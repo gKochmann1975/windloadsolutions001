@@ -1,0 +1,2685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wind FAQ - Professional Wind Load Calculator Questions & ASCE 7 Answers</title>
+    <meta name="description" content="Wind FAQ answers professional wind load calculator questions about ASCE 7 standards and pressure calculations systematically">
+    <meta name="keywords" content="wind FAQ, free online wind load calculator, wind load calculator, ASCE 7 design pressure calculator, windload calculator, wind load calculator excel, wind load calculation spreadsheet, wind load analysis, windloads, how do you calculate wind load, how do I find the wind load in my area, what is wind load pressure, wind load calculation example, wind load pressures calculator, wind speed to pressures calculator, wind pressure formula, wind speed to wind pressure, wind load calculation excel sheet, MWFRS, C&C, components cladding">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Wind FAQ - Professional Wind Load Calculator Answers">
+    <meta property="og:description" content="Wind FAQ answers wind load calculator questions about ASCE 7 standards and pressure calculations">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://windload.solutions/faqfor-wind-load-calculator-software-for-wind-load-pressures-per-asce-7/">
+    
+    <!-- Schema Markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is a wind load calculator?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "A wind load calculator is a tool that applies the formulas provided in the ASCE 7 publication to determine wind load pressures. It uses algorithms to link all the ASCE 7 formulas together to obtain accurate wind load pressure calculations."
+                }
+            },
+            {
+                "@type": "Question", 
+                "name": "What version of ASCE 7 should I use?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The most recent publication is ASCE 7-22. Only the most recent version should be used for determining wind load pressures and provided to your permitting department for approval."
+                }
+            }
+        ]
+    }
+    </script>
+    
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        .main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: transparent;
+            padding: 2rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .main-header.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1rem 0;
+            box-shadow: 0 1px 20px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+        }
+
+        .logo {
+            z-index: 1001;
+        }
+
+        .logo-image {
+            height: 100px;
+            width: auto;
+            filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
+            transition: all 0.3s ease;
+        }
+
+        .main-header.scrolled .logo-image {
+            height: 70px;
+            filter: none;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            z-index: 1001;
+        }
+
+        .header-cta {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            white-space: nowrap;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-cta:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.6);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .header-cta.primary {
+            background: rgba(0, 24, 255, 0.9);
+            border-color: rgba(0, 24, 255, 0.3);
+        }
+
+        .header-cta.primary:hover {
+            background: rgba(0, 24, 255, 1);
+            border-color: rgba(0, 24, 255, 0.8);
+        }
+
+        .main-header.scrolled .header-cta {
+            color: #0018ff;
+            background: rgba(0, 24, 255, 0.1);
+            border-color: rgba(0, 24, 255, 0.3);
+        }
+
+        .main-header.scrolled .header-cta.primary {
+            color: white;
+            background: #0018ff;
+            border-color: #0018ff;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 28px;
+            height: 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 1002;
+        }
+
+
+        .hamburger span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background: white;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .main-header.scrolled .hamburger span {
+            background: #1f2937;
+            box-shadow: none;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(8px, -8px);
+        }
+
+        /* Navigation Menu */
+        .nav-links {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100vh;
+            width: 400px;
+            max-width: 85vw;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            box-shadow: -10px 0 50px rgba(0,0,0,0.2);
+            padding: 4rem 2rem 2rem 2rem;
+            flex-direction: column;
+            gap: 1.5rem;
+            z-index: 9999;
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .nav-links.active {
+            display: flex;
+            transform: translateX(0);
+        }
+
+        /* Keep hamburger visible and nav-links as side menu only */
+        @media (min-width: 1024px) {
+            /* Keep nav-links as hamburger menu only - never show horizontally */
+            .main-header.scrolled .nav-links:not(.active) {
+                /* Stays as side menu even on desktop */
+                display: none !important;
+            }
+
+            /* Keep hamburger visible on desktop when scrolled */
+            .main-header.scrolled .hamburger {
+                display: flex;
+            }
+
+            .main-header.scrolled .header-right {
+                gap: 2rem;
+                align-items: center;
+            }
+        }
+
+        /* Simplified Desktop Nav (Shows when scrolled) */
+        .nav-desktop-scrolled {
+            display: none;
+        }
+
+        @media (min-width: 1024px) {
+            .main-header.scrolled .nav-desktop-scrolled {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 2rem;
+                overflow: visible;
+            }
+
+            .nav-desktop-scrolled a {
+                text-decoration: none;
+                font-size: 0.95rem;
+                padding: 0.5rem 1rem;
+                border-radius: 8px;
+                color: #374151;
+                font-weight: 600;
+                transition: all 0.2s ease;
+            }
+
+            .nav-desktop-scrolled a:hover {
+                background: rgba(0, 24, 255, 0.1);
+                color: #0018ff;
+            }
+
+            /* Simplified desktop nav dropdown styles */
+            .nav-desktop-scrolled .nav-dropdown {
+                position: relative;
+                z-index: 1001;
+            }
+
+            .nav-desktop-scrolled .nav-dropdown-toggle {
+                display: flex;
+                align-items: center;
+                font-size: 0.95rem;
+                padding: 0.5rem 1rem;
+                border-radius: 8px;
+                color: #374151;
+                font-weight: 600;
+                transition: all 0.2s ease;
+                cursor: pointer;
+            }
+
+            .nav-desktop-scrolled .dropdown-arrow {
+                font-size: 0.7rem;
+                margin-left: 0.3rem;
+            }
+
+            .nav-desktop-scrolled .nav-dropdown-menu {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background: white;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+                border-radius: 8px;
+                padding: 0.5rem 0;
+                min-width: 250px;
+                margin-top: 0.25rem;
+                z-index: 1002;
+                flex-direction: column;
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+                transform: translateY(-10px);
+                transition: all 0.2s ease;
+                display: flex !important;
+                padding-left: 0;
+            }
+
+            .nav-desktop-scrolled .nav-dropdown:hover .nav-dropdown-menu {
+                opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
+                transform: translateY(0);
+            }
+
+            .nav-desktop-scrolled .nav-dropdown-toggle:hover,
+            .nav-desktop-scrolled .nav-dropdown:hover .nav-dropdown-toggle {
+                background: rgba(0, 24, 255, 0.1);
+                color: #0018ff;
+            }
+
+            .nav-desktop-scrolled .nav-dropdown-menu a {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+                border-radius: 0;
+            }
+
+            .nav-desktop-scrolled .nav-dropdown-menu a:hover {
+                background: rgba(0, 24, 255, 0.1);
+            }
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #1f2937;
+            font-weight: 600;
+            font-size: 1.2rem;
+            padding: 1.2rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(45deg, #0018ff, #181E57);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #0018ff;
+            padding-left: 1rem;
+        }
+
+        .nav-links a:hover::before,
+        .nav-links a.active::before {
+            width: 50px;
+        }
+
+        .nav-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: none;
+            border: none;
+            font-size: 2.5rem;
+            color: #64748b;
+            cursor: pointer;
+            font-weight: 300;
+        }
+
+
+        .nav-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
+            z-index: 9998;
+        }
+
+        .nav-overlay.active {
+            display: block;
+        }
+
+        /* Navigation Dropdown Styles */
+        .nav-dropdown {
+            position: relative;
+        }
+
+        .nav-dropdown-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            text-decoration: none;
+            color: #1f2937;
+            font-weight: 600;
+            font-size: 1.2rem;
+            padding: 1.2rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .dropdown-arrow {
+            margin-left: 0.5rem;
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-dropdown.active .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .nav-dropdown-menu {
+            display: none;
+            flex-direction: column;
+            padding-left: 1.5rem;
+            margin-top: 0.5rem;
+            gap: 0.5rem;
+            background: rgba(248, 250, 252, 0.95);
+            border-radius: 8px;
+            padding: 0.5rem 1.5rem;
+        }
+
+        .nav-dropdown.active .nav-dropdown-menu {
+            display: flex;
+        }
+
+
+        .nav-dropdown-menu a {
+            font-size: 1.05rem;
+            font-weight: 500;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .nav-dropdown-menu a:last-child {
+            border-bottom: none;
+        }
+
+        /* Hover effects for hamburger menu */
+        .nav-dropdown-toggle:hover {
+            background: rgba(0, 24, 255, 0.05);
+            color: #0018ff;
+            padding-left: 1rem;
+            border-radius: 8px;
+        }
+
+        .nav-dropdown-menu a:hover {
+            background: rgba(0, 24, 255, 0.08);
+            color: #0018ff;
+            padding-left: 1rem;
+            border-radius: 6px;
+        }
+
+        /* Desktop dropdown styles */
+        @media (min-width: 1024px) {
+            /* CRITICAL: Prevent clipping of dropdowns */
+            .main-header.scrolled,
+            .main-header.scrolled .header-container,
+            .main-header.scrolled .header-right {
+                overflow: visible !important;
+            }
+            
+            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown-toggle {
+                display: flex;
+                align-items: center;
+                font-size: 0.95rem;
+                padding: 0.5rem 1rem;
+                border-bottom: none;
+                border-radius: 8px;
+                color: #374151;
+                transition: all 0.2s ease;
+                cursor: pointer;
+            }
+
+            .main-header.scrolled .nav-desktop-scrolled .dropdown-arrow {
+                font-size: 0.7rem;
+                margin-left: 0.3rem;
+            }
+
+            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown {
+                position: relative;
+                z-index: 1001;
+            }
+
+            /* Dropdown menu - always in DOM but invisible */
+            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown-menu {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background: white;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+                border-radius: 8px;
+                padding: 0.5rem 0;
+                min-width: 250px;
+                margin-top: 0.25rem;
+                z-index: 1002;
+                flex-direction: column;
+                
+                /* Hidden by default */
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+                transform: translateY(-10px);
+                transition: all 0.2s ease;
+                
+                /* Force display flex always - CRITICAL */
+                display: flex !important;
+                
+                /* Remove any padding/border from parent that might clip */
+                padding-left: 0;
+            }
+
+            /* Show dropdown on hover */
+            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown:hover .nav-dropdown-menu {
+                opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
+                transform: translateY(0);
+            }
+
+            /* Highlight toggle on hover */
+            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown-toggle:hover,
+            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown:hover .nav-dropdown-toggle {
+                background: rgba(0, 24, 255, 0.1);
+                color: #0018ff;
+            }
+
+            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown-menu a {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+                border-bottom: none;
+                border-radius: 0;
+            }
+
+            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown-menu a:hover {
+                background: rgba(0, 24, 255, 0.1);
+                padding-left: 1.5rem;
+            }
+        }
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 50%, #0018ff 100%);
+        }
+
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                135deg, 
+                rgba(0, 24, 255, 0.5) 0%, 
+                rgba(24, 30, 87, 0.4) 30%,
+                rgba(0, 0, 0, 0.3) 60%,
+                rgba(0, 24, 255, 0.45) 100%
+            );
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            color: white;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.95) 0%, 
+                rgba(255, 255, 255, 0.85) 50%, 
+                rgba(255, 255, 255, 0.95) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+            filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.8));
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+            font-weight: 500;
+            color: white;
+            text-shadow: 0 3px 20px rgba(0, 0, 0, 0.9);
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-button {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-button.primary {
+            background: rgba(255, 255, 255, 0.95);
+            color: #0018ff;
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .hero-button.primary:hover {
+            background: #ffffff;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        .hero-button.secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .hero-button.secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.7);
+            transform: translateY(-3px);
+        }
+
+        /* AI Assistant Section */
+        .ai-assistant-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #ffffff 100%);
+        }
+
+        .ai-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .ai-header h2 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #181E57;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .ai-header p {
+            font-size: 1.3rem;
+            color: #64748b;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .ai-interface {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 24px;
+            padding: 3rem;
+            border: 1px solid rgba(0, 24, 255, 0.1);
+            box-shadow: 
+                0 30px 80px rgba(0, 0, 0, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
+            transition: all 0.4s ease;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .ai-interface:hover {
+            transform: translateY(-8px);
+            box-shadow: 
+                0 40px 100px rgba(0, 24, 255, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 1);
+        }
+
+        .ai-input-section {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        #ai-question {
+            flex: 1;
+            padding: 1.2rem;
+            border: 2px solid rgba(0, 24, 255, 0.1);
+            border-radius: 12px;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.95);
+            color: #181E57;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        #ai-question:focus {
+            outline: none;
+            border-color: #0018ff;
+            box-shadow: 0 0 0 4px rgba(0, 24, 255, 0.1);
+            transform: translateY(-2px);
+            background: #ffffff;
+        }
+
+        .ai-ask-button {
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            color: white;
+            border: none;
+            padding: 1.2rem 2.5rem;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .ai-ask-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0, 24, 255, 0.3);
+        }
+
+        .ai-response {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 16px;
+            margin: 2rem 0;
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+            box-shadow: 0 10px 30px rgba(0, 24, 255, 0.1);
+            border: 1px solid rgba(0, 24, 255, 0.1);
+        }
+
+        .ai-response.hidden {
+            display: none;
+        }
+
+        .ai-avatar {
+            font-size: 1.5rem;
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .ai-answer {
+            flex: 1;
+            line-height: 1.7;
+            font-size: 1rem;
+            color: #181E57;
+            font-weight: 500;
+        }
+
+        .popular-questions {
+            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 50%, #f8fafc 100%);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-top: 3rem;
+            border: 1px solid rgba(0, 24, 255, 0.08);
+        }
+
+        .popular-questions h3 {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: #181E57;
+            font-weight: 700;
+        }
+
+        .questions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+
+        .question-button {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            color: #0018ff;
+            border: 1px solid rgba(0, 24, 255, 0.2);
+            padding: 1rem 1.2rem;
+            border-radius: 12px;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            font-weight: 600;
+        }
+
+        .question-button:hover {
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 24, 255, 0.3);
+        }
+
+        /* FAQ Content */
+        .faq-content {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 50%, #f8fafc 100%);
+        }
+
+        .faq-section {
+            margin-bottom: 4rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #181E57;
+            margin-bottom: 1rem;
+        }
+
+        .section-description {
+            font-size: 1.2rem;
+            color: #64748b;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .faq-item {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(0, 24, 255, 0.08);
+            box-shadow: 0 10px 30px rgba(0, 24, 255, 0.08);
+            position: relative;
+        }
+
+        .faq-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #0018ff 0%, #FF6B35 50%, #181E57 100%);
+        }
+
+        .faq-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 24, 255, 0.15);
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 2rem;
+            background: linear-gradient(135deg, #181E57 0%, #0018ff 100%);
+            border: none;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+        }
+
+        .faq-question h3 {
+            color: white;
+            font-size: 1.3rem;
+            margin: 0;
+            flex: 1;
+            font-weight: 700;
+        }
+
+        .faq-icon {
+            font-size: 1.5rem;
+            color: white;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-answer {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .faq-answer.active {
+            max-height: 2000px;
+        }
+
+        .answer-content {
+            padding: 2rem;
+        }
+
+        .answer-content p {
+            margin-bottom: 1.2rem;
+            line-height: 1.7;
+            color: #4b5563;
+            font-size: 1.05rem;
+        }
+
+        .answer-content ul {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+
+        .answer-content li {
+            margin-bottom: 0.8rem;
+            line-height: 1.6;
+            color: #4b5563;
+        }
+
+        .formula-breakdown {
+            background: linear-gradient(135deg, #f0fff4, #ecfdf5);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            border-left: 4px solid #22c55e;
+        }
+
+        .formula-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.8rem;
+            font-size: 1rem;
+        }
+
+        .formula-var {
+            background: #ffffff;
+            color: #0018ff;
+            padding: 0.3rem 0.6rem;
+            border-radius: 6px;
+            font-weight: bold;
+            font-family: monospace;
+            min-width: 30px;
+            text-align: center;
+            border: 1px solid #0018ff;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .comparison-item {
+            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid #0018ff;
+            box-shadow: 0 5px 15px rgba(0, 24, 255, 0.1);
+        }
+
+        .comparison-item h4 {
+            color: #181E57;
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+        }
+
+        .image-placeholder {
+            background: linear-gradient(135deg, #f7fafc, #edf2f7);
+            border: 2px dashed #cbd5e0;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            margin: 1.5rem 0;
+            color: #4a5568;
+        }
+        
+        .image-placeholder p {
+            margin: 0.5rem 0;
+            font-size: 0.9rem;
+        }
+        
+        .image-placeholder p:first-child {
+            font-weight: 600;
+            color: #2d3748;
+            font-size: 1rem;
+        }
+
+        /* Footer */
+        .main-footer {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d3748 50%, #1a1a1a 100%);
+            color: white;
+            padding: 5rem 0 2rem;
+            position: relative;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h4 {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .footer-section p {
+            line-height: 1.8;
+            color: #cbd5e0;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        .footer-section a {
+            display: block;
+            color: #e2e8f0;
+            text-decoration: none;
+            margin-bottom: 1rem;
+            padding: 0.5rem 0;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .footer-section a:hover {
+            color: #0018ff;
+            padding-left: 1rem;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            color: #a0aec0;
+            font-size: 0.95rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .ai-input-section {
+                flex-direction: column;
+            }
+            
+            .questions-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .hero-button {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .header-container {
+                padding: 0 2rem;
+            }
+
+            .header-right {
+                gap: 1rem;
+            }
+
+            .header-cta {
+                padding: 0.7rem 1.4rem;
+                font-size: 0.9rem;
+            }
+
+            .logo-image {
+                height: 80px;
+            }
+
+            .main-header.scrolled .logo-image {
+                height: 60px;
+            }
+
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header" id="main-header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img src="images/windload-solutions-logo.png" alt="WindLoad Solutions Logo" class="logo-image">
+            </a>
+            
+            <!-- Full Hamburger Menu (Always available via hamburger button) -->
+            <nav class="nav-links" id="nav-menu">
+                <button class="nav-close" onclick="toggleNav()">&times;</button>
+                <a href="free-online-wind-load-calculators-demos-free-excel-wind-load-calculator.html">Free Calculator</a>
+                <a href="building-intelligence-platform.html">Building Intelligence Platform</a>
+                <a href="wind-load-calculator-comparison.html">Wind Load Calculator Comparison</a>
+                
+                <!-- About Dropdown -->
+                <div class="nav-dropdown">
+                    <span class="nav-dropdown-toggle">About <span class="dropdown-arrow">▼</span></span>
+                    <div class="nav-dropdown-menu">
+                        <a href="building-intelligence-platform-landing.html">Building Intelligence Platform</a>
+                        <a href="wind-load-calculator-landing.html">Wind Load Calculators</a>
+                    </div>
+                </div>
+                
+                <!-- Shop Dropdown -->
+                <div class="nav-dropdown">
+                    <span class="nav-dropdown-toggle">Shop <span class="dropdown-arrow">▼</span></span>
+                    <div class="nav-dropdown-menu">
+                        <a href="building-intelligence-platform-shop.html">Building Intelligence Platform</a>
+                        <a href="wind-load-calculator-shop.html">Wind Load Calculators</a>
+                    </div>
+                </div>
+                
+                <a href="services-asce7-wind-load-pressures.html">Services</a>
+                
+                <!-- Professionals Dropdown -->
+                <div class="nav-dropdown">
+                    <span class="nav-dropdown-toggle">Professionals <span class="dropdown-arrow">▼</span></span>
+                    <div class="nav-dropdown-menu">
+                        <a href="wind-load-calculator-for-engineers.html">Engineers</a>
+                        <a href="wind-load-calculator-for-architects.html">Architects</a>
+                        <a href="wind-loads-for-consultants.html">Consultants</a>
+                        <a href="contractors-wind-load-calculator.html">Contractors</a>
+                    </div>
+                </div>
+                
+                <a href="why-choose-windload-solutions.html">Why Us</a>
+                <a href="faqfor-wind-load-calculator-software-for-wind-load-pressures-per-asce-7.html">FAQ</a>
+                <a href="contact-us-wind-load-calculators-for-components-and-cladding-cc-wind-load-pressures-per-the-asce-7-16-and-asce-7-22-publication-windloads-made-easy.html">Contact Us</a>
+            </nav>
+            
+            <!-- Simplified Desktop Nav (Shows when scrolled on desktop) -->
+            <nav class="nav-desktop-scrolled">
+                <a href="free-online-wind-load-calculators-demos-free-excel-wind-load-calculator.html">Free Calculator</a>
+                <a href="building-intelligence-platform.html">B.I.P.</a>
+                
+                <!-- Shop Dropdown (Simplified - only 2 items) -->
+                <div class="nav-dropdown">
+                    <span class="nav-dropdown-toggle">Shop <span class="dropdown-arrow">▼</span></span>
+                    <div class="nav-dropdown-menu">
+                        <a href="building-intelligence-platform-shop.html">Building Intelligence Platform</a>
+                        <a href="wind-load-calculator-shop.html">Wind Load Calculators</a>
+                    </div>
+                </div>
+                
+                <a href="services-asce7-wind-load-pressures.html">Services</a>
+                <a href="why-choose-windload-solutions.html">Why Us</a>
+            </nav>
+            
+            <!-- Header Right Side -->
+            <div class="header-right">
+                <a href="contact-us-wind-load-calculators-for-components-and-cladding-cc-wind-load-pressures-per-the-asce-7-16-and-asce-7-22-publication-windloads-made-easy.html" class="header-cta primary">Let's Connect</a>
+                <a href="http://127.0.0.1:8051" class="header-cta">Member Login</a>
+                <button class="hamburger" id="hamburger" onclick="toggleNav()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu Overlay -->
+        <div class="nav-overlay" id="nav-overlay" onclick="toggleNav()"></div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <!-- Video Background -->
+            <div class="video-background">
+                <video class="hero-video" autoplay muted loop playsinline>
+                    <source src="videos/windload-faq.webm" type="video/webm">
+                    <source src="videos/windload-faq.mp4" type="video/mp4">
+                </video>
+            </div>
+            
+            <!-- Video Overlay -->
+            <div class="video-overlay"></div>
+            
+            <!-- Hero Content -->
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">Wind FAQ Professional Answers</h1>
+                    <p class="hero-subtitle">Furthermore, Wind FAQ provides essential guidance for wind load calculator applications. Additionally, our comprehensive Wind FAQ addresses ASCE 7 standards systematically. Moreover, engineers utilize Wind FAQ resources for accurate wind load pressure calculations consistently.</p>
+                    <div class="hero-cta">
+                        <a href="#ai-assistant" class="hero-button primary">Ask AI Assistant</a>
+                        <a href="#basics" class="hero-button secondary">Browse FAQ</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Wind Load Assistant Section -->
+        <section class="ai-assistant-section" id="ai-assistant">
+            <div class="container">
+                <div class="ai-header">
+                    <h2>Wind FAQ AI Assistant - Instant Professional Answers</h2>
+                    <p>Nevertheless, our Wind FAQ AI delivers immediate responses to wind load calculator questions. Subsequently, engineers access comprehensive Wind FAQ guidance for ASCE 7 standards and building codes. Furthermore, our advanced Wind FAQ system incorporates 23+ years of engineering expertise systematically.</p>
+                </div>
+                
+                <div class="ai-interface">
+                    <div class="ai-input-section">
+                        <input type="text" id="ai-question" placeholder="Ask about ASCE 7, wind loads, building permits, calculations..." maxlength="200">
+                        <button onclick="askAI()" class="ai-ask-button">Ask AI</button>
+                    </div>
+                    
+                    <div id="ai-response" class="ai-response hidden">
+                        <div class="ai-avatar">AI</div>
+                        <div class="ai-answer"></div>
+                    </div>
+                    
+                    <!-- Popular Questions -->
+                    <div class="popular-questions">
+                        <h3>Most Asked Wind FAQ Questions - Wind Load Calculator Guidance</h3>
+                        <div class="questions-grid">
+                            <button class="question-button" onclick="askPredefined('How to calculate wind load pressure per ASCE 7?')">
+                                How to calculate wind load pressure per ASCE 7?
+                            </button>
+                            <button class="question-button" onclick="askPredefined('What is the difference between MWFRS and Components & Cladding?')">
+                                What is the difference between MWFRS and Components & Cladding?
+                            </button>
+                            <button class="question-button" onclick="askPredefined('ASCE 7-22 vs ASCE 7-16 wind load calculations?')">
+                                ASCE 7-22 vs ASCE 7-16 wind load calculations?
+                            </button>
+                            <button class="question-button" onclick="askPredefined('How to determine wind load zones for windows and doors?')">
+                                How to determine wind load zones for windows and doors?
+                            </button>
+                            <button class="question-button" onclick="askPredefined('Ultimate vs Nominal wind speed calculations?')">
+                                Ultimate vs Nominal wind speed calculations?
+                            </button>
+                            <button class="question-button" onclick="askPredefined('Wind load requirements for building permits?')">
+                                Wind load requirements for building permits?
+                            </button>
+                            <button class="question-button" onclick="askPredefined('What is wind load pressure?')">
+                                What is wind load pressure?
+                            </button>
+                            <button class="question-button" onclick="askPredefined('How to use wind load calculator software?')">
+                                How to use wind load calculator software?
+                            </button>
+                            <button class="question-button" onclick="askPredefined('Wind load calculator ASCE 7 compliance?')">
+                                Wind load calculator ASCE 7 compliance?
+                            </button>
+                            <button class="question-button" onclick="askPredefined('Components and cladding wind load pressures?')">
+                                Components and cladding wind load pressures?
+                            </button>
+                            <button class="question-button" onclick="askPredefined('Wind load software vs Excel spreadsheets?')">
+                                Wind load software vs Excel spreadsheets?
+                            </button>
+                            <button class="question-button" onclick="askPredefined('Professional engineer wind load seal requirements?')">
+                                Professional engineer wind load seal requirements?
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Content -->
+        <section class="faq-content" id="basics">
+            <div class="container">
+                
+                <!-- Wind Load Basics -->
+                <div class="faq-section">
+                    <div class="section-header">
+                        <h2>Wind FAQ Basics - Wind Load Calculator Fundamentals</h2>
+                        <p class="section-description">Furthermore, mastering Wind FAQ fundamentals proves essential for wind load calculator applications. Additionally, engineers utilize Wind FAQ guidance for accurate wind load pressure calculations and structural engineering success.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)">
+                            <h3>What is wind load pressure according to Wind FAQ standards?</h3>
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="answer-content">
+                                <p>Simply put, wind load pressure describes forces wind exerts on building surfaces systematically. Meanwhile, air in motion possesses kinetic energy continuously. Subsequently, when this air hits objects, it transfers energy as pressure effectively. Moreover, this pressure varies based on wind speed and direction significantly.</p>
+                                
+                                <p>Furthermore, comprehending wind load pressure phenomena proves foundational for safe construction practices. Additionally, our wind load calculator process accounts for these variables accurately. Consequently, engineers consider these forces for structural stability consistently. Therefore, buildings withstand harsh weather conditions reliably through proper calculations.</p>
+
+                                <p>Moreover, wind load pressure affects different building surfaces uniquely. Subsequently, windward faces experience positive pressure forces. Meanwhile, leeward surfaces encounter negative pressure effects. Furthermore, side walls receive varying pressure combinations. Additionally, roof surfaces experience complex pressure patterns requiring careful analysis.</p>
+
+                                <p>Nevertheless, understanding wind load pressure requires comprehensive ASCE 7 knowledge. Furthermore, engineers analyze exposure categories systematically. Subsequently, topographic factors influence pressure calculations significantly. Moreover, building height affects wind load pressure distributions continuously.</p>
+                                
+                                <div style="display: flex; justify-content: center; margin: 1.5rem 0;">
+                                    <div style="width: 600px; height: 320px; background: white; border: 2px solid #333; border-radius: 8px; position: relative; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                                        <!-- Building structure -->
+                                        <div style="width: 0; height: 0; border-left: 72px solid transparent; border-right: 72px solid transparent; border-bottom: 30px solid #b0b0b0; position: absolute; left: 228px; top: 70px; border: 2px solid #666; border-bottom: 2px solid #666;"></div>
+                                        <div style="width: 140px; height: 100px; background: #e0e0e0; border: 2px solid #666; position: absolute; left: 230px; top: 100px;"></div>
+                                        
+                                        <!-- Title -->
+                                        <div style="position: absolute; top: 25px; left: 50%; transform: translateX(-50%); font-weight: bold; font-size: 14px; color: #333; white-space: nowrap;">Wind Pressure Forces on Building Surfaces</div>
+                                        
+                                        <!-- Wind direction indicators -->
+                                        <div style="position: absolute; left: 30px; top: 140px; color: #2196F3; font-size: 24px; font-weight: bold;">→→→</div>
+                                        <div style="position: absolute; left: 30px; top: 120px; color: #2196F3; font-weight: bold; font-size: 14px;">WIND</div>
+                                        
+                                        <!-- Animated wind flow -->
+                                        <div style="position: absolute; width: 3px; height: 3px; background: #2196F3; border-radius: 50%; top: 70px; animation: windFlow1 3s linear infinite;"></div>
+                                        <div style="position: absolute; width: 3px; height: 3px; background: #2196F3; border-radius: 50%; top: 100px; animation: windFlow2 3s linear infinite;"></div>
+                                        <div style="position: absolute; width: 3px; height: 3px; background: #2196F3; border-radius: 50%; top: 130px; animation: windFlow3 3s linear infinite;"></div>
+                                        <div style="position: absolute; width: 3px; height: 3px; background: #2196F3; border-radius: 50%; top: 160px; animation: windFlow4 3s linear infinite;"></div>
+                                        <div style="position: absolute; width: 3px; height: 3px; background: #2196F3; border-radius: 50%; top: 190px; animation: windFlow5 3s linear infinite;"></div>
+                                        
+                                        <!-- Positive pressure arrows (windward side) -->
+                                        <div style="position: absolute; left: 190px; top: 110px; font-size: 18px; color: #f44336;">→</div>
+                                        <div style="position: absolute; left: 190px; top: 130px; font-size: 18px; color: #f44336;">→</div>
+                                        <div style="position: absolute; left: 190px; top: 150px; font-size: 18px; color: #f44336;">→</div>
+                                        <div style="position: absolute; left: 190px; top: 170px; font-size: 18px; color: #f44336;">→</div>
+                                        
+                                        <!-- Negative pressure arrows (leeward side) -->
+                                        <div style="position: absolute; left: 390px; top: 110px; font-size: 18px; color: #4CAF50;">←</div>
+                                        <div style="position: absolute; left: 390px; top: 130px; font-size: 18px; color: #4CAF50;">←</div>
+                                        <div style="position: absolute; left: 390px; top: 150px; font-size: 18px; color: #4CAF50;">←</div>
+                                        <div style="position: absolute; left: 390px; top: 170px; font-size: 18px; color: #4CAF50;">←</div>
+                                        
+                                        <!-- Roof pressure -->
+                                        <div style="position: absolute; left: 270px; top: 55px; font-size: 18px; color: #4CAF50;">↑</div>
+                                        <div style="position: absolute; left: 300px; top: 55px; font-size: 18px; color: #4CAF50;">↑</div>
+                                        <div style="position: absolute; left: 330px; top: 55px; font-size: 18px; color: #4CAF50;">↑</div>
+                                        
+                                        <!-- Pressure labels -->
+                                        <div style="position: absolute; left: 155px; top: 140px; font-size: 12px; color: #f44336; font-weight: bold;">+P</div>
+                                        <div style="position: absolute; left: 415px; top: 140px; font-size: 12px; color: #4CAF50; font-weight: bold;">-P</div>
+                                        <div style="position: absolute; left: 355px; top: 55px; font-size: 12px; color: #4CAF50; font-weight: bold;">-P</div>
+                                        
+                                        <!-- Legend -->
+                                        <div style="position: absolute; top: 230px; left: 50%; transform: translateX(-50%); background: rgba(255,255,255,0.95); padding: 6px 10px; border-radius: 6px; font-size: 10px; border: 1px solid #ddd; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                                            <div style="margin: 2px 0; display: flex; align-items: center;">
+                                                <div style="width: 12px; height: 12px; margin-right: 6px; border-radius: 2px; background: #f44336;"></div>
+                                                <span>Positive Pressure (Windward)</span>
+                                            </div>
+                                            <div style="margin: 2px 0; display: flex; align-items: center;">
+                                                <div style="width: 12px; height: 12px; margin-right: 6px; border-radius: 2px; background: #4CAF50;"></div>
+                                                <span>Negative Pressure (Leeward/Roof)</span>
+                                            </div>
+                                            <div style="margin: 2px 0; display: flex; align-items: center;">
+                                                <div style="width: 12px; height: 12px; margin-right: 6px; border-radius: 2px; background: #2196F3;"></div>
+                                                <span>Wind Direction</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Labels -->
+                                        <div style="position: absolute; left: 120px; top: 190px; font-size: 11px; color: #666;">Windward Side</div>
+                                        <div style="position: absolute; left: 435px; top: 190px; font-size: 11px; color: #666;">Leeward Side</div>
+                                    </div>
+                                </div>
+                                
+                                <style>
+                                    @keyframes windFlow1 {
+                                        0% { left: -10px; opacity: 1; }
+                                        50% { opacity: 0.7; }
+                                        100% { left: 620px; opacity: 0; }
+                                    }
+                                    @keyframes windFlow2 {
+                                        0% { left: -10px; opacity: 1; }
+                                        50% { opacity: 0.7; }
+                                        100% { left: 620px; opacity: 0; }
+                                    }
+                                    @keyframes windFlow3 {
+                                        0% { left: -10px; opacity: 1; }
+                                        50% { opacity: 0.7; }
+                                        100% { left: 620px; opacity: 0; }
+                                    }
+                                    @keyframes windFlow4 {
+                                        0% { left: -10px; opacity: 1; }
+                                        50% { opacity: 0.7; }
+                                        100% { left: 620px; opacity: 0; }
+                                    }
+                                    @keyframes windFlow5 {
+                                        0% { left: -10px; opacity: 1; }
+                                        50% { opacity: 0.7; }
+                                        100% { left: 620px; opacity: 0; }
+                                    }
+                                </style>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)">
+                            <h3>What types of wind load forces does Wind FAQ address comprehensively?</h3>
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="answer-content">
+                                <p>Furthermore, three main wind load pressure types affect buildings systematically:</p>
+                                
+                                <div class="comparison-grid">
+                                    <div class="comparison-item">
+                                        <h4>Uplift Load Forces</h4>
+                                        <p>Moreover, wind pressures cause lifting forces significantly. Subsequently, these forces particularly affect roofs and overhangs continuously. Furthermore, uplift loads can literally lift roofing materials dangerously. Additionally, structural elements experience upward forces requiring proper anchoring systems.</p>
+                                    </div>
+                                    <div class="comparison-item">
+                                        <h4>Shear Load Forces</h4>
+                                        <p>Meanwhile, horizontal wind pressures cause tilting effects systematically. Subsequently, these forces affect structural connections significantly. Furthermore, shear loads can cause buildings to lean dangerously. Additionally, proper bracing systems resist these forces effectively.</p>
+                                    </div>
+                                    <div class="comparison-item">
+                                        <h4>Lateral Load Forces</h4>
+                                        <p>Nevertheless, horizontal wind pressure pushes and pulls structures continuously. Subsequently, these forces create overturning possibilities significantly. Furthermore, lateral loads require comprehensive foundation design. Additionally, proper structural systems resist these forces systematically.</p>
+                                    </div>
+                                </div>
+
+                                <p>Moreover, understanding wind load force types proves crucial for structural design. Furthermore, engineers analyze each force type systematically. Subsequently, proper resistance systems address specific force characteristics. Additionally, building codes specify requirements for each force type comprehensively.</p>
+
+                                <p>Nevertheless, wind load forces interact with structural systems uniquely. Furthermore, building geometry affects force distributions significantly. Subsequently, material properties influence resistance capabilities systematically. Moreover, construction details determine force transfer mechanisms effectively.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)">
+                            <h3>What is wind load according to Wind FAQ engineering principles?</h3>
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="answer-content">
+                                <p>Furthermore, wind load represents forces exerted by moving air on structures systematically. Additionally, these forces result from kinetic energy transfer during wind-structure interaction. Moreover, wind load calculations determine structural resistance requirements comprehensively. Subsequently, engineers analyze wind load effects for safe building design consistently.</p>
+
+                                <p>Nevertheless, wind load encompasses multiple force components simultaneously. Furthermore, pressure differentials create complex loading patterns on buildings. Subsequently, dynamic effects amplify static wind load pressures significantly. Moreover, turbulence generates fluctuating forces requiring careful analysis systematically.</p>
+
+                                <p>Additionally, wind load varies with height above ground level continuously. Furthermore, surface roughness affects wind speed profiles systematically. Subsequently, building geometry influences wind flow patterns significantly. Moreover, surrounding structures create wind shadow effects requiring consideration.</p>
+
+                                <p>Meanwhile, ASCE 7 standards provide comprehensive wind load calculation procedures. Furthermore, these procedures address various building types systematically. Subsequently, engineers apply appropriate methods for specific structures. Additionally, wind load requirements ensure public safety consistently through proper application.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ASCE 7 Standards -->
+                <div class="faq-section">
+                    <div class="section-header">
+                        <h2>Wind FAQ ASCE 7 Standards - Professional Wind Load Calculator Compliance</h2>
+                        <p class="section-description">Furthermore, understanding Wind FAQ ASCE 7 requirements ensures building code compliance systematically. Additionally, engineers utilize Wind FAQ guidance for current standard applications and regulatory success.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)">
+                            <h3>What is the most recent ASCE 7 publication according to Wind FAQ experts?</h3>
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="answer-content">
+                                <p>Furthermore, the most recent publication remains <strong>ASCE 7-22</strong> comprehensively. Additionally, only the most recent ASCE 7 version should determine wind load pressure calculations systematically. Moreover, permitting departments require current standards for approval processes consistently. Subsequently, engineers must utilize ASCE 7-22 for regulatory compliance effectively.</p>
+                                
+                                <p>Moreover, <strong>previous versions include:</strong> ASCE 7-95, ASCE 7-98, ASCE 7-02, ASCE 7-05, ASCE 7-10, ASCE 7-16 chronologically. Furthermore, these historical versions provided foundational wind load calculation methods. Nevertheless, current projects require ASCE 7-22 applications exclusively. Additionally, building officials recognize only current standards for permit approval.</p>
+                                
+                                <p>Subsequently, WindLoad.Solutions applies latest ASCE 7-22 provisions for all calculations systematically. Furthermore, our wind load calculator ensures full compliance automatically. Moreover, engineers achieve regulatory approval through current standard applications. Additionally, updated calculation methods reflect improved understanding of wind load phenomena.</p>
+
+                                <p>Nevertheless, ASCE 7-22 incorporates significant improvements over previous versions. Furthermore, enhanced wind speed maps provide better accuracy systematically. Subsequently, refined calculation procedures address complex building geometries effectively. Moreover, updated provisions reflect current research findings comprehensively.</p>
+                                
+                                <div style="margin: 0; padding: 20px; font-family: 'Arial', sans-serif; background: #f8f9fa; display: flex; justify-content: center; align-items: center; overflow-x: auto;">
+                                    <div class="timeline-container" style="width: 1200px; height: 350px; background: white; border: 2px solid #333; border-radius: 10px; position: relative; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.1); padding: 30px;">
+                                        <div class="title" style="position: absolute; top: 15px; left: 50%; transform: translateX(-50%); font-weight: bold; font-size: 18px; color: #2c3e50; white-space: nowrap;">ASCE 7 Standards Evolution Timeline (1995-2022)</div>
+                                        
+                                        <!-- Main timeline line -->
+                                        <div class="timeline-line" style="position: absolute; top: 175px; left: 80px; right: 80px; height: 4px; background: linear-gradient(to right, #3498db, #2980b9); border-radius: 2px;"></div>
+                                        
+                                        <!-- Timeline markers -->
+                                        <div class="timeline-marker point-1995" style="position: absolute; width: 12px; height: 12px; background: #e74c3c; border: 3px solid white; border-radius: 50%; top: 169px; box-shadow: 0 2px 4px rgba(0,0,0,0.2); left: 120px;"></div>
+                                        <div class="timeline-marker point-1998" style="position: absolute; width: 12px; height: 12px; background: #e74c3c; border: 3px solid white; border-radius: 50%; top: 169px; box-shadow: 0 2px 4px rgba(0,0,0,0.2); left: 260px;"></div>
+                                        <div class="timeline-marker point-2002" style="position: absolute; width: 12px; height: 12px; background: #e74c3c; border: 3px solid white; border-radius: 50%; top: 169px; box-shadow: 0 2px 4px rgba(0,0,0,0.2); left: 400px;"></div>
+                                        <div class="timeline-marker point-2005" style="position: absolute; width: 12px; height: 12px; background: #e74c3c; border: 3px solid white; border-radius: 50%; top: 169px; box-shadow: 0 2px 4px rgba(0,0,0,0.2); left: 540px;"></div>
+                                        <div class="timeline-marker point-2010" style="position: absolute; width: 12px; height: 12px; background: #e74c3c; border: 3px solid white; border-radius: 50%; top: 169px; box-shadow: 0 2px 4px rgba(0,0,0,0.2); left: 680px;"></div>
+                                        <div class="timeline-marker point-2016" style="position: absolute; width: 12px; height: 12px; background: #e74c3c; border: 3px solid white; border-radius: 50%; top: 169px; box-shadow: 0 2px 4px rgba(0,0,0,0.2); left: 820px;"></div>
+                                        <div class="timeline-marker point-2022 current-version" style="position: absolute; width: 12px; height: 12px; background: #27ae60; border: 3px solid white; border-radius: 50%; top: 169px; box-shadow: 0 2px 4px rgba(0,0,0,0.2); left: 960px; animation: pulse 2s infinite;"></div>
+                                        
+                                        <!-- Version labels -->
+                                        <div class="version-label point-1995" style="position: absolute; top: 120px; font-weight: bold; font-size: 14px; color: #2c3e50; background: #ecf0f1; padding: 6px 12px; border-radius: 6px; border: 1px solid #bdc3c7; transform: translateX(-50%); white-space: nowrap; left: 120px;">ASCE 7-95</div>
+                                        <div class="version-label point-1998" style="position: absolute; top: 120px; font-weight: bold; font-size: 14px; color: #2c3e50; background: #ecf0f1; padding: 6px 12px; border-radius: 6px; border: 1px solid #bdc3c7; transform: translateX(-50%); white-space: nowrap; left: 260px;">ASCE 7-98</div>
+                                        <div class="version-label point-2002" style="position: absolute; top: 120px; font-weight: bold; font-size: 14px; color: #2c3e50; background: #ecf0f1; padding: 6px 12px; border-radius: 6px; border: 1px solid #bdc3c7; transform: translateX(-50%); white-space: nowrap; left: 400px;">ASCE 7-02</div>
+                                        <div class="version-label point-2005" style="position: absolute; top: 120px; font-weight: bold; font-size: 14px; color: #2c3e50; background: #ecf0f1; padding: 6px 12px; border-radius: 6px; border: 1px solid #bdc3c7; transform: translateX(-50%); white-space: nowrap; left: 540px;">ASCE 7-05</div>
+                                        <div class="version-label point-2010" style="position: absolute; top: 120px; font-weight: bold; font-size: 14px; color: #2c3e50; background: #ecf0f1; padding: 6px 12px; border-radius: 6px; border: 1px solid #bdc3c7; transform: translateX(-50%); white-space: nowrap; left: 680px;">ASCE 7-10</div>
+                                        <div class="version-label point-2016" style="position: absolute; top: 120px; font-weight: bold; font-size: 14px; color: #2c3e50; background: #ecf0f1; padding: 6px 12px; border-radius: 6px; border: 1px solid #bdc3c7; transform: translateX(-50%); white-space: nowrap; left: 820px;">ASCE 7-16</div>
+                                        <div class="version-label point-2022" style="position: absolute; top: 120px; font-weight: bold; font-size: 14px; color: #2c3e50; background: #ecf0f1; padding: 6px 12px; border-radius: 6px; border: 1px solid #bdc3c7; transform: translateX(-50%); white-space: nowrap; left: 960px;">ASCE 7-22</div>
+                                        
+                                        <!-- Year labels -->
+                                        <div class="year-label point-1995" style="position: absolute; top: 200px; font-size: 12px; color: #7f8c8d; font-weight: bold; transform: translateX(-50%); left: 120px;">1995</div>
+                                        <div class="year-label point-1998" style="position: absolute; top: 200px; font-size: 12px; color: #7f8c8d; font-weight: bold; transform: translateX(-50%); left: 260px;">1998</div>
+                                        <div class="year-label point-2002" style="position: absolute; top: 200px; font-size: 12px; color: #7f8c8d; font-weight: bold; transform: translateX(-50%); left: 400px;">2002</div>
+                                        <div class="year-label point-2005" style="position: absolute; top: 200px; font-size: 12px; color: #7f8c8d; font-weight: bold; transform: translateX(-50%); left: 540px;">2005</div>
+                                        <div class="year-label point-2010" style="position: absolute; top: 200px; font-size: 12px; color: #7f8c8d; font-weight: bold; transform: translateX(-50%); left: 680px;">2010</div>
+                                        <div class="year-label point-2016" style="position: absolute; top: 200px; font-size: 12px; color: #7f8c8d; font-weight: bold; transform: translateX(-50%); left: 820px;">2016</div>
+                                        <div class="year-label point-2022" style="position: absolute; top: 200px; font-size: 12px; color: #7f8c8d; font-weight: bold; transform: translateX(-50%); left: 960px;">2022</div>
+                                        
+                                        <!-- Key changes -->
+                                        <div class="change-label point-1995" style="position: absolute; top: 220px; font-size: 10px; color: #555; width: 140px; text-align: center; transform: translateX(-50%); line-height: 1.3; padding: 5px; left: 120px;">First unified standard</div>
+                                        <div class="change-label point-1998" style="position: absolute; top: 220px; font-size: 10px; color: #555; width: 140px; text-align: center; transform: translateX(-50%); line-height: 1.3; padding: 5px; left: 260px;">Wind speed updates</div>
+                                        <div class="change-label point-2002" style="position: absolute; top: 220px; font-size: 10px; color: #555; width: 140px; text-align: center; transform: translateX(-50%); line-height: 1.3; padding: 5px; left: 400px;">Seismic provisions enhanced</div>
+                                        <div class="change-label point-2005" style="position: absolute; top: 220px; font-size: 10px; color: #555; width: 140px; text-align: center; transform: translateX(-50%); line-height: 1.3; padding: 5px; left: 540px;">Risk categories introduced</div>
+                                        <div class="change-label point-2010" style="position: absolute; top: 220px; font-size: 10px; color: #555; width: 140px; text-align: center; transform: translateX(-50%); line-height: 1.3; padding: 5px; left: 680px;">Major wind map revision</div>
+                                        <div class="change-label point-2016" style="position: absolute; top: 220px; font-size: 10px; color: #555; width: 140px; text-align: center; transform: translateX(-50%); line-height: 1.3; padding: 5px; left: 820px;">Tsunami loads added</div>
+                                        <div class="change-label point-2022" style="position: absolute; top: 220px; font-size: 10px; color: #555; width: 140px; text-align: center; transform: translateX(-50%); line-height: 1.3; padding: 5px; left: 960px;">Climate change considerations</div>
+                                        
+                                        <!-- Direction arrows -->
+                                        <div class="arrow point-1995" style="position: absolute; top: 150px; font-size: 12px; color: #95a5a6; transform: translateX(-50%); left: 120px;">↓</div>
+                                        <div class="arrow point-1998" style="position: absolute; top: 150px; font-size: 12px; color: #95a5a6; transform: translateX(-50%); left: 260px;">↓</div>
+                                        <div class="arrow point-2002" style="position: absolute; top: 150px; font-size: 12px; color: #95a5a6; transform: translateX(-50%); left: 400px;">↓</div>
+                                        <div class="arrow point-2005" style="position: absolute; top: 150px; font-size: 12px; color: #95a5a6; transform: translateX(-50%); left: 540px;">↓</div>
+                                        <div class="arrow point-2010" style="position: absolute; top: 150px; font-size: 12px; color: #95a5a6; transform: translateX(-50%); left: 680px;">↓</div>
+                                        <div class="arrow point-2016" style="position: absolute; top: 150px; font-size: 12px; color: #95a5a6; transform: translateX(-50%); left: 820px;">↓</div>
+                                        <div class="arrow point-2022" style="position: absolute; top: 150px; font-size: 12px; color: #95a5a6; transform: translateX(-50%); left: 960px;">↓</div>
+                                    </div>
+                                </div>
+                                
+                                <style>
+                                    @keyframes pulse {
+                                        0% { box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+                                        50% { box-shadow: 0 2px 8px rgba(39,174,96,0.5); }
+                                        100% { box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+                                    }
+                                </style>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)">
+                            <h3>What's the Wind FAQ difference between MWFRS and C&C calculations?</h3>
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="answer-content">
+                                <p>Furthermore, significant differences exist between Main Wind Force Resisting Systems (MWFRS) and Components & Cladding (C&C) calculation methods systematically:</p>
+                                
+                                <div class="comparison-grid">
+                                    <div class="comparison-item">
+                                        <h4>MWFRS (Main Wind Force Resisting Systems)</h4>
+                                        <p>Moreover, MWFRS calculations determine wind load pressures on entire building structures systematically. Subsequently, these calculations prevent structural overturning effectively. Furthermore, primary structural frameworks distribute wind forces across buildings comprehensively. Additionally, MWFRS analysis ensures overall building stability consistently.</p>
+                                    </div>
+                                    <div class="comparison-item">
+                                        <h4>C&C (Components & Cladding)</h4>
+                                        <p>Meanwhile, C&C calculations address individual building elements systematically. Subsequently, these calculations cover windows, doors, skylights, shutters, and roofs specifically. Furthermore, external building elements receive individual analysis comprehensively. Additionally, C&C elements don't contribute to overall structural stability significantly.</p>
+                                    </div>
+                                </div>
+
+                                <p>Nevertheless, C&C pressures typically exceed MWFRS pressures significantly. Furthermore, localized effects create higher pressure concentrations on individual elements. Subsequently, edge and corner regions experience amplified pressures systematically. Moreover, effective wind area calculations influence C&C pressure determinations substantially.</p>
+
+                                <p>Additionally, engineers analyze both MWFRS and C&C systems comprehensively for complete building design. Furthermore, different calculation procedures apply to each system type systematically. Subsequently, pressure coefficients vary between MWFRS and C&C applications significantly. Moreover, our wind load calculator addresses both methodologies accurately.</p>
+                                
+                                <div style="margin: 0; padding: 20px; font-family: 'Arial', sans-serif; background: #f8f9fa; display: flex; justify-content: center; align-items: center; overflow-x: auto;">
+                                    <div class="comparison-container" style="width: 700px; height: 450px; background: white; border: 2px solid #333; border-radius: 10px; position: relative; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.1); display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 60px 1fr;">
+                                        <div class="title" style="grid-column: 1 / -1; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; color: #2c3e50; border-bottom: 2px solid #ecf0f1;">MWFRS vs Components & Cladding Wind Load Comparison</div>
+                                        
+                                        <!-- MWFRS Section -->
+                                        <div class="mwfrs-section" style="padding: 30px; border-right: 2px solid #ecf0f1; background: linear-gradient(135deg, #fff5f5, #ffffff);">
+                                            <div class="section-title mwfrs-title" style="font-size: 16px; font-weight: bold; color: #2c3e50; text-align: center; margin-bottom: 20px; padding: 8px; border-radius: 6px; background: #ffebee; border: 1px solid #e74c3c; color: #c62828;">Main Wind Force Resisting System</div>
+                                            
+                                            <div class="building-diagram" style="position: relative; height: 120px; margin: 20px 0;">
+                                                <div class="building" style="width: 80px; height: 100px; background: #e0e0e0; border: 2px solid #666; position: absolute; left: 50%; transform: translateX(-50%); bottom: 0;"></div>
+                                                <div class="mwfrs-arrows mwfrs-arrow-1" style="position: absolute; color: #e74c3c; font-size: 20px; font-weight: bold; left: 20px; top: 30px;">→</div>
+                                                <div class="mwfrs-arrows mwfrs-arrow-2" style="position: absolute; color: #e74c3c; font-size: 20px; font-weight: bold; left: 20px; top: 60px;">→</div>
+                                                <div class="mwfrs-arrows mwfrs-label" style="position: absolute; color: #e74c3c; font-size: 20px; font-weight: bold; left: 5px; top: 10px; font-size: 10px; color: #c62828; background: rgba(255,255,255,0.9); padding: 2px 4px; border-radius: 3px;">Overall Forces</div>
+                                            </div>
+                                            
+                                            <ul class="description-list" style="list-style: none; padding: 0; margin: 20px 0;">
+                                                <li style="margin: 8px 0; padding: 6px 10px; background: rgba(255,255,255,0.7); border-left: 3px solid #e74c3c; border-radius: 4px; font-size: 12px; line-height: 1.4;"><strong>Purpose:</strong> Primary structural system</li>
+                                                <li style="margin: 8px 0; padding: 6px 10px; background: rgba(255,255,255,0.7); border-left: 3px solid #e74c3c; border-radius: 4px; font-size: 12px; line-height: 1.4;"><strong>Load Path:</strong> Foundation to roof</li>
+                                                <li style="margin: 8px 0; padding: 6px 10px; background: rgba(255,255,255,0.7); border-left: 3px solid #e74c3c; border-radius: 4px; font-size: 12px; line-height: 1.4;"><strong>Elements:</strong> Frames, shear walls, bracing</li>
+                                                <li style="margin: 8px 0; padding: 6px 10px; background: rgba(255,255,255,0.7); border-left: 3px solid #e74c3c; border-radius: 4px; font-size: 12px; line-height: 1.4;"><strong>Design:</strong> Overall building stability</li>
+                                                <li style="margin: 8px 0; padding: 6px 10px; background: rgba(255,255,255,0.7); border-left: 3px solid #e74c3c; border-radius: 4px; font-size: 12px; line-height: 1.4;"><strong>Frequency:</strong> Lower gust factor (G)</li>
+                                            </ul>
+                                        </div>
+                                        
+                                        <!-- Components & Cladding Section -->
+                                        <div class="cc-section" style="padding: 30px; background: linear-gradient(135deg, #f0f8ff, #ffffff);">
+                                            <div class="section-title cc-title" style="font-size: 16px; font-weight: bold; color: #2c3e50; text-align: center; margin-bottom: 20px; padding: 8px; border-radius: 6px; background: #e3f2fd; border: 1px solid #2196f3; color: #1565c0;">Components & Cladding</div>
+                                            
+                                            <div class="building-diagram" style="position: relative; height: 120px; margin: 20px 0;">
+                                                <div class="building" style="width: 80px; height: 100px; background: #e0e0e0; border: 2px solid #666; position: absolute; left: 50%; transform: translateX(-50%); bottom: 0;"></div>
+                                                <div class="cc-arrows cc-arrow-1" style="position: absolute; color: #2196f3; font-size: 14px; font-weight: bold; left: 25px; top: 40px;">←</div>
+                                                <div class="cc-arrows cc-arrow-2" style="position: absolute; color: #2196f3; font-size: 14px; font-weight: bold; left: 90px; top: 40px;">←</div>
+                                                <div class="cc-arrows cc-arrow-3" style="position: absolute; color: #2196f3; font-size: 14px; font-weight: bold; left: 45px; top: 15px;">↑</div>
+                                                <div class="cc-arrows cc-arrow-4" style="position: absolute; color: #2196f3; font-size: 14px; font-weight: bold; left: 65px; top: 15px;">↑</div>
+                                                <div class="cc-arrows cc-arrow-5" style="position: absolute; color: #2196f3; font-size: 14px; font-weight: bold; left: 10px; top: 60px;">→</div>
+                                                <div class="cc-arrows cc-label" style="position: absolute; color: #2196f3; font-size: 14px; font-weight: bold; left: 5px; top: 5px; font-size: 10px; color: #1565c0; background: rgba(255,255,255,0.9); padding: 2px 4px; border-radius: 3px;">Local Pressures</div>
+                                            </div>
+                                            
+                                            <ul class="description-list" style="list-style: none; padding: 0; margin: 20px 0;">
+                                                <li style="margin: 8px 0; padding: 6px 10px; background: rgba(255,255,255,0.7); border-left: 3px solid #2196f3; border-radius: 4px; font-size: 12px; line-height: 1.4;"><strong>Purpose:</strong> Individual building elements</li>
+                                                <li style="margin: 8px 0; padding: 6px 10px; background: rgba(255,255,255,0.7); border-left: 3px solid #2196f3; border-radius: 4px; font-size: 12px; line-height: 1.4;"><strong>Load Path:</strong> Local to supporting structure</li>
+                                                <li style="margin: 8px 0; padding: 6px 10px; background: rgba(255,255,255,0.7); border-left: 3px solid #2196f3; border-radius: 4px; font-size: 12px; line-height: 1.4;"><strong>Elements:</strong> Windows, doors, panels, roofing</li>
+                                                <li style="margin: 8px 0; padding: 6px 10px; background: rgba(255,255,255,0.7); border-left: 3px solid #2196f3; border-radius: 4px; font-size: 12px; line-height: 1.4;"><strong>Design:</strong> Local element attachment</li>
+                                                <li style="margin: 8px 0; padding: 6px 10px; background: rgba(255,255,255,0.7); border-left: 3px solid #2196f3; border-radius: 4px; font-size: 12px; line-height: 1.4;"><strong>Frequency:</strong> Higher gust factor (G)</li>
+                                            </ul>
+                                        </div>
+                                        
+                                        <!-- Key Differences Bar -->
+                                        <div class="key-differences" style="grid-column: 1 / -1; background: #f8f9fa; padding: 15px 30px; border-top: 2px solid #ecf0f1; display: flex; justify-content: space-around; align-items: center;">
+                                            <div class="difference-item" style="text-align: center; font-size: 11px;">
+                                                <div class="difference-title" style="font-weight: bold; color: #2c3e50; margin-bottom: 4px;">Tributary Area</div>
+                                                <div class="difference-value mwfrs-value" style="padding: 4px 8px; border-radius: 4px; font-weight: bold; background: #ffebee; color: #c62828;">&gt; 700 sf</div>
+                                                <div style="margin: 4px 0;">vs</div>
+                                                <div class="difference-value cc-value" style="padding: 4px 8px; border-radius: 4px; font-weight: bold; background: #e3f2fd; color: #1565c0;">≤ 700 sf</div>
+                                            </div>
+                                            
+                                            <div class="difference-item" style="text-align: center; font-size: 11px;">
+                                                <div class="difference-title" style="font-weight: bold; color: #2c3e50; margin-bottom: 4px;">Gust Factor</div>
+                                                <div class="difference-value mwfrs-value" style="padding: 4px 8px; border-radius: 4px; font-weight: bold; background: #ffebee; color: #c62828;">0.85 (typical)</div>
+                                                <div style="margin: 4px 0;">vs</div>
+                                                <div class="difference-value cc-value" style="padding: 4px 8px; border-radius: 4px; font-weight: bold; background: #e3f2fd; color: #1565c0;">Variable</div>
+                                            </div>
+                                            
+                                            <div class="difference-item" style="text-align: center; font-size: 11px;">
+                                                <div class="difference-title" style="font-weight: bold; color: #2c3e50; margin-bottom: 4px;">Load Magnitude</div>
+                                                <div class="difference-value mwfrs-value" style="padding: 4px 8px; border-radius: 4px; font-weight: bold; background: #ffebee; color: #c62828;">Lower</div>
+                                                <div style="margin: 4px 0;">vs</div>
+                                                <div class="difference-value cc-value" style="padding: 4px 8px; border-radius: 4px; font-weight: bold; background: #e3f2fd; color: #1565c0;">Higher</div>
+                                            </div>
+                                            
+                                            <div class="difference-item" style="text-align: center; font-size: 11px;">
+                                                <div class="difference-title" style="font-weight: bold; color: #2c3e50; margin-bottom: 4px;">Design Focus</div>
+                                                <div class="difference-value mwfrs-value" style="padding: 4px 8px; border-radius: 4px; font-weight: bold; background: #ffebee; color: #c62828;">Stability</div>
+                                                <div style="margin: 4px 0;">vs</div>
+                                                <div class="difference-value cc-value" style="padding: 4px 8px; border-radius: 4px; font-weight: bold; background: #e3f2fd; color: #1565c0;">Attachment</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)">
+                            <h3>What's the Wind FAQ difference between Ultimate and Nominal wind speeds?</h3>
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="answer-content">
+                                <p>Furthermore, <strong>Nominal Design Wind Speed</strong> represents 40% reduction of Ultimate Design Wind Speed systematically. Additionally, this reduction applies to both positive and negative pressure calculations comprehensively. Moreover, engineers achieve this reduction through specific calculation procedures effectively.</p>
+                                
+                                <p>Subsequently, you can achieve 40% reduction by entering Nominal Velocity directly into calculation formulas. Furthermore, calculate Nominal Velocity by multiplying Ultimate Velocity by square root of 0.6 systematically. Moreover, ASCE 7 Velocity Maps provide Ultimate values for Nominal calculations. Additionally, proper conversion ensures accurate pressure determinations consistently.</p>
+                                
+                                <p>Nevertheless, <strong>contact your permit department</strong> to confirm Nominal Design acceptance for specific structures. Furthermore, some jurisdictions require Ultimate Design exclusively. Subsequently, others accept Nominal Design for certain building types. Moreover, our wind load calculator software toggles between both design methods seamlessly.</p>
+
+                                <p>Additionally, Ultimate Design provides conservative wind load calculations systematically. Furthermore, Nominal Design offers economic advantages for appropriate applications. Subsequently, engineers select design methods based on project requirements and regulatory acceptance. Moreover, proper design selection ensures both safety and economy effectively.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Calculator Software -->
+                <div class="faq-section">
+                    <div class="section-header">
+                        <h2>Wind FAQ Calculator Software - Professional Wind Load Calculator Solutions</h2>
+                        <p class="section-description">Moreover, Wind FAQ calculator software streamlines ASCE 7 compliance systematically. Furthermore, professional wind load calculator tools ensure accurate calculations and building permit approval success.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)">
+                            <h3>What is a wind load calculator according to Wind FAQ professionals?</h3>
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="answer-content">
+                                <p>Furthermore, a wind load calculator represents sophisticated software applying ASCE 7 formulas systematically. Additionally, programmers utilize algorithms linking all formulas together for accurate calculations. Moreover, these tools determine wind load pressures efficiently. Subsequently, engineers obtain proper calculations through automated processes consistently.</p>
+                                
+                                <p>Moreover, our advanced Wind Load Calculator performs comprehensive analysis systematically. Furthermore, the software considers dynamic effects like vortex shedding continuously. Subsequently, gust response factors receive proper consideration automatically. Additionally, engineers gain holistic views of wind forces on structures through comprehensive analysis.</p>
+
+                                <p>Nevertheless, wind load calculator software eliminates manual calculation errors effectively. Furthermore, automated processes ensure ASCE 7 compliance consistently. Subsequently, engineers save significant time through streamlined workflows. Moreover, professional results enhance project confidence and regulatory approval success.</p>
+
+                                <p>Additionally, modern wind load calculator applications provide instant PDF generation capabilities. Furthermore, Excel export functions enable detailed analysis and documentation. Subsequently, cloud-based access ensures availability from any device systematically. Moreover, professional reporting features facilitate building permit submissions efficiently.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)">
+                            <h3>Why WindLoad.solutions pioneered Wind FAQ calculator software development?</h3>
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="answer-content">
+                                <p>Furthermore, WindLoad.solutions pioneered wind load pressure software over <strong>23 years ago</strong> systematically. Additionally, we represented one of only three companies offering advanced tools initially. Moreover, this extensive experience demonstrates unmatched ability delivering successful solutions consistently. Subsequently, deep expertise ensures reliable calculation results for complex projects.</p>
+                                
+                                <p>Moreover, thousands of companies trust our Wind Load Calculator nationwide. Furthermore, our tool incorporates all ASCE 7 provisions comprehensively. Subsequently, user-friendly interfaces enable efficient workflows systematically. Additionally, this proven track record demonstrates consistent reliability and accuracy commitment continuously.</p>
+
+                                <p>Nevertheless, pioneering experience established industry calculation standards systematically. Furthermore, innovative approaches solved complex engineering challenges effectively. Subsequently, continuous development maintains technological leadership consistently. Moreover, extensive client feedback drives ongoing software improvements systematically.</p>
+
+                                <p>Additionally, our wind load calculator software serves diverse building types comprehensively. Furthermore, commercial, residential, and industrial applications receive equal attention systematically. Subsequently, specialized features address unique project requirements effectively. Moreover, professional engineers recognize our software as definitive wind load calculation solutions.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)">
+                            <h3>How does Wind FAQ software compare to Excel spreadsheets?</h3>
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="answer-content">
+                                <p>Furthermore, online wind load calculator software offers significant advantages over Excel systematically. Additionally, automatic updates ensure current ASCE 7 compliance continuously. Moreover, cloud access enables calculations from any device effectively. Subsequently, professional PDF generation eliminates manual reporting requirements.</p>
+
+                                <p>Nevertheless, Excel spreadsheets require manual formula maintenance continuously. Furthermore, version control becomes problematic with distributed files. Subsequently, error checking relies on user verification exclusively. Moreover, collaboration challenges limit team efficiency significantly.</p>
+
+                                <p>Additionally, our web-based calculator provides instant collaboration capabilities systematically. Furthermore, automatic backup systems prevent data loss effectively. Subsequently, professional reporting features exceed Excel capabilities comprehensively. Moreover, integrated help systems guide users through complex calculations efficiently.</p>
+
+                                <p>Meanwhile, Excel spreadsheets lack automatic ASCE 7 update capabilities. Furthermore, formula errors can propagate through calculations undetected. Subsequently, professional presentation requires additional formatting work. Moreover, permit officials prefer standardized report formats over custom spreadsheets consistently.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Building Permits -->
+                <div class="faq-section">
+                    <div class="section-header">
+                        <h2>Building Permits</h2>
+                        <p class="section-description">Essential guidance for building permit approval processes and compliance requirements for wind load calculations.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)">
+                            <h3>How does your wind load calculator aid building permit approval?</h3>
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="answer-content">
+                                <p>Building permit departments demand precision. Incorrect wind load calculations frequently cause significant delays. Our reliable Wind Load Calculator prevents this frustrating situation by generating accurate, code-compliant reports consistently.</p>
+                                
+                                <p>These detailed reports satisfy permitting requirements fully, accelerating the approval process considerably. This efficiency saves both valuable time and critical money, contributing directly to your project's overall success while avoiding costly rejections.</p>
+                                
+                                <div class="image-placeholder">
+                                    <p><strong>Image Required:</strong> building-permit-approval-process-flow.png</p>
+                                    <p>Content: Flowchart showing building permit approval process with wind load calculations</p>
+                                    <p>Dimensions: 750x400px</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)">
+                            <h3>What do I do with the calculated wind load pressures?</h3>
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="answer-content">
+                                <p>The calculated wind load pressure tells the designer/engineer/architect what the limit is and what pressures need to be resisted. This applies to:</p>
+                                
+                                <ul>
+                                    <li><strong>Material Selection:</strong> The type of material used for construction</li>
+                                    <li><strong>Structural Elements:</strong> The type or quantity of straps to hold the structure in place</li>
+                                    <li><strong>Component Selection:</strong> Knowing what windows, doors, shutters, skylights, etc. to purchase</li>
+                                </ul>
+                                
+                                <p><strong>Example:</strong> When selecting windows from a manufacturer's catalog, the windows have wind load pressure ratings. Based on your calculated wind load pressures, you can identify which windows are acceptable to meet code and permit requirements.</p>
+                                
+                                <div class="image-placeholder">
+                                    <p><strong>Image Required:</strong> wind-load-pressure-applications-examples.png</p>
+                                    <p>Content: Examples showing how calculated wind loads apply to window selection, materials, and structural design</p>
+                                    <p>Dimensions: 700x450px</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>WindLoad Solutions</h4>
+                    <p>Professional WindLoad Calculator software per ASCE 7 standards. Moreover, over 24 years of excellence ensures projects meet compliance requirements. Furthermore, our team provides nationwide windload calculator support and comprehensive wind load analysis solutions.</p>
+                    
+                    <h4>Contact Information</h4>
+                    
+                    <p style="margin-bottom: 0.5rem;"><strong style="display: block; margin-bottom: 0;">General Inquiries</strong>
+                    Email: info@windload.solutions<br>
+                    Phone: (833) 272-3946 | (833) ASCE-WIND</p>
+
+                    <p style="margin-bottom: 0.5rem;"><strong style="display: block; margin-bottom: 0;">Technical Support</strong>
+                    Email: support@windload.solutions</p>
+
+                    <p style="margin-bottom: 0.5rem;"><strong style="display: block; margin-bottom: 0;">Sales</strong>
+                    Email: sales@windload.solutions</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>WindLoad Calculator Services</h4>
+                    <a href="asce-7-wind-load-calculator.html">ASCE 7 WindLoad Calculator</a>
+                    <a href="services-asce7-wind-load-pressures.html">Wind Load Pressure Services</a>
+                    <a href="professional-engineer-sign-seal-wind-load-pressures.html">PE Sign & Seal Services</a>
+                    <a href="building-intelligence-platform.html">Wind Load Building Intelligence Platform</a>
+                    <a href="free-online-wind-load-calculators-demos-free-excel-wind-load-calculator.html">Free WindLoad Calculator</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>WindLoad Calculator Resources</h4>
+                    <a href="instructional-videos-asce-7-wind-load-calculator-wind-load-pressure-software-components-cladding-wind-load-pressures-asce-7.html">WindLoad Calculator Videos</a>
+                    <a href="faqfor-wind-load-calculator-software-for-wind-load-pressures-per-asce-7.html">WindLoad Calculator FAQ</a>
+                    <a href="clarifying-wind-loads-free-asce-calculator-pressure-analysis.html">Wind Load Types Guide</a>
+                    <a href="contact-us-wind-load-calculators-for-components-and-cladding-cc-wind-load-pressures-per-the-asce-7-16-and-asce-7-22-publication-windloads-made-easy.html">Contact WindLoad Experts</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Industry Solutions</h4>
+                    <a href="wind-load-calculator-for-engineers.html">For Engineers</a>
+                    <a href="wind-load-calculator-for-architects.html">For Architects</a>
+                    <a href="contractors-wind-load-calculator.html">For Contractors</a>
+                    <a href="wind-loads-for-consultants.html">For Consultants</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 WindLoad Solutions. All rights reserved. Professional WindLoad Calculator software per ASCE 7-22 & ASCE 7-16. Contact us for components and cladding wind load pressures, windloads analysis, and comprehensive wind load calculator excel solutions nationwide.</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <script>
+        // Navigation Functions
+        function toggleNav() {
+            const navMenu = document.getElementById('nav-menu');
+            const hamburger = document.getElementById('hamburger');
+            const overlay = document.getElementById('nav-overlay');
+            
+            navMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+            overlay.classList.toggle('active');
+            
+            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+        }
+
+        function initializeHeaderScroll() {
+            const header = document.getElementById('main-header');
+            
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+        }
+
+        function initializeVideo() {
+            const video = document.querySelector('.hero-video');
+            if (!video) return;
+
+            video.muted = true;
+            video.playsInline = true;
+            
+            video.addEventListener('loadeddata', function() {
+                video.play().catch(function() {
+                    console.log('Video autoplay blocked');
+                });
+            });
+
+            video.addEventListener('error', function() {
+                video.style.display = 'none';
+            });
+
+            document.addEventListener('click', function() {
+                if (video.paused) {
+                    video.play().catch(function() {
+                        console.log('Manual play failed');
+                    });
+                }
+            }, { once: true });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeVideo();
+            initializeHeaderScroll();
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    
+    
+        // Dropdown menu toggle for mobile - supports multiple dropdowns
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdowns = document.querySelectorAll('.nav-dropdown');
+            
+            dropdowns.forEach(function(dropdown) {
+                const dropdownToggle = dropdown.querySelector('.nav-dropdown-toggle');
+                
+                if (dropdownToggle) {
+                    dropdownToggle.addEventListener('click', function(e) {
+                        const header = document.getElementById('main-header');
+                        const isScrolled = header && header.classList.contains('scrolled');
+                        const isMobile = window.innerWidth < 1024;
+                        
+                        // Check if this dropdown is in the hamburger menu (nav-links) or horizontal nav (nav-desktop-scrolled)
+                        const isInHamburgerMenu = dropdown.closest('.nav-links');
+                        const isInHorizontalNav = dropdown.closest('.nav-desktop-scrolled');
+                        
+                        // Hamburger menu dropdowns: ALWAYS toggle by click
+                        // Horizontal nav dropdowns: Toggle on mobile, hover on desktop when scrolled
+                        if (isInHamburgerMenu || isMobile || !isScrolled) {
+                            e.preventDefault();
+                            // Close other dropdowns
+                            dropdowns.forEach(function(otherDropdown) {
+                                if (otherDropdown !== dropdown) {
+                                    otherDropdown.classList.remove('active');
+                                }
+                            });
+                            // Toggle current dropdown
+                            dropdown.classList.toggle('active');
+                        }
+                        // On desktop when scrolled (and in horizontal nav), let CSS hover handle it
+                    });
+                }
+            });
+        });
+    </script>
+
+    <script>
+        // PAGE-SPECIFIC FUNCTIONALITY
+        // 🚀 ENHANCED WIND LOAD AI ASSISTANT - PHASE 2 IMPLEMENTATION
+        // Advanced Semantic Search with Fuzzy Matching & Context Memory
+        // ⭐ PHASE 2 FEATURE: Conversation Context Memory
+        let conversationContext = {
+            lastState: null,
+            lastTopic: null,
+            questionHistory: [],
+            userExpertiseLevel: 'professional',
+            sessionStartTime: Date.now()
+        };
+        // ⭐ PHASE 2 FEATURE: Question Analytics & Learning
+        let questionAnalytics = {
+            popularQuestions: new Map(),
+            unhandledQuestions: [],
+            responseRatings: new Map(),
+            typoCorrections: new Map()
+        };
+        // ⭐ PHASE 2 FEATURE: Advanced Fuzzy Matching System
+        function fuzzyMatch(input, target, threshold = 0.8) {
+            const distance = calculateLevenshteinDistance(input.toLowerCase(), target.toLowerCase());
+            const maxLength = Math.max(input.length, target.length);
+            const similarity = 1 - (distance / maxLength);
+            return similarity >= threshold;
+        }
+        function calculateLevenshteinDistance(str1, str2) {
+            const matrix = Array(str2.length + 1).fill(null).map(() => Array(str1.length + 1).fill(null));
+            for (let i = 0; i <= str1.length; i++) matrix[0][i] = i;
+            for (let j = 0; j <= str2.length; j++) matrix[j][0] = j;
+            for (let j = 1; j <= str2.length; j++) {
+                for (let i = 1; i <= str1.length; i++) {
+                    const indicator = str1[i - 1] === str2[j - 1] ? 0 : 1;
+                    matrix[j][i] = Math.min(
+                        matrix[j][i - 1] + 1,     // deletion
+                        matrix[j - 1][i] + 1,     // insertion
+                        matrix[j - 1][i - 1] + indicator // substitution
+                    );
+                }
+            }
+            return matrix[str2.length][str1.length];
+        }
+        // ⭐ PHASE 2 FEATURE: Auto-Typo Correction
+        function correctCommonTypos(question) {
+            const typoCorrections = {
+                'flordia': 'florida',
+                'californa': 'california',
+                'asce7': 'asce 7',
+                'asce-7': 'asce 7',
+                'winload': 'wind load',
+                'windloads': 'wind loads',
+                'caculation': 'calculation',
+                'caculations': 'calculations',
+                'buliding': 'building',
+                'preassure': 'pressure',
+                'presure': 'pressure',
+                'enginering': 'engineering',
+                'struture': 'structure',
+                'structual': 'structural',
+                'permmit': 'permit',
+                'permitt': 'permit'
+            };
+            let corrected = question;
+            let correctionsMade = [];
+            for (const [typo, correction] of Object.entries(typoCorrections)) {
+                const regex = new RegExp(`\\b${typo}\\b`, 'gi');
+                if (regex.test(corrected)) {
+                    corrected = corrected.replace(regex, correction);
+                    correctionsMade.push({typo, correction});
+                }
+            }
+            return {corrected, correctionsMade};
+        }
+        // ⭐ PHASE 2 FEATURE: Multi-Intent Detection
+        function detectMultipleIntents(question) {
+            const intents = [];
+            const q = question.toLowerCase();
+            // Check for multiple question types
+            if (hasTerms(q, ['asce', 'standard', 'version'])) intents.push('asce_standard');
+            if (hasTerms(q, ['building code', 'code']) && !hasTerms(q, ['asce'])) intents.push('building_code');
+            if (hasTerms(q, ['mwfrs', 'components and cladding', 'c&c'])) intents.push('mwfrs_vs_cc');
+            if (hasTerms(q, ['calculate', 'formula', 'calculation'])) intents.push('calculation');
+            if (hasTerms(q, ['ultimate', 'nominal'])) intents.push('ultimate_vs_nominal');
+            if (hasTerms(q, ['wind zones', 'zone 4', 'zone 5'])) intents.push('wind_zones');
+            return intents;
+        }
+        // ⭐ PHASE 2 FEATURE: Enhanced Entity Recognition
+        function detectBuildingType(question) {
+            const buildingTypes = {
+                'residential': ['residential', 'house', 'home', 'apartment', 'condo'],
+                'commercial': ['commercial', 'office', 'retail', 'store', 'warehouse'],
+                'industrial': ['industrial', 'factory', 'plant', 'manufacturing'],
+                'institutional': ['school', 'hospital', 'church', 'government'],
+                'high-rise': ['high-rise', 'skyscraper', 'tower', 'tall building']
+            };
+            for (const [type, keywords] of Object.entries(buildingTypes)) {
+                if (keywords.some(keyword => question.includes(keyword))) {
+                    return type;
+                }
+            }
+            return null;
+        }
+        function detectMaterial(question) {
+            const materials = ['steel', 'concrete', 'wood', 'timber', 'masonry', 'aluminum'];
+            return materials.find(material => question.includes(material)) || null;
+        }
+        function detectCodeVersion(question) {
+            const versions = ['asce 7-22', 'asce 7-16', 'asce 7-10', 'ibc 2021', 'ibc 2018'];
+            return versions.find(version => question.includes(version)) || null;
+        }
+        // ⭐ COMPREHENSIVE KNOWLEDGE BASE WITH SEMANTIC INTELLIGENCE
+        const windLoadKnowledge = {
+            // ASCE 7 Specific Questions
+            "asce_standard": {
+                patterns: ["asce", "asce 7", "asce-7", "standard", "version", "publication"],
+                stateAware: true,
+                generator: (intent, entities, question) => {
+                    // Track popular questions
+                    trackQuestion('asce_standard');
+                    if (entities.state) {
+                        conversationContext.lastState = entities.state;
+                        return `${entities.state} uses ASCE 7-22 for wind load calculations. This is the current version of the American Society of Civil Engineers standard that provides requirements for wind loads on buildings and structures. ASCE 7-22 is the most recent publication and should be used for all new projects to ensure building code compliance and permit approval. Our WindLoad Solutions calculator automatically applies ASCE 7-22 provisions for your ${entities.state} location.`;
+                    }
+                    return "ASCE 7-22 is the most recent publication for wind load calculations. This standard provides comprehensive requirements for determining wind loads on buildings and structures. Only the most recent version should be used for new projects to ensure building code compliance and permit approval. Our online wind load calculator automatically applies all ASCE 7-22 provisions with instant PDF reports for building permits.";
+                }
+            },
+            "building_code": {
+                patterns: ["building code", "code", "building standard", "regulations"],
+                stateAware: true,
+                generator: (intent, entities, question) => {
+                    trackQuestion('building_code');
+                    if (entities.state) {
+                        conversationContext.lastState = entities.state;
+                        return getStateCodeResponse(entities.state, question);
+                    }
+                    return "Building codes are regulations that specify minimum standards for construction to protect public health, safety, and welfare. Most U.S. jurisdictions adopt the International Building Code (IBC) as their base, often with local amendments. Building codes reference ASCE 7 for wind load requirements. Always verify specific requirements with your local building department. Our calculator automatically applies appropriate standards for your location.";
+                }
+            },
+            "mwfrs_vs_cc": {
+                patterns: ["mwfrs", "components and cladding", "components cladding", "c&c", "main wind force", "difference between"],
+                generator: () => {
+                    trackQuestion('mwfrs_vs_cc');
+                    return "MWFRS (Main Wind Force Resisting Systems) calculates wind loads on the entire building structure to prevent overturning, while Components & Cladding (C&C) calculates loads on individual elements like windows, doors, and roofs. Key differences: MWFRS covers tributary areas >700 sf with lower pressures for overall stability, while C&C covers areas ≤700 sf with higher localized pressures for element attachment. Our calculator handles both methods automatically with detailed zone mapping.";
+                }
+            },
+            "wind_pressure_calculation": {
+                patterns: ["calculate wind load", "wind pressure formula", "how to calculate", "calculation", "formula"],
+                generator: () => {
+                    trackQuestion('calculation');
+                    return "Wind load pressure is calculated using the formula: qz = 0.00256 × Kz × Kzt × Kd × V² × I, where Kz is the velocity pressure exposure coefficient, Kzt is the topographic factor, Kd is the wind directionality factor, V is the basic wind speed, and I is the importance factor. Our online WindLoad Solutions calculator automates this complex process, handles all ASCE 7-22 provisions, and exports results to PDF and Excel for building permits. Try our free demo to see instant calculations.";
+                }
+            },
+            "ultimate_vs_nominal": {
+                patterns: ["ultimate", "nominal", "ultimate vs nominal", "wind speed", "40% reduction"],
+                generator: () => {
+                    trackQuestion('ultimate_vs_nominal');
+                    return "Ultimate wind speed is the full design value from ASCE 7 maps. Nominal wind speed is 40% reduced (multiply by √0.6 = 0.775). Ultimate design is required by most modern building codes (IBC 2015+) using LRFD methods. Nominal design uses older ASD methods with separate load factors. Contact your permit department to confirm which is acceptable for your project. Our calculator computes both methods and includes code compliance recommendations in your PDF report.";
+                }
+            },
+            "wind_zones": {
+                patterns: ["wind zones", "zone 4", "zone 5", "corner zones", "edge zones"],
+                generator: () => {
+                    trackQuestion('wind_zones');
+                    return "Wind load zones are based on location on the building per ASCE 7 figures. Zone 4 (interior areas) has lower pressures, while Zone 5 (corner and edge areas within distance 'a' from building edges) has higher pressures. The distance 'a' is calculated as 10% of least horizontal dimension or 40% of height, whichever is smaller, but not less than 4% of least horizontal dimension or 3 feet. Our online tool automatically determines zones and generates detailed zone maps with pressure calculations for your project.";
+                }
+            },
+            // ⭐ PHASE 2: Enhanced Definition System
+            "definition": {
+                patterns: ["what is", "define", "definition of", "meaning of", "what does", "stand for", "stands for"],
+                terms: {
+                    "asce": "ASCE stands for the American Society of Civil Engineers. It's a professional engineering society founded in 1852 that develops standards, provides continuing education, and advocates for the civil engineering profession. ASCE publishes the ASCE 7 standard which is the primary reference for structural loads in the United States.",
+                    "asce 7": "ASCE 7 is the 'Minimum Design Loads and Associated Criteria for Buildings and Other Structures' standard published by the American Society of Civil Engineers. It provides requirements for calculating dead, live, wind, snow, seismic, and other loads on buildings. ASCE 7-22 is the current version and is referenced by the International Building Code (IBC) and most U.S. building codes.",
+                    "asce 7-16": "ASCE 7-16 is the 2016 edition of the 'Minimum Design Loads and Associated Criteria for Buildings and Other Structures' standard. It was widely used from 2016-2022 and introduced significant updates to wind load provisions, including revised wind speed maps and new calculation methods. However, ASCE 7-22 is now the current version and should be used for new projects.",
+                    "asce 7-22": "ASCE 7-22 is the most current (2022) edition of the 'Minimum Design Loads and Associated Criteria for Buildings and Other Structures' standard published by the American Society of Civil Engineers. It includes the latest wind speed maps, updated calculation procedures, and enhanced provisions for climate change considerations. This version should be used for all new construction projects.",
+                    "asce 7-10": "ASCE 7-10 was the 2010 edition of the ASCE standard that introduced major revisions to wind load calculations, including new wind speed maps and the transition from fastest-mile to 3-second gust wind speeds. While historically significant, ASCE 7-22 is now the current standard.",
+                    "american society of civil engineers": "The American Society of Civil Engineers (ASCE) is the nation's oldest engineering society, founded in 1852. It represents more than 150,000 civil engineers worldwide and develops standards like ASCE 7 for structural design loads. ASCE promotes the advancement of civil engineering through education, advocacy, and professional development.",
+                    "psf": "PSF stands for 'pounds per square foot' - a unit of pressure commonly used in construction and structural engineering. Wind load pressures, floor loads, and material weights are often expressed in PSF. For example, a wind load of 30 PSF means 30 pounds of force acting on each square foot of surface area.",
+                    "wind load pressure": "Wind load pressure describes forces wind exerts on building surfaces. Air in motion possesses kinetic energy, and when this air hits objects, it transfers energy as pressure. This pressure varies based on wind speed, direction, building geometry, exposure conditions, and height per ASCE 7 standards.",
+                    "uplift": "Uplift is an upward force caused by wind flowing over and around a building, creating negative pressure (suction). This can lift roof materials, windows, doors, and even entire structures if not properly designed. Uplift forces are calculated using ASCE 7 standards and require adequate resistance through proper anchoring.",
+                    "exposure category": "Exposure categories (B, C, D) describe ground surface roughness around a building site. Exposure B is urban/suburban areas with buildings and trees. Exposure C is open terrain with scattered obstructions. Exposure D is flat, unobstructed coastal areas. Higher exposure categories result in higher wind loads.",
+                    "importance factor": "The Importance Factor (I) adjusts design loads based on building occupancy and use. Risk Category I (I=0.87) includes agricultural buildings. Category II (I=1.0) covers most buildings. Category III (I=1.15) includes schools and hospitals. Category IV (I=1.15) covers essential facilities like emergency services.",
+                    "dead load": "Dead load is the permanent weight of a structure including building materials, fixtures, and permanently attached equipment. Examples include concrete, steel beams, roofing materials, and HVAC equipment. Dead loads are constant and calculated per ASCE 7 standards.",
+                    "live load": "Live load is the temporary, movable weight in a building including people, furniture, equipment, and stored materials. Live loads vary over time and are specified in building codes based on occupancy type (e.g., offices: 50 PSF, residential: 40 PSF).",
+                    "professional engineer": "A Professional Engineer (PE) is a licensed engineer who can sign and seal engineering documents, take legal responsibility for engineering work, and offer services directly to the public. PE licensure is state-specific and often required for structural calculations including wind load analysis.",
+                    "building permits": "Building permits are official approvals required before construction. They ensure proposed work complies with building codes, zoning requirements, and safety standards. The permit process requires plans, structural calculations (including wind loads), and documentation. Our calculator generates permit-ready reports.",
+                    "wind load calculator": "A wind load calculator is sophisticated software that applies ASCE 7 formulas to determine wind pressures on buildings. It automates complex calculations, ensures code compliance, and generates professional reports. Our online calculator provides instant calculations with PDF/Excel export for building permits.",
+                    "gust factor": "Gust Factor (G) accounts for dynamic wind effects and turbulence in wind load calculations. It varies by building height, exposure category, and structural properties. Lower values apply to larger, stiffer structures while higher values apply to smaller, more flexible elements.",
+                    "topographic factor": "Topographic Factor (Kzt) accounts for wind speed increases due to topographic features like hills, ridges, and escarpments. It's typically 1.0 for flat terrain but can be higher for buildings on hilltops or ridges per ASCE 7 provisions.",
+                    "ibc": "IBC stands for the International Building Code, which is a model building code developed by the International Code Council (ICC). The IBC provides minimum requirements for building safety and is adopted by most U.S. jurisdictions, often with local amendments. The IBC references ASCE 7 for structural load requirements including wind loads.",
+                    "international building code": "The International Building Code (IBC) is a comprehensive model building code that addresses the design and installation of building systems. It covers structural systems, fire safety, means of egress, accessibility, and energy conservation. Most U.S. jurisdictions adopt the IBC as their base building code, referencing ASCE 7 for wind load calculations."
+                },
+                generator: (intent, entities, question) => {
+                    // ⭐ Enhanced matching for acronyms and specific terms
+                    const q = question.toLowerCase();
+                    // Priority matching for ASCE acronym questions
+                    if (q.includes('what does asce stand for') || q.includes('asce stands for') || q.includes('asce means')) {
+                        trackQuestion('definition_asce_acronym');
+                        return windLoadKnowledge.definition.terms["asce"];
+                    }
+                    // Direct version matching
+                    if (q.includes('asce 7-16') || q.includes('asce7-16')) {
+                        trackQuestion('definition_asce_7_16');
+                        return windLoadKnowledge.definition.terms["asce 7-16"];
+                    }
+                    if (q.includes('asce 7-22') || q.includes('asce7-22')) {
+                        trackQuestion('definition_asce_7_22');
+                        return windLoadKnowledge.definition.terms["asce 7-22"];
+                    }
+                    if (q.includes('asce 7-10') || q.includes('asce7-10')) {
+                        trackQuestion('definition_asce_7_10');
+                        return windLoadKnowledge.definition.terms["asce 7-10"];
+                    }
+                    // Check for IBC
+                    if (q.includes('what does ibc stand for') || q.includes('ibc stands for') || (q.includes('what is ibc') && !q.includes('building code'))) {
+                        trackQuestion('definition_ibc_acronym');
+                        return windLoadKnowledge.definition.terms["ibc"];
+                    }
+                    // Standard term matching with fuzzy search
+                    for (const [term, definition] of Object.entries(windLoadKnowledge.definition.terms)) {
+                        if (question.includes(term) || fuzzyMatch(question, term, 0.7)) {
+                            trackQuestion(`definition_${term.replace(/\s+/g, '_')}`);
+                            return definition;
+                        }
+                    }
+                    // Fallback for unmatched definition questions
+                    if (q.includes('what is') || q.includes('define') || q.includes('what does') || q.includes('stand for')) {
+                        return "I can help define wind load engineering terms! Try asking about: ASCE, ASCE 7-16, ASCE 7-22, PSF, wind load pressure, uplift, exposure categories, MWFRS, C&C, building codes, IBC, or other structural engineering terms. What specific term would you like me to explain?";
+                    }
+                    return null;
+                }
+            }
+        };
+        // ⭐ PHASE 2 FEATURE: Question Analytics
+        function trackQuestion(questionType) {
+            const count = questionAnalytics.popularQuestions.get(questionType) || 0;
+            questionAnalytics.popularQuestions.set(questionType, count + 1);
+            // Update conversation context
+            conversationContext.lastTopic = questionType;
+            conversationContext.questionHistory.push({
+                type: questionType,
+                timestamp: Date.now()
+            });
+            // Keep only last 10 questions in history
+            if (conversationContext.questionHistory.length > 10) {
+                conversationContext.questionHistory.shift();
+            }
+        }
+        // ⭐ ENHANCED INTENT ANALYSIS WITH ACRONYM DETECTION
+        function analyzeIntent(question) {
+            const q = question.toLowerCase();
+            // ⭐ ACRONYM AND "WHAT DOES X STAND FOR" DETECTION
+            if (hasTermsOrFuzzy(q, ['what does', 'stand for', 'stands for', 'what is asce', 'define asce', 'asce means'])) {
+                return 'definition';
+            }
+            // Check for specific version questions
+            if (hasTermsOrFuzzy(q, ['asce 7-16', 'asce 7-10', 'asce 7-22', 'asce7-16', 'asce7-22'])) {
+                return 'definition';
+            }
+            // Check for ASCE questions with fuzzy matching
+            if (hasTermsOrFuzzy(q, ['asce', 'asce 7', 'asce-7', 'standard', 'version']) && !hasTermsOrFuzzy(q, ['what does', 'stand for', 'define'])) {
+                return 'asce_standard';
+            }
+            // Check for building code questions
+            if (hasTermsOrFuzzy(q, ['building code', 'code', 'what code', 'ibc']) && !hasTerms(q, ['asce'])) {
+                return 'building_code';
+            }
+            // Check for MWFRS vs C&C questions
+            if (hasTermsOrFuzzy(q, ['mwfrs', 'components and cladding', 'components cladding', 'c&c', 'difference between mwfrs', 'main wind force'])) {
+                return 'mwfrs_vs_cc';
+            }
+            // Check for calculation questions
+            if (hasTermsOrFuzzy(q, ['calculate wind load', 'wind pressure formula', 'how to calculate', 'calculation formula', 'wind load calculation'])) {
+                return 'wind_pressure_calculation';
+            }
+            // Check for ultimate vs nominal questions
+            if (hasTermsOrFuzzy(q, ['ultimate', 'nominal', 'ultimate vs nominal', '40% reduction', 'ultimate wind speed', 'nominal wind speed'])) {
+                return 'ultimate_vs_nominal';
+            }
+            // Check for wind zones questions
+            if (hasTermsOrFuzzy(q, ['wind zones', 'zone 4', 'zone 5', 'corner zones', 'edge zones', 'wind load zones'])) {
+                return 'wind_zones';
+            }
+            // Check for definition questions (must be after acronym detection)
+            if (hasTermsOrFuzzy(q, ['what is', 'define', 'definition of', 'meaning of'])) {
+                return 'definition';
+            }
+            return null;
+        }
+        // ⭐ PHASE 2: Enhanced Entity Extraction
+        function extractEntities(question) {
+            return {
+                state: detectState(question),
+                buildingType: detectBuildingType(question),
+                material: detectMaterial(question),
+                codeVersion: detectCodeVersion(question),
+                term: detectTechnicalTerm(question)
+            };
+        }
+        // ⭐ PHASE 2: Fuzzy Term Matching
+        function hasTermsOrFuzzy(question, terms) {
+            return terms.some(term => {
+                return question.includes(term) || fuzzyMatch(question, term, 0.8);
+            });
+        }
+        // Utility function to check if question contains any of the terms
+        function hasTerms(question, terms) {
+            return terms.some(term => question.includes(term));
+        }
+        // ⭐ ENHANCED State Detection with Fuzzy Matching
+        function detectState(question) {
+            const stateNames = {
+                // Full state names first (longer matches take priority)
+                'north carolina': 'North Carolina',
+                'south carolina': 'South Carolina', 
+                'north dakota': 'North Dakota',
+                'south dakota': 'South Dakota',
+                'new hampshire': 'New Hampshire',
+                'new jersey': 'New Jersey',
+                'new mexico': 'New Mexico',
+                'new york': 'New York',
+                'rhode island': 'Rhode Island',
+                'west virginia': 'West Virginia',
+                // Single word states
+                'alabama': 'Alabama', 'alaska': 'Alaska', 'arizona': 'Arizona', 'arkansas': 'Arkansas',
+                'california': 'California', 'colorado': 'Colorado', 'connecticut': 'Connecticut', 'delaware': 'Delaware',
+                'florida': 'Florida', 'georgia': 'Georgia', 'hawaii': 'Hawaii', 'idaho': 'Idaho',
+                'illinois': 'Illinois', 'indiana': 'Indiana', 'iowa': 'Iowa', 'kansas': 'Kansas',
+                'kentucky': 'Kentucky', 'louisiana': 'Louisiana', 'maine': 'Maine', 'maryland': 'Maryland',
+                'massachusetts': 'Massachusetts', 'michigan': 'Michigan', 'minnesota': 'Minnesota', 'mississippi': 'Mississippi',
+                'missouri': 'Missouri', 'montana': 'Montana', 'nebraska': 'Nebraska', 'nevada': 'Nevada',
+                'ohio': 'Ohio', 'oklahoma': 'Oklahoma', 'oregon': 'Oregon', 'pennsylvania': 'Pennsylvania',
+                'tennessee': 'Tennessee', 'texas': 'Texas', 'utah': 'Utah', 'vermont': 'Vermont',
+                'virginia': 'Virginia', 'washington': 'Washington', 'wisconsin': 'Wisconsin', 'wyoming': 'Wyoming',
+                // Abbreviations
+                'al': 'Alabama', 'ak': 'Alaska', 'az': 'Arizona', 'ar': 'Arkansas', 'ca': 'California',
+                'co': 'Colorado', 'ct': 'Connecticut', 'de': 'Delaware', 'fl': 'Florida', 'ga': 'Georgia',
+                'hi': 'Hawaii', 'id': 'Idaho', 'il': 'Illinois', 'in': 'Indiana', 'ia': 'Iowa',
+                'ks': 'Kansas', 'ky': 'Kentucky', 'la': 'Louisiana', 'me': 'Maine', 'md': 'Maryland',
+                'ma': 'Massachusetts', 'mi': 'Michigan', 'mn': 'Minnesota', 'ms': 'Mississippi', 'mo': 'Missouri',
+                'mt': 'Montana', 'ne': 'Nebraska', 'nv': 'Nevada', 'nh': 'New Hampshire', 'nj': 'New Jersey',
+                'nm': 'New Mexico', 'ny': 'New York', 'nc': 'North Carolina', 'nd': 'North Dakota',
+                'oh': 'Ohio', 'ok': 'Oklahoma', 'or': 'Oregon', 'pa': 'Pennsylvania', 'ri': 'Rhode Island',
+                'sc': 'South Carolina', 'sd': 'South Dakota', 'tn': 'Tennessee', 'tx': 'Texas', 'ut': 'Utah',
+                'vt': 'Vermont', 'va': 'Virginia', 'wa': 'Washington', 'wv': 'West Virginia', 'wi': 'Wisconsin', 'wy': 'Wyoming'
+            };
+            // Sort by length (longest first) to avoid partial matches
+            const sortedStates = Object.entries(stateNames).sort((a, b) => b[0].length - a[0].length);
+            for (const [key, value] of sortedStates) {
+                // Use word boundaries to ensure exact matches
+                const regex = new RegExp(`\\b${key}\\b`, 'i');
+                if (regex.test(question)) {
+                    return value;
+                }
+            }
+            // ⭐ PHASE 2: Fuzzy matching for state names
+            for (const [key, value] of sortedStates) {
+                if (fuzzyMatch(question, key, 0.85)) {
+                    return value;
+                }
+            }
+            return null;
+        }
+        // Technical term detection with fuzzy matching
+        function detectTechnicalTerm(question) {
+            const terms = ['psf', 'wind load pressure', 'uplift', 'exposure category', 'importance factor', 
+                          'dead load', 'live load', 'professional engineer', 'building permits', 'gust factor'];
+            for (const term of terms) {
+                if (question.includes(term) || fuzzyMatch(question, term, 0.8)) {
+                    return term;
+                }
+            }
+            return null;
+        }
+        // ⭐ ENHANCED State Code Response with Context Memory
+        function getStateCodeResponse(state, question) {
+            const specialStates = {
+                'Idaho': {
+                    code: 'Idaho Building Code',
+                    details: 'based on the International Building Code (IBC) with state amendments. Idaho follows a streamlined approach with most jurisdictions adopting the current IBC edition.',
+                    windLoads: 'Wind loads follow ASCE 7 standards as adopted by local jurisdictions. Some mountainous areas may have enhanced snow load requirements.'
+                },
+                'California': {
+                    code: 'California Building Code (CBC)',
+                    details: 'based on the International Building Code (IBC) with state-specific amendments. The current version is the 2022 CBC based on the 2021 IBC. California has specific seismic requirements and energy efficiency standards.',
+                    windLoads: 'Wind loads follow ASCE 7-22 standards with additional California-specific seismic considerations. Coastal areas may have enhanced requirements.'
+                },
+                'Florida': {
+                    code: 'Florida Building Code (FBC)',
+                    details: 'based on the International Building Code with significant amendments for hurricane resistance. The current version is the 2020 FBC (7th Edition). Florida has some of the strictest wind load requirements in the nation.',
+                    windLoads: 'Florida requires enhanced wind load calculations due to hurricane exposure, with higher design wind speeds and special provisions for high velocity hurricane zones (HVHZ).'
+                },
+                'Texas': {
+                    code: 'No statewide building code',
+                    details: 'Most jurisdictions adopt the International Building Code (IBC) with local amendments. Major cities like Houston, Dallas, Austin, and San Antonio typically use the most recent IBC edition with local modifications.',
+                    windLoads: 'Wind loads follow ASCE 7 standards as adopted by local jurisdictions. Some areas have enhanced requirements for tornado and severe weather resistance.'
+                },
+                'New York': {
+                    code: 'New York State Building Code',
+                    details: 'based on the International Building Code with state amendments. New York City has its own NYC Building Code with unique requirements for high-rise buildings and urban construction.',
+                    windLoads: 'Wind loads follow ASCE 7 standards with potential local modifications for high-rise buildings and urban wind effects.'
+                },
+                'North Carolina': {
+                    code: 'North Carolina State Building Code',
+                    details: 'based on the International Building Code with state-specific amendments. The state has enhanced requirements for coastal areas due to hurricane exposure.',
+                    windLoads: 'Coastal areas follow enhanced wind load requirements due to hurricane risk, while inland areas use standard ASCE 7 provisions.'
+                }
+            };
+            if (specialStates[state]) {
+                const stateInfo = specialStates[state];
+                return `${state} uses the ${stateInfo.code}, which is ${stateInfo.details} ${stateInfo.windLoads} Always verify specific requirements with your local building department as jurisdictions may have additional amendments. Our online calculator automatically applies appropriate ASCE 7 provisions for your ${state} location and generates permit-ready reports.`;
+            }
+            // Default response for all other states
+            return `${state} typically adopts the International Building Code (IBC) as their base building code, often with state or local amendments. Most jurisdictions in ${state} use the most recent IBC edition (currently 2021 IBC) with locally adopted modifications. Wind loads generally follow ASCE 7-22 standards unless otherwise specified by local amendments. Always verify requirements with your local ${state} building department. Our calculator applies appropriate ASCE 7 standards for your specific ${state} location.`;
+        }
+        // ⭐ PHASE 2: Main AI Response Generation with Context Awareness
+        function generateIntelligentResponse(question) {
+            const intent = analyzeIntent(question);
+            const entities = extractEntities(question);
+            // ⭐ Context-aware response enhancement
+            if (conversationContext.lastState && !entities.state && intent === 'building_code') {
+                entities.state = conversationContext.lastState;
+            }
+            if (intent && windLoadKnowledge[intent]) {
+                const knowledge = windLoadKnowledge[intent];
+                if (knowledge.generator) {
+                    const response = knowledge.generator(intent, entities, question);
+                    if (response) return response;
+                }
+            }
+            // ⭐ PHASE 2: Multi-intent handling
+            const multipleIntents = detectMultipleIntents(question);
+            if (multipleIntents.length > 1) {
+                return handleMultipleIntents(multipleIntents, entities, question);
+            }
+            // Fallback for construction/engineering questions
+            return searchKnowledgeBase(question);
+        }
+        // ⭐ PHASE 2: Multi-Intent Handler
+        function handleMultipleIntents(intents, entities, question) {
+            const responses = [];
+            for (const intent of intents.slice(0, 2)) { // Handle max 2 intents
+                if (windLoadKnowledge[intent] && windLoadKnowledge[intent].generator) {
+                    const response = windLoadKnowledge[intent].generator(intent, entities, question);
+                    if (response) responses.push(response);
+                }
+            }
+            if (responses.length > 1) {
+                return responses.join('\n\n');
+            } else if (responses.length === 1) {
+                return responses[0];
+            }
+            return null;
+        }
+        // ⭐ ENHANCED Fallback Knowledge Search
+        function searchKnowledgeBase(question) {
+            const generalKnowledge = {
+                "wind load calculator": "A wind load calculator is sophisticated software that applies ASCE 7 formulas to determine wind pressures on buildings. Our online calculator automates complex calculations, ensures code compliance, and generates professional PDF reports for building permits. Features include automatic wind speed lookup, zone mapping, and instant calculations. Contact us at (833) 272-3946 for assistance.",
+                "building permits": "Building permits require ASCE 7 compliant wind load calculations showing all pressures for structural elements and components. Our calculator generates permit-ready PDF reports with all required documentation including wind speed determination, exposure categories, pressure calculations, and code references. Most permit departments accept our standardized reports.",
+                "excel spreadsheets": "Online wind load calculators offer significant advantages over Excel: automatic ASCE 7 updates, cloud access, professional PDF generation, error prevention, and collaboration features. Excel requires manual maintenance and lacks automatic code compliance features. Our web-based calculator eliminates version control issues and ensures current standards.",
+                "pe seal": "Professional Engineer (PE) sealing may be required for wind load calculations depending on your jurisdiction and project type. Requirements vary by state and building complexity. We offer PE review and sealing services through our network of licensed engineers. Contact us at (833) 272-3946 to discuss your specific requirements.",
+                "software vs spreadsheet": "Professional wind load software provides automatic ASCE 7 compliance, instant updates, cloud access, professional reporting, and error prevention. Spreadsheets require manual maintenance, lack automatic updates, and are prone to errors. Our calculator ensures current code compliance with instant PDF generation.",
+                "hurricane wind loads": "Hurricane-prone areas require enhanced wind load calculations with higher design wind speeds. ASCE 7-22 provides special provisions for hurricane regions. Coastal areas typically have wind speeds 130-180+ mph. Our calculator automatically applies appropriate hurricane provisions based on your location.",
+                "tornado design": "Most building codes don't require design for direct tornado strikes due to their localized nature and extreme forces. However, some areas have enhanced requirements for severe weather resistance. Standard wind load calculations per ASCE 7 provide reasonable protection for most tornado events."
+            };
+            // ⭐ PHASE 2: Enhanced keyword matching with fuzzy search
+            for (const [key, answer] of Object.entries(generalKnowledge)) {
+                if (question.includes(key) || fuzzyMatch(question, key, 0.7)) {
+                    return answer;
+                }
+            }
+            // ⭐ Context-aware fallback
+            if (conversationContext.lastTopic) {
+                return `I understand you're asking about "${question}" - this relates to your previous question about ${conversationContext.lastTopic}. While I don't have a specific detailed answer for this exact question, I recommend checking our comprehensive FAQ below, trying our free wind load calculator, or contacting our engineering experts at (833) 272-3946 for personalized assistance with your ${conversationContext.lastState || ''} project.`;
+            }
+            return `I understand you're asking about "${question}" - this is within my expertise area of wind loads and structural engineering! While I don't have a specific detailed answer for this exact question, I recommend checking our comprehensive FAQ below, trying our free wind load calculator, or contacting our engineering experts at (833) 272-3946 for personalized assistance.`;
+        }
+        // ⭐ MAIN AI FUNCTION - COMPLETELY ENHANCED
+        function askAI() {
+            const originalQuestion = document.getElementById('ai-question').value.trim();
+            if (!originalQuestion) {
+                showAIResponse("Please enter a question about wind loads, building codes, ASCE 7 standards, or structural engineering.");
+                return;
+            }
+            // ⭐ PHASE 2: Auto-typo correction
+            const {corrected: question, correctionsMade} = correctCommonTypos(originalQuestion.toLowerCase());
+            let correctionNote = '';
+            if (correctionsMade.length > 0) {
+                const corrections = correctionsMade.map(c => `"${c.typo}" → "${c.correction}"`).join(', ');
+                correctionNote = `<em style="color: #666; font-size: 0.9em;">Auto-corrected: ${corrections}</em><br><br>`;
+            }
+            // Check relevance with broader scope
+            const relevantTerms = [
+                'wind', 'load', 'asce', 'pressure', 'building', 'calculation', 'permit', 'structure', 'mwfrs', 'components', 'cladding', 
+                'hurricane', 'exposure', 'zone', 'construction', 'engineering', 'code', 'ibc', 'foundation', 'concrete', 'steel', 
+                'architect', 'contractor', 'inspection', 'safety', 'design', 'structural', 'seismic', 'earthquake', 'material',
+                'california', 'florida', 'texas', 'new york', 'idaho', 'nevada', 'arizona', 'colorado', 'utah', 'state', 'county', 'city',
+                'psf', 'dead load', 'live load', 'uplift', 'professional engineer', 'pe', 'seal', 'gust', 'topographic'
+            ];
+            const isRelevant = relevantTerms.some(term => question.includes(term) || fuzzyMatch(question, term, 0.8));
+            if (!isRelevant) {
+                showAIResponse("I specialize in wind loads, structural engineering, building codes, and ASCE 7 standards. Please ask about these topics, or contact our support team at (833) 272-3946 for assistance with other areas.");
+                return;
+            }
+            // ⭐ Generate intelligent response using enhanced semantic system
+            const response = generateIntelligentResponse(question);
+            showAIResponse(correctionNote + response);
+            // ⭐ PHASE 2: Update conversation context
+            conversationContext.questionHistory.push({
+                question: originalQuestion,
+                corrected: question,
+                timestamp: Date.now(),
+                response: response
+            });
+            // Clear input
+            document.getElementById('ai-question').value = '';
+        }
+        // ⭐ Enhanced predefined question handler
+        function askPredefined(question) {
+            document.getElementById('ai-question').value = question;
+            askAI();
+        }
+        // ⭐ Enhanced response display with analytics
+        function showAIResponse(answer) {
+            const responseDiv = document.getElementById('ai-response');
+            const answerDiv = responseDiv.querySelector('.ai-answer');
+            answerDiv.innerHTML = answer;
+            responseDiv.classList.remove('hidden');
+            // ⭐ PHASE 2: Add response rating buttons
+            const ratingHtml = `
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #e5e7eb;">
+                    <div style="display: flex; align-items: center; gap: 1rem; font-size: 0.9rem;">
+                        <span style="color: #6b7280;">Was this helpful?</span>
+                        <button onclick="rateResponse(true)" style="background: #10b981; color: white; border: none; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.8rem;">👍 Yes</button>
+                        <button onclick="rateResponse(false)" style="background: #ef4444; color: white; border: none; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.8rem;">👎 No</button>
+                    </div>
+                </div>
+            `;
+            answerDiv.innerHTML += ratingHtml;
+            // Smooth scroll to response
+            setTimeout(() => {
+                responseDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
+        }
+        // ⭐ PHASE 2: Response Rating System
+        function rateResponse(helpful) {
+            const lastQuestion = conversationContext.questionHistory[conversationContext.questionHistory.length - 1];
+            if (lastQuestion) {
+                questionAnalytics.responseRatings.set(lastQuestion.question, helpful);
+                // Show feedback
+                const thankYou = helpful ? 
+                    '<span style="color: #10b981;">✓ Thanks for your feedback!</span>' : 
+                    '<span style="color: #ef4444;">Thanks for your feedback. Contact (833) 272-3946 for direct assistance.</span>';
+                const ratingDiv = document.querySelector('.ai-answer').lastElementChild;
+                ratingDiv.innerHTML = `<div style="color: #6b7280; font-size: 0.9rem;">${thankYou}</div>`;
+            }
+        }
+        // Enter key support
+        document.getElementById('ai-question').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                askAI();
+            }
+        });
+        // Navigation Functions
+        function toggleNav() {
+            const navMenu = document.getElementById('nav-menu');
+            const hamburger = document.getElementById('hamburger');
+            const overlay = document.getElementById('nav-overlay');
+            navMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+        }
+        function initializeHeaderScroll() {
+            const header = document.getElementById('main-header');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+        }
+        // FAQ Toggle Functionality
+        function toggleFaq(button) {
+            const faqItem = button.closest('.faq-item');
+            const answer = faqItem.querySelector('.faq-answer');
+            const icon = button.querySelector('.faq-icon');
+            const isActive = answer.classList.contains('active');
+            // Close all other FAQ items
+            document.querySelectorAll('.faq-answer').forEach(item => {
+                item.classList.remove('active');
+            });
+            document.querySelectorAll('.faq-icon').forEach(item => {
+                item.textContent = '+';
+                item.style.transform = 'rotate(0deg)';
+            });
+            // Toggle current item if it wasn't already active
+            if (!isActive) {
+                answer.classList.add('active');
+                icon.textContent = '−';
+                icon.style.transform = 'rotate(180deg)';
+                // Smooth scroll to question
+                setTimeout(() => {
+                    button.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 300);
+            }
+        }
+        function initializeVideo() {
+            const video = document.querySelector('.hero-video');
+            if (!video) return;
+            video.muted = true;
+            video.playsInline = true;
+            video.addEventListener('loadeddata', function() {
+                video.play().catch(function() {
+                    console.log('Video autoplay blocked');
+                });
+            });
+            video.addEventListener('error', function() {
+                video.style.display = 'none';
+            });
+            document.addEventListener('click', function() {
+                if (video.paused) {
+                    video.play().catch(function() {
+                        console.log('Manual play failed');
+                    });
+                }
+            }, { once: true });
+        }
+        // ⭐ PHASE 2: Analytics Dashboard (for development)
+        function getAnalytics() {
+            return {
+                popularQuestions: Object.fromEntries(questionAnalytics.popularQuestions),
+                totalQuestions: conversationContext.questionHistory.length,
+                sessionDuration: Date.now() - conversationContext.sessionStartTime,
+                lastState: conversationContext.lastState,
+                lastTopic: conversationContext.lastTopic
+            };
+        }
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeVideo();
+            initializeHeaderScroll();
+            // ⭐ PHASE 2: Initialize conversation context
+            conversationContext.sessionStartTime = Date.now();
+        });
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        document.querySelectorAll('.nav-links a').forEach(function(link) {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    toggleNav();
+                }
+            });
+        });
+        // ⭐ PHASE 2: Auto-suggestions (future enhancement placeholder)
+        function initializeAutoSuggestions() {
+            const input = document.getElementById('ai-question');
+            input.addEventListener('input', function() {
+                const value = this.value.toLowerCase();
+                // Future: Show suggestions based on popular questions
+                if (value.length > 2) {
+                    // Implementation for suggestion dropdown
+                }
+            });
+        }
+        // ⭐ Phase 2 Complete: Industry-Leading AI System Ready! 🚀
+        console.log('🏆 WindLoad Solutions AI - Phase 2 Enhanced');
+        console.log('✅ Fuzzy Matching Active');
+        console.log('✅ Context Memory Enabled'); 
+        console.log('✅ Multi-Intent Detection Ready');
+        console.log('✅ Enhanced Entity Recognition Online');
+        console.log('✅ Analytics Tracking Active');
+        console.log('✅ Auto-Typo Correction Enabled');
+    </script>
+</body>
+</html>

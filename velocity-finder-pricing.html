@@ -1,0 +1,2295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building Intelligence Platform Pricing - Professional ASCE 7 Analysis Platform</title>
+    <meta name="description" content="Building Intelligence Platform Pricing offers professional ASCE 7 wind velocity calculations with interactive mapping, hurricane analysis, and competitive annual plans.">
+    <meta name="keywords" content="Building Intelligence Platform pricing, wind velocity software cost, ASCE 7 calculations pricing, structural engineering software rates, wind analysis subscription">
+    <meta property="og:title" content="Building Intelligence Platform Pricing - Professional ASCE 7 Analysis Platform">
+    <meta property="og:description" content="Building Intelligence Platform Pricing offers professional ASCE 7 wind velocity calculations with interactive mapping, hurricane analysis, and competitive annual plans.">
+    <meta property="og:type" content="website">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        .main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: transparent;
+            padding: 2rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .main-header.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1rem 0;
+            box-shadow: 0 1px 20px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+        }
+
+        .logo {
+            z-index: 1001;
+        }
+
+        .logo-image {
+            height: 100px;
+            width: auto;
+            filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
+            transition: all 0.3s ease;
+        }
+
+        .main-header.scrolled .logo-image {
+            height: 70px;
+            filter: none;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            z-index: 1001;
+        }
+
+        .header-cta {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            white-space: nowrap;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-cta:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.6);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .header-cta.primary {
+            background: rgba(0, 24, 255, 0.9);
+            border-color: rgba(0, 24, 255, 0.3);
+        }
+
+        .header-cta.primary:hover {
+            background: rgba(0, 24, 255, 1);
+            border-color: rgba(0, 24, 255, 0.8);
+        }
+
+        .main-header.scrolled .header-cta {
+            color: #0018ff;
+            background: rgba(0, 24, 255, 0.1);
+            border-color: rgba(0, 24, 255, 0.3);
+        }
+
+        .main-header.scrolled .header-cta.primary {
+            color: white;
+            background: #0018ff;
+            border-color: #0018ff;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 28px;
+            height: 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 1002;
+        }
+
+
+        .hamburger span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background: white;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .main-header.scrolled .hamburger span {
+            background: #1f2937;
+            box-shadow: none;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(8px, -8px);
+        }
+
+        /* Navigation Menu */
+        .nav-links {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100vh;
+            width: 400px;
+            max-width: 85vw;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            box-shadow: -10px 0 50px rgba(0,0,0,0.2);
+            padding: 4rem 2rem 2rem 2rem;
+            flex-direction: column;
+            gap: 1.5rem;
+            z-index: 9999;
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .nav-links.active {
+            display: flex;
+            transform: translateX(0);
+        }
+
+        /* Keep hamburger visible and nav-links as side menu only */
+        @media (min-width: 1024px) {
+            /* Keep nav-links as hamburger menu only - never show horizontally */
+            .main-header.scrolled .nav-links:not(.active) {
+                /* Stays as side menu even on desktop */
+                display: none !important;
+            }
+
+            /* Keep hamburger visible on desktop when scrolled */
+            .main-header.scrolled .hamburger {
+                display: flex;
+            }
+
+            .main-header.scrolled .header-right {
+                gap: 2rem;
+                align-items: center;
+            }
+        }
+
+        /* Simplified Desktop Nav (Shows when scrolled) */
+        .nav-desktop-scrolled {
+            display: none;
+        }
+
+        @media (min-width: 1024px) {
+            .main-header.scrolled .nav-desktop-scrolled {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 2rem;
+                overflow: visible;
+            }
+
+            .nav-desktop-scrolled a {
+                text-decoration: none;
+                font-size: 0.95rem;
+                padding: 0.5rem 1rem;
+                border-radius: 8px;
+                color: #374151;
+                font-weight: 600;
+                transition: all 0.2s ease;
+            }
+
+            .nav-desktop-scrolled a:hover {
+                background: rgba(0, 24, 255, 0.1);
+                color: #0018ff;
+            }
+
+            /* Simplified desktop nav dropdown styles */
+            .nav-desktop-scrolled .nav-dropdown {
+                position: relative;
+                z-index: 1001;
+            }
+
+            .nav-desktop-scrolled .nav-dropdown-toggle {
+                display: flex;
+                align-items: center;
+                font-size: 0.95rem;
+                padding: 0.5rem 1rem;
+                border-radius: 8px;
+                color: #374151;
+                font-weight: 600;
+                transition: all 0.2s ease;
+                cursor: pointer;
+            }
+
+            .nav-desktop-scrolled .dropdown-arrow {
+                font-size: 0.7rem;
+                margin-left: 0.3rem;
+            }
+
+            .nav-desktop-scrolled .nav-dropdown-menu {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background: white;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+                border-radius: 8px;
+                padding: 0.5rem 0;
+                min-width: 250px;
+                margin-top: 0.25rem;
+                z-index: 1002;
+                flex-direction: column;
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+                transform: translateY(-10px);
+                transition: all 0.2s ease;
+                display: flex !important;
+                padding-left: 0;
+            }
+
+            .nav-desktop-scrolled .nav-dropdown:hover .nav-dropdown-menu {
+                opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
+                transform: translateY(0);
+            }
+
+            .nav-desktop-scrolled .nav-dropdown-toggle:hover,
+            .nav-desktop-scrolled .nav-dropdown:hover .nav-dropdown-toggle {
+                background: rgba(0, 24, 255, 0.1);
+                color: #0018ff;
+            }
+
+            .nav-desktop-scrolled .nav-dropdown-menu a {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+                border-radius: 0;
+            }
+
+            .nav-desktop-scrolled .nav-dropdown-menu a:hover {
+                background: rgba(0, 24, 255, 0.1);
+            }
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #1f2937;
+            font-weight: 600;
+            font-size: 1.2rem;
+            padding: 1.2rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(45deg, #0018ff, #181E57);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #0018ff;
+            padding-left: 1rem;
+        }
+
+        .nav-links a:hover::before,
+        .nav-links a.active::before {
+            width: 50px;
+        }
+
+        .nav-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: none;
+            border: none;
+            font-size: 2.5rem;
+            color: #64748b;
+            cursor: pointer;
+            font-weight: 300;
+        }
+
+
+        .nav-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
+            z-index: 9998;
+        }
+
+        .nav-overlay.active {
+            display: block;
+        }
+
+        /* Navigation Dropdown Styles */
+        .nav-dropdown {
+            position: relative;
+        }
+
+        .nav-dropdown-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            text-decoration: none;
+            color: #1f2937;
+            font-weight: 600;
+            font-size: 1.2rem;
+            padding: 1.2rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .dropdown-arrow {
+            margin-left: 0.5rem;
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-dropdown.active .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .nav-dropdown-menu {
+            display: none;
+            flex-direction: column;
+            padding-left: 1.5rem;
+            margin-top: 0.5rem;
+            gap: 0.5rem;
+            background: rgba(248, 250, 252, 0.95);
+            border-radius: 8px;
+            padding: 0.5rem 1.5rem;
+        }
+
+        .nav-dropdown.active .nav-dropdown-menu {
+            display: flex;
+        }
+
+
+        .nav-dropdown-menu a {
+            font-size: 1.05rem;
+            font-weight: 500;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .nav-dropdown-menu a:last-child {
+            border-bottom: none;
+        }
+
+        /* Hover effects for hamburger menu */
+        .nav-dropdown-toggle:hover {
+            background: rgba(0, 24, 255, 0.05);
+            color: #0018ff;
+            padding-left: 1rem;
+            border-radius: 8px;
+        }
+
+        .nav-dropdown-menu a:hover {
+            background: rgba(0, 24, 255, 0.08);
+            color: #0018ff;
+            padding-left: 1rem;
+            border-radius: 6px;
+        }
+
+        /* Desktop dropdown styles */
+        @media (min-width: 1024px) {
+            /* CRITICAL: Prevent clipping of dropdowns */
+            .main-header.scrolled,
+            .main-header.scrolled .header-container,
+            .main-header.scrolled .header-right {
+                overflow: visible !important;
+            }
+            
+            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown-toggle {
+                display: flex;
+                align-items: center;
+                font-size: 0.95rem;
+                padding: 0.5rem 1rem;
+                border-bottom: none;
+                border-radius: 8px;
+                color: #374151;
+                transition: all 0.2s ease;
+                cursor: pointer;
+            }
+
+            .main-header.scrolled .nav-desktop-scrolled .dropdown-arrow {
+                font-size: 0.7rem;
+                margin-left: 0.3rem;
+            }
+
+            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown {
+                position: relative;
+                z-index: 1001;
+            }
+
+            /* Dropdown menu - always in DOM but invisible */
+            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown-menu {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background: white;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+                border-radius: 8px;
+                padding: 0.5rem 0;
+                min-width: 250px;
+                margin-top: 0.25rem;
+                z-index: 1002;
+                flex-direction: column;
+                
+                /* Hidden by default */
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+                transform: translateY(-10px);
+                transition: all 0.2s ease;
+                
+                /* Force display flex always - CRITICAL */
+                display: flex !important;
+                
+                /* Remove any padding/border from parent that might clip */
+                padding-left: 0;
+            }
+
+            /* Show dropdown on hover */
+            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown:hover .nav-dropdown-menu {
+                opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
+                transform: translateY(0);
+            }
+
+            /* Highlight toggle on hover */
+            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown-toggle:hover,
+            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown:hover .nav-dropdown-toggle {
+                background: rgba(0, 24, 255, 0.1);
+                color: #0018ff;
+            }
+
+            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown-menu a {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+                border-bottom: none;
+                border-radius: 0;
+            }
+
+            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown-menu a:hover {
+                background: rgba(0, 24, 255, 0.1);
+                padding-left: 1.5rem;
+            }
+        }
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1a2a6c 0%, #2563eb 50%, #1a2a6c 100%);
+        }
+
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                135deg, 
+                rgba(26, 42, 108, 0.5) 0%, 
+                rgba(37, 99, 235, 0.4) 30%,
+                rgba(0, 0, 0, 0.3) 60%,
+                rgba(26, 42, 108, 0.45) 100%
+            );
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            color: white;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.9) 0%, 
+                rgba(255, 255, 255, 0.7) 50%, 
+                rgba(255, 255, 255, 0.9) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+            filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.8));
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+            font-weight: 500;
+            color: white;
+            text-shadow: 0 3px 20px rgba(0, 0, 0, 0.9);
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-button {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-button.demo-button {
+            background: linear-gradient(135deg, #00C851 0%, #007E33 50%, #00C851 100%);
+            color: white;
+            border: 3px solid rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            box-shadow: 
+                0 8px 25px rgba(0, 200, 81, 0.4),
+                inset 0 2px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        .hero-button.demo-button:hover {
+            background: linear-gradient(135deg, #00E676 0%, #00A644 50%, #00E676 100%);
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 
+                0 15px 40px rgba(0, 200, 81, 0.6),
+                0 8px 25px rgba(0, 230, 118, 0.4),
+                inset 0 2px 0 rgba(255, 255, 255, 0.5);
+        }
+
+        /* Billing Toggle Section */
+        .billing-toggle-section {
+            padding: 2rem 0;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #ffffff 100%);
+            text-align: center;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .toggle-container {
+            display: inline-flex;
+            background: #f3f4f6;
+            border-radius: 8px;
+            padding: 4px;
+        }
+
+        .toggle-option {
+            padding: 0.5rem 1.5rem;
+            border-radius: 6px;
+            background: transparent;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #6b7280;
+        }
+
+        .toggle-option.active {
+            background: white;
+            color: #1a2a6c;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        /* Demo Services Section */
+        .demo-services {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #ffffff 100%);
+        }
+
+        .services-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .services-header h2 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #1a2a6c;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .services-description {
+            font-size: 1.3rem;
+            color: #64748b;
+            max-width: 800px;
+            margin: 0 auto 3rem auto;
+            line-height: 1.7;
+        }
+
+        .demo-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            margin: 4rem 0;
+        }
+
+        .demo-method {
+            background: #ffffff;
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid rgba(26, 42, 108, 0.08);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .demo-method::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #1a2a6c 0%, #2563eb 100%);
+        }
+
+        .demo-method:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 30px 60px rgba(26, 42, 108, 0.15);
+        }
+
+        .demo-method.primary {
+            border-color: #1a2a6c;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+        }
+
+        .demo-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #1a2a6c 0%, #2563eb 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem auto;
+            color: white;
+        }
+
+        .demo-method h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #1a2a6c;
+            margin-bottom: 1.5rem;
+        }
+
+        .method-description {
+            text-align: left;
+            margin-bottom: 2.5rem;
+        }
+
+        .method-description p {
+            color: #64748b;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+        }
+
+        .demo-container {
+            background: #f8fafc;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .demo-controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .demo-input {
+            padding: 0.75rem 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            width: 200px;
+        }
+
+        .demo-input:focus {
+            outline: none;
+            border-color: #1a2a6c;
+        }
+
+        .demo-button {
+            background: #1a2a6c;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .demo-button:hover {
+            background: #0f1a4a;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .category-button {
+            padding: 0.75rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            background: white;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .category-button:hover {
+            border-color: #1a2a6c;
+        }
+
+        .category-button.active {
+            background: #1a2a6c;
+            color: white;
+            border-color: #1a2a6c;
+        }
+
+        .category-label {
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        .category-value {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .result-card {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .result-number {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #1a2a6c;
+        }
+
+        .result-label {
+            color: #6b7280;
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+        }
+
+        .trial-limit {
+            background: #fef3c7;
+            color: #92400e;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #fbbf24;
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 50%, #f8fafc 100%);
+        }
+
+        /* FIXED: Badge clipping fix */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .pricing-card {
+            background: #ffffff;
+            border: 2px solid #e5e7eb;
+            border-radius: 20px;
+            padding: 3rem;
+            position: relative;
+            transition: all 0.4s ease;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #1a2a6c 0%, #2563eb 100%);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 30px 60px rgba(26, 42, 108, 0.15);
+            border-color: #1a2a6c;
+        }
+
+        .pricing-card.popular {
+            border-color: #1a2a6c;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+        }
+
+        /* FIXED: Badge positioning */
+        .plan-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1a2a6c;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 10;
+        }
+
+        .pricing-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #1a2a6c 0%, #2563eb 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem auto;
+            color: white;
+        }
+
+        .plan-header {
+            margin-bottom: 2rem;
+        }
+
+        .plan-name {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #1a2a6c;
+            margin-bottom: 0.5rem;
+        }
+
+        .plan-description {
+            color: #6b7280;
+            font-size: 1rem;
+        }
+
+        .plan-price {
+            margin-bottom: 2rem;
+        }
+
+        .price-amount {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #1a2a6c;
+        }
+
+        .price-period {
+            color: #6b7280;
+            font-size: 1rem;
+        }
+
+        .plan-features {
+            text-align: left;
+            margin-bottom: 2.5rem;
+        }
+
+        .feature-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+            color: #64748b;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .feature-item:last-child {
+            border-bottom: none;
+        }
+
+        .feature-item span:first-child {
+            font-weight: 600;
+            color: #1a2a6c;
+        }
+
+        .feature-list {
+            text-align: left;
+        }
+
+        .feature-check {
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        .feature-check::before {
+            content: "";
+            margin-right: 0.5rem;
+        }
+
+        .plan-cta {
+            width: 100%;
+            background: linear-gradient(135deg, #1a2a6c 0%, #2563eb 100%);
+            color: white;
+            border: none;
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .plan-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(26, 42, 108, 0.3);
+        }
+
+        .plan-cta.secondary {
+            background: white;
+            color: #1a2a6c;
+            border: 2px solid #1a2a6c;
+        }
+
+        .plan-cta.secondary:hover {
+            background: #f8fafc;
+        }
+
+        /* Comparison Table */
+        .comparison-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #ffffff 100%);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #1a2a6c;
+            margin-bottom: 3rem;
+        }
+
+        /* FIXED: vs. Competitors table with professional styling */
+        .comparison-table {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            border: 1px solid rgba(26, 42, 108, 0.08);
+            overflow-x: auto;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        .comparison-table table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        .table-header {
+            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+            display: grid;
+            grid-template-columns: 2fr repeat(5, 1fr);
+            padding: 1.5rem 1rem;
+            font-weight: 600;
+            color: #1a2a6c;
+            border-bottom: 2px solid #e5e7eb;
+            min-width: 1000px;
+        }
+
+        .table-header > div:nth-child(2) {
+            position: relative;
+        }
+
+        .table-header > div:nth-child(2)::after {
+            content: "SAVE $1,249/yr";
+            position: absolute;
+            bottom: -0.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ef4444;
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+
+        .table-row {
+            display: grid;
+            grid-template-columns: 2fr repeat(5, 1fr);
+            padding: 1.5rem 1rem;
+            border-bottom: 1px solid #e5e7eb;
+            align-items: center;
+            min-width: 1000px;
+            transition: background 0.2s ease;
+        }
+
+        .table-row:hover {
+            background: #f8fafc;
+        }
+
+        .table-row:nth-child(even) {
+            background: rgba(248, 250, 252, 0.5);
+        }
+
+        .table-row:nth-child(even):hover {
+            background: #f8fafc;
+        }
+
+        .feature-name {
+            font-weight: 600;
+            color: #374151;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .feature-name::before {
+            content: "";
+            width: 20px;
+            height: 20px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%231a2a6c' viewBox='0 0 24 24'%3E%3Cpath d='M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z'/%3E%3C/svg%3E") no-repeat center;
+            background-size: contain;
+            flex-shrink: 0;
+        }
+
+        .table-cell {
+            text-align: center;
+            font-size: 0.9rem;
+            padding: 1.5rem 1rem;
+        }
+
+        .check {
+            color: #10b981;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .cross {
+            color: #ef4444;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .exclusive {
+            background: #1a2a6c;
+            color: white;
+            padding: 0.25rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            margin-left: 0.5rem;
+            font-weight: 700;
+        }
+
+        .savings-highlight {
+            color: #ef4444;
+            font-weight: 700;
+        }
+
+        /* FIXED: Plan Comparison table with professional styling */
+        .comparison-section .comparison-table:last-of-type .table-header {
+            grid-template-columns: 2fr repeat(3, 1fr);
+            min-width: 800px;
+        }
+
+        .comparison-section .comparison-table:last-of-type .table-row {
+            grid-template-columns: 2fr repeat(3, 1fr);
+            min-width: 800px;
+        }
+
+        .comparison-section .comparison-table:last-of-type .check,
+        .comparison-section .comparison-table:last-of-type .cross {
+            font-size: 1.2rem;
+        }
+
+        .comparison-section .comparison-table:last-of-type .table-cell {
+            padding: 1.2rem;
+            text-align: center;
+        }
+
+        /* Content Section */
+        .content-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 50%, #f8fafc 100%);
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin: 3rem 0;
+        }
+
+        .content-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid rgba(26, 42, 108, 0.08);
+            transition: all 0.4s ease;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(26, 42, 108, 0.08);
+        }
+
+        .content-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #1a2a6c 0%, #2563eb 50%, #1a2a6c 100%);
+        }
+
+        .content-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(26, 42, 108, 0.15);
+            background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
+            border-color: rgba(26, 42, 108, 0.2);
+        }
+
+        .content-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1a2a6c;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .content-card h3::before {
+            content: '💰';
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 1.2rem;
+        }
+
+        .content-card:nth-child(2) h3::before { content: '📊'; }
+        .content-card:nth-child(3) h3::before { content: '📈'; }
+        .content-card:nth-child(4) h3::before { content: '🌍'; }
+        .content-card:nth-child(5) h3::before { content: '✅'; }
+        .content-card:nth-child(6) h3::before { content: '🚀'; }
+
+        .content-card p {
+            font-size: 1.05rem;
+            color: #64748b;
+            line-height: 1.8;
+            margin-bottom: 1.2rem;
+            position: relative;
+            padding-left: 1rem;
+        }
+
+        .content-card p::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.6rem;
+            width: 3px;
+            height: 1rem;
+            background: linear-gradient(135deg, #1a2a6c 0%, #2563eb 100%);
+            border-radius: 2px;
+        }
+
+        /* Enterprise CTA */
+        .enterprise-section {
+            background: linear-gradient(135deg, #1a2a6c 0%, #2563eb 50%, #1a2a6c 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .enterprise-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .enterprise-description {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .enterprise-cta {
+            background: white;
+            color: #1a2a6c;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .enterprise-cta:hover {
+            background: #f8fafc;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .demo-methods {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .services-header h2 {
+                font-size: 2.2rem;
+            }
+
+            .demo-method {
+                padding: 2.5rem 2rem;
+            }
+
+            .header-container {
+                padding: 0 1.5rem;
+            }
+
+            .header-right {
+                gap: 0.8rem;
+            }
+
+            .header-cta {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.85rem;
+            }
+
+            .logo-image {
+                height: 70px;
+            }
+
+            .main-header.scrolled .logo-image {
+                height: 50px;
+            }
+
+            .nav-links {
+                width: 100%;
+                padding: 3rem 2rem;
+            }
+
+            .table-header,
+            .table-row {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+            
+            .demo-input {
+                width: 100%;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header" id="main-header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img src="images/windload-solutions-logo.png" alt="WindLoad Solutions Logo" class="logo-image">
+            </a>
+            
+            <!-- Full Hamburger Menu (Always available via hamburger button) -->
+            <nav class="nav-links" id="nav-menu">
+                <button class="nav-close" onclick="toggleNav()">&times;</button>
+                <a href="free-online-wind-load-calculators-demos-free-excel-wind-load-calculator.html">Free Calculator</a>
+                <a href="building-intelligence-platform.html">Building Intelligence Platform</a>
+                <a href="wind-load-calculator-comparison.html">Wind Load Calculator Comparison</a>
+                
+                <!-- About Dropdown -->
+                <div class="nav-dropdown">
+                    <span class="nav-dropdown-toggle">About <span class="dropdown-arrow">▼</span></span>
+                    <div class="nav-dropdown-menu">
+                        <a href="building-intelligence-platform-landing.html">Building Intelligence Platform</a>
+                        <a href="wind-load-calculator-landing.html">Wind Load Calculators</a>
+                    </div>
+                </div>
+                
+                <!-- Shop Dropdown -->
+                <div class="nav-dropdown">
+                    <span class="nav-dropdown-toggle">Shop <span class="dropdown-arrow">▼</span></span>
+                    <div class="nav-dropdown-menu">
+                        <a href="building-intelligence-platform-shop.html">Building Intelligence Platform</a>
+                        <a href="wind-load-calculator-shop.html">Wind Load Calculators</a>
+                    </div>
+                </div>
+                
+                <a href="services-asce7-wind-load-pressures.html">Services</a>
+                
+                <!-- Professionals Dropdown -->
+                <div class="nav-dropdown">
+                    <span class="nav-dropdown-toggle">Professionals <span class="dropdown-arrow">▼</span></span>
+                    <div class="nav-dropdown-menu">
+                        <a href="wind-load-calculator-for-engineers.html">Engineers</a>
+                        <a href="wind-load-calculator-for-architects.html">Architects</a>
+                        <a href="wind-loads-for-consultants.html">Consultants</a>
+                        <a href="contractors-wind-load-calculator.html">Contractors</a>
+                    </div>
+                </div>
+                
+                <a href="why-choose-windload-solutions.html">Why Us</a>
+                <a href="faqfor-wind-load-calculator-software-for-wind-load-pressures-per-asce-7.html">FAQ</a>
+                <a href="contact-us-wind-load-calculators-for-components-and-cladding-cc-wind-load-pressures-per-the-asce-7-16-and-asce-7-22-publication-windloads-made-easy.html">Contact Us</a>
+            </nav>
+            
+            <!-- Simplified Desktop Nav (Shows when scrolled on desktop) -->
+            <nav class="nav-desktop-scrolled">
+                <a href="free-online-wind-load-calculators-demos-free-excel-wind-load-calculator.html">Free Calculator</a>
+                <a href="building-intelligence-platform.html">B.I.P.</a>
+                
+                <!-- Shop Dropdown (Simplified - only 2 items) -->
+                <div class="nav-dropdown">
+                    <span class="nav-dropdown-toggle">Shop <span class="dropdown-arrow">▼</span></span>
+                    <div class="nav-dropdown-menu">
+                        <a href="building-intelligence-platform-shop.html">Building Intelligence Platform</a>
+                        <a href="wind-load-calculator-shop.html">Wind Load Calculators</a>
+                    </div>
+                </div>
+                
+                <a href="services-asce7-wind-load-pressures.html">Services</a>
+                <a href="why-choose-windload-solutions.html">Why Us</a>
+            </nav>
+            
+            <!-- Header Right Side -->
+            <div class="header-right">
+                <a href="contact-us-wind-load-calculators-for-components-and-cladding-cc-wind-load-pressures-per-the-asce-7-16-and-asce-7-22-publication-windloads-made-easy.html" class="header-cta primary">Let's Connect</a>
+                <a href="http://127.0.0.1:8051" class="header-cta">Member Login</a>
+                <button class="hamburger" id="hamburger" onclick="toggleNav()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu Overlay -->
+        <div class="nav-overlay" id="nav-overlay" onclick="toggleNav()"></div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <!-- Video Background -->
+            <div class="video-background">
+                <video class="hero-video" autoplay muted loop playsinline>
+                    <source src="videos/velocity-finder-pricing.webm" type="video/webm">
+                    <source src="videos/velocity-finder-pricing.mp4" type="video/mp4">
+                </video>
+            </div>
+            
+            <!-- Video Overlay -->
+            <div class="video-overlay"></div>
+            
+            <!-- Hero Content -->
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">Building Intelligence Platform Plans</h1>
+                    <p class="hero-subtitle">Whether you're calculating wind loads for a single project or managing firm-wide compliance, Building Intelligence Platform has an affordable plan to meet your needs.</p>
+                    <div class="hero-cta">
+                        <a href="#demo-section" class="hero-button demo-button">🗺️ Try Live Demo</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section class="pricing-section">
+            <div class="container">
+                <div class="services-header">
+                    <h2>Building Intelligence Platform Pricing Plans</h2>
+                    <p class="services-description">Choose the plan that fits your engineering firm's needs. All plans include ASCE 7 compliance verification and professional-grade calculations.</p>
+                </div>
+
+                <!-- Billing Toggle -->
+                <div class="billing-toggle-section" style="padding: 2rem 0; text-align: center; border-bottom: none;">
+                    <div class="toggle-container">
+                        <button class="toggle-option" id="monthlyToggle">Monthly billing</button>
+                        <button class="toggle-option active" id="yearlyToggle">Yearly billing</button>
+                    </div>
+                </div>
+
+                <div class="pricing-grid">
+                    <!-- PROFESSIONAL PLAN -->
+                    <div class="pricing-card">
+                        <div class="plan-header">
+                            <div class="plan-name">PROFESSIONAL</div>
+                            <div class="plan-description">For engineering professionals</div>
+                        </div>
+                        <div class="plan-price">
+                            <span class="price-amount" id="proPrice">$25</span>
+                            <div class="price-period" id="proPeriod">/mo billed annually</div>
+                        </div>
+                        
+                        <div class="plan-features">
+                            <div class="feature-item">
+                                <span>∞</span>
+                                <span>Velocity Lookups</span>
+                            </div>
+                            <div class="feature-item">
+                                <span>∞</span>
+                                <span>Projects</span>
+                            </div>
+                            <div class="feature-item">
+                                <span>1</span>
+                                <span>Team Members</span>
+                            </div>
+                        </div>
+                        
+                        <button class="plan-cta">Select Professional</button>
+                        
+                        <div style="margin-top: 2rem;">
+                            <div style="font-weight: 600; margin-bottom: 1rem; color: #374151;">PROFESSIONAL FEATURES:</div>
+                            <div class="feature-list">
+                                <div class="feature-check">✓ Interactive Visual Mapping</div>
+                                <div class="feature-check">✓ Hurricane History Analysis</div>
+                                <div class="feature-check">✓ Local Authority Detection</div>
+                                <div class="feature-check">✓ Climate Projections (2030)</div>
+                                <div class="feature-check">✓ C&C Pressure Calculations</div>
+                                <div class="feature-check">✓ Professional PDF Reports</div>
+                                <div class="feature-check">✓ Priority Email Support</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- BUSINESS PLAN -->
+                    <div class="pricing-card popular">
+                        <div class="plan-badge">MOST POPULAR</div>
+                        <div class="plan-header">
+                            <div class="plan-name">BUSINESS</div>
+                            <div class="plan-description">For engineering teams and firms</div>
+                        </div>
+                        <div class="plan-price">
+                            <span class="price-amount" id="bizPrice">$42</span>
+                            <div class="price-period" id="bizPeriod">/mo billed annually</div>
+                        </div>
+                        
+                        <div class="plan-features">
+                            <div class="feature-item">
+                                <span>∞</span>
+                                <span>Velocity Lookups</span>
+                            </div>
+                            <div class="feature-item">
+                                <span>∞</span>
+                                <span>Projects</span>
+                            </div>
+                            <div class="feature-item">
+                                <span>5</span>
+                                <span>Team Members</span>
+                            </div>
+                        </div>
+                        
+                        <button class="plan-cta">Select Business</button>
+                        
+                        <div style="margin-top: 2rem;">
+                            <div style="font-weight: 600; margin-bottom: 1rem; color: #374151;">ALL PROFESSIONAL PLUS:</div>
+                            <div class="feature-list">
+                                <div class="feature-check">✓ Multi-User Access (5 seats)</div>
+                                <div class="feature-check">✓ Custom Branding on Reports</div>
+                                <div class="feature-check">✓ Excel Export Functionality</div>
+                                <div class="feature-check">✓ Phone Support</div>
+                                <div class="feature-check">✓ Project Management Tools</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ENTERPRISE PLAN -->
+                    <div class="pricing-card">
+                        <div class="plan-header">
+                            <div class="plan-name">ENTERPRISE</div>
+                            <div class="plan-description">For large organizations</div>
+                        </div>
+                        <div class="plan-price">
+                            <span class="price-amount" id="entPrice">$83</span>
+                            <div class="price-period" id="entPeriod">/mo billed annually</div>
+                        </div>
+                        
+                        <div class="plan-features">
+                            <div class="feature-item">
+                                <span>∞</span>
+                                <span>Velocity Lookups</span>
+                            </div>
+                            <div class="feature-item">
+                                <span>∞</span>
+                                <span>Projects</span>
+                            </div>
+                            <div class="feature-item">
+                                <span>∞</span>
+                                <span>Team Members</span>
+                            </div>
+                        </div>
+                        
+                        <button class="plan-cta">Select Enterprise</button>
+                        
+                        <div style="margin-top: 2rem;">
+                            <div style="font-weight: 600; margin-bottom: 1rem; color: #374151;">ALL BUSINESS PLUS:</div>
+                            <div class="feature-list">
+                                <div class="feature-check">✓ Unlimited Users</div>
+                                <div class="feature-check">✓ API Access</div>
+                                <div class="feature-check">✓ Custom Integrations</div>
+                                <div class="feature-check">✓ Dedicated Account Manager</div>
+                                <div class="feature-check">✓ On-site Training</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Competitor Comparison -->
+        <section class="comparison-section">
+            <div class="container">
+                <h2 class="section-title">vs. Competitors</h2>
+                
+                <div class="comparison-table">
+                    <div class="table-header">
+                        <div>Feature</div>
+                        <div>Building Intelligence Platform<br>($299/yr)</div>
+                        <div>SkyCiv<br>($1,548/yr)</div>
+                        <div>MecaWind<br>($396/yr)</div>
+                        <div>ENERCALC<br>($1,548/yr)</div>
+                        <div>Consultants<br>($250-500/project)</div>
+                    </div>
+                    
+                    <div class="table-row">
+                        <div class="feature-name">Interactive Visual Mapping</div>
+                        <div class="table-cell check">✓ Click anywhere <span class="exclusive">EXCLUSIVE</span></div>
+                        <div class="table-cell cross">❌ Basic location lookup</div>
+                        <div class="table-cell cross">❌ No map</div>
+                        <div class="table-cell cross">❌ No map</div>
+                        <div class="table-cell cross">❌ Manual lookup</div>
+                    </div>
+                    
+                    <div class="table-row">
+                        <div class="feature-name">Click-Anywhere Velocity</div>
+                        <div class="table-cell check">✓ Instant results <span class="exclusive">UNIQUE</span></div>
+                        <div class="table-cell cross">❌ Address only</div>
+                        <div class="table-cell cross">❌ Manual entry</div>
+                        <div class="table-cell cross">❌ Manual entry</div>
+                        <div class="table-cell cross">❌ Requires consultation</div>
+                    </div>
+                    
+                    <div class="table-row">
+                        <div class="feature-name">Hurricane History Layer</div>
+                        <div class="table-cell check">✓ 1950-2024 data <span class="exclusive">BREAKTHROUGH</span></div>
+                        <div class="table-cell cross">❌ Not available</div>
+                        <div class="table-cell cross">❌ Not available</div>
+                        <div class="table-cell cross">❌ Not available</div>
+                        <div class="table-cell cross">❌ Not available</div>
+                    </div>
+                    
+                    <div class="table-row">
+                        <div class="feature-name">Terrain Effects Analysis</div>
+                        <div class="table-cell check">✓ Visual zones <span class="exclusive">INNOVATIVE</span></div>
+                        <div class="table-cell cross">❌ Basic only</div>
+                        <div class="table-cell cross">❌ Limited</div>
+                        <div class="table-cell cross">❌ Basic</div>
+                        <div class="table-cell cross">❌ Extra cost</div>
+                    </div>
+                    
+                    <div class="table-row">
+                        <div class="feature-name">Local Authority Override Detection</div>
+                        <div class="table-cell check">✓ Automatic <span class="exclusive">GAME-CHANGER</span></div>
+                        <div class="table-cell cross">❌ Not included</div>
+                        <div class="table-cell cross">❌ Manual research</div>
+                        <div class="table-cell cross">❌ Not included</div>
+                        <div class="table-cell check">✓ Extra $500+</div>
+                    </div>
+                    
+                    <div class="table-row">
+                        <div class="feature-name">Instant C&C Pressure Calculations</div>
+                        <div class="table-cell check">✓ Built-in <span class="exclusive">INCLUDED</span></div>
+                        <div class="table-cell check">✓ Available</div>
+                        <div class="table-cell check">✓ Available</div>
+                        <div class="table-cell check">✓ Available</div>
+                        <div class="table-cell check">✓ Extra cost</div>
+                    </div>
+                    
+                    <div class="table-row">
+                        <div class="feature-name">Professional PDF Reports</div>
+                        <div class="table-cell check">✓ Always included <span class="exclusive">FREE</span></div>
+                        <div class="table-cell check">✓ Extra cost</div>
+                        <div class="table-cell check">✓ Extra cost</div>
+                        <div class="table-cell check">✓ Extra cost</div>
+                        <div class="table-cell check">✓ $200-500 each</div>
+                    </div>
+                    
+                    <div class="table-row">
+                        <div class="feature-name">2030 Climate Projections</div>
+                        <div class="table-cell check">✓ Future-proofing +15% <span class="exclusive">EXCLUSIVE</span></div>
+                        <div class="table-cell cross">❌ Not available</div>
+                        <div class="table-cell cross">❌ Not available</div>
+                        <div class="table-cell cross">❌ Not available</div>
+                        <div class="table-cell cross">❌ Not available</div>
+                    </div>
+                    
+                    <div class="table-row">
+                        <div class="feature-name">Instant Results</div>
+                        <div class="table-cell check">✓ 3 seconds <span class="exclusive">IMMEDIATE</span></div>
+                        <div class="table-cell cross">⏱️ 30+ seconds</div>
+                        <div class="table-cell cross">⏱️ Manual process</div>
+                        <div class="table-cell cross">⏱️ Complex setup</div>
+                        <div class="table-cell cross">⏱️ 3-5 business days</div>
+                    </div>
+                    
+                    <div class="table-row">
+                        <div class="feature-name">Risk Category Integration</div>
+                        <div class="table-cell check">✓ Categories I-IV <span class="exclusive">SEAMLESS</span></div>
+                        <div class="table-cell check">✓ Available</div>
+                        <div class="table-cell check">✓ Available</div>
+                        <div class="table-cell check">✓ Available</div>
+                        <div class="table-cell check">✓ Manual calculation</div>
+                    </div>
+                    
+                    <div class="table-row">
+                        <div class="feature-name">Web-Based (No Install)</div>
+                        <div class="table-cell check">✓ Cloud-based <span class="exclusive">MODERN</span></div>
+                        <div class="table-cell check">✓ Cloud-based</div>
+                        <div class="table-cell cross">❌ Desktop only</div>
+                        <div class="table-cell cross">❌ Install required</div>
+                        <div class="table-cell cross">❌ Email/phone</div>
+                    </div>
+                    
+                    <div class="table-row">
+                        <div class="feature-name">Mobile Friendly</div>
+                        <div class="table-cell check">✓ Fully responsive <span class="exclusive">OPTIMIZED</span></div>
+                        <div class="table-cell cross">❌ Limited</div>
+                        <div class="table-cell cross">❌ Desktop only</div>
+                        <div class="table-cell cross">❌ Desktop only</div>
+                        <div class="table-cell cross">❌ Not applicable</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Plan Comparison -->
+        <section class="comparison-section" style="padding-top: 0;">
+            <div class="container">
+                <h2 class="section-title">Plan Comparison</h2>
+                
+                <!-- Internal Plans Comparison -->
+                <div class="comparison-table">
+                    <div class="table-header">
+                        <div></div>
+                        <div>PROFESSIONAL</div>
+                        <div>BUSINESS</div>
+                        <div>ENTERPRISE</div>
+                    </div>
+                    
+                    <div class="table-row">
+                        <div class="feature-name">Velocity Lookups</div>
+                        <div class="table-cell">∞</div>
+                        <div class="table-cell">∞</div>
+                        <div class="table-cell">∞</div>
+                    </div>
+                    
+                    <div class="table-row">
+                        <div class="feature-name">Team Members</div>
+                        <div class="table-cell">1</div>
+                        <div class="table-cell">5</div>
+                        <div class="table-cell">∞</div>
+                    </div>
+                    
+                    <div class="table-row">
+                        <div class="feature-name">Interactive Visual Mapping</div>
+                        <div class="table-cell check">✓</div>
+                        <div class="table-cell check">✓</div>
+                        <div class="table-cell check">✓</div>
+                    </div>
+                    
+                    <div class="table-row">
+                        <div class="feature-name">Hurricane History Analysis</div>
+                        <div class="table-cell check">✓</div>
+                        <div class="table-cell check">✓</div>
+                        <div class="table-cell check">✓</div>
+                    </div>
+                    
+                    <div class="table-row">
+                        <div class="feature-name">Local Authority Detection</div>
+                        <div class="table-cell check">✓</div>
+                        <div class="table-cell check">✓</div>
+                        <div class="table-cell check">✓</div>
+                    </div>
+                    
+                    <div class="table-row">
+                        <div class="feature-name">Climate Projections (2030)</div>
+                        <div class="table-cell check">✓</div>
+                        <div class="table-cell check">✓</div>
+                        <div class="table-cell check">✓</div>
+                    </div>
+                    
+                    <div class="table-row">
+                        <div class="feature-name">C&C Pressure Calculations</div>
+                        <div class="table-cell check">✓</div>
+                        <div class="table-cell check">✓</div>
+                        <div class="table-cell check">✓</div>
+                    </div>
+                    
+                    <div class="table-row">
+                        <div class="feature-name">Professional PDF Reports</div>
+                        <div class="table-cell check">✓</div>
+                        <div class="table-cell check">✓</div>
+                        <div class="table-cell check">✓</div>
+                    </div>
+                    
+                    <div class="table-row">
+                        <div class="feature-name">Custom Branding</div>
+                        <div class="table-cell cross">✗</div>
+                        <div class="table-cell check">✓</div>
+                        <div class="table-cell check">✓</div>
+                    </div>
+                    
+                    <div class="table-row">
+                        <div class="feature-name">Excel Export</div>
+                        <div class="table-cell cross">✗</div>
+                        <div class="table-cell check">✓</div>
+                        <div class="table-cell check">✓</div>
+                    </div>
+                    
+                    <div class="table-row">
+                        <div class="feature-name">Phone Support</div>
+                        <div class="table-cell cross">✗</div>
+                        <div class="table-cell check">✓</div>
+                        <div class="table-cell check">✓</div>
+                    </div>
+                    
+                    <div class="table-row">
+                        <div class="feature-name">API Access</div>
+                        <div class="table-cell cross">✗</div>
+                        <div class="table-cell cross">✗</div>
+                        <div class="table-cell check">✓</div>
+                    </div>
+                    
+                    <div class="table-row">
+                        <div class="feature-name">Custom Integrations</div>
+                        <div class="table-cell cross">✗</div>
+                        <div class="table-cell cross">✗</div>
+                        <div class="table-cell check">✓</div>
+                    </div>
+                    
+                    <div class="table-row">
+                        <div class="feature-name">Dedicated Account Manager</div>
+                        <div class="table-cell cross">✗</div>
+                        <div class="table-cell cross">✗</div>
+                        <div class="table-cell check">✓</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Demo Services Section -->
+        <section class="demo-services" id="demo-section">
+            <div class="container">
+                <div class="services-header">
+                    <h2>Try Our Professional Building Intelligence Platform</h2>
+                    <p class="services-description">Experience instant ASCE 7 wind velocity calculations with our interactive platform. Get a taste of professional-grade analysis that saves engineering firms thousands annually.</p>
+                </div>
+
+                <!-- Demo Methods -->
+                <div class="demo-methods">
+                    <!-- Live Demo -->
+                    <div class="demo-method primary">
+                        <div class="demo-icon">
+                            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21 10C21 17 12 23 12 23S3 17 3 10C3 7.61305 3.94821 5.32387 5.63604 3.63604C7.32387 1.94821 9.61305 1 12 1C14.3869 1 16.6761 1.94821 18.3639 3.63604C20.0518 5.32387 21 7.61305 21 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M12 13C13.6569 13 15 11.6569 15 10C15 8.34315 13.6569 7 12 7C10.3431 7 9 8.34315 9 10C9 11.6569 10.3431 13 12 13Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3>Interactive Building Intelligence Platform Demo</h3>
+                        <div class="method-description">
+                            <p><strong>Best for:</strong> Testing our platform capabilities, seeing instant ASCE 7 calculations, and understanding the value before subscribing.</p>
+                            
+                            <div class="demo-container">
+                                <div class="demo-controls">
+                                    <input type="text" id="zipCode" placeholder="Enter ZIP Code (e.g., 34112)" class="demo-input">
+                                    <button id="findVelocity" class="demo-button">FIND VELOCITY</button>
+                                </div>
+                                
+                                <div class="category-grid">
+                                    <div class="category-button" data-category="1">
+                                        <div class="category-label">Category I</div>
+                                        <div class="category-value">Agricultural</div>
+                                    </div>
+                                    <div class="category-button active" data-category="2">
+                                        <div class="category-label">Category II</div>
+                                        <div class="category-value">Standard</div>
+                                    </div>
+                                    <div class="category-button" data-category="3">
+                                        <div class="category-label">Category III</div>
+                                        <div class="category-value">Schools</div>
+                                    </div>
+                                    <div class="category-button" data-category="4">
+                                        <div class="category-label">Category IV</div>
+                                        <div class="category-value">Essential</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="results-grid" id="resultsGrid" style="display: none;">
+                                    <div class="result-card">
+                                        <div class="result-number" id="asceVelocity">--</div>
+                                        <div class="result-label">ASCE 7 Velocity</div>
+                                    </div>
+                                    <div class="result-card">
+                                        <div class="result-number" id="localAuthority">--</div>
+                                        <div class="result-label">Local Authority</div>
+                                    </div>
+                                    <div class="result-card">
+                                        <div class="result-number" id="designVelocity">--</div>
+                                        <div class="result-label">Required Design</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="trial-limit" id="trialLimit">
+                                    <strong>Demo Version:</strong> 9 free lookups remaining. Full platform includes unlimited searches and professional reporting.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Professional Support -->
+                    <div class="demo-method">
+                        <div class="demo-icon">
+                            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M22 16.92V19.92C22.0011 20.1985 21.9441 20.4742 21.8325 20.7293C21.7209 20.9845 21.5573 21.2136 21.3521 21.4019C21.1468 21.5901 20.9046 21.7335 20.6407 21.8227C20.3769 21.9119 20.0974 21.9451 19.82 21.92C16.7428 21.5856 13.787 20.5341 11.19 18.85C8.77382 17.3147 6.72533 15.2662 5.19 12.85C3.49998 10.2412 2.44824 7.27099 2.12 4.18C2.09501 3.90347 2.12786 3.62476 2.21649 3.36162C2.30513 3.09849 2.44757 2.85669 2.63477 2.65162C2.82196 2.44655 3.04981 2.28271 3.30379 2.17052C3.55778 2.05833 3.83233 2.00026 4.11 2H7.11C7.59531 1.99522 8.06579 2.16708 8.43376 2.48353C8.80173 2.79999 9.04207 3.23945 9.11 3.72C9.23662 4.68007 9.47144 5.62273 9.81 6.53C9.94454 6.88792 9.97366 7.27691 9.8939 7.65088C9.81415 8.02485 9.62886 8.36811 9.36 8.64L8.09 9.91C9.51356 12.4135 11.5865 14.4864 14.09 15.91L15.36 14.64C15.6319 14.3711 15.9751 14.1858 16.3491 14.1061C16.7231 14.0263 17.1121 14.0555 17.47 14.19C18.3773 14.5286 19.3199 14.7634 20.28 14.89C20.7658 14.9585 21.2094 15.2032 21.5265 15.5775C21.8437 15.9518 22.0122 16.4296 22 16.92Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3>Professional Engineering Support</h3>
+                        <div class="method-description">
+                            <p><strong>Best for:</strong> Urgent Building Intelligence Platform needs, technical clarification, and emergency compliance assistance through direct contact with wind load specialists.</p>
+                            <p style="text-align: center; font-size: 1.4rem; font-weight: 700; color: #1a2a6c; margin: 1.5rem 0;">(833) 272-3946</p>
+                            <p>Direct communication ensures immediate connection with senior engineers specializing in ASCE 7-22 and ASCE 7-16 compliance requirements.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Content Section -->
+        <section class="content-section">
+            <div class="container">
+                <div class="services-header">
+                    <h2>Why Choose Building Intelligence Platform Pricing?</h2>
+                    <p class="services-description">Professional Building Intelligence Platform pricing delivers exceptional value through transparent subscription structures. Engineering firms achieve immediate cost savings compared to traditional consulting fees.</p>
+                </div>
+
+                <div class="content-grid">
+                    <div class="content-card">
+                        <h3>Professional ASCE 7 Calculations</h3>
+                        <p>Furthermore, interactive Building Intelligence Platform mapping delivers instant wind calculations through advanced geographic interface technology. Additionally, engineers click anywhere on comprehensive maps for immediate ASCE 7 velocity results.</p>
+                        <p>Therefore, professional mapping platforms eliminate manual coordinate lookup processes while ensuring accurate location-specific analysis for structural engineering projects nationwide.</p>
+                    </div>
+                    
+                    <div class="content-card">
+                        <h3>Competitive Pricing Analysis</h3>
+                        <p>Conversely, modern Building Intelligence Platform pricing platforms eliminate recurring consulting expenses through comprehensive subscription models. Subsequently, engineering firms calculate immediate returns on software investments.</p>
+                        <p>Moreover, unlimited access enables multiple projects without additional per-analysis charges. Therefore, intelligent firms choose comprehensive Building Intelligence Platform pricing over expensive traditional consulting arrangements.</p>
+                    </div>
+                    
+                    <div class="content-card">
+                        <h3>Advanced Export Capabilities</h3>
+                        <p>Specifically, professional platforms generate comprehensive PDF reports for engineering documentation requirements. Meanwhile, Excel export functionality enables seamless integration with existing project management systems.</p>
+                        <p>Consequently, engineers maintain detailed records while streamlining reporting workflows through automated generation processes for enhanced productivity and compliance verification.</p>
+                    </div>
+                    
+                    <div class="content-card">
+                        <h3>Climate Change Projections</h3>
+                        <p>Particularly, interactive mapping enables instant wind velocity determination for any geographic location. Meanwhile, climate change projections ensure long-term structural design adequacy for future compliance requirements.</p>
+                        <p>Subsequently, climate change projections provide critical data for coastal projects and long-term infrastructure planning through systematic analytical processes.</p>
+                    </div>
+                    
+                    <div class="content-card">
+                        <h3>ASCE 7 Compliance Verification</h3>
+                        <p>Additionally, components and cladding requirements analysis ensures complete building envelope compliance through systematic evaluation processes. Furthermore, wind load software automatically calculates ultimate pressures.</p>
+                        <p>Moreover, special local requirements identification prevents costly compliance oversights during project development phases through comprehensive regulatory verification systems.</p>
+                    </div>
+                    
+                    <div class="content-card">
+                        <h3>Professional Engineering Support</h3>
+                        <p>Ultimately, professional Building Intelligence Platform pricing represents intelligent investment decisions for forward-thinking engineering firms. Additionally, comprehensive platforms eliminate vendor dependencies while providing superior analytical capabilities.</p>
+                        <p>Therefore, progressive firms choose innovative solutions over traditional expensive alternatives through strategic technology adoption and comprehensive platform integration for enhanced productivity.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Enterprise CTA -->
+        <section class="enterprise-section">
+            <div class="container">
+                <h2 class="enterprise-title">Need a Custom Solution?</h2>
+                <p class="enterprise-description">
+                    Large engineering firms with specific requirements can get custom pricing, dedicated support, and on-site training programs.
+                </p>
+                <a href="tel:8332723946" class="enterprise-cta">📞 Contact Enterprise Sales</a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Demo functionality
+        let demoUsageCount = 0;
+        const maxDemoUsage = 9;
+        
+        const velocityData = {
+            '34112': { asce: 185, local: 195, design: 195 },
+            '33109': { asce: 175, local: 180, design: 180 },
+            '33139': { asce: 180, local: 185, design: 185 },
+            '90210': { asce: 85, local: 85, design: 85 },
+            '10001': { asce: 115, local: 115, design: 115 },
+            '02101': { asce: 110, local: 110, design: 110 }
+        };
+
+        function findVelocity() {
+            if (demoUsageCount >= maxDemoUsage) {
+                alert('Demo limit reached! Upgrade to Professional Plan for unlimited searches.');
+                return;
+            }
+
+            const zipCode = document.getElementById('zipCode').value.trim();
+            const resultsGrid = document.getElementById('resultsGrid');
+            
+            if (!zipCode) {
+                alert('Please enter a ZIP code');
+                return;
+            }
+
+            const activeCategory = document.querySelector('.category-button.active');
+            const category = activeCategory ? activeCategory.dataset.category : '2';
+            
+            let data = velocityData[zipCode];
+            if (!data) {
+                const baseVelocity = Math.floor(Math.random() * 100) + 85;
+                data = {
+                    asce: baseVelocity,
+                    local: baseVelocity + Math.floor(Math.random() * 20),
+                    design: baseVelocity + Math.floor(Math.random() * 20)
+                };
+            }
+
+            const categoryMultipliers = { '1': 0.87, '2': 1.0, '3': 1.15, '4': 1.15 };
+            const multiplier = categoryMultipliers[category] || 1.0;
+
+            document.getElementById('asceVelocity').textContent = Math.round(data.asce * multiplier);
+            document.getElementById('localAuthority').textContent = Math.round(data.local * multiplier);
+            document.getElementById('designVelocity').textContent = Math.round(data.design * multiplier);
+
+            resultsGrid.style.display = 'grid';
+            demoUsageCount++;
+
+            const remaining = maxDemoUsage - demoUsageCount;
+            const trialLimit = document.getElementById('trialLimit');
+            if (remaining > 0) {
+                trialLimit.innerHTML = `<strong>Demo Version:</strong> ${remaining} free lookups remaining. Full platform includes unlimited searches and professional reporting.`;
+            } else {
+                trialLimit.innerHTML = `<strong>Demo Limit Reached:</strong> Upgrade to Professional Plan for unlimited searches and advanced features.`;
+                trialLimit.style.background = '#fee2e2';
+                trialLimit.style.color = '#991b1b';
+                trialLimit.style.borderColor = '#ef4444';
+            }
+        }
+
+        // Navigation Functions
+        function toggleNav() {
+            const navMenu = document.getElementById('nav-menu');
+            const hamburger = document.getElementById('hamburger');
+            const overlay = document.getElementById('nav-overlay');
+            
+            navMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+            overlay.classList.toggle('active');
+            
+            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+        }
+
+        function initializeHeaderScroll() {
+            const header = document.getElementById('main-header');
+            
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+        }
+
+        function initializeVideo() {
+            const video = document.querySelector('.hero-video');
+            if (!video) return;
+
+            video.muted = true;
+            video.playsInline = true;
+            
+            video.addEventListener('loadeddata', function() {
+                video.play().catch(function() {
+                    console.log('Video autoplay blocked');
+                });
+            });
+
+            video.addEventListener('error', function() {
+                video.style.display = 'none';
+            });
+
+            document.addEventListener('click', function() {
+                if (video.paused) {
+                    video.play().catch(function() {
+                        console.log('Manual play failed');
+                    });
+                }
+            }, { once: true });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeVideo();
+            initializeHeaderScroll();
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    
+    
+        // Dropdown menu toggle for mobile - supports multiple dropdowns
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdowns = document.querySelectorAll('.nav-dropdown');
+            
+            dropdowns.forEach(function(dropdown) {
+                const dropdownToggle = dropdown.querySelector('.nav-dropdown-toggle');
+                
+                if (dropdownToggle) {
+                    dropdownToggle.addEventListener('click', function(e) {
+                        const header = document.getElementById('main-header');
+                        const isScrolled = header && header.classList.contains('scrolled');
+                        const isMobile = window.innerWidth < 1024;
+                        
+                        // Check if this dropdown is in the hamburger menu (nav-links) or horizontal nav (nav-desktop-scrolled)
+                        const isInHamburgerMenu = dropdown.closest('.nav-links');
+                        const isInHorizontalNav = dropdown.closest('.nav-desktop-scrolled');
+                        
+                        // Hamburger menu dropdowns: ALWAYS toggle by click
+                        // Horizontal nav dropdowns: Toggle on mobile, hover on desktop when scrolled
+                        if (isInHamburgerMenu || isMobile || !isScrolled) {
+                            e.preventDefault();
+                            // Close other dropdowns
+                            dropdowns.forEach(function(otherDropdown) {
+                                if (otherDropdown !== dropdown) {
+                                    otherDropdown.classList.remove('active');
+                                }
+                            });
+                            // Toggle current dropdown
+                            dropdown.classList.toggle('active');
+                        }
+                        // On desktop when scrolled (and in horizontal nav), let CSS hover handle it
+                    });
+                }
+            });
+        });
+
+
+        // Billing toggle
+        document.getElementById('monthlyToggle').addEventListener('click', function() {
+            document.querySelector('.toggle-option.active').classList.remove('active');
+            this.classList.add('active');
+            
+            document.getElementById('proPrice').textContent = '$29';
+            document.getElementById('proPeriod').textContent = '/mo';
+            document.getElementById('bizPrice').textContent = '$49';
+            document.getElementById('bizPeriod').textContent = '/mo';
+            document.getElementById('entPrice').textContent = '$99';
+            document.getElementById('entPeriod').textContent = '/mo';
+        });
+
+        document.getElementById('yearlyToggle').addEventListener('click', function() {
+            document.querySelector('.toggle-option.active').classList.remove('active');
+            this.classList.add('active');
+            
+            document.getElementById('proPrice').textContent = '$25';
+            document.getElementById('proPeriod').textContent = '/mo billed annually';
+            document.getElementById('bizPrice').textContent = '$42';
+            document.getElementById('bizPeriod').textContent = '/mo billed annually';
+            document.getElementById('entPrice').textContent = '$83';
+            document.getElementById('entPeriod').textContent = '/mo billed annually';
+        });
+
+        // Category selection
+        document.querySelectorAll('.category-button').forEach(button => {
+            button.addEventListener('click', function() {
+                document.querySelectorAll('.category-button').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                const resultsGrid = document.getElementById('resultsGrid');
+                if (resultsGrid.style.display !== 'none') {
+                    findVelocity();
+                    demoUsageCount--;
+                }
+            });
+        });
+
+        document.getElementById('findVelocity').addEventListener('click', findVelocity);
+        
+        document.getElementById('zipCode').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                findVelocity();
+            }
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeHeaderScroll();
+        });
+    </script>
+</body>
+</html>

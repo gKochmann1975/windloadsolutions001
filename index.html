@@ -3947,11 +3947,6 @@ body {
         gap: 0.75rem;
     }
 
-    /* Hide hamburger on mobile */
-    .logo-hamburger-row .hamburger {
-        display: none;
-    }
-
     /* Logo row - centered */
     .logo-hamburger-row {
         display: flex;
@@ -3992,9 +3987,21 @@ body {
         order: 2;
     }
 
-    /* Push hero content below fixed header */
+    /* Hide hamburger on mobile BEFORE scroll */
+    .header-right .hamburger {
+        display: none;
+        order: 3;
+    }
+
+    /* Show hamburger AFTER scroll on mobile */
+    .main-header.scrolled .header-right .hamburger {
+        display: flex;
+        width: auto;
+    }
+
+    /* Push hero content below fixed header - INCREASED */
     .hero-section {
-        padding-top: 180px;
+        padding-top: 260px;
     }
 
     .hero-title {
@@ -4152,11 +4159,6 @@ body {
                 <a href="index.html" class="logo">
                     <img src="images/windload-solutions-logo.png" alt="WindLoad Solutions Logo" class="logo-image">
                 </a>
-                <button class="hamburger" id="hamburger" onclick="toggleNav()">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
             </div>
 
             <!-- Full Hamburger Menu (Always available via hamburger button) -->
@@ -4224,6 +4226,11 @@ body {
             <div class="header-right">
                 <a href="contact-us-wind-load-calculators-for-components-and-cladding-cc-wind-load-pressures-per-the-asce-7-16-and-asce-7-22-publication-windloads-made-easy.html" class="header-cta primary">Let's Connect</a>
                 <a href="https://windload-auth.onrender.com" class="header-cta">Member Login</a>
+                <button class="hamburger" id="hamburger" onclick="toggleNav()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
             </div>
         </div>
         

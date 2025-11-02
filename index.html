@@ -79,6 +79,12 @@
             padding: 0 3rem;
         }
 
+        .logo-hamburger-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
         .logo {
             z-index: 1001;
         }
@@ -3933,16 +3939,57 @@ body {
 }
 
 @media (max-width: 768px) {
+    /* Mobile header - full vertical stack */
     .header-container {
-        padding: 0 1.5rem;
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem 1.5rem;
+        gap: 0.75rem;
+    }
+
+    /* Hide hamburger on mobile */
+    .logo-hamburger-row .hamburger {
+        display: none;
+    }
+
+    /* Logo row - centered */
+    .logo-hamburger-row {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
     }
 
     .logo-image {
-        height: 60px;
+        height: 50px;
     }
 
     .main-header.scrolled .logo-image {
-        height: 50px;
+        height: 45px;
+    }
+
+    /* CTA buttons - stack vertically, full width */
+    .header-right {
+        width: 100%;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .header-cta {
+        font-size: 0.9rem;
+        padding: 0.75rem 1.5rem;
+        width: 100%;
+        text-align: center;
+        order: 0;
+    }
+
+    /* Member Login first, Let's Connect second */
+    .header-cta:not(.primary) {
+        order: 1;
+    }
+
+    .header-cta.primary {
+        order: 2;
     }
 
     .hero-title {
@@ -4011,7 +4058,8 @@ body {
 
 @media (max-width: 480px) {
     .header-container {
-        padding: 0 1rem;
+        padding: 0.75rem 1rem;
+        gap: 0.5rem;
     }
 
     .logo-image {
@@ -4020,6 +4068,11 @@ body {
 
     .main-header.scrolled .logo-image {
         height: 40px;
+    }
+
+    .header-cta {
+        font-size: 0.85rem;
+        padding: 0.65rem 1.2rem;
     }
 
     .hero-title {
@@ -4090,10 +4143,17 @@ body {
     <!-- Header -->
     <header class="main-header" id="main-header">
         <div class="header-container">
-            <a href="index.html" class="logo">
-                <img src="images/windload-solutions-logo.png" alt="WindLoad Solutions Logo" class="logo-image">
-            </a>
-            
+            <div class="logo-hamburger-row">
+                <a href="index.html" class="logo">
+                    <img src="images/windload-solutions-logo.png" alt="WindLoad Solutions Logo" class="logo-image">
+                </a>
+                <button class="hamburger" id="hamburger" onclick="toggleNav()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+
             <!-- Full Hamburger Menu (Always available via hamburger button) -->
             <nav class="nav-links" id="nav-menu">
                 <button class="nav-close" onclick="toggleNav()">&times;</button>
@@ -4158,12 +4218,7 @@ body {
             <!-- Header Right Side -->
             <div class="header-right">
                 <a href="contact-us-wind-load-calculators-for-components-and-cladding-cc-wind-load-pressures-per-the-asce-7-16-and-asce-7-22-publication-windloads-made-easy.html" class="header-cta primary">Let's Connect</a>
-                <a href="http://127.0.0.1:8051" class="header-cta">Member Login</a>
-                <button class="hamburger" id="hamburger" onclick="toggleNav()">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
+                <a href="https://windload-auth.onrender.com" class="header-cta">Member Login</a>
             </div>
         </div>
         

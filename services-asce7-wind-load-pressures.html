@@ -1,0 +1,2620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services</title>
+    <meta name="description" content="Services include professional ASCE 7 wind load calculator software, expert calculations, and PE certification for nationwide compliance.">
+    <meta name="keywords" content="services, wind load calculator, ASCE 7 design pressure calculator, wind load calculator excel, windload calculator, wind load calculation spreadsheet, wind load analysis, windloads, wind load pressures calculator, wind speed to pressures calculator, wind pressure formula, wind speed to wind pressure, professional wind load calculations, PE sign seal services, structural engineering services">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Services - Professional ASCE 7 Wind Load Solutions">
+    <meta property="og:description" content="Services include professional software access, complete wind load calculations, and PE sign & seal for ASCE 7 compliance.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://windload.solutions/services-asce7-wind-load-pressures/">
+    
+    <!-- Schema Markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "ASCE 7 Wind Load Pressure Services",
+        "serviceType": "Structural Engineering Services",
+        "description": "Professional ASCE 7 wind load pressure calculations and engineering software services",
+        "provider": {
+            "@type": "Organization",
+            "name": "WindLoad Solutions",
+            "url": "https://windload.solutions"
+        },
+        "areaServed": "United States"
+    }
+    </script>
+    
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100vw;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            width: 100%;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                padding: 0 2rem;
+            }
+        }
+
+        /* Header */
+        .main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: transparent;
+            padding: 2rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .main-header.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1rem 0;
+            box-shadow: 0 1px 20px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+        }
+
+        .logo {
+            z-index: 1001;
+        }
+
+        .logo-image {
+            height: 100px;
+            width: auto;
+            filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
+            transition: all 0.3s ease;
+        }
+
+        .main-header.scrolled .logo-image {
+            height: 70px;
+            filter: none;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            z-index: 1001;
+        }
+
+        .header-cta {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            white-space: nowrap;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-cta:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.6);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .header-cta.primary {
+            background: rgba(0, 24, 255, 0.9);
+            border-color: rgba(0, 24, 255, 0.3);
+        }
+
+        .header-cta.primary:hover {
+            background: rgba(0, 24, 255, 1);
+            border-color: rgba(0, 24, 255, 0.8);
+        }
+
+        .main-header.scrolled .header-cta {
+            color: #0018ff;
+            background: rgba(0, 24, 255, 0.1);
+            border-color: rgba(0, 24, 255, 0.3);
+        }
+
+        .main-header.scrolled .header-cta.primary {
+            color: white;
+            background: #0018ff;
+            border-color: #0018ff;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 28px;
+            height: 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 1002;
+        }
+
+
+        .hamburger span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background: white;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .main-header.scrolled .hamburger span {
+            background: #1f2937;
+            box-shadow: none;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(8px, -8px);
+        }
+
+        /* Navigation Menu */
+        .nav-links {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100vh;
+            width: 400px;
+            max-width: 85vw;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            box-shadow: -10px 0 50px rgba(0,0,0,0.2);
+            padding: 4rem 2rem 2rem 2rem;
+            flex-direction: column;
+            gap: 1.5rem;
+            z-index: 9999;
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .nav-links.active {
+            display: flex;
+            transform: translateX(0);
+        }
+
+        /* Keep hamburger visible and nav-links as side menu only */
+        @media (min-width: 1024px) {
+            /* Keep nav-links as hamburger menu only - never show horizontally */
+            .main-header.scrolled .nav-links:not(.active) {
+                /* Stays as side menu even on desktop */
+                display: none !important;
+            }
+
+            /* Keep hamburger visible on desktop when scrolled */
+            .main-header.scrolled .hamburger {
+                display: flex;
+            }
+
+            .main-header.scrolled .header-right {
+                gap: 2rem;
+                align-items: center;
+            }
+        }
+
+        /* Simplified Desktop Nav (Shows when scrolled) */
+        .nav-desktop-scrolled {
+            display: none;
+        }
+
+        @media (min-width: 1024px) {
+            .main-header.scrolled .nav-desktop-scrolled {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 2rem;
+                overflow: visible;
+            }
+
+            .nav-desktop-scrolled a {
+                text-decoration: none;
+                font-size: 0.95rem;
+                padding: 0.5rem 1rem;
+                border-radius: 8px;
+                color: #374151;
+                font-weight: 600;
+                transition: all 0.2s ease;
+            }
+
+            .nav-desktop-scrolled a:hover {
+                background: rgba(0, 24, 255, 0.1);
+                color: #0018ff;
+            }
+
+            /* Simplified desktop nav dropdown styles */
+            .nav-desktop-scrolled .nav-dropdown {
+                position: relative;
+                z-index: 1001;
+            }
+
+            .nav-desktop-scrolled .nav-dropdown-toggle {
+                display: flex;
+                align-items: center;
+                font-size: 0.95rem;
+                padding: 0.5rem 1rem;
+                border-radius: 8px;
+                color: #374151;
+                font-weight: 600;
+                transition: all 0.2s ease;
+                cursor: pointer;
+            }
+
+            .nav-desktop-scrolled .dropdown-arrow {
+                font-size: 0.7rem;
+                margin-left: 0.3rem;
+            }
+
+            .nav-desktop-scrolled .nav-dropdown-menu {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background: white;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+                border-radius: 8px;
+                padding: 0.5rem 0;
+                min-width: 250px;
+                margin-top: 0.25rem;
+                z-index: 1002;
+                flex-direction: column;
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+                transform: translateY(-10px);
+                transition: all 0.2s ease;
+                display: flex !important;
+                padding-left: 0;
+            }
+
+            .nav-desktop-scrolled .nav-dropdown:hover .nav-dropdown-menu {
+                opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
+                transform: translateY(0);
+            }
+
+            .nav-desktop-scrolled .nav-dropdown-toggle:hover,
+            .nav-desktop-scrolled .nav-dropdown:hover .nav-dropdown-toggle {
+                background: rgba(0, 24, 255, 0.1);
+                color: #0018ff;
+            }
+
+            .nav-desktop-scrolled .nav-dropdown-menu a {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+                border-radius: 0;
+            }
+
+            .nav-desktop-scrolled .nav-dropdown-menu a:hover {
+                background: rgba(0, 24, 255, 0.1);
+            }
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #1f2937;
+            font-weight: 600;
+            font-size: 1.2rem;
+            padding: 1.2rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(45deg, #0018ff, #181E57);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #0018ff;
+            padding-left: 1rem;
+        }
+
+        .nav-links a:hover::before,
+        .nav-links a.active::before {
+            width: 50px;
+        }
+
+        .nav-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: none;
+            border: none;
+            font-size: 2.5rem;
+            color: #64748b;
+            cursor: pointer;
+            font-weight: 300;
+        }
+
+
+        .nav-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
+            z-index: 9998;
+        }
+
+        .nav-overlay.active {
+            display: block;
+        }
+
+        /* Navigation Dropdown Styles */
+        .nav-dropdown {
+            position: relative;
+        }
+
+        .nav-dropdown-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            text-decoration: none;
+            color: #1f2937;
+            font-weight: 600;
+            font-size: 1.2rem;
+            padding: 1.2rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .dropdown-arrow {
+            margin-left: 0.5rem;
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-dropdown.active .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .nav-dropdown-menu {
+            display: none;
+            flex-direction: column;
+            padding-left: 1.5rem;
+            margin-top: 0.5rem;
+            gap: 0.5rem;
+            background: rgba(248, 250, 252, 0.95);
+            border-radius: 8px;
+            padding: 0.5rem 1.5rem;
+        }
+
+        .nav-dropdown.active .nav-dropdown-menu {
+            display: flex;
+        }
+
+
+        .nav-dropdown-menu a {
+            font-size: 1.05rem;
+            font-weight: 500;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .nav-dropdown-menu a:last-child {
+            border-bottom: none;
+        }
+
+        /* Hover effects for hamburger menu */
+        .nav-dropdown-toggle:hover {
+            background: rgba(0, 24, 255, 0.05);
+            color: #0018ff;
+            padding-left: 1rem;
+            border-radius: 8px;
+        }
+
+        .nav-dropdown-menu a:hover {
+            background: rgba(0, 24, 255, 0.08);
+            color: #0018ff;
+            padding-left: 1rem;
+            border-radius: 6px;
+        }
+
+        /* Desktop dropdown styles */
+        @media (min-width: 1024px) {
+            /* CRITICAL: Prevent clipping of dropdowns */
+            .main-header.scrolled,
+            .main-header.scrolled .header-container,
+            .main-header.scrolled .header-right {
+                overflow: visible !important;
+            }
+            
+            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown-toggle {
+                display: flex;
+                align-items: center;
+                font-size: 0.95rem;
+                padding: 0.5rem 1rem;
+                border-bottom: none;
+                border-radius: 8px;
+                color: #374151;
+                transition: all 0.2s ease;
+                cursor: pointer;
+            }
+
+            .main-header.scrolled .nav-desktop-scrolled .dropdown-arrow {
+                font-size: 0.7rem;
+                margin-left: 0.3rem;
+            }
+
+            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown {
+                position: relative;
+                z-index: 1001;
+            }
+
+            /* Dropdown menu - always in DOM but invisible */
+            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown-menu {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background: white;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+                border-radius: 8px;
+                padding: 0.5rem 0;
+                min-width: 250px;
+                margin-top: 0.25rem;
+                z-index: 1002;
+                flex-direction: column;
+                
+                /* Hidden by default */
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+                transform: translateY(-10px);
+                transition: all 0.2s ease;
+                
+                /* Force display flex always - CRITICAL */
+                display: flex !important;
+                
+                /* Remove any padding/border from parent that might clip */
+                padding-left: 0;
+            }
+
+            /* Show dropdown on hover */
+            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown:hover .nav-dropdown-menu {
+                opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
+                transform: translateY(0);
+            }
+
+            /* Highlight toggle on hover */
+            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown-toggle:hover,
+            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown:hover .nav-dropdown-toggle {
+                background: rgba(0, 24, 255, 0.1);
+                color: #0018ff;
+            }
+
+            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown-menu a {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+                border-bottom: none;
+                border-radius: 0;
+            }
+
+            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown-menu a:hover {
+                background: rgba(0, 24, 255, 0.1);
+                padding-left: 1.5rem;
+            }
+        }
+/* Hero Section with Video Background */
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 50%, #0018ff 100%);
+        }
+
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                135deg, 
+                rgba(0, 24, 255, 0.5) 0%, 
+                rgba(24, 30, 87, 0.4) 30%,
+                rgba(0, 0, 0, 0.3) 60%,
+                rgba(0, 24, 255, 0.45) 100%
+            );
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            color: white;
+            max-width: 900px;
+            padding: 0 2rem;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.95) 0%, 
+                rgba(255, 255, 255, 0.85) 50%, 
+                rgba(255, 255, 255, 0.95) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+            filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.8));
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+            font-weight: 500;
+            color: white;
+            text-shadow: 0 3px 20px rgba(0, 0, 0, 0.9);
+        }
+
+        .hero-cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-button {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-button.primary {
+            background: rgba(255, 255, 255, 0.95);
+            color: #0018ff;
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .hero-button.primary:hover {
+            background: #ffffff;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        .hero-button.secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .hero-button.secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.7);
+            transform: translateY(-3px);
+        }
+
+        /* Revolutionary Stats Section */
+        .stats-section {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 25%, #ffffff 50%, #e2e8f0 75%, #ffffff 100%);
+            background-size: 400% 400%;
+            animation: gradient-shift 15s ease-in-out infinite;
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            text-align: center;
+        }
+
+        @media (min-width: 480px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            border: 3px solid rgba(0, 24, 255, 0.1);
+            box-shadow: 
+                0 25px 60px rgba(0, 24, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 24, 255, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .stat-card:hover::before {
+            left: 100%;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 
+                0 35px 80px rgba(0, 24, 255, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 1);
+            border-color: rgba(0, 24, 255, 0.3);
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #0018ff 0%, #FF6B35 50%, #181E57 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+            margin-bottom: 1rem;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: #4b5563;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        /* Professional Services Grid */
+        .services-section {
+            padding: 6rem 0;
+            background: #ffffff;
+            position: relative;
+        }
+
+        .services-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.05) 0%, transparent 50%), 
+                        radial-gradient(circle at 80% 80%, rgba(34, 197, 94, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .section-header h2 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: #181E57;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .section-description {
+            font-size: 1.3rem;
+            color: #64748b;
+            line-height: 1.7;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        @media (min-width: 768px) {
+            .services-grid {
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+                gap: 4rem;
+            }
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 25px;
+            padding: 3rem 2.5rem;
+            border: 3px solid rgba(0, 24, 255, 0.15);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            box-shadow: 
+                0 25px 60px rgba(0, 24, 255, 0.12),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(135deg, #0018ff 0%, #FF6B35 50%, #181E57 100%);
+        }
+
+        .service-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 
+                0 40px 100px rgba(0, 24, 255, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 1);
+            border-color: rgba(0, 24, 255, 0.3);
+        }
+
+        .service-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            color: white;
+            box-shadow: 
+                0 15px 35px rgba(0, 24, 255, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-icon::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: transform 0.6s ease;
+        }
+
+        .service-card:hover .service-icon::before {
+            transform: rotate(45deg) translate(50%, 50%);
+        }
+
+        .service-card h3 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #181E57;
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+        }
+
+        .service-card p {
+            color: #64748b;
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
+            flex-grow: 1;
+        }
+
+        .service-features {
+            margin-bottom: 2.5rem;
+        }
+
+        .service-benefits {
+            margin-bottom: 2.5rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            color: #374151;
+            font-weight: 500;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            color: #374151;
+            font-weight: 500;
+        }
+
+        .feature-icon {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 900;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        .benefit-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: #3b82f6;
+        }
+
+        .service-button {
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            color: white;
+            border: none;
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            text-align: center;
+            margin-top: auto;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 10px 25px rgba(0, 24, 255, 0.3);
+        }
+
+        .service-button:hover {
+            background: linear-gradient(135deg, #181E57 0%, #0018ff 100%);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 20px 45px rgba(0, 24, 255, 0.4);
+        }
+
+        .service-button.secondary {
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            box-shadow: 0 10px 25px rgba(34, 197, 94, 0.3);
+        }
+
+        .service-button.secondary:hover {
+            background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
+            box-shadow: 0 20px 45px rgba(34, 197, 94, 0.4);
+        }
+
+
+/* Enhanced Content Section with Visual Elements */
+        .content-section {
+            padding: 8rem 0;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 25% 25%, rgba(59, 130, 246, 0.15) 0%, transparent 50%), 
+                        radial-gradient(circle at 75% 75%, rgba(34, 197, 94, 0.15) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .content-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .content-header h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            line-height: 1.2;
+            background: linear-gradient(135deg, #ffffff 0%, #60a5fa 50%, #ffffff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .content-intro {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #cbd5e1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-bottom: 5rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        @media (min-width: 768px) {
+            .content-grid {
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+                gap: 3rem;
+            }
+        }
+
+        .content-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            border: 2px solid rgba(59, 130, 246, 0.3);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-card.featured {
+            border-color: rgba(255, 107, 53, 0.5);
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.15) 0%, rgba(255, 107, 53, 0.1) 100%);
+        }
+
+        .content-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(59, 130, 246, 0.5);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
+        }
+
+        .content-card.featured:hover {
+            border-color: rgba(255, 107, 53, 0.7);
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.2);
+        }
+
+        .content-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 25px rgba(0, 24, 255, 0.3);
+        }
+
+        .content-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #60a5fa;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .content-card p {
+            color: #cbd5e1;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+
+        .content-highlight {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .content-highlight span {
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* FAQ-Style Expandable Sections */
+        .faq-section {
+            margin: 5rem 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .faq-item {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            border: 2px solid rgba(59, 130, 246, 0.3);
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .faq-question {
+            padding: 2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .faq-question h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #60a5fa;
+            margin: 0;
+        }
+
+        .faq-toggle {
+            font-size: 2rem;
+            color: #60a5fa;
+            font-weight: 300;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+
+        .faq-answer p {
+            padding: 0 2rem 2rem 2rem;
+            color: #cbd5e1;
+            line-height: 1.7;
+        }
+
+        /* Technology Innovation Showcase */
+        .innovation-showcase {
+            margin-top: 5rem;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .showcase-header h3 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #60a5fa;
+            margin-bottom: 1rem;
+        }
+
+        .showcase-header p {
+            font-size: 1.2rem;
+            color: #cbd5e1;
+            margin-bottom: 3rem;
+        }
+
+        .innovation-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .innovation-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 3rem;
+            }
+        }
+
+        .innovation-item {
+            text-align: center;
+        }
+
+        .innovation-number {
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .innovation-label {
+            font-size: 1.1rem;
+            color: #cbd5e1;
+            font-weight: 600;
+        }
+
+        /* Results & Case Studies Section */
+        .results-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 50%, #e2e8f0 100%);
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+
+        @media (min-width: 768px) {
+            .results-grid {
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            }
+        }
+
+        .result-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            border: 2px solid rgba(0, 24, 255, 0.1);
+            box-shadow: 0 15px 35px rgba(0, 24, 255, 0.08);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .result-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #0018ff 0%, #FF6B35 50%, #181E57 100%);
+        }
+
+        .result-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0, 24, 255, 0.15);
+            border-color: rgba(0, 24, 255, 0.2);
+        }
+
+        .result-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 25px rgba(0, 24, 255, 0.3);
+        }
+
+        .result-card h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #181E57;
+            margin-bottom: 1rem;
+        }
+
+        .result-card p {
+            color: #4b5563;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+
+        .result-metrics {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .metric {
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* Benefits Section */
+        .benefits-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .benefits-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 25% 25%, rgba(59, 130, 246, 0.15) 0%, transparent 50%), 
+                        radial-gradient(circle at 75% 75%, rgba(34, 197, 94, 0.15) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        /* Fix for blue text on blue background in Benefits Section */
+        .benefits-section .section-header h2 {
+            color: #ffffff;
+        }
+
+        .benefits-section .section-description {
+            color: #cbd5e1;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .benefit-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            border: 2px solid rgba(59, 130, 246, 0.3);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .benefit-card:hover {
+            transform: translateX(10px);
+            border-color: rgba(59, 130, 246, 0.5);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
+        }
+
+        .benefit-card h4 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #60a5fa;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .benefit-card p {
+            color: #cbd5e1;
+            line-height: 1.6;
+            font-size: 1.05rem;
+        }
+
+        .cta-container {
+            margin-top: 5rem;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .cta-content h2 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            background: linear-gradient(135deg, #ffffff 0%, #fbbf24 50%, #ffffff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cta-content p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 3rem;
+            line-height: 1.6;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            background: rgba(255, 255, 255, 0.95);
+            color: #0018ff;
+            border: none;
+            padding: 1.5rem 3rem;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 15px 35px rgba(255, 255, 255, 0.2);
+        }
+
+        .cta-button:hover {
+            background: #ffffff;
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 25px 50px rgba(255, 255, 255, 0.3);
+        }
+
+        .cta-button.secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .cta-button.secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Enhanced CTA Section */
+        .cta-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .cta-section .cta-content {
+            position: relative;
+            z-index: 10;
+        }
+
+        .cta-section .cta-content h2 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            background: linear-gradient(135deg, #ffffff 0%, #fbbf24 50%, #ffffff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cta-section .cta-content p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 3rem;
+            line-height: 1.6;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        .main-footer {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d3748 50%, #1a1a1a 100%);
+            color: white;
+            padding: 5rem 0 2rem;
+            position: relative;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h4 {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .footer-section p {
+            line-height: 1.8;
+            color: #cbd5e0;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        .footer-section a {
+            display: block;
+            color: #e2e8f0;
+            text-decoration: none;
+            margin-bottom: 1rem;
+            padding: 0.5rem 0;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .footer-section a:hover {
+            color: #0018ff;
+            padding-left: 1rem;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            color: #a0aec0;
+            font-size: 0.95rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .innovation-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .hero-cta-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .hero-button {
+                width: 100%;
+                max-width: 280px;
+                padding: 0.9rem 2rem;
+                font-size: 0.95rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .logo-image {
+                height: 70px;
+            }
+
+            .main-header.scrolled .logo-image {
+                height: 50px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .cta-button {
+                width: 100%;
+                max-width: 300px;
+                padding: 1.2rem 2rem;
+                font-size: 1rem;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .service-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .stat-number {
+                font-size: 2.2rem;
+            }
+
+            .content-header h2 {
+                font-size: 1.8rem;
+            }
+
+            .cta-content h2 {
+                font-size: 2rem;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .innovation-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero-content {
+                padding: 0 1rem;
+            }
+
+            .section-header {
+                margin-bottom: 3rem;
+            }
+
+            .section-description {
+                font-size: 1.1rem;
+            }
+
+            .content-intro {
+                font-size: 1rem;
+            }
+
+            .services-section {
+                padding: 4rem 0;
+            }
+
+            .content-section {
+                padding: 4rem 0;
+            }
+
+            .results-section {
+                padding: 4rem 0;
+            }
+
+            .benefits-section {
+                padding: 4rem 0;
+            }
+
+            .cta-section {
+                padding: 4rem 0;
+            }
+
+            .stats-section {
+                padding: 3rem 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 1.8rem;
+            }
+
+            .hero-subtitle {
+                font-size: 0.9rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .stat-card {
+                padding: 1.5rem 1rem;
+            }
+
+            .stat-number {
+                font-size: 1.8rem;
+            }
+
+            .stat-label {
+                font-size: 0.9rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .service-card {
+                padding: 1.5rem 1rem;
+            }
+
+            .service-card h3 {
+                font-size: 1.5rem;
+            }
+
+            .section-header h2 {
+                font-size: 1.5rem;
+            }
+
+            .logo-image {
+                height: 60px;
+            }
+
+            .main-header.scrolled .logo-image {
+                height: 45px;
+            }
+
+            .hero-content {
+                padding: 0 0.5rem;
+            }
+
+            .container {
+                padding: 0 0.5rem;
+            }
+
+            .header-container {
+                padding: 0 0.5rem;
+            }
+
+            .content-header h2 {
+                font-size: 1.5rem;
+            }
+
+            .cta-content h2 {
+                font-size: 1.8rem;
+            }
+
+            .cta-content p {
+                font-size: 1rem;
+            }
+
+            .innovation-number {
+                font-size: 2.5rem;
+            }
+
+            .result-card {
+                padding: 1.5rem 1rem;
+            }
+
+            .result-card h3 {
+                font-size: 1.3rem;
+            }
+
+            .benefit-card {
+                padding: 1.5rem;
+            }
+
+            .benefit-card h4 {
+                font-size: 1.2rem;
+            }
+
+            .faq-question h3 {
+                font-size: 1rem;
+            }
+
+            .faq-question {
+                padding: 1.5rem;
+            }
+
+            .faq-answer p {
+                padding: 0 1.5rem 1.5rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .content-card {
+                padding: 1.5rem;
+            }
+
+            .content-card h3 {
+                font-size: 1.2rem;
+            }
+
+            .content-card p {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header" id="main-header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img src="images/windload-solutions-logo.png" alt="WindLoad Solutions Logo" class="logo-image">
+            </a>
+            
+            <!-- Full Hamburger Menu (Always available via hamburger button) -->
+            <nav class="nav-links" id="nav-menu">
+                <button class="nav-close" onclick="toggleNav()">&times;</button>
+                <a href="free-online-wind-load-calculators-demos-free-excel-wind-load-calculator.html">Free Calculator</a>
+                <a href="building-intelligence-platform.html">Building Intelligence Platform</a>
+                <a href="wind-load-calculator-comparison.html">Wind Load Calculator Comparison</a>
+                
+                <!-- About Dropdown -->
+                <div class="nav-dropdown">
+                    <span class="nav-dropdown-toggle">About <span class="dropdown-arrow">▼</span></span>
+                    <div class="nav-dropdown-menu">
+                        <a href="building-intelligence-platform-landing.html">Building Intelligence Platform</a>
+                        <a href="wind-load-calculator-landing.html">Wind Load Calculators</a>
+                    </div>
+                </div>
+                
+                <!-- Shop Dropdown -->
+                <div class="nav-dropdown">
+                    <span class="nav-dropdown-toggle">Shop <span class="dropdown-arrow">▼</span></span>
+                    <div class="nav-dropdown-menu">
+                        <a href="building-intelligence-platform-shop.html">Building Intelligence Platform</a>
+                        <a href="wind-load-calculator-shop.html">Wind Load Calculators</a>
+                    </div>
+                </div>
+                
+                <a href="services-asce7-wind-load-pressures.html">Services</a>
+                
+                <!-- Professionals Dropdown -->
+                <div class="nav-dropdown">
+                    <span class="nav-dropdown-toggle">Professionals <span class="dropdown-arrow">▼</span></span>
+                    <div class="nav-dropdown-menu">
+                        <a href="wind-load-calculator-for-engineers.html">Engineers</a>
+                        <a href="wind-load-calculator-for-architects.html">Architects</a>
+                        <a href="wind-loads-for-consultants.html">Consultants</a>
+                        <a href="contractors-wind-load-calculator.html">Contractors</a>
+                    </div>
+                </div>
+                
+                <a href="why-choose-windload-solutions.html">Why Us</a>
+                <a href="faqfor-wind-load-calculator-software-for-wind-load-pressures-per-asce-7.html">FAQ</a>
+                <a href="contact-us-wind-load-calculators-for-components-and-cladding-cc-wind-load-pressures-per-the-asce-7-16-and-asce-7-22-publication-windloads-made-easy.html">Contact Us</a>
+            </nav>
+            
+            <!-- Simplified Desktop Nav (Shows when scrolled on desktop) -->
+            <nav class="nav-desktop-scrolled">
+                <a href="free-online-wind-load-calculators-demos-free-excel-wind-load-calculator.html">Free Calculator</a>
+                <a href="building-intelligence-platform.html">B.I.P.</a>
+                
+                <!-- Shop Dropdown (Simplified - only 2 items) -->
+                <div class="nav-dropdown">
+                    <span class="nav-dropdown-toggle">Shop <span class="dropdown-arrow">▼</span></span>
+                    <div class="nav-dropdown-menu">
+                        <a href="building-intelligence-platform-shop.html">Building Intelligence Platform</a>
+                        <a href="wind-load-calculator-shop.html">Wind Load Calculators</a>
+                    </div>
+                </div>
+                
+                <a href="services-asce7-wind-load-pressures.html">Services</a>
+                <a href="why-choose-windload-solutions.html">Why Us</a>
+            </nav>
+            
+            <!-- Header Right Side -->
+            <div class="header-right">
+                <a href="contact-us-wind-load-calculators-for-components-and-cladding-cc-wind-load-pressures-per-the-asce-7-16-and-asce-7-22-publication-windloads-made-easy.html" class="header-cta primary">Let's Connect</a>
+                <a href="http://127.0.0.1:8051" class="header-cta">Member Login</a>
+                <button class="hamburger" id="hamburger" onclick="toggleNav()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu Overlay -->
+        <div class="nav-overlay" id="nav-overlay" onclick="toggleNav()"></div>
+    </header>
+
+    <main>
+        <!-- Hero Section with Video Background -->
+        <section class="hero-section">
+            <div class="video-background">
+                <video class="hero-video" autoplay muted loop playsinline>
+                    <source src="videos/professional-services-hero-animation.webm" type="video/webm">
+                    <source src="videos/professional-services-hero-animation.mp4" type="video/mp4">
+                </video>
+            </div>
+            
+            <div class="video-overlay"></div>
+            
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">Professional Services</h1>
+                    <p class="hero-subtitle">Moreover, revolutionize your engineering workflow through professional ASCE 7 wind load pressure services. Furthermore, thousands of engineers trust our services for accurate calculations and regulatory compliance nationwide. Additionally, achieve project success through comprehensive services support and expert technical assistance systematically.</p>
+                    <div class="hero-cta-buttons">
+                        <a href="#services" class="hero-button primary">Discover Solutions</a>
+                        <a href="#results" class="hero-button secondary">See Results</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Statistics Section -->
+        <section class="stats-section">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">10,000+</div>
+                        <div class="stat-label">Engineers Trust Our Revolutionary Platform</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">23+</div>
+                        <div class="stat-label">Years Pioneering Industry Excellence</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">99.9%</div>
+                        <div class="stat-label">Calculation Accuracy Guaranteed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">24hr</div>
+                        <div class="stat-label">Lightning-Fast Professional Delivery</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Overview Section -->
+        <section id="services" class="services-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Three Powerhouse Solutions</h2>
+                    <p class="section-description">Additionally, our revolutionary services portfolio transforms engineering workflows through cutting-edge software access, expert calculations, and professional certification. Subsequently, choose the solution that catapults your projects to unprecedented success systematically.</p>
+                </div>
+                
+                <div class="services-grid">
+                    <!-- Service 1: Software as a Service -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 32px; height: 32px; color: white;">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                                <line x1="8" y1="21" x2="16" y2="21"/>
+                                <line x1="12" y1="17" x2="12" y2="21"/>
+                                <path d="M16 8l-4 4-4-4"/>
+                            </svg>
+                        </div>
+                        <h3>Software as a Service (SaaS)</h3>
+                        <p>Moreover, dominate any wind load project with our revolutionary software platform delivering lightning-fast calculations and bulletproof accuracy. Furthermore, engineers achieve unmatched productivity through intuitive interfaces designed for maximum efficiency and robust capabilities.</p>
+                        
+                        <div class="service-features">
+                            <h4>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px; color: #60a5fa;">
+                                    <polygon points="13,2 3,14 12,14 11,22 21,10 12,10"/>
+                                </svg>
+                                Lightning-Fast Results
+                            </h4>
+                            <p>Subsequently, complex calculations process instantly through advanced algorithms, eliminating tedious manual work forever. Therefore, professionals complete projects 10x faster with uncompromising precision consistently.</p>
+                            
+                            <h4>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px; color: #60a5fa;">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                    <path d="M9 12l2 2 4-4"/>
+                                </svg>
+                                Bulletproof Accuracy
+                            </h4>
+                            <p>Moreover, every calculation undergoes rigorous verification through multiple quality assurance protocols ensuring absolute reliability. Additionally, regulatory compliance becomes automatic through systematically integrated code provisions.</p>
+                            
+                            <h4>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px; color: #60a5fa;">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                    <polyline points="14,2 14,8 20,8"/>
+                                    <line x1="16" y1="13" x2="8" y2="13"/>
+                                    <line x1="16" y1="17" x2="8" y2="17"/>
+                                </svg>
+                                Professional Authority
+                            </h4>
+                            <p>Furthermore, generate comprehensive reports that building officials respect and approve immediately. Nevertheless, professional documentation ensures project approval while protecting professional liability systematically.</p>
+                        </div>
+                        
+                        <a href="shop-wind-load-calculators.html" class="service-button">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px;">
+                                <polygon points="13,2 3,14 12,14 11,22 21,10 12,10"/>
+                            </svg>
+                            Explore Solutions
+                        </a>
+                    </div>
+
+                    <!-- Service 2: Expert Wind Load Calculations -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 32px; height: 32px; color: white;">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14,2 14,8 20,8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                                <polyline points="10,9 9,9 8,9"/>
+                            </svg>
+                        </div>
+                        <h3>Expert Wind Load Calculations</h3>
+                        <p>Subsequently, busy professionals rely on our elite engineering team when deadlines demand perfection. Therefore, expert calculations ensure mission-critical results while busy professionals focus on superior client relationships and business development opportunities.</p>
+                        
+                        <div class="service-benefits">
+                            <div class="benefit-item">
+                                <span class="benefit-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px;">
+                                        <polygon points="13,2 3,14 12,14 11,22 21,10 12,10"/>
+                                    </svg>
+                                </span>
+                                <span>24-48 Hour Turnaround</span>
+                            </div>
+                            <div class="benefit-item">
+                                <span class="benefit-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px;">
+                                        <circle cx="12" cy="12" r="10"/>
+                                        <path d="M12 6v6l4 2"/>
+                                    </svg>
+                                </span>
+                                <span>99.9% Accuracy Guarantee</span>
+                            </div>
+                            <div class="benefit-item">
+                                <span class="benefit-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px;">
+                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                        <path d="M9 12l2 2 4-4"/>
+                                    </svg>
+                                </span>
+                                <span>Licensed Professional Engineers</span>
+                            </div>
+                            <div class="benefit-item">
+                                <span class="benefit-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px;">
+                                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                        <polyline points="14,2 14,8 20,8"/>
+                                        <line x1="16" y1="13" x2="8" y2="13"/>
+                                        <line x1="16" y1="17" x2="8" y2="17"/>
+                                    </svg>
+                                </span>
+                                <span>Complete Documentation Package</span>
+                            </div>
+                        </div>
+                        
+                        <a href="contact-us-wind-load-calculators-for-components-and-cladding-cc-wind-load-pressures-per-the-asce-7-16-and-asce-7-22-publication-windloads-made-easy.html" class="service-button secondary">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px;">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14,2 14,8 20,8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                            Get Your Quote
+                        </a>
+                    </div>
+
+                    <!-- Service 3: Professional Engineer Certification -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 32px; height: 32px; color: white;">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                <path d="M9 12l2 2 4-4"/>
+                            </svg>
+                        </div>
+                        <h3>Professional Engineer Certification</h3>
+                        <p>Additionally, unlock unlimited project opportunities through official PE sign and seal services that building officials recognize and respect nationwide. Moreover, professional certification provides the authority needed for complex projects while maintaining comprehensive liability protection consistently.</p>
+                        
+                        <div class="service-benefits">
+                            <div class="benefit-item">
+                                <span class="benefit-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px;">
+                                        <circle cx="12" cy="8" r="7"/>
+                                        <polyline points="8.21,13.89 7,23 12,20 17,23 15.79,13.88"/>
+                                    </svg>
+                                </span>
+                                <span>Licensed PE Authority</span>
+                            </div>
+                            <div class="benefit-item">
+                                <span class="benefit-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px;">
+                                        <path d="M3 21h18"/>
+                                        <path d="M5 21V7l8-4v18"/>
+                                        <path d="M19 21V11l-6-4"/>
+                                    </svg>
+                                </span>
+                                <span>Building Official Recognition</span>
+                            </div>
+                            <div class="benefit-item">
+                                <span class="benefit-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px;">
+                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                    </svg>
+                                </span>
+                                <span>Professional Liability Protection</span>
+                            </div>
+                            <div class="benefit-item">
+                                <span class="benefit-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px;">
+                                        <circle cx="12" cy="12" r="10"/>
+                                        <path d="M12 6v6l4 2"/>
+                                    </svg>
+                                </span>
+                                <span>Official Seal & Signature</span>
+                            </div>
+                        </div>
+                        
+                        <a href="contact-us-wind-load-calculators-for-components-and-cladding-cc-wind-load-pressures-per-the-asce-7-16-and-asce-7-22-publication-windloads-made-easy.html" class="service-button">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px;">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                <path d="M9 12l2 2 4-4"/>
+                            </svg>
+                            Secure Certification
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Enhanced Content Section with Visual Elements -->
+        <section class="content-section">
+            <div class="container">
+                <div class="content-header">
+                    <h2>Professional Services Excellence for ASCE 7 Wind Load Calculator Compliance</h2>
+                    <p class="content-intro">Moreover, our comprehensive services revolutionize professional wind load calculator applications through cutting-edge software solutions and expert engineering support. Furthermore, thousands of engineers nationwide rely on our services for accurate ASCE 7 design pressure calculator functionality and regulatory compliance verification. Additionally, our wind load analysis capabilities ensure precise windloads calculations for structural design applications consistently.</p>
+                </div>
+                
+                <!-- Visual Content Grid -->
+                <div class="content-grid">
+                    <div class="content-card featured">
+                        <div class="content-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 32px; height: 32px; color: white;">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                                <line x1="8" y1="21" x2="16" y2="21"/>
+                                <line x1="12" y1="17" x2="12" y2="21"/>
+                                <path d="M16 8l-4 4-4-4"/>
+                            </svg>
+                        </div>
+                        <h3>Advanced Services for Professional Wind Load Calculator Access</h3>
+                        <p>Subsequently, our software services provide professional access to industry-leading wind load calculator tools designed for complex structural applications. Therefore, engineers receive comprehensive wind load calculator excel compatibility and windload calculator functionality through systematic methodology applications. Additionally, trial access demonstrates professional capabilities before full service commitment.</p>
+                        <div class="content-highlight">
+                            <span>✓ Professional calculator access</span>
+                            <span>✓ Excel integration included</span>
+                        </div>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="content-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 32px; height: 32px; color: white;">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14,2 14,8 20,8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3>Professional Services for Wind Load Calculation Example Documentation</h3>
+                        <p>Likewise, our expert services team provides comprehensive wind load calculation example documentation when engineers need professional assistance with complex projects. Subsequently, busy professionals recognize our services calculations for accuracy and timely delivery. Moreover, our wind load calculation spreadsheet templates streamline project documentation while maintaining professional standards consistently.</p>
+                        <div class="content-highlight">
+                            <span>✓ Professional documentation</span>
+                            <span>✓ 24-48 hour delivery</span>
+                        </div>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="content-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 32px; height: 32px; color: white;">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                <path d="M9 12l2 2 4-4"/>
+                            </svg>
+                        </div>
+                        <h3>Services for Wind Load Pressure Analysis and Calculation Expertise</h3>
+                        <p>Nevertheless, specialized services include comprehensive wind load pressure analysis for projects requiring detailed wind load pressures calculator results and engineering verification. Similarly, building officials recognize our services credentials throughout engineering communities consistently. Furthermore, our wind speed to pressures calculator applications utilize advanced wind pressure formula methodology for accurate pressure determinations systematically.</p>
+                        <div class="content-highlight">
+                            <span>✓ Expert pressure analysis</span>
+                            <span>✓ Official recognition</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ-Style Expandable Sections -->
+                <div class="faq-section">
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>How Do You Calculate Wind Load Using Our Professional Services?</h3>
+                            <div class="faq-toggle">+</div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Essentially, calculating wind load requires systematic analysis of basic wind speeds, exposure categories, and topographic effects through professional services methodology. Therefore, our services simplify complex wind speed to pressures calculator processes through automated calculations and comprehensive database integration. Additionally, engineers utilize our platform to determine accurate wind load pressures for structural design applications through proven services consistently. Meanwhile, our ASCE 7 design pressure calculator functionality ensures compliance with current building codes throughout all calculations systematically.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>How Do I Find the Wind Load in My Area Through Our Services?</h3>
+                            <div class="faq-toggle">+</div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Subsequently, our comprehensive services provide instant wind load determination for any geographic location through advanced database integration and mapping capabilities. Nevertheless, professionals utilize our services to access ASCE 7 wind speeds and local authority requirements automatically through systematic verification processes. Moreover, interactive mapping capabilities allow precise location selection for accurate wind load analysis throughout any geographic region consistently. Consequently, our windload calculator functionality integrates seamlessly with geographic information systems for enhanced accuracy and reliability continuously.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>What Is Wind Load Pressure and Professional Services Analysis?</h3>
+                            <div class="faq-toggle">+</div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Additionally, wind load pressure represents the force exerted by wind on building surfaces calculated through velocity pressure and coefficient applications using professional services. Therefore, our services utilize advanced wind pressure formula algorithms for accurate pressure determinations and comprehensive analysis capabilities. Moreover, integrated wind load pressures calculator functionality provides comprehensive analysis for both main wind force resisting systems and components through professional services consistently. Furthermore, our wind speed to wind pressure conversion tools ensure accurate calculations for various structural applications systematically.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Technology Innovation Showcase -->
+                <div class="innovation-showcase">
+                    <div class="showcase-header">
+                        <h3>Services Excellence Through Technology Innovation</h3>
+                        <p>Subsequently, continuous innovation ensures our services remain the definitive solution for professional wind load calculator applications and engineering excellence systematically.</p>
+                    </div>
+                    <div class="innovation-grid">
+                        <div class="innovation-item">
+                            <div class="innovation-number">23+</div>
+                            <div class="innovation-label">Years of Services Innovation</div>
+                        </div>
+                        <div class="innovation-item">
+                            <div class="innovation-number">1M+</div>
+                            <div class="innovation-label">Services Calculations Completed</div>
+                        </div>
+                        <div class="innovation-item">
+                            <div class="innovation-number">99.9%</div>
+                            <div class="innovation-label">Services Accuracy Rate</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results & Case Studies Section -->
+        <section id="results" class="results-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Proven Services Results and Success Stories</h2>
+                    <p class="section-description">Subsequently, discover how our services have transformed engineering workflows for thousands of professionals nationwide. Furthermore, these real-world applications demonstrate services effectiveness across diverse project types and engineering challenges systematically. Additionally, comprehensive wind load calculator implementations showcase measurable improvements in project efficiency and accuracy consistently.</p>
+                </div>
+                
+                <div class="results-grid">
+                    <div class="result-card">
+                        <div class="result-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 32px; height: 32px; color: white;">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3>Engineering Firm Case Study</h3>
+                        <p>Moreover, a major engineering firm reduced project delivery time by 75% using our services for complex high-rise buildings. Additionally, their wind load calculator excel integration streamlined documentation processes while maintaining ASCE 7 compliance consistently through our professional services platform. Furthermore, comprehensive wind load calculation spreadsheet integration enabled seamless workflow management and enhanced project coordination throughout the design process systematically.</p>
+                        <div class="result-metrics">
+                            <span class="metric">75% faster delivery</span>
+                            <span class="metric">100% code compliance</span>
+                        </div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <div class="result-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 32px; height: 32px; color: white;">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                                <polyline points="9,22 9,12 15,12 15,22"/>
+                            </svg>
+                        </div>
+                        <h3>Architectural Services Success</h3>
+                        <p>Furthermore, architectural teams utilizing our services achieved 90% faster permit approvals through accurate wind load pressures calculator results and comprehensive documentation. Subsequently, their windloads analysis became streamlined while maintaining design flexibility through professional services support. Additionally, integration with wind load analysis software enhanced project visualization and stakeholder communication throughout the design development process consistently.</p>
+                        <div class="result-metrics">
+                            <span class="metric">90% faster approvals</span>
+                            <span class="metric">Zero permit rejections</span>
+                        </div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <div class="result-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 32px; height: 32px; color: white;">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                <line x1="16" y1="2" x2="16" y2="6"/>
+                                <line x1="8" y1="2" x2="8" y2="6"/>
+                                <line x1="3" y1="10" x2="21" y2="10"/>
+                            </svg>
+                        </div>
+                        <h3>PE Certification Services Impact</h3>
+                        <p>Additionally, Professional Engineer certification services enabled small firms to compete for larger projects requiring official PE stamps. Moreover, our services provided the authority needed for complex wind speed to pressures calculator applications while maintaining professional liability protection consistently. Consequently, firms experienced significant growth through enhanced credibility and expanded service capabilities in competitive markets systematically.</p>
+                        <div class="result-metrics">
+                            <span class="metric">300% project growth</span>
+                            <span class="metric">PE authority secured</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits Section -->
+        <section class="benefits-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Why Industry Leaders Choose Our Services Platform</h2>
+                    <p class="section-description">Moreover, industry professionals recognize superior value through our comprehensive services platform capabilities and proven results systematically. Furthermore, advanced wind load calculator technology ensures accurate calculations while streamlined workflows enhance productivity consistently. Additionally, professional support services provide expert guidance throughout complex project implementations systematically.</p>
+                </div>
+                
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <h4>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px; color: #60a5fa;">
+                                <polygon points="13,2 3,14 12,14 11,22 21,10 12,10"/>
+                            </svg>
+                            Lightning-Fast Results
+                        </h4>
+                        <p>Subsequently, complex calculations process instantly through advanced algorithms, eliminating tedious manual work forever. Therefore, professionals complete projects 10x faster with uncompromising precision consistently. Meanwhile, integrated wind load calculator functionality accelerates design workflows while maintaining accuracy throughout all calculations systematically.</p>
+                        
+                        <h4>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px; color: #60a5fa;">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                <path d="M9 12l2 2 4-4"/>
+                            </svg>
+                            Bulletproof Accuracy
+                        </h4>
+                        <p>Moreover, every calculation undergoes rigorous verification through multiple quality assurance protocols ensuring absolute reliability. Additionally, regulatory compliance becomes automatic through systematically integrated code provisions. Furthermore, ASCE 7 design pressure calculator verification ensures all results meet current building code requirements consistently.</p>
+                        
+                        <h4>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px; color: #60a5fa;">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14,2 14,8 20,8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                            Professional Authority
+                        </h4>
+                        <p>Furthermore, generate comprehensive reports that building officials respect and approve immediately. Nevertheless, professional documentation ensures project approval while protecting professional liability systematically. Additionally, wind load calculation example documentation demonstrates compliance with industry standards throughout all project phases consistently.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Enhanced CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Dominate Your Competition?</h2>
+                <p>Furthermore, join the engineering elite who leverage our revolutionary services for unmatched project success and industry leadership. Additionally, experience the transformation that catapults careers and delivers extraordinary results consistently.</p>
+                <div class="cta-buttons">
+                    <a href="contact-us-wind-load-calculators-for-components-and-cladding-cc-wind-load-pressures-per-the-asce-7-16-and-asce-7-22-publication-windloads-made-easy.html" class="cta-button">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px;">
+                            <polygon points="13,2 3,14 12,14 11,22 21,10 12,10"/>
+                        </svg>
+                        Dominate Today
+                    </a>
+                    <a href="shop-wind-load-calculators.html" class="cta-button secondary">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px;">
+                            <polygon points="13,2 3,14 12,14 11,22 21,10 12,10"/>
+                        </svg>
+                        Explore Power Tools
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>WindLoad Solutions</h4>
+                    <p>Professional WindLoad Calculator software per ASCE 7 standards. Moreover, over 24 years of excellence ensures projects meet compliance requirements. Furthermore, our team provides nationwide windload calculator support and comprehensive wind load analysis solutions.</p>
+                    
+                    <h4>Contact Information</h4>
+                    
+                    <p style="margin-bottom: 0.5rem;"><strong style="display: block; margin-bottom: 0;">General Inquiries</strong>
+                    Email: info@windload.solutions<br>
+                    Phone: (833) 272-3946 | (833) ASCE-WIND</p>
+
+                    <p style="margin-bottom: 0.5rem;"><strong style="display: block; margin-bottom: 0;">Technical Support</strong>
+                    Email: support@windload.solutions</p>
+
+                    <p style="margin-bottom: 0.5rem;"><strong style="display: block; margin-bottom: 0;">Sales</strong>
+                    Email: sales@windload.solutions</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>WindLoad Calculator Services</h4>
+                    <a href="asce-7-wind-load-calculator.html">ASCE 7 WindLoad Calculator</a>
+                    <a href="services-asce7-wind-load-pressures.html">Wind Load Pressure Services</a>
+                    <a href="professional-engineer-sign-seal-wind-load-pressures.html">PE Sign & Seal Services</a>
+                    <a href="building-intelligence-platform.html">Wind Load Building Intelligence Platform</a>
+                    <a href="free-online-wind-load-calculators-demos-free-excel-wind-load-calculator.html">Free WindLoad Calculator</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>WindLoad Calculator Resources</h4>
+                    <a href="instructional-videos-asce-7-wind-load-calculator-wind-load-pressure-software-components-cladding-wind-load-pressures-asce-7.html">WindLoad Calculator Videos</a>
+                    <a href="faqfor-wind-load-calculator-software-for-wind-load-pressures-per-asce-7.html">WindLoad Calculator FAQ</a>
+                    <a href="clarifying-wind-loads-free-asce-calculator-pressure-analysis.html">Wind Load Types Guide</a>
+                    <a href="contact-us-wind-load-calculators-for-components-and-cladding-cc-wind-load-pressures-per-the-asce-7-16-and-asce-7-22-publication-windloads-made-easy.html">Contact WindLoad Experts</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Industry Solutions</h4>
+                    <a href="wind-load-calculator-for-engineers.html">For Engineers</a>
+                    <a href="wind-load-calculator-for-architects.html">For Architects</a>
+                    <a href="contractors-wind-load-calculator.html">For Contractors</a>
+                    <a href="wind-loads-for-consultants.html">For Consultants</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 WindLoad Solutions. All rights reserved. Professional WindLoad Calculator software per ASCE 7-22 & ASCE 7-16. Contact us for components and cladding wind load pressures, windloads analysis, and comprehensive wind load calculator excel solutions nationwide.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation Functions
+        function toggleNav() {
+            const navMenu = document.getElementById('nav-menu');
+            const hamburger = document.getElementById('hamburger');
+            const overlay = document.getElementById('nav-overlay');
+            
+            navMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+            overlay.classList.toggle('active');
+            
+            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+        }
+
+        function initializeHeaderScroll() {
+            const header = document.getElementById('main-header');
+            
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+        }
+
+        function initializeVideo() {
+            const video = document.querySelector('.hero-video');
+            if (!video) return;
+
+            video.muted = true;
+            video.playsInline = true;
+            
+            video.addEventListener('loadeddata', function() {
+                video.play().catch(function() {
+                    console.log('Video autoplay blocked');
+                });
+            });
+
+            video.addEventListener('error', function() {
+                video.style.display = 'none';
+            });
+
+            document.addEventListener('click', function() {
+                if (video.paused) {
+                    video.play().catch(function() {
+                        console.log('Manual play failed');
+                    });
+                }
+            }, { once: true });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeVideo();
+            initializeHeaderScroll();
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    
+    
+        // Dropdown menu toggle for mobile - supports multiple dropdowns
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdowns = document.querySelectorAll('.nav-dropdown');
+            
+            dropdowns.forEach(function(dropdown) {
+                const dropdownToggle = dropdown.querySelector('.nav-dropdown-toggle');
+                
+                if (dropdownToggle) {
+                    dropdownToggle.addEventListener('click', function(e) {
+                        const header = document.getElementById('main-header');
+                        const isScrolled = header && header.classList.contains('scrolled');
+                        const isMobile = window.innerWidth < 1024;
+                        
+                        // Check if this dropdown is in the hamburger menu (nav-links) or horizontal nav (nav-desktop-scrolled)
+                        const isInHamburgerMenu = dropdown.closest('.nav-links');
+                        const isInHorizontalNav = dropdown.closest('.nav-desktop-scrolled');
+                        
+                        // Hamburger menu dropdowns: ALWAYS toggle by click
+                        // Horizontal nav dropdowns: Toggle on mobile, hover on desktop when scrolled
+                        if (isInHamburgerMenu || isMobile || !isScrolled) {
+                            e.preventDefault();
+                            // Close other dropdowns
+                            dropdowns.forEach(function(otherDropdown) {
+                                if (otherDropdown !== dropdown) {
+                                    otherDropdown.classList.remove('active');
+                                }
+                            });
+                            // Toggle current dropdown
+                            dropdown.classList.toggle('active');
+                        }
+                        // On desktop when scrolled (and in horizontal nav), let CSS hover handle it
+                    });
+                }
+            });
+        });
+
+        function initializeVideo() {
+            const video = document.querySelector('.hero-video');
+            if (!video) return;
+
+            video.muted = true;
+            video.playsInline = true;
+            
+            video.addEventListener('loadeddata', function() {
+                video.play().catch(function() {
+                    console.log('Video autoplay blocked');
+                });
+            });
+
+            video.addEventListener('error', function() {
+                video.style.display = 'none';
+            });
+
+            document.addEventListener('click', function() {
+                if (video.paused) {
+                    video.play().catch(function() {
+                        console.log('Manual play failed');
+                    });
+                }
+            }, { once: true });
+        }
+
+        // FAQ Toggle Function
+        function toggleFAQ(element) {
+            const faqItem = element.parentElement;
+            const isActive = faqItem.classList.contains('active');
+            
+            // Close all FAQ items
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Open clicked item if it wasn't active
+            if (!isActive) {
+                faqItem.classList.add('active');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeVideo();
+            initializeHeaderScroll();
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

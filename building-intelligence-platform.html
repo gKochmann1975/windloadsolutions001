@@ -1,0 +1,3218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building Intelligence Platform</title>
+    <meta name="description" content="Building Intelligence Platform delivers instant ASCE 7 wind speeds, meteorological data licensing, and wind velocity maps for professional engineers and data partners.">
+    <meta name="keywords" content="Building Intelligence Platform, wind speed calculator, ASCE 7 wind load, wind velocity maps, meteorological data licensing, weather data API, wind atlas, construction weather data, energy sector wind data, insurance weather analytics, maritime wind forecasts, agricultural meteorology, wind data licensing, weather forecasting systems">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Building Intelligence Platform - ASCE 7 Wind Speed Calculator">
+    <meta property="og:description" content="Building Intelligence Platform delivers instant ASCE 7 wind speeds and local requirements by ZIP code nationwide.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://windload.solutions/building-intelligence-platform/">
+    
+    <!-- Schema Markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Building Intelligence Platform - ASCE 7 Wind Speed Calculator",
+        "applicationCategory": "Engineering Tool",
+        "operatingSystem": "Web Browser",
+        "description": "Professional Building Intelligence Platform for instant ASCE 7 wind speeds and local authority requirements by ZIP code",
+        "provider": {
+            "@type": "Organization",
+            "name": "WindLoad Solutions",
+            "url": "https://windload.solutions"
+        }
+    }
+    </script>
+    
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        .main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: transparent;
+            padding: 2rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .main-header.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1rem 0;
+            box-shadow: 0 1px 20px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+        }
+
+        .logo {
+            z-index: 1001;
+        }
+
+        .logo-image {
+            height: 100px;
+            width: auto;
+            filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
+            transition: all 0.3s ease;
+        }
+
+        .main-header.scrolled .logo-image {
+            height: 70px;
+            filter: none;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            z-index: 1001;
+        }
+
+        .header-cta {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            white-space: nowrap;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-cta:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.6);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .header-cta.primary {
+            background: rgba(0, 24, 255, 0.9);
+            border-color: rgba(0, 24, 255, 0.3);
+        }
+
+        .header-cta.primary:hover {
+            background: rgba(0, 24, 255, 1);
+            border-color: rgba(0, 24, 255, 0.8);
+        }
+
+        .main-header.scrolled .header-cta {
+            color: #0018ff;
+            background: rgba(0, 24, 255, 0.1);
+            border-color: rgba(0, 24, 255, 0.3);
+        }
+
+        .main-header.scrolled .header-cta.primary {
+            color: white;
+            background: #0018ff;
+            border-color: #0018ff;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 28px;
+            height: 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 1002;
+        }
+
+
+        .hamburger span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background: white;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .main-header.scrolled .hamburger span {
+            background: #1f2937;
+            box-shadow: none;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(8px, -8px);
+        }
+
+        /* Navigation Menu */
+        .nav-links {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100vh;
+            width: 400px;
+            max-width: 85vw;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            box-shadow: -10px 0 50px rgba(0,0,0,0.2);
+            padding: 4rem 2rem 2rem 2rem;
+            flex-direction: column;
+            gap: 1.5rem;
+            z-index: 9999;
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .nav-links.active {
+            display: flex;
+            transform: translateX(0);
+        }
+
+        /* Keep hamburger visible and nav-links as side menu only */
+        @media (min-width: 1024px) {
+            /* Keep nav-links as hamburger menu only - never show horizontally */
+            .main-header.scrolled .nav-links:not(.active) {
+                /* Stays as side menu even on desktop */
+                display: none !important;
+            }
+
+            /* Keep hamburger visible on desktop when scrolled */
+            .main-header.scrolled .hamburger {
+                display: flex;
+            }
+
+            .main-header.scrolled .header-right {
+                gap: 2rem;
+                align-items: center;
+            }
+        }
+
+        /* Simplified Desktop Nav (Shows when scrolled) */
+        .nav-desktop-scrolled {
+            display: none;
+        }
+
+        @media (min-width: 1024px) {
+            .main-header.scrolled .nav-desktop-scrolled {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 2rem;
+                overflow: visible;
+            }
+
+            .nav-desktop-scrolled a {
+                text-decoration: none;
+                font-size: 0.95rem;
+                padding: 0.5rem 1rem;
+                border-radius: 8px;
+                color: #374151;
+                font-weight: 600;
+                transition: all 0.2s ease;
+            }
+
+            .nav-desktop-scrolled a:hover {
+                background: rgba(0, 24, 255, 0.1);
+                color: #0018ff;
+            }
+
+            /* Simplified desktop nav dropdown styles */
+            .nav-desktop-scrolled .nav-dropdown {
+                position: relative;
+                z-index: 1001;
+            }
+
+            .nav-desktop-scrolled .nav-dropdown-toggle {
+                display: flex;
+                align-items: center;
+                font-size: 0.95rem;
+                padding: 0.5rem 1rem;
+                border-radius: 8px;
+                color: #374151;
+                font-weight: 600;
+                transition: all 0.2s ease;
+                cursor: pointer;
+            }
+
+            .nav-desktop-scrolled .dropdown-arrow {
+                font-size: 0.7rem;
+                margin-left: 0.3rem;
+            }
+
+            .nav-desktop-scrolled .nav-dropdown-menu {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background: white;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+                border-radius: 8px;
+                padding: 0.5rem 0;
+                min-width: 250px;
+                margin-top: 0.25rem;
+                z-index: 1002;
+                flex-direction: column;
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+                transform: translateY(-10px);
+                transition: all 0.2s ease;
+                display: flex !important;
+                padding-left: 0;
+            }
+
+            .nav-desktop-scrolled .nav-dropdown:hover .nav-dropdown-menu {
+                opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
+                transform: translateY(0);
+            }
+
+            .nav-desktop-scrolled .nav-dropdown-toggle:hover,
+            .nav-desktop-scrolled .nav-dropdown:hover .nav-dropdown-toggle {
+                background: rgba(0, 24, 255, 0.1);
+                color: #0018ff;
+            }
+
+            .nav-desktop-scrolled .nav-dropdown-menu a {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+                border-radius: 0;
+            }
+
+            .nav-desktop-scrolled .nav-dropdown-menu a:hover {
+                background: rgba(0, 24, 255, 0.1);
+            }
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #1f2937;
+            font-weight: 600;
+            font-size: 1.2rem;
+            padding: 1.2rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(45deg, #0018ff, #181E57);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #0018ff;
+            padding-left: 1rem;
+        }
+
+        .nav-links a:hover::before,
+        .nav-links a.active::before {
+            width: 50px;
+        }
+
+        .nav-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: none;
+            border: none;
+            font-size: 2.5rem;
+            color: #64748b;
+            cursor: pointer;
+            font-weight: 300;
+        }
+
+
+        .nav-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
+            z-index: 9998;
+        }
+
+        .nav-overlay.active {
+            display: block;
+        }
+
+        /* Navigation Dropdown Styles */
+        .nav-dropdown {
+            position: relative;
+        }
+
+        .nav-dropdown-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            text-decoration: none;
+            color: #1f2937;
+            font-weight: 600;
+            font-size: 1.2rem;
+            padding: 1.2rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .dropdown-arrow {
+            margin-left: 0.5rem;
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-dropdown.active .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .nav-dropdown-menu {
+            display: none;
+            flex-direction: column;
+            padding-left: 1.5rem;
+            margin-top: 0.5rem;
+            gap: 0.5rem;
+            background: rgba(248, 250, 252, 0.95);
+            border-radius: 8px;
+            padding: 0.5rem 1.5rem;
+        }
+
+        .nav-dropdown.active .nav-dropdown-menu {
+            display: flex;
+        }
+
+
+        .nav-dropdown-menu a {
+            font-size: 1.05rem;
+            font-weight: 500;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .nav-dropdown-menu a:last-child {
+            border-bottom: none;
+        }
+
+        /* Hover effects for hamburger menu */
+        .nav-dropdown-toggle:hover {
+            background: rgba(0, 24, 255, 0.05);
+            color: #0018ff;
+            padding-left: 1rem;
+            border-radius: 8px;
+        }
+
+        .nav-dropdown-menu a:hover {
+            background: rgba(0, 24, 255, 0.08);
+            color: #0018ff;
+            padding-left: 1rem;
+            border-radius: 6px;
+        }
+
+        /* Desktop dropdown styles */
+        @media (min-width: 1024px) {
+            /* CRITICAL: Prevent clipping of dropdowns */
+            .main-header.scrolled,
+            .main-header.scrolled .header-container,
+            .main-header.scrolled .header-right {
+                overflow: visible !important;
+            }
+            
+            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown-toggle {
+                display: flex;
+                align-items: center;
+                font-size: 0.95rem;
+                padding: 0.5rem 1rem;
+                border-bottom: none;
+                border-radius: 8px;
+                color: #374151;
+                transition: all 0.2s ease;
+                cursor: pointer;
+            }
+
+            .main-header.scrolled .nav-desktop-scrolled .dropdown-arrow {
+                font-size: 0.7rem;
+                margin-left: 0.3rem;
+            }
+
+            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown {
+                position: relative;
+                z-index: 1001;
+            }
+
+            /* Dropdown menu - always in DOM but invisible */
+            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown-menu {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background: white;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+                border-radius: 8px;
+                padding: 0.5rem 0;
+                min-width: 250px;
+                margin-top: 0.25rem;
+                z-index: 1002;
+                flex-direction: column;
+                
+                /* Hidden by default */
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+                transform: translateY(-10px);
+                transition: all 0.2s ease;
+                
+                /* Force display flex always - CRITICAL */
+                display: flex !important;
+                
+                /* Remove any padding/border from parent that might clip */
+                padding-left: 0;
+            }
+
+            /* Show dropdown on hover */
+            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown:hover .nav-dropdown-menu {
+                opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
+                transform: translateY(0);
+            }
+
+            /* Highlight toggle on hover */
+            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown-toggle:hover,
+            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown:hover .nav-dropdown-toggle {
+                background: rgba(0, 24, 255, 0.1);
+                color: #0018ff;
+            }
+
+            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown-menu a {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+                border-bottom: none;
+                border-radius: 0;
+            }
+
+            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown-menu a:hover {
+                background: rgba(0, 24, 255, 0.1);
+                padding-left: 1.5rem;
+            }
+        }
+        /* Hero Section - Same style as FAQ */
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 50%, #0018ff 100%);
+        }
+
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                135deg, 
+                rgba(0, 24, 255, 0.5) 0%, 
+                rgba(24, 30, 87, 0.4) 30%,
+                rgba(0, 0, 0, 0.3) 60%,
+                rgba(0, 24, 255, 0.45) 100%
+            );
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            color: white;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.95) 0%, 
+                rgba(255, 255, 255, 0.85) 50%, 
+                rgba(255, 255, 255, 0.95) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+            filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.8));
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+            font-weight: 500;
+            color: white;
+            text-shadow: 0 3px 20px rgba(0, 0, 0, 0.9);
+        }
+
+        .hero-cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-button {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-button.primary {
+            background: rgba(255, 255, 255, 0.95);
+            color: #0018ff;
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .hero-button.primary:hover {
+            background: #ffffff;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        .hero-button.secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .hero-button.secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.7);
+            transform: translateY(-3px);
+        }
+
+        /* Video Section - Same style as FAQ */
+        .video-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #ffffff 100%);
+        }
+
+        .video-container {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .video-container h2 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #181E57;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .video-container p {
+            font-size: 1.3rem;
+            color: #64748b;
+            max-width: 800px;
+            margin: 0 auto 2rem auto;
+            line-height: 1.7;
+        }
+
+        .video-embed {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 24px;
+            padding: 3rem;
+            border: 1px solid rgba(0, 24, 255, 0.1);
+            box-shadow: 
+                0 30px 80px rgba(0, 0, 0, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
+            transition: all 0.4s ease;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .video-embed:hover {
+            transform: translateY(-8px);
+            box-shadow: 
+                0 40px 100px rgba(0, 24, 255, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 1);
+        }
+
+        .video-placeholder {
+            position: relative;
+            width: 100%;
+            height: 450px;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .play-button {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .play-button:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+
+        .play-button::before {
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 20px solid #0018ff;
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+            margin-left: 4px;
+        }
+
+        .video-placeholder h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .video-placeholder p {
+            font-size: 1.1rem;
+            max-width: 600px;
+            text-align: center;
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        /* Features Section - Updated with FAQ style */
+        .features-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #ffffff 100%);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #181E57;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .section-description {
+            font-size: 1.3rem;
+            color: #64748b;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            position: relative;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(0, 24, 255, 0.08);
+            box-shadow: 0 10px 30px rgba(0, 24, 255, 0.08);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #0018ff 0%, #FF6B35 50%, #181E57 100%);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 24, 255, 0.15);
+        }
+
+        .feature-card-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            box-shadow: 
+                0 15px 35px rgba(0, 24, 255, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card-icon svg {
+            width: 40px;
+            height: 40px;
+            stroke-width: 2px;
+            stroke: white;
+            fill: none;
+        }
+
+        .feature-card-icon::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: transform 0.6s ease;
+        }
+
+        .feature-card:hover .feature-card-icon::before {
+            transform: rotate(45deg) translate(50%, 50%);
+        }
+
+        .feature-card h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #181E57;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .feature-card p {
+            color: #4b5563;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 1.05rem;
+        }
+
+        /* Pricing Section - Formspree-inspired clean design */
+        .pricing-section {
+            padding: 6rem 0;
+            background: #ffffff;
+            position: relative;
+        }
+
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .pricing-header h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #181E57;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .pricing-header p {
+            font-size: 1.3rem;
+            color: #64748b;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .pricing-toggle {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3rem;
+        }
+
+        .toggle-container {
+            background: #f1f5f9;
+            border-radius: 50px;
+            padding: 6px;
+            display: flex;
+            border: 2px solid #e2e8f0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .toggle-btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            border: none;
+            background: transparent;
+            color: #64748b;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+        }
+
+        .toggle-btn.active {
+            background: #0018ff;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 24, 255, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .pricing-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            position: relative;
+            transition: all 0.3s ease;
+            border: 2px solid #f1f5f9;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+            overflow: visible;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 24, 255, 0.12);
+            border-color: #cbd5e1;
+        }
+
+        .popular-card {
+            border: 2px solid #0018ff;
+            position: relative;
+            transform: scale(1.05);
+            box-shadow: 0 12px 32px rgba(0, 24, 255, 0.15);
+        }
+
+        .popular-card:hover {
+            transform: scale(1.05) translateY(-8px);
+        }
+
+        .trial-card {
+            border: 2px solid #22c55e;
+            box-shadow: 0 8px 24px rgba(34, 197, 94, 0.1);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #0018ff;
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            box-shadow: 0 4px 12px rgba(0, 24, 255, 0.4);
+            z-index: 10;
+            white-space: nowrap;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .trial-badge {
+            background: #22c55e;
+            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+        }
+
+        .pricing-header-card h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #181E57;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .pricing-price {
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            margin-bottom: 0.8rem;
+        }
+
+        .price-currency {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #181E57;
+        }
+
+        .price-amount {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: #181E57;
+            margin: 0 0.2rem;
+            line-height: 1;
+        }
+
+        .price-period {
+            font-size: 1rem;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .pricing-subtitle {
+            color: #64748b;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            line-height: 1.4;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .pricing-features {
+            margin-bottom: 2.5rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .feature-item.disabled {
+            opacity: 0.4;
+        }
+
+        .feature-icon {
+            font-size: 1.1rem;
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+            margin-top: 2px;
+            font-weight: 800;
+        }
+
+        .feature-item span:last-child {
+            flex: 1;
+            line-height: 1.5;
+            color: #374151;
+            font-weight: 500;
+        }
+
+        .pricing-cta {
+            width: 100%;
+            background: #f8fafc;
+            color: #374151;
+            border: 2px solid #e2e8f0;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 1.5rem;
+        }
+
+        .pricing-cta:hover {
+            background: #f1f5f9;
+            border-color: #cbd5e1;
+            transform: translateY(-2px);
+        }
+
+        .trial-cta {
+            background: #22c55e;
+            color: white;
+            border-color: #22c55e;
+            font-weight: 700;
+        }
+
+        .trial-cta:hover {
+            background: #16a34a;
+            border-color: #16a34a;
+            box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3);
+        }
+
+        .popular-cta {
+            background: #0018ff;
+            color: white;
+            border-color: #0018ff;
+            font-weight: 700;
+        }
+
+        .popular-cta:hover {
+            background: #0015d9;
+            border-color: #0015d9;
+            box-shadow: 0 8px 20px rgba(0, 24, 255, 0.3);
+        }
+
+        .pricing-note {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        /* Competition Comparison Section - NEW */
+        .comparison-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 25%, #e2e8f0 50%, #ffffff 75%, #f8fafc 100%);
+            background-size: 400% 400%;
+            animation: hero-gradient-shift 15s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Data Licensing Section - NEW */
+        .data-licensing-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .data-licensing-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 25% 25%, rgba(59, 130, 246, 0.15) 0%, transparent 50%), radial-gradient(circle at 75% 75%, rgba(34, 197, 94, 0.15) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        /* Market Applications Section - NEW */
+        .market-applications-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #ffffff 100%);
+        }
+
+        /* Content Section */
+        .content-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 50%, #f8fafc 100%);
+        }
+
+        .content-section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #181E57;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .content-section h3 {
+            font-size: 1.8rem;
+            color: #0018ff;
+            margin: 2rem 0 1rem 0;
+            font-weight: 700;
+        }
+
+        .content-section p {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 1.2rem;
+            color: #4b5563;
+        }
+
+        /* FAQ Section - NEW */
+        .faq-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #ffffff 100%);
+        }
+
+        /* Footer - Exact same as FAQ */
+        .main-footer {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d3748 50%, #1a1a1a 100%);
+            color: white;
+            padding: 5rem 0 2rem;
+            position: relative;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h4 {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .footer-section p {
+            line-height: 1.8;
+            color: #cbd5e0;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        .footer-section a {
+            display: block;
+            color: #e2e8f0;
+            text-decoration: none;
+            margin-bottom: 1rem;
+            padding: 0.5rem 0;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .footer-section a:hover {
+            color: #0018ff;
+            padding-left: 1rem;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            color: #a0aec0;
+            font-size: 0.95rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-cta-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .hero-button {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .header-container {
+                padding: 0 1rem;
+            }
+
+            .header-right {
+                gap: 0.5rem;
+            }
+
+            .header-cta {
+                padding: 0.6rem 1rem;
+                font-size: 0.8rem;
+                white-space: nowrap;
+            }
+
+            .logo-image {
+                height: 70px;
+            }
+
+            .main-header.scrolled .logo-image {
+                height: 50px;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .popular-card {
+                transform: scale(1);
+            }
+
+            .section-header h2 {
+                font-size: 2.2rem;
+            }
+
+            .hero-content {
+                padding: 0 1rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .content-section h2 {
+                font-size: 2rem;
+            }
+
+            .content-section h3 {
+                font-size: 1.5rem;
+            }
+
+            .video-container h2 {
+                font-size: 2.2rem;
+            }
+
+            .pricing-header h2 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .header-cta {
+                display: none;
+            }
+
+            .header-right {
+                justify-content: flex-end;
+            }
+
+            .logo-image {
+                height: 60px;
+            }
+
+            .main-header.scrolled .logo-image {
+                height: 45px;
+            }
+
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+
+            .content-section h2 {
+                font-size: 1.8rem;
+            }
+
+            .video-container h2 {
+                font-size: 1.8rem;
+            }
+
+            .pricing-header h2 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                width: 100vw;
+                padding: 4rem 1rem 2rem 1rem;
+            }
+
+            .nav-links a {
+                font-size: 1rem;
+                padding: 0.8rem 0;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .container {
+                padding: 0 0.5rem;
+            }
+
+            .header-container {
+                padding: 0 0.5rem;
+            }
+
+            .hero-title {
+                font-size: 1.8rem;
+            }
+
+            .logo-image {
+                height: 50px;
+            }
+
+            .main-header.scrolled .logo-image {
+                height: 40px;
+            }
+        }
+
+        /* Ensure proper viewport handling */
+        @media screen and (max-width: 1024px) {
+            html {
+                -webkit-text-size-adjust: 100%;
+                -ms-text-size-adjust: 100%;
+            }
+            
+            body {
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+        }
+
+        /* Fix for horizontal scrolling issues */
+        html, body {
+            overflow-x: hidden;
+            max-width: 100vw;
+        }
+
+        * {
+            max-width: 100%;
+        }
+
+        /* Mobile navigation improvements */
+        @media (max-width: 1023px) {
+            .nav-links {
+                padding-top: 5rem;
+            }
+            
+            .nav-close {
+                position: absolute;
+                top: 1.5rem;
+                right: 1.5rem;
+                background: none;
+                border: none;
+                font-size: 2rem;
+                color: #64748b;
+                cursor: pointer;
+                font-weight: 300;
+                z-index: 10000;
+            }
+        }
+    
+        /* ================================================================
+           TRIAL SYSTEM STYLES
+           ================================================================ */
+        
+        /* Trial Banner */
+        .trial-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            color: white;
+            padding: 0.75rem 1rem;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.95rem;
+            z-index: 10000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .trial-banner a {
+            color: white;
+            text-decoration: underline;
+            margin-left: 0.5rem;
+        }
+        
+        .trial-banner a:hover {
+            text-decoration: none;
+        }
+        
+        /* Adjust page content to account for trial banner */
+        body.trial-active {
+            padding-top: 50px;
+        }
+        
+        body.trial-active .main-header {
+            top: 50px;
+        }
+        
+        /* Trial Lookup Counter */
+        .trial-counter {
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+            border: 2px solid #d1d5db;
+            border-radius: 12px;
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: center;
+        }
+        
+        .trial-counter-title {
+            font-weight: 700;
+            color: #374151;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Trial Watermark */
+        .trial-watermark {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            font-size: 72px;
+            font-weight: bold;
+            color: rgba(255, 0, 0, 0.15);
+            pointer-events: none;
+            z-index: 9999;
+            white-space: nowrap;
+            user-select: none;
+            font-family: Arial, sans-serif;
+        }
+        
+        /* Upgrade Modal */
+        .upgrade-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 100000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(4px);
+        }
+        
+        .modal-content {
+            position: relative;
+            background: white;
+            border-radius: 20px;
+            max-width: 900px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 2.55rem;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            z-index: 1;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: #f3f4f6;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6b7280;
+        }
+        
+        .modal-close:hover {
+            background: #e5e7eb;
+            transform: rotate(90deg);
+        }
+        
+        .modal-icon {
+            font-size: 64px;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        
+        .modal-title {
+            font-size: 1.7rem;
+            font-weight: 800;
+            text-align: center;
+            color: #111827;
+            margin-bottom: 1rem;
+        }
+        
+        .modal-message {
+            font-size: 0.96rem;
+            text-align: center;
+            color: #6b7280;
+            margin-bottom: 2.13rem;
+        }
+        
+        .upgrade-plans {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.7rem;
+            margin-bottom: 2rem;
+        }
+        
+        .plan-card {
+            background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+            border: 2px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 1.7rem;
+            transition: all 0.3s ease;
+        }
+        
+        .plan-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .plan-card.featured {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            border-color: #1d4ed8;
+            color: white;
+            position: relative;
+        }
+        
+        .plan-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #fbbf24;
+            color: #78350f;
+            padding: 0.25rem 1rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        
+        .plan-card h3 {
+            font-size: 1.28rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: inherit;
+        }
+        
+        .plan-price {
+            font-size: 2.55rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: inherit;
+        }
+        
+        .plan-price span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: inherit;
+            opacity: 0.8;
+        }
+        
+        .plan-features {
+            list-style: none;
+            margin-bottom: 1.7rem;
+        }
+        
+        .plan-features li {
+            padding: 0.5rem 0;
+            font-size: 0.81rem;
+            color: inherit;
+            opacity: 0.9;
+        }
+        
+        .plan-card.featured .plan-features li {
+            color: white;
+            opacity: 1;
+        }
+        
+        .btn-upgrade, .btn-upgrade-primary {
+            width: 100%;
+            padding: 1rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .btn-upgrade {
+            background: white;
+            color: #2563eb;
+            border: 2px solid #2563eb;
+        }
+        
+        .btn-upgrade:hover {
+            background: #2563eb;
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        .btn-upgrade-primary {
+            background: white;
+            color: #2563eb;
+        }
+        
+        .btn-upgrade-primary:hover {
+            background: #f9fafb;
+            transform: scale(1.05);
+        }
+        
+        .view-all-plans {
+            display: block;
+            text-align: center;
+            color: #2563eb;
+            font-weight: 600;
+            text-decoration: none;
+            margin-top: 1rem;
+        }
+        
+        .view-all-plans:hover {
+            text-decoration: underline;
+        }
+        
+        /* Disabled Trial Buttons */
+        .disabled-trial {
+            opacity: 0.5;
+            cursor: not-allowed !important;
+        }
+        
+        /* Print Protection */
+        @media print {
+            #app, #main-content, .results-container, .velocity-finder-container {
+                display: none !important;
+            }
+            
+            body::before {
+                content: "PRINTING DISABLED IN TRIAL VERSION";
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 48px;
+                font-weight: bold;
+                color: red;
+                text-align: center;
+                width: 100%;
+            }
+            
+            body::after {
+                content: "Subscribe to Professional or Unlimited to enable printing and exports";
+                position: fixed;
+                top: 60%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 24px;
+                color: #333;
+                text-align: center;
+                width: 100%;
+            }
+        }
+        
+
+        /* ================================================================
+           TRIAL SYSTEM - CUSTOM SVG ICONS (No Emojis!)
+           ================================================================ */
+        
+        /* SVG Icon Base Styles */
+        .trial-icon-svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.3));
+        }
+        
+        /* Clock/Timer Icon for Banner */
+        .trial-clock-icon {
+            width: 24px;
+            height: 24px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+        
+        /* Rocket/Upgrade Icon for Modal */
+        .trial-rocket-icon {
+            width: 68px;
+            height: 68px;
+            margin: 0 auto 1rem;
+            display: block;
+            fill: #3b82f6;
+        }
+        
+        /* Feature Checkmark Icons */
+        .trial-check-icon {
+            width: 17px;
+            height: 17px;
+            display: inline-block;
+            margin-right: 8px;
+            vertical-align: middle;
+            fill: currentColor;
+        }
+        
+        /* Lock Icon for Disabled Features */
+        .trial-lock-icon {
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        
+        /* Icon Hover Effects */
+        .trial-icon-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .trial-icon-hover:hover {
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 12px rgba(0, 255, 255, 0.5));
+        }
+        
+        /* Animated Icons */
+        @keyframes trial-icon-pulse {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(1.05);
+            }
+        }
+        
+        .trial-icon-animated {
+            animation: trial-icon-pulse 2s ease-in-out infinite;
+        }
+
+                /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .modal-content {
+                padding: 2rem 1.5rem;
+            }
+            
+            .modal-title {
+                font-size: 1.5rem;
+            }
+            
+            .upgrade-plans {
+                grid-template-columns: 1fr;
+            }
+            
+            .trial-watermark {
+                font-size: 36px;
+            }
+        }
+
+
+        .trial-banner-link {
+            color: white;
+            text-decoration: underline;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+        
+        .trial-banner-link:hover {
+            color: #fbbf24;
+            text-decoration: none;
+            text-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
+        }
+
+    
+        /* TRIAL - Copy Protection */
+        .trial-protected {
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+        
+        .trial-protected::selection {
+            background: transparent;
+        }
+        
+        .trial-protected::-moz-selection {
+            background: transparent;
+        }
+        
+        .copy-blocked-notice {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.95);
+            color: white;
+            padding: 2rem 3rem;
+            border-radius: 16px;
+            z-index: 999999;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            animation: slideIn 0.3s ease;
+            text-align: center;
+            display: none;
+        }
+        
+        .copy-blocked-notice h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #fbbf24;
+        }
+        
+        .copy-blocked-notice p {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+        
+        .copy-blocked-notice button {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .copy-blocked-notice button:hover {
+            background: #2563eb;
+            transform: scale(1.05);
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -40%);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        /* ================================================================
+           FIRST-TIME VISITOR SIGN-UP MODAL STYLES
+           ================================================================ */
+
+        .signup-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 100002;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .signup-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+        }
+
+        .signup-content {
+            position: relative;
+            background: white;
+            border-radius: 24px;
+            max-width: 520px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 3rem 2.5rem;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+            z-index: 1;
+            animation: slideInUp 0.5s ease;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .signup-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .signup-icon {
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 1.5rem;
+            display: block;
+        }
+
+        .signup-header h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .signup-header p {
+            color: #6b7280;
+            font-size: 1.05rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .signup-subtext {
+            font-size: 0.9rem !important;
+            color: #9ca3af !important;
+            font-weight: 500;
+        }
+
+        .signup-form {
+            margin-bottom: 0;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .form-group .required {
+            color: #dc2626;
+        }
+
+        .form-group .optional {
+            color: #9ca3af;
+            font-weight: 400;
+            font-size: 0.85rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .form-group input::placeholder {
+            color: #9ca3af;
+        }
+
+        .signup-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-top: 2rem;
+        }
+
+        .btn-signup-trial {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .btn-signup-trial:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-signup-subscribe {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            background: white;
+            color: #374151;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .btn-signup-subscribe:hover {
+            border-color: #3b82f6;
+            color: #3b82f6;
+            background: rgba(59, 130, 246, 0.05);
+        }
+
+        .signup-privacy {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #9ca3af;
+            margin-top: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .signup-privacy a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+
+        .signup-privacy a:hover {
+            text-decoration: underline;
+        }
+
+        .signup-loading {
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #e5e7eb;
+            border-top: 4px solid #3b82f6;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1.5rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .signup-loading h3 {
+            font-size: 1.5rem;
+            color: #111827;
+            margin-bottom: 0.5rem;
+        }
+
+        .signup-loading p {
+            color: #6b7280;
+        }
+
+        .signup-success {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            display: block;
+        }
+
+        .signup-success h3 {
+            font-size: 1.75rem;
+            color: #111827;
+            margin-bottom: 0.75rem;
+        }
+
+        .signup-success p {
+            color: #6b7280;
+            font-size: 1.05rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .success-details {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 12px;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            color: #166534;
+        }
+
+        .btn-start {
+            margin-top: 1.5rem;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-start:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .signup-content {
+                width: 95%;
+                padding: 2rem 1.5rem;
+            }
+
+            .signup-header h2 {
+                font-size: 1.5rem;
+            }
+
+            .signup-icon {
+                width: 60px;
+                height: 60px;
+            }
+        }
+
+    </style>
+    
+    <!-- Leaflet CSS (required for maps) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <!-- Sun Separator CSS -->
+    <link rel="stylesheet" href="css/sun-separator.css">
+
+    <!-- Building Intelligence Platform CSS -->
+    <link rel="stylesheet" href="./css/building-intelligence-platform.css">
+</head>
+<body>
+    
+<!-- ================================================================
+     TRIAL SYSTEM SVG ICON DEFINITIONS
+     ================================================================ -->
+
+<!-- Master SVG with all gradients and symbols -->
+<svg id="trial-icons-svg" style="position: absolute; width: 0; height: 0; overflow: hidden;">
+    <defs>
+        <!-- Electric Cyan to Blue Gradient -->
+        <linearGradient id="trial-gradient-cyan" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#00ffff;stop-opacity:1" />
+            <stop offset="50%" style="stop-color:#0080ff;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#0033ff;stop-opacity:1" />
+        </linearGradient>
+        
+        <!-- Electric Blue Gradient -->
+        <linearGradient id="trial-gradient-blue" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+            <stop offset="50%" style="stop-color:#2563eb;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:1" />
+        </linearGradient>
+        
+        <!-- Electric Yellow Gradient -->
+        <linearGradient id="trial-gradient-yellow" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:1" />
+        </linearGradient>
+        
+        <!-- Electric Green Gradient -->
+        <linearGradient id="trial-gradient-green" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
+        </linearGradient>
+        
+        <!-- Glow Filter -->
+        <filter id="trial-icon-glow">
+            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+            <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+    
+    <!-- Clock/Timer Icon (for banner) -->
+    <symbol id="icon-trial-clock" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10" 
+                fill="none" 
+                stroke="url(#trial-gradient-cyan)" 
+                stroke-width="2" 
+                filter="url(#trial-icon-glow)"/>
+        <line x1="12" y1="12" x2="12" y2="6" 
+              stroke="url(#trial-gradient-cyan)" 
+              stroke-width="2" 
+              stroke-linecap="round"/>
+        <line x1="12" y1="12" x2="16" y2="12" 
+              stroke="url(#trial-gradient-cyan)" 
+              stroke-width="2" 
+              stroke-linecap="round"/>
+        <circle cx="12" cy="12" r="1.5" 
+                fill="url(#trial-gradient-cyan)"/>
+        <!-- Tick marks -->
+        <line x1="12" y1="2" x2="12" y2="4" stroke="url(#trial-gradient-cyan)" stroke-width="1.5"/>
+        <line x1="12" y1="20" x2="12" y2="22" stroke="url(#trial-gradient-cyan)" stroke-width="1.5"/>
+        <line x1="2" y1="12" x2="4" y2="12" stroke="url(#trial-gradient-cyan)" stroke-width="1.5"/>
+        <line x1="20" y1="12" x2="22" y2="12" stroke="url(#trial-gradient-cyan)" stroke-width="1.5"/>
+    </symbol>
+    
+    <!-- Rocket/Upgrade Icon (for modal) -->
+    <symbol id="icon-trial-rocket" viewBox="0 0 64 64">
+        <!-- Rocket body -->
+        <path d="M 32 8 Q 28 12, 28 20 L 28 44 L 32 50 L 36 44 L 36 20 Q 36 12, 32 8 Z" 
+              fill="none" 
+              stroke="url(#trial-gradient-blue)" 
+              stroke-width="2.5"
+              filter="url(#trial-icon-glow)"/>
+        <!-- Rocket nose -->
+        <path d="M 32 8 L 28 20 L 36 20 Z" 
+              fill="url(#trial-gradient-cyan)" 
+              opacity="0.8"/>
+        <!-- Window -->
+        <circle cx="32" cy="28" r="4" 
+                fill="none" 
+                stroke="url(#trial-gradient-cyan)" 
+                stroke-width="2"/>
+        <circle cx="32" cy="28" r="2" 
+                fill="url(#trial-gradient-cyan)" 
+                opacity="0.5"/>
+        <!-- Fins -->
+        <path d="M 28 40 L 22 46 L 22 52 L 28 44 Z" 
+              fill="none" 
+              stroke="url(#trial-gradient-blue)" 
+              stroke-width="2"
+              stroke-linejoin="round"/>
+        <path d="M 36 40 L 42 46 L 42 52 L 36 44 Z" 
+              fill="none" 
+              stroke="url(#trial-gradient-blue)" 
+              stroke-width="2"
+              stroke-linejoin="round"/>
+        <!-- Flames -->
+        <path d="M 30 50 Q 28 54, 30 58" 
+              fill="none" 
+              stroke="url(#trial-gradient-yellow)" 
+              stroke-width="2"
+              stroke-linecap="round"
+              opacity="0.8"/>
+        <path d="M 32 50 Q 32 56, 32 60" 
+              fill="none" 
+              stroke="url(#trial-gradient-yellow)" 
+              stroke-width="2.5"
+              stroke-linecap="round"/>
+        <path d="M 34 50 Q 36 54, 34 58" 
+              fill="none" 
+              stroke="url(#trial-gradient-yellow)" 
+              stroke-width="2"
+              stroke-linecap="round"
+              opacity="0.8"/>
+    </symbol>
+    
+    <!-- Checkmark Icon (for features) -->
+    <symbol id="icon-trial-check" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10" 
+                fill="none" 
+                stroke="url(#trial-gradient-green)" 
+                stroke-width="2"
+                filter="url(#trial-icon-glow)"/>
+        <polyline points="8,12 11,15 16,9" 
+                  fill="none" 
+                  stroke="url(#trial-gradient-green)" 
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"/>
+    </symbol>
+</svg>
+
+<!-- Lock Icon (for disabled features) -->
+<svg id="trial-lock-svg" style="position: absolute; width: 0; height: 0; overflow: hidden;">
+    <symbol id="icon-trial-lock" viewBox="0 0 24 24">
+        <rect x="7" y="11" width="10" height="9" rx="1" 
+              fill="none" 
+              stroke="currentColor" 
+              stroke-width="2"/>
+        <path d="M 9 11 L 9 8 Q 9 5, 12 5 Q 15 5, 15 8 L 15 11" 
+              fill="none" 
+              stroke="currentColor" 
+              stroke-width="2"
+              stroke-linecap="round"/>
+        <circle cx="12" cy="15" r="1.5" fill="currentColor"/>
+    </symbol>
+</svg>
+
+<!-- Warning/Alert Icon (for expired trial) -->
+<svg id="trial-alert-svg" style="position: absolute; width: 0; height: 0; overflow: hidden;">
+    <symbol id="icon-trial-alert" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10" 
+                fill="none" 
+                stroke="#dc2626" 
+                stroke-width="2"
+                filter="url(#trial-icon-glow)"/>
+        <line x1="12" y1="8" x2="12" y2="13" 
+              stroke="#dc2626" 
+              stroke-width="2.5"
+              stroke-linecap="round"/>
+        <circle cx="12" cy="16" r="1" fill="#dc2626"/>
+    </symbol>
+</svg>
+
+<!-- Signup Modal Icon -->
+<svg id="signup-icon-svg" style="position: absolute; width: 0; height: 0; overflow: hidden;">
+    <defs>
+        <linearGradient id="signup-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#2563eb;stop-opacity:1" />
+        </linearGradient>
+    </defs>
+    <symbol id="icon-signup-simple" viewBox="0 0 64 64">
+        <!-- Simple circle with checkmark -->
+        <circle cx="32" cy="32" r="28" fill="url(#signup-gradient)" opacity="0.1"/>
+        <circle cx="32" cy="32" r="28" fill="none" stroke="url(#signup-gradient)" stroke-width="3"/>
+        <polyline points="20,32 28,40 44,24" 
+                  fill="none" 
+                  stroke="url(#signup-gradient)" 
+                  stroke-width="4"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"/>
+    </symbol>
+</svg>
+
+
+    <!-- TRIAL BANNER -->
+    <div class="trial-banner" id="trial-banner">
+        <div id="trial-banner-content">
+            <svg class="trial-clock-icon trial-icon-animated"><use href="#icon-trial-clock"></use></svg>
+            <span>Free Trial Active - <a href="#" onclick="showUpgradeModal('Upgrade to unlock all features'); return false;" class="trial-banner-link">Upgrade Now</a></span>
+        </div>
+    </div>
+    
+    <script>document.body.classList.add('trial-active');</script>
+
+    <!-- Header -->
+    <header class="main-header" id="main-header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img src="images/windload-solutions-logo.png" alt="WindLoad Solutions Logo" class="logo-image">
+            </a>
+            
+            <!-- Full Hamburger Menu (Always available via hamburger button) -->
+            <nav class="nav-links" id="nav-menu">
+                <button class="nav-close" onclick="toggleNav()">&times;</button>
+                <a href="free-online-wind-load-calculators-demos-free-excel-wind-load-calculator.html">Free Calculator</a>
+                <a href="building-intelligence-platform.html">Building Intelligence Platform</a>
+                <a href="wind-load-calculator-comparison.html">Wind Load Calculator Comparison</a>
+                
+                <!-- About Dropdown -->
+                <div class="nav-dropdown">
+                    <span class="nav-dropdown-toggle">About <span class="dropdown-arrow">▼</span></span>
+                    <div class="nav-dropdown-menu">
+                        <a href="building-intelligence-platform-landing.html">Building Intelligence Platform</a>
+                        <a href="wind-load-calculator-landing.html">Wind Load Calculators</a>
+                    </div>
+                </div>
+                
+                <!-- Shop Dropdown -->
+                <div class="nav-dropdown">
+                    <span class="nav-dropdown-toggle">Shop <span class="dropdown-arrow">▼</span></span>
+                    <div class="nav-dropdown-menu">
+                        <a href="building-intelligence-platform-shop.html">Building Intelligence Platform</a>
+                        <a href="wind-load-calculator-shop.html">Wind Load Calculators</a>
+                    </div>
+                </div>
+                
+                <a href="services-asce7-wind-load-pressures.html">Services</a>
+                
+                <!-- Professionals Dropdown -->
+                <div class="nav-dropdown">
+                    <span class="nav-dropdown-toggle">Professionals <span class="dropdown-arrow">▼</span></span>
+                    <div class="nav-dropdown-menu">
+                        <a href="wind-load-calculator-for-engineers.html">Engineers</a>
+                        <a href="wind-load-calculator-for-architects.html">Architects</a>
+                        <a href="wind-loads-for-consultants.html">Consultants</a>
+                        <a href="contractors-wind-load-calculator.html">Contractors</a>
+                    </div>
+                </div>
+                
+                <a href="why-choose-windload-solutions.html">Why Us</a>
+                <a href="faqfor-wind-load-calculator-software-for-wind-load-pressures-per-asce-7.html">FAQ</a>
+                <a href="contact-us-wind-load-calculators-for-components-and-cladding-cc-wind-load-pressures-per-the-asce-7-16-and-asce-7-22-publication-windloads-made-easy.html">Contact Us</a>
+            </nav>
+            
+            <!-- Simplified Desktop Nav (Shows when scrolled on desktop) -->
+            <nav class="nav-desktop-scrolled">
+                <a href="free-online-wind-load-calculators-demos-free-excel-wind-load-calculator.html">Free Calculator</a>
+                <a href="building-intelligence-platform.html">B.I.P.</a>
+                
+                <!-- Shop Dropdown (Simplified - only 2 items) -->
+                <div class="nav-dropdown">
+                    <span class="nav-dropdown-toggle">Shop <span class="dropdown-arrow">▼</span></span>
+                    <div class="nav-dropdown-menu">
+                        <a href="building-intelligence-platform-shop.html">Building Intelligence Platform</a>
+                        <a href="wind-load-calculator-shop.html">Wind Load Calculators</a>
+                    </div>
+                </div>
+                
+                <a href="services-asce7-wind-load-pressures.html">Services</a>
+                <a href="why-choose-windload-solutions.html">Why Us</a>
+            </nav>
+            
+            <!-- Header Right Side -->
+            <div class="header-right">
+                <a href="contact-us-wind-load-calculators-for-components-and-cladding-cc-wind-load-pressures-per-the-asce-7-16-and-asce-7-22-publication-windloads-made-easy.html" class="header-cta primary">Let's Connect</a>
+                <a href="http://127.0.0.1:8051" class="header-cta">Member Login</a>
+                <button class="hamburger" id="hamburger" onclick="toggleNav()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu Overlay -->
+        <div class="nav-overlay" id="nav-overlay" onclick="toggleNav()"></div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <!-- Video Background -->
+            <div class="video-background">
+                <video class="hero-video" autoplay muted loop playsinline>
+                    <source src="videos/building-intelligence-platform.webm" type="video/webm">
+                    <source src="videos/building-intelligence-platform.mp4" type="video/mp4">
+                </video>
+            </div>
+            
+            <!-- Video Overlay -->
+            <div class="video-overlay"></div>
+            
+            <!-- Hero Content -->
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">Building Intelligence Platform</h1>
+                    <p class="hero-subtitle">Wind loads, demographics, and location intelligence for construction professionals.</p>
+                    <div class="hero-cta-buttons">
+                        <a href="#building-intelligence-platform" class="hero-button primary">Start Building Intelligence Platform</a>
+                        <a href="#professional-demo" class="hero-button secondary">Watch Demo</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+       
+        <!-- Building Intelligence Platform Interface -->
+        <section id="building-intelligence-platform">
+            <div id="building-intelligence-container"></div>
+        </section>       
+        
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>WindLoad Solutions</h4>
+                    <p>Professional WindLoad Calculator software per ASCE 7 standards. Moreover, over 24 years of excellence ensures projects meet compliance requirements. Furthermore, our team provides nationwide windload calculator support and comprehensive wind load analysis solutions.</p>
+                    <p><strong>Contact Information</strong></p>
+                    <p><strong>General Inquiries</strong><br>
+                    Email: info@windload.solutions<br>
+                    Phone: (833) 272-3946 | (833) ASCE-WIND</p>
+
+                    <p><strong>Technical Support</strong><br>
+                    Email: support@windload.solutions</p>
+
+                    <p><strong>Sales</strong><br>
+                    Email: sales@windload.solutions</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>WindLoad Calculator Services</h4>
+                    <a href="asce-7-wind-load-calculator.html">ASCE 7 WindLoad Calculator</a>
+                    <a href="services-asce7-wind-load-pressures.html">Wind Load Pressure Services</a>
+                    <a href="professional-engineer-sign-seal-wind-load-pressures.html">PE Sign & Seal Services</a>
+                    <a href="building-intelligence-platform.html">Wind Load Building Intelligence Platform</a>
+                    <a href="free-online-wind-load-calculators-demos-free-excel-wind-load-calculator.html">Free WindLoad Calculator</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>WindLoad Calculator Resources</h4>
+                    <a href="instructional-videos-asce-7-wind-load-calculator-wind-load-pressure-software-components-cladding-wind-load-pressures-asce-7.html">WindLoad Calculator Videos</a>
+                    <a href="faqfor-wind-load-calculator-software-for-wind-load-pressures-per-asce-7.html">WindLoad Calculator FAQ</a>
+                    <a href="clarifying-wind-loads-free-asce-calculator-pressure-analysis.html">Wind Load Types Guide</a>
+                    <a href="contact-us-wind-load-calculators-for-components-and-cladding-cc-wind-load-pressures-per-the-asce-7-16-and-asce-7-22-publication-windloads-made-easy.html">Contact WindLoad Experts</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Industry Solutions</h4>
+                    <a href="wind-load-calculator-for-engineers.html">For Engineers</a>
+                    <a href="wind-load-calculator-for-architects.html">For Architects</a>
+                    <a href="contractors-wind-load-calculator.html">For Contractors</a>
+                    <a href="wind-loads-for-consultants.html">For Consultants</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 WindLoad Solutions. All rights reserved. Professional WindLoad Calculator software per ASCE 7-22 & ASCE 7-16. Contact us for components and cladding wind load pressures, windloads analysis, and comprehensive wind load calculator excel solutions nationwide.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Leaflet JS (required for maps) -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    
+    <!-- UPGRADE MODAL -->
+    <div class="upgrade-modal" id="upgrade-modal">
+        <div class="modal-overlay" onclick="closeUpgradeModal()"></div>
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeUpgradeModal()">×</button>
+            
+            <div class="modal-icon">
+                <svg class="trial-rocket-icon trial-icon-hover"><use href="#icon-trial-rocket"></use></svg>
+            </div>
+            <h2 class="modal-title">Upgrade Required</h2>
+            <p class="modal-message" id="upgrade-message"></p>
+            
+            <div class="upgrade-plans">
+                <div class="plan-card">
+                    <h3>Professional</h3>
+                    <div class="plan-price">$69<span>/month</span></div>
+                    <ul class="plan-features">
+                        <li><svg class="trial-check-icon"><use href="#icon-trial-check"></use></svg>Unlimited lookups</li>
+                        <li><svg class="trial-check-icon"><use href="#icon-trial-check"></use></svg>PDF & Excel exports</li>
+                        <li><svg class="trial-check-icon"><use href="#icon-trial-check"></use></svg>No watermarks</li>
+                        <li><svg class="trial-check-icon"><use href="#icon-trial-check"></use></svg>Email support</li>
+                        <li><svg class="trial-check-icon"><use href="#icon-trial-check"></use></svg>Multi-location comparison</li>
+                    </ul>
+                    <button class="btn-upgrade" onclick="upgradeToPlan('professional')">
+                        Choose Professional
+                    </button>
+                </div>
+                
+                <div class="plan-card featured">
+                    <div class="plan-badge">BEST VALUE</div>
+                    <h3>Unlimited</h3>
+                    <div class="plan-price">$179<span>/month</span></div>
+                    <ul class="plan-features">
+                        <li><svg class="trial-check-icon"><use href="#icon-trial-check"></use></svg>Everything in Professional</li>
+                        <li><svg class="trial-check-icon"><use href="#icon-trial-check"></use></svg>AI Hurricane Analysis</li>
+                        <li><svg class="trial-check-icon"><use href="#icon-trial-check"></use></svg>Advanced reports</li>
+                        <li><svg class="trial-check-icon"><use href="#icon-trial-check"></use></svg>Priority support</li>
+                        <li><svg class="trial-check-icon"><use href="#icon-trial-check"></use></svg>API access</li>
+                    </ul>
+                    <button class="btn-upgrade-primary" onclick="upgradeToPlan('unlimited')">
+                        Choose Unlimited
+                    </button>
+                </div>
+            </div>
+            
+            <a href="/pricing" class="view-all-plans">View all plans →</a>
+        </div>
+    </div>
+
+    <!-- Trial Manager JS -->
+    <script src="./trial-manager.js"></script>
+        
+    <!-- Building Intelligence Platform JS -->
+    <script src="./building-intelligence-platform.js"></script>
+    <script>
+        console.log('📊 Building Intelligence Platform loaded');
+    </script>
+    
+    <!-- Hurricane AI Complete (No API Required) -->
+    <script src="./hurricane-ai-complete.js"></script>
+    
+    <!-- Initialize Building Intelligence Platform -->
+    <script>
+        // Configure CSV path for Building Intelligence Platform
+        window.VELOCITY_FINDER_CONFIG = {
+            csvPath: './data/usps_zip_codes.csv'
+        };
+        
+        // Initialize the Building Intelligence Platform
+        VelocityFinder.init('building-intelligence-container');
+    </script>
+    
+    <script>
+        // Navigation Functions
+        function toggleNav() {
+            const navMenu = document.getElementById('nav-menu');
+            const hamburger = document.getElementById('hamburger');
+            const overlay = document.getElementById('nav-overlay');
+            
+            navMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+            overlay.classList.toggle('active');
+            
+            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+        }
+
+        function initializeHeaderScroll() {
+            const header = document.getElementById('main-header');
+            
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+        }
+
+        function initializeVideo() {
+            const video = document.querySelector('.hero-video');
+            if (!video) return;
+
+            video.muted = true;
+            video.playsInline = true;
+            
+            video.addEventListener('loadeddata', function() {
+                video.play().catch(function() {
+                    console.log('Video autoplay blocked');
+                });
+            });
+
+            video.addEventListener('error', function() {
+                video.style.display = 'none';
+            });
+
+            document.addEventListener('click', function() {
+                if (video.paused) {
+                    video.play().catch(function() {
+                        console.log('Manual play failed');
+                    });
+                }
+            }, { once: true });
+        }
+
+        function togglePricing(period) {
+            document.querySelectorAll('.toggle-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Update pricing display based on period
+            const amounts = document.querySelectorAll('.price-amount');
+            const notes = document.querySelectorAll('.pricing-note');
+            
+            if (period === 'annual') {
+                // Update to annual pricing (20% discount)
+                amounts[1].textContent = '24'; // Starter annual
+                amounts[2].textContent = '63'; // Professional annual
+                notes[1].textContent = 'Billed annually, save 20%';
+                notes[2].textContent = 'Billed annually, save 20%';
+            } else {
+                // Reset to monthly pricing
+                amounts[1].textContent = '29'; // Starter monthly
+                amounts[2].textContent = '79'; // Professional monthly
+                notes[1].textContent = '$24/month when billed annually';
+                notes[2].textContent = '$63/month when billed annually';
+            }
+        }
+
+        // Initialize everything when the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeHeaderScroll();
+            initializeVideo();
+        });
+
+        // Dropdown menu toggle for mobile - supports multiple dropdowns
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdowns = document.querySelectorAll('.nav-dropdown');
+            
+            dropdowns.forEach(function(dropdown) {
+                const dropdownToggle = dropdown.querySelector('.nav-dropdown-toggle');
+                
+                if (dropdownToggle) {
+                    dropdownToggle.addEventListener('click', function(e) {
+                        const header = document.getElementById('main-header');
+                        const isScrolled = header && header.classList.contains('scrolled');
+                        const isMobile = window.innerWidth < 1024;
+                        
+                        // Check if this dropdown is in the hamburger menu (nav-links) or horizontal nav (nav-desktop-scrolled)
+                        const isInHamburgerMenu = dropdown.closest('.nav-links');
+                        const isInHorizontalNav = dropdown.closest('.nav-desktop-scrolled');
+                        
+                        // Hamburger menu dropdowns: ALWAYS toggle by click
+                        // Horizontal nav dropdowns: Toggle on mobile, hover on desktop when scrolled
+                        if (isInHamburgerMenu || isMobile || !isScrolled) {
+                            e.preventDefault();
+                            // Close other dropdowns
+                            dropdowns.forEach(function(otherDropdown) {
+                                if (otherDropdown !== dropdown) {
+                                    otherDropdown.classList.remove('active');
+                                }
+                            });
+                            // Toggle current dropdown
+                            dropdown.classList.toggle('active');
+                        }
+                        // On desktop when scrolled (and in horizontal nav), let CSS hover handle it
+                    });
+                }
+            });
+        });
+    </script>
+    </script>
+
+    <!-- ================================================================
+         FIRST-TIME VISITOR SIGN-UP MODAL
+         ================================================================ -->
+    <div class="signup-modal" id="signup-modal">
+        <div class="signup-overlay"></div>
+        <div class="signup-content">
+            <!-- Signup Form View -->
+            <div id="signup-form-view">
+                <div class="signup-header">
+                    <svg class="signup-icon">
+                        <use href="#icon-signup-simple"></use>
+                    </svg>
+                    <h2>Welcome to Building Intelligence Platform!</h2>
+                    <p>Get instant access with your 7-day free trial</p>
+                    <p class="signup-subtext">No credit card required • 3 lookups/hour • 10/day</p>
+                </div>
+                
+                <form id="signup-form" class="signup-form">
+                    <div class="form-group">
+                        <label for="signup-name">
+                            Full Name <span class="required">*</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            id="signup-name" 
+                            name="name"
+                            required 
+                            placeholder="John Smith"
+                            autocomplete="name" />
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="signup-email">
+                            Email Address <span class="required">*</span>
+                        </label>
+                        <input 
+                            type="email" 
+                            id="signup-email"
+                            name="email" 
+                            required 
+                            placeholder="john@company.com"
+                            autocomplete="email" />
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="signup-company">
+                            Company <span class="optional">(Optional)</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            id="signup-company"
+                            name="company" 
+                            placeholder="Acme Corporation"
+                            autocomplete="organization" />
+                    </div>
+                    
+                    <div class="signup-buttons">
+                        <button type="submit" class="btn-signup-trial">
+                            <svg width="20" height="20" style="margin-right: 8px;">
+                                <use href="#icon-trial-rocket"></use>
+                            </svg>
+                            Start Free Trial
+                        </button>
+                        <button 
+                            type="button" 
+                            class="btn-signup-subscribe" 
+                            onclick="window.location.href='building-intelligence-platform-shop.html'">
+                            💳 Subscribe Now
+                        </button>
+                    </div>
+                    
+                    <p class="signup-privacy">
+                        By signing up, you agree to our 
+                        <a href="/terms" target="_blank">Terms of Service</a> and 
+                        <a href="/privacy" target="_blank">Privacy Policy</a>.
+                    </p>
+                </form>
+            </div>
+            
+            <!-- Loading View -->
+            <div id="signup-loading-view" style="display: none;">
+                <div class="signup-loading">
+                    <div class="loading-spinner"></div>
+                    <h3>Setting up your trial...</h3>
+                    <p>This will only take a moment</p>
+                </div>
+            </div>
+            
+            <!-- Success View -->
+            <div id="signup-success-view" style="display: none;">
+                <div class="signup-success">
+                    <svg class="success-icon">
+                        <use href="#icon-trial-check"></use>
+                    </svg>
+                    <h3>Welcome aboard! 🎉</h3>
+                    <p>Your 7-day free trial is now active.</p>
+                    <p class="success-details">You have <strong>3 lookups per hour</strong> and <strong>10 per day</strong> to explore all features.</p>
+                    <button onclick="closeSignupModal()" class="btn-start">
+                        Start Exploring →
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Modal JavaScript -->
+    <script>
+        // Configuration
+        const SIGNUP_CONFIG = {
+            GOOGLE_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbwtwGU1jvSIQGrlf24Is7gKsu2dc-GK9FnT8fW4ldVXLQ54R0yWBy24Y4wegSrLGR_s/exec',
+            STORAGE_KEY: 'bip_signup_completed',
+            SHOW_DELAY: 1000
+        };
+
+        // Show signup modal on first visit
+        function showSignupModal() {
+            const hasCompleted = localStorage.getItem(SIGNUP_CONFIG.STORAGE_KEY);
+            
+            if (!hasCompleted) {
+                setTimeout(() => {
+                    const modal = document.getElementById('signup-modal');
+                    if (modal) {
+                        modal.style.display = 'flex';
+                    }
+                }, SIGNUP_CONFIG.SHOW_DELAY);
+            }
+        }
+
+        // Close modal
+        function closeSignupModal() {
+            const modal = document.getElementById('signup-modal');
+            if (modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Email validation
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        // Show different views
+        function showView(viewId) {
+            document.getElementById('signup-form-view').style.display = 
+                viewId === 'form' ? 'block' : 'none';
+            document.getElementById('signup-loading-view').style.display = 
+                viewId === 'loading' ? 'block' : 'none';
+            document.getElementById('signup-success-view').style.display = 
+                viewId === 'success' ? 'block' : 'none';
+        }
+
+        // Handle form submission
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('signup-form');
+            
+            if (form) {
+                form.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    
+                    // Get form data
+                    const name = document.getElementById('signup-name').value.trim();
+                    const email = document.getElementById('signup-email').value.trim();
+                    const company = document.getElementById('signup-company').value.trim();
+                    
+                    // Validate
+                    if (!name || !email) {
+                        alert('Please fill in all required fields.');
+                        return;
+                    }
+                    
+                    if (!isValidEmail(email)) {
+                        alert('Please enter a valid email address.');
+                        return;
+                    }
+                    
+                    // Show loading
+                    showView('loading');
+                    
+                    try {
+                        // Prepare data
+                        const formData = {
+                            name: name,
+                            email: email,
+                            company: company || 'Not provided',
+                            timestamp: new Date().toISOString(),
+                            date: new Date().toLocaleString(),
+                            source: 'Building Intelligence Platform',
+                            userAgent: navigator.userAgent
+                        };
+                        
+                        // Send to Google Sheets
+                        const response = await fetch(SIGNUP_CONFIG.GOOGLE_SCRIPT_URL, {
+                            method: 'POST',
+                            mode: 'no-cors',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(formData)
+                        });
+                        
+                        // Mark as completed
+                        localStorage.setItem(SIGNUP_CONFIG.STORAGE_KEY, 'true');
+                        
+                        // Show success
+                        showView('success');
+                        
+                        // Auto-close after 3 seconds
+                        setTimeout(() => {
+                            closeSignupModal();
+                        }, 3000);
+                        
+                        console.log('✅ Signup successful');
+                        
+                    } catch (error) {
+                        console.error('❌ Signup error:', error);
+                        alert('Something went wrong. Please try again or contact support.');
+                        showView('form');
+                    }
+                });
+            }
+            
+            // Initialize modal on page load
+            showSignupModal();
+        });
+
+        // Helper function to clear signup status (for testing)
+        function clearSignupStatus() {
+            localStorage.removeItem(SIGNUP_CONFIG.STORAGE_KEY);
+            console.log('✅ Signup status cleared. Refresh to see modal again.');
+        }
+    </script>
+
+    <!-- Copy Protection Script - APPLIES TO ALL USERS (All Tiers) -->
+    <script>
+        (function() {
+            'use strict';
+            
+            // Selectors for protected content
+            const protectedSelectors = [
+                '#hurricane-risk-results',
+                '#hurricane-list-container',
+                '#ai-chat-messages',
+                '#solar-results-table',
+                '#filter-results-table',
+                '#multi-zip-results',
+                '.velocity-results',
+                '.hurricane-stats-grid',
+                '.hurricane-list-item',
+                '.solar-results',
+                '.filter-results'
+            ];
+            
+            // Add trial-protected class to all result areas
+            function protectContent() {
+                protectedSelectors.forEach(selector => {
+                    const elements = document.querySelectorAll(selector);
+                    elements.forEach(el => {
+                        if (el) {
+                            el.classList.add('trial-protected');
+                        }
+                    });
+                });
+            }
+            
+            // Show copy blocked notice
+            function showCopyBlockedNotice() {
+                let notice = document.getElementById('copy-blocked-notice');
+                if (!notice) {
+                    notice = document.createElement('div');
+                    notice.id = 'copy-blocked-notice';
+                    notice.className = 'copy-blocked-notice';
+                    notice.innerHTML = `
+                        <h3>🔒 Copy Protection Active</h3>
+                        <p>Text copying is disabled to protect data integrity.<br>Please use the Export buttons (PDF/Excel) to download data.</p>
+                        <button onclick="alert('Use the Export buttons (PDF/Excel) to download your data with proper formatting.'); this.parentElement.style.display='none';">
+                            How to Export
+                        </button>
+                        <button onclick="this.parentElement.style.display='none';" style="background: #6b7280; margin-left: 10px;">
+                            Close
+                        </button>
+                    `;
+                    document.body.appendChild(notice);
+                }
+                notice.style.display = 'block';
+                setTimeout(() => {
+                    notice.style.display = 'none';
+                }, 5000);
+            }
+            
+            // Block copy events
+            function blockCopy(e) {
+                const target = e.target;
+                const isProtected = target.closest('.trial-protected');
+                
+                if (isProtected) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    showCopyBlockedNotice();
+                    return false;
+                }
+            }
+            
+            // Block right-click context menu on protected content
+            function blockContextMenu(e) {
+                const target = e.target;
+                const isProtected = target.closest('.trial-protected');
+                
+                if (isProtected) {
+                    e.preventDefault();
+                    showCopyBlockedNotice();
+                    return false;
+                }
+            }
+            
+            // Block keyboard shortcuts (Ctrl+C, Ctrl+A, Ctrl+X)
+            function blockKeyboard(e) {
+                const target = e.target;
+                const isProtected = target.closest('.trial-protected');
+                
+                if (isProtected) {
+                    // Block Ctrl+C (copy), Ctrl+X (cut), Ctrl+A (select all)
+                    if (e.ctrlKey || e.metaKey) {
+                        if (e.key === 'c' || e.key === 'C' || 
+                            e.key === 'x' || e.key === 'X' || 
+                            e.key === 'a' || e.key === 'A') {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            showCopyBlockedNotice();
+                            return false;
+                        }
+                    }
+                }
+            }
+            
+            // Initialize protection
+            document.addEventListener('DOMContentLoaded', function() {
+                protectContent();
+                
+                // Re-protect when content updates
+                const observer = new MutationObserver(protectContent);
+                observer.observe(document.body, {
+                    childList: true,
+                    subtree: true
+                });
+            });
+            
+            // Add event listeners
+            document.addEventListener('copy', blockCopy, true);
+            document.addEventListener('cut', blockCopy, true);
+            document.addEventListener('contextmenu', blockContextMenu, true);
+            document.addEventListener('keydown', blockKeyboard, true);
+            
+            // Block selection start on protected content
+            document.addEventListener('selectstart', function(e) {
+                const target = e.target;
+                const isProtected = target.closest('.trial-protected');
+                if (isProtected) {
+                    e.preventDefault();
+                    return false;
+                }
+            }, true);
+            
+            console.log('🔒 Copy protection enabled for all users (all tiers)');
+        })();
+    </script>
+
+</body>
+</html>

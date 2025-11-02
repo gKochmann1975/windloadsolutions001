@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Canceled | windload.solutions</title>
+    <link rel="stylesheet" href="css/calc-shop.css">
+    <style>
+        .cancel-container {
+            max-width: 600px;
+            margin: 4rem auto;
+            padding: 3rem;
+            text-align: center;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .cancel-icon {
+            width: 80px;
+            height: 80px;
+            background: #6b7280;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            animation: scaleIn 0.5s ease;
+        }
+        
+        .cancel-icon svg {
+            width: 48px;
+            height: 48px;
+            stroke: white;
+            stroke-width: 3;
+            fill: none;
+        }
+        
+        .cancel-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 1rem;
+        }
+        
+        .cancel-message {
+            font-size: 1.125rem;
+            color: #6b7280;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        .cancel-info {
+            text-align: left;
+            background: #f9fafb;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin: 2rem 0;
+        }
+        
+        .cancel-info h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 1rem;
+        }
+        
+        .cancel-info ul {
+            padding-left: 1.5rem;
+            color: #6b7280;
+        }
+        
+        .cancel-info li {
+            margin-bottom: 0.75rem;
+            line-height: 1.6;
+        }
+        
+        .cancel-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .cancel-actions a {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .help-section {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #eff6ff;
+            border-radius: 0.75rem;
+            border: 1px solid #bfdbfe;
+        }
+        
+        .help-section h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1d4ed8;
+            margin-bottom: 0.5rem;
+        }
+        
+        .help-section p {
+            color: #6b7280;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .support-info {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e5e7eb;
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+        
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .cancel-container {
+                margin: 2rem auto;
+                padding: 2rem 1.5rem;
+            }
+            
+            .cancel-title {
+                font-size: 1.5rem;
+            }
+            
+            .cancel-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="images/windload-solutions-logo.png" alt="WindLoad Solutions Logo" style="height: 60px; width: auto;">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Cancel Content -->
+    <div class="container">
+        <div class="cancel-container">
+            <!-- Cancel Icon -->
+            <div class="cancel-icon">
+                <svg viewBox="0 0 24 24">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </div>
+            
+            <!-- Title -->
+            <h1 class="cancel-title">Payment Canceled</h1>
+            
+            <!-- Message -->
+            <p class="cancel-message">
+                Your payment was not processed. No charges have been made to your account.
+            </p>
+            
+            <!-- Info Box -->
+            <div class="cancel-info">
+                <h3 style="display: flex; align-items: center; gap: 0.5rem;">
+                    <svg style="width: 22px; height: 22px; stroke: #111827; fill: none; stroke-width: 2;" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                        <line x1="1" y1="10" x2="23" y2="10"></line>
+                    </svg>
+                    What happened?
+                </h3>
+                <ul>
+                    <li>You chose to cancel the checkout process</li>
+                    <li>No payment was processed</li>
+                    <li>Your card was not charged</li>
+                    <li>You can try again anytime</li>
+                </ul>
+            </div>
+            
+            <!-- Help Section -->
+            <div class="help-section">
+                <h3 style="display: flex; align-items: center; gap: 0.5rem;">
+                    <svg style="width: 22px; height: 22px; stroke: #1d4ed8; fill: none; stroke-width: 2;" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 18h6"></path>
+                        <path d="M10 22h4"></path>
+                        <path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1.32.47 2.52 1.5 3.5.76.76 1.23 1.52 1.41 2.5"></path>
+                    </svg>
+                    Having trouble with checkout?
+                </h3>
+                <p>If you experienced any issues or have questions about our plans, we're here to help!</p>
+                <p><strong>Common issues:</strong></p>
+                <ul style="text-align: left; padding-left: 1.5rem; margin-top: 0.5rem;">
+                    <li>Payment method not accepted</li>
+                    <li>Card declined</li>
+                    <li>Questions about billing</li>
+                    <li>Need custom pricing</li>
+                </ul>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="cancel-actions">
+                <a href="wind-load-calculator-shop.html" class="btn btn-primary">Try Again</a>
+                <a href="wind-load-calculator-landing.html" class="btn btn-secondary">Learn More About Calculator</a>
+            </div>
+            
+            <!-- Support Info -->
+            <div class="support-info">
+                <p><strong>Need assistance?</strong></p>
+                <p>Contact our sales team at <a href="mailto:sales@windload.solutions">sales@windload.solutions</a></p>
+                <p>or call (833) ASCE-WIND / (833) 272-3946</p>
+                <p style="margin-top: 1rem;">
+                    <a href="contact-us-wind-load-calculators-for-components-and-cladding-cc-wind-load-pressures-per-the-asce-7-16-and-asce-7-22-publication-windloads-made-easy.html">Contact Us</a> | 
+                    <a href="faqfor-wind-load-calculator-software-for-wind-load-pressures-per-asce-7.html">Help Center</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 windload.solutions. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

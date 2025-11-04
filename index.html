@@ -3982,25 +3982,33 @@ body {
     /* Mobile header - SIMPLIFIED: Logo + Hamburger Only */
     .header-container {
         display: flex;
-        flex-direction: row;
-        justify-content: space-between;
+        flex-direction: column;
+        justify-content: center;
         align-items: center;
         padding: 1rem 1.5rem;
         gap: 1rem;
     }
 
-    /* Logo - bigger and more prominent */
+    /* Logo - centered and 3x bigger (360px) */
     .logo-hamburger-row {
         display: flex;
         align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .logo {
+        display: flex;
+        justify-content: center;
+        width: 100%;
     }
 
     .logo-image {
-        height: 120px;
+        height: 360px;
     }
 
     .main-header.scrolled .logo-image {
-        height: 80px;
+        height: 280px;
     }
 
     /* HIDE CTA buttons from header on mobile */
@@ -4008,24 +4016,26 @@ body {
         display: none !important;
     }
 
-    /* Keep hamburger visible */
+    /* Hamburger - centered below logo */
     .header-right {
         display: flex;
         align-items: center;
+        justify-content: center;
+        width: 100%;
     }
 
     .header-right .hamburger {
         display: flex;
     }
 
-    /* Hero section - natural alignment */
+    /* Hero section - increased padding to account for larger header */
     .hero-section {
         align-items: center !important;
         justify-content: center !important;
-        padding-top: 120px !important;
+        padding-top: 400px !important;
     }
 
-    /* Hero content - reduced margin, natural flow */
+    /* Hero content - starts just under hamburger */
     .hero-content {
         margin-top: 0 !important;
         padding-top: 2rem !important;
@@ -4063,8 +4073,29 @@ body {
     
     .hero-stats {
         grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
     }
-    
+
+    /* Reduce stat card sizes by ~50% */
+    .stat-card {
+        padding: 0.75rem;
+    }
+
+    .stat-icon {
+        width: 30px;
+        height: 30px;
+        margin-bottom: 0.25rem;
+    }
+
+    .stat-number {
+        font-size: 1.5rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .stat-label {
+        font-size: 0.65rem;
+    }
+
     .hero-buttons {
         flex-direction: column;
         width: 100%;

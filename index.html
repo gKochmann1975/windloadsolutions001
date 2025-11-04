@@ -2941,7 +2941,7 @@ body {
 
 .product-badge {
     position: absolute;
-    top: var(--spacing-lg);
+    top: -15px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -2955,6 +2955,7 @@ body {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+    z-index: 10;
 }
 
 .product-badge.best-value {
@@ -2968,9 +2969,51 @@ body {
 }
 
 .product-icon {
-    width: 100px;
-    height: 100px;
+    width: 110px;
+    height: 110px;
     margin: 0 auto var(--spacing-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.4s ease;
+}
+
+.product-card:hover .product-icon {
+    transform: scale(1.1);
+}
+
+/* BIP - Purple/Cyan Gradient */
+.product-card[data-product="bip"] .product-icon {
+    background: linear-gradient(135deg, #a855f7 0%, #06b6d4 100%);
+    box-shadow: 0 10px 35px rgba(168, 85, 247, 0.35);
+}
+
+.product-card[data-product="bip"]:hover .product-icon {
+    background: linear-gradient(135deg, #9333ea 0%, #0891b2 100%);
+    box-shadow: 0 15px 50px rgba(168, 85, 247, 0.5);
+}
+
+/* Wind Calculator - Electric Blue Gradient */
+.product-card[data-product="calculator"] .product-icon {
+    background: linear-gradient(135deg, #0018ff 0%, #4f46e5 100%);
+    box-shadow: 0 10px 35px rgba(0, 24, 255, 0.35);
+}
+
+.product-card[data-product="calculator"]:hover .product-icon {
+    background: linear-gradient(135deg, #0018ff 0%, #4f46e5 100%);
+    box-shadow: 0 15px 50px rgba(0, 24, 255, 0.5);
+}
+
+.product-icon svg {
+    width: 60px;
+    height: 60px;
+    display: block;
+    transition: all 0.4s ease;
+}
+
+.product-card:hover .product-icon svg {
+    transform: scale(1.1) rotate(5deg);
 }
 
 .electric-icon {
@@ -4477,62 +4520,14 @@ body {
                         </div>
                         
                         <div class="product-icon">
-                            <svg viewBox="0 0 100 100" class="electric-icon">
-    <defs>
-        <linearGradient id="bip-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" style="stop-color:#a855f7;stop-opacity:1" />
-            <stop offset="50%" style="stop-color:#7c3aed;stop-opacity:1" />
-            <stop offset="100%" style="stop-color:#06b6d4;stop-opacity:1" />
-        </linearGradient>
-        <filter id="glow">
-            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-            <feMerge>
-                <feMergeNode in="coloredBlur"/>
-                <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-        </filter>
-    </defs>
-    
-    <!-- Brain outline - stylized AI brain -->
-    <path d="M30 45 Q28 35 35 30 Q42 25 50 25 Q58 25 65 30 Q72 35 70 45 Q72 50 70 55 Q68 65 62 70 Q55 75 50 75 Q45 75 38 70 Q32 65 30 55 Q28 50 30 45 Z" 
-          fill="none" stroke="url(#bip-gradient)" stroke-width="3" filter="url(#glow)"/>
-    
-    <!-- Brain hemisphere division -->
-    <path d="M50 25 Q50 30 50 75" stroke="url(#bip-gradient)" stroke-width="2" opacity="0.6"/>
-    
-    <!-- Neural network nodes (left hemisphere) -->
-    <circle cx="38" cy="40" r="3" fill="url(#bip-gradient)"/>
-    <circle cx="35" cy="50" r="3" fill="url(#bip-gradient)"/>
-    <circle cx="40" cy="60" r="3" fill="url(#bip-gradient)"/>
-    
-    <!-- Neural network nodes (right hemisphere) -->
-    <circle cx="62" cy="40" r="3" fill="url(#bip-gradient)"/>
-    <circle cx="65" cy="50" r="3" fill="url(#bip-gradient)"/>
-    <circle cx="60" cy="60" r="3" fill="url(#bip-gradient)"/>
-    
-    <!-- Central processing node -->
-    <circle cx="50" cy="50" r="5" fill="url(#bip-gradient)" filter="url(#glow)"/>
-    
-    <!-- Neural connections (left side) -->
-    <line x1="38" y1="40" x2="50" y2="50" stroke="url(#bip-gradient)" stroke-width="1.5" opacity="0.5"/>
-    <line x1="35" y1="50" x2="50" y2="50" stroke="url(#bip-gradient)" stroke-width="1.5" opacity="0.5"/>
-    <line x1="40" y1="60" x2="50" y2="50" stroke="url(#bip-gradient)" stroke-width="1.5" opacity="0.5"/>
-    
-    <!-- Neural connections (right side) -->
-    <line x1="62" y1="40" x2="50" y2="50" stroke="url(#bip-gradient)" stroke-width="1.5" opacity="0.5"/>
-    <line x1="65" y1="50" x2="50" y2="50" stroke="url(#bip-gradient)" stroke-width="1.5" opacity="0.5"/>
-    <line x1="60" y1="60" x2="50" y2="50" stroke="url(#bip-gradient)" stroke-width="1.5" opacity="0.5"/>
-    
-    <!-- Circuit pattern details -->
-    <path d="M45 35 L42 35 L42 38" stroke="url(#bip-gradient)" stroke-width="1" opacity="0.7" fill="none"/>
-    <path d="M55 35 L58 35 L58 38" stroke="url(#bip-gradient)" stroke-width="1" opacity="0.7" fill="none"/>
-    <path d="M45 65 L42 65 L42 62" stroke="url(#bip-gradient)" stroke-width="1" opacity="0.7" fill="none"/>
-    <path d="M55 65 L58 65 L58 62" stroke="url(#bip-gradient)" stroke-width="1" opacity="0.7" fill="none"/>
-    
-    <!-- AI badge -->
-    <rect x="40" y="8" width="20" height="10" rx="3" fill="url(#bip-gradient)" opacity="0.9"/>
-    <text x="50" y="15" font-size="7" font-weight="bold" fill="white" text-anchor="middle">AI</text>
-</svg>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <!-- Simple brain icon -->
+                                <path d="M12 2C9 2 7 4 7 6.5c0 1-1 1.5-1 2.5C5 11 6 13 7.5 13.5M12 2c3 0 5 2 5 4.5c0 1 1 1.5 1 2.5 1 2-0 4-1.5 4.5"/>
+                                <path d="M7.5 13.5c-1 1-1.5 3.5-1.5 5.5 0 2 1.5 3 4 3s4-1 4-3m3.5-8c1 1 1.5 3.5 1.5 5.5 0 2-1.5 3-4 3"/>
+                                <circle cx="12" cy="19" r="3"/>
+                                <circle cx="9" cy="8" r="0.5" fill="white"/>
+                                <circle cx="15" cy="8" r="0.5" fill="white"/>
+                            </svg>
                         </div>
                         
                         <h3 class="product-title">Building Intelligence Platform</h3>
@@ -4635,55 +4630,18 @@ body {
                         </div>
                         
                         <div class="product-icon">
-                            <svg viewBox="0 0 100 100" class="electric-icon">
-    <defs>
-        <linearGradient id="calc-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
-            <stop offset="50%" style="stop-color:#2563eb;stop-opacity:1" />
-            <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:1" />
-        </linearGradient>
-        <filter id="calc-glow">
-            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-            <feMerge>
-                <feMergeNode in="coloredBlur"/>
-                <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-        </filter>
-    </defs>
-
-    <!-- Strong wind gust lines - angled for dramatic effect -->
-    <line x1="5" y1="25" x2="45" y2="20" stroke="url(#calc-gradient)" stroke-width="4" stroke-linecap="round" filter="url(#calc-glow)" opacity="0.9"/>
-    <line x1="5" y1="35" x2="55" y2="30" stroke="url(#calc-gradient)" stroke-width="4" stroke-linecap="round" filter="url(#calc-glow)" opacity="0.85"/>
-    <line x1="5" y1="45" x2="65" y2="40" stroke="url(#calc-gradient)" stroke-width="5" stroke-linecap="round" filter="url(#calc-glow)" opacity="0.95"/>
-
-    <!-- Secondary wind burst -->
-    <line x1="5" y1="55" x2="70" y2="50" stroke="url(#calc-gradient)" stroke-width="5" stroke-linecap="round" filter="url(#calc-glow)" opacity="0.95"/>
-    <line x1="5" y1="65" x2="60" y2="60" stroke="url(#calc-gradient)" stroke-width="4" stroke-linecap="round" filter="url(#calc-glow)" opacity="0.85"/>
-    <line x1="5" y1="75" x2="50" y2="70" stroke="url(#calc-gradient)" stroke-width="4" stroke-linecap="round" filter="url(#calc-glow)" opacity="0.9"/>
-
-    <!-- Shorter wind streaks for depth -->
-    <line x1="15" y1="30" x2="35" y2="28" stroke="url(#calc-gradient)" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
-    <line x1="20" y1="50" x2="45" y2="48" stroke="url(#calc-gradient)" stroke-width="3" stroke-linecap="round" opacity="0.75"/>
-    <line x1="25" y1="60" x2="50" y2="58" stroke="url(#calc-gradient)" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
-
-    <!-- Wind impact/pressure arrows -->
-    <path d="M75 40 L85 40 L82 37 M85 40 L82 43" stroke="url(#calc-gradient)" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#calc-glow)"/>
-    <path d="M80 50 L90 50 L87 47 M90 50 L87 53" stroke="url(#calc-gradient)" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#calc-glow)"/>
-
-    <!-- Turbulent particles showing wind strength -->
-    <circle cx="48" cy="22" r="2.5" fill="url(#calc-gradient)" opacity="0.8"/>
-    <circle cx="58" cy="32" r="2.5" fill="url(#calc-gradient)" opacity="0.8"/>
-    <circle cx="68" cy="42" r="3" fill="url(#calc-gradient)" opacity="0.9"/>
-    <circle cx="73" cy="52" r="3" fill="url(#calc-gradient)" opacity="0.9"/>
-    <circle cx="63" cy="62" r="2.5" fill="url(#calc-gradient)" opacity="0.8"/>
-    <circle cx="53" cy="72" r="2.5" fill="url(#calc-gradient)" opacity="0.8"/>
-
-    <!-- Small debris particles -->
-    <circle cx="40" cy="25" r="1.5" fill="url(#calc-gradient)" opacity="0.6"/>
-    <circle cx="50" cy="38" r="1.5" fill="url(#calc-gradient)" opacity="0.6"/>
-    <circle cx="55" cy="55" r="1.5" fill="url(#calc-gradient)" opacity="0.6"/>
-    <circle cx="45" cy="68" r="1.5" fill="url(#calc-gradient)" opacity="0.6"/>
-</svg>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <!-- Simple wind blowing icon -->
+                                <path d="M9 10h13"/>
+                                <path d="M9 14h10"/>
+                                <path d="M9 18h12"/>
+                                <circle cx="4" cy="10" r="2"/>
+                                <circle cx="4" cy="14" r="2"/>
+                                <circle cx="4" cy="18" r="2"/>
+                                <path d="M22 10l-2 2 2 2"/>
+                                <path d="M19 14l-2 2 2 2"/>
+                                <path d="M21 18l-2 2 2 2"/>
+                            </svg>
                         </div>
                         
                         <h3 class="product-title">Wind Load Calculators</h3>

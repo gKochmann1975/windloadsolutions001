@@ -4521,21 +4521,32 @@ body {
         box-sizing: border-box !important;
     }
 
-    /* ALL buttons uniform styling with margin for edge spacing */
+    /* ALL buttons uniform styling with calc width for edge spacing */
     .hero-buttons-mobile .hero-btn,
-    .hero-buttons-mobile .hero-action-btn {
+    .hero-buttons-mobile .hero-action-btn,
+    .hero-buttons-mobile .hero-btn.primary,
+    .hero-buttons-mobile .hero-btn.secondary,
+    .hero-buttons-mobile .hero-action-btn.green,
+    .hero-buttons-mobile .hero-action-btn.orange {
         display: flex !important;
-        align-items: center;
-        justify-content: center;
-        margin: 0 3rem !important; /* 48px spacing from screen edges */
+        align-items: center !important;
+        justify-content: center !important;
+        margin-left: 3rem !important;
+        margin-right: 3rem !important;
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        width: calc(100vw - 6rem) !important; /* Use viewport width minus 3rem on each side */
+        max-width: calc(100vw - 6rem) !important;
+        min-width: 0 !important;
         padding: 1.2rem 1.5rem !important;
         font-size: 1.2rem !important;
-        font-weight: 700;
+        font-weight: 700 !important;
         white-space: normal !important;
         box-sizing: border-box !important;
         border-radius: 50px !important;
         line-height: 1.3 !important;
         text-align: center !important;
+        flex-shrink: 0 !important;
     }
 
     /* Hide desktop hero action buttons on mobile */

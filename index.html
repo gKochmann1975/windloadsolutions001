@@ -597,8 +597,12 @@
             z-index: 10;
             text-align: center;
             color: white;
-            max-width: 900px;
+            max-width: 1200px;
             padding: 0 2rem;
+            width: 100%;
+            /* Unified container approach - everything scales together */
+            transform-origin: center center;
+            transition: all 0.3s ease;
         }
 
         .hero-title {
@@ -2979,13 +2983,13 @@ body {
 
 /* BIP - Purple/Cyan Gradient */
 .product-card[data-product="bip"] .product-icon {
-    background: linear-gradient(135deg, #a855f7 0%, #06b6d4 100%);
-    box-shadow: 0 10px 35px rgba(168, 85, 247, 0.35);
+    background: linear-gradient(135deg, #f97316 0%, #fbbf24 100%);
+    box-shadow: 0 10px 35px rgba(249, 115, 22, 0.35);
 }
 
 .product-card[data-product="bip"]:hover .product-icon {
-    background: linear-gradient(135deg, #9333ea 0%, #0891b2 100%);
-    box-shadow: 0 15px 50px rgba(168, 85, 247, 0.5);
+    background: linear-gradient(135deg, #ea580c 0%, #f59e0b 100%);
+    box-shadow: 0 15px 50px rgba(249, 115, 22, 0.5);
 }
 
 /* Wind Calculator - Electric Blue Gradient */
@@ -3949,17 +3953,193 @@ body {
 /* ============================================
    RESPONSIVE DESIGN
    ============================================ */
+/* Desktop 1200px - 1400px: Smooth scaling with transform */
+@media (min-width: 1201px) and (max-width: 1400px) {
+    .logo-image {
+        height: 95px;
+    }
+
+    .main-header.scrolled .logo-image {
+        height: 70px;
+    }
+}
+
 @media (max-width: 1200px) {
     .container {
         padding: 0 var(--spacing-lg);
     }
-    
+
     .hero-title {
         font-size: 3.5rem;
     }
-    
+
+    .hero-subtitle {
+        font-size: 1.15rem;
+    }
+
     .section-title {
         font-size: 2.5rem;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+    }
+
+    .stat-label {
+        font-size: 0.8rem;
+    }
+
+    .hero-btn {
+        padding: 0.9rem 2rem;
+        font-size: 1rem;
+    }
+
+    .header-cta {
+        padding: 0.65rem 1.3rem;
+        font-size: 0.85rem;
+    }
+
+    .logo-image {
+        height: 85px;
+    }
+
+    .main-header.scrolled .logo-image {
+        height: 62px;
+    }
+
+}
+
+/* ===== UNIFIED CONTAINER SCALING STRATEGY ===== */
+/* Everything scales proportionally together, content hides based on priority */
+
+/* Desktop: Start scaling down as viewport shrinks */
+@media (max-width: 1400px) {
+    .hero-content {
+        transform: scale(0.95);
+    }
+}
+
+@media (max-width: 1200px) {
+    .hero-content {
+        transform: scale(0.85);
+    }
+}
+
+@media (max-width: 1024px) {
+    .hero-content {
+        transform: scale(0.75);
+    }
+}
+
+/* Tablet: More aggressive scaling */
+@media (max-width: 900px) {
+    .hero-content {
+        transform: scale(0.65);
+    }
+
+    /* PRIORITY 3: Hide stat cards FIRST (least important) */
+    .hero-stats {
+        display: none !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-content {
+        transform: scale(0.6);
+    }
+
+    /* Stat cards already hidden */
+}
+
+/* Mobile: Continue scaling */
+@media (max-width: 640px) {
+    .hero-content {
+        transform: scale(0.55);
+    }
+}
+
+@media (max-width: 540px) {
+    .hero-content {
+        transform: scale(0.5);
+    }
+
+    /* PRIORITY 2: Hide subtitle text SECOND */
+    .hero-subtitle {
+        display: none !important;
+    }
+
+    .hero-buttons {
+        display: none !important;
+    }
+
+    .trust-indicators {
+        display: none !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-content {
+        transform: scale(0.45);
+    }
+
+    /* PRIORITY 1: Hide badge LAST (most important to keep) */
+    .electric-badge {
+        display: none !important;
+    }
+}
+
+/* Desktop 769px to 1024px - Additional refinements */
+@media (min-width: 769px) and (max-width: 1024px) {
+    /* Hero buttons */
+    .hero-btn {
+        padding: 0.8rem 1.8rem;
+        font-size: 0.95rem;
+    }
+
+    /* Header elements */
+    .logo-image {
+        height: 75px;
+    }
+
+    .main-header.scrolled .logo-image {
+        height: 55px;
+    }
+
+    .header-cta {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.8rem;
+    }
+
+    /* Section titles */
+    .section-title {
+        font-size: 2.2rem;
+    }
+
+    .section-subtitle {
+        font-size: 1rem;
+    }
+
+    /* Product cards */
+    .product-title {
+        font-size: 1.6rem;
+    }
+
+    .product-icon {
+        width: 90px;
+        height: 90px;
+    }
+
+    .product-badge {
+        font-size: 0.75rem;
+        padding: 0.5rem 1rem;
+    }
+}
+
+/* Desktop 900px - 1100px: Hide header CTAs to prevent cramping with hamburger */
+@media (min-width: 900px) and (max-width: 1100px) {
+    /* Hide header CTA buttons - they're in hamburger menu anyway */
+    .header-right .header-cta {
+        display: none !important;
     }
 }
 
@@ -3967,68 +4147,37 @@ body {
     .products-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .calculator-categories {
         grid-template-columns: 1fr;
     }
-    
+
     .features-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .cta-content-wrapper {
         grid-template-columns: 1fr;
     }
 }
 
-/* Tablet/Landscape (481px - 768px) */
-@media (min-width: 481px) and (max-width: 768px) {
-    /* Reduce header elements size for landscape */
-    .header-container {
-        padding: 0.75rem 1.5rem;
+/* Mobile Landscape - Aggressive scaling with correct priority */
+@media (max-height: 600px) and (orientation: landscape) {
+    .hero-content {
+        transform: scale(0.4) !important;
     }
 
-    .logo-image {
-        height: 55px;
-    }
-
-    .main-header.scrolled .logo-image {
-        height: 50px;
-    }
-
-    .header-cta {
-        font-size: 0.85rem;
-        padding: 0.7rem 1.3rem;
-    }
-
-    /* Push hero content below header for landscape */
-    .hero-section {
-        align-items: flex-start !important;
-        justify-content: flex-start !important;
-        padding-top: 0 !important;
-    }
-
-    /* Hide all hero text content for landscape */
-    .hero-title {
+    /* PRIORITY 3: Hide stats (already hidden at 900px) */
+    .hero-stats {
         display: none !important;
     }
 
+    /* PRIORITY 2: Hide subtitle */
     .hero-subtitle {
         display: none !important;
     }
 
-    .electric-badge {
-        display: none !important;
-    }
-
-    /* Show stat cards but scaled down by 25% */
-    .hero-stats {
-        display: flex !important;
-        transform: scale(0.75);
-        transform-origin: center;
-    }
-
-    .hero-buttons-mobile {
+    .hero-buttons {
         display: none !important;
     }
 
@@ -4036,13 +4185,40 @@ body {
         display: none !important;
     }
 
-    .scroll-indicator {
+    .hero-section {
+        min-height: 70vh;
+        padding: 6rem 0 3rem;
+    }
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+    .hero-content {
+        transform: scale(0.35) !important;
+    }
+
+    /* PRIORITY 1: Hide badge at very small heights */
+    .electric-badge {
         display: none !important;
     }
 
+    .hero-section {
+        min-height: 60vh;
+        padding: 5rem 0 2rem;
+    }
+
+    .hero-title {
+        margin-bottom: 1rem;
+    }
+}
+
+@media (max-height: 400px) and (orientation: landscape) {
     .hero-content {
-        margin-top: 140px !important;
-        padding-top: 0 !important;
+        transform: scale(0.3) !important;
+    }
+
+    .hero-section {
+        min-height: 50vh;
+        padding: 4rem 0 2rem;
     }
 }
 
@@ -4104,10 +4280,13 @@ body {
         padding-top: 180px !important;
     }
 
-    /* Hero content - starts just under hamburger */
+    /* Hero content - container scales for mobile too */
     .hero-content {
         margin-top: 0 !important;
         padding-top: 1rem !important;
+        /* Override desktop clamp - use simpler mobile scaling */
+        transform: scale(clamp(0.75, 0.002 * 100vw, 1)) !important;
+        transform-origin: center;
     }
 
     /* Add mobile CTA buttons to hero section */
@@ -4518,17 +4697,11 @@ body {
                         </div>
                         
                         <div class="product-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
-                                <circle cx="12" cy="12" r="2" fill="white"/>
-                                <ellipse cx="12" cy="12" rx="8" ry="3" opacity="0.9"/>
-                                <ellipse cx="12" cy="12" rx="8" ry="3" transform="rotate(60 12 12)" opacity="0.9"/>
-                                <ellipse cx="12" cy="12" rx="8" ry="3" transform="rotate(-60 12 12)" opacity="0.9"/>
-                                <circle cx="20" cy="12" r="1.5" fill="white"/>
-                                <circle cx="12" cy="20" r="1.5" fill="white"/>
-                                <circle cx="4" cy="12" r="1.5" fill="white"/>
+                            <svg viewBox="0 0 24 24" fill="white" stroke="none">
+                                <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z"/>
                             </svg>
                         </div>
-                        
+
                         <h3 class="product-title">Building Intelligence Platform</h3>
                         <p class="product-tagline">Instant Intelligence, Zero Manual Work</p>
                         
@@ -4630,17 +4803,13 @@ body {
                         
                         <div class="product-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
-                                <path d="M3 6 Q 8 4, 14 6 T 22 8" opacity="0.9"/>
-                                <path d="M2 10 Q 9 8, 16 10 T 24 12" opacity="0.8"/>
-                                <path d="M3 14 Q 10 12, 18 14 T 23 16" opacity="0.9"/>
-                                <path d="M20 6 Q 22 7, 21 9 Q 20 11, 18 10" stroke-width="1.2"/>
-                                <path d="M21 12 Q 23 13, 22 15 Q 21 17, 19 16" stroke-width="1.2"/>
-                                <circle cx="5" cy="6" r="1" fill="white" opacity="0.8"/>
-                                <circle cx="4" cy="10" r="1.2" fill="white" opacity="0.9"/>
-                                <circle cx="6" cy="14" r="1" fill="white" opacity="0.8"/>
+                                <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>
+                                <path d="M3 15 Q 6 13, 9 15"/>
+                                <path d="M5 18 Q 8 16, 11 18"/>
+                                <path d="M7 21 Q 10 19, 13 21"/>
                             </svg>
                         </div>
-                        
+
                         <h3 class="product-title">Wind Load Calculators</h3>
                         <p class="product-tagline">ASCE 7 Engineering Software</p>
                         

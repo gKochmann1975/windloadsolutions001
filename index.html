@@ -377,19 +377,6 @@
             width: 50px;
         }
 
-        .nav-close {
-            position: absolute;
-            top: 2rem;
-            right: 2rem;
-            background: none;
-            border: none;
-            font-size: 2.5rem;
-            color: #64748b;
-            cursor: pointer;
-            font-weight: 300;
-        }
-
-
         .nav-overlay {
             display: none;
             position: fixed;
@@ -467,14 +454,12 @@
         .nav-dropdown-toggle:hover {
             background: rgba(0, 24, 255, 0.05);
             color: #0018ff;
-            padding-left: 1rem;
             border-radius: 8px;
         }
 
         .nav-dropdown-menu a:hover {
             background: rgba(0, 24, 255, 0.08);
             color: #0018ff;
-            padding-left: 1rem;
             border-radius: 6px;
         }
 
@@ -4036,8 +4021,11 @@ body {
         display: none !important;
     }
 
+    /* Show stat cards but scaled down by 25% */
     .hero-stats {
-        display: none !important;
+        display: flex !important;
+        transform: scale(0.75);
+        transform-origin: center;
     }
 
     .hero-buttons-mobile {
@@ -4311,7 +4299,6 @@ body {
 
             <!-- Full Hamburger Menu (Always available via hamburger button) -->
             <nav class="nav-links" id="nav-menu">
-                <button class="nav-close" onclick="toggleNav()">&times;</button>
                 <a href="free-online-wind-load-calculators-demos-free-excel-wind-load-calculator.html">Free Calculator</a>
                 <a href="building-intelligence-platform.html">Building Intelligence Platform</a>
                 <a href="wind-load-calculator-comparison.html">Wind Load Calculator Comparison</a>

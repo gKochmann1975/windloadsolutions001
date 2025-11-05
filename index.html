@@ -600,10 +600,16 @@
             max-width: 1200px;
             padding: 0 2rem;
             width: 100%;
-            /* Unified container approach - everything scales together */
+        }
+
+        /* Dedicated scaling wrapper - all content inside scales proportionally as one unit */
+        .hero-scale-wrapper {
+            display: inline-block;
+            width: 1200px;
+            max-width: 100%;
             transform: scale(1);
             transform-origin: center center;
-            transition: all 0.3s ease;
+            transition: transform 0.3s ease;
         }
 
         .hero-title {
@@ -4010,26 +4016,26 @@ body {
 
 /* Desktop: Start scaling down as viewport shrinks */
 @media (max-width: 1400px) {
-    .hero-content {
+    .hero-scale-wrapper {
         transform: scale(0.95);
     }
 }
 
 @media (max-width: 1200px) {
-    .hero-content {
+    .hero-scale-wrapper {
         transform: scale(0.85);
     }
 }
 
 @media (max-width: 1024px) {
-    .hero-content {
+    .hero-scale-wrapper {
         transform: scale(0.75);
     }
 }
 
 /* Tablet: More aggressive scaling */
 @media (max-width: 900px) {
-    .hero-content {
+    .hero-scale-wrapper {
         transform: scale(0.65);
     }
 
@@ -4040,14 +4046,14 @@ body {
 }
 
 @media (max-width: 768px) {
-    .hero-content {
+    .hero-scale-wrapper {
         transform: scale(0.6);
     }
 }
 
 /* Mobile: Continue scaling */
 @media (max-width: 640px) {
-    .hero-content {
+    .hero-scale-wrapper {
         transform: scale(0.55);
     }
 
@@ -4066,7 +4072,7 @@ body {
 }
 
 @media (max-width: 540px) {
-    .hero-content {
+    .hero-scale-wrapper {
         transform: scale(0.5);
     }
 
@@ -4077,7 +4083,7 @@ body {
 }
 
 @media (max-width: 480px) {
-    .hero-content {
+    .hero-scale-wrapper {
         transform: scale(0.45);
     }
 }
@@ -4556,106 +4562,109 @@ body {
             <div class="hero-overlay"></div>
             
             <div class="container hero-content">
-                <div class="electric-badge animate-float">
-                    <i class="fas fa-bolt"></i>
-                    <span>Powered by AI & 24+ Years of Excellence</span>
-                </div>
-
-                <h1 class="hero-title">
-                    <span class="electric-text">Revolutionary</span>
-                    <br>Wind Engineering Platform
-                </h1>
-
-                <p class="hero-subtitle">
-                    From instant ASCE 7 wind speeds to comprehensive wind load calculations—
-                    <span class="highlight-text">transform your engineering practice</span>
-                    with our dual-platform solution
-                </p>
-
-                <!-- Mobile CTA Buttons (visible only on mobile) -->
-                <div class="hero-buttons-mobile">
-                    <a href="https://windload-auth.onrender.com" class="hero-btn secondary">
-                        <i class="fas fa-sign-in-alt"></i>
-                        <span>Member Login</span>
-                    </a>
-                    <a href="contact-us-wind-load-calculators-for-components-and-cladding-cc-wind-load-pressures-per-the-asce-7-16-and-asce-7-22-publication-windloads-made-easy.html" class="hero-btn primary electric-pulse">
-                        <i class="fas fa-comments"></i>
-                        <span>Let's Connect</span>
-                    </a>
-                </div>
-                
-                <div class="hero-stats">
-                    <div class="stat-card glass-card">
-                        <div class="stat-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                                <circle cx="9" cy="7" r="4"/>
-                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                            </svg>
-                        </div>
-                        <div class="stat-number electric-glow">10,000+</div>
-                        <div class="stat-label">Engineers Trust Us</div>
-                    </div>
-                    
-                    <div class="stat-card glass-card">
-                        <div class="stat-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                                <polyline points="22 4 12 14.01 9 11.01"/>
-                            </svg>
-                        </div>
-                        <div class="stat-number electric-glow">99.8%</div>
-                        <div class="stat-label">Permit Approval Rate</div>
-                    </div>
-                    
-                    <div class="stat-card glass-card">
-                        <div class="stat-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-                            </svg>
-                        </div>
-                        <div class="stat-number electric-glow">2M+</div>
-                        <div class="stat-label">Calculations Performed</div>
-                    </div>
-                    
-                    <div class="stat-card glass-card">
-                        <div class="stat-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="13" r="8"/>
-                                <polyline points="12 9 12 13 15 15"/>
-                                <path d="M16.51 17.35l-.35 3.83a2 2 0 0 1-2 1.82H9.83a2 2 0 0 1-2-1.82l-.35-3.83m0.37-8.35l.37-3.83A2 2 0 0 1 10.22 2h3.56a2 2 0 0 1 2 1.82l.37 3.83"/>
-                                <path d="M9 6h6"/>
-                            </svg>
-                        </div>
-                        <div class="stat-number electric-glow">500K+</div>
-                        <div class="stat-label">Hours Saved</div>
-                    </div>
-                </div>
-                
-                <div class="hero-buttons">
-                    <a href="#products" class="hero-btn primary electric-pulse">
-                        <i class="fas fa-rocket"></i>
-                        <span>Explore Our Products</span>
-                    </a>
-                    <a href="free-online-wind-load-calculators-demos-free-excel-wind-load-calculator.html" class="hero-btn secondary">
-                        <i class="fas fa-play-circle"></i>
-                        <span>Try Free Demo</span>
-                    </a>
-                </div>
-                
-                <div class="trust-indicators">
-                    <div class="trust-item">
-                        <i class="fas fa-check-circle"></i>
-                        <span>ASCE 7-22 & 7-16 Compliant</span>
-                    </div>
-                    <div class="trust-item">
-                        <i class="fas fa-shield-alt"></i>
-                        <span>Professional Reports</span>
-                    </div>
-                    <div class="trust-item">
+                <!-- Dedicated scaling wrapper - all content inside scales proportionally as one unit -->
+                <div class="hero-scale-wrapper">
+                    <div class="electric-badge animate-float">
                         <i class="fas fa-bolt"></i>
-                        <span>AI-Powered Analytics</span>
+                        <span>Powered by AI & 24+ Years of Excellence</span>
+                    </div>
+
+                    <h1 class="hero-title">
+                        <span class="electric-text">Revolutionary</span>
+                        <br>Wind Engineering Platform
+                    </h1>
+
+                    <p class="hero-subtitle">
+                        From instant ASCE 7 wind speeds to comprehensive wind load calculations—
+                        <span class="highlight-text">transform your engineering practice</span>
+                        with our dual-platform solution
+                    </p>
+
+                    <!-- Mobile CTA Buttons (visible only on mobile) -->
+                    <div class="hero-buttons-mobile">
+                        <a href="https://windload-auth.onrender.com" class="hero-btn secondary">
+                            <i class="fas fa-sign-in-alt"></i>
+                            <span>Member Login</span>
+                        </a>
+                        <a href="contact-us-wind-load-calculators-for-components-and-cladding-cc-wind-load-pressures-per-the-asce-7-16-and-asce-7-22-publication-windloads-made-easy.html" class="hero-btn primary electric-pulse">
+                            <i class="fas fa-comments"></i>
+                            <span>Let's Connect</span>
+                        </a>
+                    </div>
+
+                    <div class="hero-stats">
+                        <div class="stat-card glass-card">
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                    <circle cx="9" cy="7" r="4"/>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                                </svg>
+                            </div>
+                            <div class="stat-number electric-glow">10,000+</div>
+                            <div class="stat-label">Engineers Trust Us</div>
+                        </div>
+
+                        <div class="stat-card glass-card">
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                            </div>
+                            <div class="stat-number electric-glow">99.8%</div>
+                            <div class="stat-label">Permit Approval Rate</div>
+                        </div>
+
+                        <div class="stat-card glass-card">
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                                </svg>
+                            </div>
+                            <div class="stat-number electric-glow">2M+</div>
+                            <div class="stat-label">Calculations Performed</div>
+                        </div>
+
+                        <div class="stat-card glass-card">
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="13" r="8"/>
+                                    <polyline points="12 9 12 13 15 15"/>
+                                    <path d="M16.51 17.35l-.35 3.83a2 2 0 0 1-2 1.82H9.83a2 2 0 0 1-2-1.82l-.35-3.83m0.37-8.35l.37-3.83A2 2 0 0 1 10.22 2h3.56a2 2 0 0 1 2 1.82l.37 3.83"/>
+                                    <path d="M9 6h6"/>
+                                </svg>
+                            </div>
+                            <div class="stat-number electric-glow">500K+</div>
+                            <div class="stat-label">Hours Saved</div>
+                        </div>
+                    </div>
+
+                    <div class="hero-buttons">
+                        <a href="#products" class="hero-btn primary electric-pulse">
+                            <i class="fas fa-rocket"></i>
+                            <span>Explore Our Products</span>
+                        </a>
+                        <a href="free-online-wind-load-calculators-demos-free-excel-wind-load-calculator.html" class="hero-btn secondary">
+                            <i class="fas fa-play-circle"></i>
+                            <span>Try Free Demo</span>
+                        </a>
+                    </div>
+
+                    <div class="trust-indicators">
+                        <div class="trust-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>ASCE 7-22 & 7-16 Compliant</span>
+                        </div>
+                        <div class="trust-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Professional Reports</span>
+                        </div>
+                        <div class="trust-item">
+                            <i class="fas fa-bolt"></i>
+                            <span>AI-Powered Analytics</span>
+                        </div>
                     </div>
                 </div>
             </div>

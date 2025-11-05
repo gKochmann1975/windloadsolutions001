@@ -6,6 +6,9 @@
     <meta name="description" content="Professional wind load calculators for all building components - ASCE 7-22 compliant. Choose your category to get started.">
     <title>Wind Load Calculators | windload.solutions</title>
 
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
         :root {
             --spacing-xs: 0.5rem;
@@ -242,6 +245,10 @@
             text-align: center;
             position: relative;
             overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
         }
 
         .hero-section::before {
@@ -257,16 +264,46 @@
             pointer-events: none;
         }
 
+        /* Unified Hero Content Container - Everything scales together */
         .hero-content {
             position: relative;
             z-index: 1;
+            width: 100%;
+            max-width: 1400px;
+            padding: 2rem;
+            transform-origin: center center;
+            transition: all 0.3s ease;
         }
 
+        /* Floating Badge at Top */
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.8rem 2rem;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .hero-badge i {
+            font-size: 1.2rem;
+            color: #fbbf24;
+        }
+
+        /* Hero Typography */
         .hero-section h1 {
             font-size: 3.5rem;
             font-weight: 800;
             margin-bottom: 1.5rem;
             line-height: 1.2;
+            transition: all 0.3s ease;
         }
 
         .hero-section p {
@@ -276,6 +313,64 @@
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Stats Grid */
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 1rem;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .stat-icon svg {
+            width: 100%;
+            height: 100%;
+            stroke: #60d5ff;
+            stroke-width: 2;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #60d5ff;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 20px rgba(96, 213, 255, 0.5);
+        }
+
+        .stat-label {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            font-weight: 500;
         }
 
         /* Category Grid */
@@ -576,7 +671,142 @@
             font-size: 0.95rem;
         }
 
-        /* Mobile Styles */
+        /* ===== RESPONSIVE SCALING STRATEGY ===== */
+        /* The entire hero-content container scales proportionally */
+        /* Content is hidden progressively based on priority when it would overlap */
+
+        /* Desktop: Start scaling down content as viewport shrinks */
+        @media (max-width: 1400px) {
+            .hero-content {
+                transform: scale(0.95);
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .hero-content {
+                transform: scale(0.85);
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .hero-content {
+                transform: scale(0.75);
+            }
+        }
+
+        /* Tablet: More aggressive scaling */
+        @media (max-width: 900px) {
+            .hero-content {
+                transform: scale(0.65);
+            }
+
+            /* PRIORITY 5: Hide 4th stat card (Hours Saved) */
+            .stat-card:nth-child(4) {
+                display: none;
+            }
+
+            .hero-stats {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content {
+                transform: scale(0.6);
+            }
+
+            /* PRIORITY 4: Hide 3rd stat card (Calculations Performed) */
+            .stat-card:nth-child(3) {
+                display: none;
+            }
+
+            .hero-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Mobile Portrait: Continue scaling */
+        @media (max-width: 640px) {
+            .hero-content {
+                transform: scale(0.55);
+            }
+        }
+
+        @media (max-width: 540px) {
+            .hero-content {
+                transform: scale(0.5);
+            }
+
+            /* PRIORITY 3: Hide subtitle text */
+            .hero-section p {
+                display: none;
+            }
+        }
+
+        /* Mobile Landscape & Very Small Heights */
+        @media (max-height: 600px) and (orientation: landscape), (max-width: 480px) {
+            .hero-content {
+                transform: scale(0.45);
+            }
+
+            /* PRIORITY 3: Hide subtitle if not already hidden */
+            .hero-section p {
+                display: none;
+            }
+
+            /* PRIORITY 2: Hide all remaining stat cards */
+            .hero-stats {
+                display: none;
+            }
+        }
+
+        @media (max-height: 500px) and (orientation: landscape) {
+            .hero-content {
+                transform: scale(0.4);
+            }
+
+            .hero-section {
+                min-height: 70vh;
+                padding: 6rem 0 3rem;
+            }
+        }
+
+        @media (max-height: 400px) and (orientation: landscape) {
+            .hero-content {
+                transform: scale(0.35);
+            }
+
+            /* PRIORITY 1: Hide badge at very small heights */
+            .hero-badge {
+                display: none;
+            }
+
+            .hero-section {
+                min-height: 60vh;
+                padding: 5rem 0 2rem;
+            }
+
+            .hero-section h1 {
+                margin-bottom: 1rem;
+            }
+        }
+
+        /* Emergency breakpoint for extremely small screens */
+        @media (max-width: 320px) or (max-height: 320px) {
+            .hero-content {
+                transform: scale(0.3);
+            }
+
+            .hero-badge {
+                display: none;
+            }
+
+            .hero-stats {
+                display: none;
+            }
+        }
+
+        /* Mobile Navigation Styles */
         @media (max-width: 768px) {
             .hamburger {
                 display: flex;
@@ -644,18 +874,6 @@
                 border-color: #0018ff;
             }
 
-            .hero-section {
-                padding: 8rem 0 4rem;
-            }
-
-            .hero-section h1 {
-                font-size: 2.2rem;
-            }
-
-            .hero-section p {
-                font-size: 1.1rem;
-            }
-
             .category-grid {
                 grid-template-columns: 1fr;
                 gap: 2rem;
@@ -703,8 +921,68 @@
     <!-- Hero Section -->
     <section class="hero-section">
         <div class="container hero-content">
-            <h1>Professional Wind Load Calculators</h1>
-            <p>ASCE 7-22 compliant calculators for all building components. Choose your category to get started with accurate, code-compliant wind load calculations.</p>
+            <!-- Floating Badge at Top -->
+            <div class="hero-badge">
+                <i class="fas fa-bolt"></i>
+                <span>Powered by AI & 24+ Years of Excellence</span>
+            </div>
+
+            <!-- Main Headline -->
+            <h1>
+                <span style="color: #60d5ff;">Revolutionary</span><br>
+                Wind Engineering Platform
+            </h1>
+
+            <!-- Subtitle -->
+            <p>From instant ASCE 7 wind speeds to comprehensive wind load calculations— <strong>transform your engineering practice</strong> with our dual-platform solution</p>
+
+            <!-- Stats Grid -->
+            <div class="hero-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                    </div>
+                    <div class="stat-number">10K+</div>
+                    <div class="stat-label">Engineers Trust Us</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                    </div>
+                    <div class="stat-number">99.8%</div>
+                    <div class="stat-label">Permit Approval Rate</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                        </svg>
+                    </div>
+                    <div class="stat-number">2M+</div>
+                    <div class="stat-label">Calculations Performed</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="8"/>
+                            <polyline points="12 9 12 13 15 15"/>
+                        </svg>
+                    </div>
+                    <div class="stat-number">500K+</div>
+                    <div class="stat-label">Hours Saved</div>
+                </div>
+            </div>
         </div>
     </section>
 

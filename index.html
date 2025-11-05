@@ -2049,7 +2049,7 @@
             }
 
             .hero-content {
-                padding: 0 1rem;
+                padding: 0; /* Remove padding - hero-buttons-mobile handles its own spacing */
             }
 
             .hero-title {
@@ -4514,18 +4514,20 @@ body {
         display: flex !important;
         flex-direction: column;
         gap: 1rem;
-        margin: 0 auto 2rem auto !important;
-        padding: 0 3rem !important;
+        margin: 0 !important;
+        padding: 0 !important;
         order: -1;
-        align-items: stretch;
+        width: 100% !important;
         box-sizing: border-box !important;
     }
 
-    /* ALL buttons uniform styling */
+    /* ALL buttons uniform styling with margin for edge spacing */
     .hero-buttons-mobile .hero-btn,
     .hero-buttons-mobile .hero-action-btn {
-        flex: 0 0 auto !important;
+        display: flex !important;
+        align-items: center;
         justify-content: center;
+        margin: 0 3rem !important; /* 48px spacing from screen edges */
         padding: 1.2rem 1.5rem !important;
         font-size: 1.2rem !important;
         font-weight: 700;

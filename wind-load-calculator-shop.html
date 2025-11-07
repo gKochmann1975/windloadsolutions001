@@ -809,6 +809,10 @@
         }
 
         @media (max-width: 480px) {
+            .hero-scale-wrapper {
+                transform: scale(0.45);
+            }
+
             .header-container {
                 padding: 0 1rem;
             }
@@ -919,7 +923,14 @@
         flex-direction: column;
     }
 
-    /* Hero text visible on mobile - scaled by hero-scale-wrapper */
+    /* Hide hero text on mobile */
+    .hero-title {
+        display: none;
+    }
+
+    .hero-subtitle {
+        display: none;
+    }
 
     .electric-badge {
         display: none;
@@ -1175,26 +1186,28 @@
     <header class="main-header" id="main-header">
         <div class="header-container">
             <div class="logo-hamburger-row">
-                <a href="index.html" class="logo" id="logo">
-                    <img src="images/windload-solutions-logo.png" alt="windload.solutions" class="logo-image">
+                <a href="index.html" class="logo">
+                    <img src="images/windload-solutions-logo.png" alt="WindLoad Solutions Logo" class="logo-image">
                 </a>
             </div>
 
+            <!-- Full Hamburger Menu (Always available via hamburger button) -->
+            <nav class="nav-links" id="nav-menu">
+                <a href="index.html">Home</a>
+                <a href="wind-load-calculator-shop.html">Wind Load Calculators</a>
+                <a href="building-intelligence-platform-shop.html">Building Intelligence</a>
+                <a href="contact-us-wind-load-calculators-for-components-and-cladding-cc-wind-load-pressures-per-the-asce-7-16-and-asce-7-22-publication-windloads-made-easy.html">Contact</a>
+            </nav>
+
+            <!-- Header Right Side -->
             <div class="header-right">
-                <a href="https://windload-auth.onrender.com" class="header-cta">Member Login</a>
                 <a href="contact-us-wind-load-calculators-for-components-and-cladding-cc-wind-load-pressures-per-the-asce-7-16-and-asce-7-22-publication-windloads-made-easy.html" class="header-cta primary">Let's Connect</a>
+                <a href="https://windload-auth.onrender.com" class="header-cta">Member Login</a>
                 <button class="hamburger" id="hamburger" onclick="toggleNav()">
                     <span></span>
                     <span></span>
                     <span></span>
                 </button>
-
-                <nav class="nav-menu" id="nav-menu">
-                    <a href="index.html">Home</a>
-                    <a href="wind-load-calculator-shop.html">Wind Load Calculators</a>
-                    <a href="building-intelligence-platform-shop.html">Building Intelligence</a>
-                    <a href="contact-us-wind-load-calculators-for-components-and-cladding-cc-wind-load-pressures-per-the-asce-7-16-and-asce-7-22-publication-windloads-made-easy.html">Contact</a>
-                </nav>
             </div>
         </div>
     </header>

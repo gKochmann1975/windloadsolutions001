@@ -807,7 +807,15 @@
             }
 
             .hero-content {
-                padding: 0;
+                padding: 0; /* Remove padding - hero-buttons-mobile handles its own spacing */
+            }
+
+            .hero-title {
+                font-size: 2.4rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
             }
 
             .logo-image {
@@ -817,75 +825,212 @@
             .main-header.scrolled .logo-image {
                 height: 50px;
             }
-        }
 
-        @media (max-width: 480px) {
-            /* Adjust hero section padding to center buttons better */
-            .hero-section {
-                padding: 180px 0 var(--spacing-3xl) !important;
+            .trust-stat {
+                padding: 1rem 1.2rem;
             }
 
-            /* Center logo and hamburger on mobile */
-            .header-container {
-                justify-content: center;
-                flex-direction: column;
-                gap: 1rem;
+            .trust-number {
+                font-size: 1.8rem;
             }
 
-            /* Hide header CTA buttons on mobile */
-            .header-cta {
-                display: none !important;
+            .section-header h2,
+            .video-container h2,
+            .value-prop-content h2,
+            .proof-header h2,
+            .seo-content-section h2 {
+                font-size: 1.9rem;
             }
 
-            /* Add mobile CTA buttons to hero section */
-            .hero-buttons-mobile {
-                display: flex !important;
-                flex-direction: column;
-                gap: 1rem;
-                margin: 0 !important;
-                padding: 0 !important;
-                order: -1;
-                width: 100% !important;
-                box-sizing: border-box !important;
-                align-items: center !important;
+            .cta-content h2 {
+                font-size: 2.2rem;
             }
 
-            /* ALL buttons uniform styling - width based on content */
-            .hero-buttons-mobile .hero-btn,
-            .hero-buttons-mobile .hero-action-btn,
-            .hero-buttons-mobile .hero-btn.primary,
-            .hero-buttons-mobile .hero-btn.secondary,
-            .hero-buttons-mobile .hero-action-btn.green,
-            .hero-buttons-mobile .hero-action-btn.orange {
-                display: inline-flex !important;
-                align-items: center !important;
-                justify-content: center !important;
-                margin: 0 auto !important;
-                padding: 1.8rem 2.2rem !important;
-                font-size: 1.65rem !important;
-                font-weight: 700 !important;
-                white-space: nowrap !important;
-                box-sizing: border-box !important;
-                border-radius: 50px !important;
-                line-height: 1.3 !important;
-                text-align: center !important;
-                width: auto !important;
-                max-width: calc(100vw - 1.5rem) !important;
-            }
-
-            /* Hide hero text on mobile */
-            .hero-section h1 {
-                display: none;
-            }
-
-            .hero-section p {
-                display: none;
-            }
-
-            .hero-scale-wrapper {
-                transform: scale(0.45);
+            /* Very small screen nav adjustments */
+            .nav-links {
+                padding: 3rem 1.5rem 2rem 1.5rem;
             }
         }
+
+@media (max-width: 480px) {
+    /* Adjust hero section padding to center buttons better */
+    .hero-section {
+        padding: 180px 0 var(--spacing-3xl) !important;
+    }
+
+    /* Center logo and hamburger on mobile */
+    .header-container {
+        justify-content: center;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    /* Hide header CTA buttons on mobile */
+    .header-cta {
+        display: none !important;
+    }
+
+    /* Add mobile CTA buttons to hero section */
+    .hero-buttons-mobile {
+        display: flex !important;
+        flex-direction: column;
+        gap: 1rem;
+        margin: 0 !important;
+        padding: 0 !important;
+        order: -1;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        align-items: center !important;
+    }
+
+    /* ALL buttons uniform styling - width based on content */
+    .hero-buttons-mobile .hero-btn,
+    .hero-buttons-mobile .hero-action-btn,
+    .hero-buttons-mobile .hero-btn.primary,
+    .hero-buttons-mobile .hero-btn.secondary,
+    .hero-buttons-mobile .hero-action-btn.green,
+    .hero-buttons-mobile .hero-action-btn.orange {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        margin: 0 auto !important;
+        padding: 1.8rem 2.2rem !important;
+        font-size: 1.65rem !important;
+        font-weight: 700 !important;
+        white-space: nowrap !important;
+        box-sizing: border-box !important;
+        border-radius: 50px !important;
+        line-height: 1.3 !important;
+        text-align: center !important;
+        width: auto !important;
+        max-width: calc(100vw - 1.5rem) !important;
+    }
+
+    /* Hide desktop hero action buttons on mobile */
+    .hero-action-buttons {
+        display: none !important;
+    }
+
+    .hero-content {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Hide hero text on mobile */
+    .hero-title {
+        display: none;
+    }
+
+    .hero-subtitle {
+        display: none;
+    }
+
+    .electric-badge {
+        display: none;
+    }
+
+    .trust-indicators {
+        display: none;
+    }
+
+    .scroll-indicator {
+        display: none;
+    }
+
+    /* 4 cards in single row */
+    .hero-stats {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.5rem;
+        margin-bottom: 0;
+        transform: scale(0.75);
+        transform-origin: center;
+    }
+
+    /* Smaller stat cards */
+    .stat-card {
+        padding: 0.5rem 0.25rem;
+    }
+
+    .stat-icon {
+        width: 24px;
+        height: 24px;
+        margin-bottom: 0.25rem;
+    }
+
+    .stat-number {
+        font-size: 1rem;
+        margin-bottom: 0;
+    }
+
+    /* Hide stat labels on mobile */
+    .stat-label {
+        display: none;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .hero-btn:not(.hero-buttons-mobile .hero-btn) {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .comparison-cta {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .comparison-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .trust-logos {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .cta-title {
+        font-size: 2rem;
+    }
+
+    .cta-subtitle {
+        font-size: 1.05rem;
+    }
+
+    .cta-buttons-wrapper {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .cta-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .trust-indicators {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .product-card {
+        padding: var(--spacing-lg);
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+}
 
 
         /* Mobile Navigation Styles */
@@ -930,10 +1075,7 @@
             }
 
             .header-right {
-                flex-direction: column;
-                width: 100%;
                 gap: 1rem;
-                align-items: flex-start;
             }
 
             .header-cta {

@@ -1035,6 +1035,67 @@
     }
 }
 
+/* Mobile Landscape - Aggressive scaling with correct priority */
+@media (max-height: 600px) and (orientation: landscape) {
+    .hero-content {
+        transform: scale(0.4) !important;
+    }
+
+    /* PRIORITY 3: Hide stats (already hidden at 900px) */
+    .hero-stats {
+        display: none !important;
+    }
+
+    /* PRIORITY 2: Hide subtitle */
+    .hero-subtitle {
+        display: none !important;
+    }
+
+    .hero-buttons {
+        display: none !important;
+    }
+
+    .trust-indicators {
+        display: none !important;
+    }
+
+    .hero-section {
+        min-height: 70vh;
+        padding: 6rem 0 3rem;
+    }
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+    .hero-content {
+        transform: scale(0.35) !important;
+    }
+
+    /* PRIORITY 1: Hide badge at very small heights */
+    .electric-badge {
+        display: none !important;
+    }
+
+    .hero-section {
+        min-height: 60vh;
+        padding: 5rem 0 2rem;
+    }
+
+    .hero-title {
+        margin-bottom: 1rem;
+    }
+}
+
+@media (max-height: 400px) and (orientation: landscape) {
+    .hero-content {
+        transform: scale(0.3) !important;
+    }
+
+    .hero-section {
+        min-height: 50vh;
+        padding: 4rem 0 2rem;
+    }
+}
+
 
         /* Mobile Navigation Styles */
         @media (max-width: 768px) {

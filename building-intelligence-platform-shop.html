@@ -1260,30 +1260,34 @@
         }
 
         @media (max-width: 480px) {
+            /* Adjust hero section padding to center buttons better */
+            .hero-section {
+                padding: 180px 0 var(--spacing-3xl) !important;
+            }
+
+            /* Center logo and hamburger on mobile */
+            .header-container {
+                justify-content: center;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            /* Hide header CTA buttons on mobile */
             .header-cta {
-                display: none;
-            }
-
-            .logo-image {
-                height: 70px;
-            }
-
-            .main-header.scrolled .logo-image {
-                height: 50px;
-            }
-
-            /* Hide desktop buttons */
-            .hero-cta-buttons {
                 display: none !important;
             }
 
-            /* Show mobile buttons */
+            /* Add mobile CTA buttons to hero section */
             .hero-buttons-mobile {
                 display: flex !important;
                 flex-direction: column;
                 gap: 1rem;
-                width: 100%;
-                align-items: center;
+                margin: 0 !important;
+                padding: 0 !important;
+                order: -1;
+                width: 100% !important;
+                box-sizing: border-box !important;
+                align-items: center !important;
             }
 
             /* ALL buttons uniform styling - width based on content */
@@ -1309,10 +1313,22 @@
                 max-width: calc(100vw - 1.5rem) !important;
             }
 
-            /* Hide original hero content on mobile */
-            .hero-title,
+            .hero-content {
+                display: flex;
+                flex-direction: column;
+            }
+
+            /* Hide hero text on mobile */
+            .hero-title {
+                display: none;
+            }
+
             .hero-subtitle {
-                display: none !important;
+                display: none;
+            }
+
+            .logo-image {
+                height: 70px;
             }
         }
 
@@ -1463,19 +1479,15 @@
                 <!-- Mobile CTA Buttons (visible only on mobile) -->
                 <div class="hero-buttons-mobile">
                     <a href="https://windload-auth.onrender.com" class="hero-btn secondary">
-                        <i class="fas fa-sign-in-alt"></i>
                         <span>Member Login</span>
                     </a>
                     <a href="contact-us-wind-load-calculators-for-components-and-cladding-cc-wind-load-pressures-per-the-asce-7-16-and-asce-7-22-publication-windloads-made-easy.html" class="hero-btn primary electric-pulse">
-                        <i class="fas fa-comments"></i>
                         <span>Let's Connect</span>
                     </a>
                     <a href="wind-load-calculator-shop.html" class="hero-action-btn green electric-pulse">
-                        <i class="fas fa-calculator"></i>
                         <span>Browse Calculators</span>
                     </a>
                     <a href="building-intelligence-platform-shop.html" class="hero-action-btn orange electric-pulse">
-                        <i class="fas fa-brain"></i>
                         <span>Explore Intelligence Platform</span>
                     </a>
                 </div>

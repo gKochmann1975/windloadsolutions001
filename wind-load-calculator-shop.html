@@ -798,21 +798,8 @@
         }
 
         @media (max-width: 480px) {
-            .hero-scale-wrapper {
-                transform: scale(0.45);
-            }
-
-            /* Adjust hero section padding */
-            .hero-section {
-                padding: 180px 0 var(--spacing-3xl) !important;
-            }
-
-            /* Center logo and hamburger on mobile */
             .header-container {
                 padding: 0 1rem;
-                justify-content: center;
-                flex-direction: column;
-                gap: 1rem;
             }
 
             .container {
@@ -823,15 +810,6 @@
                 padding: 0;
             }
 
-            /* Hide hero text on mobile */
-            .hero-section h1 {
-                display: none;
-            }
-
-            .hero-section p {
-                display: none;
-            }
-
             .logo-image {
                 height: 70px;
             }
@@ -839,13 +817,27 @@
             .main-header.scrolled .logo-image {
                 height: 50px;
             }
+        }
+
+        @media (max-width: 480px) {
+            /* Adjust hero section padding to center buttons better */
+            .hero-section {
+                padding: 180px 0 var(--spacing-3xl) !important;
+            }
+
+            /* Center logo and hamburger on mobile */
+            .header-container {
+                justify-content: center;
+                flex-direction: column;
+                gap: 1rem;
+            }
 
             /* Hide header CTA buttons on mobile */
             .header-cta {
                 display: none !important;
             }
 
-            /* Show mobile CTA buttons in hero section */
+            /* Add mobile CTA buttons to hero section */
             .hero-buttons-mobile {
                 display: flex !important;
                 flex-direction: column;
@@ -858,7 +850,7 @@
                 align-items: center !important;
             }
 
-            /* ALL buttons uniform styling - CRITICAL SIZING */
+            /* ALL buttons uniform styling - width based on content */
             .hero-buttons-mobile .hero-btn,
             .hero-buttons-mobile .hero-action-btn,
             .hero-buttons-mobile .hero-btn.primary,
@@ -879,8 +871,19 @@
                 text-align: center !important;
                 width: auto !important;
                 max-width: calc(100vw - 1.5rem) !important;
-                min-width: 0 !important;
-                flex-shrink: 0 !important;
+            }
+
+            /* Hide hero text on mobile */
+            .hero-section h1 {
+                display: none;
+            }
+
+            .hero-section p {
+                display: none;
+            }
+
+            .hero-scale-wrapper {
+                transform: scale(0.45);
             }
         }
 

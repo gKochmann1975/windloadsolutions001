@@ -304,20 +304,31 @@
             gap: 2rem;
         }
 
-        .hero-section h1 {
-            font-size: 3.5rem;
+        .hero-title {
+            font-size: 4rem;
             font-weight: 800;
             margin-bottom: 1.5rem;
-            line-height: 1.2;
+            padding-bottom: 0.5rem;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg,
+                rgba(255, 255, 255, 0.95) 0%,
+                rgba(255, 255, 255, 0.85) 50%,
+                rgba(255, 255, 255, 0.95) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+            filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.8));
         }
 
-        .hero-section p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            opacity: 0.95;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
+        .hero-subtitle {
+            font-size: 1.4rem;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+            font-weight: 500;
+            color: white;
+            text-shadow: 0 3px 20px rgba(0, 0, 0, 0.9);
         }
 
         /* Hide mobile buttons by default (desktop) */
@@ -810,14 +821,6 @@
                 padding: 0; /* Remove padding - hero-buttons-mobile handles its own spacing */
             }
 
-            .hero-title {
-                font-size: 2.4rem;
-            }
-
-            .hero-subtitle {
-                font-size: 1.1rem;
-            }
-
             .logo-image {
                 height: 70px;
             }
@@ -1170,8 +1173,8 @@
                     </a>
                 </div>
 
-                <h1>Professional Wind Load Calculators</h1>
-                <p>ASCE 7-22 compliant calculators for all building components. Choose your category to get started with accurate, code-compliant wind load calculations.</p>
+                <h1 class="hero-title">Professional Wind Load Calculators</h1>
+                <p class="hero-subtitle">ASCE 7-22 compliant calculators for all building components. Choose your category to get started with accurate, code-compliant wind load calculations.</p>
             </div>
         </div>
     </section>

@@ -333,25 +333,34 @@
         /* Hero Section */
         .hero-section {
             position: relative;
-            min-height: 100vh;
+            min-height: 60vh;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            background: linear-gradient(135deg, #0a1128 0%, #181E57 50%, #0a0f1f 100%);
-            padding: 280px 0 4rem;
-            margin-top: 0;
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 50%, #0018ff 100%);
+            padding: 8rem 0 3rem;
         }
 
-        .hero-video {
+        .video-background {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            z-index: 0;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
             object-fit: cover;
-            opacity: 1.0;
-            z-index: 1;
         }
 
         .video-overlay {
@@ -360,31 +369,20 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(0, 24, 255, 0.1) 0%, rgba(24, 30, 87, 0.3) 100%);
-            z-index: 2;
+            background: linear-gradient(135deg,
+                rgba(0, 24, 255, 0.85) 0%,
+                rgba(24, 30, 87, 0.85) 50%,
+                rgba(0, 24, 255, 0.85) 100%
+            );
+            z-index: 1;
         }
 
         .hero-content {
             position: relative;
-            z-index: 10;
+            z-index: 2;
             text-align: center;
             color: white;
-            padding: 0 2rem;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* Dedicated scaling wrapper - all content inside scales proportionally as one unit */
-        .hero-scale-wrapper {
-            display: inline-block;
-            width: 1200px;
-            height: 900px;
-            transform: scale(1);
-            transform-origin: center center;
-            transition: transform 0.3s ease;
-            position: relative;
+            max-width: 900px;
         }
 
         .hero-title {
@@ -1095,176 +1093,6 @@
                 grid-template-columns: 1fr;
             }
         }
-
-        /* Hide mobile buttons by default (desktop) */
-        .hero-buttons-mobile {
-            display: none;
-        }
-
-        /* Mobile button styles */
-        .hero-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 1.2rem 2.5rem;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-btn i {
-            font-size: 1.3rem;
-        }
-
-        .hero-btn.primary {
-            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
-            color: white;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 4px 15px rgba(0, 24, 255, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
-        }
-
-        .hero-btn.secondary {
-            background: transparent;
-            color: white;
-            border: 2px solid rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(10px);
-        }
-
-        .hero-action-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 1.2rem 2.5rem;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            color: white;
-        }
-
-        .hero-action-btn i {
-            font-size: 1.5rem;
-            filter: drop-shadow(0 0 8px currentColor);
-        }
-
-        .hero-action-btn.green {
-            background: linear-gradient(135deg, rgba(0, 255, 136, 0.25) 0%, rgba(16, 185, 129, 0.35) 100%);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 255, 136, 0.3);
-            box-shadow: 0 10px 40px rgba(0, 255, 136, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-        }
-
-        .hero-action-btn.orange {
-            background: linear-gradient(135deg, rgba(255, 136, 0, 0.25) 0%, rgba(245, 158, 11, 0.35) 100%);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 136, 0, 0.3);
-            box-shadow: 0 10px 40px rgba(255, 136, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-        }
-
-        /* RESPONSIVE SCALING STRATEGY */
-        @media (max-width: 1400px) {
-            .hero-scale-wrapper {
-                transform: scale(0.95);
-            }
-        }
-
-        @media (max-width: 1200px) {
-            .hero-scale-wrapper {
-                transform: scale(0.85);
-            }
-        }
-
-        @media (max-width: 1024px) {
-            .hero-scale-wrapper {
-                transform: scale(0.75);
-            }
-        }
-
-        @media (max-width: 900px) {
-            .hero-scale-wrapper {
-                transform: scale(0.65);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero-scale-wrapper {
-                transform: scale(0.6);
-            }
-        }
-
-        @media (max-width: 640px) {
-            .hero-scale-wrapper {
-                transform: scale(0.55);
-            }
-
-            .hero-subtitle {
-                display: none !important;
-            }
-        }
-
-        @media (max-width: 540px) {
-            .hero-scale-wrapper {
-                transform: scale(0.5);
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero-scale-wrapper {
-                transform: scale(0.45);
-            }
-
-            /* Hide desktop hero content and CTAs on mobile */
-            .hero-section h1,
-            .hero-section p,
-            .header-cta {
-                display: none !important;
-            }
-
-            /* Show mobile buttons */
-            .hero-buttons-mobile {
-                display: flex !important;
-                flex-direction: column;
-                gap: 1rem;
-                width: 100%;
-                align-items: center;
-                padding: 2rem 0;
-            }
-
-            /* ALL buttons uniform styling - width based on content */
-            .hero-buttons-mobile .hero-btn,
-            .hero-buttons-mobile .hero-action-btn,
-            .hero-buttons-mobile .hero-btn.primary,
-            .hero-buttons-mobile .hero-btn.secondary,
-            .hero-buttons-mobile .hero-action-btn.green,
-            .hero-buttons-mobile .hero-action-btn.orange {
-                display: inline-flex !important;
-                align-items: center !important;
-                justify-content: center !important;
-                margin: 0 auto !important;
-                padding: 1.8rem 2.2rem !important;
-                font-size: 1.65rem !important;
-                font-weight: 700 !important;
-                white-space: nowrap !important;
-                box-sizing: border-box !important;
-                border-radius: 50px !important;
-                line-height: 1.3 !important;
-                text-align: center !important;
-                width: auto !important;
-                max-width: calc(100vw - 1.5rem) !important;
-            }
-
-            .hero-buttons-mobile .hero-btn i,
-            .hero-buttons-mobile .hero-action-btn i {
-                font-size: 1.8rem !important;
-            }
-        }
     </style>
 </head>
 <body>
@@ -1315,37 +1143,17 @@
 
     <!-- Hero Section -->
     <section class="hero-section">
-        <video class="hero-video" autoplay muted loop playsinline>
-            <source src="../videos/wind-load-shop-hero.webm" type="video/webm">
-            <source src="../videos/wind-load-shop-hero.mp4" type="video/mp4">
-        </video>
+        <div class="video-background">
+            <video class="hero-video" autoplay muted loop playsinline>
+                <source src="../videos/wind-load-shop-hero.webm" type="video/webm">
+                <source src="../videos/wind-load-shop-hero.mp4" type="video/mp4">
+            </video>
+        </div>
         <div class="video-overlay"></div>
 
         <div class="container hero-content">
-            <div class="hero-scale-wrapper">
-                <!-- Mobile Buttons -->
-                <div class="hero-buttons-mobile">
-                    <a href="https://windload-auth.onrender.com" class="hero-btn secondary">
-                        <i class="fas fa-sign-in-alt"></i>
-                        <span>Member Login</span>
-                    </a>
-                    <a href="../contact-us-wind-load-calculators-for-components-and-cladding-cc-wind-load-pressures-per-the-asce-7-16-and-asce-7-22-publication-windloads-made-easy.html" class="hero-btn primary">
-                        <i class="fas fa-comments"></i>
-                        <span>Let's Connect</span>
-                    </a>
-                    <a href="../wind-load-calculator-shop.html" class="hero-action-btn green">
-                        <i class="fas fa-calculator"></i>
-                        <span>Browse Calculators</span>
-                    </a>
-                    <a href="../building-intelligence-platform-shop.html" class="hero-action-btn orange">
-                        <i class="fas fa-brain"></i>
-                        <span>Explore Intelligence Platform</span>
-                    </a>
-                </div>
-
-                <h1 class="hero-title">Windows, Doors & Storm Shutters Wind Load Calculator</h1>
-                <p class="hero-subtitle">ASCE 7-22 & 7-16 Compliant | Professional C&C Calculations | Permit-Ready Reports</p>
-            </div>
+            <h1 class="hero-title">Windows, Doors & Storm Shutters Wind Load Calculator</h1>
+            <p class="hero-subtitle">ASCE 7-22 & 7-16 Compliant | Professional C&C Calculations | Permit-Ready Reports</p>
         </div>
     </section>
 

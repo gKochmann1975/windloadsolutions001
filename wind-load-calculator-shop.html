@@ -239,58 +239,30 @@
 
         /* Hero Section */
         .hero-section {
+            padding: 10rem 0 6rem;
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 50%, #3730a3 100%);
+            color: white;
+            text-align: center;
             position: relative;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             overflow: hidden;
-            background: linear-gradient(135deg, #0a1128 0%, #181E57 50%, #0a0f1f 100%);
-            padding: 280px 0 4rem;
-            margin-top: 0;
         }
 
-        .hero-video {
+        .hero-section::before {
+            content: '';
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 1.0;
-            z-index: 1;
-        }
-
-        .video-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(0, 24, 255, 0.1) 0%, rgba(24, 30, 87, 0.3) 100%);
-            z-index: 2;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(79, 70, 229, 0.3) 0%, transparent 50%);
+            pointer-events: none;
         }
 
         .hero-content {
             position: relative;
-            z-index: 10;
-            text-align: center;
-            color: white;
-            padding: 0 2rem;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .hero-scale-wrapper {
-            display: inline-block;
-            width: 1200px;
-            height: 900px;
-            transform: scale(1);
-            transform-origin: center center;
-            transition: transform 0.3s ease;
-            position: relative;
+            z-index: 1;
         }
 
         .hero-section h1 {
@@ -395,58 +367,6 @@
             transform: translateY(-3px);
             background: linear-gradient(135deg, rgba(255, 136, 0, 0.35) 0%, rgba(245, 158, 11, 0.45) 100%);
             box-shadow: 0 15px 50px rgba(255, 136, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.15);
-        }
-
-        /* Responsive Scaling Strategy */
-        @media (max-width: 1400px) {
-            .hero-scale-wrapper {
-                transform: scale(0.95);
-            }
-        }
-
-        @media (max-width: 1200px) {
-            .hero-scale-wrapper {
-                transform: scale(0.85);
-            }
-        }
-
-        @media (max-width: 1024px) {
-            .hero-scale-wrapper {
-                transform: scale(0.75);
-            }
-        }
-
-        @media (max-width: 900px) {
-            .hero-scale-wrapper {
-                transform: scale(0.65);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero-scale-wrapper {
-                transform: scale(0.6);
-            }
-        }
-
-        @media (max-width: 640px) {
-            .hero-scale-wrapper {
-                transform: scale(0.55);
-            }
-            .hero-section p {
-                display: none !important;
-            }
-        }
-
-        @media (max-width: 540px) {
-            .hero-scale-wrapper {
-                transform: scale(0.5);
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero-scale-wrapper {
-                transform: scale(0.45);
-            }
         }
 
         /* Category Grid */
@@ -941,37 +861,29 @@
 
     <!-- Hero Section -->
     <section class="hero-section">
-        <video class="hero-video" autoplay muted loop playsinline>
-            <source src="videos/wind-load-shop-hero.webm" type="video/webm">
-            <source src="videos/wind-load-shop-hero.mp4" type="video/mp4">
-        </video>
-        <div class="video-overlay"></div>
-
         <div class="container hero-content">
-            <div class="hero-scale-wrapper">
-                <!-- Mobile-only buttons -->
-                <div class="hero-buttons-mobile">
-                    <a href="https://windload-auth.onrender.com" class="hero-btn secondary">
-                        <i class="fas fa-sign-in-alt"></i>
-                        <span>Member Login</span>
-                    </a>
-                    <a href="contact-us-wind-load-calculators-for-components-and-cladding-cc-wind-load-pressures-per-the-asce-7-16-and-asce-7-22-publication-windloads-made-easy.html" class="hero-btn primary electric-pulse">
-                        <i class="fas fa-comments"></i>
-                        <span>Let's Connect</span>
-                    </a>
-                    <a href="wind-load-calculator-shop.html" class="hero-action-btn green electric-pulse">
-                        <i class="fas fa-calculator"></i>
-                        <span>Browse Calculators</span>
-                    </a>
-                    <a href="building-intelligence-platform-shop.html" class="hero-action-btn orange electric-pulse">
-                        <i class="fas fa-brain"></i>
-                        <span>Explore Intelligence Platform</span>
-                    </a>
-                </div>
-
-                <h1>Professional Wind Load Calculators</h1>
-                <p>ASCE 7-22 compliant calculators for all building components. Choose your category to get started with accurate, code-compliant wind load calculations.</p>
+            <!-- Mobile-only buttons -->
+            <div class="hero-buttons-mobile">
+                <a href="https://windload-auth.onrender.com" class="hero-btn secondary">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span>Member Login</span>
+                </a>
+                <a href="contact-us-wind-load-calculators-for-components-and-cladding-cc-wind-load-pressures-per-the-asce-7-16-and-asce-7-22-publication-windloads-made-easy.html" class="hero-btn primary electric-pulse">
+                    <i class="fas fa-comments"></i>
+                    <span>Let's Connect</span>
+                </a>
+                <a href="wind-load-calculator-shop.html" class="hero-action-btn green electric-pulse">
+                    <i class="fas fa-calculator"></i>
+                    <span>Browse Calculators</span>
+                </a>
+                <a href="building-intelligence-platform-shop.html" class="hero-action-btn orange electric-pulse">
+                    <i class="fas fa-brain"></i>
+                    <span>Explore Intelligence Platform</span>
+                </a>
             </div>
+
+            <h1>Professional Wind Load Calculators</h1>
+            <p>ASCE 7-22 compliant calculators for all building components. Choose your category to get started with accurate, code-compliant wind load calculations.</p>
         </div>
     </section>
 
@@ -1265,21 +1177,10 @@
         // Header scroll effect
         window.addEventListener('scroll', function() {
             const header = document.getElementById('main-header');
-            if (window.scrollY > 100) {
+            if (window.scrollY > 50) {
                 header.classList.add('scrolled');
             } else {
                 header.classList.remove('scrolled');
-            }
-        });
-
-        // Video initialization
-        document.addEventListener('DOMContentLoaded', function() {
-            const video = document.querySelector('.hero-video');
-            if (video) {
-                video.muted = true;
-                video.play().catch(function(error) {
-                    console.log('Video autoplay prevented:', error);
-                });
             }
         });
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Windows, Doors & Storm Shutters Wind Load Calculator - ASCE 7-22 & 7-16. Professional C&C wind load calculations for replacement windows, entry doors, and storm shutters. Starting at $335/year.">
+    <meta name="description" content="Windows, Doors & Storm Shutters Wind Load Calculator - ASCE 7-22 & 7-16. Professional C&C wind load calculations for replacement windows, entry doors, and storm shutters. Starting at $28/month (20% OFF - billed annually at $335/year).">
     <meta name="keywords" content="window wind load calculator, door wind pressure calculator, storm shutter wind loads, ASCE 7 components and cladding, C&C calculator, replacement window calculator, design pressure calculator">
     <title>Windows & Doors Wind Load Calculator - ASCE 7-22 & 7-16 | WindLoad Solutions</title>
 
@@ -1203,10 +1203,10 @@
 
                     <div class="pricing-amount">
                         <span class="price-currency">$</span>
-                        <span class="price-value" id="price-individual">335</span>
-                        <span class="price-period" id="period-individual">/year</span>
+                        <span class="price-value" id="price-individual">28</span>
+                        <span class="price-period" id="period-individual">/month</span>
                     </div>
-                    <p class="price-note" id="note-individual"><strong>20% savings</strong> with annual billing</p>
+                    <p class="price-note" id="note-individual"><strong>20% OFF</strong> - Billed annually at $335/year</p>
 
                     <div class="pricing-divider"></div>
 
@@ -1264,10 +1264,10 @@
 
                     <div class="pricing-amount">
                         <span class="price-currency">$</span>
-                        <span class="price-value" id="price-government">251</span>
-                        <span class="price-period" id="period-government">/year</span>
+                        <span class="price-value" id="price-government">21</span>
+                        <span class="price-period" id="period-government">/month</span>
                     </div>
-                    <p class="price-note" id="note-government"><strong>25% discount</strong> with .gov or .edu email</p>
+                    <p class="price-note" id="note-government"><strong>25% OFF</strong> - Billed annually at $251/year</p>
 
                     <div class="pricing-divider"></div>
 
@@ -1314,10 +1314,10 @@
 
                     <div class="pricing-amount">
                         <span class="price-currency">$</span>
-                        <span class="price-value" id="price-professional">995</span>
-                        <span class="price-period" id="period-professional">/year</span>
+                        <span class="price-value" id="price-professional">83</span>
+                        <span class="price-period" id="period-professional">/month</span>
                     </div>
-                    <p class="price-note" id="note-professional"><strong>Costs less than 3 individual licenses</strong></p>
+                    <p class="price-note" id="note-professional"><strong>20% OFF</strong> - Billed annually at $995/year</p>
 
                     <div class="pricing-divider"></div>
 
@@ -1917,37 +1917,81 @@
 
         function updatePricing() {
             // Individual
-            document.getElementById('price-individual').textContent = isAnnual ? '335' : '35';
-            document.getElementById('period-individual').textContent = isAnnual ? '/year' : '/month';
+            document.getElementById('price-individual').textContent = isAnnual ? '28' : '35';
+            document.getElementById('period-individual').textContent = '/month';
             document.getElementById('note-individual').innerHTML = isAnnual
-                ? '<strong>20% savings</strong> with annual billing'
+                ? '<strong>20% OFF</strong> - Billed annually at $335/year'
                 : 'Billed monthly at $35/month';
 
             // Government
-            document.getElementById('price-government').textContent = isAnnual ? '251' : '26';
-            document.getElementById('period-government').textContent = isAnnual ? '/year' : '/month';
+            document.getElementById('price-government').textContent = isAnnual ? '21' : '26';
+            document.getElementById('period-government').textContent = '/month';
             document.getElementById('note-government').innerHTML = isAnnual
-                ? '<strong>25% discount</strong> with .gov or .edu email'
-                : '<strong>25% discount</strong> with .gov or .edu email';
+                ? '<strong>25% OFF</strong> - Billed annually at $251/year'
+                : 'Billed monthly at $26/month';
 
             // Professional
-            document.getElementById('price-professional').textContent = isAnnual ? '995' : '104';
-            document.getElementById('period-professional').textContent = isAnnual ? '/year' : '/month';
+            document.getElementById('price-professional').textContent = isAnnual ? '83' : '104';
+            document.getElementById('period-professional').textContent = '/month';
             document.getElementById('note-professional').innerHTML = isAnnual
-                ? '<strong>Costs less than 3 individual licenses</strong>'
+                ? '<strong>20% OFF</strong> - Billed annually at $995/year'
                 : 'Billed monthly at $104/month';
         }
 
-        // Subscribe Function
-        function subscribe(plan) {
-            // Redirect to Stripe checkout or member portal
-            const checkoutUrls = {
-                individual: 'https://windload-auth.onrender.com',
-                government: 'https://windload-auth.onrender.com',
-                professional: 'https://windload-auth.onrender.com'
+        // Subscribe Function - Guest Checkout (No Login Required)
+        async function subscribe(plan) {
+            // Map plan types to product codes
+            const productCodeMap = {
+                individual: 'cc_walls',    // Windows & Doors Bundle
+                government: 'cc_walls',    // Windows & Doors Bundle (discounted for .gov/.edu)
+                professional: 'professional' // Professional Package
             };
 
-            window.location.href = checkoutUrls[plan];
+            const productCode = productCodeMap[plan];
+            const billingCycle = document.getElementById('billing-toggle').classList.contains('annual') ? 'annual' : 'monthly';
+
+            try {
+                // Show loading state
+                const button = event.target;
+                const originalText = button.textContent;
+                button.textContent = 'Loading...';
+                button.disabled = true;
+
+                // Call backend API to create Stripe checkout session (guest checkout)
+                const response = await fetch('https://windload-api.onrender.com/api/subscriptions/checkout-guest', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        product_code: productCode,
+                        billing_cycle: billingCycle
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.checkout_url) {
+                    // Redirect to Stripe checkout
+                    window.location.href = data.checkout_url;
+                } else if (data.error) {
+                    // Show error
+                    alert('Error: ' + (data.message || data.error));
+                    button.textContent = originalText;
+                    button.disabled = false;
+                } else {
+                    alert('Unexpected error creating checkout session');
+                    button.textContent = originalText;
+                    button.disabled = false;
+                }
+
+            } catch (error) {
+                console.error('Checkout error:', error);
+                alert('Error creating checkout session. Please try again.');
+                const button = event.target;
+                button.textContent = 'Get Started';
+                button.disabled = false;
+            }
         }
 
         // FAQ Toggle

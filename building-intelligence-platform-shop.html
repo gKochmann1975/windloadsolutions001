@@ -1504,11 +1504,11 @@
             <!-- Billing Toggle -->
             <div class="billing-toggle-wrapper" style="text-align: center; margin-bottom: 2rem;">
                 <div class="billing-toggle" style="display: inline-flex;">
-                    <span class="billing-label active" id="monthly-label">Monthly</span>
-                    <button class="toggle-switch" id="billing-toggle" aria-label="Toggle between monthly and annual billing">
+                    <span class="billing-label" id="monthly-label">Monthly</span>
+                    <button class="toggle-switch active" id="billing-toggle" aria-label="Toggle between monthly and annual billing">
                         <span class="toggle-slider"></span>
                     </button>
-                    <span class="billing-label" id="annual-label">Annual</span>
+                    <span class="billing-label active" id="annual-label">Annual</span>
                     <span class="save-badge">Save 15%</span>
                 </div>
             </div>
@@ -1559,7 +1559,7 @@
                         <span class="price-amount" data-monthly="69" data-annual="59">$69</span>
                         <span class="price-period">/month</span>
                     </div>
-                    <div class="annual-note">or $703/year (save 15%)</div>
+                    <div class="annual-note">Billed annually at $708/year</div>
                     <div class="card-features">
                         <p class="usage-limit">Unlimited lookups (no hourly or daily limits)</p>
                         <ul class="feature-list">
@@ -1595,7 +1595,7 @@
                         <span class="price-amount" data-monthly="179" data-annual="152">$179</span>
                         <span class="price-period">/month</span>
                     </div>
-                    <div class="annual-note">or $1,825/year (save 15%)</div>
+                    <div class="annual-note">Billed annually at $1,824/year</div>
                     <div class="card-features">
                         <p class="usage-limit">Everything unlimited - no restrictions</p>
                         <ul class="feature-list">
@@ -1625,7 +1625,7 @@
                         <p class="card-subtitle">For large firms and organizations</p>
                     </div>
                     <div class="card-price">
-                        <span class="price-amount">$599+</span>
+                        <span class="price-amount">$599</span>
                         <span class="price-period">/month</span>
                     </div>
                     <div class="card-features">
@@ -2081,11 +2081,12 @@
         document.addEventListener('DOMContentLoaded', function() {
             initializeBillingToggle();
             initializeStripeCheckout();
+            updatePrices(); // Initialize with annual pricing
         });
         // ============================================
         // BILLING TOGGLE (Monthly/Annual)
         // ============================================
-        let isAnnualBilling = false;
+        let isAnnualBilling = true;
         function initializeBillingToggle() {
             const toggleButton = document.getElementById('billing-toggle');
             const monthlyLabel = document.getElementById('monthly-label');

@@ -1252,7 +1252,7 @@
                         </ul>
                     </div>
 
-                    <button class="pricing-cta primary" onclick="subscribe('individual')">Get Started</button>
+                    <button class="pricing-cta primary" data-product-code="cc_walls" data-billing-cycle="annual">Get Started</button>
                 </div>
 
                 <!-- Government & Institutional Plan -->
@@ -1301,7 +1301,7 @@
                         </ul>
                     </div>
 
-                    <button class="pricing-cta primary" onclick="subscribe('government')">Get Started</button>
+                    <button class="pricing-cta primary" data-product-code="cc_walls" data-billing-cycle="annual">Get Started</button>
                     <p class="pricing-note">Requires .gov or .edu email verification</p>
                 </div>
 
@@ -1363,7 +1363,7 @@
                         </ul>
                     </div>
 
-                    <button class="pricing-cta primary" onclick="subscribe('professional')">Get Started</button>
+                    <button class="pricing-cta primary" data-product-code="professional" data-billing-cycle="annual">Get Started</button>
                 </div>
 
                 <!-- Enterprise Plan -->
@@ -1913,6 +1913,12 @@
             }
 
             updatePricing();
+
+            // Update billing cycle on all checkout buttons
+            const billingCycle = isAnnual ? 'annual' : 'monthly';
+            document.querySelectorAll('[data-product-code]').forEach(button => {
+                button.setAttribute('data-billing-cycle', billingCycle);
+            });
         }
 
         function updatePricing() {
@@ -1938,62 +1944,6 @@
                 : 'Billed monthly at $104/month';
         }
 
-        // Subscribe Function - Guest Checkout (No Login Required)
-        async function subscribe(plan) {
-            // Map plan types to product codes
-            const productCodeMap = {
-                individual: 'cc_walls',    // Windows & Doors Bundle
-                government: 'cc_walls',    // Windows & Doors Bundle (discounted for .gov/.edu)
-                professional: 'professional' // Professional Package
-            };
-
-            const productCode = productCodeMap[plan];
-            const billingCycle = document.getElementById('billing-toggle').classList.contains('annual') ? 'annual' : 'monthly';
-
-            try {
-                // Show loading state
-                const button = event.target;
-                const originalText = button.textContent;
-                button.textContent = 'Loading...';
-                button.disabled = true;
-
-                // Call backend API to create Stripe checkout session (guest checkout)
-                const response = await fetch('https://windload-api.onrender.com/api/subscriptions/checkout-guest', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        product_code: productCode,
-                        billing_cycle: billingCycle
-                    })
-                });
-
-                const data = await response.json();
-
-                if (data.checkout_url) {
-                    // Redirect to Stripe checkout
-                    window.location.href = data.checkout_url;
-                } else if (data.error) {
-                    // Show error
-                    alert('Error: ' + (data.message || data.error));
-                    button.textContent = originalText;
-                    button.disabled = false;
-                } else {
-                    alert('Unexpected error creating checkout session');
-                    button.textContent = originalText;
-                    button.disabled = false;
-                }
-
-            } catch (error) {
-                console.error('Checkout error:', error);
-                alert('Error creating checkout session. Please try again.');
-                const button = event.target;
-                button.textContent = 'Get Started';
-                button.disabled = false;
-            }
-        }
-
         // FAQ Toggle
         function toggleFAQ(element) {
             const faqItem = element.parentElement;
@@ -2017,6 +1967,9 @@
             updatePricing();
         });
     </script>
+
+    <!-- Stripe Checkout Integration -->
+    <script src="../js/stripe-checkout.js"></script>
 
 </body>
 </html>

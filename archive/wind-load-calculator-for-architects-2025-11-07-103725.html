@@ -1,0 +1,2253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wind Load Calculator</title>
+    <meta name="description" content="Wind Load Calculator transforms architectural design with ASCE 7 compliance tools, streamlining wind pressure calculations for building safety.">
+    <meta name="keywords" content="wind load calculator, ASCE 7 design pressure calculator, windload calculator, wind load calculator excel, wind load calculation spreadsheet, wind load analysis, windloads, free online wind load calculator, wind load pressures calculator, wind speed to pressures calculator, wind pressure formula, wind speed to wind pressure">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Wind Load Calculator for Architects - Professional ASCE 7 Solutions">
+    <meta property="og:description" content="Wind Load Calculator transforms architectural design with ASCE 7 compliance tools, streamlining wind pressure calculations for building safety.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://windload.solutions/wind-load-calculator-for-architects.html">
+    
+    <!-- Schema Markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "AboutPage",
+        "name": "Wind Load Calculator for Architects - WindLoad Solutions",
+        "description": "Professional wind load calculator solutions for architects with ASCE 7 compliance and building design integration",
+        "url": "https://windload.solutions/wind-load-calculator-for-architects.html",
+        "mainEntity": {
+            "@type": "Organization",
+            "name": "WindLoad Solutions",
+            "url": "https://windload.solutions"
+        }
+    }
+    </script>
+    
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        .main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: transparent;
+            padding: 2rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .main-header.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1rem 0;
+            box-shadow: 0 1px 20px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+        }
+
+        .logo {
+            z-index: 1001;
+        }
+
+        .logo-image {
+            height: 100px;
+            width: auto;
+            filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
+            transition: all 0.3s ease;
+        }
+
+        .main-header.scrolled .logo-image {
+            height: 70px;
+            filter: none;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            z-index: 1001;
+        }
+
+        .header-cta {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            white-space: nowrap;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-cta:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.6);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .header-cta.primary {
+            background: rgba(0, 24, 255, 0.9);
+            border-color: rgba(0, 24, 255, 0.3);
+        }
+
+        .header-cta.primary:hover {
+            background: rgba(0, 24, 255, 1);
+            border-color: rgba(0, 24, 255, 0.8);
+        }
+
+        .main-header.scrolled .header-cta {
+            color: #0018ff;
+            background: rgba(0, 24, 255, 0.1);
+            border-color: rgba(0, 24, 255, 0.3);
+        }
+
+        .main-header.scrolled .header-cta.primary {
+            color: white;
+            background: #0018ff;
+            border-color: #0018ff;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 28px;
+            height: 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 1002;
+        }
+
+
+        .hamburger span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background: white;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .main-header.scrolled .hamburger span {
+            background: #1f2937;
+            box-shadow: none;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(8px, -8px);
+        }
+
+        /* Navigation Menu */
+        .nav-links {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100vh;
+            width: 400px;
+            max-width: 85vw;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            box-shadow: -10px 0 50px rgba(0,0,0,0.2);
+            padding: 4rem 2rem 2rem 2rem;
+            flex-direction: column;
+            gap: 1.5rem;
+            z-index: 9999;
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .nav-links.active {
+            display: flex;
+            transform: translateX(0);
+        }
+
+        /* Keep hamburger visible and nav-links as side menu only */
+        @media (min-width: 1024px) {
+            /* Keep nav-links as hamburger menu only - never show horizontally */
+            .main-header.scrolled .nav-links:not(.active) {
+                /* Stays as side menu even on desktop */
+                display: none !important;
+            }
+
+            /* Keep hamburger visible on desktop when scrolled */
+            .main-header.scrolled .hamburger {
+                display: flex;
+            }
+
+            .main-header.scrolled .header-right {
+                gap: 2rem;
+                align-items: center;
+            }
+        }
+
+        /* Simplified Desktop Nav (Shows when scrolled) */
+        .nav-desktop-scrolled {
+            display: none;
+        }
+
+        @media (min-width: 1024px) {
+            .main-header.scrolled .nav-desktop-scrolled {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 2rem;
+                overflow: visible;
+            }
+
+            .nav-desktop-scrolled a {
+                text-decoration: none;
+                font-size: 0.95rem;
+                padding: 0.5rem 1rem;
+                border-radius: 8px;
+                color: #374151;
+                font-weight: 600;
+                transition: all 0.2s ease;
+            }
+
+            .nav-desktop-scrolled a:hover {
+                background: rgba(0, 24, 255, 0.1);
+                color: #0018ff;
+            }
+
+            /* Simplified desktop nav dropdown styles */
+            .nav-desktop-scrolled .nav-dropdown {
+                position: relative;
+                z-index: 1001;
+            }
+
+            .nav-desktop-scrolled .nav-dropdown-toggle {
+                display: flex;
+                align-items: center;
+                font-size: 0.95rem;
+                padding: 0.5rem 1rem;
+                border-radius: 8px;
+                color: #374151;
+                font-weight: 600;
+                transition: all 0.2s ease;
+                cursor: pointer;
+            }
+
+            .nav-desktop-scrolled .dropdown-arrow {
+                font-size: 0.7rem;
+                margin-left: 0.3rem;
+            }
+
+            .nav-desktop-scrolled .nav-dropdown-menu {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background: white;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+                border-radius: 8px;
+                padding: 0.5rem 0;
+                min-width: 250px;
+                margin-top: 0.25rem;
+                z-index: 1002;
+                flex-direction: column;
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+                transform: translateY(-10px);
+                transition: all 0.2s ease;
+                display: flex !important;
+                padding-left: 0;
+            }
+
+            .nav-desktop-scrolled .nav-dropdown:hover .nav-dropdown-menu {
+                opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
+                transform: translateY(0);
+            }
+
+            .nav-desktop-scrolled .nav-dropdown-toggle:hover,
+            .nav-desktop-scrolled .nav-dropdown:hover .nav-dropdown-toggle {
+                background: rgba(0, 24, 255, 0.1);
+                color: #0018ff;
+            }
+
+            .nav-desktop-scrolled .nav-dropdown-menu a {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+                border-radius: 0;
+            }
+
+            .nav-desktop-scrolled .nav-dropdown-menu a:hover {
+                background: rgba(0, 24, 255, 0.1);
+            }
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #1f2937;
+            font-weight: 600;
+            font-size: 1.2rem;
+            padding: 1.2rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(45deg, #0018ff, #181E57);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #0018ff;
+            padding-left: 1rem;
+        }
+
+        .nav-links a:hover::before,
+        .nav-links a.active::before {
+            width: 50px;
+        }
+
+        .nav-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: none;
+            border: none;
+            font-size: 2.5rem;
+            color: #64748b;
+            cursor: pointer;
+            font-weight: 300;
+        }
+
+
+        .nav-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
+            z-index: 9998;
+        }
+
+        .nav-overlay.active {
+            display: block;
+        }
+
+        /* Navigation Dropdown Styles */
+        .nav-dropdown {
+            position: relative;
+        }
+
+        .nav-dropdown-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            text-decoration: none;
+            color: #1f2937;
+            font-weight: 600;
+            font-size: 1.2rem;
+            padding: 1.2rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .dropdown-arrow {
+            margin-left: 0.5rem;
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-dropdown.active .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .nav-dropdown-menu {
+            display: none;
+            flex-direction: column;
+            padding-left: 1.5rem;
+            margin-top: 0.5rem;
+            gap: 0.5rem;
+            background: rgba(248, 250, 252, 0.95);
+            border-radius: 8px;
+            padding: 0.5rem 1.5rem;
+        }
+
+        .nav-dropdown.active .nav-dropdown-menu {
+            display: flex;
+        }
+
+
+        .nav-dropdown-menu a {
+            font-size: 1.05rem;
+            font-weight: 500;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .nav-dropdown-menu a:last-child {
+            border-bottom: none;
+        }
+
+        /* Hover effects for hamburger menu */
+        .nav-dropdown-toggle:hover {
+            background: rgba(0, 24, 255, 0.05);
+            color: #0018ff;
+            padding-left: 1rem;
+            border-radius: 8px;
+        }
+
+        .nav-dropdown-menu a:hover {
+            background: rgba(0, 24, 255, 0.08);
+            color: #0018ff;
+            padding-left: 1rem;
+            border-radius: 6px;
+        }
+
+        /* Desktop dropdown styles */
+        @media (min-width: 1024px) {
+            /* CRITICAL: Prevent clipping of dropdowns */
+            .main-header.scrolled,
+            .main-header.scrolled .header-container,
+            .main-header.scrolled .header-right {
+                overflow: visible !important;
+            }
+            
+            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown-toggle {
+                display: flex;
+                align-items: center;
+                font-size: 0.95rem;
+                padding: 0.5rem 1rem;
+                border-bottom: none;
+                border-radius: 8px;
+                color: #374151;
+                transition: all 0.2s ease;
+                cursor: pointer;
+            }
+
+            .main-header.scrolled .nav-desktop-scrolled .dropdown-arrow {
+                font-size: 0.7rem;
+                margin-left: 0.3rem;
+            }
+
+            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown {
+                position: relative;
+                z-index: 1001;
+            }
+
+            /* Dropdown menu - always in DOM but invisible */
+            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown-menu {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background: white;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+                border-radius: 8px;
+                padding: 0.5rem 0;
+                min-width: 250px;
+                margin-top: 0.25rem;
+                z-index: 1002;
+                flex-direction: column;
+                
+                /* Hidden by default */
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+                transform: translateY(-10px);
+                transition: all 0.2s ease;
+                
+                /* Force display flex always - CRITICAL */
+                display: flex !important;
+                
+                /* Remove any padding/border from parent that might clip */
+                padding-left: 0;
+            }
+
+            /* Show dropdown on hover */
+            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown:hover .nav-dropdown-menu {
+                opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
+                transform: translateY(0);
+            }
+
+            /* Highlight toggle on hover */
+            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown-toggle:hover,
+            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown:hover .nav-dropdown-toggle {
+                background: rgba(0, 24, 255, 0.1);
+                color: #0018ff;
+            }
+
+            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown-menu a {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+                border-bottom: none;
+                border-radius: 0;
+            }
+
+            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown-menu a:hover {
+                background: rgba(0, 24, 255, 0.1);
+                padding-left: 1.5rem;
+            }
+        }
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 50%, #0018ff 100%);
+        }
+
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                135deg, 
+                rgba(0, 24, 255, 0.5) 0%, 
+                rgba(24, 30, 87, 0.4) 30%,
+                rgba(0, 0, 0, 0.3) 60%,
+                rgba(0, 24, 255, 0.45) 100%
+            );
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            color: white;
+            max-width: 900px;
+            padding: 0 2rem;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.95) 0%, 
+                rgba(255, 255, 255, 0.85) 50%, 
+                rgba(255, 255, 255, 0.95) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+            filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.8));
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+            font-weight: 500;
+            color: white;
+            text-shadow: 0 3px 20px rgba(0, 0, 0, 0.9);
+        }
+
+        .hero-cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-button {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-button.primary {
+            background: rgba(255, 255, 255, 0.95);
+            color: #0018ff;
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .hero-button.primary:hover {
+            background: #ffffff;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        .hero-button.secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .hero-button.secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.7);
+            transform: translateY(-3px);
+        }
+
+        /* Professional Stats Section */
+        .stats-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 25%, #e2e8f0 50%, #ffffff 75%, #f8fafc 100%);
+            background-size: 400% 400%;
+            animation: gradient-shift 15s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 25% 25%, rgba(0, 24, 255, 0.05) 0%, transparent 50%), 
+                        radial-gradient(circle at 75% 75%, rgba(24, 30, 87, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2.5rem;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 70%, #0018ff 100%);
+            border-radius: 30px;
+            padding: 3.5rem 1.8rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 
+                0 25px 60px rgba(0, 24, 255, 0.4),
+                0 15px 35px rgba(0, 24, 255, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0.6) 100%);
+            background-size: 200% 100%;
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        .stat-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.8s ease;
+        }
+
+        .stat-card:hover::after {
+            left: 100%;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-20px) scale(1.05);
+            box-shadow: 
+                0 40px 100px rgba(0, 24, 255, 0.5),
+                0 25px 60px rgba(0, 24, 255, 0.4),
+                0 0 50px rgba(255, 255, 255, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .stat-number {
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: #ffffff;
+            display: block;
+            margin-bottom: 1.2rem;
+            line-height: 0.9;
+            position: relative;
+            z-index: 10;
+            text-shadow: 
+                0 0 20px rgba(255, 255, 255, 0.8),
+                0 0 40px rgba(255, 255, 255, 0.6),
+                0 0 60px rgba(255, 255, 255, 0.4),
+                0 4px 15px rgba(0, 0, 0, 0.3);
+            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.5));
+            animation: glow-pulse 4s ease-in-out infinite;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 600;
+            line-height: 1.4;
+            position: relative;
+            z-index: 10;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            50% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% { 
+                text-shadow: 
+                    0 0 20px rgba(255, 255, 255, 0.8),
+                    0 0 40px rgba(255, 255, 255, 0.6),
+                    0 0 60px rgba(255, 255, 255, 0.4),
+                    0 4px 15px rgba(0, 0, 0, 0.3);
+                filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.5));
+            }
+            50% { 
+                text-shadow: 
+                    0 0 30px rgba(255, 255, 255, 1),
+                    0 0 60px rgba(255, 255, 255, 0.8),
+                    0 0 90px rgba(255, 255, 255, 0.6),
+                    0 4px 15px rgba(0, 0, 0, 0.3);
+                filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.8));
+            }
+        }
+
+        /* Architect Features Section */
+        .architect-features-section {
+            padding: 6rem 0;
+            background: #ffffff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .architect-features-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.05) 0%, transparent 50%), 
+                        radial-gradient(circle at 80% 80%, rgba(34, 197, 94, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .section-header h2 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: #181E57;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .section-description {
+            font-size: 1.3rem;
+            color: #64748b;
+            line-height: 1.7;
+        }
+
+        .architect-features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 4rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .architect-feature-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 25px;
+            padding: 3rem 2.5rem;
+            border: 3px solid rgba(0, 24, 255, 0.15);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            box-shadow: 
+                0 25px 60px rgba(0, 24, 255, 0.12),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .architect-feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(135deg, #0018ff 0%, #FF6B35 50%, #181E57 100%);
+        }
+
+        .architect-feature-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 
+                0 40px 100px rgba(0, 24, 255, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 1);
+            border-color: rgba(0, 24, 255, 0.3);
+        }
+
+        .architect-feature-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            color: white;
+            box-shadow: 
+                0 15px 35px rgba(0, 24, 255, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .architect-feature-icon svg {
+            width: 50px;
+            height: 50px;
+            stroke-width: 2px;
+        }
+
+        .architect-feature-icon::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: transform 0.6s ease;
+        }
+
+        .architect-feature-card:hover .architect-feature-icon::before {
+            transform: rotate(45deg) translate(50%, 50%);
+        }
+
+        .architect-feature-card h3 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #181E57;
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+        }
+
+        .architect-feature-card p {
+            color: #64748b;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            flex-grow: 1;
+        }
+
+        .architect-features {
+            margin-bottom: 2rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            color: #374151;
+            font-weight: 500;
+        }
+
+        .feature-icon {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 900;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        .architect-button {
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            color: white;
+            border: none;
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            text-align: center;
+            margin-top: auto;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 10px 25px rgba(0, 24, 255, 0.3);
+        }
+
+        .architect-button:hover {
+            background: linear-gradient(135deg, #181E57 0%, #0018ff 100%);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 20px 45px rgba(0, 24, 255, 0.4);
+        }
+
+        .keyword-emphasis {
+            color: #0018ff;
+            font-weight: 600;
+        }
+
+        /* Enhanced Content Section */
+        .content-section {
+            padding: 8rem 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 25%, #e2e8f0 50%, #ffffff 75%, #f8fafc 100%);
+            background-size: 400% 400%;
+            animation: gradient-shift 20s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 15% 25%, rgba(0, 24, 255, 0.03) 0%, transparent 50%), 
+                        radial-gradient(circle at 85% 75%, rgba(24, 30, 87, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+        }
+
+        .main-content-header {
+            text-align: center;
+            margin-bottom: 6rem;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .main-content-header h2 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 50%, #0018ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+            line-height: 1.2;
+            text-shadow: 0 4px 20px rgba(0, 24, 255, 0.1);
+        }
+
+        .main-content-header .intro-text {
+            font-size: 1.4rem;
+            color: #64748b;
+            line-height: 1.7;
+            font-weight: 500;
+            margin-bottom: 3rem;
+        }
+
+        .content-grid {
+            display: grid;
+            gap: 4rem;
+            margin-bottom: 6rem;
+        }
+
+        .content-block {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 30px;
+            padding: 4rem 3rem;
+            box-shadow: 
+                0 30px 80px rgba(0, 24, 255, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
+            border: 2px solid rgba(0, 24, 255, 0.08);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-block::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 50%, #0018ff 100%);
+        }
+
+        .content-block:hover {
+            transform: translateY(-12px);
+            box-shadow: 
+                0 50px 120px rgba(0, 24, 255, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 1);
+            border-color: rgba(0, 24, 255, 0.2);
+        }
+
+        .content-block h3 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #181E57;
+            margin-bottom: 2rem;
+            line-height: 1.3;
+            position: relative;
+        }
+
+        .content-block h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            border-radius: 2px;
+        }
+
+        .content-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #4b5563;
+            margin-bottom: 1.5rem;
+        }
+
+        .content-text:last-child {
+            margin-bottom: 0;
+        }
+
+        .content-text strong {
+            color: #181E57;
+            font-weight: 700;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(0, 24, 255, 0.05) 0%, rgba(24, 30, 87, 0.03) 100%);
+            border-left: 6px solid #0018ff;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .highlight-box::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: 25px;
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            border-radius: 50%;
+            box-shadow: 0 8px 25px rgba(0, 24, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .highlight-box::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 30px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .highlight-icon {
+            position: absolute;
+            top: -5px;
+            left: 35px;
+            color: #0018ff;
+            z-index: 3;
+            animation: architect-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes architect-pulse {
+            0%, 100% { 
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+            50% { 
+                transform: scale(1.1) rotate(5deg);
+                opacity: 0.8;
+            }
+        }
+
+        /* Enhanced CTA Section */
+        .cta-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 10;
+        }
+
+        .cta-content h2 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            background: linear-gradient(135deg, #ffffff 0%, #fbbf24 50%, #ffffff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cta-content p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 3rem;
+            line-height: 1.6;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            background: rgba(255, 255, 255, 0.95);
+            color: #0018ff;
+            border: none;
+            padding: 1.5rem 3rem;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 15px 35px rgba(255, 255, 255, 0.2);
+        }
+
+        .cta-button:hover {
+            background: #ffffff;
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 25px 50px rgba(255, 255, 255, 0.3);
+        }
+
+        .cta-button.secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .cta-button.secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Footer */
+        .main-footer {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d3748 50%, #1a1a1a 100%);
+            color: white;
+            padding: 5rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h4 {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .footer-section p {
+            line-height: 1.8;
+            color: #cbd5e0;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        .footer-section a {
+            display: block;
+            color: #e2e8f0;
+            text-decoration: none;
+            margin-bottom: 1rem;
+            padding: 0.5rem 0;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .footer-section a:hover {
+            color: #0018ff;
+            padding-left: 1rem;
+        }
+
+        .footer-section a.active {
+            color: #0018ff;
+            font-weight: 700;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            color: #a0aec0;
+            font-size: 0.95rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .architect-features-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+
+            .header-container {
+                padding: 0 2rem;
+            }
+
+            .header-right {
+                gap: 1rem;
+            }
+
+            .header-cta {
+                padding: 0.7rem 1.4rem;
+                font-size: 0.9rem;
+            }
+
+            .logo-image {
+                height: 80px;
+            }
+
+            .main-header.scrolled .logo-image {
+                height: 60px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-button {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .section-header h2 {
+                font-size: 2.5rem;
+            }
+
+            .architect-feature-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .stat-number {
+                font-size: 2.8rem;
+            }
+
+            .cta-content h2 {
+                font-size: 2.5rem;
+            }
+
+            .hero-cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hero-button {
+                width: 100%;
+                max-width: 280px;
+            }
+
+            .main-content-header h2 {
+                font-size: 2.5rem;
+            }
+
+            .main-content-header .intro-text {
+                font-size: 1.2rem;
+            }
+
+            .content-block {
+                padding: 2.5rem 2rem;
+            }
+
+            .content-block h3 {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Hide mobile buttons by default (desktop) */
+        .hero-buttons-mobile {
+            display: none;
+        }
+
+        /* Mobile button styles */
+        .hero-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-btn i {
+            font-size: 1.3rem;
+        }
+
+        .hero-btn.primary {
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 24, 255, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        .hero-btn.secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            color: white;
+        }
+
+        .hero-action-btn i {
+            font-size: 1.5rem;
+            filter: drop-shadow(0 0 8px currentColor);
+        }
+
+        .hero-action-btn.green {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.25) 0%, rgba(16, 185, 129, 0.35) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            box-shadow: 0 10px 40px rgba(0, 255, 136, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .hero-action-btn.orange {
+            background: linear-gradient(135deg, rgba(255, 136, 0, 0.25) 0%, rgba(245, 158, 11, 0.35) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 136, 0, 0.3);
+            box-shadow: 0 10px 40px rgba(255, 136, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .architect-features-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            /* Hide desktop hero content and CTAs on mobile */
+            .hero-section h1,
+            .hero-section p,
+            .hero-cta-buttons,
+            .header-cta {
+                display: none !important;
+            }
+
+            /* Show mobile buttons */
+            .hero-buttons-mobile {
+                display: flex !important;
+                flex-direction: column;
+                gap: 1rem;
+                width: 100%;
+                align-items: center;
+                padding: 2rem 0;
+            }
+
+            /* ALL buttons uniform styling - width based on content */
+            .hero-buttons-mobile .hero-btn,
+            .hero-buttons-mobile .hero-action-btn,
+            .hero-buttons-mobile .hero-btn.primary,
+            .hero-buttons-mobile .hero-btn.secondary,
+            .hero-buttons-mobile .hero-action-btn.green,
+            .hero-buttons-mobile .hero-action-btn.orange {
+                display: inline-flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                margin: 0 auto !important;
+                padding: 1.8rem 2.2rem !important;
+                font-size: 1.65rem !important;
+                font-weight: 700 !important;
+                white-space: nowrap !important;
+                box-sizing: border-box !important;
+                border-radius: 50px !important;
+                line-height: 1.3 !important;
+                text-align: center !important;
+                width: auto !important;
+                max-width: calc(100vw - 1.5rem) !important;
+            }
+
+            .hero-buttons-mobile .hero-btn i,
+            .hero-buttons-mobile .hero-action-btn i {
+                font-size: 1.8rem !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header" id="main-header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img src="images/windload-solutions-logo.png" alt="WindLoad Solutions Logo" class="logo-image">
+            </a>
+            
+            <!-- Full Hamburger Menu (Always available via hamburger button) -->
+            <nav class="nav-links" id="nav-menu">
+                <button class="nav-close" onclick="toggleNav()">&times;</button>
+                <a href="free-online-wind-load-calculators-demos-free-excel-wind-load-calculator.html">Free Calculator</a>
+                <a href="building-intelligence-platform.html">Building Intelligence Platform</a>
+                <a href="wind-load-calculator-comparison.html">Wind Load Calculator Comparison</a>
+                
+                <!-- About Dropdown -->
+                <div class="nav-dropdown">
+                    <span class="nav-dropdown-toggle">About <span class="dropdown-arrow">▼</span></span>
+                    <div class="nav-dropdown-menu">
+                        <a href="building-intelligence-platform-landing.html">Building Intelligence Platform</a>
+                        <a href="wind-load-calculator-landing.html">Wind Load Calculators</a>
+                    </div>
+                </div>
+                
+                <!-- Shop Dropdown -->
+                <div class="nav-dropdown">
+                    <span class="nav-dropdown-toggle">Shop <span class="dropdown-arrow">▼</span></span>
+                    <div class="nav-dropdown-menu">
+                        <a href="building-intelligence-platform-shop.html">Building Intelligence Platform</a>
+                        <a href="wind-load-calculator-shop.html">Wind Load Calculators</a>
+                    </div>
+                </div>
+                
+                <a href="services-asce7-wind-load-pressures.html">Services</a>
+                
+                <!-- Professionals Dropdown -->
+                <div class="nav-dropdown">
+                    <span class="nav-dropdown-toggle">Professionals <span class="dropdown-arrow">▼</span></span>
+                    <div class="nav-dropdown-menu">
+                        <a href="wind-load-calculator-for-engineers.html">Engineers</a>
+                        <a href="wind-load-calculator-for-architects.html">Architects</a>
+                        <a href="wind-loads-for-consultants.html">Consultants</a>
+                        <a href="contractors-wind-load-calculator.html">Contractors</a>
+                    </div>
+                </div>
+                
+                <a href="why-choose-windload-solutions.html">Why Us</a>
+                <a href="faqfor-wind-load-calculator-software-for-wind-load-pressures-per-asce-7.html">FAQ</a>
+                <a href="contact-us-wind-load-calculators-for-components-and-cladding-cc-wind-load-pressures-per-the-asce-7-16-and-asce-7-22-publication-windloads-made-easy.html">Contact Us</a>
+            </nav>
+            
+            <!-- Simplified Desktop Nav (Shows when scrolled on desktop) -->
+            <nav class="nav-desktop-scrolled">
+                <a href="free-online-wind-load-calculators-demos-free-excel-wind-load-calculator.html">Free Calculator</a>
+                <a href="building-intelligence-platform.html">B.I.P.</a>
+                
+                <!-- Shop Dropdown (Simplified - only 2 items) -->
+                <div class="nav-dropdown">
+                    <span class="nav-dropdown-toggle">Shop <span class="dropdown-arrow">▼</span></span>
+                    <div class="nav-dropdown-menu">
+                        <a href="building-intelligence-platform-shop.html">Building Intelligence Platform</a>
+                        <a href="wind-load-calculator-shop.html">Wind Load Calculators</a>
+                    </div>
+                </div>
+                
+                <a href="services-asce7-wind-load-pressures.html">Services</a>
+                <a href="why-choose-windload-solutions.html">Why Us</a>
+            </nav>
+            
+            <!-- Header Right Side -->
+            <div class="header-right">
+                <a href="contact-us-wind-load-calculators-for-components-and-cladding-cc-wind-load-pressures-per-the-asce-7-16-and-asce-7-22-publication-windloads-made-easy.html" class="header-cta primary">Let's Connect</a>
+                <a href="http://127.0.0.1:8051" class="header-cta">Member Login</a>
+                <button class="hamburger" id="hamburger" onclick="toggleNav()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu Overlay -->
+        <div class="nav-overlay" id="nav-overlay" onclick="toggleNav()"></div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <!-- Video Background -->
+            <div class="video-background">
+                <video class="hero-video" autoplay muted loop playsinline>
+                    <source src="videos/windload-architects.webm" type="video/webm">
+                    <source src="videos/windload-architects.mp4" type="video/mp4">
+                </video>
+            </div>
+            
+            <!-- Video Overlay -->
+            <div class="video-overlay"></div>
+            
+            <!-- Hero Content -->
+            <div class="container">
+                <div class="hero-content">
+                    <!-- Mobile-only buttons -->
+                    <div class="hero-buttons-mobile">
+                        <a href="https://windload-auth.onrender.com" class="hero-btn secondary">
+                            <i class="fas fa-sign-in-alt"></i>
+                            <span>Member Login</span>
+                        </a>
+                        <a href="contact-us-wind-load-calculators-for-components-and-cladding-cc-wind-load-pressures-per-the-asce-7-16-and-asce-7-22-publication-windloads-made-easy.html" class="hero-btn primary electric-pulse">
+                            <i class="fas fa-comments"></i>
+                            <span>Let's Connect</span>
+                        </a>
+                        <a href="wind-load-calculator-shop.html" class="hero-action-btn green electric-pulse">
+                            <i class="fas fa-calculator"></i>
+                            <span>Browse Calculators</span>
+                        </a>
+                        <a href="building-intelligence-platform-shop.html" class="hero-action-btn orange electric-pulse">
+                            <i class="fas fa-brain"></i>
+                            <span>Explore Intelligence Platform</span>
+                        </a>
+                    </div>
+
+                    <h1 class="hero-title">Wind Load Calculator for Architects</h1>
+                    <p class="hero-subtitle">Moreover, architects face increasing pressure to deliver structurally sound buildings while meeting tight deadlines. Furthermore, traditional <span class="keyword-emphasis">wind load calculation</span> methods consume valuable time that could focus on creative design elements. Additionally, manual calculations often introduce errors that compromise both safety and project timelines systematically.</p>
+                    <div class="hero-cta-buttons">
+                        <a href="#architect-features" class="hero-button primary">Discover Wind Load Calculator Benefits</a>
+                        <a href="free-online-wind-load-calculators-demos-free-excel-wind-load-calculator.html" class="hero-button secondary">Try Free Calculator</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Professional Statistics Section -->
+        <section class="stats-section">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">85%</div>
+                        <div class="stat-label">Time Reduction for Architects</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">99.9%</div>
+                        <div class="stat-label">Wind Load Calculator Accuracy</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">2,500+</div>
+                        <div class="stat-label">Architectural Projects Completed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">States with ASCE 7 Support</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Architect Features Section -->
+        <section id="architect-features" class="architect-features-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Professional Wind Load Calculator Solutions Transform Architectural Practice</h2>
+                    <p class="section-description">Subsequently, modern architectural firms require sophisticated tools that streamline complex engineering calculations. Therefore, our comprehensive <span class="keyword-emphasis">wind load calculator</span> integrates seamlessly into existing design workflows. Consequently, architects achieve ASCE 7 compliance while maintaining creative focus on innovative building solutions systematically.</p>
+                </div>
+                
+                <div class="architect-features-grid">
+                    <!-- Feature 1: Design Efficiency -->
+                    <div class="architect-feature-card">
+                        <div class="architect-feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polyline points="12,6 12,12 16,14"/>
+                            </svg>
+                        </div>
+                        <h3>Streamlined Wind Load Calculator Design Efficiency</h3>
+                        <p>Initially, architects struggled with time-consuming manual calculations for <span class="keyword-emphasis">wind pressure formula</span> applications. However, our advanced calculator eliminates repetitive computational tasks. Subsequently, design teams redirect energy toward creative architectural solutions rather than mathematical verification processes systematically.</p>
+                        
+                        <div class="architect-features">
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span>85% faster Wind Load Calculator processing</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span>Automated wind load analysis workflows</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span>Seamless CAD software integration</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span>Real-time calculation validation</span>
+                            </div>
+                        </div>
+                        
+                        <a href="free-online-wind-load-calculators-demos-free-excel-wind-load-calculator.html" class="architect-button">Try Calculator</a>
+                    </div>
+
+                    <!-- Feature 2: ASCE 7 Compliance -->
+                    <div class="architect-feature-card">
+                        <div class="architect-feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 12l2 2 4-4"/>
+                                <path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"/>
+                            </svg>
+                        </div>
+                        <h3>ASCE 7 Wind Load Calculator Compliance Made Simple</h3>
+                        <p>Furthermore, our <span class="keyword-emphasis">ASCE 7 design pressure calculator</span> ensures every project meets current building codes automatically. Additionally, automated compliance checks prevent costly redesigns and regulatory delays systematically. Therefore, architects achieve permit approval faster through verified calculations consistently.</p>
+                        
+                        <div class="architect-features">
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span>Complete ASCE 7-22 compliance</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span>Automated code verification</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span>Building permit documentation</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span>Regulatory approval acceleration</span>
+                            </div>
+                        </div>
+                        
+                        <a href="services-asce7-wind-load-pressures.html" class="architect-button">Ensure Compliance</a>
+                    </div>
+
+                    <!-- Feature 3: Professional Integration -->
+                    <div class="architect-feature-card">
+                        <div class="architect-feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                <circle cx="8.5" cy="8.5" r="1.5"/>
+                                <polyline points="21,15 16,10 5,21"/>
+                            </svg>
+                        </div>
+                        <h3>Instant Wind Load Calculator Pressure Analysis</h3>
+                        <p>Moreover, real-time <span class="keyword-emphasis">wind speed to pressure calculator</span> functionality delivers immediate results for informed design decisions. Therefore, architects make structural choices without waiting for external engineering consultations. Additionally, interactive pressure mapping visualizes load distributions clearly across building surfaces systematically.</p>
+                        
+                        <div class="architect-features">
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span>Real-time pressure analysis</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span>Interactive pressure mapping</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span>Components and cladding calculations</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span>Building envelope optimization</span>
+                            </div>
+                        </div>
+                        
+                        <a href="#content-section" class="architect-button">Learn More</a>
+                    </div>
+
+                    <!-- Feature 4: Professional Documentation -->
+                    <div class="architect-feature-card">
+                        <div class="architect-feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14,2 14,8 20,8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                                <polyline points="10,9 9,9 8,9"/>
+                            </svg>
+                        </div>
+                        <h3>Professional Wind Load Calculator Documentation</h3>
+                        <p>Subsequently, comprehensive reports include all necessary calculations for permit submissions efficiently. Thus, architects present complete technical documentation that satisfies municipal requirements systematically. Furthermore, professional engineer stamp coordination streamlines approval processes nationwide.</p>
+                        
+                        <div class="architect-features">
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span>Complete technical documentation</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span>Professional engineer coordination</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span>Municipal requirement compliance</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span>Standardized report formats</span>
+                            </div>
+                        </div>
+                        
+                        <a href="professional-engineer-sign-seal-wind-load-pressures.html" class="architect-button">Get Documentation</a>
+                    </div>
+
+                    <!-- Feature 5: Cost Optimization -->
+                    <div class="architect-feature-card">
+                        <div class="architect-feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="1" x2="12" y2="23"/>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                            </svg>
+                        </div>
+                        <h3>Wind Load Calculator Cost Optimization</h3>
+                        <p>Essentially, automated <span class="keyword-emphasis">windload calculator</span> tools reduce external consulting expenses significantly while maintaining project profitability. Meanwhile, architects achieve structural compliance through internal calculation capabilities. Therefore, accurate <span class="keyword-emphasis">wind load pressure</span> analysis prevents over-conservative designs that increase material costs systematically.</p>
+                        
+                        <div class="architect-features">
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span>Reduced consulting expenses</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span>Optimized material usage</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span>Enhanced project profitability</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span>Competitive pricing advantage</span>
+                            </div>
+                        </div>
+                        
+                        <a href="wind-load-calculator-shop.html" class="architect-button">Save Costs</a>
+                    </div>
+
+                    <!-- Feature 6: Technology Integration -->
+                    <div class="architect-feature-card">
+                        <div class="architect-feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                                <line x1="8" y1="21" x2="16" y2="21"/>
+                                <line x1="12" y1="17" x2="12" y2="21"/>
+                            </svg>
+                        </div>
+                        <h3>Advanced Wind Load Calculator Technology</h3>
+                        <p>Nevertheless, cloud-based <span class="keyword-emphasis">free online wind load calculator</span> platforms provide accessibility from any location efficiently. Meanwhile, mobile compatibility enables field calculations during site visits. Additionally, automatic data synchronization ensures consistency across project teams through seamless <span class="keyword-emphasis">wind load calculation spreadsheet</span> integration systematically.</p>
+                        
+                        <div class="architect-features">
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span>Cloud-based accessibility</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span>Mobile field calculations</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span>Team data synchronization</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span>CAD software integration</span>
+                            </div>
+                        </div>
+                        
+                        <a href="contact-us-wind-load-calculators-for-components-and-cladding-cc-wind-load-pressures-per-the-asce-7-16-and-asce-7-22-publication-windloads-made-easy.html" class="architect-button">Explore Technology</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Enhanced Content Section -->
+        <section id="content-section" class="content-section">
+            <div class="container">
+                <div class="content-wrapper">
+                    <!-- Main Header -->
+                    <div class="main-content-header">
+                        <h2>Why Architects Choose Professional Wind Load Calculator Solutions</h2>
+                        <p class="intro-text">Specifically, architectural firms report significant productivity improvements when implementing automated <span class="keyword-emphasis">wind load pressures calculator</span> systems. Moreover, consistent calculation methodology reduces errors and improves client confidence in structural safety assessments systematically.</p>
+                    </div>
+
+                    <!-- Content Grid -->
+                    <div class="content-grid">
+                        
+                        <!-- Understanding Applications Block -->
+                        <div class="content-block">
+                            <h3>Understanding Wind Load Calculator Applications in Architectural Design</h3>
+                            
+                            <p class="content-text">Essentially, <span class="keyword-emphasis">wind load pressure</span> affects every exterior building element from curtain walls to roofing systems comprehensively. Meanwhile, architects must consider these forces during initial design phases rather than as afterthoughts during structural review processes.</p>
+                            
+                            <div class="highlight-box">
+                                <p class="content-text">Furthermore, the system addresses common questions like <strong>how do you calculate wind load</strong> through intuitive step-by-step guidance for architects. Additionally, location-specific features answer <strong>how do I find the wind load in my area</strong> by automatically accessing regional wind speed databases and terrain characteristics systematically.</p>
+                            </div>
+
+                            <p class="content-text">Additionally, our <span class="keyword-emphasis">wind speed to wind pressure</span> conversion tools eliminate manual formula applications efficiently. Thus, architects focus on design optimization rather than computational verification. Furthermore, integrated safety factors ensure conservative yet economical structural solutions consistently.</p>
+                        </div>
+
+                        <!-- Professional vs Free Tools Block -->
+                        <div class="content-block">
+                            <h3>Free Online Wind Load Calculator vs Professional Solutions</h3>
+                            
+                            <p class="content-text">Although basic <span class="keyword-emphasis">free online wind load calculator</span> tools exist, professional architectural practice requires comprehensive analysis capabilities systematically. Therefore, advanced features like terrain modeling, building interaction effects, and detailed pressure mapping justify professional-grade solutions.</p>
+
+                            <p class="content-text">Moreover, professional tools include extensive documentation features that satisfy regulatory requirements efficiently. Subsequently, architects present complete technical packages that expedite permit approval processes and demonstrate design competency to clients and contractors systematically.</p>
+
+                            <p class="content-text">Nevertheless, comprehensive <span class="keyword-emphasis">wind load calculation spreadsheet</span> alternatives surpass traditional Excel-based methods through automated verification and error checking. Meanwhile, interactive visualization tools help architects understand pressure distributions across building surfaces clearly.</p>
+                        </div>
+
+                        <!-- Implementation Success Block -->
+                        <div class="content-block">
+                            <h3>Wind Load Calculator Implementation for Architectural Success</h3>
+                            
+                            <p class="content-text">Finally, successful implementation requires understanding both technical capabilities and workflow integration opportunities comprehensively. Hence, our support team provides comprehensive training on maximizing <span class="keyword-emphasis">wind load calculation</span> efficiency within existing design processes.</p>
+
+                            <p class="content-text">Ultimately, architects who embrace advanced calculation tools position themselves for continued success in increasingly complex building environments. Therefore, investing in professional <span class="keyword-emphasis">wind load analysis</span> capabilities becomes essential for maintaining design leadership and ensuring structural safety compliance systematically.</p>
+
+                            <div class="highlight-box">
+                                <p class="content-text">Industry Challenge: Nevertheless, traditional wind load analysis consumes up to 40% of structural design time efficiently. Meanwhile, manual calculations increase liability risks and project delays significantly. Thus, automated solutions become essential for competitive architectural practices systematically.</p>
+                            </div>
+
+                            <p class="content-text">Notably, our platform includes sophisticated <span class="keyword-emphasis">wind load calculation spreadsheet</span> alternatives that surpass traditional Excel-based methods. Similarly, interactive visualization tools help architects understand pressure distributions across building surfaces. Consequently, design decisions become more informed and structurally optimized systematically.</p>
+                        </div>
+
+                        <!-- Workflow Integration Block -->
+                        <div class="content-block">
+                            <h3>How Wind Load Calculator Revolutionizes Design Efficiency</h3>
+                            
+                            <p class="content-text">Essentially, contemporary building design demands precise <span class="keyword-emphasis">wind load analysis</span> for structural integrity consistently. Meanwhile, architects must balance safety requirements with aesthetic vision and budget constraints. Therefore, efficient calculation tools become indispensable for successful project delivery systematically.</p>
+
+                            <p class="content-text">Additionally, detailed <span class="keyword-emphasis">wind load calculation</span> reports demonstrate due diligence to clients effectively. Therefore, architects build confidence through transparent technical documentation. Moreover, standardized formats expedite regulatory review processes nationwide.</p>
+
+                            <p class="content-text">Furthermore, accurate <span class="keyword-emphasis">wind load pressure</span> analysis prevents over-conservative designs that increase material costs unnecessarily. Subsequently, optimal structural solutions balance safety with economic efficiency. Thus, clients receive maximum value from architectural services systematically.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Enhanced CTA Section -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Ready to Transform Your Wind Load Calculator Workflow?</h2>
+                    <p>Discover how professional architects streamline structural calculations while maintaining design excellence systematically. Start your free trial today and experience the difference advanced calculation tools make in architectural practice efficiently.</p>
+                    <div class="cta-buttons">
+                        <a href="free-online-wind-load-calculators-demos-free-excel-wind-load-calculator.html" class="cta-button">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px;">
+                                <polygon points="13,2 3,14 12,14 11,22 21,10 12,10"/>
+                            </svg>
+                            Start Free Trial
+                        </a>
+                        <a href="contact-us-wind-load-calculators-for-components-and-cladding-cc-wind-load-pressures-per-the-asce-7-16-and-asce-7-22-publication-windloads-made-easy.html" class="cta-button secondary">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px;">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                            Contact Expert
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>WindLoad Solutions</h4>
+                    <p>Professional WindLoad Calculator software per ASCE 7 standards. Moreover, over 24 years of excellence ensures projects meet compliance requirements. Furthermore, our team provides nationwide windload calculator support and comprehensive wind load analysis solutions.</p>
+                    
+                    <h4>Contact Information</h4>
+                    
+                    <p style="margin-bottom: 0.5rem;"><strong style="display: block; margin-bottom: 0;">General Inquiries</strong>
+                    Email: info@windload.solutions<br>
+                    Phone: (833) 272-3946 | (833) ASCE-WIND</p>
+
+                    <p style="margin-bottom: 0.5rem;"><strong style="display: block; margin-bottom: 0;">Technical Support</strong>
+                    Email: support@windload.solutions</p>
+
+                    <p style="margin-bottom: 0.5rem;"><strong style="display: block; margin-bottom: 0;">Sales</strong>
+                    Email: sales@windload.solutions</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>WindLoad Calculator Services</h4>
+                    <a href="asce-7-wind-load-calculator.html">ASCE 7 WindLoad Calculator</a>
+                    <a href="services-asce7-wind-load-pressures.html">Wind Load Pressure Services</a>
+                    <a href="professional-engineer-sign-seal-wind-load-pressures.html">PE Sign & Seal Services</a>
+                    <a href="building-intelligence-platform.html">Wind Load Building Intelligence Platform</a>
+                    <a href="free-online-wind-load-calculators-demos-free-excel-wind-load-calculator.html">Free WindLoad Calculator</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>WindLoad Calculator Resources</h4>
+                    <a href="instructional-videos-asce-7-wind-load-calculator-wind-load-pressure-software-components-cladding-wind-load-pressures-asce-7.html">WindLoad Calculator Videos</a>
+                    <a href="faqfor-wind-load-calculator-software-for-wind-load-pressures-per-asce-7.html">WindLoad Calculator FAQ</a>
+                    <a href="clarifying-wind-loads-free-asce-calculator-pressure-analysis.html">Wind Load Types Guide</a>
+                    <a href="contact-us-wind-load-calculators-for-components-and-cladding-cc-wind-load-pressures-per-the-asce-7-16-and-asce-7-22-publication-windloads-made-easy.html">Contact WindLoad Experts</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Industry Solutions</h4>
+                    <a href="wind-load-calculator-for-engineers.html">For Engineers</a>
+                    <a href="wind-load-calculator-for-architects.html">For Architects</a>
+                    <a href="contractors-wind-load-calculator.html">For Contractors</a>
+                    <a href="wind-loads-for-consultants.html">For Consultants</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 WindLoad Solutions. All rights reserved. Professional WindLoad Calculator software per ASCE 7-22 & ASCE 7-16. Contact us for components and cladding wind load pressures, windloads analysis, and comprehensive wind load calculator excel solutions nationwide.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation Functions
+        function toggleNav() {
+            const navMenu = document.getElementById('nav-menu');
+            const hamburger = document.getElementById('hamburger');
+            const overlay = document.getElementById('nav-overlay');
+            
+            navMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+            overlay.classList.toggle('active');
+            
+            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+        }
+
+        function initializeHeaderScroll() {
+            const header = document.getElementById('main-header');
+            
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+        }
+
+        function initializeVideo() {
+            const video = document.querySelector('.hero-video');
+            if (!video) return;
+
+            video.muted = true;
+            video.playsInline = true;
+            
+            video.addEventListener('loadeddata', function() {
+                video.play().catch(function() {
+                    console.log('Video autoplay blocked');
+                });
+            });
+
+            video.addEventListener('error', function() {
+                video.style.display = 'none';
+            });
+
+            document.addEventListener('click', function() {
+                if (video.paused) {
+                    video.play().catch(function() {
+                        console.log('Manual play failed');
+                    });
+                }
+            }, { once: true });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeVideo();
+            initializeHeaderScroll();
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    
+    
+        // Dropdown menu toggle for mobile - supports multiple dropdowns
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdowns = document.querySelectorAll('.nav-dropdown');
+            
+            dropdowns.forEach(function(dropdown) {
+                const dropdownToggle = dropdown.querySelector('.nav-dropdown-toggle');
+                
+                if (dropdownToggle) {
+                    dropdownToggle.addEventListener('click', function(e) {
+                        const header = document.getElementById('main-header');
+                        const isScrolled = header && header.classList.contains('scrolled');
+                        const isMobile = window.innerWidth < 1024;
+                        
+                        // Check if this dropdown is in the hamburger menu (nav-links) or horizontal nav (nav-desktop-scrolled)
+                        const isInHamburgerMenu = dropdown.closest('.nav-links');
+                        const isInHorizontalNav = dropdown.closest('.nav-desktop-scrolled');
+                        
+                        // Hamburger menu dropdowns: ALWAYS toggle by click
+                        // Horizontal nav dropdowns: Toggle on mobile, hover on desktop when scrolled
+                        if (isInHamburgerMenu || isMobile || !isScrolled) {
+                            e.preventDefault();
+                            // Close other dropdowns
+                            dropdowns.forEach(function(otherDropdown) {
+                                if (otherDropdown !== dropdown) {
+                                    otherDropdown.classList.remove('active');
+                                }
+                            });
+                            // Toggle current dropdown
+                            dropdown.classList.toggle('active');
+                        }
+                        // On desktop when scrolled (and in horizontal nav), let CSS hover handle it
+                    });
+                }
+            });
+        });
+
+        function initializeVideo() {
+            const video = document.querySelector('.hero-video');
+            if (!video) return;
+
+            video.muted = true;
+            video.playsInline = true;
+            
+            video.addEventListener('loadeddata', function() {
+                video.play().catch(function() {
+                    console.log('Video autoplay blocked');
+                });
+            });
+
+            video.addEventListener('error', function() {
+                video.style.display = 'none';
+            });
+
+            document.addEventListener('click', function() {
+                if (video.paused) {
+                    video.play().catch(function() {
+                        console.log('Manual play failed');
+                    });
+                }
+            }, { once: true });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeVideo();
+            initializeHeaderScroll();
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(function(link) {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 1024) {
+                    toggleNav();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

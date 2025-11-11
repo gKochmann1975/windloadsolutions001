@@ -1,0 +1,2286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Choose your Building Intelligence Platform plan - Professional wind velocity analysis and building intelligence starting at $29/month">
+    <title>BIP Pricing Plans | Building Intelligence Platform | windload.solutions</title>
+    
+    <!-- CSS -->
+    
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        .main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: transparent;
+            padding: 2rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .main-header.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1rem 0;
+            box-shadow: 0 1px 20px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+        }
+
+        .logo {
+            z-index: 1001;
+        }
+
+        .logo-image {
+            height: 100px;
+            width: auto;
+            filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
+            transition: all 0.3s ease;
+        }
+
+        .main-header.scrolled .logo-image {
+            height: 70px;
+            filter: none;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            z-index: 1001;
+        }
+
+        .header-cta {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            white-space: nowrap;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-cta:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.6);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .header-cta.primary {
+            background: rgba(0, 24, 255, 0.9);
+            border-color: rgba(0, 24, 255, 0.3);
+        }
+
+        .header-cta.primary:hover {
+            background: rgba(0, 24, 255, 1);
+            border-color: rgba(0, 24, 255, 0.8);
+        }
+
+        .main-header.scrolled .header-cta {
+            color: #0018ff;
+            background: rgba(0, 24, 255, 0.1);
+            border-color: rgba(0, 24, 255, 0.3);
+        }
+
+        .main-header.scrolled .header-cta.primary {
+            color: white;
+            background: #0018ff;
+            border-color: #0018ff;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 28px;
+            height: 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 1002;
+        }
+
+
+        .hamburger span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background: white;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .main-header.scrolled .hamburger span {
+            background: #1f2937;
+            box-shadow: none;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(8px, -8px);
+        }
+
+        /* Navigation Menu */
+        .nav-links {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100vh;
+            width: 400px;
+            max-width: 85vw;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            box-shadow: -10px 0 50px rgba(0,0,0,0.2);
+            padding: 4rem 2rem 2rem 2rem;
+            flex-direction: column;
+            gap: 1.5rem;
+            z-index: 9999;
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .nav-links.active {
+            display: flex;
+            transform: translateX(0);
+        }
+
+        /* Keep hamburger visible and nav-links as side menu only */
+        @media (min-width: 1024px) {
+            /* Keep nav-links as hamburger menu only - never show horizontally */
+            .main-header.scrolled .nav-links:not(.active) {
+                /* Stays as side menu even on desktop */
+                display: none !important;
+            }
+
+            /* Keep hamburger visible on desktop when scrolled */
+            .main-header.scrolled .hamburger {
+                display: flex;
+            }
+
+            .main-header.scrolled .header-right {
+                gap: 2rem;
+                align-items: center;
+            }
+        }
+
+        /* Simplified Desktop Nav (Shows when scrolled) */
+        .nav-desktop-scrolled {
+            display: none;
+        }
+
+        @media (min-width: 1024px) {
+            .main-header.scrolled .nav-desktop-scrolled {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 2rem;
+                overflow: visible;
+            }
+
+            .nav-desktop-scrolled a {
+                text-decoration: none;
+                font-size: 0.95rem;
+                padding: 0.5rem 1rem;
+                border-radius: 8px;
+                color: #374151;
+                font-weight: 600;
+                transition: all 0.2s ease;
+            }
+
+            .nav-desktop-scrolled a:hover {
+                background: rgba(0, 24, 255, 0.1);
+                color: #0018ff;
+            }
+
+            /* Simplified desktop nav dropdown styles */
+            .nav-desktop-scrolled .nav-dropdown {
+                position: relative;
+                z-index: 1001;
+            }
+
+            .nav-desktop-scrolled .nav-dropdown-toggle {
+                display: flex;
+                align-items: center;
+                font-size: 0.95rem;
+                padding: 0.5rem 1rem;
+                border-radius: 8px;
+                color: #374151;
+                font-weight: 600;
+                transition: all 0.2s ease;
+                cursor: pointer;
+            }
+
+            .nav-desktop-scrolled .dropdown-arrow {
+                font-size: 0.7rem;
+                margin-left: 0.3rem;
+            }
+
+            .nav-desktop-scrolled .nav-dropdown-menu {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background: white;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+                border-radius: 8px;
+                padding: 0.5rem 0;
+                min-width: 250px;
+                margin-top: 0.25rem;
+                z-index: 1002;
+                flex-direction: column;
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+                transform: translateY(-10px);
+                transition: all 0.2s ease;
+                display: flex !important;
+                padding-left: 0;
+            }
+
+            .nav-desktop-scrolled .nav-dropdown:hover .nav-dropdown-menu {
+                opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
+                transform: translateY(0);
+            }
+
+            .nav-desktop-scrolled .nav-dropdown-toggle:hover,
+            .nav-desktop-scrolled .nav-dropdown:hover .nav-dropdown-toggle {
+                background: rgba(0, 24, 255, 0.1);
+                color: #0018ff;
+            }
+
+            .nav-desktop-scrolled .nav-dropdown-menu a {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+                border-radius: 0;
+            }
+
+            .nav-desktop-scrolled .nav-dropdown-menu a:hover {
+                background: rgba(0, 24, 255, 0.1);
+            }
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #1f2937;
+            font-weight: 600;
+            font-size: 1.2rem;
+            padding: 1.2rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(45deg, #0018ff, #181E57);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #0018ff;
+            padding-left: 1rem;
+        }
+
+        .nav-links a:hover::before,
+        .nav-links a.active::before {
+            width: 50px;
+        }
+
+        .nav-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: none;
+            border: none;
+            font-size: 2.5rem;
+            color: #64748b;
+            cursor: pointer;
+            font-weight: 300;
+        }
+
+
+        .nav-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
+            z-index: 9998;
+        }
+
+        .nav-overlay.active {
+            display: block;
+        }
+
+        /* Navigation Dropdown Styles */
+        .nav-dropdown {
+            position: relative;
+        }
+
+        .nav-dropdown-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            text-decoration: none;
+            color: #1f2937;
+            font-weight: 600;
+            font-size: 1.2rem;
+            padding: 1.2rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .dropdown-arrow {
+            margin-left: 0.5rem;
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-dropdown.active .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .nav-dropdown-menu {
+            display: none;
+            flex-direction: column;
+            padding-left: 1.5rem;
+            margin-top: 0.5rem;
+            gap: 0.5rem;
+            background: rgba(248, 250, 252, 0.95);
+            border-radius: 8px;
+            padding: 0.5rem 1.5rem;
+        }
+
+        .nav-dropdown.active .nav-dropdown-menu {
+            display: flex;
+        }
+
+
+        .nav-dropdown-menu a {
+            font-size: 1.05rem;
+            font-weight: 500;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .nav-dropdown-menu a:last-child {
+            border-bottom: none;
+        }
+
+        /* Hover effects for hamburger menu */
+        .nav-dropdown-toggle:hover {
+            background: rgba(0, 24, 255, 0.05);
+            color: #0018ff;
+            padding-left: 1rem;
+            border-radius: 8px;
+        }
+
+        .nav-dropdown-menu a:hover {
+            background: rgba(0, 24, 255, 0.08);
+            color: #0018ff;
+            padding-left: 1rem;
+            border-radius: 6px;
+        }
+
+        /* Desktop dropdown styles */
+        @media (min-width: 1024px) {
+            /* CRITICAL: Prevent clipping of dropdowns */
+            .main-header.scrolled,
+            .main-header.scrolled .header-container,
+            .main-header.scrolled .header-right {
+                overflow: visible !important;
+            }
+            
+            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown-toggle {
+                display: flex;
+                align-items: center;
+                font-size: 0.95rem;
+                padding: 0.5rem 1rem;
+                border-bottom: none;
+                border-radius: 8px;
+                color: #374151;
+                transition: all 0.2s ease;
+                cursor: pointer;
+            }
+
+            .main-header.scrolled .nav-desktop-scrolled .dropdown-arrow {
+                font-size: 0.7rem;
+                margin-left: 0.3rem;
+            }
+
+            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown {
+                position: relative;
+                z-index: 1001;
+            }
+
+            /* Dropdown menu - always in DOM but invisible */
+            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown-menu {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background: white;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+                border-radius: 8px;
+                padding: 0.5rem 0;
+                min-width: 250px;
+                margin-top: 0.25rem;
+                z-index: 1002;
+                flex-direction: column;
+                
+                /* Hidden by default */
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+                transform: translateY(-10px);
+                transition: all 0.2s ease;
+                
+                /* Force display flex always - CRITICAL */
+                display: flex !important;
+                
+                /* Remove any padding/border from parent that might clip */
+                padding-left: 0;
+            }
+
+            /* Show dropdown on hover */
+            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown:hover .nav-dropdown-menu {
+                opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
+                transform: translateY(0);
+            }
+
+            /* Highlight toggle on hover */
+            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown-toggle:hover,
+            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown:hover .nav-dropdown-toggle {
+                background: rgba(0, 24, 255, 0.1);
+                color: #0018ff;
+            }
+
+            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown-menu a {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+                border-bottom: none;
+                border-radius: 0;
+            }
+
+            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown-menu a:hover {
+                background: rgba(0, 24, 255, 0.1);
+                padding-left: 1.5rem;
+            }
+        }
+        /* ============================================
+   BIP SHOP PAGE - MAIN STYLES
+   Formspree-inspired clean professional design
+   ============================================ */
+        /* CSS Variables */
+        :root {
+    /* Colors */
+    --color-primary: #0018ff;        /* Blue - matching site */
+    --color-secondary: #181E57;      /* Dark Blue */
+    --color-success: #00C851;        /* Green */
+    --color-background: #ffffff;     /* White */
+    --color-text-primary: #111827;   /* Dark Gray */
+    --color-text-secondary: #6b7280; /* Medium Gray */
+    --color-border: #e5e7eb;         /* Light Gray */
+    --color-gray-50: #f9fafb;
+    --color-gray-100: #f3f4f6;
+    --color-gray-200: #e5e7eb;
+    /* Typography */
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    /* Spacing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 0.75rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-2xl: 3rem;
+    /* Border Radius */
+    --radius-sm: 0.375rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        /* Reset & Base Styles */
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+        }
+        html {
+    scroll-behavior: smooth;
+        }
+        body {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--color-text-primary);
+    background-color: var(--color-background);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+        }
+        /* Hero Section - Full Screen with Video Background */
+        .hero-section {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+        }
+        /* Video Background */
+        .video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+        }
+        .hero-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+        }
+        /* Video Overlay */
+        .video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, 
+        rgba(0, 24, 255, 0.85) 0%, 
+        rgba(24, 30, 87, 0.85) 50%, 
+        rgba(0, 24, 255, 0.85) 100%
+    );
+    z-index: 1;
+        }
+        /* Hero Content Container */
+        .hero-section .container {
+    position: relative;
+    z-index: 2;
+        }
+        .hero-content {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+    padding: var(--spacing-2xl) 0;
+        }
+        .hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: var(--spacing-lg);
+    line-height: 1.2;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+        .hero-subtitle {
+    font-size: 1.3rem;
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: var(--spacing-2xl);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    font-weight: 500;
+        }
+
+        /* Hide mobile buttons by default (desktop) */
+        .hero-buttons-mobile {
+            display: none;
+        }
+
+        /* Mobile button styles */
+        .hero-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-btn.primary {
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 24, 255, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        .hero-btn.primary:hover {
+            background: linear-gradient(135deg, #181E57 0%, #0018ff 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0, 24, 255, 0.6);
+        }
+
+        .hero-btn.secondary {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-btn.secondary:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.6);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            color: white;
+        }
+
+        .hero-action-btn.green {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.25) 0%, rgba(16, 185, 129, 0.35) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            box-shadow: 0 10px 40px rgba(0, 255, 136, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .hero-action-btn.green:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.35) 0%, rgba(16, 185, 129, 0.45) 100%);
+            box-shadow: 0 15px 50px rgba(0, 255, 136, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+        }
+
+        .hero-action-btn.orange {
+            background: linear-gradient(135deg, rgba(255, 136, 0, 0.25) 0%, rgba(245, 158, 11, 0.35) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 136, 0, 0.3);
+            box-shadow: 0 10px 40px rgba(255, 136, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .hero-action-btn.orange:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(135deg, rgba(255, 136, 0, 0.35) 0%, rgba(245, 158, 11, 0.45) 100%);
+            box-shadow: 0 15px 50px rgba(255, 136, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+        }
+
+        /* Billing Toggle */
+        .billing-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-md);
+    background: rgba(0, 24, 255, 0.08);
+    backdrop-filter: blur(10px);
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    border: 2px solid rgba(0, 24, 255, 0.15);
+    box-shadow: 0 4px 20px rgba(0, 24, 255, 0.1);
+        }
+        .billing-label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.2s ease;
+        }
+        .billing-label.active {
+    color: #0018ff;
+    transform: scale(1.05);
+        }
+        /* Toggle Switch (iOS-style) */
+        .toggle-switch {
+    position: relative;
+    width: 56px;
+    height: 28px;
+    background: rgba(0, 24, 255, 0.2);
+    border: 2px solid rgba(0, 24, 255, 0.3);
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+        }
+        .toggle-switch.active {
+    background: rgba(0, 24, 255, 0.3);
+    border-color: rgba(0, 24, 255, 0.5);
+        }
+        .toggle-slider {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    background: #0018ff;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 24, 255, 0.4);
+        }
+        .toggle-switch.active .toggle-slider {
+    transform: translateX(26px);
+        }
+        /* Save Badge */
+        .save-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #00C851 0%, #007E33 100%);
+    color: white;
+    font-size: 0.875rem;
+    font-weight: 700;
+    padding: var(--spacing-xs) var(--spacing-md);
+    border-radius: var(--radius-md);
+    box-shadow: 0 4px 15px rgba(0, 200, 81, 0.3);
+        }
+        /* Pricing Section */
+        .pricing {
+    padding: var(--spacing-2xl) 0;
+        }
+        .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-xl);
+        }
+        /* Pricing Cards */
+        .pricing-card {
+    background: white;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-xl);
+    position: relative;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+        }
+        .pricing-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
+        }
+        /* Featured Card (Professional) */
+        .pricing-card-featured {
+    border: 2px solid #0018ff;
+    box-shadow: 0 4px 12px rgba(0, 24, 255, 0.15);
+        }
+        /* Badges */
+        .badge-popular,
+        .badge-value,
+        .badge-enterprise {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: var(--spacing-xs) var(--spacing-md);
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: white;
+        }
+        .badge-popular {
+    background: linear-gradient(135deg, #00C851 0%, #007E33 100%);
+    box-shadow: 0 4px 15px rgba(0, 200, 81, 0.3);
+        }
+        .badge-value {
+    background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+    box-shadow: 0 4px 15px rgba(0, 24, 255, 0.3);
+        }
+        .badge-enterprise {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d3748 100%);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        /* Card Header */
+        .card-header {
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+    margin-top: var(--spacing-sm);
+        }
+        .card-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-xs);
+        }
+        .card-subtitle {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+        }
+        /* Card Price */
+        .card-price {
+    text-align: center;
+    margin-bottom: var(--spacing-sm);
+        }
+        .price-amount {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    transition: all 0.3s ease;
+        }
+        .price-period {
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+        }
+        .annual-note {
+    text-align: center;
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-lg);
+    min-height: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+        }
+        .annual-note.show {
+    opacity: 1;
+        }
+        /* Card Features */
+        .card-features {
+    flex-grow: 1;
+    margin-bottom: var(--spacing-lg);
+        }
+        .usage-limit {
+    text-align: center;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--color-border);
+        }
+        .feature-list {
+    list-style: none;
+    padding: 0;
+        }
+        .feature-list li {
+    padding: var(--spacing-xs) 0;
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+        }
+        /* Card Action */
+        .card-action {
+    margin-top: auto;
+        }
+        /* Contact Info (Enterprise) */
+        .contact-info {
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--color-border);
+    text-align: center;
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+        }
+        .contact-info p {
+    margin: var(--spacing-xs) 0;
+        }
+        /* Buttons */
+        .btn {
+    display: inline-block;
+    width: 100%;
+    padding: var(--spacing-md) var(--spacing-lg);
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+        }
+        .btn-primary {
+    background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+    color: white;
+    box-shadow: 0 8px 25px rgba(0, 24, 255, 0.3);
+        }
+        .btn-primary:hover {
+    background: linear-gradient(135deg, #001aff 0%, #1a2060 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px rgba(0, 24, 255, 0.4);
+        }
+        .btn-secondary {
+    background: white;
+    color: #0018ff;
+    border: 2px solid #0018ff;
+        }
+        .btn-secondary:hover {
+    background: rgba(0, 24, 255, 0.05);
+    border-color: #0018ff;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 24, 255, 0.2);
+        }
+        /* Feature Comparison Table */
+        .comparison {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, 
+                rgba(0, 24, 255, 0.04) 0%, 
+                rgba(0, 128, 255, 0.06) 50%,
+                rgba(0, 255, 255, 0.04) 100%);
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: #1f2937;
+            text-shadow: 0 2px 8px rgba(0, 24, 255, 0.1);
+        }
+        
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 24, 255, 0.15);
+            background: white;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            background: white;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+        
+        .comparison-table thead {
+            background: linear-gradient(135deg, #0018ff 0%, #0080ff 50%, #00ffff 100%);
+        }
+        
+        .comparison-table th {
+            padding: 1.5rem 1rem;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            letter-spacing: 0.03em;
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
+            vertical-align: middle;
+        }
+        
+        .comparison-table th:last-child {
+            border-right: none;
+        }
+        
+        .comparison-table th:first-child {
+            text-align: left;
+            padding-left: 2rem;
+            width: 30%;
+        }
+        
+        .comparison-table th:nth-child(2),
+        .comparison-table th:nth-child(3),
+        .comparison-table th:nth-child(4),
+        .comparison-table th:nth-child(5) {
+            width: 17.5%;
+        }
+        
+        .comparison-table tbody tr {
+            transition: all 0.25s ease;
+            border-bottom: 1px solid rgba(0, 24, 255, 0.08);
+        }
+        
+        .comparison-table tbody tr:hover {
+            background: linear-gradient(90deg, 
+                rgba(0, 24, 255, 0.05) 0%, 
+                rgba(0, 128, 255, 0.05) 100%);
+            transform: translateX(4px);
+            box-shadow: -4px 0 0 0 #0080ff;
+        }
+        
+        .comparison-table td {
+            padding: 1.25rem 1rem;
+            text-align: center;
+            color: #333;
+            font-size: 0.95rem;
+            vertical-align: middle;
+        }
+        
+        .comparison-table td:first-child {
+            text-align: left;
+            font-weight: 600;
+            color: #1f2937;
+            padding-left: 2rem;
+        }
+        
+        .comparison-table tbody tr:nth-child(even) {
+            background: rgba(249, 250, 251, 0.5);
+        }
+        
+        .comparison-table tbody tr:nth-child(even):hover {
+            background: linear-gradient(90deg, 
+                rgba(0, 24, 255, 0.05) 0%, 
+                rgba(0, 128, 255, 0.05) 100%);
+        }
+        
+        .comparison-table .check {
+            color: #00C851;
+            font-weight: 700;
+            font-size: 1.3rem;
+            text-shadow: 0 0 8px rgba(0, 200, 81, 0.3);
+        }
+        
+        .comparison-table tbody tr:hover .check {
+            text-shadow: 0 0 15px rgba(0, 200, 81, 0.6),
+                         0 0 25px rgba(0, 200, 81, 0.3);
+        }
+        
+        .comparison-table .cross {
+            color: #cbd5e1;
+            opacity: 0.6;
+            font-size: 1.1rem;
+        }
+        
+        /* Featured column (Professional) */
+        .comparison-table th:nth-child(3) {
+            background: rgba(0, 255, 255, 0.15);
+            position: relative;
+        }
+        
+        .comparison-table td:nth-child(3) {
+            background: rgba(0, 24, 255, 0.02);
+        }
+        
+        .comparison-table tbody tr:hover td:nth-child(3) {
+            background: rgba(0, 24, 255, 0.06);
+        }
+        /* FAQ Section */
+        .faq {
+    padding: var(--spacing-2xl) 0;
+        }
+        .faq-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-xl);
+        }
+        .faq-item {
+    background: white;
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+        }
+        .faq-question {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text-primary);
+        }
+        .faq-answer {
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+        }
+        /* Footer */
+        .main-footer {
+    background: linear-gradient(135deg, #181E57 0%, #0018ff 50%, #181E57 100%);
+    padding: var(--spacing-2xl) 0 var(--spacing-lg);
+    margin-top: var(--spacing-2xl);
+    color: white;
+        }
+        .footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
+        }
+        .footer-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+        }
+        .footer-section h4 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-md);
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        .footer-section p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.875rem;
+    margin: var(--spacing-xs) 0;
+    line-height: 1.6;
+        }
+        .footer-section strong {
+    color: white;
+    font-weight: 600;
+    display: block;
+    margin-top: 0.75rem;
+        }
+        .footer-section a {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    font-size: 0.875rem;
+    padding: 0.25rem 0;
+    display: block;
+        }
+        .footer-section a:hover {
+    color: #00ffff;
+    padding-left: 0.5rem;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+        .footer-bottom {
+    text-align: center;
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.875rem;
+    margin-top: var(--spacing-lg);
+        }
+        /* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+        /* Tablet */
+        @media (min-width: 641px) and (max-width: 1024px) {
+    .pricing-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .hero-title {
+        font-size: 2.5rem;
+    }
+        }
+        /* Mobile */
+        @media (max-width: 640px) {
+    .container {
+        padding: 0 var(--spacing-md);
+    }
+    .header-content {
+        flex-direction: column;
+        gap: var(--spacing-md);
+        text-align: center;
+    }
+    .nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: var(--spacing-md);
+    }
+    .hero-section {
+        min-height: 100vh;
+    }
+    .hero-title {
+        font-size: 2rem;
+    }
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+    .pricing-grid {
+        grid-template-columns: 1fr;
+    }
+    .pricing-card {
+        padding: var(--spacing-lg);
+    }
+    .billing-toggle {
+        flex-wrap: wrap;
+        padding: 1rem;
+    }
+    .faq-grid {
+        grid-template-columns: 1fr;
+    }
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+    .comparison-table {
+        font-size: 0.875rem;
+    }
+    .comparison-table th,
+    .comparison-table td {
+        padding: var(--spacing-sm);
+    }
+        }
+
+        @media (max-width: 480px) {
+            .header-cta {
+                display: none;
+            }
+
+            .logo-image {
+                height: 70px;
+            }
+
+            .main-header.scrolled .logo-image {
+                height: 50px;
+            }
+
+            /* Hide desktop buttons */
+            .hero-cta-buttons {
+                display: none !important;
+            }
+
+            /* Show mobile buttons */
+            .hero-buttons-mobile {
+                display: flex !important;
+                flex-direction: column;
+                gap: 1rem;
+                width: 100%;
+                align-items: center;
+            }
+
+            /* ALL buttons uniform styling - width based on content */
+            .hero-buttons-mobile .hero-btn,
+            .hero-buttons-mobile .hero-action-btn,
+            .hero-buttons-mobile .hero-btn.primary,
+            .hero-buttons-mobile .hero-btn.secondary,
+            .hero-buttons-mobile .hero-action-btn.green,
+            .hero-buttons-mobile .hero-action-btn.orange {
+                display: inline-flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                margin: 0 auto !important;
+                padding: 1.8rem 2.2rem !important;
+                font-size: 1.65rem !important;
+                font-weight: 700 !important;
+                white-space: nowrap !important;
+                box-sizing: border-box !important;
+                border-radius: 50px !important;
+                line-height: 1.3 !important;
+                text-align: center !important;
+                width: auto !important;
+                max-width: calc(100vw - 1.5rem) !important;
+            }
+
+            /* Hide original hero content on mobile */
+            .hero-title,
+            .hero-subtitle {
+                display: none !important;
+            }
+        }
+
+        /* Desktop Large */
+        @media (min-width: 1025px) {
+    .pricing-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+        }
+        /* Animation for price changes */
+        @keyframes priceChange {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+        }
+        .price-amount.changing {
+    animation: priceChange 0.3s ease;
+        }
+        /* ============================================
+   CONTACT ICON STYLES (Professional SVG Icons)
+   ============================================ */
+        .contact-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin: var(--spacing-xs) 0;
+        }
+        .contact-icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    color: var(--color-primary);
+    transition: all 0.2s ease;
+        }
+        .contact-item:hover .contact-icon {
+    color: var(--color-secondary);
+    transform: scale(1.1);
+        }
+        .contact-item-indent {
+    margin-left: 26px; /* Aligns with text when icon is 18px + 8px gap */
+        }    </style>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header" id="main-header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img src="images/windload-solutions-logo.png" alt="WindLoad Solutions Logo" class="logo-image">
+            </a>
+            
+            <!-- Full Hamburger Menu (Always available via hamburger button) -->
+            <nav class="nav-links" id="nav-menu">
+                <button class="nav-close" onclick="toggleNav()">&times;</button>
+                <a href="free-online-wind-load-calculators-demos-free-excel-wind-load-calculator.html">Free Calculator</a>
+                <a href="building-intelligence-platform.html">Building Intelligence Platform</a>
+                <a href="wind-load-calculator-comparison.html">Wind Load Calculator Comparison</a>
+                
+                <!-- About Dropdown -->
+                <div class="nav-dropdown">
+                    <span class="nav-dropdown-toggle">About <span class="dropdown-arrow">▼</span></span>
+                    <div class="nav-dropdown-menu">
+                        <a href="building-intelligence-platform-landing.html">Building Intelligence Platform</a>
+                        <a href="wind-load-calculator-landing.html">Wind Load Calculators</a>
+                    </div>
+                </div>
+                
+                <!-- Shop Dropdown -->
+                <div class="nav-dropdown">
+                    <span class="nav-dropdown-toggle">Shop <span class="dropdown-arrow">▼</span></span>
+                    <div class="nav-dropdown-menu">
+                        <a href="building-intelligence-platform-shop.html">Building Intelligence Platform</a>
+                        <a href="wind-load-calculator-shop.html">Wind Load Calculators</a>
+                    </div>
+                </div>
+                
+                <a href="services-asce7-wind-load-pressures.html">Services</a>
+                
+                <!-- Professionals Dropdown -->
+                <div class="nav-dropdown">
+                    <span class="nav-dropdown-toggle">Professionals <span class="dropdown-arrow">▼</span></span>
+                    <div class="nav-dropdown-menu">
+                        <a href="wind-load-calculator-for-engineers.html">Engineers</a>
+                        <a href="wind-load-calculator-for-architects.html">Architects</a>
+                        <a href="wind-loads-for-consultants.html">Consultants</a>
+                        <a href="contractors-wind-load-calculator.html">Contractors</a>
+                    </div>
+                </div>
+                
+                <a href="why-choose-windload-solutions.html">Why Us</a>
+                <a href="faqfor-wind-load-calculator-software-for-wind-load-pressures-per-asce-7.html">FAQ</a>
+                <a href="contact-us-wind-load-calculators-for-components-and-cladding-cc-wind-load-pressures-per-the-asce-7-16-and-asce-7-22-publication-windloads-made-easy.html">Contact Us</a>
+            </nav>
+            
+            <!-- Simplified Desktop Nav (Shows when scrolled on desktop) -->
+            <nav class="nav-desktop-scrolled">
+                <a href="free-online-wind-load-calculators-demos-free-excel-wind-load-calculator.html">Free Calculator</a>
+                <a href="building-intelligence-platform.html">B.I.P.</a>
+                
+                <!-- Shop Dropdown (Simplified - only 2 items) -->
+                <div class="nav-dropdown">
+                    <span class="nav-dropdown-toggle">Shop <span class="dropdown-arrow">▼</span></span>
+                    <div class="nav-dropdown-menu">
+                        <a href="building-intelligence-platform-shop.html">Building Intelligence Platform</a>
+                        <a href="wind-load-calculator-shop.html">Wind Load Calculators</a>
+                    </div>
+                </div>
+                
+                <a href="services-asce7-wind-load-pressures.html">Services</a>
+                <a href="why-choose-windload-solutions.html">Why Us</a>
+            </nav>
+            
+            <!-- Header Right Side -->
+            <div class="header-right">
+                <a href="contact-us-wind-load-calculators-for-components-and-cladding-cc-wind-load-pressures-per-the-asce-7-16-and-asce-7-22-publication-windloads-made-easy.html" class="header-cta primary">Let's Connect</a>
+                <a href="http://127.0.0.1:8051" class="header-cta">Member Login</a>
+                <button class="hamburger" id="hamburger" onclick="toggleNav()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu Overlay -->
+        <div class="nav-overlay" id="nav-overlay" onclick="toggleNav()"></div>
+    </header>
+
+
+    <!-- Hero Section with Video Background -->
+    <section class="hero-section">
+        <div class="video-background">
+            <video class="hero-video" autoplay muted loop playsinline>
+                <source src="videos/bip-shop-hero.webm" type="video/webm">
+                <source src="videos/bip-shop-hero.mp4" type="video/mp4">
+                <!-- Fallback to BIP video if shop video doesn't exist -->
+                <source src="videos/building-intelligence-platform.webm" type="video/webm">
+                <source src="videos/building-intelligence-platform.mp4" type="video/mp4">
+            </video>
+        </div>
+        
+        <div class="video-overlay"></div>
+        
+        <div class="container">
+            <div class="hero-content">
+                <!-- Mobile CTA Buttons (visible only on mobile) -->
+                <div class="hero-buttons-mobile">
+                    <a href="https://windload-auth.onrender.com" class="hero-btn secondary">
+                        <i class="fas fa-sign-in-alt"></i>
+                        <span>Member Login</span>
+                    </a>
+                    <a href="contact-us-wind-load-calculators-for-components-and-cladding-cc-wind-load-pressures-per-the-asce-7-16-and-asce-7-22-publication-windloads-made-easy.html" class="hero-btn primary electric-pulse">
+                        <i class="fas fa-comments"></i>
+                        <span>Let's Connect</span>
+                    </a>
+                    <a href="wind-load-calculator-shop.html" class="hero-action-btn green electric-pulse">
+                        <i class="fas fa-calculator"></i>
+                        <span>Browse Calculators</span>
+                    </a>
+                    <a href="building-intelligence-platform-shop.html" class="hero-action-btn orange electric-pulse">
+                        <i class="fas fa-brain"></i>
+                        <span>Explore Intelligence Platform</span>
+                    </a>
+                </div>
+
+                <h1 class="hero-title">Choose Your Plan</h1>
+                <p class="hero-subtitle">Professional wind engineering data for every team size</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Cards -->
+    <section class="pricing">
+        <div class="container">
+            <!-- Billing Toggle -->
+            <div class="billing-toggle-wrapper" style="text-align: center; margin-bottom: 2rem;">
+                <div class="billing-toggle" style="display: inline-flex;">
+                    <span class="billing-label active" id="monthly-label">Monthly</span>
+                    <button class="toggle-switch" id="billing-toggle" aria-label="Toggle between monthly and annual billing">
+                        <span class="toggle-slider"></span>
+                    </button>
+                    <span class="billing-label" id="annual-label">Annual</span>
+                    <span class="save-badge">Save 15%</span>
+                </div>
+            </div>
+            
+            <div class="pricing-grid">
+                
+                <!-- FREE Card -->
+                <div class="pricing-card">
+                    <div class="badge-value" style="background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);">7-Day Trial</div>
+                    <div class="card-header">
+                        <h3 class="card-title">FREE</h3>
+                        <p class="card-subtitle">Try before you buy</p>
+                    </div>
+                    <div class="card-price">
+                        <span class="price-amount">$0</span>
+                        <span class="price-period">/7 days</span>
+                    </div>
+                    <div class="card-features">
+                        <p class="usage-limit">3 lookups/hour • 10/day max</p>
+                        <ul class="feature-list">
+                            <li>✓ 7-day full platform access</li>
+                            <li>✓ All 5 features accessible:</li>
+                            <li style="padding-left: 1.5rem;">• Wind velocity finder</li>
+                            <li style="padding-left: 1.5rem;">• Hurricane risk analysis</li>
+                            <li style="padding-left: 1.5rem;">• Solar site finder</li>
+                            <li style="padding-left: 1.5rem;">• Multi-location comparison</li>
+                            <li style="padding-left: 1.5rem;">• Interactive maps & visualizations</li>
+                            <li>✓ ASCE 7-22 compliant calculations</li>
+                            <li style="color: #ef4444;">⚠️ Results display watermarks</li>
+                            <li style="color: #ef4444;">⚠️ No PDF exports</li>
+                            <li style="color: #ef4444;">⚠️ No Excel exports</li>
+                            <li style="color: #ef4444;">⚠️ No printing</li>
+                        </ul>
+                    </div>
+                    <div class="card-action">
+                        <a href="building-intelligence-platform.html" class="btn btn-secondary">Start Free Trial</a>
+                    </div>
+                </div>
+
+                <!-- PROFESSIONAL Card (Most Popular) -->
+                <div class="pricing-card pricing-card-featured">
+                    <div class="badge-popular">Most Popular</div>
+                    <div class="card-header">
+                        <h3 class="card-title">PROFESSIONAL</h3>
+                        <p class="card-subtitle">For freelancers and small firms</p>
+                    </div>
+                    <div class="card-price">
+                        <span class="price-amount" data-monthly="69" data-annual="59">$69</span>
+                        <span class="price-period">/month</span>
+                    </div>
+                    <div class="annual-note">or $703/year (save 15%)</div>
+                    <div class="card-features">
+                        <p class="usage-limit">Unlimited lookups (no hourly or daily limits)</p>
+                        <ul class="feature-list">
+                            <li>✓ All 5 features with full access:</li>
+                            <li style="padding-left: 1.5rem;">• Wind velocity finder</li>
+                            <li style="padding-left: 1.5rem;">• Hurricane risk analysis</li>
+                            <li style="padding-left: 1.5rem;">• Solar site finder</li>
+                            <li style="padding-left: 1.5rem;">• Multi-location comparison</li>
+                            <li style="padding-left: 1.5rem;">• Interactive maps & visualizations</li>
+                            <li>✓ ASCE 7-22 compliant calculations</li>
+                            <li>✓ No watermarks - professional, clean results</li>
+                            <li>✓ Unlimited PDF exports</li>
+                            <li>✓ Unlimited Excel exports</li>
+                            <li>✓ Unlimited printing</li>
+                            <li>✓ Email support (24-hour response time)</li>
+                            <li>✓ Always up-to-date with latest wind data</li>
+                            <li>✓ Mobile & desktop access</li>
+                        </ul>
+                    </div>
+                    <div class="card-action">
+                        <button class="btn btn-primary" id="subscribe-professional">Subscribe Now</button>
+                    </div>
+                </div>
+
+                <!-- UNLIMITED Card -->
+                <div class="pricing-card">
+                    <div class="badge-value">Best Value</div>
+                    <div class="card-header">
+                        <h3 class="card-title">UNLIMITED</h3>
+                        <p class="card-subtitle">For power users and medium firms</p>
+                    </div>
+                    <div class="card-price">
+                        <span class="price-amount" data-monthly="179" data-annual="152">$179</span>
+                        <span class="price-period">/month</span>
+                    </div>
+                    <div class="annual-note">or $1,825/year (save 15%)</div>
+                    <div class="card-features">
+                        <p class="usage-limit">Everything unlimited - no restrictions</p>
+                        <ul class="feature-list">
+                            <li>✓ <strong>Everything in Professional</strong> PLUS:</li>
+                            <li>✓ <strong>Built-in Hurricane Intelligence</strong> ⚛ </li>
+                            <li style="padding-left: 1.5rem;">• Natural language questions</li>
+                            <li style="padding-left: 1.5rem;">• AI-powered analysis and insights</li>
+                            <li style="padding-left: 1.5rem;">• Intelligent data interpretation</li>
+                            <li>✓ Hurricane path animator</li>
+                            <li>✓ Advanced hurricane analytics</li>
+                            <li>✓ Priority support (4-hour response time)</li>
+                            <li>✓ Early access to new features and beta programs</li>
+                            <li>✓ API access (beta)</li>
+                            <li>✓ Enhanced visualizations</li>
+                        </ul>
+                    </div>
+                    <div class="card-action">
+                        <button class="btn btn-primary" id="subscribe-unlimited">Subscribe Now</button>
+                    </div>
+                </div>
+
+                <!-- ENTERPRISE Card -->
+                <div class="pricing-card">
+                    <div class="badge-enterprise">Enterprise</div>
+                    <div class="card-header">
+                        <h3 class="card-title">ENTERPRISE</h3>
+                        <p class="card-subtitle">For large firms and organizations</p>
+                    </div>
+                    <div class="card-price">
+                        <span class="price-amount">$599+</span>
+                        <span class="price-period">/month</span>
+                    </div>
+                    <div class="card-features">
+                        <p class="usage-limit">Custom pricing and unlimited everything</p>
+                        <ul class="feature-list">
+                            <li>✓ <strong>Everything in Unlimited</strong> PLUS:</li>
+                            <li>✓ <strong>Full API access</strong> - complete programmatic control</li>
+                            <li>✓ <strong>White-label capability</strong> - brand as your own</li>
+                            <li>✓ Dedicated account manager</li>
+                            <li>✓ Phone support - direct line to our team</li>
+                            <li>✓ Custom integrations with your existing systems</li>
+                            <li>✓ SLA guarantees (99.9% uptime commitment)</li>
+                            <li>✓ Training & onboarding for your team</li>
+                            <li>✓ Multi-user management - team accounts & permissions</li>
+                            <li>✓ Bulk processing - analyze thousands of locations</li>
+                            <li>✓ Custom feature development</li>
+                            <li>✓ Volume discounts - pricing scales with needs</li>
+                            <li>✓ Priority feature requests - influence our roadmap</li>
+                        </ul>
+                    </div>
+                    <div class="card-action">
+                        <a href="contact-us-wind-load-calculators-for-components-and-cladding-cc-wind-load-pressures-per-the-asce-7-16-and-asce-7-22-publication-windloads-made-easy.html" class="btn btn-secondary">Contact Sales</a>
+                    </div>
+                    <div class="contact-info">
+                        <p class="contact-item">
+                            <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                            sales@windload.solutions
+                        </p>
+                        <p class="contact-item">
+                            <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                            </svg>
+                            (833) ASCE-WIND
+                        </p>
+                        <p class="contact-item-indent">(833) 272-3946</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Not Sure Which Plan? -->
+    <section style="padding: 3rem 0; background: linear-gradient(135deg, rgba(0, 24, 255, 0.03) 0%, rgba(0, 128, 255, 0.05) 50%, rgba(0, 255, 255, 0.03) 100%);">
+        <div class="container">
+            <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+                <h2 style="font-size: 2rem; font-weight: 700; color: #1f2937; margin-bottom: 1.5rem;">Not Sure Which Plan is Right for You?</h2>
+                <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem;">
+                    <a href="building-intelligence-platform.html" class="btn btn-primary" style="width: auto; padding: 1rem 2rem; display: inline-flex; align-items: center; gap: 0.5rem;">
+                        <svg style="width: 20px; height: 20px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                            <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                        Start Free Trial
+                    </a>
+                    <a href="contact-us-wind-load-calculators-for-components-and-cladding-cc-wind-load-pressures-per-the-asce-7-16-and-asce-7-22-publication-windloads-made-easy.html" class="btn btn-secondary" style="width: auto; padding: 1rem 2rem; display: inline-flex; align-items: center; gap: 0.5rem;">
+                        <svg style="width: 20px; height: 20px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                        </svg>
+                        Contact Sales
+                    </a>
+                </div>
+                <p style="margin-top: 1.5rem; color: #6b7280; font-size: 0.875rem;">Try all features for 7 days, no credit card required • Or let us help you choose the best plan</p>
+            </div>
+            
+            <!-- Quick Recommendations -->
+            <div style="margin-top: 3rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;">
+                <!-- For Individuals - Electric Blue -->
+                <div style="background: white; padding: 1.5rem; border-radius: 12px; border: 2px solid #0080ff; position: relative; overflow: hidden; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0, 128, 255, 0.1);">
+                    <div style="position: absolute; top: 0; right: 0; width: 60px; height: 60px; background: linear-gradient(135deg, #0080ff 0%, #0018ff 100%); opacity: 0.1; border-radius: 0 12px 0 100%;"></div>
+                    <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
+                        <svg style="width: 32px; height: 32px; color: #0080ff; filter: drop-shadow(0 2px 8px rgba(0, 128, 255, 0.3));" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        <h4 style="color: #0080ff; font-size: 1.125rem; font-weight: 600; margin: 0;">For Individuals</h4>
+                    </div>
+                    <p style="color: #6b7280; font-size: 0.875rem; line-height: 1.6; margin: 0;">Start with Professional - all core features with unlimited use, perfect for independent engineers and freelancers.</p>
+                </div>
+
+                <!-- For Small Teams - Electric Turquoise -->
+                <div style="background: white; padding: 1.5rem; border-radius: 12px; border: 2px solid #40e0d0; position: relative; overflow: hidden; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(64, 224, 208, 0.1);">
+                    <div style="position: absolute; top: 0; right: 0; width: 60px; height: 60px; background: linear-gradient(135deg, #40e0d0 0%, #00ffff 100%); opacity: 0.1; border-radius: 0 12px 0 100%;"></div>
+                    <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
+                        <svg style="width: 32px; height: 32px; color: #40e0d0; filter: drop-shadow(0 2px 8px rgba(64, 224, 208, 0.3));" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                        <h4 style="color: #40e0d0; font-size: 1.125rem; font-weight: 600; margin: 0;">For Small Teams</h4>
+                    </div>
+                    <p style="color: #6b7280; font-size: 0.875rem; line-height: 1.6; margin: 0;">Start with Professional, upgrade to Unlimited when you need AI-powered hurricane intelligence and priority support.</p>
+                </div>
+
+                <!-- For Medium Firms - Electric Purple -->
+                <div style="background: white; padding: 1.5rem; border-radius: 12px; border: 2px solid #7c3aed; position: relative; overflow: hidden; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(124, 58, 237, 0.1);">
+                    <div style="position: absolute; top: 0; right: 0; width: 60px; height: 60px; background: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%); opacity: 0.1; border-radius: 0 12px 0 100%;"></div>
+                    <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
+                        <svg style="width: 32px; height: 32px; color: #7c3aed; filter: drop-shadow(0 2px 8px rgba(124, 58, 237, 0.3));" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                        </svg>
+                        <h4 style="color: #7c3aed; font-size: 1.125rem; font-weight: 600; margin: 0;">For Medium Firms</h4>
+                    </div>
+                    <p style="color: #6b7280; font-size: 0.875rem; line-height: 1.6; margin: 0;">Choose Unlimited for AI Hurricane Intelligence, natural language search, and priority support for your growing team.</p>
+                </div>
+
+                <!-- For Large Organizations - Electric Orange -->
+                <div style="background: white; padding: 1.5rem; border-radius: 12px; border: 2px solid #f59e0b; position: relative; overflow: hidden; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.1);">
+                    <div style="position: absolute; top: 0; right: 0; width: 60px; height: 60px; background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%); opacity: 0.1; border-radius: 0 12px 0 100%;"></div>
+                    <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
+                        <svg style="width: 32px; height: 32px; color: #f59e0b; filter: drop-shadow(0 2px 8px rgba(245, 158, 11, 0.3));" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                        </svg>
+                        <h4 style="color: #f59e0b; font-size: 1.125rem; font-weight: 600; margin: 0;">For Large Organizations</h4>
+                    </div>
+                    <p style="color: #6b7280; font-size: 0.875rem; line-height: 1.6; margin: 0;">Contact us for Enterprise pricing with white-label capability, dedicated support, and custom integrations.</p>
+                </div>
+            </div>
+            
+            <!-- Responsive Styles -->
+            <style>
+                @media (max-width: 1200px) {
+                    .container > div:last-of-type {
+                        grid-template-columns: repeat(2, 1fr) !important;
+                    }
+                }
+                @media (max-width: 768px) {
+                    .container > div:last-of-type {
+                        grid-template-columns: 1fr !important;
+                    }
+                }
+            </style>
+        </div>
+    </section>
+
+    <!-- Feature Comparison Table -->
+    <section class="comparison">
+        <div class="container">
+            <h2 class="section-title">Feature Comparison</h2>
+            <div class="table-wrapper">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>FREE</th>
+                            <th>PROFESSIONAL</th>
+                            <th>UNLIMITED</th>
+                            <th>ENTERPRISE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Monthly Uses</strong></td>
+                            <td>12 (3/week)</td>
+                            <td>50</td>
+                            <td>Unlimited</td>
+                            <td>Custom</td>
+                        </tr>
+                        <tr>
+                            <td>Velocity Finder</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                        </tr>
+                        <tr>
+                            <td>Hurricane Risk Analysis</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                        </tr>
+                        <tr>
+                            <td>Solar Site Finder</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                        </tr>
+                        <tr>
+                            <td>Advanced Search</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                        </tr>
+                        <tr>
+                            <td>Multi-ZIP Comparison</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Export (CSV/PDF)</strong></td>
+                            <td class="cross">✗</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Email Support</strong></td>
+                            <td class="cross">✗</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Priority Support</strong></td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Phone Support</strong></td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                            <td class="check">✓</td>
+                        </tr>
+                        <tr>
+                            <td><strong>API Access</strong></td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                            <td>Coming Soon</td>
+                            <td class="check">✓</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Custom Training</strong></td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                            <td class="check">✓</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section (Optional) -->
+    <section class="faq">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3 class="faq-question">What happens after my free trial?</h3>
+                    <p class="faq-answer">Your trial expires after 7 days. To continue using the platform, simply choose a paid plan. Your trial data and settings are saved.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">Can I change plans later?</h3>
+                    <p class="faq-answer">Yes! Upgrade or downgrade anytime. Changes take effect immediately.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">Do I need a credit card for the free trial?</h3>
+                    <p class="faq-answer">No. Start your free trial with just your email. Add payment only when you're ready to subscribe.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">What's the difference between Professional and Unlimited?</h3>
+                    <p class="faq-answer">Professional includes all core features with unlimited use. Unlimited adds AI Hurricane Intelligence, natural language search, priority support, and API access.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">Is there a setup fee?</h3>
+                    <p class="faq-answer">No setup fees. Pay only your monthly or annual subscription.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">What payment methods do you accept?</h3>
+                    <p class="faq-answer">We accept all major credit cards (Visa, Mastercard, American Express, Discover) through our secure Stripe payment processor.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>WindLoad Solutions</h4>
+                    <p>Professional WindLoad Calculator software per ASCE 7 standards. Moreover, over 24 years of excellence ensures projects meet compliance requirements. Furthermore, our team provides nationwide windload calculator support and comprehensive wind load analysis solutions.</p>
+                    <p><strong>Contact Information</strong></p>
+                    <p><strong>General Inquiries</strong><br>
+                    Email: info@windload.solutions<br>
+                    Phone: (833) 272-3946 | (833) ASCE-WIND</p>
+
+                    <p><strong>Technical Support</strong><br>
+                    Email: support@windload.solutions</p>
+
+                    <p><strong>Sales</strong><br>
+                    Email: sales@windload.solutions</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>WindLoad Calculator Services</h4>
+                    <a href="asce-7-wind-load-calculator.html">ASCE 7 WindLoad Calculator</a>
+                    <a href="services-asce7-wind-load-pressures.html">Wind Load Pressure Services</a>
+                    <a href="professional-engineer-sign-seal-wind-load-pressures.html">PE Sign & Seal Services</a>
+                    <a href="building-intelligence-platform.html">Wind Load Building Intelligence Platform</a>
+                    <a href="free-online-wind-load-calculators-demos-free-excel-wind-load-calculator.html">Free WindLoad Calculator</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>WindLoad Calculator Resources</h4>
+                    <a href="instructional-videos-asce-7-wind-load-calculator-wind-load-pressure-software-components-cladding-wind-load-pressures-asce-7.html">WindLoad Calculator Videos</a>
+                    <a href="faqfor-wind-load-calculator-software-for-wind-load-pressures-per-asce-7.html">WindLoad Calculator FAQ</a>
+                    <a href="clarifying-wind-loads-free-asce-calculator-pressure-analysis.html">Wind Load Types Guide</a>
+                    <a href="contact-us-wind-load-calculators-for-components-and-cladding-cc-wind-load-pressures-per-the-asce-7-16-and-asce-7-22-publication-windloads-made-easy.html">Contact WindLoad Experts</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Industry Solutions</h4>
+                    <a href="wind-load-calculator-for-engineers.html">For Engineers</a>
+                    <a href="wind-load-calculator-for-architects.html">For Architects</a>
+                    <a href="contractors-wind-load-calculator.html">For Contractors</a>
+                    <a href="wind-loads-for-consultants.html">For Consultants</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 WindLoad Solutions. All rights reserved. Professional WindLoad Calculator software per ASCE 7-22 & ASCE 7-16. Contact us for components and cladding wind load pressures, windloads analysis, and comprehensive wind load calculator excel solutions nationwide.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+
+    <script>
+        // Navigation Functions
+        function toggleNav() {
+            const navMenu = document.getElementById('nav-menu');
+            const hamburger = document.getElementById('hamburger');
+            const overlay = document.getElementById('nav-overlay');
+            
+            navMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+            overlay.classList.toggle('active');
+            
+            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+        }
+
+        function initializeHeaderScroll() {
+            const header = document.getElementById('main-header');
+            
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+        }
+
+        function initializeVideo() {
+            const video = document.querySelector('.hero-video');
+            if (!video) return;
+
+            video.muted = true;
+            video.playsInline = true;
+            
+            video.addEventListener('loadeddata', function() {
+                video.play().catch(function() {
+                    console.log('Video autoplay blocked');
+                });
+            });
+
+            video.addEventListener('error', function() {
+                video.style.display = 'none';
+            });
+
+            document.addEventListener('click', function() {
+                if (video.paused) {
+                    video.play().catch(function() {
+                        console.log('Manual play failed');
+                    });
+                }
+            }, { once: true });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeVideo();
+            initializeHeaderScroll();
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    
+    
+        // Dropdown menu toggle for mobile - supports multiple dropdowns
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdowns = document.querySelectorAll('.nav-dropdown');
+            
+            dropdowns.forEach(function(dropdown) {
+                const dropdownToggle = dropdown.querySelector('.nav-dropdown-toggle');
+                
+                if (dropdownToggle) {
+                    dropdownToggle.addEventListener('click', function(e) {
+                        const header = document.getElementById('main-header');
+                        const isScrolled = header && header.classList.contains('scrolled');
+                        const isMobile = window.innerWidth < 1024;
+                        
+                        // Check if this dropdown is in the hamburger menu (nav-links) or horizontal nav (nav-desktop-scrolled)
+                        const isInHamburgerMenu = dropdown.closest('.nav-links');
+                        const isInHorizontalNav = dropdown.closest('.nav-desktop-scrolled');
+                        
+                        // Hamburger menu dropdowns: ALWAYS toggle by click
+                        // Horizontal nav dropdowns: Toggle on mobile, hover on desktop when scrolled
+                        if (isInHamburgerMenu || isMobile || !isScrolled) {
+                            e.preventDefault();
+                            // Close other dropdowns
+                            dropdowns.forEach(function(otherDropdown) {
+                                if (otherDropdown !== dropdown) {
+                                    otherDropdown.classList.remove('active');
+                                }
+                            });
+                            // Toggle current dropdown
+                            dropdown.classList.toggle('active');
+                        }
+                        // On desktop when scrolled (and in horizontal nav), let CSS hover handle it
+                    });
+                }
+            });
+        });
+    </script>
+
+    <script>
+        // ============================================
+        // SHOP-SPECIFIC FUNCTIONALITY
+        // ============================================
+        
+        /**
+         * BIP SHOP PAGE - JAVASCRIPT
+         * Handles pricing toggle and Stripe checkout
+         */
+        // ============================================
+        // INITIALIZATION
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeBillingToggle();
+            initializeStripeCheckout();
+        });
+        // ============================================
+        // BILLING TOGGLE (Monthly/Annual)
+        // ============================================
+        let isAnnualBilling = false;
+        function initializeBillingToggle() {
+            const toggleButton = document.getElementById('billing-toggle');
+            const monthlyLabel = document.getElementById('monthly-label');
+            const annualLabel = document.getElementById('annual-label');
+            if (!toggleButton) return;
+            // Click handlers
+            toggleButton.addEventListener('click', toggleBilling);
+            monthlyLabel.addEventListener('click', () => {
+                if (isAnnualBilling) toggleBilling();
+            });
+            annualLabel.addEventListener('click', () => {
+                if (!isAnnualBilling) toggleBilling();
+            });
+        }
+        function toggleBilling() {
+            isAnnualBilling = !isAnnualBilling;
+            const toggleButton = document.getElementById('billing-toggle');
+            const monthlyLabel = document.getElementById('monthly-label');
+            const annualLabel = document.getElementById('annual-label');
+            // Update toggle switch
+            toggleButton.classList.toggle('active');
+            // Update labels
+            if (isAnnualBilling) {
+                monthlyLabel.classList.remove('active');
+                annualLabel.classList.add('active');
+            } else {
+                monthlyLabel.classList.add('active');
+                annualLabel.classList.remove('active');
+            }
+            // Update prices
+            updatePrices();
+        }
+        function updatePrices() {
+            // Get all price elements
+            const priceElements = document.querySelectorAll('.price-amount[data-monthly]');
+            const annualNotes = document.querySelectorAll('.annual-note');
+            priceElements.forEach(priceElement => {
+                const monthlyPrice = priceElement.getAttribute('data-monthly');
+                const annualPrice = priceElement.getAttribute('data-annual');
+                // Add animation class
+                priceElement.classList.add('changing');
+                // Update price
+                setTimeout(() => {
+                    if (isAnnualBilling) {
+                        priceElement.textContent = '$' + annualPrice;
+                    } else {
+                        priceElement.textContent = '$' + monthlyPrice;
+                    }
+                    // Remove animation class
+                    setTimeout(() => {
+                        priceElement.classList.remove('changing');
+                    }, 300);
+                }, 150);
+            });
+            // Show/hide annual notes
+            annualNotes.forEach(note => {
+                if (isAnnualBilling) {
+                    note.classList.add('show');
+                } else {
+                    note.classList.remove('show');
+                }
+            });
+        }
+        // ============================================
+        // STRIPE CHECKOUT INTEGRATION
+        // ============================================
+        function initializeStripeCheckout() {
+            // Professional Plan Button
+            const professionalBtn = document.getElementById('subscribe-professional');
+            if (professionalBtn) {
+                professionalBtn.addEventListener('click', () => {
+                    const billing = isAnnualBilling ? 'annual' : 'monthly';
+                    createStripeCheckout('professional', billing);
+                });
+            }
+            // Unlimited Plan Button
+            const unlimitedBtn = document.getElementById('subscribe-unlimited');
+            if (unlimitedBtn) {
+                unlimitedBtn.addEventListener('click', () => {
+                    const billing = isAnnualBilling ? 'annual' : 'monthly';
+                    createStripeCheckout('unlimited', billing);
+                });
+            }
+        }
+        /**
+         * Create Stripe Checkout Session
+         * @param {string} plan - 'professional' or 'unlimited'
+         * @param {string} billing - 'monthly' or 'annual'
+         */
+        async function createStripeCheckout(plan, billing) {
+            console.log(`Creating checkout for ${plan} ${billing}`);
+            // Show loading state
+            const buttonId = plan === 'professional' ? 'subscribe-professional' : 'subscribe-unlimited';
+            const button = document.getElementById(buttonId);
+            const originalText = button.textContent;
+            button.textContent = 'Loading...';
+            button.disabled = true;
+            try {
+                // Call backend API to create Stripe Checkout session
+                const response = await fetch('https://api.windload.solutions/api/stripe/create-checkout', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        plan: plan,
+                        billing: billing,
+                        success_url: window.location.origin + '/bip-shop-success.html',
+                        cancel_url: window.location.origin + '/bip-shop-cancel.html'
+                    })
+                });
+                if (!response.ok) {
+                    throw new Error('Failed to create checkout session');
+                }
+                const data = await response.json();
+                // Redirect to Stripe Checkout
+                if (data.url) {
+                    window.location.href = data.url;
+                } else {
+                    throw new Error('No checkout URL returned');
+                }
+            } catch (error) {
+                console.error('Checkout error:', error);
+                alert('Unable to start checkout. Please try again or contact support at support@windload.solutions');
+                // Restore button state
+                button.textContent = originalText;
+                button.disabled = false;
+            }
+        }
+        // ============================================
+        // SMOOTH SCROLLING (Optional Enhancement)
+        // ============================================
+        // SMOOTH SCROLLING REMOVED - Now inline in HTML from index.html reference
+        
+        // ============================================
+        // ANALYTICS TRACKING (Optional)
+        // ============================================
+        /**
+         * Track user interactions for analytics
+         * Can be integrated with Google Analytics, Mixpanel, etc.
+         */
+        function trackEvent(category, action, label) {
+            // Example: Google Analytics 4
+            if (typeof gtag !== 'undefined') {
+                gtag('event', action, {
+                    'event_category': category,
+                    'event_label': label
+                });
+            }
+            // Console log for debugging
+            console.log('Analytics Event:', category, action, label);
+        }
+        // Track billing toggle
+        const billingToggle = document.getElementById('billing-toggle');
+        if (billingToggle) {
+            billingToggle.addEventListener('click', () => {
+                trackEvent('Pricing', 'Toggle Billing', isAnnualBilling ? 'Annual' : 'Monthly');
+            });
+        }
+        // Track plan clicks
+        document.querySelectorAll('.btn-primary').forEach(button => {
+            button.addEventListener('click', function() {
+                const planName = this.id.replace('subscribe-', '');
+                const billing = isAnnualBilling ? 'annual' : 'monthly';
+                trackEvent('Pricing', 'Click Subscribe', `${planName}-${billing}`);
+            });
+        });
+        // ============================================
+        // UTILITY FUNCTIONS
+        // ============================================
+        /**
+         * Get current plan and billing period
+         * Useful for passing to backend
+         */
+        function getCurrentSelection() {
+            return {
+                billing: isAnnualBilling ? 'annual' : 'monthly',
+                timestamp: new Date().toISOString()
+            };
+        }
+        /**
+         * Format price display
+         */
+        function formatPrice(amount, period = 'month') {
+            return `$${amount}/${period}`;
+        }
+        // ============================================
+        // ERROR HANDLING
+        // ============================================
+        // Global error handler for fetch requests
+        window.addEventListener('unhandledrejection', function(event) {
+            console.error('Unhandled promise rejection:', event.reason);
+            // Could show user-friendly error message here
+        });
+        // ============================================
+        // EXPORTS (for testing)
+        // ============================================
+        // Export functions for testing if needed
+        if (typeof module !== 'undefined' && module.exports) {
+            module.exports = {
+                toggleBilling,
+                createStripeCheckout,
+                getCurrentSelection,
+                formatPrice
+            };
+        }
+    </script>
+
+</body>
+</html>

@@ -262,11 +262,80 @@
             width: 100%;
             height: 100%;
             background: rgba(0,0,0,0.6);
-            z-index: 9998;
+            backdrop-filter: blur(5px);
+            z-index: 9999;
         }
 
         .nav-overlay.active {
             display: block;
+        }
+
+        /* Hamburger Menu Dropdown Styles */
+        .nav-dropdown {
+            position: relative;
+        }
+
+        .nav-dropdown-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            text-decoration: none;
+            color: #1f2937;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .dropdown-arrow {
+            margin-left: 0.5rem;
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-dropdown.active .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .nav-dropdown-menu {
+            display: none;
+            flex-direction: column;
+            padding-left: 1rem;
+            margin-top: 0.25rem;
+            gap: 0;
+            background: rgba(248, 250, 252, 0.95);
+            border-radius: 8px;
+            padding: 0.25rem 1rem;
+        }
+
+        .nav-dropdown.active .nav-dropdown-menu {
+            display: flex;
+        }
+
+        .nav-dropdown-menu a {
+            font-size: 1.1rem;
+            font-weight: 500;
+            padding: 1rem 0.5rem;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .nav-dropdown-menu a:last-child {
+            border-bottom: none;
+        }
+
+        .nav-dropdown-toggle:hover {
+            background: rgba(0, 24, 255, 0.05);
+            color: #0018ff;
+            border-radius: 8px;
+        }
+
+        .nav-dropdown-menu a:hover {
+            background: rgba(0, 24, 255, 0.08);
+            color: #0018ff;
+            border-radius: 6px;
         }
 
         /* Hero Section with Fullscreen Video */
@@ -1232,9 +1301,10 @@
                 <a href="contact-us-wind-load-calculators-for-components-and-cladding-cc-wind-load-pressures-per-the-asce-7-16-and-asce-7-22-publication-windloads-made-easy.html">Contact Us</a>
             </nav>
         </div>
-    </header>
 
-    <div class="nav-overlay" id="nav-overlay" onclick="toggleNav()"></div>
+        <!-- Mobile Menu Overlay -->
+        <div class="nav-overlay" id="nav-overlay" onclick="toggleNav()"></div>
+    </header>
 
     <!-- Hero Section with Video Background -->
     <section class="hero-section">
@@ -1582,6 +1652,42 @@
 
             document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
         }
+
+        // Dropdown menu toggle for hamburger menu
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdowns = document.querySelectorAll('.nav-dropdown');
+
+            dropdowns.forEach(function(dropdown) {
+                const dropdownToggle = dropdown.querySelector('.nav-dropdown-toggle');
+
+                if (dropdownToggle) {
+                    dropdownToggle.addEventListener('click', function(e) {
+                        const header = document.getElementById('main-header');
+                        const isScrolled = header && header.classList.contains('scrolled');
+                        const isMobile = window.innerWidth < 1024;
+
+                        // Check if this dropdown is in the hamburger menu (nav-links) or horizontal nav (nav-desktop-scrolled)
+                        const isInHamburgerMenu = dropdown.closest('.nav-links');
+                        const isInHorizontalNav = dropdown.closest('.nav-desktop-scrolled');
+
+                        // Hamburger menu dropdowns: ALWAYS toggle by click
+                        // Horizontal nav dropdowns: Toggle on mobile, hover on desktop when scrolled
+                        if (isInHamburgerMenu || isMobile || !isScrolled) {
+                            e.preventDefault();
+                            // Close other dropdowns
+                            dropdowns.forEach(function(otherDropdown) {
+                                if (otherDropdown !== dropdown) {
+                                    otherDropdown.classList.remove('active');
+                                }
+                            });
+                            // Toggle current dropdown
+                            dropdown.classList.toggle('active');
+                        }
+                        // On desktop when scrolled (and in horizontal nav), let CSS hover handle it
+                    });
+                }
+            });
+        });
 
         // Close menu when clicking on a link
         document.querySelectorAll('.nav-menu a').forEach(link => {

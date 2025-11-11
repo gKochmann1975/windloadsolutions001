@@ -2870,15 +2870,18 @@
     
     <!-- Initialize Building Intelligence Platform -->
     <script>
-        // Configure CSV path for Building Intelligence Platform (optional - ZIP lookup uses API)
+        // Configure CSV path for Building Intelligence Platform (disabled - ZIP lookup uses API)
         window.VELOCITY_FINDER_CONFIG = {
-            // csvPath: './data/usps_zip_codes.csv'  // Commented out - not required, API handles ZIP validation
+            csvPath: null,  // Explicitly disable CSV loading - API handles all ZIP validation
+            skipCSVLoad: true  // Flag to skip CSV loading entirely
         };
 
-        // Initialize the Building Intelligence Platform
-        if (typeof VelocityFinder !== 'undefined') {
-            VelocityFinder.init('building-intelligence-container');
-        }
+        // Initialize the Building Intelligence Platform with delay to prevent flash
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof VelocityFinder !== 'undefined') {
+                VelocityFinder.init('building-intelligence-container');
+            }
+        });
     </script>
     
     <script>

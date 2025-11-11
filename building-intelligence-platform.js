@@ -2546,11 +2546,22 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
     // CSV DATA LOADING (PRESERVED)
     // ================================================================
     async function loadCSVData() {
+        // Check if CSV loading should be skipped
+        if (window.VELOCITY_FINDER_CONFIG?.skipCSVLoad === true ||
+            window.VELOCITY_FINDER_CONFIG?.csvPath === null) {
+            console.log('CSV loading skipped - using API for ZIP lookups');
+            state.csvLoaded = false; // Mark as not loaded, will use API fallback
+            LoadingOverlay.hide();
+            initializeHurricaneAnimator();
+            filterHurricanes(); // Initialize hurricane list
+            return; // Exit early
+        }
+
         LoadingOverlay.show('Loading location database...');
-        
+
         let csvLoaded = false;
         let lastError = null;
-        
+
         // Try each path until one works
         for (const csvPath of CONFIG.csvPaths) {
             try {

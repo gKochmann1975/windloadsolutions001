@@ -736,8 +736,59 @@
         /* ===== UNIFIED CONTAINER SCALING STRATEGY ===== */
         /* Everything scales proportionally together, content hides based on priority */
 
+        /* Desktop Navigation */
+        .nav-desktop {
+            display: none;
+        }
+
         /* Keep hamburger visible on desktop when scrolled */
         @media (min-width: 1024px) {
+            /* Show desktop navigation on desktop screens */
+            .nav-desktop {
+                display: flex;
+                gap: var(--spacing-lg);
+                align-items: center;
+            }
+
+            .nav-desktop a {
+                color: white;
+                text-decoration: none;
+                font-weight: 600;
+                font-size: 0.95rem;
+                padding: var(--spacing-sm) var(--spacing-md);
+                border-radius: var(--radius-sm);
+                transition: all 0.3s ease;
+                text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            }
+
+            .nav-desktop a:hover {
+                color: #0018ff;
+                background: rgba(255, 255, 255, 0.95);
+                text-shadow: none;
+            }
+
+            .nav-desktop a.active {
+                color: #0018ff;
+                background: rgba(255, 255, 255, 0.95);
+                text-shadow: none;
+            }
+
+            /* Adjust navigation colors when header is scrolled */
+            .main-header.scrolled .nav-desktop a {
+                color: #1a202c;
+                text-shadow: none;
+            }
+
+            .main-header.scrolled .nav-desktop a:hover {
+                color: #0018ff;
+                background: rgba(0, 24, 255, 0.05);
+            }
+
+            .main-header.scrolled .nav-desktop a.active {
+                color: #0018ff;
+                background: rgba(0, 24, 255, 0.1);
+            }
+
             .main-header.scrolled .hamburger {
                 display: flex;
             }
@@ -1136,18 +1187,17 @@
     <!-- Header -->
     <header class="main-header" id="main-header">
         <div class="header-container">
-            <div class="logo-hamburger-row">
-                <a href="index.html" class="logo">
-                    <img src="images/windload-solutions-logo.png" alt="WindLoad Solutions Logo" class="logo-image">
-                </a>
-            </div>
+            <a href="index.html" class="logo">
+                <img src="images/windload-solutions-logo.png" alt="WindLoad Solutions Logo" class="logo-image">
+            </a>
 
-            <!-- Full Hamburger Menu (Always available via hamburger button) -->
-            <nav class="nav-links" id="nav-menu">
-                <a href="index.html">Home</a>
-                <a href="wind-load-calculator-shop.html">Wind Load Calculators</a>
-                <a href="building-intelligence-platform-shop.html">Building Intelligence</a>
-                <a href="contact-us-wind-load-calculators-for-components-and-cladding-cc-wind-load-pressures-per-the-asce-7-16-and-asce-7-22-publication-windloads-made-easy.html">Contact</a>
+            <!-- Desktop Navigation Links -->
+            <nav class="nav-desktop">
+                <a href="free-online-wind-load-calculators-demos-free-excel-wind-load-calculator.html">Free Calculator</a>
+                <a href="building-intelligence-platform-shop.html">B.I.P.</a>
+                <a href="wind-load-calculator-shop.html" class="active">Shop</a>
+                <a href="services-asce7-wind-load-pressures.html">Services</a>
+                <a href="why-choose-windload-solutions.html">Why Us</a>
             </nav>
 
             <!-- Header Right Side -->
@@ -1161,6 +1211,17 @@
                 </button>
             </div>
         </div>
+
+        <!-- Mobile Hamburger Menu -->
+        <nav class="nav-links" id="nav-menu">
+            <a href="index.html">Home</a>
+            <a href="free-online-wind-load-calculators-demos-free-excel-wind-load-calculator.html">Free Calculator</a>
+            <a href="building-intelligence-platform-shop.html">B.I.P.</a>
+            <a href="wind-load-calculator-shop.html" class="active">Shop</a>
+            <a href="services-asce7-wind-load-pressures.html">Services</a>
+            <a href="why-choose-windload-solutions.html">Why Us</a>
+            <a href="contact-us-wind-load-calculators-for-components-and-cladding-cc-wind-load-pressures-per-the-asce-7-16-and-asce-7-22-publication-windloads-made-easy.html">Contact</a>
+        </nav>
     </header>
 
     <div class="nav-overlay" id="nav-overlay" onclick="toggleNav()"></div>

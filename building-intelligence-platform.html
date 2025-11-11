@@ -2870,13 +2870,15 @@
     
     <!-- Initialize Building Intelligence Platform -->
     <script>
-        // Configure CSV path for Building Intelligence Platform
+        // Configure CSV path for Building Intelligence Platform (optional - ZIP lookup uses API)
         window.VELOCITY_FINDER_CONFIG = {
-            csvPath: './data/usps_zip_codes.csv'
+            // csvPath: './data/usps_zip_codes.csv'  // Commented out - not required, API handles ZIP validation
         };
-        
+
         // Initialize the Building Intelligence Platform
-        VelocityFinder.init('building-intelligence-container');
+        if (typeof VelocityFinder !== 'undefined') {
+            VelocityFinder.init('building-intelligence-container');
+        }
     </script>
     
     <script>
@@ -3070,9 +3072,9 @@
                     </div>
                     
                     <p class="signup-privacy">
-                        By signing up, you agree to our 
-                        <a href="/terms" target="_blank">Terms of Service</a> and 
-                        <a href="/privacy" target="_blank">Privacy Policy</a>.
+                        By signing up, you agree to our
+                        <a href="terms-of-service.html" target="_blank">Terms of Service</a> and
+                        <a href="privacy-policy.html" target="_blank">Privacy Policy</a>.
                     </p>
                 </form>
             </div>

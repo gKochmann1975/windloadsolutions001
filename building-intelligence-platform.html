@@ -52,6 +52,16 @@
         body::-webkit-scrollbar {
             display: none;
         }
+
+        /* Global scrollbar hiding for all scrollable elements */
+        html {
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE and Edge */
+        }
+
+        html::-webkit-scrollbar {
+            display: none;
+        }
         
         .container {
             max-width: 1200px;
@@ -2157,6 +2167,14 @@
             box-shadow: 0 25px 60px rgba(0,0,0,0.5);
             z-index: 1;
             animation: slideInUp 0.5s ease;
+            /* Hide scrollbar but keep scroll functionality */
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE and Edge */
+        }
+
+        /* Hide scrollbar for signup modal in Chrome, Safari and Opera */
+        .signup-content::-webkit-scrollbar {
+            display: none;
         }
 
         @keyframes slideInUp {

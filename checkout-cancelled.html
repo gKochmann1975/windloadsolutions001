@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout Not Completed - Wind Load Solutions</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .cancel-container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 700px;
+            width: 100%;
+            padding: 48px;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .icon-container {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .cancel-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            animation: scaleIn 0.6s ease-out 0.2s both;
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+
+        .cancel-icon svg {
+            width: 40px;
+            height: 40px;
+            stroke: white;
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        h1 {
+            color: #1e293b;
+            font-size: 2rem;
+            margin-bottom: 16px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .subtitle {
+            color: #64748b;
+            font-size: 1.1rem;
+            margin-bottom: 32px;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .reassurance-box {
+            background: #ecfdf5;
+            border: 2px solid #10b981;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 32px 0;
+        }
+
+        .reassurance-box h2 {
+            color: #047857;
+            font-size: 1.3rem;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .reassurance-box h2 svg {
+            width: 28px;
+            height: 28px;
+            stroke: #047857;
+        }
+
+        .reassurance-box ul {
+            margin: 0;
+            padding-left: 24px;
+        }
+
+        .reassurance-box li {
+            color: #065f46;
+            margin-bottom: 12px;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        .reassurance-box li strong {
+            color: #047857;
+        }
+
+        .guarantee-badge {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 16px 24px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 24px 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .guarantee-badge svg {
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+
+        .help-section {
+            background: #fef3c7;
+            border: 2px solid #f59e0b;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+
+        .help-section h3 {
+            color: #92400e;
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .help-section h3 svg {
+            width: 24px;
+            height: 24px;
+            fill: #92400e;
+        }
+
+        .help-section p {
+            color: #78350f;
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .help-section .contact-info {
+            background: white;
+            padding: 16px;
+            border-radius: 6px;
+            margin-top: 16px;
+        }
+
+        .help-section .contact-info a {
+            color: #0018ff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .help-section .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 16px;
+            margin-top: 32px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            flex: 1;
+            min-width: 200px;
+            padding: 16px 32px;
+            border-radius: 8px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 24, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 24, 255, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #10b981;
+            border: 2px solid #10b981;
+        }
+
+        .btn-secondary:hover {
+            background: #f0fdf4;
+            transform: translateY(-2px);
+        }
+
+        .reasons-section {
+            margin: 32px 0;
+            text-align: left;
+        }
+
+        .reasons-section h3 {
+            color: #1e293b;
+            margin-bottom: 16px;
+            font-size: 1.1rem;
+        }
+
+        .reason-item {
+            padding: 16px;
+            margin-bottom: 12px;
+            background: #f8fafc;
+            border-left: 4px solid #3b82f6;
+            border-radius: 6px;
+        }
+
+        .reason-item h4 {
+            color: #1e40af;
+            margin-bottom: 6px;
+            font-size: 1rem;
+        }
+
+        .reason-item p {
+            color: #475569;
+            margin: 0;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .footer-note {
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid #e2e8f0;
+            text-align: center;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 640px) {
+            .cancel-container {
+                padding: 32px 24px;
+            }
+
+            h1 {
+                font-size: 1.6rem;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cancel-container">
+        <div class="icon-container">
+            <div class="cancel-icon">
+                <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2M7.5 21h9l1.5-8H6l1.5 8z"></path>
+                    <path d="M3.5 10h17"></path>
+                </svg>
+            </div>
+        </div>
+
+        <h1>Checkout Not Completed</h1>
+        <p class="subtitle">No worries! Your payment was not processed and you were not charged.</p>
+
+        <div class="reassurance-box">
+            <h2>
+                <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-width="2"></path>
+                </svg>
+                We're Here to Help You Decide
+            </h2>
+            <ul>
+                <li><strong>7-Day Money-Back Guarantee</strong> - Try it risk-free! Full refund if you're not satisfied</li>
+                <li><strong>No Long-Term Commitment</strong> - Cancel anytime, no questions asked</li>
+                <li><strong>Instant Access</strong> - Start calculating wind loads within minutes of purchase</li>
+                <li><strong>Expert Support</strong> - Get help from real wind engineering experts</li>
+                <li><strong>ASCE 7 Compliant</strong> - Trusted by thousands of professionals nationwide</li>
+            </ul>
+        </div>
+
+        <div class="guarantee-badge">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/>
+                <path d="M9 12l2 2 4-4" fill="none" stroke="white" stroke-width="2"/>
+            </svg>
+            100% Risk-Free - 7-Day Money-Back Guarantee
+        </div>
+
+        <div class="help-section">
+            <h3>
+                <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <path d="M9 9h.01M15 9h.01M9.5 13a3.5 3.5 0 005 0" fill="none" stroke="currentColor" stroke-width="2"/>
+                </svg>
+                Have Questions or Concerns?
+            </h3>
+            <p>We understand choosing the right tool is important. If you have any questions about our calculators, pricing, or how they work, we're here to help!</p>
+            <div class="contact-info">
+                <p style="margin: 0;"><strong>📧 Email:</strong> <a href="mailto:support@windloadsolutions.com">support@windloadsolutions.com</a></p>
+                <p style="margin: 8px 0 0 0;"><strong>💬 Response Time:</strong> Usually within 2-4 hours during business hours</p>
+            </div>
+        </div>
+
+        <div class="reasons-section">
+            <h3>Common reasons customers come back to purchase:</h3>
+
+            <div class="reason-item">
+                <h4>💰 "I wanted to check my budget first"</h4>
+                <p>Smart decision! Our annual plan saves you 20% compared to monthly. Plus, with our 7-day guarantee, there's zero risk.</p>
+            </div>
+
+            <div class="reason-item">
+                <h4>🤔 "I wasn't sure which plan to choose"</h4>
+                <p>Most professionals start with the Individual Plan ($35/month) and upgrade later if needed. You can change plans anytime!</p>
+            </div>
+
+            <div class="reason-item">
+                <h4>⏰ "I needed to get approval first"</h4>
+                <p>We get it! Feel free to show your boss our calculators and ASCE 7 compliance. We also offer invoicing for business accounts.</p>
+            </div>
+
+            <div class="reason-item">
+                <h4>🧪 "I wanted to try before buying"</h4>
+                <p>Good news! With our 7-day money-back guarantee, you can try the full version risk-free. If it doesn't meet your needs, we'll refund you 100%.</p>
+            </div>
+        </div>
+
+        <div class="button-group">
+            <a href="shop/windows-doors-shutters.html" class="btn btn-primary">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+                Try Again - View Plans
+            </a>
+            <a href="mailto:support@windloadsolutions.com?subject=Question about Wind Load Calculator&body=Hi, I was about to purchase but have a question:" class="btn btn-secondary">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+                Contact Us
+            </a>
+        </div>
+
+        <div class="footer-note">
+            <p><strong>Still browsing?</strong> Check out our <a href="index.html" style="color: #0018ff; text-decoration: none; font-weight: 600;">website</a> to learn more about our calculators.</p>
+            <p style="margin-top: 16px; font-size: 0.85rem; color: #94a3b8;">
+                Questions? View our <a href="terms-of-service.html" style="color: #64748b;">Terms of Service</a> or <a href="privacy-policy.html" style="color: #64748b;">Privacy Policy</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Track checkout abandonment (for analytics)
+        if (window.gtag) {
+            gtag('event', 'checkout_abandoned', {
+                'event_category': 'ecommerce',
+                'event_label': 'Stripe Checkout Cancelled'
+            });
+        }
+
+        // Parse URL to see if we can get session info
+        const urlParams = new URLSearchParams(window.location.search);
+        const reason = urlParams.get('reason');
+
+        if (reason === 'card_declined') {
+            const subtitle = document.querySelector('.subtitle');
+            subtitle.innerHTML = 'Your card was declined. No worries - you can try a different payment method!';
+        }
+    </script>
+</body>
+</html>

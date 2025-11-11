@@ -736,6 +736,18 @@
         /* ===== UNIFIED CONTAINER SCALING STRATEGY ===== */
         /* Everything scales proportionally together, content hides based on priority */
 
+        /* Keep hamburger visible on desktop when scrolled */
+        @media (min-width: 1024px) {
+            .main-header.scrolled .hamburger {
+                display: flex;
+            }
+
+            .main-header.scrolled .header-right {
+                gap: 2rem;
+                align-items: center;
+            }
+        }
+
         /* Desktop: Start scaling down as viewport shrinks */
         @media (max-width: 1400px) {
             .hero-scale-wrapper {

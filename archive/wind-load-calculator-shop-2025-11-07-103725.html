@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Professional wind load calculators for all building components - ASCE 7-22 compliant. Choose your category to get started.">
+    <title>Wind Load Calculators | windload.solutions</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2rem;
+            --spacing-xl: 3rem;
+            --spacing-2xl: 4rem;
+            --spacing-3xl: 6rem;
+            --radius-sm: 0.5rem;
+            --radius-md: 1rem;
+            --radius-lg: 1.5rem;
+            --radius-xl: 2rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #1a202c;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-lg);
+        }
+
+        /* Header */
+        .main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: transparent;
+            padding: 2rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .main-header.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1rem 0;
+            box-shadow: 0 1px 20px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+        }
+
+        .logo {
+            z-index: 1001;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .logo.menu-active {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .logo-image {
+            height: 100px;
+            width: auto;
+            filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
+            transition: all 0.3s ease;
+        }
+
+        .main-header.scrolled .logo-image {
+            height: 70px;
+            filter: none;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            z-index: 1001;
+        }
+
+        .header-cta {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            white-space: nowrap;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-cta:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.6);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .header-cta.primary {
+            background: rgba(0, 24, 255, 0.9);
+            border-color: rgba(0, 24, 255, 0.3);
+        }
+
+        .header-cta.primary:hover {
+            background: rgba(0, 24, 255, 1);
+            border-color: rgba(0, 24, 255, 0.8);
+        }
+
+        .main-header.scrolled .header-cta {
+            color: #0018ff;
+            background: rgba(0, 24, 255, 0.1);
+            border-color: rgba(0, 24, 255, 0.3);
+        }
+
+        .main-header.scrolled .header-cta:hover {
+            background: rgba(0, 24, 255, 0.2);
+            border-color: rgba(0, 24, 255, 0.5);
+        }
+
+        .main-header.scrolled .header-cta.primary {
+            background: #0018ff;
+            color: white;
+            border-color: #0018ff;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 0.5rem;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 3px 0;
+            transition: all 0.3s ease;
+            border-radius: 3px;
+        }
+
+        .main-header.scrolled .hamburger span {
+            background: #0018ff;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(8px, -8px);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: white;
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover:after {
+            width: 100%;
+        }
+
+        .main-header.scrolled .nav-menu a {
+            color: #1a202c;
+        }
+
+        .main-header.scrolled .nav-menu a:after {
+            background: #0018ff;
+        }
+
+        .nav-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-overlay.active {
+            opacity: 1;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            padding: 10rem 0 6rem;
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 50%, #3730a3 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(79, 70, 229, 0.3) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-section h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-section p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Hide mobile buttons by default (desktop) */
+        .hero-buttons-mobile {
+            display: none;
+        }
+
+        /* Mobile button styles */
+        .hero-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-btn.primary {
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 24, 255, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        .hero-btn.primary:hover {
+            background: linear-gradient(135deg, #181E57 0%, #0018ff 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0, 24, 255, 0.6);
+        }
+
+        .hero-btn.secondary {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-btn.secondary:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.6);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            color: white;
+        }
+
+        .hero-action-btn.green {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.25) 0%, rgba(16, 185, 129, 0.35) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            box-shadow: 0 10px 40px rgba(0, 255, 136, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .hero-action-btn.green:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.35) 0%, rgba(16, 185, 129, 0.45) 100%);
+            box-shadow: 0 15px 50px rgba(0, 255, 136, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+        }
+
+        .hero-action-btn.orange {
+            background: linear-gradient(135deg, rgba(255, 136, 0, 0.25) 0%, rgba(245, 158, 11, 0.35) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 136, 0, 0.3);
+            box-shadow: 0 10px 40px rgba(255, 136, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .hero-action-btn.orange:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(135deg, rgba(255, 136, 0, 0.35) 0%, rgba(245, 158, 11, 0.45) 100%);
+            box-shadow: 0 15px 50px rgba(255, 136, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+        }
+
+        /* Category Grid */
+        .categories-section {
+            padding: var(--spacing-3xl) 0;
+            background: #f8fafc;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--spacing-3xl);
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #1a202c;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: #64748b;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-2xl);
+            position: relative;
+            overflow: visible;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            border: 2px solid transparent;
+            margin-top: 30px;
+        }
+
+        .category-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border-color: currentColor;
+        }
+
+        .category-badge {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            white-space: nowrap;
+        }
+
+        .badge-cyan {
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+        }
+
+        .badge-blue {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+        }
+
+        .badge-yellow {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+        }
+
+        .badge-orange {
+            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+        }
+
+        .badge-purple {
+            background: linear-gradient(135deg, #a855f7 0%, #9333ea 100%);
+        }
+
+        .category-icon {
+            width: 110px;
+            height: 110px;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .category-card:hover .category-icon {
+            transform: scale(1.1);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.25);
+        }
+
+        .category-icon svg {
+            width: 60px;
+            height: 60px;
+            display: block;
+            transition: all 0.4s ease;
+            stroke: white;
+        }
+
+        .category-card:hover .category-icon svg {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        /* Windows - Cyan gradient */
+        .category-card[href*="windows"] .category-icon {
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+            box-shadow: 0 10px 35px rgba(6, 182, 212, 0.35);
+        }
+
+        .category-card[href*="windows"]:hover .category-icon {
+            box-shadow: 0 15px 50px rgba(6, 182, 212, 0.5);
+        }
+
+        /* MWFRS - Blue gradient */
+        .category-card[href*="mwfrs"] .category-icon {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            box-shadow: 0 10px 35px rgba(59, 130, 246, 0.35);
+        }
+
+        .category-card[href*="mwfrs"]:hover .category-icon {
+            box-shadow: 0 15px 50px rgba(59, 130, 246, 0.5);
+        }
+
+        /* Roofing - Orange gradient */
+        .category-card[href*="roofing"] .category-icon {
+            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+            box-shadow: 0 10px 35px rgba(249, 115, 22, 0.35);
+        }
+
+        .category-card[href*="roofing"]:hover .category-icon {
+            box-shadow: 0 15px 50px rgba(249, 115, 22, 0.5);
+        }
+
+        /* Solar - Yellow gradient */
+        .category-card[href*="solar"] .category-icon {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            box-shadow: 0 10px 35px rgba(251, 191, 36, 0.35);
+        }
+
+        .category-card[href*="solar"]:hover .category-icon {
+            box-shadow: 0 15px 50px rgba(251, 191, 36, 0.5);
+        }
+
+        /* Specialty - Purple gradient */
+        .category-card[href*="specialty"] .category-icon {
+            background: linear-gradient(135deg, #a855f7 0%, #9333ea 100%);
+            box-shadow: 0 10px 35px rgba(168, 85, 247, 0.35);
+        }
+
+        .category-card[href*="specialty"]:hover .category-icon {
+            box-shadow: 0 15px 50px rgba(168, 85, 247, 0.5);
+        }
+
+        .category-card h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #1a202c;
+            text-align: center;
+        }
+
+        .category-card p {
+            font-size: 1.05rem;
+            color: #64748b;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .category-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .category-features li {
+            padding: 0.6rem 0;
+            color: #475569;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .category-features li:before {
+            content: '✓';
+            color: currentColor;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .category-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            background: currentColor;
+            color: white;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin: 0 auto;
+            justify-content: center;
+            width: fit-content;
+            display: flex;
+        }
+
+        .category-cta:hover {
+            transform: translateX(5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .category-cta svg {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .category-card:hover .category-cta svg {
+            transform: translateX(5px);
+        }
+
+        /* SEO Content Sections */
+        .content-section {
+            padding: var(--spacing-3xl) 0;
+        }
+
+        .content-section:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        .content-section h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #1a202c;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .content-section p {
+            font-size: 1.1rem;
+            color: #475569;
+            line-height: 1.8;
+            max-width: 900px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .content-section ul {
+            max-width: 900px;
+            margin: 1.5rem auto;
+            list-style: none;
+        }
+
+        .content-section li {
+            padding: 0.75rem 0;
+            color: #475569;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .content-section li:before {
+            content: '→';
+            color: #6366f1;
+            font-weight: bold;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a202c;
+            color: white;
+            padding: var(--spacing-2xl) 0;
+            text-align: center;
+        }
+
+        footer p {
+            opacity: 0.8;
+            font-size: 0.95rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 8rem 0 4rem;
+            }
+
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-section p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-section {
+                padding: 6rem 0 3rem;
+            }
+
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+
+            .header-cta {
+                display: none;
+            }
+
+            .logo-image {
+                height: 70px;
+            }
+
+            .main-header.scrolled .logo-image {
+                height: 50px;
+            }
+
+            /* Hide desktop buttons */
+            .hero-cta-buttons {
+                display: none !important;
+            }
+
+            /* Show mobile buttons */
+            .hero-buttons-mobile {
+                display: flex !important;
+                flex-direction: column;
+                gap: 1rem;
+                width: 100%;
+                align-items: center;
+            }
+
+            /* ALL buttons uniform styling - width based on content */
+            .hero-buttons-mobile .hero-btn,
+            .hero-buttons-mobile .hero-action-btn,
+            .hero-buttons-mobile .hero-btn.primary,
+            .hero-buttons-mobile .hero-btn.secondary,
+            .hero-buttons-mobile .hero-action-btn.green,
+            .hero-buttons-mobile .hero-action-btn.orange {
+                display: inline-flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                margin: 0 auto !important;
+                padding: 1.8rem 2.2rem !important;
+                font-size: 1.65rem !important;
+                font-weight: 700 !important;
+                white-space: nowrap !important;
+                box-sizing: border-box !important;
+                border-radius: 50px !important;
+                line-height: 1.3 !important;
+                text-align: center !important;
+                width: auto !important;
+                max-width: calc(100vw - 1.5rem) !important;
+            }
+
+            /* Hide original hero content on mobile */
+            .hero-title,
+            .hero-subtitle {
+                display: none !important;
+            }
+        }
+
+        /* Mobile Navigation Styles */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 400px;
+                height: 100vh;
+                background: white;
+                flex-direction: column;
+                padding: 6rem 2rem 2rem;
+                transition: right 0.3s ease;
+                align-items: flex-start;
+                box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1);
+                overflow-y: auto;
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            .nav-overlay.active {
+                display: block;
+            }
+
+            .nav-menu a {
+                color: #1a202c;
+                font-size: 1.1rem;
+                padding: 0.75rem 0;
+                width: 100%;
+            }
+
+            .nav-menu a:after {
+                background: #0018ff;
+            }
+
+            .header-right {
+                flex-direction: column;
+                width: 100%;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+
+            .header-cta {
+                width: 100%;
+                text-align: center;
+                color: #0018ff;
+                background: rgba(0, 24, 255, 0.1);
+                border-color: rgba(0, 24, 255, 0.3);
+            }
+
+            .header-cta:hover {
+                background: rgba(0, 24, 255, 0.2);
+                border-color: rgba(0, 24, 255, 0.5);
+                transform: none;
+            }
+
+            .header-cta.primary {
+                background: #0018ff;
+                color: white;
+                border-color: #0018ff;
+            }
+
+            .category-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .content-section h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header" id="main-header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img src="images/windload-solutions-logo.png" alt="windload.solutions" class="logo-image">
+            </a>
+
+            <nav class="nav-menu" id="nav-menu">
+                <a href="index.html">Home</a>
+                <a href="wind-load-calculator-shop.html">Wind Load Calculators</a>
+                <a href="building-intelligence-platform-shop.html">Building Intelligence</a>
+                <a href="#contact">Contact</a>
+                <div class="header-right">
+                    <a href="#" class="header-cta">Sign In</a>
+                    <a href="#" class="header-cta primary">Get Started Free</a>
+                </div>
+            </nav>
+
+            <div class="hamburger" id="hamburger" onclick="toggleNav()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <div class="nav-overlay" id="nav-overlay" onclick="toggleNav()"></div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container hero-content">
+            <!-- Mobile-only buttons -->
+            <div class="hero-buttons-mobile">
+                <a href="https://windload-auth.onrender.com" class="hero-btn secondary">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span>Member Login</span>
+                </a>
+                <a href="contact-us-wind-load-calculators-for-components-and-cladding-cc-wind-load-pressures-per-the-asce-7-16-and-asce-7-22-publication-windloads-made-easy.html" class="hero-btn primary electric-pulse">
+                    <i class="fas fa-comments"></i>
+                    <span>Let's Connect</span>
+                </a>
+                <a href="wind-load-calculator-shop.html" class="hero-action-btn green electric-pulse">
+                    <i class="fas fa-calculator"></i>
+                    <span>Browse Calculators</span>
+                </a>
+                <a href="building-intelligence-platform-shop.html" class="hero-action-btn orange electric-pulse">
+                    <i class="fas fa-brain"></i>
+                    <span>Explore Intelligence Platform</span>
+                </a>
+            </div>
+
+            <h1>Professional Wind Load Calculators</h1>
+            <p>ASCE 7-22 compliant calculators for all building components. Choose your category to get started with accurate, code-compliant wind load calculations.</p>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Choose Your Calculator Category</h2>
+                <p>Select the category that matches your project needs. Each category includes specialized calculators designed for specific building components.</p>
+            </div>
+
+            <div class="category-grid">
+                <!-- Windows, Doors & Shutters -->
+                <a href="shop/windows-doors-shutters.html" class="category-card" style="color: #06b6d4;">
+                    <div class="category-badge badge-cyan">Components & Cladding</div>
+                    <div class="category-icon">
+                        <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="3" y="3" width="7" height="7" rx="1"/>
+                            <rect x="14" y="3" width="7" height="7" rx="1"/>
+                            <rect x="14" y="14" width="7" height="7" rx="1"/>
+                            <rect x="3" y="14" width="7" height="7" rx="1"/>
+                        </svg>
+                    </div>
+                    <h3>Windows, Doors & Shutters</h3>
+                    <p>Specialized calculators for fenestration components including impact-rated products and hurricane shutters.</p>
+                    <ul class="category-features">
+                        <li>Impact-rated windows & doors</li>
+                        <li>Hurricane shutters & protection</li>
+                        <li>Curtain wall systems</li>
+                        <li>Skylight assemblies</li>
+                    </ul>
+                    <div class="category-cta">
+                        View Pricing
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </div>
+                </a>
+
+                <!-- MWFRS -->
+                <a href="shop/mwfrs.html" class="category-card" style="color: #3b82f6;">
+                    <div class="category-badge badge-blue">Main Wind Force</div>
+                    <div class="category-icon">
+                        <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                            <line x1="9" y1="22" x2="9" y2="12"/>
+                            <line x1="15" y1="22" x2="15" y2="12"/>
+                        </svg>
+                    </div>
+                    <h3>Main Wind Force (MWFRS)</h3>
+                    <p>Comprehensive calculators for main wind force resisting systems and structural components.</p>
+                    <ul class="category-features">
+                        <li>Building envelope loads</li>
+                        <li>Structural frame analysis</li>
+                        <li>Lateral load calculations</li>
+                        <li>Foundation design loads</li>
+                    </ul>
+                    <div class="category-cta">
+                        View Pricing
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </div>
+                </a>
+
+                <!-- Roofing -->
+                <a href="shop/roofing.html" class="category-card" style="color: #f97316;">
+                    <div class="category-badge badge-orange">Roofing Systems</div>
+                    <div class="category-icon">
+                        <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                            <polyline points="9 22 9 12 15 12 15 22"/>
+                        </svg>
+                    </div>
+                    <h3>Roofing Systems</h3>
+                    <p>Dedicated calculators for all types of roofing components and attachment systems.</p>
+                    <ul class="category-features">
+                        <li>Shingle & tile systems</li>
+                        <li>Metal roofing panels</li>
+                        <li>Membrane roofing</li>
+                        <li>Roof deck & fasteners</li>
+                    </ul>
+                    <div class="category-cta">
+                        View Pricing
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </div>
+                </a>
+
+                <!-- Solar Panels -->
+                <a href="shop/solar-panels.html" class="category-card" style="color: #fbbf24;">
+                    <div class="category-badge badge-yellow">Solar & Renewable</div>
+                    <div class="category-icon">
+                        <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="12" cy="12" r="4"/>
+                            <line x1="12" y1="2" x2="12" y2="4"/>
+                            <line x1="12" y1="20" x2="12" y2="22"/>
+                            <line x1="4.93" y1="4.93" x2="6.34" y2="6.34"/>
+                            <line x1="17.66" y1="17.66" x2="19.07" y2="19.07"/>
+                            <line x1="2" y1="12" x2="4" y2="12"/>
+                            <line x1="20" y1="12" x2="22" y2="12"/>
+                            <line x1="4.93" y1="19.07" x2="6.34" y2="17.66"/>
+                            <line x1="17.66" y1="6.34" x2="19.07" y2="4.93"/>
+                        </svg>
+                    </div>
+                    <h3>Solar Panel Systems</h3>
+                    <p>Specialized calculators for solar panel arrays and mounting systems on various roof types.</p>
+                    <ul class="category-features">
+                        <li>Roof-mounted arrays</li>
+                        <li>Ground-mounted systems</li>
+                        <li>Ballasted systems</li>
+                        <li>Attachment & rail loads</li>
+                    </ul>
+                    <div class="category-cta">
+                        View Pricing
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </div>
+                </a>
+
+                <!-- Specialty -->
+                <a href="shop/specialty.html" class="category-card" style="color: #a855f7;">
+                    <div class="category-badge badge-purple">Specialty Items</div>
+                    <div class="category-icon">
+                        <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                            <polyline points="2 17 12 22 22 17"/>
+                            <polyline points="2 12 12 17 22 12"/>
+                        </svg>
+                    </div>
+                    <h3>Specialty Components</h3>
+                    <p>Unique calculators for specialized building components and equipment.</p>
+                    <ul class="category-features">
+                        <li>Parapets & canopies</li>
+                        <li>Signs & billboards</li>
+                        <li>Roof-mounted equipment</li>
+                        <li>Balconies & railings</li>
+                    </ul>
+                    <div class="category-cta">
+                        View Pricing
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEO Content Sections -->
+    <section class="content-section">
+        <div class="container">
+            <h2>Why Wind Load Calculations Matter</h2>
+            <p>Wind load calculations are critical for ensuring the structural integrity and safety of buildings in areas prone to high winds, hurricanes, and severe weather events. Accurate wind load analysis helps engineers and architects design buildings that can withstand the forces of nature while meeting all applicable building codes and standards.</p>
+            <p>The ASCE 7-22 standard provides comprehensive guidelines for determining wind loads on buildings and structures. Our calculators implement these standards with precision, helping you ensure code compliance while streamlining your design workflow. From simple residential projects to complex commercial developments, accurate wind load calculations are essential for protecting lives and property.</p>
+            <p>Professional wind load calculators eliminate the complexity of manual calculations, reduce errors, and save valuable engineering time. By using specialized calculators for different building components, you can ensure that every element of your project—from windows and doors to roofing systems and solar panels—is properly designed to resist wind forces.</p>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2>Components & Cladding vs. Main Wind Force</h2>
+            <p>Understanding the difference between Components & Cladding (C&C) and Main Wind Force Resisting Systems (MWFRS) is fundamental to proper wind load analysis. Each system experiences different pressure distributions and requires distinct calculation approaches.</p>
+
+            <h3 style="font-size: 1.8rem; margin-top: 2rem; margin-bottom: 1rem; color: #1a202c;">Components & Cladding (C&C)</h3>
+            <p>C&C elements include individual building envelope components that receive wind loads directly. These typically experience higher localized pressures than the overall building structure:</p>
+            <ul>
+                <li>Windows, doors, and skylights that must resist direct wind pressure</li>
+                <li>Roofing materials including shingles, tiles, and metal panels</li>
+                <li>Wall cladding systems such as siding, EIFS, and curtain walls</li>
+                <li>Fasteners and attachment systems that secure components to the structure</li>
+                <li>Parapets, overhangs, and other architectural features</li>
+            </ul>
+
+            <h3 style="font-size: 1.8rem; margin-top: 2rem; margin-bottom: 1rem; color: #1a202c;">Main Wind Force Resisting Systems (MWFRS)</h3>
+            <p>MWFRS refers to the structural framework that provides overall stability and transfers wind loads to the foundation:</p>
+            <ul>
+                <li>Structural frames including columns, beams, and load-bearing walls</li>
+                <li>Bracing systems and shear walls that resist lateral forces</li>
+                <li>Roof and floor diaphragms that distribute loads</li>
+                <li>Foundation elements that transfer loads to the ground</li>
+                <li>Overall building stability and overturning resistance</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2>Applications Across Building Types</h2>
+            <p>Wind load calculations are essential for virtually every type of construction project, from residential homes to large commercial developments. Different building types present unique challenges and require specialized approaches to wind load analysis.</p>
+
+            <h3 style="font-size: 1.8rem; margin-top: 2rem; margin-bottom: 1rem; color: #1a202c;">Residential Construction</h3>
+            <ul>
+                <li>Single-family homes requiring accurate roof, window, and door calculations</li>
+                <li>Multi-family developments with complex building geometries</li>
+                <li>Townhomes and condominiums with shared structural elements</li>
+                <li>Additions and renovations to existing residential structures</li>
+            </ul>
+
+            <h3 style="font-size: 1.8rem; margin-top: 2rem; margin-bottom: 1rem; color: #1a202c;">Commercial Buildings</h3>
+            <ul>
+                <li>Office buildings with curtain wall systems and large glazed areas</li>
+                <li>Retail centers with varied roof geometries and signage</li>
+                <li>Warehouses and industrial facilities with large roof spans</li>
+                <li>Mixed-use developments combining multiple building types</li>
+            </ul>
+
+            <h3 style="font-size: 1.8rem; margin-top: 2rem; margin-bottom: 1rem; color: #1a202c;">Specialty Structures</h3>
+            <ul>
+                <li>Solar panel installations on various roof types</li>
+                <li>Rooftop equipment and mechanical systems</li>
+                <li>Canopies, awnings, and covered outdoor spaces</li>
+                <li>Signs, billboards, and architectural features</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2>The Cost of Inaccurate Wind Load Calculations</h2>
+            <p>Errors in wind load calculations can lead to serious consequences, both financial and safety-related. Understanding these risks highlights the importance of using professional, code-compliant calculation tools.</p>
+
+            <h3 style="font-size: 1.8rem; margin-top: 2rem; margin-bottom: 1rem; color: #1a202c;">Under-Design Risks</h3>
+            <ul>
+                <li>Structural failures during high wind events leading to property damage</li>
+                <li>Liability exposure for engineers, architects, and building owners</li>
+                <li>Injuries or loss of life due to component failures</li>
+                <li>Costly repairs, retrofits, or complete rebuilds after storm damage</li>
+                <li>Insurance claims, litigation, and professional liability issues</li>
+            </ul>
+
+            <h3 style="font-size: 1.8rem; margin-top: 2rem; margin-bottom: 1rem; color: #1a202c;">Over-Design Consequences</h3>
+            <ul>
+                <li>Unnecessarily high material and construction costs</li>
+                <li>Reduced project profitability and competitiveness</li>
+                <li>Extended construction timelines due to over-engineered components</li>
+                <li>Difficulty sourcing oversized or specialty materials</li>
+                <li>Wasted engineering time on overly conservative designs</li>
+            </ul>
+
+            <h3 style="font-size: 1.8rem; margin-top: 2rem; margin-bottom: 1rem; color: #1a202c;">The Value of Precision</h3>
+            <p>Professional wind load calculators help achieve the optimal balance—designs that are safe, code-compliant, and cost-effective. By using accurate, ASCE 7-22 compliant calculations, you protect your projects, your clients, and your professional reputation while maximizing efficiency and profitability.</p>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2>Regional Wind Load Considerations</h2>
+            <p>Wind load requirements vary significantly based on geographic location, local climate patterns, and regional building codes. Understanding these variations is essential for proper design and code compliance.</p>
+
+            <h3 style="font-size: 1.8rem; margin-top: 2rem; margin-bottom: 1rem; color: #1a202c;">Hurricane-Prone Regions</h3>
+            <ul>
+                <li>Coastal areas requiring enhanced wind resistance and impact protection</li>
+                <li>Wind-borne debris regions requiring impact-rated windows and doors</li>
+                <li>Higher design wind speeds based on hurricane risk zones</li>
+                <li>Additional requirements for shutters and hurricane protection systems</li>
+                <li>Special considerations for corrosion resistance in salt air environments</li>
+            </ul>
+
+            <h3 style="font-size: 1.8rem; margin-top: 2rem; margin-bottom: 1rem; color: #1a202c;">Tornado-Prone Areas</h3>
+            <ul>
+                <li>Enhanced anchorage requirements for roofing and cladding</li>
+                <li>Continuous load path design from roof to foundation</li>
+                <li>Consideration of extreme suction pressures on building components</li>
+                <li>Safe room and shelter design requirements</li>
+            </ul>
+
+            <h3 style="font-size: 1.8rem; margin-top: 2rem; margin-bottom: 1rem; color: #1a202c;">High-Elevation & Mountainous Regions</h3>
+            <ul>
+                <li>Increased wind speeds at higher elevations</li>
+                <li>Topographic effects that amplify wind pressures</li>
+                <li>Combined wind and snow load considerations</li>
+                <li>Extreme temperature variations affecting material performance</li>
+            </ul>
+
+            <h3 style="font-size: 1.8rem; margin-top: 2rem; margin-bottom: 1rem; color: #1a202c;">Local Code Variations</h3>
+            <p>While ASCE 7-22 provides the national standard, many jurisdictions adopt modifications based on local conditions and historical storm data. Our calculators help you navigate these variations by implementing the core ASCE 7-22 methodology while allowing you to adjust parameters for local requirements. Always verify your designs against applicable local building codes and consult with local building officials when required.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 windload.solutions. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('main-header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        function toggleNav() {
+            const navMenu = document.getElementById('nav-menu');
+            const hamburger = document.getElementById('hamburger');
+            const overlay = document.getElementById('nav-overlay');
+            const logo = document.querySelector('.logo');
+
+            navMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+            overlay.classList.toggle('active');
+
+            if (logo) {
+                logo.classList.toggle('menu-active');
+            }
+
+            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+        }
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    toggleNav();
+                }
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -752,11 +752,7 @@ body.panel-open {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, 
-        rgba(0, 24, 255, 0.85) 0%, 
-        rgba(124, 58, 237, 0.75) 50%, 
-        rgba(0, 24, 255, 0.85) 100%
-    );
+    background: rgba(0, 0, 0, 0.3); /* Light dark overlay for text readability */
     z-index: 1;
 }
 
@@ -954,12 +950,34 @@ body.panel-open {
 .benefit-icon {
     width: 48px;
     height: 48px;
-    background: linear-gradient(135deg, #0018ff 0%, #7c3aed 100%);
     border-radius: 50%;
     padding: 12px;
     stroke: white;
     flex-shrink: 0;
+}
+
+/* Benefit icon 1: Lightning/Speed - Yellow */
+.benefit-item:nth-child(1) .benefit-icon {
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+    box-shadow: 0 4px 12px rgba(251, 191, 36, 0.3);
+}
+
+/* Benefit icon 2: Compliance - Green */
+.benefit-item:nth-child(2) .benefit-icon {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+/* Benefit icon 3: Certifications - Blue */
+.benefit-item:nth-child(3) .benefit-icon {
+    background: linear-gradient(135deg, #0018ff 0%, #4169ff 100%);
     box-shadow: 0 4px 12px rgba(0, 24, 255, 0.3);
+}
+
+/* Benefit icon 4: Reports - Purple */
+.benefit-item:nth-child(4) .benefit-icon {
+    background: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%);
+    box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3);
 }
 
 .benefit-text {
@@ -4490,7 +4508,7 @@ body.panel-open {
                     </div>
 
                     <h1 class="hero-title">Professional Wind Load Calculations in Minutes</h1>
-                    <p class="hero-subtitle">Complete ASCE 7-22 compliant wind load analysis in 2-15 minutes with 99.8% first-time permit approval rate. Trusted by 10,000+ professionals for 24 years.</p>
+                    <p class="hero-subtitle">Complete ASCE 7 compliant wind load analysis in 2-15 minutes with 99.8% first-time permit approval rate. Trusted by 10,000+ professionals for 24 years.</p>
                     
                     <div class="hero-stats">
                         <div class="stat-item">

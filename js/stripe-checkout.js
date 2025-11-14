@@ -64,8 +64,8 @@ async function startCheckout(productCode, billingCycle = 'monthly', button = nul
             body: JSON.stringify({
                 product_code: productCode,
                 billing_cycle: billingCycle,
-                success_url: 'https://windload.solutions/checkout-success.html',
-                cancel_url: 'https://windload.solutions/checkout-cancelled.html'
+                success_url: 'https://windloadcalc.com/checkout-success.html',
+                cancel_url: 'https://windloadcalc.com/checkout-cancelled.html'
             })
         });
 

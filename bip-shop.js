@@ -165,7 +165,7 @@ async function createStripeCheckout(plan, billing) {
     
     try {
         // Call backend API to create Stripe Checkout session
-        const response = await fetch('https://api.windload.solutions/api/stripe/create-checkout', {
+        const response = await fetch('https://api.windloadcalc.com/api/stripe/create-checkout', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -193,7 +193,7 @@ async function createStripeCheckout(plan, billing) {
         
     } catch (error) {
         console.error('Checkout error:', error);
-        alert('Unable to start checkout. Please try again or contact support at support@windload.solutions');
+        alert('Unable to start checkout. Please try again or contact support at support@windloadcalc.com');
         
         // Restore button state
         button.textContent = originalText;

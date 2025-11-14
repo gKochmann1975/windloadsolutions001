@@ -164,7 +164,7 @@ async function createStripeCheckout(category, billing) {
     
     try {
         // Call backend API to create Stripe Checkout session
-        const response = await fetch('https://api.windload.solutions/api/stripe/create-checkout', {
+        const response = await fetch('https://api.windloadcalc.com/api/stripe/create-checkout', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -193,7 +193,7 @@ async function createStripeCheckout(category, billing) {
         
     } catch (error) {
         console.error('Checkout error:', error);
-        alert('Unable to start checkout. Please try again or contact support at support@windload.solutions');
+        alert('Unable to start checkout. Please try again or contact support at support@windloadcalc.com');
         
         // Restore button state
         button.textContent = originalText;
@@ -235,7 +235,7 @@ async function submitWaitlist(event) {
     const data = Object.fromEntries(formData);
     
     try {
-        const response = await fetch('https://api.windload.solutions/api/waitlist/join', {
+        const response = await fetch('https://api.windloadcalc.com/api/waitlist/join', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -258,7 +258,7 @@ async function submitWaitlist(event) {
         
     } catch (error) {
         console.error('Waitlist error:', error);
-        alert('Unable to join waitlist. Please try again or contact us at support@windload.solutions');
+        alert('Unable to join waitlist. Please try again or contact us at support@windloadcalc.com');
     }
 }
 

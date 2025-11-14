@@ -126,23 +126,35 @@ const SubscriptionManager = (function() {
         if (!currentUser) return null;
 
         try {
-            const response = await fetch(`${API_URL}/api/auth/user-subscriptions`, {
+            // Use new /api/auth/check-session endpoint for comprehensive subscription info
+            const response = await fetch(`${API_URL}/api/auth/check-session`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${getToken()}`
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    user_id: currentUser.id
+                    token: getToken()
                 })
             });
 
             const data = await response.json();
 
-            if (data.success) {
-                userSubscriptions = data;
-                console.log('✅ Subscriptions loaded:', data.subscriptions);
-                return data;
+            if (data.success && data.authenticated) {
+                // Store subscription data with limits
+                userSubscriptions = {
+                    has_bip: data.subscription.has_bip,
+                    has_calculator: data.subscription.has_calculator,
+                    bip_plan: data.subscription.bip_plan,
+                    active: data.subscription.active,
+                    trial: data.subscription.trial,
+                    limits: data.limits,
+                    subscriptions: [{
+                        product_code: data.subscription.bip_plan
+                    }]
+                };
+
+                console.log('✅ Subscriptions loaded:', userSubscriptions);
+                return userSubscriptions;
             } else {
                 console.error('Failed to load subscriptions:', data.error);
                 return null;

@@ -324,20 +324,116 @@
     </div>
 
     <script>
-        // Parse URL parameters to show personalized email if available
+        const API_URL = 'https://windload-api.onrender.com';
+
+        // Parse URL parameters
         const urlParams = new URLSearchParams(window.location.search);
+        const sessionId = urlParams.get('session_id');
         const email = urlParams.get('email');
 
+        // Show personalized email if available
         if (email) {
-            // Add personalized message
             const subtitle = document.querySelector('.subtitle');
             subtitle.innerHTML = `Thank you for subscribing to Wind Load Solutions. Your payment has been processed successfully.<br><br>An email with your login credentials has been sent to: <strong>${email}</strong>`;
         }
 
-        // Auto-refresh page after 5 minutes to prevent stale sessions
+        // AUTO-LOGIN FLOW
+        async function attemptAutoLogin() {
+            if (!sessionId) {
+                console.log('No session_id found in URL - auto-login not possible');
+                return;
+            }
+
+            try {
+                console.log('Attempting auto-login with session:', sessionId);
+
+                // Show loading state
+                const primaryBtn = document.querySelector('.btn-primary');
+                const originalBtnText = primaryBtn.innerHTML;
+                primaryBtn.innerHTML = '<span style="display: inline-block; animation: spin 1s linear infinite;">⏳</span> Preparing your account...';
+                primaryBtn.style.pointerEvents = 'none';
+
+                // Call backend to create auto-login token
+                const response = await fetch(`${API_URL}/api/auth/auto-login-token`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        session_id: sessionId,
+                        email: email // Optional verification
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success && data.redirect_url) {
+                    console.log('✅ Auto-login successful! Redirecting to:', data.redirect_url);
+
+                    // Update UI to show redirect
+                    primaryBtn.innerHTML = '✅ Success! Redirecting...';
+
+                    // Show which platform they're going to
+                    const subtitle = document.querySelector('.subtitle');
+                    if (data.has_bip) {
+                        subtitle.innerHTML += '<br><br><strong style="color: #10b981;">🚀 Taking you to Building Intelligence Platform...</strong>';
+                    } else if (data.has_calculator) {
+                        subtitle.innerHTML += '<br><br><strong style="color: #10b981;">🚀 Taking you to Wind Load Calculators...</strong>';
+                    }
+
+                    // Redirect after 2 seconds
+                    setTimeout(() => {
+                        window.location.href = data.redirect_url;
+                    }, 2000);
+
+                } else {
+                    throw new Error(data.error || 'Auto-login failed');
+                }
+
+            } catch (error) {
+                console.error('Auto-login error:', error);
+                console.log('Falling back to manual login flow');
+
+                // Reset button to manual login
+                const primaryBtn = document.querySelector('.btn-primary');
+                primaryBtn.innerHTML = originalBtnText;
+                primaryBtn.style.pointerEvents = 'auto';
+
+                // Show notice that they need to check email
+                const emailNotice = document.querySelector('.email-notice');
+                emailNotice.style.borderColor = '#f59e0b';
+                emailNotice.style.background = '#fffbeb';
+
+                const emailHeader = emailNotice.querySelector('h2');
+                emailHeader.innerHTML = `
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                    ⚠️ Please Check Your Email
+                `;
+            }
+        }
+
+        // Attempt auto-login after page loads
+        window.addEventListener('DOMContentLoaded', () => {
+            attemptAutoLogin();
+        });
+
+        // Fallback: Auto-refresh page after 5 minutes to prevent stale sessions
         setTimeout(() => {
             window.location.reload();
         }, 300000); // 5 minutes
+
+        // Add spinning animation for loading state
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes spin {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>

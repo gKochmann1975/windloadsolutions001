@@ -299,8 +299,66 @@ const SubscriptionManager = (function() {
             transition: all 0.3s ease;
         `;
 
-        button.addEventListener('click', () => {
-            window.open('https://windload-webapp.onrender.com', '_blank');
+        button.addEventListener('click', async () => {
+            // Get SSO token from backend for seamless login
+            try {
+                button.innerHTML = `
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 8px; animation: spin 1s linear infinite;">
+                        <circle cx="12" cy="12" r="10"></circle>
+                    </svg>
+                    Loading...
+                `;
+                button.style.pointerEvents = 'none';
+
+                const response = await fetch(`${API_URL}/api/auth/sso-token`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        token: getToken()
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success && data.webapp_url) {
+                    console.log('✅ SSO token created - launching calculators');
+                    window.open(data.webapp_url, '_blank');
+                } else {
+                    throw new Error(data.error || 'Failed to create SSO token');
+                }
+
+                // Reset button
+                setTimeout(() => {
+                    button.innerHTML = `
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 8px;">
+                            <rect x="4" y="2" width="16" height="20" rx="2"></rect>
+                            <line x1="8" y1="6" x2="16" y2="6"></line>
+                            <line x1="8" y1="10" x2="16" y2="10"></line>
+                            <line x1="8" y1="14" x2="12" y2="14"></line>
+                        </svg>
+                        Launch Wind Load Calculators
+                    `;
+                    button.style.pointerEvents = 'auto';
+                }, 1000);
+
+            } catch (error) {
+                console.error('Error launching calculators:', error);
+                alert('Failed to launch calculators. Please try logging in directly at windload-webapp.onrender.com');
+
+                // Reset button
+                button.innerHTML = `
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 8px;">
+                        <rect x="4" y="2" width="16" height="20" rx="2"></rect>
+                        <line x1="8" y1="6" x2="16" y2="6"></line>
+                        <line x1="8" y1="10" x2="16" y2="10"></line>
+                        <line x1="8" y1="14" x2="12" y2="14"></line>
+                    </svg>
+                    Launch Wind Load Calculators
+                `;
+                button.style.pointerEvents = 'auto';
+            }
         });
 
         button.addEventListener('mouseenter', () => {
@@ -315,6 +373,19 @@ const SubscriptionManager = (function() {
 
         container.appendChild(button);
         document.body.appendChild(container);
+
+        // Add spin animation for loading state
+        if (!document.getElementById('sso-spin-animation')) {
+            const style = document.createElement('style');
+            style.id = 'sso-spin-animation';
+            style.textContent = `
+                @keyframes spin {
+                    from { transform: rotate(0deg); }
+                    to { transform: rotate(360deg); }
+                }
+            `;
+            document.head.appendChild(style);
+        }
     }
 
     function showNoAccessMessage() {

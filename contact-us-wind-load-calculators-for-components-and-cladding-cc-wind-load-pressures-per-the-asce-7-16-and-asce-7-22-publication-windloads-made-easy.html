@@ -1767,7 +1767,10 @@
                 submitButton.disabled = true;
                 submitButton.style.opacity = '0.7';
                 const formData = new FormData(this);
-                const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyUJUvTepkHYlXGbQ2TcjCNkQzZEgIW-l_6aws1jfNMEUF7TZPLZvYDH9SPRxZd4RZK/exec';
+                // Add formType parameter for router
+                formData.append('formType', 'contact');
+
+                const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbznqQA5RVxAqBVJopNP-fwCR1BYHpBtzq3T1-q80no0FHs8xWitO5Zc4tOKJ5H792TZ/exec';
                 fetch(GOOGLE_SHEETS_URL, {
                     method: 'POST',
                     body: formData,

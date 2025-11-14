@@ -443,14 +443,48 @@
                 <h2 class="waitlist-title">Join the Waitlist</h2>
                 <p class="waitlist-description">Be the first to get access when we launch. We'll notify you with exclusive early-bird pricing and priority support.</p>
 
-                <form class="waitlist-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                <form class="waitlist-form" id="waitlist-form">
                     <input type="text" name="name" class="form-input" placeholder="Your Name" required>
                     <input type="email" name="email" class="form-input" placeholder="Your Email" required>
                     <input type="text" name="company" class="form-input" placeholder="Company Name (Optional)">
-                    <textarea name="message" class="form-input" rows="3" placeholder="Tell us about your solar projects (Optional)"></textarea>
-                    <input type="hidden" name="_subject" value="Solar Panel Calculator Waitlist">
+                    <input type="hidden" name="formType" value="waitlist">
+                    <input type="hidden" name="category" value="Solar Panels Calculator">
                     <button type="submit" class="form-button">Join Waitlist</button>
                 </form>
+
+                <script>
+                    document.getElementById('waitlist-form').addEventListener('submit', function(e) {
+                        e.preventDefault();
+                        const submitButton = this.querySelector('.form-button');
+                        const originalText = submitButton.textContent;
+                        submitButton.textContent = 'Joining waitlist...';
+                        submitButton.disabled = true;
+
+                        const formData = new FormData(this);
+                        const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbznqQA5RVxAqBVJopNP-fwCR1BYHpBtzq3T1-q80no0FHs8xWitO5Zc4tOKJ5H792TZ/exec';
+
+                        fetch(GOOGLE_SHEETS_URL, {
+                            method: 'POST',
+                            body: formData,
+                            mode: 'no-cors'
+                        })
+                        .then(function() {
+                            submitButton.textContent = '✅ You\'re on the list!';
+                            submitButton.style.background = 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)';
+                            setTimeout(function() {
+                                submitButton.textContent = originalText;
+                                submitButton.disabled = false;
+                                submitButton.style.background = '';
+                            }, 3000);
+                            document.getElementById('waitlist-form').reset();
+                        })
+                        .catch(function(error) {
+                            submitButton.textContent = originalText;
+                            submitButton.disabled = false;
+                            alert('Error joining waitlist. Please try again or contact us directly.');
+                        });
+                    });
+                </script>
 
                 <p class="form-note">We respect your privacy. Unsubscribe anytime.</p>
             </div>

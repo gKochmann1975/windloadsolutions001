@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="images/windloadcalc-favicon.svg">
+    <title>Member Login - WindLoadCalc</title>
+    <meta name="description" content="Login to your WindLoadCalc account. Access your wind load calculators and Building Intelligence Platform.">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            overflow: hidden;
+        }
+
+        .video-background {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            object-fit: cover;
+        }
+
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 24, 255, 0.7) 0%, rgba(24, 30, 87, 0.8) 100%);
+            z-index: 1;
+        }
+
+        .login-container {
+            position: relative;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 450px;
+            margin: 1rem;
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo-container img {
+            height: 80px;
+            width: auto;
+        }
+
+        .form-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #181E57;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-subtitle {
+            font-size: 1rem;
+            color: #64748b;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #0018ff;
+            box-shadow: 0 0 0 3px rgba(0, 24, 255, 0.1);
+        }
+
+        .password-container {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #64748b;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+
+        .toggle-password:hover {
+            color: #0018ff;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 24, 255, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 24, 255, 0.4);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 2rem 0;
+            color: #9ca3af;
+            font-size: 0.9rem;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .divider span {
+            padding: 0 1rem;
+        }
+
+        .trial-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+            margin-bottom: 1rem;
+        }
+
+        .trial-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+        }
+
+        .shop-link {
+            display: block;
+            text-align: center;
+            color: #0018ff;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.75rem;
+            border: 2px solid #0018ff;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .shop-link:hover {
+            background: rgba(0, 24, 255, 0.05);
+            transform: translateY(-1px);
+        }
+
+        .forgot-password {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .forgot-password a {
+            color: #0018ff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+
+        .message {
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .message.error {
+            background: #fef2f2;
+            color: #dc2626;
+            border: 1px solid #fecaca;
+            display: block;
+        }
+
+        .message.success {
+            background: #f0fdf4;
+            color: #16a34a;
+            border: 1px solid #bbf7d0;
+            display: block;
+        }
+
+        .back-home {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            z-index: 20;
+            transition: all 0.3s ease;
+        }
+
+        .back-home:hover {
+            transform: translateX(-5px);
+        }
+
+        /* Trial Signup Form (hidden by default) */
+        .trial-form {
+            display: none;
+        }
+
+        .trial-form.active {
+            display: block;
+        }
+
+        .login-form.hidden {
+            display: none;
+        }
+
+        .back-to-login {
+            background: none;
+            border: none;
+            color: #0018ff;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-to-login:hover {
+            color: #0012cc;
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 2rem 1.5rem;
+                margin: 1rem;
+            }
+
+            .form-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Video Background -->
+    <video class="video-background" autoplay loop muted playsinline>
+        <source src="assets/login-background.mp4" type="video/mp4">
+    </video>
+    <div class="video-overlay"></div>
+
+    <!-- Back to Home -->
+    <a href="index.html" class="back-home">
+        ← Back to Home
+    </a>
+
+    <!-- Login Container -->
+    <div class="login-container">
+        <!-- Logo -->
+        <div class="logo-container">
+            <img src="images/windloadcalc-logo.svg" alt="WindLoadCalc Logo">
+        </div>
+
+        <!-- Message Display -->
+        <div id="message" class="message"></div>
+
+        <!-- Login Form -->
+        <div id="login-form" class="login-form">
+            <h1 class="form-title">Welcome Back</h1>
+            <p class="form-subtitle">Sign in to access your calculators</p>
+
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label class="form-label" for="email">Email Address</label>
+                    <input type="email" id="email" class="form-input" placeholder="you@company.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="password">Password</label>
+                    <div class="password-container">
+                        <input type="password" id="password" class="form-input" placeholder="Enter your password" required>
+                        <button type="button" class="toggle-password" onclick="togglePassword()">Show</button>
+                    </div>
+                </div>
+
+                <button type="submit" id="loginBtn" class="submit-btn">Sign In</button>
+            </form>
+
+            <div class="forgot-password">
+                <a href="#" onclick="showForgotPassword()">Forgot your password?</a>
+            </div>
+
+            <div class="divider">
+                <span>New to WindLoadCalc?</span>
+            </div>
+
+            <button type="button" class="trial-btn" onclick="showTrialForm()">
+                Start Your 7-Day Free Trial
+            </button>
+
+            <a href="building-intelligence-platform-shop.html" class="shop-link">
+                View Subscription Plans
+            </a>
+        </div>
+
+        <!-- Trial Signup Form -->
+        <div id="trial-form" class="trial-form">
+            <button type="button" class="back-to-login" onclick="showLoginForm()">
+                ← Back to Login
+            </button>
+
+            <h1 class="form-title">Start Free Trial</h1>
+            <p class="form-subtitle">7 days of full access - No credit card required</p>
+
+            <form id="trialForm" onsubmit="handleTrialSignup(event)">
+                <div class="form-group">
+                    <label class="form-label" for="trial-name">Full Name</label>
+                    <input type="text" id="trial-name" class="form-input" placeholder="John Smith" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="trial-email">Email Address</label>
+                    <input type="email" id="trial-email" class="form-input" placeholder="you@company.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="trial-password">Create Password</label>
+                    <div class="password-container">
+                        <input type="password" id="trial-password" class="form-input" placeholder="Min. 8 characters" required minlength="8">
+                        <button type="button" class="toggle-password" onclick="toggleTrialPassword()">Show</button>
+                    </div>
+                </div>
+
+                <button type="submit" id="trialBtn" class="submit-btn">Create Trial Account</button>
+            </form>
+
+            <p style="text-align: center; margin-top: 1rem; font-size: 0.85rem; color: #64748b;">
+                By signing up, you agree to our <a href="terms-of-service.html" style="color: #0018ff;">Terms of Service</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // API Configuration
+        const API_URL = 'https://api.windloadcalc.com';
+        const WEBAPP_URL = 'https://calc.windloadcalc.com'; // Will be Railway webapp
+        const BIP_URL = 'https://windloadcalc.com/building-intelligence-platform.html';
+
+        // Toggle password visibility
+        function togglePassword() {
+            const input = document.getElementById('password');
+            const btn = event.target;
+            if (input.type === 'password') {
+                input.type = 'text';
+                btn.textContent = 'Hide';
+            } else {
+                input.type = 'password';
+                btn.textContent = 'Show';
+            }
+        }
+
+        function toggleTrialPassword() {
+            const input = document.getElementById('trial-password');
+            const btn = event.target;
+            if (input.type === 'password') {
+                input.type = 'text';
+                btn.textContent = 'Hide';
+            } else {
+                input.type = 'password';
+                btn.textContent = 'Show';
+            }
+        }
+
+        // Show/hide forms
+        function showTrialForm() {
+            document.getElementById('login-form').classList.add('hidden');
+            document.getElementById('trial-form').classList.add('active');
+            hideMessage();
+        }
+
+        function showLoginForm() {
+            document.getElementById('login-form').classList.remove('hidden');
+            document.getElementById('trial-form').classList.remove('active');
+            hideMessage();
+        }
+
+        function showForgotPassword() {
+            showMessage('Password reset: Please contact support@windloadcalc.com', 'success');
+        }
+
+        // Message display
+        function showMessage(text, type) {
+            const msg = document.getElementById('message');
+            msg.textContent = text;
+            msg.className = 'message ' + type;
+        }
+
+        function hideMessage() {
+            document.getElementById('message').className = 'message';
+        }
+
+        // Handle Login
+        async function handleLogin(event) {
+            event.preventDefault();
+            const btn = document.getElementById('loginBtn');
+            const originalText = btn.textContent;
+
+            btn.textContent = 'Signing in...';
+            btn.disabled = true;
+            hideMessage();
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const response = await fetch(`${API_URL}/api/auth/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.token) {
+                    showMessage('Login successful! Redirecting...', 'success');
+
+                    // Smart redirect based on subscriptions
+                    const subscriptions = data.subscriptions || {};
+                    const hasBIP = subscriptions.has_bip || false;
+                    const hasCalculator = subscriptions.has_calculator || false;
+                    const userId = data.user_id;
+                    const token = data.token;
+
+                    setTimeout(() => {
+                        if (hasBIP) {
+                            // Redirect to BIP page with token
+                            window.location.href = `${BIP_URL}?token=${token}&user_id=${userId}`;
+                        } else if (hasCalculator || data.role === 'trial') {
+                            // Redirect to calculator webapp with token
+                            window.location.href = `${WEBAPP_URL}/?token=${token}&user_id=${userId}`;
+                        } else {
+                            // No subscription - redirect to shop
+                            window.location.href = 'building-intelligence-platform-shop.html';
+                        }
+                    }, 1500);
+                } else if (data.message === 'verification_required') {
+                    showMessage('New device detected. Please check your email for a verification code.', 'success');
+                    btn.textContent = originalText;
+                    btn.disabled = false;
+                } else {
+                    showMessage(data.message || 'Invalid email or password', 'error');
+                    btn.textContent = originalText;
+                    btn.disabled = false;
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                showMessage('Connection error. Please try again.', 'error');
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }
+        }
+
+        // Handle Trial Signup
+        async function handleTrialSignup(event) {
+            event.preventDefault();
+            const btn = document.getElementById('trialBtn');
+            const originalText = btn.textContent;
+
+            btn.textContent = 'Creating account...';
+            btn.disabled = true;
+            hideMessage();
+
+            const name = document.getElementById('trial-name').value;
+            const email = document.getElementById('trial-email').value;
+            const password = document.getElementById('trial-password').value;
+
+            try {
+                const response = await fetch(`${API_URL}/api/auth/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name,
+                        email,
+                        password,
+                        role: 'trial'
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    showMessage('Account created! Please check your email to verify your account.', 'success');
+                    btn.textContent = 'Account Created!';
+
+                    // Switch back to login form after 3 seconds
+                    setTimeout(() => {
+                        showLoginForm();
+                        btn.textContent = originalText;
+                        btn.disabled = false;
+                    }, 3000);
+                } else {
+                    showMessage(data.message || 'Registration failed. Please try again.', 'error');
+                    btn.textContent = originalText;
+                    btn.disabled = false;
+                }
+            } catch (error) {
+                console.error('Registration error:', error);
+                showMessage('Connection error. Please try again.', 'error');
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>

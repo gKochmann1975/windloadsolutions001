@@ -3,7 +3,7 @@
  * Handles guest checkout flow for all subscription products
  */
 
-const API_URL = 'https://windload-api.onrender.com';
+const API_URL = 'https://api.windloadcalc.com';
 
 /**
  * Product code mapping for all Wind Load Calculator products

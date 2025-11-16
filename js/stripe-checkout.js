@@ -9,7 +9,13 @@ const API_URL = 'https://api.windloadcalc.com';
  * Product code mapping for all Wind Load Calculator products
  */
 const PRODUCT_CODES = {
-    // C&C Bundles
+    // Windows, Doors & Shutters Calculator - Tiered Plans
+    'cc_walls_starter': 'Windows, Doors & Shutters - Starter',
+    'cc_walls_pro': 'Windows, Doors & Shutters - Pro',
+    'cc_walls_premium': 'Windows, Doors & Shutters - Premium',
+    'cc_walls_enterprise': 'Windows, Doors & Shutters - Enterprise',
+
+    // C&C Bundles (legacy/future)
     'cc_walls': 'C&C Walls Bundle',
     'cc_roofs': 'C&C Roofs Bundle',
     'cc_solar': 'C&C Solar Bundle',
@@ -29,7 +35,13 @@ const PRODUCT_CODES = {
     // Packages
     'cc_complete': 'C&C Complete Package',
     'professional': 'Professional Package',
-    'enterprise': 'Enterprise Package'
+    'enterprise': 'Enterprise Package',
+
+    // BIP Products
+    'bip_starter': 'Building Intelligence Platform - Starter',
+    'bip_pro': 'Building Intelligence Platform - Pro',
+    'bip_premium': 'Building Intelligence Platform - Premium',
+    'bip_enterprise': 'Building Intelligence Platform - Enterprise'
 };
 
 /**

@@ -1323,7 +1323,7 @@
             <!-- Header Right Side -->
             <div class="header-right">
                 <a href="contact-us-wind-load-calculators-for-components-and-cladding-cc-wind-load-pressures-per-the-asce-7-16-and-asce-7-22-publication-windloads-made-easy.html" class="header-cta primary">Let's Connect</a>
-                <a href="https://windload-auth.onrender.com" class="header-cta">Member Login</a>
+                <a href="login.html" class="header-cta">Member Login</a>
                 <button class="hamburger" id="hamburger" onclick="toggleNav()">
                     <span></span>
                     <span></span>
@@ -1355,7 +1355,7 @@
                 <div class="hero-content">
                     <!-- Mobile-only buttons -->
                     <div class="hero-buttons-mobile">
-                        <a href="https://windload-auth.onrender.com" class="hero-btn secondary">
+                        <a href="login.html" class="hero-btn secondary">
                             <i class="fas fa-sign-in-alt"></i>
                             <span>Member Login</span>
                         </a>
@@ -1774,25 +1774,17 @@
                 fetch(GOOGLE_SHEETS_URL, {
                     method: 'POST',
                     body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
+                    mode: 'no-cors'
                 })
-                .then(function(response) {
-                    return response.json();
-                })
-                .then(function(data) {
-                    if (data.result === 'success') {
-                        showFormMessage('✅ Contact request sent successfully! Our wind load engineers will respond within 1-2 hours during business hours.', 'success');
-                        form.reset();
-                    } else {
-                        throw new Error('Failed to send contact request');
-                    }
+                .then(function() {
+                    showFormMessage('✅ Contact request sent successfully! Our wind load engineers will respond within 1-2 hours during business hours.', 'success');
+                    form.reset();
+                    submitButton.textContent = originalText;
+                    submitButton.disabled = false;
+                    submitButton.style.opacity = '1';
                 })
                 .catch(function(error) {
                     showFormMessage('❌ Error sending contact request. Please try calling our wind load experts directly at (833) 272-3946.', 'error');
-                })
-                .finally(function() {
                     submitButton.textContent = originalText;
                     submitButton.disabled = false;
                     submitButton.style.opacity = '1';

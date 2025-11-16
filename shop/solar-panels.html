@@ -4,11 +4,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/svg+xml" href="../images/windloadcalc-favicon.svg">
-    <meta name="description" content="Solar Panel Wind Load Calculator - Coming Soon. Professional ASCE 7 wind load calculations for rooftop and ground-mount solar installations. Join the waitlist.">
-    <meta name="keywords" content="solar panel wind load calculator, solar wind loads, PV system calculator, rooftop solar calculator, ground mount solar, ASCE 7 solar">
-    <title>Solar Panel Wind Load Calculator - Coming Soon | windloadcalc</title>
+    <meta name="description" content="Solar Panels Wind Load Calculator - Coming Soon. Professional solar panel wind load calculations per ASCE 7 for replacement windows, entry doors, and storm shutters. Starting at $28/month (20% OFF - billed annually at $336/year).">
+    <meta name="keywords" content="window wind load calculator, door wind pressure calculator, storm shutter wind loads, ASCE 7 components and cladding, C&C calculator, replacement window calculator, design pressure calculator">
+    <title>Solar Panels Wind Load Calculator - Coming Soon | windloadcalc</title>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Solar Panels Wind Load Calculator - Coming Soon">
+    <meta property="og:description" content="Professional ASCE 7 compliant wind load calculations for windows, doors, and storm shutters. Generate permit-ready reports in minutes.">
+    <meta property="og:url" content="https://windloadcalc.com/shop/solar-panels.html">
+
+    <!-- Schema Markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Windows, Doors & Storm Shutters Wind Load Calculator",
+        "applicationCategory": "EngineeringSoftware",
+        "operatingSystem": "Web-based",
+        "offers": [
+            {
+                "@type": "Offer",
+                "name": "Individual",
+                "price": "336",
+                "priceCurrency": "USD",
+                "priceSpecification": {
+                    "@type": "UnitPriceSpecification",
+                    "price": "336",
+                    "priceCurrency": "USD",
+                    "unitText": "year"
+                }
+            },
+            {
+                "@type": "Offer",
+                "name": "Professional",
+                "price": "996",
+                "priceCurrency": "USD",
+                "priceSpecification": {
+                    "@type": "UnitPriceSpecification",
+                    "price": "996",
+                    "priceCurrency": "USD",
+                    "unitText": "year"
+                }
+            },
+            {
+                "@type": "Offer",
+                "name": "Enterprise",
+                "price": "4495",
+                "priceCurrency": "USD",
+                "priceSpecification": {
+                    "@type": "UnitPriceSpecification",
+                    "price": "4495",
+                    "priceCurrency": "USD",
+                    "unitText": "year"
+                }
+            }
+        ],
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "ratingCount": "127"
+        }
+    }
+    </script>
 
     <style>
+        /* Reset and Base Styles */
         * {
             margin: 0;
             padding: 0;
@@ -28,13 +88,19 @@
             padding: 0 2rem;
         }
 
-        /* Header */
+        /* Header Styles */
         .main-header {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 1000;
+            background: transparent;
+            padding: 2rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .main-header.scrolled {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
             padding: 1rem 0;
@@ -50,37 +116,80 @@
             padding: 0 3rem;
         }
 
-        .logo-image {
-            height: 70px;
-            width: auto;
-        }
-
-        .header-cta {
-            background: #0018ff;
-            color: white;
-            border: 2px solid #0018ff;
-            padding: 0.8rem 1.8rem;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .header-cta:hover {
-            background: #0012cc;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 24, 255, 0.3);
-        }
-
-        /* Hero */
-
-        .header-right {
+        .logo-hamburger-row {
             display: flex;
             align-items: center;
             gap: 1rem;
         }
 
+        .logo {
+            z-index: 1001;
+        }
+
+        .logo-image {
+            height: 100px;
+            width: auto;
+            filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
+            transition: all 0.3s ease;
+        }
+
+        .main-header.scrolled .logo-image {
+            height: 70px;
+            filter: none;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            z-index: 1001;
+        }
+
+        .header-cta {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            white-space: nowrap;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-cta:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.6);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .header-cta.primary {
+            background: rgba(0, 24, 255, 0.9);
+            border-color: rgba(0, 24, 255, 0.3);
+        }
+
+        .header-cta.primary:hover {
+            background: rgba(0, 24, 255, 1);
+            border-color: rgba(0, 24, 255, 0.8);
+        }
+
+        .main-header.scrolled .header-cta {
+            color: #0018ff;
+            background: rgba(0, 24, 255, 0.1);
+            border-color: rgba(0, 24, 255, 0.3);
+        }
+
+        .main-header.scrolled .header-cta.primary {
+            color: white;
+            background: #0018ff;
+            border-color: #0018ff;
+        }
+
+        /* Hamburger Menu */
         .hamburger {
             display: flex;
             flex-direction: column;
@@ -98,9 +207,15 @@
             display: block;
             height: 3px;
             width: 100%;
-            background: #1f2937;
+            background: white;
             border-radius: 2px;
             transition: all 0.3s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .main-header.scrolled .hamburger span {
+            background: #1f2937;
+            box-shadow: none;
         }
 
         .hamburger.active span:nth-child(1) {
@@ -115,23 +230,26 @@
             transform: rotate(-45deg) translate(8px, -8px);
         }
 
+        /* Navigation Menu */
         .nav-links {
             display: none;
             position: fixed;
             top: 0;
             right: 0;
             height: 100vh;
-            width: 350px;
+            width: 400px;
             max-width: 85vw;
             background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(20px);
             box-shadow: -10px 0 50px rgba(0,0,0,0.2);
             padding: 4rem 2rem 2rem 2rem;
             flex-direction: column;
-            gap: 1rem;
+            gap: 1.5rem;
             z-index: 9999;
             transform: translateX(100%);
             transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-y: auto;
+            overflow-x: hidden;
         }
 
         .nav-links.active {
@@ -143,26 +261,28 @@
             text-decoration: none;
             color: #1f2937;
             font-weight: 600;
-            font-size: 1.1rem;
-            padding: 1rem 0;
+            font-size: 1.2rem;
+            padding: 1.2rem 0;
             border-bottom: 1px solid rgba(0,0,0,0.08);
             transition: all 0.3s ease;
+            position: relative;
         }
 
         .nav-links a:hover {
             color: #0018ff;
-            padding-left: 0.5rem;
+            padding-left: 1rem;
         }
 
         .nav-close {
             position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
+            top: 2rem;
+            right: 2rem;
             background: none;
             border: none;
-            font-size: 2rem;
+            font-size: 2.5rem;
             color: #64748b;
             cursor: pointer;
+            font-weight: 300;
         }
 
         .nav-overlay {
@@ -172,7 +292,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
             z-index: 9998;
         }
 
@@ -180,153 +301,423 @@
             display: block;
         }
 
-        .hero-section {
-            padding: 12rem 0 6rem;
-            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
-            color: white;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
+        /* Simplified Desktop Nav */
+        .nav-desktop-scrolled {
+            display: none;
         }
 
-        .hero-section::before {
-            content: '';
+        @media (min-width: 1024px) {
+            .main-header.scrolled .nav-desktop-scrolled {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 2rem;
+                overflow: visible;
+            }
+
+            .nav-desktop-scrolled a {
+                text-decoration: none;
+                font-size: 0.95rem;
+                padding: 0.5rem 1rem;
+                border-radius: 8px;
+                color: #374151;
+                font-weight: 600;
+                transition: all 0.2s ease;
+            }
+
+            .nav-desktop-scrolled a:hover {
+                background: rgba(0, 24, 255, 0.1);
+                color: #0018ff;
+            }
+        }
+
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 50%, #0018ff 100%);
+            padding: 8rem 0 3rem;
+        }
+
+        .video-background {
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
-            pointer-events: none;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
         }
 
-        .coming-soon-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: rgba(251, 191, 36, 0.2);
-            border: 2px solid rgba(251, 191, 36, 0.5);
-            color: #fbbf24;
-            padding: 0.75rem 1.5rem;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 2rem;
-            backdrop-filter: blur(10px);
+        .hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+            max-width: 900px;
         }
 
         .hero-title {
-            font-size: 3.5rem;
-            font-weight: 800;
+            font-size: 3rem;
+            font-weight: 700;
             margin-bottom: 1.5rem;
             line-height: 1.2;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
         }
 
         .hero-subtitle {
-            font-size: 1.3rem;
-            margin-bottom: 3rem;
-            opacity: 0.95;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            font-weight: 500;
         }
 
-        /* Waitlist Form */
-        .waitlist-section {
-            padding: 6rem 0;
-            background: white;
+        /* Breadcrumbs */
+        .breadcrumbs {
+            background: rgba(0, 24, 255, 0.05);
+            padding: 1rem 0;
         }
 
-        .waitlist-container {
-            max-width: 600px;
-            margin: 0 auto;
+        .breadcrumbs-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumbs a {
+            color: #0018ff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumbs span {
+            color: #64748b;
+        }
+
+        /* Billing Toggle */
+        .billing-toggle-section {
             text-align: center;
+            padding: 2rem 0 1rem;
+            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
         }
 
-        .waitlist-title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: #181E57;
+        .billing-toggle-container {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            background: white;
+            padding: 0.5rem;
+            border-radius: 50px;
+            border: 2px solid #e5e7eb;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .billing-label {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #64748b;
+            padding: 0 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .billing-label.active {
+            color: #0018ff;
+        }
+
+        .billing-toggle {
+            position: relative;
+            width: 60px;
+            height: 32px;
+            background: #e5e7eb;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .billing-toggle.annual {
+            background: #0018ff;
+        }
+
+        .billing-toggle-slider {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+
+        .billing-toggle.annual .billing-toggle-slider {
+            transform: translateX(28px);
+        }
+
+        .savings-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            padding: 4rem 0 6rem;
+            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            border: 2px solid #e5e7eb;
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0, 24, 255, 0.15);
+            border-color: #0018ff;
+        }
+
+        .pricing-card.featured {
+            border-color: #0018ff;
+            border-width: 3px;
+            box-shadow: 0 15px 40px rgba(0, 24, 255, 0.2);
+        }
+
+        .pricing-card.featured::before {
+            content: 'Most Popular';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 12px rgba(0, 24, 255, 0.3);
+        }
+
+        .pricing-header h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-description {
+            font-size: 0.9rem;
+            color: #64748b;
             margin-bottom: 1.5rem;
         }
 
-        .waitlist-description {
-            font-size: 1.1rem;
-            color: #64748b;
-            margin-bottom: 3rem;
+        .pricing-amount {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
         }
 
-        .waitlist-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
+        .price-currency {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .price-value {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #0018ff;
+            line-height: 1;
+        }
+
+        .price-period {
+            font-size: 1rem;
+            color: #64748b;
+            font-weight: 600;
+        }
+
+        .price-note {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-bottom: 1.5rem;
+        }
+
+        .price-note strong {
+            color: #10b981;
+            font-weight: 700;
+        }
+
+        .pricing-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #e5e7eb, transparent);
+            margin: 1.5rem 0;
+        }
+
+        .pricing-features {
+            flex-grow: 1;
             margin-bottom: 2rem;
         }
 
-        .form-input {
-            padding: 1.2rem 1.5rem;
-            border: 2px solid #e5e7eb;
-            border-radius: 12px;
+        .pricing-features h4 {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #374151;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .pricing-features ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .pricing-features li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.75rem 0;
+            font-size: 0.95rem;
+            color: #374151;
+        }
+
+        .pricing-features li svg {
+            flex-shrink: 0;
+            margin-top: 0.1rem;
+        }
+
+        .pricing-cta {
+            display: block;
+            text-align: center;
+            padding: 1.2rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
             font-size: 1rem;
+            text-decoration: none;
             transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            width: 100%;
         }
 
-        .form-input:focus {
-            outline: none;
-            border-color: #0018ff;
-            box-shadow: 0 0 0 3px rgba(0, 24, 255, 0.1);
-        }
-
-        .form-button {
+        .pricing-cta.primary {
             background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
             color: white;
-            padding: 1.2rem 2rem;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
             box-shadow: 0 8px 25px rgba(0, 24, 255, 0.3);
         }
 
-        .form-button:hover {
+        .pricing-cta.primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 12px 35px rgba(0, 24, 255, 0.4);
         }
 
-        .form-note {
-            font-size: 0.9rem;
+        .pricing-cta.secondary {
+            background: rgba(0, 24, 255, 0.1);
+            color: #0018ff;
+            border: 2px solid #0018ff;
+        }
+
+        .pricing-cta.secondary:hover {
+            background: rgba(0, 24, 255, 0.15);
+        }
+
+        .pricing-note {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.85rem;
             color: #64748b;
         }
 
-        /* Preview Section */
-        .preview-section {
+        /* Features Grid */
+        .features-section {
             padding: 6rem 0;
-            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+            background: white;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
         }
 
         .section-title {
             font-size: 2.8rem;
             font-weight: 700;
             color: #181E57;
-            margin-bottom: 3rem;
-            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-description {
+            font-size: 1.2rem;
+            color: #64748b;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 4rem;
+            gap: 2.5rem;
         }
 
         .feature-card {
-            background: white;
-            padding: 2rem;
+            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
             border-radius: 20px;
+            padding: 2.5rem;
             border: 2px solid #e5e7eb;
             transition: all 0.3s ease;
         }
@@ -340,13 +731,13 @@
         .feature-icon {
             width: 60px;
             height: 60px;
-            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
             border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 1.5rem;
-            box-shadow: 0 8px 20px rgba(251, 191, 36, 0.3);
+            box-shadow: 0 8px 20px rgba(0, 24, 255, 0.2);
         }
 
         .feature-icon svg {
@@ -363,92 +754,298 @@
         }
 
         .feature-card p {
+            font-size: 1rem;
             color: #64748b;
             line-height: 1.7;
         }
 
-        /* Pricing Preview */
-        .pricing-preview {
-            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
-            color: white;
-            padding: 3rem;
+        /* Who Uses Section */
+        .who-uses-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+        }
+
+        .who-uses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .who-uses-card {
+            background: white;
             border-radius: 20px;
-            text-align: center;
+            padding: 2rem;
+            border: 2px solid #e5e7eb;
+            transition: all 0.3s ease;
         }
 
-        .pricing-preview h3 {
-            font-size: 2rem;
+        .who-uses-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 24, 255, 0.1);
+            border-color: #0018ff;
+        }
+
+        .who-uses-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 24, 255, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             margin-bottom: 1rem;
         }
 
-        .pricing-preview p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            margin-bottom: 2rem;
+        .who-uses-icon svg {
+            width: 25px;
+            height: 25px;
+            stroke: #0018ff;
         }
 
-        .price-range {
-            font-size: 3rem;
-            font-weight: 900;
-            margin-bottom: 1rem;
+        .who-uses-card h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 0.75rem;
         }
 
-        .price-note {
+        .who-uses-card p {
             font-size: 0.95rem;
-            opacity: 0.8;
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        .faq-grid {
+            display: grid;
+            gap: 1.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: #0018ff;
+        }
+
+        .faq-question {
+            padding: 1.5rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #111827;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            color: #0018ff;
+        }
+
+        .faq-toggle {
+            font-size: 1.5rem;
+            color: #0018ff;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+
+        .faq-answer-content {
+            padding: 0 2rem 1.5rem 2rem;
+            color: #64748b;
+            line-height: 1.7;
+            font-size: 1rem;
         }
 
         /* CTA Section */
         .cta-section {
-            padding: 6rem 0;
-            background: white;
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            padding: 5rem 0;
+            color: white;
             text-align: center;
         }
 
-        .cta-title {
+        .cta-section h2 {
             font-size: 2.5rem;
-            font-weight: 800;
-            color: #181E57;
-            margin-bottom: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
         }
 
-        .cta-subtitle {
+        .cta-section p {
             font-size: 1.2rem;
-            color: #64748b;
-            margin-bottom: 3rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
         }
 
-        .cta-button {
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
             display: inline-flex;
             align-items: center;
             gap: 0.75rem;
-            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
-            color: white;
-            padding: 1.2rem 2.5rem;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(0, 24, 255, 0.3);
         }
 
-        .cta-button:hover {
+        .cta-btn.primary {
+            background: white;
+            color: #0018ff;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-btn.primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(0, 24, 255, 0.4);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-btn.secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .cta-btn.secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Related Categories */
+        .related-section {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .related-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            text-decoration: none;
+            color: inherit;
+            border: 2px solid #e5e7eb;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .related-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 24, 255, 0.1);
+            border-color: #0018ff;
+        }
+
+        .related-badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+        }
+
+        .related-card h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 0.75rem;
+        }
+
+        .related-card p {
+            font-size: 0.9rem;
+            color: #64748b;
         }
 
         /* Footer */
         .main-footer {
             background: linear-gradient(135deg, #1a1a1a 0%, #2d3748 50%, #1a1a1a 100%);
             color: white;
-            padding: 3rem 0 2rem;
+            padding: 5rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h4 {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .footer-section p {
+            line-height: 1.8;
+            color: #cbd5e0;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        .footer-section a {
+            display: block;
+            color: #e2e8f0;
+            text-decoration: none;
+            margin-bottom: 1rem;
+            padding: 0.5rem 0;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .footer-section a:hover {
+            color: #0018ff;
+            padding-left: 1rem;
         }
 
         .footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            text-align: center;
         }
 
         .footer-bottom p {
@@ -456,62 +1053,88 @@
             font-size: 0.95rem;
         }
 
-        /* Breadcrumbs */
-        .breadcrumbs {
-            background: rgba(0, 24, 255, 0.05);
-            padding: 1rem 0;
-            margin-top: 70px;
-        }
-
-        .breadcrumbs-container {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.9rem;
-        }
-
-        .breadcrumbs a {
-            color: #0018ff;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .breadcrumbs a:hover {
-            text-decoration: underline;
-        }
-
-        .breadcrumbs span {
-            color: #64748b;
-        }
-
+        /* Responsive */
         @media (max-width: 768px) {
+            .hero-section {
+                min-height: 70vh;
+                padding: 6rem 0 2rem;
+            }
+
             .hero-title {
-                font-size: 2.5rem;
+                font-size: 2rem;
             }
 
             .hero-subtitle {
-                font-size: 1.1rem;
+                font-size: 1rem;
+            }
+
+            .container {
+                padding: 0 1.5rem;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
             }
 
             .features-grid {
                 grid-template-columns: 1fr;
             }
 
-            .section-title {
-                font-size: 2rem;
+            .who-uses-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+
+            .related-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
     <!-- Header -->
-<header class="main-header">
+    <header class="main-header" id="main-header">
         <div class="header-container">
-            <a href="../index.html">
-                <img src="../images/windloadcalc-logo.svg" alt="windloadcalc Logo" class="logo-image">
-            </a>
+            <div class="logo-hamburger-row">
+                <a href="../index.html" class="logo">
+                    <img src="../images/windloadcalc-logo.svg" alt="windloadcalc Logo" class="logo-image">
+                </a>
+            </div>
+
+            <!-- Full Hamburger Menu -->
+            <nav class="nav-links" id="nav-menu">
+                <button class="nav-close" onclick="toggleNav()">&times;</button>
+                <a href="../free-online-wind-load-calculators-demos-free-excel-wind-load-calculator.html">Free Calculator</a>
+                <a href="../building-intelligence-platform.html">Building Intelligence Platform</a>
+                <a href="../wind-load-calculator-comparison.html">Calculator Comparison</a>
+                <a href="../services-asce7-wind-load-pressures.html">Services</a>
+                <a href="../why-choose-windload-solutions.html">Why Us</a>
+                <a href="../faqfor-wind-load-calculator-software-for-wind-load-pressures-per-asce-7.html">FAQ</a>
+                <a href="../contact-us-wind-load-calculators-for-components-and-cladding-cc-wind-load-pressures-per-the-asce-7-16-and-asce-7-22-publication-windloads-made-easy.html">Contact Us</a>
+            </nav>
+
+            <!-- Simplified Desktop Nav -->
+            <nav class="nav-desktop-scrolled">
+                <a href="../free-online-wind-load-calculators-demos-free-excel-wind-load-calculator.html">Free Calculator</a>
+                <a href="../building-intelligence-platform.html">B.I.P.</a>
+                <a href="../services-asce7-wind-load-pressures.html">Services</a>
+                <a href="../why-choose-windload-solutions.html">Why Us</a>
+            </nav>
+
+            <!-- Header Right Side -->
             <div class="header-right">
-                <a href="../contact-us-wind-load-calculators-for-components-and-cladding-cc-wind-load-pressures-per-the-asce-7-16-and-asce-7-22-publication-windloads-made-easy.html" class="header-cta">Contact Us</a>
+                <a href="../contact-us-wind-load-calculators-for-components-and-cladding-cc-wind-load-pressures-per-the-asce-7-16-and-asce-7-22-publication-windloads-made-easy.html" class="header-cta primary">Let's Connect</a>
+                <a href="https://windload-auth.onrender.com" class="header-cta">Member Login</a>
                 <button class="hamburger" id="hamburger" onclick="toggleNav()">
                     <span></span>
                     <span></span>
@@ -519,19 +1142,26 @@
                 </button>
             </div>
         </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div class="nav-overlay" id="nav-overlay" onclick="toggleNav()"></div>
     </header>
 
-    <nav class="nav-links" id="nav-menu">
-        <button class="nav-close" onclick="toggleNav()">&times;</button>
-        <a href="../free-online-wind-load-calculators-demos-free-excel-wind-load-calculator.html">Free Calculator</a>
-        <a href="../building-intelligence-platform.html">Building Intelligence Platform</a>
-        <a href="../wind-load-calculator-comparison.html">Calculator Comparison</a>
-        <a href="../services-asce7-wind-load-pressures.html">Services</a>
-        <a href="../why-choose-windload-solutions.html">Why Us</a>
-        <a href="../faqfor-wind-load-calculator-software-for-wind-load-pressures-per-asce-7.html">FAQ</a>
-        <a href="../contact-us-wind-load-calculators-for-components-and-cladding-cc-wind-load-pressures-per-the-asce-7-16-and-asce-7-22-publication-windloads-made-easy.html">Contact Us</a>
-    </nav>
-    <div class="nav-overlay" id="nav-overlay" onclick="toggleNav()"></div>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="video-background">
+            <video class="hero-video" autoplay muted loop playsinline>
+                <source src="../videos/windows-doors-shutters.webm" type="video/webm">
+                <source src="../videos/windows-doors-shutters.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="video-overlay"></div>
+
+        <div class="container hero-content">
+            <h1 class="hero-title">Solar Panels Wind Load Calculator</h1>
+            <p class="hero-subtitle">Coming Soon | Professional Solar Panels Calculations | ASCE 7 Compliant</p>
+        </div>
+    </section>
 
     <!-- Breadcrumbs -->
     <section class="breadcrumbs">
@@ -546,27 +1176,20 @@
         </div>
     </section>
 
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="container">
-            <div class="coming-soon-badge">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="10"/>
-                    <polyline points="12 6 12 12 16 14"/>
-                </svg>
-                Coming Soon
-            </div>
-            <h1 class="hero-title">Solar Panel Wind Load Calculator</h1>
-            <p class="hero-subtitle">Professional ASCE 7 wind load calculations for rooftop and ground-mount solar PV installations. Join the waitlist to be the first to know when we launch.</p>
-        </div>
-    </section>
-
-    <!-- Waitlist Form -->
+    <!-- Coming Soon Section -->
+    <!-- Coming Soon / Waitlist Section -->
     <section class="waitlist-section">
         <div class="container">
             <div class="waitlist-container">
+                <div class="coming-soon-badge">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12 6 12 12 16 14"/>
+                    </svg>
+                    Coming Soon
+                </div>
                 <h2 class="waitlist-title">Join the Waitlist</h2>
-                <p class="waitlist-description">Be the first to get access when we launch. We'll notify you with exclusive early-bird pricing and priority support.</p>
+                <p class="waitlist-description">Be first in line for our comprehensive Solar Panels calculator. Get exclusive early-bird pricing and priority technical support.</p>
 
                 <form class="waitlist-form" id="waitlist-form">
                     <input type="text" name="name" class="form-input" placeholder="Your Name" required>
@@ -577,143 +1200,392 @@
                     <button type="submit" class="form-button">Join Waitlist</button>
                 </form>
 
-                <script>
-                    document.getElementById('waitlist-form').addEventListener('submit', function(e) {
-                        e.preventDefault();
-                        const submitButton = this.querySelector('.form-button');
-                        const originalText = submitButton.textContent;
-                        submitButton.textContent = 'Joining waitlist...';
-                        submitButton.disabled = true;
-
-                        const formData = new FormData(this);
-                        const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbznqQA5RVxAqBVJopNP-fwCR1BYHpBtzq3T1-q80no0FHs8xWitO5Zc4tOKJ5H792TZ/exec';
-
-                        fetch(GOOGLE_SHEETS_URL, {
-                            method: 'POST',
-                            body: formData,
-                            mode: 'no-cors'
-                        })
-                        .then(function() {
-                            submitButton.textContent = '✅ You\'re on the list!';
-                            submitButton.style.background = 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)';
-                            setTimeout(function() {
-                                submitButton.textContent = originalText;
-                                submitButton.disabled = false;
-                                submitButton.style.background = '';
-                            }, 3000);
-                            document.getElementById('waitlist-form').reset();
-                        })
-                        .catch(function(error) {
-                            submitButton.textContent = originalText;
-                            submitButton.disabled = false;
-                            alert('Error joining waitlist. Please try again or contact us directly.');
-                        });
-                    });
-                </script>
-
-                <p class="form-note">We respect your privacy. Unsubscribe anytime.</p>
+                <p class="form-note">We'll notify you as soon as the Solar Panels calculator is ready.</p>
             </div>
         </div>
     </section>
 
-    <!-- Preview Features -->
-    <section class="preview-section">
+    <style>
+        .waitlist-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+        }
+        .waitlist-container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .coming-soon-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4);
+        }
+        .waitlist-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #181E57;
+            margin-bottom: 1.5rem;
+        }
+        .waitlist-description {
+            font-size: 1.1rem;
+            color: #64748b;
+            margin-bottom: 3rem;
+        }
+        .waitlist-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .form-input {
+            padding: 1.2rem 1.5rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #0018ff;
+            box-shadow: 0 0 0 3px rgba(0, 24, 255, 0.1);
+        }
+        .form-button {
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            color: white;
+            padding: 1.2rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0, 24, 255, 0.3);
+        }
+        .form-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(0, 24, 255, 0.4);
+        }
+        .form-note {
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+    </style>
+
+    <script>
+        document.getElementById('waitlist-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const submitButton = this.querySelector('.form-button');
+            const originalText = submitButton.textContent;
+            submitButton.textContent = 'Joining waitlist...';
+            submitButton.disabled = true;
+            
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+            
+            fetch('https://script.google.com/macros/s/AKfycbzMuORWqPrwvsFAmhSqPrwIjinWDVM_6CJK50Q7qwAJXq9tkXZNAqPLRKU-NxC0dHaY/exec', {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: { 'Content-Type': 'text/plain' }
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.status === 'success') {
+                    submitButton.textContent = '✓ You're on the list!';
+                    submitButton.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
+                    this.reset();
+                } else {
+                    throw new Error('Submission failed');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                submitButton.textContent = originalText;
+                submitButton.disabled = false;
+                alert('There was an error. Please try again.');
+            });
+        });
+    </script>
+
+    <!-- Features Section -->
+    <section class="features-section">
         <div class="container">
-            <h2 class="section-title">What to Expect</h2>
+            <div class="section-header">
+                <h2 class="section-title">Professional Features Built for Speed and Accuracy</h2>
+                <p class="section-description">
+                    Everything you need to calculate wind loads quickly, accurately, and in full compliance with ASCE 7 standards.
+                </p>
+            </div>
 
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-                            <!-- Sun rays -->
-                            <line x1="12" y1="1" x2="12" y2="3" stroke-width="1.5" stroke-linecap="round"/>
-                            <line x1="12" y1="21" x2="12" y2="23" stroke-width="1.5" stroke-linecap="round"/>
-                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" stroke-width="1.5" stroke-linecap="round"/>
-                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" stroke-width="1.5" stroke-linecap="round"/>
-                            <line x1="1" y1="12" x2="3" y2="12" stroke-width="1.5" stroke-linecap="round"/>
-                            <line x1="21" y1="12" x2="23" y2="12" stroke-width="1.5" stroke-linecap="round"/>
-                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" stroke-width="1.5" stroke-linecap="round"/>
-                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" stroke-width="1.5" stroke-linecap="round"/>
-                            <!-- Sun circle -->
-                            <circle cx="12" cy="12" r="4" stroke-width="1.5"/>
-                            <!-- Solar panel below -->
-                            <rect x="7" y="16" width="10" height="5" rx="0.5" stroke-width="1.5" fill="currentColor" opacity="0.15"/>
-                            <!-- Panel grid -->
-                            <line x1="10" y1="16" x2="10" y2="21" stroke-width="1" opacity="0.5"/>
-                            <line x1="14" y1="16" x2="14" y2="21" stroke-width="1" opacity="0.5"/>
-                            <line x1="7" y1="18.5" x2="17" y2="18.5" stroke-width="1" opacity="0.5"/>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <path d="M9 11l3 3L22 4"/>
+                            <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
                         </svg>
                     </div>
-                    <h3>Rooftop Solar Arrays</h3>
-                    <p>Calculate wind loads for flush-mount, tilted, and ballasted rooftop solar installations on flat, gable, and hip roofs.</p>
+                    <h3>ASCE 7-22 & 7-16 Compliant</h3>
+                    <p>Fully compliant calculations for both ASCE 7-22 and ASCE 7-16 standards. Toggle between versions instantly based on your project requirements or local building code adoption.</p>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                            <polyline points="9 22 9 12 15 12 15 22"/>
-                        </svg>
-                    </div>
-                    <h3>Ground-Mount Systems</h3>
-                    <p>Comprehensive analysis for ground-mounted solar farms, carports, and freestanding PV structures with any tilt angle.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
                             <polyline points="14 2 14 8 20 8"/>
                             <line x1="16" y1="13" x2="8" y2="13"/>
                             <line x1="16" y1="17" x2="8" y2="17"/>
+                            <polyline points="10 9 9 9 8 9"/>
                         </svg>
                     </div>
-                    <h3>Professional Reports</h3>
-                    <p>Generate permit-ready engineering reports with detailed calculations, diagrams, and ASCE 7 compliance documentation.</p>
+                    <h3>Permit-Ready PDF Reports</h3>
+                    <p>Generate professional, detailed PDF reports that building departments trust. Includes all calculation steps, wind speed maps, exposure categories, and zone diagrams.</p>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                            <polyline points="22 4 12 14.01 9 11.01"/>
-                        </svg>
-                    </div>
-                    <h3>ASCE 7-22 & 7-16</h3>
-                    <p>Full compliance with both current and legacy ASCE 7 standards for solar panel wind load calculations.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
                             <circle cx="12" cy="12" r="10"/>
                             <polyline points="12 6 12 12 16 14"/>
                         </svg>
                     </div>
-                    <h3>Fast Results</h3>
-                    <p>Complete wind load analysis in 5-10 minutes. No more days of manual calculations or waiting for engineering quotes.</p>
+                    <h3>5-Minute Calculations</h3>
+                    <p>Save hours on every project. Our intuitive interface guides you through the calculation process in minutes, not hours. No engineering degree required to operate.</p>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                            <circle cx="9" cy="7" r="4"/>
-                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                            <line x1="3" y1="9" x2="21" y2="9"/>
+                            <line x1="9" y1="21" x2="9" y2="9"/>
                         </svg>
                     </div>
-                    <h3>Multi-User Support</h3>
-                    <p>Professional and Enterprise plans with team collaboration, centralized billing, and priority support.</p>
+                    <h3>Components & Cladding Focus</h3>
+                    <p>Purpose-built for C&C calculations on windows, doors, sliding glass doors, and storm shutters. Handles positive and negative pressures with ease.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/>
+                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                            <line x1="12" y1="22.08" x2="12" y2="12"/>
+                        </svg>
+                    </div>
+                    <h3>Nationwide Wind Speed Data</h3>
+                    <p>Pre-loaded wind speed maps for the entire United States. Automatically determines wind speed based on address or coordinates. Hurricane-prone regions fully supported.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 00-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 010 7.75"/>
+                        </svg>
+                    </div>
+                    <h3>Professional Support</h3>
+                    <p>Get help from real wind engineering experts. Email support for all plans, priority phone support for Professional and Enterprise customers.</p>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- Pricing Preview -->
-            <div class="pricing-preview">
-                <h3>Expected Pricing</h3>
-                <p>Affordable pricing for solar professionals</p>
-                <div class="price-range">$49 - $5,995</div>
-                <p class="price-note">Individual, Government & Institutional, Professional, and Enterprise plans available</p>
+    <!-- Who Uses This Section -->
+    <section class="who-uses-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Who Uses This Calculator?</h2>
+                <p class="section-description">
+                    Trusted by thousands of professionals across the replacement window, door, and storm shutter industries.
+                </p>
+            </div>
+
+            <div class="who-uses-grid">
+                <div class="who-uses-card">
+                    <div class="who-uses-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#0018ff" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                            <line x1="9" y1="3" x2="9" y2="21"/>
+                        </svg>
+                    </div>
+                    <h4>Replacement Window Contractors</h4>
+                    <p>Calculate design pressures for impact-rated windows, vinyl replacement windows, and aluminum frame installations. Handle permit submissions with confidence.</p>
+                </div>
+
+                <div class="who-uses-card">
+                    <div class="who-uses-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#0018ff" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                            <path d="M9 3v18"/>
+                        </svg>
+                    </div>
+                    <h4>Door Manufacturers & Installers</h4>
+                    <p>Size entry doors, French doors, and sliding glass doors for wind load requirements. Perfect for residential and commercial applications.</p>
+                </div>
+
+                <div class="who-uses-card">
+                    <div class="who-uses-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#0018ff" stroke-width="2">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                            <line x1="8" y1="21" x2="16" y2="21"/>
+                            <line x1="12" y1="17" x2="12" y2="21"/>
+                        </svg>
+                    </div>
+                    <h4>Storm Shutter Companies</h4>
+                    <p>Calculate wind loads for hurricane shutters, accordion shutters, roll-down shutters, and panel systems. Critical for hurricane-prone coastal regions.</p>
+                </div>
+
+                <div class="who-uses-card">
+                    <div class="who-uses-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#0018ff" stroke-width="2">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+                            <polyline points="9 22 9 12 15 12 15 22"/>
+                        </svg>
+                    </div>
+                    <h4>Building Departments</h4>
+                    <p>Review permit applications and verify contractor calculations. Educational institutions use it to teach ASCE 7 wind load principles.</p>
+                </div>
+
+                <div class="who-uses-card">
+                    <div class="who-uses-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#0018ff" stroke-width="2">
+                            <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/>
+                        </svg>
+                    </div>
+                    <h4>Architects & Engineers</h4>
+                    <p>Specify window and door products with accurate wind load requirements. Provide calculations to clients and general contractors for new construction and renovations.</p>
+                </div>
+
+                <div class="who-uses-card">
+                    <div class="who-uses-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#0018ff" stroke-width="2">
+                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                            <path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/>
+                        </svg>
+                    </div>
+                    <h4>Manufacturers & Distributors</h4>
+                    <p>Provide technical support to dealers and contractors. Verify product performance ratings match project requirements before fabrication.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+            </div>
+
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>What types of windows and doors can I calculate?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            The calculator handles all common window and door types including replacement windows, new construction windows, sliding glass doors, French doors, entry doors, storm doors, and all types of hurricane shutters. Both impact-rated and non-impact products are supported.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Do I need an engineering degree to use this calculator?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            No engineering degree required. The calculator is designed for contractors, installers, and sales professionals. The interface guides you step-by-step through the process. However, understanding basic ASCE 7 concepts is helpful for interpreting results.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Which ASCE 7 versions are supported?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Both ASCE 7-22 and ASCE 7-16 are fully supported. You can toggle between versions for any project. Most jurisdictions have adopted ASCE 7-16, but ASCE 7-22 adoption is growing. Check with your local building department to confirm which version applies.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>What information do I need to start a calculation?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            You'll need: project address or coordinates, building dimensions (height and width), roof type, exposure category (B, C, or D), and the dimensions of the window/door being calculated. The calculator will guide you through each input with helpful tooltips.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Can I save and reuse project data?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Yes. All your projects are automatically saved to your account. You can duplicate previous projects to speed up calculations for similar buildings, or use templates for common building types you work with frequently.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Are the PDF reports accepted by building departments?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Yes. Our reports are accepted nationwide by thousands of building departments. They include all required information: wind speed, exposure category, topographic factors, elevation factors, zone diagrams, and detailed calculation steps per ASCE 7.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Can I cancel my subscription anytime?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Yes. You can cancel anytime from your account dashboard. Your access will continue until the end of your paid billing period. No cancellation fees or penalties.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Is there a free trial available?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Yes. You can try our free demo calculator on the Free Calculator page. The demo uses limited wind speeds and building configurations, but gives you a complete feel for how the calculator works and what the reports look like.
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -721,39 +1593,268 @@
     <!-- CTA Section -->
     <section class="cta-section">
         <div class="container">
-            <h2 class="cta-title">Need Wind Load Calculations Now?</h2>
-            <p class="cta-subtitle">While you wait for the Solar Panel calculator, check out our Windows, Doors & Storm Shutters calculator—available now!</p>
-            <a href="windows-doors-shutters.html" class="cta-button">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="3" y="3" width="18" height="18" rx="1"/>
-                    <line x1="12" y1="3" x2="12" y2="21"/>
-                    <line x1="3" y1="12" x2="21" y2="12"/>
-                </svg>
-                View Available Calculator
-            </a>
+            <h2>Ready to Start Calculating Wind Loads?</h2>
+            <p>Join thousands of professionals who trust windloadcalc for accurate ASCE 7 calculations.</p>
+            <div class="cta-buttons">
+                <a href="../free-online-wind-load-calculators-demos-free-excel-wind-load-calculator.html" class="cta-btn primary">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polygon points="10 8 16 12 10 16 10 8"/>
+                    </svg>
+                    Try Free Demo
+                </a>
+                <a href="../contact-us-wind-load-calculators-for-components-and-cladding-cc-wind-load-pressures-per-the-asce-7-16-and-asce-7-22-publication-windloads-made-easy.html" class="cta-btn secondary">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+                    </svg>
+                    Contact Sales
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Categories -->
+    <section class="related-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Other Wind Load Calculators</h2>
+                <p class="section-description">
+                    Explore our other specialized wind load calculators for different project types.
+                </p>
+            </div>
+
+            <div class="related-grid">
+                <a href="solar-panels.html" class="related-card">
+                    <span class="related-badge">Coming Soon</span>
+                    <h4>Solar Panel Calculator</h4>
+                    <p>Rooftop and ground-mount solar PV systems</p>
+                </a>
+
+                <a href="roofing.html" class="related-card">
+                    <span class="related-badge">Coming Soon</span>
+                    <h4>Roof Wind Load Calculator</h4>
+                    <p>All roof types and configurations</p>
+                </a>
+
+                <a href="solar-panels.html" class="related-card">
+                    <span class="related-badge">Coming Soon</span>
+                    <h4>Solar Panels Calculator</h4>
+                    <p>solar panel wind load</p>
+                </a>
+
+                <a href="specialty.html" class="related-card">
+                    <span class="related-badge">Coming Soon</span>
+                    <h4>Specialty Structures</h4>
+                    <p>Signs, billboards, towers, equipment</p>
+                </a>
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="main-footer">
         <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>windloadcalc</h4>
+                    <p>Professional wind load calculator software per ASCE 7 standards. Over 24 years of excellence ensures projects meet compliance requirements. Our team provides nationwide windload calculator support and comprehensive wind load analysis solutions.</p>
+
+                    <h4>Contact Information</h4>
+
+                    <p style="margin-bottom: 0.5rem;"><strong style="display: block; margin-bottom: 0;">General Inquiries</strong>
+                    Email: info@windloadcalc.com<br>
+                    Phone: (833) 272-3946 | (833) ASCE-WIND</p>
+
+                    <p style="margin-bottom: 0.5rem;"><strong style="display: block; margin-bottom: 0;">Technical Support</strong>
+                    Email: support@windloadcalc.com</p>
+
+                    <p style="margin-bottom: 0.5rem;"><strong style="display: block; margin-bottom: 0;">Sales</strong>
+                    Email: sales@windloadcalc.com</p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Wind Load Calculators</h4>
+                    <a href="windows-doors-shutters.html">Windows, Doors & Shutters</a>
+                    <a href="solar-panels.html">Solar Panels</a>
+                    <a href="roofing.html">Roofing Systems</a>
+                    <a href="solar-panels.html">Solar Panels</a>
+                    <a href="specialty.html">Specialty Structures</a>
+                    <a href="../asce-7-wind-load-calculator.html">ASCE 7 Calculator</a>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Services & Resources</h4>
+                    <a href="../services-asce7-wind-load-pressures.html">Wind Load Services</a>
+                    <a href="../professional-engineer-sign-seal-wind-load-pressures.html">PE Sign & Seal</a>
+                    <a href="../building-intelligence-platform.html">Building Intelligence Platform</a>
+                    <a href="../free-online-wind-load-calculators-demos-free-excel-wind-load-calculator.html">Free Calculator</a>
+                    <a href="../instructional-videos-asce-7-wind-load-calculator-wind-load-pressure-software-components-cladding-wind-load-pressures-asce-7.html">Video Tutorials</a>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <a href="../why-choose-windload-solutions.html">Why Choose Us</a>
+                    <a href="../wind-load-calculator-for-engineers.html">For Engineers</a>
+                    <a href="../wind-load-calculator-for-architects.html">For Architects</a>
+                    <a href="../contractors-wind-load-calculator.html">For Contractors</a>
+                    <a href="../faqfor-wind-load-calculator-software-for-wind-load-pressures-per-asce-7.html">FAQ</a>
+                    <a href="../contact-us-wind-load-calculators-for-components-and-cladding-cc-wind-load-pressures-per-the-asce-7-16-and-asce-7-22-publication-windloads-made-easy.html">Contact Us</a>
+                </div>
+            </div>
+
             <div class="footer-bottom">
-                <p>&copy; 2025 windloadcalc. All rights reserved.</p>
+                <p>&copy; 2025 windloadcalc. All rights reserved. Professional wind load calculator software per ASCE 7-22 & ASCE 7-16. Contact us for components and cladding wind load pressures, windloads analysis, and comprehensive wind load calculator solutions nationwide.</p>
             </div>
         </div>
     </footer>
+
+    <!-- JavaScript -->
     <script>
+        // Pricing Data
+        const pricing = {
+            individual: {
+                monthly: 35,
+                annual: 336
+            },
+            government: {
+                monthly: 26,
+                annual: 252
+            },
+            professional: {
+                monthly: 104,
+                annual: 996
+            }
+        };
+
+        let isAnnual = true;
+
+        // Navigation Functions
         function toggleNav() {
-            const hamburger = document.getElementById('hamburger');
             const navMenu = document.getElementById('nav-menu');
-            const navOverlay = document.getElementById('nav-overlay');
-            
-            hamburger.classList.toggle('active');
+            const hamburger = document.getElementById('hamburger');
+            const overlay = document.getElementById('nav-overlay');
+
             navMenu.classList.toggle('active');
-            navOverlay.classList.toggle('active');
+            hamburger.classList.toggle('active');
+            overlay.classList.toggle('active');
+
             document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
         }
+
+        function initializeHeaderScroll() {
+            const header = document.getElementById('main-header');
+
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+        }
+
+        function initializeVideo() {
+            const video = document.querySelector('.hero-video');
+            if (!video) return;
+
+            video.muted = true;
+            video.playsInline = true;
+
+            video.addEventListener('loadeddata', function() {
+                video.play().catch(function() {
+                    console.log('Video autoplay blocked');
+                });
+            });
+
+            video.addEventListener('error', function() {
+                video.style.display = 'none';
+            });
+
+            document.addEventListener('click', function() {
+                if (video.paused) {
+                    video.play().catch(function() {
+                        console.log('Manual play failed');
+                    });
+                }
+            }, { once: true });
+        }
+
+        // Billing Toggle
+        function toggleBilling() {
+            isAnnual = !isAnnual;
+
+            const toggle = document.getElementById('billing-toggle');
+            const monthlyLabel = document.getElementById('monthly-label');
+            const annualLabel = document.getElementById('annual-label');
+
+            if (isAnnual) {
+                toggle.classList.add('annual');
+                monthlyLabel.classList.remove('active');
+                annualLabel.classList.add('active');
+            } else {
+                toggle.classList.remove('annual');
+                monthlyLabel.classList.add('active');
+                annualLabel.classList.remove('active');
+            }
+
+            updatePricing();
+
+            // Update billing cycle on all checkout buttons
+            const billingCycle = isAnnual ? 'annual' : 'monthly';
+            document.querySelectorAll('[data-product-code]').forEach(button => {
+                button.setAttribute('data-billing-cycle', billingCycle);
+            });
+        }
+
+        function updatePricing() {
+            // Individual
+            document.getElementById('price-individual').textContent = isAnnual ? '28' : '35';
+            document.getElementById('period-individual').textContent = '/month';
+            document.getElementById('note-individual').innerHTML = isAnnual
+                ? '<strong>20% OFF</strong> - Billed annually at $336/year'
+                : '';
+
+            // Government
+            document.getElementById('price-government').textContent = isAnnual ? '21' : '26';
+            document.getElementById('period-government').textContent = '/month';
+            document.getElementById('note-government').innerHTML = isAnnual
+                ? '<strong>25% OFF</strong> - Billed annually at $252/year'
+                : '';
+
+            // Professional
+            document.getElementById('price-professional').textContent = isAnnual ? '83' : '104';
+            document.getElementById('period-professional').textContent = '/month';
+            document.getElementById('note-professional').innerHTML = isAnnual
+                ? '<strong>20% OFF</strong> - Billed annually at $996/year'
+                : '';
+        }
+
+        // FAQ Toggle
+        function toggleFAQ(element) {
+            const faqItem = element.parentElement;
+            const allItems = document.querySelectorAll('.faq-item');
+
+            // Close all other items
+            allItems.forEach(item => {
+                if (item !== faqItem) {
+                    item.classList.remove('active');
+                }
+            });
+
+            // Toggle current item
+            faqItem.classList.toggle('active');
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeVideo();
+            initializeHeaderScroll();
+            updatePricing();
+        });
     </script>
+
+    <!-- Stripe Checkout Integration -->
+    <script src="../js/stripe-checkout.js"></script>
 
 </body>
 </html>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <link rel="icon" type="image/svg+xml" href="images/windloadcalc-favicon.svg">
     <title>Member Login - WindLoadCalc</title>
     <meta name="description" content="Login to your WindLoadCalc account. Access your wind load calculators and Building Intelligence Platform.">
@@ -14,6 +14,11 @@
             box-sizing: border-box;
         }
 
+        html, body {
+            height: 100%;
+            -webkit-overflow-scrolling: touch;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             min-height: 100vh;
@@ -21,7 +26,9 @@
             align-items: center;
             justify-content: center;
             background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
+            padding: 2rem 1rem;
         }
 
         .video-background {
@@ -52,26 +59,78 @@
             z-index: 10;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
-            padding: 3rem;
+            padding: 2rem;
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             width: 100%;
-            max-width: 450px;
-            margin: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
         }
 
+        /* Floating Logo with Blue Glow */
         .logo-container {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
         }
 
-        .logo-container img {
-            height: 80px;
+        .logo-badge {
+            display: inline-block;
+            background: white;
+            padding: 1.5rem 2rem;
+            border-radius: 15px;
+            box-shadow:
+                0 0 30px rgba(0, 24, 255, 0.4),
+                0 0 60px rgba(0, 24, 255, 0.2),
+                0 10px 40px rgba(0, 0, 0, 0.15);
+            animation: float 3s ease-in-out infinite;
+            position: relative;
+        }
+
+        .logo-badge::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(135deg, rgba(0, 24, 255, 0.3), rgba(24, 30, 87, 0.3));
+            border-radius: 20px;
+            z-index: -1;
+            filter: blur(15px);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .logo-badge img {
+            height: 60px;
             width: auto;
+            display: block;
+        }
+
+        /* Back to Home - Inside Container */
+        .back-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #0018ff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-home:hover {
+            transform: translateX(-5px);
+            color: #0012cc;
         }
 
         .form-title {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 700;
             color: #181E57;
             text-align: center;
@@ -79,27 +138,27 @@
         }
 
         .form-subtitle {
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: #64748b;
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.25rem;
         }
 
         .form-label {
             display: block;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 600;
             color: #374151;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
         }
 
         .form-input {
             width: 100%;
-            padding: 1rem;
+            padding: 0.9rem;
             border: 2px solid #e5e7eb;
             border-radius: 10px;
             font-size: 1rem;
@@ -135,12 +194,12 @@
 
         .submit-btn {
             width: 100%;
-            padding: 1rem;
+            padding: 0.9rem;
             background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
             color: white;
             border: none;
             border-radius: 50px;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -158,38 +217,79 @@
             transform: none;
         }
 
-        .divider {
+        .forgot-password {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .forgot-password a {
+            color: #0018ff;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+
+        /* Product Sections */
+        .section-divider {
             display: flex;
             align-items: center;
-            margin: 2rem 0;
-            color: #9ca3af;
-            font-size: 0.9rem;
+            margin: 1.5rem 0 1rem;
+            color: #64748b;
+            font-size: 0.85rem;
+            font-weight: 600;
         }
 
-        .divider::before,
-        .divider::after {
+        .section-divider::before,
+        .section-divider::after {
             content: '';
             flex: 1;
-            border-bottom: 1px solid #e5e7eb;
+            border-bottom: 2px solid #e5e7eb;
         }
 
-        .divider span {
+        .section-divider span {
             padding: 0 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .product-section {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .product-section h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #181E57;
+            margin-bottom: 0.75rem;
+            text-align: center;
+        }
+
+        .section-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
         }
 
         .trial-btn {
             width: 100%;
-            padding: 1rem;
+            padding: 0.75rem;
             background: linear-gradient(135deg, #10b981 0%, #059669 100%);
             color: white;
             border: none;
             border-radius: 50px;
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
-            margin-bottom: 1rem;
         }
 
         .trial-btn:hover {
@@ -203,10 +303,11 @@
             color: #0018ff;
             text-decoration: none;
             font-weight: 600;
-            padding: 0.75rem;
+            padding: 0.6rem;
             border: 2px solid #0018ff;
             border-radius: 50px;
             transition: all 0.3s ease;
+            font-size: 0.9rem;
         }
 
         .shop-link:hover {
@@ -214,27 +315,11 @@
             transform: translateY(-1px);
         }
 
-        .forgot-password {
-            text-align: center;
-            margin-top: 1.5rem;
-        }
-
-        .forgot-password a {
-            color: #0018ff;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-
-        .forgot-password a:hover {
-            text-decoration: underline;
-        }
-
         .message {
-            padding: 1rem;
+            padding: 0.9rem;
             border-radius: 10px;
-            margin-bottom: 1.5rem;
-            font-size: 0.9rem;
+            margin-bottom: 1.25rem;
+            font-size: 0.85rem;
             display: none;
         }
 
@@ -250,24 +335,6 @@
             color: #16a34a;
             border: 1px solid #bbf7d0;
             display: block;
-        }
-
-        .back-home {
-            position: absolute;
-            top: 2rem;
-            left: 2rem;
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            z-index: 20;
-            transition: all 0.3s ease;
-        }
-
-        .back-home:hover {
-            transform: translateX(-5px);
         }
 
         /* Trial Signup Form (hidden by default) */
@@ -288,9 +355,9 @@
             border: none;
             color: #0018ff;
             cursor: pointer;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 600;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.25rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
@@ -300,14 +367,81 @@
             color: #0012cc;
         }
 
+        .trial-type-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #0018ff, #181E57);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Mobile Responsive */
         @media (max-width: 480px) {
+            body {
+                padding: 1rem 0.75rem;
+            }
+
             .login-container {
-                padding: 2rem 1.5rem;
-                margin: 1rem;
+                padding: 1.5rem;
+                border-radius: 15px;
+            }
+
+            .logo-badge {
+                padding: 1rem 1.5rem;
+            }
+
+            .logo-badge img {
+                height: 50px;
             }
 
             .form-title {
-                font-size: 1.5rem;
+                font-size: 1.4rem;
+            }
+
+            .form-subtitle {
+                font-size: 0.9rem;
+            }
+
+            .form-input {
+                padding: 0.8rem;
+                font-size: 16px; /* Prevents iOS zoom */
+            }
+
+            .submit-btn {
+                padding: 0.85rem;
+                font-size: 0.95rem;
+            }
+
+            .product-section {
+                padding: 1rem;
+            }
+
+            .product-section h3 {
+                font-size: 0.95rem;
+            }
+
+            .trial-btn, .shop-link {
+                padding: 0.7rem;
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .login-container {
+                padding: 1.25rem;
+            }
+
+            .logo-badge img {
+                height: 45px;
+            }
+
+            .form-title {
+                font-size: 1.3rem;
             }
         }
     </style>
@@ -319,16 +453,18 @@
     </video>
     <div class="video-overlay"></div>
 
-    <!-- Back to Home -->
-    <a href="index.html" class="back-home">
-        ← Back to Home
-    </a>
-
     <!-- Login Container -->
     <div class="login-container">
-        <!-- Logo -->
+        <!-- Back to Home (Inside Container) -->
+        <a href="index.html" class="back-home">
+            ← Back to Home
+        </a>
+
+        <!-- Floating Logo with Blue Glow -->
         <div class="logo-container">
-            <img src="images/windloadcalc-logo.svg" alt="WindLoadCalc Logo">
+            <div class="logo-badge">
+                <img src="images/windloadcalc-logo.svg" alt="WindLoadCalc Logo">
+            </div>
         </div>
 
         <!-- Message Display -->
@@ -337,18 +473,18 @@
         <!-- Login Form -->
         <div id="login-form" class="login-form">
             <h1 class="form-title">Welcome Back</h1>
-            <p class="form-subtitle">Sign in to access your calculators</p>
+            <p class="form-subtitle">Sign in to access your products</p>
 
             <form id="loginForm" onsubmit="handleLogin(event)">
                 <div class="form-group">
                     <label class="form-label" for="email">Email Address</label>
-                    <input type="email" id="email" class="form-input" placeholder="you@company.com" required>
+                    <input type="email" id="email" class="form-input" placeholder="you@company.com" required autocomplete="email">
                 </div>
 
                 <div class="form-group">
                     <label class="form-label" for="password">Password</label>
                     <div class="password-container">
-                        <input type="password" id="password" class="form-input" placeholder="Enter your password" required>
+                        <input type="password" id="password" class="form-input" placeholder="Enter your password" required autocomplete="current-password">
                         <button type="button" class="toggle-password" onclick="togglePassword()">Show</button>
                     </div>
                 </div>
@@ -357,20 +493,42 @@
             </form>
 
             <div class="forgot-password">
-                <a href="#" onclick="showForgotPassword()">Forgot your password?</a>
+                <a href="#" onclick="showForgotPassword(); return false;">Forgot your password?</a>
             </div>
 
-            <div class="divider">
-                <span>New to WindLoadCalc?</span>
+            <!-- Building Intelligence Platform Section -->
+            <div class="section-divider">
+                <span>Building Intelligence Platform</span>
             </div>
 
-            <button type="button" class="trial-btn" onclick="showTrialForm()">
-                Start Your 7-Day Free Trial
-            </button>
+            <div class="product-section">
+                <h3>AI-Powered Analysis Tools</h3>
+                <div class="section-buttons">
+                    <button type="button" class="trial-btn" onclick="showTrialForm('bip')">
+                        Start Free Trial
+                    </button>
+                    <a href="building-intelligence-platform-shop.html" class="shop-link">
+                        View Plans
+                    </a>
+                </div>
+            </div>
 
-            <a href="building-intelligence-platform-shop.html" class="shop-link">
-                View Subscription Plans
-            </a>
+            <!-- Wind Load Calculators Section -->
+            <div class="section-divider">
+                <span>Wind Load Calculators</span>
+            </div>
+
+            <div class="product-section">
+                <h3>ASCE 7-16 & 7-22 Calculations</h3>
+                <div class="section-buttons">
+                    <button type="button" class="trial-btn" onclick="showTrialForm('calculator')">
+                        Start Free Trial
+                    </button>
+                    <a href="wind-load-calculator-shop.html" class="shop-link">
+                        View Plans
+                    </a>
+                </div>
+            </div>
         </div>
 
         <!-- Trial Signup Form -->
@@ -379,24 +537,35 @@
                 ← Back to Login
             </button>
 
+            <div style="text-align: center;">
+                <span id="trial-type-badge" class="trial-type-badge">BIP Trial</span>
+            </div>
+
             <h1 class="form-title">Start Free Trial</h1>
             <p class="form-subtitle">7 days of full access - No credit card required</p>
 
             <form id="trialForm" onsubmit="handleTrialSignup(event)">
+                <input type="hidden" id="trial-product-type" value="bip">
+
                 <div class="form-group">
                     <label class="form-label" for="trial-name">Full Name</label>
-                    <input type="text" id="trial-name" class="form-input" placeholder="John Smith" required>
+                    <input type="text" id="trial-name" class="form-input" placeholder="John Smith" required autocomplete="name">
                 </div>
 
                 <div class="form-group">
                     <label class="form-label" for="trial-email">Email Address</label>
-                    <input type="email" id="trial-email" class="form-input" placeholder="you@company.com" required>
+                    <input type="email" id="trial-email" class="form-input" placeholder="you@company.com" required autocomplete="email">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="trial-company">Company (Optional)</label>
+                    <input type="text" id="trial-company" class="form-input" placeholder="Your company name" autocomplete="organization">
                 </div>
 
                 <div class="form-group">
                     <label class="form-label" for="trial-password">Create Password</label>
                     <div class="password-container">
-                        <input type="password" id="trial-password" class="form-input" placeholder="Min. 8 characters" required minlength="8">
+                        <input type="password" id="trial-password" class="form-input" placeholder="Min. 8 characters" required minlength="8" autocomplete="new-password">
                         <button type="button" class="toggle-password" onclick="toggleTrialPassword()">Show</button>
                     </div>
                 </div>
@@ -404,7 +573,7 @@
                 <button type="submit" id="trialBtn" class="submit-btn">Create Trial Account</button>
             </form>
 
-            <p style="text-align: center; margin-top: 1rem; font-size: 0.85rem; color: #64748b;">
+            <p style="text-align: center; margin-top: 1rem; font-size: 0.8rem; color: #64748b;">
                 By signing up, you agree to our <a href="terms-of-service.html" style="color: #0018ff;">Terms of Service</a>
             </p>
         </div>
@@ -413,8 +582,11 @@
     <script>
         // API Configuration
         const API_URL = 'https://api.windloadcalc.com';
-        const WEBAPP_URL = 'https://calc.windloadcalc.com'; // Will be Railway webapp
+        const WEBAPP_URL = 'https://calc.windloadcalc.com';
         const BIP_URL = 'https://windloadcalc.com/building-intelligence-platform.html';
+
+        // Current trial type
+        let currentTrialType = 'bip';
 
         // Toggle password visibility
         function togglePassword() {
@@ -442,7 +614,20 @@
         }
 
         // Show/hide forms
-        function showTrialForm() {
+        function showTrialForm(productType = 'bip') {
+            currentTrialType = productType;
+            document.getElementById('trial-product-type').value = productType;
+
+            // Update badge
+            const badge = document.getElementById('trial-type-badge');
+            if (productType === 'bip') {
+                badge.textContent = 'BI Platform Trial';
+                badge.style.background = 'linear-gradient(135deg, #0018ff, #181E57)';
+            } else {
+                badge.textContent = 'Calculator Trial';
+                badge.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+            }
+
             document.getElementById('login-form').classList.add('hidden');
             document.getElementById('trial-form').classList.add('active');
             hideMessage();
@@ -544,7 +729,9 @@
 
             const name = document.getElementById('trial-name').value;
             const email = document.getElementById('trial-email').value;
+            const company = document.getElementById('trial-company').value;
             const password = document.getElementById('trial-password').value;
+            const productType = document.getElementById('trial-product-type').value;
 
             try {
                 const response = await fetch(`${API_URL}/api/auth/register`, {
@@ -553,17 +740,19 @@
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        name,
-                        email,
-                        password,
-                        role: 'trial'
+                        full_name: name,
+                        email: email,
+                        password: password,
+                        company: company,
+                        trial_type: productType // 'bip' or 'calculator'
                     })
                 });
 
                 const data = await response.json();
 
                 if (response.ok) {
-                    showMessage('Account created! Please check your email to verify your account.', 'success');
+                    const productName = productType === 'bip' ? 'Building Intelligence Platform' : 'Wind Load Calculators';
+                    showMessage(`Account created! Check your email to start your ${productName} trial.`, 'success');
                     btn.textContent = 'Account Created!';
 
                     // Switch back to login form after 3 seconds
@@ -571,9 +760,11 @@
                         showLoginForm();
                         btn.textContent = originalText;
                         btn.disabled = false;
+                        // Clear form
+                        document.getElementById('trialForm').reset();
                     }, 3000);
                 } else {
-                    showMessage(data.message || 'Registration failed. Please try again.', 'error');
+                    showMessage(data.error || data.message || 'Registration failed. Please try again.', 'error');
                     btn.textContent = originalText;
                     btn.disabled = false;
                 }

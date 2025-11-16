@@ -1664,8 +1664,22 @@
 
             </div>
 
+            <!-- Second Billing Toggle (synced with main toggle) -->
+            <div style="text-align: center; margin-top: 2.5rem; margin-bottom: 1.5rem; position: relative; z-index: 1;">
+                <div class="billing-toggle-container">
+                    <span class="billing-label" id="monthly-label-2">Monthly</span>
+                    <div class="billing-toggle annual" id="billing-toggle-2" onclick="toggleBilling()">
+                        <div class="billing-toggle-slider"></div>
+                    </div>
+                    <span class="billing-label active" id="annual-label-2">Annual</span>
+                    <span class="savings-badge">
+                        <i class="fas fa-tag"></i> Save 20%
+                    </span>
+                </div>
+            </div>
+
             <!-- Government & Institutional Discount -->
-            <div style="margin-top: 3rem; background: linear-gradient(135deg, #0018ff 0%, #181E57 100%); backdrop-filter: blur(10px); border-radius: 20px; padding: 2rem; border: none; position: relative; z-index: 1; box-shadow: 0 15px 40px rgba(0, 24, 255, 0.3);">
+            <div style="margin-top: 1.5rem; background: linear-gradient(135deg, #0018ff 0%, #181E57 100%); backdrop-filter: blur(10px); border-radius: 20px; padding: 2rem; border: none; position: relative; z-index: 1; box-shadow: 0 15px 40px rgba(0, 24, 255, 0.3);">
                 <div style="text-align: center; margin-bottom: 1.5rem;">
                     <h3 style="font-size: 1.3rem; font-weight: 700; color: white; margin-bottom: 0.5rem;">
                         <i class="fas fa-university" style="margin-right: 0.5rem;"></i> Government & Institutional Discount
@@ -2339,18 +2353,36 @@
         function toggleBilling() {
             isAnnual = !isAnnual;
 
+            // Update first toggle
             const toggle = document.getElementById('billing-toggle');
             const monthlyLabel = document.getElementById('monthly-label');
             const annualLabel = document.getElementById('annual-label');
+
+            // Update second toggle (synced)
+            const toggle2 = document.getElementById('billing-toggle-2');
+            const monthlyLabel2 = document.getElementById('monthly-label-2');
+            const annualLabel2 = document.getElementById('annual-label-2');
 
             if (isAnnual) {
                 toggle.classList.add('annual');
                 monthlyLabel.classList.remove('active');
                 annualLabel.classList.add('active');
+                // Sync second toggle
+                if (toggle2) {
+                    toggle2.classList.add('annual');
+                    monthlyLabel2.classList.remove('active');
+                    annualLabel2.classList.add('active');
+                }
             } else {
                 toggle.classList.remove('annual');
                 monthlyLabel.classList.add('active');
                 annualLabel.classList.remove('active');
+                // Sync second toggle
+                if (toggle2) {
+                    toggle2.classList.remove('annual');
+                    monthlyLabel2.classList.add('active');
+                    annualLabel2.classList.remove('active');
+                }
             }
 
             updatePricing();

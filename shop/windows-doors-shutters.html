@@ -425,48 +425,63 @@
             color: #64748b;
         }
 
+        /* Electric Color Variables */
+        :root {
+            --electric-cyan: #00ffff;
+            --electric-blue: #0080ff;
+            --electric-purple: #7c3aed;
+            --electric-green: #10b981;
+            --electric-orange: #f59e0b;
+            --primary-blue: #0018ff;
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.18);
+        }
+
         /* Billing Toggle */
         .billing-toggle-section {
             text-align: center;
             padding: 2rem 0 1rem;
-            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
         }
 
         .billing-toggle-container {
             display: inline-flex;
             align-items: center;
             gap: 1rem;
-            background: white;
-            padding: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            padding: 0.75rem 1.5rem;
             border-radius: 50px;
-            border: 2px solid #e5e7eb;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
 
         .billing-label {
             font-size: 1rem;
             font-weight: 600;
-            color: #64748b;
+            color: rgba(255, 255, 255, 0.6);
             padding: 0 1rem;
             transition: all 0.3s ease;
         }
 
         .billing-label.active {
-            color: #0018ff;
+            color: var(--electric-cyan);
+            text-shadow: 0 0 10px var(--electric-cyan);
         }
 
         .billing-toggle {
             position: relative;
             width: 60px;
             height: 32px;
-            background: #e5e7eb;
+            background: rgba(255, 255, 255, 0.2);
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
         .billing-toggle.annual {
-            background: #0018ff;
+            background: var(--electric-cyan);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
         }
 
         .billing-toggle-slider {
@@ -489,34 +504,111 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            background: linear-gradient(135deg, var(--electric-green) 0%, #059669 100%);
             color: white;
             padding: 0.5rem 1.5rem;
             border-radius: 50px;
             font-size: 0.85rem;
             font-weight: 700;
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);
+            animation: pulse-glow 2s infinite;
         }
 
-        /* Pricing Section */
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4); }
+            50% { box-shadow: 0 4px 30px rgba(16, 185, 129, 0.6); }
+        }
+
+        /* Feature Navigation Banner */
+        .feature-nav-banner {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .feature-nav-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .feature-nav-link:hover {
+            color: var(--electric-cyan);
+            background: rgba(0, 255, 255, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 255, 255, 0.2);
+        }
+
+        /* Pricing Section - Glassmorphism */
         .pricing-section {
-            padding: 4rem 0 6rem;
-            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+            padding: 3rem 0 4rem;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 70%, rgba(0, 255, 255, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 30%, rgba(0, 128, 255, 0.05) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(-2%, 2%) rotate(1deg); }
         }
 
         .pricing-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        @media (max-width: 1200px) {
+            .pricing-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         .pricing-card {
-            background: white;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
             border-radius: 20px;
-            padding: 2.5rem 2rem;
-            border: 2px solid #e5e7eb;
+            padding: 2rem 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.15);
             transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
             position: relative;
@@ -524,99 +616,100 @@
 
         .pricing-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 25px 50px rgba(0, 24, 255, 0.15);
-            border-color: #0018ff;
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.3);
+            border-color: var(--electric-cyan);
         }
 
         .pricing-card.featured {
-            border-color: #0018ff;
-            border-width: 3px;
-            box-shadow: 0 15px 40px rgba(0, 24, 255, 0.2);
+            border-color: var(--electric-cyan);
+            border-width: 2px;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
         }
 
         .pricing-card.featured::before {
             content: 'Most Popular';
             position: absolute;
-            top: -15px;
+            top: -12px;
             left: 50%;
             transform: translateX(-50%);
-            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
-            color: white;
-            padding: 0.5rem 1.5rem;
+            background: linear-gradient(135deg, var(--electric-cyan) 0%, var(--electric-blue) 100%);
+            color: #0f172a;
+            padding: 0.4rem 1.2rem;
             border-radius: 50px;
-            font-size: 0.75rem;
-            font-weight: 700;
+            font-size: 0.7rem;
+            font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            box-shadow: 0 4px 12px rgba(0, 24, 255, 0.3);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
         }
 
         .pricing-header h3 {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 700;
-            color: #111827;
+            color: white;
             margin-bottom: 0.5rem;
         }
 
         .pricing-description {
-            font-size: 0.9rem;
-            color: #64748b;
-            margin-bottom: 1.5rem;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1rem;
         }
 
         .pricing-amount {
             display: flex;
             align-items: baseline;
-            gap: 0.5rem;
+            gap: 0.3rem;
             margin-bottom: 0.5rem;
         }
 
         .price-currency {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             font-weight: 700;
-            color: #111827;
+            color: white;
         }
 
         .price-value {
-            font-size: 3.5rem;
+            font-size: 2.8rem;
             font-weight: 700;
-            color: #0018ff;
+            color: var(--electric-cyan);
             line-height: 1;
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
         }
 
         .price-period {
-            font-size: 1rem;
-            color: #64748b;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
             font-weight: 600;
         }
 
         .price-note {
-            font-size: 0.85rem;
-            color: #64748b;
-            margin-bottom: 1.5rem;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 1rem;
         }
 
         .price-note strong {
-            color: #10b981;
+            color: var(--electric-green);
             font-weight: 700;
         }
 
         .pricing-divider {
             height: 1px;
-            background: linear-gradient(90deg, transparent, #e5e7eb, transparent);
-            margin: 1.5rem 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            margin: 1rem 0;
         }
 
         .pricing-features {
             flex-grow: 1;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .pricing-features h4 {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             font-weight: 700;
-            color: #374151;
-            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
@@ -630,10 +723,10 @@
         .pricing-features li {
             display: flex;
             align-items: flex-start;
-            gap: 0.75rem;
-            padding: 0.75rem 0;
-            font-size: 0.95rem;
-            color: #374151;
+            gap: 0.5rem;
+            padding: 0.5rem 0;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.9);
         }
 
         .pricing-features li svg {
@@ -644,10 +737,10 @@
         .pricing-cta {
             display: block;
             text-align: center;
-            padding: 1.2rem 2rem;
+            padding: 1rem 1.5rem;
             border-radius: 50px;
             font-weight: 700;
-            font-size: 1rem;
+            font-size: 0.95rem;
             text-decoration: none;
             transition: all 0.3s ease;
             cursor: pointer;
@@ -656,31 +749,80 @@
         }
 
         .pricing-cta.primary {
-            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
-            color: white;
-            box-shadow: 0 8px 25px rgba(0, 24, 255, 0.3);
+            background: linear-gradient(135deg, var(--electric-cyan) 0%, var(--electric-blue) 100%);
+            color: #0f172a;
+            box-shadow: 0 8px 25px rgba(0, 255, 255, 0.3);
         }
 
         .pricing-cta.primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 12px 35px rgba(0, 24, 255, 0.4);
+            box-shadow: 0 12px 35px rgba(0, 255, 255, 0.5);
         }
 
         .pricing-cta.secondary {
-            background: rgba(0, 24, 255, 0.1);
-            color: #0018ff;
-            border: 2px solid #0018ff;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
         }
 
         .pricing-cta.secondary:hover {
-            background: rgba(0, 24, 255, 0.15);
+            background: rgba(255, 255, 255, 0.2);
+            border-color: var(--electric-cyan);
         }
 
         .pricing-note {
             text-align: center;
-            margin-top: 1rem;
+            margin-top: 0.75rem;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .trial-link {
+            display: block;
+            text-align: center;
+            margin-top: 0.75rem;
+            color: var(--electric-cyan);
+            font-weight: 600;
             font-size: 0.85rem;
-            color: #64748b;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .trial-link:hover {
+            text-shadow: 0 0 10px var(--electric-cyan);
+        }
+
+        /* Competitive Advantage Badges */
+        .advantage-badges {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .advantage-badge {
+            background: rgba(16, 185, 129, 0.15);
+            backdrop-filter: blur(10px);
+            color: var(--electric-green);
+            padding: 0.8rem 1rem;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .advantage-badge:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+            background: rgba(16, 185, 129, 0.25);
+            border-color: var(--electric-green);
+        }
+
+        .advantage-badge i {
+            margin-right: 0.5rem;
         }
 
         /* Features Grid */
@@ -1219,200 +1361,68 @@
         </div>
     </section>
 
-    <!-- Billing Toggle -->
-    <section class="billing-toggle-section">
+    <!-- Pricing Section with Toggle and Navigation -->
+    <section class="pricing-section" id="pricing">
         <div class="container">
-            <div class="billing-toggle-container">
-                <span class="billing-label" id="monthly-label">Monthly</span>
-                <div class="billing-toggle annual" id="billing-toggle" onclick="toggleBilling()">
-                    <div class="billing-toggle-slider"></div>
-                </div>
-                <span class="billing-label active" id="annual-label">Annual</span>
-                <span class="savings-badge">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="20 6 9 17 4 12"></polyline>
-                    </svg>
-                    Save 20%
-                </span>
-            </div>
-        </div>
-    </section>
-
-    <!-- Key Features Section - Competitive Differentiators -->
-    <section style="padding: 4rem 0; background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);">
-        <div class="container">
-            <div style="text-align: center; margin-bottom: 3rem;">
-                <h2 style="font-size: 2.2rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem;">
-                    Why Choose Our Windows, Doors & Shutters Calculator?
+            <!-- Section Header -->
+            <div style="text-align: center; margin-bottom: 1.5rem; position: relative; z-index: 1;">
+                <h2 style="font-size: 2.2rem; font-weight: 800; color: white; margin-bottom: 0.5rem;">
+                    Simple, Transparent <span style="color: var(--electric-cyan); text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);">Pricing</span>
                 </h2>
-                <p style="font-size: 1.1rem; color: #64748b; max-width: 800px; margin: 0 auto;">
-                    Industry-leading features that set us apart from SkyCiv, MecaWind, and other wind load software
-                </p>
-            </div>
-
-            <!-- Competitive Advantages Banner -->
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 3rem;">
-                <div style="background: #10b981; color: white; padding: 1rem; border-radius: 10px; text-align: center; font-weight: 600;">
-                    <i class="fas fa-ban" style="margin-right: 0.5rem;"></i> No Setup Fees
-                </div>
-                <div style="background: #10b981; color: white; padding: 1rem; border-radius: 10px; text-align: center; font-weight: 600;">
-                    <i class="fas fa-download" style="margin-right: 0.5rem;"></i> No Installation Required
-                </div>
-                <div style="background: #10b981; color: white; padding: 1rem; border-radius: 10px; text-align: center; font-weight: 600;">
-                    <i class="fas fa-laptop" style="margin-right: 0.5rem;"></i> Access from Any Device
-                </div>
-                <div style="background: #10b981; color: white; padding: 1rem; border-radius: 10px; text-align: center; font-weight: 600;">
-                    <i class="fas fa-infinity" style="margin-right: 0.5rem;"></i> Unlimited Calculations
-                </div>
-            </div>
-
-            <!-- Feature Cards Grid -->
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem;">
-
-                <!-- Multi-Format Export -->
-                <div style="background: white; border-radius: 16px; padding: 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border: 1px solid #e2e8f0;">
-                    <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
-                        <div style="background: linear-gradient(135deg, #3b82f6, #1d4ed8); width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
-                            <i class="fas fa-file-export" style="color: white; font-size: 1.5rem;"></i>
-                        </div>
-                        <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a;">Multi-Format Exports</h3>
-                    </div>
-                    <p style="color: #64748b; margin-bottom: 1rem; line-height: 1.6;">
-                        Export your calculations in the format that works best for your workflow and client requirements.
-                    </p>
-                    <ul style="list-style: none; padding: 0; margin: 0;">
-                        <li style="display: flex; align-items: center; padding: 0.5rem 0; color: #374151;">
-                            <i class="fas fa-file-pdf" style="color: #ef4444; margin-right: 0.75rem; width: 20px;"></i>
-                            <span><strong>PDF Reports</strong> - Permit-ready professional documents</span>
-                        </li>
-                        <li style="display: flex; align-items: center; padding: 0.5rem 0; color: #374151;">
-                            <i class="fas fa-file-excel" style="color: #10b981; margin-right: 0.75rem; width: 20px;"></i>
-                            <span><strong>Excel (.xlsx)</strong> - Editable spreadsheets for further analysis</span>
-                        </li>
-                        <li style="display: flex; align-items: center; padding: 0.5rem 0; color: #374151;">
-                            <i class="fas fa-file-csv" style="color: #f59e0b; margin-right: 0.75rem; width: 20px;"></i>
-                            <span><strong>CSV Files</strong> - Data integration with other software</span>
-                        </li>
-                        <li style="display: flex; align-items: center; padding: 0.5rem 0; color: #374151;">
-                            <i class="fas fa-print" style="color: #6366f1; margin-right: 0.75rem; width: 20px;"></i>
-                            <span><strong>Direct Print</strong> - Print to local printer instantly</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Custom Company Branding -->
-                <div style="background: white; border-radius: 16px; padding: 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border: 1px solid #e2e8f0;">
-                    <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
-                        <div style="background: linear-gradient(135deg, #8b5cf6, #6d28d9); width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
-                            <i class="fas fa-palette" style="color: white; font-size: 1.5rem;"></i>
-                        </div>
-                        <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a;">Custom Company Branding</h3>
-                    </div>
-                    <p style="color: #64748b; margin-bottom: 1rem; line-height: 1.6;">
-                        Add your company logo to all reports for professional client deliverables.
-                    </p>
-                    <ul style="list-style: none; padding: 0; margin: 0;">
-                        <li style="display: flex; align-items: center; padding: 0.5rem 0; color: #374151;">
-                            <i class="fas fa-check-circle" style="color: #10b981; margin-right: 0.75rem; width: 20px;"></i>
-                            <span>Upload your company logo</span>
-                        </li>
-                        <li style="display: flex; align-items: center; padding: 0.5rem 0; color: #374151;">
-                            <i class="fas fa-check-circle" style="color: #10b981; margin-right: 0.75rem; width: 20px;"></i>
-                            <span>Professional branded reports</span>
-                        </li>
-                        <li style="display: flex; align-items: center; padding: 0.5rem 0; color: #374151;">
-                            <i class="fas fa-check-circle" style="color: #10b981; margin-right: 0.75rem; width: 20px;"></i>
-                            <span>Client-ready deliverables</span>
-                        </li>
-                        <li style="display: flex; align-items: center; padding: 0.5rem 0; color: #374151;">
-                            <i class="fas fa-check-circle" style="color: #10b981; margin-right: 0.75rem; width: 20px;"></i>
-                            <span>Build brand recognition</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- State-Specific Certifications -->
-                <div style="background: white; border-radius: 16px; padding: 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border: 2px solid #f59e0b; position: relative;">
-                    <div style="position: absolute; top: -12px; right: 20px; background: #f59e0b; color: white; padding: 0.3rem 1rem; border-radius: 20px; font-size: 0.8rem; font-weight: 700;">
-                        EXCLUSIVE FEATURE
-                    </div>
-                    <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
-                        <div style="background: linear-gradient(135deg, #f59e0b, #d97706); width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
-                            <i class="fas fa-certificate" style="color: white; font-size: 1.5rem;"></i>
-                        </div>
-                        <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a;">State-Specific Certifications</h3>
-                    </div>
-                    <p style="color: #64748b; margin-bottom: 1rem; line-height: 1.6;">
-                        Built-in compliance workflows for 10 states with automatic certification tracking.
-                    </p>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
-                        <div style="background: #fef3c7; padding: 0.5rem; border-radius: 6px; font-size: 0.85rem; color: #92400e;">
-                            <strong>Florida</strong> - NOA Numbers
-                        </div>
-                        <div style="background: #fef3c7; padding: 0.5rem; border-radius: 6px; font-size: 0.85rem; color: #92400e;">
-                            <strong>Texas</strong> - TDI Compliance
-                        </div>
-                        <div style="background: #fef3c7; padding: 0.5rem; border-radius: 6px; font-size: 0.85rem; color: #92400e;">
-                            <strong>California</strong> - CBC/AAMA
-                        </div>
-                        <div style="background: #fef3c7; padding: 0.5rem; border-radius: 6px; font-size: 0.85rem; color: #92400e;">
-                            <strong>New York</strong> - NYSERDA
-                        </div>
-                        <div style="background: #fef3c7; padding: 0.5rem; border-radius: 6px; font-size: 0.85rem; color: #92400e;">
-                            <strong>Louisiana</strong> - ICC-ES
-                        </div>
-                        <div style="background: #fef3c7; padding: 0.5rem; border-radius: 6px; font-size: 0.85rem; color: #92400e;">
-                            <strong>+ 5 More States</strong>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product Certification Tracking -->
-                <div style="background: white; border-radius: 16px; padding: 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border: 1px solid #e2e8f0;">
-                    <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
-                        <div style="background: linear-gradient(135deg, #10b981, #059669); width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
-                            <i class="fas fa-clipboard-check" style="color: white; font-size: 1.5rem;"></i>
-                        </div>
-                        <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a;">Product Certification Tracking</h3>
-                    </div>
-                    <p style="color: #64748b; margin-bottom: 1rem; line-height: 1.6;">
-                        Document manufacturer certifications for permit compliance and traceability.
-                    </p>
-                    <ul style="list-style: none; padding: 0; margin: 0;">
-                        <li style="display: flex; align-items: center; padding: 0.5rem 0; color: #374151;">
-                            <i class="fas fa-industry" style="color: #10b981; margin-right: 0.75rem; width: 20px;"></i>
-                            <span>Manufacturer name & contact</span>
-                        </li>
-                        <li style="display: flex; align-items: center; padding: 0.5rem 0; color: #374151;">
-                            <i class="fas fa-barcode" style="color: #10b981; margin-right: 0.75rem; width: 20px;"></i>
-                            <span>Model numbers & specifications</span>
-                        </li>
-                        <li style="display: flex; align-items: center; padding: 0.5rem 0; color: #374151;">
-                            <i class="fas fa-award" style="color: #10b981; margin-right: 0.75rem; width: 20px;"></i>
-                            <span>Design pressure ratings (+/-)</span>
-                        </li>
-                        <li style="display: flex; align-items: center; padding: 0.5rem 0; color: #374151;">
-                            <i class="fas fa-shield-alt" style="color: #10b981; margin-right: 0.75rem; width: 20px;"></i>
-                            <span>Impact ratings & compliance codes</span>
-                        </li>
-                    </ul>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- Pricing Section -->
-    <section class="pricing-section">
-        <div class="container">
-            <div style="text-align: center; margin-bottom: 2rem;">
-                <h2 style="font-size: 2rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">
-                    Simple, Transparent Pricing
-                </h2>
-                <p style="color: #64748b; font-size: 1.1rem;">
+                <p style="color: rgba(255, 255, 255, 0.7); font-size: 1rem;">
                     Start with a 7-day free trial. No credit card required.
                 </p>
             </div>
+
+            <!-- Billing Toggle -->
+            <div style="text-align: center; margin-bottom: 1.5rem; position: relative; z-index: 1;">
+                <div class="billing-toggle-container">
+                    <span class="billing-label" id="monthly-label">Monthly</span>
+                    <div class="billing-toggle annual" id="billing-toggle" onclick="toggleBilling()">
+                        <div class="billing-toggle-slider"></div>
+                    </div>
+                    <span class="billing-label active" id="annual-label">Annual</span>
+                    <span class="savings-badge">
+                        <i class="fas fa-tag"></i> Save 20%
+                    </span>
+                </div>
+            </div>
+
+            <!-- Feature Navigation Banner -->
+            <div class="feature-nav-banner" style="margin-bottom: 2rem; border-radius: 12px; position: relative; z-index: 1;">
+                <div class="feature-nav-links">
+                    <a href="#exports" class="feature-nav-link">
+                        <i class="fas fa-file-export"></i> Multi-Format Exports
+                    </a>
+                    <a href="#branding" class="feature-nav-link">
+                        <i class="fas fa-palette"></i> Custom Branding
+                    </a>
+                    <a href="#certifications" class="feature-nav-link">
+                        <i class="fas fa-certificate"></i> State Certifications
+                    </a>
+                    <a href="#tracking" class="feature-nav-link">
+                        <i class="fas fa-clipboard-check"></i> Product Tracking
+                    </a>
+                </div>
+            </div>
+
+            <!-- Competitive Advantage Badges -->
+            <div class="advantage-badges" style="position: relative; z-index: 1;">
+                <div class="advantage-badge">
+                    <i class="fas fa-ban"></i> No Setup Fees
+                </div>
+                <div class="advantage-badge">
+                    <i class="fas fa-cloud"></i> No Installation Required
+                </div>
+                <div class="advantage-badge">
+                    <i class="fas fa-laptop"></i> Access from Any Device
+                </div>
+                <div class="advantage-badge">
+                    <i class="fas fa-infinity"></i> Unlimited Calculations
+                </div>
+            </div>
+
+            <!-- Pricing Grid - 4 columns -->
             <div class="pricing-grid">
 
                 <!-- Starter Plan -->
@@ -1474,7 +1484,7 @@
                     </div>
 
                     <button class="pricing-cta primary" data-product-code="cc_walls_starter" data-billing-cycle="annual">Subscribe Now</button>
-                    <a href="../login.html" style="display: block; text-align: center; margin-top: 0.75rem; color: #0018ff; font-weight: 600; font-size: 0.9rem; text-decoration: none;">or Start 7-Day Free Trial</a>
+                    <a href="../login.html" class="trial-link">or Start 7-Day Free Trial</a>
                 </div>
 
                 <!-- Pro Plan -->
@@ -1530,7 +1540,7 @@
                     </div>
 
                     <button class="pricing-cta primary" data-product-code="cc_walls_pro" data-billing-cycle="annual">Subscribe Now</button>
-                    <a href="../login.html" style="display: block; text-align: center; margin-top: 0.75rem; color: #0018ff; font-weight: 600; font-size: 0.9rem; text-decoration: none;">or Start 7-Day Free Trial</a>
+                    <a href="../login.html" class="trial-link">or Start 7-Day Free Trial</a>
                 </div>
 
                 <!-- Premium Plan -->
@@ -1586,7 +1596,7 @@
                     </div>
 
                     <button class="pricing-cta primary" data-product-code="cc_walls_premium" data-billing-cycle="annual">Subscribe Now</button>
-                    <a href="../login.html" style="display: block; text-align: center; margin-top: 0.75rem; color: #0018ff; font-weight: 600; font-size: 0.9rem; text-decoration: none;">or Start 7-Day Free Trial</a>
+                    <a href="../login.html" class="trial-link">or Start 7-Day Free Trial</a>
                 </div>
 
                 <!-- Enterprise Plan -->
@@ -1647,40 +1657,207 @@
             </div>
 
             <!-- Government & Institutional Discount -->
-            <div style="margin-top: 3rem; background: linear-gradient(135deg, #dbeafe 0%, #eff6ff 100%); border-radius: 20px; padding: 2.5rem; border: 2px solid #3b82f6;">
+            <div style="margin-top: 3rem; background: rgba(59, 130, 246, 0.1); backdrop-filter: blur(10px); border-radius: 20px; padding: 2rem; border: 1px solid rgba(59, 130, 246, 0.3); position: relative; z-index: 1;">
                 <div style="text-align: center; margin-bottom: 1.5rem;">
-                    <h3 style="font-size: 1.5rem; font-weight: 700; color: #1e40af; margin-bottom: 0.5rem;">Government & Institutional Discount</h3>
-                    <p style="color: #3b82f6; font-size: 1rem;">25% off for building departments, universities, and government agencies</p>
+                    <h3 style="font-size: 1.3rem; font-weight: 700; color: var(--electric-cyan); margin-bottom: 0.5rem; text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);">
+                        <i class="fas fa-university" style="margin-right: 0.5rem;"></i> Government & Institutional Discount
+                    </h3>
+                    <p style="color: rgba(255, 255, 255, 0.7); font-size: 0.95rem;">25% off for building departments, universities, and government agencies</p>
                 </div>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
-                    <div style="background: white; padding: 1.5rem; border-radius: 12px; text-align: center;">
-                        <h4 style="font-size: 1.1rem; font-weight: 700; color: #1e40af; margin-bottom: 0.5rem;">Individual</h4>
-                        <p style="font-size: 2rem; font-weight: 700; color: #3b82f6; margin-bottom: 0.25rem;">$21<span style="font-size: 1rem; color: #64748b;">/month</span></p>
-                        <p style="font-size: 0.85rem; color: #64748b;">Billed annually at $252/year</p>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;">
+                    <div style="background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(10px); padding: 1.2rem; border-radius: 12px; text-align: center; border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 25px rgba(59, 130, 246, 0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                        <h4 style="font-size: 1rem; font-weight: 700; color: white; margin-bottom: 0.5rem;">Individual</h4>
+                        <p style="font-size: 1.8rem; font-weight: 700; color: var(--electric-blue); margin-bottom: 0.25rem; text-shadow: 0 0 10px rgba(0, 128, 255, 0.3);">$21<span style="font-size: 0.9rem; color: rgba(255, 255, 255, 0.6);">/mo</span></p>
+                        <p style="font-size: 0.8rem; color: rgba(255, 255, 255, 0.6);">$252/year</p>
                     </div>
-                    <div style="background: white; padding: 1.5rem; border-radius: 12px; text-align: center;">
-                        <h4 style="font-size: 1.1rem; font-weight: 700; color: #1e40af; margin-bottom: 0.5rem;">Department (5 users)</h4>
-                        <p style="font-size: 2rem; font-weight: 700; color: #3b82f6; margin-bottom: 0.25rem;">$47<span style="font-size: 1rem; color: #64748b;">/month</span></p>
-                        <p style="font-size: 0.85rem; color: #64748b;">Billed annually at $567/year</p>
+                    <div style="background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(10px); padding: 1.2rem; border-radius: 12px; text-align: center; border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 25px rgba(59, 130, 246, 0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                        <h4 style="font-size: 1rem; font-weight: 700; color: white; margin-bottom: 0.5rem;">Department (5 users)</h4>
+                        <p style="font-size: 1.8rem; font-weight: 700; color: var(--electric-blue); margin-bottom: 0.25rem; text-shadow: 0 0 10px rgba(0, 128, 255, 0.3);">$47<span style="font-size: 0.9rem; color: rgba(255, 255, 255, 0.6);">/mo</span></p>
+                        <p style="font-size: 0.8rem; color: rgba(255, 255, 255, 0.6);">$567/year</p>
                     </div>
-                    <div style="background: white; padding: 1.5rem; border-radius: 12px; text-align: center;">
-                        <h4 style="font-size: 1.1rem; font-weight: 700; color: #1e40af; margin-bottom: 0.5rem;">Institution (10+ users)</h4>
-                        <p style="font-size: 2rem; font-weight: 700; color: #3b82f6; margin-bottom: 0.25rem;">Contact Us</p>
-                        <p style="font-size: 0.85rem; color: #64748b;">Bulk & classroom pricing available</p>
+                    <div style="background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(10px); padding: 1.2rem; border-radius: 12px; text-align: center; border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 25px rgba(59, 130, 246, 0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                        <h4 style="font-size: 1rem; font-weight: 700; color: white; margin-bottom: 0.5rem;">Institution (10+ users)</h4>
+                        <p style="font-size: 1.8rem; font-weight: 700; color: var(--electric-blue); margin-bottom: 0.25rem; text-shadow: 0 0 10px rgba(0, 128, 255, 0.3);">Contact Us</p>
+                        <p style="font-size: 0.8rem; color: rgba(255, 255, 255, 0.6);">Bulk & classroom pricing</p>
                     </div>
                 </div>
-                <p style="text-align: center; margin-top: 1rem; font-size: 0.85rem; color: #3b82f6;">Requires .gov or .edu email verification. Purchase order invoicing available.</p>
+                <p style="text-align: center; margin-top: 1rem; font-size: 0.8rem; color: rgba(255, 255, 255, 0.6);">
+                    <i class="fas fa-shield-alt" style="margin-right: 0.3rem;"></i> Requires .gov or .edu email verification. Purchase order invoicing available.
+                </p>
             </div>
 
             <!-- Legal Disclaimer -->
-            <div style="text-align: center; margin-top: 60px; padding: 30px; background: #f8fafc; border-radius: 8px;">
-                <p style="font-size: 0.9rem; color: #666; line-height: 1.6; margin: 0;">
+            <div style="text-align: center; margin-top: 2rem; padding: 1.5rem; background: rgba(255, 255, 255, 0.05); border-radius: 12px; position: relative; z-index: 1;">
+                <p style="font-size: 0.85rem; color: rgba(255, 255, 255, 0.6); line-height: 1.6; margin: 0;">
                     By purchasing a subscription, you agree to our
-                    <a href="../terms-of-service.html" style="color: #0018ff; text-decoration: none; font-weight: 500;">Terms of Service</a> and
-                    <a href="../privacy-policy.html" style="color: #0018ff; text-decoration: none; font-weight: 500;">Privacy Policy</a>.
+                    <a href="../terms-of-service.html" style="color: var(--electric-cyan); text-decoration: none; font-weight: 500;">Terms of Service</a> and
+                    <a href="../privacy-policy.html" style="color: var(--electric-cyan); text-decoration: none; font-weight: 500;">Privacy Policy</a>.
                     <br>
                     All subscriptions automatically renew. Cancel anytime. 7-day money-back guarantee on new subscriptions.
                 </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Features Section with Custom SVG Icons -->
+    <section id="features" style="padding: 5rem 0; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 3rem;">
+                <h2 style="font-size: 2.2rem; font-weight: 800; color: white; margin-bottom: 1rem;">
+                    Why Choose Our <span style="color: var(--electric-cyan); text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);">Calculator?</span>
+                </h2>
+                <p style="font-size: 1.1rem; color: rgba(255, 255, 255, 0.7); max-width: 800px; margin: 0 auto;">
+                    Industry-leading features that set us apart from SkyCiv, MecaWind, and other wind load software
+                </p>
+            </div>
+
+            <!-- Feature Cards Grid with Custom SVGs -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem;">
+
+                <!-- Multi-Format Export -->
+                <div id="exports" style="background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(20px); border-radius: 16px; padding: 2rem; border: 1px solid rgba(255, 255, 255, 0.15); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 0 30px rgba(0, 255, 255, 0.2)'; this.style.borderColor='var(--electric-cyan)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(255, 255, 255, 0.15)';">
+                    <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                        <div style="background: linear-gradient(135deg, var(--electric-blue), #1d4ed8); width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
+                            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <path d="M12 18v-6"/>
+                                <path d="M9 15l3 3 3-3"/>
+                            </svg>
+                        </div>
+                        <h3 style="font-size: 1.3rem; font-weight: 700; color: white;">Multi-Format Exports</h3>
+                    </div>
+                    <p style="color: rgba(255, 255, 255, 0.7); margin-bottom: 1rem; line-height: 1.6;">
+                        Export your calculations in the format that works best for your workflow.
+                    </p>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="display: flex; align-items: center; padding: 0.5rem 0; color: rgba(255, 255, 255, 0.9);">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#ef4444" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                            <span style="margin-left: 0.75rem;"><strong>PDF Reports</strong> - Permit-ready documents</span>
+                        </li>
+                        <li style="display: flex; align-items: center; padding: 0.5rem 0; color: rgba(255, 255, 255, 0.9);">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#10b981" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="12" y1="8" x2="12" y2="16"/></svg>
+                            <span style="margin-left: 0.75rem;"><strong>Excel (.xlsx)</strong> - Editable spreadsheets</span>
+                        </li>
+                        <li style="display: flex; align-items: center; padding: 0.5rem 0; color: rgba(255, 255, 255, 0.9);">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#f59e0b" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M8 13h8M8 17h8"/></svg>
+                            <span style="margin-left: 0.75rem;"><strong>CSV Files</strong> - Data integration</span>
+                        </li>
+                        <li style="display: flex; align-items: center; padding: 0.5rem 0; color: rgba(255, 255, 255, 0.9);">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#6366f1" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                            <span style="margin-left: 0.75rem;"><strong>Direct Print</strong> - Local printer support</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Custom Company Branding -->
+                <div id="branding" style="background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(20px); border-radius: 16px; padding: 2rem; border: 1px solid rgba(255, 255, 255, 0.15); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 0 30px rgba(0, 255, 255, 0.2)'; this.style.borderColor='var(--electric-cyan)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(255, 255, 255, 0.15)';">
+                    <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                        <div style="background: linear-gradient(135deg, var(--electric-purple), #6d28d9); width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
+                            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                                <circle cx="8.5" cy="8.5" r="1.5"/>
+                                <path d="M21 15l-5-5L5 21"/>
+                            </svg>
+                        </div>
+                        <h3 style="font-size: 1.3rem; font-weight: 700; color: white;">Custom Company Branding</h3>
+                    </div>
+                    <p style="color: rgba(255, 255, 255, 0.7); margin-bottom: 1rem; line-height: 1.6;">
+                        Add your company logo to all reports for professional client deliverables.
+                    </p>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="display: flex; align-items: center; padding: 0.5rem 0; color: rgba(255, 255, 255, 0.9);">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="var(--electric-green)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span style="margin-left: 0.75rem;">Upload your company logo</span>
+                        </li>
+                        <li style="display: flex; align-items: center; padding: 0.5rem 0; color: rgba(255, 255, 255, 0.9);">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="var(--electric-green)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span style="margin-left: 0.75rem;">Professional branded reports</span>
+                        </li>
+                        <li style="display: flex; align-items: center; padding: 0.5rem 0; color: rgba(255, 255, 255, 0.9);">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="var(--electric-green)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span style="margin-left: 0.75rem;">Client-ready deliverables</span>
+                        </li>
+                        <li style="display: flex; align-items: center; padding: 0.5rem 0; color: rgba(255, 255, 255, 0.9);">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="var(--electric-green)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span style="margin-left: 0.75rem;">Build brand recognition</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- State-Specific Certifications -->
+                <div id="certifications" style="background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(20px); border-radius: 16px; padding: 2rem; border: 2px solid var(--electric-orange); position: relative; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 0 30px rgba(245, 158, 11, 0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                    <div style="position: absolute; top: -12px; right: 20px; background: var(--electric-orange); color: #0f172a; padding: 0.3rem 1rem; border-radius: 20px; font-size: 0.75rem; font-weight: 800; box-shadow: 0 0 15px rgba(245, 158, 11, 0.5);">
+                        EXCLUSIVE FEATURE
+                    </div>
+                    <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                        <div style="background: linear-gradient(135deg, var(--electric-orange), #d97706); width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
+                            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="8" r="7"/>
+                                <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>
+                            </svg>
+                        </div>
+                        <h3 style="font-size: 1.3rem; font-weight: 700; color: white;">State-Specific Certifications</h3>
+                    </div>
+                    <p style="color: rgba(255, 255, 255, 0.7); margin-bottom: 1rem; line-height: 1.6;">
+                        Built-in compliance workflows for 10 states with automatic certification tracking.
+                    </p>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                        <div style="background: rgba(245, 158, 11, 0.15); padding: 0.5rem; border-radius: 6px; font-size: 0.85rem; color: var(--electric-orange);">
+                            <strong>Florida</strong> - NOA Numbers
+                        </div>
+                        <div style="background: rgba(245, 158, 11, 0.15); padding: 0.5rem; border-radius: 6px; font-size: 0.85rem; color: var(--electric-orange);">
+                            <strong>Texas</strong> - TDI Compliance
+                        </div>
+                        <div style="background: rgba(245, 158, 11, 0.15); padding: 0.5rem; border-radius: 6px; font-size: 0.85rem; color: var(--electric-orange);">
+                            <strong>California</strong> - CBC/AAMA
+                        </div>
+                        <div style="background: rgba(245, 158, 11, 0.15); padding: 0.5rem; border-radius: 6px; font-size: 0.85rem; color: var(--electric-orange);">
+                            <strong>New York</strong> - NYSERDA
+                        </div>
+                        <div style="background: rgba(245, 158, 11, 0.15); padding: 0.5rem; border-radius: 6px; font-size: 0.85rem; color: var(--electric-orange);">
+                            <strong>Louisiana</strong> - ICC-ES
+                        </div>
+                        <div style="background: rgba(245, 158, 11, 0.15); padding: 0.5rem; border-radius: 6px; font-size: 0.85rem; color: var(--electric-orange);">
+                            <strong>+ 5 More States</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Certification Tracking -->
+                <div id="tracking" style="background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(20px); border-radius: 16px; padding: 2rem; border: 1px solid rgba(255, 255, 255, 0.15); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 0 30px rgba(0, 255, 255, 0.2)'; this.style.borderColor='var(--electric-cyan)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(255, 255, 255, 0.15)';">
+                    <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                        <div style="background: linear-gradient(135deg, var(--electric-green), #059669); width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
+                            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 11l3 3L22 4"/>
+                                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                            </svg>
+                        </div>
+                        <h3 style="font-size: 1.3rem; font-weight: 700; color: white;">Product Certification Tracking</h3>
+                    </div>
+                    <p style="color: rgba(255, 255, 255, 0.7); margin-bottom: 1rem; line-height: 1.6;">
+                        Document manufacturer certifications for permit compliance and traceability.
+                    </p>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="display: flex; align-items: center; padding: 0.5rem 0; color: rgba(255, 255, 255, 0.9);">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="var(--electric-green)" stroke-width="2"><path d="M3 21h18M3 7v1a3 3 0 0 0 6 0V7m0 1a3 3 0 0 0 6 0V7m0 1a3 3 0 0 0 6 0V7H3l2-4h14l2 4M4 15h16"/></svg>
+                            <span style="margin-left: 0.75rem;">Manufacturer name & contact</span>
+                        </li>
+                        <li style="display: flex; align-items: center; padding: 0.5rem 0; color: rgba(255, 255, 255, 0.9);">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="var(--electric-green)" stroke-width="2"><rect x="3" y="4" width="18" height="4"/><path d="M3 8h18M5 12h2M9 12h2M13 12h2M17 12h2M5 16h2M9 16h2M13 16h2M17 16h2M5 20h2M9 20h2M13 20h2M17 20h2"/></svg>
+                            <span style="margin-left: 0.75rem;">Model numbers & specifications</span>
+                        </li>
+                        <li style="display: flex; align-items: center; padding: 0.5rem 0; color: rgba(255, 255, 255, 0.9);">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="var(--electric-green)" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+                            <span style="margin-left: 0.75rem;">Design pressure ratings (+/-)</span>
+                        </li>
+                        <li style="display: flex; align-items: center; padding: 0.5rem 0; color: rgba(255, 255, 255, 0.9);">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="var(--electric-green)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                            <span style="margin-left: 0.75rem;">Impact ratings & compliance codes</span>
+                        </li>
+                    </ul>
+                </div>
+
             </div>
         </div>
     </section>

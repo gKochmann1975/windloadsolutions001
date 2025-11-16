@@ -182,6 +182,14 @@
             box-shadow: 0 0 0 3px rgba(0, 24, 255, 0.1);
         }
 
+        .form-input.valid {
+            border-color: #10b981;
+        }
+
+        .form-input.invalid {
+            border-color: #ef4444;
+        }
+
         .password-container {
             position: relative;
         }
@@ -202,6 +210,65 @@
             color: #0018ff;
         }
 
+        /* Password Strength Indicator */
+        .password-strength {
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .password-strength.active {
+            display: block;
+        }
+
+        .strength-bar {
+            height: 4px;
+            background: #e5e7eb;
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 0.3rem;
+        }
+
+        .strength-fill {
+            height: 100%;
+            width: 0%;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .strength-fill.weak { width: 33%; background: #ef4444; }
+        .strength-fill.medium { width: 66%; background: #f59e0b; }
+        .strength-fill.strong { width: 100%; background: #10b981; }
+
+        .strength-text {
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .strength-text.weak { color: #ef4444; }
+        .strength-text.medium { color: #f59e0b; }
+        .strength-text.strong { color: #10b981; }
+
+        /* Remember Me Checkbox */
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .remember-me input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #0018ff;
+            cursor: pointer;
+        }
+
+        .remember-me label {
+            font-size: 0.85rem;
+            color: #64748b;
+            cursor: pointer;
+        }
+
         .submit-btn {
             width: 100%;
             padding: 0.9rem;
@@ -214,6 +281,8 @@
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(0, 24, 255, 0.3);
+            position: relative;
+            overflow: hidden;
         }
 
         .submit-btn:hover {
@@ -225,6 +294,32 @@
             opacity: 0.7;
             cursor: not-allowed;
             transform: none;
+        }
+
+        .submit-btn:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 24, 255, 0.3), 0 4px 15px rgba(0, 24, 255, 0.3);
+        }
+
+        /* Loading spinner for buttons */
+        .btn-loading {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .spinner {
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
 
         .forgot-password {
@@ -307,6 +402,11 @@
             box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
         }
 
+        .trial-btn:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3), 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
         .shop-link {
             display: block;
             text-align: center;
@@ -325,12 +425,29 @@
             transform: translateY(-1px);
         }
 
+        .shop-link:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 24, 255, 0.2);
+        }
+
         .message {
             padding: 0.9rem;
             border-radius: 10px;
             margin-bottom: 1.25rem;
             font-size: 0.85rem;
             display: none;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .message.error {
@@ -354,6 +471,12 @@
 
         .trial-form.active {
             display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .login-form.hidden {
@@ -371,10 +494,12 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            transition: all 0.3s ease;
         }
 
         .back-to-login:hover {
             color: #0012cc;
+            transform: translateX(-3px);
         }
 
         .trial-type-badge {
@@ -388,6 +513,42 @@
             margin-bottom: 0.5rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+        }
+
+        /* Success checkmark animation */
+        .success-icon {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #10b981, #059669);
+            margin-bottom: 1rem;
+            position: relative;
+            animation: scaleIn 0.5s ease;
+        }
+
+        @keyframes scaleIn {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .success-icon::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 35px;
+            border: solid white;
+            border-width: 0 4px 4px 0;
+            transform: translate(-50%, -60%) rotate(45deg);
+            animation: checkmark 0.3s ease 0.3s forwards;
+            opacity: 0;
+        }
+
+        @keyframes checkmark {
+            to { opacity: 1; }
         }
 
         /* Mobile Responsive */
@@ -488,7 +649,7 @@
             <form id="loginForm" onsubmit="handleLogin(event)">
                 <div class="form-group">
                     <label class="form-label" for="email">Email Address</label>
-                    <input type="email" id="email" class="form-input" placeholder="you@company.com" required autocomplete="email">
+                    <input type="email" id="email" class="form-input" placeholder="you@company.com" required autocomplete="email" oninput="validateEmail(this)">
                 </div>
 
                 <div class="form-group">
@@ -497,6 +658,11 @@
                         <input type="password" id="password" class="form-input" placeholder="Enter your password" required autocomplete="current-password">
                         <button type="button" class="toggle-password" onclick="togglePassword()">Show</button>
                     </div>
+                </div>
+
+                <div class="remember-me">
+                    <input type="checkbox" id="remember" name="remember">
+                    <label for="remember">Remember me</label>
                 </div>
 
                 <button type="submit" id="loginBtn" class="submit-btn">Sign In</button>
@@ -562,7 +728,7 @@
 
                 <div class="form-group">
                     <label class="form-label" for="trial-email">Email Address</label>
-                    <input type="email" id="trial-email" class="form-input" placeholder="you@company.com" required autocomplete="email">
+                    <input type="email" id="trial-email" class="form-input" placeholder="you@company.com" required autocomplete="email" oninput="validateEmail(this)">
                 </div>
 
                 <div class="form-group">
@@ -573,8 +739,14 @@
                 <div class="form-group">
                     <label class="form-label" for="trial-password">Create Password</label>
                     <div class="password-container">
-                        <input type="password" id="trial-password" class="form-input" placeholder="Min. 8 characters" required minlength="8" autocomplete="new-password">
+                        <input type="password" id="trial-password" class="form-input" placeholder="Min. 8 characters" required minlength="8" autocomplete="new-password" oninput="checkPasswordStrength(this.value)">
                         <button type="button" class="toggle-password" onclick="toggleTrialPassword()">Show</button>
+                    </div>
+                    <div id="password-strength" class="password-strength">
+                        <div class="strength-bar">
+                            <div id="strength-fill" class="strength-fill"></div>
+                        </div>
+                        <span id="strength-text" class="strength-text"></span>
                     </div>
                 </div>
 
@@ -595,6 +767,59 @@
 
         // Current trial type
         let currentTrialType = 'bip';
+
+        // Email validation
+        function validateEmail(input) {
+            const email = input.value;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (email.length === 0) {
+                input.classList.remove('valid', 'invalid');
+            } else if (emailRegex.test(email)) {
+                input.classList.add('valid');
+                input.classList.remove('invalid');
+            } else {
+                input.classList.add('invalid');
+                input.classList.remove('valid');
+            }
+        }
+
+        // Password strength checker
+        function checkPasswordStrength(password) {
+            const strengthContainer = document.getElementById('password-strength');
+            const strengthFill = document.getElementById('strength-fill');
+            const strengthText = document.getElementById('strength-text');
+
+            if (password.length === 0) {
+                strengthContainer.classList.remove('active');
+                return;
+            }
+
+            strengthContainer.classList.add('active');
+
+            let strength = 0;
+            if (password.length >= 8) strength++;
+            if (/[a-z]/.test(password) && /[A-Z]/.test(password)) strength++;
+            if (/\d/.test(password)) strength++;
+            if (/[^a-zA-Z0-9]/.test(password)) strength++;
+
+            strengthFill.className = 'strength-fill';
+            strengthText.className = 'strength-text';
+
+            if (strength <= 1) {
+                strengthFill.classList.add('weak');
+                strengthText.classList.add('weak');
+                strengthText.textContent = 'Weak - Add numbers & special characters';
+            } else if (strength <= 2) {
+                strengthFill.classList.add('medium');
+                strengthText.classList.add('medium');
+                strengthText.textContent = 'Medium - Add uppercase & special characters';
+            } else {
+                strengthFill.classList.add('strong');
+                strengthText.classList.add('strong');
+                strengthText.textContent = 'Strong password';
+            }
+        }
 
         // Toggle password visibility
         function togglePassword() {
@@ -662,18 +887,29 @@
             document.getElementById('message').className = 'message';
         }
 
+        // Set button loading state
+        function setButtonLoading(btn, loading, originalText) {
+            if (loading) {
+                btn.innerHTML = `<span class="btn-loading"><span class="spinner"></span>Processing...</span>`;
+                btn.disabled = true;
+            } else {
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }
+        }
+
         // Handle Login
         async function handleLogin(event) {
             event.preventDefault();
             const btn = document.getElementById('loginBtn');
             const originalText = btn.textContent;
 
-            btn.textContent = 'Signing in...';
-            btn.disabled = true;
+            setButtonLoading(btn, true, originalText);
             hideMessage();
 
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
+            const remember = document.getElementById('remember').checked;
 
             try {
                 const response = await fetch(`${API_URL}/api/auth/login`, {
@@ -681,13 +917,19 @@
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ email, password })
+                    body: JSON.stringify({ email, password, remember })
                 });
 
                 const data = await response.json();
 
                 if (response.ok && data.token) {
                     showMessage('Login successful! Redirecting...', 'success');
+
+                    // Store token if remember me is checked
+                    if (remember) {
+                        localStorage.setItem('windload_token', data.token);
+                        localStorage.setItem('windload_user_id', data.user_id);
+                    }
 
                     // Smart redirect based on subscriptions
                     const subscriptions = data.subscriptions || {};
@@ -710,18 +952,18 @@
                     }, 1500);
                 } else if (data.message === 'verification_required') {
                     showMessage('New device detected. Please check your email for a verification code.', 'success');
-                    btn.textContent = originalText;
-                    btn.disabled = false;
+                    setButtonLoading(btn, false, originalText);
+                } else if (response.status === 429) {
+                    showMessage('Too many login attempts. Please try again in a few minutes.', 'error');
+                    setButtonLoading(btn, false, originalText);
                 } else {
-                    showMessage(data.message || 'Invalid email or password', 'error');
-                    btn.textContent = originalText;
-                    btn.disabled = false;
+                    showMessage(data.message || data.error || 'Invalid email or password', 'error');
+                    setButtonLoading(btn, false, originalText);
                 }
             } catch (error) {
                 console.error('Login error:', error);
                 showMessage('Connection error. Please try again.', 'error');
-                btn.textContent = originalText;
-                btn.disabled = false;
+                setButtonLoading(btn, false, originalText);
             }
         }
 
@@ -731,8 +973,7 @@
             const btn = document.getElementById('trialBtn');
             const originalText = btn.textContent;
 
-            btn.textContent = 'Creating account...';
-            btn.disabled = true;
+            setButtonLoading(btn, true, originalText);
             hideMessage();
 
             const name = document.getElementById('trial-name').value;
@@ -761,28 +1002,40 @@
                 if (response.ok) {
                     const productName = productType === 'bip' ? 'Building Intelligence Platform' : 'Wind Load Calculators';
                     showMessage(`Account created! Check your email to start your ${productName} trial.`, 'success');
-                    btn.textContent = 'Account Created!';
+                    btn.innerHTML = '<span class="btn-loading">Account Created!</span>';
 
                     // Switch back to login form after 3 seconds
                     setTimeout(() => {
                         showLoginForm();
-                        btn.textContent = originalText;
-                        btn.disabled = false;
+                        setButtonLoading(btn, false, originalText);
                         // Clear form
                         document.getElementById('trialForm').reset();
+                        document.getElementById('password-strength').classList.remove('active');
                     }, 3000);
+                } else if (response.status === 429) {
+                    showMessage('Too many signup attempts. Please try again later.', 'error');
+                    setButtonLoading(btn, false, originalText);
                 } else {
                     showMessage(data.error || data.message || 'Registration failed. Please try again.', 'error');
-                    btn.textContent = originalText;
-                    btn.disabled = false;
+                    setButtonLoading(btn, false, originalText);
                 }
             } catch (error) {
                 console.error('Registration error:', error);
                 showMessage('Connection error. Please try again.', 'error');
-                btn.textContent = originalText;
-                btn.disabled = false;
+                setButtonLoading(btn, false, originalText);
             }
         }
+
+        // Check for saved login on page load
+        window.addEventListener('load', () => {
+            const savedToken = localStorage.getItem('windload_token');
+            const savedUserId = localStorage.getItem('windload_user_id');
+
+            // Auto-fill remember me if token exists
+            if (savedToken) {
+                document.getElementById('remember').checked = true;
+            }
+        });
     </script>
 </body>
 </html>

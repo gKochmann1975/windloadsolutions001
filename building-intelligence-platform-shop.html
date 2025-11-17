@@ -2368,19 +2368,43 @@
         // CROSS-SELL UPSELL FUNCTIONALITY
         // ============================================
 
-        // Show calculator upsell section on page load
+        // Show calculator upsell section on page load (only if no calculator in cart)
         document.addEventListener('DOMContentLoaded', function() {
             const upsellSection = document.getElementById('calculator-upsell-section');
             if (upsellSection) {
-                // Show after a short delay for better UX
-                setTimeout(() => {
-                    upsellSection.style.display = 'block';
-                }, 500);
+                // Check if calculator is already in cart
+                const hasCalculatorInCart = checkIfCalculatorInCart();
+
+                if (!hasCalculatorInCart) {
+                    // Show after a short delay for better UX
+                    setTimeout(() => {
+                        upsellSection.style.display = 'block';
+                    }, 500);
+                } else {
+                    // Hide upsell if calculator already in cart
+                    upsellSection.style.display = 'none';
+                }
             }
 
             // Start countdown timer
             startBundleCountdown();
         });
+
+        // Check if any calculator product is already in cart
+        function checkIfCalculatorInCart() {
+            try {
+                const cartData = localStorage.getItem('windloadcalc_cart');
+                if (!cartData) return false;
+
+                const cartItems = JSON.parse(cartData);
+                // Check if any calculator product is in cart
+                return cartItems.some(item =>
+                    item.productCode && item.productCode.startsWith('cc_')
+                );
+            } catch (e) {
+                return false;
+            }
+        }
 
         // Add calculator to bundle with discount
         function addCalculatorToBundle() {

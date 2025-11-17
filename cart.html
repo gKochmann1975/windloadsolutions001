@@ -381,16 +381,17 @@
             const hasCalc = totals.items.some(item => item.category === 'calculator');
 
             if (!hasBIP && hasCalc) {
-                // Recommend BIP
+                // Recommend BIP - $300/year = $25/mo, with 15% off = $21.25/mo
                 html += `
                     <div class="upsell-product">
                         <h4><i class="fas fa-brain"></i> Building Intelligence Platform</h4>
                         <p>AI-powered building analysis, wind velocity finder, hurricane risk analysis</p>
                         <div class="upsell-price">
-                            <span class="original">$29/mo</span>
-                            <span class="discounted">$24.65/mo</span>
+                            <span class="original">$25/mo</span>
+                            <span class="discounted">$21.25/mo</span>
                             <span style="color: #10b981; font-size: 0.85rem; font-weight: 600;">Save 15%</span>
                         </div>
+                        <div style="font-size: 0.8rem; color: #64748b; margin-bottom: 8px;">billed annually ($255/year)</div>
                         <button onclick="cart.addItem('bip_starter', 'annual')" class="add-upsell-btn">
                             <i class="fas fa-plus"></i> Add & Save 15%
                         </button>
@@ -399,7 +400,7 @@
             }
 
             if (!hasCalc && hasBIP) {
-                // Recommend Calculator
+                // Recommend Calculator - $336/year = $28/mo, with 15% off = $23.80/mo
                 html += `
                     <div class="upsell-product">
                         <h4><i class="fas fa-calculator"></i> Wind Load Calculator</h4>
@@ -409,6 +410,7 @@
                             <span class="discounted">$23.80/mo</span>
                             <span style="color: #10b981; font-size: 0.85rem; font-weight: 600;">Save 15%</span>
                         </div>
+                        <div style="font-size: 0.8rem; color: #64748b; margin-bottom: 8px;">billed annually ($285.60/year)</div>
                         <button onclick="cart.addItem('cc_walls_starter', 'annual')" class="add-upsell-btn">
                             <i class="fas fa-plus"></i> Add & Save 15%
                         </button>

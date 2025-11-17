@@ -65,7 +65,11 @@ async function startCheckout(productCode, billingCycle = 'monthly', button = nul
             button.dataset.originalText = originalText;
         }
 
-        console.log(`Creating checkout session for ${productCode} (${billingCycle})`);
+        // Check for bundle discount from upsell system
+        const bundleDiscount = sessionStorage.getItem('bundle_discount') === 'true' ||
+                               new URLSearchParams(window.location.search).get('bundle') === 'true';
+
+        console.log(`Creating checkout session for ${productCode} (${billingCycle}) - Bundle: ${bundleDiscount}`);
 
         // Call API to create checkout session
         const response = await fetch(`${API_URL}/api/subscriptions/checkout-guest`, {
@@ -76,6 +80,7 @@ async function startCheckout(productCode, billingCycle = 'monthly', button = nul
             body: JSON.stringify({
                 product_code: productCode,
                 billing_cycle: billingCycle,
+                bundle_discount: bundleDiscount,
                 success_url: 'https://windloadcalc.com/checkout-success.html',
                 cancel_url: 'https://windloadcalc.com/checkout-cancelled.html'
             })
@@ -85,6 +90,11 @@ async function startCheckout(productCode, billingCycle = 'monthly', button = nul
 
         if (data.success && data.checkout_url) {
             console.log('Redirecting to Stripe checkout...');
+
+            // Clear bundle flag after use
+            sessionStorage.removeItem('bundle_discount');
+            sessionStorage.removeItem('bundle_product');
+
             // Redirect to Stripe checkout
             window.location.href = data.checkout_url;
         } else {

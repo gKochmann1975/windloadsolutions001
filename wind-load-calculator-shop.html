@@ -713,7 +713,7 @@
             align-items: center;
             gap: 0.75rem;
             padding: 1rem 2rem;
-            background: currentColor;
+            background: #06b6d4;
             color: white;
             border-radius: 50px;
             font-weight: 600;
@@ -729,16 +729,54 @@
         .category-cta:hover {
             transform: translateX(5px);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            filter: brightness(1.1);
         }
 
         .category-cta svg {
             width: 20px;
             height: 20px;
             transition: transform 0.3s ease;
+            stroke: white;
         }
 
         .category-card:hover .category-cta svg {
             transform: translateX(5px);
+        }
+
+        /* Category-specific button colors matching their icons */
+        .category-card[href*="windows"] .category-cta {
+            background: #06b6d4; /* Cyan for Windows/Doors */
+        }
+        .category-card[href*="windows"] .category-cta:hover {
+            background: #0891b2;
+        }
+
+        .category-card[href*="mwfrs"] .category-cta {
+            background: #3b82f6; /* Blue for MWFRS */
+        }
+        .category-card[href*="mwfrs"] .category-cta:hover {
+            background: #2563eb;
+        }
+
+        .category-card[href*="roofing"] .category-cta {
+            background: #f97316; /* Orange for Roofing */
+        }
+        .category-card[href*="roofing"] .category-cta:hover {
+            background: #ea580c;
+        }
+
+        .category-card[href*="solar"] .category-cta {
+            background: #f59e0b; /* Amber/Yellow for Solar */
+        }
+        .category-card[href*="solar"] .category-cta:hover {
+            background: #d97706;
+        }
+
+        .category-card[href*="specialty"] .category-cta {
+            background: #a855f7; /* Purple for Specialty */
+        }
+        .category-card[href*="specialty"] .category-cta:hover {
+            background: #9333ea;
         }
 
         /* SEO Content Sections */

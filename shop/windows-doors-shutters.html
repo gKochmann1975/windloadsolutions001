@@ -1369,6 +1369,15 @@
         </div>
     </section>
 
+    <!-- BIP Upsell Banner (Cross-Sell) -->
+    <section style="padding: 0 20px;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto;">
+            <div id="bip-upsell-container">
+                <!-- BIP upsell banner will be injected here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
     <!-- Pricing Section with Toggle and Navigation -->
     <section class="pricing-section" id="pricing">
         <div class="container">
@@ -2455,6 +2464,17 @@
 
     <!-- Stripe Checkout Integration -->
     <script src="../js/stripe-checkout.js"></script>
+
+    <!-- Cross-Sell Upsell System -->
+    <script src="../js/cross-sell-upsell.js"></script>
+    <script>
+        // Initialize BIP upsell banner after page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof WindLoadUpsell !== 'undefined') {
+                WindLoadUpsell.initUpsellBanners('calculator', 'bip-upsell-container');
+            }
+        });
+    </script>
 
 </body>
 </html>

@@ -1499,6 +1499,65 @@
         </div>
     </section>
 
+    <!-- Cross-Sell: Wind Load Calculators Upsell -->
+    <section id="calculator-upsell-section" style="padding: 3rem 0; background: linear-gradient(135deg, rgba(6, 182, 212, 0.05) 0%, rgba(59, 130, 246, 0.08) 100%); display: none;">
+        <div class="container">
+            <div style="max-width: 900px; margin: 0 auto; text-align: center;">
+                <!-- Limited Time Badge -->
+                <div style="display: inline-block; background: linear-gradient(135deg, #f59e0b, #d97706); color: white; padding: 0.5rem 1.5rem; border-radius: 50px; font-weight: 600; font-size: 0.9rem; margin-bottom: 1.5rem; animation: pulse 2s infinite;">
+                    🎁 LIMITED TIME OFFER - 15% Bundle Discount
+                </div>
+
+                <h2 style="font-size: 2rem; font-weight: 700; color: #1f2937; margin-bottom: 1rem;">
+                    Complete Your Engineering Toolkit
+                </h2>
+                <p style="color: #4b5563; font-size: 1.1rem; margin-bottom: 2rem; line-height: 1.7;">
+                    BIP subscribers get <strong>15% off</strong> Wind Load Calculators for 12 months. Generate permit-ready C&C pressure calculations alongside your wind velocity data.
+                </p>
+
+                <!-- Calculator Benefits -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+                    <div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">📋</div>
+                        <h4 style="color: #1f2937; margin-bottom: 0.5rem;">Permit-Ready PDFs</h4>
+                        <p style="color: #6b7280; font-size: 0.9rem;">Professional reports for building departments</p>
+                    </div>
+                    <div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">⚡</div>
+                        <h4 style="color: #1f2937; margin-bottom: 0.5rem;">5-Minute Calculations</h4>
+                        <p style="color: #6b7280; font-size: 0.9rem;">Fast, accurate ASCE 7-22 compliant results</p>
+                    </div>
+                    <div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🏗️</div>
+                        <h4 style="color: #1f2937; margin-bottom: 0.5rem;">C&C Pressures</h4>
+                        <p style="color: #6b7280; font-size: 0.9rem;">Windows, doors, shutters, and more</p>
+                    </div>
+                </div>
+
+                <!-- Pricing with Discount -->
+                <div style="background: white; border: 3px solid #06b6d4; border-radius: 16px; padding: 2rem; margin-bottom: 1.5rem; position: relative;">
+                    <div style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #06b6d4; color: white; padding: 0.3rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">
+                        BUNDLE DISCOUNT APPLIED
+                    </div>
+                    <div style="display: flex; justify-content: center; align-items: baseline; gap: 0.5rem; margin-bottom: 0.5rem;">
+                        <span style="text-decoration: line-through; color: #9ca3af; font-size: 1.2rem;">$35/mo</span>
+                        <span style="font-size: 2.5rem; font-weight: 700; color: #06b6d4;">$29.75</span>
+                        <span style="color: #6b7280;">/month</span>
+                    </div>
+                    <p style="color: #10b981; font-weight: 600; margin-bottom: 1rem;">Save $63 in the first year!</p>
+                    <button onclick="addCalculatorToBundle()" style="background: linear-gradient(135deg, #06b6d4, #0891b2); color: white; border: none; padding: 1rem 3rem; border-radius: 8px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 12px rgba(6, 182, 212, 0.4);">
+                        Add Calculator to Bundle
+                    </button>
+                </div>
+
+                <!-- Countdown Timer -->
+                <div id="bundle-countdown" style="color: #dc2626; font-weight: 600; font-size: 0.95rem;">
+                    ⏰ Offer expires in <span id="countdown-timer">29 days 23:59:59</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Pricing Cards -->
     <section class="pricing">
         <div class="container">
@@ -2304,6 +2363,77 @@
                 formatPrice
             };
         }
+
+        // ============================================
+        // CROSS-SELL UPSELL FUNCTIONALITY
+        // ============================================
+
+        // Show calculator upsell section on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const upsellSection = document.getElementById('calculator-upsell-section');
+            if (upsellSection) {
+                // Show after a short delay for better UX
+                setTimeout(() => {
+                    upsellSection.style.display = 'block';
+                }, 500);
+            }
+
+            // Start countdown timer
+            startBundleCountdown();
+        });
+
+        // Add calculator to bundle with discount
+        function addCalculatorToBundle() {
+            // Set bundle discount flag
+            sessionStorage.setItem('bundle_discount', 'true');
+            sessionStorage.setItem('bundle_product', 'calculator');
+
+            // Redirect to calculator shop with bundle flag
+            window.location.href = 'shop/windows-doors-shutters.html?bundle=true';
+        }
+
+        // Countdown timer for bundle offer
+        function startBundleCountdown() {
+            const countdownElement = document.getElementById('countdown-timer');
+            if (!countdownElement) return;
+
+            // Set offer expiry to 30 days from now (or retrieve from localStorage)
+            let expiryTime = localStorage.getItem('bundle_offer_expiry');
+            if (!expiryTime) {
+                expiryTime = Date.now() + (30 * 24 * 60 * 60 * 1000); // 30 days
+                localStorage.setItem('bundle_offer_expiry', expiryTime);
+            }
+
+            function updateCountdown() {
+                const now = Date.now();
+                const remaining = expiryTime - now;
+
+                if (remaining <= 0) {
+                    countdownElement.textContent = 'Offer expired';
+                    return;
+                }
+
+                const days = Math.floor(remaining / (24 * 60 * 60 * 1000));
+                const hours = Math.floor((remaining % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
+                const minutes = Math.floor((remaining % (60 * 60 * 1000)) / (60 * 1000));
+                const seconds = Math.floor((remaining % (60 * 1000)) / 1000);
+
+                countdownElement.textContent = `${days} days ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }
+
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        }
+
+        // Pulse animation for badge
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes pulse {
+                0%, 100% { transform: scale(1); }
+                50% { transform: scale(1.05); }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 
 </body>

@@ -7,8 +7,8 @@
 const SubscriptionManager = (function() {
     'use strict';
 
-    const API_URL = 'https://windload-api.onrender.com';
-    const AUTH_LOGIN_URL = 'https://windload-auth.onrender.com';
+    const API_URL = 'https://api.windloadcalc.com';
+    const AUTH_LOGIN_URL = 'https://windloadcalc.com';
 
     // Configuration
     const STORAGE_KEY = 'windload_auth_token';
@@ -345,7 +345,7 @@ const SubscriptionManager = (function() {
 
             } catch (error) {
                 console.error('Error launching calculators:', error);
-                alert('Failed to launch calculators. Please try logging in directly at windload-webapp.onrender.com');
+                alert('Failed to launch calculators. Please try logging in directly at calc.windloadcalc.com');
 
                 // Reset button
                 button.innerHTML = `

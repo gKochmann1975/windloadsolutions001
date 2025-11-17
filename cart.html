@@ -380,19 +380,47 @@
             const hasBIP = totals.items.some(item => item.category === 'bip');
             const hasCalc = totals.items.some(item => item.category === 'calculator');
 
+            // Get current tier if one product is in cart (to recommend matching tier)
+            const calcItem = totals.items.find(item => item.category === 'calculator');
+            const bipItem = totals.items.find(item => item.category === 'bip');
+
+            // Tier pricing data for dynamic recommendations
+            const bipTiers = {
+                starter: { code: 'bip_starter', name: 'Starter', annual: 300, monthly: 25, discounted: 21.25, yearlyDisc: 255 },
+                pro: { code: 'bip_pro', name: 'Pro', annual: 804, monthly: 67, discounted: 56.95, yearlyDisc: 683.40 },
+                premium: { code: 'bip_premium', name: 'Premium', annual: 1524, monthly: 127, discounted: 107.95, yearlyDisc: 1295.40 }
+            };
+
+            const calcTiers = {
+                starter: { code: 'cc_walls_starter', name: 'Starter', annual: 336, monthly: 28, discounted: 23.80, yearlyDisc: 285.60 },
+                pro: { code: 'cc_walls_pro', name: 'Pro', annual: 564, monthly: 47, discounted: 39.95, yearlyDisc: 479.40 },
+                premium: { code: 'cc_walls_premium', name: 'Premium', annual: 1428, monthly: 119, discounted: 101.15, yearlyDisc: 1213.80 }
+            };
+
+            // Helper to get tier name from product code
+            function getTierFromCode(code) {
+                if (code.includes('starter')) return 'starter';
+                if (code.includes('pro')) return 'pro';
+                if (code.includes('premium')) return 'premium';
+                return 'starter';
+            }
+
             if (!hasBIP && hasCalc) {
-                // Recommend BIP - $300/year = $25/mo, with 15% off = $21.25/mo
+                // Recommend BIP matching the Calculator tier
+                const calcTier = getTierFromCode(calcItem.productCode);
+                const bip = bipTiers[calcTier];
+
                 html += `
                     <div class="upsell-product">
-                        <h4><i class="fas fa-brain"></i> Building Intelligence Platform</h4>
+                        <h4><i class="fas fa-brain"></i> Building Intelligence Platform - ${bip.name}</h4>
                         <p>AI-powered building analysis, wind velocity finder, hurricane risk analysis</p>
                         <div class="upsell-price">
-                            <span class="original">$25/mo</span>
-                            <span class="discounted">$21.25/mo</span>
+                            <span class="original">$${bip.monthly}/mo</span>
+                            <span class="discounted">$${bip.discounted.toFixed(2)}/mo</span>
                             <span style="color: #10b981; font-size: 0.85rem; font-weight: 600;">Save 15%</span>
                         </div>
-                        <div style="font-size: 0.8rem; color: #64748b; margin-bottom: 8px;">billed annually ($255/year)</div>
-                        <button onclick="cart.addItem('bip_starter', 'annual')" class="add-upsell-btn">
+                        <div style="font-size: 0.8rem; color: #64748b; margin-bottom: 8px;">billed annually ($${bip.yearlyDisc.toFixed(2)}/year)</div>
+                        <button onclick="cart.addItem('${bip.code}', 'annual')" class="add-upsell-btn">
                             <i class="fas fa-plus"></i> Add & Save 15%
                         </button>
                     </div>
@@ -400,18 +428,21 @@
             }
 
             if (!hasCalc && hasBIP) {
-                // Recommend Calculator - $336/year = $28/mo, with 15% off = $23.80/mo
+                // Recommend Calculator matching the BIP tier
+                const bipTier = getTierFromCode(bipItem.productCode);
+                const calc = calcTiers[bipTier];
+
                 html += `
                     <div class="upsell-product">
-                        <h4><i class="fas fa-calculator"></i> Wind Load Calculator</h4>
+                        <h4><i class="fas fa-calculator"></i> Wind Load Calculator - ${calc.name}</h4>
                         <p>ASCE 7-22 compliant C&C pressure calculations with permit-ready PDFs</p>
                         <div class="upsell-price">
-                            <span class="original">$28/mo</span>
-                            <span class="discounted">$23.80/mo</span>
+                            <span class="original">$${calc.monthly}/mo</span>
+                            <span class="discounted">$${calc.discounted.toFixed(2)}/mo</span>
                             <span style="color: #10b981; font-size: 0.85rem; font-weight: 600;">Save 15%</span>
                         </div>
-                        <div style="font-size: 0.8rem; color: #64748b; margin-bottom: 8px;">billed annually ($285.60/year)</div>
-                        <button onclick="cart.addItem('cc_walls_starter', 'annual')" class="add-upsell-btn">
+                        <div style="font-size: 0.8rem; color: #64748b; margin-bottom: 8px;">billed annually ($${calc.yearlyDisc.toFixed(2)}/year)</div>
+                        <button onclick="cart.addItem('${calc.code}', 'annual')" class="add-upsell-btn">
                             <i class="fas fa-plus"></i> Add & Save 15%
                         </button>
                     </div>

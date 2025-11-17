@@ -418,6 +418,10 @@ class ShoppingCart {
         const existing = document.getElementById('cart-notification');
         if (existing) existing.remove();
 
+        // Determine cart URL based on current location
+        const isInShopSubfolder = window.location.pathname.includes('/shop/');
+        const cartUrl = isInShopSubfolder ? '../cart.html' : 'cart.html';
+
         const notification = document.createElement('div');
         notification.id = 'cart-notification';
         notification.innerHTML = `
@@ -444,7 +448,7 @@ class ShoppingCart {
                         ${this.hasBundleDiscount() ? ' - Bundle discount applied!' : ''}
                     </div>
                 </div>
-                <a href="cart.html" style="
+                <a href="${cartUrl}" style="
                     background: white;
                     color: #10b981;
                     padding: 6px 12px;

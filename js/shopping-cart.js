@@ -511,16 +511,20 @@ class ShoppingCart {
 
             const data = await response.json();
 
+            console.log('Checkout response:', data);
+            console.log('Response status:', response.status);
+
             if (data.success && data.checkout_url) {
                 // Clear cart on successful checkout initiation
                 // this.clearCart(); // Don't clear yet - clear after success
                 window.location.href = data.checkout_url;
             } else {
-                throw new Error(data.error || 'Failed to create checkout');
+                throw new Error(data.error || data.message || 'Failed to create checkout');
             }
 
         } catch (error) {
             console.error('Checkout error:', error);
+            console.error('Full error details:', error.stack);
             alert(`Checkout failed: ${error.message}\n\nPlease try again or contact support.`);
 
             if (checkoutBtn) {

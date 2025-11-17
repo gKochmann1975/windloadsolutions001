@@ -3564,32 +3564,77 @@ body {
 }
 
 .category-icon {
-    width: 60px;
-    height: 60px;
-    border-radius: var(--radius-md);
+    width: 110px;
+    height: 110px;
+    margin: 0 auto 1.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2rem;
-    background: linear-gradient(135deg, var(--electric-cyan) 0%, var(--electric-blue) 100%);
-    color: white;
-    box-shadow: 0 8px 25px rgba(0, 255, 255, 0.3);
+    border-radius: 50%;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15);
+}
+
+.category-icon svg {
+    width: 60px;
+    height: 60px;
+    display: block;
+    transition: all 0.4s ease;
+    stroke: white;
+}
+
+.calc-category:hover .category-icon {
+    transform: scale(1.1);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.25);
+}
+
+.calc-category:hover .category-icon svg {
+    transform: scale(1.1) rotate(5deg);
 }
 
 .category-icon.electric-cyan {
-    background: linear-gradient(135deg, var(--electric-cyan) 0%, var(--electric-blue) 100%);
+    background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+    box-shadow: 0 10px 35px rgba(6, 182, 212, 0.35);
+}
+
+.calc-category:hover .category-icon.electric-cyan {
+    box-shadow: 0 15px 50px rgba(6, 182, 212, 0.5);
 }
 
 .category-icon.electric-blue {
-    background: linear-gradient(135deg, var(--electric-blue) 0%, var(--electric-purple) 100%);
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    box-shadow: 0 10px 35px rgba(59, 130, 246, 0.35);
+}
+
+.calc-category:hover .category-icon.electric-blue {
+    box-shadow: 0 15px 50px rgba(59, 130, 246, 0.5);
 }
 
 .category-icon.electric-purple {
-    background: linear-gradient(135deg, var(--electric-purple) 0%, var(--primary-blue) 100%);
+    background: linear-gradient(135deg, #a855f7 0%, #9333ea 100%);
+    box-shadow: 0 10px 35px rgba(168, 85, 247, 0.35);
+}
+
+.calc-category:hover .category-icon.electric-purple {
+    box-shadow: 0 15px 50px rgba(168, 85, 247, 0.5);
 }
 
 .category-icon.electric-orange {
-    background: linear-gradient(135deg, var(--electric-orange) 0%, var(--electric-yellow) 100%);
+    background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+    box-shadow: 0 10px 35px rgba(249, 115, 22, 0.35);
+}
+
+.calc-category:hover .category-icon.electric-orange {
+    box-shadow: 0 15px 50px rgba(249, 115, 22, 0.5);
+}
+
+.category-icon.electric-yellow {
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+    box-shadow: 0 10px 35px rgba(251, 191, 36, 0.35);
+}
+
+.calc-category:hover .category-icon.electric-yellow {
+    box-shadow: 0 15px 50px rgba(251, 191, 36, 0.5);
 }
 
 .category-badge {
@@ -5379,7 +5424,7 @@ body {
                     <!-- Windows, Doors & Shutters (C&C) -->
                     <div class="calc-category glass-card electric-border-hover">
                         <div class="category-header-visual">
-                            <div class="category-icon electric-cyan"><svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <div class="category-icon electric-cyan"><svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <rect x="3" y="3" width="7" height="7" rx="1"/>
                     <rect x="14" y="3" width="7" height="7" rx="1"/>
                     <rect x="14" y="14" width="7" height="7" rx="1"/>
@@ -5429,7 +5474,7 @@ body {
                     <!-- Roofing Systems -->
                     <div class="calc-category glass-card electric-border-hover">
                         <div class="category-header-visual">
-                            <div class="category-icon" style="color: #f97316;"><svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <div class="category-icon electric-orange"><svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
                     <polyline points="9 22 9 12 15 12 15 22"/>
                 </svg></div>
@@ -5477,7 +5522,7 @@ body {
                     <!-- MWFRS -->
                     <div class="calc-category glass-card electric-border-hover">
                         <div class="category-header-visual">
-                            <div class="category-icon electric-blue"><svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <div class="category-icon electric-blue"><svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
                     <line x1="9" y1="22" x2="9" y2="12"/>
                     <line x1="15" y1="22" x2="15" y2="12"/>
@@ -5526,7 +5571,7 @@ body {
                     <!-- Solar Panels -->
                     <div class="calc-category glass-card electric-border-hover">
                         <div class="category-header-visual">
-                            <div class="category-icon electric-yellow"><svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <div class="category-icon electric-yellow"><svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <circle cx="12" cy="12" r="4"/>
                     <line x1="12" y1="2" x2="12" y2="4"/>
                     <line x1="12" y1="20" x2="12" y2="22"/>
@@ -5581,7 +5626,7 @@ body {
                     <!-- Specialized Structures -->
                     <div class="calc-category glass-card electric-border-hover">
                         <div class="category-header-visual">
-                            <div class="category-icon electric-purple"><svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <div class="category-icon electric-purple"><svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <polygon points="12 2 2 7 12 12 22 7 12 2"/>
                     <polyline points="2 17 12 22 22 17"/>
                     <polyline points="2 12 12 17 22 12"/>

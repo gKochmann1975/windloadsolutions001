@@ -476,21 +476,52 @@
             }
 
             if (hasBIP && hasCalc) {
-                // Both in cart - upsell to higher tier
+                // Both in cart - check if upgrade is possible
+                const calcTier = getTierFromCode(calcItem.productCode);
+                const bipTier = getTierFromCode(bipItem.productCode);
+
+                // Determine the highest tier between the two products
+                const tierRank = { 'starter': 1, 'pro': 2, 'premium': 3 };
+                const highestTier = tierRank[calcTier] >= tierRank[bipTier] ? calcTier : bipTier;
+
                 html = `
                     <div style="text-align: center; padding: 20px; color: #10b981;">
                         <i class="fas fa-check-circle" style="font-size: 2rem; margin-bottom: 1rem;"></i>
                         <h4 style="margin-bottom: 0.5rem;">Complete Toolkit!</h4>
                         <p style="color: #64748b; font-size: 0.9rem;">You have both BIP and Calculator subscriptions with 15% bundle discount applied.</p>
                     </div>
-                    <div class="upsell-product" style="border-color: #f59e0b; background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);">
-                        <h4 style="color: #d97706;"><i class="fas fa-arrow-up"></i> Upgrade to Pro?</h4>
-                        <p>Get team features, more calculations, and priority support</p>
-                        <button onclick="window.location.href='wind-load-calculator-shop.html#pricing'" class="add-upsell-btn" style="background: #f59e0b;">
-                            View Pro Plans
-                        </button>
-                    </div>
                 `;
+
+                // Only show upgrade option if not already at Premium
+                if (highestTier === 'starter') {
+                    html += `
+                        <div class="upsell-product" style="border-color: #f59e0b; background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);">
+                            <h4 style="color: #d97706;"><i class="fas fa-arrow-up"></i> Upgrade to Pro?</h4>
+                            <p>Get team features (5 users), more calculations (500/mo), and priority support</p>
+                            <button onclick="window.location.href='wind-load-calculator-shop.html#pricing'" class="add-upsell-btn" style="background: #f59e0b;">
+                                View Pro Plans
+                            </button>
+                        </div>
+                    `;
+                } else if (highestTier === 'pro') {
+                    html += `
+                        <div class="upsell-product" style="border-color: #8b5cf6; background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);">
+                            <h4 style="color: #7c3aed;"><i class="fas fa-arrow-up"></i> Upgrade to Premium?</h4>
+                            <p>Get unlimited calculations, more users (10-15), and API access</p>
+                            <button onclick="window.location.href='wind-load-calculator-shop.html#pricing'" class="add-upsell-btn" style="background: #8b5cf6;">
+                                View Premium Plans
+                            </button>
+                        </div>
+                    `;
+                } else {
+                    // Already at Premium - show congratulations
+                    html += `
+                        <div style="text-align: center; padding: 16px; background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-radius: 8px; border: 2px solid #f59e0b;">
+                            <h4 style="color: #92400e; margin-bottom: 0.5rem;"><i class="fas fa-crown"></i> Premium Bundle!</h4>
+                            <p style="color: #78350f; font-size: 0.9rem;">You have the highest tier for both products. Enjoy unlimited access!</p>
+                        </div>
+                    `;
+                }
             }
 
             container.innerHTML = html;

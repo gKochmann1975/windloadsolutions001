@@ -1134,7 +1134,7 @@
             <!-- Header Right Side -->
             <div class="header-right">
                 <a href="../contact.html" class="header-cta primary">Let's Connect</a>
-                <a href="login.html" class="header-cta">Member Login</a>
+                <a href="../login.html" class="header-cta">Member Login</a>
                 <button class="hamburger" id="hamburger" onclick="toggleNav()">
                     <span></span>
                     <span></span>
@@ -1288,26 +1288,26 @@
             const originalText = submitButton.textContent;
             submitButton.textContent = 'Joining waitlist...';
             submitButton.disabled = true;
-            
+
             const formData = new FormData(this);
             const data = Object.fromEntries(formData.entries());
-            
-            fetch('https://script.google.com/macros/s/AKfycbzMuORWqPrwvsFAmhSqPrwIjinWDVM_6CJK50Q7qwAJXq9tkXZNAqPLRKU-NxC0dHaY/exec', {
+
+            fetch('https://script.google.com/macros/s/AKfycbzMuORWqPrwvsFAmhSqPrwvsFAmhSqPrwIjinWDVM_6CJK50Q7qwAJXq9tkXZNAqPLRKU-NxC0dHaY/exec', {
                 method: 'POST',
                 body: JSON.stringify(data),
                 headers: { 'Content-Type': 'text/plain' }
             })
-            .then(response => response.json())
-            .then(result => {
+            .then(function(response) { return response.json(); })
+            .then(function(result) {
                 if (result.status === 'success') {
-                    submitButton.textContent = '✓ You're on the list!';
+                    submitButton.textContent = '\u2713 You\'re on the list!';
                     submitButton.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
                     this.reset();
                 } else {
                     throw new Error('Submission failed');
                 }
-            })
-            .catch(error => {
+            }.bind(this))
+            .catch(function(error) {
                 console.error('Error:', error);
                 submitButton.textContent = originalText;
                 submitButton.disabled = false;
@@ -1624,6 +1624,11 @@
             </div>
 
             <div class="related-grid">
+                <a href="windows-doors-shutters.html" class="related-card">
+                    <h4>Windows, Doors & Shutters</h4>
+                    <p>Replacement windows, doors, and storm shutters</p>
+                </a>
+
                 <a href="solar-panels.html" class="related-card">
                     <span class="related-badge">Coming Soon</span>
                     <h4>Solar Panel Calculator</h4>
@@ -1634,18 +1639,6 @@
                     <span class="related-badge">Coming Soon</span>
                     <h4>Roof Wind Load Calculator</h4>
                     <p>All roof types and configurations</p>
-                </a>
-
-                <a href="specialty.html" class="related-card">
-                    <span class="related-badge">Coming Soon</span>
-                    <h4>Specialty Structures Calculator</h4>
-                    <p>specialty structure wind load</p>
-                </a>
-
-                <a href="specialty.html" class="related-card">
-                    <span class="related-badge">Coming Soon</span>
-                    <h4>Specialty Structures</h4>
-                    <p>Signs, billboards, towers, equipment</p>
                 </a>
             </div>
         </div>
@@ -1677,7 +1670,6 @@
                     <a href="windows-doors-shutters.html">Windows, Doors & Shutters</a>
                     <a href="solar-panels.html">Solar Panels</a>
                     <a href="roofing.html">Roofing Systems</a>
-                    <a href="specialty.html">Specialty Structures</a>
                     <a href="specialty.html">Specialty Structures</a>
                     <a href="../asce-7-wind-load-calculator.html">ASCE 7 Calculator</a>
                 </div>

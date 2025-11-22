@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIP Test</title>
+</head>
+<body>
+    <h1>Building Intelligence Platform Test</h1>
+
+    <div id="building-intelligence-container" style="border: 2px solid red; min-height: 200px; padding: 20px;">
+        <p>Container is here - waiting for BIP to load...</p>
+    </div>
+
+    <div id="console-log" style="margin-top: 20px; padding: 20px; background: #f0f0f0; font-family: monospace;">
+        <h3>Console Output:</h3>
+        <div id="log-output"></div>
+    </div>
+
+    <script>
+        // Override console.log to show on page
+        const logDiv = document.getElementById('log-output');
+        const originalLog = console.log;
+        const originalError = console.error;
+
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            const p = document.createElement('p');
+            p.textContent = '✓ ' + args.join(' ');
+            p.style.color = 'green';
+            logDiv.appendChild(p);
+        };
+
+        console.error = function(...args) {
+            originalError.apply(console, args);
+            const p = document.createElement('p');
+            p.textContent = '✗ ' + args.join(' ');
+            p.style.color = 'red';
+            logDiv.appendChild(p);
+        };
+
+        console.log('1. Test page loaded');
+    </script>
+
+    <!-- Load trial manager first -->
+    <script src="./trial-manager.js"></script>
+    <script>
+        console.log('2. trial-manager.js loaded, TrialManager exists:', typeof TrialManager !== 'undefined');
+    </script>
+
+    <!-- Load BIP -->
+    <script src="./building-intelligence-platform.js"></script>
+    <script>
+        console.log('3. building-intelligence-platform.js loaded, VelocityFinder exists:', typeof VelocityFinder !== 'undefined');
+    </script>
+
+    <!-- Initialize -->
+    <script>
+        console.log('4. Waiting for DOMContentLoaded...');
+
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('5. DOMContentLoaded fired');
+            console.log('6. Container exists:', document.getElementById('building-intelligence-container') !== null);
+            console.log('7. VelocityFinder exists:', typeof VelocityFinder !== 'undefined');
+
+            if (typeof VelocityFinder !== 'undefined') {
+                console.log('8. Calling VelocityFinder.init()...');
+                try {
+                    VelocityFinder.init('building-intelligence-container');
+                    console.log('9. VelocityFinder.init() completed successfully!');
+                } catch (error) {
+                    console.error('9. ERROR calling VelocityFinder.init():', error.message);
+                    console.error('Stack:', error.stack);
+                }
+            } else {
+                console.error('8. VelocityFinder is undefined!');
+            }
+        });
+
+        console.log('10. Event listener registered');
+    </script>
+
+    <!-- Load hurricane AI (optional for this test) -->
+    <script src="./hurricane-ai-complete.js"></script>
+    <script>
+        console.log('11. hurricane-ai-complete.js loaded');
+    </script>
+</body>
+</html>

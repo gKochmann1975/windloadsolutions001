@@ -858,13 +858,52 @@
         footer {
             background: #1a202c;
             color: white;
-            padding: var(--spacing-2xl) 0;
+            padding: var(--spacing-2xl) 0 var(--spacing-lg) 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-xl);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .footer-column h3 {
+            font-size: 1.1rem;
+            margin-bottom: var(--spacing-md);
+            color: #60a5fa;
+        }
+
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-column a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .footer-column a:hover {
+            color: #60a5fa;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: var(--spacing-lg);
             text-align: center;
         }
 
-        footer p {
+        .footer-bottom p {
             opacity: 0.8;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+            margin: 0;
         }
 
         /* ===== UNIFIED CONTAINER SCALING STRATEGY ===== */
@@ -1690,7 +1729,48 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p>&copy; 2024 windloadcalc.com. All rights reserved.</p>
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Wind Load Calculators</h3>
+                    <ul>
+                        <li><a href="wind-load-calculator-shop.html">All Calculators</a></li>
+                        <li><a href="index.html">MWFRS Calculator</a></li>
+                        <li><a href="index.html">C&C Calculator</a></li>
+                        <li><a href="index.html">Roofing Calculator</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Building Intelligence</h3>
+                    <ul>
+                        <li><a href="building-intelligence-platform-shop.html">BIP Plans</a></li>
+                        <li><a href="index.html">Wind Analysis</a></li>
+                        <li><a href="index.html">Site Assessment</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="mailto:support@windloadcalc.com">Contact Support</a></li>
+                        <li><a href="index.html">Documentation</a></li>
+                        <li><a href="index.html">ASCE 7-22 Guide</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="index.html">About Us</a></li>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms-of-service.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 WindLoadCalc. All rights reserved.</p>
+            </div>
         </div>
     </footer>
 

@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="images/windloadcalc-favicon.svg">
+    <title>Migrate Your Account | WindLoadCalc</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .migration-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 3rem;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo h1 {
+            font-size: 2rem;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .logo p {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+
+        .status {
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid #e5e7eb;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error {
+            background: #fee2e2;
+            border: 1px solid #fecaca;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .error h3 {
+            color: #dc2626;
+            margin-bottom: 0.5rem;
+        }
+
+        .error p {
+            color: #7f1d1d;
+            line-height: 1.6;
+        }
+
+        .customer-info {
+            background: #f3f4f6;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .customer-info h3 {
+            color: #1f2937;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        .info-value {
+            color: #1f2937;
+            font-weight: 600;
+        }
+
+        .welcome-message {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .welcome-message h2 {
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .welcome-message p {
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: block;
+            width: 100%;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .cta-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .benefits {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .benefits h3 {
+            color: #1f2937;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: start;
+            margin-bottom: 0.75rem;
+        }
+
+        .benefit-item svg {
+            flex-shrink: 0;
+            margin-right: 0.75rem;
+            margin-top: 0.1rem;
+        }
+
+        .benefit-item p {
+            color: #4b5563;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .support-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+
+        .support-link a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .support-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="migration-card">
+            <div class="logo">
+                <h1>WindLoadCalc</h1>
+                <p>Account Migration</p>
+            </div>
+
+            <!-- Loading State -->
+            <div id="loading-state" class="status">
+                <div class="spinner"></div>
+                <p>Verifying your migration token...</p>
+            </div>
+
+            <!-- Error State -->
+            <div id="error-state" style="display: none;">
+                <div class="error">
+                    <h3>Migration Error</h3>
+                    <p id="error-message">Something went wrong. Please contact support.</p>
+                </div>
+                <div class="support-link">
+                    <p>Need help? <a href="mailto:support@windloadcalc.com">Contact Support</a></p>
+                </div>
+            </div>
+
+            <!-- Success State -->
+            <div id="success-state" style="display: none;">
+                <div class="welcome-message">
+                    <h2>Welcome Back! 👋</h2>
+                    <p>We're upgrading to a better platform. Your subscription details are below.</p>
+                </div>
+
+                <div class="customer-info">
+                    <h3>Your Subscription</h3>
+                    <div class="info-row">
+                        <span class="info-label">Email:</span>
+                        <span class="info-value" id="customer-email">—</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Plan:</span>
+                        <span class="info-value" id="customer-plan">—</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Billing:</span>
+                        <span class="info-value" id="customer-billing">—</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Price:</span>
+                        <span class="info-value" id="customer-price">—</span>
+                    </div>
+                </div>
+
+                <button id="migrate-button" class="cta-button">
+                    Continue to Secure Checkout
+                </button>
+
+                <div class="benefits">
+                    <h3>What's New:</h3>
+                    <div class="benefit-item">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <p><strong>Faster Performance:</strong> Our new platform is 3x faster with improved reliability</p>
+                    </div>
+                    <div class="benefit-item">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <p><strong>Secure Payments:</strong> Powered by Stripe for the most secure payment processing</p>
+                    </div>
+                    <div class="benefit-item">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <p><strong>Same Price:</strong> Your pricing stays the same - no increases</p>
+                    </div>
+                    <div class="benefit-item">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <p><strong>Better Features:</strong> Enhanced calculators with more options and outputs</p>
+                    </div>
+                </div>
+
+                <div class="support-link">
+                    <p>Questions? <a href="mailto:support@windloadcalc.com">Contact Support</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get migration token from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const migrationToken = urlParams.get('token');
+
+        const API_URL = 'https://api.windloadcalc.com';
+
+        let customerData = null;
+        let legacyCustomerId = null;
+
+        // Verify migration token on page load
+        async function verifyToken() {
+            if (!migrationToken) {
+                showError('Invalid migration link. Please use the link from your email.');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/api/migration/verify-token`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ token: migrationToken })
+                });
+
+                const result = await response.json();
+
+                if (!result.success) {
+                    showError(result.error || 'Migration token is invalid or expired.');
+                    return;
+                }
+
+                // Store customer data
+                customerData = result.customer;
+                legacyCustomerId = result.legacy_customer_id;
+
+                // Show success state with customer info
+                showSuccess();
+
+            } catch (error) {
+                console.error('Verification error:', error);
+                showError('Unable to verify migration token. Please try again or contact support.');
+            }
+        }
+
+        function showSuccess() {
+            document.getElementById('loading-state').style.display = 'none';
+            document.getElementById('error-state').style.display = 'none';
+            document.getElementById('success-state').style.display = 'block';
+
+            // Populate customer info
+            document.getElementById('customer-email').textContent = customerData.email;
+            document.getElementById('customer-plan').textContent = customerData.product_name;
+
+            const billingCycle = customerData.billing_cycle === 'annual' ? 'Annual' : 'Monthly';
+            document.getElementById('customer-billing').textContent = billingCycle;
+
+            const price = customerData.billing_cycle === 'annual'
+                ? `$${customerData.original_price}/year`
+                : `$${customerData.original_price}/month`;
+            document.getElementById('customer-price').textContent = price;
+        }
+
+        function showError(message) {
+            document.getElementById('loading-state').style.display = 'none';
+            document.getElementById('success-state').style.display = 'none';
+            document.getElementById('error-state').style.display = 'block';
+            document.getElementById('error-message').textContent = message;
+        }
+
+        // Handle migration button click
+        document.addEventListener('DOMContentLoaded', () => {
+            const migrateButton = document.getElementById('migrate-button');
+
+            migrateButton?.addEventListener('click', async () => {
+                if (!customerData || !legacyCustomerId) {
+                    alert('Migration data not loaded. Please refresh the page.');
+                    return;
+                }
+
+                migrateButton.disabled = true;
+                migrateButton.textContent = 'Creating checkout session...';
+
+                try {
+                    // Create Stripe checkout session
+                    const response = await fetch(`${API_URL}/api/migration/create-checkout`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            legacy_customer_id: legacyCustomerId,
+                            product_code: customerData.product_code,
+                            billing_cycle: customerData.billing_cycle
+                        })
+                    });
+
+                    const result = await response.json();
+
+                    if (!result.success) {
+                        alert('Error: ' + (result.error || 'Failed to create checkout session'));
+                        migrateButton.disabled = false;
+                        migrateButton.textContent = 'Continue to Secure Checkout';
+                        return;
+                    }
+
+                    // Redirect to Stripe checkout
+                    window.location.href = result.checkout_url;
+
+                } catch (error) {
+                    console.error('Checkout error:', error);
+                    alert('Unable to start checkout. Please try again or contact support.');
+                    migrateButton.disabled = false;
+                    migrateButton.textContent = 'Continue to Secure Checkout';
+                }
+            });
+
+            // Start verification
+            verifyToken();
+        });
+    </script>
+</body>
+</html>

@@ -2542,25 +2542,25 @@
             // Step 7: Calculate design pressures (p = qh * [(GCp) - (GCpi)])
             // ASCE 7-22 Equation 27.3-1
 
-            // Windward wall
-            const p_windward_pos = qh * (Cp_windward - GCpi_negative);
-            const p_windward_neg = qh * (Cp_windward - GCpi_positive);
-            const p_windward = Math.max(Math.abs(p_windward_pos), Math.abs(p_windward_neg));
+            // Windward wall (positive pressure - take maximum)
+            const p_windward_pos = qh * (Cp_windward - GCpi_negative);  // External + Internal suction
+            const p_windward_neg = qh * (Cp_windward - GCpi_positive);  // External + Internal pressure
+            const p_windward = Math.max(p_windward_pos, p_windward_neg); // Maximum positive pressure governs
 
-            // Leeward wall
-            const p_leeward_pos = qh * (Cp_leeward - GCpi_negative);
-            const p_leeward_neg = qh * (Cp_leeward - GCpi_positive);
-            const p_leeward = Math.min(p_leeward_pos, p_leeward_neg);
+            // Leeward wall (negative pressure - take minimum/maximum suction)
+            const p_leeward_pos = qh * (Cp_leeward - GCpi_negative);  // External suction + Internal suction
+            const p_leeward_neg = qh * (Cp_leeward - GCpi_positive);  // External suction + Internal pressure
+            const p_leeward = Math.min(p_leeward_pos, p_leeward_neg);  // Maximum suction (most negative) governs
 
-            // Side walls
+            // Side walls (negative pressure - take minimum/maximum suction)
             const p_side_pos = qh * (Cp_side - GCpi_negative);
             const p_side_neg = qh * (Cp_side - GCpi_positive);
             const p_side = Math.min(p_side_pos, p_side_neg);
 
-            // Roof
-            const p_roof_pos = qh * (Cp_roof - GCpi_negative);
-            const p_roof_neg = qh * (Cp_roof - GCpi_positive);
-            const p_roof = Math.min(p_roof_pos, p_roof_neg);
+            // Roof (negative pressure - take minimum/maximum suction)
+            const p_roof_pos = qh * (Cp_roof - GCpi_negative);  // External suction + Internal suction
+            const p_roof_neg = qh * (Cp_roof - GCpi_positive);  // External suction + Internal pressure
+            const p_roof = Math.min(p_roof_pos, p_roof_neg);  // Maximum suction (most negative) governs
 
             // Update results in UI
             document.getElementById('zone4-pressure').textContent = p_windward.toFixed(1) + ' psf';

@@ -2005,14 +2005,6 @@
                             </div>
                             
                             <div class="input-group">
-                                <label for="demo-risk-category">Risk Category</label>
-                                <select id="demo-risk-category" onchange="updateDemo()">
-                                    <option value="II">Category II (Standard Buildings)</option>
-                                    <option value="III/IV">Category III/IV (Schools, Hospitals, Emergency Facilities)</option>
-                                </select>
-                            </div>
-                            
-                            <div class="input-group">
                                 <label for="demo-exposure">Exposure Category</label>
                                 <select id="demo-exposure" onchange="updateDemo()">
                                     <option value="B">Exposure B (Urban Areas)</option>
@@ -2052,6 +2044,39 @@
                             <div class="result-item">
                                 <span class="result-label">MWFRS Leeward:</span>
                                 <span class="result-value" id="mwfrs-leeward">-0.0 psf</span>
+                            </div>
+                        </div>
+
+                        <!-- Formula Display -->
+                        <div style="background: #f8fafc; border-radius: 12px; padding: 1.5rem; margin-top: 2rem; border-left: 4px solid #3b82f6;">
+                            <h4 style="color: #181E57; margin-bottom: 1rem; font-size: 1.1rem;">📐 ASCE 7-22 Calculation Formulas</h4>
+
+                            <div style="font-family: 'Courier New', monospace; font-size: 0.9rem; line-height: 2;">
+                                <p style="margin-bottom: 0.75rem; color: #475569;">
+                                    <strong>Step 1: Velocity Pressure</strong> (Eq. 26.10-1)
+                                </p>
+                                <p style="background: white; padding: 0.75rem; border-radius: 6px; margin-bottom: 1rem; color: #0f172a;">
+                                    q<sub>h</sub> = 0.00256 × K<sub>h</sub> × K<sub>zt</sub> × K<sub>d</sub> × V²<br>
+                                    q<sub>h</sub> = 0.00256 × <span id="formula-kh" style="color: #3b82f6; font-weight: bold;">0.000</span> × <span id="formula-kzt" style="color: #3b82f6; font-weight: bold;">1.00</span> × <span id="formula-kd" style="color: #3b82f6; font-weight: bold;">0.85</span> × (<span id="formula-v" style="color: #3b82f6; font-weight: bold;">115</span>)²<br>
+                                    q<sub>h</sub> = <span id="formula-qh" style="color: #10b981; font-weight: bold;">0.00</span> psf
+                                </p>
+
+                                <p style="margin-bottom: 0.75rem; color: #475569;">
+                                    <strong>Step 2: Design Pressure</strong> (Eq. 27.3-1)
+                                </p>
+                                <p style="background: white; padding: 0.75rem; border-radius: 6px; color: #0f172a;">
+                                    p = q<sub>h</sub> × [(C<sub>p</sub>) - (GC<sub>pi</sub>)]<br>
+                                    p = <span id="formula-qh-2" style="color: #3b82f6; font-weight: bold;">0.00</span> × [<span id="formula-cp-windward" style="color: #3b82f6; font-weight: bold;">0.80</span> - (<span id="formula-gcpi" style="color: #3b82f6; font-weight: bold;">±0.18</span>)]<br>
+                                    p = <span id="formula-p-windward" style="color: #10b981; font-weight: bold;">0.0</span> psf
+                                </p>
+
+                                <p style="margin-top: 1rem; font-size: 0.85rem; color: #64748b; font-family: Arial, sans-serif;">
+                                    <strong>Where:</strong> K<sub>h</sub> = velocity pressure coefficient (Table 26.10-1),
+                                    K<sub>zt</sub> = topographic factor (1.0 for flat terrain),
+                                    K<sub>d</sub> = wind directionality factor (0.85 for buildings),
+                                    C<sub>p</sub> = external pressure coefficient (Fig. 27.3-1),
+                                    GC<sub>pi</sub> = internal pressure coefficient (±0.18 for enclosed buildings)
+                                </p>
                             </div>
                         </div>
                         
@@ -2462,19 +2487,10 @@
             const windSpeed = parseFloat(document.getElementById('demo-wind-speed').value);
             const exposure = document.getElementById('demo-exposure').value;
             const height = parseFloat(document.getElementById('demo-height').value);
-            const riskCategory = document.getElementById('demo-risk-category').value;
 
             // ASCE 7-22 MWFRS Directional Procedure (Simplified)
 
-            // Step 1: Importance Factor (Iw) based on Risk Category - ASCE 7-22 Table 1.5-2
-            let Iw;
-            if (riskCategory === 'II') {
-                Iw = 1.0;  // Standard buildings
-            } else { // Category III/IV
-                Iw = 1.15; // Schools, hospitals, emergency facilities
-            }
-
-            // Step 2: Velocity pressure exposure coefficient (Kh) - ASCE 7-22 Table 26.10-1
+            // Step 1: Velocity pressure exposure coefficient (Kh) - ASCE 7-22 Table 26.10-1
             let Kh;
             const heightFt = height;
 
@@ -2500,34 +2516,30 @@
                 else Kh = 1.19 + (heightFt - 60) * 0.002; // Approximate for > 60ft
             }
 
-            // Step 3: Topographic factor (Kzt) - Assume flat terrain = 1.0
+            // Step 2: Topographic factor (Kzt) - Assume flat terrain = 1.0
             const Kzt = 1.0;
 
-            // Step 4: Wind directionality factor (Kd) - ASCE 7-22 Table 26.6-1
+            // Step 3: Wind directionality factor (Kd) - ASCE 7-22 Table 26.6-1
             // For buildings = 0.85
             const Kd = 0.85;
 
-            // Step 5: Apply importance factor to wind speed
-            // V_adjusted = V * sqrt(Iw)
-            const V_adjusted = windSpeed * Math.sqrt(Iw);
-
-            // Step 6: Calculate velocity pressure (qh) - ASCE 7-22 Equation 26.10-1
+            // Step 4: Calculate velocity pressure (qh) - ASCE 7-22 Equation 26.10-1
             // qh = 0.00256 * Kh * Kzt * Kd * V^2 (psf)
-            const qh = 0.00256 * Kh * Kzt * Kd * Math.pow(V_adjusted, 2);
+            const qh = 0.00256 * Kh * Kzt * Kd * Math.pow(windSpeed, 2);
 
-            // Step 7: External pressure coefficients (Cp) for rectangular building
+            // Step 5: External pressure coefficients (Cp) for rectangular building
             // ASCE 7-22 Figure 27.3-1 (simplified)
             const Cp_windward = 0.8;   // Windward wall
             const Cp_leeward = -0.5;   // Leeward wall
             const Cp_side = -0.7;      // Side walls
             const Cp_roof = -0.9;      // Roof (simplified, worst case)
 
-            // Step 8: Internal pressure coefficient (GCpi)
+            // Step 6: Internal pressure coefficient (GCpi)
             // ASCE 7-22 Section 26.13 - Enclosed building
             const GCpi_positive = 0.18;
             const GCpi_negative = -0.18;
 
-            // Step 9: Calculate design pressures (p = qh * [(GCp) - (GCpi)])
+            // Step 7: Calculate design pressures (p = qh * [(GCp) - (GCpi)])
             // ASCE 7-22 Equation 27.3-1
 
             // Windward wall
@@ -2555,6 +2567,17 @@
             document.getElementById('zone5-pressure').textContent = p_roof.toFixed(1) + ' psf';
             document.getElementById('mwfrs-windward').textContent = '+' + p_windward.toFixed(1) + ' psf';
             document.getElementById('mwfrs-leeward').textContent = p_leeward.toFixed(1) + ' psf';
+
+            // Update formula display with live values
+            document.getElementById('formula-kh').textContent = Kh.toFixed(3);
+            document.getElementById('formula-kzt').textContent = Kzt.toFixed(2);
+            document.getElementById('formula-kd').textContent = Kd.toFixed(2);
+            document.getElementById('formula-v').textContent = windSpeed;
+            document.getElementById('formula-qh').textContent = qh.toFixed(2);
+            document.getElementById('formula-qh-2').textContent = qh.toFixed(2);
+            document.getElementById('formula-cp-windward').textContent = Cp_windward.toFixed(2);
+            document.getElementById('formula-gcpi').textContent = '±' + GCpi_positive.toFixed(2);
+            document.getElementById('formula-p-windward').textContent = p_windward.toFixed(1);
 
             // Show results
             document.getElementById('demo-results').style.display = 'block';

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/svg+xml" href="images/windloadcalc-favicon.svg">
+    <link rel="icon" type="image/svg+xml" href="../images/windloadcalc-favicon.svg">
 
     <!-- SEO Meta Tags - ALL ORIGINAL SEO PRESERVED -->
     <title>ASCE 7 Wind Load Calculator | ASCE 7-16 & 7-22 Compliance Software</title>
@@ -106,6 +106,66 @@
             background: white;
             padding: 1rem 0;
             box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        /* Jump Navigation */
+        .jump-nav {
+            position: sticky;
+            top: 80px;
+            z-index: 999;
+            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+            border-bottom: 2px solid #e5e7eb;
+            padding: 1rem 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .jump-nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .jump-nav-pills {
+            display: flex;
+            gap: 0.75rem;
+            white-space: nowrap;
+            min-width: min-content;
+        }
+
+        .jump-pill {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 50px;
+            color: #4a5568;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .jump-pill:hover {
+            border-color: #0018ff;
+            color: #0018ff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 24, 255, 0.15);
+        }
+
+        .jump-pill.active {
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            color: white;
+            border-color: #0018ff;
+            box-shadow: 0 4px 15px rgba(0, 24, 255, 0.3);
+        }
+
+        .jump-pill i {
+            margin-right: 0.5rem;
+            font-size: 0.85rem;
         }
 
         .header-container {
@@ -535,6 +595,82 @@
             color: rgba(255, 255, 255, 0.6);
         }
 
+        /* CTA Boxes */
+        .content-cta {
+            background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 50%, #8b5cf6 100%);
+            background-size: 200% 200%;
+            animation: gradientShift 8s ease infinite;
+            border-radius: 20px;
+            padding: 3rem 2.5rem;
+            margin: 3rem 0;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .content-cta::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent);
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .content-cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-cta h3 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .content-cta p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            color: white;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: #0018ff;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            font-size: 1.1rem;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-button i {
+            margin-left: 0.5rem;
+        }
+
         /* Responsive */
         @media (max-width: 1024px) {
             .content-wrapper {
@@ -549,6 +685,10 @@
             .edition-grid,
             .chapter-cards {
                 grid-template-columns: 1fr;
+            }
+
+            .jump-nav {
+                top: 70px;
             }
         }
 
@@ -568,6 +708,23 @@
             .process-step {
                 padding-left: 3.5rem;
             }
+
+            .content-cta {
+                padding: 2rem 1.5rem;
+            }
+
+            .content-cta h3 {
+                font-size: 1.5rem;
+            }
+
+            .jump-nav-pills {
+                gap: 0.5rem;
+            }
+
+            .jump-pill {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.85rem;
+            }
         }
     </style>
 </head>
@@ -575,10 +732,10 @@
     <!-- Header -->
     <header class="main-header">
         <div class="header-container">
-            <a href="index.html">
-                <img src="images/windloadcalc-logo.svg" alt="WindLoadCalc" class="logo-image">
+            <a href="../index.html">
+                <img src="../images/windloadcalc-logo.svg" alt="WindLoadCalc" class="logo-image">
             </a>
-            <a href="demo.html" class="header-cta">Try Free Calculator</a>
+            <a href="../demo.html" class="header-cta">Try Free Calculator</a>
         </div>
     </header>
 
@@ -590,6 +747,32 @@
             <p class="article-subtitle">Understanding ASCE 7-16, 7-22 standards and how to calculate wind loads for structural design</p>
         </div>
     </section>
+
+    <!-- Jump Navigation -->
+    <nav class="jump-nav">
+        <div class="jump-nav-container">
+            <div class="jump-nav-pills">
+                <a href="#what-is-asce-7" class="jump-pill">
+                    <i class="fas fa-book"></i> What is ASCE 7?
+                </a>
+                <a href="#asce-editions" class="jump-pill">
+                    <i class="fas fa-layer-group"></i> Editions
+                </a>
+                <a href="#chapters" class="jump-pill">
+                    <i class="fas fa-list"></i> Key Chapters
+                </a>
+                <a href="#calculation-process" class="jump-pill">
+                    <i class="fas fa-calculator"></i> Calculation Process
+                </a>
+                <a href="#challenges" class="jump-pill">
+                    <i class="fas fa-exclamation-triangle"></i> Challenges
+                </a>
+                <a href="#calculator" class="jump-pill">
+                    <i class="fas fa-rocket"></i> Professional Calculator
+                </a>
+            </div>
+        </div>
+    </nav>
 
     <!-- Main Content -->
     <div class="content-wrapper">
@@ -621,6 +804,15 @@
                 <li><strong>Main Wind Force Resisting System (MWFRS)</strong> - Loads on the overall structural frame, shear walls, and structural diaphragms</li>
                 <li><strong>Components and Cladding (C&C)</strong> - Loads on individual elements like windows, doors, wall panels, and roof panels</li>
             </ul>
+
+            <!-- CTA 1 -->
+            <div class="content-cta">
+                <div class="content-cta-content">
+                    <h3>Try Our Free Wind Load Calculator</h3>
+                    <p>Experience ASCE 7 calculations in action with our interactive demo. No signup required.</p>
+                    <a href="../demo.html" class="cta-button">Launch Free Calculator <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
 
             <!-- ASCE 7 Editions -->
             <h2 id="asce-editions">ASCE 7 Editions: Understanding the Differences</h2>
@@ -662,6 +854,15 @@
             <div class="warning-box info-box">
                 <h4><i class="fas fa-exclamation-triangle"></i> Critical Note on Code Adoption</h4>
                 <p>While ASCE 7-22 is the latest edition, many jurisdictions still require ASCE 7-16 calculations. Always confirm the applicable edition with your local building department or authority having jurisdiction (AHJ) before beginning design work.</p>
+            </div>
+
+            <!-- CTA 2 -->
+            <div class="content-cta">
+                <div class="content-cta-content">
+                    <h3>Calculate with Any ASCE 7 Edition</h3>
+                    <p>Our professional calculator supports ASCE 7-10, 7-16, and 7-22. Switch editions instantly.</p>
+                    <a href="../wind-load-calculator-shop.html" class="cta-button">View Calculator Plans <i class="fas fa-arrow-right"></i></a>
+                </div>
             </div>
 
             <!-- Wind Load Chapters -->
@@ -749,56 +950,100 @@
                 </div>
             </div>
 
+            <!-- CTA 3 -->
+            <div class="content-cta">
+                <div class="content-cta-content">
+                    <h3>Automate the Entire Process</h3>
+                    <p>Skip the manual calculations. Get accurate ASCE 7 results in under 15 minutes with full documentation.</p>
+                    <a href="../index.html" class="cta-button">See How It Works <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
             <!-- Common Challenges -->
             <h2 id="challenges">Common Challenges in Manual ASCE 7 Calculations</h2>
 
-            <p>While ASCE 7 provides comprehensive methodology, manual wind load calculations present several challenges for structural engineers:</p>
+            <p>Manual wind load calculations present time-consuming challenges for structural engineers:</p>
 
-            <h3>Coefficient Selection Complexity</h3>
-            <p>ASCE 7 contains numerous figures showing pressure coefficients for different building configurations. Selecting the correct figure and interpolating values for specific geometries requires careful attention to detail and can be time-consuming.</p>
+            <div class="chapter-cards">
+                <div class="chapter-card">
+                    <div class="chapter-number"><i class="fas fa-table"></i></div>
+                    <h4>Coefficient Selection Complexity</h4>
+                    <p>Selecting and interpolating pressure coefficients from numerous ASCE 7 figures requires careful attention and significant time.</p>
+                </div>
 
-            <h3>Edition-Specific Differences</h3>
-            <p>Calculations must use the edition adopted by the local jurisdiction. Wind speeds, coefficients, and procedures vary between editions, making it critical to use the correct reference throughout the entire calculation.</p>
+                <div class="chapter-card">
+                    <div class="chapter-number"><i class="fas fa-code-branch"></i></div>
+                    <h4>Edition-Specific Differences</h4>
+                    <p>Wind speeds, coefficients, and procedures vary between editions. Using the wrong edition can invalidate entire calculations.</p>
+                </div>
 
-            <h3>Components and Cladding Effective Areas</h3>
-            <p>C&C calculations require determining effective wind areas for each component, which vary with location on the building. Corner, edge, and field zones have different pressure coefficients, and calculations must account for positive and negative pressures.</p>
+                <div class="chapter-card">
+                    <div class="chapter-number"><i class="fas fa-grid-2"></i></div>
+                    <h4>C&C Effective Areas</h4>
+                    <p>Components and cladding require zone-specific calculations with different coefficients for corners, edges, and field areas.</p>
+                </div>
 
-            <h3>Documentation Requirements</h3>
-            <p>Permit submittal typically requires comprehensive calculation documentation including assumptions, references to specific ASCE 7 sections, pressure diagrams, and load combinations. Preparing this documentation manually is time-intensive.</p>
+                <div class="chapter-card">
+                    <div class="chapter-number"><i class="fas fa-file-alt"></i></div>
+                    <h4>Documentation Requirements</h4>
+                    <p>Permit submittal requires comprehensive documentation with assumptions, code references, diagrams, and load combinations.</p>
+                </div>
+            </div>
 
             <!-- Professional Calculator -->
             <h2 id="calculator">Professional ASCE 7 Wind Load Calculator</h2>
 
-            <p>WindLoadCalc provides a professional software solution designed specifically for ASCE 7 wind load calculations. The calculator automates the complex aspects of ASCE 7 compliance while maintaining full transparency and accuracy.</p>
+            <p>WindLoadCalc automates ASCE 7 compliance while maintaining full transparency and accuracy:</p>
 
-            <h3>Key Features</h3>
+            <div class="edition-grid">
+                <div class="edition-box">
+                    <div class="edition-number"><i class="fas fa-layer-group"></i></div>
+                    <h4>Multi-Edition Support</h4>
+                    <ul>
+                        <li>ASCE 7-10, 7-16, and 7-22 editions</li>
+                        <li>Edition-specific wind maps and coefficients</li>
+                        <li>Switch between editions instantly</li>
+                    </ul>
+                </div>
 
-            <ul>
-                <li><strong>Multi-Edition Support</strong> - Calculate per ASCE 7-16 or 7-22 with edition-specific wind maps, coefficients, and procedures</li>
-                <li><strong>Automated Coefficient Selection</strong> - Intelligent selection of pressure coefficients from ASCE 7 figures based on building geometry</li>
-                <li><strong>GPS Wind Speed Database</strong> - Built-in database with wind speeds for all U.S. locations referenced to ASCE 7 maps</li>
-                <li><strong>Both MWFRS and C&C</strong> - Complete calculations for main wind force resisting system and components and cladding</li>
-                <li><strong>Professional Reports</strong> - Generate detailed calculation reports with code references, diagrams, and pressure tables suitable for permit submittal</li>
-                <li><strong>Verified Accuracy</strong> - All calculation algorithms verified by licensed Professional Engineers</li>
-            </ul>
+                <div class="edition-box">
+                    <div class="edition-number"><i class="fas fa-magic"></i></div>
+                    <h4>Automated Intelligence</h4>
+                    <ul>
+                        <li>Automatic coefficient selection from ASCE 7 figures</li>
+                        <li>GPS wind speed database for all U.S. locations</li>
+                        <li>Both MWFRS and C&C calculations</li>
+                    </ul>
+                </div>
 
-            <div class="info-box">
-                <h4><i class="fas fa-clock"></i> Time Savings</h4>
-                <p>Engineers using WindLoadCalc report reducing wind load calculation time from 4-6 hours to under 15 minutes, allowing more time for design optimization and client service.</p>
+                <div class="edition-box">
+                    <div class="edition-number"><i class="fas fa-file-pdf"></i></div>
+                    <h4>Professional Reports</h4>
+                    <ul>
+                        <li>Detailed calculation documentation</li>
+                        <li>Code references and diagrams</li>
+                        <li>Permit-ready PDF reports</li>
+                    </ul>
+                </div>
+
+                <div class="edition-box">
+                    <div class="edition-number"><i class="fas fa-clock"></i></div>
+                    <h4>Massive Time Savings</h4>
+                    <ul>
+                        <li>4-6 hours reduced to under 15 minutes</li>
+                        <li>Verified by licensed PEs</li>
+                        <li>All building types supported</li>
+                    </ul>
+                </div>
             </div>
 
-            <p>The calculator supports all common building types including rectangular buildings, L-shaped buildings, buildings with parapets, and special structures. For components and cladding, it automatically calculates pressures for walls, roofs, overhangs, and canopies with appropriate zone-specific coefficients.</p>
-
-            <!-- Conclusion -->
-            <h2 id="conclusion">Getting Started with ASCE 7 Calculations</h2>
-
-            <p>Understanding ASCE 7 wind load calculation methodology is fundamental for structural engineers and building designers. Whether you're performing manual calculations or using professional software, a solid grasp of the underlying principles ensures accurate, code-compliant designs.</p>
-
-            <p>For engineers seeking to streamline their workflow while maintaining full ASCE 7 compliance, WindLoadCalc offers a professional solution with comprehensive features, accurate calculations, and time-saving automation.</p>
-
-            <div class="info-box">
-                <h4><i class="fas fa-rocket"></i> Try It Free</h4>
-                <p>Experience the WindLoadCalc ASCE 7 calculator with a free 7-day trial. No credit card required, full feature access, and professional support from licensed PEs.</p>
+            <!-- Final CTA -->
+            <div class="content-cta">
+                <div class="content-cta-content">
+                    <h3>Start Your Free 7-Day Trial</h3>
+                    <p>Full feature access. No credit card required. Professional support from licensed PEs.</p>
+                    <a href="../wind-load-calculator-shop.html" class="cta-button">Get Started Now <i class="fas fa-arrow-right"></i></a>
+                </div>
             </div>
         </main>
 
@@ -820,7 +1065,7 @@
             <div class="sidebar-cta">
                 <h3>Professional ASCE 7 Calculator</h3>
                 <p>Calculate ASCE 7-16 and 7-22 wind loads in minutes with our professional software.</p>
-                <a href="wind-load-calculator-shop.html" class="sidebar-cta-button">View Calculator Plans</a>
+                <a href="../wind-load-calculator-shop.html" class="sidebar-cta-button">View Calculator Plans</a>
             </div>
 
             <div class="sidebar-box">
@@ -828,8 +1073,8 @@
                 <ul>
                     <li><a href="free-wind-load-calculator.html">Free Calculator Demo</a></li>
                     <li><a href="components-and-cladding-wind-loads.html">C&C Wind Loads Guide</a></li>
-                    <li><a href="wind-load-calculator-shop.html">Calculator Plans</a></li>
-                    <li><a href="contact.html">Contact Support</a></li>
+                    <li><a href="../wind-load-calculator-shop.html">Calculator Plans</a></li>
+                    <li><a href="../contact.html">Contact Support</a></li>
                 </ul>
             </div>
         </aside>
@@ -839,18 +1084,72 @@
     <footer class="main-footer">
         <div class="container">
             <div class="footer-links">
-                <a href="index.html">Home</a>
-                <a href="wind-load-calculator-shop.html">Calculators</a>
+                <a href="../index.html">Home</a>
+                <a href="../wind-load-calculator-shop.html">Calculators</a>
                 <a href="free-wind-load-calculator.html">Free Demo</a>
                 <a href="components-and-cladding-wind-loads.html">C&C Loads</a>
-                <a href="contact.html">Contact</a>
-                <a href="privacy-policy.html">Privacy</a>
-                <a href="terms-of-service.html">Terms</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../privacy-policy.html">Privacy</a>
+                <a href="../terms-of-service.html">Terms</a>
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2025 WindLoadCalc. All rights reserved.</p>
             </div>
         </div>
     </footer>
+
+    <script>
+        // Jump Navigation Active State
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('h2[id]');
+            const navPills = document.querySelectorAll('.jump-pill');
+
+            // Smooth scroll for jump navigation
+            navPills.forEach(pill => {
+                pill.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+
+                    if (targetSection) {
+                        const jumpNavHeight = document.querySelector('.jump-nav').offsetHeight;
+                        const headerHeight = document.querySelector('.main-header').offsetHeight;
+                        const offset = headerHeight + jumpNavHeight + 20;
+                        const targetPosition = targetSection.offsetTop - offset;
+
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Update active state on scroll
+            function updateActiveNav() {
+                let current = '';
+                const scrollPos = window.scrollY + 200;
+
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+
+                    if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navPills.forEach(pill => {
+                    pill.classList.remove('active');
+                    if (pill.getAttribute('href') === '#' + current) {
+                        pill.classList.add('active');
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', updateActiveNav);
+            updateActiveNav(); // Initial call
+        });
+    </script>
 </body>
 </html>

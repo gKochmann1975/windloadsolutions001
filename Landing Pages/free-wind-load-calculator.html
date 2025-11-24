@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="../images/windloadcalc-favicon.svg">
+
+    <!-- SEO Meta Tags -->
+    <title>Free Wind Load Calculator | ASCE 7-16 & 7-22 Wind Pressure Calculator</title>
+    <meta name="description" content="Professional free wind load calculator for ASCE 7-16 and ASCE 7-22 standards. Calculate wind pressure, components and cladding loads, and MWFRS forces instantly. Trusted by 10,000+ engineers nationwide.">
+    <meta name="keywords" content="free wind load calculator, wind load calculator, ASCE 7 wind load calculator, wind pressure calculator, components and cladding calculator, wind load calculation, wind load software, ASCE 7-22 wind load, ASCE 7-16 wind load, building wind load, window wind load, how to calculate wind load">
+    <link rel="canonical" href="https://windloadcalc.com/free-wind-load-calculator">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Free Wind Load Calculator | ASCE 7 Wind Pressure Analysis">
+    <meta property="og:description" content="Professional free wind load calculator for ASCE 7 compliance. Instant wind pressure calculations for components, cladding, and MWFRS.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://windloadcalc.com/free-wind-load-calculator">
+    <meta property="og:image" content="https://windloadcalc.com/images/wind-calculator-og.jpg">
+
+    <!-- Schema Markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "WindLoadCalc Free Calculator",
+        "applicationCategory": "EngineeringApplication",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "ratingCount": "1247"
+        }
+    }
+    </script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Slim Header */
+        .main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo-image {
+            height: 100px;
+            width: auto;
+        }
+
+        .header-cta {
+            background: #0018ff;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .header-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 24, 255, 0.3);
+        }
+
+        /* Hero Section - Conversion Focused */
+        .hero-section {
+            padding: 8rem 0 4rem;
+            background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 50%, #fae8ff 100%);
+            margin-top: 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(14, 165, 233, 0.15), transparent);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.15), transparent);
+            border-radius: 50%;
+            animation: float 10s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(30px, -30px); }
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            animation: pulse 2s ease-in-out infinite;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4); }
+            50% { transform: scale(1.05); box-shadow: 0 6px 20px rgba(245, 158, 11, 0.6); }
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #181E57;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .hero-title .highlight {
+            color: #0018ff;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: #4a5568;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+        }
+
+        .hero-cta-primary {
+            display: inline-block;
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            color: white;
+            padding: 1.5rem 4rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 24, 255, 0.3);
+            margin-bottom: 1rem;
+        }
+
+        .hero-cta-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 24, 255, 0.4);
+        }
+
+        .hero-note {
+            font-size: 0.95rem;
+            color: #6b7280;
+            margin-top: 1rem;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 3rem 0;
+            background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 2rem 1rem;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, transparent 0%, rgba(14, 165, 233, 0.05) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .stat-item:hover::before {
+            opacity: 1;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(14, 165, 233, 0.2);
+        }
+
+        .stat-item:nth-child(1):hover { box-shadow: 0 10px 30px rgba(14, 165, 233, 0.25); }
+        .stat-item:nth-child(2):hover { box-shadow: 0 10px 30px rgba(139, 92, 246, 0.25); }
+        .stat-item:nth-child(3):hover { box-shadow: 0 10px 30px rgba(16, 185, 129, 0.25); }
+        .stat-item:nth-child(4):hover { box-shadow: 0 10px 30px rgba(245, 158, 11, 0.25); }
+
+        .stat-item h3 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #0ea5e9, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-item:nth-child(2) h3 {
+            background: linear-gradient(135deg, #8b5cf6, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-item:nth-child(3) h3 {
+            background: linear-gradient(135deg, #10b981, #059669);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-item:nth-child(4) h3 {
+            background: linear-gradient(135deg, #f59e0b, #f97316);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-item p {
+            color: #6b7280;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        /* Benefits Grid */
+        .benefits-section {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+        }
+
+        .benefits-section h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #181E57;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .benefit-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0, 24, 255, 0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .benefit-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: currentColor;
+        }
+
+        .benefit-card:hover::before {
+            opacity: 1;
+        }
+
+        .benefit-card:nth-child(1) { --card-color: #0ea5e9; }
+        .benefit-card:nth-child(1)::before { background: linear-gradient(90deg, #0ea5e9, #3b82f6); }
+        .benefit-card:nth-child(1):hover { box-shadow: 0 15px 40px rgba(14, 165, 233, 0.25); border-color: #0ea5e9; }
+
+        .benefit-card:nth-child(2) { --card-color: #10b981; }
+        .benefit-card:nth-child(2)::before { background: linear-gradient(90deg, #10b981, #059669); }
+        .benefit-card:nth-child(2):hover { box-shadow: 0 15px 40px rgba(16, 185, 129, 0.25); border-color: #10b981; }
+
+        .benefit-card:nth-child(3) { --card-color: #f97316; }
+        .benefit-card:nth-child(3)::before { background: linear-gradient(90deg, #f97316, #ea580c); }
+        .benefit-card:nth-child(3):hover { box-shadow: 0 15px 40px rgba(249, 115, 22, 0.25); border-color: #f97316; }
+
+        .benefit-card:nth-child(4) { --card-color: #8b5cf6; }
+        .benefit-card:nth-child(4)::before { background: linear-gradient(90deg, #8b5cf6, #7c3aed); }
+        .benefit-card:nth-child(4):hover { box-shadow: 0 15px 40px rgba(139, 92, 246, 0.25); border-color: #8b5cf6; }
+
+        .benefit-card:nth-child(5) { --card-color: #ec4899; }
+        .benefit-card:nth-child(5)::before { background: linear-gradient(90deg, #ec4899, #db2777); }
+        .benefit-card:nth-child(5):hover { box-shadow: 0 15px 40px rgba(236, 72, 153, 0.25); border-color: #ec4899; }
+
+        .benefit-card:nth-child(6) { --card-color: #6366f1; }
+        .benefit-card:nth-child(6)::before { background: linear-gradient(90deg, #6366f1, #4f46e5); }
+        .benefit-card:nth-child(6):hover { box-shadow: 0 15px 40px rgba(99, 102, 241, 0.25); border-color: #6366f1; }
+
+        .benefit-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--card-color), var(--card-color));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .benefit-card:hover .benefit-icon {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .benefit-icon i {
+            color: white;
+            font-size: 1.75rem;
+        }
+
+        .benefit-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #181E57;
+            margin-bottom: 0.75rem;
+        }
+
+        .benefit-card p {
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        /* CTA Banner */
+        .cta-banner {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 50%, #8b5cf6 100%);
+            background-size: 200% 200%;
+            animation: gradientShift 8s ease infinite;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1), transparent),
+                        radial-gradient(circle at 80% 50%, rgba(255, 255, 255, 0.1), transparent);
+            animation: float 15s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .cta-banner h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-banner p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-banner-button {
+            display: inline-block;
+            background: white;
+            color: #3b82f6;
+            padding: 1.5rem 4rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-banner-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 50px rgba(255, 255, 255, 0.4);
+            color: #0ea5e9;
+        }
+
+        /* Footer */
+        .main-footer {
+            background: #1f2937;
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero-cta-primary {
+                padding: 1.2rem 2.5rem;
+                font-size: 1.1rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Slim Header -->
+    <header class="main-header">
+        <div class="header-container">
+            <a href="../index.html">
+                <img src="../images/windloadcalc-logo.svg" alt="WindLoadCalc" class="logo-image">
+            </a>
+            <a href="../demo.html" class="header-cta">Try Free Demo</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="container hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-star"></i> Trusted by 10,000+ Engineers
+                </div>
+                <h1 class="hero-title">
+                    Calculate Wind Loads in <span class="highlight">Minutes</span>, Not Hours
+                </h1>
+                <p class="hero-subtitle">
+                    Professional ASCE 7-16 & 7-22 wind load calculator. Try our full-featured demo with instant results—no registration, no credit card, no commitment.
+                </p>
+                <a href="../demo.html" class="hero-cta-primary">
+                    <i class="fas fa-calculator"></i> Start Free Calculator →
+                </a>
+                <p class="hero-note">
+                    ✓ Full feature access &nbsp;&nbsp;|&nbsp;&nbsp; ✓ Instant results &nbsp;&nbsp;|&nbsp;&nbsp; ✓ No registration required
+                </p>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <h3>10,000+</h3>
+                        <p>Engineers Trust Us</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>500K+</h3>
+                        <p>Calculations Complete</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>95%</h3>
+                        <p>Time Saved</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>4.8/5</h3>
+                        <p>User Rating</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits Section -->
+        <section class="benefits-section">
+            <div class="container">
+                <h2>Why Engineers Choose WindLoadCalc</h2>
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3>Instant Results</h3>
+                        <p>Get complete wind load calculations in under 2 minutes. No more hours spent on manual calculations.</p>
+                    </div>
+
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <h3>ASCE 7 Compliant</h3>
+                        <p>Built-in compliance for ASCE 7-16 and 7-22 editions. Automatic coefficient selection from standard figures.</p>
+                    </div>
+
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                        <h3>Professional Reports</h3>
+                        <p>Generate detailed calculation reports suitable for permit submittal with one click.</p>
+                    </div>
+
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Verified Accuracy</h3>
+                        <p>All calculations verified by licensed Professional Engineers. Trust your results.</p>
+                    </div>
+
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3>Works Anywhere</h3>
+                        <p>Access from desktop, tablet, or phone. Calculate on-site or in the office.</p>
+                    </div>
+
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h3>Expert Support</h3>
+                        <p>Questions? Our PE-staffed support team is here to help you succeed.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Banner -->
+        <section class="cta-banner">
+            <div class="container">
+                <h2>Ready to Save Hours on Wind Load Calculations?</h2>
+                <p>Try our professional calculator free—no registration, no credit card required.</p>
+                <a href="../demo.html" class="cta-banner-button">
+                    Start Free Calculator Now
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="../index.html">Home</a>
+                <a href="../wind-load-calculator-shop.html">Calculators</a>
+                <a href="asce-7-wind-load-calculator.html">ASCE 7 Guide</a>
+                <a href="components-and-cladding-wind-loads.html">C&C Loads</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../privacy-policy.html">Privacy</a>
+                <a href="../terms-of-service.html">Terms</a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 WindLoadCalc. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

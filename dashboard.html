@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="images/windloadcalc-favicon.svg">
+    <title>My Subscriptions - WindLoadCalc</title>
+    <meta name="description" content="Access your Wind Load Calculator and Building Intelligence Platform subscriptions.">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 2rem;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .logo {
+            height: 60px;
+            margin-bottom: 1rem;
+        }
+
+        .welcome-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #181E57;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: #64748b;
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .product-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Active Card */
+        .product-card.active::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+
+        /* Inactive Card */
+        .product-card.inactive {
+            opacity: 0.7;
+        }
+
+        .product-card.inactive::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(135deg, #94a3b8 0%, #64748b 100%);
+        }
+
+        .product-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #181E57;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-subtitle {
+            font-size: 0.9rem;
+            color: #64748b;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Status Badge */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .status-badge.active {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            color: #047857;
+        }
+
+        .status-badge.trial {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            color: #92400e;
+        }
+
+        .status-badge.inactive {
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            color: #475569;
+        }
+
+        .plan-name {
+            font-size: 0.95rem;
+            color: #64748b;
+            margin-bottom: 0.5rem;
+        }
+
+        .plan-details {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Action Button */
+        .action-btn {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .action-btn.primary {
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 24, 255, 0.3);
+        }
+
+        .action-btn.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 24, 255, 0.4);
+        }
+
+        .action-btn.secondary {
+            background: white;
+            color: #0018ff;
+            border: 2px solid #0018ff;
+        }
+
+        .action-btn.secondary:hover {
+            background: rgba(0, 24, 255, 0.05);
+            transform: translateY(-1px);
+        }
+
+        .action-btn:disabled,
+        .action-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Bottom Actions */
+        .bottom-actions {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .bottom-btn {
+            padding: 0.8rem 2rem;
+            border: 2px solid #0018ff;
+            background: white;
+            color: #0018ff;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .bottom-btn:hover {
+            background: rgba(0, 24, 255, 0.05);
+            transform: translateY(-2px);
+        }
+
+        /* Error Message */
+        .error-message {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            color: #dc2626;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem 0.5rem;
+            }
+
+            .header {
+                padding: 1.5rem;
+            }
+
+            .welcome-text {
+                font-size: 1.4rem;
+            }
+
+            .product-card {
+                padding: 2rem;
+            }
+
+            .bottom-actions {
+                flex-direction: column;
+            }
+
+            .bottom-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading State -->
+    <div id="loading" class="loading">
+        <div class="spinner"></div>
+        <p>Loading your subscriptions...</p>
+    </div>
+
+    <!-- Main Container (hidden until loaded) -->
+    <div id="main-content" class="container" style="display: none;">
+        <!-- Header -->
+        <div class="header">
+            <img src="images/windloadcalc-logo.svg" alt="WindLoadCalc" class="logo">
+            <h1 class="welcome-text">Welcome back, <span id="user-name">User</span>!</h1>
+            <p class="subtitle">Access your subscriptions below</p>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="products-grid">
+            <!-- Building Intelligence Platform -->
+            <div id="bip-card" class="product-card inactive">
+                <div class="product-icon">🏗️</div>
+                <h2 class="product-title">Building Intelligence Platform</h2>
+                <p class="product-subtitle">ASCE 7 wind speeds, meteorological data, and building code intelligence</p>
+
+                <div id="bip-status" class="status-badge inactive">
+                    <span>🔒</span>
+                    <span>Not Subscribed</span>
+                </div>
+
+                <div id="bip-plan-info" style="display: none;">
+                    <p class="plan-name" id="bip-plan-name">Starter Plan</p>
+                    <p class="plan-details" id="bip-plan-details">1 user • 50 calculations/month</p>
+                </div>
+
+                <a id="bip-action" href="#" class="action-btn secondary">View Plans</a>
+            </div>
+
+            <!-- Wind Load Calculators -->
+            <div id="calc-card" class="product-card inactive">
+                <div class="product-icon">🧮</div>
+                <h2 class="product-title">Wind Load Calculators</h2>
+                <p class="product-subtitle">Professional ASCE 7 calculation tools for structural engineers</p>
+
+                <div id="calc-status" class="status-badge inactive">
+                    <span>🔒</span>
+                    <span>Not Subscribed</span>
+                </div>
+
+                <div id="calc-plan-info" style="display: none;">
+                    <p class="plan-name" id="calc-plan-name">Starter Plan</p>
+                    <p class="plan-details" id="calc-plan-details">1 user • 100 calculations/month</p>
+                </div>
+
+                <a id="calc-action" href="#" class="action-btn secondary">View Plans</a>
+            </div>
+        </div>
+
+        <!-- Bottom Actions -->
+        <div class="bottom-actions">
+            <a href="index.html" class="bottom-btn">← Back to Home</a>
+            <button onclick="logout()" class="bottom-btn">Logout</button>
+        </div>
+    </div>
+
+    <!-- Error State -->
+    <div id="error-content" class="container" style="display: none;">
+        <div class="error-message">
+            <h2>⚠️ Unable to Load Subscriptions</h2>
+            <p id="error-text" style="margin-top: 1rem;"></p>
+            <button onclick="window.location.href='login.html'" class="action-btn primary" style="max-width: 300px; margin: 1.5rem auto 0;">
+                Return to Login
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // API Configuration
+        const API_URL = 'https://api.windloadcalc.com';
+        const WEBAPP_URL = 'https://calc.windloadcalc.com';
+        const BIP_URL = 'https://windloadcalc.com/building-intelligence-platform.html';
+
+        // Get URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const token = urlParams.get('token');
+        const userId = urlParams.get('user_id');
+
+        // Store token if provided
+        if (token && userId) {
+            localStorage.setItem('windload_token', token);
+            localStorage.setItem('windload_user_id', userId);
+        }
+
+        // Get stored credentials
+        const storedToken = localStorage.getItem('windload_token');
+        const storedUserId = localStorage.getItem('windload_user_id');
+
+        // Product info mapping
+        const BIP_PLANS = {
+            'bip_starter': { name: 'Starter Plan', details: '1 user • 50 calculations/month' },
+            'bip_pro': { name: 'Pro Plan', details: '5 users • Unlimited calculations' },
+            'bip_premium': { name: 'Premium Plan', details: '15 users • Unlimited calculations' },
+            'bip_enterprise': { name: 'Enterprise Plan', details: 'Unlimited users • Custom integrations' }
+        };
+
+        const CALC_PLANS = {
+            'cc_walls_starter': { name: 'Starter Plan', details: '1 user • 100 calculations/month' },
+            'cc_walls_pro': { name: 'Pro Plan', details: '5 users • 500 calculations/month' },
+            'cc_walls_premium': { name: 'Premium Plan', details: '10 users • Unlimited calculations' },
+            'cc_walls_enterprise': { name: 'Enterprise Plan', details: 'Unlimited users • API access' }
+        };
+
+        // Initialize dashboard
+        async function initDashboard() {
+            // Check if we have authentication
+            if (!storedToken || !storedUserId) {
+                showError('Please log in to access your subscriptions.');
+                return;
+            }
+
+            try {
+                // Fetch user subscriptions
+                const response = await fetch(`${API_URL}/api/auth/user-subscriptions`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${storedToken}`
+                    },
+                    body: JSON.stringify({ user_id: storedUserId })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to load subscriptions');
+                }
+
+                const data = await response.json();
+
+                // Set user name (you may need to fetch this separately or pass it via URL)
+                const userName = urlParams.get('name') || 'User';
+                document.getElementById('user-name').textContent = userName;
+
+                // Update dashboard based on subscriptions
+                updateDashboard(data);
+
+                // Show main content
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+
+            } catch (error) {
+                console.error('Dashboard initialization error:', error);
+                showError('Unable to load your subscriptions. Please try again.');
+            }
+        }
+
+        function updateDashboard(data) {
+            const hasBIP = data.has_bip || false;
+            const hasCalculator = data.has_calculator || false;
+            const subscriptions = data.subscriptions || [];
+
+            // Find active BIP subscription
+            const bipSub = subscriptions.find(sub =>
+                sub.product_code.startsWith('bip_') &&
+                (sub.status === 'active' || sub.status === 'trialing')
+            );
+
+            // Find active Calculator subscription
+            const calcSub = subscriptions.find(sub =>
+                (sub.product_code.startsWith('cc_') || sub.product_code === 'professional' || sub.product_code === 'enterprise') &&
+                (sub.status === 'active' || sub.status === 'trialing')
+            );
+
+            // Update BIP Card
+            const bipCard = document.getElementById('bip-card');
+            const bipStatus = document.getElementById('bip-status');
+            const bipAction = document.getElementById('bip-action');
+            const bipPlanInfo = document.getElementById('bip-plan-info');
+
+            if (hasBIP && bipSub) {
+                bipCard.classList.remove('inactive');
+                bipCard.classList.add('active');
+
+                // Update status badge
+                const isTrial = bipSub.status === 'trialing';
+                bipStatus.className = `status-badge ${isTrial ? 'trial' : 'active'}`;
+                bipStatus.innerHTML = isTrial
+                    ? '<span>⏰</span><span>Free Trial</span>'
+                    : '<span>✅</span><span>Active</span>';
+
+                // Show plan info
+                bipPlanInfo.style.display = 'block';
+                const planInfo = BIP_PLANS[bipSub.product_code] || { name: 'Active Plan', details: '' };
+                document.getElementById('bip-plan-name').textContent = planInfo.name;
+                document.getElementById('bip-plan-details').textContent = planInfo.details;
+
+                // Update action button
+                bipAction.textContent = 'Launch Platform →';
+                bipAction.className = 'action-btn primary';
+                bipAction.href = `${BIP_URL}?token=${storedToken}&user_id=${storedUserId}`;
+                bipAction.target = '_self';
+            } else {
+                bipAction.href = 'building-intelligence-platform-shop.html';
+                bipAction.textContent = 'View Plans';
+            }
+
+            // Update Calculator Card
+            const calcCard = document.getElementById('calc-card');
+            const calcStatus = document.getElementById('calc-status');
+            const calcAction = document.getElementById('calc-action');
+            const calcPlanInfo = document.getElementById('calc-plan-info');
+
+            if (hasCalculator && calcSub) {
+                calcCard.classList.remove('inactive');
+                calcCard.classList.add('active');
+
+                // Update status badge
+                const isTrial = calcSub.status === 'trialing';
+                calcStatus.className = `status-badge ${isTrial ? 'trial' : 'active'}`;
+                calcStatus.innerHTML = isTrial
+                    ? '<span>⏰</span><span>Free Trial</span>'
+                    : '<span>✅</span><span>Active</span>';
+
+                // Show plan info
+                calcPlanInfo.style.display = 'block';
+                const planInfo = CALC_PLANS[calcSub.product_code] || { name: 'Active Plan', details: '' };
+                document.getElementById('calc-plan-name').textContent = planInfo.name;
+                document.getElementById('calc-plan-details').textContent = planInfo.details;
+
+                // Update action button
+                calcAction.textContent = 'Launch Calculator →';
+                calcAction.className = 'action-btn primary';
+                calcAction.href = `${WEBAPP_URL}/?token=${storedToken}&user_id=${storedUserId}`;
+                calcAction.target = '_blank';  // Open webapp in new tab
+            } else {
+                calcAction.href = 'wind-load-calculator-shop.html';
+                calcAction.textContent = 'View Plans';
+            }
+        }
+
+        function showError(message) {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('error-text').textContent = message;
+            document.getElementById('error-content').style.display = 'block';
+        }
+
+        function logout() {
+            localStorage.removeItem('windload_token');
+            localStorage.removeItem('windload_user_id');
+            window.location.href = 'login.html';
+        }
+
+        // Initialize on page load
+        window.addEventListener('load', initDashboard);
+    </script>
+</body>
+</html>

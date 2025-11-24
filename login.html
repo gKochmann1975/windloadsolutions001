@@ -931,24 +931,14 @@
                         localStorage.setItem('windload_user_id', data.user_id);
                     }
 
-                    // Smart redirect based on subscriptions
-                    const subscriptions = data.subscriptions || {};
-                    const hasBIP = subscriptions.has_bip || false;
-                    const hasCalculator = subscriptions.has_calculator || false;
+                    // Redirect to dashboard to show all subscription options
                     const userId = data.user_id;
                     const token = data.token;
+                    const userName = data.user?.full_name || 'User';
 
                     setTimeout(() => {
-                        if (hasBIP) {
-                            // Redirect to BIP page with token
-                            window.location.href = `${BIP_URL}?token=${token}&user_id=${userId}`;
-                        } else if (hasCalculator || data.role === 'trial') {
-                            // Redirect to calculator webapp with token
-                            window.location.href = `${WEBAPP_URL}/?token=${token}&user_id=${userId}`;
-                        } else {
-                            // No subscription - redirect to shop
-                            window.location.href = 'building-intelligence-platform-shop.html';
-                        }
+                        // Always redirect to dashboard - it will show active/inactive products
+                        window.location.href = `dashboard.html?token=${token}&user_id=${userId}&name=${encodeURIComponent(userName)}`;
                     }, 1500);
                 } else if (data.message === 'verification_required') {
                     showMessage('New device detected. Please check your email for a verification code.', 'success');

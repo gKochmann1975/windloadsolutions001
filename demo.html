@@ -2033,26 +2033,26 @@
                     
                     <div class="demo-results" id="demo-results">
                         <div class="demo-banner" id="demo-banner">
-                            🔬 DEMO PREVIEW - Sample calculations shown below
+                            ✅ ASCE 7-22 MWFRS Calculations (Simplified Demo)
                         </div>
-                        
-                        <h3 style="color: #181E57; margin-bottom: 1.5rem;">Wind Calculator Sample Results</h3>
+
+                        <h3 style="color: #181E57; margin-bottom: 1.5rem;">Wind Load Results</h3>
                         <div class="results-grid">
                             <div class="result-item">
-                                <span class="result-label">Zone 4 Pressure:</span>
-                                <span class="result-value" id="zone4-pressure">+25.2 psf</span>
+                                <span class="result-label">Windward Wall:</span>
+                                <span class="result-value" id="zone4-pressure">+0.0 psf</span>
                             </div>
                             <div class="result-item">
-                                <span class="result-label">Zone 5 Pressure:</span>
-                                <span class="result-value" id="zone5-pressure">-31.8 psf</span>
+                                <span class="result-label">Roof Suction:</span>
+                                <span class="result-value" id="zone5-pressure">-0.0 psf</span>
                             </div>
                             <div class="result-item">
                                 <span class="result-label">MWFRS Windward:</span>
-                                <span class="result-value" id="mwfrs-windward">+18.5 psf</span>
+                                <span class="result-value" id="mwfrs-windward">+0.0 psf</span>
                             </div>
                             <div class="result-item">
                                 <span class="result-label">MWFRS Leeward:</span>
-                                <span class="result-value" id="mwfrs-leeward">-12.3 psf</span>
+                                <span class="result-value" id="mwfrs-leeward">-0.0 psf</span>
                             </div>
                         </div>
                         
@@ -2449,7 +2449,7 @@
             });
         });
 
-        // Demo Calculator Functions - OPTION 1: Static Demo + Redirect
+        // Real ASCE 7-22 MWFRS Calculator
         function calculateDemo() {
             // Track demo interaction
             if (typeof gtag !== 'undefined') {
@@ -2459,13 +2459,98 @@
                 });
             }
 
-            // Show immediate sample results (static preview)
+            // Get input values
+            const windSpeed = parseFloat(document.getElementById('demo-wind-speed').value);
+            const exposure = document.getElementById('demo-exposure').value;
+            const height = parseFloat(document.getElementById('demo-height').value);
+
+            // ASCE 7-22 MWFRS Directional Procedure (Simplified)
+
+            // Step 1: Velocity pressure exposure coefficient (Kh) - ASCE 7-22 Table 26.10-1
+            let Kh;
+            const heightFt = height;
+
+            if (exposure === 'B') {
+                if (heightFt <= 30) Kh = 0.70;
+                else if (heightFt <= 40) Kh = 0.76;
+                else if (heightFt <= 50) Kh = 0.81;
+                else if (heightFt <= 60) Kh = 0.85;
+                else Kh = 0.85 + (heightFt - 60) * 0.002; // Approximate for > 60ft
+            } else if (exposure === 'C') {
+                if (heightFt <= 20) Kh = 0.85;
+                else if (heightFt <= 30) Kh = 0.90;
+                else if (heightFt <= 40) Kh = 0.98;
+                else if (heightFt <= 50) Kh = 1.04;
+                else if (heightFt <= 60) Kh = 1.09;
+                else Kh = 1.09 + (heightFt - 60) * 0.003; // Approximate for > 60ft
+            } else { // Exposure D
+                if (heightFt <= 20) Kh = 1.03;
+                else if (heightFt <= 30) Kh = 1.08;
+                else if (heightFt <= 40) Kh = 1.12;
+                else if (heightFt <= 50) Kh = 1.16;
+                else if (heightFt <= 60) Kh = 1.19;
+                else Kh = 1.19 + (heightFt - 60) * 0.002; // Approximate for > 60ft
+            }
+
+            // Step 2: Topographic factor (Kzt) - Assume flat terrain = 1.0
+            const Kzt = 1.0;
+
+            // Step 3: Wind directionality factor (Kd) - ASCE 7-22 Table 26.6-1
+            // For buildings = 0.85
+            const Kd = 0.85;
+
+            // Step 4: Calculate velocity pressure (qh) - ASCE 7-22 Equation 26.10-1
+            // qh = 0.00256 * Kh * Kzt * Kd * V^2 (psf)
+            const qh = 0.00256 * Kh * Kzt * Kd * Math.pow(windSpeed, 2);
+
+            // Step 5: External pressure coefficients (Cp) for rectangular building
+            // ASCE 7-22 Figure 27.3-1 (simplified)
+            const Cp_windward = 0.8;   // Windward wall
+            const Cp_leeward = -0.5;   // Leeward wall
+            const Cp_side = -0.7;      // Side walls
+            const Cp_roof = -0.9;      // Roof (simplified, worst case)
+
+            // Step 6: Internal pressure coefficient (GCpi)
+            // ASCE 7-22 Section 26.13 - Enclosed building
+            const GCpi_positive = 0.18;
+            const GCpi_negative = -0.18;
+
+            // Step 7: Calculate design pressures (p = qh * [(GCp) - (GCpi)])
+            // ASCE 7-22 Equation 27.3-1
+
+            // Windward wall
+            const p_windward_pos = qh * (Cp_windward - GCpi_negative);
+            const p_windward_neg = qh * (Cp_windward - GCpi_positive);
+            const p_windward = Math.max(Math.abs(p_windward_pos), Math.abs(p_windward_neg));
+
+            // Leeward wall
+            const p_leeward_pos = qh * (Cp_leeward - GCpi_negative);
+            const p_leeward_neg = qh * (Cp_leeward - GCpi_positive);
+            const p_leeward = Math.min(p_leeward_pos, p_leeward_neg);
+
+            // Side walls
+            const p_side_pos = qh * (Cp_side - GCpi_negative);
+            const p_side_neg = qh * (Cp_side - GCpi_positive);
+            const p_side = Math.min(p_side_pos, p_side_neg);
+
+            // Roof
+            const p_roof_pos = qh * (Cp_roof - GCpi_negative);
+            const p_roof_neg = qh * (Cp_roof - GCpi_positive);
+            const p_roof = Math.min(p_roof_pos, p_roof_neg);
+
+            // Update results in UI
+            document.getElementById('zone4-pressure').textContent = p_windward.toFixed(1) + ' psf';
+            document.getElementById('zone5-pressure').textContent = p_roof.toFixed(1) + ' psf';
+            document.getElementById('mwfrs-windward').textContent = '+' + p_windward.toFixed(1) + ' psf';
+            document.getElementById('mwfrs-leeward').textContent = p_leeward.toFixed(1) + ' psf';
+
+            // Show results
             document.getElementById('demo-results').style.display = 'block';
-            
+
             // Scroll to results
-            document.getElementById('demo-results').scrollIntoView({ 
-                behavior: 'smooth', 
-                block: 'nearest' 
+            document.getElementById('demo-results').scrollIntoView({
+                behavior: 'smooth',
+                block: 'nearest'
             });
 
             // After 4 seconds, prompt for trial signup (only once per session)
@@ -2551,9 +2636,10 @@
         }
         
         function updateDemo() {
-            // For Option 1, we don't auto-calculate
-            // Keep inputs interactive but calculations are static
-            console.log('Demo inputs updated - static preview mode');
+            // Auto-calculate when inputs change (if results are already showing)
+            if (document.getElementById('demo-results').style.display === 'block') {
+                calculateDemo();
+            }
         }
 
         // Trial Form Functions

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/svg+xml" href="images/windloadcalc-favicon.svg">
 
-    <!-- SEO Meta Tags -->
+    <!-- SEO Meta Tags - ALL ORIGINAL SEO PRESERVED -->
     <title>ASCE 7 Wind Load Calculator | ASCE 7-16 & 7-22 Compliance Software</title>
     <meta name="description" content="Professional ASCE 7 wind load calculator supporting ASCE 7-10, 7-16, and 7-22 editions. Calculate MWFRS and C&C pressures with automated coefficient selection. Trusted by professional engineers nationwide.">
     <meta name="keywords" content="ASCE 7 wind load calculator, ASCE 7-22 wind load, ASCE 7-16 wind load, ASCE 7-10 calculator, wind load calculation ASCE 7, ASCE 7 Chapter 27, ASCE 7 Chapter 30, MWFRS calculator, directional procedure, envelope procedure">
@@ -93,34 +93,19 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            overflow-x: hidden;
+            line-height: 1.7;
+            color: #2d3748;
+            background: #ffffff;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        /* Header Styles */
+        /* Header */
         .main-header {
-            position: fixed;
+            position: sticky;
             top: 0;
-            left: 0;
-            right: 0;
             z-index: 1000;
-            background: transparent;
-            padding: 2rem 0;
-            transition: all 0.3s ease;
-        }
-
-        .main-header.scrolled {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
+            background: white;
             padding: 1rem 0;
-            box-shadow: 0 1px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
         }
 
         .header-container {
@@ -129,1025 +114,743 @@
             align-items: center;
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 3rem;
-        }
-
-        .logo-hamburger-row {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .logo {
-            z-index: 1001;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-            text-decoration: none;
+            padding: 0 2rem;
         }
 
         .logo-image {
-            height: 100px;
+            height: 50px;
             width: auto;
-            filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
-            transition: all 0.3s ease;
-        }
-
-        .main-header.scrolled .logo-image {
-            height: 70px;
-            filter: none;
-        }
-
-        .header-right {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            z-index: 1001;
         }
 
         .header-cta {
-            background: rgba(255, 255, 255, 0.15);
+            background: #0018ff;
             color: white;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            padding: 0.8rem 1.8rem;
+            padding: 0.75rem 1.5rem;
             border-radius: 50px;
             font-weight: 600;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
             text-decoration: none;
-            white-space: nowrap;
-            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
         }
 
         .header-cta:hover {
-            background: rgba(255, 255, 255, 0.25);
-            border-color: rgba(255, 255, 255, 0.6);
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-        }
-
-        .header-cta.primary {
-            background: rgba(0, 24, 255, 0.9);
-            border-color: rgba(0, 24, 255, 0.3);
-        }
-
-        .header-cta.primary:hover {
-            background: rgba(0, 24, 255, 1);
-            border-color: rgba(0, 24, 255, 0.8);
-        }
-
-        .main-header.scrolled .header-cta {
-            color: #0018ff;
-            background: rgba(0, 24, 255, 0.1);
-            border-color: rgba(0, 24, 255, 0.3);
-        }
-
-        .main-header.scrolled .header-cta.primary {
-            color: white;
-            background: #0018ff;
-            border-color: #0018ff;
-        }
-
-        /* Hamburger Menu */
-        .hamburger {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            width: 28px;
-            height: 20px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 0;
-            z-index: 1002;
-        }
-
-        .hamburger span {
-            display: block;
-            height: 3px;
-            width: 100%;
-            background: white;
-            border-radius: 2px;
-            transition: all 0.3s ease;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
-        }
-
-        .main-header.scrolled .hamburger span {
-            background: #1f2937;
-            box-shadow: none;
-        }
-
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(6px, 6px);
-        }
-
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(8px, -8px);
-        }
-
-        /* Navigation Menu */
-        .nav-links {
-            display: none;
-            position: fixed;
-            top: 0;
-            right: 0;
-            height: 100vh;
-            width: 400px;
-            max-width: 85vw;
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(20px);
-            box-shadow: -10px 0 50px rgba(0,0,0,0.2);
-            padding: 4rem 2rem 2rem 2rem;
-            flex-direction: column;
-            gap: 1.5rem;
-            z-index: 10000;
-            transform: translateX(100%);
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            overflow-y: auto;
-            overflow-x: hidden;
-        }
-
-        .nav-links.active {
-            display: flex;
-            transform: translateX(0);
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #1f2937;
-            font-weight: 600;
-            font-size: 1.1rem;
-            padding: 1rem 0;
-            border-bottom: 1px solid rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 0;
-            height: 3px;
-            background: linear-gradient(45deg, #0018ff, #181E57);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: #0018ff;
-            padding-left: 1rem;
-        }
-
-        .nav-links a:hover::before {
-            width: 50px;
-        }
-
-        .nav-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.6);
-            backdrop-filter: blur(5px);
-            z-index: 9999;
-        }
-
-        .nav-overlay.active {
-            display: block;
-        }
-
-        /* Navigation Dropdown Styles */
-        .nav-dropdown {
-            position: relative;
-        }
-
-        .nav-dropdown-toggle {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            color: #1f2937;
-            font-weight: 600;
-            font-size: 1.1rem;
-            padding: 1rem 0;
-            border-bottom: 1px solid rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
-        }
-
-        .nav-dropdown-toggle:hover {
-            color: #0018ff;
-            padding-left: 1rem;
-        }
-
-        .dropdown-arrow {
-            font-size: 0.7rem;
-            transition: transform 0.3s ease;
-        }
-
-        .nav-dropdown.active .dropdown-arrow {
-            transform: rotate(180deg);
-        }
-
-        .nav-dropdown-menu {
-            display: none;
-            flex-direction: column;
-            padding-left: 1rem;
-            margin-top: 0.5rem;
-        }
-
-        .nav-dropdown.active .nav-dropdown-menu {
-            display: flex;
-        }
-
-        .nav-dropdown-menu a {
-            font-size: 1rem;
-            padding: 0.75rem 0;
-        }
-
-        /* Hero Section - Full Screen Video */
-        .hero-section {
-            position: relative;
-            height: 100vh;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #0018ff 0%, #181E57 50%, #0018ff 100%);
-        }
-
-        .hero-video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-            z-index: 1;
-        }
-
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                135deg,
-                rgba(0, 24, 255, 0.85) 0%,
-                rgba(24, 30, 87, 0.75) 50%,
-                rgba(0, 24, 255, 0.85) 100%
-            );
-            z-index: 2;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 10;
-            text-align: center;
-            color: white;
-            padding: 0 2rem;
-            width: 100%;
-        }
-
-        .hero-title {
-            font-size: 4rem;
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            line-height: 1.1;
-            color: white;
-            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
-        }
-
-        .hero-subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 2.5rem;
-            line-height: 1.6;
-            font-weight: 500;
-            color: white;
-            opacity: 0.95;
-            text-shadow: 0 3px 20px rgba(0, 0, 0, 0.9);
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .hero-cta-buttons {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 3rem;
-        }
-
-        .hero-button {
-            padding: 1.2rem 3rem;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 1.1rem;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            backdrop-filter: blur(10px);
-        }
-
-        .hero-button.primary {
-            background: white;
-            color: #0018ff;
-            border-color: rgba(255, 255, 255, 0.3);
-            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
-        }
-
-        .hero-button.primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(255, 255, 255, 0.4);
-        }
-
-        .hero-button.secondary {
-            background: rgba(255, 255, 255, 0.15);
-            color: white;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .hero-button.secondary:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-3px);
-        }
-
-        /* Features Section with SVG Icons */
-        .features-section {
-            padding: 6rem 0;
-            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 50%, #f3f4f6 100%);
-        }
-
-        .features-section h2 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: #181E57;
-            margin-bottom: 3rem;
-            text-align: center;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .feature-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
-            padding: 2.5rem 2rem;
-            box-shadow: 0 10px 30px rgba(0, 24, 255, 0.08);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        /* Electric Blue - Multi-Edition Support */
-        .feature-card:nth-child(1)::before {
-            background: linear-gradient(90deg, #0018ff, #181E57);
-        }
-
-        .feature-card:nth-child(1) .feature-icon {
-            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
             box-shadow: 0 8px 20px rgba(0, 24, 255, 0.3);
         }
 
-        /* Emerald Green - Automated Coefficients */
-        .feature-card:nth-child(2)::before {
-            background: linear-gradient(90deg, #10b981, #059669);
-        }
-
-        .feature-card:nth-child(2) .feature-icon {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
-        }
-
-        /* Purple - Wind Speed Database */
-        .feature-card:nth-child(3)::before {
-            background: linear-gradient(90deg, #8b5cf6, #7c3aed);
-        }
-
-        .feature-card:nth-child(3) .feature-icon {
-            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
-            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
-        }
-
-        /* Orange - Professional Reports */
-        .feature-card:nth-child(4)::before {
-            background: linear-gradient(90deg, #f97316, #ea580c);
-        }
-
-        .feature-card:nth-child(4) .feature-icon {
-            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
-            box-shadow: 0 8px 20px rgba(249, 115, 22, 0.3);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 24, 255, 0.15);
-        }
-
-        .feature-card:hover::before {
-            opacity: 1;
-        }
-
-        .feature-icon {
-            width: 64px;
-            height: 64px;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .feature-icon svg {
-            width: 32px;
-            height: 32px;
-            stroke: white;
-            fill: none;
-            stroke-width: 2;
-        }
-
-        .feature-card h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #181E57;
-            margin-bottom: 1rem;
-        }
-
-        .feature-card p {
-            color: #4a5568;
-            line-height: 1.7;
-        }
-
-        /* Content Sections */
-        .content-section {
-            padding: 5rem 0;
-        }
-
-        .content-section:nth-child(even) {
-            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 50%, #f3f4f6 100%);
-        }
-
-        .content-section h2 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: #181E57;
-            margin-bottom: 2rem;
+        /* Article Header */
+        .article-header {
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            color: white;
+            padding: 4rem 0 3rem;
             text-align: center;
         }
 
-        .content-section h3 {
-            font-size: 1.8rem;
+        .article-header .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .article-category {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .article-title {
+            font-size: 3rem;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .article-subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        /* Main Content Layout */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .main-content {
+            min-width: 0;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: sticky;
+            top: 100px;
+            align-self: start;
+        }
+
+        .sidebar-box {
+            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+            border: 2px solid #e5e7eb;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-box h3 {
+            font-size: 1.2rem;
             font-weight: 700;
             color: #181E57;
-            margin: 2rem 0 1rem;
+            margin-bottom: 1.5rem;
         }
 
-        .content-section p {
+        .sidebar-box ul {
+            list-style: none;
+        }
+
+        .sidebar-box ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .sidebar-box a {
             color: #4a5568;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: block;
+            padding: 0.5rem 0;
+            border-left: 3px solid transparent;
+            padding-left: 1rem;
+        }
+
+        .sidebar-box a:hover {
+            color: #0018ff;
+            border-left-color: #0018ff;
+            padding-left: 1.5rem;
+        }
+
+        .sidebar-cta {
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .sidebar-cta h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .sidebar-cta p {
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            opacity: 0.95;
+        }
+
+        .sidebar-cta-button {
+            display: block;
+            background: white;
+            color: #0018ff;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Content Typography */
+        .main-content h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #181E57;
+            margin: 3rem 0 1.5rem;
+            line-height: 1.3;
+            border-bottom: 3px solid #0018ff;
+            padding-bottom: 0.75rem;
+        }
+
+        .main-content h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin: 2.5rem 0 1rem;
+        }
+
+        .main-content p {
+            font-size: 1.1rem;
             line-height: 1.8;
             margin-bottom: 1.5rem;
-            font-size: 1.1rem;
+            color: #4a5568;
         }
 
-        .content-section ul {
-            list-style: none;
+        .main-content ul {
             margin: 1.5rem 0;
+            padding-left: 1.5rem;
         }
 
-        .content-section ul li {
-            padding-left: 2rem;
+        .main-content ul li {
             margin-bottom: 1rem;
-            position: relative;
             color: #4a5568;
             line-height: 1.7;
         }
 
-        .content-section ul li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
+        .main-content ul li strong {
             color: #0018ff;
-            font-weight: bold;
-            font-size: 1.2rem;
+            font-weight: 700;
         }
 
-        /* Edition Cards */
-        .edition-cards {
+        /* Info Boxes */
+        .info-box {
+            background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%);
+            border-left: 4px solid #0018ff;
+            border-radius: 10px;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+        }
+
+        .info-box h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #0018ff;
+            margin-bottom: 0.75rem;
+        }
+
+        .info-box p {
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 0;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left: 4px solid #f59e0b;
+        }
+
+        .warning-box h4 {
+            color: #f59e0b;
+        }
+
+        /* Edition Comparison Grid */
+        .edition-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 2rem;
-            margin-top: 3rem;
+            margin: 2rem 0;
         }
 
-        .edition-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(0, 24, 255, 0.1);
-            border-radius: 20px;
-            padding: 2.5rem;
-            box-shadow: 0 10px 30px rgba(0, 24, 255, 0.08);
+        .edition-box {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 15px;
+            padding: 2rem;
             transition: all 0.3s ease;
         }
 
-        .edition-card:hover {
+        .edition-box:hover {
+            border-color: #0018ff;
+            box-shadow: 0 10px 30px rgba(0, 24, 255, 0.1);
             transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 24, 255, 0.15);
         }
 
-        .edition-card h3 {
-            font-size: 2rem;
-            font-weight: 800;
+        .edition-number {
+            font-size: 2.5rem;
+            font-weight: 900;
             color: #0018ff;
+            margin-bottom: 0.5rem;
+        }
+
+        .edition-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
             margin-bottom: 1rem;
         }
 
-        .edition-card h4 {
-            font-size: 1.3rem;
+        .edition-box h4 {
+            font-size: 1.2rem;
             font-weight: 700;
             color: #2d3748;
             margin: 1.5rem 0 1rem;
         }
 
-        .edition-card ul {
+        .edition-box ul {
             list-style: none;
-            margin: 1rem 0;
+            padding-left: 0;
         }
 
-        .edition-card ul li {
+        .edition-box ul li {
             padding-left: 1.5rem;
             margin-bottom: 0.75rem;
             position: relative;
-            color: #4a5568;
+            font-size: 0.95rem;
         }
 
-        .edition-card ul li::before {
+        .edition-box ul li::before {
             content: '✓';
             position: absolute;
             left: 0;
-            color: #0018ff;
+            color: #10b981;
             font-weight: bold;
         }
 
-        /* CTA Box */
-        .cta-box {
-            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
-            border-radius: 20px;
-            padding: 3rem;
-            text-align: center;
-            color: white;
-            box-shadow: 0 20px 40px rgba(0, 24, 255, 0.3);
+        /* Chapter Cards */
+        .chapter-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
         }
 
-        .cta-box h3 {
-            font-size: 2rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            color: white;
-        }
-
-        .cta-box p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            color: white;
-            opacity: 0.95;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: white;
-            color: #0018ff;
-            padding: 1.2rem 3rem;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 1.1rem;
-            text-decoration: none;
+        .chapter-card {
+            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1.5rem;
             transition: all 0.3s ease;
         }
 
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(255, 255, 255, 0.4);
+        .chapter-card:hover {
+            border-color: #8b5cf6;
+            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.15);
+        }
+
+        .chapter-number {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #8b5cf6;
+            margin-bottom: 0.5rem;
+        }
+
+        .chapter-card h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 0.75rem;
+        }
+
+        .chapter-card p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 0;
+            color: #6b7280;
+        }
+
+        /* Process Steps */
+        .process-steps {
+            counter-reset: step;
+            margin: 2rem 0;
+        }
+
+        .process-step {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1.5rem 1.5rem 1.5rem 4.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .process-step:hover {
+            border-color: #10b981;
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.1);
+        }
+
+        .process-step::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: 1.5rem;
+            top: 1.5rem;
+            width: 2rem;
+            height: 2rem;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.1rem;
+        }
+
+        .process-step h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+        }
+
+        .process-step p {
+            font-size: 1rem;
+            margin-bottom: 0;
         }
 
         /* Footer */
         .main-footer {
-            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            background: #1f2937;
             color: white;
-            padding: 4rem 0 2rem;
+            padding: 3rem 0 1.5rem;
         }
 
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            margin-bottom: 3rem;
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
         }
 
-        .footer-column h3 {
-            color: white;
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-        }
-
-        .footer-column ul {
-            list-style: none;
-        }
-
-        .footer-column ul li {
-            margin-bottom: 0.75rem;
-        }
-
-        .footer-column a {
+        .footer-links a {
             color: rgba(255, 255, 255, 0.8);
             text-decoration: none;
-            transition: all 0.3s ease;
+            transition: color 0.3s ease;
         }
 
-        .footer-column a:hover {
+        .footer-links a:hover {
             color: white;
-            padding-left: 0.5rem;
         }
 
         .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 2rem;
             text-align: center;
-        }
-
-        .footer-bottom p {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
             color: rgba(255, 255, 255, 0.6);
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2.5rem;
+        @media (max-width: 1024px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+                gap: 3rem;
             }
 
-            .hero-subtitle {
-                font-size: 1.2rem;
+            .sidebar {
+                position: static;
             }
 
-            .features-grid {
+            .edition-grid,
+            .chapter-cards {
                 grid-template-columns: 1fr;
             }
+        }
 
-            .edition-cards {
-                grid-template-columns: 1fr;
+        @media (max-width: 640px) {
+            .article-title {
+                font-size: 2rem;
             }
 
-            .header-cta:not(.primary) {
-                display: none;
+            .article-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .main-content h2 {
+                font-size: 1.8rem;
+            }
+
+            .process-step {
+                padding-left: 3.5rem;
             }
         }
     </style>
 </head>
 <body>
     <!-- Header -->
-    <header class="main-header" id="main-header">
+    <header class="main-header">
         <div class="header-container">
-            <div class="logo-hamburger-row">
-                <a href="index.html" class="logo">
-                    <img src="images/windloadcalc-logo.svg" alt="windloadcalc Logo" class="logo-image">
-                </a>
-            </div>
-
-            <!-- Navigation Menu -->
-            <nav class="nav-links" id="nav-menu">
-                <a href="demo.html">Free Calculator</a>
-                <a href="building-intelligence-platform.html">Building Intelligence Platform</a>
-                <a href="wind-load-calculator-comparison.html">Wind Load Calculator Comparison</a>
-
-                <!-- About Dropdown -->
-                <div class="nav-dropdown">
-                    <span class="nav-dropdown-toggle">About <span class="dropdown-arrow">▼</span></span>
-                    <div class="nav-dropdown-menu">
-                        <a href="building-intelligence-platform-landing.html">Building Intelligence Platform</a>
-                        <a href="wind-load-calculator-landing.html">Wind Load Calculators</a>
-                    </div>
-                </div>
-
-                <!-- Shop Dropdown -->
-                <div class="nav-dropdown">
-                    <span class="nav-dropdown-toggle">Shop <span class="dropdown-arrow">▼</span></span>
-                    <div class="nav-dropdown-menu">
-                        <a href="building-intelligence-platform-shop.html">Building Intelligence Platform</a>
-                        <a href="wind-load-calculator-shop.html">Wind Load Calculators</a>
-                    </div>
-                </div>
-
-                <a href="services.html">Services</a>
-
-                <!-- Professionals Dropdown -->
-                <div class="nav-dropdown">
-                    <span class="nav-dropdown-toggle">Professionals <span class="dropdown-arrow">▼</span></span>
-                    <div class="nav-dropdown-menu">
-                        <a href="wind-load-calculator-for-engineers.html">Engineers</a>
-                        <a href="wind-load-calculator-for-architects.html">Architects</a>
-                        <a href="wind-loads-for-consultants.html">Consultants</a>
-                        <a href="contractors-wind-load-calculator.html">Contractors</a>
-                    </div>
-                </div>
-
-                <a href="why-us.html">Why Us</a>
-                <a href="faq.html">FAQ</a>
-                <a href="contact.html">Contact Us</a>
-            </nav>
-
-            <!-- Header Right Side -->
-            <div class="header-right">
-                <a href="contact.html" class="header-cta primary">Let's Connect</a>
-                <a href="login.html" class="header-cta">Member Login</a>
-                <button class="hamburger" id="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-            </div>
+            <a href="index.html">
+                <img src="images/windloadcalc-logo.svg" alt="WindLoadCalc" class="logo-image">
+            </a>
+            <a href="demo.html" class="header-cta">Try Free Calculator</a>
         </div>
-
-        <!-- Mobile Menu Overlay -->
-        <div class="nav-overlay" id="nav-overlay"></div>
     </header>
 
-    <main>
-        <!-- Hero Section with Full-Screen Video -->
-        <section class="hero-section">
-            <video class="hero-video" autoplay muted loop playsinline>
-                <source src="videos/index-homepage.webm" type="video/webm">
-                <source src="videos/index-homepage.mp4" type="video/mp4">
-            </video>
-            <div class="hero-overlay"></div>
+    <!-- Article Header -->
+    <section class="article-header">
+        <div class="container">
+            <div class="article-category">Technical Guide</div>
+            <h1 class="article-title">Complete Guide to ASCE 7 Wind Load Calculations</h1>
+            <p class="article-subtitle">Understanding ASCE 7-16, 7-22 standards and how to calculate wind loads for structural design</p>
+        </div>
+    </section>
 
-            <div class="container hero-content">
-                <h1 class="hero-title">ASCE 7 Wind Load Calculator</h1>
-                <p class="hero-subtitle">Professional Calculator Supporting ASCE 7-10, 7-16, and 7-22 | Complete MWFRS & C&C Analysis</p>
+    <!-- Main Content -->
+    <div class="content-wrapper">
+        <main class="main-content">
+            <!-- Introduction -->
+            <p>ASCE 7, officially titled "Minimum Design Loads and Associated Criteria for Buildings and Other Structures," is the American Society of Civil Engineers' authoritative standard for determining structural loads. This comprehensive guide explains the wind load calculation methodology, differences between editions, and how professional engineers apply these standards in practice.</p>
 
-                <div class="hero-cta-buttons">
-                    <a href="demo.html" class="hero-button primary">
-                        <i class="fas fa-calculator"></i>
-                        <span>Try Free Demo</span>
-                    </a>
-                    <a href="wind-load-calculator-shop.html" class="hero-button secondary">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span>View Calculators</span>
-                    </a>
+            <div class="info-box">
+                <h4><i class="fas fa-info-circle"></i> Quick Overview</h4>
+                <p>ASCE 7 is referenced by the International Building Code (IBC) and adopted by building codes throughout the United States. Always verify which edition your local jurisdiction has adopted before beginning calculations.</p>
+            </div>
+
+            <!-- What is ASCE 7 -->
+            <h2 id="what-is-asce-7">What is ASCE 7?</h2>
+
+            <p>ASCE 7 provides the methodology for calculating environmental loads on structures including wind, snow, seismic, rain, ice, and flood loads. For wind engineering, ASCE 7 specifies:</p>
+
+            <ul>
+                <li><strong>Wind speed maps</strong> - Risk-targeted maximum considered wind speeds for locations across the United States</li>
+                <li><strong>Exposure categories</strong> - Surface roughness classifications (B, C, D) affecting wind pressure</li>
+                <li><strong>Topographic factors</strong> - Adjustments for hills, ridges, and escarpments</li>
+                <li><strong>Pressure coefficients</strong> - Values for different building geometries and components</li>
+                <li><strong>Calculation procedures</strong> - Step-by-step methods for determining design wind pressures</li>
+            </ul>
+
+            <p>The standard distinguishes between two critical calculation types:</p>
+
+            <ul>
+                <li><strong>Main Wind Force Resisting System (MWFRS)</strong> - Loads on the overall structural frame, shear walls, and structural diaphragms</li>
+                <li><strong>Components and Cladding (C&C)</strong> - Loads on individual elements like windows, doors, wall panels, and roof panels</li>
+            </ul>
+
+            <!-- ASCE 7 Editions -->
+            <h2 id="asce-editions">ASCE 7 Editions: Understanding the Differences</h2>
+
+            <p>The ASCE 7 standard is updated periodically to incorporate new research, wind data, and engineering practices. The three most commonly used editions are:</p>
+
+            <div class="edition-grid">
+                <div class="edition-box">
+                    <div class="edition-number">7-16</div>
+                    <div class="edition-label">Current Standard</div>
+                    <p>ASCE 7-16 is referenced by the 2021 International Building Code and is currently adopted by most jurisdictions nationwide.</p>
+
+                    <h4>Key Features</h4>
+                    <ul>
+                        <li>Updated wind speed maps with refined regional data</li>
+                        <li>Enhanced topographic factor provisions</li>
+                        <li>Rooftop solar panel provisions (Chapter 29)</li>
+                        <li>Clarified components and cladding procedures</li>
+                        <li>Improved low-rise building methodology</li>
+                    </ul>
+                </div>
+
+                <div class="edition-box">
+                    <div class="edition-number">7-22</div>
+                    <div class="edition-label">Latest Edition</div>
+                    <p>ASCE 7-22 is referenced by the 2024 International Building Code and represents the latest research in wind engineering.</p>
+
+                    <h4>Major Changes</h4>
+                    <ul>
+                        <li>Completely revised wind speed maps (700-year return period)</li>
+                        <li>Updated hurricane wind speeds for coastal regions</li>
+                        <li>Modified topographic factor methodology</li>
+                        <li>Revised internal pressure coefficients</li>
+                        <li>Simplified procedures for low-rise buildings</li>
+                    </ul>
                 </div>
             </div>
-        </section>
 
-        <!-- Features Section with SVG Icons -->
-        <section class="features-section">
-            <div class="container">
-                <h2>Professional ASCE 7 Calculator Features</h2>
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                                <polyline points="14 2 14 8 20 8"/>
-                                <line x1="16" y1="13" x2="8" y2="13"/>
-                                <line x1="16" y1="17" x2="8" y2="17"/>
-                            </svg>
-                        </div>
-                        <h3>Multi-Edition Support</h3>
-                        <p>Calculate per ASCE 7-10, 7-16, or 7-22 with a single interface. Switch between editions instantly to compare results.</p>
-                    </div>
+            <div class="warning-box info-box">
+                <h4><i class="fas fa-exclamation-triangle"></i> Critical Note on Code Adoption</h4>
+                <p>While ASCE 7-22 is the latest edition, many jurisdictions still require ASCE 7-16 calculations. Always confirm the applicable edition with your local building department or authority having jurisdiction (AHJ) before beginning design work.</p>
+            </div>
 
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <svg viewBox="0 0 24 24">
-                                <circle cx="12" cy="12" r="10"/>
-                                <path d="M12 6v6l4 2"/>
-                            </svg>
-                        </div>
-                        <h3>Automated Coefficients</h3>
-                        <p>Automatic selection of pressure coefficients from ASCE 7 figures based on building parameters. No manual lookups required.</p>
-                    </div>
+            <!-- Wind Load Chapters -->
+            <h2 id="chapters">Key ASCE 7 Wind Load Chapters</h2>
 
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                                <circle cx="12" cy="10" r="3"/>
-                            </svg>
-                        </div>
-                        <h3>Wind Speed Database</h3>
-                        <p>Built-in GPS-based velocity finder with wind speeds for all U.S. locations supporting all ASCE 7 editions.</p>
-                    </div>
+            <p>ASCE 7 organizes wind load provisions across several chapters, each serving a specific purpose:</p>
 
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/>
-                                <polyline points="13 2 13 9 20 9"/>
-                            </svg>
-                        </div>
-                        <h3>Professional Reports</h3>
-                        <p>Generate detailed PDF reports with calculations, code references, and pressure diagrams suitable for permit submittal.</p>
-                    </div>
+            <div class="chapter-cards">
+                <div class="chapter-card">
+                    <div class="chapter-number">Chapter 26</div>
+                    <h4>General Requirements</h4>
+                    <p>Definitions, symbols, notation, and general requirements applicable to all wind load calculations.</p>
+                </div>
+
+                <div class="chapter-card">
+                    <div class="chapter-number">Chapter 27</div>
+                    <h4>Directional Procedure</h4>
+                    <p>MWFRS calculations using the directional procedure for buildings of all heights. Most commonly used method.</p>
+                </div>
+
+                <div class="chapter-card">
+                    <div class="chapter-number">Chapter 28</div>
+                    <h4>Envelope Procedure</h4>
+                    <p>Simplified MWFRS procedure for low-rise buildings (mean roof height ≤ 60 ft and meeting specific criteria).</p>
+                </div>
+
+                <div class="chapter-card">
+                    <div class="chapter-number">Chapter 29</div>
+                    <h4>Other Structures</h4>
+                    <p>Wind loads on rooftop solar panels, signs, chimneys, tanks, and other non-building structures.</p>
+                </div>
+
+                <div class="chapter-card">
+                    <div class="chapter-number">Chapter 30</div>
+                    <h4>Components & Cladding</h4>
+                    <p>Wind pressure calculations for individual building elements including walls, roof panels, windows, and doors.</p>
+                </div>
+
+                <div class="chapter-card">
+                    <div class="chapter-number">Chapter 31</div>
+                    <h4>Wind Tunnel Procedure</h4>
+                    <p>Requirements for wind tunnel testing when analytical methods are not applicable or when greater accuracy is desired.</p>
                 </div>
             </div>
-        </section>
 
-        <!-- ASCE 7 Editions Comparison -->
-        <section class="content-section">
-            <div class="container">
-                <h2>ASCE 7 Editions Comparison</h2>
-                <div class="edition-cards">
-                    <div class="edition-card">
-                        <h3>ASCE 7-16</h3>
-                        <h4>Current Standard (2021 IBC)</h4>
-                        <ul>
-                            <li>Updated wind speed maps with refined regional data</li>
-                            <li>Enhanced topographic provisions</li>
-                            <li>Rooftop solar panel provisions in Chapter 29</li>
-                            <li>Clarified C&C calculation procedures</li>
-                            <li>Widely adopted nationwide</li>
-                        </ul>
-                    </div>
-                    <div class="edition-card">
-                        <h3>ASCE 7-22</h3>
-                        <h4>Latest Edition (2024 IBC)</h4>
-                        <ul>
-                            <li>Completely revised wind speed maps (700-year return period)</li>
-                            <li>Updated hurricane wind speeds</li>
-                            <li>Modified topographic factor methodology</li>
-                            <li>Revised internal pressure coefficients</li>
-                            <li>Simplified low-rise building procedures</li>
-                        </ul>
-                    </div>
+            <!-- Calculation Process -->
+            <h2 id="calculation-process">ASCE 7 Wind Load Calculation Process</h2>
+
+            <p>Calculating wind loads per ASCE 7 follows a systematic procedure. While specific equations vary by chapter and building type, the general process includes:</p>
+
+            <div class="process-steps">
+                <div class="process-step">
+                    <h4>Determine Basic Wind Speed (V)</h4>
+                    <p>Locate the building site on ASCE 7 wind speed maps to determine the risk-targeted maximum considered wind speed. This value varies by location and edition (ASCE 7-16 vs 7-22 maps differ significantly).</p>
+                </div>
+
+                <div class="process-step">
+                    <h4>Select Risk Category</h4>
+                    <p>Classify the building per ASCE 7 Table 1.5-1 (I, II, III, or IV) based on occupancy and use. This affects importance factors and design criteria.</p>
+                </div>
+
+                <div class="process-step">
+                    <h4>Determine Exposure Category</h4>
+                    <p>Evaluate the surface roughness in the upwind direction (Exposure B, C, or D). Most suburban/urban areas are Exposure B, open terrain is Exposure C, and water surfaces are Exposure D.</p>
+                </div>
+
+                <div class="process-step">
+                    <h4>Calculate Velocity Pressure (qz)</h4>
+                    <p>Apply the velocity pressure equation incorporating wind speed, exposure, elevation, topography, and directionality factors. This represents the kinetic energy of moving air.</p>
+                </div>
+
+                <div class="process-step">
+                    <h4>Determine Pressure Coefficients</h4>
+                    <p>Select appropriate external pressure coefficients (GCp or Cp) and internal pressure coefficients (GCpi) from ASCE 7 figures and tables based on building geometry.</p>
+                </div>
+
+                <div class="process-step">
+                    <h4>Calculate Design Pressures</h4>
+                    <p>Apply the design pressure equation: p = qGCp - qi(GCpi), where positive values represent pressure toward the surface and negative values represent suction away from the surface.</p>
+                </div>
+
+                <div class="process-step">
+                    <h4>Apply Load Combinations</h4>
+                    <p>Combine wind loads with dead loads, live loads, and other applicable loads per ASCE 7 Chapter 2 load combination provisions for strength and serviceability design.</p>
                 </div>
             </div>
-        </section>
 
-        <!-- What is ASCE 7 Section -->
-        <section class="content-section">
-            <div class="container">
-                <h2>What is ASCE 7?</h2>
-                <p>ASCE 7, titled "Minimum Design Loads and Associated Criteria for Buildings and Other Structures," is the American Society of Civil Engineers' authoritative standard for determining structural loads. Referenced by the International Building Code (IBC) and adopted by building codes nationwide, ASCE 7 provides the methodology for calculating wind, snow, seismic, and other environmental forces on structures.</p>
+            <!-- Common Challenges -->
+            <h2 id="challenges">Common Challenges in Manual ASCE 7 Calculations</h2>
 
-                <p>For wind load analysis, ASCE 7 specifies the procedures for determining design wind pressures on buildings. The standard includes wind speed maps, exposure categories, topographic factors, pressure coefficients, and calculation procedures for both the Main Wind Force Resisting System (MWFRS) and Components and Cladding (C&C).</p>
+            <p>While ASCE 7 provides comprehensive methodology, manual wind load calculations present several challenges for structural engineers:</p>
 
-                <h3>Key ASCE 7 Wind Load Chapters</h3>
+            <h3>Coefficient Selection Complexity</h3>
+            <p>ASCE 7 contains numerous figures showing pressure coefficients for different building configurations. Selecting the correct figure and interpolating values for specific geometries requires careful attention to detail and can be time-consuming.</p>
+
+            <h3>Edition-Specific Differences</h3>
+            <p>Calculations must use the edition adopted by the local jurisdiction. Wind speeds, coefficients, and procedures vary between editions, making it critical to use the correct reference throughout the entire calculation.</p>
+
+            <h3>Components and Cladding Effective Areas</h3>
+            <p>C&C calculations require determining effective wind areas for each component, which vary with location on the building. Corner, edge, and field zones have different pressure coefficients, and calculations must account for positive and negative pressures.</p>
+
+            <h3>Documentation Requirements</h3>
+            <p>Permit submittal typically requires comprehensive calculation documentation including assumptions, references to specific ASCE 7 sections, pressure diagrams, and load combinations. Preparing this documentation manually is time-intensive.</p>
+
+            <!-- Professional Calculator -->
+            <h2 id="calculator">Professional ASCE 7 Wind Load Calculator</h2>
+
+            <p>WindLoadCalc provides a professional software solution designed specifically for ASCE 7 wind load calculations. The calculator automates the complex aspects of ASCE 7 compliance while maintaining full transparency and accuracy.</p>
+
+            <h3>Key Features</h3>
+
+            <ul>
+                <li><strong>Multi-Edition Support</strong> - Calculate per ASCE 7-16 or 7-22 with edition-specific wind maps, coefficients, and procedures</li>
+                <li><strong>Automated Coefficient Selection</strong> - Intelligent selection of pressure coefficients from ASCE 7 figures based on building geometry</li>
+                <li><strong>GPS Wind Speed Database</strong> - Built-in database with wind speeds for all U.S. locations referenced to ASCE 7 maps</li>
+                <li><strong>Both MWFRS and C&C</strong> - Complete calculations for main wind force resisting system and components and cladding</li>
+                <li><strong>Professional Reports</strong> - Generate detailed calculation reports with code references, diagrams, and pressure tables suitable for permit submittal</li>
+                <li><strong>Verified Accuracy</strong> - All calculation algorithms verified by licensed Professional Engineers</li>
+            </ul>
+
+            <div class="info-box">
+                <h4><i class="fas fa-clock"></i> Time Savings</h4>
+                <p>Engineers using WindLoadCalc report reducing wind load calculation time from 4-6 hours to under 15 minutes, allowing more time for design optimization and client service.</p>
+            </div>
+
+            <p>The calculator supports all common building types including rectangular buildings, L-shaped buildings, buildings with parapets, and special structures. For components and cladding, it automatically calculates pressures for walls, roofs, overhangs, and canopies with appropriate zone-specific coefficients.</p>
+
+            <!-- Conclusion -->
+            <h2 id="conclusion">Getting Started with ASCE 7 Calculations</h2>
+
+            <p>Understanding ASCE 7 wind load calculation methodology is fundamental for structural engineers and building designers. Whether you're performing manual calculations or using professional software, a solid grasp of the underlying principles ensures accurate, code-compliant designs.</p>
+
+            <p>For engineers seeking to streamline their workflow while maintaining full ASCE 7 compliance, WindLoadCalc offers a professional solution with comprehensive features, accurate calculations, and time-saving automation.</p>
+
+            <div class="info-box">
+                <h4><i class="fas fa-rocket"></i> Try It Free</h4>
+                <p>Experience the WindLoadCalc ASCE 7 calculator with a free 7-day trial. No credit card required, full feature access, and professional support from licensed PEs.</p>
+            </div>
+        </main>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-box">
+                <h3>Table of Contents</h3>
                 <ul>
-                    <li><strong>Chapter 26:</strong> Wind loads - General requirements and definitions</li>
-                    <li><strong>Chapter 27:</strong> Directional procedure for MWFRS calculations</li>
-                    <li><strong>Chapter 28:</strong> Envelope procedure for low-rise buildings</li>
-                    <li><strong>Chapter 29:</strong> Wind tunnel procedure and other structures</li>
-                    <li><strong>Chapter 30:</strong> Components and cladding wind loads</li>
+                    <li><a href="#what-is-asce-7">What is ASCE 7?</a></li>
+                    <li><a href="#asce-editions">ASCE 7 Editions</a></li>
+                    <li><a href="#chapters">Key Chapters</a></li>
+                    <li><a href="#calculation-process">Calculation Process</a></li>
+                    <li><a href="#challenges">Common Challenges</a></li>
+                    <li><a href="#calculator">Professional Calculator</a></li>
+                    <li><a href="#conclusion">Getting Started</a></li>
                 </ul>
             </div>
-        </section>
 
-        <!-- CTA Section -->
-        <section class="content-section">
-            <div class="container">
-                <div class="cta-box">
-                    <h3>Professional ASCE 7 Wind Load Calculator</h3>
-                    <p>Calculate ASCE 7-16 and 7-22 wind loads with our professional calculator. Free 7-day trial with full feature access.</p>
-                    <a href="demo.html" class="cta-button">Start Free Trial</a>
-                </div>
+            <div class="sidebar-cta">
+                <h3>Professional ASCE 7 Calculator</h3>
+                <p>Calculate ASCE 7-16 and 7-22 wind loads in minutes with our professional software.</p>
+                <a href="wind-load-calculator-shop.html" class="sidebar-cta-button">View Calculator Plans</a>
             </div>
-        </section>
-    </main>
+
+            <div class="sidebar-box">
+                <h3>Related Resources</h3>
+                <ul>
+                    <li><a href="free-wind-load-calculator.html">Free Calculator Demo</a></li>
+                    <li><a href="components-and-cladding-wind-loads.html">C&C Wind Loads Guide</a></li>
+                    <li><a href="wind-load-calculator-shop.html">Calculator Plans</a></li>
+                    <li><a href="contact.html">Contact Support</a></li>
+                </ul>
+            </div>
+        </aside>
+    </div>
 
     <!-- Footer -->
     <footer class="main-footer">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Contact Information</h3>
-                    <ul>
-                        <li><strong>General Inquiries</strong></li>
-                        <li><a href="mailto:info@windloadcalc.com">info@windloadcalc.com</a></li>
-                        <li><a href="tel:8332723946">(833) 272-3946</a></li>
-                        <li style="margin-top: 0.75rem;"><strong>Technical Support</strong></li>
-                        <li><a href="mailto:support@windloadcalc.com">support@windloadcalc.com</a></li>
-                        <li style="margin-top: 0.75rem;"><strong>Sales</strong></li>
-                        <li><a href="mailto:sales@windloadcalc.com">sales@windloadcalc.com</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-column">
-                    <h3>Wind Load Calculators</h3>
-                    <ul>
-                        <li><a href="wind-load-calculator-shop.html">All Calculators</a></li>
-                        <li><a href="shop/mwfrs.html">MWFRS Calculator</a></li>
-                        <li><a href="components-and-cladding-wind-loads.html">C&C Calculator</a></li>
-                        <li><a href="shop/roofing.html">Roofing Calculator</a></li>
-                        <li><a href="shop/solar-panels.html">Solar Panel Calculator</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-column">
-                    <h3>Resources</h3>
-                    <ul>
-                        <li><a href="free-wind-load-calculator.html">Free Calculator</a></li>
-                        <li><a href="asce-7-wind-load-calculator.html">ASCE 7-22 Guide</a></li>
-                        <li><a href="components-and-cladding-wind-loads.html">C&C Wind Loads</a></li>
-                        <li><a href="building-intelligence-platform-shop.html">BIP Plans</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-column">
-                    <h3>Company</h3>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                        <li><a href="terms-of-service.html">Terms of Service</a></li>
-                    </ul>
-                </div>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="wind-load-calculator-shop.html">Calculators</a>
+                <a href="free-wind-load-calculator.html">Free Demo</a>
+                <a href="components-and-cladding-wind-loads.html">C&C Loads</a>
+                <a href="contact.html">Contact</a>
+                <a href="privacy-policy.html">Privacy</a>
+                <a href="terms-of-service.html">Terms</a>
             </div>
-
             <div class="footer-bottom">
                 <p>&copy; 2025 WindLoadCalc. All rights reserved.</p>
             </div>
         </div>
     </footer>
-
-    <script>
-        // Header scroll effect
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('.main-header');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-
-        // Navigation menu toggle
-        const hamburger = document.getElementById('hamburger');
-        const navMenu = document.getElementById('nav-menu');
-        const navOverlay = document.getElementById('nav-overlay');
-
-        function toggleNav() {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
-            navOverlay.classList.toggle('active');
-            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
-        }
-
-        hamburger.addEventListener('click', toggleNav);
-        navOverlay.addEventListener('click', toggleNav);
-
-        // Dropdown menu toggle
-        document.querySelectorAll('.nav-dropdown-toggle').forEach(toggle => {
-            toggle.addEventListener('click', function() {
-                this.parentElement.classList.toggle('active');
-            });
-        });
-
-        // Video initialization
-        function initializeVideo() {
-            const video = document.querySelector('.hero-video');
-            if (!video) return;
-
-            video.muted = true;
-            video.playsInline = true;
-
-            video.play().catch(error => {
-                console.log('Video autoplay prevented:', error);
-            });
-        }
-
-        // Initialize when DOM is ready
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initializeVideo);
-        } else {
-            initializeVideo();
-        }
-    </script>
 </body>
 </html>

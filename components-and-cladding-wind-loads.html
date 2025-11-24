@@ -88,6 +88,9 @@
     }
     </script>
 
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
         * {
             margin: 0;
@@ -108,347 +111,6 @@
             padding: 0 2rem;
         }
 
-        /* Hero Section */
-        .hero-section {
-            position: relative;
-            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
-            padding: 12rem 0 6rem;
-            overflow: hidden;
-            margin-top: 0;
-        }
-
-        .hero-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background:
-                radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
-            pointer-events: none;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 10;
-            text-align: center;
-            color: white;
-        }
-
-        .hero-content h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
-            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
-        }
-
-        .hero-content p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            opacity: 0.95;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* Component Type Cards */
-        .component-types-section {
-            padding: 6rem 0;
-            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 50%, #f3f4f6 100%);
-        }
-
-        .component-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .component-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
-            padding: 2.5rem 2rem;
-            box-shadow: 0 10px 30px rgba(0, 24, 255, 0.08);
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: block;
-        }
-
-        .component-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 24, 255, 0.15);
-        }
-
-        .component-icon {
-            width: 64px;
-            height: 64px;
-            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-            font-size: 2rem;
-            box-shadow: 0 8px 20px rgba(0, 24, 255, 0.3);
-        }
-
-        .component-card h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #181E57;
-            margin-bottom: 1rem;
-        }
-
-        .component-card p {
-            color: #4a5568;
-            line-height: 1.7;
-        }
-
-        /* Pressure Zones Section */
-        .zones-section {
-            padding: 5rem 0;
-        }
-
-        .zones-section h2 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: #181E57;
-            margin-bottom: 3rem;
-            text-align: center;
-        }
-
-        .zone-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .zone-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(0, 24, 255, 0.1);
-            border-radius: 20px;
-            padding: 2.5rem;
-            box-shadow: 0 10px 30px rgba(0, 24, 255, 0.08);
-            transition: all 0.3s ease;
-        }
-
-        .zone-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 24, 255, 0.15);
-        }
-
-        .zone-card h3 {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: #0018ff;
-            margin-bottom: 1rem;
-        }
-
-        .zone-card h4 {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #2d3748;
-            margin: 1.5rem 0 1rem;
-        }
-
-        .zone-card ul {
-            list-style: none;
-            margin: 1rem 0;
-        }
-
-        .zone-card ul li {
-            padding-left: 1.5rem;
-            margin-bottom: 0.75rem;
-            position: relative;
-        }
-
-        .zone-card ul li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: #0018ff;
-            font-weight: bold;
-        }
-
-        /* Features Section */
-        .features-section {
-            padding: 6rem 0;
-            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 50%, #f3f4f6 100%);
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .feature-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
-            padding: 2.5rem 2rem;
-            box-shadow: 0 10px 30px rgba(0, 24, 255, 0.08);
-            transition: all 0.3s ease;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 24, 255, 0.15);
-        }
-
-        .feature-icon {
-            width: 64px;
-            height: 64px;
-            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-            font-size: 2rem;
-            box-shadow: 0 8px 20px rgba(0, 24, 255, 0.3);
-        }
-
-        .feature-card h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #181E57;
-            margin-bottom: 1rem;
-        }
-
-        .feature-card p {
-            color: #4a5568;
-            line-height: 1.7;
-        }
-
-        /* CTA Box */
-        .cta-box {
-            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
-            padding: 4rem 3rem;
-            text-align: center;
-            margin: 4rem 0;
-            box-shadow: 0 20px 40px rgba(0, 24, 255, 0.2);
-        }
-
-        .cta-box h3 {
-            color: white;
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .cta-box p {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: white;
-            color: #0018ff;
-            padding: 1.2rem 3rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Footer Styles */
-        .main-footer {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d3748 50%, #1a1a1a 100%);
-            color: white;
-            padding: 5rem 0 2rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            margin-bottom: 3rem;
-        }
-
-        .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            color: white;
-        }
-
-        .footer-column ul {
-            list-style: none;
-        }
-
-        .footer-column ul li {
-            margin-bottom: 0.75rem;
-        }
-
-        .footer-column a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .footer-column a:hover {
-            color: #0018ff;
-            padding-left: 0.5rem;
-        }
-
-        .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 2rem;
-            text-align: center;
-        }
-
-        .footer-bottom p {
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        /* Content Section */
-        .content-section {
-            padding: 5rem 0;
-        }
-
-        .content-section h2 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: #181E57;
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-
-        .content-section p {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #4a5568;
-            margin-bottom: 1.5rem;
-        }
-
-        ul, ol {
-            margin: 1.5rem 0 1.5rem 2rem;
-        }
-
-        li {
-            margin-bottom: 0.75rem;
-            line-height: 1.7;
-        }
         /* Header Styles */
         .main-header {
             position: fixed;
@@ -487,11 +149,6 @@
             z-index: 1001;
             transition: opacity 0.3s ease, visibility 0.3s ease;
             text-decoration: none;
-        }
-
-        .logo.menu-active {
-            opacity: 0;
-            visibility: hidden;
         }
 
         .logo-image {
@@ -647,14 +304,12 @@
             transition: width 0.3s ease;
         }
 
-        .nav-links a:hover,
-        .nav-links a.active {
+        .nav-links a:hover {
             color: #0018ff;
             padding-left: 1rem;
         }
 
-        .nav-links a:hover::before,
-        .nav-links a.active::before {
+        .nav-links a:hover::before {
             width: 50px;
         }
 
@@ -720,6 +375,405 @@
         .nav-dropdown-menu a {
             font-size: 1rem;
             padding: 0.75rem 0;
+        }
+
+        /* Hero Section - Full Screen Video */
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 50%, #0018ff 100%);
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            z-index: 1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                135deg,
+                rgba(0, 24, 255, 0.85) 0%,
+                rgba(24, 30, 87, 0.75) 50%,
+                rgba(0, 24, 255, 0.85) 100%
+            );
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            color: white;
+            padding: 0 2rem;
+            width: 100%;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            color: white;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+            font-weight: 500;
+            color: white;
+            opacity: 0.95;
+            text-shadow: 0 3px 20px rgba(0, 0, 0, 0.9);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .hero-button {
+            padding: 1.2rem 3rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-button.primary {
+            background: white;
+            color: #0018ff;
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+        }
+
+        .hero-button.primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 255, 255, 0.4);
+        }
+
+        .hero-button.secondary {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .hero-button.secondary:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-3px);
+        }
+
+        /* Features Section with SVG Icons */
+        .features-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 50%, #f3f4f6 100%);
+        }
+
+        .features-section h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #181E57;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 10px 30px rgba(0, 24, 255, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Electric Blue - Zone Identification */
+        .feature-card:nth-child(1)::before {
+            background: linear-gradient(90deg, #0018ff, #181E57);
+        }
+
+        .feature-card:nth-child(1) .feature-icon {
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            box-shadow: 0 8px 20px rgba(0, 24, 255, 0.3);
+        }
+
+        /* Emerald Green - Effective Area */
+        .feature-card:nth-child(2)::before {
+            background: linear-gradient(90deg, #10b981, #059669);
+        }
+
+        .feature-card:nth-child(2) .feature-icon {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+        }
+
+        /* Purple - GCp Selection */
+        .feature-card:nth-child(3)::before {
+            background: linear-gradient(90deg, #8b5cf6, #7c3aed);
+        }
+
+        .feature-card:nth-child(3) .feature-icon {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
+        }
+
+        /* Orange - Detailed Reports */
+        .feature-card:nth-child(4)::before {
+            background: linear-gradient(90deg, #f97316, #ea580c);
+        }
+
+        .feature-card:nth-child(4) .feature-icon {
+            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+            box-shadow: 0 8px 20px rgba(249, 115, 22, 0.3);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 24, 255, 0.15);
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-icon svg {
+            width: 32px;
+            height: 32px;
+            stroke: white;
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #181E57;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: #4a5568;
+            line-height: 1.7;
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: 5rem 0;
+        }
+
+        .content-section:nth-child(even) {
+            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 50%, #f3f4f6 100%);
+        }
+
+        .content-section h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #181E57;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .content-section h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #181E57;
+            margin: 2rem 0 1rem;
+        }
+
+        .content-section p {
+            color: #4a5568;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .content-section ul {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .content-section ul li {
+            padding-left: 2rem;
+            margin-bottom: 1rem;
+            position: relative;
+            color: #4a5568;
+            line-height: 1.7;
+        }
+
+        .content-section ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #0018ff;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* CTA Box */
+        .cta-box {
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            color: white;
+            box-shadow: 0 20px 40px rgba(0, 24, 255, 0.3);
+        }
+
+        .cta-box h3 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .cta-box p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: white;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: #0018ff;
+            padding: 1.2rem 3rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 255, 255, 0.4);
+        }
+
+        /* Footer */
+        .main-footer {
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-column h3 {
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-column a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-column a:hover {
+            color: white;
+            padding-left: 0.5rem;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header-cta:not(.primary) {
+                display: none;
+            }
         }
     </style>
 </head>
@@ -791,127 +845,124 @@
         <div class="nav-overlay" id="nav-overlay"></div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Components & Cladding Wind Loads</h1>
-                <p>Complete Guide to C&C Pressure Calculations | Windows | Doors | Roofing | Wall Cladding | ASCE 7 Chapter 30</p>
-            </div>
-        </div>
-    </section>
+    <main>
+        <!-- Hero Section with Full-Screen Video -->
+        <section class="hero-section">
+            <video class="hero-video" autoplay muted loop playsinline>
+                <source src="videos/index-homepage.webm" type="video/webm">
+                <source src="videos/index-homepage.mp4" type="video/mp4">
+            </video>
+            <div class="hero-overlay"></div>
 
-    <!-- Component Types Section -->
-    <section class="component-types-section">
-        <div class="container">
-            <h2>Component Types We Calculate</h2>
-            <div class="component-grid">
-                <a href="shop/windows-doors-shutters.html" class="component-card">
-                    <div class="component-icon">🪟</div>
-                    <h3>Windows & Doors</h3>
-                    <p>Precise wind load calculations for fixed and operable windows, curtain walls, storefronts, entry doors, and overhead doors.</p>
-                </a>
-                <div class="component-card">
-                    <div class="component-icon">🏠</div>
-                    <h3>Roofing Elements</h3>
-                    <p>Roof panel, sheathing, membrane, and fastener design pressures with automatic zone identification for corners and edges.</p>
-                </div>
-                <div class="component-card">
-                    <div class="component-icon">🧱</div>
-                    <h3>Wall Cladding</h3>
-                    <p>Metal panels, masonry veneer, EIFS, fiber cement, and all wall cladding systems with proper edge zone pressures.</p>
-                </div>
-                <div class="component-card">
-                    <div class="component-icon">📐</div>
-                    <h3>Parapets & Features</h3>
-                    <p>Architectural features including parapets, cornices, canopies, awnings, and louvers with localized pressure analysis.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+            <div class="container hero-content">
+                <h1 class="hero-title">Components and Cladding Wind Loads</h1>
+                <p class="hero-subtitle">Professional C&C Pressure Calculator | Window, Door & Roofing Wind Loads per ASCE 7</p>
 
-    <!-- Pressure Zones Section -->
-    <section class="zones-section">
-        <div class="container">
-            <h2>Understanding C&C Pressure Zones</h2>
-            <div class="zone-cards">
-                <div class="zone-card">
-                    <h3>Wall Zones</h3>
-                    <h4>Zone 4 - Interior Areas</h4>
-                    <ul>
-                        <li>Located away from building corners</li>
-                        <li>Lower pressures due to uniform flow</li>
-                        <li>Covers most wall surface area</li>
-                    </ul>
-                    <h4>Zone 5 - Edge & Corner Zones</h4>
-                    <ul>
-                        <li>Within 10% of building dimension from corners</li>
-                        <li>2x higher pressures than interior zones</li>
-                        <li>Critical for window and cladding design</li>
-                    </ul>
-                </div>
-                <div class="zone-card">
-                    <h3>Roof Zones</h3>
-                    <h4>Zone 1 - Interior Roof</h4>
-                    <ul>
-                        <li>Central roof area away from edges</li>
-                        <li>Lowest roof pressures</li>
-                    </ul>
-                    <h4>Zone 2 - Edge Strips</h4>
-                    <ul>
-                        <li>Perimeter strips along roof edges</li>
-                        <li>Elevated suction pressures</li>
-                    </ul>
-                    <h4>Zone 3 - Corner Zones</h4>
-                    <ul>
-                        <li>Square areas at roof corners</li>
-                        <li>Highest pressures - often govern design</li>
-                        <li>3-4x higher than interior zones</li>
-                    </ul>
+                <div class="hero-cta-buttons">
+                    <a href="demo.html" class="hero-button primary">
+                        <i class="fas fa-calculator"></i>
+                        <span>Try Free Demo</span>
+                    </a>
+                    <a href="wind-load-calculator-shop.html" class="hero-button secondary">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>View Calculators</span>
+                    </a>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Features Section -->
-    <section class="features-section">
-        <div class="container">
-            <h2>Professional C&C Calculator Features</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🎯</div>
-                    <h3>Automatic Zone Detection</h3>
-                    <p>Identifies applicable pressure zones based on element location and building dimensions. No manual zone determination needed.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📐</div>
-                    <h3>Effective Wind Area</h3>
-                    <p>Automatic calculation and interpolation of pressure coefficients for any effective wind area from 1 to 500 ft².</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📊</div>
-                    <h3>GCp Interpolation</h3>
-                    <p>Precise linear interpolation of ASCE 7 Chapter 30 pressure coefficients for accurate design pressures.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">✅</div>
-                    <h3>Both Pressure Cases</h3>
-                    <p>Automatically calculates both positive and negative pressure combinations to identify governing load case.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+        <!-- Features Section with SVG Icons -->
+        <section class="features-section">
+            <div class="container">
+                <h2>Professional C&C Wind Load Calculator Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24">
+                                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                                <line x1="3" y1="9" x2="21" y2="9"/>
+                                <line x1="9" y1="21" x2="9" y2="9"/>
+                            </svg>
+                        </div>
+                        <h3>Automated Zone Identification</h3>
+                        <p>Automatic identification of pressure zones (interior, edge, corner) based on component location and dimensions per ASCE 7 Chapter 30.</p>
+                    </div>
 
-    <!-- CTA Section -->
-    <section class="content-section">
-        <div class="container">
-            <div class="cta-box">
-                <h3>Professional C&C Wind Load Calculator</h3>
-                <p>Calculate components and cladding loads instantly with automatic zone detection. Free 7-day trial with full features.</p>
-                <a href="demo.html" class="cta-button">Start Free Demo</a>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24">
+                                <rect x="2" y="7" width="20" height="14" rx="2"/>
+                                <path d="M16 3h5v5M21 3l-7 7"/>
+                            </svg>
+                        </div>
+                        <h3>Effective Area Calculations</h3>
+                        <p>Precise effective wind area calculations for windows, doors, panels, and fasteners with automatic tributary area determination.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            </svg>
+                        </div>
+                        <h3>GCp Coefficient Selection</h3>
+                        <p>Automated GCp value selection from ASCE 7 figures with interpolation for specific effective wind areas.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3>Detailed C&C Reports</h3>
+                        <p>Professional PDF reports with zone diagrams, pressure calculations, and fastener spacing recommendations.</p>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- What are C&C Wind Loads Section -->
+        <section class="content-section">
+            <div class="container">
+                <h2>What are Components and Cladding Wind Loads?</h2>
+                <p><strong>Components and cladding (C&C)</strong> wind loads are the design wind pressures applied to building envelope elements that receive wind pressure directly but do not contribute to the overall lateral resistance of the structure. Unlike the Main Wind Force Resisting System (MWFRS) which carries loads to the foundation, C&C elements transfer wind forces to the structural frame through local connections.</p>
+
+                <p>C&C elements include windows, doors, curtain walls, wall panels, roof panels, sheathing, fasteners, and all other exterior components. These elements experience significantly higher wind pressures than MWFRS because they have smaller tributary areas, experience peak local pressure fluctuations, and are subject to concentrated pressures at building edges and corners.</p>
+
+                <h3>Why C&C Loads are Higher</h3>
+                <ul>
+                    <li><strong>Smaller Effective Wind Areas:</strong> Smaller components see higher pressure coefficients per ASCE 7</li>
+                    <li><strong>Peak Pressure Effects:</strong> Local pressure peaks that don't occur simultaneously across entire structure</li>
+                    <li><strong>Edge and Corner Zones:</strong> Concentrated wind pressures at building discontinuities</li>
+                    <li><strong>Less Spatial Averaging:</strong> Smaller tributary areas mean less pressure averaging</li>
+                </ul>
+
+                <h3>Common C&C Design Applications</h3>
+                <ul>
+                    <li><strong>Windows and Doors:</strong> Glazing selection, frame design, and anchor spacing</li>
+                    <li><strong>Roof Sheathing:</strong> Panel thickness and fastener spacing requirements</li>
+                    <li><strong>Wall Cladding:</strong> Panel design and attachment to structural frame</li>
+                    <li><strong>Roofing Membranes:</strong> Insulation and membrane fastening patterns</li>
+                    <li><strong>Solar Panels:</strong> Ballast or attachment requirements for rooftop arrays</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="content-section">
+            <div class="container">
+                <div class="cta-box">
+                    <h3>Professional C&C Wind Load Calculator</h3>
+                    <p>Calculate components and cladding wind loads with our professional calculator. Automatic zone identification, effective area calculations, and detailed reports.</p>
+                    <a href="demo.html" class="cta-button">Start Free Demo</a>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer class="main-footer">
@@ -935,7 +986,7 @@
                     <ul>
                         <li><a href="wind-load-calculator-shop.html">All Calculators</a></li>
                         <li><a href="shop/mwfrs.html">MWFRS Calculator</a></li>
-                        <li><a href="asce-7-wind-load-calculator.html">ASCE 7 Calculator</a></li>
+                        <li><a href="components-and-cladding-wind-loads.html">C&C Calculator</a></li>
                         <li><a href="shop/roofing.html">Roofing Calculator</a></li>
                         <li><a href="shop/solar-panels.html">Solar Panel Calculator</a></li>
                     </ul>
@@ -1000,6 +1051,26 @@
                 this.parentElement.classList.toggle('active');
             });
         });
+
+        // Video initialization
+        function initializeVideo() {
+            const video = document.querySelector('.hero-video');
+            if (!video) return;
+
+            video.muted = true;
+            video.playsInline = true;
+
+            video.play().catch(error => {
+                console.log('Video autoplay prevented:', error);
+            });
+        }
+
+        // Initialize when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeVideo);
+        } else {
+            initializeVideo();
+        }
     </script>
 </body>
 </html>

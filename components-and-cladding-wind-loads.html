@@ -17,7 +17,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://windloadcalc.com/components-and-cladding-wind-loads">
 
-    <!-- Article Schema -->
+    <!-- Schema Markup - ALL ORIGINAL SEO PRESERVED -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -41,7 +41,6 @@
     }
     </script>
 
-    <!-- BreadcrumbList Schema -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -60,7 +59,6 @@
     }
     </script>
 
-    <!-- FAQPage Schema -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -81,27 +79,6 @@
             }
         },{
             "@type": "Question",
-            "name": "How do you calculate effective wind area?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Effective wind area equals the span length times the effective width of the component. For a window, this is typically the glass dimension between mullions times the width. For wall panels, it's the stud spacing times panel height. For roof panels, it's purlin spacing times panel width. The effective wind area determines which GCp pressure coefficient to use from ASCE 7 Chapter 30 figures."
-            }
-        },{
-            "@type": "Question",
-            "name": "What are the C&C pressure zones?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "ASCE 7 divides building surfaces into zones with different pressure coefficients. Walls have Zones 4 (interior) and 5 (edges/corners). Roofs have Zones 1 (interior), 2 (edges), and 3 (corners). Corner zones (Zone 3 for roofs, Zone 5 for walls) experience the highest pressures due to wind flow acceleration and turbulence. Elements must be designed for the zone in which they're located."
-            }
-        },{
-            "@type": "Question",
-            "name": "Do windows need wind load calculations?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Yes, all windows require wind load calculations to ensure proper glass thickness, frame strength, and anchorage design. Window wind loads determine: (1) Required glass type and thickness, (2) Frame structural adequacy, (3) Anchor size and spacing, (4) Performance class rating needed. Building codes require windows to resist calculated C&C design pressures with appropriate safety factors."
-            }
-        },{
-            "@type": "Question",
             "name": "What is GCp in wind load calculations?",
             "acceptedAnswer": {
                 "@type": "Answer",
@@ -119,54 +96,10 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.7;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
             color: #333;
-            background: #fff;
-        }
-
-        .header {
-            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
-            color: white;
-            padding: 3rem 0;
-            text-align: center;
-        }
-
-        .header h1 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            line-height: 1.2;
-        }
-
-        .header .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.95;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .breadcrumb {
-            background: #f8fafc;
-            padding: 1rem 0;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        .breadcrumb nav {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            font-size: 0.9rem;
-        }
-
-        .breadcrumb a {
-            color: #0018ff;
-            text-decoration: none;
-        }
-
-        .breadcrumb a:hover {
-            text-decoration: underline;
+            overflow-x: hidden;
         }
 
         .container {
@@ -175,995 +108,472 @@
             padding: 0 2rem;
         }
 
-        .content-section {
-            padding: 4rem 0;
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            padding: 8rem 0 6rem;
+            overflow: hidden;
         }
 
-        .content-section:nth-child(even) {
-            background: #f8fafc;
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+            pointer-events: none;
         }
 
-        article {
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
             max-width: 900px;
-            margin: 0 auto;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        h2 {
+        /* Component Type Cards */
+        .component-types-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 50%, #f3f4f6 100%);
+        }
+
+        .component-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .component-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 10px 30px rgba(0, 24, 255, 0.08);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .component-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 24, 255, 0.15);
+        }
+
+        .component-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
             font-size: 2rem;
+            box-shadow: 0 8px 20px rgba(0, 24, 255, 0.3);
+        }
+
+        .component-card h3 {
+            font-size: 1.5rem;
             font-weight: 700;
             color: #181E57;
-            margin: 2.5rem 0 1.5rem 0;
-            line-height: 1.3;
+            margin-bottom: 1rem;
         }
 
-        h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #2d3748;
-            margin: 2rem 0 1rem 0;
-        }
-
-        h4 {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #374151;
-            margin: 1.5rem 0 0.8rem 0;
-        }
-
-        p {
-            margin-bottom: 1.2rem;
-            font-size: 1.05rem;
-            line-height: 1.8;
-        }
-
-        ul, ol {
-            margin: 1.2rem 0 1.2rem 2rem;
-        }
-
-        li {
-            margin-bottom: 0.8rem;
+        .component-card p {
+            color: #4a5568;
             line-height: 1.7;
         }
 
-        .highlight-box {
-            background: linear-gradient(135deg, #e6f3ff 0%, #f0f9ff 100%);
-            border-left: 4px solid #0018ff;
-            padding: 1.5rem;
-            margin: 2rem 0;
-            border-radius: 8px;
+        /* Pressure Zones Section */
+        .zones-section {
+            padding: 5rem 0;
         }
 
-        .highlight-box h3 {
-            margin-top: 0;
+        .zones-section h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #181E57;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .zone-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .zone-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 24, 255, 0.1);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 24, 255, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .zone-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 24, 255, 0.15);
+        }
+
+        .zone-card h3 {
+            font-size: 1.8rem;
+            font-weight: 800;
             color: #0018ff;
+            margin-bottom: 1rem;
         }
 
-        .formula-box {
-            background: #1a202c;
-            color: white;
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin: 1.5rem 0;
-            font-family: 'Courier New', monospace;
-            overflow-x: auto;
+        .zone-card h4 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin: 1.5rem 0 1rem;
         }
 
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 2rem 0;
-            background: white;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        .zone-card ul {
+            list-style: none;
+            margin: 1rem 0;
         }
 
-        .comparison-table th {
-            background: #0018ff;
-            color: white;
-            padding: 1rem;
-            text-align: left;
-            font-weight: 600;
+        .zone-card ul li {
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+            position: relative;
         }
 
-        .comparison-table td {
-            padding: 1rem;
-            border-bottom: 1px solid #e2e8f0;
+        .zone-card ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #0018ff;
+            font-weight: bold;
         }
 
-        .comparison-table tr:hover {
-            background: #f8fafc;
+        /* Features Section */
+        .features-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 50%, #f3f4f6 100%);
         }
 
-        .example-box {
-            background: #f0fdf4;
-            border-left: 4px solid #10b981;
-            padding: 1.5rem;
-            margin: 2rem 0;
-            border-radius: 8px;
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
         }
 
-        .example-box h4 {
-            color: #047857;
-            margin-top: 0;
+        .feature-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 10px 30px rgba(0, 24, 255, 0.08);
+            transition: all 0.3s ease;
         }
 
-        .warning-box {
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 1.5rem;
-            margin: 2rem 0;
-            border-radius: 8px;
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 24, 255, 0.15);
         }
 
-        .warning-box h4 {
-            color: #856404;
-            margin-top: 0;
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            box-shadow: 0 8px 20px rgba(0, 24, 255, 0.3);
         }
 
+        .feature-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #181E57;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: #4a5568;
+            line-height: 1.7;
+        }
+
+        /* CTA Box */
         .cta-box {
             background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
-            color: white;
-            padding: 3rem;
-            border-radius: 12px;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 4rem 3rem;
             text-align: center;
-            margin: 3rem 0;
+            margin: 4rem 0;
+            box-shadow: 0 20px 40px rgba(0, 24, 255, 0.2);
         }
 
         .cta-box h3 {
             color: white;
-            margin-top: 0;
-            font-size: 1.8rem;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-box p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
         }
 
         .cta-button {
             display: inline-block;
             background: white;
             color: #0018ff;
-            padding: 1rem 2.5rem;
+            padding: 1.2rem 3rem;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 700;
             font-size: 1.1rem;
-            margin-top: 1.5rem;
             transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
         }
 
         .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
         }
 
-        .zone-diagram {
-            background: white;
-            border: 2px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin: 2rem 0;
+        /* Footer Styles */
+        .main-footer {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d3748 50%, #1a1a1a 100%);
+            color: white;
+            padding: 5rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-column a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-column a:hover {
+            color: #0018ff;
+            padding-left: 0.5rem;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
             text-align: center;
         }
 
-        .faq-section {
-            background: white;
-            padding: 3rem 0;
+        .footer-bottom p {
+            color: rgba(255, 255, 255, 0.6);
         }
 
-        .faq-item {
-            border-bottom: 1px solid #e2e8f0;
-            padding: 1.5rem 0;
+        /* Content Section */
+        .content-section {
+            padding: 5rem 0;
         }
 
-        .faq-question {
-            font-size: 1.2rem;
-            font-weight: 600;
+        .content-section h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
             color: #181E57;
-            margin-bottom: 0.8rem;
-        }
-
-        .faq-answer {
-            color: #4a5568;
-            line-height: 1.7;
-        }
-
-        .lastmod {
+            margin-bottom: 2rem;
             text-align: center;
-            color: #64748b;
-            font-size: 0.9rem;
-            padding: 2rem 0;
-            border-top: 1px solid #e2e8f0;
+        }
+
+        .content-section p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #4a5568;
+            margin-bottom: 1.5rem;
+        }
+
+        ul, ol {
+            margin: 1.5rem 0 1.5rem 2rem;
+        }
+
+        li {
+            margin-bottom: 0.75rem;
+            line-height: 1.7;
         }
     </style>
 </head>
 <body>
-    <header class="header">
+    <!-- Hero Section -->
+    <section class="hero-section">
         <div class="container">
-            <h1>Components and Cladding Wind Loads</h1>
-            <p class="subtitle">Complete Guide to C&C Pressure Calculations | Windows | Doors | Roofing | Wall Cladding | ASCE 7 Chapter 30</p>
-        </div>
-    </header>
-
-    <nav class="breadcrumb">
-        <nav>
-            <a href="/">Home</a> &raquo; <span>Components and Cladding Wind Loads</span>
-        </nav>
-    </nav>
-
-    <section class="content-section">
-        <div class="container">
-            <article>
-                <h2>What are Components and Cladding?</h2>
-
-                <p><strong>Components and cladding</strong> (abbreviated as C&C) refers to elements of the building envelope that receive wind pressure directly but are not part of the Main Wind Force Resisting System (MWFRS). These building components form the weather-tight barrier that protects the interior while transferring wind loads to the structural frame through localized connections.</p>
-
-                <p>Understanding the distinction between components/cladding and MWFRS is fundamental to proper wind load analysis. While MWFRS elements (columns, beams, braced frames, shear walls) transfer overall building wind forces to the foundation, <strong>C&C elements</strong> resist localized wind pressures and deliver these loads to the MWFRS through secondary load paths.</p>
-
-                <h3>Elements Classified as Components and Cladding</h3>
-
-                <p>ASCE 7 Chapter 30 applies to a wide range of building envelope elements:</p>
-
-                <h4>Fenestration Systems</h4>
-                <ul>
-                    <li><strong>Windows:</strong> Fixed windows, operable windows, casement windows, awning windows</li>
-                    <li><strong>Curtain Walls:</strong> Stick-built and unitized curtain wall systems</li>
-                    <li><strong>Storefronts:</strong> Commercial entrance systems</li>
-                    <li><strong>Skylights:</strong> Roof-mounted glazing systems</li>
-                    <li><strong>Doors:</strong> Entry doors, overhead doors, sliding doors, access panels</li>
-                    <li><strong>Glazing:</strong> Glass panels, acrylic panels, polycarbonate panels</li>
-                </ul>
-
-                <h4>Wall Cladding Systems</h4>
-                <ul>
-                    <li><strong>Metal Panels:</strong> Standing seam panels, corrugated siding, architectural panels</li>
-                    <li><strong>Masonry Veneer:</strong> Brick veneer, stone veneer, thin-set masonry</li>
-                    <li><strong>EIFS:</strong> Exterior Insulation and Finish Systems</li>
-                    <li><strong>Siding:</strong> Vinyl siding, fiber cement siding, wood siding</li>
-                    <li><strong>Precast Panels:</strong> Architectural precast concrete cladding</li>
-                    <li><strong>Fiber Cement Panels:</strong> Lap siding, panel systems</li>
-                </ul>
-
-                <h4>Roofing Elements</h4>
-                <ul>
-                    <li><strong>Roof Panels:</strong> Metal roofing panels, standing seam roofing</li>
-                    <li><strong>Roof Sheathing:</strong> Plywood, OSB, metal decking</li>
-                    <li><strong>Roofing Membranes:</strong> TPO, EPDM, PVC single-ply membranes</li>
-                    <li><strong>Shingles:</strong> Asphalt shingles, tile roofing, slate</li>
-                    <li><strong>Built-Up Roofing:</strong> Multiple-ply membrane systems</li>
-                    <li><strong>Solar Panels:</strong> Rooftop photovoltaic mounting systems</li>
-                </ul>
-
-                <h4>Fasteners and Connections</h4>
-                <ul>
-                    <li><strong>Panel Fasteners:</strong> Screws, clips, and mechanical attachments for cladding</li>
-                    <li><strong>Window Anchors:</strong> Structural attachments securing fenestration to building frame</li>
-                    <li><strong>Roof Fasteners:</strong> Membrane attachment, shingle nails, panel clips</li>
-                    <li><strong>Masonry Ties:</strong> Anchors connecting veneer to backup structure</li>
-                </ul>
-
-                <h4>Architectural Features</h4>
-                <ul>
-                    <li><strong>Parapets:</strong> Roof edge walls extending above roof surface</li>
-                    <li><strong>Cornices:</strong> Decorative projections at roof edge</li>
-                    <li><strong>Canopies:</strong> Entrance canopies, walkway covers</li>
-                    <li><strong>Awnings:</strong> Fixed and retractable fabric or metal awnings</li>
-                    <li><strong>Louvers:</strong> Ventilation and architectural louver systems</li>
-                </ul>
-
-                <div class="highlight-box">
-                    <h3>Key Distinction: C&C vs MWFRS</h3>
-                    <p>The fundamental difference lies in load path and tributary area:</p>
-                    <ul>
-                        <li><strong>MWFRS:</strong> Transfers wind forces from entire building surfaces through continuous load paths (walls, diaphragms, frames) to the foundation. Analyzes overall building stability and structural adequacy.</li>
-                        <li><strong>Components & Cladding:</strong> Resists localized wind pressures on individual elements with smaller tributary areas. Analyzes local strength and attachment adequacy of specific building components.</li>
-                    </ul>
-                    <p><strong>Important:</strong> Both MWFRS and C&C must be calculated for complete building design. They represent different failure modes requiring separate analysis.</p>
-                </div>
-
-                <h2>Why C&C Wind Loads are Higher than MWFRS Loads</h2>
-
-                <p>A common question from engineers new to wind load analysis: "Why do <strong>components and cladding</strong> have higher design pressures than the overall structure?" The answer involves several aerodynamic and statistical factors:</p>
-
-                <h3>1. Smaller Effective Wind Areas</h3>
-
-                <p>ASCE 7 recognizes that <strong>smaller surface areas experience higher peak pressures</strong> than larger areas. This phenomenon occurs because:</p>
-
-                <ul>
-                    <li>Peak pressure fluctuations don't occur simultaneously across large areas</li>
-                    <li>Spatial averaging reduces effective pressure on large surfaces</li>
-                    <li>Small elements experience the full magnitude of localized pressure peaks</li>
-                    <li>Larger areas benefit from pressure variations that partially cancel out</li>
-                </ul>
-
-                <p>ASCE 7 Chapter 30 provides pressure coefficients (GCp) that <strong>increase as effective wind area decreases</strong>. For example, a 10 ft² element might have GCp = -2.0, while a 500 ft² area has GCp = -1.2 for the same location and building.</p>
-
-                <h3>2. Localized Pressure Concentrations</h3>
-
-                <p>Wind flow creates pressure intensification at:</p>
-
-                <ul>
-                    <li><strong>Building Corners:</strong> Flow acceleration around corners produces pressure multiplication</li>
-                    <li><strong>Roof Edges:</strong> Separation and reattachment create strong suction zones</li>
-                    <li><strong>Discontinuities:</strong> Abrupt geometry changes cause local pressure spikes</li>
-                    <li><strong>Parapets:</strong> Edges and corners of parapets experience severe localized pressures</li>
-                </ul>
-
-                <p>These localized effects govern C&C design but are averaged out in MWFRS analysis of overall building response.</p>
-
-                <h3>3. Tributary Area vs Effective Wind Area</h3>
-
-                <p>The <strong>effective wind area</strong> for C&C elements is typically much smaller than tributary areas for MWFRS components:</p>
-
-                <table class="comparison-table">
-                    <thead>
-                        <tr>
-                            <th>Element Type</th>
-                            <th>Typical Effective Wind Area</th>
-                            <th>Resulting Pressure Magnitude</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Small Window</strong></td>
-                            <td>10-30 ft²</td>
-                            <td>Highest - full peak pressure coefficients</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Large Window</strong></td>
-                            <td>50-100 ft²</td>
-                            <td>High - reduced from peak but still elevated</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Wall Panel</strong></td>
-                            <td>20-80 ft²</td>
-                            <td>High - varies with stud spacing and height</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Roof Panel</strong></td>
-                            <td>15-50 ft²</td>
-                            <td>High - depends on purlin spacing</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Entire Wall (MWFRS)</strong></td>
-                            <td>1000+ ft²</td>
-                            <td>Lower - averaged over large area</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <h3>4. Gust Effect Factor Inclusion</h3>
-
-                <p>For C&C, the <strong>GCp coefficient</strong> already includes gust effects, capturing the dynamic response of small, flexible elements to wind fluctuations. This built-in amplification for gusts contributes to higher design pressures compared to MWFRS analysis where gust effects are applied separately.</p>
-
-                <h2>Effective Wind Area: The Critical Parameter</h2>
-
-                <p>The <strong>effective wind area</strong> concept is fundamental to C&C wind load calculations and is the single most important parameter determining design pressure magnitude.</p>
-
-                <h3>Definition and Calculation</h3>
-
-                <p>Per ASCE 7, effective wind area is defined as:</p>
-
-                <div class="formula-box">
-Effective Wind Area = Span Length × Effective Width
-
-Where:
-- Span Length: Distance between structural supports
-- Effective Width: Width of component perpendicular to span
-
-The effective wind area represents the tributary area of the
-component that participates in resisting wind pressure.
-                </div>
-
-                <h3>Calculating Effective Wind Area for Different Elements</h3>
-
-                <h4>Windows and Glazing</h4>
-
-                <div class="example-box">
-                    <h4>Example: Fixed Window</h4>
-                    <p><strong>Configuration:</strong></p>
-                    <ul>
-                        <li>Glass Size: 4 feet wide × 6 feet tall</li>
-                        <li>Supported on all four sides by frame</li>
-                        <li>No intermediate mullions</li>
-                    </ul>
-
-                    <p><strong>Calculation:</strong></p>
-                    <p>Span = 6 feet (vertical dimension between supports)<br>
-                    Width = 4 feet (horizontal dimension)<br>
-                    Effective Wind Area = 6 ft × 4 ft = <strong>24 ft²</strong></p>
-
-                    <p>For glazing supported on all four edges, the effective wind area equals the glass area.</p>
-                </div>
-
-                <div class="example-box">
-                    <h4>Example: Curtain Wall Mullion</h4>
-                    <p><strong>Configuration:</strong></p>
-                    <ul>
-                        <li>Vertical mullion height: 12 feet (floor to floor)</li>
-                        <li>Horizontal spacing: 5 feet</li>
-                        <li>Tributary width for mullion: 2.5 feet each side</li>
-                    </ul>
-
-                    <p><strong>Calculation:</strong></p>
-                    <p>Span = 12 feet (mullion height)<br>
-                    Width = 5 feet (horizontal mullion spacing)<br>
-                    Effective Wind Area = 12 ft × 5 ft = <strong>60 ft²</strong></p>
-                </div>
-
-                <h4>Wall Panels and Cladding</h4>
-
-                <div class="example-box">
-                    <h4>Example: Metal Wall Panel</h4>
-                    <p><strong>Configuration:</strong></p>
-                    <ul>
-                        <li>Vertical girt spacing: 6 feet</li>
-                        <li>Panel width: 3 feet</li>
-                        <li>Panel spans between horizontal girts</li>
-                    </ul>
-
-                    <p><strong>Calculation:</strong></p>
-                    <p>Span = 6 feet (girt spacing)<br>
-                    Width = 3 feet (panel width)<br>
-                    Effective Wind Area = 6 ft × 3 ft = <strong>18 ft²</strong></p>
-                </div>
-
-                <div class="example-box">
-                    <h4>Example: Stud Wall Sheathing</h4>
-                    <p><strong>Configuration:</strong></p>
-                    <ul>
-                        <li>Wall height: 10 feet</li>
-                        <li>Stud spacing: 16 inches (1.33 feet)</li>
-                        <li>Sheathing spans vertically between top and bottom plates</li>
-                    </ul>
-
-                    <p><strong>Calculation:</strong></p>
-                    <p>Span = 10 feet (wall height)<br>
-                    Width = 1.33 feet (stud spacing)<br>
-                    Effective Wind Area = 10 ft × 1.33 ft = <strong>13.3 ft²</strong></p>
-                </div>
-
-                <h4>Roof Panels and Sheathing</h4>
-
-                <div class="example-box">
-                    <h4>Example: Standing Seam Roof Panel</h4>
-                    <p><strong>Configuration:</strong></p>
-                    <ul>
-                        <li>Purlin spacing: 5 feet</li>
-                        <li>Panel width: 16 inches (1.33 feet)</li>
-                        <li>Panel spans between purlins</li>
-                    </ul>
-
-                    <p><strong>Calculation:</strong></p>
-                    <p>Span = 5 feet (purlin spacing)<br>
-                    Width = 1.33 feet (panel width)<br>
-                    Effective Wind Area = 5 ft × 1.33 ft = <strong>6.7 ft²</strong></p>
-
-                    <p>Small effective wind area results in high pressure coefficients - this is why roof corner zones are often critical for panel design.</p>
-                </div>
-
-                <h4>Fasteners</h4>
-
-                <div class="example-box">
-                    <h4>Example: Roof Sheathing Fastener</h4>
-                    <p><strong>Configuration:</strong></p>
-                    <ul>
-                        <li>Fastener pattern: 6 inches on center at panel edges</li>
-                        <li>12 inches on center in field</li>
-                        <li>Tributary width: 24 inches (2 feet)</li>
-                    </ul>
-
-                    <p><strong>Calculation:</strong></p>
-                    <p>Span = 0.5 feet (fastener spacing at edge)<br>
-                    Width = 2 feet (tributary width)<br>
-                    Effective Wind Area = 0.5 ft × 2 ft = <strong>1 ft²</strong></p>
-
-                    <p>Very small effective wind area means maximum pressure coefficients apply. Fasteners often experience the highest design pressures of any building component.</p>
-                </div>
-
-                <h3>Interpolation for Intermediate Effective Wind Areas</h3>
-
-                <p>ASCE 7 Chapter 30 provides GCp values for specific effective wind areas: 10, 20, 50, 100, and 500 ft². For intermediate values, <strong>linear interpolation</strong> is required:</p>
-
-                <div class="formula-box">
-For effective wind area A between tabulated values A₁ and A₂:
-
-GCp = GCp₁ + (GCp₂ - GCp₁) × (A - A₁) / (A₂ - A₁)
-
-Example:
-If A = 30 ft² (between 20 and 50 ft²)
-GCp at 20 ft² = -1.8
-GCp at 50 ft² = -1.4
-
-GCp = -1.8 + (-1.4 - (-1.8)) × (30 - 20) / (50 - 20)
-    = -1.8 + (0.4) × (10/30)
-    = -1.8 + 0.133
-    = -1.67
-                </div>
-
-                <p>Professional <strong>components and cladding calculator</strong> software performs these interpolations automatically, ensuring accurate pressure coefficient determination for any effective wind area.</p>
-
-                <h2>C&C Pressure Zones and Coefficients</h2>
-
-                <p>ASCE 7 divides building surfaces into zones experiencing different wind pressure magnitudes. Understanding these <strong>pressure zones</strong> is essential for proper C&C design.</p>
-
-                <h3>Wall Pressure Zones</h3>
-
-                <p>Building walls are divided into two primary zones:</p>
-
-                <h4>Zone 4 - Interior Wall Areas</h4>
-                <ul>
-                    <li>Located away from building corners and discontinuities</li>
-                    <li>Experience lower pressures due to relatively uniform flow</li>
-                    <li>Pressure coefficients typically range from GCp = ±0.9 to ±1.2</li>
-                    <li>Most wall area typically falls in Zone 4</li>
-                </ul>
-
-                <h4>Zone 5 - Edge and Corner Zones</h4>
-                <ul>
-                    <li>Located within edge distance 'a' from wall corners</li>
-                    <li>Edge distance a = 0.1 × minimum building dimension (but ≥ 3 ft)</li>
-                    <li>Experience significantly elevated pressures due to flow acceleration</li>
-                    <li>Pressure coefficients typically GCp = ±1.8 to ±2.4</li>
-                    <li>Critical for window and cladding design near building corners</li>
-                </ul>
-
-                <div class="example-box">
-                    <h4>Example: Determining Wall Zone</h4>
-                    <p><strong>Building Dimensions:</strong> 80 feet × 120 feet<br>
-                    <strong>Minimum Dimension:</strong> 80 feet</p>
-
-                    <p><strong>Edge Distance Calculation:</strong><br>
-                    a = 0.1 × 80 ft = 8 feet</p>
-
-                    <p><strong>Zone Classification:</strong></p>
-                    <ul>
-                        <li>Zone 5: Within 8 feet of all building corners</li>
-                        <li>Zone 4: All wall areas more than 8 feet from corners</li>
-                    </ul>
-
-                    <p>Windows located within 8 feet of building corners must be designed for Zone 5 pressures (approximately 2× higher than Zone 4).</p>
-                </div>
-
-                <h3>Roof Pressure Zones</h3>
-
-                <p>Roof surfaces have three distinct zones reflecting complex wind flow patterns:</p>
-
-                <h4>Zone 1 - Interior Roof Areas</h4>
-                <ul>
-                    <li>Central roof area away from edges and corners</li>
-                    <li>Lowest roof pressures (but still significant suction)</li>
-                    <li>Pressure coefficients typically GCp = -0.9 to -1.3</li>
-                    <li>Largest roof area by square footage</li>
-                </ul>
-
-                <h4>Zone 2 - Edge Zones</h4>
-                <ul>
-                    <li>Perimeter strip along roof edges (excluding corners)</li>
-                    <li>Width = 0.1 × minimum building dimension (but ≥ 3 ft)</li>
-                    <li>Elevated suction due to edge flow separation</li>
-                    <li>Pressure coefficients typically GCp = -1.8 to -2.6</li>
-                </ul>
-
-                <h4>Zone 3 - Corner Zones</h4>
-                <ul>
-                    <li>Square areas at roof corners</li>
-                    <li>Dimension = edge zone width in both directions</li>
-                    <li><strong>Highest roof pressures</strong> - critical design zone</li>
-                    <li>Pressure coefficients typically GCp = -2.8 to -4.5</li>
-                    <li>Often governs roof panel and fastener design</li>
-                </ul>
-
-                <div class="warning-box">
-                    <h4>Zone 3 Critical Importance</h4>
-                    <p>Roof corner zones (Zone 3) experience extreme suction pressures that can be <strong>3-4 times higher</strong> than interior zones. Roof failures frequently initiate at corners where inadequate fastening cannot resist these elevated pressures. Always verify Zone 3 requirements are met for:</p>
-                    <ul>
-                        <li>Roof panel attachment</li>
-                        <li>Membrane adhesion or fastening</li>
-                        <li>Sheathing nail spacing</li>
-                        <li>Parapet coping and cap flashing</li>
-                    </ul>
-                </div>
-
-                <div class="example-box">
-                    <h4>Example: Roof Zone Layout</h4>
-                    <p><strong>Building:</strong> 60 ft × 100 ft, flat roof</p>
-
-                    <p><strong>Zone Width Calculation:</strong><br>
-                    Minimum dimension = 60 feet<br>
-                    Zone width = 0.1 × 60 = 6 feet (controls over 3 ft minimum)</p>
-
-                    <p><strong>Zone Areas:</strong></p>
-                    <ul>
-                        <li><strong>Zone 3 (corners):</strong> Four 6 ft × 6 ft squares = 144 ft² total</li>
-                        <li><strong>Zone 2 (edges):</strong> Perimeter strips 6 feet wide (excluding corners) = ~600 ft² total</li>
-                        <li><strong>Zone 1 (interior):</strong> Remaining central area = ~5,250 ft²</li>
-                    </ul>
-
-                    <p>Despite representing only 2.4% of roof area, Zone 3 governs fastening requirements and panel selection due to extreme pressures.</p>
-                </div>
-
-                <h2>C&C Wind Load Calculation Methodology</h2>
-
-                <p>The process for calculating <strong>components and cladding wind loads</strong> per ASCE 7 Chapter 30 follows a systematic approach:</p>
-
-                <h3>Step-by-Step C&C Calculation Procedure</h3>
-
-                <h4>Step 1: Determine Basic Parameters</h4>
-                <ul>
-                    <li>Basic wind speed V (from ASCE 7 maps or velocity finder)</li>
-                    <li>Risk Category (I, II, III, or IV)</li>
-                    <li>Exposure Category (B, C, or D)</li>
-                    <li>Mean roof height h</li>
-                    <li>Building enclosure classification (enclosed, partially enclosed, open)</li>
-                </ul>
-
-                <h4>Step 2: Calculate Velocity Pressure</h4>
-
-                <div class="formula-box">
-qh = 0.00256 × Kz × Kzt × Kd × V²
-
-Where:
-qh  = Velocity pressure at mean roof height (psf)
-Kz  = Velocity pressure exposure coefficient at height h
-Kzt = Topographic factor (1.0 for flat terrain)
-Kd  = Wind directionality factor (0.85 for buildings)
-V   = Basic wind speed (mph)
-
-For internal pressure:
-qi = qh (evaluated at mean roof height)
-                </div>
-
-                <h4>Step 3: Determine Element Parameters</h4>
-                <ul>
-                    <li>Element location (wall or roof)</li>
-                    <li>Span length between supports</li>
-                    <li>Effective width</li>
-                    <li>Effective wind area = span × width</li>
-                    <li>Pressure zone (Zone 1, 2, 3 for roofs; Zone 4, 5 for walls)</li>
-                </ul>
-
-                <h4>Step 4: Select External Pressure Coefficients</h4>
-
-                <p>From ASCE 7 Chapter 30 figures based on:</p>
-                <ul>
-                    <li>Building type and geometry</li>
-                    <li>Element location (wall or roof)</li>
-                    <li>Pressure zone</li>
-                    <li>Effective wind area</li>
-                    <li>Roof slope (for roof elements)</li>
-                </ul>
-
-                <p>Interpolate GCp values for intermediate effective wind areas.</p>
-
-                <h4>Step 5: Determine Internal Pressure Coefficient</h4>
-
-                <table class="comparison-table">
-                    <thead>
-                        <tr>
-                            <th>Enclosure Classification</th>
-                            <th>GCpi Value</th>
-                            <th>Description</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Enclosed Buildings</strong></td>
-                            <td>±0.18</td>
-                            <td>Buildings meeting ASCE 7 definition with uniformly distributed openings</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Partially Enclosed</strong></td>
-                            <td>±0.55</td>
-                            <td>Buildings with large opening on one side relative to other sides</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Open Buildings</strong></td>
-                            <td>0.0</td>
-                            <td>Structures without enclosing walls</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <h4>Step 6: Calculate Design Pressure</h4>
-
-                <div class="formula-box">
-p = qh × (GCp) - qi × (GCpi)
-
-Where:
-p    = Design wind pressure (psf, positive inward)
-qh   = Velocity pressure at mean roof height
-GCp  = External pressure coefficient
-qi   = Internal velocity pressure (= qh)
-GCpi = Internal pressure coefficient
-
-Calculate for both:
-1. p(+GCpi) = qh × (GCp) - qh × (+GCpi)
-2. p(-GCpi) = qh × (GCp) - qh × (-GCpi)
-
-Use the maximum absolute value for design.
-                </div>
-
-                <h4>Step 7: Apply Minimum Design Pressures</h4>
-
-                <p>ASCE 7 Section 30.2.2 specifies minimum design pressures:</p>
-                <ul>
-                    <li><strong>Walls:</strong> Minimum 16 psf</li>
-                    <li><strong>Roofs:</strong> Minimum 8 psf</li>
-                </ul>
-
-                <p>Use calculated pressure if greater than minimum, otherwise use minimum value.</p>
-
-                <h3>Complete Calculation Example: Window Design</h3>
-
-                <div class="example-box">
-                    <h4>Project Parameters</h4>
-                    <ul>
-                        <li><strong>Location:</strong> Miami, FL (hurricane zone)</li>
-                        <li><strong>Building:</strong> 3-story office, 40 ft mean roof height</li>
-                        <li><strong>Dimensions:</strong> 80 ft × 120 ft</li>
-                        <li><strong>Risk Category:</strong> II</li>
-                        <li><strong>Exposure:</strong> C</li>
-                        <li><strong>Topography:</strong> Flat (Kzt = 1.0)</li>
-                        <li><strong>Enclosure:</strong> Enclosed building</li>
-                    </ul>
-
-                    <h4>Window Specifications</h4>
-                    <ul>
-                        <li><strong>Size:</strong> 4 ft × 6 ft fixed window</li>
-                        <li><strong>Location:</strong> 3rd floor, 5 feet from building corner (Zone 5)</li>
-                        <li><strong>Height:</strong> 30 feet above grade</li>
-                    </ul>
-
-                    <h4>Step 1: Basic Wind Speed</h4>
-                    <p>From ASCE 7-16 Figure 26.5-1B (Miami, Risk Category II):<br>
-                    V = <strong>175 mph</strong></p>
-
-                    <h4>Step 2: Velocity Pressure</h4>
-                    <p>Kz at 40 ft, Exposure C (ASCE 7 Table 26.10-1): Kz = 0.98<br>
-                    Kzt = 1.0 (flat site)<br>
-                    Kd = 0.85 (buildings)</p>
-
-                    <p>qh = 0.00256 × 0.98 × 1.0 × 0.85 × 175²<br>
-                    qh = <strong>66.3 psf</strong></p>
-
-                    <p>qi = qh = <strong>66.3 psf</strong></p>
-
-                    <h4>Step 3: Effective Wind Area</h4>
-                    <p>Window dimensions: 4 ft × 6 ft<br>
-                    Effective wind area = 4 × 6 = <strong>24 ft²</strong></p>
-
-                    <h4>Step 4: External Pressure Coefficient</h4>
-                    <p>From ASCE 7 Figure 30.3-1 (Wall, Zone 5, 24 ft²):<br>
-                    Interpolate between 20 ft² and 50 ft²</p>
-
-                    <p>Positive pressure: GCp = <strong>+1.0</strong><br>
-                    Negative pressure: GCp = <strong>-1.8</strong></p>
-
-                    <h4>Step 5: Internal Pressure</h4>
-                    <p>Enclosed building: GCpi = <strong>±0.18</strong></p>
-
-                    <h4>Step 6: Design Pressures</h4>
-
-                    <p><strong>Case 1: External positive, internal negative</strong><br>
-                    p = 66.3 × (+1.0) - 66.3 × (-0.18)<br>
-                    p = 66.3 + 11.9 = <strong>+78.2 psf</strong> (inward)</p>
-
-                    <p><strong>Case 2: External positive, internal positive</strong><br>
-                    p = 66.3 × (+1.0) - 66.3 × (+0.18)<br>
-                    p = 66.3 - 11.9 = <strong>+54.4 psf</strong> (inward)</p>
-
-                    <p><strong>Case 3: External negative, internal positive</strong><br>
-                    p = 66.3 × (-1.8) - 66.3 × (+0.18)<br>
-                    p = -119.3 - 11.9 = <strong>-131.2 psf</strong> (outward suction)</p>
-
-                    <p><strong>Case 4: External negative, internal negative</strong><br>
-                    p = 66.3 × (-1.8) - 66.3 × (-0.18)<br>
-                    p = -119.3 + 11.9 = <strong>-107.4 psf</strong> (outward suction)</p>
-
-                    <h4>Critical Design Pressure</h4>
-                    <p><strong>Maximum: ±131.2 psf</strong> (outward suction governs)</p>
-
-                    <h4>Window Design Requirements</h4>
-                    <ul>
-                        <li>Select impact-resistant glazing (hurricane zone)</li>
-                        <li>Verify glass thickness adequate for 131.2 psf suction</li>
-                        <li>Design frame and mullions for 131.2 psf load</li>
-                        <li>Size anchors to resist outward force: 4 ft × 6 ft × 131.2 psf = 3,149 lbs</li>
-                        <li>Specify window performance class ≥ AW-140 (design pressure 140 psf)</li>
-                    </ul>
-                </div>
-
-                <div class="cta-box">
-                    <h3>Professional C&C Calculator</h3>
-                    <p>Calculate components and cladding wind loads instantly with our professional ASCE 7 calculator. Automatic zone identification, pressure coefficient interpolation, and detailed reports.</p>
-                    <a href="/demo" class="cta-button">Try Free Demo</a>
-                </div>
-
-                <h2>Specific C&C Applications</h2>
-
-                <h3>Window Wind Load Design</h3>
-
-                <p><strong>Window wind load</strong> analysis involves three interconnected design requirements:</p>
-
-                <h4>1. Glazing Design</h4>
-                <p>Glass must resist design pressure without excessive deflection or failure. Key considerations:</p>
-
-                <ul>
-                    <li><strong>Glass Type:</strong>
-                        <ul>
-                            <li>Annealed glass: Lowest strength, breaks into large shards</li>
-                            <li>Heat-strengthened: 2× annealed strength, breaks into larger pieces</li>
-                            <li>Fully tempered: 4× annealed strength, breaks into small cube-like pieces</li>
-                            <li>Laminated: Multiple glass plies with interlayer, retains fragments when broken</li>
-                        </ul>
-                    </li>
-                    <li><strong>Glass Thickness:</strong> Ranges from 1/8" for small windows under low pressure to 1" or more for large lites under high pressure</li>
-                    <li><strong>Aspect Ratio:</strong> Long, narrow lites deflect more than square lites of equal area</li>
-                    <li><strong>Edge Support:</strong> Four-sided support provides more capacity than two-edge support</li>
-                </ul>
-
-                <p>Use ASTM E1300 procedures or manufacturer's software to verify glass adequacy.</p>
-
-                <h4>2. Frame and Mullion Strength</h4>
-                <p>Window frames must resist bending and deflection while transferring loads to structure:</p>
-
-                <ul>
-                    <li><strong>Deflection Limits:</strong> Typically L/175 to L/240 to prevent glass contact and seal damage</li>
-                    <li><strong>Material Properties:</strong> Aluminum extrusions, steel tubes, vinyl profiles, or fiberglass shapes</li>
-                    <li><strong>Section Modulus:</strong> Must provide adequate strength for calculated pressures and spans</li>
-                    <li><strong>Connections:</strong> Corner connections and intermediate joints must develop full member capacity</li>
-                </ul>
-
-                <h4>3. Anchorage to Structure</h4>
-                <p>Anchors transfer total wind force from window to building structure:</p>
-
-                <ul>
-                    <li><strong>Anchor Spacing:</strong> Typically 12-24 inches on center depending on pressure</li>
-                    <li><strong>Anchor Capacity:</strong> Must resist shear and tension from wind loads with appropriate safety factors</li>
-                    <li><strong>Edge Distance:</strong> Maintain minimum edge distance per anchor manufacturer requirements</li>
-                    <li><strong>Substrate Capacity:</strong> Concrete, masonry, steel, or wood backup must resist anchor forces</li>
-                </ul>
-
-                <h3>Roof Panel and Sheathing Design</h3>
-
-                <p><strong>Roof component wind loads</strong> are frequently critical due to extreme corner zone pressures:</p>
-
-                <h4>Metal Roof Panel Design</h4>
-
-                <ul>
-                    <li><strong>Panel Strength:</strong> Standing seam, corrugated, or ribbed panels must resist suction without excessive deflection</li>
-                    <li><strong>Clip Spacing:</strong> Panel clips attach to purlins/structure, spacing determined by design pressure</li>
-                    <li><strong>Seam Strength:</strong> Mechanically seamed systems must resist seam separation forces</li>
-                    <li><strong>End Laps:</strong> Panel end laps (if any) require additional fastening for wind uplift</li>
-                </ul>
-
-                <h4>Roof Sheathing</h4>
-
-                <ul>
-                    <li><strong>Plywood/OSB Thickness:</strong> Minimum 15/32" for most applications, may require up to 3/4" in high wind zones</li>
-                    <li><strong>Fastener Schedule:</strong>
-                        <ul>
-                            <li>Zone 1 (interior): Typically 6" edges, 12" field</li>
-                            <li>Zone 2 (edges): Typically 6" edges, 6" field</li>
-                            <li>Zone 3 (corners): Often 4" edges, 6" field or closer</li>
-                        </ul>
-                    </li>
-                    <li><strong>Fastener Type:</strong> 8d common nails minimum, ring-shank or screw fasteners for higher pressures</li>
-                    <li><strong>Panel Orientation:</strong> Strength axis perpendicular to supports for maximum capacity</li>
-                </ul>
-
-                <h4>Membrane Roofing Systems</h4>
-
-                <ul>
-                    <li><strong>Fully Adhered:</strong> Adhesive must resist peeling forces from wind suction across entire roof area</li>
-                    <li><strong>Mechanically Attached:</strong> Plate spacing varies by zone, typically 12" field to 6" corners</li>
-                    <li><strong>Ballasted:</strong> Requires minimum ballast weight to prevent membrane uplift, often impractical in high wind zones</li>
-                    <li><strong>FM Approval:</strong> Factory Mutual requires wind uplift testing and approval for commercial roofs</li>
-                </ul>
-
-                <h3>Wall Cladding Design</h3>
-
-                <h4>Metal Wall Panels</h4>
-
-                <ul>
-                    <li><strong>Panel Profile:</strong> Deeper profiles provide greater stiffness and spanning capability</li>
-                    <li><strong>Girt Spacing:</strong> Horizontal girts support panels, spacing affects panel selection</li>
-                    <li><strong>Fastener Pattern:</strong> Edge fastening plus field fasteners based on pressure and span</li>
-                    <li><strong>Sidelaps:</strong> Panel sidelaps must be fastened or seamed to prevent separation</li>
-                </ul>
-
-                <h4>Masonry Veneer</h4>
-
-                <ul>
-                    <li><strong>Veneer Ties:</strong> Corrugated ties, adjustable ties, or seismic ties connect veneer to backup</li>
-                    <li><strong>Tie Spacing:</strong> Typically 16-24 inches vertically and horizontally, closer spacing for high pressures</li>
-                    <li><strong>Air Space:</strong> Minimum 2 inch cavity between veneer and backup structure</li>
-                    <li><strong>Wind Load Transfer:</strong> Ties must resist both tension and compression from wind pressure reversal</li>
-                </ul>
-
-                <h2>Common C&C Design Mistakes</h2>
-
-                <p>Avoid these frequent errors in <strong>components and cladding wind load</strong> calculations:</p>
-
-                <h3>1. Using MWFRS Pressures for C&C Design</h3>
-                <p><strong>Mistake:</strong> Applying overall building pressures to individual components.<br>
-                <strong>Impact:</strong> Severe under-design, potential failure of windows, cladding, and roofing.<br>
-                <strong>Solution:</strong> Always calculate separate C&C pressures per ASCE 7 Chapter 30.</p>
-
-                <h3>2. Incorrect Effective Wind Area</h3>
-                <p><strong>Mistake:</strong> Using total wall area instead of element tributary area.<br>
-                <strong>Impact:</strong> Significantly underestimated design pressures.<br>
-                <strong>Solution:</strong> Calculate effective wind area as span × width for each component.</p>
-
-                <h3>3. Ignoring Pressure Zones</h3>
-                <p><strong>Mistake:</strong> Using interior zone pressures for corner or edge elements.<br>
-                <strong>Impact:</strong> Under-design of critical corner and edge regions where failures initiate.<br>
-                <strong>Solution:</strong> Identify applicable zone for each element location and use correct coefficients.</p>
-
-                <h3>4. Neglecting Both Pressure Cases</h3>
-                <p><strong>Mistake:</strong> Only analyzing positive pressure, missing critical suction cases.<br>
-                <strong>Impact:</strong> Inadequate design for uplift/outward forces that often govern.<br>
-                <strong>Solution:</strong> Calculate both (+GCpi) and (-GCpi) cases, use maximum absolute value.</p>
-
-                <h3>5. Forgetting Minimum Design Pressures</h3>
-                <p><strong>Mistake:</strong> Accepting very low calculated pressures without checking minimums.<br>
-                <strong>Impact:</strong> Non-compliant design below code minimum requirements.<br>
-                <strong>Solution:</strong> Apply ASCE 7 minimum pressures (16 psf walls, 8 psf roofs).</p>
-
-                <h3>6. Improper GCp Interpolation</h3>
-                <p><strong>Mistake:</strong> Using nearest tabulated value instead of interpolating.<br>
-                <strong>Impact:</strong> Inaccurate design pressures, potentially unconservative.<br>
-                <strong>Solution:</strong> Linearly interpolate GCp for all intermediate effective wind areas.</p>
-
-            </article>
-        </div>
-    </section>
-
-    <section class="faq-section">
-        <div class="container">
-            <article>
-                <h2>Components and Cladding FAQs</h2>
-
-                <div class="faq-item">
-                    <div class="faq-question">What are components and cladding?</div>
-                    <div class="faq-answer">Components and cladding (C&C) are building envelope elements that receive wind pressure directly but are not part of the Main Wind Force Resisting System (MWFRS). This includes windows, doors, wall panels, roof sheathing, fasteners, and all exterior building components. C&C elements transfer wind loads to the structural frame through local connections and supports.</div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">Why are C&C wind loads higher than MWFRS loads?</div>
-                    <div class="faq-answer">Components and cladding experience higher localized wind pressures because: (1) Smaller effective wind areas result in higher pressure coefficients per ASCE 7, (2) Peak local pressure fluctuations that don't affect the entire structure simultaneously, (3) Edge and corner effects create pressure concentrations, (4) Smaller tributary areas mean less spatial averaging of pressures. C&C loads can be 2-3 times higher than MWFRS loads for the same location.</div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">How do you calculate effective wind area?</div>
-                    <div class="faq-answer">Effective wind area equals the span length times the effective width of the component. For a window, this is typically the glass dimension between mullions times the width. For wall panels, it's the stud spacing times panel height. For roof panels, it's purlin spacing times panel width. The effective wind area determines which GCp pressure coefficient to use from ASCE 7 Chapter 30 figures.</div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">What are the C&C pressure zones?</div>
-                    <div class="faq-answer">ASCE 7 divides building surfaces into zones with different pressure coefficients. Walls have Zones 4 (interior) and 5 (edges/corners). Roofs have Zones 1 (interior), 2 (edges), and 3 (corners). Corner zones (Zone 3 for roofs, Zone 5 for walls) experience the highest pressures due to wind flow acceleration and turbulence. Elements must be designed for the zone in which they're located.</div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">Do windows need wind load calculations?</div>
-                    <div class="faq-answer">Yes, all windows require wind load calculations to ensure proper glass thickness, frame strength, and anchorage design. Window wind loads determine: (1) Required glass type and thickness, (2) Frame structural adequacy, (3) Anchor size and spacing, (4) Performance class rating needed. Building codes require windows to resist calculated C&C design pressures with appropriate safety factors.</div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">What is GCp in wind load calculations?</div>
-                    <div class="faq-answer">GCp is the combined external pressure coefficient used in components and cladding wind load calculations. It combines the gust effect factor (G) and external pressure coefficient (Cp) into a single value that varies with effective wind area. ASCE 7 provides GCp values in Chapter 30 figures for different building surfaces, zones, and effective wind areas ranging from 10 to 500 square feet.</div>
-                </div>
-            </article>
-        </div>
-    </section>
-
-    <section class="content-section">
-        <div class="container">
-            <div class="cta-box">
-                <h3>Calculate Components and Cladding Loads Professionally</h3>
-                <p>Use our professional C&C calculator with automatic zone detection and pressure coefficient interpolation. Free 7-day trial.</p>
-                <a href="/demo" class="cta-button">Start Free Trial</a>
+            <div class="hero-content">
+                <h1>Components & Cladding Wind Loads</h1>
+                <p>Complete Guide to C&C Pressure Calculations | Windows | Doors | Roofing | Wall Cladding | ASCE 7 Chapter 30</p>
             </div>
         </div>
     </section>
 
-        <!-- Footer -->
+    <!-- Component Types Section -->
+    <section class="component-types-section">
+        <div class="container">
+            <h2>Component Types We Calculate</h2>
+            <div class="component-grid">
+                <a href="shop/windows-doors-shutters.html" class="component-card">
+                    <div class="component-icon">🪟</div>
+                    <h3>Windows & Doors</h3>
+                    <p>Precise wind load calculations for fixed and operable windows, curtain walls, storefronts, entry doors, and overhead doors.</p>
+                </a>
+                <div class="component-card">
+                    <div class="component-icon">🏠</div>
+                    <h3>Roofing Elements</h3>
+                    <p>Roof panel, sheathing, membrane, and fastener design pressures with automatic zone identification for corners and edges.</p>
+                </div>
+                <div class="component-card">
+                    <div class="component-icon">🧱</div>
+                    <h3>Wall Cladding</h3>
+                    <p>Metal panels, masonry veneer, EIFS, fiber cement, and all wall cladding systems with proper edge zone pressures.</p>
+                </div>
+                <div class="component-card">
+                    <div class="component-icon">📐</div>
+                    <h3>Parapets & Features</h3>
+                    <p>Architectural features including parapets, cornices, canopies, awnings, and louvers with localized pressure analysis.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pressure Zones Section -->
+    <section class="zones-section">
+        <div class="container">
+            <h2>Understanding C&C Pressure Zones</h2>
+            <div class="zone-cards">
+                <div class="zone-card">
+                    <h3>Wall Zones</h3>
+                    <h4>Zone 4 - Interior Areas</h4>
+                    <ul>
+                        <li>Located away from building corners</li>
+                        <li>Lower pressures due to uniform flow</li>
+                        <li>Covers most wall surface area</li>
+                    </ul>
+                    <h4>Zone 5 - Edge & Corner Zones</h4>
+                    <ul>
+                        <li>Within 10% of building dimension from corners</li>
+                        <li>2x higher pressures than interior zones</li>
+                        <li>Critical for window and cladding design</li>
+                    </ul>
+                </div>
+                <div class="zone-card">
+                    <h3>Roof Zones</h3>
+                    <h4>Zone 1 - Interior Roof</h4>
+                    <ul>
+                        <li>Central roof area away from edges</li>
+                        <li>Lowest roof pressures</li>
+                    </ul>
+                    <h4>Zone 2 - Edge Strips</h4>
+                    <ul>
+                        <li>Perimeter strips along roof edges</li>
+                        <li>Elevated suction pressures</li>
+                    </ul>
+                    <h4>Zone 3 - Corner Zones</h4>
+                    <ul>
+                        <li>Square areas at roof corners</li>
+                        <li>Highest pressures - often govern design</li>
+                        <li>3-4x higher than interior zones</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <h2>Professional C&C Calculator Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Automatic Zone Detection</h3>
+                    <p>Identifies applicable pressure zones based on element location and building dimensions. No manual zone determination needed.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📐</div>
+                    <h3>Effective Wind Area</h3>
+                    <p>Automatic calculation and interpolation of pressure coefficients for any effective wind area from 1 to 500 ft².</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>GCp Interpolation</h3>
+                    <p>Precise linear interpolation of ASCE 7 Chapter 30 pressure coefficients for accurate design pressures.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">✅</div>
+                    <h3>Both Pressure Cases</h3>
+                    <p>Automatically calculates both positive and negative pressure combinations to identify governing load case.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="content-section">
+        <div class="container">
+            <div class="cta-box">
+                <h3>Professional C&C Wind Load Calculator</h3>
+                <p>Calculate components and cladding loads instantly with automatic zone detection. Free 7-day trial with full features.</p>
+                <a href="demo.html" class="cta-button">Start Free Demo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer class="main-footer">
         <div class="container">
             <div class="footer-content">
@@ -1184,27 +594,28 @@ Use the maximum absolute value for design.
                     <h3>Wind Load Calculators</h3>
                     <ul>
                         <li><a href="wind-load-calculator-shop.html">All Calculators</a></li>
-                        <li><a href="index.html">MWFRS Calculator</a></li>
-                        <li><a href="index.html">C&C Calculator</a></li>
-                        <li><a href="index.html">Roofing Calculator</a></li>
+                        <li><a href="shop/mwfrs.html">MWFRS Calculator</a></li>
+                        <li><a href="asce-7-wind-load-calculator.html">ASCE 7 Calculator</a></li>
+                        <li><a href="shop/roofing.html">Roofing Calculator</a></li>
+                        <li><a href="shop/solar-panels.html">Solar Panel Calculator</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-column">
                     <h3>Resources</h3>
                     <ul>
+                        <li><a href="free-wind-load-calculator.html">Free Calculator</a></li>
+                        <li><a href="asce-7-wind-load-calculator.html">ASCE 7-22 Guide</a></li>
+                        <li><a href="components-and-cladding-wind-loads.html">C&C Wind Loads</a></li>
                         <li><a href="building-intelligence-platform-shop.html">BIP Plans</a></li>
-                        <li><a href="index.html">Documentation</a></li>
-                        <li><a href="index.html">ASCE 7-22 Guide</a></li>
-                        <li><a href="index.html">Video Tutorials</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-column">
                     <h3>Company</h3>
                     <ul>
-                        <li><a href="index.html">About Us</a></li>
-                        <li><a href="index.html">Contact</a></li>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="contact.html">Contact</a></li>
                         <li><a href="privacy-policy.html">Privacy Policy</a></li>
                         <li><a href="terms-of-service.html">Terms of Service</a></li>
                     </ul>

@@ -2008,8 +2008,7 @@
                                 <label for="demo-risk-category">Risk Category</label>
                                 <select id="demo-risk-category" onchange="updateDemo()">
                                     <option value="II">Category II (Standard Buildings)</option>
-                                    <option value="III">Category III (Essential Facilities)</option>
-                                    <option value="IV">Category IV (Critical Facilities)</option>
+                                    <option value="III/IV">Category III/IV (Schools, Hospitals, Emergency Facilities)</option>
                                 </select>
                             </div>
                             
@@ -2471,10 +2470,8 @@
             let Iw;
             if (riskCategory === 'II') {
                 Iw = 1.0;  // Standard buildings
-            } else if (riskCategory === 'III') {
-                Iw = 1.15; // Essential facilities (schools, jails, power stations)
-            } else { // Category IV
-                Iw = 1.15; // Critical facilities (hospitals, fire stations, emergency shelters)
+            } else { // Category III/IV
+                Iw = 1.15; // Schools, hospitals, emergency facilities
             }
 
             // Step 2: Velocity pressure exposure coefficient (Kh) - ASCE 7-22 Table 26.10-1

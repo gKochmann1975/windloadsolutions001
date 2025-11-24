@@ -443,34 +443,144 @@
             font-size: 2.2rem;
             font-weight: 800;
             color: #1f2937;
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
             text-align: center;
+        }
+
+        .applications-section .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #6b7280;
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .applications-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
         }
 
         .application-card {
             background: white;
-            border-radius: 15px;
-            padding: 2rem;
+            border-radius: 20px;
+            padding: 2.5rem;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+        }
+
+        .application-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .application-card:hover::before {
+            opacity: 1;
         }
 
         .application-card:hover {
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
-            transform: translateY(-3px);
+            transform: translateY(-8px);
+        }
+
+        /* Windows Card - Blue */
+        .application-card.windows {
+            border-color: #e0f2fe;
+        }
+
+        .application-card.windows::before {
+            background: linear-gradient(90deg, #0ea5e9, #3b82f6);
+        }
+
+        .application-card.windows:hover {
+            box-shadow: 0 15px 40px rgba(14, 165, 233, 0.25);
+            border-color: #0ea5e9;
+        }
+
+        .application-card.windows .application-icon {
+            background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%);
+            box-shadow: 0 8px 25px rgba(14, 165, 233, 0.3);
+        }
+
+        .application-card.windows h3 {
+            color: #0369a1;
+        }
+
+        .application-card.windows .badge {
+            background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+            color: #0369a1;
+        }
+
+        /* Doors Card - Orange */
+        .application-card.doors {
+            border-color: #fed7aa;
+        }
+
+        .application-card.doors::before {
+            background: linear-gradient(90deg, #f97316, #ea580c);
+        }
+
+        .application-card.doors:hover {
+            box-shadow: 0 15px 40px rgba(249, 115, 22, 0.25);
+            border-color: #f97316;
+        }
+
+        .application-card.doors .application-icon {
+            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+            box-shadow: 0 8px 25px rgba(249, 115, 22, 0.3);
+        }
+
+        .application-card.doors h3 {
+            color: #c2410c;
+        }
+
+        .application-card.doors .badge {
+            background: linear-gradient(135deg, #fed7aa 0%, #fdba74 100%);
+            color: #c2410c;
+        }
+
+        /* Storm Shutters Card - Purple */
+        .application-card.shutters {
+            border-color: #e9d5ff;
+        }
+
+        .application-card.shutters::before {
+            background: linear-gradient(90deg, #a855f7, #9333ea);
+        }
+
+        .application-card.shutters:hover {
+            box-shadow: 0 15px 40px rgba(168, 85, 247, 0.25);
+            border-color: #a855f7;
+        }
+
+        .application-card.shutters .application-icon {
+            background: linear-gradient(135deg, #a855f7 0%, #9333ea 100%);
+            box-shadow: 0 8px 25px rgba(168, 85, 247, 0.3);
+        }
+
+        .application-card.shutters h3 {
+            color: #7e22ce;
+        }
+
+        .application-card.shutters .badge {
+            background: linear-gradient(135deg, #e9d5ff 0%, #d8b4fe 100%);
+            color: #7e22ce;
         }
 
         .application-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #059669 0%, #10b981 100%);
-            border-radius: 12px;
+            width: 70px;
+            height: 70px;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -479,21 +589,42 @@
 
         .application-icon i {
             color: white;
-            font-size: 1.75rem;
+            font-size: 2rem;
+        }
+
+        .application-card .badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
         }
 
         .application-card h3 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #1f2937;
+            font-size: 1.5rem;
+            font-weight: 800;
             margin-bottom: 1rem;
         }
 
-        .application-card p {
-            font-size: 1rem;
-            color: #6b7280;
+        .application-card .description {
+            font-size: 1.05rem;
+            color: #4b5563;
             line-height: 1.7;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .application-card .highlight-text {
+            background: #fef3c7;
+            border-left: 3px solid #f59e0b;
+            padding: 1rem 1.25rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            color: #92400e;
+            font-size: 0.95rem;
         }
 
         .application-card ul {
@@ -501,19 +632,32 @@
         }
 
         .application-card ul li {
-            padding-left: 1.5rem;
-            margin-bottom: 0.5rem;
+            padding-left: 1.75rem;
+            margin-bottom: 0.75rem;
             position: relative;
-            font-size: 0.95rem;
-            color: #4b5563;
+            font-size: 1rem;
+            color: #374151;
+            line-height: 1.6;
         }
 
         .application-card ul li::before {
-            content: '→';
+            content: '✓';
             position: absolute;
             left: 0;
-            color: #10b981;
             font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .application-card.windows ul li::before {
+            color: #0ea5e9;
+        }
+
+        .application-card.doors ul li::before {
+            color: #f97316;
+        }
+
+        .application-card.shutters ul li::before {
+            color: #a855f7;
         }
 
         /* CTA Section */
@@ -782,62 +926,73 @@
 
         <!-- Common Applications -->
         <div class="applications-section" id="applications">
-            <h2>Common C&C Applications</h2>
+            <h2>Hurricane-Resistant C&C Applications</h2>
+            <p class="section-subtitle">Critical components and cladding calculations for coastal and hurricane-prone regions</p>
 
             <div class="applications-grid">
-                <div class="application-card">
+                <div class="application-card windows">
                     <div class="application-icon">
                         <i class="fas fa-window-maximize"></i>
                     </div>
-                    <h3>Window & Glazing Systems</h3>
-                    <p>Window systems must resist both positive and negative C&C pressures. Critical design considerations:</p>
+                    <div class="badge">Impact Resistant</div>
+                    <h3>Windows & Glazing</h3>
+                    <p class="description">Impact-resistant windows are the first line of defense against hurricane-force winds. Proper C&C calculations ensure glazing systems withstand extreme pressures without failure.</p>
+
+                    <div class="highlight-text">
+                        <i class="fas fa-exclamation-triangle"></i> Window failures are the leading cause of structural damage during hurricanes
+                    </div>
+
                     <ul>
-                        <li>Glass thickness and type</li>
-                        <li>Frame strength and anchorage</li>
-                        <li>Mullion and transom capacity</li>
-                        <li>Fastener design for frame-to-wall connections</li>
+                        <li>Impact-resistant laminated glass sizing</li>
+                        <li>Design pressure ratings (DP 30-80)</li>
+                        <li>Large missile impact testing compliance</li>
+                        <li>Frame anchorage to structural openings</li>
+                        <li>Positive and negative pressure resistance</li>
+                        <li>Coastal zone wind-borne debris requirements</li>
                     </ul>
                 </div>
 
-                <div class="application-card">
+                <div class="application-card doors">
                     <div class="application-icon">
                         <i class="fas fa-door-open"></i>
                     </div>
-                    <h3>Doors & Storefronts</h3>
-                    <p>Doors experience high localized pressures, especially in hurricane-prone regions:</p>
+                    <div class="badge">High Wind Rated</div>
+                    <h3>Doors & Entry Systems</h3>
+                    <p class="description">Entry doors face extreme wind pressures combined with impact from flying debris. C&C calculations determine the required design pressure ratings and reinforcement details.</p>
+
+                    <div class="highlight-text">
+                        <i class="fas fa-exclamation-triangle"></i> Door breaches create internal pressurization that can destroy roof structures
+                    </div>
+
                     <ul>
-                        <li>Door leaf design pressure rating</li>
-                        <li>Impact resistance requirements</li>
-                        <li>Hardware and locking mechanisms</li>
-                        <li>Frame anchorage to rough opening</li>
+                        <li>Impact-rated door assemblies</li>
+                        <li>Design pressure (DP) certification requirements</li>
+                        <li>Heavy-duty hinges and multi-point locking</li>
+                        <li>Frame-to-wall anchoring specifications</li>
+                        <li>Garage door reinforcement systems</li>
+                        <li>Hurricane-rated sliding glass doors</li>
                     </ul>
                 </div>
 
-                <div class="application-card">
+                <div class="application-card shutters">
                     <div class="application-icon">
-                        <i class="fas fa-square"></i>
+                        <i class="fas fa-shield-alt"></i>
                     </div>
-                    <h3>Wall Panels & Cladding</h3>
-                    <p>Metal panels, masonry veneer, and curtain walls require detailed C&C analysis:</p>
-                    <ul>
-                        <li>Panel spanning and support spacing</li>
-                        <li>Fastener spacing and capacity</li>
-                        <li>Connection to backup structure</li>
-                        <li>Thermal movement considerations</li>
-                    </ul>
-                </div>
+                    <div class="badge">Storm Protection</div>
+                    <h3>Storm Shutters & Panels</h3>
+                    <p class="description">Storm shutters provide critical protection when impact-resistant windows aren't present. C&C analysis ensures shutters can withstand design wind pressures and debris impacts.</p>
 
-                <div class="application-card">
-                    <div class="application-icon">
-                        <i class="fas fa-home"></i>
+                    <div class="highlight-text">
+                        <i class="fas fa-exclamation-triangle"></i> Properly installed shutters can prevent catastrophic building pressurization
                     </div>
-                    <h3>Roof Panels & Sheathing</h3>
-                    <p>Roofs experience the highest C&C pressures, particularly corners and edges:</p>
+
                     <ul>
-                        <li>Roof panel gauge and spanning</li>
-                        <li>Fastener patterns and edge spacing</li>
-                        <li>Roof sheathing thickness and fastening</li>
-                        <li>Edge securement and flashing details</li>
+                        <li>Accordion shutter track and panel design</li>
+                        <li>Roll-down shutter box and guide sizing</li>
+                        <li>Colonial shutter hinge and fastener spacing</li>
+                        <li>Plywood panel thickness and attachment</li>
+                        <li>Bahama shutter arm and anchorage design</li>
+                        <li>Wind load and impact testing compliance</li>
                     </ul>
                 </div>
             </div>

@@ -823,108 +823,7 @@
             </div>
         </div>
 
-        <!-- MWFRS vs C&C Comparison -->
-        <div class="comparison-section">
-            <h2>MWFRS vs. Components & Cladding: Key Differences</h2>
-            <table class="comparison-table">
-                <thead>
-                    <tr>
-                        <th>Aspect</th>
-                        <th>MWFRS (Main Wind Force Resisting System)</th>
-                        <th>Components & Cladding (C&C)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Definition</strong></td>
-                        <td>Structural system providing stability and load transfer to foundation</td>
-                        <td>Envelope elements receiving direct wind loads</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Elements</strong></td>
-                        <td>Columns, beams, bracing, shear walls, diaphragms</td>
-                        <td>Windows, doors, panels, sheathing, fasteners</td>
-                    </tr>
-                    <tr>
-                        <td><strong>ASCE 7 Chapter</strong></td>
-                        <td>Chapters 27 & 28</td>
-                        <td>Chapter 30</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Pressure Magnitude</strong></td>
-                        <td>Lower (spatially averaged)</td>
-                        <td>Higher (localized peaks)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Effective Area</strong></td>
-                        <td>Large tributary areas</td>
-                        <td>Small component areas (10-500 sf)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Coefficients Used</strong></td>
-                        <td>Cp (external pressure coefficient)</td>
-                        <td>GCp (combined gust/pressure coefficient)</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- Pressure Zones -->
-        <div class="zones-section">
-            <h2>Understanding C&C Pressure Zones</h2>
-            <p style="text-align: center; max-width: 800px; margin: 0 auto 2rem; color: #6b7280; font-size: 1.1rem;">ASCE 7 divides building surfaces into distinct zones with different pressure coefficients based on distance from discontinuities</p>
-
-            <div class="zones-grid">
-                <div class="zone-card">
-                    <div class="zone-icon">1</div>
-                    <h3>Corner Zones</h3>
-                    <p>Highest pressures occur at building corners where wind accelerates around edges. Typically extends distance 'a' from corners (where a = 10% of least horizontal dimension, min 3 ft).</p>
-                </div>
-
-                <div class="zone-card">
-                    <div class="zone-icon">2</div>
-                    <h3>Edge Zones</h3>
-                    <p>Intermediate pressures along building perimeters near roof edges and wall corners. Extends distance 'a' from discontinuities but excludes corner zones.</p>
-                </div>
-
-                <div class="zone-card">
-                    <div class="zone-icon">3</div>
-                    <h3>Field Zones</h3>
-                    <p>Lower pressures in interior building areas away from edges and corners. Represents the majority of building surface area with more uniform pressure distribution.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Calculation Example -->
-        <div class="calc-example">
-            <h3><i class="fas fa-calculator"></i> Sample C&C Calculation Process</h3>
-
-            <div class="example-step">
-                <h4>Step 1: Determine Effective Wind Area</h4>
-                <p>Calculate the effective wind area for the component. For a 4 ft × 6 ft window:</p>
-                <code>Effective Wind Area = 4 ft × 6 ft = 24 square feet</code>
-            </div>
-
-            <div class="example-step">
-                <h4>Step 2: Calculate Velocity Pressure (qh)</h4>
-                <p>Apply ASCE 7 equation considering wind speed, exposure, elevation, and topography:</p>
-                <code>qh = 0.00256 × Kh × Kzt × Kd × V² = 35.2 psf (example value)</code>
-            </div>
-
-            <div class="example-step">
-                <h4>Step 3: Select GCp Coefficients</h4>
-                <p>From ASCE 7 Chapter 30 figures based on zone and effective area. For wall in edge zone with 24 sf area:</p>
-                <code>GCp (positive) = +0.85<br>GCp (negative) = -1.15</code>
-            </div>
-
-            <div class="example-step">
-                <h4>Step 4: Calculate Design Pressures</h4>
-                <p>Apply pressure equation with internal pressure coefficient:</p>
-                <code>p = qh[(GCp) - (GCpi)]<br>p (positive) = 35.2 × [(+0.85) - (-0.18)] = 36.3 psf<br>p (negative) = 35.2 × [(-1.15) - (+0.18)] = -46.8 psf</code>
-            </div>
-        </div>
-
-        <!-- Common Applications -->
+        <!-- Hurricane-Resistant C&C Applications -->
         <div class="applications-section" id="applications">
             <h2>Hurricane-Resistant C&C Applications</h2>
             <p class="section-subtitle">Critical components and cladding calculations for coastal and hurricane-prone regions</p>
@@ -995,6 +894,61 @@
                         <li>Wind load and impact testing compliance</li>
                     </ul>
                 </div>
+            </div>
+        </div>
+
+        <!-- Pressure Zones -->
+        <div class="zones-section">
+            <h2>Understanding C&C Pressure Zones</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 2rem; color: #6b7280; font-size: 1.1rem;">ASCE 7 divides building surfaces into distinct zones with different pressure coefficients based on distance from discontinuities</p>
+
+            <div class="zones-grid">
+                <div class="zone-card">
+                    <div class="zone-icon">1</div>
+                    <h3>Corner Zones</h3>
+                    <p>Highest pressures occur at building corners where wind accelerates around edges. Typically extends distance 'a' from corners (where a = 10% of least horizontal dimension, min 3 ft).</p>
+                </div>
+
+                <div class="zone-card">
+                    <div class="zone-icon">2</div>
+                    <h3>Edge Zones</h3>
+                    <p>Intermediate pressures along building perimeters near roof edges and wall corners. Extends distance 'a' from discontinuities but excludes corner zones.</p>
+                </div>
+
+                <div class="zone-card">
+                    <div class="zone-icon">3</div>
+                    <h3>Field Zones</h3>
+                    <p>Lower pressures in interior building areas away from edges and corners. Represents the majority of building surface area with more uniform pressure distribution.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Calculation Example -->
+        <div class="calc-example">
+            <h3><i class="fas fa-calculator"></i> Sample C&C Calculation Process</h3>
+
+            <div class="example-step">
+                <h4>Step 1: Determine Effective Wind Area</h4>
+                <p>Calculate the effective wind area for the component. For a 4 ft × 6 ft window:</p>
+                <code>Effective Wind Area = 4 ft × 6 ft = 24 square feet</code>
+            </div>
+
+            <div class="example-step">
+                <h4>Step 2: Calculate Velocity Pressure (qh)</h4>
+                <p>Apply ASCE 7 equation considering wind speed, exposure, elevation, and topography:</p>
+                <code>qh = 0.00256 × Kh × Kzt × Kd × V² = 35.2 psf (example value)</code>
+            </div>
+
+            <div class="example-step">
+                <h4>Step 3: Select GCp Coefficients</h4>
+                <p>From ASCE 7 Chapter 30 figures based on zone and effective area. For wall in edge zone with 24 sf area:</p>
+                <code>GCp (positive) = +0.85<br>GCp (negative) = -1.15</code>
+            </div>
+
+            <div class="example-step">
+                <h4>Step 4: Calculate Design Pressures</h4>
+                <p>Apply pressure equation with internal pressure coefficient:</p>
+                <code>p = qh[(GCp) - (GCpi)]<br>p (positive) = 35.2 × [(+0.85) - (-0.18)] = 36.3 psf<br>p (negative) = 35.2 × [(-1.15) - (+0.18)] = -46.8 psf</code>
             </div>
         </div>
 

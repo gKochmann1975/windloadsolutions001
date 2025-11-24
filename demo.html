@@ -1668,6 +1668,247 @@
             box-shadow: 0 10px 40px rgba(255, 136, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
 
+        /* ===== STUNNING DEMO CALCULATOR STYLES ===== */
+
+        /* Animated gradient background for demo section */
+        .demo-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Glassmorphism card effects */
+        .demo-inputs,
+        .demo-results {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3),
+                        0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .demo-inputs:hover,
+        .demo-results:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4),
+                        0 0 0 1px rgba(255, 255, 255, 0.3) inset;
+        }
+
+        /* Animated result cards with glow */
+        .result-item {
+            background: linear-gradient(135deg, #f6f8fb 0%, #ffffff 100%);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 2px solid transparent;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .result-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .result-item:hover::before {
+            left: 100%;
+        }
+
+        .result-item.positive {
+            border-color: #f59e0b;
+            background: linear-gradient(135deg, #fef3c7 0%, #fef9c3 100%);
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.3);
+        }
+
+        .result-item.negative {
+            border-color: #06b6d4;
+            background: linear-gradient(135deg, #cffafe 0%, #e0f2fe 100%);
+            box-shadow: 0 8px 25px rgba(6, 182, 212, 0.3);
+        }
+
+        .result-item.positive:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 35px rgba(245, 158, 11, 0.5);
+        }
+
+        .result-item.negative:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 35px rgba(6, 182, 212, 0.5);
+        }
+
+        /* Animated result values with pulse */
+        .result-value {
+            font-size: 2rem !important;
+            font-weight: 800 !important;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .result-item.positive .result-value {
+            background: linear-gradient(135deg, #f59e0b, #dc2626);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .result-item.negative .result-value {
+            background: linear-gradient(135deg, #06b6d4, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        /* Premium input styling with glow */
+        .demo-inputs .input-group select,
+        .demo-inputs .input-group input {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 0.875rem 1rem;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .demo-inputs .input-group select:focus,
+        .demo-inputs .input-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1),
+                        0 4px 12px rgba(102, 126, 234, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .demo-inputs .input-group select:hover,
+        .demo-inputs .input-group input:hover {
+            border-color: #a78bfa;
+        }
+
+        /* Calculate button with gradient animation */
+        .calculate-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-size: 200% 200%;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            animation: gradientButton 3s ease infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes gradientButton {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .calculate-btn::after {
+            content: '→';
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%) translateX(0);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+            padding-right: 3rem;
+        }
+
+        .calculate-btn:hover::after {
+            opacity: 1;
+            transform: translateY(-50%) translateX(5px);
+        }
+
+        .calculate-btn:active {
+            transform: translateY(-1px);
+        }
+
+        /* Demo banner with shimmer effect */
+        .demo-banner {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .demo-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(255, 255, 255, 0.3) 50%,
+                transparent 70%
+            );
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        /* Formula display with premium styling */
+        .formula-display {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .formula-display h4 {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
         /* Responsive grid for demo calculator */
         @media (max-width: 968px) {
             .demo-calculator-grid {
@@ -1993,9 +2234,13 @@
         <!-- Demo Calculator -->
         <section class="demo-section" id="demo-calculator">
             <div class="container">
-                <div class="demo-header">
-                    <h2>Interactive Wind Calculator Demo</h2>
-                    <p style="color: #64748b; font-size: 1.2rem; max-width: 700px; margin: 0 auto;">Experience Wind Calculator functionality through our interactive demonstration. See professional calculation capabilities before starting your trial.</p>
+                <div class="demo-header" style="text-align: center; margin-bottom: 3rem;">
+                    <h2 style="font-size: 3rem; font-weight: 900; color: white; margin-bottom: 1rem; text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);">
+                        Interactive Wind Calculator Demo
+                    </h2>
+                    <p style="color: rgba(255, 255, 255, 0.95); font-size: 1.3rem; max-width: 700px; margin: 0 auto; font-weight: 500; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);">
+                        Experience real-time ASCE 7-22 calculations with stunning visualizations
+                    </p>
                 </div>
                 
                 <!-- Side-by-side layout container -->
@@ -2038,21 +2283,21 @@
                             ✅ ASCE 7-22 MWFRS Calculations (Simplified Demo)
                         </div>
 
-                        <h3 style="color: #181E57; margin-bottom: 1.5rem;">Wind Load Results</h3>
+                        <h3 style="color: #181E57; margin-bottom: 1.5rem; font-weight: 800;">Wind Load Results</h3>
                         <div class="results-grid">
-                            <div class="result-item">
+                            <div class="result-item positive">
                                 <span class="result-label">Windward Wall:</span>
                                 <span class="result-value" id="zone4-pressure">+0.0 psf</span>
                             </div>
-                            <div class="result-item">
+                            <div class="result-item negative">
                                 <span class="result-label">Roof Suction:</span>
                                 <span class="result-value" id="zone5-pressure">-0.0 psf</span>
                             </div>
-                            <div class="result-item">
+                            <div class="result-item positive">
                                 <span class="result-label">MWFRS Windward:</span>
                                 <span class="result-value" id="mwfrs-windward">+0.0 psf</span>
                             </div>
-                            <div class="result-item">
+                            <div class="result-item negative">
                                 <span class="result-label">MWFRS Leeward:</span>
                                 <span class="result-value" id="mwfrs-leeward">-0.0 psf</span>
                             </div>
@@ -2061,8 +2306,8 @@
                 </div>
 
                 <!-- Formula Display - Full Width Below -->
-                <div style="background: #f8fafc; border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem; border-left: 4px solid #3b82f6;">
-                    <h4 style="color: #181E57; margin-bottom: 1rem; font-size: 1.1rem;">📐 ASCE 7-22 Calculation Formulas</h4>
+                <div class="formula-display">
+                    <h4 style="margin-bottom: 1rem; font-size: 1.3rem; font-weight: 800;">📐 ASCE 7-22 Calculation Formulas</h4>
 
                     <div style="font-family: 'Courier New', monospace; font-size: 0.9rem; line-height: 2;">
                         <p style="margin-bottom: 0.75rem; color: #475569;">

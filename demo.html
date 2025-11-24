@@ -2463,10 +2463,21 @@
             const windSpeed = parseFloat(document.getElementById('demo-wind-speed').value);
             const exposure = document.getElementById('demo-exposure').value;
             const height = parseFloat(document.getElementById('demo-height').value);
+            const riskCategory = document.getElementById('demo-risk-category').value;
 
             // ASCE 7-22 MWFRS Directional Procedure (Simplified)
 
-            // Step 1: Velocity pressure exposure coefficient (Kh) - ASCE 7-22 Table 26.10-1
+            // Step 1: Importance Factor (Iw) based on Risk Category - ASCE 7-22 Table 1.5-2
+            let Iw;
+            if (riskCategory === 'II') {
+                Iw = 1.0;  // Standard buildings
+            } else if (riskCategory === 'III') {
+                Iw = 1.15; // Essential facilities (schools, jails, power stations)
+            } else { // Category IV
+                Iw = 1.15; // Critical facilities (hospitals, fire stations, emergency shelters)
+            }
+
+            // Step 2: Velocity pressure exposure coefficient (Kh) - ASCE 7-22 Table 26.10-1
             let Kh;
             const heightFt = height;
 
@@ -2492,30 +2503,34 @@
                 else Kh = 1.19 + (heightFt - 60) * 0.002; // Approximate for > 60ft
             }
 
-            // Step 2: Topographic factor (Kzt) - Assume flat terrain = 1.0
+            // Step 3: Topographic factor (Kzt) - Assume flat terrain = 1.0
             const Kzt = 1.0;
 
-            // Step 3: Wind directionality factor (Kd) - ASCE 7-22 Table 26.6-1
+            // Step 4: Wind directionality factor (Kd) - ASCE 7-22 Table 26.6-1
             // For buildings = 0.85
             const Kd = 0.85;
 
-            // Step 4: Calculate velocity pressure (qh) - ASCE 7-22 Equation 26.10-1
-            // qh = 0.00256 * Kh * Kzt * Kd * V^2 (psf)
-            const qh = 0.00256 * Kh * Kzt * Kd * Math.pow(windSpeed, 2);
+            // Step 5: Apply importance factor to wind speed
+            // V_adjusted = V * sqrt(Iw)
+            const V_adjusted = windSpeed * Math.sqrt(Iw);
 
-            // Step 5: External pressure coefficients (Cp) for rectangular building
+            // Step 6: Calculate velocity pressure (qh) - ASCE 7-22 Equation 26.10-1
+            // qh = 0.00256 * Kh * Kzt * Kd * V^2 (psf)
+            const qh = 0.00256 * Kh * Kzt * Kd * Math.pow(V_adjusted, 2);
+
+            // Step 7: External pressure coefficients (Cp) for rectangular building
             // ASCE 7-22 Figure 27.3-1 (simplified)
             const Cp_windward = 0.8;   // Windward wall
             const Cp_leeward = -0.5;   // Leeward wall
             const Cp_side = -0.7;      // Side walls
             const Cp_roof = -0.9;      // Roof (simplified, worst case)
 
-            // Step 6: Internal pressure coefficient (GCpi)
+            // Step 8: Internal pressure coefficient (GCpi)
             // ASCE 7-22 Section 26.13 - Enclosed building
             const GCpi_positive = 0.18;
             const GCpi_negative = -0.18;
 
-            // Step 7: Calculate design pressures (p = qh * [(GCp) - (GCpi)])
+            // Step 9: Calculate design pressures (p = qh * [(GCp) - (GCpi)])
             // ASCE 7-22 Equation 27.3-1
 
             // Windward wall

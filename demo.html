@@ -1668,6 +1668,14 @@
             box-shadow: 0 10px 40px rgba(255, 136, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
 
+        /* Responsive grid for demo calculator */
+        @media (max-width: 968px) {
+            .demo-calculator-grid {
+                grid-template-columns: 1fr !important;
+                gap: 1.5rem !important;
+            }
+        }
+
         @media (max-width: 480px) {
             /* Hide desktop hero content and CTAs on mobile */
             .hero-section h1,
@@ -1990,10 +1998,12 @@
                     <p style="color: #64748b; font-size: 1.2rem; max-width: 700px; margin: 0 auto;">Experience Wind Calculator functionality through our interactive demonstration. See professional calculation capabilities before starting your trial.</p>
                 </div>
                 
-                <div class="demo-calculator">
+                <!-- Side-by-side layout container -->
+                <div class="demo-calculator-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
+                    <!-- Left Column: Inputs -->
                     <div class="demo-inputs">
-                        <h3 style="color: #181E57; margin-bottom: 1.5rem;">Wind Calculator Building Parameters</h3>
-                        <div class="input-grid">
+                        <h3 style="color: #181E57; margin-bottom: 1.5rem;">Building Parameters</h3>
+                        <div style="display: flex; flex-direction: column; gap: 1.25rem;">
                             <div class="input-group">
                                 <label for="demo-wind-speed">Basic Wind Speed (mph)</label>
                                 <select id="demo-wind-speed" onchange="updateDemo()">
@@ -2003,7 +2013,7 @@
                                     <option value="180">180 mph (Extreme Zone)</option>
                                 </select>
                             </div>
-                            
+
                             <div class="input-group">
                                 <label for="demo-exposure">Exposure Category</label>
                                 <select id="demo-exposure" onchange="updateDemo()">
@@ -2012,17 +2022,18 @@
                                     <option value="D">Exposure D (Coastal Areas)</option>
                                 </select>
                             </div>
-                            
+
                             <div class="input-group">
                                 <label for="demo-height">Building Height (ft)</label>
                                 <input type="number" id="demo-height" value="30" min="15" max="200" onchange="updateDemo()">
                             </div>
+
+                            <button class="calculate-btn" onclick="calculateDemo()">Calculate Wind Loads</button>
                         </div>
-                        
-                        <button class="calculate-btn" onclick="calculateDemo()">Preview Wind Calculations</button>
                     </div>
-                    
-                    <div class="demo-results" id="demo-results">
+
+                    <!-- Right Column: Results -->
+                    <div class="demo-results" id="demo-results" style="display: block; min-height: 300px;">
                         <div class="demo-banner" id="demo-banner">
                             ✅ ASCE 7-22 MWFRS Calculations (Simplified Demo)
                         </div>
@@ -2046,46 +2057,47 @@
                                 <span class="result-value" id="mwfrs-leeward">-0.0 psf</span>
                             </div>
                         </div>
-
-                        <!-- Formula Display -->
-                        <div style="background: #f8fafc; border-radius: 12px; padding: 1.5rem; margin-top: 2rem; border-left: 4px solid #3b82f6;">
-                            <h4 style="color: #181E57; margin-bottom: 1rem; font-size: 1.1rem;">📐 ASCE 7-22 Calculation Formulas</h4>
-
-                            <div style="font-family: 'Courier New', monospace; font-size: 0.9rem; line-height: 2;">
-                                <p style="margin-bottom: 0.75rem; color: #475569;">
-                                    <strong>Step 1: Velocity Pressure</strong> (Eq. 26.10-1)
-                                </p>
-                                <p style="background: white; padding: 0.75rem; border-radius: 6px; margin-bottom: 1rem; color: #0f172a;">
-                                    q<sub>h</sub> = 0.00256 × K<sub>h</sub> × K<sub>zt</sub> × K<sub>d</sub> × V²<br>
-                                    q<sub>h</sub> = 0.00256 × <span id="formula-kh" style="color: #3b82f6; font-weight: bold;">0.000</span> × <span id="formula-kzt" style="color: #3b82f6; font-weight: bold;">1.00</span> × <span id="formula-kd" style="color: #3b82f6; font-weight: bold;">0.85</span> × (<span id="formula-v" style="color: #3b82f6; font-weight: bold;">115</span>)²<br>
-                                    q<sub>h</sub> = <span id="formula-qh" style="color: #10b981; font-weight: bold;">0.00</span> psf
-                                </p>
-
-                                <p style="margin-bottom: 0.75rem; color: #475569;">
-                                    <strong>Step 2: Design Pressure</strong> (Eq. 27.3-1)
-                                </p>
-                                <p style="background: white; padding: 0.75rem; border-radius: 6px; color: #0f172a;">
-                                    p = q<sub>h</sub> × [(C<sub>p</sub>) - (GC<sub>pi</sub>)]<br>
-                                    p = <span id="formula-qh-2" style="color: #3b82f6; font-weight: bold;">0.00</span> × [<span id="formula-cp-windward" style="color: #3b82f6; font-weight: bold;">0.80</span> - (<span id="formula-gcpi" style="color: #3b82f6; font-weight: bold;">±0.18</span>)]<br>
-                                    p = <span id="formula-p-windward" style="color: #10b981; font-weight: bold;">0.0</span> psf
-                                </p>
-
-                                <p style="margin-top: 1rem; font-size: 0.85rem; color: #64748b; font-family: Arial, sans-serif;">
-                                    <strong>Where:</strong> K<sub>h</sub> = velocity pressure coefficient (Table 26.10-1),
-                                    K<sub>zt</sub> = topographic factor (1.0 for flat terrain),
-                                    K<sub>d</sub> = wind directionality factor (0.85 for buildings),
-                                    C<sub>p</sub> = external pressure coefficient (Fig. 27.3-1),
-                                    GC<sub>pi</sub> = internal pressure coefficient (±0.18 for enclosed buildings)
-                                </p>
-                            </div>
-                        </div>
-                        
-                        <div style="text-align: center; padding: 2rem; background: linear-gradient(45deg, #e6fffa, #f0fff4); border-radius: 12px; margin-top: 2rem;">
-                            <p style="font-weight: 700; color: #181E57; margin-bottom: 1rem;">Want unlimited professional calculations?</p>
-                            <button class="trial-button" onclick="scrollToTrial()" style="width: auto; padding: 1rem 2rem;">Start Your Free Trial</button>
-                            <p style="font-size: 0.8rem; color: #64748b; margin-top: 0.5rem;">✅ 7-day free trial • ✅ No credit card required</p>
-                        </div>
                     </div>
+                </div>
+
+                <!-- Formula Display - Full Width Below -->
+                <div style="background: #f8fafc; border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem; border-left: 4px solid #3b82f6;">
+                    <h4 style="color: #181E57; margin-bottom: 1rem; font-size: 1.1rem;">📐 ASCE 7-22 Calculation Formulas</h4>
+
+                    <div style="font-family: 'Courier New', monospace; font-size: 0.9rem; line-height: 2;">
+                        <p style="margin-bottom: 0.75rem; color: #475569;">
+                            <strong>Step 1: Velocity Pressure</strong> (Eq. 26.10-1)
+                        </p>
+                        <p style="background: white; padding: 0.75rem; border-radius: 6px; margin-bottom: 1rem; color: #0f172a;">
+                            q<sub>h</sub> = 0.00256 × K<sub>h</sub> × K<sub>zt</sub> × K<sub>d</sub> × V²<br>
+                            q<sub>h</sub> = 0.00256 × <span id="formula-kh" style="color: #3b82f6; font-weight: bold;">0.000</span> × <span id="formula-kzt" style="color: #3b82f6; font-weight: bold;">1.00</span> × <span id="formula-kd" style="color: #3b82f6; font-weight: bold;">0.85</span> × (<span id="formula-v" style="color: #3b82f6; font-weight: bold;">115</span>)²<br>
+                            q<sub>h</sub> = <span id="formula-qh" style="color: #10b981; font-weight: bold;">0.00</span> psf
+                        </p>
+
+                        <p style="margin-bottom: 0.75rem; color: #475569;">
+                            <strong>Step 2: Design Pressure</strong> (Eq. 27.3-1)
+                        </p>
+                        <p style="background: white; padding: 0.75rem; border-radius: 6px; color: #0f172a;">
+                            p = q<sub>h</sub> × [(C<sub>p</sub>) - (GC<sub>pi</sub>)]<br>
+                            p = <span id="formula-qh-2" style="color: #3b82f6; font-weight: bold;">0.00</span> × [<span id="formula-cp-windward" style="color: #3b82f6; font-weight: bold;">0.80</span> - (<span id="formula-gcpi" style="color: #3b82f6; font-weight: bold;">±0.18</span>)]<br>
+                            p = <span id="formula-p-windward" style="color: #10b981; font-weight: bold;">0.0</span> psf
+                        </p>
+
+                        <p style="margin-top: 1rem; font-size: 0.85rem; color: #64748b; font-family: Arial, sans-serif;">
+                            <strong>Where:</strong> K<sub>h</sub> = velocity pressure coefficient (Table 26.10-1),
+                            K<sub>zt</sub> = topographic factor (1.0 for flat terrain),
+                            K<sub>d</sub> = wind directionality factor (0.85 for buildings),
+                            C<sub>p</sub> = external pressure coefficient (Fig. 27.3-1),
+                            GC<sub>pi</sub> = internal pressure coefficient (±0.18 for enclosed buildings)
+                        </p>
+                    </div>
+                </div>
+
+                <!-- CTA - Full Width Below -->
+                <div style="text-align: center; padding: 2rem; background: linear-gradient(45deg, #e6fffa, #f0fff4); border-radius: 12px;">
+                    <p style="font-weight: 700; color: #181E57; margin-bottom: 1rem;">Want unlimited professional calculations?</p>
+                    <button class="trial-button" onclick="scrollToTrial()" style="width: auto; padding: 1rem 2rem;">Start Your Free Trial</button>
+                    <p style="font-size: 0.8rem; color: #64748b; margin-top: 0.5rem;">✅ 7-day free trial • ✅ No credit card required</p>
                 </div>
             </div>
         </section>
@@ -2579,14 +2591,7 @@
             document.getElementById('formula-gcpi').textContent = '±' + GCpi_positive.toFixed(2);
             document.getElementById('formula-p-windward').textContent = p_windward.toFixed(1);
 
-            // Show results
-            document.getElementById('demo-results').style.display = 'block';
-
-            // Scroll to results
-            document.getElementById('demo-results').scrollIntoView({
-                behavior: 'smooth',
-                block: 'nearest'
-            });
+            // Results are already visible in side-by-side layout, no need to show/hide or scroll
 
             // After 4 seconds, prompt for trial signup (only once per session)
             if (!demoTrialPromptShown) {

@@ -1401,6 +1401,9 @@
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+    <!-- Google Sign-In SDK -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
     <!-- Header -->
@@ -2181,13 +2184,17 @@
         // ============================================
         // STRIPE CHECKOUT INTEGRATION
         // ============================================
+
+        // Store pending checkout info
+        let pendingCheckout = null;
+
         function initializeStripeCheckout() {
             // Starter Plan Button
             const starterBtn = document.getElementById('subscribe-starter');
             if (starterBtn) {
                 starterBtn.addEventListener('click', () => {
                     const billing = isAnnualBilling ? 'annual' : 'monthly';
-                    createStripeCheckout('bip_starter', billing);
+                    showPreCheckoutModal('bip_starter', billing);
                 });
             }
             // Pro Plan Button
@@ -2195,7 +2202,7 @@
             if (proBtn) {
                 proBtn.addEventListener('click', () => {
                     const billing = isAnnualBilling ? 'annual' : 'monthly';
-                    createStripeCheckout('bip_pro', billing);
+                    showPreCheckoutModal('bip_pro', billing);
                 });
             }
             // Premium Plan Button
@@ -2203,7 +2210,7 @@
             if (premiumBtn) {
                 premiumBtn.addEventListener('click', () => {
                     const billing = isAnnualBilling ? 'annual' : 'monthly';
-                    createStripeCheckout('bip_premium', billing);
+                    showPreCheckoutModal('bip_premium', billing);
                 });
             }
         }
@@ -2257,11 +2264,250 @@
                 button.disabled = false;
             }
         }
+
+        // ============================================
+        // PRE-CHECKOUT MODAL SYSTEM
+        // ============================================
+
+        const API_BASE = 'https://api.windloadcalc.com';
+        const GOOGLE_CLIENT_ID = '54861385840-potugp8t4bpls8ckgbba6ku6i1semkuf.apps.googleusercontent.com';
+
+        function showPreCheckoutModal(product_code, billing) {
+            // Check if user is already logged in
+            const authToken = localStorage.getItem('authToken');
+            if (authToken) {
+                // User already has account, proceed directly to checkout
+                createStripeCheckoutAuthenticated(product_code, billing, authToken);
+                return;
+            }
+
+            // Store checkout details for later
+            pendingCheckout = { product_code, billing };
+
+            // Show modal
+            const modal = document.getElementById('preCheckoutModal');
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+
+            // Initialize Google Sign-In if not already done
+            if (typeof google !== 'undefined' && google.accounts) {
+                google.accounts.id.initialize({
+                    client_id: GOOGLE_CLIENT_ID,
+                    callback: handleGoogleSignupCallback
+                });
+            }
+        }
+
+        function closePreCheckoutModal() {
+            const modal = document.getElementById('preCheckoutModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            pendingCheckout = null;
+
+            // Reset form
+            document.getElementById('preCheckoutForm').reset();
+            document.getElementById('checkout-error').style.display = 'none';
+        }
+
+        function switchCheckoutTab(tab) {
+            // Update tab buttons
+            document.querySelectorAll('.checkout-tab').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.tab === tab) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Update tab content
+            document.querySelectorAll('.checkout-tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            if (tab === 'email') {
+                document.getElementById('emailTab').classList.add('active');
+            } else if (tab === 'google') {
+                document.getElementById('googleTab').classList.add('active');
+            }
+        }
+
+        async function handlePreCheckoutSignup(event) {
+            event.preventDefault();
+
+            const submitBtn = document.getElementById('checkout-submit-btn');
+            const errorDiv = document.getElementById('checkout-error');
+            const form = event.target;
+
+            // Get form data
+            const formData = new FormData(form);
+            const signupData = {
+                full_name: formData.get('full_name'),
+                email: formData.get('email'),
+                password: formData.get('password')
+            };
+
+            // Disable button
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Creating account...';
+            errorDiv.style.display = 'none';
+
+            try {
+                // Call signup API
+                const response = await fetch(`${API_BASE}/api/auth/signup`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(signupData)
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || 'Signup failed');
+                }
+
+                // Store auth token
+                localStorage.setItem('authToken', data.token);
+
+                // Track signup event
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'sign_up', {
+                        'method': 'Email',
+                        'event_category': 'authentication'
+                    });
+                }
+
+                // Close modal
+                closePreCheckoutModal();
+
+                // Proceed to checkout with authenticated session
+                if (pendingCheckout) {
+                    createStripeCheckoutAuthenticated(
+                        pendingCheckout.product_code,
+                        pendingCheckout.billing,
+                        data.token
+                    );
+                }
+
+            } catch (error) {
+                console.error('Signup error:', error);
+                errorDiv.textContent = error.message || 'Failed to create account. Please try again.';
+                errorDiv.style.display = 'block';
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Create Account & Continue to Payment';
+            }
+        }
+
+        function signUpWithGoogle() {
+            if (typeof google !== 'undefined' && google.accounts) {
+                google.accounts.id.prompt();
+            } else {
+                alert('Google Sign-In is not available. Please try email signup instead.');
+            }
+        }
+
+        async function handleGoogleSignupCallback(response) {
+            const errorDiv = document.getElementById('checkout-error');
+            errorDiv.style.display = 'none';
+
+            try {
+                // Send ID token to backend
+                const apiResponse = await fetch(`${API_BASE}/api/auth/google`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        id_token: response.credential
+                    })
+                });
+
+                const data = await apiResponse.json();
+
+                if (!apiResponse.ok) {
+                    throw new Error(data.error || 'Google sign-in failed');
+                }
+
+                // Store auth token
+                localStorage.setItem('authToken', data.token);
+
+                // Track signup/login event
+                if (typeof gtag !== 'undefined') {
+                    const eventName = data.new_user ? 'sign_up' : 'login';
+                    gtag('event', eventName, {
+                        'method': 'Google',
+                        'event_category': 'authentication'
+                    });
+                }
+
+                // Close modal
+                closePreCheckoutModal();
+
+                // Proceed to checkout
+                if (pendingCheckout) {
+                    createStripeCheckoutAuthenticated(
+                        pendingCheckout.product_code,
+                        pendingCheckout.billing,
+                        data.token
+                    );
+                }
+
+            } catch (error) {
+                console.error('Google sign-in error:', error);
+                errorDiv.textContent = error.message || 'Google sign-in failed. Please try again.';
+                errorDiv.style.display = 'block';
+            }
+        }
+
+        async function createStripeCheckoutAuthenticated(product_code, billing, authToken) {
+            console.log(`Creating authenticated checkout for ${product_code} ${billing}`);
+
+            try {
+                // Call authenticated checkout endpoint
+                const response = await fetch(`${API_BASE}/api/subscriptions/checkout`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${authToken}`
+                    },
+                    body: JSON.stringify({
+                        product_code: product_code,
+                        billing_cycle: billing
+                    })
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || 'Failed to create checkout session');
+                }
+
+                const data = await response.json();
+
+                // Redirect to Stripe Checkout
+                if (data.checkout_url) {
+                    window.location.href = data.checkout_url;
+                } else {
+                    throw new Error('No checkout URL returned');
+                }
+
+            } catch (error) {
+                console.error('Authenticated checkout error:', error);
+                alert('Unable to start checkout. Please try again or contact support at support@windloadcalc.com');
+            }
+        }
+
+        // Close modal on overlay click
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('checkout-modal-overlay')) {
+                closePreCheckoutModal();
+            }
+        });
+
         // ============================================
         // SMOOTH SCROLLING (Optional Enhancement)
         // ============================================
         // SMOOTH SCROLLING REMOVED - Now inline in HTML from index.html reference
-        
+
         // ============================================
         // ANALYTICS TRACKING (Optional)
         // ============================================
@@ -2343,6 +2589,342 @@
     <!-- Shopping Cart System -->
     <script src="js/shopping-cart.js"></script>
     <script src="js/cart-header.js"></script>
+
+    <!-- Pre-Checkout Account Modal -->
+    <div id="preCheckoutModal" class="checkout-modal" style="display: none;">
+        <div class="checkout-modal-overlay"></div>
+        <div class="checkout-modal-content">
+            <button class="checkout-modal-close" onclick="closePreCheckoutModal()">&times;</button>
+
+            <div class="checkout-modal-header">
+                <h2>Create Your Account</h2>
+                <p>Set up your account before completing your purchase</p>
+            </div>
+
+            <div class="checkout-tab-switcher">
+                <button class="checkout-tab active" data-tab="email" onclick="switchCheckoutTab('email')">
+                    Email & Password
+                </button>
+                <button class="checkout-tab" data-tab="google" onclick="switchCheckoutTab('google')">
+                    <svg width="18" height="18" viewBox="0 0 18 18" style="vertical-align: middle; margin-right: 8px;">
+                        <path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.716v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z"/>
+                        <path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332C2.438 15.983 5.482 18 9 18z"/>
+                        <path fill="#FBBC05" d="M3.964 10.707c-.18-.54-.282-1.117-.282-1.707s.102-1.167.282-1.707V4.961H.957C.347 6.175 0 7.548 0 9s.348 2.825.957 4.039l3.007-2.332z"/>
+                        <path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0 5.482 0 2.438 2.017.957 4.961L3.964 7.293C4.672 5.163 6.656 3.58 9 3.58z"/>
+                    </svg>
+                    Sign up with Google
+                </button>
+            </div>
+
+            <!-- Email/Password Tab -->
+            <div id="emailTab" class="checkout-tab-content active">
+                <form id="preCheckoutForm" onsubmit="handlePreCheckoutSignup(event)">
+                    <div class="checkout-form-group">
+                        <label for="checkout-name">Full Name</label>
+                        <input type="text" id="checkout-name" name="full_name" required placeholder="John Doe">
+                    </div>
+
+                    <div class="checkout-form-group">
+                        <label for="checkout-email">Email Address</label>
+                        <input type="email" id="checkout-email" name="email" required placeholder="john@example.com">
+                    </div>
+
+                    <div class="checkout-form-group">
+                        <label for="checkout-password">Password</label>
+                        <input type="password" id="checkout-password" name="password" required
+                               placeholder="Minimum 8 characters" minlength="8">
+                        <small style="color: #64748b; font-size: 0.85rem;">
+                            Use a strong password with letters, numbers, and symbols
+                        </small>
+                    </div>
+
+                    <div class="checkout-form-group" style="margin-top: 1.5rem;">
+                        <label style="display: flex; align-items: start; gap: 0.5rem; cursor: pointer;">
+                            <input type="checkbox" id="terms-checkbox" required
+                                   style="margin-top: 0.25rem; width: 18px; height: 18px;">
+                            <span style="font-size: 0.9rem; color: #475569; line-height: 1.5;">
+                                I agree to the <a href="/terms-of-service.html" target="_blank" style="color: #0018ff;">Terms of Service</a>
+                                and <a href="/privacy-policy.html" target="_blank" style="color: #0018ff;">Privacy Policy</a>
+                            </span>
+                        </label>
+                    </div>
+
+                    <div id="checkout-error" class="checkout-error" style="display: none;"></div>
+
+                    <button type="submit" class="checkout-submit-btn" id="checkout-submit-btn">
+                        Create Account & Continue to Payment
+                    </button>
+
+                    <p style="text-align: center; color: #64748b; font-size: 0.9rem; margin-top: 1rem;">
+                        Already have an account? <a href="/login.html" style="color: #0018ff; font-weight: 600;">Sign in</a>
+                    </p>
+                </form>
+            </div>
+
+            <!-- Google OAuth Tab -->
+            <div id="googleTab" class="checkout-tab-content">
+                <div style="text-align: center; padding: 2rem 0;">
+                    <p style="color: #475569; margin-bottom: 1.5rem;">
+                        Sign up with your Google account for instant access
+                    </p>
+
+                    <button type="button" class="google-signin-btn" onclick="signUpWithGoogle()">
+                        <svg width="20" height="20" viewBox="0 0 18 18" style="margin-right: 12px;">
+                            <path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.716v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z"/>
+                            <path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332C2.438 15.983 5.482 18 9 18z"/>
+                            <path fill="#FBBC05" d="M3.964 10.707c-.18-.54-.282-1.117-.282-1.707s.102-1.167.282-1.707V4.961H.957C.347 6.175 0 7.548 0 9s.348 2.825.957 4.039l3.007-2.332z"/>
+                            <path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0 5.482 0 2.438 2.017.957 4.961L3.964 7.293C4.672 5.163 6.656 3.58 9 3.58z"/>
+                        </svg>
+                        Sign up with Google
+                    </button>
+
+                    <p style="color: #64748b; font-size: 0.85rem; margin-top: 1.5rem;">
+                        By continuing, you agree to our
+                        <a href="/terms-of-service.html" target="_blank" style="color: #0018ff;">Terms</a> and
+                        <a href="/privacy-policy.html" target="_blank" style="color: #0018ff;">Privacy Policy</a>
+                    </p>
+
+                    <p style="text-align: center; color: #64748b; font-size: 0.9rem; margin-top: 2rem;">
+                        Already have an account? <a href="/login.html" style="color: #0018ff; font-weight: 600;">Sign in</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* Pre-Checkout Modal Styles */
+        .checkout-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .checkout-modal-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+        }
+
+        .checkout-modal-content {
+            position: relative;
+            background: white;
+            border-radius: 16px;
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .checkout-modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: transparent;
+            border: none;
+            font-size: 2rem;
+            color: #94a3b8;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.2s ease;
+        }
+
+        .checkout-modal-close:hover {
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+
+        .checkout-modal-header {
+            padding: 2rem 2rem 1rem;
+            text-align: center;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .checkout-modal-header h2 {
+            font-size: 1.75rem;
+            color: #181E57;
+            margin-bottom: 0.5rem;
+        }
+
+        .checkout-modal-header p {
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+
+        .checkout-tab-switcher {
+            display: flex;
+            padding: 1.5rem 2rem 0;
+            gap: 0.5rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .checkout-tab {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            background: transparent;
+            border: none;
+            border-bottom: 3px solid transparent;
+            color: #64748b;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-bottom: -2px;
+        }
+
+        .checkout-tab:hover {
+            color: #0018ff;
+            background: #f8fafc;
+        }
+
+        .checkout-tab.active {
+            color: #0018ff;
+            border-bottom-color: #0018ff;
+        }
+
+        .checkout-tab-content {
+            display: none;
+            padding: 2rem;
+        }
+
+        .checkout-tab-content.active {
+            display: block;
+        }
+
+        .checkout-form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .checkout-form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #334155;
+            font-size: 0.95rem;
+        }
+
+        .checkout-form-group input[type="text"],
+        .checkout-form-group input[type="email"],
+        .checkout-form-group input[type="password"] {
+            width: 100%;
+            padding: 0.875rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+        }
+
+        .checkout-form-group input:focus {
+            outline: none;
+            border-color: #0018ff;
+            box-shadow: 0 0 0 3px rgba(0, 24, 255, 0.1);
+        }
+
+        .checkout-error {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            border-radius: 8px;
+            padding: 0.875rem;
+            color: #dc2626;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .checkout-submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .checkout-submit-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 24, 255, 0.3);
+        }
+
+        .checkout-submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .google-signin-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.875rem 2rem;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1f2937;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .google-signin-btn:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 640px) {
+            .checkout-modal-content {
+                max-width: 100%;
+                border-radius: 16px 16px 0 0;
+                margin-top: auto;
+            }
+
+            .checkout-tab-switcher {
+                flex-direction: column;
+            }
+
+            .checkout-tab {
+                border-bottom: none;
+                border-left: 3px solid transparent;
+            }
+
+            .checkout-tab.active {
+                border-left-color: #0018ff;
+                border-bottom-color: transparent;
+            }
+        }
+    </style>
 
 </body>
 </html>

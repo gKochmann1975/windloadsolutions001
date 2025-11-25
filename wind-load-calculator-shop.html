@@ -1172,9 +1172,15 @@
         /* Regional Cards */
         .regional-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 2rem;
             margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .regional-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         .regional-card {
@@ -2495,11 +2501,14 @@
                 <!-- Hurricane-Prone Regions -->
                 <div class="regional-card hurricane">
                     <div class="regional-icon hurricane">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-                            <circle cx="12" cy="12" r="10"/>
-                            <path d="M12 2c-2.5 2.5-2.5 6.5 0 9s6.5 2.5 9 0"/>
-                            <path d="M12 22c2.5-2.5 2.5-6.5 0-9s-6.5-2.5-9 0"/>
-                            <circle cx="12" cy="12" r="2" fill="white"/>
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8">
+                            <!-- Outer spiral arms -->
+                            <path d="M12 2 C8 4, 6 7, 6 10 C6 12, 7 13, 9 13" stroke-linecap="round"/>
+                            <path d="M22 12 C20 8, 17 6, 14 6 C12 6, 11 7, 11 9" stroke-linecap="round"/>
+                            <path d="M12 22 C16 20, 18 17, 18 14 C18 12, 17 11, 15 11" stroke-linecap="round"/>
+                            <path d="M2 12 C4 16, 7 18, 10 18 C12 18, 13 17, 13 15" stroke-linecap="round"/>
+                            <!-- Eye -->
+                            <circle cx="12" cy="12" r="2.5" fill="white" stroke="white" stroke-width="1"/>
                         </svg>
                     </div>
                     <h3>Hurricane-Prone Regions</h3>
@@ -2541,13 +2550,15 @@
                 <div class="regional-card tornado">
                     <div class="regional-icon tornado">
                         <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-                            <path d="M6 8h12"/>
-                            <path d="M7 12h10"/>
-                            <path d="M9 16h6"/>
-                            <path d="M11 20h2"/>
-                            <path d="M12 2L8 8"/>
-                            <path d="M12 2L16 8"/>
-                            <line x1="12" y1="20" x2="12" y2="22"/>
+                            <!-- Tornado funnel with curved spiral lines -->
+                            <path d="M6 6 Q12 6, 18 6" stroke-linecap="round"/>
+                            <path d="M7 9 Q12 9.5, 17 9" stroke-linecap="round"/>
+                            <path d="M8 12 Q12 13, 16 12" stroke-linecap="round"/>
+                            <path d="M9 15 Q12 16.5, 15 15" stroke-linecap="round"/>
+                            <path d="M10 18 Q12 19.5, 14 18" stroke-linecap="round"/>
+                            <path d="M11 21 Q12 22, 13 21" stroke-linecap="round"/>
+                            <!-- Cloud base -->
+                            <ellipse cx="12" cy="5" rx="7" ry="2" fill="white" opacity="0.3"/>
                         </svg>
                     </div>
                     <h3>Tornado-Prone Areas</h3>

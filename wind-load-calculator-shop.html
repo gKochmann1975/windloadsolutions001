@@ -806,52 +806,249 @@
             background: #9333ea;
         }
 
-        /* SEO Content Sections */
+        /* SEO Content Sections - Modern Design */
         .content-section {
             padding: var(--spacing-3xl) 0;
+            position: relative;
         }
 
         .content-section:nth-child(even) {
-            background: #f8fafc;
+            background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
         }
 
-        .content-section h2 {
+        .content-section:nth-child(odd) {
+            background: white;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
             font-size: 2.5rem;
             font-weight: 800;
-            color: #1a202c;
-            margin-bottom: 1.5rem;
-            text-align: center;
+            color: #181E57;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #0018ff 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .content-section p {
-            font-size: 1.1rem;
-            color: #475569;
+        .section-header p {
+            font-size: 1.2rem;
+            color: #64748b;
+            max-width: 800px;
+            margin: 0 auto;
             line-height: 1.8;
-            max-width: 900px;
-            margin: 0 auto 1.5rem;
         }
 
-        .content-section ul {
-            max-width: 900px;
-            margin: 1.5rem auto;
+        /* Comparison Cards */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .comparison-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .comparison-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #0018ff, #8b5cf6);
+        }
+
+        .comparison-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(0, 24, 255, 0.15);
+            border-color: rgba(0, 24, 255, 0.2);
+        }
+
+        .comparison-card.blue::before {
+            background: linear-gradient(90deg, #0018ff, #4F46E5);
+        }
+
+        .comparison-card.green::before {
+            background: linear-gradient(90deg, #10b981, #059669);
+        }
+
+        .card-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-icon.blue {
+            background: linear-gradient(135deg, #0018ff 0%, #4F46E5 100%);
+        }
+
+        .card-icon.green {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+
+        .card-icon.orange {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+
+        .card-icon.purple {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+        }
+
+        .card-icon.pink {
+            background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+        }
+
+        .comparison-card h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #181E57;
+            margin-bottom: 1rem;
+        }
+
+        .comparison-card p {
+            color: #64748b;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .comparison-card ul {
             list-style: none;
+            padding: 0;
+            margin: 0;
         }
 
-        .content-section li {
+        .comparison-card li {
             padding: 0.75rem 0;
             color: #475569;
-            font-size: 1.05rem;
+            font-size: 1rem;
             display: flex;
             align-items: flex-start;
-            gap: 1rem;
+            gap: 0.75rem;
+            border-bottom: 1px solid #f1f5f9;
         }
 
-        .content-section li:before {
-            content: '→';
-            color: #6366f1;
-            font-weight: bold;
-            font-size: 1.3rem;
+        .comparison-card li:last-child {
+            border-bottom: none;
+        }
+
+        .comparison-card li svg {
             flex-shrink: 0;
+            margin-top: 0.25rem;
+        }
+
+        /* Feature Grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .feature-box {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+            border: 2px solid #f1f5f9;
+        }
+
+        .feature-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-color: #e0e7ff;
+        }
+
+        .feature-box h4 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .feature-box p {
+            color: #64748b;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Risk Cards */
+        .risk-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .risk-card {
+            background: linear-gradient(135deg, #fff 0%, #fef2f2 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            border-left: 5px solid #ef4444;
+            box-shadow: 0 4px 20px rgba(239, 68, 68, 0.1);
+        }
+
+        .risk-card.warning {
+            background: linear-gradient(135deg, #fff 0%, #fffbeb 100%);
+            border-left-color: #f59e0b;
+            box-shadow: 0 4px 20px rgba(245, 158, 11, 0.1);
+        }
+
+        .risk-card.success {
+            background: linear-gradient(135deg, #fff 0%, #f0fdf4 100%);
+            border-left-color: #10b981;
+            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.1);
+        }
+
+        .risk-card h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .risk-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .risk-card li {
+            padding: 0.75rem 0;
+            color: #475569;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .risk-card li svg {
+            flex-shrink: 0;
+            margin-top: 0.25rem;
         }
 
         /* Footer */
@@ -868,30 +1065,48 @@
             margin-bottom: var(--spacing-xl);
         }
 
+        .footer-column {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
         .footer-column h3 {
-            font-size: 1.1rem;
-            margin-bottom: var(--spacing-md);
-            color: #60a5fa;
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .footer-column ul {
             list-style: none;
             padding: 0;
+            margin: 0;
         }
 
         .footer-column ul li {
-            margin-bottom: 0.75rem;
+            margin: 0.25rem 0;
+        }
+
+        .footer-column strong {
+            color: white;
+            font-weight: 600;
+            font-size: 0.875rem;
         }
 
         .footer-column a {
-            color: rgba(255, 255, 255, 0.8);
+            color: rgba(255, 255, 255, 0.9);
             text-decoration: none;
-            transition: color 0.3s ease;
-            font-size: 0.95rem;
+            transition: all 0.2s ease;
+            font-size: 0.875rem;
+            display: inline-block;
         }
 
         .footer-column a:hover {
-            color: #60a5fa;
+            color: #00ffff;
+            padding-left: 0.5rem;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
         }
 
         .footer-bottom {
@@ -1607,87 +1822,315 @@
 
     <section class="content-section">
         <div class="container">
-            <h2>Components & Cladding vs. Main Wind Force</h2>
-            <p>Understanding the difference between Components & Cladding (C&C) and Main Wind Force Resisting Systems (MWFRS) is fundamental to proper wind load analysis. Each system experiences different pressure distributions and requires distinct calculation approaches.</p>
+            <div class="section-header">
+                <h2>Components & Cladding vs. Main Wind Force</h2>
+                <p>Understanding the difference between C&C and MWFRS is fundamental to proper wind load analysis. Each system experiences different pressure distributions and requires distinct calculation approaches.</p>
+            </div>
 
-            <h3 style="font-size: 1.8rem; margin-top: 2rem; margin-bottom: 1rem; color: #1a202c;">Components & Cladding (C&C)</h3>
-            <p>C&C elements include individual building envelope components that receive wind loads directly. These typically experience higher localized pressures than the overall building structure:</p>
-            <ul>
-                <li>Windows, doors, and skylights that must resist direct wind pressure</li>
-                <li>Roofing materials including shingles, tiles, and metal panels</li>
-                <li>Wall cladding systems such as siding, EIFS, and curtain walls</li>
-                <li>Fasteners and attachment systems that secure components to the structure</li>
-                <li>Parapets, overhangs, and other architectural features</li>
-            </ul>
+            <div class="comparison-grid">
+                <!-- C&C Card -->
+                <div class="comparison-card blue">
+                    <div class="card-icon blue">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <rect x="3" y="3" width="7" height="7" rx="1"/>
+                            <rect x="14" y="3" width="7" height="7" rx="1"/>
+                            <rect x="3" y="14" width="7" height="7" rx="1"/>
+                            <rect x="14" y="14" width="7" height="7" rx="1"/>
+                        </svg>
+                    </div>
+                    <h3>Components & Cladding (C&C)</h3>
+                    <p>Individual building envelope components that receive wind loads directly. These typically experience higher localized pressures than the overall structure.</p>
+                    <ul>
+                        <li>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0018ff" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            Windows, doors, and skylights resisting direct wind pressure
+                        </li>
+                        <li>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0018ff" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            Roofing materials: shingles, tiles, and metal panels
+                        </li>
+                        <li>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0018ff" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            Wall cladding systems: siding, EIFS, and curtain walls
+                        </li>
+                        <li>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0018ff" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            Fasteners and attachment systems securing components
+                        </li>
+                        <li>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0018ff" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            Parapets, overhangs, and architectural features
+                        </li>
+                    </ul>
+                </div>
 
-            <h3 style="font-size: 1.8rem; margin-top: 2rem; margin-bottom: 1rem; color: #1a202c;">Main Wind Force Resisting Systems (MWFRS)</h3>
-            <p>MWFRS refers to the structural framework that provides overall stability and transfers wind loads to the foundation:</p>
-            <ul>
-                <li>Structural frames including columns, beams, and load-bearing walls</li>
-                <li>Bracing systems and shear walls that resist lateral forces</li>
-                <li>Roof and floor diaphragms that distribute loads</li>
-                <li>Foundation elements that transfer loads to the ground</li>
-                <li>Overall building stability and overturning resistance</li>
-            </ul>
+                <!-- MWFRS Card -->
+                <div class="comparison-card green">
+                    <div class="card-icon green">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                            <polyline points="9 22 9 12 15 12 15 22"/>
+                        </svg>
+                    </div>
+                    <h3>Main Wind Force Resisting Systems (MWFRS)</h3>
+                    <p>The structural framework that provides overall stability and transfers wind loads to the foundation. Essential for building integrity and safety.</p>
+                    <ul>
+                        <li>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            Structural frames: columns, beams, and load-bearing walls
+                        </li>
+                        <li>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            Bracing systems and shear walls resisting lateral forces
+                        </li>
+                        <li>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            Roof and floor diaphragms distributing loads
+                        </li>
+                        <li>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            Foundation elements transferring loads to the ground
+                        </li>
+                        <li>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            Overall building stability and overturning resistance
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </section>
 
     <section class="content-section">
         <div class="container">
-            <h2>Applications Across Building Types</h2>
-            <p>Wind load calculations are essential for virtually every type of construction project, from residential homes to large commercial developments. Different building types present unique challenges and require specialized approaches to wind load analysis.</p>
+            <div class="section-header">
+                <h2>Applications Across Building Types</h2>
+                <p>Wind load calculations are essential for virtually every construction project. Different building types present unique challenges and require specialized approaches.</p>
+            </div>
 
-            <h3 style="font-size: 1.8rem; margin-top: 2rem; margin-bottom: 1rem; color: #1a202c;">Residential Construction</h3>
-            <ul>
-                <li>Single-family homes requiring accurate roof, window, and door calculations</li>
-                <li>Multi-family developments with complex building geometries</li>
-                <li>Townhomes and condominiums with shared structural elements</li>
-                <li>Additions and renovations to existing residential structures</li>
-            </ul>
+            <div class="feature-grid">
+                <!-- Residential -->
+                <div class="feature-box">
+                    <h4>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0018ff" stroke-width="2">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                            <polyline points="9 22 9 12 15 12 15 22"/>
+                        </svg>
+                        Residential
+                    </h4>
+                    <p>Single-family homes, multi-family developments, townhomes, condominiums, and renovations requiring accurate roof, window, and door calculations.</p>
+                </div>
 
-            <h3 style="font-size: 1.8rem; margin-top: 2rem; margin-bottom: 1rem; color: #1a202c;">Commercial Buildings</h3>
-            <ul>
-                <li>Office buildings with curtain wall systems and large glazed areas</li>
-                <li>Retail centers with varied roof geometries and signage</li>
-                <li>Warehouses and industrial facilities with large roof spans</li>
-                <li>Mixed-use developments combining multiple building types</li>
-            </ul>
+                <!-- Commercial -->
+                <div class="feature-box">
+                    <h4>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2"/>
+                            <path d="M3 9h18"/>
+                            <path d="M9 21V9"/>
+                        </svg>
+                        Commercial
+                    </h4>
+                    <p>Office buildings, retail centers, warehouses, and mixed-use developments with curtain walls, varied roof geometries, and large roof spans.</p>
+                </div>
 
-            <h3 style="font-size: 1.8rem; margin-top: 2rem; margin-bottom: 1rem; color: #1a202c;">Specialty Structures</h3>
-            <ul>
-                <li>Solar panel installations on various roof types</li>
-                <li>Rooftop equipment and mechanical systems</li>
-                <li>Canopies, awnings, and covered outdoor spaces</li>
-                <li>Signs, billboards, and architectural features</li>
-            </ul>
+                <!-- Industrial -->
+                <div class="feature-box">
+                    <h4>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2">
+                            <path d="M2 20h20"/>
+                            <path d="M4 20V8l6-4 6 4v12"/>
+                            <path d="M16 20V10l4 2v8"/>
+                        </svg>
+                        Industrial
+                    </h4>
+                    <p>Manufacturing facilities, distribution centers, and warehouses with large roof spans requiring specialized structural analysis.</p>
+                </div>
+
+                <!-- Specialty Structures -->
+                <div class="feature-box">
+                    <h4>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="8" x2="12" y2="12"/>
+                            <line x1="12" y1="16" x2="12.01" y2="16"/>
+                        </svg>
+                        Specialty
+                    </h4>
+                    <p>Solar panels, rooftop equipment, canopies, awnings, signs, billboards, and unique architectural features requiring custom calculations.</p>
+                </div>
+
+                <!-- Healthcare -->
+                <div class="feature-box">
+                    <h4>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ec4899" stroke-width="2">
+                            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                        </svg>
+                        Healthcare
+                    </h4>
+                    <p>Hospitals, clinics, and medical facilities with critical infrastructure requiring enhanced safety factors and code compliance.</p>
+                </div>
+
+                <!-- Educational -->
+                <div class="feature-box">
+                    <h4>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2">
+                            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                        </svg>
+                        Educational
+                    </h4>
+                    <p>Schools, universities, and educational facilities with varied building types, gymnasiums, and large assembly spaces.</p>
+                </div>
+            </div>
         </div>
     </section>
 
     <section class="content-section">
         <div class="container">
-            <h2>The Cost of Inaccurate Wind Load Calculations</h2>
-            <p>Errors in wind load calculations can lead to serious consequences, both financial and safety-related. Understanding these risks highlights the importance of using professional, code-compliant calculation tools.</p>
+            <div class="section-header">
+                <h2>The Cost of Inaccurate Wind Load Calculations</h2>
+                <p>Errors in wind load calculations can lead to serious consequences, both financial and safety-related. Understanding these risks highlights the importance of using professional, code-compliant calculation tools.</p>
+            </div>
 
-            <h3 style="font-size: 1.8rem; margin-top: 2rem; margin-bottom: 1rem; color: #1a202c;">Under-Design Risks</h3>
-            <ul>
-                <li>Structural failures during high wind events leading to property damage</li>
-                <li>Liability exposure for engineers, architects, and building owners</li>
-                <li>Injuries or loss of life due to component failures</li>
-                <li>Costly repairs, retrofits, or complete rebuilds after storm damage</li>
-                <li>Insurance claims, litigation, and professional liability issues</li>
-            </ul>
+            <div class="risk-grid">
+                <!-- Under-Design Risks -->
+                <div class="risk-card">
+                    <h3>
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2">
+                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                            <line x1="12" y1="9" x2="12" y2="13"/>
+                            <line x1="12" y1="17" x2="12.01" y2="17"/>
+                        </svg>
+                        Under-Design Risks
+                    </h3>
+                    <ul>
+                        <li>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="15" y1="9" x2="9" y2="15"/>
+                                <line x1="9" y1="9" x2="15" y2="15"/>
+                            </svg>
+                            Structural failures during high wind events
+                        </li>
+                        <li>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="15" y1="9" x2="9" y2="15"/>
+                                <line x1="9" y1="9" x2="15" y2="15"/>
+                            </svg>
+                            Liability exposure for engineers and owners
+                        </li>
+                        <li>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="15" y1="9" x2="9" y2="15"/>
+                                <line x1="9" y1="9" x2="15" y2="15"/>
+                            </svg>
+                            Safety risks and potential injuries
+                        </li>
+                        <li>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="15" y1="9" x2="9" y2="15"/>
+                                <line x1="9" y1="9" x2="15" y2="15"/>
+                            </svg>
+                            Costly repairs or complete rebuilds
+                        </li>
+                        <li>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="15" y1="9" x2="9" y2="15"/>
+                                <line x1="9" y1="9" x2="15" y2="15"/>
+                            </svg>
+                            Insurance claims and litigation
+                        </li>
+                    </ul>
+                </div>
 
-            <h3 style="font-size: 1.8rem; margin-top: 2rem; margin-bottom: 1rem; color: #1a202c;">Over-Design Consequences</h3>
-            <ul>
-                <li>Unnecessarily high material and construction costs</li>
-                <li>Reduced project profitability and competitiveness</li>
-                <li>Extended construction timelines due to over-engineered components</li>
-                <li>Difficulty sourcing oversized or specialty materials</li>
-                <li>Wasted engineering time on overly conservative designs</li>
-            </ul>
+                <!-- Over-Design Consequences -->
+                <div class="risk-card warning">
+                    <h3>
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="8" x2="12" y2="12"/>
+                            <line x1="12" y1="16" x2="12.01" y2="16"/>
+                        </svg>
+                        Over-Design Consequences
+                    </h3>
+                    <ul>
+                        <li>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19"/>
+                                <line x1="5" y1="12" x2="19" y2="12"/>
+                            </svg>
+                            Unnecessarily high material costs
+                        </li>
+                        <li>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19"/>
+                                <line x1="5" y1="12" x2="19" y2="12"/>
+                            </svg>
+                            Reduced project profitability
+                        </li>
+                        <li>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19"/>
+                                <line x1="5" y1="12" x2="19" y2="12"/>
+                            </svg>
+                            Extended construction timelines
+                        </li>
+                        <li>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19"/>
+                                <line x1="5" y1="12" x2="19" y2="12"/>
+                            </svg>
+                            Difficulty sourcing specialty materials
+                        </li>
+                        <li>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19"/>
+                                <line x1="5" y1="12" x2="19" y2="12"/>
+                            </svg>
+                            Wasted engineering time
+                        </li>
+                    </ul>
+                </div>
 
-            <h3 style="font-size: 1.8rem; margin-top: 2rem; margin-bottom: 1rem; color: #1a202c;">The Value of Precision</h3>
-            <p>Professional wind load calculators help achieve the optimal balance—designs that are safe, code-compliant, and cost-effective. By using accurate, ASCE 7-22 compliant calculations, you protect your projects, your clients, and your professional reputation while maximizing efficiency and profitability.</p>
+                <!-- The Value of Precision -->
+                <div class="risk-card success">
+                    <h3>
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                        The Value of Precision
+                    </h3>
+                    <p style="color: #475569; line-height: 1.7; margin-top: 0.5rem;">
+                        Professional wind load calculators help achieve the optimal balance—designs that are safe, code-compliant, and cost-effective. By using accurate, ASCE 7-22 compliant calculations, you protect your projects, your clients, and your professional reputation while maximizing efficiency and profitability.
+                    </p>
+                </div>
+            </div>
         </div>
     </section>
 

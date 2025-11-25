@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="images/windloadcalc-favicon.svg">
+    <title>Payment Successful - WindLoadCalc</title>
+    <meta name="description" content="Your WindLoadCalc subscription is now active. Access your products immediately.">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            padding: 2rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 700px;
+            width: 100%;
+        }
+
+        /* Success Card */
+        .success-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Success Icon */
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            animation: scaleIn 0.5s ease-out 0.3s both;
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+
+        .success-icon svg {
+            width: 50px;
+            height: 50px;
+            stroke: white;
+            stroke-width: 3;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .success-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #181E57;
+            margin-bottom: 0.5rem;
+        }
+
+        .success-subtitle {
+            font-size: 1.1rem;
+            color: #64748b;
+            margin-bottom: 2rem;
+        }
+
+        /* Loading State */
+        .loading {
+            padding: 2rem;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(24, 30, 87, 0.1);
+            border-top-color: #0018ff;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: #64748b;
+            font-size: 1rem;
+        }
+
+        /* Access Buttons */
+        .access-section {
+            margin: 2rem 0;
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #181E57;
+            margin-bottom: 1.5rem;
+        }
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .access-button {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .access-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-bip {
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            color: white;
+        }
+
+        .btn-bip:hover {
+            background: linear-gradient(135deg, #0018ff 20%, #181E57 120%);
+        }
+
+        .btn-calculator {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+        }
+
+        .btn-calculator:hover {
+            background: linear-gradient(135deg, #10b981 20%, #059669 120%);
+        }
+
+        .button-label {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .button-icon {
+            font-size: 1.5rem;
+        }
+
+        .button-arrow {
+            font-size: 1.3rem;
+            transition: transform 0.3s ease;
+        }
+
+        .access-button:hover .button-arrow {
+            transform: translateX(5px);
+        }
+
+        /* Info Box */
+        .info-box {
+            background: #eff6ff;
+            border-left: 4px solid #0018ff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .info-title {
+            font-weight: 600;
+            color: #1e40af;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .info-text {
+            color: #1e40af;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .info-text a {
+            color: #0018ff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .info-text a:hover {
+            text-decoration: underline;
+        }
+
+        /* Redirect Notice */
+        .redirect-notice {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e2e8f0;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        /* Error State */
+        .error-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .error-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 3rem;
+            color: white;
+        }
+
+        .error-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #181E57;
+            margin-bottom: 0.5rem;
+        }
+
+        .error-text {
+            color: #64748b;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 24, 255, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            .success-card, .error-card {
+                padding: 2rem;
+            }
+
+            .success-title {
+                font-size: 1.5rem;
+            }
+
+            .access-button {
+                font-size: 1rem;
+                padding: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Loading State -->
+        <div id="loading" class="success-card">
+            <div class="loading">
+                <div class="spinner"></div>
+                <p class="loading-text">Processing your subscription...</p>
+            </div>
+        </div>
+
+        <!-- Success State (hidden initially) -->
+        <div id="success" class="success-card" style="display: none;">
+            <div class="success-icon">
+                <svg viewBox="0 0 24 24">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+            </div>
+
+            <h1 class="success-title">Payment Successful!</h1>
+            <p class="success-subtitle">Your subscription is now active</p>
+
+            <div class="access-section">
+                <h2 class="section-title">Access Your Products</h2>
+                <div id="buttons" class="button-group">
+                    <!-- Buttons will be dynamically inserted here -->
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h3 class="info-title">📧 Check Your Email</h3>
+                <p class="info-text">
+                    We've sent a confirmation email with direct access links to <strong id="user-email"></strong>
+                </p>
+            </div>
+
+            <div class="info-box">
+                <h3 class="info-title">📝 For Future Logins</h3>
+                <p class="info-text">
+                    Visit <a href="/login.html">windloadcalc.com/login.html</a> to access your account anytime.
+                </p>
+            </div>
+
+            <div class="redirect-notice">
+                <p>Redirecting to your dashboard in <span id="countdown">10</span> seconds...</p>
+            </div>
+        </div>
+
+        <!-- Error State (hidden initially) -->
+        <div id="error" class="error-card" style="display: none;">
+            <div class="error-icon">⚠️</div>
+            <h1 class="error-title">Session Not Found</h1>
+            <p class="error-text">
+                We couldn't verify your payment session. This could be because:<br>
+                • The session has expired<br>
+                • The link is invalid<br>
+                • You've already accessed this page
+            </p>
+            <a href="/login.html" class="btn-primary">Go to Login</a>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'https://api.windloadcalc.com';
+
+        // Get session_id from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const sessionId = urlParams.get('session_id');
+
+        if (!sessionId) {
+            showError();
+        } else {
+            verifyPayment();
+        }
+
+        async function verifyPayment() {
+            try {
+                const response = await fetch(`${API_BASE}/api/stripe/verify-session`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ session_id: sessionId })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || 'Payment verification failed');
+                }
+
+                // Store auth token
+                if (data.token) {
+                    localStorage.setItem('authToken', data.token);
+                }
+
+                // Display success with user's subscriptions
+                showSuccess(data);
+
+                // Track conversion
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'purchase', {
+                        'event_category': 'ecommerce',
+                        'event_label': 'subscription_purchase',
+                        'value': data.amount || 0
+                    });
+                }
+
+            } catch (error) {
+                console.error('Payment verification error:', error);
+                showError();
+            }
+        }
+
+        function showSuccess(data) {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('success').style.display = 'block';
+
+            // Set user email
+            if (data.email) {
+                document.getElementById('user-email').textContent = data.email;
+            }
+
+            // Build access buttons
+            const buttonsContainer = document.getElementById('buttons');
+            buttonsContainer.innerHTML = '';
+
+            const subscriptions = data.subscriptions || [];
+            const hasBIP = subscriptions.some(sub =>
+                sub.product_code && sub.product_code.startsWith('bip')
+            );
+            const hasCalculator = subscriptions.some(sub =>
+                sub.product_code && (sub.product_code.startsWith('cc') ||
+                ['professional', 'enterprise'].includes(sub.product_code))
+            );
+
+            // Add BIP button
+            if (hasBIP) {
+                const bipButton = document.createElement('a');
+                bipButton.href = `/building-intelligence-platform.html?token=${data.token}&user_id=${data.user_id}`;
+                bipButton.className = 'access-button btn-bip';
+                bipButton.innerHTML = `
+                    <span class="button-label">
+                        <span class="button-icon">🏗️</span>
+                        <span>Launch BIP Platform</span>
+                    </span>
+                    <span class="button-arrow">→</span>
+                `;
+                buttonsContainer.appendChild(bipButton);
+            }
+
+            // Add Calculator button
+            if (hasCalculator) {
+                const calcButton = document.createElement('a');
+                calcButton.href = `https://calc.windloadcalc.com/?token=${data.token}&user_id=${data.user_id}`;
+                calcButton.className = 'access-button btn-calculator';
+                calcButton.target = '_blank';
+                calcButton.innerHTML = `
+                    <span class="button-label">
+                        <span class="button-icon">🧮</span>
+                        <span>Launch Wind Load Calculator</span>
+                    </span>
+                    <span class="button-arrow">→</span>
+                `;
+                buttonsContainer.appendChild(calcButton);
+            }
+
+            // Start countdown
+            startCountdown();
+        }
+
+        function showError() {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('error').style.display = 'block';
+        }
+
+        function startCountdown() {
+            let seconds = 10;
+            const countdownElement = document.getElementById('countdown');
+
+            const interval = setInterval(() => {
+                seconds--;
+                countdownElement.textContent = seconds;
+
+                if (seconds <= 0) {
+                    clearInterval(interval);
+                    window.location.href = '/dashboard.html';
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

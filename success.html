@@ -434,7 +434,10 @@
             buttonsContainer.innerHTML = '';
 
             const subscriptions = data.subscriptions || [];
-            const hasBIP = subscriptions.some(sub =>
+
+            // Check what products user has access to
+            // If subscriptions list is empty but user just purchased, show BIP button by default
+            const hasBIP = subscriptions.length === 0 || subscriptions.some(sub =>
                 sub.product_code && sub.product_code.startsWith('bip')
             );
             const hasCalculator = subscriptions.some(sub =>
@@ -442,7 +445,7 @@
                 ['professional', 'enterprise'].includes(sub.product_code))
             );
 
-            // Add BIP button
+            // Add BIP button (always show for new purchases - they just bought BIP)
             if (hasBIP) {
                 const bipButton = document.createElement('a');
                 bipButton.href = `/building-intelligence-platform.html?token=${data.token}&user_id=${data.user_id}`;

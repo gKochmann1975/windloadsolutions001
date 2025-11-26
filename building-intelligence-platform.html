@@ -2977,10 +2977,11 @@ Leaflet: ${typeof L !== 'undefined' ? 'LOADED' : 'NOT LOADED'}
     
     <!-- Initialize Building Intelligence Platform -->
     <script>
-        // Configure CSV path for Building Intelligence Platform (disabled - ZIP lookup uses API)
+        // Configure CSV path for Building Intelligence Platform
+        // CSV is required for ZIP code lookups - do NOT skip loading
         window.VELOCITY_FINDER_CONFIG = {
-            csvPath: null,  // Explicitly disable CSV loading - API handles all ZIP validation
-            skipCSVLoad: true  // Flag to skip CSV loading entirely
+            csvPath: './data/usps_zip_codes.csv',  // Primary CSV path
+            skipCSVLoad: false  // Must load CSV for ZIP lookups to work
         };
 
         // Initialize the Building Intelligence Platform with delay to prevent flash

@@ -332,6 +332,33 @@ const TrialManager = (function() {
             return; // Skip trial restrictions
         }
 
+        // ADMIN TESTING MODE: ?admin=true bypasses all trial restrictions
+        if (urlParams.get('admin') === 'true') {
+            console.log('🔧 Trial Manager: ADMIN MODE - All restrictions bypassed');
+            // Grant full access for testing
+            const now = new Date();
+            const expiryDate = new Date(now.getTime() + (TRIAL_DURATION_DAYS * 24 * 60 * 60 * 1000));
+            const trialData = {
+                userId: 'admin_test_' + generateUserId(),
+                startDate: now.toISOString(),
+                expiryDate: expiryDate.toISOString(),
+                lookups: [],
+                exportAttempts: 0,
+                authenticated: true,
+                adminMode: true,
+                featureAccess: {
+                    windVelocity: true,
+                    hurricaneRisk: true,
+                    solarFinder: true,
+                    multiZipComparison: true,
+                    exports: true,
+                    aiReports: true
+                }
+            };
+            saveTrialData(trialData);
+            return; // Skip all trial restrictions in admin mode
+        }
+
         // Initialize trial data for non-authenticated users
         initializeTrial();
 

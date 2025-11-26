@@ -342,8 +342,7 @@ const TrialManager = (function() {
 
         // Update UI elements (but don't auto-show modal)
         updateLookupCounter();
-        // Skip updateTrialBanner on load to avoid confusion
-        // updateTrialBanner();
+        updateTrialBanner();  // Update banner with trial status
         addTrialWatermark();
 
         // Update counters periodically (but not banner to avoid modal triggers)

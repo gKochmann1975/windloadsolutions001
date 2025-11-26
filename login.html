@@ -1221,6 +1221,25 @@
             if (savedToken) {
                 document.getElementById('remember').checked = true;
             }
+
+            // Check for trial mode from URL parameters (coming from demo.html)
+            const urlParams = new URLSearchParams(window.location.search);
+            const mode = urlParams.get('mode');
+            const email = urlParams.get('email');
+            const company = urlParams.get('company');
+
+            if (mode === 'trial') {
+                // Show trial form and pre-select calculator
+                showTrialForm('calculator');
+
+                // Pre-fill email and company if provided
+                if (email) {
+                    document.getElementById('trial-email').value = email;
+                }
+                if (company) {
+                    document.getElementById('trial-company').value = company;
+                }
+            }
         });
     </script>
 </body>

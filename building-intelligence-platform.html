@@ -3220,6 +3220,7 @@ Leaflet: ${typeof L !== 'undefined' ? 'LOADED' : 'NOT LOADED'}
     <script>
         // Configuration
         const SIGNUP_CONFIG = {
+            API_URL: 'https://api.windloadcalc.com',
             GOOGLE_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbwtwGU1jvSIQGrlf24Is7gKsu2dc-GK9FnT8fW4ldVXLQ54R0yWBy24Y4wegSrLGR_s/exec',
             STORAGE_KEY: 'bip_signup_completed',
             SHOW_DELAY: 1000
@@ -3291,43 +3292,91 @@ Leaflet: ${typeof L !== 'undefined' ? 'LOADED' : 'NOT LOADED'}
                     showView('loading');
                     
                     try {
-                        // Prepare data
-                        const formData = {
-                            name: name,
-                            email: email,
-                            company: company || 'Not provided',
-                            timestamp: new Date().toISOString(),
-                            date: new Date().toLocaleString(),
-                            source: 'Building Intelligence Platform',
-                            userAgent: navigator.userAgent
-                        };
-                        
-                        // Send to Google Sheets
-                        const response = await fetch(SIGNUP_CONFIG.GOOGLE_SCRIPT_URL, {
+                        // Generate a temporary password for the trial account
+                        const tempPassword = 'Trial' + Math.random().toString(36).substring(2, 10) + '!';
+
+                        // Register with backend API
+                        const response = await fetch(`${SIGNUP_CONFIG.API_URL}/api/signup`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                email: email,
+                                password: tempPassword,
+                                full_name: name,
+                                phone: '',
+                                trial_type: 'bip'
+                            })
+                        });
+
+                        const result = await response.json();
+
+                        if (!response.ok) {
+                            throw new Error(result.error || 'Signup failed');
+                        }
+
+                        // Also send to Google Sheets for tracking
+                        fetch(SIGNUP_CONFIG.GOOGLE_SCRIPT_URL, {
                             method: 'POST',
                             mode: 'no-cors',
                             headers: {
                                 'Content-Type': 'application/json',
                             },
-                            body: JSON.stringify(formData)
-                        });
-                        
-                        // Mark as completed
+                            body: JSON.stringify({
+                                name: name,
+                                email: email,
+                                company: company || 'Not provided',
+                                timestamp: new Date().toISOString(),
+                                date: new Date().toLocaleString(),
+                                source: 'Building Intelligence Platform',
+                                userAgent: navigator.userAgent
+                            })
+                        }).catch(e => console.log('Google Sheets logging failed:', e));
+
+                        // Reset local trial data with fresh 7-day trial
+                        const now = new Date();
+                        const expiryDate = new Date(now.getTime() + (7 * 24 * 60 * 60 * 1000));
+                        const trialData = {
+                            userId: result.user_id || ('trial_' + Math.random().toString(36).substring(2, 15)),
+                            startDate: now.toISOString(),
+                            expiryDate: expiryDate.toISOString(),
+                            lookups: [],
+                            exportAttempts: 0,
+                            authenticated: false,
+                            featureAccess: {
+                                windVelocity: true,
+                                hurricaneRisk: true,
+                                solarFinder: true,
+                                multiZipComparison: false,
+                                exports: false,
+                                aiReports: false
+                            }
+                        };
+                        localStorage.setItem('windload_trial_data', JSON.stringify(trialData));
+
+                        // Mark signup as completed
                         localStorage.setItem(SIGNUP_CONFIG.STORAGE_KEY, 'true');
-                        
+
                         // Show success
                         showView('success');
-                        
+
+                        // Update trial banner immediately
+                        if (typeof TrialManager !== 'undefined') {
+                            TrialManager.init();
+                        }
+
                         // Auto-close after 3 seconds
                         setTimeout(() => {
                             closeSignupModal();
+                            location.reload(); // Reload to refresh trial status
                         }, 3000);
-                        
-                        console.log('✅ Signup successful');
-                        
+
+                        console.log('✅ Signup successful - 7-day trial activated');
+
                     } catch (error) {
                         console.error('❌ Signup error:', error);
-                        alert('Something went wrong. Please try again or contact support.');
+                        alert(error.message || 'Something went wrong. Please try again or contact support.');
                         showView('form');
                     }
                 });

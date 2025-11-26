@@ -15,12 +15,22 @@ const TrialManager = (function() {
     // Initialize or get trial data
     function initializeTrial() {
         let trialData = getTrialData();
-        
+
+        // Check if existing trial data is expired - if so, reset it for a fresh trial
+        if (trialData) {
+            const now = new Date();
+            const expiryDate = new Date(trialData.expiryDate);
+            if (now > expiryDate) {
+                console.log('🔄 Trial Manager: Old trial expired, creating fresh trial');
+                trialData = null; // Force create new trial
+            }
+        }
+
         if (!trialData) {
-            // First time user - create new trial
+            // First time user OR expired trial - create new trial
             const now = new Date();
             const expiryDate = new Date(now.getTime() + (TRIAL_DURATION_DAYS * 24 * 60 * 60 * 1000));
-            
+
             trialData = {
                 userId: 'trial_' + generateUserId(),
                 startDate: now.toISOString(),
@@ -36,17 +46,16 @@ const TrialManager = (function() {
                     aiReports: false
                 }
             };
-            
+
             saveTrialData(trialData);
         }
-        
-        
+
         console.log('✅ Trial Manager: Trial initialized', {
             userId: trialData.userId,
             expiryDate: trialData.expiryDate,
             lookups: trialData.lookups.length
         });
-        
+
         return trialData;
     }
 

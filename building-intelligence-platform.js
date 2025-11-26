@@ -2613,11 +2613,33 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
                 
                 console.log('CSV Headers:', headers);
                 
+                // Helper function to properly parse CSV with quoted fields
+                function parseCSVLine(line) {
+                    const result = [];
+                    let current = '';
+                    let inQuotes = false;
+
+                    for (let i = 0; i < line.length; i++) {
+                        const char = line[i];
+
+                        if (char === '"') {
+                            inQuotes = !inQuotes;
+                        } else if (char === ',' && !inQuotes) {
+                            result.push(current);
+                            current = '';
+                        } else {
+                            current += char;
+                        }
+                    }
+                    result.push(current); // Push last field
+                    return result;
+                }
+
                 for (let i = 1; i < lines.length; i++) {
                     const line = lines[i].trim();
                     if (!line) continue;
-                    
-                    const cols = line.split(',');
+
+                    const cols = parseCSVLine(line);
                     let zip = cols[0];
                     
                     if (zip) zip = zip.padStart(5, '0');

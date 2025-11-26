@@ -332,15 +332,23 @@ const TrialManager = (function() {
         // Initialize trial data for non-authenticated users
         initializeTrial();
 
-        // Update UI elements
+        // Check if trial is expired - if so, show upgrade modal ONLY if user hasn't dismissed it
+        const status = getTrialStatus();
+        if (status.expired) {
+            // Don't auto-show modal on page load - let users browse first
+            // Modal will show when they try to use features
+            console.log('⚠️ Trial Manager: Trial expired, features will be restricted');
+        }
+
+        // Update UI elements (but don't auto-show modal)
         updateLookupCounter();
-        updateTrialBanner();
+        // Skip updateTrialBanner on load to avoid confusion
+        // updateTrialBanner();
         addTrialWatermark();
 
-        // Update counters periodically
+        // Update counters periodically (but not banner to avoid modal triggers)
         setInterval(() => {
             updateLookupCounter();
-            updateTrialBanner();
         }, 30000); // Every 30 seconds
 
         // Disable export buttons

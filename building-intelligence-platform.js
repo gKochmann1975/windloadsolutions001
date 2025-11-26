@@ -2086,6 +2086,8 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
                 });
             }
         } else if (mode === 'history') {
+            console.log('🌀 Switching to History mode...');
+
             // Switch to history mode
             if (animatorBtn) {
                 animatorBtn.className = 'hurricane-mode-btn';
@@ -2095,10 +2097,29 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
             }
             if (animatorControls) animatorControls.style.display = 'none';
             if (historyControls) historyControls.style.display = 'block';
-            
+
             // Stop any running animation
-            state.hurricaneAnimator.isPlaying = false;
-            
+            if (state.hurricaneAnimator) {
+                state.hurricaneAnimator.isPlaying = false;
+            }
+
+            // FORCE initialize hurricane map if not done yet
+            if (!state.hurricaneMap && document.getElementById('hurricane-map') && typeof L !== 'undefined') {
+                console.log('🗺️ Lazy initializing hurricane map for History mode...');
+                try {
+                    state.hurricaneMap = L.map('hurricane-map').setView([30, -90], 4);
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '© OpenStreetMap contributors',
+                        maxZoom: 18
+                    }).addTo(state.hurricaneMap);
+                    console.log('✅ Hurricane map initialized for History mode');
+                } catch (error) {
+                    console.error('❌ Failed to initialize hurricane map:', error);
+                    Notifications.show('Failed to initialize map. Please refresh the page.', 'error');
+                    return;
+                }
+            }
+
             // Clear existing layers
             if (state.hurricaneMap) {
                 state.hurricaneMap.eachLayer(layer => {
@@ -2107,7 +2128,7 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
                     }
                 });
             }
-            
+
             // Add hurricane history layer
             addHurricaneHistoryLayer();
         }
@@ -2117,18 +2138,30 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
      * Add hurricane history layer with timeline slider
      */
     function addHurricaneHistoryLayer() {
+        console.log('🌀 addHurricaneHistoryLayer called');
+        console.log('🗺️ state.hurricaneMap:', state.hurricaneMap ? 'EXISTS' : 'NULL');
+        console.log('📊 HURRICANE_DATABASE length:', HURRICANE_DATABASE ? HURRICANE_DATABASE.length : 'UNDEFINED');
+
         if (!state.hurricaneMap) {
-            console.error('Hurricane map not initialized');
+            console.error('❌ Hurricane map not initialized - cannot add history layer');
+            Notifications.show('Map not ready. Please try again.', 'error');
             return;
         }
-        
+
+        if (!HURRICANE_DATABASE || HURRICANE_DATABASE.length === 0) {
+            console.error('❌ HURRICANE_DATABASE is empty or undefined');
+            Notifications.show('Hurricane data not loaded.', 'error');
+            return;
+        }
+
         // Store hurricane track layers
         if (!state.hurricaneHistoryLayers) {
             state.hurricaneHistoryLayers = {};
         }
-        
+
         // Function to display hurricanes within selected year range
         function displayHurricanesInRange(startYear, endYear) {
+            console.log(`🌀 Displaying hurricanes from ${startYear} to ${endYear}`);
             // Clear existing hurricane tracks
             Object.values(state.hurricaneHistoryLayers).forEach(trackGroup => {
                 state.hurricaneMap.removeLayer(trackGroup);

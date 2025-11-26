@@ -282,23 +282,70 @@ const TrialManager = (function() {
     function init() {
         console.log('🔒 Trial Manager: Initializing...');
 
-        // Initialize trial data
+        // Check if user is authenticated via URL token (coming from login/signup)
+        const urlParams = new URLSearchParams(window.location.search);
+        const token = urlParams.get('token');
+        const userId = urlParams.get('user_id');
+
+        if (token && userId) {
+            // User is authenticated - skip local trial restrictions
+            console.log('✅ Trial Manager: Authenticated user detected, skipping local trial');
+            localStorage.setItem('windload_token', token);
+            localStorage.setItem('windload_user_id', userId);
+
+            // Reset local trial to give full access
+            const now = new Date();
+            const expiryDate = new Date(now.getTime() + (TRIAL_DURATION_DAYS * 24 * 60 * 60 * 1000));
+            const trialData = {
+                userId: userId,
+                startDate: now.toISOString(),
+                expiryDate: expiryDate.toISOString(),
+                lookups: [],
+                exportAttempts: 0,
+                authenticated: true,
+                featureAccess: {
+                    windVelocity: true,
+                    hurricaneRisk: true,
+                    solarFinder: true,
+                    multiZipComparison: true,
+                    exports: true,
+                    aiReports: true
+                }
+            };
+            saveTrialData(trialData);
+
+            // Clean URL without reloading
+            const cleanUrl = window.location.pathname;
+            window.history.replaceState({}, document.title, cleanUrl);
+
+            return; // Skip trial restrictions for authenticated users
+        }
+
+        // Check if user was previously authenticated
+        const savedToken = localStorage.getItem('windload_token');
+        const savedTrialData = getTrialData();
+        if (savedToken && savedTrialData && savedTrialData.authenticated) {
+            console.log('✅ Trial Manager: Previously authenticated user, skipping trial restrictions');
+            return; // Skip trial restrictions
+        }
+
+        // Initialize trial data for non-authenticated users
         initializeTrial();
-        
+
         // Update UI elements
         updateLookupCounter();
         updateTrialBanner();
         addTrialWatermark();
-        
+
         // Update counters periodically
         setInterval(() => {
             updateLookupCounter();
             updateTrialBanner();
         }, 30000); // Every 30 seconds
-        
+
         // Disable export buttons
         disableExportButtons();
-        
+
         // Prevent printing
         preventPrinting();
     }

@@ -2928,15 +2928,47 @@
 
         // ADMIN ONLY: Reset trial button (only shows with ?admin=true in URL)
         if (window.location.search.includes('admin=true')) {
+            // Container for admin buttons
+            const adminPanel = document.createElement('div');
+            adminPanel.style.cssText = 'position:fixed;bottom:20px;right:20px;z-index:99999;display:flex;flex-direction:column;gap:10px;';
+
+            // Reset Trial button
             const resetBtn = document.createElement('button');
-            resetBtn.textContent = '🔧 ADMIN: Reset Trial';
-            resetBtn.style.cssText = 'position:fixed;bottom:20px;right:20px;z-index:99999;padding:10px 20px;background:#dc2626;color:white;border:none;border-radius:8px;cursor:pointer;font-weight:bold;box-shadow:0 4px 12px rgba(0,0,0,0.3);';
+            resetBtn.textContent = '🔧 Reset Trial';
+            resetBtn.style.cssText = 'padding:10px 20px;background:#dc2626;color:white;border:none;border-radius:8px;cursor:pointer;font-weight:bold;box-shadow:0 4px 12px rgba(0,0,0,0.3);';
             resetBtn.onclick = function() {
                 localStorage.clear();
-                alert('Trial reset! Page will reload.');
-                location.reload();
+                sessionStorage.clear();
+                alert('Trial & cache cleared! Page will hard reload.');
+                location.reload(true);
             };
-            document.body.appendChild(resetBtn);
+
+            // Show Debug Info button
+            const debugBtn = document.createElement('button');
+            debugBtn.textContent = '🔍 Debug Info';
+            debugBtn.style.cssText = 'padding:10px 20px;background:#2563eb;color:white;border:none;border-radius:8px;cursor:pointer;font-weight:bold;box-shadow:0 4px 12px rgba(0,0,0,0.3);';
+            debugBtn.onclick = function() {
+                const trialData = localStorage.getItem('windload_trial_data');
+                const token = localStorage.getItem('windload_token');
+                const userId = localStorage.getItem('windload_user_id');
+                const debugInfo = `
+=== TRIAL DEBUG INFO ===
+Token: ${token ? 'SET' : 'NOT SET'}
+User ID: ${userId || 'NOT SET'}
+Trial Data: ${trialData ? JSON.stringify(JSON.parse(trialData), null, 2) : 'NOT SET'}
+
+=== SCRIPT STATUS ===
+VelocityFinder: ${typeof VelocityFinder !== 'undefined' ? 'LOADED' : 'NOT LOADED'}
+TrialManager: ${typeof TrialManager !== 'undefined' ? 'LOADED' : 'NOT LOADED'}
+Leaflet: ${typeof L !== 'undefined' ? 'LOADED' : 'NOT LOADED'}
+                `;
+                console.log(debugInfo);
+                alert(debugInfo);
+            };
+
+            adminPanel.appendChild(debugBtn);
+            adminPanel.appendChild(resetBtn);
+            document.body.appendChild(adminPanel);
         }
     </script>
     

@@ -1777,6 +1777,13 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
      * Download REPORT as text file
      */
     function downloadReport(reportText) {
+        // TRIAL BLOCK - Exports disabled during trial
+        if (typeof TrialManager !== 'undefined' && !TrialManager.canAccessFeature('exports')) {
+            console.log('🚫 Export blocked - Trial user');
+            showUpgradeModal('Export features require a paid subscription. Upgrade now for unlimited exports!');
+            return;
+        }
+
         const blob = new Blob([reportText], { type: 'text/plain' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
@@ -2152,6 +2159,13 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
      * Export hurricane database to CSV
      */
     function exportHurricaneData() {
+        // TRIAL BLOCK - Exports disabled during trial
+        if (typeof TrialManager !== 'undefined' && !TrialManager.canAccessFeature('exports')) {
+            console.log('🚫 Export blocked - Trial user');
+            showUpgradeModal('Export features require a paid subscription. Upgrade now for unlimited exports!');
+            return;
+        }
+
         let csvContent = 'Hurricane Name,Year,Category,Landfall Location,Peak Wind Speed,Damage (Millions USD),Casualties,Affected States\n';
 
         HURRICANE_DATABASE.forEach(hurricane => {
@@ -3499,6 +3513,13 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
     }
 
     function exportSolarResults() {
+        // TRIAL BLOCK - Exports disabled during trial
+        if (typeof TrialManager !== 'undefined' && !TrialManager.canAccessFeature('exports')) {
+            console.log('🚫 Export blocked - Trial user');
+            showUpgradeModal('Export features require a paid subscription. Upgrade now for unlimited exports!');
+            return;
+        }
+
         if (!state.solarResults || state.solarResults.length === 0) {
             Notifications.show('No solar results to export', 'warning');
             return;
@@ -3680,6 +3701,13 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
     }
 
     function exportFilterResults() {
+        // TRIAL BLOCK - Exports disabled during trial
+        if (typeof TrialManager !== 'undefined' && !TrialManager.canAccessFeature('exports')) {
+            console.log('🚫 Export blocked - Trial user');
+            showUpgradeModal('Export features require a paid subscription. Upgrade now for unlimited exports!');
+            return;
+        }
+
         if (!state.filterResults || state.filterResults.length === 0) {
             Notifications.show('No filter results to export', 'warning');
             return;
@@ -3879,6 +3907,13 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
     }
 
     function exportComparison() {
+        // TRIAL BLOCK - Exports disabled during trial
+        if (typeof TrialManager !== 'undefined' && !TrialManager.canAccessFeature('exports')) {
+            console.log('🚫 Export blocked - Trial user');
+            showUpgradeModal('Export features require a paid subscription. Upgrade now for unlimited exports!');
+            return;
+        }
+
         if (state.comparisonZIPs.length === 0) {
             Notifications.show('No ZIP codes to export', 'warning');
             return;

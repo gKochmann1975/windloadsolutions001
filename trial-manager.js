@@ -358,6 +358,9 @@ const TrialManager = (function() {
 
         // Prevent printing
         preventPrinting();
+
+        // Prevent content selection and copying
+        preventContentCopy();
     }
 
     // Disable export buttons
@@ -396,12 +399,72 @@ const TrialManager = (function() {
                 return false;
             }
         });
-        
+
         // Override window.print()
         const originalPrint = window.print;
         window.print = function() {
             showUpgradeModal('Print functionality requires a paid subscription');
         };
+    }
+
+    // Prevent content selection/copying for trial users
+    function preventContentCopy() {
+        // Disable text selection via CSS
+        const style = document.createElement('style');
+        style.textContent = `
+            body.trial-mode {
+                -webkit-user-select: none !important;
+                -moz-user-select: none !important;
+                -ms-user-select: none !important;
+                user-select: none !important;
+            }
+            body.trial-mode input,
+            body.trial-mode textarea,
+            body.trial-mode [contenteditable="true"] {
+                -webkit-user-select: text !important;
+                -moz-user-select: text !important;
+                -ms-user-select: text !important;
+                user-select: text !important;
+            }
+        `;
+        document.head.appendChild(style);
+        document.body.classList.add('trial-mode');
+
+        // Disable copy event
+        document.addEventListener('copy', function(e) {
+            e.preventDefault();
+            showUpgradeModal('Copy functionality requires a paid subscription');
+            return false;
+        });
+
+        // Disable cut event
+        document.addEventListener('cut', function(e) {
+            e.preventDefault();
+            showUpgradeModal('Cut functionality requires a paid subscription');
+            return false;
+        });
+
+        // Disable right-click context menu
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            showUpgradeModal('Right-click is disabled during trial. Upgrade to unlock all features!');
+            return false;
+        });
+
+        // Disable Ctrl+C, Ctrl+A, Ctrl+X
+        document.addEventListener('keydown', function(e) {
+            if ((e.ctrlKey || e.metaKey) && (e.key === 'c' || e.key === 'a' || e.key === 'x')) {
+                // Allow in input fields
+                if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+                    return true;
+                }
+                e.preventDefault();
+                showUpgradeModal('Copy/Select functionality requires a paid subscription');
+                return false;
+            }
+        });
+
+        console.log('🔒 Trial Manager: Content copy protection enabled');
     }
 
     // Public API

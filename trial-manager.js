@@ -240,7 +240,7 @@ const TrialManager = (function() {
     function updateTrialBanner() {
         const bannerElement = document.getElementById('trial-banner-content');
         if (!bannerElement) return;
-        
+
         const status = getTrialStatus();
         if (status.expired) {
             bannerElement.innerHTML = `
@@ -248,9 +248,12 @@ const TrialManager = (function() {
                 <span>Trial Expired - <a href="#" onclick="showUpgradeModal('Your trial has expired'); return false;" class="trial-banner-link">Upgrade Now</a></span>
             `;
         } else {
+            // Show trial countdown - clicking just shows the status, not upgrade modal
             bannerElement.innerHTML = `
                 <svg class="trial-clock-icon trial-icon-animated"><use href="#icon-trial-clock"></use></svg>
-                <span>${status.message} - <a href="#" onclick="showUpgradeModal('Upgrade to unlock all features'); return false;" class="trial-banner-link">Upgrade Now</a></span>
+                <span>${status.message}</span>
+                <span style="margin-left: 10px;">-</span>
+                <a href="#" onclick="showUpgradeModal('Upgrade to unlock all features'); return false;" class="trial-banner-link" style="margin-left: 10px;">Upgrade Now</a>
             `;
         }
     }

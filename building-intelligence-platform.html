@@ -2925,6 +2925,19 @@
     <script src="./building-intelligence-platform.js"></script>
     <script>
         console.log('📊 Building Intelligence Platform loaded');
+
+        // ADMIN ONLY: Reset trial button (only shows with ?admin=true in URL)
+        if (window.location.search.includes('admin=true')) {
+            const resetBtn = document.createElement('button');
+            resetBtn.textContent = '🔧 ADMIN: Reset Trial';
+            resetBtn.style.cssText = 'position:fixed;bottom:20px;right:20px;z-index:99999;padding:10px 20px;background:#dc2626;color:white;border:none;border-radius:8px;cursor:pointer;font-weight:bold;box-shadow:0 4px 12px rgba(0,0,0,0.3);';
+            resetBtn.onclick = function() {
+                localStorage.clear();
+                alert('Trial reset! Page will reload.');
+                location.reload();
+            };
+            document.body.appendChild(resetBtn);
+        }
     </script>
     
     <!-- Hurricane AI Complete (No API Required) -->

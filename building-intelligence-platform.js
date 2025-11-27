@@ -3902,12 +3902,57 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
                     });
                 });
                 
-                results.sort((a, b) => a.velocity - b.velocity);
-                
-                const limitedResults = results.slice(0, maxResults);
+                // Sort by velocity first, then by state to ensure geographic diversity
+                // Without secondary sort, ZIP codes starting with low numbers (VA=24xxx) dominate results
+                results.sort((a, b) => {
+                    if (a.velocity !== b.velocity) {
+                        return a.velocity - b.velocity;  // Primary: velocity ascending
+                    }
+                    return a.state.localeCompare(b.state);  // Secondary: state alphabetically
+                });
+
+                // For better distribution when no state filter is applied, interleave states
+                // This prevents showing 72 Virginia ZIPs when there are 12 states with same velocity
+                let limitedResults;
+                if (!stateFilter && results.length > maxResults) {
+                    // Group by velocity, then distribute states evenly within each velocity group
+                    const velocityGroups = {};
+                    results.forEach(r => {
+                        if (!velocityGroups[r.velocity]) velocityGroups[r.velocity] = [];
+                        velocityGroups[r.velocity].push(r);
+                    });
+
+                    const distributed = [];
+                    Object.keys(velocityGroups).sort((a, b) => a - b).forEach(velocity => {
+                        const group = velocityGroups[velocity];
+                        // Round-robin by state within each velocity group
+                        const byState = {};
+                        group.forEach(r => {
+                            if (!byState[r.state]) byState[r.state] = [];
+                            byState[r.state].push(r);
+                        });
+
+                        const stateKeys = Object.keys(byState).sort();
+                        let added = true;
+                        while (added && distributed.length < results.length) {
+                            added = false;
+                            stateKeys.forEach(state => {
+                                if (byState[state].length > 0) {
+                                    distributed.push(byState[state].shift());
+                                    added = true;
+                                }
+                            });
+                        }
+                    });
+
+                    limitedResults = distributed.slice(0, maxResults);
+                } else {
+                    limitedResults = results.slice(0, maxResults);
+                }
+
                 state.filterResults = limitedResults;
-                
-                displayFilterResults(limitedResults, riskCategory);
+
+                displayFilterResults(limitedResults, riskCategory, stateFilter);
                 
                 LoadingOverlay.hide();
                 Notifications.show(`Found ${limitedResults.length} matching locations`, 'success');
@@ -3924,19 +3969,23 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
         }, 100);
     }
 
-    function displayFilterResults(results, riskCategory) {
+    function displayFilterResults(results, riskCategory, stateFilter) {
         const container = document.getElementById('filter-results-container');
         if (!container) return;
-        
+
         if (results.length === 0) {
             container.innerHTML = '<div class="empty-state">No results found. Try adjusting your filters.</div>';
             container.style.display = 'block';
             return;
         }
-        
+
+        // Count unique states in results for display
+        const statesInResults = new Set(results.map(r => r.state_id));
+        const stateCountText = statesInResults.size > 1 ? ` across ${statesInResults.size} states` : '';
+
         let tableHTML = `
             <div class="results-header">
-                <h3 style="color: #181E57; margin: 0;">Filter Results (${results.length} locations)</h3>
+                <h3 style="color: #181E57; margin: 0;">Filter Results (${results.length} locations${stateCountText})</h3>
                 <div style="display: flex; gap: 0.5rem;">
                     <button class="btn-secondary" onclick="VelocityFinder.toggleResultsTable('filter-results-table')" id="filter-collapse-btn">
                         ${SVG_ICONS.chevronDown}

@@ -454,6 +454,63 @@ window.VelocityFinder = (function() {
             .feature-content-card {
                 transition: all 0.3s ease;
             }
+
+            /* Solar Site Finder Risk Category Radio Buttons */
+            .solar-risk-radio-group {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+                margin-top: 0.5rem;
+            }
+
+            .solar-risk-radio {
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+                padding: 0.5rem 1rem;
+                border-radius: 8px;
+                border: 2px solid #e2e8f0;
+                background: white;
+                transition: all 0.2s ease;
+            }
+
+            .solar-risk-radio:hover {
+                border-color: #0018ff;
+                background: #f0f4ff;
+            }
+
+            .solar-risk-radio input[type="radio"] {
+                display: none;
+            }
+
+            .solar-risk-radio input[type="radio"]:checked + .solar-risk-label {
+                color: white;
+            }
+
+            .solar-risk-radio:has(input[type="radio"]:checked) {
+                background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+                border-color: #10b981;
+                box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+            }
+
+            .solar-risk-label {
+                font-size: 0.9rem;
+                font-weight: 600;
+                color: #475569;
+                transition: color 0.2s ease;
+            }
+
+            @media (max-width: 768px) {
+                .solar-risk-radio-group {
+                    gap: 0.4rem;
+                }
+                .solar-risk-radio {
+                    padding: 0.4rem 0.8rem;
+                }
+                .solar-risk-label {
+                    font-size: 0.85rem;
+                }
+            }
         </style>
         
         <div class="building-intelligence-platform">
@@ -1060,11 +1117,30 @@ window.VelocityFinder = (function() {
                                     <option value="100">100 results</option>
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label class="form-label">
-                                    <input type="checkbox" id="solar-risk-comparison" style="margin-right: 0.5rem;">
-                                    Show All Risk Categories
-                                </label>
+                            <div class="form-group" style="grid-column: span 2;">
+                                <label class="form-label">Risk Category</label>
+                                <div class="solar-risk-radio-group">
+                                    <label class="solar-risk-radio">
+                                        <input type="radio" name="solar-risk-category" value="category_1">
+                                        <span class="solar-risk-label">Category I</span>
+                                    </label>
+                                    <label class="solar-risk-radio">
+                                        <input type="radio" name="solar-risk-category" value="category_2" checked>
+                                        <span class="solar-risk-label">Category II</span>
+                                    </label>
+                                    <label class="solar-risk-radio">
+                                        <input type="radio" name="solar-risk-category" value="category_3">
+                                        <span class="solar-risk-label">Category III</span>
+                                    </label>
+                                    <label class="solar-risk-radio">
+                                        <input type="radio" name="solar-risk-category" value="category_4">
+                                        <span class="solar-risk-label">Category IV</span>
+                                    </label>
+                                    <label class="solar-risk-radio">
+                                        <input type="radio" name="solar-risk-category" value="all">
+                                        <span class="solar-risk-label">All Categories</span>
+                                    </label>
+                                </div>
                             </div>
                         </div>
                         <div class="text-center">
@@ -3379,10 +3455,16 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
 
         const stateFilter = document.getElementById('solar-state-filter')?.value || '';
         const maxResults = parseInt(document.getElementById('solar-max-results')?.value || '50');
-        const showAllCategories = document.getElementById('solar-risk-comparison')?.checked || false;
-        
+
+        // Get selected risk category from radio buttons
+        const selectedRadio = document.querySelector('input[name="solar-risk-category"]:checked');
+        const solarRiskCategory = selectedRadio?.value || 'category_2';
+        const showAllCategories = solarRiskCategory === 'all';
+
+        console.log(`🔍 Solar Finder: Risk category selected: ${solarRiskCategory}, showAllCategories: ${showAllCategories}`);
+
         LoadingOverlay.show('Finding solar sites...');
-        
+
         setTimeout(() => {
             try {
                 const results = [];
@@ -3390,7 +3472,7 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
                 // Debug: Log total ZIP codes available
                 const totalZips = Object.keys(state.csvVelocityData).length;
                 console.log(`🔍 Solar Search: Total ZIP codes loaded: ${totalZips}`);
-                console.log(`🔍 Solar Search: State filter: "${stateFilter}", Risk category: "${state.selectedRiskCategory}"`);
+                console.log(`🔍 Solar Search: State filter: "${stateFilter}", Risk category: "${solarRiskCategory}"`);
 
                 let checkedCount = 0;
                 let matchingCount = 0;
@@ -3405,20 +3487,24 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
                         return;
                     }
 
-                    const velocityData = getVelocityFromCSV(zip, state.selectedRiskCategory);
+                    // Use the solar finder's own risk category, not the global one
+                    const velocityData = getVelocityFromCSV(zip, solarRiskCategory === 'all' ? 'category_1' : solarRiskCategory);
                     if (!velocityData || !velocityData.velocity) {
                         noVelocityCount++;
                         return;
                     }
 
-                    if (velocityData.velocity <= 120) {
+                    // For "all" categories, use the lowest velocity (Category I) for filtering
+                    const filterVelocity = showAllCategories ? velocityData.cat1 : velocityData.velocity;
+
+                    if (filterVelocity && filterVelocity <= 120) {
                         matchingCount++;
                         results.push({
                             zip: zip,
                             city: data.city,
                             state: data.state_name,
                             state_id: data.state_id,
-                            velocity: velocityData.velocity,
+                            velocity: filterVelocity,
                             population: data.population,
                             density: data.density,
                             cat1: velocityData.cat1,
@@ -3560,8 +3646,10 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
             Notifications.show('No solar results to export', 'warning');
             return;
         }
-        
-        const showAllCategories = document.getElementById('solar-risk-comparison')?.checked || false;
+
+        // Get selected risk category from radio buttons
+        const selectedRadio = document.querySelector('input[name="solar-risk-category"]:checked');
+        const showAllCategories = selectedRadio?.value === 'all';
         
         let csvContent = showAllCategories
             ? 'ZIP Code,City,State,Category I (mph),Category II (mph),Category III (mph),Category IV (mph),Population,Density\n'

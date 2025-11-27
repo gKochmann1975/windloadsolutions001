@@ -1121,23 +1121,23 @@ window.VelocityFinder = (function() {
                                 <label class="form-label">Risk Category</label>
                                 <div class="solar-risk-radio-group">
                                     <label class="solar-risk-radio">
-                                        <input type="radio" name="solar-risk-category" value="category_1">
+                                        <input type="radio" name="solar-risk-category" value="category_1" onchange="VelocityFinder.findSolarSites()">
                                         <span class="solar-risk-label">Category I</span>
                                     </label>
                                     <label class="solar-risk-radio">
-                                        <input type="radio" name="solar-risk-category" value="category_2" checked>
+                                        <input type="radio" name="solar-risk-category" value="category_2" checked onchange="VelocityFinder.findSolarSites()">
                                         <span class="solar-risk-label">Category II</span>
                                     </label>
                                     <label class="solar-risk-radio">
-                                        <input type="radio" name="solar-risk-category" value="category_3">
+                                        <input type="radio" name="solar-risk-category" value="category_3" onchange="VelocityFinder.findSolarSites()">
                                         <span class="solar-risk-label">Category III</span>
                                     </label>
                                     <label class="solar-risk-radio">
-                                        <input type="radio" name="solar-risk-category" value="category_4">
+                                        <input type="radio" name="solar-risk-category" value="category_4" onchange="VelocityFinder.findSolarSites()">
                                         <span class="solar-risk-label">Category IV</span>
                                     </label>
                                     <label class="solar-risk-radio">
-                                        <input type="radio" name="solar-risk-category" value="all">
+                                        <input type="radio" name="solar-risk-category" value="all" onchange="VelocityFinder.findSolarSites()">
                                         <span class="solar-risk-label">All Categories</span>
                                     </label>
                                 </div>

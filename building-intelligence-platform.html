@@ -2362,6 +2362,68 @@
             background: rgba(59, 130, 246, 0.05);
         }
 
+        /* Google Sign-In Divider */
+        .signup-divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: #9ca3af;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin: 1rem 0;
+        }
+
+        .signup-divider::before,
+        .signup-divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .signup-divider::before {
+            margin-right: 1rem;
+        }
+
+        .signup-divider::after {
+            margin-left: 1rem;
+        }
+
+        /* Google Sign-Up Button */
+        .btn-google-signup {
+            width: 100%;
+            padding: 0.9rem 1.5rem;
+            background: white;
+            color: #1f2937;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .btn-google-signup:hover {
+            background: #f9fafb;
+            border-color: #d1d5db;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .btn-google-signup:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-google-signup .google-icon {
+            flex-shrink: 0;
+        }
+
         .signup-privacy {
             text-align: center;
             font-size: 0.8rem;
@@ -2482,6 +2544,9 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <!-- Building Intelligence Platform CSS -->
     <link rel="stylesheet" href="./css/building-intelligence-platform.css">
+
+    <!-- Google Sign-In SDK -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
     
@@ -3454,14 +3519,26 @@ Leaflet: ${typeof L !== 'undefined' ? 'LOADED' : 'NOT LOADED'}
                             </svg>
                             Start Free Trial
                         </button>
-                        <button 
-                            type="button" 
-                            class="btn-signup-subscribe" 
+                        <button
+                            type="button"
+                            class="btn-signup-subscribe"
                             onclick="window.location.href='building-intelligence-platform-shop.html'">
                             💳 Subscribe Now
                         </button>
                     </div>
-                    
+
+                    <div class="signup-divider">OR</div>
+
+                    <button type="button" id="googleSignupBtn" class="btn-google-signup" onclick="signUpWithGoogle()">
+                        <svg class="google-icon" viewBox="0 0 24 24" width="20" height="20">
+                            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                        </svg>
+                        Sign up with Google
+                    </button>
+
                     <p class="signup-privacy">
                         By signing up, you agree to our
                         <a href="terms-of-service.html" target="_blank">Terms of Service</a> and
@@ -3504,6 +3581,7 @@ Leaflet: ${typeof L !== 'undefined' ? 'LOADED' : 'NOT LOADED'}
         // Configuration
         const SIGNUP_CONFIG = {
             API_URL: 'https://api.windloadcalc.com',
+            GOOGLE_CLIENT_ID: '54861385840-potugp8t4bpls8ckgbba6ku6i1semkuf.apps.googleusercontent.com',
             GOOGLE_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbwtwGU1jvSIQGrlf24Is7gKsu2dc-GK9FnT8fW4ldVXLQ54R0yWBy24Y4wegSrLGR_s/exec',
             STORAGE_KEY: 'bip_signup_completed',
             SHOW_DELAY: 1000
@@ -3545,6 +3623,155 @@ Leaflet: ${typeof L !== 'undefined' ? 'LOADED' : 'NOT LOADED'}
                 viewId === 'loading' ? 'block' : 'none';
             document.getElementById('signup-success-view').style.display =
                 viewId === 'success' ? 'block' : 'none';
+        }
+
+        // Grant immediate access after signup
+        function grantImmediateAccess(data) {
+            // Store auth tokens for immediate access
+            if (data.token) {
+                localStorage.setItem('authToken', data.token);
+                localStorage.setItem('windload_token', data.token);
+            }
+            if (data.user_id) {
+                localStorage.setItem('userId', data.user_id);
+                localStorage.setItem('windload_user_id', data.user_id);
+            }
+
+            // Mark as authenticated trial user
+            const trialData = {
+                userId: data.user_id || 'trial_' + Math.random().toString(36).substring(2, 15),
+                startDate: new Date().toISOString(),
+                expiryDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
+                lookups: [],
+                authenticated: true,
+                email: data.email
+            };
+            localStorage.setItem('windload_trial_data', JSON.stringify(trialData));
+
+            // Mark signup complete
+            localStorage.setItem(SIGNUP_CONFIG.STORAGE_KEY, 'true');
+
+            console.log('✅ Immediate access granted');
+        }
+
+        // Initialize Google Sign-In
+        function initializeGoogleSignIn() {
+            if (typeof google !== 'undefined' && google.accounts) {
+                google.accounts.id.initialize({
+                    client_id: SIGNUP_CONFIG.GOOGLE_CLIENT_ID,
+                    callback: handleGoogleSignupCallback,
+                    auto_select: false,
+                    cancel_on_tap_outside: true
+                });
+            }
+        }
+
+        // Google Sign-Up button handler
+        async function signUpWithGoogle() {
+            const btn = document.getElementById('googleSignupBtn');
+            const originalText = btn.innerHTML;
+
+            try {
+                btn.disabled = true;
+                btn.innerHTML = '<span style="display: inline-block; width: 18px; height: 18px; border: 2px solid rgba(0,0,0,0.1); border-top-color: #1f2937; border-radius: 50%; animation: spin 0.8s linear infinite;"></span> Signing up...';
+
+                if (typeof google === 'undefined' || !google.accounts) {
+                    throw new Error('Google Sign-In not loaded yet. Please try again.');
+                }
+
+                // Use One Tap to get credential
+                google.accounts.id.prompt((notification) => {
+                    if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+                        // Fallback - reset button if popup not shown
+                        btn.disabled = false;
+                        btn.innerHTML = originalText;
+                    }
+                });
+
+            } catch (error) {
+                console.error('Google Sign-Up error:', error);
+                alert(`Sign-up failed: ${error.message}`);
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+            }
+        }
+
+        // Handle Google callback for signup
+        async function handleGoogleSignupCallback(response) {
+            const btn = document.getElementById('googleSignupBtn');
+
+            showView('loading');
+
+            try {
+                // Send ID token to backend
+                const apiResponse = await fetch(`${SIGNUP_CONFIG.API_URL}/api/auth/google`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        id_token: response.credential,
+                        trial_type: 'bip'
+                    })
+                });
+
+                const data = await apiResponse.json();
+
+                if (data.success || apiResponse.ok) {
+                    // Log to Google Sheets (non-blocking)
+                    fetch(SIGNUP_CONFIG.GOOGLE_SCRIPT_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            name: data.user?.full_name || 'Google User',
+                            email: data.user?.email || 'unknown',
+                            company: 'Google Sign-In',
+                            timestamp: new Date().toISOString(),
+                            source: 'BIP - Google Sign-Up',
+                            userAgent: navigator.userAgent
+                        })
+                    }).catch(e => console.log('Sheets logging failed:', e));
+
+                    // Grant immediate access
+                    grantImmediateAccess({
+                        token: data.token,
+                        user_id: data.user_id,
+                        email: data.user?.email
+                    });
+
+                    // Update success view for immediate access
+                    document.getElementById('signup-email-display').textContent = data.user?.email || '';
+                    document.querySelector('#signup-success-view h3').textContent = 'Welcome! 🎉';
+                    document.querySelector('#signup-success-view .success-details').innerHTML =
+                        'Your 7-day free trial is now active with <strong>3 lookups per hour</strong> and <strong>10 per day</strong>.';
+                    document.querySelector('#signup-success-view .success-note').innerHTML =
+                        'A confirmation email has been sent to your inbox.';
+                    document.querySelector('#signup-success-view .btn-start').textContent = 'Start Exploring →';
+
+                    showView('success');
+
+                    // Auto-close and reload after 2 seconds for immediate access
+                    setTimeout(() => {
+                        closeSignupModal();
+                        location.reload();
+                    }, 2000);
+
+                    console.log('✅ Google signup successful - immediate access granted');
+
+                } else {
+                    throw new Error(data.error || 'Google sign-up failed');
+                }
+
+            } catch (error) {
+                console.error('Google auth error:', error);
+                alert(`Sign-up failed: ${error.message}`);
+                showView('form');
+                if (btn) {
+                    btn.disabled = false;
+                    btn.innerHTML = '<svg class="google-icon" viewBox="0 0 24 24" width="20" height="20"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg> Sign up with Google';
+                }
+            }
         }
 
         // Handle form submission
@@ -3645,6 +3872,15 @@ Leaflet: ${typeof L !== 'undefined' ? 'LOADED' : 'NOT LOADED'}
                 });
             }
 
+            // Initialize Google Sign-In
+            const checkGoogleLoaded = setInterval(() => {
+                if (typeof google !== 'undefined' && google.accounts) {
+                    clearInterval(checkGoogleLoaded);
+                    initializeGoogleSignIn();
+                }
+            }, 100);
+            setTimeout(() => clearInterval(checkGoogleLoaded), 10000);
+
             // Initialize modal on page load
             showSignupModal();
         });
@@ -3652,6 +3888,11 @@ Leaflet: ${typeof L !== 'undefined' ? 'LOADED' : 'NOT LOADED'}
         // Helper function to clear signup status (for testing)
         function clearSignupStatus() {
             localStorage.removeItem(SIGNUP_CONFIG.STORAGE_KEY);
+            localStorage.removeItem('windload_trial_data');
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('windload_token');
+            localStorage.removeItem('userId');
+            localStorage.removeItem('windload_user_id');
             console.log('✅ Signup status cleared. Refresh to see modal again.');
         }
     </script>

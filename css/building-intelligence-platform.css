@@ -1022,6 +1022,28 @@
     cursor: pointer;
 }
 
+/* Sortable table headers */
+.results-table th.sortable-header {
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s ease;
+}
+
+.results-table th.sortable-header:hover {
+    background: linear-gradient(135deg, #1a2fed 0%, #1f2563 100%);
+}
+
+.results-table th .sort-icon {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 4px;
+    opacity: 0.7;
+}
+
+.results-table th.sortable-header:hover .sort-icon {
+    opacity: 1;
+}
+
 .table-wrapper {
     overflow-x: auto;
     border-radius: 10px;

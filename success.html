@@ -350,7 +350,7 @@
             </div>
 
             <div class="redirect-notice">
-                <p>Redirecting to your dashboard in <span id="countdown">10</span> seconds...</p>
+                <p>Redirecting to BIP Platform in <span id="countdown">10</span> seconds...</p>
             </div>
         </div>
 
@@ -424,6 +424,10 @@
             document.getElementById('loading').style.display = 'none';
             document.getElementById('success').style.display = 'block';
 
+            // Store token and user_id for redirect
+            redirectToken = data.token;
+            redirectUserId = data.user_id;
+
             // Set user email
             if (data.email) {
                 document.getElementById('user-email').textContent = data.email;
@@ -485,6 +489,10 @@
             document.getElementById('error').style.display = 'block';
         }
 
+        // Store token and user_id for redirect
+        let redirectToken = null;
+        let redirectUserId = null;
+
         function startCountdown() {
             let seconds = 10;
             const countdownElement = document.getElementById('countdown');
@@ -495,7 +503,12 @@
 
                 if (seconds <= 0) {
                     clearInterval(interval);
-                    window.location.href = '/dashboard.html';
+                    // Redirect to BIP page with token for authenticated access
+                    if (redirectToken && redirectUserId) {
+                        window.location.href = `/building-intelligence-platform.html?token=${redirectToken}&user_id=${redirectUserId}`;
+                    } else {
+                        window.location.href = '/building-intelligence-platform.html';
+                    }
                 }
             }, 1000);
         }

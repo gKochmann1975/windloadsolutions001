@@ -3551,7 +3551,7 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
                 const limitedResults = results.slice(0, maxResults);
                 state.solarResults = limitedResults;
 
-                displaySolarResults(limitedResults, showAllCategories, solarRiskCategory);                
+                displaySolarResults(limitedResults, showAllCategories, solarRiskCategory, stateFilter);
                 // TRIAL - Record successful lookup (MANDATORY)
                 if (typeof TrialManager !== 'undefined') {
                     TrialManager.recordLookup('solar_sites', stateFilter || 'all_states');
@@ -3576,14 +3576,38 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
         }, 100);
     }
 
-    function displaySolarResults(results, showAllCategories, selectedRiskCategory) {
+    function displaySolarResults(results, showAllCategories, selectedRiskCategory, stateFilter) {
         const container = document.getElementById('solar-results-container');
         if (!container) return;
 
         if (results.length === 0) {
-            // Show specific explanation for Category IV (no ZIPs have Cat IV ≤ 120 mph per ASCE 7-22)
+            // Define state data for informative messages
+            const stateNames = {
+                'AL': 'Alabama', 'AK': 'Alaska', 'AZ': 'Arizona', 'AR': 'Arkansas', 'CA': 'California',
+                'CO': 'Colorado', 'CT': 'Connecticut', 'DE': 'Delaware', 'DC': 'District of Columbia',
+                'FL': 'Florida', 'GA': 'Georgia', 'HI': 'Hawaii', 'ID': 'Idaho', 'IL': 'Illinois',
+                'IN': 'Indiana', 'IA': 'Iowa', 'KS': 'Kansas', 'KY': 'Kentucky', 'LA': 'Louisiana',
+                'ME': 'Maine', 'MD': 'Maryland', 'MA': 'Massachusetts', 'MI': 'Michigan', 'MN': 'Minnesota',
+                'MS': 'Mississippi', 'MO': 'Missouri', 'MT': 'Montana', 'NE': 'Nebraska', 'NV': 'Nevada',
+                'NH': 'New Hampshire', 'NJ': 'New Jersey', 'NM': 'New Mexico', 'NY': 'New York',
+                'NC': 'North Carolina', 'ND': 'North Dakota', 'OH': 'Ohio', 'OK': 'Oklahoma', 'OR': 'Oregon',
+                'PA': 'Pennsylvania', 'RI': 'Rhode Island', 'SC': 'South Carolina', 'SD': 'South Dakota',
+                'TN': 'Tennessee', 'TX': 'Texas', 'UT': 'Utah', 'VT': 'Vermont', 'VA': 'Virginia',
+                'WA': 'Washington', 'WV': 'West Virginia', 'WI': 'Wisconsin', 'WY': 'Wyoming',
+                'PR': 'Puerto Rico', 'VI': 'Virgin Islands', 'GU': 'Guam', 'AS': 'American Samoa', 'MP': 'Northern Mariana Islands'
+            };
+
+            // States with results for each category (≤120 mph wind speeds)
+            const cat2States = ['AL', 'FL', 'GA', 'IN', 'KY', 'MI', 'NC', 'OH', 'PA', 'SC', 'TN', 'VA', 'WI', 'WV'];
+            const cat3States = ['AL', 'FL', 'GA', 'IN', 'KY', 'MI', 'NC', 'OH', 'SC', 'TN', 'VA'];
+            const cat1Territories = ['AS', 'PR', 'VI']; // Only territories have no Cat I results
+
+            const stateName = stateFilter ? (stateNames[stateFilter] || stateFilter) : '';
+            let infoHTML = '';
+
+            // Category IV - No results anywhere in the US
             if (selectedRiskCategory === 'category-4') {
-                container.innerHTML = `
+                infoHTML = `
                     <div class="info-panel" style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-radius: 12px; padding: 1.5rem; border-left: 4px solid #f59e0b;">
                         <h4 style="color: #92400e; margin: 0 0 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
                             <span style="font-size: 1.5rem;">⚠️</span>
@@ -3611,9 +3635,100 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
                         </p>
                     </div>
                 `;
-            } else {
-                container.innerHTML = '<div class="empty-state">No results found. Try adjusting your filters.</div>';
             }
+            // Category III - Only 11 states have results
+            else if (selectedRiskCategory === 'category-3') {
+                const hasResults = !stateFilter || cat3States.includes(stateFilter);
+                if (!hasResults || !stateFilter) {
+                    const statesWithResults = cat3States.map(s => stateNames[s]).join(', ');
+                    infoHTML = `
+                        <div class="info-panel" style="background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%); border-radius: 12px; padding: 1.5rem; border-left: 4px solid #3b82f6;">
+                            <h4 style="color: #1e40af; margin: 0 0 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
+                                <span style="font-size: 1.5rem;">ℹ️</span>
+                                ${stateFilter ? `No Results for ${stateName} in Risk Category III` : 'Risk Category III - Limited Geographic Coverage'}
+                            </h4>
+                            <p style="color: #1e3a8a; margin: 0 0 1rem 0; line-height: 1.6;">
+                                <strong>Risk Category III</strong> applies to buildings with <strong>high occupancy</strong> (schools, theaters, daycare facilities)
+                                where failure poses substantial risk to human life.
+                            </p>
+                            <p style="color: #1e3a8a; margin: 0 0 1rem 0; line-height: 1.6;">
+                                Due to ASCE 7-22's minimum wind speed of <strong>120 mph</strong> for Category III, only <strong>11 states</strong>
+                                in the interior Midwest and Southeast have locations meeting the ≤120 mph solar threshold.
+                            </p>
+                            <div style="background: white; border-radius: 8px; padding: 1rem; margin-top: 1rem;">
+                                <p style="color: #1f2937; margin: 0 0 0.5rem 0; font-weight: 600;">States with Category III Solar Sites:</p>
+                                <p style="color: #4b5563; margin: 0; line-height: 1.6;">${statesWithResults}</p>
+                            </div>
+                            <p style="color: #1e3a8a; margin: 1rem 0 0 0; font-style: italic;">
+                                💡 <strong>Tip:</strong> ${stateFilter ? `Try selecting one of the states listed above, or switch to ` : 'For more results, try '}<strong>Category I</strong> or <strong>Category II</strong> for broader coverage.
+                            </p>
+                        </div>
+                    `;
+                }
+            }
+            // Category II - Only 14 states have results
+            else if (selectedRiskCategory === 'category-2') {
+                const hasResults = !stateFilter || cat2States.includes(stateFilter);
+                if (!hasResults || !stateFilter) {
+                    const statesWithResults = cat2States.map(s => stateNames[s]).join(', ');
+                    infoHTML = `
+                        <div class="info-panel" style="background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%); border-radius: 12px; padding: 1.5rem; border-left: 4px solid #22c55e;">
+                            <h4 style="color: #166534; margin: 0 0 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
+                                <span style="font-size: 1.5rem;">ℹ️</span>
+                                ${stateFilter ? `No Results for ${stateName} in Risk Category II` : 'Risk Category II - Geographic Coverage'}
+                            </h4>
+                            <p style="color: #15803d; margin: 0 0 1rem 0; line-height: 1.6;">
+                                <strong>Risk Category II</strong> is the standard category for most buildings including <strong>residential, commercial,
+                                and industrial</strong> structures not classified as essential facilities.
+                            </p>
+                            <p style="color: #15803d; margin: 0 0 1rem 0; line-height: 1.6;">
+                                With ASCE 7-22's minimum wind speed of <strong>115 mph</strong> for Category II, only <strong>14 states</strong>
+                                in the interior Midwest and Southeast have locations meeting the ≤120 mph solar threshold.
+                            </p>
+                            <div style="background: white; border-radius: 8px; padding: 1rem; margin-top: 1rem;">
+                                <p style="color: #1f2937; margin: 0 0 0.5rem 0; font-weight: 600;">States with Category II Solar Sites:</p>
+                                <p style="color: #4b5563; margin: 0; line-height: 1.6;">${statesWithResults}</p>
+                            </div>
+                            <p style="color: #15803d; margin: 1rem 0 0 0; font-style: italic;">
+                                💡 <strong>Tip:</strong> ${stateFilter ? `Try selecting one of the states listed above, or switch to ` : 'For the broadest coverage, try '}<strong>Category I</strong> which covers nearly all continental US states.
+                            </p>
+                        </div>
+                    `;
+                }
+            }
+            // Category I - Only territories have no results
+            else if (selectedRiskCategory === 'category-1' && stateFilter && cat1Territories.includes(stateFilter)) {
+                infoHTML = `
+                    <div class="info-panel" style="background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%); border-radius: 12px; padding: 1.5rem; border-left: 4px solid #ec4899;">
+                        <h4 style="color: #9d174d; margin: 0 0 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
+                            <span style="font-size: 1.5rem;">🌴</span>
+                            No Results for ${stateName} - High Wind Zone Territory
+                        </h4>
+                        <p style="color: #831843; margin: 0 0 1rem 0; line-height: 1.6;">
+                            <strong>${stateName}</strong> is located in a <strong>hurricane-prone region</strong> of the Caribbean/Pacific
+                            with consistently high design wind speeds across all risk categories.
+                        </p>
+                        <p style="color: #831843; margin: 0 0 1rem 0; line-height: 1.6;">
+                            Even for <strong>Category I</strong> (the lowest risk category), all ZIP codes in ${stateName} have
+                            design wind speeds exceeding the 120 mph threshold for ideal solar installations.
+                        </p>
+                        <div style="background: white; border-radius: 8px; padding: 1rem; margin-top: 1rem;">
+                            <p style="color: #1f2937; margin: 0 0 0.5rem 0; font-weight: 600;">US Territories with No Solar Sites (High Wind Zones):</p>
+                            <p style="color: #4b5563; margin: 0; line-height: 1.6;">Puerto Rico, US Virgin Islands, American Samoa, Guam, Northern Mariana Islands</p>
+                        </div>
+                        <p style="color: #831843; margin: 1rem 0 0 0; font-style: italic;">
+                            💡 <strong>Note:</strong> Solar installations are still possible in these territories but require enhanced wind-resistant mounting systems designed for high-wind zones.
+                        </p>
+                    </div>
+                `;
+            }
+
+            // If no specific message was generated, show generic message
+            if (!infoHTML) {
+                infoHTML = '<div class="empty-state">No results found for your selected filters. Try adjusting your state selection or risk category.</div>';
+            }
+
+            container.innerHTML = infoHTML;
             container.style.display = 'block';
             return;
         }

@@ -3550,8 +3550,8 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
 
                 const limitedResults = results.slice(0, maxResults);
                 state.solarResults = limitedResults;
-                
-                displaySolarResults(limitedResults, showAllCategories);                
+
+                displaySolarResults(limitedResults, showAllCategories, solarRiskCategory);                
                 // TRIAL - Record successful lookup (MANDATORY)
                 if (typeof TrialManager !== 'undefined') {
                     TrialManager.recordLookup('solar_sites', stateFilter || 'all_states');
@@ -3576,12 +3576,44 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
         }, 100);
     }
 
-    function displaySolarResults(results, showAllCategories) {
+    function displaySolarResults(results, showAllCategories, selectedRiskCategory) {
         const container = document.getElementById('solar-results-container');
         if (!container) return;
-        
+
         if (results.length === 0) {
-            container.innerHTML = '<div class="empty-state">No results found. Try adjusting your filters.</div>';
+            // Show specific explanation for Category IV (no ZIPs have Cat IV ≤ 120 mph per ASCE 7-22)
+            if (selectedRiskCategory === 'category-4') {
+                container.innerHTML = `
+                    <div class="info-panel" style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-radius: 12px; padding: 1.5rem; border-left: 4px solid #f59e0b;">
+                        <h4 style="color: #92400e; margin: 0 0 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
+                            <span style="font-size: 1.5rem;">⚠️</span>
+                            Why No Results for Risk Category IV?
+                        </h4>
+                        <p style="color: #78350f; margin: 0 0 1rem 0; line-height: 1.6;">
+                            <strong>Risk Category IV</strong> applies to <strong>essential facilities</strong> (hospitals, fire stations, emergency shelters)
+                            that must remain operational during and after extreme wind events.
+                        </p>
+                        <p style="color: #78350f; margin: 0 0 1rem 0; line-height: 1.6;">
+                            Per <strong>ASCE 7-22</strong>, the minimum design wind speed for Category IV structures is <strong>130 mph</strong>
+                            nationwide. This exceeds the Solar Site Finder's 120 mph threshold for ideal solar installation locations.
+                        </p>
+                        <div style="background: white; border-radius: 8px; padding: 1rem; margin-top: 1rem;">
+                            <p style="color: #1f2937; margin: 0 0 0.5rem 0; font-weight: 600;">Wind Speed Thresholds by Category:</p>
+                            <ul style="color: #4b5563; margin: 0; padding-left: 1.5rem; line-height: 1.8;">
+                                <li><strong>Category I</strong> (Agricultural): Min 105 mph → 32,000+ eligible ZIPs</li>
+                                <li><strong>Category II</strong> (Standard): Min 115 mph → 5,700+ eligible ZIPs</li>
+                                <li><strong>Category III</strong> (Schools/Hospitals): Min 120 mph → 2,600+ eligible ZIPs</li>
+                                <li><strong>Category IV</strong> (Essential): Min 130 mph → <em>0 eligible ZIPs</em></li>
+                            </ul>
+                        </div>
+                        <p style="color: #78350f; margin: 1rem 0 0 0; font-style: italic;">
+                            💡 <strong>Tip:</strong> For solar site planning, use Category I or II which represent typical commercial and residential structures.
+                        </p>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = '<div class="empty-state">No results found. Try adjusting your filters.</div>';
+            }
             container.style.display = 'block';
             return;
         }

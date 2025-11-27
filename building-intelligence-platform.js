@@ -166,15 +166,15 @@ window.VelocityFinder = (function() {
             <polyline points="6 9 12 15 18 9"/>
         </svg>`,
 
-        sortAsc: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 14px; height: 14px;">
+        sortAsc: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));">
             <polyline points="6 15 12 9 18 15"/>
         </svg>`,
 
-        sortDesc: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 14px; height: 14px;">
+        sortDesc: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));">
             <polyline points="6 9 12 15 18 9"/>
         </svg>`,
 
-        sortNone: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 14px; height: 14px; opacity: 0.4;">
+        sortNone: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px; opacity: 0.6; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.2));">
             <polyline points="6 9 12 5 18 9"/>
             <polyline points="6 15 12 19 18 15"/>
         </svg>`,

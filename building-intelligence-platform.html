@@ -2481,6 +2481,19 @@
             height: 80px;
             margin: 0 auto 1.5rem;
             display: block;
+            /* Ensure no background/border shows - clean circular look */
+            background: transparent;
+            border: none;
+            overflow: visible;
+        }
+
+        /* Large email icon for success header */
+        .email-icon-large {
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            vertical-align: middle;
+            margin-left: 8px;
         }
 
         .signup-success h3 {
@@ -3591,18 +3604,27 @@ Leaflet: ${typeof L !== 'undefined' ? 'LOADED' : 'NOT LOADED'}
             <!-- Success View -->
             <div id="signup-success-view" style="display: none;">
                 <div class="signup-success">
-                    <svg class="success-icon">
-                        <use href="#icon-trial-check"></use>
-                    </svg>
-                    <h3>Check Your Email! 📧</h3>
-                    <p>We've sent a verification link to <strong id="signup-email-display"></strong></p>
-                    <p class="success-details">Click the link in your email to activate your 7-day free trial with <strong>3 lookups per hour</strong> and <strong>10 per day</strong>.</p>
+                    <!-- Clean circular checkmark -->
+                    <div style="width: 80px; height: 80px; margin: 0 auto 1.5rem; background: linear-gradient(135deg, #10b981 0%, #059669 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 25px rgba(16, 185, 129, 0.35);">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                    </div>
+                    <h3 style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+                        Account Created!
+                        <svg class="email-icon-large" viewBox="0 0 24 24" fill="none" stroke="#0018ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                            <path d="M22 6L12 13L2 6"></path>
+                        </svg>
+                    </h3>
+                    <p>We've sent a confirmation to <strong id="signup-email-display"></strong></p>
+                    <p class="success-details">Your account is ready! You can now <strong>log in</strong> with your email and password to start your 7-day free trial.</p>
+                    <a href="login.html" class="btn-start" style="display: inline-block; text-decoration: none;">
+                        Log In Now →
+                    </a>
                     <p class="success-note" style="margin-top: 1rem; font-size: 0.9rem; color: #64748b;">
-                        Didn't receive it? Check your spam folder or <a href="login.html" style="color: #0018ff;">request a new link</a>.
+                        Check your inbox for a welcome email with your account details.
                     </p>
-                    <button onclick="closeSignupModal()" class="btn-start">
-                        Got it →
-                    </button>
                 </div>
             </div>
         </div>

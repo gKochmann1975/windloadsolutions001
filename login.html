@@ -1240,6 +1240,187 @@
                     document.getElementById('trial-company').value = company;
                 }
             }
+
+            // ADMIN TESTING PANEL - Shows with ?admin=true
+            if (window.location.search.includes('admin=true')) {
+                const adminPanel = document.createElement('div');
+                adminPanel.id = 'admin-test-panel';
+                adminPanel.innerHTML = `
+                    <style>
+                        #admin-test-panel {
+                            position: fixed;
+                            bottom: 20px;
+                            right: 20px;
+                            z-index: 99999;
+                            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                        }
+                        #admin-test-panel .admin-toggle {
+                            padding: 12px 20px;
+                            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                            color: white;
+                            border: none;
+                            border-radius: 50px;
+                            cursor: pointer;
+                            font-weight: bold;
+                            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+                            font-size: 14px;
+                        }
+                        #admin-test-panel .panel-content {
+                            display: none;
+                            position: absolute;
+                            bottom: 55px;
+                            right: 0;
+                            width: 420px;
+                            max-height: 70vh;
+                            overflow-y: auto;
+                            background: white;
+                            border-radius: 16px;
+                            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+                            padding: 20px;
+                        }
+                        #admin-test-panel .panel-content.open { display: block; }
+                        #admin-test-panel h3 { margin: 0 0 15px 0; color: #1e293b; font-size: 18px; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; }
+                        #admin-test-panel h4 { margin: 15px 0 10px 0; color: #475569; font-size: 14px; text-transform: uppercase; }
+                        #admin-test-panel .btn-row { display: flex; gap: 8px; margin-bottom: 15px; }
+                        #admin-test-panel .btn { flex: 1; padding: 10px 15px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 13px; }
+                        #admin-test-panel .btn-reset { background: #dc2626; color: white; }
+                        #admin-test-panel .test-accounts { background: #f8fafc; border-radius: 12px; padding: 12px; margin-bottom: 10px; }
+                        #admin-test-panel .account-item { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid #e2e8f0; font-size: 11px; }
+                        #admin-test-panel .account-item:last-child { border-bottom: none; }
+                        #admin-test-panel .account-tier { background: #e0e7ff; color: #3730a3; padding: 2px 8px; border-radius: 4px; font-weight: 600; }
+                        #admin-test-panel .account-email { color: #64748b; font-family: monospace; font-size: 10px; }
+                        #admin-test-panel .copy-btn { background: #10b981; color: white; border: none; padding: 3px 8px; border-radius: 4px; cursor: pointer; font-size: 10px; }
+                        #admin-test-panel .fill-btn { background: #2563eb; color: white; border: none; padding: 3px 8px; border-radius: 4px; cursor: pointer; font-size: 10px; margin-left: 4px; }
+                    </style>
+
+                    <button class="admin-toggle" onclick="document.querySelector('#admin-test-panel .panel-content').classList.toggle('open')">
+                        🔧 Admin Testing Panel
+                    </button>
+
+                    <div class="panel-content">
+                        <h3>🧪 Login Testing Panel</h3>
+
+                        <div class="btn-row">
+                            <button class="btn btn-reset" onclick="localStorage.clear(); sessionStorage.clear(); alert('Storage cleared!'); location.reload();">🗑️ Clear Storage</button>
+                        </div>
+
+                        <h4>📧 BIP Test Accounts</h4>
+                        <div class="test-accounts">
+                            <div class="account-item">
+                                <span class="account-tier">Free Trial</span>
+                                <span class="account-email">windloadcalcllc+bip-trial@gmail.com</span>
+                                <button class="copy-btn" onclick="navigator.clipboard.writeText('windloadcalcllc+bip-trial@gmail.com')">Copy</button>
+                                <button class="fill-btn" onclick="document.getElementById('email').value='windloadcalcllc+bip-trial@gmail.com'">Fill</button>
+                            </div>
+                            <div class="account-item">
+                                <span class="account-tier">Starter Mo</span>
+                                <span class="account-email">windloadcalcllc+bip-starter-mo@gmail.com</span>
+                                <button class="copy-btn" onclick="navigator.clipboard.writeText('windloadcalcllc+bip-starter-mo@gmail.com')">Copy</button>
+                                <button class="fill-btn" onclick="document.getElementById('email').value='windloadcalcllc+bip-starter-mo@gmail.com'">Fill</button>
+                            </div>
+                            <div class="account-item">
+                                <span class="account-tier">Starter Yr</span>
+                                <span class="account-email">windloadcalcllc+bip-starter-yr@gmail.com</span>
+                                <button class="copy-btn" onclick="navigator.clipboard.writeText('windloadcalcllc+bip-starter-yr@gmail.com')">Copy</button>
+                                <button class="fill-btn" onclick="document.getElementById('email').value='windloadcalcllc+bip-starter-yr@gmail.com'">Fill</button>
+                            </div>
+                            <div class="account-item">
+                                <span class="account-tier">Pro Mo</span>
+                                <span class="account-email">windloadcalcllc+bip-pro-mo@gmail.com</span>
+                                <button class="copy-btn" onclick="navigator.clipboard.writeText('windloadcalcllc+bip-pro-mo@gmail.com')">Copy</button>
+                                <button class="fill-btn" onclick="document.getElementById('email').value='windloadcalcllc+bip-pro-mo@gmail.com'">Fill</button>
+                            </div>
+                            <div class="account-item">
+                                <span class="account-tier">Pro Yr</span>
+                                <span class="account-email">windloadcalcllc+bip-pro-yr@gmail.com</span>
+                                <button class="copy-btn" onclick="navigator.clipboard.writeText('windloadcalcllc+bip-pro-yr@gmail.com')">Copy</button>
+                                <button class="fill-btn" onclick="document.getElementById('email').value='windloadcalcllc+bip-pro-yr@gmail.com'">Fill</button>
+                            </div>
+                            <div class="account-item">
+                                <span class="account-tier">Premium Mo</span>
+                                <span class="account-email">windloadcalcllc+bip-premium-mo@gmail.com</span>
+                                <button class="copy-btn" onclick="navigator.clipboard.writeText('windloadcalcllc+bip-premium-mo@gmail.com')">Copy</button>
+                                <button class="fill-btn" onclick="document.getElementById('email').value='windloadcalcllc+bip-premium-mo@gmail.com'">Fill</button>
+                            </div>
+                            <div class="account-item">
+                                <span class="account-tier">Premium Yr</span>
+                                <span class="account-email">windloadcalcllc+bip-premium-yr@gmail.com</span>
+                                <button class="copy-btn" onclick="navigator.clipboard.writeText('windloadcalcllc+bip-premium-yr@gmail.com')">Copy</button>
+                                <button class="fill-btn" onclick="document.getElementById('email').value='windloadcalcllc+bip-premium-yr@gmail.com'">Fill</button>
+                            </div>
+                            <div class="account-item">
+                                <span class="account-tier">Enterprise Mo</span>
+                                <span class="account-email">windloadcalcllc+bip-ent-mo@gmail.com</span>
+                                <button class="copy-btn" onclick="navigator.clipboard.writeText('windloadcalcllc+bip-ent-mo@gmail.com')">Copy</button>
+                                <button class="fill-btn" onclick="document.getElementById('email').value='windloadcalcllc+bip-ent-mo@gmail.com'">Fill</button>
+                            </div>
+                            <div class="account-item">
+                                <span class="account-tier">Enterprise Yr</span>
+                                <span class="account-email">windloadcalcllc+bip-ent-yr@gmail.com</span>
+                                <button class="copy-btn" onclick="navigator.clipboard.writeText('windloadcalcllc+bip-ent-yr@gmail.com')">Copy</button>
+                                <button class="fill-btn" onclick="document.getElementById('email').value='windloadcalcllc+bip-ent-yr@gmail.com'">Fill</button>
+                            </div>
+                        </div>
+
+                        <h4>🧮 Calculator Test Accounts</h4>
+                        <div class="test-accounts">
+                            <div class="account-item">
+                                <span class="account-tier">Free Trial</span>
+                                <span class="account-email">windloadcalcllc+calc-trial@gmail.com</span>
+                                <button class="copy-btn" onclick="navigator.clipboard.writeText('windloadcalcllc+calc-trial@gmail.com')">Copy</button>
+                                <button class="fill-btn" onclick="document.getElementById('email').value='windloadcalcllc+calc-trial@gmail.com'">Fill</button>
+                            </div>
+                            <div class="account-item">
+                                <span class="account-tier">Starter Mo</span>
+                                <span class="account-email">windloadcalcllc+calc-starter-mo@gmail.com</span>
+                                <button class="copy-btn" onclick="navigator.clipboard.writeText('windloadcalcllc+calc-starter-mo@gmail.com')">Copy</button>
+                                <button class="fill-btn" onclick="document.getElementById('email').value='windloadcalcllc+calc-starter-mo@gmail.com'">Fill</button>
+                            </div>
+                            <div class="account-item">
+                                <span class="account-tier">Starter Yr</span>
+                                <span class="account-email">windloadcalcllc+calc-starter-yr@gmail.com</span>
+                                <button class="copy-btn" onclick="navigator.clipboard.writeText('windloadcalcllc+calc-starter-yr@gmail.com')">Copy</button>
+                                <button class="fill-btn" onclick="document.getElementById('email').value='windloadcalcllc+calc-starter-yr@gmail.com'">Fill</button>
+                            </div>
+                            <div class="account-item">
+                                <span class="account-tier">Pro Mo</span>
+                                <span class="account-email">windloadcalcllc+calc-pro-mo@gmail.com</span>
+                                <button class="copy-btn" onclick="navigator.clipboard.writeText('windloadcalcllc+calc-pro-mo@gmail.com')">Copy</button>
+                                <button class="fill-btn" onclick="document.getElementById('email').value='windloadcalcllc+calc-pro-mo@gmail.com'">Fill</button>
+                            </div>
+                            <div class="account-item">
+                                <span class="account-tier">Pro Yr</span>
+                                <span class="account-email">windloadcalcllc+calc-pro-yr@gmail.com</span>
+                                <button class="copy-btn" onclick="navigator.clipboard.writeText('windloadcalcllc+calc-pro-yr@gmail.com')">Copy</button>
+                                <button class="fill-btn" onclick="document.getElementById('email').value='windloadcalcllc+calc-pro-yr@gmail.com'">Fill</button>
+                            </div>
+                            <div class="account-item">
+                                <span class="account-tier">Premium Mo</span>
+                                <span class="account-email">windloadcalcllc+calc-premium-mo@gmail.com</span>
+                                <button class="copy-btn" onclick="navigator.clipboard.writeText('windloadcalcllc+calc-premium-mo@gmail.com')">Copy</button>
+                                <button class="fill-btn" onclick="document.getElementById('email').value='windloadcalcllc+calc-premium-mo@gmail.com'">Fill</button>
+                            </div>
+                            <div class="account-item">
+                                <span class="account-tier">Premium Yr</span>
+                                <span class="account-email">windloadcalcllc+calc-premium-yr@gmail.com</span>
+                                <button class="copy-btn" onclick="navigator.clipboard.writeText('windloadcalcllc+calc-premium-yr@gmail.com')">Copy</button>
+                                <button class="fill-btn" onclick="document.getElementById('email').value='windloadcalcllc+calc-premium-yr@gmail.com'">Fill</button>
+                            </div>
+                        </div>
+
+                        <h4>📦 Bundle Test Account</h4>
+                        <div class="test-accounts">
+                            <div class="account-item">
+                                <span class="account-tier">Both Pro</span>
+                                <span class="account-email">windloadcalcllc+both-pro@gmail.com</span>
+                                <button class="copy-btn" onclick="navigator.clipboard.writeText('windloadcalcllc+both-pro@gmail.com')">Copy</button>
+                                <button class="fill-btn" onclick="document.getElementById('email').value='windloadcalcllc+both-pro@gmail.com'">Fill</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                document.body.appendChild(adminPanel);
+            }
         });
     </script>
 </body>

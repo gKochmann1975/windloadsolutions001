@@ -3610,20 +3610,18 @@ Leaflet: ${typeof L !== 'undefined' ? 'LOADED' : 'NOT LOADED'}
                             <polyline points="20 6 9 17 4 12"></polyline>
                         </svg>
                     </div>
-                    <h3 style="display: flex; align-items: center; justify-content: center; gap: 10px;">
-                        Account Created!
-                        <svg class="email-icon-large" viewBox="0 0 24 24" fill="none" stroke="#0018ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <h3>You're All Set!</h3>
+                    <p>Your 7-day free trial is now active for <strong id="signup-email-display"></strong></p>
+                    <p class="success-details">You have <strong>3 lookups per hour</strong> and <strong>10 per day</strong>. Start exploring wind data now!</p>
+                    <button onclick="closeSignupModal(); window.scrollTo({top: 0, behavior: 'smooth'});" class="btn-start">
+                        Start Using BIP →
+                    </button>
+                    <p class="success-note" style="margin-top: 1rem; font-size: 0.9rem; color: #64748b;">
+                        <svg style="width: 16px; height: 16px; vertical-align: middle; margin-right: 4px;" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2">
                             <rect x="2" y="4" width="20" height="16" rx="2"></rect>
                             <path d="M22 6L12 13L2 6"></path>
                         </svg>
-                    </h3>
-                    <p>We've sent a confirmation to <strong id="signup-email-display"></strong></p>
-                    <p class="success-details">Your account is ready! You can now <strong>log in</strong> with your email and password to start your 7-day free trial.</p>
-                    <a href="login.html" class="btn-start" style="display: inline-block; text-decoration: none;">
-                        Log In Now →
-                    </a>
-                    <p class="success-note" style="margin-top: 1rem; font-size: 0.9rem; color: #64748b;">
-                        Check your inbox for a welcome email with your account details.
+                        Check your inbox for a confirmation email with your login details.
                     </p>
                 </div>
             </div>

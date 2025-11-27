@@ -3458,8 +3458,10 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
 
         // Get selected risk category from radio buttons
         const selectedRadio = document.querySelector('input[name="solar-risk-category"]:checked');
-        const solarRiskCategory = selectedRadio?.value || 'category_2';
-        const showAllCategories = solarRiskCategory === 'all';
+        const radioValue = selectedRadio?.value || 'category_2';
+        // Convert underscore to hyphen for getVelocityFromCSV compatibility
+        const solarRiskCategory = radioValue.replace('_', '-');
+        const showAllCategories = radioValue === 'all';
 
         console.log(`🔍 Solar Finder: Risk category selected: ${solarRiskCategory}, showAllCategories: ${showAllCategories}`);
 
@@ -3488,7 +3490,7 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
                     }
 
                     // Use the solar finder's own risk category, not the global one
-                    const velocityData = getVelocityFromCSV(zip, solarRiskCategory === 'all' ? 'category_1' : solarRiskCategory);
+                    const velocityData = getVelocityFromCSV(zip, showAllCategories ? 'category-1' : solarRiskCategory);
                     if (!velocityData || !velocityData.velocity) {
                         noVelocityCount++;
                         return;

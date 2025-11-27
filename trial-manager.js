@@ -281,22 +281,291 @@ const TrialManager = (function() {
         });
     }
 
+    // ================================================================
+    // SUBSCRIPTION TIER DEFINITIONS
+    // Defines features and limits for each subscription tier
+    // ================================================================
+    const TIER_CONFIG = {
+        free: {
+            name: 'Free Trial',
+            hourlyLimit: HOURLY_LIMIT,
+            dailyLimit: DAILY_LIMIT,
+            features: {
+                windVelocity: true,
+                hurricaneRisk: true,
+                solarFinder: true,
+                multiZipComparison: false,
+                exports: false,
+                aiReports: false
+            },
+            restrictions: {
+                watermark: true,
+                blockExport: true,
+                blockPrint: true,
+                blockCopy: true
+            }
+        },
+        starter: {
+            name: 'Starter',
+            hourlyLimit: 20,
+            dailyLimit: 100,
+            features: {
+                windVelocity: true,
+                hurricaneRisk: true,
+                solarFinder: true,
+                multiZipComparison: false,
+                exports: true,  // PDF only
+                aiReports: false
+            },
+            restrictions: {
+                watermark: false,
+                blockExport: false,
+                blockPrint: false,
+                blockCopy: false
+            }
+        },
+        pro: {
+            name: 'Pro',
+            hourlyLimit: 100,
+            dailyLimit: 500,
+            features: {
+                windVelocity: true,
+                hurricaneRisk: true,
+                solarFinder: true,
+                multiZipComparison: true,
+                exports: true,  // PDF + Excel
+                aiReports: false
+            },
+            restrictions: {
+                watermark: false,
+                blockExport: false,
+                blockPrint: false,
+                blockCopy: false
+            }
+        },
+        premium: {
+            name: 'Premium',
+            hourlyLimit: 500,
+            dailyLimit: 2000,
+            features: {
+                windVelocity: true,
+                hurricaneRisk: true,
+                solarFinder: true,
+                multiZipComparison: true,
+                exports: true,
+                aiReports: true
+            },
+            restrictions: {
+                watermark: false,
+                blockExport: false,
+                blockPrint: false,
+                blockCopy: false
+            }
+        },
+        enterprise: {
+            name: 'Enterprise',
+            hourlyLimit: Infinity,
+            dailyLimit: Infinity,
+            features: {
+                windVelocity: true,
+                hurricaneRisk: true,
+                solarFinder: true,
+                multiZipComparison: true,
+                exports: true,
+                aiReports: true,
+                apiAccess: true,
+                whiteLabel: true
+            },
+            restrictions: {
+                watermark: false,
+                blockExport: false,
+                blockPrint: false,
+                blockCopy: false
+            }
+        },
+        admin: {
+            name: 'Admin',
+            hourlyLimit: Infinity,
+            dailyLimit: Infinity,
+            features: {
+                windVelocity: true,
+                hurricaneRisk: true,
+                solarFinder: true,
+                multiZipComparison: true,
+                exports: true,
+                aiReports: true,
+                apiAccess: true,
+                whiteLabel: true
+            },
+            restrictions: {
+                watermark: false,
+                blockExport: false,
+                blockPrint: false,
+                blockCopy: false
+            }
+        }
+    };
+
+    // Current active tier (for testing modes)
+    let activeTier = null;
+
+    // Get active tier config
+    function getActiveTierConfig() {
+        return activeTier ? TIER_CONFIG[activeTier] : TIER_CONFIG.free;
+    }
+
+    // Show testing mode banner
+    function showTestingBanner(tier, tierConfig) {
+        const banner = document.createElement('div');
+        banner.id = 'testing-mode-banner';
+        banner.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(90deg, #7c3aed, #a855f7);
+            color: white;
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            z-index: 10000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        `;
+
+        const restrictions = [];
+        if (tierConfig.restrictions.watermark) restrictions.push('watermark');
+        if (tierConfig.restrictions.blockExport) restrictions.push('no-export');
+        if (tierConfig.restrictions.blockPrint) restrictions.push('no-print');
+        if (tierConfig.restrictions.blockCopy) restrictions.push('no-copy');
+
+        const restrictionText = restrictions.length > 0
+            ? ` | Restrictions: ${restrictions.join(', ')}`
+            : ' | No restrictions';
+
+        const limitText = tierConfig.hourlyLimit === Infinity
+            ? 'Unlimited'
+            : `${tierConfig.hourlyLimit}/hr, ${tierConfig.dailyLimit}/day`;
+
+        banner.innerHTML = `
+            🧪 TESTING MODE: <strong>${tierConfig.name.toUpperCase()}</strong>
+            | Limits: ${limitText}${restrictionText}
+            <button onclick="this.parentElement.remove()" style="
+                background: rgba(255,255,255,0.2);
+                border: none;
+                color: white;
+                padding: 2px 10px;
+                margin-left: 15px;
+                border-radius: 4px;
+                cursor: pointer;
+            ">✕</button>
+        `;
+        document.body.insertBefore(banner, document.body.firstChild);
+
+        // Add padding to body so content isn't hidden
+        document.body.style.paddingTop = '40px';
+    }
+
+    // Apply tier-specific restrictions
+    function applyTierRestrictions(tierConfig) {
+        if (tierConfig.restrictions.watermark) {
+            addTrialWatermark();
+        }
+        if (tierConfig.restrictions.blockExport) {
+            disableExportButtons();
+        }
+        if (tierConfig.restrictions.blockPrint) {
+            preventPrinting();
+        }
+        if (tierConfig.restrictions.blockCopy) {
+            preventContentCopy();
+        }
+    }
+
     // Initialize trial system on page load
     function init() {
         console.log('🔒 Trial Manager: Initializing...');
 
-        // Check if user is authenticated via URL token (coming from login/signup)
         const urlParams = new URLSearchParams(window.location.search);
         const token = urlParams.get('token');
         const userId = urlParams.get('user_id');
+        const tierParam = urlParams.get('tier');
 
+        // ================================================================
+        // TESTING MODES - Use URL parameters to simulate subscription tiers
+        // ================================================================
+        //
+        // USAGE:
+        //   ?tier=free      - Free trial (watermark, no export, limited lookups)
+        //   ?tier=starter   - Starter subscription
+        //   ?tier=pro       - Pro subscription
+        //   ?tier=premium   - Premium subscription
+        //   ?tier=enterprise - Enterprise subscription
+        //   ?admin=true     - Admin full access (same as ?tier=admin)
+        //   ?trial=true     - Alias for ?tier=free
+        //
+        // These modes DO NOT persist to localStorage - refresh to reset
+        // ================================================================
+
+        // Handle ?admin=true (alias for ?tier=admin)
+        if (urlParams.get('admin') === 'true') {
+            activeTier = 'admin';
+            const tierConfig = TIER_CONFIG.admin;
+            console.log('🔧 Trial Manager: ADMIN MODE - Full access enabled');
+            showTestingBanner('admin', tierConfig);
+            return;
+        }
+
+        // Handle ?trial=true (alias for ?tier=free)
+        if (urlParams.get('trial') === 'true') {
+            activeTier = 'free';
+            const tierConfig = TIER_CONFIG.free;
+            console.log('🧪 Trial Manager: FREE TRIAL MODE - All restrictions enabled');
+
+            // Clear any existing auth for clean test
+            localStorage.removeItem('windload_token');
+            localStorage.removeItem('windload_user_id');
+            localStorage.removeItem(TRIAL_STORAGE_KEY);
+
+            initializeTrial();
+            showTestingBanner('free', tierConfig);
+            updateLookupCounter();
+            updateTrialBanner();
+            applyTierRestrictions(tierConfig);
+            return;
+        }
+
+        // Handle ?tier=xxx parameter
+        if (tierParam && TIER_CONFIG[tierParam]) {
+            activeTier = tierParam;
+            const tierConfig = TIER_CONFIG[tierParam];
+            console.log(`🧪 Trial Manager: Testing ${tierConfig.name.toUpperCase()} tier`);
+
+            // For free tier, clear auth and apply restrictions
+            if (tierParam === 'free') {
+                localStorage.removeItem('windload_token');
+                localStorage.removeItem('windload_user_id');
+                localStorage.removeItem(TRIAL_STORAGE_KEY);
+                initializeTrial();
+                updateLookupCounter();
+                updateTrialBanner();
+            }
+
+            showTestingBanner(tierParam, tierConfig);
+            applyTierRestrictions(tierConfig);
+            return;
+        }
+
+        // ============================================
+        // NORMAL MODE: Check actual authentication state
+        // ============================================
+
+        // Check if user is authenticated via URL token (coming from login/signup)
         if (token && userId) {
-            // User is authenticated - skip local trial restrictions
             console.log('✅ Trial Manager: Authenticated user detected, skipping local trial');
             localStorage.setItem('windload_token', token);
             localStorage.setItem('windload_user_id', userId);
 
-            // Reset local trial to give full access
             const now = new Date();
             const expiryDate = new Date(now.getTime() + (TRIAL_DURATION_DAYS * 24 * 60 * 60 * 1000));
             const trialData = {
@@ -320,8 +589,7 @@ const TrialManager = (function() {
             // Clean URL without reloading
             const cleanUrl = window.location.pathname;
             window.history.replaceState({}, document.title, cleanUrl);
-
-            return; // Skip trial restrictions for authenticated users
+            return;
         }
 
         // Check if user was previously authenticated
@@ -329,50 +597,23 @@ const TrialManager = (function() {
         const savedTrialData = getTrialData();
         if (savedToken && savedTrialData && savedTrialData.authenticated) {
             console.log('✅ Trial Manager: Previously authenticated user, skipping trial restrictions');
-            return; // Skip trial restrictions
+            return;
         }
 
-        // ADMIN TESTING MODE: ?admin=true bypasses all trial restrictions
-        if (urlParams.get('admin') === 'true') {
-            console.log('🔧 Trial Manager: ADMIN MODE - All restrictions bypassed');
-            // Grant full access for testing
-            const now = new Date();
-            const expiryDate = new Date(now.getTime() + (TRIAL_DURATION_DAYS * 24 * 60 * 60 * 1000));
-            const trialData = {
-                userId: 'admin_test_' + generateUserId(),
-                startDate: now.toISOString(),
-                expiryDate: expiryDate.toISOString(),
-                lookups: [],
-                exportAttempts: 0,
-                authenticated: true,
-                adminMode: true,
-                featureAccess: {
-                    windVelocity: true,
-                    hurricaneRisk: true,
-                    solarFinder: true,
-                    multiZipComparison: true,
-                    exports: true,
-                    aiReports: true
-                }
-            };
-            saveTrialData(trialData);
-            return; // Skip all trial restrictions in admin mode
-        }
-
-        // Initialize trial data for non-authenticated users
+        // ============================================
+        // TRIAL USER: Apply all restrictions
+        // ============================================
+        activeTier = 'free';
         initializeTrial();
 
-        // Check if trial is expired - if so, show upgrade modal ONLY if user hasn't dismissed it
         const status = getTrialStatus();
         if (status.expired) {
-            // Don't auto-show modal on page load - let users browse first
-            // Modal will show when they try to use features
             console.log('⚠️ Trial Manager: Trial expired, features will be restricted');
         }
 
-        // Update UI elements (but don't auto-show modal)
+        // Update UI elements
         updateLookupCounter();
-        updateTrialBanner();  // Update banner with trial status
+        updateTrialBanner();
         addTrialWatermark();
 
         // Update counters periodically (but not banner to avoid modal triggers)

@@ -106,9 +106,22 @@ const TrialManager = (function() {
 
     // Check if lookup is allowed
     function canPerformLookup() {
+        // ADMIN/PAID TIER BYPASS - Always allow lookups in testing modes
+        if (activeTier && activeTier !== 'free') {
+            const tierConfig = TIER_CONFIG[activeTier];
+            console.log(`✅ Trial Manager: ${tierConfig.name} mode - Lookup always allowed`);
+            return {
+                allowed: true,
+                remaining: {
+                    hourly: tierConfig.hourlyLimit,
+                    daily: tierConfig.dailyLimit
+                }
+            };
+        }
+
         const trialData = initializeTrial();
         const status = getTrialStatus();
-        
+
         // Check if trial expired
         if (status.expired) {
             return {

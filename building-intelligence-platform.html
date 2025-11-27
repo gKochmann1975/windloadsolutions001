@@ -2926,34 +2926,270 @@
     <script>
         console.log('📊 Building Intelligence Platform loaded');
 
-        // ADMIN ONLY: Reset trial button (only shows with ?admin=true in URL)
+        // ADMIN ONLY: Testing panel (only shows with ?admin=true in URL)
         if (window.location.search.includes('admin=true')) {
-            // Container for admin buttons
+            // Create comprehensive testing panel
             const adminPanel = document.createElement('div');
-            adminPanel.style.cssText = 'position:fixed;bottom:20px;right:20px;z-index:99999;display:flex;flex-direction:column;gap:10px;';
+            adminPanel.id = 'admin-test-panel';
+            adminPanel.innerHTML = `
+                <style>
+                    #admin-test-panel {
+                        position: fixed;
+                        bottom: 20px;
+                        right: 20px;
+                        z-index: 99999;
+                        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                    }
+                    #admin-test-panel .admin-toggle {
+                        padding: 12px 20px;
+                        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                        color: white;
+                        border: none;
+                        border-radius: 50px;
+                        cursor: pointer;
+                        font-weight: bold;
+                        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+                        font-size: 14px;
+                    }
+                    #admin-test-panel .admin-toggle:hover {
+                        transform: translateY(-2px);
+                        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+                    }
+                    #admin-test-panel .panel-content {
+                        display: none;
+                        position: absolute;
+                        bottom: 55px;
+                        right: 0;
+                        width: 420px;
+                        max-height: 70vh;
+                        overflow-y: auto;
+                        background: white;
+                        border-radius: 16px;
+                        box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+                        padding: 20px;
+                    }
+                    #admin-test-panel .panel-content.open { display: block; }
+                    #admin-test-panel h3 {
+                        margin: 0 0 15px 0;
+                        color: #1e293b;
+                        font-size: 18px;
+                        border-bottom: 2px solid #e2e8f0;
+                        padding-bottom: 10px;
+                    }
+                    #admin-test-panel h4 {
+                        margin: 15px 0 10px 0;
+                        color: #475569;
+                        font-size: 14px;
+                        text-transform: uppercase;
+                        letter-spacing: 0.5px;
+                    }
+                    #admin-test-panel .btn-row {
+                        display: flex;
+                        gap: 8px;
+                        margin-bottom: 15px;
+                    }
+                    #admin-test-panel .btn {
+                        flex: 1;
+                        padding: 10px 15px;
+                        border: none;
+                        border-radius: 8px;
+                        cursor: pointer;
+                        font-weight: 600;
+                        font-size: 13px;
+                        transition: all 0.2s;
+                    }
+                    #admin-test-panel .btn-debug {
+                        background: #2563eb;
+                        color: white;
+                    }
+                    #admin-test-panel .btn-debug:hover { background: #1d4ed8; }
+                    #admin-test-panel .btn-reset {
+                        background: #dc2626;
+                        color: white;
+                    }
+                    #admin-test-panel .btn-reset:hover { background: #b91c1c; }
+                    #admin-test-panel .test-accounts {
+                        background: #f8fafc;
+                        border-radius: 12px;
+                        padding: 12px;
+                        margin-bottom: 10px;
+                    }
+                    #admin-test-panel .test-accounts h5 {
+                        margin: 0 0 8px 0;
+                        color: #334155;
+                        font-size: 13px;
+                    }
+                    #admin-test-panel .account-item {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        padding: 6px 0;
+                        border-bottom: 1px solid #e2e8f0;
+                        font-size: 11px;
+                    }
+                    #admin-test-panel .account-item:last-child { border-bottom: none; }
+                    #admin-test-panel .account-tier {
+                        background: #e0e7ff;
+                        color: #3730a3;
+                        padding: 2px 8px;
+                        border-radius: 4px;
+                        font-weight: 600;
+                    }
+                    #admin-test-panel .account-email {
+                        color: #64748b;
+                        font-family: monospace;
+                        font-size: 10px;
+                    }
+                    #admin-test-panel .copy-btn {
+                        background: #10b981;
+                        color: white;
+                        border: none;
+                        padding: 3px 8px;
+                        border-radius: 4px;
+                        cursor: pointer;
+                        font-size: 10px;
+                    }
+                    #admin-test-panel .copy-btn:hover { background: #059669; }
+                    #admin-test-panel .status-box {
+                        background: #fef3c7;
+                        border: 1px solid #f59e0b;
+                        border-radius: 8px;
+                        padding: 10px;
+                        margin-top: 15px;
+                        font-size: 12px;
+                    }
+                    #admin-test-panel .status-box.trial { background: #fee2e2; border-color: #ef4444; }
+                    #admin-test-panel .status-box.auth { background: #d1fae5; border-color: #10b981; }
+                </style>
 
-            // Reset Trial button
-            const resetBtn = document.createElement('button');
-            resetBtn.textContent = '🔧 Reset Trial';
-            resetBtn.style.cssText = 'padding:10px 20px;background:#dc2626;color:white;border:none;border-radius:8px;cursor:pointer;font-weight:bold;box-shadow:0 4px 12px rgba(0,0,0,0.3);';
-            resetBtn.onclick = function() {
-                localStorage.clear();
-                sessionStorage.clear();
-                alert('Trial & cache cleared! Page will hard reload.');
-                location.reload(true);
+                <button class="admin-toggle" onclick="document.querySelector('#admin-test-panel .panel-content').classList.toggle('open')">
+                    🔧 Admin Testing Panel
+                </button>
+
+                <div class="panel-content">
+                    <h3>🧪 Testing Control Panel</h3>
+
+                    <div class="btn-row">
+                        <button class="btn btn-debug" onclick="showDebugInfo()">🔍 Debug Info</button>
+                        <button class="btn btn-reset" onclick="resetTrial()">🗑️ Reset Trial</button>
+                    </div>
+
+                    <div id="current-status" class="status-box">Loading status...</div>
+
+                    <h4>📧 BIP Test Accounts</h4>
+                    <div class="test-accounts">
+                        <div class="account-item">
+                            <span><span class="account-tier">Free Trial</span></span>
+                            <span class="account-email">windloadcalcllc+bip-trial@gmail.com</span>
+                            <button class="copy-btn" onclick="copyEmail('windloadcalcllc+bip-trial@gmail.com')">Copy</button>
+                        </div>
+                        <div class="account-item">
+                            <span><span class="account-tier">Starter Mo</span></span>
+                            <span class="account-email">windloadcalcllc+bip-starter-mo@gmail.com</span>
+                            <button class="copy-btn" onclick="copyEmail('windloadcalcllc+bip-starter-mo@gmail.com')">Copy</button>
+                        </div>
+                        <div class="account-item">
+                            <span><span class="account-tier">Starter Yr</span></span>
+                            <span class="account-email">windloadcalcllc+bip-starter-yr@gmail.com</span>
+                            <button class="copy-btn" onclick="copyEmail('windloadcalcllc+bip-starter-yr@gmail.com')">Copy</button>
+                        </div>
+                        <div class="account-item">
+                            <span><span class="account-tier">Pro Mo</span></span>
+                            <span class="account-email">windloadcalcllc+bip-pro-mo@gmail.com</span>
+                            <button class="copy-btn" onclick="copyEmail('windloadcalcllc+bip-pro-mo@gmail.com')">Copy</button>
+                        </div>
+                        <div class="account-item">
+                            <span><span class="account-tier">Pro Yr</span></span>
+                            <span class="account-email">windloadcalcllc+bip-pro-yr@gmail.com</span>
+                            <button class="copy-btn" onclick="copyEmail('windloadcalcllc+bip-pro-yr@gmail.com')">Copy</button>
+                        </div>
+                        <div class="account-item">
+                            <span><span class="account-tier">Premium Mo</span></span>
+                            <span class="account-email">windloadcalcllc+bip-premium-mo@gmail.com</span>
+                            <button class="copy-btn" onclick="copyEmail('windloadcalcllc+bip-premium-mo@gmail.com')">Copy</button>
+                        </div>
+                        <div class="account-item">
+                            <span><span class="account-tier">Premium Yr</span></span>
+                            <span class="account-email">windloadcalcllc+bip-premium-yr@gmail.com</span>
+                            <button class="copy-btn" onclick="copyEmail('windloadcalcllc+bip-premium-yr@gmail.com')">Copy</button>
+                        </div>
+                        <div class="account-item">
+                            <span><span class="account-tier">Enterprise Mo</span></span>
+                            <span class="account-email">windloadcalcllc+bip-ent-mo@gmail.com</span>
+                            <button class="copy-btn" onclick="copyEmail('windloadcalcllc+bip-ent-mo@gmail.com')">Copy</button>
+                        </div>
+                        <div class="account-item">
+                            <span><span class="account-tier">Enterprise Yr</span></span>
+                            <span class="account-email">windloadcalcllc+bip-ent-yr@gmail.com</span>
+                            <button class="copy-btn" onclick="copyEmail('windloadcalcllc+bip-ent-yr@gmail.com')">Copy</button>
+                        </div>
+                    </div>
+
+                    <h4>🧮 Calculator Test Accounts</h4>
+                    <div class="test-accounts">
+                        <div class="account-item">
+                            <span><span class="account-tier">Free Trial</span></span>
+                            <span class="account-email">windloadcalcllc+calc-trial@gmail.com</span>
+                            <button class="copy-btn" onclick="copyEmail('windloadcalcllc+calc-trial@gmail.com')">Copy</button>
+                        </div>
+                        <div class="account-item">
+                            <span><span class="account-tier">Starter Mo</span></span>
+                            <span class="account-email">windloadcalcllc+calc-starter-mo@gmail.com</span>
+                            <button class="copy-btn" onclick="copyEmail('windloadcalcllc+calc-starter-mo@gmail.com')">Copy</button>
+                        </div>
+                        <div class="account-item">
+                            <span><span class="account-tier">Starter Yr</span></span>
+                            <span class="account-email">windloadcalcllc+calc-starter-yr@gmail.com</span>
+                            <button class="copy-btn" onclick="copyEmail('windloadcalcllc+calc-starter-yr@gmail.com')">Copy</button>
+                        </div>
+                        <div class="account-item">
+                            <span><span class="account-tier">Pro Mo</span></span>
+                            <span class="account-email">windloadcalcllc+calc-pro-mo@gmail.com</span>
+                            <button class="copy-btn" onclick="copyEmail('windloadcalcllc+calc-pro-mo@gmail.com')">Copy</button>
+                        </div>
+                        <div class="account-item">
+                            <span><span class="account-tier">Pro Yr</span></span>
+                            <span class="account-email">windloadcalcllc+calc-pro-yr@gmail.com</span>
+                            <button class="copy-btn" onclick="copyEmail('windloadcalcllc+calc-pro-yr@gmail.com')">Copy</button>
+                        </div>
+                        <div class="account-item">
+                            <span><span class="account-tier">Premium Mo</span></span>
+                            <span class="account-email">windloadcalcllc+calc-premium-mo@gmail.com</span>
+                            <button class="copy-btn" onclick="copyEmail('windloadcalcllc+calc-premium-mo@gmail.com')">Copy</button>
+                        </div>
+                        <div class="account-item">
+                            <span><span class="account-tier">Premium Yr</span></span>
+                            <span class="account-email">windloadcalcllc+calc-premium-yr@gmail.com</span>
+                            <button class="copy-btn" onclick="copyEmail('windloadcalcllc+calc-premium-yr@gmail.com')">Copy</button>
+                        </div>
+                    </div>
+
+                    <h4>📦 Bundle Test Account</h4>
+                    <div class="test-accounts">
+                        <div class="account-item">
+                            <span><span class="account-tier">Both Pro</span></span>
+                            <span class="account-email">windloadcalcllc+both-pro@gmail.com</span>
+                            <button class="copy-btn" onclick="copyEmail('windloadcalcllc+both-pro@gmail.com')">Copy</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(adminPanel);
+
+            // Helper functions
+            window.copyEmail = function(email) {
+                navigator.clipboard.writeText(email).then(() => {
+                    alert('Copied: ' + email);
+                });
             };
 
-            // Show Debug Info button
-            const debugBtn = document.createElement('button');
-            debugBtn.textContent = '🔍 Debug Info';
-            debugBtn.style.cssText = 'padding:10px 20px;background:#2563eb;color:white;border:none;border-radius:8px;cursor:pointer;font-weight:bold;box-shadow:0 4px 12px rgba(0,0,0,0.3);';
-            debugBtn.onclick = function() {
+            window.showDebugInfo = function() {
                 const trialData = localStorage.getItem('windload_trial_data');
                 const token = localStorage.getItem('windload_token');
                 const userId = localStorage.getItem('windload_user_id');
                 const debugInfo = `
 === TRIAL DEBUG INFO ===
-Token: ${token ? 'SET' : 'NOT SET'}
+Token: ${token ? 'SET (' + token.substring(0, 20) + '...)' : 'NOT SET'}
 User ID: ${userId || 'NOT SET'}
 Trial Data: ${trialData ? JSON.stringify(JSON.parse(trialData), null, 2) : 'NOT SET'}
 
@@ -2966,9 +3202,39 @@ Leaflet: ${typeof L !== 'undefined' ? 'LOADED' : 'NOT LOADED'}
                 alert(debugInfo);
             };
 
-            adminPanel.appendChild(debugBtn);
-            adminPanel.appendChild(resetBtn);
-            document.body.appendChild(adminPanel);
+            window.resetTrial = function() {
+                if (confirm('Clear ALL localStorage data and reload?')) {
+                    localStorage.clear();
+                    sessionStorage.clear();
+                    alert('Trial & cache cleared! Page will reload.');
+                    location.reload(true);
+                }
+            };
+
+            // Update status display
+            function updateStatus() {
+                const statusBox = document.getElementById('current-status');
+                const trialData = localStorage.getItem('windload_trial_data');
+                const token = localStorage.getItem('windload_token');
+
+                if (trialData) {
+                    const data = JSON.parse(trialData);
+                    if (data.authenticated) {
+                        statusBox.className = 'status-box auth';
+                        statusBox.innerHTML = '<strong>✅ Authenticated User</strong><br>User ID: ' + (data.userId || 'N/A') + '<br>Admin Mode: ' + (data.adminMode ? 'YES' : 'NO');
+                    } else {
+                        const expiry = new Date(data.expiryDate);
+                        const now = new Date();
+                        const daysLeft = Math.ceil((expiry - now) / (1000 * 60 * 60 * 24));
+                        statusBox.className = 'status-box trial';
+                        statusBox.innerHTML = '<strong>🔒 Trial Mode</strong><br>Days Left: ' + daysLeft + '<br>Lookups: ' + (data.lookups?.length || 0);
+                    }
+                } else {
+                    statusBox.className = 'status-box';
+                    statusBox.innerHTML = '<strong>⚠️ No Trial Data</strong><br>Fresh visitor state';
+                }
+            }
+            updateStatus();
         }
     </script>
     

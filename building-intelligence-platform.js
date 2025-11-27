@@ -165,7 +165,20 @@ window.VelocityFinder = (function() {
         chevronDown: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="6 9 12 15 18 9"/>
         </svg>`,
-        
+
+        sortAsc: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 14px; height: 14px;">
+            <polyline points="6 15 12 9 18 15"/>
+        </svg>`,
+
+        sortDesc: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 14px; height: 14px;">
+            <polyline points="6 9 12 15 18 9"/>
+        </svg>`,
+
+        sortNone: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 14px; height: 14px; opacity: 0.4;">
+            <polyline points="6 9 12 5 18 9"/>
+            <polyline points="6 15 12 19 18 15"/>
+        </svg>`,
+
         play: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polygon points="5 3 19 12 5 21 5 3"/>
         </svg>`,
@@ -317,7 +330,13 @@ window.VelocityFinder = (function() {
             state: 'all',
             name: ''
         },
-        openSection: null // Track which section is currently open
+        openSection: null, // Track which section is currently open
+        // Table sorting state
+        tableSorts: {
+            solar: { column: null, direction: 'asc' },
+            filter: { column: null, direction: 'asc' },
+            comparison: { column: null, direction: 'asc' }
+        }
     };
 
     // ================================================================
@@ -1472,6 +1491,327 @@ window.VelocityFinder = (function() {
             return R * c;
         }
     };
+
+    // ================================================================
+    // TABLE SORTING FUNCTIONS
+    // ================================================================
+    function sortTableResults(tableType, column) {
+        // Get current sort state
+        const sortState = state.tableSorts[tableType];
+
+        // Toggle direction if same column, otherwise reset to asc
+        if (sortState.column === column) {
+            sortState.direction = sortState.direction === 'asc' ? 'desc' : 'asc';
+        } else {
+            sortState.column = column;
+            sortState.direction = 'asc';
+        }
+
+        // Get the data array to sort
+        let data;
+        if (tableType === 'solar') {
+            data = state.solarResults;
+        } else if (tableType === 'filter') {
+            data = state.filterResults;
+        } else if (tableType === 'comparison') {
+            // Comparison table needs special handling - data comes from comparisonZIPs
+            sortComparisonTable(column, sortState.direction);
+            return;
+        }
+
+        if (!data || data.length === 0) return;
+
+        // Sort the data
+        data.sort((a, b) => {
+            let valA, valB;
+
+            switch (column) {
+                case 'zip':
+                    valA = a.zip;
+                    valB = b.zip;
+                    break;
+                case 'city':
+                    valA = `${a.city}, ${a.state}`.toLowerCase();
+                    valB = `${b.city}, ${b.state}`.toLowerCase();
+                    break;
+                case 'state':
+                    valA = a.state.toLowerCase();
+                    valB = b.state.toLowerCase();
+                    break;
+                case 'county':
+                    valA = (a.county || '').toLowerCase();
+                    valB = (b.county || '').toLowerCase();
+                    break;
+                case 'velocity':
+                case 'wind':
+                    valA = parseFloat(a.velocity) || 0;
+                    valB = parseFloat(b.velocity) || 0;
+                    break;
+                case 'cat1':
+                    valA = parseFloat(a.cat1) || 0;
+                    valB = parseFloat(b.cat1) || 0;
+                    break;
+                case 'cat2':
+                    valA = parseFloat(a.cat2) || 0;
+                    valB = parseFloat(b.cat2) || 0;
+                    break;
+                case 'cat3':
+                    valA = parseFloat(a.cat3) || 0;
+                    valB = parseFloat(b.cat3) || 0;
+                    break;
+                case 'cat4':
+                    valA = parseFloat(a.cat4) || 0;
+                    valB = parseFloat(b.cat4) || 0;
+                    break;
+                case 'population':
+                    valA = parseInt(a.population) || 0;
+                    valB = parseInt(b.population) || 0;
+                    break;
+                case 'density':
+                    valA = parseFloat(a.density) || 0;
+                    valB = parseFloat(b.density) || 0;
+                    break;
+                default:
+                    valA = a[column];
+                    valB = b[column];
+            }
+
+            // Compare values
+            if (typeof valA === 'string') {
+                const comparison = valA.localeCompare(valB);
+                return sortState.direction === 'asc' ? comparison : -comparison;
+            } else {
+                const comparison = valA - valB;
+                return sortState.direction === 'asc' ? comparison : -comparison;
+            }
+        });
+
+        // Re-render the table
+        if (tableType === 'solar') {
+            rerenderSolarTable();
+        } else if (tableType === 'filter') {
+            rerenderFilterTable();
+        }
+    }
+
+    function sortComparisonTable(column, direction) {
+        // Build comparison data array
+        const comparisonData = state.comparisonZIPs.map(zip => {
+            const data = getVelocityFromCSV(zip, state.selectedRiskCategory);
+            return { zip, ...data };
+        }).filter(d => d.city); // Filter out invalid ZIPs
+
+        // Sort the data
+        comparisonData.sort((a, b) => {
+            let valA, valB;
+
+            switch (column) {
+                case 'zip':
+                    valA = a.zip;
+                    valB = b.zip;
+                    break;
+                case 'location':
+                    valA = `${a.city}, ${a.state}`.toLowerCase();
+                    valB = `${b.city}, ${b.state}`.toLowerCase();
+                    break;
+                case 'cat1':
+                    valA = parseFloat(a.cat1) || 0;
+                    valB = parseFloat(b.cat1) || 0;
+                    break;
+                case 'cat2':
+                    valA = parseFloat(a.cat2) || 0;
+                    valB = parseFloat(b.cat2) || 0;
+                    break;
+                case 'cat3':
+                    valA = parseFloat(a.cat3) || 0;
+                    valB = parseFloat(b.cat3) || 0;
+                    break;
+                case 'cat4':
+                    valA = parseFloat(a.cat4) || 0;
+                    valB = parseFloat(b.cat4) || 0;
+                    break;
+                case 'population':
+                    valA = parseInt(a.population) || 0;
+                    valB = parseInt(b.population) || 0;
+                    break;
+                case 'density':
+                    valA = parseFloat(a.density) || 0;
+                    valB = parseFloat(b.density) || 0;
+                    break;
+                default:
+                    valA = a[column];
+                    valB = b[column];
+            }
+
+            if (typeof valA === 'string') {
+                const comparison = valA.localeCompare(valB);
+                return direction === 'asc' ? comparison : -comparison;
+            } else {
+                const comparison = valA - valB;
+                return direction === 'asc' ? comparison : -comparison;
+            }
+        });
+
+        // Reorder comparisonZIPs array based on sorted data
+        state.comparisonZIPs = comparisonData.map(d => d.zip);
+
+        // Re-render the comparison table
+        updateComparisonDisplay();
+    }
+
+    // Track last display options for re-rendering after sort
+    let lastSolarDisplayOptions = { showAllCategories: false, selectedRiskCategory: 'category-2', stateFilter: '' };
+    let lastFilterDisplayOptions = { riskCategory: 'category-2', stateFilter: '' };
+
+    function rerenderSolarTable() {
+        // Re-render with current sorted data and last display options
+        const container = document.getElementById('solar-results-container');
+        if (!container || !state.solarResults || state.solarResults.length === 0) return;
+
+        const { showAllCategories, selectedRiskCategory, stateFilter } = lastSolarDisplayOptions;
+
+        let tableHTML = `
+            <div class="results-header">
+                <h3 style="color: #181E57; margin: 0;">Solar Site Results (${state.solarResults.length} locations)</h3>
+                <div style="display: flex; gap: 0.5rem;">
+                    <button class="btn-secondary" onclick="VelocityFinder.toggleResultsTable('solar-results-table')" id="solar-collapse-btn">
+                        ${SVG_ICONS.chevronDown}
+                        Collapse
+                    </button>
+                    <button class="btn-success" onclick="VelocityFinder.exportSolarResults()">
+                        ${SVG_ICONS.download} Export CSV
+                    </button>
+                </div>
+            </div>
+            <div class="table-wrapper" id="solar-results-table">
+                <table class="results-table">
+                    <thead>
+                        <tr>
+                            ${createSortableHeader('solar', 'zip', 'ZIP Code')}
+                            ${createSortableHeader('solar', 'city', 'City, State')}
+                            ${showAllCategories ?
+                                createSortableHeader('solar', 'cat1', 'Cat I') +
+                                createSortableHeader('solar', 'cat2', 'Cat II') +
+                                createSortableHeader('solar', 'cat3', 'Cat III') +
+                                createSortableHeader('solar', 'cat4', 'Cat IV') :
+                                createSortableHeader('solar', 'velocity', 'Wind Speed')}
+                            ${createSortableHeader('solar', 'population', 'Population')}
+                            ${createSortableHeader('solar', 'density', 'Density')}
+                        </tr>
+                    </thead>
+                    <tbody>
+        `;
+
+        state.solarResults.forEach(result => {
+            tableHTML += `
+                <tr onclick="VelocityFinder.loadZIPFromTable('${result.zip}')">
+                    <td><strong>${result.zip}</strong></td>
+                    <td>${result.city}, ${result.state}</td>
+            `;
+
+            if (showAllCategories) {
+                tableHTML += `
+                    <td>${result.cat1 || 'N/A'} mph</td>
+                    <td>${result.cat2 || 'N/A'} mph</td>
+                    <td>${result.cat3 || 'N/A'} mph</td>
+                    <td>${result.cat4 || 'N/A'} mph</td>
+                `;
+            } else {
+                tableHTML += `<td>${result.velocity} mph</td>`;
+            }
+
+            tableHTML += `
+                    <td>${result.population.toLocaleString()}</td>
+                    <td>${result.density.toFixed(1)}</td>
+                </tr>
+            `;
+        });
+
+        tableHTML += `
+                    </tbody>
+                </table>
+            </div>
+        `;
+
+        container.innerHTML = tableHTML;
+        container.style.display = 'block';
+    }
+
+    function rerenderFilterTable() {
+        const container = document.getElementById('filter-results-container');
+        if (!container || !state.filterResults || state.filterResults.length === 0) return;
+
+        // Count unique states in results for display
+        const statesInResults = new Set(state.filterResults.map(r => r.state_id));
+        const stateCountText = statesInResults.size > 1 ? ` across ${statesInResults.size} states` : '';
+
+        let tableHTML = `
+            <div class="results-header">
+                <h3 style="color: #181E57; margin: 0;">Filter Results (${state.filterResults.length} locations${stateCountText})</h3>
+                <div style="display: flex; gap: 0.5rem;">
+                    <button class="btn-secondary" onclick="VelocityFinder.toggleResultsTable('filter-results-table')" id="filter-collapse-btn">
+                        ${SVG_ICONS.chevronDown}
+                        Collapse
+                    </button>
+                    <button class="btn-success" onclick="VelocityFinder.exportFilterResults()">
+                        ${SVG_ICONS.download} Export CSV
+                    </button>
+                </div>
+            </div>
+            <div class="table-wrapper" id="filter-results-table">
+                <table class="results-table">
+                    <thead>
+                        <tr>
+                            ${createSortableHeader('filter', 'zip', 'ZIP Code')}
+                            ${createSortableHeader('filter', 'city', 'City, State')}
+                            ${createSortableHeader('filter', 'county', 'County')}
+                            ${createSortableHeader('filter', 'velocity', 'Wind Speed')}
+                            ${createSortableHeader('filter', 'population', 'Population')}
+                            ${createSortableHeader('filter', 'density', 'Density')}
+                        </tr>
+                    </thead>
+                    <tbody>
+        `;
+
+        state.filterResults.forEach(result => {
+            tableHTML += `
+                <tr onclick="VelocityFinder.loadZIPFromTable('${result.zip}')">
+                    <td><strong>${result.zip}</strong></td>
+                    <td>${result.city}, ${result.state}</td>
+                    <td>${result.county}</td>
+                    <td>${result.velocity} mph</td>
+                    <td>${result.population.toLocaleString()}</td>
+                    <td>${result.density.toFixed(1)}</td>
+                </tr>
+            `;
+        });
+
+        tableHTML += `
+                    </tbody>
+                </table>
+            </div>
+        `;
+
+        container.innerHTML = tableHTML;
+        container.style.display = 'block';
+    }
+
+    function getSortIcon(tableType, column) {
+        const sortState = state.tableSorts[tableType];
+        if (sortState.column !== column) {
+            return SVG_ICONS.sortNone;
+        }
+        return sortState.direction === 'asc' ? SVG_ICONS.sortAsc : SVG_ICONS.sortDesc;
+    }
+
+    function createSortableHeader(tableType, column, label) {
+        return `<th class="sortable-header" onclick="VelocityFinder.sortTable('${tableType}', '${column}')" style="cursor: pointer; user-select: none;">
+            <span style="display: flex; align-items: center; gap: 4px; justify-content: center;">
+                ${label}
+                <span class="sort-icon">${getSortIcon(tableType, column)}</span>
+            </span>
+        </th>`;
+    }
 
     // ================================================================
     // NOTIFICATION SYSTEM (PRESERVED)
@@ -3580,6 +3920,12 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
         const container = document.getElementById('solar-results-container');
         if (!container) return;
 
+        // Save display options for re-rendering after sort
+        lastSolarDisplayOptions = { showAllCategories, selectedRiskCategory, stateFilter };
+
+        // Reset sort state when new search is performed
+        state.tableSorts.solar = { column: null, direction: 'asc' };
+
         if (results.length === 0) {
             // Define state data for informative messages
             const stateNames = {
@@ -3750,11 +4096,16 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
                 <table class="results-table">
                     <thead>
                         <tr>
-                            <th>ZIP Code</th>
-                            <th>City, State</th>
-                            ${showAllCategories ? '<th>Cat I</th><th>Cat II</th><th>Cat III</th><th>Cat IV</th>' : '<th>Wind Speed</th>'}
-                            <th>Population</th>
-                            <th>Density</th>
+                            ${createSortableHeader('solar', 'zip', 'ZIP Code')}
+                            ${createSortableHeader('solar', 'city', 'City, State')}
+                            ${showAllCategories ?
+                                createSortableHeader('solar', 'cat1', 'Cat I') +
+                                createSortableHeader('solar', 'cat2', 'Cat II') +
+                                createSortableHeader('solar', 'cat3', 'Cat III') +
+                                createSortableHeader('solar', 'cat4', 'Cat IV') :
+                                createSortableHeader('solar', 'velocity', 'Wind Speed')}
+                            ${createSortableHeader('solar', 'population', 'Population')}
+                            ${createSortableHeader('solar', 'density', 'Density')}
                         </tr>
                     </thead>
                     <tbody>
@@ -3973,6 +4324,12 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
         const container = document.getElementById('filter-results-container');
         if (!container) return;
 
+        // Save display options for re-rendering after sort
+        lastFilterDisplayOptions = { riskCategory, stateFilter };
+
+        // Reset sort state when new search is performed
+        state.tableSorts.filter = { column: null, direction: 'asc' };
+
         if (results.length === 0) {
             container.innerHTML = '<div class="empty-state">No results found. Try adjusting your filters.</div>';
             container.style.display = 'block';
@@ -4000,17 +4357,17 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
                 <table class="results-table">
                     <thead>
                         <tr>
-                            <th>ZIP Code</th>
-                            <th>City, State</th>
-                            <th>County</th>
-                            <th>Wind Speed</th>
-                            <th>Population</th>
-                            <th>Density</th>
+                            ${createSortableHeader('filter', 'zip', 'ZIP Code')}
+                            ${createSortableHeader('filter', 'city', 'City, State')}
+                            ${createSortableHeader('filter', 'county', 'County')}
+                            ${createSortableHeader('filter', 'velocity', 'Wind Speed')}
+                            ${createSortableHeader('filter', 'population', 'Population')}
+                            ${createSortableHeader('filter', 'density', 'Density')}
                         </tr>
                     </thead>
                     <tbody>
         `;
-        
+
         results.forEach(result => {
             tableHTML += `
                 <tr onclick="VelocityFinder.loadZIPFromTable('${result.zip}')">
@@ -4199,14 +4556,14 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
                 <table class="results-table">
                     <thead>
                         <tr>
-                            <th>ZIP Code</th>
-                            <th>Location</th>
-                            <th>Cat I</th>
-                            <th>Cat II</th>
-                            <th>Cat III</th>
-                            <th>Cat IV</th>
-                            <th>Population</th>
-                            <th>Density</th>
+                            ${createSortableHeader('comparison', 'zip', 'ZIP Code')}
+                            ${createSortableHeader('comparison', 'location', 'Location')}
+                            ${createSortableHeader('comparison', 'cat1', 'Cat I')}
+                            ${createSortableHeader('comparison', 'cat2', 'Cat II')}
+                            ${createSortableHeader('comparison', 'cat3', 'Cat III')}
+                            ${createSortableHeader('comparison', 'cat4', 'Cat IV')}
+                            ${createSortableHeader('comparison', 'population', 'Population')}
+                            ${createSortableHeader('comparison', 'density', 'Density')}
                         </tr>
                     </thead>
                     <tbody>
@@ -4705,6 +5062,9 @@ Category IV,${locationData.cat4 || 'N/A'},${locationData.cat4 ? Utils.calculateP
         
         // Helper (PRESERVED)
         loadZIPFromTable: loadZIPFromTable,
-        toggleResultsTable: toggleResultsTable
+        toggleResultsTable: toggleResultsTable,
+
+        // Table Sorting
+        sortTable: sortTableResults
     };
 })();

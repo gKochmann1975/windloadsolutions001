@@ -3136,7 +3136,11 @@
 
                     <div class="btn-row">
                         <button class="btn btn-debug" onclick="showDebugInfo()">🔍 Debug Info</button>
-                        <button class="btn btn-reset" onclick="resetTrial()">🗑️ Reset Trial</button>
+                        <button class="btn btn-reset" onclick="resetTrial()">🗑️ Fresh Trial</button>
+                    </div>
+                    <div class="btn-row">
+                        <button class="btn" style="background:#7c3aed;color:white;" onclick="showAllStorage()">📦 All Storage Keys</button>
+                        <button class="btn" style="background:#dc2626;color:white;" onclick="fullLogout()">🚪 Full Logout</button>
                     </div>
 
                     <div id="current-status" class="status-box">Loading status...</div>
@@ -3268,11 +3272,39 @@ Leaflet: ${typeof L !== 'undefined' ? 'LOADED' : 'NOT LOADED'}
             };
 
             window.resetTrial = function() {
-                if (confirm('Clear ALL localStorage data and reload?')) {
+                if (confirm('This will clear your data and give you a FRESH 7-day trial. Continue?')) {
                     localStorage.clear();
                     sessionStorage.clear();
-                    alert('Trial & cache cleared! Page will reload.');
+                    alert('✅ All data cleared! You will get a fresh 7-day trial on reload.');
                     location.reload(true);
+                }
+            };
+
+            window.showAllStorage = function() {
+                let keys = [];
+                for (let i = 0; i < localStorage.length; i++) {
+                    const key = localStorage.key(i);
+                    const value = localStorage.getItem(key);
+                    const preview = value.length > 50 ? value.substring(0, 50) + '...' : value;
+                    keys.push(`${key}: ${preview}`);
+                }
+                if (keys.length === 0) {
+                    alert('📦 localStorage is EMPTY\n\nNo data stored.');
+                } else {
+                    alert('📦 localStorage Keys (' + keys.length + '):\n\n' + keys.join('\n\n'));
+                }
+            };
+
+            window.fullLogout = function() {
+                if (confirm('⚠️ FULL LOGOUT: This clears ALL data and redirects to login page. Continue?')) {
+                    localStorage.clear();
+                    sessionStorage.clear();
+                    // Also clear any cookies
+                    document.cookie.split(";").forEach(c => {
+                        document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+                    });
+                    alert('✅ Fully logged out! Redirecting to login page...');
+                    window.location.href = 'https://windloadcalc.com/login.html';
                 }
             };
 

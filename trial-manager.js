@@ -482,6 +482,55 @@ const TrialManager = (function() {
         }
     }
 
+    // Hide ALL trial UI elements (for admin/paid tiers)
+    function hideAllTrialUI() {
+        // Wait for DOM to be ready
+        const hide = () => {
+            // Hide trial banner
+            const trialBanner = document.querySelector('.trial-banner');
+            if (trialBanner) trialBanner.style.display = 'none';
+
+            // Hide upgrade modal
+            const upgradeModal = document.getElementById('upgrade-modal');
+            if (upgradeModal) upgradeModal.style.display = 'none';
+
+            // Hide trial counter
+            const trialCounter = document.getElementById('trial-lookup-counter');
+            if (trialCounter) trialCounter.style.display = 'none';
+
+            // Remove watermarks
+            document.querySelectorAll('.trial-watermark').forEach(el => el.remove());
+
+            // Remove trial-mode class from body
+            document.body.classList.remove('trial-mode');
+            document.body.classList.remove('trial-active');
+
+            // Re-enable any disabled buttons
+            document.querySelectorAll('.disabled-trial').forEach(btn => {
+                btn.disabled = false;
+                btn.classList.remove('disabled-trial');
+                btn.title = '';
+            });
+
+            // Remove print blocking styles
+            const printBlocker = document.getElementById('trial-print-blocker');
+            if (printBlocker) printBlocker.remove();
+
+            console.log('🔧 Admin Mode: All trial UI hidden');
+        };
+
+        // Run now and after DOM loads
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', hide);
+        } else {
+            hide();
+        }
+
+        // Also run after a short delay to catch late-loaded elements
+        setTimeout(hide, 100);
+        setTimeout(hide, 500);
+    }
+
     // Initialize trial system on page load
     function init() {
         console.log('🔒 Trial Manager: Initializing...');
@@ -512,6 +561,15 @@ const TrialManager = (function() {
             activeTier = 'admin';
             const tierConfig = TIER_CONFIG.admin;
             console.log('🔧 Trial Manager: ADMIN MODE - Full access enabled');
+
+            // Hide ALL trial UI elements
+            hideAllTrialUI();
+
+            // Override showUpgradeModal to do nothing in admin mode
+            window.showUpgradeModal = function() {
+                console.log('🔧 Admin Mode: Upgrade modal suppressed');
+            };
+
             showTestingBanner('admin', tierConfig);
             return;
         }
@@ -549,6 +607,12 @@ const TrialManager = (function() {
                 initializeTrial();
                 updateLookupCounter();
                 updateTrialBanner();
+            } else {
+                // For PAID tiers (starter, pro, premium, enterprise), hide all trial UI
+                hideAllTrialUI();
+                window.showUpgradeModal = function() {
+                    console.log(`🔧 ${tierConfig.name} Mode: Upgrade modal suppressed`);
+                };
             }
 
             showTestingBanner(tierParam, tierConfig);

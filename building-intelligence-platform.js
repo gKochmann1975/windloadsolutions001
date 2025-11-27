@@ -3386,14 +3386,33 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
         setTimeout(() => {
             try {
                 const results = [];
-                
+
+                // Debug: Log total ZIP codes available
+                const totalZips = Object.keys(state.csvVelocityData).length;
+                console.log(`🔍 Solar Search: Total ZIP codes loaded: ${totalZips}`);
+                console.log(`🔍 Solar Search: State filter: "${stateFilter}", Risk category: "${state.selectedRiskCategory}"`);
+
+                let checkedCount = 0;
+                let matchingCount = 0;
+                let noVelocityCount = 0;
+                let stateFilteredCount = 0;
+
                 Object.entries(state.csvVelocityData).forEach(([zip, data]) => {
-                    if (stateFilter && data.state_id !== stateFilter) return;
-                    
+                    checkedCount++;
+
+                    if (stateFilter && data.state_id !== stateFilter) {
+                        stateFilteredCount++;
+                        return;
+                    }
+
                     const velocityData = getVelocityFromCSV(zip, state.selectedRiskCategory);
-                    if (!velocityData || !velocityData.velocity) return;
-                    
+                    if (!velocityData || !velocityData.velocity) {
+                        noVelocityCount++;
+                        return;
+                    }
+
                     if (velocityData.velocity <= 120) {
+                        matchingCount++;
                         results.push({
                             zip: zip,
                             city: data.city,
@@ -3409,9 +3428,26 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
                         });
                     }
                 });
-                
+
+                // Debug: Summary of search results
+                console.log(`🔍 Solar Search Summary:`);
+                console.log(`   - ZIPs checked: ${checkedCount}`);
+                console.log(`   - Filtered by state: ${stateFilteredCount}`);
+                console.log(`   - No velocity data: ${noVelocityCount}`);
+                console.log(`   - Matching (<=120 mph): ${matchingCount}`);
+
+                // Log first 5 results by state to verify diversity
+                const stateCount = {};
+                results.forEach(r => {
+                    stateCount[r.state_id] = (stateCount[r.state_id] || 0) + 1;
+                });
+                console.log(`🔍 Results by state:`, stateCount);
+
                 results.sort((a, b) => a.velocity - b.velocity);
-                
+
+                // Log top 10 after sorting
+                console.log(`🔍 Top 10 after sorting:`, results.slice(0, 10).map(r => `${r.zip} ${r.state_id} ${r.velocity}mph`));
+
                 const limitedResults = results.slice(0, maxResults);
                 state.solarResults = limitedResults;
                 

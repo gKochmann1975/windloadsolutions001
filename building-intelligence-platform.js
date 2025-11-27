@@ -3531,10 +3531,22 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
                 });
                 console.log(`🔍 Results by state:`, stateCount);
 
-                results.sort((a, b) => a.velocity - b.velocity);
+                // Sort by velocity first, then by state for diversity when velocities are equal
+                results.sort((a, b) => {
+                    if (a.velocity !== b.velocity) {
+                        return a.velocity - b.velocity;
+                    }
+                    // Secondary sort by state for diversity
+                    return a.state_id.localeCompare(b.state_id);
+                });
 
-                // Log top 10 after sorting
-                console.log(`🔍 Top 10 after sorting:`, results.slice(0, 10).map(r => `${r.zip} ${r.state_id} ${r.velocity}mph`));
+                // Log detailed sorting info
+                const velocityBreakdown = {};
+                results.forEach(r => {
+                    velocityBreakdown[r.velocity] = (velocityBreakdown[r.velocity] || 0) + 1;
+                });
+                console.log(`🔍 Velocity breakdown:`, velocityBreakdown);
+                console.log(`🔍 Top 20 after sorting:`, results.slice(0, 20).map(r => `${r.zip} ${r.state_id} ${r.velocity}mph`));
 
                 const limitedResults = results.slice(0, maxResults);
                 state.solarResults = limitedResults;

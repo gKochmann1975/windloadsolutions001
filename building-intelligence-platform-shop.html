@@ -2388,8 +2388,8 @@
             errorDiv.style.display = 'none';
 
             try {
-                // Call signup API
-                const response = await fetch(`${API_BASE}/api/auth/signup`, {
+                // Call register API (creates account before checkout)
+                const response = await fetch(`${API_BASE}/api/auth/register`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

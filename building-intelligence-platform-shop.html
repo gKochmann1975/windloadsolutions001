@@ -2310,8 +2310,8 @@
         const GOOGLE_CLIENT_ID = '54861385840-potugp8t4bpls8ckgbba6ku6i1semkuf.apps.googleusercontent.com';
 
         function showPreCheckoutModal(product_code, billing) {
-            // Check if user is already logged in
-            const authToken = localStorage.getItem('authToken');
+            // Check if user is already logged in (check both token keys for compatibility)
+            const authToken = localStorage.getItem('authToken') || localStorage.getItem('windload_token');
             if (authToken) {
                 // User already has account, proceed directly to checkout
                 createStripeCheckoutAuthenticated(product_code, billing, authToken);

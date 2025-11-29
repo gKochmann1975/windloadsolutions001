@@ -1246,6 +1246,134 @@
             }
         }
 
+        // Show trial success popup with access button
+        function showTrialSuccessPopup(productName, productUrl, userEmail) {
+            // Create popup overlay
+            const popup = document.createElement('div');
+            popup.id = 'trial-success-popup';
+            popup.innerHTML = `
+                <style>
+                    #trial-success-popup {
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: rgba(0, 0, 0, 0.7);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        z-index: 99999;
+                        animation: fadeIn 0.3s ease;
+                    }
+                    @keyframes fadeIn {
+                        from { opacity: 0; }
+                        to { opacity: 1; }
+                    }
+                    .success-popup-content {
+                        background: white;
+                        border-radius: 20px;
+                        padding: 2.5rem;
+                        max-width: 450px;
+                        width: 90%;
+                        text-align: center;
+                        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+                        animation: slideUp 0.4s ease;
+                    }
+                    @keyframes slideUp {
+                        from { transform: translateY(30px); opacity: 0; }
+                        to { transform: translateY(0); opacity: 1; }
+                    }
+                    .success-icon-popup {
+                        width: 80px;
+                        height: 80px;
+                        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        margin: 0 auto 1.5rem;
+                        animation: scaleIn 0.5s ease 0.2s both;
+                    }
+                    @keyframes scaleIn {
+                        from { transform: scale(0); }
+                        to { transform: scale(1); }
+                    }
+                    .success-icon-popup svg {
+                        width: 40px;
+                        height: 40px;
+                        stroke: white;
+                        stroke-width: 3;
+                    }
+                    .success-popup-title {
+                        font-size: 1.6rem;
+                        font-weight: 700;
+                        color: #181E57;
+                        margin-bottom: 0.5rem;
+                    }
+                    .success-popup-subtitle {
+                        color: #64748b;
+                        margin-bottom: 1.5rem;
+                        line-height: 1.5;
+                    }
+                    .success-popup-email {
+                        background: #f0f9ff;
+                        border: 1px solid #0ea5e9;
+                        border-radius: 10px;
+                        padding: 1rem;
+                        margin-bottom: 1.5rem;
+                        font-size: 0.9rem;
+                        color: #0369a1;
+                    }
+                    .success-popup-btn {
+                        width: 100%;
+                        padding: 1rem 2rem;
+                        background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+                        color: white;
+                        border: none;
+                        border-radius: 50px;
+                        font-size: 1.1rem;
+                        font-weight: 700;
+                        cursor: pointer;
+                        text-decoration: none;
+                        display: inline-block;
+                        box-shadow: 0 4px 15px rgba(0, 24, 255, 0.3);
+                        transition: all 0.3s ease;
+                    }
+                    .success-popup-btn:hover {
+                        transform: translateY(-2px);
+                        box-shadow: 0 8px 25px rgba(0, 24, 255, 0.4);
+                    }
+                    .success-popup-note {
+                        margin-top: 1rem;
+                        font-size: 0.85rem;
+                        color: #94a3b8;
+                    }
+                </style>
+                <div class="success-popup-content">
+                    <div class="success-icon-popup">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                    </div>
+                    <h2 class="success-popup-title">Your Trial is Ready!</h2>
+                    <p class="success-popup-subtitle">
+                        You now have <strong>7 days of full access</strong> to ${productName}.
+                    </p>
+                    <div class="success-popup-email">
+                        <strong>Confirmation sent to:</strong><br>${userEmail}
+                    </div>
+                    <a href="${productUrl}" class="success-popup-btn">
+                        Launch ${productName} →
+                    </a>
+                    <p class="success-popup-note">
+                        You can also access your trial from the confirmation email.
+                    </p>
+                </div>
+            `;
+            document.body.appendChild(popup);
+        }
+
         // Handle Login
         async function handleLogin(event) {
             event.preventDefault();
@@ -1337,19 +1465,18 @@
 
                 const data = await response.json();
 
-                if (response.ok) {
+                if (response.ok && data.token) {
                     const productName = productType === 'bip' ? 'Building Intelligence Platform' : 'Wind Load Calculators';
-                    showMessage(`Account created! Check your email to start your ${productName} trial.`, 'success');
-                    btn.innerHTML = '<span class="btn-loading">Account Created!</span>';
+                    const productUrl = productType === 'bip'
+                        ? `${BIP_URL}?token=${data.token}&user_id=${data.user_id}`
+                        : `${WEBAPP_URL}?token=${data.token}&user_id=${data.user_id}`;
 
-                    // Switch back to login form after 3 seconds
-                    setTimeout(() => {
-                        showLoginForm();
-                        setButtonLoading(btn, false, originalText);
-                        // Clear form
-                        document.getElementById('trialForm').reset();
-                        document.getElementById('password-strength').classList.remove('active');
-                    }, 3000);
+                    // Store token for future use
+                    localStorage.setItem('windload_token', data.token);
+                    localStorage.setItem('windload_user_id', data.user_id);
+
+                    // Show success popup instead of returning to login
+                    showTrialSuccessPopup(productName, productUrl, email);
                 } else if (response.status === 429) {
                     showMessage('Too many signup attempts. Please try again later.', 'error');
                     setButtonLoading(btn, false, originalText);

@@ -850,6 +850,29 @@
                 By signing up, you agree to our <a href="terms-of-service.html" style="color: #0018ff;">Terms of Service</a>
             </p>
         </div>
+
+        <!-- Forgot Password Form -->
+        <div id="forgot-password-form" class="trial-form">
+            <button type="button" class="back-to-login" onclick="hideForgotPassword()">
+                ← Back to Login
+            </button>
+
+            <h1 class="form-title">Reset Password</h1>
+            <p class="form-subtitle">Enter your email and we'll send you a reset link</p>
+
+            <form id="forgotForm" onsubmit="handleForgotPassword(event)">
+                <div class="form-group">
+                    <label class="form-label" for="forgot-email">Email Address</label>
+                    <input type="email" id="forgot-email" class="form-input" placeholder="you@company.com" required autocomplete="email" oninput="validateEmail(this)">
+                </div>
+
+                <button type="submit" id="forgotPasswordBtn" class="submit-btn">Send Reset Link</button>
+            </form>
+
+            <p style="text-align: center; margin-top: 1.5rem; font-size: 0.85rem; color: #64748b;">
+                Remember your password? <a href="#" onclick="hideForgotPassword(); return false;" style="color: #0018ff; font-weight: 600;">Sign in</a>
+            </p>
+        </div>
     </div>
 
     <script>
@@ -1144,7 +1167,61 @@
         }
 
         function showForgotPassword() {
-            showMessage('Password reset: Please contact support@windloadcalc.com', 'success');
+            document.getElementById('login-form').classList.add('hidden');
+            document.getElementById('trial-form').classList.remove('active');
+            document.getElementById('forgot-password-form').classList.add('active');
+            hideMessage();
+        }
+
+        function hideForgotPassword() {
+            document.getElementById('forgot-password-form').classList.remove('active');
+            document.getElementById('login-form').classList.remove('hidden');
+            hideMessage();
+        }
+
+        async function handleForgotPassword(event) {
+            event.preventDefault();
+            const btn = document.getElementById('forgotPasswordBtn');
+            const originalText = btn.textContent;
+            const email = document.getElementById('forgot-email').value;
+
+            setButtonLoading(btn, true, originalText);
+            hideMessage();
+
+            try {
+                const response = await fetch(`${API_URL}/api/auth/forgot-password`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    showMessage('✓ If this email is registered, a password reset link has been sent. Check your inbox!', 'success');
+                    btn.textContent = 'Email Sent!';
+                    btn.disabled = true;
+
+                    // Reset after 5 seconds
+                    setTimeout(() => {
+                        hideForgotPassword();
+                        setButtonLoading(btn, false, originalText);
+                        document.getElementById('forgot-email').value = '';
+                    }, 5000);
+                } else if (response.status === 429) {
+                    showMessage('Too many requests. Please try again in a few minutes.', 'error');
+                    setButtonLoading(btn, false, originalText);
+                } else {
+                    showMessage(data.error || data.message || 'Something went wrong. Please try again.', 'error');
+                    setButtonLoading(btn, false, originalText);
+                }
+            } catch (error) {
+                console.error('Forgot password error:', error);
+                showMessage('Connection error. Please try again.', 'error');
+                setButtonLoading(btn, false, originalText);
+            }
         }
 
         // Message display

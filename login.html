@@ -1471,9 +1471,10 @@
                         ? `${BIP_URL}?token=${data.token}&user_id=${data.user_id}`
                         : `${WEBAPP_URL}?token=${data.token}&user_id=${data.user_id}`;
 
-                    // Store token for future use
+                    // Store token for future use (both keys for compatibility)
                     localStorage.setItem('windload_token', data.token);
                     localStorage.setItem('windload_user_id', data.user_id);
+                    localStorage.setItem('authToken', data.token);  // For shop page compatibility
 
                     // Show success popup instead of returning to login
                     showTrialSuccessPopup(productName, productUrl, email);

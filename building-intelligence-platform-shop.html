@@ -2186,6 +2186,13 @@
             }
             // Update prices
             updatePrices();
+
+            // CRITICAL: Update data-billing-cycle on all checkout buttons
+            // cart-header.js reads this attribute, not the isAnnualBilling variable
+            const billingCycle = isAnnualBilling ? 'annual' : 'monthly';
+            document.querySelectorAll('[data-product-code]').forEach(button => {
+                button.setAttribute('data-billing-cycle', billingCycle);
+            });
         }
         function updatePrices() {
             // Get all price elements

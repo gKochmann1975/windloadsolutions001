@@ -122,6 +122,7 @@ class ShoppingCart {
 
     /**
      * Add item to cart
+     * Now allows same product with different billing cycles
      */
     addItem(productCode, billingCycle = 'annual') {
         const product = PRODUCT_CATALOG[productCode];
@@ -135,18 +136,46 @@ class ShoppingCart {
             return false;
         }
 
-        // Check if already in cart
-        const existingIndex = this.items.findIndex(item => item.productCode === productCode);
+        // Check if EXACT same item (same product AND same billing cycle) already in cart
+        const existingIndex = this.items.findIndex(
+            item => item.productCode === productCode && item.billingCycle === billingCycle
+        );
+
         if (existingIndex >= 0) {
-            // Update billing cycle if different
-            this.items[existingIndex].billingCycle = billingCycle;
-        } else {
-            this.items.push({
-                productCode: productCode,
-                billingCycle: billingCycle,
-                addedAt: Date.now()
-            });
+            // Already have this exact item, notify user
+            alert(`${product.shortName} (${billingCycle}) is already in your cart.`);
+            return false;
         }
+
+        // Check if same product with DIFFERENT billing cycle exists
+        const differentCycleIndex = this.items.findIndex(
+            item => item.productCode === productCode && item.billingCycle !== billingCycle
+        );
+
+        if (differentCycleIndex >= 0) {
+            // Ask user if they want to replace or add both
+            const existingCycle = this.items[differentCycleIndex].billingCycle;
+            const replace = confirm(
+                `You already have ${product.shortName} (${existingCycle}) in your cart.\n\n` +
+                `Do you want to REPLACE it with ${billingCycle} billing?\n\n` +
+                `Click OK to replace, or Cancel to keep both.`
+            );
+
+            if (replace) {
+                this.items[differentCycleIndex].billingCycle = billingCycle;
+                this.saveCart();
+                this.showAddedNotification(`${product.shortName} updated to ${billingCycle}`);
+                return true;
+            }
+            // Otherwise fall through and add both
+        }
+
+        // Add new item
+        this.items.push({
+            productCode: productCode,
+            billingCycle: billingCycle,
+            addedAt: Date.now()
+        });
 
         this.saveCart();
         this.showAddedNotification(product.shortName);
@@ -154,10 +183,18 @@ class ShoppingCart {
     }
 
     /**
-     * Remove item from cart
+     * Remove item from cart by product code AND billing cycle
      */
-    removeItem(productCode) {
-        this.items = this.items.filter(item => item.productCode !== productCode);
+    removeItem(productCode, billingCycle = null) {
+        if (billingCycle) {
+            // Remove specific billing cycle
+            this.items = this.items.filter(
+                item => !(item.productCode === productCode && item.billingCycle === billingCycle)
+            );
+        } else {
+            // Remove all instances of this product (legacy behavior)
+            this.items = this.items.filter(item => item.productCode !== productCode);
+        }
         this.saveCart();
     }
 
@@ -186,71 +223,61 @@ class ShoppingCart {
     }
 
     /**
-     * Calculate cart totals
+     * Calculate cart totals - separates monthly and annual items
      */
     calculateTotals() {
-        let subtotal = 0;
-        let bundleDiscount = 0;
-        const itemDetails = [];
+        const monthlyItems = [];
+        const annualItems = [];
+        let monthlySubtotal = 0;
+        let annualSubtotal = 0;
 
         this.items.forEach(item => {
             const product = PRODUCT_CATALOG[item.productCode];
             if (!product) return;
 
-            const price = item.billingCycle === 'annual'
-                ? product.annualPrice / 12
-                : product.monthlyPrice;
-
-            subtotal += price;
-
-            itemDetails.push({
+            const itemDetail = {
                 productCode: item.productCode,
                 name: product.shortName,
                 fullName: product.name,
                 category: product.category,
                 billingCycle: item.billingCycle,
-                monthlyPrice: price,
-                annualTotal: item.billingCycle === 'annual' ? product.annualPrice : product.monthlyPrice * 12,
+                monthlyPrice: product.monthlyPrice,
+                annualPrice: product.annualPrice,
                 features: product.features || []
-            });
+            };
+
+            if (item.billingCycle === 'annual') {
+                annualItems.push(itemDetail);
+                annualSubtotal += product.annualPrice;
+            } else {
+                monthlyItems.push(itemDetail);
+                monthlySubtotal += product.monthlyPrice;
+            }
         });
 
-        // Apply bundle discount if both BIP and Calculator
-        if (this.hasBundleDiscount()) {
-            bundleDiscount = subtotal * (BUNDLE_DISCOUNT_PERCENT / 100);
-        }
+        // Bundle discount only applies if both BIP and Calculator in same billing cycle
+        // For simplicity, we'll skip bundle discount on mixed carts
+        const bundleDiscount = 0;
 
-        const total = subtotal - bundleDiscount;
+        // Calculate totals
+        const hasMonthly = monthlyItems.length > 0;
+        const hasAnnual = annualItems.length > 0;
+        const isMixed = hasMonthly && hasAnnual;
 
-        // Determine if ALL items are annual or monthly (or mixed)
-        const allAnnual = itemDetails.length > 0 && itemDetails.every(item => item.billingCycle === 'annual');
-        const allMonthly = itemDetails.length > 0 && itemDetails.every(item => item.billingCycle === 'monthly');
-
-        // Calculate the actual charge amount
-        let chargeTotal, chargePeriod;
-        if (allAnnual) {
-            // All annual: charge annual total upfront
-            chargeTotal = itemDetails.reduce((sum, item) => sum + item.annualTotal, 0);
-            if (this.hasBundleDiscount()) {
-                chargeTotal = chargeTotal * (1 - BUNDLE_DISCOUNT_PERCENT / 100);
-            }
-            chargePeriod = 'year';
-        } else {
-            // Monthly or mixed: charge monthly
-            chargeTotal = total;
-            chargePeriod = 'month';
-        }
+        // Total due today = annual upfront + first month
+        const totalDueToday = annualSubtotal + monthlySubtotal;
 
         return {
-            items: itemDetails,
-            subtotal: subtotal,
+            monthlyItems: monthlyItems,
+            annualItems: annualItems,
+            monthlySubtotal: monthlySubtotal,
+            annualSubtotal: annualSubtotal,
+            totalDueToday: totalDueToday,
+            hasMonthly: hasMonthly,
+            hasAnnual: hasAnnual,
+            isMixed: isMixed,
             bundleDiscount: bundleDiscount,
             bundleDiscountPercent: this.hasBundleDiscount() ? BUNDLE_DISCOUNT_PERCENT : 0,
-            total: total,
-            chargeTotal: chargeTotal,
-            chargePeriod: chargePeriod,
-            isAllAnnual: allAnnual,
-            isAllMonthly: allMonthly,
             itemCount: this.items.length,
             hasBundleDiscount: this.hasBundleDiscount()
         };
@@ -276,6 +303,7 @@ class ShoppingCart {
 
     /**
      * Update cart display (for cart page or sidebar)
+     * Shows separate sections for monthly and annual items
      */
     updateCartDisplay() {
         const cartContainer = document.getElementById('cart-items-container');
@@ -294,10 +322,14 @@ class ShoppingCart {
             return;
         }
 
-        let html = '<div class="cart-items">';
+        let html = '';
 
-        totals.items.forEach(item => {
-            html += `
+        // Helper function to render a single cart item
+        const renderCartItem = (item, billingType) => {
+            const price = billingType === 'annual' ? item.annualPrice : item.monthlyPrice;
+            const priceLabel = billingType === 'annual' ? '/year' : '/month';
+
+            return `
                 <div class="cart-item" style="
                     background: white;
                     border: 1px solid #e5e7eb;
@@ -310,11 +342,8 @@ class ShoppingCart {
                 ">
                     <div style="flex: 1;">
                         <h4 style="margin: 0 0 4px 0; color: #1f2937; font-size: 1rem;">${item.name}</h4>
-                        <p style="margin: 0; color: #64748b; font-size: 0.85rem;">
-                            ${item.billingCycle === 'annual' ? 'Annual billing' : 'Monthly billing'}
-                        </p>
                         <div style="margin-top: 8px;">
-                            ${item.features.slice(0, 2).map(f => `
+                            ${(item.features || []).slice(0, 2).map(f => `
                                 <span style="
                                     display: inline-block;
                                     background: #f0f9ff;
@@ -330,10 +359,10 @@ class ShoppingCart {
                     </div>
                     <div style="text-align: right; min-width: 100px;">
                         <div style="font-size: 1.2rem; font-weight: 700; color: #0018ff;">
-                            $${item.monthlyPrice.toFixed(2)}
+                            $${price.toFixed(2)}
                         </div>
-                        <div style="font-size: 0.8rem; color: #64748b;">/month</div>
-                        <button onclick="cart.removeItem('${item.productCode}')" style="
+                        <div style="font-size: 0.8rem; color: #64748b;">${priceLabel}</div>
+                        <button onclick="cart.removeItem('${item.productCode}', '${item.billingCycle}')" style="
                             background: none;
                             border: none;
                             color: #dc2626;
@@ -347,88 +376,176 @@ class ShoppingCart {
                     </div>
                 </div>
             `;
-        });
+        };
 
-        html += '</div>';
-
-        // Cart summary
-        html += `
-            <div class="cart-summary" style="
-                background: #f8fafc;
-                border-radius: 12px;
-                padding: 20px;
-                margin-top: 20px;
-            ">
-                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                    <span style="color: #64748b;">Subtotal (${totals.itemCount} item${totals.itemCount > 1 ? 's' : ''})</span>
-                    <span style="color: #1f2937;">$${totals.subtotal.toFixed(2)}/mo</span>
-                </div>
-        `;
-
-        if (totals.hasBundleDiscount) {
+        // ANNUAL SECTION (if any annual items)
+        if (totals.hasAnnual) {
             html += `
-                <div style="display: flex; justify-content: space-between; margin-bottom: 8px; color: #10b981;">
-                    <span>
-                        <i class="fas fa-gift"></i> Bundle Discount (${totals.bundleDiscountPercent}% off)
-                    </span>
-                    <span>-$${totals.bundleDiscount.toFixed(2)}/mo</span>
-                </div>
-                <div style="
-                    background: #d1fae5;
-                    color: #065f46;
-                    padding: 8px 12px;
-                    border-radius: 6px;
-                    font-size: 0.85rem;
-                    margin-bottom: 12px;
-                ">
-                    <i class="fas fa-check-circle"></i>
-                    You're saving $${(totals.bundleDiscount * 12).toFixed(0)}/year with the bundle discount!
+                <div class="cart-section annual-section" style="margin-bottom: 24px;">
+                    <div style="
+                        display: flex;
+                        align-items: center;
+                        gap: 8px;
+                        margin-bottom: 12px;
+                        padding-bottom: 8px;
+                        border-bottom: 2px solid #10b981;
+                    ">
+                        <i class="fas fa-calendar-check" style="color: #10b981;"></i>
+                        <h3 style="margin: 0; font-size: 1rem; color: #1f2937;">Annual Subscriptions</h3>
+                        <span style="
+                            background: #d1fae5;
+                            color: #065f46;
+                            padding: 2px 8px;
+                            border-radius: 4px;
+                            font-size: 0.75rem;
+                            font-weight: 600;
+                        ">Save ~15%</span>
+                    </div>
+                    <div class="cart-items">
+            `;
+
+            totals.annualItems.forEach(item => {
+                html += renderCartItem(item, 'annual');
+            });
+
+            html += `
+                    </div>
+                    <div style="
+                        background: #f0fdf4;
+                        border-radius: 8px;
+                        padding: 12px 16px;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                    ">
+                        <span style="color: #166534; font-weight: 500;">Annual Total (paid upfront)</span>
+                        <span style="color: #166534; font-size: 1.2rem; font-weight: 700;">$${totals.annualSubtotal.toFixed(2)}</span>
+                    </div>
                 </div>
             `;
         }
 
-        // Show clear total based on billing cycle
-        const billingLabel = totals.isAllAnnual ? 'Billed annually' : 'Billed monthly';
-        const periodLabel = totals.chargePeriod === 'year' ? '/year' : '/month';
+        // MONTHLY SECTION (if any monthly items)
+        if (totals.hasMonthly) {
+            html += `
+                <div class="cart-section monthly-section" style="margin-bottom: 24px;">
+                    <div style="
+                        display: flex;
+                        align-items: center;
+                        gap: 8px;
+                        margin-bottom: 12px;
+                        padding-bottom: 8px;
+                        border-bottom: 2px solid #3b82f6;
+                    ">
+                        <i class="fas fa-sync-alt" style="color: #3b82f6;"></i>
+                        <h3 style="margin: 0; font-size: 1rem; color: #1f2937;">Monthly Subscriptions</h3>
+                        <span style="
+                            background: #dbeafe;
+                            color: #1e40af;
+                            padding: 2px 8px;
+                            border-radius: 4px;
+                            font-size: 0.75rem;
+                            font-weight: 600;
+                        ">Flexible</span>
+                    </div>
+                    <div class="cart-items">
+            `;
+
+            totals.monthlyItems.forEach(item => {
+                html += renderCartItem(item, 'monthly');
+            });
+
+            html += `
+                    </div>
+                    <div style="
+                        background: #eff6ff;
+                        border-radius: 8px;
+                        padding: 12px 16px;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                    ">
+                        <span style="color: #1e40af; font-weight: 500;">Monthly Total (recurring)</span>
+                        <span style="color: #1e40af; font-size: 1.2rem; font-weight: 700;">$${totals.monthlySubtotal.toFixed(2)}/mo</span>
+                    </div>
+                </div>
+            `;
+        }
+
+        // TOTAL DUE TODAY SECTION
+        html += `
+            <div class="cart-summary" style="
+                background: linear-gradient(135deg, #1e3a5f, #0f172a);
+                border-radius: 12px;
+                padding: 24px;
+                margin-top: 20px;
+                color: white;
+            ">
+                <h3 style="margin: 0 0 16px 0; font-size: 1.1rem; color: #94a3b8;">
+                    <i class="fas fa-receipt"></i> Order Summary
+                </h3>
+        `;
+
+        // Show breakdown if mixed cart
+        if (totals.isMixed) {
+            html += `
+                <div style="display: flex; justify-content: space-between; margin-bottom: 8px; color: #94a3b8;">
+                    <span>Annual subscriptions (upfront)</span>
+                    <span>$${totals.annualSubtotal.toFixed(2)}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 16px; color: #94a3b8;">
+                    <span>Monthly subscriptions (first month)</span>
+                    <span>$${totals.monthlySubtotal.toFixed(2)}</span>
+                </div>
+            `;
+        }
 
         html += `
                 <div style="
                     display: flex;
                     justify-content: space-between;
-                    padding-top: 12px;
-                    border-top: 2px solid #e5e7eb;
-                    font-size: 1.2rem;
+                    padding-top: 16px;
+                    border-top: 1px solid rgba(255,255,255,0.2);
+                    font-size: 1.4rem;
                     font-weight: 700;
                 ">
-                    <span style="color: #1f2937;">Total</span>
-                    <div style="text-align: right;">
-                        <div style="color: #0018ff;">$${totals.chargeTotal.toFixed(2)}${periodLabel}</div>
-                        <div style="font-size: 0.85rem; color: #64748b; font-weight: normal;">
-                            ${billingLabel}
-                        </div>
-                    </div>
+                    <span>Total Due Today</span>
+                    <span style="color: #4ade80;">$${totals.totalDueToday.toFixed(2)}</span>
                 </div>
+        `;
+
+        // Add note about recurring charges
+        if (totals.hasMonthly) {
+            html += `
+                <p style="margin: 12px 0 0 0; font-size: 0.85rem; color: #94a3b8;">
+                    <i class="fas fa-info-circle"></i>
+                    Monthly subscriptions will renew at $${totals.monthlySubtotal.toFixed(2)}/month
+                </p>
+            `;
+        }
+
+        html += `
             </div>
 
             <button onclick="cart.proceedToCheckout()" style="
                 width: 100%;
-                background: linear-gradient(135deg, #0018ff, #0080ff);
+                background: linear-gradient(135deg, #10b981, #059669);
                 color: white;
                 border: none;
-                padding: 16px;
+                padding: 18px;
                 border-radius: 8px;
-                font-size: 1.1rem;
+                font-size: 1.2rem;
                 font-weight: 600;
                 cursor: pointer;
                 margin-top: 20px;
                 transition: all 0.3s;
-                box-shadow: 0 4px 12px rgba(0, 24, 255, 0.3);
-            " onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
-                <i class="fas fa-lock"></i> Proceed to Secure Checkout
+                box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+            " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(16, 185, 129, 0.5)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(16, 185, 129, 0.4)'">
+                <i class="fas fa-lock"></i> Pay $${totals.totalDueToday.toFixed(2)} Securely
             </button>
 
             <p style="text-align: center; color: #64748b; font-size: 0.85rem; margin-top: 12px;">
-                <i class="fas fa-shield-alt"></i> Secured by Stripe
+                <i class="fas fa-shield-alt"></i> Secured by Stripe &bull; Cancel anytime
             </p>
         `;
 

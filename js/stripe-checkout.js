@@ -124,19 +124,21 @@ function initializeCheckoutButtons() {
     const buttons = document.querySelectorAll('[data-product-code]');
 
     buttons.forEach(button => {
-        const productCode = button.dataset.productCode;
-        const billingCycle = button.dataset.billingCycle || 'monthly';
-
         // Remove any existing click handlers
         button.onclick = null;
 
         // Add new click handler
+        // IMPORTANT: Read data attributes at CLICK TIME, not initialization time!
+        // This allows the billing toggle to update the cycle dynamically
         button.addEventListener('click', (e) => {
             e.preventDefault();
+            const productCode = button.dataset.productCode;
+            const billingCycle = button.dataset.billingCycle || 'monthly';
+            console.log(`Checkout clicked: ${productCode} (${billingCycle})`);
             startCheckout(productCode, billingCycle, button);
         });
 
-        console.log(`Initialized checkout button: ${productCode} (${billingCycle})`);
+        console.log(`Initialized checkout button: ${button.dataset.productCode}`);
     });
 
     console.log(`Initialized ${buttons.length} checkout buttons`);

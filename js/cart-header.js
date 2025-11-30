@@ -60,9 +60,6 @@
         const subscribeButtons = document.querySelectorAll('[data-product-code]');
 
         subscribeButtons.forEach(btn => {
-            const productCode = btn.dataset.productCode;
-            const billingCycle = btn.dataset.billingCycle || 'annual';
-
             // Replace the button text and behavior
             btn.innerHTML = '<i class="fas fa-cart-plus"></i> Add to Cart';
 
@@ -70,8 +67,13 @@
             const newBtn = btn.cloneNode(true);
             btn.parentNode.replaceChild(newBtn, btn);
 
+            // IMPORTANT: Read data attributes at CLICK TIME, not initialization time!
+            // This allows the billing toggle to update the cycle dynamically
             newBtn.addEventListener('click', function(e) {
                 e.preventDefault();
+                const productCode = this.dataset.productCode;
+                const billingCycle = this.dataset.billingCycle || 'annual';
+                console.log(`Cart add: ${productCode} (${billingCycle})`);
                 if (typeof cart !== 'undefined') {
                     cart.addItem(productCode, billingCycle);
                 } else {

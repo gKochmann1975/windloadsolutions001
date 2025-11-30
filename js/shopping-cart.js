@@ -613,6 +613,7 @@ class ShoppingCart {
 
     /**
      * Proceed to checkout with all items
+     * Uses cart checkout endpoint to send ALL items to Stripe
      */
     async proceedToCheckout() {
         if (this.items.length === 0) {
@@ -630,35 +631,26 @@ class ShoppingCart {
         }
 
         try {
-            // For now, redirect to Stripe with the first item
-            // In future, this will create a multi-item checkout session
             const API_URL = 'https://api.windloadcalc.com';
 
-            // If multiple items, we need to handle this differently
-            // For MVP, we'll create separate sessions or use Stripe's multi-line-item feature
-
-            const response = await fetch(`${API_URL}/api/subscriptions/checkout-guest`, {
+            // Use cart checkout endpoint for ALL items
+            const response = await fetch(`${API_URL}/api/subscriptions/checkout-cart`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    product_code: this.items[0].productCode,
-                    billing_cycle: this.items[0].billingCycle,
-                    bundle_discount: totals.hasBundleDiscount,
-                    // Pass all items for future multi-product support
-                    cart_items: this.items,
-                    success_url: 'https://windloadcalc.com/checkout-success.html',
-                    cancel_url: 'https://windloadcalc.com/cart.html'
+                    cart_items: this.items,  // Send ALL cart items
+                    email: null  // Will be entered in Stripe checkout
                 })
             });
 
             const data = await response.json();
 
-            console.log('Checkout response:', data);
-            console.log('Response status:', response.status);
+            console.log('Cart checkout response:', data);
+            console.log('Items sent:', this.items.length);
+            console.log('Expected total:', totals.totalDueToday);
 
             if (data.success && data.checkout_url) {
-                // Clear cart on successful checkout initiation
-                // this.clearCart(); // Don't clear yet - clear after success
+                console.log(`✅ Checkout created for ${data.item_count} items, total: $${data.total_amount}`);
                 window.location.href = data.checkout_url;
             } else {
                 throw new Error(data.error || data.message || 'Failed to create checkout');
@@ -671,7 +663,7 @@ class ShoppingCart {
 
             if (checkoutBtn) {
                 checkoutBtn.disabled = false;
-                checkoutBtn.innerHTML = '<i class="fas fa-lock"></i> Proceed to Secure Checkout';
+                checkoutBtn.innerHTML = `<i class="fas fa-lock"></i> Pay $${totals.totalDueToday.toFixed(2)} Securely`;
             }
         }
     }

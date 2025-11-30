@@ -221,7 +221,25 @@ class ShoppingCart {
         }
 
         const total = subtotal - bundleDiscount;
-        const annualTotal = total * 12;
+
+        // Determine if ALL items are annual or monthly (or mixed)
+        const allAnnual = itemDetails.length > 0 && itemDetails.every(item => item.billingCycle === 'annual');
+        const allMonthly = itemDetails.length > 0 && itemDetails.every(item => item.billingCycle === 'monthly');
+
+        // Calculate the actual charge amount
+        let chargeTotal, chargePeriod;
+        if (allAnnual) {
+            // All annual: charge annual total upfront
+            chargeTotal = itemDetails.reduce((sum, item) => sum + item.annualTotal, 0);
+            if (this.hasBundleDiscount()) {
+                chargeTotal = chargeTotal * (1 - BUNDLE_DISCOUNT_PERCENT / 100);
+            }
+            chargePeriod = 'year';
+        } else {
+            // Monthly or mixed: charge monthly
+            chargeTotal = total;
+            chargePeriod = 'month';
+        }
 
         return {
             items: itemDetails,
@@ -229,7 +247,10 @@ class ShoppingCart {
             bundleDiscount: bundleDiscount,
             bundleDiscountPercent: this.hasBundleDiscount() ? BUNDLE_DISCOUNT_PERCENT : 0,
             total: total,
-            annualTotal: annualTotal,
+            chargeTotal: chargeTotal,
+            chargePeriod: chargePeriod,
+            isAllAnnual: allAnnual,
+            isAllMonthly: allMonthly,
             itemCount: this.items.length,
             hasBundleDiscount: this.hasBundleDiscount()
         };
@@ -366,6 +387,10 @@ class ShoppingCart {
             `;
         }
 
+        // Show clear total based on billing cycle
+        const billingLabel = totals.isAllAnnual ? 'Billed annually' : 'Billed monthly';
+        const periodLabel = totals.chargePeriod === 'year' ? '/year' : '/month';
+
         html += `
                 <div style="
                     display: flex;
@@ -377,9 +402,9 @@ class ShoppingCart {
                 ">
                     <span style="color: #1f2937;">Total</span>
                     <div style="text-align: right;">
-                        <div style="color: #0018ff;">$${totals.total.toFixed(2)}/mo</div>
+                        <div style="color: #0018ff;">$${totals.chargeTotal.toFixed(2)}${periodLabel}</div>
                         <div style="font-size: 0.85rem; color: #64748b; font-weight: normal;">
-                            $${totals.annualTotal.toFixed(0)}/year
+                            ${billingLabel}
                         </div>
                     </div>
                 </div>

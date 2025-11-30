@@ -60,17 +60,18 @@
         const subscribeButtons = document.querySelectorAll('[data-product-code]');
 
         subscribeButtons.forEach(btn => {
-            // Replace the button text and behavior
+            // Replace the button text
             btn.innerHTML = '<i class="fas fa-cart-plus"></i> Add to Cart';
 
-            // Remove old click handlers
-            const newBtn = btn.cloneNode(true);
-            btn.parentNode.replaceChild(newBtn, btn);
+            // Remove old click handlers by setting onclick to null
+            btn.onclick = null;
 
-            // IMPORTANT: Read data attributes at CLICK TIME, not initialization time!
-            // This allows the billing toggle to update the cycle dynamically
-            newBtn.addEventListener('click', function(e) {
+            // IMPORTANT: Don't clone the button! Cloning breaks the billing toggle
+            // because updatePricing() updates the original button, not the clone.
+            // Instead, add a capturing event listener that reads attributes at click time.
+            btn.addEventListener('click', function(e) {
                 e.preventDefault();
+                e.stopPropagation();
                 const productCode = this.dataset.productCode;
                 const billingCycle = this.dataset.billingCycle || 'annual';
                 console.log(`Cart add: ${productCode} (${billingCycle})`);
@@ -79,7 +80,7 @@
                 } else {
                     alert('Cart system loading... Please try again.');
                 }
-            });
+            }, true);  // Use capture phase to run before other handlers
         });
 
         // Add cart icon to header if not already present

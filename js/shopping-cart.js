@@ -472,13 +472,45 @@ class ShoppingCart {
             `;
         }
 
+        // MIXED CART WARNING BANNER
+        if (totals.isMixed) {
+            html += `
+                <div style="
+                    background: linear-gradient(135deg, #fef3c7, #fde68a);
+                    border: 2px solid #f59e0b;
+                    border-radius: 12px;
+                    padding: 16px;
+                    margin-top: 20px;
+                    margin-bottom: 16px;
+                ">
+                    <div style="display: flex; align-items: flex-start; gap: 12px;">
+                        <i class="fas fa-exclamation-triangle" style="color: #d97706; font-size: 1.5rem; margin-top: 2px;"></i>
+                        <div>
+                            <h4 style="margin: 0 0 8px 0; color: #92400e; font-size: 1rem;">Two-Step Checkout Required</h4>
+                            <p style="margin: 0 0 8px 0; color: #78350f; font-size: 0.9rem; line-height: 1.5;">
+                                Your cart contains both <strong>monthly</strong> and <strong>annual</strong> subscriptions.
+                                Due to payment processor limitations, you'll complete <strong>two separate checkouts</strong>:
+                            </p>
+                            <ol style="margin: 0; padding-left: 20px; color: #78350f; font-size: 0.9rem; line-height: 1.6;">
+                                <li><strong>First:</strong> Annual subscriptions ($${totals.annualSubtotal.toFixed(2)})</li>
+                                <li><strong>Then:</strong> Monthly subscriptions ($${totals.monthlySubtotal.toFixed(2)}/mo)</li>
+                            </ol>
+                            <p style="margin: 8px 0 0 0; color: #92400e; font-size: 0.85rem;">
+                                <i class="fas fa-info-circle"></i> Both will be under the same account.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
         // TOTAL DUE TODAY SECTION
         html += `
             <div class="cart-summary" style="
                 background: linear-gradient(135deg, #1e3a5f, #0f172a);
                 border-radius: 12px;
                 padding: 24px;
-                margin-top: 20px;
+                margin-top: ${totals.isMixed ? '0' : '20px'};
                 color: white;
             ">
                 <h3 style="margin: 0 0 16px 0; font-size: 1.1rem; color: #94a3b8;">

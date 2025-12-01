@@ -1211,17 +1211,22 @@
         // Update upsell recommendations based on cart
         function updateUpsellRecommendations() {
             const container = document.getElementById('upsell-recommendations');
+            if (!container) return;
+
             const totals = cart.calculateTotals();
+
+            // Combine all items from both billing cycles
+            const allItems = [...totals.monthlyItems, ...totals.annualItems];
 
             let html = '';
 
             // Check what's NOT in cart
-            const hasBIP = totals.items.some(item => item.category === 'bip');
-            const hasCalc = totals.items.some(item => item.category === 'calculator');
+            const hasBIP = allItems.some(item => item.category === 'bip');
+            const hasCalc = allItems.some(item => item.category === 'calculator');
 
             // Get current tier if one product is in cart (to recommend matching tier)
-            const calcItem = totals.items.find(item => item.category === 'calculator');
-            const bipItem = totals.items.find(item => item.category === 'bip');
+            const calcItem = allItems.find(item => item.category === 'calculator');
+            const bipItem = allItems.find(item => item.category === 'bip');
 
             // Tier pricing data for dynamic recommendations
             const bipTiers = {

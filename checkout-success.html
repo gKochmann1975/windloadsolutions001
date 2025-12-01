@@ -337,6 +337,128 @@
             subtitle.innerHTML = `Thank you for subscribing to WindLoadCalc. Your payment has been processed successfully.<br><br>An email with your login credentials has been sent to: <strong>${email}</strong>`;
         }
 
+        // Check for pending monthly checkout (from mixed cart scenario)
+        async function checkPendingMonthlyCheckout() {
+            const pendingMonthly = sessionStorage.getItem('pending_monthly_checkout');
+            if (!pendingMonthly) return;
+
+            try {
+                const monthlyItems = JSON.parse(pendingMonthly);
+                if (!monthlyItems || monthlyItems.length === 0) {
+                    sessionStorage.removeItem('pending_monthly_checkout');
+                    return;
+                }
+
+                // Calculate monthly total for display
+                const PRODUCT_CATALOG = {
+                    'bip_starter': { monthlyPrice: 29 },
+                    'bip_pro': { monthlyPrice: 79 },
+                    'bip_premium': { monthlyPrice: 149 },
+                    'cc_walls_starter': { monthlyPrice: 35 },
+                    'cc_walls_pro': { monthlyPrice: 59 },
+                    'cc_walls_premium': { monthlyPrice: 149 }
+                };
+
+                let monthlyTotal = 0;
+                const itemNames = monthlyItems.map(item => {
+                    const product = PRODUCT_CATALOG[item.productCode];
+                    if (product) monthlyTotal += product.monthlyPrice;
+                    return item.productCode.replace(/_/g, ' ').toUpperCase();
+                });
+
+                // Show pending monthly checkout notice
+                const container = document.querySelector('.success-container');
+                const pendingNotice = document.createElement('div');
+                pendingNotice.style.cssText = `
+                    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+                    border: 2px solid #f59e0b;
+                    border-radius: 12px;
+                    padding: 24px;
+                    margin: 24px 0;
+                    text-align: center;
+                `;
+                pendingNotice.innerHTML = `
+                    <h2 style="color: #92400e; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#92400e" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        Complete Your Monthly Subscriptions
+                    </h2>
+                    <p style="color: #78350f; margin-bottom: 16px; line-height: 1.6;">
+                        Your annual subscriptions are set up! You still have <strong>${monthlyItems.length} monthly subscription${monthlyItems.length > 1 ? 's' : ''}</strong> to complete.
+                    </p>
+                    <button onclick="completePendingMonthlyCheckout()" style="
+                        background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+                        color: white;
+                        border: none;
+                        padding: 14px 28px;
+                        border-radius: 8px;
+                        font-size: 1rem;
+                        font-weight: 600;
+                        cursor: pointer;
+                        transition: all 0.2s;
+                    " onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">
+                        Continue to Monthly Checkout ($${monthlyTotal.toFixed(2)}/month)
+                    </button>
+                    <p style="color: #92400e; font-size: 0.85rem; margin-top: 12px;">
+                        Or <a href="#" onclick="skipPendingCheckout(); return false;" style="color: #78350f; text-decoration: underline;">skip for now</a>
+                    </p>
+                `;
+
+                // Insert after the email notice
+                const emailNotice = container.querySelector('.email-notice');
+                emailNotice.parentNode.insertBefore(pendingNotice, emailNotice.nextSibling);
+
+            } catch (e) {
+                console.error('Error parsing pending checkout:', e);
+                sessionStorage.removeItem('pending_monthly_checkout');
+            }
+        }
+
+        // Complete the pending monthly checkout
+        async function completePendingMonthlyCheckout() {
+            const pendingMonthly = sessionStorage.getItem('pending_monthly_checkout');
+            if (!pendingMonthly) return;
+
+            const monthlyItems = JSON.parse(pendingMonthly);
+            sessionStorage.removeItem('pending_monthly_checkout');
+
+            try {
+                const response = await fetch(`${API_URL}/api/subscriptions/checkout-cart`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        cart_items: monthlyItems,
+                        email: email
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success && data.checkout_url) {
+                    window.location.href = data.checkout_url;
+                } else {
+                    throw new Error(data.error || 'Failed to create checkout');
+                }
+            } catch (error) {
+                console.error('Monthly checkout error:', error);
+                alert('Failed to start monthly checkout. Please try again from the shop.');
+            }
+        }
+
+        // Skip the pending checkout
+        function skipPendingCheckout() {
+            sessionStorage.removeItem('pending_monthly_checkout');
+            const notice = document.querySelector('[onclick="completePendingMonthlyCheckout()"]').closest('div');
+            if (notice) notice.remove();
+        }
+
+        // Check for pending checkout on load
+        window.addEventListener('DOMContentLoaded', () => {
+            checkPendingMonthlyCheckout();
+        });
+
         // AUTO-LOGIN FLOW
         async function attemptAutoLogin() {
             if (!sessionId) {

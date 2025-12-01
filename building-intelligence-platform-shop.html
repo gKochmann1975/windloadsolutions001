@@ -1736,6 +1736,12 @@
         </div>
     </section>
 
+    <!-- Cross-Sell Upsell Banner - Promote Wind Load Calculators -->
+    <section id="upsell-banner-section" style="padding: 2rem 0; background: linear-gradient(135deg, #0018ff10 0%, #0080ff15 100%);">
+        <div class="container">
+            <div id="calculator-upsell-banner"></div>
+        </div>
+    </section>
 
     <!-- Not Sure Which Plan? -->
     <section style="padding: 3rem 0; background: linear-gradient(135deg, rgba(0, 24, 255, 0.03) 0%, rgba(0, 128, 255, 0.05) 50%, rgba(0, 255, 255, 0.03) 100%);">
@@ -2633,6 +2639,17 @@
     <!-- Shopping Cart System -->
     <script src="js/shopping-cart.js"></script>
     <script src="js/cart-header.js"></script>
+
+    <!-- Cross-Sell Upsell System -->
+    <script src="js/cross-sell-upsell.js"></script>
+    <script>
+        // Initialize Calculator upsell banner on BIP shop page
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof WindLoadUpsell !== 'undefined') {
+                WindLoadUpsell.initUpsellBanners('bip', 'calculator-upsell-banner');
+            }
+        });
+    </script>
 
     <!-- Pre-Checkout Account Modal -->
     <div id="preCheckoutModal" class="checkout-modal" style="display: none;">

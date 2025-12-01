@@ -614,6 +614,10 @@ class ShoppingCart {
     /**
      * Proceed to checkout with all items
      * Uses cart checkout endpoint to send ALL items to Stripe
+     *
+     * IMPORTANT: Stripe does NOT allow mixing monthly and annual subscriptions
+     * in a single checkout session. If cart has mixed billing cycles, we must
+     * checkout each billing cycle separately.
      */
     async proceedToCheckout() {
         if (this.items.length === 0) {
@@ -623,6 +627,39 @@ class ShoppingCart {
 
         const totals = this.calculateTotals();
 
+        // Check for mixed billing cycles - Stripe doesn't support this in one session
+        if (totals.isMixed) {
+            const proceed = confirm(
+                `Your cart contains both monthly and annual subscriptions.\n\n` +
+                `Due to payment processor limitations, you'll need to complete two separate checkouts:\n\n` +
+                `1. Annual subscriptions: $${totals.annualSubtotal.toFixed(2)}\n` +
+                `2. Monthly subscriptions: $${totals.monthlySubtotal.toFixed(2)}/month\n\n` +
+                `Click OK to proceed with annual subscriptions first.`
+            );
+
+            if (!proceed) return;
+
+            // Checkout annual items first, save monthly for after
+            sessionStorage.setItem('pending_monthly_checkout', JSON.stringify(
+                this.items.filter(item => item.billingCycle === 'monthly')
+            ));
+
+            // Only checkout annual items now
+            await this._doCheckout(
+                this.items.filter(item => item.billingCycle === 'annual'),
+                totals.annualSubtotal
+            );
+            return;
+        }
+
+        // Single billing cycle - proceed normally
+        await this._doCheckout(this.items, totals.totalDueToday);
+    }
+
+    /**
+     * Internal checkout function - sends items to Stripe
+     */
+    async _doCheckout(items, expectedTotal) {
         // Show loading state
         const checkoutBtn = document.querySelector('button[onclick="cart.proceedToCheckout()"]');
         if (checkoutBtn) {
@@ -633,12 +670,12 @@ class ShoppingCart {
         try {
             const API_URL = 'https://api.windloadcalc.com';
 
-            // Use cart checkout endpoint for ALL items
+            // Use cart checkout endpoint for items
             const response = await fetch(`${API_URL}/api/subscriptions/checkout-cart`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    cart_items: this.items,  // Send ALL cart items
+                    cart_items: items,
                     email: null  // Will be entered in Stripe checkout
                 })
             });
@@ -646,11 +683,20 @@ class ShoppingCart {
             const data = await response.json();
 
             console.log('Cart checkout response:', data);
-            console.log('Items sent:', this.items.length);
-            console.log('Expected total:', totals.totalDueToday);
+            console.log('Items sent:', items.length);
+            console.log('Expected total:', expectedTotal);
 
             if (data.success && data.checkout_url) {
                 console.log(`✅ Checkout created for ${data.item_count} items, total: $${data.total_amount}`);
+
+                // Clear the items that were sent to checkout from localStorage
+                // This ensures cart is empty when they return
+                const sentProductCodes = items.map(i => i.productCode + '_' + i.billingCycle);
+                this.items = this.items.filter(item =>
+                    !sentProductCodes.includes(item.productCode + '_' + item.billingCycle)
+                );
+                this.saveCart();
+
                 window.location.href = data.checkout_url;
             } else {
                 throw new Error(data.error || data.message || 'Failed to create checkout');
@@ -663,7 +709,7 @@ class ShoppingCart {
 
             if (checkoutBtn) {
                 checkoutBtn.disabled = false;
-                checkoutBtn.innerHTML = `<i class="fas fa-lock"></i> Pay $${totals.totalDueToday.toFixed(2)} Securely`;
+                checkoutBtn.innerHTML = `<i class="fas fa-lock"></i> Pay $${expectedTotal.toFixed(2)} Securely`;
             }
         }
     }

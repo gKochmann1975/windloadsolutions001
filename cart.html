@@ -1076,6 +1076,17 @@
             try {
                 const totals = cart.calculateTotals();
 
+                // Check if we have pending monthly items (from mixed cart notification)
+                // If so, only checkout annual items now
+                const pendingMonthly = sessionStorage.getItem('pending_monthly_checkout');
+                let itemsToCheckout = cart.items;
+
+                if (pendingMonthly && totals.isMixed) {
+                    // Only send annual items to Stripe
+                    itemsToCheckout = cart.items.filter(item => item.billingCycle === 'annual');
+                    console.log('Mixed cart: Checking out annual items only:', itemsToCheckout);
+                }
+
                 // Create checkout session with user token
                 const response = await fetch(`${CHECKOUT_API_URL}/api/subscriptions/checkout`, {
                     method: 'POST',
@@ -1084,10 +1095,10 @@
                         'Authorization': `Bearer ${token}`
                     },
                     body: JSON.stringify({
-                        product_code: cart.items[0].productCode,
-                        billing_cycle: cart.items[0].billingCycle,
+                        product_code: itemsToCheckout[0].productCode,
+                        billing_cycle: itemsToCheckout[0].billingCycle,
                         bundle_discount: totals.hasBundleDiscount,
-                        cart_items: cart.items,
+                        cart_items: itemsToCheckout,
                         success_url: 'https://windloadcalc.com/checkout-success.html',
                         cancel_url: 'https://windloadcalc.com/cart.html'
                     })
@@ -1096,6 +1107,13 @@
                 const data = await response.json();
 
                 if (data.success && data.checkout_url) {
+                    // Clear items that were sent to checkout from cart
+                    const sentKeys = itemsToCheckout.map(i => i.productCode + '_' + i.billingCycle);
+                    cart.items = cart.items.filter(item =>
+                        !sentKeys.includes(item.productCode + '_' + item.billingCycle)
+                    );
+                    cart.saveCart();
+
                     window.location.href = data.checkout_url;
                 } else {
                     // Try guest checkout as fallback
@@ -1103,11 +1121,11 @@
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
-                            product_code: cart.items[0].productCode,
-                            billing_cycle: cart.items[0].billingCycle,
+                            product_code: itemsToCheckout[0].productCode,
+                            billing_cycle: itemsToCheckout[0].billingCycle,
                             email: user?.email,
                             bundle_discount: totals.hasBundleDiscount,
-                            cart_items: cart.items,
+                            cart_items: itemsToCheckout,
                             success_url: 'https://windloadcalc.com/checkout-success.html',
                             cancel_url: 'https://windloadcalc.com/cart.html'
                         })
@@ -1116,6 +1134,13 @@
                     const guestData = await guestResponse.json();
 
                     if (guestData.success && guestData.checkout_url) {
+                        // Clear items that were sent to checkout from cart
+                        const sentKeys = itemsToCheckout.map(i => i.productCode + '_' + i.billingCycle);
+                        cart.items = cart.items.filter(item =>
+                            !sentKeys.includes(item.productCode + '_' + item.billingCycle)
+                        );
+                        cart.saveCart();
+
                         window.location.href = guestData.checkout_url;
                     } else {
                         throw new Error(guestData.error || 'Checkout failed');
@@ -1134,6 +1159,28 @@
                 alert('Your cart is empty. Please add products first.');
                 return;
             }
+
+            // Check for mixed billing cycles - Stripe doesn't support this in one session
+            const totals = this.calculateTotals();
+            if (totals.isMixed) {
+                const proceed = confirm(
+                    `Your cart contains both monthly and annual subscriptions.\n\n` +
+                    `Due to payment processor limitations, you'll need to complete two separate checkouts:\n\n` +
+                    `1. Annual subscriptions: $${totals.annualSubtotal.toFixed(2)}\n` +
+                    `2. Monthly subscriptions: $${totals.monthlySubtotal.toFixed(2)}/month\n\n` +
+                    `Both subscriptions will be under the same account.\n\n` +
+                    `Click OK to proceed with annual subscriptions first.`
+                );
+
+                if (!proceed) return;
+
+                // Save monthly items for after annual checkout completes
+                sessionStorage.setItem('pending_monthly_checkout', JSON.stringify(
+                    this.items.filter(item => item.billingCycle === 'monthly')
+                ));
+                sessionStorage.setItem('pending_monthly_amount', totals.monthlySubtotal.toFixed(2));
+            }
+
             openCheckoutModal();
         };
 

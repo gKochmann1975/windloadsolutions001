@@ -1164,18 +1164,8 @@
             const totals = this.calculateTotals();
 
             if (totals.isMixed) {
-                const proceed = confirm(
-                    `Your cart contains both monthly and annual subscriptions.\n\n` +
-                    `Due to payment processor limitations, you'll need to complete two separate checkouts:\n\n` +
-                    `1. Annual subscriptions: $${totals.annualSubtotal.toFixed(2)}\n` +
-                    `2. Monthly subscriptions: $${totals.monthlySubtotal.toFixed(2)}/month\n\n` +
-                    `Both subscriptions will be under the same account.\n\n` +
-                    `Click OK to proceed with annual subscriptions first.`
-                );
-
-                if (!proceed) return;
-
                 // Save monthly items for after annual checkout completes
+                // The warning banner is already visible on the page
                 sessionStorage.setItem('pending_monthly_checkout', JSON.stringify(
                     this.items.filter(item => item.billingCycle === 'monthly')
                 ));

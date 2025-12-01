@@ -423,6 +423,7 @@
 
             const monthlyItems = JSON.parse(pendingMonthly);
             sessionStorage.removeItem('pending_monthly_checkout');
+            sessionStorage.removeItem('pending_monthly_amount');
 
             try {
                 const response = await fetch(`${API_URL}/api/subscriptions/checkout-cart`, {
@@ -430,7 +431,12 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         cart_items: monthlyItems,
-                        email: email
+                        email: email,
+                        split_checkout_info: {
+                            part: 2,
+                            total_parts: 2,
+                            other_cycle: 'annual'
+                        }
                     })
                 });
 

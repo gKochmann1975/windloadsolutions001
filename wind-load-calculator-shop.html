@@ -2063,6 +2063,13 @@
         </div>
     </section>
 
+    <!-- Cross-Sell Upsell Banner - Promote BIP -->
+    <section id="upsell-banner-section" style="padding: 2rem 0; background: linear-gradient(135deg, #8b5cf615 0%, #a855f720 100%);">
+        <div class="container">
+            <div id="bip-upsell-banner"></div>
+        </div>
+    </section>
+
     <!-- SEO Content Sections -->
     <section class="content-section">
         <div class="container">
@@ -2787,6 +2794,21 @@
                     }
                 }
             });
+        });
+    </script>
+
+    <!-- Shopping Cart System -->
+    <script src="js/shopping-cart.js"></script>
+    <script src="js/cart-header.js"></script>
+
+    <!-- Cross-Sell Upsell System -->
+    <script src="js/cross-sell-upsell.js"></script>
+    <script>
+        // Initialize BIP upsell banner on Calculator shop page
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof WindLoadUpsell !== 'undefined') {
+                WindLoadUpsell.initUpsellBanners('calculator', 'bip-upsell-banner');
+            }
         });
     </script>
 </body>

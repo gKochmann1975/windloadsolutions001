@@ -643,11 +643,19 @@ class ShoppingCart {
             sessionStorage.setItem('pending_monthly_checkout', JSON.stringify(
                 this.items.filter(item => item.billingCycle === 'monthly')
             ));
+            // Also save the monthly amount for the success page
+            sessionStorage.setItem('pending_monthly_amount', totals.monthlySubtotal.toFixed(2));
 
-            // Only checkout annual items now
+            // Only checkout annual items now - with split checkout info for Stripe message
             await this._doCheckout(
                 this.items.filter(item => item.billingCycle === 'annual'),
-                totals.annualSubtotal
+                totals.annualSubtotal,
+                {
+                    part: 1,
+                    total_parts: 2,
+                    other_amount: totals.monthlySubtotal,
+                    other_cycle: 'monthly'
+                }
             );
             return;
         }
@@ -658,8 +666,11 @@ class ShoppingCart {
 
     /**
      * Internal checkout function - sends items to Stripe
+     * @param {Array} items - Cart items to checkout
+     * @param {number} expectedTotal - Expected total amount
+     * @param {Object} splitCheckoutInfo - Optional info for split checkout messaging
      */
-    async _doCheckout(items, expectedTotal) {
+    async _doCheckout(items, expectedTotal, splitCheckoutInfo = null) {
         // Show loading state
         const checkoutBtn = document.querySelector('button[onclick="cart.proceedToCheckout()"]');
         if (checkoutBtn) {
@@ -670,14 +681,22 @@ class ShoppingCart {
         try {
             const API_URL = 'https://api.windloadcalc.com';
 
+            // Build request payload
+            const payload = {
+                cart_items: items,
+                email: null  // Will be entered in Stripe checkout
+            };
+
+            // Add split checkout info if this is part of a split checkout
+            if (splitCheckoutInfo) {
+                payload.split_checkout_info = splitCheckoutInfo;
+            }
+
             // Use cart checkout endpoint for items
             const response = await fetch(`${API_URL}/api/subscriptions/checkout-cart`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    cart_items: items,
-                    email: null  // Will be entered in Stripe checkout
-                })
+                body: JSON.stringify(payload)
             });
 
             const data = await response.json();

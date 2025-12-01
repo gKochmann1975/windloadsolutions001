@@ -1155,11 +1155,6 @@
 
         // Override cart's proceedToCheckout to use modal
         cart.proceedToCheckout = function() {
-            // DEBUG: Show raw cart items to see billingCycle values
-            const rawItems = JSON.stringify(this.items, null, 2);
-            console.log('RAW CART ITEMS:', rawItems);
-            alert('DEBUG - RAW CART ITEMS:\n\n' + rawItems);
-
             if (this.items.length === 0) {
                 alert('Your cart is empty. Please add products first.');
                 return;
@@ -1167,12 +1162,8 @@
 
             // Check for mixed billing cycles - Stripe doesn't support this in one session
             const totals = this.calculateTotals();
-            console.log('Cart totals:', totals);
-            console.log('hasMonthly:', totals.hasMonthly, 'hasAnnual:', totals.hasAnnual, 'isMixed:', totals.isMixed);
-            alert('DEBUG - TOTALS:\nhasMonthly: ' + totals.hasMonthly + '\nhasAnnual: ' + totals.hasAnnual + '\nisMixed: ' + totals.isMixed);
 
             if (totals.isMixed) {
-                console.log('MIXED CART DETECTED - showing confirm');
                 const proceed = confirm(
                     `Your cart contains both monthly and annual subscriptions.\n\n` +
                     `Due to payment processor limitations, you'll need to complete two separate checkouts:\n\n` +

@@ -472,12 +472,46 @@
                 return;
             }
 
+            const primaryBtn = document.querySelector('.btn-primary');
+            const originalBtnHTML = `
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                    <polyline points="10 17 15 12 10 7"></polyline>
+                    <line x1="15" y1="12" x2="3" y2="12"></line>
+                </svg>
+                <span>Go to Member Login</span>
+            `;
+
+            // Set timeout to restore button if auto-login takes too long
+            const timeoutId = setTimeout(() => {
+                console.log('Auto-login timeout - restoring button');
+                restoreButtonToManualLogin();
+            }, 8000); // 8 second timeout
+
+            function restoreButtonToManualLogin() {
+                primaryBtn.innerHTML = originalBtnHTML;
+                primaryBtn.style.pointerEvents = 'auto';
+                primaryBtn.href = 'login.html';
+
+                // Show notice that they need to check email
+                const emailNotice = document.querySelector('.email-notice');
+                emailNotice.style.borderColor = '#10b981';
+                emailNotice.style.background = '#f0fdf4';
+
+                const emailHeader = emailNotice.querySelector('h2');
+                emailHeader.innerHTML = `
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                    ✓ Check Your Email for Login Details
+                `;
+            }
+
             try {
                 console.log('Attempting auto-login with session:', sessionId);
 
                 // Show loading state
-                const primaryBtn = document.querySelector('.btn-primary');
-                const originalBtnText = primaryBtn.innerHTML;
                 primaryBtn.innerHTML = '<span style="display: inline-block; animation: spin 1s linear infinite;">⏳</span> Preparing your account...';
                 primaryBtn.style.pointerEvents = 'none';
 
@@ -494,6 +528,7 @@
                 });
 
                 const data = await response.json();
+                clearTimeout(timeoutId); // Clear timeout on successful response
 
                 if (data.success && data.redirect_url) {
                     console.log('✅ Auto-login successful! Redirecting to:', data.redirect_url);
@@ -519,27 +554,12 @@
                 }
 
             } catch (error) {
+                clearTimeout(timeoutId); // Clear timeout on error
                 console.error('Auto-login error:', error);
                 console.log('Falling back to manual login flow');
 
                 // Reset button to manual login
-                const primaryBtn = document.querySelector('.btn-primary');
-                primaryBtn.innerHTML = originalBtnText;
-                primaryBtn.style.pointerEvents = 'auto';
-
-                // Show notice that they need to check email
-                const emailNotice = document.querySelector('.email-notice');
-                emailNotice.style.borderColor = '#f59e0b';
-                emailNotice.style.background = '#fffbeb';
-
-                const emailHeader = emailNotice.querySelector('h2');
-                emailHeader.innerHTML = `
-                    <svg viewBox="0 0 24 24" fill="none">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                        <polyline points="22,6 12,13 2,6"></polyline>
-                    </svg>
-                    ⚠️ Please Check Your Email
-                `;
+                restoreButtonToManualLogin();
             }
         }
 

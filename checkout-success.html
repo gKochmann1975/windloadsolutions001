@@ -465,54 +465,100 @@
             checkPendingMonthlyCheckout();
         });
 
-        // AUTO-LOGIN FLOW
-        async function attemptAutoLogin() {
+        // PREPARE ACCESS BUTTON - Gets auth token and updates button (NO auto-redirect)
+        async function prepareAccessButton() {
             if (!sessionId) {
-                console.log('No session_id found in URL - auto-login not possible');
+                console.log('No session_id found in URL - cannot prepare access button');
                 return;
             }
 
             const primaryBtn = document.querySelector('.btn-primary');
-            const originalBtnHTML = `
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
-                    <polyline points="10 17 15 12 10 7"></polyline>
-                    <line x1="15" y1="12" x2="3" y2="12"></line>
-                </svg>
-                <span>Go to Member Login</span>
-            `;
 
-            // Set timeout to restore button if auto-login takes too long
+            // Set timeout to restore to login button if API takes too long
             const timeoutId = setTimeout(() => {
-                console.log('Auto-login timeout - restoring button');
-                restoreButtonToManualLogin();
-            }, 8000); // 8 second timeout
+                console.log('Prepare access timeout - showing login button');
+                showLoginButton();
+            }, 10000); // 10 second timeout
 
-            function restoreButtonToManualLogin() {
-                primaryBtn.innerHTML = originalBtnHTML;
+            function showLoginButton() {
+                primaryBtn.innerHTML = `
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                        <polyline points="10 17 15 12 10 7"></polyline>
+                        <line x1="15" y1="12" x2="3" y2="12"></line>
+                    </svg>
+                    <span>Go to Member Login</span>
+                `;
                 primaryBtn.style.pointerEvents = 'auto';
                 primaryBtn.href = 'login.html';
+            }
 
-                // Show notice that they need to check email
+            function showProductButton(productName, redirectUrl, token, userId) {
+                // Store token in localStorage so product page can read it
+                if (token) {
+                    localStorage.setItem('windload_token', token);
+                    localStorage.setItem('authToken', token);
+                }
+                if (userId) {
+                    localStorage.setItem('windload_user_id', userId);
+                    localStorage.setItem('userId', userId);
+                }
+
+                // CRITICAL: Store trial data with authenticated flag
+                // This tells trial-manager.js that user is paid, not on free trial
+                const trialData = {
+                    userId: userId || 'paid_user',
+                    startDate: new Date().toISOString(),
+                    expiryDate: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(), // 1 year
+                    lookups: [],
+                    exportAttempts: 0,
+                    authenticated: true, // KEY: This bypasses trial restrictions
+                    featureAccess: {
+                        windVelocity: true,
+                        hurricaneRisk: true,
+                        solarFinder: true,
+                        multiZipComparison: true,
+                        exports: true,
+                        aiReports: true
+                    }
+                };
+                localStorage.setItem('windload_trial_data', JSON.stringify(trialData));
+                console.log('✅ Stored authenticated trial data for paid user');
+
+                primaryBtn.innerHTML = `
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14"></path>
+                        <path d="M12 5l7 7-7 7"></path>
+                    </svg>
+                    <span>Launch ${productName}</span>
+                `;
+                primaryBtn.style.pointerEvents = 'auto';
+                primaryBtn.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
+                primaryBtn.href = redirectUrl;
+
+                // Update subtitle to show success
+                const subtitle = document.querySelector('.subtitle');
+                subtitle.innerHTML = `Thank you for subscribing! Your payment has been processed and your <strong>${productName}</strong> subscription is now <strong style="color: #10b981;">ACTIVE</strong>.<br><br>Click the button below to start using your product.`;
+
+                // Update email notice to success state
                 const emailNotice = document.querySelector('.email-notice');
                 emailNotice.style.borderColor = '#10b981';
                 emailNotice.style.background = '#f0fdf4';
-
                 const emailHeader = emailNotice.querySelector('h2');
                 emailHeader.innerHTML = `
                     <svg viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2">
                         <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                         <polyline points="22,6 12,13 2,6"></polyline>
                     </svg>
-                    ✓ Check Your Email for Login Details
+                    ✓ Receipt Sent to Your Email
                 `;
             }
 
             try {
-                console.log('Attempting auto-login with session:', sessionId);
+                console.log('Preparing access button with session:', sessionId);
 
                 // Show loading state
-                primaryBtn.innerHTML = '<span style="display: inline-block; animation: spin 1s linear infinite;">⏳</span> Preparing your account...';
+                primaryBtn.innerHTML = '<span style="display: inline-block; animation: spin 1s linear infinite;">⏳</span> Preparing your access...';
                 primaryBtn.style.pointerEvents = 'none';
 
                 // Call backend to create auto-login token
@@ -523,50 +569,42 @@
                     },
                     body: JSON.stringify({
                         session_id: sessionId,
-                        email: email // Optional verification
+                        email: email
                     })
                 });
 
                 const data = await response.json();
-                clearTimeout(timeoutId); // Clear timeout on successful response
+                clearTimeout(timeoutId);
 
                 if (data.success && data.redirect_url) {
-                    console.log('✅ Auto-login successful! Redirecting to:', data.redirect_url);
+                    console.log('✅ Access prepared! Button ready for:', data.redirect_url);
 
-                    // Update UI to show redirect
-                    primaryBtn.innerHTML = '✅ Success! Redirecting...';
-
-                    // Show which platform they're going to
-                    const subtitle = document.querySelector('.subtitle');
+                    // Determine product name
+                    let productName = 'Your Product';
                     if (data.has_bip) {
-                        subtitle.innerHTML += '<br><br><strong style="color: #10b981;">🚀 Taking you to Building Intelligence Platform...</strong>';
+                        productName = 'BIP Platform';
                     } else if (data.has_calculator) {
-                        subtitle.innerHTML += '<br><br><strong style="color: #10b981;">🚀 Taking you to Wind Load Calculators...</strong>';
+                        productName = 'Wind Load Calculator';
                     }
 
-                    // Redirect after 2 seconds
-                    setTimeout(() => {
-                        window.location.href = data.redirect_url;
-                    }, 2000);
+                    // Show button - user must click to proceed (NO auto-redirect)
+                    showProductButton(productName, data.redirect_url, data.token, data.user_id);
 
                 } else {
-                    throw new Error(data.error || 'Auto-login failed');
+                    throw new Error(data.error || 'Failed to prepare access');
                 }
 
             } catch (error) {
-                clearTimeout(timeoutId); // Clear timeout on error
-                console.error('Auto-login error:', error);
-                console.log('Falling back to manual login flow');
-
-                // Reset button to manual login
-                restoreButtonToManualLogin();
+                clearTimeout(timeoutId);
+                console.error('Prepare access error:', error);
+                console.log('Falling back to login button');
+                showLoginButton();
             }
         }
 
-        // Attempt auto-login after page loads
+        // Prepare access button after page loads (NO auto-redirect)
         window.addEventListener('DOMContentLoaded', () => {
-            // Re-enabled auto-login for seamless user experience
-            attemptAutoLogin();
+            prepareAccessButton();
         });
 
         // Fallback: Auto-refresh page after 5 minutes to prevent stale sessions

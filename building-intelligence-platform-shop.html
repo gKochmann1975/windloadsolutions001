@@ -2154,7 +2154,9 @@
         // ============================================
         document.addEventListener('DOMContentLoaded', function() {
             initializeBillingToggle();
-            initializeStripeCheckout();
+            // NOTE: initializeStripeCheckout() REMOVED - was conflicting with cart-header.js
+            // Buttons now ONLY add to cart via cart-header.js handlers
+            // Users go to cart.html to checkout (supports mixed billing 2-step flow)
             updatePrices(); // Initialize with annual pricing
         });
         // ============================================

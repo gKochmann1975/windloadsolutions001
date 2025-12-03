@@ -663,6 +663,14 @@ const TrialManager = (function() {
             };
             saveTrialData(trialData);
 
+            // Hide all trial UI for authenticated users
+            hideAllTrialUI();
+
+            // Override showUpgradeModal to do nothing for authenticated users
+            window.showUpgradeModal = function() {
+                console.log('🔧 Authenticated Mode: Upgrade modal suppressed');
+            };
+
             // Clean URL without reloading
             const cleanUrl = window.location.pathname;
             window.history.replaceState({}, document.title, cleanUrl);
@@ -674,6 +682,15 @@ const TrialManager = (function() {
         const savedTrialData = getTrialData();
         if (savedToken && savedTrialData && savedTrialData.authenticated) {
             console.log('✅ Trial Manager: Previously authenticated user, skipping trial restrictions');
+
+            // Hide all trial UI for authenticated users
+            hideAllTrialUI();
+
+            // Override showUpgradeModal to do nothing for authenticated users
+            window.showUpgradeModal = function() {
+                console.log('🔧 Authenticated Mode: Upgrade modal suppressed');
+            };
+
             return;
         }
 

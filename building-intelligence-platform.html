@@ -3951,6 +3951,22 @@ Leaflet: ${typeof L !== 'undefined' ? 'LOADED' : 'NOT LOADED'}
             }, 100);
             setTimeout(() => clearInterval(checkGoogleLoaded), 10000);
 
+            // Auto-clear localStorage if ?reset=true is in URL (for testing)
+            const resetParam = new URLSearchParams(window.location.search).get('reset');
+            if (resetParam === 'true') {
+                localStorage.removeItem(SIGNUP_CONFIG.STORAGE_KEY);
+                localStorage.removeItem('windload_trial_data');
+                localStorage.removeItem('authToken');
+                localStorage.removeItem('windload_token');
+                localStorage.removeItem('userId');
+                localStorage.removeItem('windload_user_id');
+                console.log('✅ localStorage cleared via ?reset=true');
+                // Remove the reset param from URL so refresh doesn't keep clearing
+                const url = new URL(window.location);
+                url.searchParams.delete('reset');
+                window.history.replaceState({}, '', url);
+            }
+
             // Initialize modal on page load
             showSignupModal();
         });

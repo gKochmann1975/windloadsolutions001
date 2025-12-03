@@ -842,10 +842,31 @@ const TrialManager = (function() {
 })();
 
 // Show upgrade modal (will be defined in HTML)
+// IMPORTANT: This function checks user state - paid users should NEVER see this modal
 function showUpgradeModal(message) {
+    // Check if user is authenticated (paid or registered trial)
+    // If they are, DO NOT show the upgrade modal
+    const token = localStorage.getItem('windload_token');
+    const trialDataStr = localStorage.getItem('windload_trial_data');
+
+    if (token) {
+        // User has a token - check if they're authenticated (not just anonymous trial)
+        if (trialDataStr) {
+            try {
+                const trialData = JSON.parse(trialDataStr);
+                if (trialData.authenticated === true) {
+                    // User is authenticated - they either have a subscription or registered trial
+                    // Don't show upgrade modal
+                    console.log('showUpgradeModal suppressed - user is authenticated');
+                    return;
+                }
+            } catch (e) {}
+        }
+    }
+
     const modal = document.getElementById('upgrade-modal');
     const messageEl = document.getElementById('upgrade-message');
-    
+
     if (modal && messageEl) {
         messageEl.textContent = message;
         modal.style.display = 'flex';

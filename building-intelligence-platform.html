@@ -3721,6 +3721,11 @@ Leaflet: ${typeof L !== 'undefined' ? 'LOADED' : 'NOT LOADED'}
             // Mark signup complete
             localStorage.setItem(SIGNUP_CONFIG.STORAGE_KEY, 'true');
 
+            // Now apply trial restrictions (they were deferred for new visitors)
+            if (typeof TrialManager !== 'undefined') {
+                TrialManager.applyTrialRestrictions();
+            }
+
             console.log('✅ Immediate access granted');
         }
 

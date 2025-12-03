@@ -744,14 +744,22 @@ const TrialManager = (function() {
             updateLookupCounter();
         }, 30000); // Every 30 seconds
 
-        // Disable export buttons
-        disableExportButtons();
+        // Only apply restrictions if user has already completed signup
+        // New visitors seeing the signup modal for the first time should NOT
+        // have copy protection active - it would trigger upgrade modal on any click
+        const hasCompletedSignup = localStorage.getItem('bip_signup_completed');
 
-        // Prevent printing
-        preventPrinting();
-
-        // Prevent content selection and copying
-        preventContentCopy();
+        if (hasCompletedSignup) {
+            // User has signed up - apply all trial restrictions
+            disableExportButtons();
+            preventPrinting();
+            preventContentCopy();
+            console.log('🔒 Trial Manager: Restrictions applied (signup completed)');
+        } else {
+            // New visitor - don't apply copy protection yet
+            // Just show watermark and trial banner, let them explore
+            console.log('👋 Trial Manager: New visitor - restrictions deferred until signup');
+        }
     }
 
     // Disable export buttons
@@ -858,6 +866,14 @@ const TrialManager = (function() {
         console.log('🔒 Trial Manager: Content copy protection enabled');
     }
 
+    // Apply trial restrictions (called after signup completes)
+    function applyTrialRestrictions() {
+        console.log('🔒 Trial Manager: Applying trial restrictions after signup');
+        disableExportButtons();
+        preventPrinting();
+        preventContentCopy();
+    }
+
     // Public API
     return {
         init: init,
@@ -866,7 +882,8 @@ const TrialManager = (function() {
         canAccessFeature: canAccessFeature,
         recordExportAttempt: recordExportAttempt,
         getTrialStatus: getTrialStatus,
-        addTrialWatermark: addTrialWatermark
+        addTrialWatermark: addTrialWatermark,
+        applyTrialRestrictions: applyTrialRestrictions
     };
 })();
 

@@ -637,61 +637,90 @@ const TrialManager = (function() {
         // NORMAL MODE: Check actual authentication state
         // ============================================
 
-        // Check if user is authenticated via URL token (coming from login/signup)
+        // Check if user is authenticated via URL token (coming from login/signup or purchase)
+        // We need to check with the backend if they are PAID or just a TRIAL user
         if (token && userId) {
-            console.log('✅ Trial Manager: Authenticated user detected, skipping local trial');
+            console.log('✅ Trial Manager: Authenticated user detected via URL token');
             localStorage.setItem('windload_token', token);
             localStorage.setItem('windload_user_id', userId);
-
-            const now = new Date();
-            const expiryDate = new Date(now.getTime() + (TRIAL_DURATION_DAYS * 24 * 60 * 60 * 1000));
-            const trialData = {
-                userId: userId,
-                startDate: now.toISOString(),
-                expiryDate: expiryDate.toISOString(),
-                lookups: [],
-                exportAttempts: 0,
-                authenticated: true,
-                featureAccess: {
-                    windVelocity: true,
-                    hurricaneRisk: true,
-                    solarFinder: true,
-                    multiZipComparison: true,
-                    exports: true,
-                    aiReports: true
-                }
-            };
-            saveTrialData(trialData);
-
-            // Hide all trial UI for authenticated users
-            hideAllTrialUI();
-
-            // Override showUpgradeModal to do nothing for authenticated users
-            window.showUpgradeModal = function() {
-                console.log('🔧 Authenticated Mode: Upgrade modal suppressed');
-            };
 
             // Clean URL without reloading
             const cleanUrl = window.location.pathname;
             window.history.replaceState({}, document.title, cleanUrl);
-            return;
+
+            // Check if this is a PAID user by looking at URL params or checking backend
+            const isPaidParam = urlParams.get('paid');
+            const subscriptionParam = urlParams.get('subscription');
+
+            if (isPaidParam === 'true' || subscriptionParam) {
+                // User is a PAID subscriber - no restrictions
+                console.log('✅ Trial Manager: PAID user - no restrictions');
+                const trialData = {
+                    userId: userId,
+                    startDate: new Date().toISOString(),
+                    expiryDate: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(),
+                    lookups: [],
+                    exportAttempts: 0,
+                    authenticated: true,
+                    isPaid: true,
+                    featureAccess: {
+                        windVelocity: true,
+                        hurricaneRisk: true,
+                        solarFinder: true,
+                        multiZipComparison: true,
+                        exports: true,
+                        aiReports: true
+                    }
+                };
+                saveTrialData(trialData);
+                hideAllTrialUI();
+                window.showUpgradeModal = function() {
+                    console.log('🔧 Paid Mode: Upgrade modal suppressed');
+                };
+                return;
+            } else {
+                // User is an authenticated TRIAL user - APPLY RESTRICTIONS
+                console.log('⚠️ Trial Manager: Authenticated TRIAL user - applying restrictions');
+                const now = new Date();
+                const expiryDate = new Date(now.getTime() + (TRIAL_DURATION_DAYS * 24 * 60 * 60 * 1000));
+                const trialData = {
+                    userId: userId,
+                    startDate: now.toISOString(),
+                    expiryDate: expiryDate.toISOString(),
+                    lookups: [],
+                    exportAttempts: 0,
+                    authenticated: true,
+                    isPaid: false,
+                    featureAccess: {
+                        windVelocity: true,
+                        hurricaneRisk: true,
+                        solarFinder: true,
+                        multiZipComparison: true,
+                        exports: false,  // Trial users can't export
+                        aiReports: false
+                    }
+                };
+                saveTrialData(trialData);
+                // DON'T return - fall through to apply trial restrictions below
+            }
         }
 
         // Check if user was previously authenticated
         const savedToken = localStorage.getItem('windload_token');
         const savedTrialData = getTrialData();
         if (savedToken && savedTrialData && savedTrialData.authenticated) {
-            console.log('✅ Trial Manager: Previously authenticated user, skipping trial restrictions');
-
-            // Hide all trial UI for authenticated users
-            hideAllTrialUI();
-
-            // Override showUpgradeModal to do nothing for authenticated users
-            window.showUpgradeModal = function() {
-                console.log('🔧 Authenticated Mode: Upgrade modal suppressed');
-            };
-
-            return;
+            // Check if they are PAID or just authenticated trial
+            if (savedTrialData.isPaid === true) {
+                console.log('✅ Trial Manager: Previously authenticated PAID user - no restrictions');
+                hideAllTrialUI();
+                window.showUpgradeModal = function() {
+                    console.log('🔧 Paid Mode: Upgrade modal suppressed');
+                };
+                return;
+            } else {
+                console.log('⚠️ Trial Manager: Previously authenticated TRIAL user - applying restrictions');
+                // DON'T return - fall through to apply trial restrictions below
+            }
         }
 
         // ============================================
@@ -842,26 +871,21 @@ const TrialManager = (function() {
 })();
 
 // Show upgrade modal (will be defined in HTML)
-// IMPORTANT: This function checks user state - paid users should NEVER see this modal
+// IMPORTANT: PAID users should NEVER see this. TRIAL users CAN see it (to upsell).
 function showUpgradeModal(message) {
-    // Check if user is authenticated (paid or registered trial)
-    // If they are, DO NOT show the upgrade modal
     const token = localStorage.getItem('windload_token');
     const trialDataStr = localStorage.getItem('windload_trial_data');
 
-    if (token) {
-        // User has a token - check if they're authenticated (not just anonymous trial)
-        if (trialDataStr) {
-            try {
-                const trialData = JSON.parse(trialDataStr);
-                if (trialData.authenticated === true) {
-                    // User is authenticated - they either have a subscription or registered trial
-                    // Don't show upgrade modal
-                    console.log('showUpgradeModal suppressed - user is authenticated');
-                    return;
-                }
-            } catch (e) {}
-        }
+    if (token && trialDataStr) {
+        try {
+            const trialData = JSON.parse(trialDataStr);
+            // Only suppress for PAID users, NOT for trial users
+            if (trialData.isPaid === true) {
+                console.log('showUpgradeModal suppressed - user is PAID');
+                return;
+            }
+            // Trial users CAN see upgrade modal - it's an upsell opportunity
+        } catch (e) {}
     }
 
     const modal = document.getElementById('upgrade-modal');

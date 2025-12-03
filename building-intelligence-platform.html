@@ -3639,18 +3639,36 @@ Leaflet: ${typeof L !== 'undefined' ? 'LOADED' : 'NOT LOADED'}
             SHOW_DELAY: 1000
         };
 
-        // Show signup modal on first visit
+        // Show signup modal on first visit (but NOT for authenticated users)
         function showSignupModal() {
             const hasCompleted = localStorage.getItem(SIGNUP_CONFIG.STORAGE_KEY);
 
-            if (!hasCompleted) {
-                setTimeout(() => {
-                    const modal = document.getElementById('signup-modal');
-                    if (modal) {
-                        modal.style.display = 'flex';
-                    }
-                }, SIGNUP_CONFIG.SHOW_DELAY);
+            // Check if user is authenticated - DON'T show modal if they are
+            const urlParams = new URLSearchParams(window.location.search);
+            const hasTokenInUrl = urlParams.get('token');
+            const hasStoredToken = localStorage.getItem('windload_token');
+            const trialDataStr = localStorage.getItem('windload_trial_data');
+            let isAuthenticated = false;
+
+            if (trialDataStr) {
+                try {
+                    const trialData = JSON.parse(trialDataStr);
+                    isAuthenticated = trialData.authenticated === true;
+                } catch (e) {}
             }
+
+            // Skip modal if: already completed signup, has token in URL, has stored token, or is authenticated
+            if (hasCompleted || hasTokenInUrl || hasStoredToken || isAuthenticated) {
+                console.log('Signup modal skipped - user is authenticated or already signed up');
+                return;
+            }
+
+            setTimeout(() => {
+                const modal = document.getElementById('signup-modal');
+                if (modal) {
+                    modal.style.display = 'flex';
+                }
+            }, SIGNUP_CONFIG.SHOW_DELAY);
         }
 
         // Close modal

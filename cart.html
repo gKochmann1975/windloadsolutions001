@@ -1087,14 +1087,32 @@
                     console.log('Mixed cart: Checking out annual items only:', itemsToCheckout);
                 }
 
-                // Create checkout session with user token
-                const response = await fetch(`${CHECKOUT_API_URL}/api/subscriptions/checkout`, {
+                // Use checkout-cart endpoint for multi-item carts, single checkout for single items
+                const isMultiItem = itemsToCheckout.length > 1;
+                const endpoint = isMultiItem
+                    ? `${CHECKOUT_API_URL}/api/subscriptions/checkout-cart`
+                    : `${CHECKOUT_API_URL}/api/subscriptions/checkout`;
+
+                console.log(`Checkout: ${itemsToCheckout.length} items, using ${isMultiItem ? 'cart' : 'single'} endpoint`);
+
+                // Create checkout session
+                const response = await fetch(endpoint, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`
                     },
-                    body: JSON.stringify({
+                    body: JSON.stringify(isMultiItem ? {
+                        // Multi-item cart checkout
+                        cart_items: itemsToCheckout,
+                        email: user?.email,
+                        split_checkout_info: pendingMonthly ? {
+                            part: 1,
+                            other_amount: totals.monthlyTotal,
+                            other_cycle: 'monthly'
+                        } : null
+                    } : {
+                        // Single item checkout
                         product_code: itemsToCheckout[0].productCode,
                         billing_cycle: itemsToCheckout[0].billingCycle,
                         bundle_discount: totals.hasBundleDiscount,
@@ -1116,11 +1134,23 @@
 
                     window.location.href = data.checkout_url;
                 } else {
-                    // Try guest checkout as fallback
-                    const guestResponse = await fetch(`${CHECKOUT_API_URL}/api/subscriptions/checkout-guest`, {
+                    // Try guest checkout-cart as fallback for multi-item
+                    const guestEndpoint = isMultiItem
+                        ? `${CHECKOUT_API_URL}/api/subscriptions/checkout-cart`
+                        : `${CHECKOUT_API_URL}/api/subscriptions/checkout-guest`;
+
+                    const guestResponse = await fetch(guestEndpoint, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
+                        body: JSON.stringify(isMultiItem ? {
+                            cart_items: itemsToCheckout,
+                            email: user?.email,
+                            split_checkout_info: pendingMonthly ? {
+                                part: 1,
+                                other_amount: totals.monthlyTotal,
+                                other_cycle: 'monthly'
+                            } : null
+                        } : {
                             product_code: itemsToCheckout[0].productCode,
                             billing_cycle: itemsToCheckout[0].billingCycle,
                             email: user?.email,

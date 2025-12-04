@@ -13,7 +13,10 @@
     <meta property="og:description" content="Contact expert wind load engineers for ASCE 7 compliance and building permit assistance nationwide.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://windloadcalc.com/contact.html">
-    
+
+    <!-- reCAPTCHA v3 -->
+    <script src="https://www.google.com/recaptcha/api.js?render=6Ld8dSEsAAAAADQhiFFuSitPCafwmxWnStJ5Ii0h"></script>
+
     <style>
         /* Reset and Base Styles */
         * {
@@ -1540,8 +1543,13 @@
                 </div>
                 
                 <form class="contact-form" id="contact-form-element">
-                    
+
                     <div id="form-message" style="display: none;"></div>
+
+                    <!-- Honeypot field - hidden from humans, bots will fill it -->
+                    <div style="position: absolute; left: -9999px;" aria-hidden="true">
+                        <input type="text" name="website_url" tabindex="-1" autocomplete="off">
+                    </div>
                     
                     <div class="form-row">
                         <div class="form-group">
@@ -1808,33 +1816,57 @@
             if (!form) return;
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
+
+                // Honeypot check - if filled, it's a bot
+                const honeypot = form.querySelector('input[name="website_url"]');
+                if (honeypot && honeypot.value) {
+                    console.log('Bot detected via honeypot');
+                    showFormMessage('✅ Contact request sent successfully!', 'success');
+                    form.reset();
+                    return; // Silently reject
+                }
+
                 const submitButton = this.querySelector('.submit-button');
                 const originalText = submitButton.textContent;
-                submitButton.textContent = 'Contacting Wind Load Engineers...';
+                submitButton.textContent = 'Verifying...';
                 submitButton.disabled = true;
                 submitButton.style.opacity = '0.7';
-                const formData = new FormData(this);
-                // Add formType parameter for router
-                formData.append('formType', 'contact');
 
-                const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbznqQA5RVxAqBVJopNP-fwCR1BYHpBtzq3T1-q80no0FHs8xWitO5Zc4tOKJ5H792TZ/exec';
-                fetch(GOOGLE_SHEETS_URL, {
-                    method: 'POST',
-                    body: formData,
-                    mode: 'no-cors'
-                })
-                .then(function() {
-                    showFormMessage('✅ Contact request sent successfully! Our wind load engineers will respond within 1-2 hours during business hours.', 'success');
-                    form.reset();
-                    submitButton.textContent = originalText;
-                    submitButton.disabled = false;
-                    submitButton.style.opacity = '1';
-                })
-                .catch(function(error) {
-                    showFormMessage('❌ Error sending contact request. Please try calling our wind load experts directly at (833) 272-3946.', 'error');
-                    submitButton.textContent = originalText;
-                    submitButton.disabled = false;
-                    submitButton.style.opacity = '1';
+                // reCAPTCHA v3 verification
+                grecaptcha.ready(function() {
+                    grecaptcha.execute('6Ld8dSEsAAAAADQhiFFuSitPCafwmxWnStJ5Ii0h', {action: 'contact_form'}).then(function(token) {
+                        submitButton.textContent = 'Contacting Wind Load Engineers...';
+
+                        const formData = new FormData(form);
+                        formData.append('formType', 'contact');
+                        formData.append('recaptcha_token', token);
+
+                        const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbznqQA5RVxAqBVJopNP-fwCR1BYHpBtzq3T1-q80no0FHs8xWitO5Zc4tOKJ5H792TZ/exec';
+                        fetch(GOOGLE_SHEETS_URL, {
+                            method: 'POST',
+                            body: formData,
+                            mode: 'no-cors'
+                        })
+                        .then(function() {
+                            showFormMessage('✅ Contact request sent successfully! Our wind load engineers will respond within 1-2 hours during business hours.', 'success');
+                            form.reset();
+                            submitButton.textContent = originalText;
+                            submitButton.disabled = false;
+                            submitButton.style.opacity = '1';
+                        })
+                        .catch(function(error) {
+                            showFormMessage('❌ Error sending contact request. Please try calling our wind load experts directly at (833) 272-3946.', 'error');
+                            submitButton.textContent = originalText;
+                            submitButton.disabled = false;
+                            submitButton.style.opacity = '1';
+                        });
+                    }).catch(function(error) {
+                        console.error('reCAPTCHA error:', error);
+                        showFormMessage('❌ Security verification failed. Please refresh and try again.', 'error');
+                        submitButton.textContent = originalText;
+                        submitButton.disabled = false;
+                        submitButton.style.opacity = '1';
+                    });
                 });
             });
         }

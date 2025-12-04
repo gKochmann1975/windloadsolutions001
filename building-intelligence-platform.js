@@ -2625,83 +2625,27 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
                     className: 'hurricane-popup'
                 });
                 
-                // Get icon size and color based on category
-                const getCategoryStyle = (cat) => {
-                    const styles = {
-                        1: { size: 28, color: '#fbbf24', bg: '#fef3c7', border: '#f59e0b' }, // Yellow
-                        2: { size: 32, color: '#fb923c', bg: '#ffedd5', border: '#f97316' }, // Orange
-                        3: { size: 36, color: '#f97316', bg: '#fed7aa', border: '#ea580c' }, // Dark Orange
-                        4: { size: 42, color: '#ef4444', bg: '#fee2e2', border: '#dc2626' }, // Red
-                        5: { size: 48, color: '#7c3aed', bg: '#ede9fe', border: '#6d28d9' }  // Purple
-                    };
-                    return styles[cat] || styles[3];
-                };
-                const catStyle = getCategoryStyle(hurricane.category);
-
-                // Add start point marker with styled icon
+                // Add start point marker
                 L.marker(hurricane.path[0], {
                     icon: L.divIcon({
-                        className: 'hurricane-marker-styled',
-                        html: `<div style="
-                            width: ${catStyle.size}px;
-                            height: ${catStyle.size}px;
-                            background: ${catStyle.bg};
-                            border: 3px solid ${catStyle.border};
-                            border-radius: 50%;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-                            cursor: pointer;
-                            transition: transform 0.2s ease;
-                        " onmouseover="this.style.transform='scale(1.15)'" onmouseout="this.style.transform='scale(1)'">
-                            <svg width="${catStyle.size * 0.6}" height="${catStyle.size * 0.6}" viewBox="0 0 24 24" fill="${catStyle.color}">
-                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
-                            </svg>
-                        </div>`,
-                        iconSize: [catStyle.size, catStyle.size],
-                        iconAnchor: [catStyle.size/2, catStyle.size/2]
+                        className: 'hurricane-marker',
+                        html: '🌀',
+                        iconSize: [25, 25]
                     })
                 }).addTo(trackGroup)
                 .bindPopup(`
-                    <div style="background: linear-gradient(135deg, ${catStyle.bg} 0%, #ffffff 100%); padding: 0; border-radius: 12px; min-width: 260px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
-                        <div style="background: ${catStyle.color}; color: white; padding: 12px 16px; display: flex; align-items: center; gap: 10px;">
-                            <span style="font-size: 1.5rem;">🌀</span>
-                            <div>
-                                <div style="font-size: 1.2rem; font-weight: 700;">${hurricane.name}</div>
-                                <div style="font-size: 0.85rem; opacity: 0.9;">Category ${hurricane.category} Hurricane</div>
-                            </div>
-                        </div>
-                        <div style="padding: 16px;">
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
-                                <div style="background: white; padding: 10px; border-radius: 8px; text-align: center; border: 1px solid #e2e8f0;">
-                                    <div style="font-size: 1.25rem; font-weight: 700; color: ${catStyle.color};">${hurricane.year}</div>
-                                    <div style="font-size: 0.75rem; color: #64748b; text-transform: uppercase;">Year</div>
-                                </div>
-                                <div style="background: white; padding: 10px; border-radius: 8px; text-align: center; border: 1px solid #e2e8f0;">
-                                    <div style="font-size: 1.25rem; font-weight: 700; color: ${catStyle.color};">${hurricane.windSpeed || 'N/A'}</div>
-                                    <div style="font-size: 0.75rem; color: #64748b; text-transform: uppercase;">Max MPH</div>
-                                </div>
-                            </div>
-                            <div style="background: white; padding: 12px; border-radius: 8px; border: 1px solid #e2e8f0;">
-                                <div style="display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #f1f5f9;">
-                                    <span style="color: #64748b; font-size: 0.9rem;">Landfall</span>
-                                    <span style="color: #1e293b; font-weight: 600; font-size: 0.9rem;">${hurricane.landfall || 'N/A'}</span>
-                                </div>
-                                <div style="display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #f1f5f9;">
-                                    <span style="color: #64748b; font-size: 0.9rem;">Casualties</span>
-                                    <span style="color: #1e293b; font-weight: 600; font-size: 0.9rem;">${hurricane.casualties ? hurricane.casualties.toLocaleString() : 'N/A'}</span>
-                                </div>
-                                <div style="display: flex; justify-content: space-between; padding: 6px 0;">
-                                    <span style="color: #64748b; font-size: 0.9rem;">Damage</span>
-                                    <span style="color: #1e293b; font-weight: 600; font-size: 0.9rem;">${hurricane.damage ? '$' + hurricane.damage.toLocaleString() + 'M' : 'N/A'}</span>
-                                </div>
-                            </div>
+                    <div class="velocity-popup">
+                        <div class="popup-title">${hurricane.name}</div>
+                        <div class="popup-velocity">Landfall Point</div>
+                        <div class="popup-details">
+                            <strong>Year:</strong> ${hurricane.year}<br>
+                            <strong>Category:</strong> ${hurricane.category}<br>
+                            <strong>Casualties:</strong> ${hurricane.casualties || 'N/A'}
                         </div>
                     </div>
                 `, {
-                    maxWidth: 320,
-                    className: 'hurricane-popup-styled'
+                    maxWidth: 300,
+                    className: 'hurricane-popup'
                 });
                 
                 state.hurricaneHistoryLayers[hurricane.name] = trackGroup;

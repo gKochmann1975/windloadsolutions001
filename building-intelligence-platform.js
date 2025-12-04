@@ -2625,22 +2625,38 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
                     className: 'hurricane-popup'
                 });
                 
+                // Icon size and color based on category
+                const catStyles = {
+                    1: { size: 30, color: '#facc15' },  // Yellow
+                    2: { size: 34, color: '#fb923c' },  // Orange
+                    3: { size: 38, color: '#f97316' },  // Dark Orange
+                    4: { size: 44, color: '#ef4444' },  // Red
+                    5: { size: 50, color: '#a855f7' }   // Purple
+                };
+                const cs = catStyles[hurricane.category] || catStyles[3];
+
                 // Add start point marker
                 L.marker(hurricane.path[0], {
                     icon: L.divIcon({
                         className: 'hurricane-marker',
-                        html: '🌀',
-                        iconSize: [25, 25]
+                        html: `<span style="font-size:${cs.size}px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4)); cursor:pointer;">🌀</span>`,
+                        iconSize: [cs.size, cs.size]
                     })
                 }).addTo(trackGroup)
                 .bindPopup(`
-                    <div class="velocity-popup">
-                        <div class="popup-title">${hurricane.name}</div>
-                        <div class="popup-velocity">Landfall Point</div>
-                        <div class="popup-details">
-                            <strong>Year:</strong> ${hurricane.year}<br>
-                            <strong>Category:</strong> ${hurricane.category}<br>
-                            <strong>Casualties:</strong> ${hurricane.casualties || 'N/A'}
+                    <div style="min-width: 220px; font-family: system-ui, sans-serif;">
+                        <div style="background: ${cs.color}; color: white; padding: 10px 14px; margin: -1px -1px 0 -1px; border-radius: 4px 4px 0 0;">
+                            <div style="font-size: 1.1rem; font-weight: 700;">🌀 ${hurricane.name}</div>
+                            <div style="font-size: 0.85rem; opacity: 0.9;">Category ${hurricane.category} Hurricane</div>
+                        </div>
+                        <div style="padding: 12px 14px; background: #f8fafc;">
+                            <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+                                <tr><td style="color: #64748b; padding: 4px 0;">Year</td><td style="text-align: right; font-weight: 600; color: #1e293b;">${hurricane.year}</td></tr>
+                                <tr><td style="color: #64748b; padding: 4px 0;">Max Winds</td><td style="text-align: right; font-weight: 600; color: #1e293b;">${hurricane.windSpeed || 'N/A'} mph</td></tr>
+                                <tr><td style="color: #64748b; padding: 4px 0;">Landfall</td><td style="text-align: right; font-weight: 600; color: #1e293b;">${hurricane.landfall || 'N/A'}</td></tr>
+                                <tr><td style="color: #64748b; padding: 4px 0;">Casualties</td><td style="text-align: right; font-weight: 600; color: #1e293b;">${hurricane.casualties ? hurricane.casualties.toLocaleString() : 'N/A'}</td></tr>
+                                <tr><td style="color: #64748b; padding: 4px 0;">Damage</td><td style="text-align: right; font-weight: 600; color: #1e293b;">${hurricane.damage ? '$' + hurricane.damage.toLocaleString() + 'M' : 'N/A'}</td></tr>
+                            </table>
                         </div>
                     </div>
                 `, {

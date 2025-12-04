@@ -652,11 +652,11 @@ window.VelocityFinder = (function() {
                             </div>
                             <div class="risk-option" id="risk-category-3" onclick="VelocityFinder.selectRisk('category-3', event)">
                                 <div class="risk-category-name">Category III</div>
-                                <div class="risk-category-desc">Schools, Hospitals</div>
+                                <div class="risk-category-desc">Schools, Assembly</div>
                             </div>
                             <div class="risk-option" id="risk-category-4" onclick="VelocityFinder.selectRisk('category-4', event)">
                                 <div class="risk-category-name">Category IV</div>
-                                <div class="risk-category-desc">Essential Facilities</div>
+                                <div class="risk-category-desc">Hospitals, Emergency</div>
                             </div>
                         </div>
                         

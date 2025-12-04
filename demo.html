@@ -34,6 +34,9 @@
     }
     </script>
     
+    <!-- reCAPTCHA v3 -->
+    <script src="https://www.google.com/recaptcha/api.js?render=6Ld8dSEsAAAAADQhiFFuSitPCafwmxWnStJ5Ii0h"></script>
+
     <!-- Google Analytics 4 - Replace with your tracking ID -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
     <script>
@@ -2172,6 +2175,10 @@
                     </div>
                     
                     <form id="trial-form">
+                        <!-- Honeypot field - hidden from real users, bots will fill it -->
+                        <div style="position: absolute; left: -9999px;" aria-hidden="true">
+                            <input type="text" name="website_url" id="website_url" tabindex="-1" autocomplete="off">
+                        </div>
                         <div class="trial-form">
                             <div class="form-group">
                                 <label for="email">Professional Email *</label>
@@ -2978,72 +2985,95 @@
             if (!validateTrialForm()) {
                 return;
             }
-            
+
+            // Honeypot check - if filled, it's a bot
+            const honeypot = document.getElementById('website_url');
+            if (honeypot && honeypot.value) {
+                console.log('Bot detected via honeypot');
+                // Silently fail for bots - show fake success
+                const button = document.querySelector('.trial-button');
+                button.textContent = 'Redirecting...';
+                button.disabled = true;
+                return;
+            }
+
             const email = document.getElementById('email').value.trim();
             const company = document.getElementById('company').value.trim();
-            
-            try {
-                // Track conversion event
-                if (typeof gtag !== 'undefined') {
-                    gtag('event', 'trial_signup_attempt', {
-                        'event_category': 'conversion',
-                        'event_label': 'wind_calculator_trial',
-                        'value': 1
-                    });
-                }
-                
-                // Show loading state
-                const button = document.querySelector('.trial-button');
-                const originalText = button.textContent;
-                button.textContent = 'Redirecting to Trial...';
-                button.disabled = true;
-                
-                // Build the redirect URL to auth system with trial parameters
-                const authSystemUrl = 'login.html'; // Local development
-                // const authSystemUrl = 'https://auth.windloadcalc.com/'; // Production
-                
-                const params = new URLSearchParams({
-                    mode: 'trial',
-                    email: email,
-                    company: company
+
+            // Show loading state
+            const button = document.querySelector('.trial-button');
+            const originalText = button.textContent;
+            button.textContent = 'Verifying...';
+            button.disabled = true;
+
+            // Execute reCAPTCHA v3
+            grecaptcha.ready(function() {
+                grecaptcha.execute('6Ld8dSEsAAAAADQhiFFuSitPCafwmxWnStJ5Ii0h', {action: 'trial_signup'}).then(function(token) {
+                    // reCAPTCHA passed, proceed with trial signup
+                    try {
+                        // Track conversion event
+                        if (typeof gtag !== 'undefined') {
+                            gtag('event', 'trial_signup_attempt', {
+                                'event_category': 'conversion',
+                                'event_label': 'wind_calculator_trial',
+                                'value': 1
+                            });
+                        }
+
+                        button.textContent = 'Redirecting to Trial...';
+
+                        // Build the redirect URL to auth system with trial parameters
+                        const authSystemUrl = 'login.html'; // Local development
+                        // const authSystemUrl = 'https://auth.windloadcalc.com/'; // Production
+
+                        const params = new URLSearchParams({
+                            mode: 'trial',
+                            email: email,
+                            company: company
+                        });
+
+                        const redirectUrl = `${authSystemUrl}?${params.toString()}`;
+
+                        // Track successful redirect
+                        if (typeof gtag !== 'undefined') {
+                            gtag('event', 'trial_redirect_initiated', {
+                                'event_category': 'conversion',
+                                'event_label': 'wind_calculator_trial',
+                                'value': 1
+                            });
+                        }
+
+                        // Small delay for UX, then redirect
+                        setTimeout(() => {
+                            window.location.href = redirectUrl;
+                        }, 1000);
+
+                    } catch (error) {
+                        console.error('Trial redirect error:', error);
+
+                        // Track error
+                        if (typeof gtag !== 'undefined') {
+                            gtag('event', 'trial_redirect_error', {
+                                'event_category': 'error',
+                                'event_label': 'wind_calculator_trial',
+                                'custom_parameter_1': error.message
+                            });
+                        }
+
+                        // Reset button on error
+                        button.textContent = 'Start Wind Calculator Trial';
+                        button.disabled = false;
+
+                        // Show user-friendly error message
+                        alert('There was an issue starting your trial. Please try again or contact support at info@windloadcalc.com');
+                    }
+                }).catch(function(error) {
+                    console.error('reCAPTCHA error:', error);
+                    button.textContent = 'Start Wind Calculator Trial';
+                    button.disabled = false;
+                    alert('Verification failed. Please try again.');
                 });
-                
-                const redirectUrl = `${authSystemUrl}?${params.toString()}`;
-                
-                // Track successful redirect
-                if (typeof gtag !== 'undefined') {
-                    gtag('event', 'trial_redirect_initiated', {
-                        'event_category': 'conversion',
-                        'event_label': 'wind_calculator_trial',
-                        'value': 1
-                    });
-                }
-                
-                // Small delay for UX, then redirect
-                setTimeout(() => {
-                    window.location.href = redirectUrl;
-                }, 1000);
-                
-            } catch (error) {
-                console.error('Trial redirect error:', error);
-                
-                // Track error
-                if (typeof gtag !== 'undefined') {
-                    gtag('event', 'trial_redirect_error', {
-                        'event_category': 'error',
-                        'event_label': 'wind_calculator_trial',
-                        'custom_parameter_1': error.message
-                    });
-                }
-                
-                // Reset button on error
-                const button = document.querySelector('.trial-button');
-                button.textContent = 'Start Wind Calculator Trial';
-                button.disabled = false;
-                
-                // Show user-friendly error message
-                alert('There was an issue starting your trial. Please try again or contact support at info@windloadcalc.com');
-            }
+            });
         }
 
         // Form validation enhancements

@@ -106,83 +106,88 @@ const TrialManager = (function() {
 
     // Check if lookup is allowed
     function canPerformLookup() {
-        // ADMIN/PAID TIER BYPASS - Always allow lookups in testing modes
-        if (activeTier && activeTier !== 'free') {
-            const tierConfig = TIER_CONFIG[activeTier];
-            console.log(`✅ Trial Manager: ${tierConfig.name} mode - Lookup always allowed`);
+        // Get the tier config for current tier (or free tier if not set)
+        const tierConfig = activeTier ? TIER_CONFIG[activeTier] : TIER_CONFIG.free;
+        const tierHourlyLimit = tierConfig.hourlyLimit;
+        const tierDailyLimit = tierConfig.dailyLimit;
+
+        // UNLIMITED TIERS (Enterprise, Admin) - Always allow
+        if (tierHourlyLimit === Infinity && tierDailyLimit === Infinity) {
+            console.log(`✅ Trial Manager: ${tierConfig.name} mode - Unlimited lookups`);
             return {
                 allowed: true,
                 remaining: {
-                    hourly: tierConfig.hourlyLimit,
-                    daily: tierConfig.dailyLimit
+                    hourly: Infinity,
+                    daily: Infinity
                 }
             };
         }
 
         const trialData = initializeTrial();
-        const status = getTrialStatus();
 
-        // Check if trial expired
-        if (status.expired) {
-            return {
-                allowed: false,
-                reason: 'expired',
-                message: 'Your trial has expired. Upgrade to continue using the platform.'
-            };
+        // For FREE tier only: Check if trial expired
+        if (!activeTier || activeTier === 'free') {
+            const status = getTrialStatus();
+            if (status.expired) {
+                return {
+                    allowed: false,
+                    reason: 'expired',
+                    message: 'Your trial has expired. Upgrade to continue using the platform.'
+                };
+            }
         }
-        
+
         const now = new Date();
         const oneHourAgo = new Date(now.getTime() - (60 * 60 * 1000));
         const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-        
+
         // Filter lookups from last hour
         const recentLookups = trialData.lookups.filter(lookup => {
             const lookupTime = new Date(lookup.timestamp);
             return lookupTime > oneHourAgo;
         });
-        
+
         // Filter lookups from today
         const todayLookups = trialData.lookups.filter(lookup => {
             const lookupTime = new Date(lookup.timestamp);
             return lookupTime > todayStart;
         });
-        
-        // Check hourly limit
-        if (recentLookups.length >= HOURLY_LIMIT) {
+
+        // Check hourly limit using tier-specific limit
+        if (recentLookups.length >= tierHourlyLimit) {
             const oldestRecent = new Date(recentLookups[0].timestamp);
             const resetTime = new Date(oldestRecent.getTime() + (60 * 60 * 1000));
             const minutesUntilReset = Math.ceil((resetTime - now) / (1000 * 60));
-            
-            
-        console.warn('🚫 Trial Manager: Hourly limit reached!');
-        
-        return {
+
+            console.warn(`🚫 Trial Manager: Hourly limit reached for ${tierConfig.name}!`);
+
+            return {
                 allowed: false,
                 reason: 'hourly_limit',
-                message: `Hourly limit reached (${HOURLY_LIMIT} lookups per hour). Resets in ${minutesUntilReset} minutes.`
+                message: `Hourly limit reached (${tierHourlyLimit} lookups per hour). Resets in ${minutesUntilReset} minutes.`
             };
         }
-        
-        // Check daily limit
-        if (todayLookups.length >= DAILY_LIMIT) {
+
+        // Check daily limit using tier-specific limit
+        if (todayLookups.length >= tierDailyLimit) {
+            console.warn(`🚫 Trial Manager: Daily limit reached for ${tierConfig.name}!`);
             return {
                 allowed: false,
                 reason: 'daily_limit',
-                message: `Daily limit reached (${DAILY_LIMIT} lookups per day). Resets at midnight.`
+                message: `Daily limit reached (${tierDailyLimit} lookups per day). Resets at midnight.`
             };
         }
-        
-        
-        console.log('✅ Trial Manager: Lookup allowed', {
-            hourlyRemaining: HOURLY_LIMIT - recentLookups.length,
-            dailyRemaining: DAILY_LIMIT - todayLookups.length
+
+        console.log(`✅ Trial Manager: ${tierConfig.name} lookup allowed`, {
+            hourlyRemaining: tierHourlyLimit - recentLookups.length,
+            dailyRemaining: tierDailyLimit - todayLookups.length
         });
-        
+
         return {
             allowed: true,
             remaining: {
-                hourly: HOURLY_LIMIT - recentLookups.length,
-                daily: DAILY_LIMIT - todayLookups.length
+                hourly: tierHourlyLimit - recentLookups.length,
+                daily: tierDailyLimit - todayLookups.length
             }
         };
     }
@@ -210,13 +215,24 @@ const TrialManager = (function() {
 
     // Check if feature is allowed
     function canAccessFeature(featureName) {
+        // If we have an active tier, use TIER_CONFIG to check features
+        if (activeTier) {
+            const tierConfig = TIER_CONFIG[activeTier];
+            if (tierConfig && tierConfig.features) {
+                const hasFeature = tierConfig.features[featureName] === true;
+                console.log(`🔍 Trial Manager: Feature '${featureName}' for ${tierConfig.name}: ${hasFeature}`);
+                return hasFeature;
+            }
+        }
+
+        // Fall back to trial data for unauthenticated/free users
         const trialData = initializeTrial();
         const status = getTrialStatus();
-        
+
         if (status.expired) {
             return false;
         }
-        
+
         return trialData.featureAccess[featureName] === true;
     }
 
@@ -876,6 +892,26 @@ const TrialManager = (function() {
         preventContentCopy();
     }
 
+    // Check if user is on free trial (has restrictions)
+    function isTrialUser() {
+        // If activeTier is set to a PAID tier, user is NOT a trial user
+        if (activeTier && activeTier !== 'free') {
+            return false;
+        }
+        // Check localStorage for paid status
+        const trialData = getTrialData();
+        if (trialData && trialData.isPaid === true) {
+            return false;
+        }
+        // Default: user is on free trial
+        return true;
+    }
+
+    // Get the current active tier name
+    function getActiveTier() {
+        return activeTier || 'free';
+    }
+
     // Public API
     return {
         init: init,
@@ -885,7 +921,9 @@ const TrialManager = (function() {
         recordExportAttempt: recordExportAttempt,
         getTrialStatus: getTrialStatus,
         addTrialWatermark: addTrialWatermark,
-        applyTrialRestrictions: applyTrialRestrictions
+        applyTrialRestrictions: applyTrialRestrictions,
+        isTrialUser: isTrialUser,
+        getActiveTier: getActiveTier
     };
 })();
 

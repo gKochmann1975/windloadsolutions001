@@ -250,20 +250,41 @@ window.VelocityFinder = (function() {
     const HURRICANE_DATABASE = [
         // ===========================================
         // HISTORIC FLORIDA KEYS HURRICANES (Pre-1950)
+        // Source: NWS Key West, HurricaneCity.com, NOAA HURDAT2
         // ===========================================
+        // 1906 Florida Keys Hurricane
+        { name: 'Florida Keys Hurricane', year: 1906, category: 3, windSpeed: 120, path: [[24.55, -81.80], [24.65, -81.50], [24.75, -81.20], [24.85, -80.90], [25.10, -80.50]], color: '#f59e0b', landfall: 'Florida Keys', damage: 5, casualties: 135, states: ['FL'] },
+        // 1909 Key West Hurricane - 400 buildings destroyed
+        { name: 'Key West Hurricane', year: 1909, category: 3, windSpeed: 115, path: [[24.55, -81.80], [24.60, -81.70], [24.65, -81.55], [25.0, -81.20]], color: '#f59e0b', landfall: 'Florida Keys (Key West)', damage: 8, casualties: 15, states: ['FL'] },
+        // 1910 Key West Hurricane - 15ft storm surge
+        { name: 'Keys Hurricane', year: 1910, category: 4, windSpeed: 125, path: [[24.55, -81.75], [24.60, -81.65], [24.65, -81.50], [24.70, -81.30]], color: '#dc2626', landfall: 'Florida Keys (Key West)', damage: 10, casualties: 12, states: ['FL'] },
+        // 1919 Key West Hurricane - 400+ marine casualties
+        { name: 'Key West Hurricane', year: 1919, category: 4, windSpeed: 130, path: [[24.55, -81.80], [24.60, -81.65], [24.65, -81.50], [24.75, -81.20], [25.0, -80.90]], color: '#dc2626', landfall: 'Florida Keys (Key West)', damage: 22, casualties: 600, states: ['FL', 'TX'] },
         // 1935 Labor Day Hurricane - One of only 3 Cat 5 US landfalls ever
-        { name: 'Labor Day Hurricane', year: 1935, category: 5, windSpeed: 185, path: [[24.55, -80.95], [24.65, -80.75], [24.75, -80.55], [24.85, -80.35], [25.0, -80.15]], color: '#7f1d1d', landfall: 'Florida Keys (Islamorada)', damage: 100, casualties: 408, states: ['FL'] },
-
-        // 1948 Florida Keys Hurricane
-        { name: 'Florida Keys Hurricane', year: 1948, category: 4, windSpeed: 140, path: [[24.55, -81.80], [24.65, -81.50], [24.75, -81.20], [24.85, -80.90], [25.10, -80.50]], color: '#dc2626', landfall: 'Florida Keys', damage: 12, casualties: 3, states: ['FL'] },
+        { name: 'Labor Day Hurricane', year: 1935, category: 5, windSpeed: 185, path: [[24.75, -80.95], [24.80, -80.80], [24.85, -80.65], [24.92, -80.55], [25.0, -80.40], [25.20, -80.15]], color: '#7f1d1d', landfall: 'Florida Keys (Islamorada)', damage: 100, casualties: 408, states: ['FL'] },
+        // 1948 Florida Keys Hurricane (September) - 125mph winds hit Keys directly
+        { name: 'Florida Keys Hurricane', year: 1948, category: 4, windSpeed: 125, path: [[24.55, -81.80], [24.60, -81.65], [24.65, -81.50], [24.70, -81.35], [24.75, -81.20], [24.85, -80.90], [25.10, -80.50]], color: '#dc2626', landfall: 'Florida Keys (Key West)', damage: 12, casualties: 3, states: ['FL'] },
+        // 1948 Florida Keys Hurricane (October) - 2nd hurricane in 2 weeks
+        { name: 'Florida Keys Hurricane #2', year: 1948, category: 3, windSpeed: 100, path: [[24.55, -81.80], [24.65, -81.50], [24.75, -81.20], [24.85, -80.90], [25.20, -80.50], [25.80, -80.20]], color: '#f59e0b', landfall: 'Florida Keys', damage: 5, casualties: 1, states: ['FL'] },
+        // 1926 Miami Hurricane - One of most destructive ever, affected upper Keys
+        { name: 'Great Miami Hurricane', year: 1926, category: 4, windSpeed: 150, path: [[25.0, -80.50], [25.20, -80.35], [25.50, -80.20], [25.80, -80.15], [26.5, -80.2], [27.5, -81.0]], color: '#dc2626', landfall: 'Florida (Miami)', damage: 105, casualties: 372, states: ['FL', 'AL'] },
+        // 1929 Keys Hurricane - 150mph estimated, severe damage to Islamorada area
+        { name: 'Florida Keys Hurricane', year: 1929, category: 4, windSpeed: 150, path: [[24.80, -80.80], [24.90, -80.65], [25.0, -80.50], [25.20, -80.30]], color: '#dc2626', landfall: 'Florida Keys (Upper Keys)', damage: 8, casualties: 3, states: ['FL'] },
 
         // ===========================================
         // 1950s-1960s
         // ===========================================
+        // 1950 Hurricane Easy - passed just west of Keys
+        { name: 'Hurricane Easy', year: 1950, category: 3, windSpeed: 125, path: [[24.40, -82.20], [24.60, -82.00], [24.80, -81.80], [25.50, -81.50], [27.0, -82.5]], color: '#f59e0b', landfall: 'Florida (Cedar Key)', damage: 32, casualties: 2, states: ['FL'] },
         { name: 'Hurricane Hazel', year: 1954, category: 4, windSpeed: 140, path: [[33.5, -78.0], [35.0, -79.0], [37.0, -80.0]], color: '#dc2626', landfall: 'North Carolina', damage: 281, casualties: 95, states: ['NC', 'SC', 'VA'] },
-        // Donna - MAJOR Keys hurricane, crossed entire chain
-        { name: 'Hurricane Donna', year: 1960, category: 4, windSpeed: 145, path: [[24.55, -81.80], [24.65, -81.40], [24.75, -81.00], [24.85, -80.70], [25.0, -80.40], [25.5, -80.20], [26.5, -80.50], [28.0, -81.5], [30.0, -82.5]], color: '#dc2626', landfall: 'Florida Keys (Marathon)', damage: 900, casualties: 364, states: ['FL', 'GA', 'SC', 'NC'] },
-        { name: 'Hurricane Betsy', year: 1965, category: 3, windSpeed: 125, path: [[24.60, -81.60], [24.75, -81.30], [24.85, -81.00], [25.0, -80.60], [25.8, -80.20], [29.0, -89.5], [30.0, -89.0]], color: '#f59e0b', landfall: 'Florida Keys/Louisiana', damage: 1420, casualties: 76, states: ['FL', 'LA'] },
+        // Donna - MAJOR Keys hurricane, crossed entire chain with 140mph winds at Marathon
+        { name: 'Hurricane Donna', year: 1960, category: 4, windSpeed: 145, path: [[24.55, -81.80], [24.60, -81.60], [24.65, -81.40], [24.70, -81.20], [24.75, -81.00], [24.82, -80.80], [24.92, -80.60], [25.20, -80.40], [25.5, -80.20], [26.5, -80.50], [28.0, -81.5], [30.0, -82.5]], color: '#dc2626', landfall: 'Florida Keys (Marathon)', damage: 900, casualties: 364, states: ['FL', 'GA', 'SC', 'NC'] },
+        // Isbell - passed 30mi north of Key West with 125mph winds
+        { name: 'Hurricane Isbell', year: 1964, category: 3, windSpeed: 125, path: [[24.40, -82.50], [24.55, -82.20], [24.70, -81.90], [24.90, -81.60], [25.85, -81.65], [27.0, -81.0]], color: '#f59e0b', landfall: 'Florida (Everglades City)', damage: 30, casualties: 4, states: ['FL'] },
+        // Betsy - passed 40mi north of Keys, Key West had 81mph gusts
+        { name: 'Hurricane Betsy', year: 1965, category: 3, windSpeed: 125, path: [[24.50, -82.00], [24.70, -81.60], [24.85, -81.20], [25.0, -80.60], [25.8, -80.20], [28.0, -88.0], [29.0, -89.5], [30.0, -89.0]], color: '#f59e0b', landfall: 'Florida Keys/Louisiana', damage: 1420, casualties: 76, states: ['FL', 'LA'] },
+        // Alma 1966 - passed just west of Keys
+        { name: 'Hurricane Alma', year: 1966, category: 2, windSpeed: 110, path: [[24.40, -82.50], [24.60, -82.20], [24.80, -81.90], [25.50, -81.50], [27.0, -82.5]], color: '#eab308', landfall: 'Florida (Panhandle)', damage: 10, casualties: 6, states: ['FL'] },
         { name: 'Hurricane Camille', year: 1969, category: 5, windSpeed: 175, path: [[29.0, -89.5], [30.5, -89.0], [32.0, -88.5]], color: '#7f1d1d', landfall: 'Mississippi', damage: 1420, casualties: 256, states: ['MS', 'LA', 'AL'] },
 
         // ===========================================
@@ -278,12 +299,14 @@ window.VelocityFinder = (function() {
         // ===========================================
         // 1990s
         // ===========================================
-        // Andrew - Hit Homestead, just north of Keys, but Keys got hurricane-force winds
-        { name: 'Hurricane Andrew', year: 1992, category: 5, windSpeed: 165, path: [[25.10, -80.50], [25.35, -80.30], [25.50, -80.15], [25.65, -80.00], [25.80, -79.85], [26.0, -80.5], [27.0, -82.0], [29.0, -89.5]], color: '#7f1d1d', landfall: 'Florida (Homestead)', damage: 27300, casualties: 65, states: ['FL', 'LA'] },
-        // Georges - Passed through Keys
-        { name: 'Hurricane Georges', year: 1998, category: 2, windSpeed: 105, path: [[24.55, -81.85], [24.65, -81.50], [24.75, -81.10], [24.85, -80.70], [25.0, -80.35], [25.5, -80.10]], color: '#eab308', landfall: 'Florida Keys (Key West)', damage: 6000, casualties: 4, states: ['FL', 'MS', 'LA'] },
+        // Andrew - Hit Homestead, Keys got hurricane-force winds
+        { name: 'Hurricane Andrew', year: 1992, category: 5, windSpeed: 165, path: [[25.10, -80.50], [25.25, -80.35], [25.35, -80.20], [25.50, -80.00], [25.65, -79.85], [26.0, -80.5], [27.0, -82.0], [29.0, -89.5]], color: '#7f1d1d', landfall: 'Florida (Homestead)', damage: 27300, casualties: 65, states: ['FL', 'LA'] },
         { name: 'Hurricane Opal', year: 1995, category: 3, windSpeed: 115, path: [[30.0, -87.0], [31.0, -86.5], [32.0, -86.0]], color: '#f59e0b', landfall: 'Florida Panhandle', damage: 3000, casualties: 9, states: ['FL', 'AL', 'GA'] },
         { name: 'Hurricane Fran', year: 1996, category: 3, windSpeed: 120, path: [[34.0, -78.0], [35.0, -78.5], [36.0, -79.0]], color: '#f59e0b', landfall: 'North Carolina', damage: 3200, casualties: 26, states: ['NC', 'VA', 'SC'] },
+        // Georges - Eye passed 12mi south of Key West, 104mph winds
+        { name: 'Hurricane Georges', year: 1998, category: 2, windSpeed: 105, path: [[24.45, -81.90], [24.50, -81.70], [24.55, -81.50], [24.60, -81.30], [24.70, -81.00], [24.80, -80.70], [25.0, -80.35], [25.5, -80.10]], color: '#eab308', landfall: 'Florida Keys (Key West)', damage: 6000, casualties: 4, states: ['FL', 'MS', 'LA'] },
+        // Irene 1999 - Eye passed DIRECTLY over Key West, 75mph winds
+        { name: 'Hurricane Irene', year: 1999, category: 1, windSpeed: 80, path: [[24.55, -81.75], [24.60, -81.60], [24.65, -81.45], [24.75, -81.20], [24.85, -80.90], [25.35, -80.50], [25.85, -80.90]], color: '#22c55e', landfall: 'Florida Keys (Key West)', damage: 800, casualties: 3, states: ['FL'] },
 
         // ===========================================
         // 2000s
@@ -325,7 +348,13 @@ window.VelocityFinder = (function() {
         // Ian - Passed west of Keys in Gulf, but Keys got significant impacts
         { name: 'Hurricane Ian', year: 2022, category: 4, windSpeed: 155, path: [[24.0, -84.0], [24.50, -83.20], [24.75, -82.60], [25.50, -82.30], [26.5, -82.0], [27.5, -82.2], [28.0, -81.8]], color: '#dc2626', landfall: 'Florida (Cayo Costa)', damage: 112900, casualties: 156, states: ['FL', 'SC', 'NC'] },
         { name: 'Hurricane Nicole', year: 2022, category: 1, windSpeed: 75, path: [[27.0, -80.0], [28.0, -80.5], [29.0, -81.0]], color: '#22c55e', landfall: 'Florida', damage: 1000, casualties: 5, states: ['FL'] },
-        { name: 'Hurricane Idalia', year: 2023, category: 3, windSpeed: 125, path: [[24.20, -84.0], [25.0, -84.0], [27.0, -83.5], [29.0, -83.5], [30.0, -84.0], [31.0, -84.5]], color: '#f59e0b', landfall: 'Florida (Big Bend)', damage: 3600, casualties: 12, states: ['FL', 'GA', 'SC'] }
+        { name: 'Hurricane Idalia', year: 2023, category: 3, windSpeed: 125, path: [[24.20, -84.0], [25.0, -84.0], [27.0, -83.5], [29.0, -83.5], [30.0, -84.0], [31.0, -84.5]], color: '#f59e0b', landfall: 'Florida (Big Bend)', damage: 3600, casualties: 12, states: ['FL', 'GA', 'SC'] },
+        // Helene 2024 - Passed west of Keys in Gulf, brushed Keys with tropical storm winds
+        { name: 'Hurricane Helene', year: 2024, category: 4, windSpeed: 140, path: [[24.0, -84.5], [24.50, -84.00], [25.0, -84.0], [26.0, -84.5], [28.0, -84.5], [29.5, -84.0], [30.5, -84.0]], color: '#dc2626', landfall: 'Florida (Big Bend)', damage: 55000, casualties: 230, states: ['FL', 'GA', 'NC', 'SC', 'TN', 'VA'] },
+        // Milton 2024 - Passed just north of Keys, severe impacts to Keys
+        { name: 'Hurricane Milton', year: 2024, category: 3, windSpeed: 120, path: [[24.0, -85.0], [24.3, -84.0], [24.60, -83.20], [24.80, -82.60], [25.20, -82.20], [25.80, -82.00], [27.5, -82.5], [28.0, -81.0]], color: '#f59e0b', landfall: 'Florida (Siesta Key)', damage: 50000, casualties: 24, states: ['FL'] },
+        // Eta 2020 - Made landfall at Lower Matecumbe Key in Keys
+        { name: 'Tropical Storm Eta', year: 2020, category: 0, windSpeed: 65, path: [[24.75, -80.90], [24.85, -80.70], [24.95, -80.50], [25.20, -80.30], [25.90, -80.50], [27.5, -83.0]], color: '#3b82f6', landfall: 'Florida Keys (Lower Matecumbe)', damage: 1500, casualties: 3, states: ['FL'] }
     ];
 
     // ================================================================
@@ -356,7 +385,7 @@ window.VelocityFinder = (function() {
         hurricaneFilters: {
             category: 'all',
             yearStart: 1950,
-            yearEnd: 2024,
+            yearEnd: 2025,
             state: 'all',
             name: ''
         },

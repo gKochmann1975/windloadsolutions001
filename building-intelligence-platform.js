@@ -1131,7 +1131,7 @@ window.VelocityFinder = (function() {
                                 <div class="form-group">
                                     <label class="form-label">Year Range</label>
                                     <select id="hurricane-year-filter" class="form-select" onchange="VelocityFinder.filterHurricanes()">
-                                        <option value="all">All Years (1950-2024)</option>
+                                        <option value="all">All Years (1906-2024)</option>
                                         <option value="2020-2024">2020-2024</option>
                                         <option value="2010-2019">2010-2019</option>
                                         <option value="2000-2009">2000-2009</option>
@@ -1139,6 +1139,7 @@ window.VelocityFinder = (function() {
                                         <option value="1980-1989">1980-1989</option>
                                         <option value="1970-1979">1970-1979</option>
                                         <option value="1950-1969">1950-1969</option>
+                                        <option value="1900-1949">1900-1949</option>
                                     </select>
                                 </div>
                                 <div class="form-group">

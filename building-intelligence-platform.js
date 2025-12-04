@@ -1775,7 +1775,7 @@ window.VelocityFinder = (function() {
 
             tableHTML += `
                     <td>${result.population.toLocaleString()}</td>
-                    <td>${result.density.toFixed(1)}</td>
+                    <td>${result.density.toLocaleString(undefined, {minimumFractionDigits: 1, maximumFractionDigits: 1})}/sq mi</td>
                 </tr>
             `;
         });
@@ -1834,7 +1834,7 @@ window.VelocityFinder = (function() {
                     <td>${result.county}</td>
                     <td>${result.velocity} mph</td>
                     <td>${result.population.toLocaleString()}</td>
-                    <td>${result.density.toFixed(1)}</td>
+                    <td>${result.density.toLocaleString(undefined, {minimumFractionDigits: 1, maximumFractionDigits: 1})}/sq mi</td>
                 </tr>
             `;
         });
@@ -4545,20 +4545,20 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
             } else {
                 tableHTML += `<td>${result.velocity} mph</td>`;
             }
-            
+
             tableHTML += `
                     <td>${result.population.toLocaleString()}</td>
-                    <td>${result.density.toFixed(1)}</td>
+                    <td>${result.density.toLocaleString(undefined, {minimumFractionDigits: 1, maximumFractionDigits: 1})}/sq mi</td>
                 </tr>
             `;
         });
-        
+
         tableHTML += `
                     </tbody>
                 </table>
             </div>
         `;
-        
+
         container.innerHTML = tableHTML;
         container.style.display = 'block';
     }
@@ -4793,17 +4793,17 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
                     <td>${result.county}</td>
                     <td>${result.velocity} mph</td>
                     <td>${result.population.toLocaleString()}</td>
-                    <td>${result.density.toFixed(1)}</td>
+                    <td>${result.density.toLocaleString(undefined, {minimumFractionDigits: 1, maximumFractionDigits: 1})}/sq mi</td>
                 </tr>
             `;
         });
-        
+
         tableHTML += `
                     </tbody>
                 </table>
             </div>
         `;
-        
+
         container.innerHTML = tableHTML;
         container.style.display = 'block';
     }
@@ -4998,12 +4998,12 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
                         <td>${data.cat3 || 'N/A'} mph</td>
                         <td>${data.cat4 || 'N/A'} mph</td>
                         <td>${data.population.toLocaleString()}</td>
-                        <td>${data.density.toFixed(1)}</td>
+                        <td>${data.density.toLocaleString(undefined, {minimumFractionDigits: 1, maximumFractionDigits: 1})}/sq mi</td>
                     </tr>
                 `;
             }
         });
-        
+
         tableHTML += `
                     </tbody>
                 </table>

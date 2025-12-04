@@ -1098,20 +1098,20 @@ window.VelocityFinder = (function() {
                             
                             <div class="hurricane-stats-grid">
                                 <div class="hurricane-stat-card">
-                                    <div class="hurricane-stat-value">${HURRICANE_DATABASE.length}</div>
-                                    <div class="hurricane-stat-label">Total Hurricanes</div>
+                                    <div class="hurricane-stat-value" id="stat-total-hurricanes">${HURRICANE_DATABASE.length}</div>
+                                    <div class="hurricane-stat-label">Hurricanes</div>
                                 </div>
                                 <div class="hurricane-stat-card">
-                                    <div class="hurricane-stat-value">${HURRICANE_DATABASE.filter(h => h.category === 5).length}</div>
+                                    <div class="hurricane-stat-value" id="stat-category-5">${HURRICANE_DATABASE.filter(h => h.category === 5).length}</div>
                                     <div class="hurricane-stat-label">Category 5</div>
                                 </div>
                                 <div class="hurricane-stat-card">
-                                    <div class="hurricane-stat-value">$${(HURRICANE_DATABASE.reduce((sum, h) => sum + (h.damage || 0), 0) / 1000).toFixed(0)}B</div>
+                                    <div class="hurricane-stat-value" id="stat-total-damage">$${(HURRICANE_DATABASE.reduce((sum, h) => sum + (h.damage || 0), 0) / 1000).toFixed(0)}B</div>
                                     <div class="hurricane-stat-label">Total Damage</div>
                                 </div>
                                 <div class="hurricane-stat-card">
-                                    <div class="hurricane-stat-value">${HURRICANE_DATABASE.reduce((sum, h) => sum + (h.casualties || 0), 0).toLocaleString()}</div>
-                                    <div class="hurricane-stat-label">Total Casualties</div>
+                                    <div class="hurricane-stat-value" id="stat-total-casualties">${HURRICANE_DATABASE.reduce((sum, h) => sum + (h.casualties || 0), 0).toLocaleString()}</div>
+                                    <div class="hurricane-stat-label">Casualties</div>
                                 </div>
                             </div>
 
@@ -2375,11 +2375,39 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
     }
 
     /**
-     * Display filtered hurricane list
+     * Update hurricane statistics cards based on filtered data
+     */
+    function updateHurricaneStats(hurricanes) {
+        const totalEl = document.getElementById('stat-total-hurricanes');
+        const cat5El = document.getElementById('stat-category-5');
+        const damageEl = document.getElementById('stat-total-damage');
+        const casualtiesEl = document.getElementById('stat-total-casualties');
+
+        if (totalEl) {
+            totalEl.textContent = hurricanes.length;
+        }
+        if (cat5El) {
+            cat5El.textContent = hurricanes.filter(h => h.category === 5).length;
+        }
+        if (damageEl) {
+            const totalDamage = hurricanes.reduce((sum, h) => sum + (h.damage || 0), 0);
+            damageEl.textContent = `$${(totalDamage / 1000).toFixed(0)}B`;
+        }
+        if (casualtiesEl) {
+            const totalCasualties = hurricanes.reduce((sum, h) => sum + (h.casualties || 0), 0);
+            casualtiesEl.textContent = totalCasualties.toLocaleString();
+        }
+    }
+
+    /**
+     * Display filtered hurricane list and update stats
      */
     function displayFilteredHurricanes(hurricanes) {
         const container = document.getElementById('hurricane-filtered-list');
         if (!container) return;
+
+        // Update stats cards to reflect filtered data
+        updateHurricaneStats(hurricanes);
 
         if (hurricanes.length === 0) {
             container.innerHTML = '<div class="empty-state">No hurricanes match your filters</div>';

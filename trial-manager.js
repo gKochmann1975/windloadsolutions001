@@ -655,6 +655,7 @@ const TrialManager = (function() {
             if (isPaidParam === 'true' || subscriptionParam) {
                 // User is a PAID subscriber - no restrictions
                 console.log('✅ Trial Manager: PAID user - no restrictions');
+                activeTier = 'starter'; // Set tier so canPerformLookup allows unlimited lookups
                 const trialData = {
                     userId: userId,
                     startDate: new Date().toISOString(),
@@ -712,6 +713,7 @@ const TrialManager = (function() {
             // Check if they are PAID or just authenticated trial
             if (savedTrialData.isPaid === true) {
                 console.log('✅ Trial Manager: Previously authenticated PAID user - no restrictions');
+                activeTier = 'starter'; // Set tier so canPerformLookup allows unlimited lookups
                 hideAllTrialUI();
                 window.showUpgradeModal = function() {
                     console.log('🔧 Paid Mode: Upgrade modal suppressed');

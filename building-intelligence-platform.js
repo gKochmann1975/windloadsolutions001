@@ -1527,8 +1527,8 @@ window.VelocityFinder = (function() {
             const names = {
                 'category-1': 'Category I (Agricultural, Temporary)',
                 'category-2': 'Category II (Standard Buildings)',
-                'category-3': 'Category III (Schools, Hospitals)',
-                'category-4': 'Category IV (Essential Facilities)'
+                'category-3': 'Category III (Schools, Assembly)',
+                'category-4': 'Category IV (Hospitals, Emergency)'
             };
             return names[category] || 'Unknown';
         },
@@ -4389,8 +4389,8 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
                             <ul style="color: #4b5563; margin: 0; padding-left: 1.5rem; line-height: 1.8;">
                                 <li><strong>Category I</strong> (Agricultural): Min 105 mph → 32,000+ eligible ZIPs</li>
                                 <li><strong>Category II</strong> (Standard): Min 115 mph → 5,700+ eligible ZIPs</li>
-                                <li><strong>Category III</strong> (Schools/Hospitals): Min 120 mph → 2,600+ eligible ZIPs</li>
-                                <li><strong>Category IV</strong> (Essential): Min 130 mph → <em>0 eligible ZIPs</em></li>
+                                <li><strong>Category III</strong> (Schools/Assembly): Min 120 mph → 2,600+ eligible ZIPs</li>
+                                <li><strong>Category IV</strong> (Hospitals/Emergency): Min 130 mph → <em>0 eligible ZIPs</em></li>
                             </ul>
                         </div>
                         <p style="color: #78350f; margin: 1rem 0 0 0; font-style: italic;">
@@ -5105,11 +5105,11 @@ Category II (Standard Buildings):
   Wind Speed: ${locationData.cat2 || 'N/A'} mph
   Design Pressure: ${locationData.cat2 ? Utils.calculatePressure(locationData.cat2) + ' psf' : 'N/A'}
 
-Category III (Schools, Hospitals):
+Category III (Schools, Assembly):
   Wind Speed: ${locationData.cat3 || 'N/A'} mph
   Design Pressure: ${locationData.cat3 ? Utils.calculatePressure(locationData.cat3) + ' psf' : 'N/A'}
 
-Category IV (Essential Facilities):
+Category IV (Hospitals, Emergency):
   Wind Speed: ${locationData.cat4 || 'N/A'} mph
   Design Pressure: ${locationData.cat4 ? Utils.calculatePressure(locationData.cat4) + ' psf' : 'N/A'}
 

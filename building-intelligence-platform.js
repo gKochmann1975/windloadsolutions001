@@ -5048,8 +5048,8 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
     // EXPORT FUNCTIONS (PRESERVED)
     // ================================================================
     function exportToPDF() {
-        // TRIAL BLOCK - Exports disabled during trial
-        if (typeof TrialManager === 'undefined' || true) { // Always block for trial users
+        // TRIAL BLOCK - Exports disabled during trial, allowed for paid users
+        if (typeof TrialManager !== 'undefined' && TrialManager.isTrialUser && TrialManager.isTrialUser()) {
             console.log('🚫 Export blocked - Trial user');
             showUpgradeModal('Export features require a paid subscription. Upgrade now for unlimited exports!');
             return;
@@ -5128,8 +5128,8 @@ Phone: (833) 272-3946`;
     }
 
     function exportToExcel() {
-        // TRIAL BLOCK - Exports disabled during trial
-        if (typeof TrialManager === 'undefined' || true) { // Always block for trial users
+        // TRIAL BLOCK - Exports disabled during trial, allowed for paid users
+        if (typeof TrialManager !== 'undefined' && TrialManager.isTrialUser && TrialManager.isTrialUser()) {
             console.log('🚫 Export blocked - Trial user');
             showUpgradeModal('Export features require a paid subscription. Upgrade now for unlimited exports!');
             return;

@@ -823,6 +823,9 @@ window.VelocityFinder = (function() {
                                 <button class="map-control-btn" id="authorities-layer" onclick="VelocityFinder.toggleMapLayer('authorities')">
                                     Local Authorities
                                 </button>
+                                <button class="map-control-btn" id="hurricanes-layer" onclick="VelocityFinder.toggleMapLayer('hurricanes')">
+                                    Hurricane History
+                                </button>
                             </div>
                             
                             <div id="velocity-map" class="velocity-map"></div>
@@ -955,12 +958,60 @@ window.VelocityFinder = (function() {
                             </div>
                         </div>
 
-                        <!-- Hurricane Path Animator -->
+                        <!-- Hurricane Path Animator & History -->
                         <div style="background: white; border-radius: 20px; padding: 2rem; margin-bottom: 2rem; border: 2px solid #e2e8f0;">
                             <h3 style="color: #181E57; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
-                                ${SVG_ICONS.play} Hurricane Path Animator
+                                ${SVG_ICONS.play} Hurricane Path Animator & History
                             </h3>
-                            <!-- Animator Controls -->
+                            
+                            <!-- Mode Toggle -->
+                            <style>
+                                .hurricane-mode-btn {
+                                    padding: 0.75rem 1.5rem;
+                                    border-radius: 8px;
+                                    border: 2px solid #e2e8f0;
+                                    font-weight: 600;
+                                    cursor: pointer;
+                                    transition: all 0.3s ease;
+                                    display: inline-flex;
+                                    align-items: center;
+                                    gap: 0.5rem;
+                                    font-size: 1rem;
+                                }
+                                
+                                .hurricane-mode-btn.active {
+                                    background: linear-gradient(135deg, #00ff88 0%, #00cc66 100%);
+                                    color: white;
+                                    border-color: #00ff88;
+                                    box-shadow: 0 4px 16px rgba(0, 255, 136, 0.5);
+                                    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+                                }
+                                
+                                .hurricane-mode-btn:not(.active) {
+                                    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+                                    color: #64748b;
+                                    border-color: #cbd5e1;
+                                }
+                                
+                                .hurricane-mode-btn:not(.active):hover {
+                                    background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+                                    color: white;
+                                    border-color: #0018ff;
+                                    box-shadow: 0 4px 12px rgba(0, 24, 255, 0.3);
+                                    transform: translateY(-2px);
+                                }
+                            </style>
+
+                            <div style="display: flex; gap: 1rem; margin-bottom: 1rem; justify-content: center;">
+                                <button class="hurricane-mode-btn active" id="animator-mode-btn" onclick="VelocityFinder.setHurricaneMapMode('animator')">
+                                    ${SVG_ICONS.play} Animator Mode
+                                </button>
+                                <button class="hurricane-mode-btn" id="history-mode-btn" onclick="VelocityFinder.setHurricaneMapMode('history')">
+                                    ${SVG_ICONS.map} History Mode
+                                </button>
+                            </div>
+                            
+                            <!-- Animator Controls (shown by default) -->
                             <div id="animator-controls" class="hurricane-animator-controls">
                                 <select id="hurricane-select" class="hurricane-select">
                                     <option value="">Select a hurricane...</option>
@@ -973,6 +1024,11 @@ window.VelocityFinder = (function() {
                                     ${SVG_ICONS.pause}
                                     Stop
                                 </button>
+                            </div>
+                            
+                            <!-- History Controls (hidden by default) -->
+                            <div id="history-controls" style="display: none; text-align: center; margin-bottom: 1rem;">
+                                <p style="color: #64748b; margin-bottom: 0.5rem;">Use the timeline slider on the map to filter hurricanes by year range (1950-2024)</p>
                             </div>
                             
                             <div id="hurricane-map" style="width: 100%; height: 500px; border-radius: 15px; border: 2px solid #e2e8f0;"></div>
@@ -2419,14 +2475,31 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
     }
 
     /**
-     * Set hurricane map mode (animator only - history mode removed)
+     * Set hurricane map mode (animator or history)
      */
     function setHurricaneMapMode(mode) {
+        const animatorBtn = document.getElementById('animator-mode-btn');
+        const historyBtn = document.getElementById('history-mode-btn');
         const animatorControls = document.getElementById('animator-controls');
-
+        const historyControls = document.getElementById('history-controls');
+        
         if (mode === 'animator') {
+            // Switch to animator mode
+            if (animatorBtn) {
+                animatorBtn.className = 'hurricane-mode-btn active';
+            }
+            if (historyBtn) {
+                historyBtn.className = 'hurricane-mode-btn';
+            }
             if (animatorControls) animatorControls.style.display = 'flex';
-
+            if (historyControls) historyControls.style.display = 'none';
+            
+            // Clear hurricane history layer
+            if (state.hurricaneMap && state.hurricaneTimelineControl) {
+                state.hurricaneMap.removeControl(state.hurricaneTimelineControl);
+                state.hurricaneTimelineControl = null;
+            }
+            
             // Clear all hurricane layers
             if (state.hurricaneMap) {
                 state.hurricaneMap.eachLayer(layer => {
@@ -2435,6 +2508,337 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
                     }
                 });
             }
+        } else if (mode === 'history') {
+            console.log('🌀 Switching to History mode...');
+
+            // Switch to history mode
+            if (animatorBtn) {
+                animatorBtn.className = 'hurricane-mode-btn';
+            }
+            if (historyBtn) {
+                historyBtn.className = 'hurricane-mode-btn active';
+            }
+            if (animatorControls) animatorControls.style.display = 'none';
+            if (historyControls) historyControls.style.display = 'block';
+
+            // Stop any running animation
+            if (state.hurricaneAnimator) {
+                state.hurricaneAnimator.isPlaying = false;
+            }
+
+            // FORCE initialize hurricane map if not done yet
+            if (!state.hurricaneMap && document.getElementById('hurricane-map') && typeof L !== 'undefined') {
+                console.log('🗺️ Lazy initializing hurricane map for History mode...');
+                try {
+                    state.hurricaneMap = L.map('hurricane-map').setView([30, -90], 4);
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '© OpenStreetMap contributors',
+                        maxZoom: 18
+                    }).addTo(state.hurricaneMap);
+                    console.log('✅ Hurricane map initialized for History mode');
+                } catch (error) {
+                    console.error('❌ Failed to initialize hurricane map:', error);
+                    Notifications.show('Failed to initialize map. Please refresh the page.', 'error');
+                    return;
+                }
+            }
+
+            // Clear existing layers
+            if (state.hurricaneMap) {
+                state.hurricaneMap.eachLayer(layer => {
+                    if (layer instanceof L.Polyline || layer instanceof L.Marker) {
+                        state.hurricaneMap.removeLayer(layer);
+                    }
+                });
+            }
+
+            // Add hurricane history layer
+            addHurricaneHistoryLayer();
+        }
+    }
+
+    /**
+     * Add hurricane history layer with timeline slider
+     */
+    function addHurricaneHistoryLayer() {
+        console.log('🌀 addHurricaneHistoryLayer called');
+        console.log('🗺️ state.hurricaneMap:', state.hurricaneMap ? 'EXISTS' : 'NULL');
+        console.log('📊 HURRICANE_DATABASE length:', HURRICANE_DATABASE ? HURRICANE_DATABASE.length : 'UNDEFINED');
+
+        if (!state.hurricaneMap) {
+            console.error('❌ Hurricane map not initialized - cannot add history layer');
+            Notifications.show('Map not ready. Please try again.', 'error');
+            return;
+        }
+
+        if (!HURRICANE_DATABASE || HURRICANE_DATABASE.length === 0) {
+            console.error('❌ HURRICANE_DATABASE is empty or undefined');
+            Notifications.show('Hurricane data not loaded.', 'error');
+            return;
+        }
+
+        // Store hurricane track layers
+        if (!state.hurricaneHistoryLayers) {
+            state.hurricaneHistoryLayers = {};
+        }
+
+        // Function to display hurricanes within selected year range
+        function displayHurricanesInRange(startYear, endYear) {
+            console.log(`🌀 Displaying hurricanes from ${startYear} to ${endYear}`);
+            // Clear existing hurricane tracks
+            Object.values(state.hurricaneHistoryLayers).forEach(trackGroup => {
+                state.hurricaneMap.removeLayer(trackGroup);
+            });
+            state.hurricaneHistoryLayers = {};
+            
+            // Filter and display hurricanes within the selected year range
+            const selectedHurricanes = HURRICANE_DATABASE.filter(hurricane => 
+                hurricane.year >= startYear && hurricane.year <= endYear
+            );
+            
+            selectedHurricanes.forEach(hurricane => {
+                const trackGroup = L.layerGroup();
+                
+                const polyline = L.polyline(hurricane.path, {
+                    color: hurricane.color,
+                    weight: 4,
+                    opacity: 0.8
+                }).addTo(trackGroup);
+                
+                polyline.bindPopup(`
+                    <div style="background: white; padding: 1rem; border-radius: 12px; min-width: 250px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+                        <div style="font-size: 1.25rem; font-weight: 700; color: #181E57; margin-bottom: 0.5rem;">
+                            ${hurricane.name}
+                        </div>
+                        <div style="background: ${hurricane.color}; color: white; display: inline-block; padding: 0.25rem 0.75rem; border-radius: 6px; font-weight: 600; margin-bottom: 0.75rem;">
+                            Category ${hurricane.category}
+                        </div>
+                        <div style="color: #64748b; font-size: 0.95rem; line-height: 1.6;">
+                            <strong style="color: #181E57;">Max Wind Speed:</strong> ${hurricane.windSpeed} mph<br>
+                            <strong style="color: #181E57;">Year:</strong> ${hurricane.year}<br>
+                            <strong style="color: #181E57;">Landfall:</strong> ${hurricane.landfall}<br>
+                            <strong style="color: #181E57;">Damage:</strong> $${hurricane.damage ? hurricane.damage.toLocaleString() : 'N/A'}M
+                        </div>
+                    </div>
+                `, {
+                    maxWidth: 300,
+                    className: 'hurricane-popup'
+                });
+                
+                // Add start point marker
+                L.marker(hurricane.path[0], {
+                    icon: L.divIcon({
+                        className: 'hurricane-marker',
+                        html: '🌀',
+                        iconSize: [25, 25]
+                    })
+                }).addTo(trackGroup)
+                .bindPopup(`
+                    <div class="velocity-popup">
+                        <div class="popup-title">${hurricane.name}</div>
+                        <div class="popup-velocity">Landfall Point</div>
+                        <div class="popup-details">
+                            <strong>Year:</strong> ${hurricane.year}<br>
+                            <strong>Category:</strong> ${hurricane.category}<br>
+                            <strong>Casualties:</strong> ${hurricane.casualties || 'N/A'}
+                        </div>
+                    </div>
+                `, {
+                    maxWidth: 300,
+                    className: 'hurricane-popup'
+                });
+                
+                state.hurricaneHistoryLayers[hurricane.name] = trackGroup;
+                trackGroup.addTo(state.hurricaneMap);
+            });
+        }
+        
+        // Display initial range (2015-2024)
+        displayHurricanesInRange(2015, 2024);
+        
+        // Add functional dual-range slider
+        if (!state.hurricaneTimelineControl) {
+            state.hurricaneTimelineControl = L.control({ position: 'bottomleft' });
+            state.hurricaneTimelineControl.onAdd = function(map) {
+                const div = L.DomUtil.create('div', 'hurricane-timeline');
+                div.innerHTML = `
+                    <div style="background: rgba(255,255,255,0.95); padding: 15px; border-radius: 8px; border: 2px solid #dc2626; backdrop-filter: blur(10px); min-width: 320px;">
+                        <strong style="color: #dc2626;">Hurricane Timeline Range</strong><br>
+                        <div style="margin: 15px 0; position: relative; height: 60px;">
+                            <!-- Range track background -->
+                            <div style="position: absolute; top: 25px; left: 10px; width: 280px; height: 6px; background: #e5e7eb; border-radius: 3px;"></div>
+                            
+                            <!-- Active range indicator -->
+                            <div id="range-fill" style="position: absolute; top: 25px; left: 10px; height: 6px; background: #dc2626; border-radius: 3px; transition: all 0.1s ease; width: 280px;"></div>
+                            
+                            <!-- Dual-range slider container -->
+                            <div class="dual-range-container" style="position: absolute; top: 15px; left: 10px; width: 280px; height: 25px;">
+                                <input type="range" min="1950" max="2024" value="2015" 
+                                    style="position: absolute; width: 100%; height: 25px; background: transparent; -webkit-appearance: none; appearance: none; cursor: pointer; pointer-events: none;"
+                                    id="hurricane-start-slider">
+                                
+                                <input type="range" min="1950" max="2024" value="2024" 
+                                    style="position: absolute; width: 100%; height: 25px; background: transparent; -webkit-appearance: none; appearance: none; cursor: pointer; pointer-events: none;"
+                                    id="hurricane-end-slider">
+                            </div>
+                            
+                            <!-- Year labels -->
+                            <div style="position: absolute; top: 5px; left: 10px; font-size: 11px; color: #6b7280;">1950</div>
+                            <div style="position: absolute; top: 5px; right: 10px; font-size: 11px; color: #6b7280;">2024</div>
+                        </div>
+                        
+                        <div style="margin-top: 5px; text-align: center;">
+                            <span style="color: #7f1d1d; font-weight: 600; font-size: 14px;" id="timeline-range-label">2015 - 2024</span>
+                            <br><small style="color: #991b1b; font-size: 12px;" id="timeline-count-label">Showing hurricanes in range</small>
+                        </div>
+                    </div>
+                    
+                    <style>
+                        /* Dual-range slider styling */
+                        .dual-range-container {
+                            position: relative;
+                        }
+                        
+                        #hurricane-start-slider, #hurricane-end-slider {
+                            pointer-events: auto !important;
+                        }
+                        
+                        #hurricane-start-slider::-webkit-slider-thumb {
+                            -webkit-appearance: none;
+                            appearance: none;
+                            width: 20px;
+                            height: 20px;
+                            border-radius: 50%;
+                            background: #dc2626;
+                            border: 3px solid #ffffff;
+                            cursor: pointer;
+                            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+                            pointer-events: auto;
+                            z-index: 3001;
+                            position: relative;
+                        }
+                        
+                        #hurricane-end-slider::-webkit-slider-thumb {
+                            -webkit-appearance: none;
+                            appearance: none;
+                            width: 20px;
+                            height: 20px;
+                            border-radius: 50%;
+                            background: #b91c1c;
+                            border: 3px solid #ffffff;
+                            cursor: pointer;
+                            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+                            pointer-events: auto;
+                            z-index: 3002;
+                            position: relative;
+                        }
+                        
+                        #hurricane-start-slider::-moz-range-thumb {
+                            width: 20px;
+                            height: 20px;
+                            border-radius: 50%;
+                            background: #dc2626;
+                            border: 3px solid #ffffff;
+                            cursor: pointer;
+                            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+                            border: none;
+                            pointer-events: auto;
+                        }
+                        
+                        #hurricane-end-slider::-moz-range-thumb {
+                            width: 20px;
+                            height: 20px;
+                            border-radius: 50%;
+                            background: #b91c1c;
+                            border: 3px solid #ffffff;
+                            cursor: pointer;
+                            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+                            border: none;
+                            pointer-events: auto;
+                        }
+                        
+                        #hurricane-start-slider::-webkit-slider-track,
+                        #hurricane-end-slider::-webkit-slider-track {
+                            background: transparent;
+                            height: 6px;
+                            border-radius: 3px;
+                        }
+                        
+                        #hurricane-start-slider::-moz-range-track,
+                        #hurricane-end-slider::-moz-range-track {
+                            background: transparent;
+                            height: 6px;
+                            border-radius: 3px;
+                            border: none;
+                        }
+                        
+                        #hurricane-start-slider:active::-webkit-slider-thumb {
+                            z-index: 3003;
+                        }
+                        
+                        #hurricane-end-slider:active::-webkit-slider-thumb {
+                            z-index: 3004;
+                        }
+                    </style>
+                `;
+                
+                // Add event listeners for both sliders
+                const startSlider = div.querySelector('#hurricane-start-slider');
+                const endSlider = div.querySelector('#hurricane-end-slider');
+                const rangeLabel = div.querySelector('#timeline-range-label');
+                const countLabel = div.querySelector('#timeline-count-label');
+                const rangeFill = div.querySelector('#range-fill');
+                
+                function updateRangeFill() {
+                    const startYear = parseInt(startSlider.value);
+                    const endYear = parseInt(endSlider.value);
+                    const totalRange = 2024 - 1950;
+                    const startPercent = (startYear - 1950) / totalRange;
+                    const endPercent = (endYear - 1950) / totalRange;
+                    
+                    rangeFill.style.left = `${10 + (startPercent * 280)}px`;
+                    rangeFill.style.width = `${(endPercent - startPercent) * 280}px`;
+                }
+                
+                function updateHurricaneDisplay() {
+                    let startYear = parseInt(startSlider.value);
+                    let endYear = parseInt(endSlider.value);
+                    
+                    // Prevent crossover
+                    if (startYear > endYear) {
+                        if (event && event.target === startSlider) {
+                            endSlider.value = startYear;
+                            endYear = startYear;
+                        } else {
+                            startSlider.value = endYear;
+                            startYear = endYear;
+                        }
+                    }
+                    
+                    rangeLabel.textContent = `${startYear} - ${endYear}`;
+                    updateRangeFill();
+                    
+                    const hurricanesInRange = HURRICANE_DATABASE.filter(h => h.year >= startYear && h.year <= endYear);
+                    countLabel.textContent = `Showing ${hurricanesInRange.length} hurricanes in range`;
+                    
+                    displayHurricanesInRange(startYear, endYear);
+                }
+                
+                startSlider.addEventListener('input', updateHurricaneDisplay);
+                endSlider.addEventListener('input', updateHurricaneDisplay);
+                startSlider.addEventListener('change', updateHurricaneDisplay);
+                endSlider.addEventListener('change', updateHurricaneDisplay);
+                
+                updateRangeFill();
+                updateHurricaneDisplay();
+                
+                // Prevent map interaction when using sliders
+                L.DomEvent.disableClickPropagation(div);
+                L.DomEvent.disableScrollPropagation(div);
+                
+                return div;
+            };
+            state.hurricaneTimelineControl.addTo(state.hurricaneMap);
         }
     }
 

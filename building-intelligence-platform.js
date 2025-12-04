@@ -823,9 +823,6 @@ window.VelocityFinder = (function() {
                                 <button class="map-control-btn" id="authorities-layer" onclick="VelocityFinder.toggleMapLayer('authorities')">
                                     Local Authorities
                                 </button>
-                                <button class="map-control-btn" id="hurricanes-layer" onclick="VelocityFinder.toggleMapLayer('hurricanes')">
-                                    Hurricane History
-                                </button>
                             </div>
                             
                             <div id="velocity-map" class="velocity-map"></div>

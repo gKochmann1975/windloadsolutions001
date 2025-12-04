@@ -8,6 +8,9 @@
     <meta name="keywords" content="window wind load calculator, door wind pressure calculator, storm shutter wind loads, ASCE 7 components and cladding, C&C calculator, replacement window calculator, design pressure calculator">
     <title>Roofing Systems Wind Load Calculator - Coming Soon | windloadcalc</title>
 
+    <!-- reCAPTCHA v3 -->
+    <script src="https://www.google.com/recaptcha/api.js?render=6Ld8dSEsAAAAADQhiFFuSitPCafwmxWnStJ5Ii0h"></script>
+
     <!-- Open Graph -->
     <meta property="og:title" content="Roofing Systems Wind Load Calculator - Coming Soon">
     <meta property="og:description" content="Professional ASCE 7 compliant wind load calculations for windows, doors, and storm shutters. Generate permit-ready reports in minutes.">
@@ -1184,6 +1187,10 @@
                 <p class="waitlist-description">Be first in line for our comprehensive Roofing Systems calculator. Get exclusive early-bird pricing and priority technical support.</p>
 
                 <form class="waitlist-form" id="waitlist-form">
+                    <!-- Honeypot field - hidden from humans -->
+                    <div style="position: absolute; left: -9999px;" aria-hidden="true">
+                        <input type="text" name="website_url" tabindex="-1" autocomplete="off">
+                    </div>
                     <input type="text" name="name" class="form-input" placeholder="Your Name" required>
                     <input type="email" name="email" class="form-input" placeholder="Your Email" required>
                     <input type="text" name="company" class="form-input" placeholder="Company Name (Optional)">
@@ -1276,34 +1283,54 @@
     <script>
         document.getElementById('waitlist-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            const submitButton = this.querySelector('.form-button');
+            const form = this;
+            const submitButton = form.querySelector('.form-button');
+
+            // Honeypot check
+            const honeypot = form.querySelector('input[name="website_url"]');
+            if (honeypot && honeypot.value) {
+                console.log('Bot detected');
+                submitButton.textContent = '\u2713 You\'re on the list!';
+                submitButton.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
+                form.reset();
+                return;
+            }
+
             const originalText = submitButton.textContent;
-            submitButton.textContent = 'Joining waitlist...';
+            submitButton.textContent = 'Verifying...';
             submitButton.disabled = true;
 
-            const formData = new FormData(this);
-            const data = Object.fromEntries(formData.entries());
+            // reCAPTCHA v3
+            grecaptcha.ready(function() {
+                grecaptcha.execute('6Ld8dSEsAAAAADQhiFFuSitPCafwmxWnStJ5Ii0h', {action: 'waitlist'}).then(function(token) {
+                    submitButton.textContent = 'Joining waitlist...';
 
-            fetch('https://script.google.com/macros/s/AKfycbzMuORWqPrwvsFAmhSqPrwIjinWDVM_6CJK50Q7qwAJXq9tkXZNAqPLRKU-NxC0dHaY/exec', {
-                method: 'POST',
-                body: JSON.stringify(data),
-                headers: { 'Content-Type': 'text/plain' }
-            })
-            .then(function(response) { return response.json(); })
-            .then(function(result) {
-                if (result.status === 'success') {
-                    submitButton.textContent = '\u2713 You\'re on the list!';
-                    submitButton.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
-                    this.reset();
-                } else {
-                    throw new Error('Submission failed');
-                }
-            }.bind(this))
-            .catch(function(error) {
-                console.error('Error:', error);
-                submitButton.textContent = originalText;
-                submitButton.disabled = false;
-                alert('There was an error. Please try again.');
+                    const formData = new FormData(form);
+                    const data = Object.fromEntries(formData.entries());
+                    data.recaptcha_token = token;
+
+                    fetch('https://script.google.com/macros/s/AKfycbzMuORWqPrwvsFAmhSqPrwIjinWDVM_6CJK50Q7qwAJXq9tkXZNAqPLRKU-NxC0dHaY/exec', {
+                        method: 'POST',
+                        body: JSON.stringify(data),
+                        headers: { 'Content-Type': 'text/plain' }
+                    })
+                    .then(function(response) { return response.json(); })
+                    .then(function(result) {
+                        if (result.status === 'success') {
+                            submitButton.textContent = '\u2713 You\'re on the list!';
+                            submitButton.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
+                            form.reset();
+                        } else {
+                            throw new Error('Submission failed');
+                        }
+                    })
+                    .catch(function(error) {
+                        console.error('Error:', error);
+                        submitButton.textContent = originalText;
+                        submitButton.disabled = false;
+                        alert('There was an error. Please try again.');
+                    });
+                });
             });
         });
     </script>

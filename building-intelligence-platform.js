@@ -248,54 +248,84 @@ window.VelocityFinder = (function() {
     // COMPREHENSIVE HURRICANE DATABASE
     // ================================================================
     const HURRICANE_DATABASE = [
-        // 1950s
+        // ===========================================
+        // HISTORIC FLORIDA KEYS HURRICANES (Pre-1950)
+        // ===========================================
+        // 1935 Labor Day Hurricane - One of only 3 Cat 5 US landfalls ever
+        { name: 'Labor Day Hurricane', year: 1935, category: 5, windSpeed: 185, path: [[24.55, -80.95], [24.65, -80.75], [24.75, -80.55], [24.85, -80.35], [25.0, -80.15]], color: '#7f1d1d', landfall: 'Florida Keys (Islamorada)', damage: 100, casualties: 408, states: ['FL'] },
+
+        // 1948 Florida Keys Hurricane
+        { name: 'Florida Keys Hurricane', year: 1948, category: 4, windSpeed: 140, path: [[24.55, -81.80], [24.65, -81.50], [24.75, -81.20], [24.85, -80.90], [25.10, -80.50]], color: '#dc2626', landfall: 'Florida Keys', damage: 12, casualties: 3, states: ['FL'] },
+
+        // ===========================================
+        // 1950s-1960s
+        // ===========================================
         { name: 'Hurricane Hazel', year: 1954, category: 4, windSpeed: 140, path: [[33.5, -78.0], [35.0, -79.0], [37.0, -80.0]], color: '#dc2626', landfall: 'North Carolina', damage: 281, casualties: 95, states: ['NC', 'SC', 'VA'] },
-        { name: 'Hurricane Donna', year: 1960, category: 4, windSpeed: 145, path: [[25.0, -80.5], [27.0, -81.0], [29.0, -82.0]], color: '#dc2626', landfall: 'Florida Keys', damage: 900, casualties: 364, states: ['FL', 'GA', 'SC', 'NC'] },
+        // Donna - MAJOR Keys hurricane, crossed entire chain
+        { name: 'Hurricane Donna', year: 1960, category: 4, windSpeed: 145, path: [[24.55, -81.80], [24.65, -81.40], [24.75, -81.00], [24.85, -80.70], [25.0, -80.40], [25.5, -80.20], [26.5, -80.50], [28.0, -81.5], [30.0, -82.5]], color: '#dc2626', landfall: 'Florida Keys (Marathon)', damage: 900, casualties: 364, states: ['FL', 'GA', 'SC', 'NC'] },
+        { name: 'Hurricane Betsy', year: 1965, category: 3, windSpeed: 125, path: [[24.60, -81.60], [24.75, -81.30], [24.85, -81.00], [25.0, -80.60], [25.8, -80.20], [29.0, -89.5], [30.0, -89.0]], color: '#f59e0b', landfall: 'Florida Keys/Louisiana', damage: 1420, casualties: 76, states: ['FL', 'LA'] },
         { name: 'Hurricane Camille', year: 1969, category: 5, windSpeed: 175, path: [[29.0, -89.5], [30.5, -89.0], [32.0, -88.5]], color: '#7f1d1d', landfall: 'Mississippi', damage: 1420, casualties: 256, states: ['MS', 'LA', 'AL'] },
-        
-        // 1970s
+
+        // ===========================================
+        // 1970s-1980s
+        // ===========================================
         { name: 'Hurricane Carmen', year: 1974, category: 3, windSpeed: 115, path: [[29.5, -90.0], [30.0, -89.5], [31.0, -89.0]], color: '#f59e0b', landfall: 'Louisiana', damage: 162, casualties: 8, states: ['LA'] },
         { name: 'Hurricane Frederic', year: 1979, category: 3, windSpeed: 120, path: [[30.0, -88.0], [31.0, -87.5], [32.5, -87.0]], color: '#f59e0b', landfall: 'Alabama', damage: 2300, casualties: 12, states: ['AL', 'MS', 'FL'] },
-        
-        // 1980s
         { name: 'Hurricane Alicia', year: 1983, category: 3, windSpeed: 115, path: [[29.0, -95.0], [29.5, -95.5], [30.0, -96.0]], color: '#f59e0b', landfall: 'Texas', damage: 3000, casualties: 21, states: ['TX'] },
         { name: 'Hurricane Elena', year: 1985, category: 3, windSpeed: 125, path: [[27.5, -82.5], [28.5, -83.0], [29.5, -84.0]], color: '#f59e0b', landfall: 'Florida', damage: 1300, casualties: 4, states: ['FL', 'MS', 'AL'] },
         { name: 'Hurricane Hugo', year: 1989, category: 4, windSpeed: 140, path: [[32.5, -79.5], [33.5, -80.0], [34.5, -80.5]], color: '#dc2626', landfall: 'South Carolina', damage: 10000, casualties: 60, states: ['SC', 'NC', 'VA'] },
-        
+
+        // ===========================================
         // 1990s
-        { name: 'Hurricane Andrew', year: 1992, category: 5, windSpeed: 165, path: [[25.5, -80.5], [25.7, -80.3], [25.9, -80.1], [26.1, -79.9]], color: '#7f1d1d', landfall: 'Florida', damage: 27300, casualties: 65, states: ['FL', 'LA'] },
+        // ===========================================
+        // Andrew - Hit Homestead, just north of Keys, but Keys got hurricane-force winds
+        { name: 'Hurricane Andrew', year: 1992, category: 5, windSpeed: 165, path: [[25.10, -80.50], [25.35, -80.30], [25.50, -80.15], [25.65, -80.00], [25.80, -79.85], [26.0, -80.5], [27.0, -82.0], [29.0, -89.5]], color: '#7f1d1d', landfall: 'Florida (Homestead)', damage: 27300, casualties: 65, states: ['FL', 'LA'] },
+        // Georges - Passed through Keys
+        { name: 'Hurricane Georges', year: 1998, category: 2, windSpeed: 105, path: [[24.55, -81.85], [24.65, -81.50], [24.75, -81.10], [24.85, -80.70], [25.0, -80.35], [25.5, -80.10]], color: '#eab308', landfall: 'Florida Keys (Key West)', damage: 6000, casualties: 4, states: ['FL', 'MS', 'LA'] },
         { name: 'Hurricane Opal', year: 1995, category: 3, windSpeed: 115, path: [[30.0, -87.0], [31.0, -86.5], [32.0, -86.0]], color: '#f59e0b', landfall: 'Florida Panhandle', damage: 3000, casualties: 9, states: ['FL', 'AL', 'GA'] },
         { name: 'Hurricane Fran', year: 1996, category: 3, windSpeed: 120, path: [[34.0, -78.0], [35.0, -78.5], [36.0, -79.0]], color: '#f59e0b', landfall: 'North Carolina', damage: 3200, casualties: 26, states: ['NC', 'VA', 'SC'] },
-        
+
+        // ===========================================
         // 2000s
+        // ===========================================
         { name: 'Hurricane Isabel', year: 2003, category: 2, windSpeed: 105, path: [[35.5, -76.0], [36.5, -76.5], [37.5, -77.0]], color: '#eab308', landfall: 'North Carolina', damage: 5500, casualties: 51, states: ['NC', 'VA', 'MD'] },
-        { name: 'Hurricane Charley', year: 2004, category: 4, windSpeed: 150, path: [[26.5, -82.0], [27.0, -81.5], [27.5, -81.0]], color: '#dc2626', landfall: 'Florida', damage: 16300, casualties: 35, states: ['FL', 'SC'] },
+        { name: 'Hurricane Charley', year: 2004, category: 4, windSpeed: 150, path: [[24.70, -82.40], [25.5, -82.20], [26.5, -82.0], [27.0, -81.5], [27.5, -81.0], [28.5, -80.5]], color: '#dc2626', landfall: 'Florida (Punta Gorda)', damage: 16300, casualties: 35, states: ['FL', 'SC'] },
         { name: 'Hurricane Frances', year: 2004, category: 2, windSpeed: 105, path: [[27.0, -80.0], [27.5, -80.5], [28.0, -81.0]], color: '#eab308', landfall: 'Florida', damage: 10000, casualties: 48, states: ['FL', 'GA', 'SC', 'NC'] },
         { name: 'Hurricane Ivan', year: 2004, category: 3, windSpeed: 120, path: [[30.0, -87.5], [30.5, -88.0], [31.0, -88.5]], color: '#f59e0b', landfall: 'Alabama', damage: 20500, casualties: 92, states: ['AL', 'FL', 'MS', 'LA'] },
         { name: 'Hurricane Jeanne', year: 2004, category: 3, windSpeed: 120, path: [[27.0, -80.0], [27.5, -80.5], [28.0, -81.0]], color: '#f59e0b', landfall: 'Florida', damage: 7500, casualties: 28, states: ['FL', 'SC', 'NC', 'VA'] },
-        { name: 'Hurricane Katrina', year: 2005, category: 3, windSpeed: 125, path: [[25.0, -89.0], [28.0, -90.0], [30.0, -89.5], [32.0, -89.0]], color: '#f59e0b', landfall: 'Louisiana', damage: 125000, casualties: 1833, states: ['LA', 'MS', 'AL', 'FL'] },
-        { name: 'Hurricane Rita', year: 2005, category: 3, windSpeed: 115, path: [[25.5, -93.0], [29.0, -94.0], [30.5, -93.5], [32.0, -93.0]], color: '#f59e0b', landfall: 'Texas/Louisiana', damage: 18500, casualties: 120, states: ['TX', 'LA'] },
-        { name: 'Hurricane Wilma', year: 2005, category: 3, windSpeed: 120, path: [[25.5, -81.5], [26.0, -81.0], [26.5, -80.5]], color: '#f59e0b', landfall: 'Florida', damage: 21000, casualties: 35, states: ['FL'] },
-        
+        // Katrina - First landfall was between Hallandale & North Miami Beach, hit upper Keys
+        { name: 'Hurricane Katrina', year: 2005, category: 1, windSpeed: 80, path: [[25.20, -80.40], [25.50, -80.30], [25.90, -80.10], [26.5, -80.5], [28.0, -86.0], [29.0, -89.0], [30.0, -89.5], [32.0, -89.0]], color: '#f59e0b', landfall: 'Florida/Louisiana', damage: 125000, casualties: 1833, states: ['FL', 'LA', 'MS', 'AL'] },
+        { name: 'Hurricane Rita', year: 2005, category: 3, windSpeed: 115, path: [[24.0, -84.0], [24.3, -83.5], [24.55, -83.0], [25.5, -93.0], [29.0, -94.0], [30.5, -93.5]], color: '#f59e0b', landfall: 'Texas/Louisiana', damage: 18500, casualties: 120, states: ['FL', 'TX', 'LA'] },
+        // Wilma - Passed just north of Keys, severe storm surge in Keys
+        { name: 'Hurricane Wilma', year: 2005, category: 3, windSpeed: 120, path: [[24.50, -83.50], [24.70, -82.80], [24.85, -82.10], [25.0, -81.50], [25.85, -81.65], [26.5, -81.0], [26.8, -80.5]], color: '#f59e0b', landfall: 'Florida (Cape Romano)', damage: 21000, casualties: 35, states: ['FL'] },
+
+        // ===========================================
         // 2010s
+        // ===========================================
         { name: 'Hurricane Irene', year: 2011, category: 1, windSpeed: 85, path: [[35.5, -75.5], [36.5, -76.0], [37.5, -76.5]], color: '#22c55e', landfall: 'North Carolina', damage: 15800, casualties: 45, states: ['NC', 'VA', 'MD', 'NJ', 'NY'] },
         { name: 'Hurricane Sandy', year: 2012, category: 1, windSpeed: 80, path: [[39.5, -74.0], [40.0, -74.5], [40.5, -75.0]], color: '#22c55e', landfall: 'New Jersey', damage: 70200, casualties: 233, states: ['NJ', 'NY', 'CT', 'PA'] },
         { name: 'Hurricane Arthur', year: 2014, category: 2, windSpeed: 100, path: [[35.0, -76.0], [36.0, -76.5], [37.0, -77.0]], color: '#eab308', landfall: 'North Carolina', damage: 110, casualties: 1, states: ['NC'] },
-        { name: 'Hurricane Matthew', year: 2016, category: 4, windSpeed: 145, path: [[29.5, -81.0], [30.5, -81.5], [32.0, -80.5]], color: '#dc2626', landfall: 'South Carolina', damage: 10000, casualties: 49, states: ['FL', 'GA', 'SC', 'NC'] },
+        // Matthew - Passed close to Keys, caused flooding
+        { name: 'Hurricane Matthew', year: 2016, category: 4, windSpeed: 145, path: [[24.50, -80.20], [25.50, -80.00], [27.0, -80.20], [29.5, -81.0], [30.5, -81.5], [32.0, -80.5]], color: '#dc2626', landfall: 'South Carolina', damage: 10000, casualties: 49, states: ['FL', 'GA', 'SC', 'NC'] },
         { name: 'Hurricane Harvey', year: 2017, category: 4, windSpeed: 130, path: [[27.5, -97.0], [28.5, -96.5], [29.5, -95.5], [30.0, -94.5]], color: '#dc2626', landfall: 'Texas', damage: 125000, casualties: 107, states: ['TX', 'LA'] },
-        { name: 'Hurricane Irma', year: 2017, category: 4, windSpeed: 155, path: [[25.0, -80.5], [26.0, -81.0], [27.5, -82.5], [29.0, -83.0]], color: '#dc2626', landfall: 'Florida', damage: 50000, casualties: 134, states: ['FL', 'GA', 'SC'] },
+        // Irma - MAJOR Keys hurricane, landfall at Cudjoe Key as Cat 4
+        { name: 'Hurricane Irma', year: 2017, category: 4, windSpeed: 155, path: [[24.55, -81.85], [24.65, -81.60], [24.70, -81.50], [24.75, -81.30], [24.80, -81.10], [24.85, -80.90], [24.95, -80.65], [25.20, -80.40], [25.8, -81.0], [26.5, -81.5], [27.5, -82.0], [28.5, -82.3], [29.5, -83.0], [31.0, -84.0]], color: '#dc2626', landfall: 'Florida Keys (Cudjoe Key)', damage: 50000, casualties: 134, states: ['FL', 'GA', 'SC'] },
         { name: 'Hurricane Maria', year: 2017, category: 4, windSpeed: 155, path: [[18.0, -66.0], [19.0, -67.0], [20.0, -68.0]], color: '#dc2626', landfall: 'Puerto Rico', damage: 90000, casualties: 2975, states: ['PR', 'VI'] },
         { name: 'Hurricane Florence', year: 2018, category: 1, windSpeed: 90, path: [[34.0, -78.0], [35.0, -78.5], [36.0, -79.0]], color: '#22c55e', landfall: 'North Carolina', damage: 24200, casualties: 53, states: ['NC', 'SC', 'VA'] },
         { name: 'Hurricane Michael', year: 2018, category: 5, windSpeed: 160, path: [[30.0, -85.5], [31.0, -85.0], [32.0, -84.5]], color: '#7f1d1d', landfall: 'Florida Panhandle', damage: 25100, casualties: 74, states: ['FL', 'GA', 'AL'] },
         { name: 'Hurricane Dorian', year: 2019, category: 2, windSpeed: 110, path: [[35.0, -75.5], [36.0, -76.0], [37.0, -76.5]], color: '#eab308', landfall: 'North Carolina', damage: 5100, casualties: 84, states: ['NC', 'SC'] },
-        
+
+        // ===========================================
         // 2020s
+        // ===========================================
         { name: 'Hurricane Laura', year: 2020, category: 4, windSpeed: 150, path: [[29.5, -93.5], [30.0, -93.0], [30.5, -92.5]], color: '#dc2626', landfall: 'Louisiana', damage: 19000, casualties: 77, states: ['LA', 'TX'] },
         { name: 'Hurricane Sally', year: 2020, category: 2, windSpeed: 105, path: [[30.5, -87.5], [31.0, -87.0], [31.5, -86.5]], color: '#eab308', landfall: 'Alabama', damage: 7300, casualties: 8, states: ['AL', 'FL'] },
-        { name: 'Hurricane Ida', year: 2021, category: 4, windSpeed: 150, path: [[28.5, -89.5], [29.5, -90.0], [30.5, -89.5], [32.0, -89.0]], color: '#dc2626', landfall: 'Louisiana', damage: 75000, casualties: 115, states: ['LA', 'MS', 'NY', 'NJ', 'PA'] },
-        { name: 'Hurricane Ian', year: 2022, category: 4, windSpeed: 155, path: [[24.5, -82.5], [26.5, -82.0], [27.5, -82.5], [28.0, -83.0]], color: '#dc2626', landfall: 'Florida', damage: 112900, casualties: 156, states: ['FL', 'SC', 'NC'] },
+        // Ida passed through Gulf south of Keys
+        { name: 'Hurricane Ida', year: 2021, category: 4, windSpeed: 150, path: [[24.0, -84.5], [24.5, -86.0], [26.0, -88.0], [28.5, -89.5], [29.5, -90.0], [30.5, -89.5], [32.0, -89.0]], color: '#dc2626', landfall: 'Louisiana', damage: 75000, casualties: 115, states: ['LA', 'MS', 'NY', 'NJ', 'PA'] },
+        // Ian - Passed west of Keys in Gulf, but Keys got significant impacts
+        { name: 'Hurricane Ian', year: 2022, category: 4, windSpeed: 155, path: [[24.0, -84.0], [24.50, -83.20], [24.75, -82.60], [25.50, -82.30], [26.5, -82.0], [27.5, -82.2], [28.0, -81.8]], color: '#dc2626', landfall: 'Florida (Cayo Costa)', damage: 112900, casualties: 156, states: ['FL', 'SC', 'NC'] },
         { name: 'Hurricane Nicole', year: 2022, category: 1, windSpeed: 75, path: [[27.0, -80.0], [28.0, -80.5], [29.0, -81.0]], color: '#22c55e', landfall: 'Florida', damage: 1000, casualties: 5, states: ['FL'] },
-        { name: 'Hurricane Idalia', year: 2023, category: 3, windSpeed: 125, path: [[29.0, -83.0], [30.0, -84.0], [31.0, -84.5]], color: '#f59e0b', landfall: 'Florida', damage: 3600, casualties: 12, states: ['FL', 'GA', 'SC'] }
+        { name: 'Hurricane Idalia', year: 2023, category: 3, windSpeed: 125, path: [[24.20, -84.0], [25.0, -84.0], [27.0, -83.5], [29.0, -83.5], [30.0, -84.0], [31.0, -84.5]], color: '#f59e0b', landfall: 'Florida (Big Bend)', damage: 3600, casualties: 12, states: ['FL', 'GA', 'SC'] }
     ];
 
     // ================================================================

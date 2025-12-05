@@ -5360,11 +5360,12 @@ Category IV,${locationData.cat4 || 'N/A'},${locationData.cat4 ? Utils.calculateP
     
     function toggleResultsTable(tableId) {
         const table = document.getElementById(tableId);
-        const btnId = tableId.replace('-table', '-btn');
+        // Button ID: 'filter-results-table' → 'filter-collapse-btn', 'solar-results-table' → 'solar-collapse-btn'
+        const btnId = tableId.replace('-results-table', '-collapse-btn');
         const btn = document.getElementById(btnId);
-        
+
         if (!table || !btn) return;
-        
+
         if (table.style.display === 'none') {
             table.style.display = 'block';
             btn.innerHTML = `${SVG_ICONS.chevronDown} Collapse`;

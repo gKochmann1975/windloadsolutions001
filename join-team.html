@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="images/windloadcalc-favicon.svg">
+    <title>Join Team - WindLoadCalc</title>
+    <meta name="description" content="Accept your team invitation to WindLoadCalc.">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .logo {
+            height: 60px;
+            margin-bottom: 1.5rem;
+        }
+
+        .title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #181E57;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: #64748b;
+            margin-bottom: 2rem;
+        }
+
+        /* Loading State */
+        .loading {
+            padding: 2rem 0;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #e2e8f0;
+            border-top-color: #0018ff;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: #64748b;
+            font-size: 1rem;
+        }
+
+        /* Invite Info */
+        .invite-info {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .invite-label {
+            font-size: 0.85rem;
+            color: #166534;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #166534;
+            margin-bottom: 0.5rem;
+        }
+
+        .owner-name {
+            font-size: 0.95rem;
+            color: #15803d;
+        }
+
+        /* Form */
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #334155;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            font-size: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #0018ff;
+            box-shadow: 0 0 0 3px rgba(0, 24, 255, 0.1);
+        }
+
+        .form-input:disabled {
+            background: #f1f5f9;
+            color: #64748b;
+        }
+
+        /* Buttons */
+        .btn {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background: #f1f5f9;
+            color: #334155;
+            margin-top: 1rem;
+        }
+
+        .btn-secondary:hover {
+            background: #e2e8f0;
+        }
+
+        /* Status Messages */
+        .error-message {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #dc2626;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .success-message {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            color: #166534;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        /* States */
+        #loading-state,
+        #invite-state,
+        #login-state,
+        #create-account-state,
+        #success-state,
+        #error-state {
+            display: none;
+        }
+
+        .state-active {
+            display: block !important;
+        }
+
+        /* Divider */
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 1.5rem 0;
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #e2e8f0;
+        }
+
+        .divider span {
+            padding: 0 1rem;
+        }
+
+        /* Link */
+        .link {
+            color: #0018ff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .link:hover {
+            text-decoration: underline;
+        }
+
+        /* Success Icon */
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+
+        .success-icon svg {
+            width: 40px;
+            height: 40px;
+            stroke: white;
+            stroke-width: 3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <a href="index.html">
+                <img src="images/windloadcalc-logo.png" alt="WindLoadCalc" class="logo">
+            </a>
+
+            <!-- Loading State -->
+            <div id="loading-state" class="state-active">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p class="loading-text">Verifying invitation...</p>
+                </div>
+            </div>
+
+            <!-- Error State (invalid/expired token) -->
+            <div id="error-state">
+                <h1 class="title">Invitation Not Found</h1>
+                <p class="subtitle" id="error-message">This invitation link is invalid or has expired.</p>
+                <a href="index.html" class="btn btn-secondary">Go to Homepage</a>
+            </div>
+
+            <!-- Invite State (valid token, choose login or create account) -->
+            <div id="invite-state">
+                <h1 class="title">You're Invited!</h1>
+                <p class="subtitle">Join your team on WindLoadCalc</p>
+
+                <div class="invite-info">
+                    <p class="invite-label">Team Subscription</p>
+                    <p class="product-name" id="product-name">Loading...</p>
+                    <p class="owner-name">Invited by <span id="owner-name">...</span></p>
+                </div>
+
+                <p style="color: #64748b; margin-bottom: 1.5rem; font-size: 0.95rem;">
+                    Your email: <strong id="invite-email">...</strong>
+                </p>
+
+                <div id="existing-user-section">
+                    <button class="btn btn-primary" onclick="showLoginState()">
+                        I Have an Account - Log In
+                    </button>
+                    <div class="divider"><span>or</span></div>
+                    <button class="btn btn-secondary" onclick="showCreateAccountState()">
+                        Create New Account
+                    </button>
+                </div>
+
+                <div id="new-user-section" style="display: none;">
+                    <button class="btn btn-primary" onclick="showCreateAccountState()">
+                        Create Account & Join Team
+                    </button>
+                </div>
+            </div>
+
+            <!-- Login State (existing user) -->
+            <div id="login-state">
+                <h1 class="title">Log In to Join</h1>
+                <p class="subtitle">Enter your password to join the team</p>
+
+                <div id="login-error" class="error-message" style="display: none;"></div>
+
+                <form id="login-form" onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" id="login-email" class="form-input" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <input type="password" id="login-password" class="form-input" placeholder="Enter your password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="login-btn">
+                        Log In & Join Team
+                    </button>
+                </form>
+
+                <button class="btn btn-secondary" onclick="showInviteState()">Back</button>
+            </div>
+
+            <!-- Create Account State (new user) -->
+            <div id="create-account-state">
+                <h1 class="title">Create Your Account</h1>
+                <p class="subtitle">Set up your account to join the team</p>
+
+                <div id="create-error" class="error-message" style="display: none;"></div>
+
+                <form id="create-form" onsubmit="handleCreateAccount(event)">
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" id="create-email" class="form-input" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" id="create-name" class="form-input" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <input type="password" id="create-password" class="form-input" placeholder="Create a password (min 8 characters)" minlength="8" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Confirm Password</label>
+                        <input type="password" id="create-password-confirm" class="form-input" placeholder="Confirm your password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="create-btn">
+                        Create Account & Join Team
+                    </button>
+                </form>
+
+                <button class="btn btn-secondary" onclick="showInviteState()">Back</button>
+            </div>
+
+            <!-- Success State -->
+            <div id="success-state">
+                <div class="success-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                </div>
+                <h1 class="title">Welcome to the Team!</h1>
+                <p class="subtitle">You now have access to <span id="success-product">the product</span></p>
+
+                <div class="success-message">
+                    You can now use all features included in your team subscription.
+                </div>
+
+                <a href="dashboard.html" class="btn btn-primary">
+                    Go to Dashboard
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Configuration
+        const API_URL = 'https://windload-backend-production.up.railway.app';
+
+        // State
+        let inviteToken = null;
+        let inviteData = null;
+
+        // Get token from URL
+        function getTokenFromURL() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('token');
+        }
+
+        // Show/hide states
+        function showState(stateId) {
+            document.querySelectorAll('[id$="-state"]').forEach(el => {
+                el.classList.remove('state-active');
+            });
+            document.getElementById(stateId).classList.add('state-active');
+        }
+
+        function showInviteState() {
+            showState('invite-state');
+        }
+
+        function showLoginState() {
+            document.getElementById('login-email').value = inviteData.invite_email;
+            showState('login-state');
+            document.getElementById('login-password').focus();
+        }
+
+        function showCreateAccountState() {
+            document.getElementById('create-email').value = inviteData.invite_email;
+            showState('create-account-state');
+            document.getElementById('create-name').focus();
+        }
+
+        // Verify the invite token
+        async function verifyInvite() {
+            inviteToken = getTokenFromURL();
+
+            if (!inviteToken) {
+                showError('No invitation token provided. Please use the link from your invitation email.');
+                return;
+            }
+
+            try {
+                // Call backend to verify token and get invite details
+                const response = await fetch(`${API_URL}/api/team/verify-invite`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ token: inviteToken })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok || !data.valid) {
+                    showError(data.error || 'This invitation is invalid or has expired.');
+                    return;
+                }
+
+                // Store invite data
+                inviteData = data;
+
+                // Populate UI
+                document.getElementById('product-name').textContent = data.product_name;
+                document.getElementById('owner-name').textContent = data.owner_name;
+                document.getElementById('invite-email').textContent = data.invite_email;
+
+                // Check if user already exists
+                if (data.user_exists) {
+                    // Show login option
+                    document.getElementById('existing-user-section').style.display = 'block';
+                    document.getElementById('new-user-section').style.display = 'none';
+                } else {
+                    // Show create account option only
+                    document.getElementById('existing-user-section').style.display = 'none';
+                    document.getElementById('new-user-section').style.display = 'block';
+                }
+
+                showState('invite-state');
+
+            } catch (error) {
+                console.error('Error verifying invite:', error);
+                showError('Unable to verify invitation. Please try again later.');
+            }
+        }
+
+        // Show error state
+        function showError(message) {
+            document.getElementById('error-message').textContent = message;
+            showState('error-state');
+        }
+
+        // Handle login form
+        async function handleLogin(event) {
+            event.preventDefault();
+
+            const password = document.getElementById('login-password').value;
+            const btn = document.getElementById('login-btn');
+            const errorDiv = document.getElementById('login-error');
+
+            btn.disabled = true;
+            btn.textContent = 'Logging in...';
+            errorDiv.style.display = 'none';
+
+            try {
+                // First, login to get user info
+                const loginResponse = await fetch(`${API_URL}/api/auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        email: inviteData.invite_email,
+                        password: password
+                    })
+                });
+
+                const loginData = await loginResponse.json();
+
+                if (!loginResponse.ok) {
+                    throw new Error(loginData.message || 'Invalid password');
+                }
+
+                // Save auth token
+                localStorage.setItem('windload_token', loginData.token);
+                localStorage.setItem('windload_user_id', loginData.user_id);
+                localStorage.setItem('windload_user_email', loginData.email);
+
+                // Now accept the invite
+                const acceptResponse = await fetch(`${API_URL}/api/team/accept-invite`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        token: inviteToken,
+                        email: inviteData.invite_email
+                    })
+                });
+
+                const acceptData = await acceptResponse.json();
+
+                if (!acceptResponse.ok) {
+                    throw new Error(acceptData.error || 'Failed to join team');
+                }
+
+                // Success!
+                document.getElementById('success-product').textContent = inviteData.product_name;
+                showState('success-state');
+
+            } catch (error) {
+                console.error('Login error:', error);
+                errorDiv.textContent = error.message;
+                errorDiv.style.display = 'block';
+                btn.disabled = false;
+                btn.textContent = 'Log In & Join Team';
+            }
+        }
+
+        // Handle create account form
+        async function handleCreateAccount(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('create-name').value;
+            const password = document.getElementById('create-password').value;
+            const passwordConfirm = document.getElementById('create-password-confirm').value;
+            const btn = document.getElementById('create-btn');
+            const errorDiv = document.getElementById('create-error');
+
+            // Validate passwords match
+            if (password !== passwordConfirm) {
+                errorDiv.textContent = 'Passwords do not match';
+                errorDiv.style.display = 'block';
+                return;
+            }
+
+            btn.disabled = true;
+            btn.textContent = 'Creating account...';
+            errorDiv.style.display = 'none';
+
+            try {
+                // Accept invite (creates account)
+                const response = await fetch(`${API_URL}/api/team/accept-invite`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        token: inviteToken,
+                        email: inviteData.invite_email,
+                        password: password,
+                        full_name: name
+                    })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || 'Failed to create account');
+                }
+
+                // Auto-login the new user
+                const loginResponse = await fetch(`${API_URL}/api/auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        email: inviteData.invite_email,
+                        password: password
+                    })
+                });
+
+                const loginData = await loginResponse.json();
+
+                if (loginResponse.ok) {
+                    localStorage.setItem('windload_token', loginData.token);
+                    localStorage.setItem('windload_user_id', loginData.user_id);
+                    localStorage.setItem('windload_user_email', loginData.email);
+                }
+
+                // Success!
+                document.getElementById('success-product').textContent = inviteData.product_name;
+                showState('success-state');
+
+            } catch (error) {
+                console.error('Create account error:', error);
+                errorDiv.textContent = error.message;
+                errorDiv.style.display = 'block';
+                btn.disabled = false;
+                btn.textContent = 'Create Account & Join Team';
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', verifyInvite);
+    </script>
+</body>
+</html>

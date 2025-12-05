@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="images/windloadcalc-favicon.svg">
+    <title>Team Management - WindLoadCalc</title>
+    <meta name="description" content="Manage your team members and invitations.">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 2rem;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .logo {
+            height: 50px;
+        }
+
+        .header-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #181E57;
+        }
+
+        .back-link {
+            color: #0018ff;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Card */
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            margin-bottom: 2rem;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #181E57;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Seat Usage */
+        .seat-usage {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .seat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .seat-label {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #166534;
+        }
+
+        .seat-count {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #166534;
+        }
+
+        .seat-bar {
+            height: 10px;
+            background: #bbf7d0;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .seat-bar-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border-radius: 5px;
+            transition: width 0.3s ease;
+        }
+
+        .seat-bar-fill.warning {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+
+        .seat-bar-fill.full {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+        }
+
+        /* Invite Form */
+        .invite-form {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .invite-input {
+            flex: 1;
+            padding: 0.875rem 1rem;
+            font-size: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+        }
+
+        .invite-input:focus {
+            outline: none;
+            border-color: #0018ff;
+            box-shadow: 0 0 0 3px rgba(0, 24, 255, 0.1);
+        }
+
+        .invite-input:disabled {
+            background: #f1f5f9;
+            color: #94a3b8;
+        }
+
+        .btn {
+            padding: 0.875rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background: #f1f5f9;
+            color: #334155;
+        }
+
+        .btn-secondary:hover {
+            background: #e2e8f0;
+        }
+
+        .btn-danger {
+            background: #fef2f2;
+            color: #dc2626;
+        }
+
+        .btn-danger:hover {
+            background: #fee2e2;
+        }
+
+        .btn-small {
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+        }
+
+        /* Messages */
+        .message {
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .message-success {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            color: #166534;
+        }
+
+        .message-error {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #dc2626;
+        }
+
+        /* Members Table */
+        .members-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .members-table th {
+            text-align: left;
+            padding: 1rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .members-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #f1f5f9;
+            vertical-align: middle;
+        }
+
+        .member-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .member-name {
+            font-weight: 600;
+            color: #181E57;
+        }
+
+        .member-email {
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        /* Status Badge */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.375rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-active {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status-pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .status-revoked {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #64748b;
+        }
+
+        .empty-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Subscription Selector */
+        .subscription-select {
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            background: white;
+            cursor: pointer;
+        }
+
+        .subscription-select:focus {
+            outline: none;
+            border-color: #0018ff;
+        }
+
+        /* Actions */
+        .actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .header-left {
+                flex-direction: column;
+            }
+
+            .invite-form {
+                flex-direction: column;
+            }
+
+            .members-table th:nth-child(3),
+            .members-table td:nth-child(3) {
+                display: none;
+            }
+        }
+
+        /* No Access State */
+        .no-access {
+            text-align: center;
+            padding: 3rem;
+        }
+
+        .no-access h2 {
+            color: #181E57;
+            margin-bottom: 1rem;
+        }
+
+        .no-access p {
+            color: #64748b;
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-left">
+                <a href="index.html">
+                    <img src="images/windloadcalc-logo.png" alt="WindLoadCalc" class="logo">
+                </a>
+                <h1 class="header-title">Team Management</h1>
+            </div>
+            <a href="dashboard.html" class="back-link">
+                ← Back to Dashboard
+            </a>
+        </div>
+
+        <!-- Loading State -->
+        <div id="loading-state">
+            <div class="loading">
+                <div class="spinner"></div>
+                <p>Loading your team...</p>
+            </div>
+        </div>
+
+        <!-- No Access State -->
+        <div id="no-access-state" style="display: none;">
+            <div class="card">
+                <div class="no-access">
+                    <h2>No Team Subscriptions</h2>
+                    <p>You don't have any subscriptions that support team members. Upgrade to Pro or Premium to add team members.</p>
+                    <a href="building-intelligence-platform-shop.html" class="btn btn-primary">View Plans</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div id="main-content" style="display: none;">
+            <!-- Subscription Selector (if multiple) -->
+            <div id="subscription-selector" class="card" style="display: none;">
+                <label for="subscription-select" style="font-weight: 600; color: #334155; margin-right: 1rem;">
+                    Select Subscription:
+                </label>
+                <select id="subscription-select" class="subscription-select" onchange="loadTeamInfo()">
+                </select>
+            </div>
+
+            <!-- Team Info -->
+            <div class="card">
+                <h2 class="card-title">
+                    <span id="product-name">Loading...</span>
+                </h2>
+
+                <!-- Seat Usage -->
+                <div class="seat-usage">
+                    <div class="seat-header">
+                        <span class="seat-label">Team Seats</span>
+                        <span class="seat-count">
+                            <span id="seats-used">0</span> / <span id="seats-total">0</span>
+                        </span>
+                    </div>
+                    <div class="seat-bar">
+                        <div class="seat-bar-fill" id="seat-bar-fill" style="width: 0%;"></div>
+                    </div>
+                </div>
+
+                <!-- Messages -->
+                <div id="invite-message" class="message" style="display: none;"></div>
+
+                <!-- Invite Form -->
+                <div id="invite-section">
+                    <h3 style="font-size: 1rem; font-weight: 600; color: #334155; margin-bottom: 1rem;">
+                        Invite Team Member
+                    </h3>
+                    <form class="invite-form" onsubmit="handleInvite(event)">
+                        <input
+                            type="email"
+                            id="invite-email"
+                            class="invite-input"
+                            placeholder="Enter email address"
+                            required
+                        >
+                        <button type="submit" class="btn btn-primary" id="invite-btn">
+                            Send Invite
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Seat Full Warning -->
+                <div id="seats-full-warning" class="message message-error" style="display: none;">
+                    All seats are used. Remove a team member or upgrade to add more.
+                </div>
+            </div>
+
+            <!-- Team Members -->
+            <div class="card">
+                <h2 class="card-title">Team Members</h2>
+
+                <div id="members-loading" class="loading" style="padding: 2rem;">
+                    <div class="spinner" style="border-color: #e2e8f0; border-top-color: #0018ff;"></div>
+                </div>
+
+                <div id="members-empty" class="empty-state" style="display: none;">
+                    <div class="empty-icon">👥</div>
+                    <p>No team members yet. Invite your first team member above!</p>
+                </div>
+
+                <table class="members-table" id="members-table" style="display: none;">
+                    <thead>
+                        <tr>
+                            <th>Member</th>
+                            <th>Status</th>
+                            <th>Joined</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="members-tbody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Configuration
+        const API_URL = 'https://windload-backend-production.up.railway.app';
+
+        // State
+        let userId = null;
+        let subscriptions = [];
+        let currentSubscriptionId = null;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Check if logged in
+            const token = localStorage.getItem('windload_token');
+            userId = localStorage.getItem('windload_user_id');
+
+            if (!token || !userId) {
+                window.location.href = 'login.html?redirect=team-management.html';
+                return;
+            }
+
+            await loadSubscriptions();
+        });
+
+        // Load user's subscriptions
+        async function loadSubscriptions() {
+            try {
+                const response = await fetch(`${API_URL}/api/team/my-teams`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ user_id: parseInt(userId) })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || 'Failed to load subscriptions');
+                }
+
+                // Filter to only show subscriptions where user is owner and can manage
+                subscriptions = data.teams.filter(t => t.can_manage && t.seat_limit > 1);
+
+                document.getElementById('loading-state').style.display = 'none';
+
+                if (subscriptions.length === 0) {
+                    document.getElementById('no-access-state').style.display = 'block';
+                    return;
+                }
+
+                document.getElementById('main-content').style.display = 'block';
+
+                // If multiple subscriptions, show selector
+                if (subscriptions.length > 1) {
+                    const selector = document.getElementById('subscription-selector');
+                    const select = document.getElementById('subscription-select');
+                    selector.style.display = 'block';
+
+                    select.innerHTML = subscriptions.map(s =>
+                        `<option value="${s.subscription_id}">${s.product_name}</option>`
+                    ).join('');
+                }
+
+                // Load first subscription
+                currentSubscriptionId = subscriptions[0].subscription_id;
+                await loadTeamInfo();
+
+            } catch (error) {
+                console.error('Error loading subscriptions:', error);
+                document.getElementById('loading-state').innerHTML = `
+                    <div class="card">
+                        <p style="color: #dc2626;">Error: ${error.message}</p>
+                        <a href="dashboard.html" class="btn btn-secondary" style="margin-top: 1rem;">Back to Dashboard</a>
+                    </div>
+                `;
+            }
+        }
+
+        // Load team info for selected subscription
+        async function loadTeamInfo() {
+            const select = document.getElementById('subscription-select');
+            if (select.value) {
+                currentSubscriptionId = parseInt(select.value);
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/api/team/info`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        user_id: parseInt(userId),
+                        subscription_id: currentSubscriptionId
+                    })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || 'Failed to load team info');
+                }
+
+                // Update UI
+                document.getElementById('product-name').textContent = data.subscription.product_name;
+                document.getElementById('seats-used').textContent = data.team.seats_used;
+                document.getElementById('seats-total').textContent = data.team.seat_limit || '∞';
+
+                // Update seat bar
+                const seatPercent = data.team.seat_limit
+                    ? (data.team.seats_used / data.team.seat_limit) * 100
+                    : 0;
+                const seatBar = document.getElementById('seat-bar-fill');
+                seatBar.style.width = `${Math.min(seatPercent, 100)}%`;
+                seatBar.classList.remove('warning', 'full');
+                if (seatPercent >= 100) {
+                    seatBar.classList.add('full');
+                } else if (seatPercent >= 80) {
+                    seatBar.classList.add('warning');
+                }
+
+                // Handle seats full
+                const seatsAvailable = data.team.seats_available;
+                const inviteSection = document.getElementById('invite-section');
+                const seatsFull = document.getElementById('seats-full-warning');
+                if (seatsAvailable !== null && seatsAvailable <= 0) {
+                    inviteSection.style.display = 'none';
+                    seatsFull.style.display = 'block';
+                } else {
+                    inviteSection.style.display = 'block';
+                    seatsFull.style.display = 'none';
+                }
+
+                // Update members table
+                renderMembers(data.team.members);
+
+            } catch (error) {
+                console.error('Error loading team info:', error);
+                showMessage('Error: ' + error.message, 'error');
+            }
+        }
+
+        // Render members table
+        function renderMembers(members) {
+            const loading = document.getElementById('members-loading');
+            const empty = document.getElementById('members-empty');
+            const table = document.getElementById('members-table');
+            const tbody = document.getElementById('members-tbody');
+
+            loading.style.display = 'none';
+
+            if (!members || members.length === 0) {
+                empty.style.display = 'block';
+                table.style.display = 'none';
+                return;
+            }
+
+            empty.style.display = 'none';
+            table.style.display = 'table';
+
+            tbody.innerHTML = members.map(member => {
+                const statusClass = {
+                    'active': 'status-active',
+                    'pending': 'status-pending',
+                    'revoked': 'status-revoked',
+                    'expired': 'status-revoked'
+                }[member.status] || 'status-pending';
+
+                const statusText = member.status.charAt(0).toUpperCase() + member.status.slice(1);
+
+                const joinedDate = member.accepted_at
+                    ? new Date(member.accepted_at).toLocaleDateString()
+                    : member.invited_at
+                        ? 'Invited ' + new Date(member.invited_at).toLocaleDateString()
+                        : '-';
+
+                let actions = '';
+                if (member.status === 'pending') {
+                    actions = `
+                        <button class="btn btn-secondary btn-small" onclick="resendInvite(${member.id})">Resend</button>
+                        <button class="btn btn-danger btn-small" onclick="removeMember(${member.id})">Cancel</button>
+                    `;
+                } else if (member.status === 'active') {
+                    actions = `
+                        <button class="btn btn-danger btn-small" onclick="removeMember(${member.id})">Remove</button>
+                    `;
+                }
+
+                return `
+                    <tr>
+                        <td>
+                            <div class="member-info">
+                                <span class="member-name">${member.name || 'Pending'}</span>
+                                <span class="member-email">${member.email}</span>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="status-badge ${statusClass}">${statusText}</span>
+                        </td>
+                        <td>${joinedDate}</td>
+                        <td>
+                            <div class="actions">${actions}</div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        // Handle invite form
+        async function handleInvite(event) {
+            event.preventDefault();
+
+            const emailInput = document.getElementById('invite-email');
+            const email = emailInput.value.trim().toLowerCase();
+            const btn = document.getElementById('invite-btn');
+
+            if (!email) return;
+
+            btn.disabled = true;
+            btn.textContent = 'Sending...';
+
+            try {
+                const response = await fetch(`${API_URL}/api/team/invite`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        user_id: parseInt(userId),
+                        subscription_id: currentSubscriptionId,
+                        email: email
+                    })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || 'Failed to send invite');
+                }
+
+                showMessage(`Invitation sent to ${email}!`, 'success');
+                emailInput.value = '';
+                await loadTeamInfo();
+
+            } catch (error) {
+                console.error('Invite error:', error);
+                showMessage(error.message, 'error');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Send Invite';
+            }
+        }
+
+        // Resend invite
+        async function resendInvite(membershipId) {
+            try {
+                const response = await fetch(`${API_URL}/api/team/resend-invite`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        user_id: parseInt(userId),
+                        subscription_id: currentSubscriptionId,
+                        membership_id: membershipId
+                    })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || 'Failed to resend invite');
+                }
+
+                showMessage('Invitation resent!', 'success');
+
+            } catch (error) {
+                console.error('Resend error:', error);
+                showMessage(error.message, 'error');
+            }
+        }
+
+        // Remove member
+        async function removeMember(membershipId) {
+            if (!confirm('Are you sure you want to remove this team member?')) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/api/team/remove-member`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        user_id: parseInt(userId),
+                        subscription_id: currentSubscriptionId,
+                        membership_id: membershipId
+                    })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || 'Failed to remove member');
+                }
+
+                showMessage('Team member removed.', 'success');
+                await loadTeamInfo();
+
+            } catch (error) {
+                console.error('Remove error:', error);
+                showMessage(error.message, 'error');
+            }
+        }
+
+        // Show message
+        function showMessage(text, type) {
+            const messageEl = document.getElementById('invite-message');
+            messageEl.textContent = text;
+            messageEl.className = `message message-${type}`;
+            messageEl.style.display = 'block';
+
+            // Auto-hide success messages
+            if (type === 'success') {
+                setTimeout(() => {
+                    messageEl.style.display = 'none';
+                }, 5000);
+            }
+        }
+    </script>
+</body>
+</html>

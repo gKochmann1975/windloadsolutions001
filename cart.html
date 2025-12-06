@@ -1270,47 +1270,113 @@
             }
 
             if (!hasBIP && hasCalc) {
-                // Recommend BIP matching the Calculator tier
+                // Recommend BIP matching the Calculator tier AND billing cycle
                 const calcTier = getTierFromCode(calcItem.productCode);
+                const calcCycle = calcItem.billingCycle || 'annual';
                 const bip = bipTiers[calcTier];
+
+                // Calculate prices based on billing cycle
+                const isAnnual = calcCycle === 'annual';
+                const displayPrice = isAnnual ? bip.discounted.toFixed(2) : bip.monthly;
+                const billingText = isAnnual ? `billed annually ($${bip.yearlyDisc.toFixed(2)}/year)` : 'billed monthly';
+                const savingsText = isAnnual ? 'Save 15%' : 'Bundle discount at checkout';
 
                 html += `
                     <div class="upsell-product">
                         <h4><i class="fas fa-brain"></i> Building Intelligence Platform - ${bip.name}</h4>
                         <p>AI-powered building analysis, wind velocity finder, hurricane risk analysis</p>
-                        <div class="upsell-price">
-                            <span class="original">$${bip.monthly}/mo</span>
-                            <span class="discounted">$${bip.discounted.toFixed(2)}/mo</span>
-                            <span style="color: #10b981; font-size: 0.85rem; font-weight: 600;">Save 15%</span>
+
+                        <!-- Billing Cycle Toggle -->
+                        <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+                            <button onclick="toggleUpsellCycle('bip', 'monthly')"
+                                id="bip-monthly-btn"
+                                class="upsell-cycle-btn ${!isAnnual ? 'active' : ''}"
+                                style="flex: 1; padding: 8px; border: 2px solid ${!isAnnual ? '#0ea5e9' : '#e5e7eb'};
+                                       background: ${!isAnnual ? '#f0f9ff' : 'white'}; border-radius: 6px;
+                                       cursor: pointer; font-weight: 600; font-size: 0.85rem;
+                                       color: ${!isAnnual ? '#0ea5e9' : '#64748b'};">
+                                Monthly $${bip.monthly}/mo
+                            </button>
+                            <button onclick="toggleUpsellCycle('bip', 'annual')"
+                                id="bip-annual-btn"
+                                class="upsell-cycle-btn ${isAnnual ? 'active' : ''}"
+                                style="flex: 1; padding: 8px; border: 2px solid ${isAnnual ? '#0ea5e9' : '#e5e7eb'};
+                                       background: ${isAnnual ? '#f0f9ff' : 'white'}; border-radius: 6px;
+                                       cursor: pointer; font-weight: 600; font-size: 0.85rem;
+                                       color: ${isAnnual ? '#0ea5e9' : '#64748b'};">
+                                Annual $${bip.discounted.toFixed(2)}/mo
+                            </button>
                         </div>
-                        <div style="font-size: 0.8rem; color: #64748b; margin-bottom: 8px;">billed annually ($${bip.yearlyDisc.toFixed(2)}/year)</div>
-                        <button onclick="cart.addItem('${bip.code}', 'annual')" class="add-upsell-btn">
+
+                        <div id="bip-upsell-price" class="upsell-price">
+                            ${isAnnual ? `<span class="original">$${bip.monthly}/mo</span>` : ''}
+                            <span class="discounted">$${displayPrice}/mo</span>
+                            <span style="color: #10b981; font-size: 0.85rem; font-weight: 600;">${savingsText}</span>
+                        </div>
+                        <div id="bip-upsell-billing" style="font-size: 0.8rem; color: #64748b; margin-bottom: 8px;">${billingText}</div>
+                        <button id="bip-upsell-add-btn" onclick="cart.addItem('${bip.code}', '${calcCycle}')" class="add-upsell-btn">
                             <i class="fas fa-plus"></i> Add & Save 15%
                         </button>
                     </div>
                 `;
+
+                // Store BIP tier info for toggle
+                window.upsellBipTier = bip;
             }
 
             if (!hasCalc && hasBIP) {
-                // Recommend Calculator matching the BIP tier
+                // Recommend Calculator matching the BIP tier AND billing cycle
                 const bipTier = getTierFromCode(bipItem.productCode);
+                const bipCycle = bipItem.billingCycle || 'annual';
                 const calc = calcTiers[bipTier];
+
+                // Calculate prices based on billing cycle
+                const isAnnual = bipCycle === 'annual';
+                const displayPrice = isAnnual ? calc.discounted.toFixed(2) : calc.monthly;
+                const billingText = isAnnual ? `billed annually ($${calc.yearlyDisc.toFixed(2)}/year)` : 'billed monthly';
+                const savingsText = isAnnual ? 'Save 15%' : 'Bundle discount at checkout';
 
                 html += `
                     <div class="upsell-product">
                         <h4><i class="fas fa-calculator"></i> Wind Load Calculator - ${calc.name}</h4>
                         <p>ASCE 7-22 compliant C&C pressure calculations with permit-ready PDFs</p>
-                        <div class="upsell-price">
-                            <span class="original">$${calc.monthly}/mo</span>
-                            <span class="discounted">$${calc.discounted.toFixed(2)}/mo</span>
-                            <span style="color: #10b981; font-size: 0.85rem; font-weight: 600;">Save 15%</span>
+
+                        <!-- Billing Cycle Toggle -->
+                        <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+                            <button onclick="toggleUpsellCycle('calc', 'monthly')"
+                                id="calc-monthly-btn"
+                                class="upsell-cycle-btn ${!isAnnual ? 'active' : ''}"
+                                style="flex: 1; padding: 8px; border: 2px solid ${!isAnnual ? '#0ea5e9' : '#e5e7eb'};
+                                       background: ${!isAnnual ? '#f0f9ff' : 'white'}; border-radius: 6px;
+                                       cursor: pointer; font-weight: 600; font-size: 0.85rem;
+                                       color: ${!isAnnual ? '#0ea5e9' : '#64748b'};">
+                                Monthly $${calc.monthly}/mo
+                            </button>
+                            <button onclick="toggleUpsellCycle('calc', 'annual')"
+                                id="calc-annual-btn"
+                                class="upsell-cycle-btn ${isAnnual ? 'active' : ''}"
+                                style="flex: 1; padding: 8px; border: 2px solid ${isAnnual ? '#0ea5e9' : '#e5e7eb'};
+                                       background: ${isAnnual ? '#f0f9ff' : 'white'}; border-radius: 6px;
+                                       cursor: pointer; font-weight: 600; font-size: 0.85rem;
+                                       color: ${isAnnual ? '#0ea5e9' : '#64748b'};">
+                                Annual $${calc.discounted.toFixed(2)}/mo
+                            </button>
                         </div>
-                        <div style="font-size: 0.8rem; color: #64748b; margin-bottom: 8px;">billed annually ($${calc.yearlyDisc.toFixed(2)}/year)</div>
-                        <button onclick="cart.addItem('${calc.code}', 'annual')" class="add-upsell-btn">
+
+                        <div id="calc-upsell-price" class="upsell-price">
+                            ${isAnnual ? `<span class="original">$${calc.monthly}/mo</span>` : ''}
+                            <span class="discounted">$${displayPrice}/mo</span>
+                            <span style="color: #10b981; font-size: 0.85rem; font-weight: 600;">${savingsText}</span>
+                        </div>
+                        <div id="calc-upsell-billing" style="font-size: 0.8rem; color: #64748b; margin-bottom: 8px;">${billingText}</div>
+                        <button id="calc-upsell-add-btn" onclick="cart.addItem('${calc.code}', '${bipCycle}')" class="add-upsell-btn">
                             <i class="fas fa-plus"></i> Add & Save 15%
                         </button>
                     </div>
                 `;
+
+                // Store calc tier info for toggle
+                window.upsellCalcTier = calc;
             }
 
             if (!hasBIP && !hasCalc) {
@@ -1401,6 +1467,103 @@
                 banner.style.display = 'block';
             } else {
                 banner.style.display = 'none';
+            }
+        }
+
+        // Toggle upsell billing cycle (monthly/annual)
+        function toggleUpsellCycle(product, cycle) {
+            const isAnnual = cycle === 'annual';
+
+            if (product === 'bip' && window.upsellBipTier) {
+                const bip = window.upsellBipTier;
+
+                // Update button styles
+                const monthlyBtn = document.getElementById('bip-monthly-btn');
+                const annualBtn = document.getElementById('bip-annual-btn');
+
+                if (monthlyBtn && annualBtn) {
+                    monthlyBtn.style.borderColor = !isAnnual ? '#0ea5e9' : '#e5e7eb';
+                    monthlyBtn.style.background = !isAnnual ? '#f0f9ff' : 'white';
+                    monthlyBtn.style.color = !isAnnual ? '#0ea5e9' : '#64748b';
+
+                    annualBtn.style.borderColor = isAnnual ? '#0ea5e9' : '#e5e7eb';
+                    annualBtn.style.background = isAnnual ? '#f0f9ff' : 'white';
+                    annualBtn.style.color = isAnnual ? '#0ea5e9' : '#64748b';
+                }
+
+                // Update price display
+                const priceEl = document.getElementById('bip-upsell-price');
+                const billingEl = document.getElementById('bip-upsell-billing');
+                const addBtn = document.getElementById('bip-upsell-add-btn');
+
+                if (priceEl) {
+                    if (isAnnual) {
+                        priceEl.innerHTML = `
+                            <span class="original">$${bip.monthly}/mo</span>
+                            <span class="discounted">$${bip.discounted.toFixed(2)}/mo</span>
+                            <span style="color: #10b981; font-size: 0.85rem; font-weight: 600;">Save 15%</span>
+                        `;
+                    } else {
+                        priceEl.innerHTML = `
+                            <span class="discounted">$${bip.monthly}/mo</span>
+                            <span style="color: #10b981; font-size: 0.85rem; font-weight: 600;">Bundle discount at checkout</span>
+                        `;
+                    }
+                }
+
+                if (billingEl) {
+                    billingEl.textContent = isAnnual ? `billed annually ($${bip.yearlyDisc.toFixed(2)}/year)` : 'billed monthly';
+                }
+
+                if (addBtn) {
+                    addBtn.setAttribute('onclick', `cart.addItem('${bip.code}', '${cycle}')`);
+                }
+            }
+
+            if (product === 'calc' && window.upsellCalcTier) {
+                const calc = window.upsellCalcTier;
+
+                // Update button styles
+                const monthlyBtn = document.getElementById('calc-monthly-btn');
+                const annualBtn = document.getElementById('calc-annual-btn');
+
+                if (monthlyBtn && annualBtn) {
+                    monthlyBtn.style.borderColor = !isAnnual ? '#0ea5e9' : '#e5e7eb';
+                    monthlyBtn.style.background = !isAnnual ? '#f0f9ff' : 'white';
+                    monthlyBtn.style.color = !isAnnual ? '#0ea5e9' : '#64748b';
+
+                    annualBtn.style.borderColor = isAnnual ? '#0ea5e9' : '#e5e7eb';
+                    annualBtn.style.background = isAnnual ? '#f0f9ff' : 'white';
+                    annualBtn.style.color = isAnnual ? '#0ea5e9' : '#64748b';
+                }
+
+                // Update price display
+                const priceEl = document.getElementById('calc-upsell-price');
+                const billingEl = document.getElementById('calc-upsell-billing');
+                const addBtn = document.getElementById('calc-upsell-add-btn');
+
+                if (priceEl) {
+                    if (isAnnual) {
+                        priceEl.innerHTML = `
+                            <span class="original">$${calc.monthly}/mo</span>
+                            <span class="discounted">$${calc.discounted.toFixed(2)}/mo</span>
+                            <span style="color: #10b981; font-size: 0.85rem; font-weight: 600;">Save 15%</span>
+                        `;
+                    } else {
+                        priceEl.innerHTML = `
+                            <span class="discounted">$${calc.monthly}/mo</span>
+                            <span style="color: #10b981; font-size: 0.85rem; font-weight: 600;">Bundle discount at checkout</span>
+                        `;
+                    }
+                }
+
+                if (billingEl) {
+                    billingEl.textContent = isAnnual ? `billed annually ($${calc.yearlyDisc.toFixed(2)}/year)` : 'billed monthly';
+                }
+
+                if (addBtn) {
+                    addBtn.setAttribute('onclick', `cart.addItem('${calc.code}', '${cycle}')`);
+                }
             }
         }
 

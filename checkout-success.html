@@ -586,49 +586,77 @@
                 `;
             }
 
-            try {
-                console.log('Preparing access button with session:', sessionId);
+            // Retry logic - webhook may not have completed yet
+            const maxRetries = 5;
+            const retryDelayMs = 2000; // 2 seconds between retries
 
-                // Show loading state
-                primaryBtn.innerHTML = '<span style="display: inline-block; animation: spin 1s linear infinite;">⏳</span> Preparing your access...';
-                primaryBtn.style.pointerEvents = 'none';
+            async function tryGetAccess(attempt = 1) {
+                try {
+                    console.log(`Preparing access button (attempt ${attempt}/${maxRetries}) with session:`, sessionId);
 
-                // Call backend to create auto-login token
-                const response = await fetch(`${API_URL}/api/auth/auto-login-token`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        session_id: sessionId,
-                        email: email
-                    })
-                });
+                    // Show loading state with attempt info
+                    if (attempt === 1) {
+                        primaryBtn.innerHTML = '<span style="display: inline-block; animation: spin 1s linear infinite;">⏳</span> Preparing your access...';
+                    } else {
+                        primaryBtn.innerHTML = `<span style="display: inline-block; animation: spin 1s linear infinite;">⏳</span> Setting up your account... (${attempt}/${maxRetries})`;
+                    }
+                    primaryBtn.style.pointerEvents = 'none';
 
-                const data = await response.json();
-                clearTimeout(timeoutId);
+                    // Call backend to create auto-login token
+                    const response = await fetch(`${API_URL}/api/auth/auto-login-token`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            session_id: sessionId,
+                            email: email
+                        })
+                    });
 
-                if (data.success && data.redirect_url) {
-                    console.log('✅ Access prepared! Button ready for:', data.redirect_url);
+                    const data = await response.json();
 
-                    // Determine product name
-                    let productName = 'Your Product';
-                    if (data.has_bip) {
-                        productName = 'BIP Platform';
-                    } else if (data.has_calculator) {
-                        productName = 'Wind Load Calculator';
+                    if (data.success && data.redirect_url) {
+                        clearTimeout(timeoutId);
+                        console.log('✅ Access prepared! Button ready for:', data.redirect_url);
+
+                        // Determine product name
+                        let productName = 'Your Product';
+                        if (data.has_bip) {
+                            productName = 'BIP Platform';
+                        } else if (data.has_calculator) {
+                            productName = 'Wind Load Calculator';
+                        }
+
+                        // Show button - user must click to proceed (NO auto-redirect)
+                        showProductButton(productName, data.redirect_url, data.token, data.user_id);
+                        return true;
+
+                    } else if (data.error && data.error.includes('User not found') && attempt < maxRetries) {
+                        // User not created yet - webhook still processing, retry
+                        console.log(`User not found yet (webhook processing), retrying in ${retryDelayMs}ms...`);
+                        await new Promise(resolve => setTimeout(resolve, retryDelayMs));
+                        return tryGetAccess(attempt + 1);
+                    } else {
+                        throw new Error(data.error || 'Failed to prepare access');
                     }
 
-                    // Show button - user must click to proceed (NO auto-redirect)
-                    showProductButton(productName, data.redirect_url, data.token, data.user_id);
-
-                } else {
-                    throw new Error(data.error || 'Failed to prepare access');
+                } catch (error) {
+                    if (attempt < maxRetries && error.message && error.message.includes('User not found')) {
+                        // Retry on user not found errors
+                        console.log(`Retry ${attempt}: ${error.message}`);
+                        await new Promise(resolve => setTimeout(resolve, retryDelayMs));
+                        return tryGetAccess(attempt + 1);
+                    }
+                    throw error;
                 }
+            }
 
+            try {
+                await tryGetAccess();
             } catch (error) {
                 clearTimeout(timeoutId);
-                console.error('Prepare access error:', error);
+                console.error('Prepare access error after retries:', error);
                 console.log('Falling back to login button');
                 showLoginButton();
             }

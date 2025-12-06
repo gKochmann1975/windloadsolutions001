@@ -525,8 +525,8 @@
                 primaryBtn.href = 'login.html';
             }
 
-            function showProductButton(productName, redirectUrl, token, userId) {
-                // Store token in localStorage so product page can read it
+            // Store authentication data for paid user
+            function storeAuthData(token, userId) {
                 if (token) {
                     localStorage.setItem('windload_token', token);
                     localStorage.setItem('authToken', token);
@@ -536,7 +536,7 @@
                     localStorage.setItem('userId', userId);
                 }
 
-                // CRITICAL: Store trial data with authenticated flag
+                // CRITICAL: Store trial data with isPaid flag
                 // This tells trial-manager.js that user is paid, not on free trial
                 const trialData = {
                     userId: userId || 'paid_user',
@@ -544,7 +544,8 @@
                     expiryDate: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(), // 1 year
                     lookups: [],
                     exportAttempts: 0,
-                    authenticated: true, // KEY: This bypasses trial restrictions
+                    authenticated: true,
+                    isPaid: true, // KEY: This bypasses trial restrictions in trial-manager.js
                     featureAccess: {
                         windVelocity: true,
                         hurricaneRisk: true,
@@ -555,7 +556,44 @@
                     }
                 };
                 localStorage.setItem('windload_trial_data', JSON.stringify(trialData));
-                console.log('✅ Stored authenticated trial data for paid user');
+                console.log('✅ Stored authenticated trial data for paid user (isPaid: true)');
+            }
+
+            // Show BOTH product buttons when user has combo purchase
+            function showComboButtons(token, userId, bipUrl, calcUrl) {
+                storeAuthData(token, userId);
+
+                const buttonGroup = document.querySelector('.button-group');
+                buttonGroup.innerHTML = `
+                    <a href="${bipUrl}" class="btn btn-primary" style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2a10 10 0 0 1 10 10 10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2z"></path>
+                            <path d="M12 8v8M8 12h8"></path>
+                        </svg>
+                        <span>Launch BIP Platform</span>
+                    </a>
+                    <a href="${calcUrl}" class="btn btn-primary" style="background: linear-gradient(135deg, #0018ff 0%, #181E57 100%); box-shadow: 0 4px 12px rgba(0, 24, 255, 0.3);">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="4" y="2" width="16" height="20" rx="2"></rect>
+                            <line x1="8" y1="6" x2="16" y2="6"></line>
+                            <line x1="8" y1="10" x2="16" y2="10"></line>
+                            <line x1="8" y1="14" x2="12" y2="14"></line>
+                            <line x1="8" y1="18" x2="12" y2="18"></line>
+                        </svg>
+                        <span>Launch Calculator</span>
+                    </a>
+                `;
+
+                // Update subtitle to show both products
+                const subtitle = document.querySelector('.subtitle');
+                subtitle.innerHTML = `Thank you for subscribing! Your payment has been processed and both your <strong>Building Intelligence Platform</strong> and <strong>Wind Load Calculator</strong> subscriptions are now <strong style="color: #10b981;">ACTIVE</strong>.<br><br>Click a button below to start using your products.`;
+
+                // Update email notice to success state
+                updateEmailNoticeToSuccess();
+            }
+
+            function showProductButton(productName, redirectUrl, token, userId) {
+                storeAuthData(token, userId);
 
                 primaryBtn.innerHTML = `
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -573,6 +611,10 @@
                 subtitle.innerHTML = `Thank you for subscribing! Your payment has been processed and your <strong>${productName}</strong> subscription is now <strong style="color: #10b981;">ACTIVE</strong>.<br><br>Click the button below to start using your product.`;
 
                 // Update email notice to success state
+                updateEmailNoticeToSuccess();
+            }
+
+            function updateEmailNoticeToSuccess() {
                 const emailNotice = document.querySelector('.email-notice');
                 emailNotice.style.borderColor = '#10b981';
                 emailNotice.style.background = '#f0fdf4';
@@ -618,9 +660,18 @@
 
                     if (data.success && data.redirect_url) {
                         clearTimeout(timeoutId);
-                        console.log('✅ Access prepared! Button ready for:', data.redirect_url);
+                        console.log('✅ Access prepared! has_bip:', data.has_bip, 'has_calculator:', data.has_calculator);
 
-                        // Determine product name
+                        // Check if user has BOTH products (combo purchase)
+                        if (data.has_bip && data.has_calculator) {
+                            console.log('🎉 COMBO purchase detected - showing both product buttons');
+                            const bipUrl = `https://windloadcalc.com/building-intelligence-platform.html?token=${data.token}&user_id=${data.user_id}&paid=true`;
+                            const calcUrl = `https://calc.windloadcalc.com/?token=${data.token}&user_id=${data.user_id}&paid=true`;
+                            showComboButtons(data.token, data.user_id, bipUrl, calcUrl);
+                            return true;
+                        }
+
+                        // Single product purchase
                         let productName = 'Your Product';
                         if (data.has_bip) {
                             productName = 'BIP Platform';

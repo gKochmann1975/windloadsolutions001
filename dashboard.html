@@ -499,7 +499,9 @@
                 // Update action button
                 bipAction.textContent = 'Launch Platform →';
                 bipAction.className = 'action-btn primary';
-                bipAction.href = `${BIP_URL}?token=${storedToken}&user_id=${storedUserId}`;
+                // CRITICAL: Add paid=true for PAID subscriptions (not trials) so BIP doesn't show trial restrictions
+                const isBipPaid = bipSub.status === 'active' && bipSub.status !== 'trialing';
+                bipAction.href = `${BIP_URL}?token=${storedToken}&user_id=${storedUserId}${isBipPaid ? '&paid=true' : ''}`;
                 bipAction.target = '_self';
             } else {
                 bipAction.href = 'building-intelligence-platform-shop.html';

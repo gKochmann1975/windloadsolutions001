@@ -986,12 +986,17 @@
                     // Redirect based on trial type or subscription
                     setTimeout(() => {
                         const trialType = isTrialSignup ? requestBody.trial_type : null;
+                        // Check if user has PAID subscriptions (not trial signups)
+                        // Add &paid=true for paid users so BIP doesn't show trial restrictions
+                        const isPaidUser = !isTrialSignup && (data.subscriptions?.has_bip || data.subscriptions?.has_calculator);
+                        const paidParam = isPaidUser ? '&paid=true' : '';
+
                         if (trialType === 'bip' || data.subscriptions?.has_bip) {
-                            window.location.href = `${BIP_URL}?token=${data.token}&user_id=${data.user_id}`;
+                            window.location.href = `${BIP_URL}?token=${data.token}&user_id=${data.user_id}${paidParam}`;
                         } else if (trialType === 'calculator' || data.subscriptions?.has_calculator) {
-                            window.location.href = `${WEBAPP_URL}/?token=${data.token}&user_id=${data.user_id}`;
+                            window.location.href = `${WEBAPP_URL}/?token=${data.token}&user_id=${data.user_id}${paidParam}`;
                         } else {
-                            // Default to BIP for new users
+                            // Default to BIP for new users (trial)
                             window.location.href = `${BIP_URL}?token=${data.token}&user_id=${data.user_id}`;
                         }
                     }, 1000);

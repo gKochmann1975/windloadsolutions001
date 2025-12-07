@@ -1471,11 +1471,22 @@
         }
 
         // Toggle upsell billing cycle (monthly/annual)
+        // IMPORTANT: Bundle 15% discount ONLY applies when both products have the SAME billing cycle
         function toggleUpsellCycle(product, cycle) {
             const isAnnual = cycle === 'annual';
 
+            // Get the primary item's billing cycle to check if bundle discount applies
+            const totals = cart.calculateTotals();
+            const allItems = [...totals.monthlyItems, ...totals.annualItems];
+            const calcItem = allItems.find(item => item.category === 'calculator');
+            const bipItem = allItems.find(item => item.category === 'bip');
+
             if (product === 'bip' && window.upsellBipTier) {
                 const bip = window.upsellBipTier;
+
+                // Check if the upsell cycle matches the primary Calculator's cycle
+                const primaryCycle = calcItem ? calcItem.billingCycle : 'annual';
+                const cyclesMatch = cycle === primaryCycle;
 
                 // Update button styles
                 const monthlyBtn = document.getElementById('bip-monthly-btn');
@@ -1491,23 +1502,40 @@
                     annualBtn.style.color = isAnnual ? '#0ea5e9' : '#64748b';
                 }
 
-                // Update price display
+                // Update price display - show bundle discount ONLY if cycles match
                 const priceEl = document.getElementById('bip-upsell-price');
                 const billingEl = document.getElementById('bip-upsell-billing');
                 const addBtn = document.getElementById('bip-upsell-add-btn');
 
                 if (priceEl) {
                     if (isAnnual) {
-                        priceEl.innerHTML = `
-                            <span class="original">$${bip.monthly}/mo</span>
-                            <span class="discounted">$${bip.discounted.toFixed(2)}/mo</span>
-                            <span style="color: #10b981; font-size: 0.85rem; font-weight: 600;">Save 15%</span>
-                        `;
+                        // Annual: 15% annual discount already built in
+                        if (cyclesMatch) {
+                            priceEl.innerHTML = `
+                                <span class="original">$${bip.monthly}/mo</span>
+                                <span class="discounted">$${bip.discounted.toFixed(2)}/mo</span>
+                                <span style="color: #10b981; font-size: 0.85rem; font-weight: 600;">Save 15% (annual)</span>
+                            `;
+                        } else {
+                            priceEl.innerHTML = `
+                                <span class="original">$${bip.monthly}/mo</span>
+                                <span class="discounted">$${bip.discounted.toFixed(2)}/mo</span>
+                                <span style="color: #f59e0b; font-size: 0.85rem; font-weight: 600;">No bundle discount (different cycle)</span>
+                            `;
+                        }
                     } else {
-                        priceEl.innerHTML = `
-                            <span class="discounted">$${bip.monthly}/mo</span>
-                            <span style="color: #10b981; font-size: 0.85rem; font-weight: 600;">Bundle discount at checkout</span>
-                        `;
+                        // Monthly: bundle discount only if primary is also monthly
+                        if (cyclesMatch) {
+                            priceEl.innerHTML = `
+                                <span class="discounted">$${bip.monthly}/mo</span>
+                                <span style="color: #10b981; font-size: 0.85rem; font-weight: 600;">15% bundle discount at checkout</span>
+                            `;
+                        } else {
+                            priceEl.innerHTML = `
+                                <span class="discounted">$${bip.monthly}/mo</span>
+                                <span style="color: #f59e0b; font-size: 0.85rem; font-weight: 600;">No bundle discount (different cycle)</span>
+                            `;
+                        }
                     }
                 }
 
@@ -1517,11 +1545,21 @@
 
                 if (addBtn) {
                     addBtn.setAttribute('onclick', `cart.addItem('${bip.code}', '${cycle}')`);
+                    // Update button text based on whether bundle discount applies
+                    if (cyclesMatch) {
+                        addBtn.innerHTML = `<i class="fas fa-plus"></i> Add & Save 15%`;
+                    } else {
+                        addBtn.innerHTML = `<i class="fas fa-plus"></i> Add to Cart`;
+                    }
                 }
             }
 
             if (product === 'calc' && window.upsellCalcTier) {
                 const calc = window.upsellCalcTier;
+
+                // Check if the upsell cycle matches the primary BIP's cycle
+                const primaryCycle = bipItem ? bipItem.billingCycle : 'annual';
+                const cyclesMatch = cycle === primaryCycle;
 
                 // Update button styles
                 const monthlyBtn = document.getElementById('calc-monthly-btn');
@@ -1537,23 +1575,40 @@
                     annualBtn.style.color = isAnnual ? '#0ea5e9' : '#64748b';
                 }
 
-                // Update price display
+                // Update price display - show bundle discount ONLY if cycles match
                 const priceEl = document.getElementById('calc-upsell-price');
                 const billingEl = document.getElementById('calc-upsell-billing');
                 const addBtn = document.getElementById('calc-upsell-add-btn');
 
                 if (priceEl) {
                     if (isAnnual) {
-                        priceEl.innerHTML = `
-                            <span class="original">$${calc.monthly}/mo</span>
-                            <span class="discounted">$${calc.discounted.toFixed(2)}/mo</span>
-                            <span style="color: #10b981; font-size: 0.85rem; font-weight: 600;">Save 15%</span>
-                        `;
+                        // Annual: 15% annual discount already built in
+                        if (cyclesMatch) {
+                            priceEl.innerHTML = `
+                                <span class="original">$${calc.monthly}/mo</span>
+                                <span class="discounted">$${calc.discounted.toFixed(2)}/mo</span>
+                                <span style="color: #10b981; font-size: 0.85rem; font-weight: 600;">Save 15% (annual)</span>
+                            `;
+                        } else {
+                            priceEl.innerHTML = `
+                                <span class="original">$${calc.monthly}/mo</span>
+                                <span class="discounted">$${calc.discounted.toFixed(2)}/mo</span>
+                                <span style="color: #f59e0b; font-size: 0.85rem; font-weight: 600;">No bundle discount (different cycle)</span>
+                            `;
+                        }
                     } else {
-                        priceEl.innerHTML = `
-                            <span class="discounted">$${calc.monthly}/mo</span>
-                            <span style="color: #10b981; font-size: 0.85rem; font-weight: 600;">Bundle discount at checkout</span>
-                        `;
+                        // Monthly: bundle discount only if primary is also monthly
+                        if (cyclesMatch) {
+                            priceEl.innerHTML = `
+                                <span class="discounted">$${calc.monthly}/mo</span>
+                                <span style="color: #10b981; font-size: 0.85rem; font-weight: 600;">15% bundle discount at checkout</span>
+                            `;
+                        } else {
+                            priceEl.innerHTML = `
+                                <span class="discounted">$${calc.monthly}/mo</span>
+                                <span style="color: #f59e0b; font-size: 0.85rem; font-weight: 600;">No bundle discount (different cycle)</span>
+                            `;
+                        }
                     }
                 }
 
@@ -1563,6 +1618,12 @@
 
                 if (addBtn) {
                     addBtn.setAttribute('onclick', `cart.addItem('${calc.code}', '${cycle}')`);
+                    // Update button text based on whether bundle discount applies
+                    if (cyclesMatch) {
+                        addBtn.innerHTML = `<i class="fas fa-plus"></i> Add & Save 15%`;
+                    } else {
+                        addBtn.innerHTML = `<i class="fas fa-plus"></i> Add to Cart`;
+                    }
                 }
             }
         }

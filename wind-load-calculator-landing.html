@@ -741,10 +741,13 @@ body.panel-open {
     left: 50%;
     min-width: 100%;
     min-height: 100%;
-    width: auto;
-    height: auto;
+    width: 100vw;
+    height: 100vh;
     transform: translate(-50%, -50%);
     object-fit: cover;
+    /* Ensure video is always visible and playing */
+    opacity: 1;
+    visibility: visible;
 }
 
 .video-overlay {
@@ -4523,7 +4526,7 @@ body.panel-open {
         <!-- Hero Section -->
         <section class="hero-section">
             <div class="video-background">
-                <video class="hero-video" autoplay muted loop playsinline>
+                <video class="hero-video" autoplay muted loop playsinline preload="auto">
                     <source src="videos/wind-load-calculator-landing.webm" type="video/webm">
                     <source src="videos/wind-load-calculator-landing.mp4" type="video/mp4">
                 </video>
@@ -5948,24 +5951,40 @@ body.panel-open {
             const video = document.querySelector('.hero-video');
             if (!video) return;
 
+            // Ensure video plays on all devices including mobile
             video.muted = true;
             video.playsInline = true;
-            
-            video.addEventListener('loadeddata', function() {
+            video.setAttribute('playsinline', '');
+            video.setAttribute('webkit-playsinline', '');
+
+            // Force play function
+            const playVideo = function() {
                 video.play().catch(function() {
                     console.log('Video autoplay blocked');
                 });
-            });
+            };
+
+            // Try to play immediately
+            playVideo();
+
+            // Also try after loadeddata event
+            video.addEventListener('loadeddata', playVideo);
 
             video.addEventListener('error', function() {
                 video.style.display = 'none';
             });
 
+            // Try to play on first user interaction if still paused
             document.addEventListener('click', function() {
                 if (video.paused) {
-                    video.play().catch(function() {
-                        console.log('Manual play failed');
-                    });
+                    playVideo();
+                }
+            }, { once: true });
+
+            // Also try on touchstart for mobile devices
+            document.addEventListener('touchstart', function() {
+                if (video.paused) {
+                    playVideo();
                 }
             }, { once: true });
         }
@@ -6862,28 +6881,51 @@ function toggleNav() {
 // VIDEO BACKGROUND
 // ============================================
 
-function initializeVideo() {
+function initializeVideoBackground() {
     const video = document.querySelector('.hero-video');
-    
+
     if (video) {
-        // Ensure video plays on mobile (with fallback)
-        video.play().catch(function(error) {
-            console.log('Video autoplay failed:', error);
-            // Fallback: Show poster or static image if video fails
-        });
-        
+        // Ensure video plays on all devices including mobile
+        video.muted = true;
+        video.playsInline = true;
+        video.setAttribute('playsinline', '');
+        video.setAttribute('webkit-playsinline', '');
+
+        // Force play on load
+        const playVideo = function() {
+            video.play().catch(function(error) {
+                console.log('Video autoplay failed:', error);
+            });
+        };
+
+        // Try to play immediately
+        playVideo();
+
+        // Also try after loadeddata event
+        video.addEventListener('loadeddata', playVideo);
+
         // Pause video when not in viewport (performance optimization)
+        // Use low threshold so video stays playing when mostly visible
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    video.play();
+                    video.play().catch(function() {});
                 } else {
                     video.pause();
                 }
             });
-        }, { threshold: 0.5 });
-        
+        }, { threshold: 0.1 });
+
         observer.observe(video);
+
+        // Handle visibility change (tab switching)
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                video.pause();
+            } else {
+                video.play().catch(function() {});
+            }
+        });
     }
 }
 

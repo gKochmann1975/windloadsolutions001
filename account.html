@@ -1123,10 +1123,11 @@
 
                 if (response.ok) {
                     const data = await response.json();
+                    // API returns data.team.members, data.team.seats_used, data.team.seat_limit
                     teamData = {
-                        seats_used: data.seats_used || 1,
-                        seat_limit: data.seat_limit || getTeamSeats(sub),
-                        members: data.team_members || []
+                        seats_used: data.team?.seats_used || 1,
+                        seat_limit: data.team?.seat_limit || getTeamSeats(sub),
+                        members: data.team?.members || []
                     };
                 }
 
@@ -1151,7 +1152,8 @@
                 teamData.members.forEach(member => {
                     const statusClass = member.status === 'active' ? 'status-active' : 'status-pending';
                     const statusText = member.status === 'active' ? 'Active' : 'Pending';
-                    const memberName = member.member_name || member.invite_email.split('@')[0];
+                    const memberEmail = member.email || member.invite_email;
+                    const memberName = member.name || memberEmail.split('@')[0];
 
                     membersHtml += `
                         <div class="team-member-row">
@@ -1159,7 +1161,7 @@
                                 <div class="member-avatar">${getInitials(memberName)}</div>
                                 <div class="member-details">
                                     <h4>${memberName}</h4>
-                                    <span>${member.invite_email}</span>
+                                    <span>${memberEmail}</span>
                                 </div>
                             </div>
                             <div style="display: flex; align-items: center; gap: 0.5rem;">

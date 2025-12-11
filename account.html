@@ -878,11 +878,19 @@
                 }
 
                 if (currentUser) {
-                    updateWelcomeBanner();
+                    // Update name and email fields (but NOT status yet - wait for subscriptions)
+                    const firstName = currentUser.full_name ? currentUser.full_name.split(' ')[0] : 'User';
+                    document.getElementById('userName').textContent = firstName;
+                    document.getElementById('fullName').value = currentUser.full_name || '';
+                    document.getElementById('email').value = currentUser.email || '';
+                    document.getElementById('company').value = currentUser.company || '';
                 }
 
-                // Load subscriptions
+                // Load subscriptions FIRST, then update status
                 await loadSubscriptions();
+
+                // NOW update the account status after subscriptions are loaded
+                updateAccountStatus();
 
                 // Determine which tabs to show
                 updateTabVisibility();
@@ -941,9 +949,7 @@
                 document.getElementById('fullName').value = currentUser.full_name || '';
                 document.getElementById('email').value = currentUser.email || '';
                 document.getElementById('company').value = currentUser.company || '';
-
-                // Update account status
-                updateAccountStatus();
+                // Note: updateAccountStatus() is called separately after loadSubscriptions()
             }
         }
 
@@ -1095,118 +1101,53 @@
                 return;
             }
 
-            // Find subscription with team seats
-            const sub = userSubscriptions.find(s => hasTeamSeats(s));
-            if (!sub) return;
-
-            // Store current subscription for invite function
-            window.currentTeamSubscription = sub;
+            // Find ALL subscriptions with team seats (both BIP and Calculator)
+            const teamSubs = userSubscriptions.filter(s => hasTeamSeats(s));
+            if (teamSubs.length === 0) return;
 
             const token = localStorage.getItem(STORAGE_KEY) || localStorage.getItem('windload_token');
             const userId = currentUser?.id || currentUser?.user_id;
 
-            try {
-                // Fetch team info from backend
-                const response = await fetch(`${API_URL}/api/team/info`, {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        user_id: userId,
-                        subscription_id: sub.subscription_id || sub.id
-                    })
-                });
+            // Build HTML for each subscription's team management
+            let allTeamsHtml = '';
 
-                let teamData = { seats_used: 1, seat_limit: getTeamSeats(sub), members: [] };
+            for (const sub of teamSubs) {
+                const isBIP = sub.product_code?.startsWith('bip_') || sub.product_name?.toLowerCase().includes('building intelligence');
+                const productLabel = isBIP ? 'Building Intelligence Platform (BIP)' : 'Wind Load Calculators';
+                const productIcon = isBIP ? 'fa-brain' : 'fa-calculator';
+                const productColor = isBIP ? '#8b5cf6' : '#0ea5e9';
 
-                if (response.ok) {
-                    const data = await response.json();
-                    // API returns data.team.members, data.team.seats_used, data.team.seat_limit
-                    teamData = {
-                        seats_used: data.team?.seats_used || 1,
-                        seat_limit: data.team?.seat_limit || getTeamSeats(sub),
-                        members: data.team?.members || []
-                    };
-                }
+                try {
+                    // Fetch team info for this subscription
+                    const response = await fetch(`${API_URL}/api/team/info`, {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            user_id: userId,
+                            subscription_id: sub.subscription_id || sub.id
+                        })
+                    });
 
-                const seats = teamData.seat_limit;
-                const seatsUsed = teamData.seats_used;
+                    let teamData = { seats_used: 1, seat_limit: getTeamSeats(sub), members: [] };
 
-                // Build team members HTML
-                let membersHtml = `
-                    <div class="team-member-row">
-                        <div class="member-info">
-                            <div class="member-avatar">${getInitials(currentUser?.full_name)}</div>
-                            <div class="member-details">
-                                <h4>${currentUser?.full_name || 'You'}</h4>
-                                <span>${currentUser?.email}</span>
-                            </div>
-                        </div>
-                        <span class="member-status status-owner">Owner</span>
-                    </div>
-                `;
+                    if (response.ok) {
+                        const data = await response.json();
+                        teamData = {
+                            seats_used: data.team?.seats_used || 1,
+                            seat_limit: data.team?.seat_limit || getTeamSeats(sub),
+                            members: data.team?.members || []
+                        };
+                    }
 
-                // Add team members from API
-                teamData.members.forEach(member => {
-                    const statusClass = member.status === 'active' ? 'status-active' : 'status-pending';
-                    const statusText = member.status === 'active' ? 'Active' : 'Pending';
-                    const memberEmail = member.email || member.invite_email;
-                    const memberName = member.name || memberEmail.split('@')[0];
+                    const seats = teamData.seat_limit;
+                    const seatsUsed = teamData.seats_used;
+                    const subId = sub.subscription_id || sub.id;
 
-                    membersHtml += `
-                        <div class="team-member-row">
-                            <div class="member-info">
-                                <div class="member-avatar">${getInitials(memberName)}</div>
-                                <div class="member-details">
-                                    <h4>${memberName}</h4>
-                                    <span>${memberEmail}</span>
-                                </div>
-                            </div>
-                            <div style="display: flex; align-items: center; gap: 0.5rem;">
-                                <span class="member-status ${statusClass}">${statusText}</span>
-                                <button class="btn btn-danger" style="padding: 0.3rem 0.6rem; font-size: 0.75rem;" onclick="removeMember(${member.id})">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
-                        </div>
-                    `;
-                });
-
-                container.innerHTML = `
-                    <div class="team-header">
-                        <div class="seat-usage">
-                            <div class="number">${seatsUsed}/${seats === null ? '∞' : seats}</div>
-                            <div class="label">Seats Used</div>
-                        </div>
-                    </div>
-
-                    <div id="teamMembersList">
-                        ${membersHtml}
-                    </div>
-
-                    <div class="invite-form">
-                        <input type="email" class="form-input" id="inviteEmail" placeholder="Enter team member's email address">
-                        <button class="btn btn-primary" onclick="sendInvite()">
-                            <i class="fas fa-paper-plane"></i> Send Invite
-                        </button>
-                    </div>
-                `;
-
-            } catch (error) {
-                console.error('Error loading team data:', error);
-                // Show basic UI even if API fails
-                const seats = getTeamSeats(sub);
-                container.innerHTML = `
-                    <div class="team-header">
-                        <div class="seat-usage">
-                            <div class="number">1/${seats === -1 ? '∞' : seats}</div>
-                            <div class="label">Seats Used</div>
-                        </div>
-                    </div>
-
-                    <div id="teamMembersList">
+                    // Build team members HTML for this subscription
+                    let membersHtml = `
                         <div class="team-member-row">
                             <div class="member-info">
                                 <div class="member-avatar">${getInitials(currentUser?.full_name)}</div>
@@ -1217,16 +1158,74 @@
                             </div>
                             <span class="member-status status-owner">Owner</span>
                         </div>
-                    </div>
+                    `;
 
-                    <div class="invite-form">
-                        <input type="email" class="form-input" id="inviteEmail" placeholder="Enter team member's email address">
-                        <button class="btn btn-primary" onclick="sendInvite()">
-                            <i class="fas fa-paper-plane"></i> Send Invite
-                        </button>
-                    </div>
-                `;
+                    // Add team members from API
+                    teamData.members.forEach(member => {
+                        const statusClass = member.status === 'active' ? 'status-active' : 'status-pending';
+                        const statusText = member.status === 'active' ? 'Active' : 'Pending';
+                        const memberEmail = member.email || member.invite_email;
+                        const memberName = member.name || memberEmail.split('@')[0];
+
+                        membersHtml += `
+                            <div class="team-member-row">
+                                <div class="member-info">
+                                    <div class="member-avatar">${getInitials(memberName)}</div>
+                                    <div class="member-details">
+                                        <h4>${memberName}</h4>
+                                        <span>${memberEmail}</span>
+                                    </div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <span class="member-status ${statusClass}">${statusText}</span>
+                                    <button class="btn btn-danger" style="padding: 0.3rem 0.6rem; font-size: 0.75rem;" onclick="removeMember(${member.id}, ${subId})">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                    });
+
+                    allTeamsHtml += `
+                        <div class="team-section" style="margin-bottom: 2rem; padding: 1.5rem; background: linear-gradient(135deg, ${productColor}10 0%, ${productColor}05 100%); border-radius: 12px; border: 2px solid ${productColor}30;">
+                            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                                <i class="fas ${productIcon}" style="font-size: 1.5rem; color: ${productColor};"></i>
+                                <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--dark-blue); margin: 0;">${productLabel}</h3>
+                                <span class="subscription-badge" style="background: ${productColor}; color: white; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600;">${(sub.plan_tier || 'STARTER').toUpperCase()}</span>
+                            </div>
+
+                            <div class="team-header" style="margin-bottom: 1rem;">
+                                <div class="seat-usage">
+                                    <div class="number">${seatsUsed}/${seats === null ? '∞' : seats}</div>
+                                    <div class="label">Seats Used</div>
+                                </div>
+                            </div>
+
+                            <div class="team-members-list">
+                                ${membersHtml}
+                            </div>
+
+                            <div class="invite-form" style="display: flex; gap: 1rem; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid ${productColor}30;">
+                                <input type="email" class="form-input" id="inviteEmail-${subId}" placeholder="Enter team member's email address" style="flex: 1;">
+                                <button class="btn btn-primary" onclick="sendInviteForSubscription(${subId})" style="background: ${productColor};">
+                                    <i class="fas fa-paper-plane"></i> Send Invite
+                                </button>
+                            </div>
+                        </div>
+                    `;
+
+                } catch (error) {
+                    console.error('Error loading team data for subscription:', sub, error);
+                }
             }
+
+            container.innerHTML = allTeamsHtml || `
+                <div class="no-team-access">
+                    <i class="fas fa-users-slash"></i>
+                    <h3>Team Management Not Available</h3>
+                    <p>Upgrade to Pro, Premium, or Enterprise to invite team members.</p>
+                </div>
+            `;
         }
 
         function getTeamSeats(sub) {
@@ -1336,9 +1335,10 @@
             }
         });
 
-        // Team Functions
-        async function sendInvite() {
-            const email = document.getElementById('inviteEmail').value.trim();
+        // Team Functions - subscription-specific
+        async function sendInviteForSubscription(subscriptionId) {
+            const emailInput = document.getElementById(`inviteEmail-${subscriptionId}`);
+            const email = emailInput?.value.trim();
 
             if (!email) {
                 showAlert('Please enter an email address.', 'error');
@@ -1349,13 +1349,6 @@
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) {
                 showAlert('Please enter a valid email address.', 'error');
-                return;
-            }
-
-            // Get subscription ID from stored subscription
-            const sub = window.currentTeamSubscription;
-            if (!sub) {
-                showAlert('No active team subscription found.', 'error');
                 return;
             }
 
@@ -1371,7 +1364,7 @@
                     },
                     body: JSON.stringify({
                         user_id: userId,
-                        subscription_id: sub.subscription_id || sub.id,
+                        subscription_id: subscriptionId,
                         email: email
                     })
                 });
@@ -1380,7 +1373,7 @@
 
                 if (response.ok && data.success) {
                     showAlert(`Invitation sent to ${email}!`, 'success');
-                    document.getElementById('inviteEmail').value = '';
+                    emailInput.value = '';
                     // Reload team data to show new member
                     await loadTeamData();
                 } else {
@@ -1392,7 +1385,7 @@
             }
         }
 
-        async function removeMember(membershipId) {
+        async function removeMember(membershipId, subscriptionId) {
             if (!confirm('Are you sure you want to remove this team member?')) {
                 return;
             }
@@ -1400,7 +1393,6 @@
             try {
                 const token = localStorage.getItem(STORAGE_KEY) || localStorage.getItem('windload_token');
                 const userId = currentUser?.id || currentUser?.user_id;
-                const sub = window.currentTeamSubscription;
 
                 const response = await fetch(`${API_URL}/api/team/remove-member`, {
                     method: 'POST',
@@ -1410,7 +1402,7 @@
                     },
                     body: JSON.stringify({
                         user_id: userId,
-                        subscription_id: sub.subscription_id || sub.id,
+                        subscription_id: subscriptionId,
                         membership_id: membershipId
                     })
                 });

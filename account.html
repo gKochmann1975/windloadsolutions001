@@ -1089,24 +1089,119 @@
         }
 
         async function loadTeamData() {
-            // This will be implemented when team backend is ready
             const container = document.getElementById('teamContent');
 
-            // For now, show the team management UI for Pro/Premium/Enterprise users
-            if (hasTeamManagement()) {
-                const sub = userSubscriptions.find(s => hasTeamSeats(s));
-                const seats = getTeamSeats(sub);
-                const seatsUsed = 1; // Will come from API
+            if (!hasTeamManagement()) {
+                return;
+            }
+
+            // Find subscription with team seats
+            const sub = userSubscriptions.find(s => hasTeamSeats(s));
+            if (!sub) return;
+
+            // Store current subscription for invite function
+            window.currentTeamSubscription = sub;
+
+            const token = localStorage.getItem(STORAGE_KEY) || localStorage.getItem('windload_token');
+            const userId = currentUser?.id || currentUser?.user_id;
+
+            try {
+                // Fetch team info from backend
+                const response = await fetch(`${API_URL}/api/team/info`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        user_id: userId,
+                        subscription_id: sub.subscription_id || sub.id
+                    })
+                });
+
+                let teamData = { seats_used: 1, seat_limit: getTeamSeats(sub), members: [] };
+
+                if (response.ok) {
+                    const data = await response.json();
+                    teamData = {
+                        seats_used: data.seats_used || 1,
+                        seat_limit: data.seat_limit || getTeamSeats(sub),
+                        members: data.team_members || []
+                    };
+                }
+
+                const seats = teamData.seat_limit;
+                const seatsUsed = teamData.seats_used;
+
+                // Build team members HTML
+                let membersHtml = `
+                    <div class="team-member-row">
+                        <div class="member-info">
+                            <div class="member-avatar">${getInitials(currentUser?.full_name)}</div>
+                            <div class="member-details">
+                                <h4>${currentUser?.full_name || 'You'}</h4>
+                                <span>${currentUser?.email}</span>
+                            </div>
+                        </div>
+                        <span class="member-status status-owner">Owner</span>
+                    </div>
+                `;
+
+                // Add team members from API
+                teamData.members.forEach(member => {
+                    const statusClass = member.status === 'active' ? 'status-active' : 'status-pending';
+                    const statusText = member.status === 'active' ? 'Active' : 'Pending';
+                    const memberName = member.member_name || member.invite_email.split('@')[0];
+
+                    membersHtml += `
+                        <div class="team-member-row">
+                            <div class="member-info">
+                                <div class="member-avatar">${getInitials(memberName)}</div>
+                                <div class="member-details">
+                                    <h4>${memberName}</h4>
+                                    <span>${member.invite_email}</span>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span class="member-status ${statusClass}">${statusText}</span>
+                                <button class="btn btn-danger" style="padding: 0.3rem 0.6rem; font-size: 0.75rem;" onclick="removeMember(${member.id})">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                });
 
                 container.innerHTML = `
                     <div class="team-header">
                         <div class="seat-usage">
-                            <div class="number">${seatsUsed}/${seats === -1 ? '∞' : seats}</div>
+                            <div class="number">${seatsUsed}/${seats === null ? '∞' : seats}</div>
                             <div class="label">Seats Used</div>
                         </div>
-                        <button class="btn btn-success" onclick="showInviteModal()">
-                            <i class="fas fa-user-plus"></i> Invite Team Member
+                    </div>
+
+                    <div id="teamMembersList">
+                        ${membersHtml}
+                    </div>
+
+                    <div class="invite-form">
+                        <input type="email" class="form-input" id="inviteEmail" placeholder="Enter team member's email address">
+                        <button class="btn btn-primary" onclick="sendInvite()">
+                            <i class="fas fa-paper-plane"></i> Send Invite
                         </button>
+                    </div>
+                `;
+
+            } catch (error) {
+                console.error('Error loading team data:', error);
+                // Show basic UI even if API fails
+                const seats = getTeamSeats(sub);
+                container.innerHTML = `
+                    <div class="team-header">
+                        <div class="seat-usage">
+                            <div class="number">1/${seats === -1 ? '∞' : seats}</div>
+                            <div class="label">Seats Used</div>
+                        </div>
                     </div>
 
                     <div id="teamMembersList">
@@ -1248,28 +1343,88 @@
                 return;
             }
 
+            // Validate email format
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showAlert('Please enter a valid email address.', 'error');
+                return;
+            }
+
+            // Get subscription ID from stored subscription
+            const sub = window.currentTeamSubscription;
+            if (!sub) {
+                showAlert('No active team subscription found.', 'error');
+                return;
+            }
+
             try {
-                const token = localStorage.getItem(STORAGE_KEY);
+                const token = localStorage.getItem(STORAGE_KEY) || localStorage.getItem('windload_token');
+                const userId = currentUser?.id || currentUser?.user_id;
+
                 const response = await fetch(`${API_URL}/api/team/invite`, {
                     method: 'POST',
                     headers: {
                         'Authorization': `Bearer ${token}`,
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ email })
+                    body: JSON.stringify({
+                        user_id: userId,
+                        subscription_id: sub.subscription_id || sub.id,
+                        email: email
+                    })
                 });
 
-                if (response.ok) {
+                const data = await response.json();
+
+                if (response.ok && data.success) {
                     showAlert(`Invitation sent to ${email}!`, 'success');
                     document.getElementById('inviteEmail').value = '';
-                    // Reload team data
+                    // Reload team data to show new member
                     await loadTeamData();
                 } else {
-                    const data = await response.json();
                     showAlert(data.error || 'Failed to send invitation.', 'error');
                 }
             } catch (error) {
+                console.error('Error sending invite:', error);
                 showAlert('Error sending invitation. Please try again.', 'error');
+            }
+        }
+
+        async function removeMember(membershipId) {
+            if (!confirm('Are you sure you want to remove this team member?')) {
+                return;
+            }
+
+            try {
+                const token = localStorage.getItem(STORAGE_KEY) || localStorage.getItem('windload_token');
+                const userId = currentUser?.id || currentUser?.user_id;
+                const sub = window.currentTeamSubscription;
+
+                const response = await fetch(`${API_URL}/api/team/remove-member`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        user_id: userId,
+                        subscription_id: sub.subscription_id || sub.id,
+                        membership_id: membershipId
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    showAlert('Team member removed successfully.', 'success');
+                    // Reload team data
+                    await loadTeamData();
+                } else {
+                    showAlert(data.error || 'Failed to remove team member.', 'error');
+                }
+            } catch (error) {
+                console.error('Error removing member:', error);
+                showAlert('Error removing team member. Please try again.', 'error');
             }
         }
 

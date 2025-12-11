@@ -842,7 +842,7 @@
         });
 
         async function initAccount() {
-            const token = localStorage.getItem(STORAGE_KEY);
+            const token = localStorage.getItem(STORAGE_KEY) || localStorage.getItem('windload_token');
 
             if (!token) {
                 // Not logged in - redirect to login
@@ -852,9 +852,32 @@
 
             // Verify token and load user data
             try {
+                // Try to get user data from storage - check multiple possible keys
                 const userData = localStorage.getItem(USER_STORAGE_KEY);
                 if (userData) {
                     currentUser = JSON.parse(userData);
+                } else {
+                    // Fallback: construct user data from individual storage items
+                    const userId = localStorage.getItem('windload_user_id') || localStorage.getItem('userId');
+                    const userName = localStorage.getItem('userName') || 'User';
+                    const userEmail = localStorage.getItem('userEmail') || '';
+
+                    if (userId) {
+                        currentUser = {
+                            id: parseInt(userId),
+                            user_id: parseInt(userId),
+                            full_name: userName,
+                            email: userEmail
+                        };
+                    }
+                }
+
+                // If we still don't have user data, try to fetch from API
+                if (!currentUser || (!currentUser.id && !currentUser.user_id)) {
+                    await fetchUserProfile(token);
+                }
+
+                if (currentUser) {
                     updateWelcomeBanner();
                 }
 
@@ -872,6 +895,42 @@
             } catch (error) {
                 console.error('Error initializing account:', error);
                 showAlert('Error loading account data. Please try logging in again.', 'error');
+            }
+        }
+
+        async function fetchUserProfile(token) {
+            try {
+                // Decode JWT token to get user_id (JWT tokens are base64 encoded)
+                const tokenParts = token.split('.');
+                if (tokenParts.length === 3) {
+                    const payload = JSON.parse(atob(tokenParts[1]));
+                    const userId = payload.user_id;
+
+                    if (userId) {
+                        const response = await fetch(`${API_URL}/api/user/${userId}`, {
+                            headers: {
+                                'Authorization': `Bearer ${token}`,
+                                'Content-Type': 'application/json'
+                            }
+                        });
+
+                        if (response.ok) {
+                            const data = await response.json();
+                            currentUser = {
+                                id: data.id,
+                                user_id: data.id,
+                                full_name: data.full_name || data.name,
+                                email: data.email,
+                                company: data.company
+                            };
+                            // Store for future use
+                            localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(currentUser));
+                            localStorage.setItem('windload_user_id', data.id);
+                        }
+                    }
+                }
+            } catch (error) {
+                console.error('Error fetching user profile:', error);
             }
         }
 
@@ -910,16 +969,33 @@
             const token = localStorage.getItem(STORAGE_KEY);
 
             try {
-                const response = await fetch(`${API_URL}/api/subscriptions`, {
+                // Get user_id from stored user data
+                const userId = currentUser?.id || currentUser?.user_id;
+
+                if (!userId) {
+                    console.error('No user ID available');
+                    userSubscriptions = [];
+                    renderSubscriptions();
+                    return;
+                }
+
+                const response = await fetch(`${API_URL}/api/auth/user-subscriptions`, {
+                    method: 'POST',
                     headers: {
                         'Authorization': `Bearer ${token}`,
                         'Content-Type': 'application/json'
-                    }
+                    },
+                    body: JSON.stringify({ user_id: userId })
                 });
 
                 if (response.ok) {
                     const data = await response.json();
                     userSubscriptions = data.subscriptions || [];
+                    // Also store trial info
+                    if (data.is_trial) {
+                        currentUser.trial_active = true;
+                        currentUser.trial_expires = data.trial_expires;
+                    }
                     renderSubscriptions();
                 } else {
                     // Fallback to local data if available

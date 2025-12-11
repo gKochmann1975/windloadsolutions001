@@ -398,8 +398,11 @@
         <!-- Account Management Notice -->
         <div class="account-notice" style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); padding: 1.5rem 2rem; border-radius: 16px; margin-bottom: 2rem; text-align: center; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);">
             <p style="color: #475569; font-size: 0.95rem; margin: 0;">
-                <strong style="color: #181E57;">Manage your account and team subscriptions</strong> in your
+                <strong style="color: #181E57;">Manage your account</strong> in your
                 <a href="account.html" style="color: #0018ff; font-weight: 600; text-decoration: underline;">Member Account</a>
+            </p>
+            <p id="team-management-notice" style="color: #059669; font-size: 0.9rem; margin-top: 0.5rem; display: none;">
+                <strong>Pro/Premium/Enterprise:</strong> Add and manage team members in your account settings
             </p>
         </div>
 
@@ -583,6 +586,16 @@
             } else {
                 calcAction.href = 'wind-load-calculator-shop.html';
                 calcAction.textContent = 'View Plans';
+            }
+
+            // Show team management notice for Pro/Premium/Enterprise users
+            const hasTeamPlan = subscriptions.some(sub => {
+                const code = sub.product_code.toLowerCase();
+                return code.includes('pro') || code.includes('premium') || code.includes('enterprise');
+            });
+
+            if (hasTeamPlan) {
+                document.getElementById('team-management-notice').style.display = 'block';
             }
         }
 

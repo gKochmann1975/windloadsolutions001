@@ -1,21 +1,51 @@
-# Robots.txt for windloadcalc.com
+# WindLoadCalc.com Robots.txt
+# Optimized for AI crawler access (GEO - Generative Engine Optimization)
+# Last Updated: December 2025
+
+# Allow all standard crawlers
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /admin/
 
-# Sitemaps
+# ============================================
+# AI CRAWLER PERMISSIONS - EXPLICITLY ALLOWED
+# ============================================
+
+# OpenAI Crawlers (ChatGPT, GPT-4)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Perplexity AI
+User-agent: PerplexityBot
+Allow: /
+
+# Anthropic (Claude)
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Google AI (Gemini, Bard)
+User-agent: Google-Extended
+Allow: /
+
+# Microsoft/Bing AI (Copilot)
+User-agent: Bingbot
+Allow: /
+
+# Common Crawl (used by many AI training datasets)
+User-agent: CCBot
+Allow: /
+
+# ============================================
+# SITEMAP LOCATION
+# ============================================
 Sitemap: https://windloadcalc.com/sitemap.xml
-
-# Disallow archive and backup folders
-Disallow: /.archive/
-Disallow: /.backups/
-Disallow: /archive/
-
-# Disallow cancel pages (low value for SEO)
-Disallow: /calc-shop-cancel.html
-Disallow: /bip-shop-cancel.html
-
-# Allow all other pages
-Allow: /wind-load-calculator-shop.html
-Allow: /building-intelligence-platform-shop.html
-Allow: /privacy-policy.html
-Allow: /terms-of-service.html

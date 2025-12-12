@@ -843,6 +843,22 @@
                     </div>
                 </div>
 
+                <div class="form-group">
+                    <label class="form-label" for="trial-referral">How did you hear about us?</label>
+                    <select id="trial-referral" class="form-input">
+                        <option value="">Select an option (optional)</option>
+                        <option value="google_search">Google Search</option>
+                        <option value="ai_search">AI Search (ChatGPT, Perplexity, etc.)</option>
+                        <option value="reddit">Reddit</option>
+                        <option value="linkedin">LinkedIn</option>
+                        <option value="youtube">YouTube</option>
+                        <option value="colleague">Colleague/Word of Mouth</option>
+                        <option value="eng_tips">Eng-Tips Forum</option>
+                        <option value="conference">Conference/Trade Show</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
                 <button type="submit" id="trialBtn" class="submit-btn">Create Trial Account</button>
             </form>
 
@@ -1452,6 +1468,7 @@
             const company = document.getElementById('trial-company').value;
             const password = document.getElementById('trial-password').value;
             const productType = document.getElementById('trial-product-type').value;
+            const referralSource = document.getElementById('trial-referral').value;
 
             try {
                 const response = await fetch(`${API_URL}/api/auth/register`, {
@@ -1464,7 +1481,8 @@
                         email: email,
                         password: password,
                         company: company,
-                        trial_type: productType // 'bip' or 'calculator'
+                        trial_type: productType, // 'bip' or 'calculator'
+                        referral_source: referralSource // How they found us
                     })
                 });
 

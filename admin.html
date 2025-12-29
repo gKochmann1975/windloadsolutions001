@@ -6,698 +6,278 @@
     <link rel="icon" type="image/svg+xml" href="images/windloadcalc-favicon.svg">
     <title>Admin Panel - WindLoadCalc</title>
     <meta name="robots" content="noindex, nofollow">
-
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             min-height: 100vh;
             background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
             padding: 2rem 1rem;
         }
+        .container { max-width: 900px; margin: 0 auto; }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        /* Header */
-        .header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            padding: 1.5rem 2rem;
-            border-radius: 16px;
-            margin-bottom: 2rem;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .logo {
-            height: 50px;
-        }
-
-        .header-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #181E57;
-        }
-
-        .admin-badge {
-            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
-            color: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: 50px;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-
-        .logout-btn {
-            background: #64748b;
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .logout-btn:hover {
-            background: #475569;
-        }
-
-        /* Login Form */
-        .login-container {
+        /* Login */
+        .login-box {
             max-width: 400px;
-            margin: 100px auto;
-        }
-
-        .login-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
+            margin: 80px auto;
+            background: white;
             padding: 2.5rem;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
         }
-
-        .login-card h2 {
-            text-align: center;
-            color: #181E57;
-            margin-bottom: 0.5rem;
-        }
-
-        .login-card p {
-            text-align: center;
-            color: #64748b;
-            margin-bottom: 2rem;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            font-weight: 600;
-            color: #334155;
-            margin-bottom: 0.5rem;
-        }
-
+        .login-box h1 { color: #181E57; text-align: center; margin-bottom: 0.5rem; }
+        .login-box p { color: #64748b; text-align: center; margin-bottom: 2rem; }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; font-weight: 600; color: #334155; margin-bottom: 0.5rem; }
         .form-group input, .form-group select {
             width: 100%;
             padding: 0.75rem 1rem;
             border: 2px solid #e2e8f0;
-            border-radius: 10px;
+            border-radius: 8px;
             font-size: 1rem;
-            transition: all 0.3s ease;
         }
-
-        .form-group input:focus, .form-group select:focus {
-            outline: none;
-            border-color: #0018ff;
-            box-shadow: 0 0 0 3px rgba(0, 24, 255, 0.1);
-        }
-
+        .form-group input:focus { outline: none; border-color: #0018ff; }
         .btn {
             width: 100%;
             padding: 0.875rem;
             border: none;
-            border-radius: 10px;
+            border-radius: 8px;
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s;
         }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0, 24, 255, 0.3);
-        }
-
-        .btn-success {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            color: white;
-        }
-
-        .btn-success:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
-        }
-
-        .btn-secondary {
-            background: #64748b;
-            color: white;
-        }
-
-        .btn-secondary:hover {
-            background: #475569;
-        }
-
-        .btn-danger {
-            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
-            color: white;
-        }
+        .btn-primary { background: linear-gradient(135deg, #0018ff, #181E57); color: white; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0,24,255,0.3); }
+        .btn-success { background: #10b981; color: white; }
+        .btn-success:hover { background: #059669; }
+        .btn-gray { background: #64748b; color: white; }
+        .btn-gray:hover { background: #475569; }
+        .error { background: #fee2e2; color: #dc2626; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; display: none; }
+        .success { background: #d1fae5; color: #047857; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; display: none; }
 
         /* Admin Panel */
-        .admin-panel {
-            display: none;
+        .admin-panel { display: none; }
+        .header {
+            background: white;
+            padding: 1.5rem 2rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
-
-        .admin-panel.active {
-            display: block;
-        }
-
-        /* Stats Cards */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .stat-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            padding: 1.5rem;
-            border-radius: 16px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-        }
-
-        .stat-card h3 {
-            font-size: 2rem;
-            color: #181E57;
-            margin-bottom: 0.25rem;
-        }
-
-        .stat-card p {
-            color: #64748b;
-            font-size: 0.9rem;
-        }
+        .header h1 { color: #181E57; font-size: 1.5rem; }
+        .header .badge { background: #dc2626; color: white; padding: 0.25rem 0.75rem; border-radius: 50px; font-size: 0.75rem; margin-left: 0.75rem; }
+        .logout-btn { background: #64748b; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-weight: 600; }
+        .logout-btn:hover { background: #475569; }
 
         /* Tabs */
         .tabs {
             display: flex;
             gap: 0.5rem;
             margin-bottom: 1.5rem;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255,255,255,0.1);
             padding: 0.5rem;
-            border-radius: 12px;
-            flex-wrap: wrap;
+            border-radius: 10px;
         }
-
         .tab {
             padding: 0.75rem 1.5rem;
             border: none;
             background: transparent;
-            color: rgba(255, 255, 255, 0.7);
+            color: rgba(255,255,255,0.7);
             font-weight: 600;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .tab:hover {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-        }
-
-        .tab.active {
-            background: white;
-            color: #181E57;
-        }
-
-        /* Content Cards */
-        .content-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            padding: 2rem;
-            border-radius: 16px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            margin-bottom: 2rem;
-        }
-
-        .content-card h2 {
-            color: #181E57;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid #e2e8f0;
-        }
-
-        /* Table */
-        .table-container {
-            overflow-x: auto;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            padding: 1rem;
-            text-align: left;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        th {
-            background: #f8fafc;
-            font-weight: 600;
-            color: #334155;
-        }
-
-        tr:hover {
-            background: #f8fafc;
-        }
-
-        /* Status Badges */
-        .badge {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            border-radius: 50px;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-
-        .badge-active {
-            background: #d1fae5;
-            color: #047857;
-        }
-
-        .badge-trial {
-            background: #fef3c7;
-            color: #92400e;
-        }
-
-        .badge-admin {
-            background: #fee2e2;
-            color: #dc2626;
-        }
-
-        .badge-paid {
-            background: #dbeafe;
-            color: #1d4ed8;
-        }
-
-        /* Search */
-        .search-bar {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .search-bar input {
-            flex: 1;
-            padding: 0.75rem 1rem;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            font-size: 1rem;
-        }
-
-        .search-bar button {
-            padding: 0.75rem 1.5rem;
-        }
-
-        /* Action Buttons */
-        .action-btn {
-            padding: 0.5rem 1rem;
-            border: none;
             border-radius: 6px;
-            font-size: 0.85rem;
-            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
-            margin-right: 0.5rem;
         }
+        .tab:hover { background: rgba(255,255,255,0.1); color: white; }
+        .tab.active { background: white; color: #181E57; }
 
-        .action-btn-view {
-            background: #0018ff;
-            color: white;
+        /* Cards */
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            margin-bottom: 1.5rem;
         }
-
-        .action-btn-edit {
-            background: #10b981;
-            color: white;
-        }
-
-        .action-btn-delete {
-            background: #dc2626;
-            color: white;
-        }
+        .card h2 { color: #181E57; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 2px solid #e2e8f0; }
+        .card p.subtitle { color: #64748b; margin: -1rem 0 1.5rem 0; }
 
         /* Tab Content */
-        .tab-content {
-            display: none;
-        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
 
-        .tab-content.active {
-            display: block;
-        }
-
-        /* Alert */
-        .alert {
-            padding: 1rem 1.5rem;
+        /* Password Section */
+        .password-row { display: flex; gap: 0.5rem; margin-bottom: 0.5rem; }
+        .password-row input { flex: 1; font-family: monospace; font-size: 1.1rem; letter-spacing: 1px; }
+        .password-row button { white-space: nowrap; }
+        .password-display {
+            margin-top: 1rem;
+            padding: 1.25rem;
+            background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+            border: 2px solid #10b981;
             border-radius: 10px;
-            margin-bottom: 1.5rem;
-            display: none;
         }
-
-        .alert.show {
+        .password-display strong { color: #047857; display: block; margin-bottom: 0.5rem; }
+        .password-display code {
             display: block;
-        }
-
-        .alert-success {
-            background: #d1fae5;
-            color: #047857;
-            border: 1px solid #a7f3d0;
-        }
-
-        .alert-error {
-            background: #fee2e2;
-            color: #dc2626;
-            border: 1px solid #fecaca;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .header {
-                flex-direction: column;
-                gap: 1rem;
-                text-align: center;
-            }
-
-            .tabs {
-                justify-content: center;
-            }
-
-            .search-bar {
-                flex-direction: column;
-            }
-        }
-
-        /* Modal */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-        }
-
-        .modal-overlay.show {
-            display: flex;
-        }
-
-        .modal {
+            font-size: 1.4rem;
+            padding: 0.75rem;
             background: white;
-            padding: 2rem;
-            border-radius: 16px;
-            max-width: 500px;
-            width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
+            border-radius: 6px;
+            text-align: center;
+            letter-spacing: 2px;
+            font-weight: bold;
+            color: #181E57;
+            user-select: all;
+            margin-bottom: 0.75rem;
         }
 
-        .modal h3 {
-            color: #181E57;
+        /* Results Section */
+        .result-box {
+            margin-top: 1.5rem;
+            padding: 1.25rem;
+            border-radius: 10px;
+            display: none;
+        }
+        .result-box.success-result { background: #d1fae5; border: 2px solid #10b981; }
+        .result-box.error-result { background: #fee2e2; border: 2px solid #dc2626; }
+        .result-box h3 { margin-bottom: 0.75rem; }
+        .result-box .detail { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid rgba(0,0,0,0.1); }
+        .result-box .detail:last-child { border-bottom: none; }
+        .result-box .label { font-weight: 600; color: #475569; }
+        .result-box .value { font-family: monospace; color: #1e293b; }
+
+        /* Info Box */
+        .info-box {
+            background: #eff6ff;
+            border-left: 4px solid #0018ff;
+            padding: 1rem 1.25rem;
+            border-radius: 0 8px 8px 0;
             margin-bottom: 1.5rem;
         }
-
-        .modal-actions {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-
-        .modal-actions button {
-            flex: 1;
-        }
-
-        /* User Details */
-        .user-detail {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.75rem 0;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        .user-detail-label {
-            font-weight: 600;
-            color: #64748b;
-        }
-
-        .user-detail-value {
-            color: #1e293b;
-        }
+        .info-box p { color: #1e40af; font-size: 0.9rem; line-height: 1.5; }
     </style>
 </head>
 <body>
-    <!-- Login Form -->
-    <div id="loginContainer" class="login-container">
-        <div class="login-card">
-            <h2>Admin Login</h2>
-            <p>WindLoadCalc Administration Panel</p>
-
-            <div id="loginAlert" class="alert"></div>
-
-            <form id="loginForm">
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" placeholder="admin@windloadcalc.com" required>
-                </div>
-                <div class="form-group">
-                    <label for="adminKey">Admin Key</label>
-                    <input type="password" id="adminKey" placeholder="Enter admin key" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Login to Admin Panel</button>
-            </form>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-box">
+        <h1>Admin Panel</h1>
+        <p>WindLoadCalc Administration</p>
+        <div id="loginError" class="error"></div>
+        <div class="form-group">
+            <label>Admin Key</label>
+            <input type="password" id="adminKeyInput" placeholder="Enter admin key">
         </div>
+        <button class="btn btn-primary" onclick="doLogin()">Access Admin Panel</button>
     </div>
 
     <!-- Admin Panel -->
     <div id="adminPanel" class="admin-panel container">
-        <!-- Header -->
         <div class="header">
-            <div class="header-left">
-                <img src="images/windloadcalc-logo.svg" alt="WindLoadCalc" class="logo">
-                <div>
-                    <div class="header-title">Admin Panel</div>
-                    <span class="admin-badge">ADMINISTRATOR</span>
-                </div>
+            <div style="display: flex; align-items: center;">
+                <h1>WindLoadCalc Admin</h1>
+                <span class="badge">ADMIN</span>
             </div>
-            <button class="logout-btn" onclick="logout()">Logout</button>
+            <button class="logout-btn" onclick="doLogout()">Logout</button>
         </div>
 
-        <!-- Stats -->
-        <div class="stats-grid">
-            <div class="stat-card">
-                <h3 id="totalUsers">-</h3>
-                <p>Total Users</p>
-            </div>
-            <div class="stat-card">
-                <h3 id="activeSubscriptions">-</h3>
-                <p>Active Subscriptions</p>
-            </div>
-            <div class="stat-card">
-                <h3 id="trialUsers">-</h3>
-                <p>Trial Users</p>
-            </div>
-            <div class="stat-card">
-                <h3 id="todayCalcs">-</h3>
-                <p>Calculations Today</p>
-            </div>
-        </div>
-
-        <!-- Tabs -->
         <div class="tabs">
-            <button class="tab active" data-tab="users">Users</button>
-            <button class="tab" data-tab="create-user">Create User</button>
-            <button class="tab" data-tab="grant-subscription">Grant Subscription</button>
-            <button class="tab" data-tab="usage">Usage Report</button>
+            <button class="tab active" onclick="showTab('create')">Create User</button>
+            <button class="tab" onclick="showTab('grant')">Grant Subscription</button>
         </div>
 
-        <!-- Alert -->
-        <div id="adminAlert" class="alert"></div>
-
-        <!-- Tab Content: Users -->
-        <div id="tab-users" class="tab-content active">
-            <div class="content-card">
-                <h2>User Management</h2>
-
-                <div class="search-bar">
-                    <input type="text" id="userSearch" placeholder="Search by email or name...">
-                    <button class="btn btn-primary" onclick="searchUsers()">Search</button>
-                    <button class="btn btn-secondary" onclick="loadUsers()">Refresh</button>
-                </div>
-
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Email</th>
-                                <th>Name</th>
-                                <th>Role</th>
-                                <th>Created</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="usersTable">
-                            <tr><td colspan="6" style="text-align: center;">Loading...</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <!-- Tab Content: Create User -->
-        <div id="tab-create-user" class="tab-content">
-            <div class="content-card">
+        <!-- Create User Tab -->
+        <div id="tab-create" class="tab-content active">
+            <div class="card">
                 <h2>Create New User</h2>
-                <p style="color: #64748b; margin-bottom: 1.5rem;">Create a new user account for existing customers migrating to the new system.</p>
+                <p class="subtitle">Create accounts for existing customers migrating to the new system</p>
 
-                <form id="createUserForm">
-                    <div class="form-group">
-                        <label for="newUserEmail">Email Address *</label>
-                        <input type="email" id="newUserEmail" placeholder="user@example.com" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="newUserName">Full Name *</label>
-                        <input type="text" id="newUserName" placeholder="John Doe" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="newUserPassword">Password *</label>
-                        <div style="display: flex; gap: 0.5rem; align-items: center;">
-                            <input type="text" id="newUserPassword" placeholder="Enter password" required style="flex: 1; font-family: monospace; font-size: 1.1rem;">
-                            <button type="button" class="btn btn-secondary" style="width: auto; white-space: nowrap;" onclick="togglePasswordVisibility()">Hide</button>
-                        </div>
-                        <button type="button" class="btn btn-secondary" style="width: auto; margin-top: 0.5rem;" onclick="generatePassword()">Generate Secure Password</button>
-                        <div id="generatedPasswordDisplay" style="margin-top: 0.75rem; padding: 1rem; background: #f0fdf4; border: 2px solid #10b981; border-radius: 8px; display: none;">
-                            <strong style="color: #047857;">Generated Password:</strong>
-                            <code id="passwordCopyText" style="display: block; font-size: 1.2rem; margin-top: 0.5rem; padding: 0.5rem; background: white; border-radius: 4px; user-select: all;"></code>
-                            <button type="button" class="btn btn-success" style="width: auto; margin-top: 0.5rem;" onclick="copyPassword()">Copy to Clipboard</button>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="newUserRole">Role</label>
-                        <select id="newUserRole">
-                            <option value="paid">Paid</option>
-                            <option value="trial">Trial</option>
-                            <option value="admin">Admin</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-success">Create User</button>
-                </form>
-            </div>
-        </div>
+                <div class="info-box">
+                    <p><strong>Instructions:</strong> Fill in the customer details below. Generate a secure password, then copy it to send to the customer.</p>
+                </div>
 
-        <!-- Tab Content: Grant Subscription -->
-        <div id="tab-grant-subscription" class="tab-content">
-            <div class="content-card">
-                <h2>Grant Subscription</h2>
-                <p style="color: #64748b; margin-bottom: 1.5rem;">Manually grant a subscription to an existing user (bypasses Stripe).</p>
+                <div class="form-group">
+                    <label>Email Address *</label>
+                    <input type="email" id="userEmail" placeholder="customer@example.com">
+                </div>
 
-                <form id="grantSubscriptionForm">
-                    <div class="form-group">
-                        <label for="subUserEmail">User Email *</label>
-                        <input type="email" id="subUserEmail" placeholder="user@example.com" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="productCode">Product *</label>
-                        <select id="productCode" required>
-                            <option value="">Select a product...</option>
-                            <optgroup label="Wind Load Calculator">
-                                <option value="cc_walls">C&C Walls Bundle - $35/mo</option>
-                                <option value="cc_walls_starter">Calculator Starter - $35/mo</option>
-                                <option value="cc_walls_pro">Calculator Pro - $59/mo</option>
-                                <option value="cc_walls_premium">Calculator Premium - $149/mo</option>
-                            </optgroup>
-                            <optgroup label="Building Intelligence Platform">
-                                <option value="bip_starter">BIP Starter - $29/mo</option>
-                                <option value="bip_pro">BIP Pro - $79/mo</option>
-                                <option value="bip_premium">BIP Premium - $149/mo</option>
-                            </optgroup>
-                            <optgroup label="Packages">
-                                <option value="professional">Professional Package - $104/mo</option>
-                                <option value="enterprise">Enterprise Package - $399/mo</option>
-                            </optgroup>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="billingCycle">Billing Cycle</label>
-                        <select id="billingCycle">
-                            <option value="monthly">Monthly</option>
-                            <option value="annual">Annual</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-success">Grant Subscription</button>
-                </form>
-            </div>
-        </div>
+                <div class="form-group">
+                    <label>Full Name *</label>
+                    <input type="text" id="userName" placeholder="John Doe">
+                </div>
 
-        <!-- Tab Content: Usage Report -->
-        <div id="tab-usage" class="tab-content">
-            <div class="content-card">
-                <h2>Usage Report</h2>
+                <div class="form-group">
+                    <label>Password *</label>
+                    <div class="password-row">
+                        <input type="text" id="userPassword" placeholder="Click Generate or type password">
+                        <button class="btn btn-gray" onclick="generatePassword()" style="width: auto; padding: 0.75rem 1.25rem;">Generate</button>
+                    </div>
+                    <div id="passwordDisplay" class="password-display" style="display: none;">
+                        <strong>Generated Password (copy this for the customer):</strong>
+                        <code id="passwordCode"></code>
+                        <button class="btn btn-success" onclick="copyPassword()" style="width: auto;">Copy to Clipboard</button>
+                    </div>
+                </div>
 
-                <div class="search-bar">
-                    <select id="usagePeriod" style="flex: 0 0 auto; width: auto;">
-                        <option value="day">Last 24 Hours</option>
-                        <option value="week">Last 7 Days</option>
-                        <option value="month" selected>Last 30 Days</option>
+                <div class="form-group">
+                    <label>Role</label>
+                    <select id="userRole">
+                        <option value="paid">Paid Customer</option>
+                        <option value="trial">Trial User</option>
+                        <option value="admin">Administrator</option>
                     </select>
-                    <button class="btn btn-primary" onclick="loadUsageReport()">Load Report</button>
                 </div>
 
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Email</th>
-                                <th>Name</th>
-                                <th>Role</th>
-                                <th>Calculations</th>
-                                <th>Subscription</th>
-                            </tr>
-                        </thead>
-                        <tbody id="usageTable">
-                            <tr><td colspan="5" style="text-align: center;">Click "Load Report" to view usage data</td></tr>
-                        </tbody>
-                    </table>
-                </div>
+                <button class="btn btn-primary" onclick="createUser()">Create User Account</button>
+
+                <div id="createResult" class="result-box"></div>
             </div>
         </div>
-    </div>
 
-    <!-- User Details Modal -->
-    <div id="userModal" class="modal-overlay">
-        <div class="modal">
-            <h3>User Details</h3>
-            <div id="userDetails"></div>
-            <div class="modal-actions">
-                <button class="btn btn-secondary" onclick="closeModal()">Close</button>
+        <!-- Grant Subscription Tab -->
+        <div id="tab-grant" class="tab-content">
+            <div class="card">
+                <h2>Grant Subscription</h2>
+                <p class="subtitle">Manually grant product access to an existing user (bypasses Stripe)</p>
+
+                <div class="form-group">
+                    <label>User Email *</label>
+                    <input type="email" id="subEmail" placeholder="customer@example.com">
+                </div>
+
+                <div class="form-group">
+                    <label>Product *</label>
+                    <select id="subProduct">
+                        <option value="">-- Select Product --</option>
+                        <optgroup label="Wind Load Calculator">
+                            <option value="cc_walls">C&C Walls Bundle - $35/mo</option>
+                            <option value="cc_walls_starter">Calculator Starter - $35/mo</option>
+                            <option value="cc_walls_pro">Calculator Pro - $59/mo</option>
+                            <option value="cc_walls_premium">Calculator Premium - $149/mo</option>
+                            <option value="professional">Professional Package - $104/mo</option>
+                        </optgroup>
+                        <optgroup label="Building Intelligence Platform">
+                            <option value="bip_starter">BIP Starter - $29/mo</option>
+                            <option value="bip_pro">BIP Pro - $79/mo</option>
+                            <option value="bip_premium">BIP Premium - $149/mo</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Billing Cycle</label>
+                    <select id="subBilling">
+                        <option value="monthly">Monthly</option>
+                        <option value="annual">Annual</option>
+                    </select>
+                </div>
+
+                <button class="btn btn-primary" onclick="grantSubscription()">Grant Subscription</button>
+
+                <div id="grantResult" class="result-box"></div>
             </div>
         </div>
     </div>
@@ -705,350 +285,181 @@
     <script>
         // Configuration
         const API_URL = 'https://windloadcalc-production.up.railway.app';
-        let adminKey = '';
-        let adminEmail = '';
+        const ADMIN_KEY = 'w!ndl0@dADMIN2026';
+        let currentAdminKey = '';
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            // Check for stored credentials
-            const stored = localStorage.getItem('wlc_admin');
-            if (stored) {
-                const { email, key } = JSON.parse(stored);
-                adminEmail = email;
-                adminKey = key;
-                showAdminPanel();
+        // Login
+        function doLogin() {
+            const key = document.getElementById('adminKeyInput').value;
+            if (key === ADMIN_KEY) {
+                currentAdminKey = key;
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('adminPanel').style.display = 'block';
+                localStorage.setItem('wlc_admin_key', key);
+            } else {
+                const err = document.getElementById('loginError');
+                err.textContent = 'Invalid admin key. Please try again.';
+                err.style.display = 'block';
             }
+        }
 
-            // Tab switching
-            document.querySelectorAll('.tab').forEach(tab => {
-                tab.addEventListener('click', () => {
-                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-                    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-                    tab.classList.add('active');
-                    document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
-                });
+        // Check for saved login
+        window.onload = function() {
+            const saved = localStorage.getItem('wlc_admin_key');
+            if (saved === ADMIN_KEY) {
+                currentAdminKey = saved;
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('adminPanel').style.display = 'block';
+            }
+            // Enter key to login
+            document.getElementById('adminKeyInput').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') doLogin();
             });
-
-            // Login form
-            document.getElementById('loginForm').addEventListener('submit', handleLogin);
-
-            // Create user form
-            document.getElementById('createUserForm').addEventListener('submit', handleCreateUser);
-
-            // Grant subscription form
-            document.getElementById('grantSubscriptionForm').addEventListener('submit', handleGrantSubscription);
-        });
-
-        // Login handler
-        async function handleLogin(e) {
-            e.preventDefault();
-            const email = document.getElementById('email').value;
-            const key = document.getElementById('adminKey').value;
-
-            try {
-                // Verify admin key by making a test request
-                const response = await fetch(`${API_URL}/api/admin/users?limit=1`, {
-                    headers: {
-                        'X-Admin-Key': key
-                    }
-                });
-
-                if (response.ok) {
-                    adminEmail = email;
-                    adminKey = key;
-                    localStorage.setItem('wlc_admin', JSON.stringify({ email, key }));
-                    showAdminPanel();
-                } else {
-                    showAlert('loginAlert', 'Invalid admin key', 'error');
-                }
-            } catch (error) {
-                showAlert('loginAlert', 'Connection error: ' + error.message, 'error');
-            }
-        }
-
-        // Show admin panel
-        function showAdminPanel() {
-            document.getElementById('loginContainer').style.display = 'none';
-            document.getElementById('adminPanel').classList.add('active');
-            loadUsers();
-            loadStats();
-        }
+        };
 
         // Logout
-        function logout() {
-            localStorage.removeItem('wlc_admin');
-            adminEmail = '';
-            adminKey = '';
-            document.getElementById('loginContainer').style.display = 'block';
-            document.getElementById('adminPanel').classList.remove('active');
+        function doLogout() {
+            localStorage.removeItem('wlc_admin_key');
+            currentAdminKey = '';
+            document.getElementById('loginScreen').style.display = 'block';
+            document.getElementById('adminPanel').style.display = 'none';
+            document.getElementById('adminKeyInput').value = '';
         }
 
-        // Show alert
-        function showAlert(elementId, message, type) {
-            const alert = document.getElementById(elementId);
-            alert.textContent = message;
-            alert.className = `alert show alert-${type}`;
-            setTimeout(() => alert.classList.remove('show'), 5000);
+        // Tab switching
+        function showTab(tab) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.querySelector(`[onclick="showTab('${tab}')"]`).classList.add('active');
+            document.getElementById('tab-' + tab).classList.add('active');
         }
 
-        // API request helper
-        async function apiRequest(endpoint, method = 'GET', body = null) {
-            const options = {
-                method,
-                headers: {
-                    'X-Admin-Key': adminKey,
-                    'Content-Type': 'application/json'
-                }
-            };
-            if (body) {
-                options.body = JSON.stringify(body);
-            }
-            const response = await fetch(`${API_URL}${endpoint}`, options);
-            return response.json();
-        }
-
-        // Load users
-        async function loadUsers() {
-            const search = document.getElementById('userSearch').value;
-            try {
-                const data = await apiRequest(`/api/admin/users?limit=100${search ? '&search=' + encodeURIComponent(search) : ''}`);
-
-                if (data.success) {
-                    const tbody = document.getElementById('usersTable');
-                    if (data.users.length === 0) {
-                        tbody.innerHTML = '<tr><td colspan="6" style="text-align: center;">No users found</td></tr>';
-                        return;
-                    }
-
-                    tbody.innerHTML = data.users.map(user => `
-                        <tr>
-                            <td>${user.id}</td>
-                            <td>${user.email}</td>
-                            <td>${user.full_name || '-'}</td>
-                            <td><span class="badge badge-${user.role === 'admin' ? 'admin' : user.role === 'trial' ? 'trial' : 'paid'}">${user.role}</span></td>
-                            <td>${user.created_at ? new Date(user.created_at).toLocaleDateString() : '-'}</td>
-                            <td>
-                                <button class="action-btn action-btn-view" onclick="viewUser('${user.email}')">View</button>
-                            </td>
-                        </tr>
-                    `).join('');
-                }
-            } catch (error) {
-                console.error('Error loading users:', error);
-            }
-        }
-
-        // Search users
-        function searchUsers() {
-            loadUsers();
-        }
-
-        // Load stats
-        async function loadStats() {
-            try {
-                const usersData = await apiRequest('/api/admin/users?limit=1');
-                document.getElementById('totalUsers').textContent = usersData.total || 0;
-
-                const usageData = await apiRequest('/api/admin/usage-report?period=day');
-                document.getElementById('todayCalcs').textContent = usageData.total_calculations || 0;
-
-                // Count trial and subscribed users from user list
-                const allUsers = await apiRequest('/api/admin/users?limit=1000');
-                if (allUsers.success) {
-                    const trialCount = allUsers.users.filter(u => u.role === 'trial').length;
-                    const paidCount = allUsers.users.filter(u => ['paid', 'owner', 'admin'].includes(u.role)).length;
-                    document.getElementById('trialUsers').textContent = trialCount;
-                    document.getElementById('activeSubscriptions').textContent = paidCount;
-                }
-            } catch (error) {
-                console.error('Error loading stats:', error);
-            }
-        }
-
-        // View user details
-        async function viewUser(email) {
-            try {
-                const data = await apiRequest(`/api/admin/users/lookup?email=${encodeURIComponent(email)}`);
-
-                if (data.success && data.found) {
-                    const user = data.user;
-                    const subs = data.subscriptions || [];
-
-                    document.getElementById('userDetails').innerHTML = `
-                        <div class="user-detail">
-                            <span class="user-detail-label">ID</span>
-                            <span class="user-detail-value">${user.id}</span>
-                        </div>
-                        <div class="user-detail">
-                            <span class="user-detail-label">Email</span>
-                            <span class="user-detail-value">${user.email}</span>
-                        </div>
-                        <div class="user-detail">
-                            <span class="user-detail-label">Name</span>
-                            <span class="user-detail-value">${user.full_name || '-'}</span>
-                        </div>
-                        <div class="user-detail">
-                            <span class="user-detail-label">Role</span>
-                            <span class="user-detail-value">${user.role}</span>
-                        </div>
-                        <div class="user-detail">
-                            <span class="user-detail-label">Email Verified</span>
-                            <span class="user-detail-value">${user.email_verified ? 'Yes' : 'No'}</span>
-                        </div>
-                        <div class="user-detail">
-                            <span class="user-detail-label">Google OAuth</span>
-                            <span class="user-detail-value">${user.google_id ? 'Connected' : 'Not connected'}</span>
-                        </div>
-                        <div class="user-detail">
-                            <span class="user-detail-label">Created</span>
-                            <span class="user-detail-value">${user.created_at ? new Date(user.created_at).toLocaleString() : '-'}</span>
-                        </div>
-                        <div class="user-detail">
-                            <span class="user-detail-label">Subscriptions</span>
-                            <span class="user-detail-value">${subs.length > 0 ? subs.map(s => `${s.product_id} (${s.status})`).join(', ') : 'None'}</span>
-                        </div>
-                    `;
-                    document.getElementById('userModal').classList.add('show');
-                }
-            } catch (error) {
-                console.error('Error viewing user:', error);
-            }
-        }
-
-        // Close modal
-        function closeModal() {
-            document.getElementById('userModal').classList.remove('show');
-        }
-
-        // Generate secure password
+        // Generate password
         function generatePassword() {
             const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789!@#$%';
             let password = '';
-            for (let i = 0; i < 12; i++) {
+            for (let i = 0; i < 14; i++) {
                 password += chars.charAt(Math.floor(Math.random() * chars.length));
             }
-            document.getElementById('newUserPassword').value = password;
-            document.getElementById('newUserPassword').type = 'text';
-            document.getElementById('passwordCopyText').textContent = password;
-            document.getElementById('generatedPasswordDisplay').style.display = 'block';
+            document.getElementById('userPassword').value = password;
+            document.getElementById('passwordCode').textContent = password;
+            document.getElementById('passwordDisplay').style.display = 'block';
         }
 
-        // Toggle password visibility
-        function togglePasswordVisibility() {
-            const input = document.getElementById('newUserPassword');
-            const btn = event.target;
-            if (input.type === 'password') {
-                input.type = 'text';
-                btn.textContent = 'Hide';
-            } else {
-                input.type = 'password';
-                btn.textContent = 'Show';
-            }
-        }
-
-        // Copy password to clipboard
+        // Copy password
         function copyPassword() {
-            const password = document.getElementById('newUserPassword').value;
+            const password = document.getElementById('userPassword').value;
             navigator.clipboard.writeText(password).then(() => {
-                showAlert('adminAlert', 'Password copied to clipboard!', 'success');
+                alert('Password copied to clipboard!');
             });
         }
 
-        // Create user handler
-        async function handleCreateUser(e) {
-            e.preventDefault();
-            const email = document.getElementById('newUserEmail').value;
-            const fullName = document.getElementById('newUserName').value;
-            const password = document.getElementById('newUserPassword').value;
-            const role = document.getElementById('newUserRole').value;
+        // Show result
+        function showResult(elementId, success, title, details) {
+            const box = document.getElementById(elementId);
+            box.className = 'result-box ' + (success ? 'success-result' : 'error-result');
+            box.style.display = 'block';
+
+            let html = `<h3 style="color: ${success ? '#047857' : '#dc2626'}">${title}</h3>`;
+            for (const [label, value] of Object.entries(details)) {
+                html += `<div class="detail"><span class="label">${label}</span><span class="value">${value}</span></div>`;
+            }
+            box.innerHTML = html;
+        }
+
+        // Create user
+        async function createUser() {
+            const email = document.getElementById('userEmail').value.trim();
+            const name = document.getElementById('userName').value.trim();
+            const password = document.getElementById('userPassword').value;
+            const role = document.getElementById('userRole').value;
+
+            if (!email || !name || !password) {
+                showResult('createResult', false, 'Missing Information', {
+                    'Error': 'Please fill in all required fields (Email, Name, Password)'
+                });
+                return;
+            }
 
             try {
-                const data = await apiRequest('/api/admin/users/create', 'POST', {
-                    email,
-                    full_name: fullName,
-                    password,
-                    role
+                const response = await fetch(`${API_URL}/api/admin/users/create`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Admin-Key': currentAdminKey
+                    },
+                    body: JSON.stringify({ email, full_name: name, password, role })
                 });
 
+                const data = await response.json();
+
                 if (data.success) {
-                    showAlert('adminAlert', `User created successfully! Email: ${email}`, 'success');
-                    document.getElementById('createUserForm').reset();
-                    loadUsers();
-                    loadStats();
+                    showResult('createResult', true, 'User Created Successfully!', {
+                        'Email': email,
+                        'Name': name,
+                        'Role': role,
+                        'Password': password
+                    });
+                    // Clear form
+                    document.getElementById('userEmail').value = '';
+                    document.getElementById('userName').value = '';
                 } else {
-                    showAlert('adminAlert', 'Error: ' + data.error, 'error');
+                    showResult('createResult', false, 'Failed to Create User', {
+                        'Error': data.error || 'Unknown error'
+                    });
                 }
             } catch (error) {
-                showAlert('adminAlert', 'Error: ' + error.message, 'error');
+                showResult('createResult', false, 'Connection Error', {
+                    'Error': error.message,
+                    'Note': 'Check if the backend server is running'
+                });
             }
         }
 
-        // Grant subscription handler
-        async function handleGrantSubscription(e) {
-            e.preventDefault();
-            const email = document.getElementById('subUserEmail').value;
-            const productCode = document.getElementById('productCode').value;
-            const billingCycle = document.getElementById('billingCycle').value;
+        // Grant subscription
+        async function grantSubscription() {
+            const email = document.getElementById('subEmail').value.trim();
+            const product = document.getElementById('subProduct').value;
+            const billing = document.getElementById('subBilling').value;
+
+            if (!email || !product) {
+                showResult('grantResult', false, 'Missing Information', {
+                    'Error': 'Please fill in email and select a product'
+                });
+                return;
+            }
 
             try {
-                const data = await apiRequest('/api/admin/users/grant-subscription', 'POST', {
-                    email,
-                    product_code: productCode,
-                    billing_cycle: billingCycle
+                const response = await fetch(`${API_URL}/api/admin/users/grant-subscription`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Admin-Key': currentAdminKey
+                    },
+                    body: JSON.stringify({ email, product_code: product, billing_cycle: billing })
                 });
 
+                const data = await response.json();
+
                 if (data.success) {
-                    showAlert('adminAlert', `Subscription granted successfully to ${email}!`, 'success');
-                    document.getElementById('grantSubscriptionForm').reset();
+                    showResult('grantResult', true, 'Subscription Granted!', {
+                        'Email': email,
+                        'Product': product,
+                        'Billing': billing
+                    });
+                    document.getElementById('subEmail').value = '';
                 } else {
-                    showAlert('adminAlert', 'Error: ' + data.error, 'error');
+                    showResult('grantResult', false, 'Failed to Grant Subscription', {
+                        'Error': data.error || 'Unknown error'
+                    });
                 }
             } catch (error) {
-                showAlert('adminAlert', 'Error: ' + error.message, 'error');
+                showResult('grantResult', false, 'Connection Error', {
+                    'Error': error.message,
+                    'Note': 'Check if the backend server is running'
+                });
             }
         }
-
-        // Load usage report
-        async function loadUsageReport() {
-            const period = document.getElementById('usagePeriod').value;
-            try {
-                const data = await apiRequest(`/api/admin/usage-report?period=${period}&limit=50`);
-
-                if (data.success) {
-                    const tbody = document.getElementById('usageTable');
-                    if (data.users.length === 0) {
-                        tbody.innerHTML = '<tr><td colspan="5" style="text-align: center;">No usage data for this period</td></tr>';
-                        return;
-                    }
-
-                    tbody.innerHTML = data.users.map(user => `
-                        <tr>
-                            <td>${user.email}</td>
-                            <td>${user.name || '-'}</td>
-                            <td><span class="badge badge-${user.role === 'admin' ? 'admin' : user.role === 'trial' ? 'trial' : 'paid'}">${user.role}</span></td>
-                            <td><strong>${user.calculation_count}</strong></td>
-                            <td>${user.subscription ? user.subscription.product : 'None'}</td>
-                        </tr>
-                    `).join('');
-                }
-            } catch (error) {
-                console.error('Error loading usage report:', error);
-            }
-        }
-
-        // Close modal on outside click
-        document.getElementById('userModal').addEventListener('click', (e) => {
-            if (e.target.classList.contains('modal-overlay')) {
-                closeModal();
-            }
-        });
-
-        // Search on Enter key
-        document.getElementById('userSearch').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                searchUsers();
-            }
-        });
     </script>
 </body>
 </html>

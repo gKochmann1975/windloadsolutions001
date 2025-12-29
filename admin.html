@@ -169,9 +169,15 @@
         <div id="loginError" class="error"></div>
         <div class="form-group">
             <label>Admin Key</label>
-            <input type="password" id="adminKeyInput" placeholder="Enter admin key">
+            <div style="display: flex; gap: 0.5rem;">
+                <input type="text" id="adminKeyInput" placeholder="Enter admin key" style="flex: 1; font-family: monospace;">
+                <button type="button" class="btn btn-gray" onclick="toggleKeyVisibility()" style="width: auto; padding: 0.75rem 1rem;" id="toggleKeyBtn">Hide</button>
+            </div>
         </div>
         <button class="btn btn-primary" onclick="doLogin()">Access Admin Panel</button>
+        <p style="margin-top: 1.5rem; padding: 1rem; background: #f0f9ff; border-radius: 8px; font-size: 0.85rem; color: #0369a1; text-align: center;">
+            <strong>Key:</strong> <code style="background: #e0f2fe; padding: 0.25rem 0.5rem; border-radius: 4px;">WindLoadAdmin2026</code>
+        </p>
     </div>
 
     <!-- Admin Panel -->
@@ -324,6 +330,19 @@
             document.getElementById('loginScreen').style.display = 'block';
             document.getElementById('adminPanel').style.display = 'none';
             document.getElementById('adminKeyInput').value = '';
+        }
+
+        // Toggle admin key visibility
+        function toggleKeyVisibility() {
+            const input = document.getElementById('adminKeyInput');
+            const btn = document.getElementById('toggleKeyBtn');
+            if (input.type === 'password') {
+                input.type = 'text';
+                btn.textContent = 'Hide';
+            } else {
+                input.type = 'password';
+                btn.textContent = 'Show';
+            }
         }
 
         // Tab switching

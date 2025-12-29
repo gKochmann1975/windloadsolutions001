@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="images/windloadcalc-favicon.svg">
+    <title>Admin Panel - WindLoadCalc</title>
+    <meta name="robots" content="noindex, nofollow">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1.5rem 2rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            height: 50px;
+        }
+
+        .header-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #181E57;
+        }
+
+        .admin-badge {
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .logout-btn {
+            background: #64748b;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: #475569;
+        }
+
+        /* Login Form */
+        .login-container {
+            max-width: 400px;
+            margin: 100px auto;
+        }
+
+        .login-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .login-card h2 {
+            text-align: center;
+            color: #181E57;
+            margin-bottom: 0.5rem;
+        }
+
+        .login-card p {
+            text-align: center;
+            color: #64748b;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #334155;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #0018ff;
+            box-shadow: 0 0 0 3px rgba(0, 24, 255, 0.1);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 0.875rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 24, 255, 0.3);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-secondary {
+            background: #64748b;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #475569;
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            color: white;
+        }
+
+        /* Admin Panel */
+        .admin-panel {
+            display: none;
+        }
+
+        .admin-panel.active {
+            display: block;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1.5rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .stat-card h3 {
+            font-size: 2rem;
+            color: #181E57;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-card p {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem;
+            border-radius: 12px;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .tab.active {
+            background: white;
+            color: #181E57;
+        }
+
+        /* Content Cards */
+        .content-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            margin-bottom: 2rem;
+        }
+
+        .content-card h2 {
+            color: #181E57;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        /* Table */
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            background: #f8fafc;
+            font-weight: 600;
+            color: #334155;
+        }
+
+        tr:hover {
+            background: #f8fafc;
+        }
+
+        /* Status Badges */
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .badge-active {
+            background: #d1fae5;
+            color: #047857;
+        }
+
+        .badge-trial {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .badge-admin {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .badge-paid {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+
+        /* Search */
+        .search-bar {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .search-bar input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
+        }
+
+        .search-bar button {
+            padding: 0.75rem 1.5rem;
+        }
+
+        /* Action Buttons */
+        .action-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-right: 0.5rem;
+        }
+
+        .action-btn-view {
+            background: #0018ff;
+            color: white;
+        }
+
+        .action-btn-edit {
+            background: #10b981;
+            color: white;
+        }
+
+        .action-btn-delete {
+            background: #dc2626;
+            color: white;
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Alert */
+        .alert {
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+
+        .alert.show {
+            display: block;
+        }
+
+        .alert-success {
+            background: #d1fae5;
+            color: #047857;
+            border: 1px solid #a7f3d0;
+        }
+
+        .alert-error {
+            background: #fee2e2;
+            color: #dc2626;
+            border: 1px solid #fecaca;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .tabs {
+                justify-content: center;
+            }
+
+            .search-bar {
+                flex-direction: column;
+            }
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal h3 {
+            color: #181E57;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .modal-actions button {
+            flex: 1;
+        }
+
+        /* User Details */
+        .user-detail {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .user-detail-label {
+            font-weight: 600;
+            color: #64748b;
+        }
+
+        .user-detail-value {
+            color: #1e293b;
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Form -->
+    <div id="loginContainer" class="login-container">
+        <div class="login-card">
+            <h2>Admin Login</h2>
+            <p>WindLoadCalc Administration Panel</p>
+
+            <div id="loginAlert" class="alert"></div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="admin@windloadcalc.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="adminKey">Admin Key</label>
+                    <input type="password" id="adminKey" placeholder="Enter admin key" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Login to Admin Panel</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Panel -->
+    <div id="adminPanel" class="admin-panel container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-left">
+                <img src="images/windloadcalc-logo.svg" alt="WindLoadCalc" class="logo">
+                <div>
+                    <div class="header-title">Admin Panel</div>
+                    <span class="admin-badge">ADMINISTRATOR</span>
+                </div>
+            </div>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3 id="totalUsers">-</h3>
+                <p>Total Users</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="activeSubscriptions">-</h3>
+                <p>Active Subscriptions</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="trialUsers">-</h3>
+                <p>Trial Users</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="todayCalcs">-</h3>
+                <p>Calculations Today</p>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab active" data-tab="users">Users</button>
+            <button class="tab" data-tab="create-user">Create User</button>
+            <button class="tab" data-tab="grant-subscription">Grant Subscription</button>
+            <button class="tab" data-tab="usage">Usage Report</button>
+        </div>
+
+        <!-- Alert -->
+        <div id="adminAlert" class="alert"></div>
+
+        <!-- Tab Content: Users -->
+        <div id="tab-users" class="tab-content active">
+            <div class="content-card">
+                <h2>User Management</h2>
+
+                <div class="search-bar">
+                    <input type="text" id="userSearch" placeholder="Search by email or name...">
+                    <button class="btn btn-primary" onclick="searchUsers()">Search</button>
+                    <button class="btn btn-secondary" onclick="loadUsers()">Refresh</button>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Email</th>
+                                <th>Name</th>
+                                <th>Role</th>
+                                <th>Created</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTable">
+                            <tr><td colspan="6" style="text-align: center;">Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Content: Create User -->
+        <div id="tab-create-user" class="tab-content">
+            <div class="content-card">
+                <h2>Create New User</h2>
+                <p style="color: #64748b; margin-bottom: 1.5rem;">Create a new user account for existing customers migrating to the new system.</p>
+
+                <form id="createUserForm">
+                    <div class="form-group">
+                        <label for="newUserEmail">Email Address *</label>
+                        <input type="email" id="newUserEmail" placeholder="user@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="newUserName">Full Name *</label>
+                        <input type="text" id="newUserName" placeholder="John Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="newUserPassword">Password *</label>
+                        <input type="text" id="newUserPassword" placeholder="Enter password" required>
+                        <button type="button" class="btn btn-secondary" style="width: auto; margin-top: 0.5rem;" onclick="generatePassword()">Generate Secure Password</button>
+                    </div>
+                    <div class="form-group">
+                        <label for="newUserRole">Role</label>
+                        <select id="newUserRole">
+                            <option value="paid">Paid</option>
+                            <option value="trial">Trial</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-success">Create User</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Tab Content: Grant Subscription -->
+        <div id="tab-grant-subscription" class="tab-content">
+            <div class="content-card">
+                <h2>Grant Subscription</h2>
+                <p style="color: #64748b; margin-bottom: 1.5rem;">Manually grant a subscription to an existing user (bypasses Stripe).</p>
+
+                <form id="grantSubscriptionForm">
+                    <div class="form-group">
+                        <label for="subUserEmail">User Email *</label>
+                        <input type="email" id="subUserEmail" placeholder="user@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="productCode">Product *</label>
+                        <select id="productCode" required>
+                            <option value="">Select a product...</option>
+                            <optgroup label="Wind Load Calculator">
+                                <option value="cc_walls">C&C Walls Bundle - $35/mo</option>
+                                <option value="cc_walls_starter">Calculator Starter - $35/mo</option>
+                                <option value="cc_walls_pro">Calculator Pro - $59/mo</option>
+                                <option value="cc_walls_premium">Calculator Premium - $149/mo</option>
+                            </optgroup>
+                            <optgroup label="Building Intelligence Platform">
+                                <option value="bip_starter">BIP Starter - $29/mo</option>
+                                <option value="bip_pro">BIP Pro - $79/mo</option>
+                                <option value="bip_premium">BIP Premium - $149/mo</option>
+                            </optgroup>
+                            <optgroup label="Packages">
+                                <option value="professional">Professional Package - $104/mo</option>
+                                <option value="enterprise">Enterprise Package - $399/mo</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="billingCycle">Billing Cycle</label>
+                        <select id="billingCycle">
+                            <option value="monthly">Monthly</option>
+                            <option value="annual">Annual</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-success">Grant Subscription</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Tab Content: Usage Report -->
+        <div id="tab-usage" class="tab-content">
+            <div class="content-card">
+                <h2>Usage Report</h2>
+
+                <div class="search-bar">
+                    <select id="usagePeriod" style="flex: 0 0 auto; width: auto;">
+                        <option value="day">Last 24 Hours</option>
+                        <option value="week">Last 7 Days</option>
+                        <option value="month" selected>Last 30 Days</option>
+                    </select>
+                    <button class="btn btn-primary" onclick="loadUsageReport()">Load Report</button>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Email</th>
+                                <th>Name</th>
+                                <th>Role</th>
+                                <th>Calculations</th>
+                                <th>Subscription</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usageTable">
+                            <tr><td colspan="5" style="text-align: center;">Click "Load Report" to view usage data</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Details Modal -->
+    <div id="userModal" class="modal-overlay">
+        <div class="modal">
+            <h3>User Details</h3>
+            <div id="userDetails"></div>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Configuration
+        const API_URL = 'https://windloadcalc-production.up.railway.app';
+        let adminKey = '';
+        let adminEmail = '';
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check for stored credentials
+            const stored = localStorage.getItem('wlc_admin');
+            if (stored) {
+                const { email, key } = JSON.parse(stored);
+                adminEmail = email;
+                adminKey = key;
+                showAdminPanel();
+            }
+
+            // Tab switching
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                    tab.classList.add('active');
+                    document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+                });
+            });
+
+            // Login form
+            document.getElementById('loginForm').addEventListener('submit', handleLogin);
+
+            // Create user form
+            document.getElementById('createUserForm').addEventListener('submit', handleCreateUser);
+
+            // Grant subscription form
+            document.getElementById('grantSubscriptionForm').addEventListener('submit', handleGrantSubscription);
+        });
+
+        // Login handler
+        async function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const key = document.getElementById('adminKey').value;
+
+            try {
+                // Verify admin key by making a test request
+                const response = await fetch(`${API_URL}/api/admin/users?limit=1`, {
+                    headers: {
+                        'X-Admin-Key': key
+                    }
+                });
+
+                if (response.ok) {
+                    adminEmail = email;
+                    adminKey = key;
+                    localStorage.setItem('wlc_admin', JSON.stringify({ email, key }));
+                    showAdminPanel();
+                } else {
+                    showAlert('loginAlert', 'Invalid admin key', 'error');
+                }
+            } catch (error) {
+                showAlert('loginAlert', 'Connection error: ' + error.message, 'error');
+            }
+        }
+
+        // Show admin panel
+        function showAdminPanel() {
+            document.getElementById('loginContainer').style.display = 'none';
+            document.getElementById('adminPanel').classList.add('active');
+            loadUsers();
+            loadStats();
+        }
+
+        // Logout
+        function logout() {
+            localStorage.removeItem('wlc_admin');
+            adminEmail = '';
+            adminKey = '';
+            document.getElementById('loginContainer').style.display = 'block';
+            document.getElementById('adminPanel').classList.remove('active');
+        }
+
+        // Show alert
+        function showAlert(elementId, message, type) {
+            const alert = document.getElementById(elementId);
+            alert.textContent = message;
+            alert.className = `alert show alert-${type}`;
+            setTimeout(() => alert.classList.remove('show'), 5000);
+        }
+
+        // API request helper
+        async function apiRequest(endpoint, method = 'GET', body = null) {
+            const options = {
+                method,
+                headers: {
+                    'X-Admin-Key': adminKey,
+                    'Content-Type': 'application/json'
+                }
+            };
+            if (body) {
+                options.body = JSON.stringify(body);
+            }
+            const response = await fetch(`${API_URL}${endpoint}`, options);
+            return response.json();
+        }
+
+        // Load users
+        async function loadUsers() {
+            const search = document.getElementById('userSearch').value;
+            try {
+                const data = await apiRequest(`/api/admin/users?limit=100${search ? '&search=' + encodeURIComponent(search) : ''}`);
+
+                if (data.success) {
+                    const tbody = document.getElementById('usersTable');
+                    if (data.users.length === 0) {
+                        tbody.innerHTML = '<tr><td colspan="6" style="text-align: center;">No users found</td></tr>';
+                        return;
+                    }
+
+                    tbody.innerHTML = data.users.map(user => `
+                        <tr>
+                            <td>${user.id}</td>
+                            <td>${user.email}</td>
+                            <td>${user.full_name || '-'}</td>
+                            <td><span class="badge badge-${user.role === 'admin' ? 'admin' : user.role === 'trial' ? 'trial' : 'paid'}">${user.role}</span></td>
+                            <td>${user.created_at ? new Date(user.created_at).toLocaleDateString() : '-'}</td>
+                            <td>
+                                <button class="action-btn action-btn-view" onclick="viewUser('${user.email}')">View</button>
+                            </td>
+                        </tr>
+                    `).join('');
+                }
+            } catch (error) {
+                console.error('Error loading users:', error);
+            }
+        }
+
+        // Search users
+        function searchUsers() {
+            loadUsers();
+        }
+
+        // Load stats
+        async function loadStats() {
+            try {
+                const usersData = await apiRequest('/api/admin/users?limit=1');
+                document.getElementById('totalUsers').textContent = usersData.total || 0;
+
+                const usageData = await apiRequest('/api/admin/usage-report?period=day');
+                document.getElementById('todayCalcs').textContent = usageData.total_calculations || 0;
+
+                // Count trial and subscribed users from user list
+                const allUsers = await apiRequest('/api/admin/users?limit=1000');
+                if (allUsers.success) {
+                    const trialCount = allUsers.users.filter(u => u.role === 'trial').length;
+                    const paidCount = allUsers.users.filter(u => ['paid', 'owner', 'admin'].includes(u.role)).length;
+                    document.getElementById('trialUsers').textContent = trialCount;
+                    document.getElementById('activeSubscriptions').textContent = paidCount;
+                }
+            } catch (error) {
+                console.error('Error loading stats:', error);
+            }
+        }
+
+        // View user details
+        async function viewUser(email) {
+            try {
+                const data = await apiRequest(`/api/admin/users/lookup?email=${encodeURIComponent(email)}`);
+
+                if (data.success && data.found) {
+                    const user = data.user;
+                    const subs = data.subscriptions || [];
+
+                    document.getElementById('userDetails').innerHTML = `
+                        <div class="user-detail">
+                            <span class="user-detail-label">ID</span>
+                            <span class="user-detail-value">${user.id}</span>
+                        </div>
+                        <div class="user-detail">
+                            <span class="user-detail-label">Email</span>
+                            <span class="user-detail-value">${user.email}</span>
+                        </div>
+                        <div class="user-detail">
+                            <span class="user-detail-label">Name</span>
+                            <span class="user-detail-value">${user.full_name || '-'}</span>
+                        </div>
+                        <div class="user-detail">
+                            <span class="user-detail-label">Role</span>
+                            <span class="user-detail-value">${user.role}</span>
+                        </div>
+                        <div class="user-detail">
+                            <span class="user-detail-label">Email Verified</span>
+                            <span class="user-detail-value">${user.email_verified ? 'Yes' : 'No'}</span>
+                        </div>
+                        <div class="user-detail">
+                            <span class="user-detail-label">Google OAuth</span>
+                            <span class="user-detail-value">${user.google_id ? 'Connected' : 'Not connected'}</span>
+                        </div>
+                        <div class="user-detail">
+                            <span class="user-detail-label">Created</span>
+                            <span class="user-detail-value">${user.created_at ? new Date(user.created_at).toLocaleString() : '-'}</span>
+                        </div>
+                        <div class="user-detail">
+                            <span class="user-detail-label">Subscriptions</span>
+                            <span class="user-detail-value">${subs.length > 0 ? subs.map(s => `${s.product_id} (${s.status})`).join(', ') : 'None'}</span>
+                        </div>
+                    `;
+                    document.getElementById('userModal').classList.add('show');
+                }
+            } catch (error) {
+                console.error('Error viewing user:', error);
+            }
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('userModal').classList.remove('show');
+        }
+
+        // Generate secure password
+        function generatePassword() {
+            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789!@#$%';
+            let password = '';
+            for (let i = 0; i < 12; i++) {
+                password += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            document.getElementById('newUserPassword').value = password;
+        }
+
+        // Create user handler
+        async function handleCreateUser(e) {
+            e.preventDefault();
+            const email = document.getElementById('newUserEmail').value;
+            const fullName = document.getElementById('newUserName').value;
+            const password = document.getElementById('newUserPassword').value;
+            const role = document.getElementById('newUserRole').value;
+
+            try {
+                const data = await apiRequest('/api/admin/users/create', 'POST', {
+                    email,
+                    full_name: fullName,
+                    password,
+                    role
+                });
+
+                if (data.success) {
+                    showAlert('adminAlert', `User created successfully! Email: ${email}`, 'success');
+                    document.getElementById('createUserForm').reset();
+                    loadUsers();
+                    loadStats();
+                } else {
+                    showAlert('adminAlert', 'Error: ' + data.error, 'error');
+                }
+            } catch (error) {
+                showAlert('adminAlert', 'Error: ' + error.message, 'error');
+            }
+        }
+
+        // Grant subscription handler
+        async function handleGrantSubscription(e) {
+            e.preventDefault();
+            const email = document.getElementById('subUserEmail').value;
+            const productCode = document.getElementById('productCode').value;
+            const billingCycle = document.getElementById('billingCycle').value;
+
+            try {
+                const data = await apiRequest('/api/admin/users/grant-subscription', 'POST', {
+                    email,
+                    product_code: productCode,
+                    billing_cycle: billingCycle
+                });
+
+                if (data.success) {
+                    showAlert('adminAlert', `Subscription granted successfully to ${email}!`, 'success');
+                    document.getElementById('grantSubscriptionForm').reset();
+                } else {
+                    showAlert('adminAlert', 'Error: ' + data.error, 'error');
+                }
+            } catch (error) {
+                showAlert('adminAlert', 'Error: ' + error.message, 'error');
+            }
+        }
+
+        // Load usage report
+        async function loadUsageReport() {
+            const period = document.getElementById('usagePeriod').value;
+            try {
+                const data = await apiRequest(`/api/admin/usage-report?period=${period}&limit=50`);
+
+                if (data.success) {
+                    const tbody = document.getElementById('usageTable');
+                    if (data.users.length === 0) {
+                        tbody.innerHTML = '<tr><td colspan="5" style="text-align: center;">No usage data for this period</td></tr>';
+                        return;
+                    }
+
+                    tbody.innerHTML = data.users.map(user => `
+                        <tr>
+                            <td>${user.email}</td>
+                            <td>${user.name || '-'}</td>
+                            <td><span class="badge badge-${user.role === 'admin' ? 'admin' : user.role === 'trial' ? 'trial' : 'paid'}">${user.role}</span></td>
+                            <td><strong>${user.calculation_count}</strong></td>
+                            <td>${user.subscription ? user.subscription.product : 'None'}</td>
+                        </tr>
+                    `).join('');
+                }
+            } catch (error) {
+                console.error('Error loading usage report:', error);
+            }
+        }
+
+        // Close modal on outside click
+        document.getElementById('userModal').addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal-overlay')) {
+                closeModal();
+            }
+        });
+
+        // Search on Enter key
+        document.getElementById('userSearch').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                searchUsers();
+            }
+        });
+    </script>
+</body>
+</html>

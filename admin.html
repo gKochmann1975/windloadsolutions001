@@ -589,8 +589,16 @@
                     </div>
                     <div class="form-group">
                         <label for="newUserPassword">Password *</label>
-                        <input type="text" id="newUserPassword" placeholder="Enter password" required>
+                        <div style="display: flex; gap: 0.5rem; align-items: center;">
+                            <input type="text" id="newUserPassword" placeholder="Enter password" required style="flex: 1; font-family: monospace; font-size: 1.1rem;">
+                            <button type="button" class="btn btn-secondary" style="width: auto; white-space: nowrap;" onclick="togglePasswordVisibility()">Hide</button>
+                        </div>
                         <button type="button" class="btn btn-secondary" style="width: auto; margin-top: 0.5rem;" onclick="generatePassword()">Generate Secure Password</button>
+                        <div id="generatedPasswordDisplay" style="margin-top: 0.75rem; padding: 1rem; background: #f0fdf4; border: 2px solid #10b981; border-radius: 8px; display: none;">
+                            <strong style="color: #047857;">Generated Password:</strong>
+                            <code id="passwordCopyText" style="display: block; font-size: 1.2rem; margin-top: 0.5rem; padding: 0.5rem; background: white; border-radius: 4px; user-select: all;"></code>
+                            <button type="button" class="btn btn-success" style="width: auto; margin-top: 0.5rem;" onclick="copyPassword()">Copy to Clipboard</button>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="newUserRole">Role</label>
@@ -920,6 +928,30 @@
                 password += chars.charAt(Math.floor(Math.random() * chars.length));
             }
             document.getElementById('newUserPassword').value = password;
+            document.getElementById('newUserPassword').type = 'text';
+            document.getElementById('passwordCopyText').textContent = password;
+            document.getElementById('generatedPasswordDisplay').style.display = 'block';
+        }
+
+        // Toggle password visibility
+        function togglePasswordVisibility() {
+            const input = document.getElementById('newUserPassword');
+            const btn = event.target;
+            if (input.type === 'password') {
+                input.type = 'text';
+                btn.textContent = 'Hide';
+            } else {
+                input.type = 'password';
+                btn.textContent = 'Show';
+            }
+        }
+
+        // Copy password to clipboard
+        function copyPassword() {
+            const password = document.getElementById('newUserPassword').value;
+            navigator.clipboard.writeText(password).then(() => {
+                showAlert('adminAlert', 'Password copied to clipboard!', 'success');
+            });
         }
 
         // Create user handler

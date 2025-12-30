@@ -175,9 +175,6 @@
             </div>
         </div>
         <button class="btn btn-primary" onclick="doLogin()">Access Admin Panel</button>
-        <p style="margin-top: 1.5rem; padding: 1rem; background: #f0f9ff; border-radius: 8px; font-size: 0.85rem; color: #0369a1; text-align: center;">
-            <strong>Key:</strong> <code style="background: #e0f2fe; padding: 0.25rem 0.5rem; border-radius: 4px;">WindLoadAdmin2026</code>
-        </p>
     </div>
 
     <!-- Admin Panel -->
@@ -281,6 +278,27 @@
                     </select>
                 </div>
 
+                <div class="form-group">
+                    <label>Access Duration *</label>
+                    <select id="subDuration">
+                        <option value="30">30 Days</option>
+                        <option value="60">60 Days</option>
+                        <option value="90">90 Days</option>
+                        <option value="180">6 Months (180 Days)</option>
+                        <option value="365" selected>1 Year (365 Days)</option>
+                        <option value="custom">Custom End Date</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="customDateGroup" style="display: none;">
+                    <label>Custom End Date</label>
+                    <input type="date" id="subEndDate" min="">
+                </div>
+
+                <div class="info-box" style="background: #fef3c7; border-left-color: #f59e0b;">
+                    <p style="color: #92400e;"><strong>Duration Info:</strong> This sets how long the customer has access before they need to purchase a subscription. Use this to match their existing account expiration date.</p>
+                </div>
+
                 <button class="btn btn-primary" onclick="grantSubscription()">Grant Subscription</button>
 
                 <div id="grantResult" class="result-box"></div>
@@ -373,6 +391,29 @@
             });
         }
 
+        // Duration selector toggle for custom date
+        document.addEventListener('DOMContentLoaded', function() {
+            const durationSelect = document.getElementById('subDuration');
+            const customDateGroup = document.getElementById('customDateGroup');
+            const endDateInput = document.getElementById('subEndDate');
+
+            // Set minimum date to today
+            const today = new Date().toISOString().split('T')[0];
+            endDateInput.setAttribute('min', today);
+
+            durationSelect.addEventListener('change', function() {
+                if (this.value === 'custom') {
+                    customDateGroup.style.display = 'block';
+                    // Default to 30 days from now
+                    const defaultDate = new Date();
+                    defaultDate.setDate(defaultDate.getDate() + 30);
+                    endDateInput.value = defaultDate.toISOString().split('T')[0];
+                } else {
+                    customDateGroup.style.display = 'none';
+                }
+            });
+        });
+
         // Show result
         function showResult(elementId, success, title, details) {
             const box = document.getElementById(elementId);
@@ -440,12 +481,34 @@
             const email = document.getElementById('subEmail').value.trim();
             const product = document.getElementById('subProduct').value;
             const billing = document.getElementById('subBilling').value;
+            const duration = document.getElementById('subDuration').value;
+            const customEndDate = document.getElementById('subEndDate').value;
 
             if (!email || !product) {
                 showResult('grantResult', false, 'Missing Information', {
                     'Error': 'Please fill in email and select a product'
                 });
                 return;
+            }
+
+            // Calculate end date
+            let endDate;
+            let durationLabel;
+            if (duration === 'custom') {
+                if (!customEndDate) {
+                    showResult('grantResult', false, 'Missing Information', {
+                        'Error': 'Please select a custom end date'
+                    });
+                    return;
+                }
+                endDate = customEndDate;
+                durationLabel = customEndDate;
+            } else {
+                const days = parseInt(duration);
+                const date = new Date();
+                date.setDate(date.getDate() + days);
+                endDate = date.toISOString().split('T')[0];
+                durationLabel = `${days} days (until ${endDate})`;
             }
 
             try {
@@ -455,7 +518,13 @@
                         'Content-Type': 'application/json',
                         'X-Admin-Key': currentAdminKey
                     },
-                    body: JSON.stringify({ email, product_code: product, billing_cycle: billing })
+                    body: JSON.stringify({
+                        email,
+                        product_code: product,
+                        billing_cycle: billing,
+                        duration_days: duration === 'custom' ? null : parseInt(duration),
+                        end_date: duration === 'custom' ? customEndDate : null
+                    })
                 });
 
                 const data = await response.json();
@@ -464,7 +533,8 @@
                     showResult('grantResult', true, 'Subscription Granted!', {
                         'Email': email,
                         'Product': product,
-                        'Billing': billing
+                        'Billing': billing,
+                        'Access Until': data.subscription?.expires_at || endDate
                     });
                     document.getElementById('subEmail').value = '';
                 } else {

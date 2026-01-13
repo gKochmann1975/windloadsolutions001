@@ -159,6 +159,70 @@
             margin-bottom: 1.5rem;
         }
         .info-box p { color: #1e40af; font-size: 0.9rem; line-height: 1.5; }
+
+        /* Customer Table Styles */
+        .search-bar {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .search-bar input {
+            flex: 1;
+            min-width: 200px;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        .search-bar input:focus { outline: none; border-color: #0018ff; }
+        .search-bar button { white-space: nowrap; width: auto; padding: 0.75rem 1.5rem; }
+        .customer-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+        .customer-table th, .customer-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .customer-table th {
+            background: #f1f5f9;
+            font-weight: 600;
+            color: #475569;
+            position: sticky;
+            top: 0;
+        }
+        .customer-table tr:hover { background: #f8fafc; }
+        .customer-table .email { font-family: monospace; font-size: 0.85rem; }
+        .customer-table .date { color: #64748b; font-size: 0.85rem; }
+        .table-container {
+            max-height: 500px;
+            overflow-y: auto;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+        }
+        .stats-row {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .stat-box {
+            flex: 1;
+            min-width: 120px;
+            background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .stat-box .number { font-size: 1.5rem; font-weight: bold; color: #181E57; }
+        .stat-box .label { font-size: 0.8rem; color: #64748b; }
+        .badge-active { background: #d1fae5; color: #047857; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; }
+        .badge-expired { background: #fee2e2; color: #dc2626; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; }
+        .badge-trial { background: #fef3c7; color: #92400e; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; }
+        .loading { text-align: center; padding: 2rem; color: #64748b; }
     </style>
     <link rel="canonical" href="https://windloadcalc.com/admin.html">
 </head>
@@ -189,12 +253,63 @@
         </div>
 
         <div class="tabs">
-            <button class="tab active" onclick="showTab('create')">Create User</button>
+            <button class="tab active" onclick="showTab('customers')">View Customers</button>
+            <button class="tab" onclick="showTab('create')">Create User</button>
             <button class="tab" onclick="showTab('grant')">Grant Subscription</button>
         </div>
 
+        <!-- View Customers Tab -->
+        <div id="tab-customers" class="tab-content active">
+            <div class="card">
+                <h2>Customer List</h2>
+                <p class="subtitle">View all registered customers and their subscription status</p>
+
+                <div class="stats-row" id="customerStats">
+                    <div class="stat-box">
+                        <div class="number" id="statTotal">-</div>
+                        <div class="label">Total Users</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="number" id="statActive">-</div>
+                        <div class="label">Active Subs</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="number" id="statTrial">-</div>
+                        <div class="label">Trial Users</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="number" id="statExpired">-</div>
+                        <div class="label">Expired</div>
+                    </div>
+                </div>
+
+                <div class="search-bar">
+                    <input type="text" id="customerSearch" placeholder="Search by email or name..." onkeyup="filterCustomers()">
+                    <button class="btn btn-primary" onclick="loadCustomers()">Refresh</button>
+                </div>
+
+                <div class="table-container">
+                    <table class="customer-table">
+                        <thead>
+                            <tr>
+                                <th>Email</th>
+                                <th>Name</th>
+                                <th>Phone</th>
+                                <th>Subscription</th>
+                                <th>Signup Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="customerTableBody">
+                            <tr><td colspan="6" class="loading">Loading customers...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
         <!-- Create User Tab -->
-        <div id="tab-create" class="tab-content active">
+        <div id="tab-create" class="tab-content">
             <div class="card">
                 <h2>Create New User</h2>
                 <p class="subtitle">Create accounts for existing customers migrating to the new system</p>
@@ -321,6 +436,7 @@
                 document.getElementById('loginScreen').style.display = 'none';
                 document.getElementById('adminPanel').style.display = 'block';
                 localStorage.setItem('wlc_admin_key', key);
+                loadCustomers(); // Load customers after login
             } else {
                 const err = document.getElementById('loginError');
                 err.textContent = 'Invalid admin key. Please try again.';
@@ -335,12 +451,139 @@
                 currentAdminKey = saved;
                 document.getElementById('loginScreen').style.display = 'none';
                 document.getElementById('adminPanel').style.display = 'block';
+                loadCustomers(); // Load customers on login
             }
             // Enter key to login
             document.getElementById('adminKeyInput').addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') doLogin();
             });
         };
+
+        // Customer data storage
+        let allCustomers = [];
+
+        // Product name mapping
+        const productNames = {
+            'cc_walls': 'Calculator Bundle',
+            'cc_walls_starter': 'Calculator Starter',
+            'cc_walls_pro': 'Calculator Pro',
+            'cc_walls_premium': 'Calculator Premium',
+            'professional': 'Professional',
+            'bip_starter': 'BIP Starter',
+            'bip_pro': 'BIP Pro',
+            'bip_premium': 'BIP Premium',
+            'bip_enterprise': 'BIP Enterprise'
+        };
+
+        // Load customers from API
+        async function loadCustomers() {
+            const tbody = document.getElementById('customerTableBody');
+            tbody.innerHTML = '<tr><td colspan="6" class="loading">Loading customers...</td></tr>';
+
+            try {
+                const response = await fetch(`${API_URL}/api/admin/users`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Admin-Key': currentAdminKey
+                    }
+                });
+
+                const data = await response.json();
+
+                if (data.success && data.users) {
+                    allCustomers = data.users;
+                    renderCustomers(allCustomers);
+                    updateStats(allCustomers);
+                } else {
+                    tbody.innerHTML = `<tr><td colspan="6" class="loading" style="color: #dc2626;">Error: ${data.error || 'Failed to load customers'}</td></tr>`;
+                }
+            } catch (error) {
+                tbody.innerHTML = `<tr><td colspan="6" class="loading" style="color: #dc2626;">Connection error: ${error.message}</td></tr>`;
+            }
+        }
+
+        // Render customers to table
+        function renderCustomers(customers) {
+            const tbody = document.getElementById('customerTableBody');
+
+            if (customers.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" class="loading">No customers found</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = customers.map(user => {
+                const name = user.full_name || '-';
+                const phone = user.phone || '-';
+                const signupDate = user.created_at ? new Date(user.created_at).toLocaleDateString() : '-';
+
+                // Determine subscription info
+                let subInfo = '-';
+                let statusBadge = '<span class="badge-expired">No Sub</span>';
+
+                if (user.subscriptions && user.subscriptions.length > 0) {
+                    const subs = user.subscriptions.map(s => {
+                        const prodName = productNames[s.product_code] || s.product_code;
+                        return prodName;
+                    });
+                    subInfo = subs.join(', ');
+
+                    const activeSub = user.subscriptions.find(s => s.status === 'active');
+                    if (activeSub) {
+                        statusBadge = '<span class="badge-active">Active</span>';
+                    } else {
+                        statusBadge = '<span class="badge-expired">Expired</span>';
+                    }
+                } else if (user.role === 'trial') {
+                    subInfo = 'Trial';
+                    statusBadge = '<span class="badge-trial">Trial</span>';
+                }
+
+                return `
+                    <tr>
+                        <td class="email">${user.email}</td>
+                        <td>${name}</td>
+                        <td>${phone}</td>
+                        <td>${subInfo}</td>
+                        <td class="date">${signupDate}</td>
+                        <td>${statusBadge}</td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        // Update statistics
+        function updateStats(customers) {
+            document.getElementById('statTotal').textContent = customers.length;
+
+            let active = 0, trial = 0, expired = 0;
+            customers.forEach(user => {
+                if (user.subscriptions && user.subscriptions.length > 0) {
+                    const hasActive = user.subscriptions.some(s => s.status === 'active');
+                    if (hasActive) active++;
+                    else expired++;
+                } else if (user.role === 'trial') {
+                    trial++;
+                } else {
+                    expired++;
+                }
+            });
+
+            document.getElementById('statActive').textContent = active;
+            document.getElementById('statTrial').textContent = trial;
+            document.getElementById('statExpired').textContent = expired;
+        }
+
+        // Filter customers by search
+        function filterCustomers() {
+            const searchTerm = document.getElementById('customerSearch').value.toLowerCase();
+            const filtered = allCustomers.filter(user => {
+                const name = (user.full_name || '').toLowerCase();
+                const email = (user.email || '').toLowerCase();
+                return name.includes(searchTerm) || email.includes(searchTerm);
+            });
+            renderCustomers(filtered);
+        }
 
         // Logout
         function doLogout() {

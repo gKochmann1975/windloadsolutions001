@@ -509,6 +509,7 @@
         function updateDashboard(data) {
             const hasBIP = data.has_bip || false;
             const hasCalculator = data.has_calculator || false;
+            const isAdmin = data.is_admin || false;
             const subscriptions = data.subscriptions || [];
 
             // Find active BIP subscription
@@ -535,22 +536,34 @@
 
                 // Update status badge
                 const isTrial = bipSub.status === 'trialing';
-                bipStatus.className = `status-badge ${isTrial ? 'trial' : 'active'}`;
-                bipStatus.innerHTML = isTrial
-                    ? '<span>⏰</span><span>Free Trial</span>'
-                    : '<span>✅</span><span>Active</span>';
+                const isAdminAccess = isAdmin || bipSub.access_type === 'admin';
+
+                if (isAdminAccess) {
+                    bipStatus.className = 'status-badge active';
+                    bipStatus.innerHTML = '<span>👑</span><span>Admin Access</span>';
+                } else {
+                    bipStatus.className = `status-badge ${isTrial ? 'trial' : 'active'}`;
+                    bipStatus.innerHTML = isTrial
+                        ? '<span>⏰</span><span>Free Trial</span>'
+                        : '<span>✅</span><span>Active</span>';
+                }
 
                 // Show plan info
                 bipPlanInfo.style.display = 'block';
-                const planInfo = BIP_PLANS[bipSub.product_code] || { name: 'Active Plan', details: '' };
-                document.getElementById('bip-plan-name').textContent = planInfo.name;
-                document.getElementById('bip-plan-details').textContent = planInfo.details;
+                if (isAdminAccess) {
+                    document.getElementById('bip-plan-name').textContent = 'Premium Plan';
+                    document.getElementById('bip-plan-details').textContent = 'Full admin access';
+                } else {
+                    const planInfo = BIP_PLANS[bipSub.product_code] || { name: 'Active Plan', details: '' };
+                    document.getElementById('bip-plan-name').textContent = planInfo.name;
+                    document.getElementById('bip-plan-details').textContent = planInfo.details;
+                }
 
                 // Update action button
                 bipAction.textContent = 'Launch Platform →';
                 bipAction.className = 'action-btn primary';
-                // CRITICAL: Add paid=true for PAID subscriptions (not trials) so BIP doesn't show trial restrictions
-                const isBipPaid = bipSub.status === 'active' && bipSub.status !== 'trialing';
+                // CRITICAL: Add paid=true for PAID subscriptions (not trials) and admins so BIP doesn't show trial restrictions
+                const isBipPaid = isAdminAccess || (bipSub.status === 'active' && bipSub.status !== 'trialing');
                 bipAction.href = `${BIP_URL}?token=${storedToken}&user_id=${storedUserId}${isBipPaid ? '&paid=true' : ''}`;
                 bipAction.target = '_self';
             } else {
@@ -570,16 +583,28 @@
 
                 // Update status badge
                 const isTrial = calcSub.status === 'trialing';
-                calcStatus.className = `status-badge ${isTrial ? 'trial' : 'active'}`;
-                calcStatus.innerHTML = isTrial
-                    ? '<span>⏰</span><span>Free Trial</span>'
-                    : '<span>✅</span><span>Active</span>';
+                const isAdminAccess = isAdmin || calcSub.access_type === 'admin';
+
+                if (isAdminAccess) {
+                    calcStatus.className = 'status-badge active';
+                    calcStatus.innerHTML = '<span>👑</span><span>Admin Access</span>';
+                } else {
+                    calcStatus.className = `status-badge ${isTrial ? 'trial' : 'active'}`;
+                    calcStatus.innerHTML = isTrial
+                        ? '<span>⏰</span><span>Free Trial</span>'
+                        : '<span>✅</span><span>Active</span>';
+                }
 
                 // Show plan info
                 calcPlanInfo.style.display = 'block';
-                const planInfo = CALC_PLANS[calcSub.product_code] || { name: 'Active Plan', details: '' };
-                document.getElementById('calc-plan-name').textContent = planInfo.name;
-                document.getElementById('calc-plan-details').textContent = planInfo.details;
+                if (isAdminAccess) {
+                    document.getElementById('calc-plan-name').textContent = 'Premium Plan';
+                    document.getElementById('calc-plan-details').textContent = 'Full admin access';
+                } else {
+                    const planInfo = CALC_PLANS[calcSub.product_code] || { name: 'Active Plan', details: '' };
+                    document.getElementById('calc-plan-name').textContent = planInfo.name;
+                    document.getElementById('calc-plan-details').textContent = planInfo.details;
+                }
 
                 // Update action button
                 calcAction.textContent = 'Launch Calculator →';

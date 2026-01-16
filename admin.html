@@ -256,6 +256,7 @@
             <button class="tab active" onclick="showTab('customers')">View Customers</button>
             <button class="tab" onclick="showTab('create')">Create User</button>
             <button class="tab" onclick="showTab('grant')">Grant Subscription</button>
+            <button class="tab" onclick="showTab('campaigns')" style="background: linear-gradient(135deg, #00b4d8, #0077b6); color: white;">Campaigns</button>
         </div>
 
         <!-- View Customers Tab -->
@@ -418,6 +419,172 @@
                 <button class="btn btn-primary" onclick="grantSubscription()">Grant Subscription</button>
 
                 <div id="grantResult" class="result-box"></div>
+            </div>
+        </div>
+
+        <!-- Campaigns Tab -->
+        <div id="tab-campaigns" class="tab-content">
+            <div class="card" style="background: linear-gradient(135deg, #0c1220 0%, #1a1a2e 100%); color: #e2e8f0; border: 1px solid rgba(0, 180, 216, 0.3);">
+                <h2 style="color: #00e5ff; border-bottom-color: rgba(0, 229, 255, 0.3);">
+                    <span style="margin-right: 0.5rem;">🎯</span> Campaign Admin
+                </h2>
+                <p class="subtitle" style="color: #94a3b8;">WindLoad.co landing page deployment pipeline</p>
+
+                <!-- Goal Progress -->
+                <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                        <span style="font-weight: 600;">500 Page Goal</span>
+                        <span id="campaignPercent" style="font-size: 1.5rem; font-weight: 800; color: #00e5ff;">0.4%</span>
+                    </div>
+                    <div style="height: 8px; background: rgba(255,255,255,0.1); border-radius: 100px; overflow: hidden; margin-bottom: 0.75rem;">
+                        <div id="campaignProgressBar" style="height: 100%; width: 0.4%; background: linear-gradient(90deg, #ef4444, #f97316); border-radius: 100px;"></div>
+                    </div>
+                    <div style="display: flex; gap: 2rem; color: #94a3b8; font-size: 0.875rem;">
+                        <span>Total: <strong id="campaignTotal" style="color: white;">2</strong> / 500</span>
+                        <span>Remaining: <strong id="campaignRemaining" style="color: white;">498</strong></span>
+                        <span>Days to Goal: <strong id="campaignDays" style="color: white;">36</strong> @ 14/day</span>
+                    </div>
+                </div>
+
+                <!-- Stats Grid -->
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.5rem;">
+                    <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 1rem;">
+                        <div style="font-size: 0.75rem; color: #64748b; margin-bottom: 0.25rem;">📍 Live</div>
+                        <div id="campaignLive" style="font-size: 1.75rem; font-weight: 800; color: white;">2</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 1rem;">
+                        <div style="font-size: 0.75rem; color: #64748b; margin-bottom: 0.25rem;">📦 Staged</div>
+                        <div id="campaignStaged" style="font-size: 1.75rem; font-weight: 800; color: white;">0</div>
+                        <div style="font-size: 0.7rem; color: #64748b;">~0 days content</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 1rem;">
+                        <div style="font-size: 0.75rem; color: #64748b; margin-bottom: 0.25rem;">🚀 Today</div>
+                        <div id="campaignToday" style="font-size: 1.75rem; font-weight: 800; color: white;">0</div>
+                        <div style="font-size: 0.7rem; color: #10b981;">14 remaining</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 1rem;">
+                        <div style="font-size: 0.75rem; color: #64748b; margin-bottom: 0.25rem;">📈 This Week</div>
+                        <div id="campaignWeek" style="font-size: 1.75rem; font-weight: 800; color: white;">2</div>
+                        <div style="font-size: 0.7rem; color: #64748b;">Target: 98/week</div>
+                    </div>
+                </div>
+
+                <!-- Auto-Deploy Status -->
+                <div style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 10px; padding: 1rem; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                        <span style="color: #f59e0b;">⏸</span>
+                        <div>
+                            <div style="font-weight: 600; color: #f59e0b;">Auto-Deploy: Paused</div>
+                            <div style="font-size: 0.75rem; color: #64748b;">Waiting for staged pages (re-enable when ready)</div>
+                        </div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-size: 0.7rem; color: #64748b;">Pages in Bank</div>
+                        <div id="campaignBank" style="font-size: 1.25rem; font-weight: 800; color: white;">0</div>
+                    </div>
+                </div>
+
+                <!-- Categories by Location -->
+                <div style="margin-bottom: 1.5rem;">
+                    <div style="font-size: 0.9rem; font-weight: 600; margin-bottom: 0.75rem; color: #00b4d8;">📍 Pages by Location</div>
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem;">
+                        <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(0, 229, 255, 0.3); border-radius: 8px; padding: 0.75rem;">
+                            <div style="font-size: 0.75rem; color: #94a3b8;"><span style="display: inline-block; width: 8px; height: 8px; background: #00e5ff; border-radius: 50%; margin-right: 0.5rem;"></span>Miami-Dade</div>
+                            <div style="font-size: 1.25rem; font-weight: 800; color: white;">2</div>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 0.75rem;">
+                            <div style="font-size: 0.75rem; color: #94a3b8;"><span style="display: inline-block; width: 8px; height: 8px; background: #00ff88; border-radius: 50%; margin-right: 0.5rem;"></span>Broward</div>
+                            <div style="font-size: 1.25rem; font-weight: 800; color: white;">0</div>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 0.75rem;">
+                            <div style="font-size: 0.75rem; color: #94a3b8;"><span style="display: inline-block; width: 8px; height: 8px; background: #fbbf24; border-radius: 50%; margin-right: 0.5rem;"></span>Palm Beach</div>
+                            <div style="font-size: 1.25rem; font-weight: 800; color: white;">0</div>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 0.75rem;">
+                            <div style="font-size: 0.75rem; color: #94a3b8;"><span style="display: inline-block; width: 8px; height: 8px; background: #f472b6; border-radius: 50%; margin-right: 0.5rem;"></span>Monroe</div>
+                            <div style="font-size: 1.25rem; font-weight: 800; color: white;">0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Categories by Product -->
+                <div style="margin-bottom: 1.5rem;">
+                    <div style="font-size: 0.9rem; font-weight: 600; margin-bottom: 0.75rem; color: #00b4d8;">🏗️ Pages by Product Type</div>
+                    <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.75rem;">
+                        <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(6, 182, 212, 0.3); border-radius: 8px; padding: 0.75rem;">
+                            <div style="font-size: 0.7rem; color: #94a3b8;"><span style="display: inline-block; width: 6px; height: 6px; background: #06b6d4; border-radius: 50%; margin-right: 0.4rem;"></span>Windows</div>
+                            <div style="font-size: 1.1rem; font-weight: 800; color: white;">1</div>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(236, 72, 153, 0.3); border-radius: 8px; padding: 0.75rem;">
+                            <div style="font-size: 0.7rem; color: #94a3b8;"><span style="display: inline-block; width: 6px; height: 6px; background: #ec4899; border-radius: 50%; margin-right: 0.4rem;"></span>Shutters</div>
+                            <div style="font-size: 1.1rem; font-weight: 800; color: white;">1</div>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 0.75rem;">
+                            <div style="font-size: 0.7rem; color: #94a3b8;"><span style="display: inline-block; width: 6px; height: 6px; background: #84cc16; border-radius: 50%; margin-right: 0.4rem;"></span>Doors</div>
+                            <div style="font-size: 1.1rem; font-weight: 800; color: white;">0</div>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 0.75rem;">
+                            <div style="font-size: 0.7rem; color: #94a3b8;"><span style="display: inline-block; width: 6px; height: 6px; background: #6366f1; border-radius: 50%; margin-right: 0.4rem;"></span>Garage</div>
+                            <div style="font-size: 1.1rem; font-weight: 800; color: white;">0</div>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 0.75rem;">
+                            <div style="font-size: 0.7rem; color: #94a3b8;"><span style="display: inline-block; width: 6px; height: 6px; background: #f97316; border-radius: 50%; margin-right: 0.4rem;"></span>Roofing</div>
+                            <div style="font-size: 1.1rem; font-weight: 800; color: white;">0</div>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 0.75rem;">
+                            <div style="font-size: 0.7rem; color: #94a3b8;"><span style="display: inline-block; width: 6px; height: 6px; background: #8b5cf6; border-radius: 50%; margin-right: 0.4rem;"></span>HVHZ</div>
+                            <div style="font-size: 1.1rem; font-weight: 800; color: white;">0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Deployed Pages List -->
+                <div style="margin-bottom: 1rem;">
+                    <div style="font-size: 0.9rem; font-weight: 600; margin-bottom: 0.75rem; color: #00b4d8;">✅ Live Campaign Pages</div>
+                    <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; overflow: hidden;">
+                        <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem;">
+                            <thead>
+                                <tr style="background: rgba(0,0,0,0.2);">
+                                    <th style="text-align: left; padding: 0.75rem; color: #64748b; font-size: 0.7rem; text-transform: uppercase;">Page</th>
+                                    <th style="text-align: left; padding: 0.75rem; color: #64748b; font-size: 0.7rem; text-transform: uppercase;">Category</th>
+                                    <th style="text-align: left; padding: 0.75rem; color: #64748b; font-size: 0.7rem; text-transform: uppercase;">Deployed</th>
+                                    <th style="text-align: left; padding: 0.75rem; color: #64748b; font-size: 0.7rem; text-transform: uppercase;">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="campaignPagesTable">
+                                <tr style="border-top: 1px solid rgba(255,255,255,0.05);">
+                                    <td style="padding: 0.75rem;">
+                                        <div style="font-weight: 600; color: white;">Window Replacement Requirements</div>
+                                        <div style="font-size: 0.7rem; color: #64748b; font-family: monospace;">/florida/miami-dade/window-replacement</div>
+                                    </td>
+                                    <td style="padding: 0.75rem;"><span style="background: rgba(0, 229, 255, 0.2); color: #00e5ff; padding: 0.2rem 0.5rem; border-radius: 100px; font-size: 0.7rem;">Miami-Dade</span></td>
+                                    <td style="padding: 0.75rem; color: #94a3b8;">Jan 15, 2026</td>
+                                    <td style="padding: 0.75rem;">
+                                        <a href="https://windload.co/florida/miami-dade/window-replacement" target="_blank" style="color: #00b4d8; text-decoration: none; font-size: 0.8rem; margin-right: 0.75rem;">View ↗</a>
+                                    </td>
+                                </tr>
+                                <tr style="border-top: 1px solid rgba(255,255,255,0.05);">
+                                    <td style="padding: 0.75rem;">
+                                        <div style="font-weight: 600; color: white;">Hurricane Shutters Guide</div>
+                                        <div style="font-size: 0.7rem; color: #64748b; font-family: monospace;">/florida/miami-dade/hurricane-shutters</div>
+                                    </td>
+                                    <td style="padding: 0.75rem;"><span style="background: rgba(0, 229, 255, 0.2); color: #00e5ff; padding: 0.2rem 0.5rem; border-radius: 100px; font-size: 0.7rem;">Miami-Dade</span></td>
+                                    <td style="padding: 0.75rem; color: #94a3b8;">Jan 15, 2026</td>
+                                    <td style="padding: 0.75rem;">
+                                        <a href="https://windload.co/florida/miami-dade/hurricane-shutters" target="_blank" style="color: #00b4d8; text-decoration: none; font-size: 0.8rem; margin-right: 0.75rem;">View ↗</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <a href="https://github.com/gKochmann1975/windload-co/actions" target="_blank" style="background: rgba(255,255,255,0.1); color: white; padding: 0.5rem 1rem; border-radius: 6px; text-decoration: none; font-size: 0.8rem;">GitHub Actions ↗</a>
+                    <a href="https://github.com/gKochmann1975/windload-co" target="_blank" style="background: rgba(255,255,255,0.1); color: white; padding: 0.5rem 1rem; border-radius: 6px; text-decoration: none; font-size: 0.8rem;">Repository ↗</a>
+                    <a href="https://windload.co/florida/miami-dade/" target="_blank" style="background: rgba(255,255,255,0.1); color: white; padding: 0.5rem 1rem; border-radius: 6px; text-decoration: none; font-size: 0.8rem;">Miami-Dade Hub ↗</a>
+                </div>
             </div>
         </div>
     </div>

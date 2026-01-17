@@ -223,6 +223,191 @@
         .badge-expired { background: #fee2e2; color: #dc2626; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; }
         .badge-trial { background: #fef3c7; color: #92400e; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; }
         .loading { text-align: center; padding: 2rem; color: #64748b; }
+
+        /* Clickable Stat Cards */
+        .stat-card-clickable {
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .stat-card-clickable:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+        .stat-card-clickable:hover::after {
+            content: 'Click to view';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.65rem;
+            color: #94a3b8;
+            white-space: nowrap;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            backdrop-filter: blur(4px);
+        }
+        .modal-overlay.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            background: linear-gradient(135deg, #0c1220 0%, #1a1a2e 100%);
+            border: 1px solid rgba(0, 180, 216, 0.3);
+            border-radius: 16px;
+            width: 90%;
+            max-width: 900px;
+            max-height: 85vh;
+            overflow: hidden;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+        }
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .modal-header h2 {
+            color: #00e5ff;
+            margin: 0;
+            font-size: 1.25rem;
+        }
+        .modal-close {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #94a3b8;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+        .modal-body {
+            padding: 1.5rem;
+            max-height: calc(85vh - 80px);
+            overflow-y: auto;
+        }
+        .modal-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .modal-stat {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 0.75rem;
+            text-align: center;
+        }
+        .modal-stat-value {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: white;
+        }
+        .modal-stat-label {
+            font-size: 0.7rem;
+            color: #64748b;
+            margin-top: 0.25rem;
+        }
+        .modal-search {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        .modal-search input {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            color: white;
+            font-size: 0.9rem;
+        }
+        .modal-search input::placeholder {
+            color: #64748b;
+        }
+        .modal-search input:focus {
+            outline: none;
+            border-color: #00b4d8;
+        }
+        .modal-filter {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            color: white;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+        .modal-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .modal-table th {
+            text-align: left;
+            padding: 0.75rem;
+            color: #64748b;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            background: rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+        }
+        .modal-table td {
+            padding: 0.75rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .modal-table tr:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+        .page-title {
+            font-weight: 600;
+            color: white;
+            margin-bottom: 0.25rem;
+        }
+        .page-url {
+            font-size: 0.7rem;
+            color: #64748b;
+            font-family: monospace;
+        }
+        .page-link {
+            color: #00b4d8;
+            text-decoration: none;
+            font-size: 0.85rem;
+        }
+        .page-link:hover {
+            color: #00e5ff;
+            text-decoration: underline;
+        }
+        .analytics-mini {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.75rem;
+        }
+        .analytics-mini span {
+            color: #94a3b8;
+        }
+        .analytics-mini strong {
+            color: white;
+        }
     </style>
     <link rel="canonical" href="https://windloadcalc.com/admin.html">
 </head>
@@ -449,14 +634,15 @@
 
                 <!-- Stats Grid -->
                 <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.5rem;">
-                    <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 1rem;">
-                        <div style="font-size: 0.75rem; color: #64748b; margin-bottom: 0.25rem;"><svg style="width: 12px; height: 12px; vertical-align: -1px; margin-right: 4px; color: #ef4444;" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> Live</div>
-                        <div id="campaignLive" style="font-size: 1.75rem; font-weight: 800; color: white;">2</div>
+                    <div class="stat-card-clickable" onclick="showPagesModal('live')" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 10px; padding: 1rem; position: relative;">
+                        <div style="font-size: 0.75rem; color: #10b981; margin-bottom: 0.25rem;"><svg style="width: 12px; height: 12px; vertical-align: -1px; margin-right: 4px;" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg> Live</div>
+                        <div id="campaignLive" style="font-size: 1.75rem; font-weight: 800; color: #10b981;">2</div>
+                        <div style="font-size: 0.65rem; color: #64748b; margin-top: 0.25rem;">Click to view all</div>
                     </div>
-                    <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 10px; padding: 1rem;">
+                    <div class="stat-card-clickable" onclick="showPagesModal('staged')" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 10px; padding: 1rem; position: relative;">
                         <div style="font-size: 0.75rem; color: #f59e0b; margin-bottom: 0.25rem;"><svg style="width: 12px; height: 12px; vertical-align: -1px; margin-right: 4px;" viewBox="0 0 24 24" fill="currentColor"><path d="M20 6h-8l-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V6h5.17l2 2H20v10z"/></svg> Staged</div>
                         <div id="campaignStaged" style="font-size: 1.75rem; font-weight: 800; color: #f59e0b;">68</div>
-                        <div style="font-size: 0.7rem; color: #64748b;">~5 days content</div>
+                        <div style="font-size: 0.65rem; color: #64748b;">Click to view all</div>
                     </div>
                     <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 1rem;">
                         <div style="font-size: 0.75rem; color: #64748b; margin-bottom: 0.25rem;"><svg style="width: 12px; height: 12px; vertical-align: -1px; margin-right: 4px; color: #10b981;" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/></svg> Today</div>
@@ -736,11 +922,321 @@
         </div>
     </div>
 
+    <!-- Pages Modal -->
+    <div id="pagesModal" class="modal-overlay" onclick="closePagesModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h2 id="modalTitle">
+                    <svg style="width: 18px; height: 18px; vertical-align: -3px; margin-right: 8px;" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    <span id="modalTitleText">Campaign Pages</span>
+                </h2>
+                <button class="modal-close" onclick="closePagesModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- Stats Summary -->
+                <div class="modal-stats" id="modalStats"></div>
+
+                <!-- Search and Filter -->
+                <div class="modal-search">
+                    <input type="text" id="modalSearchInput" placeholder="Search pages by title or URL..." onkeyup="filterModalPages()">
+                    <select class="modal-filter" id="modalCountyFilter" onchange="filterModalPages()">
+                        <option value="">All Counties</option>
+                        <option value="miami-dade">Miami-Dade</option>
+                        <option value="broward">Broward</option>
+                        <option value="palm-beach">Palm Beach</option>
+                        <option value="monroe">Monroe</option>
+                    </select>
+                </div>
+
+                <!-- Pages Table -->
+                <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; overflow: hidden; max-height: 400px; overflow-y: auto;">
+                    <table class="modal-table">
+                        <thead>
+                            <tr>
+                                <th>Page</th>
+                                <th>County</th>
+                                <th>Type</th>
+                                <th>Date</th>
+                                <th>Analytics</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="modalPagesTable"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Configuration
         const API_URL = 'https://api.windloadcalc.com';
         const ADMIN_KEY = 'wlc-admin-2025-bf8SUb3EiKNzsz4';
         let currentAdminKey = '';
+
+        // Campaign Pages Data
+        const campaignPages = {
+            live: [
+                { title: 'Window Replacement Requirements', url: '/florida/miami-dade/window-replacement', county: 'miami-dade', type: 'Windows', deployedDate: '2026-01-15', views: 127, clicks: 23 },
+                { title: 'Hurricane Shutters Guide', url: '/florida/miami-dade/hurricane-shutters', county: 'miami-dade', type: 'Shutters', deployedDate: '2026-01-15', views: 89, clicks: 15 }
+            ],
+            staged: [
+                // Miami-Dade (18 pages)
+                { title: 'Storefront Systems', url: '/florida/miami-dade/storefront-systems', county: 'miami-dade', type: 'Windows', stagedDate: '2026-01-17' },
+                { title: 'Curtain Wall Requirements', url: '/florida/miami-dade/curtain-wall', county: 'miami-dade', type: 'Windows', stagedDate: '2026-01-17' },
+                { title: 'High-Rise Windows', url: '/florida/miami-dade/high-rise-windows', county: 'miami-dade', type: 'Windows', stagedDate: '2026-01-17' },
+                { title: 'Impact Doors', url: '/florida/miami-dade/impact-doors', county: 'miami-dade', type: 'Doors', stagedDate: '2026-01-17' },
+                { title: 'Casement Windows', url: '/florida/miami-dade/casement-windows', county: 'miami-dade', type: 'Windows', stagedDate: '2026-01-17' },
+                { title: 'Fixed Windows', url: '/florida/miami-dade/fixed-windows', county: 'miami-dade', type: 'Windows', stagedDate: '2026-01-17' },
+                { title: 'Pivot Doors', url: '/florida/miami-dade/pivot-doors', county: 'miami-dade', type: 'Doors', stagedDate: '2026-01-17' },
+                { title: 'Bi-Fold Doors', url: '/florida/miami-dade/bi-fold-doors', county: 'miami-dade', type: 'Doors', stagedDate: '2026-01-17' },
+                { title: 'Hurricane Glass', url: '/florida/miami-dade/hurricane-glass', county: 'miami-dade', type: 'Windows', stagedDate: '2026-01-17' },
+                { title: 'Louvered Windows', url: '/florida/miami-dade/louvered-windows', county: 'miami-dade', type: 'Windows', stagedDate: '2026-01-17' },
+                { title: 'Clerestory Windows', url: '/florida/miami-dade/clerestory-windows', county: 'miami-dade', type: 'Windows', stagedDate: '2026-01-17' },
+                { title: 'Corner Windows', url: '/florida/miami-dade/corner-windows', county: 'miami-dade', type: 'Windows', stagedDate: '2026-01-17' },
+                { title: 'Bay Windows', url: '/florida/miami-dade/bay-windows', county: 'miami-dade', type: 'Windows', stagedDate: '2026-01-17' },
+                { title: 'Picture Windows', url: '/florida/miami-dade/picture-windows', county: 'miami-dade', type: 'Windows', stagedDate: '2026-01-17' },
+                { title: 'Jalousie Windows', url: '/florida/miami-dade/jalousie-windows', county: 'miami-dade', type: 'Windows', stagedDate: '2026-01-17' },
+                { title: 'Balcony Railings', url: '/florida/miami-dade/balcony-railings', county: 'miami-dade', type: 'HVHZ', stagedDate: '2026-01-17' },
+                { title: 'Awning Windows', url: '/florida/miami-dade/awning-windows', county: 'miami-dade', type: 'Windows', stagedDate: '2026-01-17' },
+                { title: 'Retrofit Windows', url: '/florida/miami-dade/retrofit-windows', county: 'miami-dade', type: 'Windows', stagedDate: '2026-01-17' },
+                // Broward (17 pages)
+                { title: 'Pool Enclosures', url: '/florida/broward/pool-enclosures', county: 'broward', type: 'HVHZ', stagedDate: '2026-01-17' },
+                { title: 'Skylight Requirements', url: '/florida/broward/skylight-requirements', county: 'broward', type: 'Windows', stagedDate: '2026-01-17' },
+                { title: 'Garage Doors', url: '/florida/broward/garage-doors', county: 'broward', type: 'Garage', stagedDate: '2026-01-17' },
+                { title: 'Entry Doors', url: '/florida/broward/entry-doors', county: 'broward', type: 'Doors', stagedDate: '2026-01-17' },
+                { title: 'French Doors', url: '/florida/broward/french-doors', county: 'broward', type: 'Doors', stagedDate: '2026-01-17' },
+                { title: 'Hurricane Windows', url: '/florida/broward/hurricane-windows', county: 'broward', type: 'Windows', stagedDate: '2026-01-17' },
+                { title: 'Impact Glass', url: '/florida/broward/impact-glass', county: 'broward', type: 'Windows', stagedDate: '2026-01-17' },
+                { title: 'Commercial Windows', url: '/florida/broward/commercial-windows', county: 'broward', type: 'Windows', stagedDate: '2026-01-17' },
+                { title: 'Residential Shutters', url: '/florida/broward/residential-shutters', county: 'broward', type: 'Shutters', stagedDate: '2026-01-17' },
+                { title: 'Accordion Shutters', url: '/florida/broward/accordion-shutters', county: 'broward', type: 'Shutters', stagedDate: '2026-01-17' },
+                { title: 'Roll-Down Shutters', url: '/florida/broward/roll-down-shutters', county: 'broward', type: 'Shutters', stagedDate: '2026-01-17' },
+                { title: 'Bahama Shutters', url: '/florida/broward/bahama-shutters', county: 'broward', type: 'Shutters', stagedDate: '2026-01-17' },
+                { title: 'Colonial Shutters', url: '/florida/broward/colonial-shutters', county: 'broward', type: 'Shutters', stagedDate: '2026-01-17' },
+                { title: 'Patio Doors', url: '/florida/broward/patio-doors', county: 'broward', type: 'Doors', stagedDate: '2026-01-17' },
+                { title: 'Folding Doors', url: '/florida/broward/folding-doors', county: 'broward', type: 'Doors', stagedDate: '2026-01-17' },
+                { title: 'Storefront Glazing', url: '/florida/broward/storefront-glazing', county: 'broward', type: 'Windows', stagedDate: '2026-01-17' },
+                { title: 'Window Wall', url: '/florida/broward/window-wall', county: 'broward', type: 'Windows', stagedDate: '2026-01-17' },
+                // Palm Beach (17 pages)
+                { title: 'Sliding Doors', url: '/florida/palm-beach/sliding-doors', county: 'palm-beach', type: 'Doors', stagedDate: '2026-01-17' },
+                { title: 'Lanai Enclosures', url: '/florida/palm-beach/lanai-enclosures', county: 'palm-beach', type: 'HVHZ', stagedDate: '2026-01-17' },
+                { title: 'Roof Systems', url: '/florida/palm-beach/roof-systems', county: 'palm-beach', type: 'Roofing', stagedDate: '2026-01-17' },
+                { title: 'Commercial Glazing', url: '/florida/palm-beach/commercial-glazing', county: 'palm-beach', type: 'Windows', stagedDate: '2026-01-17' },
+                { title: 'Atrium Systems', url: '/florida/palm-beach/atrium-systems', county: 'palm-beach', type: 'Windows', stagedDate: '2026-01-17' },
+                { title: 'Hurricane Doors', url: '/florida/palm-beach/hurricane-doors', county: 'palm-beach', type: 'Doors', stagedDate: '2026-01-17' },
+                { title: 'Impact Windows', url: '/florida/palm-beach/impact-windows', county: 'palm-beach', type: 'Windows', stagedDate: '2026-01-17' },
+                { title: 'Sliding Glass Doors', url: '/florida/palm-beach/sliding-glass-doors', county: 'palm-beach', type: 'Doors', stagedDate: '2026-01-17' },
+                { title: 'Screen Enclosures', url: '/florida/palm-beach/screen-enclosures', county: 'palm-beach', type: 'HVHZ', stagedDate: '2026-01-17' },
+                { title: 'Sunroom Windows', url: '/florida/palm-beach/sunroom-windows', county: 'palm-beach', type: 'Windows', stagedDate: '2026-01-17' },
+                { title: 'Conservatory Glazing', url: '/florida/palm-beach/conservatory-glazing', county: 'palm-beach', type: 'Windows', stagedDate: '2026-01-17' },
+                { title: 'Coastal Windows', url: '/florida/palm-beach/coastal-windows', county: 'palm-beach', type: 'Windows', stagedDate: '2026-01-17' },
+                { title: 'High-Rise Glazing', url: '/florida/palm-beach/high-rise-glazing', county: 'palm-beach', type: 'Windows', stagedDate: '2026-01-17' },
+                { title: 'Curtain Wall Systems', url: '/florida/palm-beach/curtain-wall-systems', county: 'palm-beach', type: 'Windows', stagedDate: '2026-01-17' },
+                { title: 'Exterior Doors', url: '/florida/palm-beach/exterior-doors', county: 'palm-beach', type: 'Doors', stagedDate: '2026-01-17' },
+                { title: 'Glass Railings', url: '/florida/palm-beach/glass-railings', county: 'palm-beach', type: 'HVHZ', stagedDate: '2026-01-17' },
+                { title: 'Skylight Systems', url: '/florida/palm-beach/skylight-systems', county: 'palm-beach', type: 'Windows', stagedDate: '2026-01-17' },
+                // Monroe (16 pages)
+                { title: 'Boat House Protection', url: '/florida/monroe/boat-house-protection', county: 'monroe', type: 'HVHZ', stagedDate: '2026-01-17' },
+                { title: 'Commercial Doors', url: '/florida/monroe/commercial-doors', county: 'monroe', type: 'Doors', stagedDate: '2026-01-17' },
+                { title: 'Residential Windows', url: '/florida/monroe/residential-windows', county: 'monroe', type: 'Windows', stagedDate: '2026-01-17' },
+                { title: 'Storm Panels', url: '/florida/monroe/storm-panels', county: 'monroe', type: 'Shutters', stagedDate: '2026-01-17' },
+                { title: 'Hurricane Windows', url: '/florida/monroe/hurricane-windows', county: 'monroe', type: 'Windows', stagedDate: '2026-01-17' },
+                { title: 'Impact Rated Doors', url: '/florida/monroe/impact-rated-doors', county: 'monroe', type: 'Doors', stagedDate: '2026-01-17' },
+                { title: 'Coastal Protection', url: '/florida/monroe/coastal-protection', county: 'monroe', type: 'HVHZ', stagedDate: '2026-01-17' },
+                { title: 'Marine Glazing', url: '/florida/monroe/marine-glazing', county: 'monroe', type: 'Windows', stagedDate: '2026-01-17' },
+                { title: 'Waterfront Windows', url: '/florida/monroe/waterfront-windows', county: 'monroe', type: 'Windows', stagedDate: '2026-01-17' },
+                { title: 'Elevated Structure Windows', url: '/florida/monroe/elevated-structure-windows', county: 'monroe', type: 'Windows', stagedDate: '2026-01-17' },
+                { title: 'Flood Zone Doors', url: '/florida/monroe/flood-zone-doors', county: 'monroe', type: 'Doors', stagedDate: '2026-01-17' },
+                { title: 'Island Construction', url: '/florida/monroe/island-construction', county: 'monroe', type: 'HVHZ', stagedDate: '2026-01-17' },
+                { title: 'Key West Windows', url: '/florida/monroe/key-west-windows', county: 'monroe', type: 'Windows', stagedDate: '2026-01-17' },
+                { title: 'Marathon Glazing', url: '/florida/monroe/marathon-glazing', county: 'monroe', type: 'Windows', stagedDate: '2026-01-17' },
+                { title: 'Islamorada Doors', url: '/florida/monroe/islamorada-doors', county: 'monroe', type: 'Doors', stagedDate: '2026-01-17' },
+                { title: 'Big Pine Windows', url: '/florida/monroe/big-pine-windows', county: 'monroe', type: 'Windows', stagedDate: '2026-01-17' }
+            ]
+        };
+
+        // County colors
+        const countyColors = {
+            'miami-dade': { bg: 'rgba(0, 229, 255, 0.2)', text: '#00e5ff' },
+            'broward': { bg: 'rgba(0, 255, 136, 0.2)', text: '#00ff88' },
+            'palm-beach': { bg: 'rgba(251, 191, 36, 0.2)', text: '#fbbf24' },
+            'monroe': { bg: 'rgba(244, 114, 182, 0.2)', text: '#f472b6' }
+        };
+
+        // County display names
+        const countyNames = {
+            'miami-dade': 'Miami-Dade',
+            'broward': 'Broward',
+            'palm-beach': 'Palm Beach',
+            'monroe': 'Monroe'
+        };
+
+        let currentModalType = 'live';
+        let filteredPages = [];
+
+        // Show pages modal
+        function showPagesModal(type) {
+            currentModalType = type;
+            const modal = document.getElementById('pagesModal');
+            const titleText = document.getElementById('modalTitleText');
+            const titleIcon = document.getElementById('modalTitle').querySelector('svg');
+
+            if (type === 'live') {
+                titleText.textContent = 'Live Campaign Pages';
+                titleIcon.innerHTML = '<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>';
+                titleIcon.style.color = '#10b981';
+            } else {
+                titleText.textContent = 'Staged Campaign Pages';
+                titleIcon.innerHTML = '<path d="M20 6h-8l-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V6h5.17l2 2H20v10z"/>';
+                titleIcon.style.color = '#f59e0b';
+            }
+
+            updateModalStats();
+            filterModalPages();
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close modal
+        function closePagesModal(event) {
+            if (event && event.target !== event.currentTarget) return;
+            document.getElementById('pagesModal').classList.remove('active');
+            document.body.style.overflow = '';
+            document.getElementById('modalSearchInput').value = '';
+            document.getElementById('modalCountyFilter').value = '';
+        }
+
+        // Update modal stats
+        function updateModalStats() {
+            const pages = campaignPages[currentModalType];
+            const statsContainer = document.getElementById('modalStats');
+
+            // Count by county
+            const countyCounts = {};
+            pages.forEach(p => {
+                countyCounts[p.county] = (countyCounts[p.county] || 0) + 1;
+            });
+
+            let statsHtml = `
+                <div class="modal-stat">
+                    <div class="modal-stat-value">${pages.length}</div>
+                    <div class="modal-stat-label">Total Pages</div>
+                </div>
+            `;
+
+            if (currentModalType === 'live') {
+                const totalViews = pages.reduce((sum, p) => sum + (p.views || 0), 0);
+                const totalClicks = pages.reduce((sum, p) => sum + (p.clicks || 0), 0);
+                statsHtml += `
+                    <div class="modal-stat">
+                        <div class="modal-stat-value">${totalViews}</div>
+                        <div class="modal-stat-label">Total Views</div>
+                    </div>
+                    <div class="modal-stat">
+                        <div class="modal-stat-value">${totalClicks}</div>
+                        <div class="modal-stat-label">Total Clicks</div>
+                    </div>
+                    <div class="modal-stat">
+                        <div class="modal-stat-value">${totalViews > 0 ? ((totalClicks / totalViews) * 100).toFixed(1) : 0}%</div>
+                        <div class="modal-stat-label">CTR</div>
+                    </div>
+                `;
+            } else {
+                statsHtml += `
+                    <div class="modal-stat">
+                        <div class="modal-stat-value" style="color: #00e5ff;">${countyCounts['miami-dade'] || 0}</div>
+                        <div class="modal-stat-label">Miami-Dade</div>
+                    </div>
+                    <div class="modal-stat">
+                        <div class="modal-stat-value" style="color: #00ff88;">${countyCounts['broward'] || 0}</div>
+                        <div class="modal-stat-label">Broward</div>
+                    </div>
+                    <div class="modal-stat">
+                        <div class="modal-stat-value" style="color: #fbbf24;">${countyCounts['palm-beach'] || 0}</div>
+                        <div class="modal-stat-label">Palm Beach</div>
+                    </div>
+                `;
+            }
+
+            statsContainer.innerHTML = statsHtml;
+        }
+
+        // Filter modal pages
+        function filterModalPages() {
+            const searchTerm = document.getElementById('modalSearchInput').value.toLowerCase();
+            const countyFilter = document.getElementById('modalCountyFilter').value;
+            const pages = campaignPages[currentModalType];
+
+            filteredPages = pages.filter(page => {
+                const matchesSearch = !searchTerm ||
+                    page.title.toLowerCase().includes(searchTerm) ||
+                    page.url.toLowerCase().includes(searchTerm);
+                const matchesCounty = !countyFilter || page.county === countyFilter;
+                return matchesSearch && matchesCounty;
+            });
+
+            renderModalPages();
+        }
+
+        // Render modal pages
+        function renderModalPages() {
+            const tbody = document.getElementById('modalPagesTable');
+
+            if (filteredPages.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; padding: 2rem; color: #64748b;">No pages found</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = filteredPages.map(page => {
+                const colors = countyColors[page.county];
+                const countyName = countyNames[page.county];
+                const date = currentModalType === 'live' ? page.deployedDate : page.stagedDate;
+                const dateLabel = currentModalType === 'live' ? 'Deployed' : 'Staged';
+                const formattedDate = new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+                let analyticsHtml = '';
+                if (currentModalType === 'live') {
+                    analyticsHtml = `
+                        <div class="analytics-mini">
+                            <span>Views: <strong>${page.views || 0}</strong></span>
+                            <span>Clicks: <strong>${page.clicks || 0}</strong></span>
+                        </div>
+                    `;
+                } else {
+                    analyticsHtml = '<span style="color: #64748b; font-size: 0.75rem;">Pending deployment</span>';
+                }
+
+                const liveUrl = currentModalType === 'live' ?
+                    `https://windload.co${page.url}` :
+                    `https://github.com/gKochmann1975/windload-co/blob/master/staged-pages${page.url.replace('/florida/', '/')}.html`;
+
+                return `
+                    <tr>
+                        <td>
+                            <div class="page-title">${page.title}</div>
+                            <div class="page-url">${page.url}</div>
+                        </td>
+                        <td>
+                            <span style="background: ${colors.bg}; color: ${colors.text}; padding: 0.15rem 0.5rem; border-radius: 100px; font-size: 0.7rem;">${countyName}</span>
+                        </td>
+                        <td style="color: #94a3b8; font-size: 0.8rem;">${page.type}</td>
+                        <td style="color: ${currentModalType === 'live' ? '#10b981' : '#f59e0b'}; font-size: 0.8rem;">${formattedDate}</td>
+                        <td>${analyticsHtml}</td>
+                        <td>
+                            <a href="${liveUrl}" target="_blank" class="page-link">${currentModalType === 'live' ? 'View' : 'Preview'} ↗</a>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closePagesModal();
+            }
+        });
 
         // Login
         function doLogin() {

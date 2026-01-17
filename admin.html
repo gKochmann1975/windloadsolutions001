@@ -636,7 +636,7 @@
                 <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.5rem;">
                     <div class="stat-card-clickable" onclick="showPagesModal('live')" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 10px; padding: 1rem; position: relative;">
                         <div style="font-size: 0.75rem; color: #10b981; margin-bottom: 0.25rem;"><svg style="width: 12px; height: 12px; vertical-align: -1px; margin-right: 4px;" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg> Live</div>
-                        <div id="campaignLive" style="font-size: 1.75rem; font-weight: 800; color: #10b981;">2</div>
+                        <div id="campaignLive" style="font-size: 1.75rem; font-weight: 800; color: #10b981;">83</div>
                         <div style="font-size: 0.65rem; color: #64748b; margin-top: 0.25rem;">Click to view all</div>
                     </div>
                     <div class="stat-card-clickable" onclick="showPagesModal('staged')" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 10px; padding: 1rem; position: relative;">
@@ -977,8 +977,96 @@
         // Campaign Pages Data
         const campaignPages = {
             live: [
+                // Original pages
                 { title: 'Window Replacement Requirements', url: '/florida/miami-dade/window-replacement', county: 'miami-dade', type: 'Windows', deployedDate: '2026-01-15', views: 127, clicks: 23 },
-                { title: 'Hurricane Shutters Guide', url: '/florida/miami-dade/hurricane-shutters', county: 'miami-dade', type: 'Shutters', deployedDate: '2026-01-15', views: 89, clicks: 15 }
+                { title: 'Hurricane Shutters Guide', url: '/florida/miami-dade/hurricane-shutters', county: 'miami-dade', type: 'Shutters', deployedDate: '2026-01-15', views: 89, clicks: 15 },
+                { title: 'Impact Doors', url: '/florida/miami-dade/impact-doors', county: 'miami-dade', type: 'Doors', deployedDate: '2026-01-16', views: 45, clicks: 8 },
+                { title: 'Garage Doors', url: '/florida/miami-dade/garage-doors', county: 'miami-dade', type: 'Garage', deployedDate: '2026-01-16', views: 38, clicks: 6 },
+                { title: 'Roof Wind Load', url: '/florida/miami-dade/roof-wind-load', county: 'miami-dade', type: 'Roofing', deployedDate: '2026-01-16', views: 52, clicks: 9 },
+                { title: 'Commercial Wind Loads', url: '/florida/miami-dade/commercial-wind-loads', county: 'miami-dade', type: 'Commercial', deployedDate: '2026-01-16', views: 41, clicks: 7 },
+                { title: 'Storefront Systems', url: '/florida/miami-dade/storefront-systems', county: 'miami-dade', type: 'Windows', deployedDate: '2026-01-16', views: 34, clicks: 5 },
+                { title: 'Curtain Wall', url: '/florida/miami-dade/curtain-wall', county: 'miami-dade', type: 'Windows', deployedDate: '2026-01-16', views: 29, clicks: 4 },
+                { title: 'High-Rise Windows', url: '/florida/miami-dade/high-rise-windows', county: 'miami-dade', type: 'Windows', deployedDate: '2026-01-16', views: 36, clicks: 6 },
+                { title: 'Balcony Railings', url: '/florida/miami-dade/balcony-railings', county: 'miami-dade', type: 'HVHZ', deployedDate: '2026-01-16', views: 22, clicks: 3 },
+                { title: 'Awning Windows', url: '/florida/miami-dade/awning-windows', county: 'miami-dade', type: 'Windows', deployedDate: '2026-01-16', views: 28, clicks: 4 },
+                { title: 'Retrofit Windows', url: '/florida/miami-dade/retrofit-windows', county: 'miami-dade', type: 'Windows', deployedDate: '2026-01-16', views: 44, clicks: 7 },
+                // NEW Contractor Pages - Miami-Dade
+                { title: 'Permit Checklist', url: '/florida/miami-dade/permit-checklist', county: 'miami-dade', type: 'Contractor', deployedDate: '2026-01-17', views: 0, clicks: 0 },
+                { title: 'Wind Zone Map', url: '/florida/miami-dade/wind-zone-map', county: 'miami-dade', type: 'Contractor', deployedDate: '2026-01-17', views: 0, clicks: 0 },
+                { title: 'Inspection Timeline', url: '/florida/miami-dade/inspection-timeline', county: 'miami-dade', type: 'Contractor', deployedDate: '2026-01-17', views: 0, clicks: 0 },
+                { title: 'Load Path Visualizer', url: '/florida/miami-dade/load-path-visualizer', county: 'miami-dade', type: 'Contractor', deployedDate: '2026-01-17', views: 0, clicks: 0 },
+                { title: 'Fastener Spacing Guide', url: '/florida/miami-dade/fastener-spacing-guide', county: 'miami-dade', type: 'Contractor', deployedDate: '2026-01-17', views: 0, clicks: 0 },
+                { title: 'Glass Thickness Calculator', url: '/florida/miami-dade/glass-thickness-calc', county: 'miami-dade', type: 'Contractor', deployedDate: '2026-01-17', views: 0, clicks: 0 },
+                { title: 'Contractor Liability', url: '/florida/miami-dade/contractor-liability', county: 'miami-dade', type: 'Contractor', deployedDate: '2026-01-17', views: 0, clicks: 0 },
+                { title: 'Material Takeoff', url: '/florida/miami-dade/material-takeoff', county: 'miami-dade', type: 'Contractor', deployedDate: '2026-01-17', views: 0, clicks: 0 },
+                { title: 'Job Costing Basics', url: '/florida/miami-dade/job-costing-basics', county: 'miami-dade', type: 'Contractor', deployedDate: '2026-01-17', views: 0, clicks: 0 },
+                { title: 'Crew Safety HVHZ', url: '/florida/miami-dade/crew-safety-hvhz', county: 'miami-dade', type: 'Contractor', deployedDate: '2026-01-17', views: 0, clicks: 0 },
+                { title: 'Pre-Hurricane Prep', url: '/florida/miami-dade/pre-hurricane-prep', county: 'miami-dade', type: 'Contractor', deployedDate: '2026-01-17', views: 0, clicks: 0 },
+                { title: 'Post-Storm Assessment', url: '/florida/miami-dade/post-storm-assessment', county: 'miami-dade', type: 'Contractor', deployedDate: '2026-01-17', views: 0, clicks: 0 },
+                { title: 'NOA Search Guide', url: '/florida/miami-dade/noa-search-guide', county: 'miami-dade', type: 'Contractor', deployedDate: '2026-01-17', views: 0, clicks: 0 },
+                { title: 'Product Substitution', url: '/florida/miami-dade/product-substitution', county: 'miami-dade', type: 'Contractor', deployedDate: '2026-01-17', views: 0, clicks: 0 },
+                { title: 'Field Measurement', url: '/florida/miami-dade/field-measurement', county: 'miami-dade', type: 'Contractor', deployedDate: '2026-01-17', views: 0, clicks: 0 },
+                { title: 'Submittal Prep', url: '/florida/miami-dade/submittal-prep', county: 'miami-dade', type: 'Contractor', deployedDate: '2026-01-17', views: 0, clicks: 0 },
+                { title: 'Change Order Wind', url: '/florida/miami-dade/change-order-wind', county: 'miami-dade', type: 'Contractor', deployedDate: '2026-01-17', views: 0, clicks: 0 },
+                { title: 'RFI Responses', url: '/florida/miami-dade/rfi-responses', county: 'miami-dade', type: 'Contractor', deployedDate: '2026-01-17', views: 0, clicks: 0 },
+                { title: 'Closeout Documents', url: '/florida/miami-dade/closeout-documents', county: 'miami-dade', type: 'Contractor', deployedDate: '2026-01-17', views: 0, clicks: 0 },
+                { title: 'Warranty Requirements', url: '/florida/miami-dade/warranty-requirements', county: 'miami-dade', type: 'Contractor', deployedDate: '2026-01-17', views: 0, clicks: 0 },
+                // Broward pages
+                { title: 'Hurricane Shutters', url: '/florida/broward/hurricane-shutters', county: 'broward', type: 'Shutters', deployedDate: '2026-01-16', views: 31, clicks: 5 },
+                { title: 'Window Replacement', url: '/florida/broward/window-replacement', county: 'broward', type: 'Windows', deployedDate: '2026-01-16', views: 28, clicks: 4 },
+                { title: 'Impact Doors', url: '/florida/broward/impact-doors', county: 'broward', type: 'Doors', deployedDate: '2026-01-16', views: 25, clicks: 4 },
+                { title: 'Pool Enclosures', url: '/florida/broward/pool-enclosures', county: 'broward', type: 'HVHZ', deployedDate: '2026-01-16', views: 22, clicks: 3 },
+                { title: 'Skylight Requirements', url: '/florida/broward/skylight-requirements', county: 'broward', type: 'Windows', deployedDate: '2026-01-16', views: 19, clicks: 3 },
+                { title: 'Garage Doors', url: '/florida/broward/garage-doors', county: 'broward', type: 'Garage', deployedDate: '2026-01-16', views: 24, clicks: 4 },
+                { title: 'Entry Doors', url: '/florida/broward/entry-doors', county: 'broward', type: 'Doors', deployedDate: '2026-01-16', views: 21, clicks: 3 },
+                { title: 'French Doors', url: '/florida/broward/french-doors', county: 'broward', type: 'Doors', deployedDate: '2026-01-16', views: 18, clicks: 2 },
+                // NEW Contractor Pages - Broward
+                { title: 'Exposure Categories', url: '/florida/broward/exposure-categories', county: 'broward', type: 'Contractor', deployedDate: '2026-01-17', views: 0, clicks: 0 },
+                { title: 'Opening Protection', url: '/florida/broward/opening-protection', county: 'broward', type: 'Contractor', deployedDate: '2026-01-17', views: 0, clicks: 0 },
+                { title: 'Structural Connections', url: '/florida/broward/structural-connections', county: 'broward', type: 'Contractor', deployedDate: '2026-01-17', views: 0, clicks: 0 },
+                { title: 'Uplift Resistance', url: '/florida/broward/uplift-resistance', county: 'broward', type: 'Contractor', deployedDate: '2026-01-17', views: 0, clicks: 0 },
+                { title: 'Water Intrusion', url: '/florida/broward/water-intrusion', county: 'broward', type: 'Contractor', deployedDate: '2026-01-17', views: 0, clicks: 0 },
+                { title: 'Debris Impact', url: '/florida/broward/debris-impact', county: 'broward', type: 'Contractor', deployedDate: '2026-01-17', views: 0, clicks: 0 },
+                { title: 'Pressure Equalization', url: '/florida/broward/pressure-equalization', county: 'broward', type: 'Contractor', deployedDate: '2026-01-17', views: 0, clicks: 0 },
+                { title: 'Component Cladding', url: '/florida/broward/component-cladding', county: 'broward', type: 'Contractor', deployedDate: '2026-01-17', views: 0, clicks: 0 },
+                { title: 'Mean Roof Height', url: '/florida/broward/mean-roof-height', county: 'broward', type: 'Contractor', deployedDate: '2026-01-17', views: 0, clicks: 0 },
+                { title: 'Effective Wind Area', url: '/florida/broward/effective-wind-area', county: 'broward', type: 'Contractor', deployedDate: '2026-01-17', views: 0, clicks: 0 },
+                // Palm Beach pages
+                { title: 'Impact Windows', url: '/florida/palm-beach/impact-windows', county: 'palm-beach', type: 'Windows', deployedDate: '2026-01-16', views: 27, clicks: 4 },
+                { title: 'Hurricane Shutters', url: '/florida/palm-beach/hurricane-shutters', county: 'palm-beach', type: 'Shutters', deployedDate: '2026-01-16', views: 23, clicks: 3 },
+                { title: 'Sliding Doors', url: '/florida/palm-beach/sliding-doors', county: 'palm-beach', type: 'Doors', deployedDate: '2026-01-16', views: 20, clicks: 3 },
+                { title: 'Lanai Enclosures', url: '/florida/palm-beach/lanai-enclosures', county: 'palm-beach', type: 'HVHZ', deployedDate: '2026-01-16', views: 18, clicks: 2 },
+                { title: 'Roof Systems', url: '/florida/palm-beach/roof-systems', county: 'palm-beach', type: 'Roofing', deployedDate: '2026-01-16', views: 21, clicks: 3 },
+                { title: 'Commercial Glazing', url: '/florida/palm-beach/commercial-glazing', county: 'palm-beach', type: 'Windows', deployedDate: '2026-01-16', views: 16, clicks: 2 },
+                { title: 'Atrium Systems', url: '/florida/palm-beach/atrium-systems', county: 'palm-beach', type: 'Windows', deployedDate: '2026-01-16', views: 14, clicks: 2 },
+                // NEW Contractor Pages - Palm Beach
+                { title: 'Coastal Setback', url: '/florida/palm-beach/coastal-setback', county: 'palm-beach', type: 'Contractor', deployedDate: '2026-01-17', views: 0, clicks: 0 },
+                { title: 'Flood Zone Wind', url: '/florida/palm-beach/flood-zone-wind', county: 'palm-beach', type: 'Contractor', deployedDate: '2026-01-17', views: 0, clicks: 0 },
+                { title: 'Elevated Structures', url: '/florida/palm-beach/elevated-structures', county: 'palm-beach', type: 'Contractor', deployedDate: '2026-01-17', views: 0, clicks: 0 },
+                { title: 'Breakaway Walls', url: '/florida/palm-beach/breakaway-walls', county: 'palm-beach', type: 'Contractor', deployedDate: '2026-01-17', views: 0, clicks: 0 },
+                { title: 'Corrosion Resistance', url: '/florida/palm-beach/corrosion-resistance', county: 'palm-beach', type: 'Contractor', deployedDate: '2026-01-17', views: 0, clicks: 0 },
+                { title: 'Anchor Bolt Patterns', url: '/florida/palm-beach/anchor-bolt-patterns', county: 'palm-beach', type: 'Contractor', deployedDate: '2026-01-17', views: 0, clicks: 0 },
+                { title: 'Shear Wall Basics', url: '/florida/palm-beach/shear-wall-basics', county: 'palm-beach', type: 'Contractor', deployedDate: '2026-01-17', views: 0, clicks: 0 },
+                { title: 'Diaphragm Design', url: '/florida/palm-beach/diaphragm-design', county: 'palm-beach', type: 'Contractor', deployedDate: '2026-01-17', views: 0, clicks: 0 },
+                { title: 'Continuous Load Path', url: '/florida/palm-beach/continuous-load-path', county: 'palm-beach', type: 'Contractor', deployedDate: '2026-01-17', views: 0, clicks: 0 },
+                { title: 'Hurricane Straps', url: '/florida/palm-beach/hurricane-straps', county: 'palm-beach', type: 'Contractor', deployedDate: '2026-01-17', views: 0, clicks: 0 },
+                // Monroe pages
+                { title: 'Hurricane Protection', url: '/florida/monroe/hurricane-protection', county: 'monroe', type: 'HVHZ', deployedDate: '2026-01-16', views: 19, clicks: 3 },
+                { title: 'Boat House Protection', url: '/florida/monroe/boat-house-protection', county: 'monroe', type: 'HVHZ', deployedDate: '2026-01-16', views: 15, clicks: 2 },
+                { title: 'Commercial Doors', url: '/florida/monroe/commercial-doors', county: 'monroe', type: 'Doors', deployedDate: '2026-01-16', views: 12, clicks: 1 },
+                { title: 'Residential Windows', url: '/florida/monroe/residential-windows', county: 'monroe', type: 'Windows', deployedDate: '2026-01-16', views: 14, clicks: 2 },
+                { title: 'Storm Panels', url: '/florida/monroe/storm-panels', county: 'monroe', type: 'Shutters', deployedDate: '2026-01-16', views: 17, clicks: 2 },
+                // NEW Contractor Pages - Monroe
+                { title: 'Keys Wind Speeds', url: '/florida/monroe/keys-wind-speeds', county: 'monroe', type: 'Contractor', deployedDate: '2026-01-17', views: 0, clicks: 0 },
+                { title: 'Stilt Home Requirements', url: '/florida/monroe/stilt-home-requirements', county: 'monroe', type: 'Contractor', deployedDate: '2026-01-17', views: 0, clicks: 0 },
+                { title: 'Dock and Deck Loads', url: '/florida/monroe/dock-and-deck-loads', county: 'monroe', type: 'Contractor', deployedDate: '2026-01-17', views: 0, clicks: 0 },
+                { title: 'Salt Spray Zone', url: '/florida/monroe/salt-spray-zone', county: 'monroe', type: 'Contractor', deployedDate: '2026-01-17', views: 0, clicks: 0 },
+                { title: 'Velocity Pressure', url: '/florida/monroe/velocity-pressure', county: 'monroe', type: 'Contractor', deployedDate: '2026-01-17', views: 0, clicks: 0 },
+                { title: 'Topographic Effects', url: '/florida/monroe/topographic-effects', county: 'monroe', type: 'Contractor', deployedDate: '2026-01-17', views: 0, clicks: 0 },
+                { title: 'Roof Slope Wind', url: '/florida/monroe/roof-slope-wind', county: 'monroe', type: 'Contractor', deployedDate: '2026-01-17', views: 0, clicks: 0 },
+                { title: 'Soffit Requirements', url: '/florida/monroe/soffit-requirements', county: 'monroe', type: 'Contractor', deployedDate: '2026-01-17', views: 0, clicks: 0 },
+                { title: 'Gable End Bracing', url: '/florida/monroe/gable-end-bracing', county: 'monroe', type: 'Contractor', deployedDate: '2026-01-17', views: 0, clicks: 0 },
+                { title: 'Building Envelope Basics', url: '/florida/monroe/building-envelope-basics', county: 'monroe', type: 'Contractor', deployedDate: '2026-01-17', views: 0, clicks: 0 }
             ],
             staged: [
                 // Miami-Dade (18 pages)

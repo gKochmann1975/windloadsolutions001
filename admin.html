@@ -1478,8 +1478,32 @@
             }
         }
 
+        // Update campaign dashboard stats from data
+        function updateCampaignStats() {
+            const liveCount = campaignPages.live.length;
+            const stagedCount = campaignPages.staged.length;
+            const totalCount = liveCount + stagedCount;
+
+            // Update dashboard cards
+            document.getElementById('campaignLive').textContent = liveCount;
+            document.getElementById('campaignStaged').textContent = stagedCount;
+            document.getElementById('campaignTotal').textContent = totalCount;
+            document.getElementById('campaignBank').textContent = stagedCount;
+            document.getElementById('campaignWeek').textContent = totalCount;
+
+            // Update progress bar and percentage (5000 page goal)
+            const goal = 5000;
+            const percentage = ((totalCount / goal) * 100).toFixed(1);
+            document.getElementById('campaignProgressBar').style.width = percentage + '%';
+            document.getElementById('campaignPercent').textContent = percentage + '%';
+            document.getElementById('campaignRemaining').textContent = (goal - totalCount).toLocaleString();
+        }
+
         // Check for saved login
         window.onload = function() {
+            // Always update campaign stats on page load
+            updateCampaignStats();
+
             const saved = localStorage.getItem('wlc_admin_key');
             if (saved === ADMIN_KEY) {
                 currentAdminKey = saved;

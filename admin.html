@@ -647,7 +647,7 @@
                     <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 1rem;">
                         <div style="font-size: 0.75rem; color: #64748b; margin-bottom: 0.25rem;"><svg style="width: 12px; height: 12px; vertical-align: -1px; margin-right: 4px; color: #10b981;" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/></svg> Today</div>
                         <div id="campaignToday" style="font-size: 1.75rem; font-weight: 800; color: white;">0</div>
-                        <div style="font-size: 0.7rem; color: #10b981;">12 remaining</div>
+                        <div data-remaining style="font-size: 0.7rem; color: #10b981;">12 remaining</div>
                     </div>
                     <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 1rem;">
                         <div style="font-size: 0.75rem; color: #64748b; margin-bottom: 0.25rem;"><svg style="width: 12px; height: 12px; vertical-align: -1px; margin-right: 4px; color: #8b5cf6;" viewBox="0 0 24 24" fill="currentColor"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg> This Week</div>
@@ -662,7 +662,7 @@
                         <svg style="width: 18px; height: 18px; color: #10b981;" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
                         <div>
                             <div style="font-weight: 600; color: #10b981;">Auto-Deploy: Ready</div>
-                            <div style="font-size: 0.75rem; color: #64748b;">68 pages staged and ready for deployment</div>
+                            <div data-auto-deploy-count style="font-size: 0.75rem; color: #64748b;">68 pages staged and ready for deployment</div>
                         </div>
                     </div>
                     <div style="text-align: right;">
@@ -1528,18 +1528,77 @@
             }
         }
 
-        // Update campaign dashboard stats from data
-        function updateCampaignStats() {
-            const liveCount = campaignPages.live.length;
-            const stagedCount = campaignPages.staged.length;
+        // Fetch live deployment data from windload.co
+        async function fetchDeploymentData() {
+            try {
+                const response = await fetch('https://windload.co/deployment-log.json?' + Date.now());
+                if (!response.ok) throw new Error('Failed to fetch deployment log');
+                return await response.json();
+            } catch (error) {
+                console.error('Error fetching deployment log:', error);
+                return null;
+            }
+        }
+
+        // Update campaign dashboard stats from real data
+        async function updateCampaignStats() {
+            // Fetch real deployment data
+            const deploymentData = await fetchDeploymentData();
+
+            let liveCount, stagedCount, todayCount, weekCount;
+
+            if (deploymentData) {
+                // Use real data from deployment log
+                const deployments = deploymentData.deployments || [];
+                const staged = deploymentData.staged || [];
+
+                liveCount = deployments.length;
+                stagedCount = staged.length;
+
+                // Calculate today's and this week's deployments
+                const now = new Date();
+                const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+                const weekStart = new Date(todayStart);
+                weekStart.setDate(weekStart.getDate() - 7);
+
+                todayCount = deployments.filter(d => {
+                    const deployedAt = new Date(d.deployedAt);
+                    return deployedAt >= todayStart;
+                }).length;
+
+                weekCount = deployments.filter(d => {
+                    const deployedAt = new Date(d.deployedAt);
+                    return deployedAt >= weekStart;
+                }).length;
+            } else {
+                // Fallback to local campaignPages data if fetch fails
+                liveCount = campaignPages.live.length;
+                stagedCount = campaignPages.staged.length;
+
+                const today = new Date().toISOString().split('T')[0];
+                const weekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+
+                todayCount = campaignPages.live.filter(p => p.deployedDate === today).length;
+                weekCount = campaignPages.live.filter(p => p.deployedDate >= weekAgo).length;
+            }
+
             const totalCount = liveCount + stagedCount;
+            const dailyTarget = 12;
+            const todayRemaining = Math.max(0, dailyTarget - todayCount);
 
             // Update dashboard cards
             document.getElementById('campaignLive').textContent = liveCount;
             document.getElementById('campaignStaged').textContent = stagedCount;
             document.getElementById('campaignTotal').textContent = totalCount;
             document.getElementById('campaignBank').textContent = stagedCount;
-            document.getElementById('campaignWeek').textContent = totalCount;
+            document.getElementById('campaignToday').textContent = todayCount;
+            document.getElementById('campaignWeek').textContent = weekCount;
+
+            // Update "remaining" text for today
+            const todayRemainingEl = document.getElementById('campaignToday')?.parentElement?.querySelector('[data-remaining]');
+            if (todayRemainingEl) {
+                todayRemainingEl.textContent = todayRemaining + ' remaining';
+            }
 
             // Update progress bar and percentage (5000 page goal)
             const goal = 5000;
@@ -1547,6 +1606,12 @@
             document.getElementById('campaignProgressBar').style.width = percentage + '%';
             document.getElementById('campaignPercent').textContent = percentage + '%';
             document.getElementById('campaignRemaining').textContent = (goal - totalCount).toLocaleString();
+
+            // Update auto-deploy status
+            const autoDeployStatus = document.querySelector('[data-auto-deploy-count]');
+            if (autoDeployStatus) {
+                autoDeployStatus.textContent = stagedCount + ' pages staged and ready for deployment';
+            }
         }
 
         // Check for saved login

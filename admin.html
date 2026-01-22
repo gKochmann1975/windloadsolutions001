@@ -946,6 +946,25 @@
                         <option value="palm-beach">Palm Beach</option>
                         <option value="monroe">Monroe</option>
                     </select>
+                    <select class="modal-filter" id="modalTypeFilter" onchange="filterModalPages()">
+                        <option value="">All Types</option>
+                        <option value="Windows">Windows</option>
+                        <option value="Doors">Doors</option>
+                        <option value="Shutters">Shutters</option>
+                        <option value="Garage">Garage</option>
+                        <option value="Roofing">Roofing</option>
+                        <option value="HVHZ">HVHZ</option>
+                        <option value="Commercial">Commercial</option>
+                        <option value="Contractor">Contractor</option>
+                        <option value="Wind Load">Wind Load</option>
+                        <option value="Structural">Structural</option>
+                    </select>
+                    <select class="modal-filter" id="modalDateFilter" onchange="filterModalPages()">
+                        <option value="">All Dates</option>
+                        <option value="today">Today</option>
+                        <option value="week">This Week</option>
+                        <option value="month">This Month</option>
+                    </select>
                 </div>
 
                 <!-- Pages Table -->
@@ -1379,6 +1398,8 @@
             document.body.style.overflow = '';
             document.getElementById('modalSearchInput').value = '';
             document.getElementById('modalCountyFilter').value = '';
+            document.getElementById('modalTypeFilter').value = '';
+            document.getElementById('modalDateFilter').value = '';
         }
 
         // Update modal stats
@@ -1440,14 +1461,39 @@
         function filterModalPages() {
             const searchTerm = document.getElementById('modalSearchInput').value.toLowerCase();
             const countyFilter = document.getElementById('modalCountyFilter').value;
+            const typeFilter = document.getElementById('modalTypeFilter').value;
+            const dateFilter = document.getElementById('modalDateFilter').value;
             const pages = campaignPages[currentModalType];
+
+            // Calculate date ranges for filtering
+            const now = new Date();
+            const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+            const weekStart = new Date(todayStart);
+            weekStart.setDate(weekStart.getDate() - 7);
+            const monthStart = new Date(todayStart);
+            monthStart.setMonth(monthStart.getMonth() - 1);
 
             filteredPages = pages.filter(page => {
                 const matchesSearch = !searchTerm ||
                     page.title.toLowerCase().includes(searchTerm) ||
                     page.url.toLowerCase().includes(searchTerm);
                 const matchesCounty = !countyFilter || page.county === countyFilter;
-                return matchesSearch && matchesCounty;
+                const matchesType = !typeFilter || page.type === typeFilter;
+
+                // Date filtering
+                let matchesDate = true;
+                if (dateFilter) {
+                    const pageDate = new Date(currentModalType === 'live' ? page.deployedDate : page.stagedDate);
+                    if (dateFilter === 'today') {
+                        matchesDate = pageDate >= todayStart;
+                    } else if (dateFilter === 'week') {
+                        matchesDate = pageDate >= weekStart;
+                    } else if (dateFilter === 'month') {
+                        matchesDate = pageDate >= monthStart;
+                    }
+                }
+
+                return matchesSearch && matchesCounty && matchesType && matchesDate;
             });
 
             renderModalPages();

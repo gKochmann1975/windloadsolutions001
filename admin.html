@@ -349,13 +349,18 @@
             border-color: #00b4d8;
         }
         .modal-filter {
-            background: rgba(255, 255, 255, 0.05);
+            background: #1e293b;
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 8px;
             padding: 0.75rem 1rem;
             color: white;
             font-size: 0.9rem;
             cursor: pointer;
+        }
+        .modal-filter option {
+            background: #1e293b;
+            color: white;
+            padding: 0.5rem;
         }
         .modal-table {
             width: 100%;
@@ -370,6 +375,22 @@
             background: rgba(0, 0, 0, 0.3);
             position: sticky;
             top: 0;
+            cursor: pointer;
+            user-select: none;
+            transition: color 0.2s;
+        }
+        .modal-table th:hover {
+            color: #00b4d8;
+        }
+        .modal-table th .sort-icon {
+            margin-left: 4px;
+            opacity: 0.5;
+        }
+        .modal-table th.sort-active {
+            color: #00b4d8;
+        }
+        .modal-table th.sort-active .sort-icon {
+            opacity: 1;
         }
         .modal-table td {
             padding: 0.75rem;
@@ -972,11 +993,11 @@
                     <table class="modal-table">
                         <thead>
                             <tr>
-                                <th>Page</th>
-                                <th>County</th>
-                                <th>Type</th>
-                                <th>Date</th>
-                                <th>Analytics</th>
+                                <th data-sort="title" onclick="sortModalPages('title')">Page <span class="sort-icon">↕</span></th>
+                                <th data-sort="county" onclick="sortModalPages('county')">County <span class="sort-icon">↕</span></th>
+                                <th data-sort="type" onclick="sortModalPages('type')">Type <span class="sort-icon">↕</span></th>
+                                <th data-sort="date" onclick="sortModalPages('date')">Date <span class="sort-icon">↕</span></th>
+                                <th data-sort="views" onclick="sortModalPages('views')">Analytics <span class="sort-icon">↕</span></th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -1367,6 +1388,68 @@
 
         let currentModalType = 'live';
         let filteredPages = [];
+        let currentSortColumn = null;
+        let currentSortDirection = 'asc';
+
+        // Sort modal pages by column
+        function sortModalPages(column) {
+            // Toggle direction if same column, otherwise default to asc
+            if (currentSortColumn === column) {
+                currentSortDirection = currentSortDirection === 'asc' ? 'desc' : 'asc';
+            } else {
+                currentSortColumn = column;
+                currentSortDirection = 'asc';
+            }
+
+            // Update header styling
+            document.querySelectorAll('.modal-table th').forEach(th => {
+                th.classList.remove('sort-active');
+                const icon = th.querySelector('.sort-icon');
+                if (icon) icon.textContent = '↕';
+            });
+            const activeHeader = document.querySelector(`.modal-table th[data-sort="${column}"]`);
+            if (activeHeader) {
+                activeHeader.classList.add('sort-active');
+                const icon = activeHeader.querySelector('.sort-icon');
+                if (icon) icon.textContent = currentSortDirection === 'asc' ? '↑' : '↓';
+            }
+
+            // Sort the filtered pages
+            filteredPages.sort((a, b) => {
+                let valA, valB;
+
+                switch (column) {
+                    case 'title':
+                        valA = a.title.toLowerCase();
+                        valB = b.title.toLowerCase();
+                        break;
+                    case 'county':
+                        valA = a.county;
+                        valB = b.county;
+                        break;
+                    case 'type':
+                        valA = a.type;
+                        valB = b.type;
+                        break;
+                    case 'date':
+                        valA = new Date(currentModalType === 'live' ? a.deployedDate : a.stagedDate);
+                        valB = new Date(currentModalType === 'live' ? b.deployedDate : b.stagedDate);
+                        break;
+                    case 'views':
+                        valA = a.views || 0;
+                        valB = b.views || 0;
+                        break;
+                    default:
+                        return 0;
+                }
+
+                if (valA < valB) return currentSortDirection === 'asc' ? -1 : 1;
+                if (valA > valB) return currentSortDirection === 'asc' ? 1 : -1;
+                return 0;
+            });
+
+            renderModalPages();
+        }
 
         // Show pages modal
         function showPagesModal(type) {
@@ -1384,6 +1467,15 @@
                 titleIcon.innerHTML = '<path d="M20 6h-8l-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V6h5.17l2 2H20v10z"/>';
                 titleIcon.style.color = '#f59e0b';
             }
+
+            // Reset sort state
+            currentSortColumn = null;
+            currentSortDirection = 'asc';
+            document.querySelectorAll('.modal-table th').forEach(th => {
+                th.classList.remove('sort-active');
+                const icon = th.querySelector('.sort-icon');
+                if (icon) icon.textContent = '↕';
+            });
 
             updateModalStats();
             filterModalPages();

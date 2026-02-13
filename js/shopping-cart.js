@@ -559,6 +559,47 @@ class ShoppingCart {
         html += `
             </div>
 
+            <!-- Promo Code Section -->
+            <div id="promo-code-section" style="
+                background: #f8fafc;
+                border: 2px solid #e2e8f0;
+                border-radius: 10px;
+                padding: 16px;
+                margin-top: 16px;
+            ">
+                <div onclick="togglePromoCode()" style="
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    cursor: pointer;
+                    user-select: none;
+                ">
+                    <span style="color: #374151; font-weight: 600; font-size: 0.95rem;">
+                        <i class="fas fa-tag" style="color: #6366f1; margin-right: 6px;"></i>
+                        Have a discount code?
+                    </span>
+                    <i id="promo-toggle-icon" class="fas fa-chevron-down" style="color: #9ca3af; font-size: 0.8rem; transition: transform 0.3s;"></i>
+                </div>
+                <div id="promo-code-input-area" style="display: none; margin-top: 12px;">
+                    <div style="
+                        background: white;
+                        border: 1px solid #e5e7eb;
+                        border-radius: 8px;
+                        padding: 14px;
+                    ">
+                        <p style="margin: 0 0 8px 0; color: #374151; font-size: 0.9rem; font-weight: 500;">
+                            <i class="fas fa-check-circle" style="color: #10b981; margin-right: 4px;"></i>
+                            Yes! Enter your code on the next page.
+                        </p>
+                        <p style="margin: 0; color: #64748b; font-size: 0.85rem; line-height: 1.5;">
+                            After clicking <strong>"Pay Securely"</strong> below, you'll see an
+                            <strong>"Add promotion code"</strong> link on the secure Stripe checkout page.
+                            Click it, enter your code, and the discount will be applied before payment.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
             <button onclick="cart.proceedToCheckout()" style="
                 width: 100%;
                 background: linear-gradient(135deg, #10b981, #059669);
@@ -800,6 +841,22 @@ cartStyles.textContent = `
     }
 `;
 document.head.appendChild(cartStyles);
+
+// Promo code toggle
+function togglePromoCode() {
+    const area = document.getElementById('promo-code-input-area');
+    const icon = document.getElementById('promo-toggle-icon');
+    if (!area || !icon) return;
+
+    if (area.style.display === 'none') {
+        area.style.display = 'block';
+        icon.style.transform = 'rotate(180deg)';
+    } else {
+        area.style.display = 'none';
+        icon.style.transform = 'rotate(0deg)';
+    }
+}
+window.togglePromoCode = togglePromoCode;
 
 // Export for global use
 window.WindLoadCart = cart;

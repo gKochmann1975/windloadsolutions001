@@ -602,6 +602,88 @@
             font-size: 0.95rem;
         }
 
+        /* Project Cards */
+        .project-card {
+            background: linear-gradient(135deg, var(--bg-light) 0%, white 100%);
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            border-color: var(--primary-blue);
+            box-shadow: 0 4px 15px rgba(0, 24, 255, 0.1);
+        }
+
+        .project-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .project-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--dark-blue);
+            margin-bottom: 0.3rem;
+        }
+
+        .project-address {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .project-meta {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 0.75rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .project-meta span {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .project-actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        .btn-sm {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.8rem;
+            border-radius: 8px;
+        }
+
+        .no-projects {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-secondary);
+        }
+
+        .no-projects i {
+            font-size: 3rem;
+            color: var(--border-color);
+            margin-bottom: 1rem;
+        }
+
+        .no-projects h3 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .account-header {
@@ -698,6 +780,9 @@
             <button class="tab-btn" onclick="showTab('subscriptions')">
                 <i class="fas fa-credit-card"></i> Subscriptions
             </button>
+            <button class="tab-btn" onclick="showTab('projects')">
+                <i class="fas fa-folder-open"></i> My Projects
+            </button>
             <button class="tab-btn" onclick="showTab('team')" id="teamTab" style="display: none;">
                 <i class="fas fa-users"></i> Team Management
             </button>
@@ -775,6 +860,20 @@
             </div>
         </div>
 
+        <!-- My Projects Tab -->
+        <div class="tab-content" id="tab-projects">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fas fa-folder-open"></i> My Saved Projects</h2>
+                </div>
+                <div id="projectsList">
+                    <div class="loading">
+                        <div class="spinner"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Team Management Tab (for owners) -->
         <div class="tab-content" id="tab-team">
             <div class="card">
@@ -838,6 +937,7 @@
         let currentUser = null;
         let userSubscriptions = [];
         let teamMemberships = [];
+        let projectsLoaded = false;
 
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', async function() {
@@ -1262,6 +1362,11 @@
 
             // Activate button
             event.target.closest('.tab-btn').classList.add('active');
+
+            // Lazy-load projects on first view
+            if (tabName === 'projects' && !projectsLoaded) {
+                loadProjects();
+            }
         }
 
         // Form Handlers
@@ -1422,6 +1527,127 @@
             } catch (error) {
                 console.error('Error removing member:', error);
                 showAlert('Error removing team member. Please try again.', 'error');
+            }
+        }
+
+        // Projects Functions
+        async function loadProjects() {
+            const container = document.getElementById('projectsList');
+            const token = localStorage.getItem(STORAGE_KEY) || localStorage.getItem('windload_token');
+
+            try {
+                const response = await fetch(`${API_URL}/api/projects`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    const projects = data.projects || data || [];
+                    projectsLoaded = true;
+                    renderProjects(projects);
+                } else {
+                    container.innerHTML = `
+                        <div class="no-projects">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <h3>Unable to Load Projects</h3>
+                            <p>Please try again later.</p>
+                        </div>`;
+                }
+            } catch (error) {
+                console.error('Error loading projects:', error);
+                container.innerHTML = `
+                    <div class="no-projects">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h3>Connection Error</h3>
+                        <p>Could not reach the server. Please check your connection.</p>
+                    </div>`;
+            }
+        }
+
+        function renderProjects(projects) {
+            const container = document.getElementById('projectsList');
+
+            if (!projects || projects.length === 0) {
+                container.innerHTML = `
+                    <div class="no-projects">
+                        <i class="fas fa-folder-open"></i>
+                        <h3>No Saved Projects</h3>
+                        <p>Projects you save in the Wind Load Calculator will appear here.</p>
+                        <a href="https://calc.windloadcalc.com" class="btn btn-primary" style="margin-top: 1rem;">
+                            <i class="fas fa-calculator"></i> Open Calculator
+                        </a>
+                    </div>`;
+                return;
+            }
+
+            container.innerHTML = projects.map(function(project) {
+                var name = project.name || 'Untitled Project';
+                var address = project.address || '';
+                var componentCount = project.component_count || 0;
+                var updatedAt = project.updated_at ? new Date(project.updated_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'N/A';
+                var createdAt = project.created_at ? new Date(project.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'N/A';
+
+                return `
+                    <div class="project-card">
+                        <div class="project-card-header">
+                            <div>
+                                <div class="project-name">${escapeHtml(name)}</div>
+                                ${address ? `<div class="project-address"><i class="fas fa-map-marker-alt"></i> ${escapeHtml(address)}</div>` : ''}
+                            </div>
+                            <div class="project-actions">
+                                <a href="https://calc.windloadcalc.com?project_id=${project.id}" class="btn btn-primary btn-sm" title="Open in Calculator">
+                                    <i class="fas fa-external-link-alt"></i> Open
+                                </a>
+                                <button class="btn btn-danger btn-sm" onclick="deleteProject(${project.id}, '${escapeHtml(name)}')" title="Delete Project">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="project-meta">
+                            <span><i class="fas fa-cubes"></i> ${componentCount} component${componentCount !== 1 ? 's' : ''}</span>
+                            <span><i class="fas fa-calendar-plus"></i> Created: ${createdAt}</span>
+                            <span><i class="fas fa-clock"></i> Updated: ${updatedAt}</span>
+                        </div>
+                    </div>`;
+            }).join('');
+        }
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            var div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        async function deleteProject(projectId, projectName) {
+            if (!confirm('Delete project "' + projectName + '"? This cannot be undone.')) {
+                return;
+            }
+
+            var token = localStorage.getItem(STORAGE_KEY) || localStorage.getItem('windload_token');
+
+            try {
+                var response = await fetch(`${API_URL}/api/projects/${projectId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    showAlert('Project "' + projectName + '" deleted.', 'success');
+                    loadProjects();
+                } else {
+                    var data = await response.json();
+                    showAlert(data.error || 'Failed to delete project.', 'error');
+                }
+            } catch (error) {
+                console.error('Error deleting project:', error);
+                showAlert('Error deleting project. Please try again.', 'error');
             }
         }
 

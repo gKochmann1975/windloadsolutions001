@@ -1549,11 +1549,14 @@
                     projectsLoaded = true;
                     renderProjects(projects);
                 } else {
+                    let errMsg = 'HTTP ' + response.status;
+                    try { const errData = await response.json(); errMsg = errData.error || errMsg; } catch(e) {}
+                    console.error('Load projects failed:', response.status, errMsg);
                     container.innerHTML = `
                         <div class="no-projects">
                             <i class="fas fa-exclamation-triangle"></i>
                             <h3>Unable to Load Projects</h3>
-                            <p>Please try again later.</p>
+                            <p>${errMsg}</p>
                         </div>`;
                 }
             } catch (error) {

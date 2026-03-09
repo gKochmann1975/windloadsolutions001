@@ -1572,6 +1572,8 @@
 
         function renderProjects(projects) {
             const container = document.getElementById('projectsList');
+            const _token = localStorage.getItem(STORAGE_KEY) || localStorage.getItem('windload_token') || '';
+            const _userId = localStorage.getItem('windload_user_id') || '';
 
             if (!projects || projects.length === 0) {
                 container.innerHTML = `
@@ -1601,7 +1603,7 @@
                                 ${address ? `<div class="project-address"><i class="fas fa-map-marker-alt"></i> ${escapeHtml(address)}</div>` : ''}
                             </div>
                             <div class="project-actions">
-                                <a href="https://calc.windloadcalc.com?project_id=${project.id}" class="btn btn-primary btn-sm" title="Open in Calculator">
+                                <a href="https://calc.windloadcalc.com?token=${encodeURIComponent(_token)}&user_id=${_userId}&project_id=${project.id}" class="btn btn-primary btn-sm" title="Open in Calculator">
                                     <i class="fas fa-external-link-alt"></i> Open
                                 </a>
                                 <button class="btn btn-danger btn-sm" onclick="deleteProject(${project.id}, '${escapeHtml(name)}')" title="Delete Project">

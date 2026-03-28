@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C&C Batch Entry (Alt.) - WindLoadCalc Admin</title>
+<link rel="icon" type="image/svg+xml" href="images/windloadcalc-favicon.svg">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root {
+    --brand-primary: #181E57;
+    --brand-secondary: #0018FF;
+    --premium-emerald: #10B981;
+    --premium-emerald-dark: #059669;
+    --premium-ruby: #EF4444;
+    --premium-sapphire: #3B82F6;
+    --premium-gold: #F59E0B;
+    --glass-bg: rgba(255, 255, 255, 0.95);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --glass-blur: blur(20px);
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    --radius-2xl: 20px;
+    --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1);
+    --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1);
+    --shadow-2xl: 0 25px 50px -12px rgba(0,0,0,0.25);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', -apple-system, Arial, sans-serif;
+    font-size: 14px; line-height: 1.5;
+    background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+    color: #1f2937; min-height: 100vh; padding: 24px;
+  }
+
+  .glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 2px solid var(--glass-border);
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-xl);
+  }
+
+  /* ===== ADMIN BANNER ===== */
+  .admin-banner {
+    max-width: 1200px; margin: 0 auto 16px;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 20px;
+    background: rgba(239, 68, 68, 0.1);
+    border: 2px solid rgba(239, 68, 68, 0.3);
+    border-radius: var(--radius-lg);
+    backdrop-filter: blur(10px);
+  }
+  .admin-banner .label { color: #fca5a5; font-weight: 700; font-size: 13px; }
+  .admin-banner .back-link {
+    color: #93c5fd; font-size: 12px; text-decoration: none;
+    padding: 4px 12px; border: 1px solid rgba(147,197,253,0.3);
+    border-radius: 6px; transition: all 0.2s;
+  }
+  .admin-banner .back-link:hover { background: rgba(147,197,253,0.1); }
+
+  /* ===== PROJECT SETUP BAR ===== */
+  .setup-bar {
+    max-width: 1200px; margin: 0 auto 16px;
+    padding: 16px 20px;
+  }
+  .setup-bar h2 {
+    font-size: 18px; font-weight: 800; color: var(--brand-primary); margin-bottom: 12px;
+  }
+  .setup-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+  }
+  .setup-field label {
+    display: block; font-size: 10px; text-transform: uppercase;
+    letter-spacing: 1px; color: #6b7280; font-weight: 700; margin-bottom: 4px;
+  }
+  .setup-field input, .setup-field select {
+    width: 100%; padding: 8px 12px;
+    background: white; border: 2px solid rgba(203, 213, 225, 0.6);
+    border-radius: 10px; font-size: 13px; font-weight: 600;
+    color: #1f2937; font-family: inherit;
+  }
+  .setup-field input:focus, .setup-field select:focus {
+    outline: none; border-color: var(--brand-secondary);
+    box-shadow: 0 0 0 3px rgba(0, 24, 255, 0.1);
+  }
+
+  /* ===== TOP BAR ===== */
+  .top-bar {
+    display: flex; gap: 16px; align-items: stretch;
+    max-width: 1200px; margin: 0 auto 16px;
+  }
+
+  /* Edge Strip Card */
+  .edge-strip-card {
+    background: linear-gradient(135deg, #ff6600 0%, #ff4400 100%);
+    border: 2px solid #ff6600; border-radius: var(--radius-xl);
+    padding: 14px 16px; min-width: 240px; text-align: center;
+    position: relative; color: white;
+    box-shadow: 0 4px 15px rgba(255, 102, 0, 0.3);
+  }
+  .edge-strip-card .es-title { font-size: 16px; font-weight: 600; margin-bottom: 2px; }
+  .edge-strip-card .es-subtitle { font-size: 12px; color: rgba(255,255,255,0.9); margin-bottom: 12px; }
+  .edge-strip-card .help-btn {
+    position: absolute; top: 8px; right: 8px;
+    background: rgba(255,255,255,0.2); color: white;
+    border: 1px solid rgba(255,255,255,0.3); border-radius: 50%;
+    width: 24px; height: 24px; font-size: 14px; font-weight: bold;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+  }
+  .building-diagram {
+    position: relative; width: 100%; height: 80px;
+    border: 2px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.1);
+    border-radius: var(--radius-lg); margin-bottom: 12px;
+  }
+  .bz {
+    position: absolute; display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; border-radius: 4px;
+  }
+  .bz.z5 { background: rgba(255,255,255,0.9); border: 1px solid rgba(255,255,255,0.7); color: #dc2626; }
+  .bz.z4 {
+    background: repeating-linear-gradient(45deg, rgba(255,255,255,0.4) 0px, rgba(255,255,255,0.4) 3px, rgba(255,255,255,0.2) 3px, rgba(255,255,255,0.2) 6px);
+    border: 1px solid rgba(255,255,255,0.5); color: white;
+  }
+  .es-value-box {
+    background: white; color: #1f2937; padding: 8px 14px;
+    border-radius: 8px; font-size: 14px; font-weight: 700;
+  }
+
+  /* Edge Strip Info */
+  .edge-info-card {
+    background: var(--glass-bg); backdrop-filter: var(--glass-blur);
+    border: 2px solid var(--glass-border); border-radius: var(--radius-xl);
+    padding: 14px 16px; min-width: 260px; box-shadow: var(--shadow-lg); flex: 1;
+  }
+  .edge-info-card .info-title {
+    font-size: 13px; font-weight: 700; color: var(--brand-primary);
+    text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .edge-info-card .info-title i { color: #ff6600; }
+  .edge-info-rule {
+    display: flex; align-items: flex-start; gap: 8px;
+    padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,0.06);
+    font-size: 12px; color: #374151;
+  }
+  .edge-info-rule:last-child { border-bottom: none; }
+  .zone-tag {
+    font-size: 10px; font-weight: 700; padding: 2px 8px;
+    border-radius: 4px; white-space: nowrap; min-width: 48px; text-align: center;
+  }
+  .zone-tag.z5-tag { background: rgba(239,68,68,0.12); color: #dc2626; border: 1px solid rgba(239,68,68,0.2); }
+  .zone-tag.z4-tag { background: rgba(16,185,129,0.12); color: #059669; border: 1px solid rgba(16,185,129,0.2); }
+
+  /* Library CTA */
+  .library-cta {
+    display: flex; align-items: center; gap: 6px;
+    padding: 8px 14px; background: white;
+    border: 2px solid rgba(59,130,246,0.15); border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06); cursor: pointer;
+    transition: all 0.25s; white-space: nowrap;
+    font-size: 12px; font-weight: 600; color: var(--brand-primary);
+    position: relative; align-self: flex-start;
+  }
+  .library-cta i { font-size: 13px; color: var(--premium-sapphire); }
+  .library-cta .count {
+    position: absolute; top: -6px; right: -6px;
+    font-size: 9px; font-weight: 800; background: var(--premium-sapphire);
+    color: white; width: 18px; height: 18px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 2px 6px rgba(59,130,246,0.4);
+  }
+  .library-cta:hover {
+    border-color: var(--premium-sapphire);
+    box-shadow: 0 4px 12px rgba(59,130,246,0.15); transform: translateY(-1px);
+  }
+
+  /* ===== MAIN TABLE ===== */
+  .table-panel { max-width: 1200px; margin: 0 auto 20px; overflow: hidden; }
+  .table-header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 14px 20px; border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .table-header .left { font-weight: 700; color: var(--brand-primary); font-size: 16px; }
+  .table-header .right {
+    font-size: 12px; color: var(--premium-gold); font-weight: 600;
+    background: rgba(245,158,11,0.1); padding: 4px 12px; border-radius: 8px;
+    border: 1px solid rgba(245,158,11,0.2);
+  }
+
+  .entry-table { width: 100%; border-collapse: collapse; }
+  .entry-table th {
+    font-size: 10px; text-transform: uppercase; letter-spacing: 1px;
+    color: #6b7280; font-weight: 700; padding: 10px 8px 6px; text-align: center;
+    border-bottom: 2px solid rgba(24,30,87,0.1);
+  }
+  .entry-table td {
+    padding: 8px; vertical-align: middle;
+    border-bottom: 1px solid rgba(0,0,0,0.04); text-align: center;
+  }
+  .entry-table tbody tr { transition: background 0.15s; }
+  .entry-table tbody tr:hover td { background: rgba(59,130,246,0.03); }
+  .entry-table .row-num { font-weight: 800; color: var(--brand-primary); font-size: 16px; width: 36px; }
+
+  /* Mini Card Scroller */
+  .mini-scroller { display: flex; flex-direction: column; align-items: center; gap: 1px; user-select: none; }
+  .scroll-arrow {
+    width: 100%; display: flex; align-items: center; justify-content: center;
+    cursor: pointer; color: #cbd5e1; font-size: 10px; height: 14px;
+    transition: all 0.2s; border-radius: 4px;
+  }
+  .scroll-arrow:hover { color: var(--brand-secondary); background: rgba(0,24,255,0.06); }
+  .scroll-arrow svg { width: 14px; height: 8px; }
+
+  .type-mini-card {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    width: 110px; height: 58px; border-radius: var(--radius-lg);
+    cursor: pointer; transition: all 0.3s; position: relative; overflow: hidden;
+    background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+    color: white; border: 3px solid white;
+    box-shadow: 0 8px 20px rgba(16,185,129,0.4), 0 0 20px rgba(16,185,129,0.3), inset 0 1px 0 rgba(255,255,255,0.3);
+    animation: pulseGreen 2s ease-in-out infinite;
+  }
+  .type-mini-card i { font-size: 16px; margin-bottom: 2px; color: white; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.2)); }
+  .type-mini-card .card-label { font-size: 11px; font-weight: 700; color: white; text-shadow: 0 1px 2px rgba(0,0,0,0.2); }
+  .type-mini-card.empty {
+    background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%);
+    border: 3px solid rgba(203,213,225,0.6); color: #9ca3af; box-shadow: var(--shadow-lg); animation: none;
+  }
+  .type-mini-card.empty i { color: #9ca3af; filter: none; }
+  .type-mini-card.empty .card-label { color: #9ca3af; text-shadow: none; }
+
+  @keyframes pulseGreen {
+    0%, 100% { box-shadow: 0 8px 20px rgba(16,185,129,0.4), 0 0 20px rgba(16,185,129,0.3); }
+    50% { box-shadow: 0 12px 28px rgba(16,185,129,0.6), 0 0 35px rgba(16,185,129,0.5); transform: translateY(-2px); }
+  }
+
+  .zone-mini-card {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    width: 76px; height: 58px; border-radius: var(--radius-lg);
+    cursor: pointer; transition: all 0.3s;
+    background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+    color: white; border: 3px solid white;
+    box-shadow: 0 8px 20px rgba(16,185,129,0.4), 0 0 20px rgba(16,185,129,0.3), inset 0 1px 0 rgba(255,255,255,0.3);
+    animation: pulseGreen 2s ease-in-out infinite;
+  }
+  .zone-mini-card i { font-size: 16px; margin-bottom: 2px; color: white; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.2)); }
+  .zone-mini-card .zone-label { font-size: 11px; font-weight: 700; color: white; text-shadow: 0 1px 2px rgba(0,0,0,0.2); }
+  .zone-mini-card .zone-sublabel { font-size: 6px; color: rgba(255,255,255,0.8); }
+
+  /* Inputs */
+  .t-input {
+    background: white; border: 2px solid rgba(203,213,225,0.6);
+    border-radius: 10px; padding: 8px 10px; color: #1f2937;
+    font-size: 13px; font-family: inherit; transition: all 0.2s;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.04);
+  }
+  .t-input:focus { outline: none; border-color: var(--brand-secondary); box-shadow: 0 0 0 3px rgba(0,24,255,0.1); }
+  .t-input.dim { width: 72px; text-align: center; font-weight: 600; }
+  .t-input.mark { width: 72px; font-weight: 600; }
+  .t-input.desc { width: 240px; }
+  .t-input.calculated { background: #f0fdf4; border-color: rgba(16,185,129,0.3); }
+
+  .save-btn {
+    background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.25);
+    color: var(--premium-gold); padding: 6px 8px; border-radius: 8px;
+    cursor: pointer; font-size: 14px; transition: all 0.2s;
+  }
+  .save-btn:hover { background: rgba(245,158,11,0.15); border-color: var(--premium-gold); }
+  .remove-btn {
+    background: none; border: none; color: var(--premium-ruby);
+    font-size: 18px; cursor: pointer; opacity: 0.35; transition: opacity 0.2s;
+  }
+  .remove-btn:hover { opacity: 1; }
+
+  .pressure-val {
+    font-size: 12px; font-weight: 700; padding: 5px 10px;
+    border-radius: 8px; text-align: center; min-width: 70px; display: inline-block;
+  }
+  .pressure-val.pos { background: rgba(16,185,129,0.08); color: #059669; border: 1px solid rgba(16,185,129,0.2); }
+  .pressure-val.neg { background: rgba(239,68,68,0.08); color: #dc2626; border: 1px solid rgba(239,68,68,0.2); }
+  .pressure-pending { font-size: 12px; color: #d1d5db; }
+
+  /* Action bar */
+  .action-bar {
+    display: flex; gap: 12px; padding: 14px 20px;
+    border-top: 1px solid rgba(0,0,0,0.06);
+  }
+  .action-btn {
+    padding: 10px 22px; border-radius: var(--radius-lg);
+    font-size: 13px; font-weight: 700; cursor: pointer;
+    border: none; transition: all 0.25s;
+  }
+  .action-btn.primary {
+    background: linear-gradient(135deg, var(--premium-emerald), var(--premium-emerald-dark));
+    color: white; box-shadow: 0 4px 15px rgba(16,185,129,0.3);
+  }
+  .action-btn.primary:hover { box-shadow: 0 8px 25px rgba(16,185,129,0.5); transform: translateY(-2px); }
+  .action-btn.secondary {
+    background: rgba(24,30,87,0.06); border: 2px solid rgba(24,30,87,0.15); color: var(--brand-primary);
+  }
+  .action-btn.secondary:hover { background: rgba(24,30,87,0.1); }
+
+  /* Status toast */
+  .calc-toast {
+    position: fixed; bottom: 24px; right: 24px;
+    padding: 12px 20px; border-radius: var(--radius-lg);
+    font-size: 13px; font-weight: 600; color: white;
+    box-shadow: var(--shadow-xl); z-index: 100;
+    animation: toastIn 0.3s ease-out;
+    display: none;
+  }
+  .calc-toast.success { background: linear-gradient(135deg, var(--premium-emerald), var(--premium-emerald-dark)); }
+  .calc-toast.error { background: linear-gradient(135deg, var(--premium-ruby), #dc2626); }
+  @keyframes toastIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* Modal */
+  .modal-overlay {
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5); backdrop-filter: blur(4px);
+    z-index: 1000; display: none; align-items: center; justify-content: center;
+  }
+  .library-modal {
+    background: var(--glass-bg); backdrop-filter: var(--glass-blur);
+    border: 2px solid var(--glass-border); border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-2xl); width: 680px; max-height: 80vh; overflow-y: auto;
+  }
+  .modal-header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 24px; border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .modal-header .modal-title {
+    font-size: 18px; font-weight: 800; color: var(--brand-primary);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .modal-close {
+    width: 32px; height: 32px; border-radius: 8px; border: none;
+    background: rgba(0,0,0,0.04); color: #6b7280; font-size: 20px;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+  }
+  .modal-body { padding: 20px 24px; }
+  .modal-footer {
+    display: flex; justify-content: flex-end; gap: 10px;
+    padding: 16px 24px; border-top: 1px solid rgba(0,0,0,0.06);
+  }
+</style>
+</head>
+<body>
+
+<!-- Admin Banner -->
+<div class="admin-banner">
+  <span class="label"><i class="fas fa-flask" style="margin-right:6px;"></i> ADMIN TEST — Batch Entry (Alt.) — Not visible to users</span>
+  <a class="back-link" href="javascript:history.back()"><i class="fas fa-arrow-left" style="margin-right:4px;"></i> Back to Calculator</a>
+</div>
+
+<!-- Project Setup -->
+<div class="setup-bar glass-panel">
+  <h2><i class="fas fa-cog" style="color:var(--premium-sapphire); margin-right:8px;"></i> Project Setup</h2>
+  <div class="setup-grid">
+    <div class="setup-field">
+      <label>Project Name</label>
+      <input type="text" id="project-name" value="Gamblin Residence">
+    </div>
+    <div class="setup-field">
+      <label>Address</label>
+      <input type="text" id="project-addr" value="206 Seahorse CT, Marco Island FL 34145">
+    </div>
+    <div class="setup-field">
+      <label>Wind Speed (mph)</label>
+      <input type="number" id="wind-speed" value="170">
+    </div>
+    <div class="setup-field">
+      <label>Exposure Category</label>
+      <select id="exposure-cat">
+        <option value="B">B — Urban/Suburban</option>
+        <option value="C" selected>C — Open Terrain</option>
+        <option value="D">D — Flat/Unobstructed</option>
+      </select>
+    </div>
+    <div class="setup-field">
+      <label>Mean Roof Height (ft)</label>
+      <input type="number" id="roof-height" value="15">
+    </div>
+    <div class="setup-field">
+      <label>Building Width (ft)</label>
+      <input type="number" id="bldg-width" value="50">
+    </div>
+    <div class="setup-field">
+      <label>Building Length (ft)</label>
+      <input type="number" id="bldg-length" value="60">
+    </div>
+    <div class="setup-field">
+      <label>Enclosure</label>
+      <select id="enclosure">
+        <option value="enclosed" selected>Enclosed</option>
+        <option value="partially_enclosed">Partially Enclosed</option>
+        <option value="open">Open</option>
+      </select>
+    </div>
+    <div class="setup-field">
+      <label>Speed Type</label>
+      <select id="speed-type">
+        <option value="ultimate" selected>Ultimate (LRFD)</option>
+        <option value="nominal">Nominal (ASD)</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<!-- Top Bar: Edge Strip + Zone Guide + Library -->
+<div class="top-bar">
+  <div class="edge-strip-card">
+    <div class="es-title">Edge Strip (a)</div>
+    <div class="es-subtitle">a = Zone 5</div>
+    <div class="help-btn">?</div>
+    <div class="building-diagram">
+      <div class="bz z5" style="top:0;left:0;width:25%;height:35%;">5</div>
+      <div class="bz z4" style="top:0;left:25%;width:50%;height:35%;">4</div>
+      <div class="bz z5" style="top:0;right:0;width:25%;height:35%;">5</div>
+      <div class="bz z4" style="top:35%;left:0;width:25%;height:30%;">4</div>
+      <div class="bz z4" style="top:35%;right:0;width:25%;height:30%;">4</div>
+      <div class="bz z5" style="bottom:0;left:0;width:25%;height:35%;">5</div>
+      <div class="bz z4" style="bottom:0;left:25%;width:50%;height:35%;">4</div>
+      <div class="bz z5" style="bottom:0;right:0;width:25%;height:35%;">5</div>
+    </div>
+    <div class="es-value-box" id="edge-strip-value">
+      <i class="fas fa-ruler" style="color:#ff6600;margin-right:4px;font-size:12px;"></i>
+      a = <span id="a-value">4.0</span> ft <span style="font-weight:400;font-size:11px;color:#6b7280;">(min 4 ft FBC)</span>
+    </div>
+  </div>
+
+  <div class="edge-info-card">
+    <div class="info-title"><i class="fas fa-info-circle"></i> How to Apply Zones</div>
+    <div class="edge-info-rule">
+      <span class="zone-tag z5-tag">Zone 5</span>
+      <span>Any component that falls <strong>within</strong> the edge strip <strong>"a"</strong> distance from a building corner or edge. If <strong>any portion</strong> of the component is inside the edge strip area, the entire component is Zone 5.</span>
+    </div>
+    <div class="edge-info-rule">
+      <span class="zone-tag z4-tag">Zone 4</span>
+      <span>A component that is <strong>fully interior</strong> — the entire opening must be more than <strong>"a"</strong> from all corners and edges. Measure from the building corner inward.</span>
+    </div>
+    <div class="edge-info-rule" style="border-bottom:none;padding-bottom:2px;flex-direction:column;gap:6px;">
+      <span style="font-size:11px;color:#374151;"><i class="fas fa-ruler-combined" style="color:#ff6600;margin-right:4px;"></i> <strong>Example:</strong> With a = 4.0 ft, a window whose edge is 3 ft from the building corner is <strong style="color:#dc2626;">Zone 5</strong> (within "a"). A window 6 ft from the corner is <strong style="color:#059669;">Zone 4</strong> (fully beyond "a"). A window at 3.5 ft where part of it extends into the edge strip is still <strong style="color:#dc2626;">Zone 5</strong>.</span>
+      <span style="font-size:11px;color:#6b7280;"><i class="fas fa-lightbulb" style="color:#f59e0b;margin-right:4px;"></i> <strong>Tip:</strong> When in doubt, use Zone 5 — it gives the higher (more conservative) pressure, which is always safe.</span>
+    </div>
+  </div>
+
+  <div class="library-cta" onclick="document.getElementById('lib-modal').style.display='flex'">
+    <i class="fas fa-bookmark"></i> My Library
+    <span class="count" id="lib-count">0</span>
+  </div>
+</div>
+
+<!-- Main Table -->
+<div class="table-panel glass-panel">
+  <div class="table-header">
+    <div class="left" id="project-title">Gamblin Residence — 206 Seahorse CT, Marco Island FL 34145</div>
+    <div class="right" id="project-params"><i class="fas fa-wind" style="margin-right:4px;"></i> V = 170 mph • Exposure C • Risk Cat II</div>
+  </div>
+
+  <table class="entry-table">
+    <thead>
+      <tr>
+        <th style="width:36px">#</th>
+        <th>Mark ID</th>
+        <th>Component Type</th>
+        <th>Zone</th>
+        <th>Width (in)</th>
+        <th>Height (in)</th>
+        <th style="text-align:left">Description</th>
+        <th style="width:36px"><i class="fas fa-bookmark" style="color:#93c5fd;"></i></th>
+        <th>Pressure (+)</th>
+        <th>Pressure (−)</th>
+        <th style="width:32px"></th>
+      </tr>
+    </thead>
+    <tbody id="entry-tbody"></tbody>
+  </table>
+
+  <div class="action-bar">
+    <div class="action-btn primary" onclick="calculateAll()"><i class="fas fa-bolt" style="margin-right:6px;"></i> Calculate All</div>
+    <div class="action-btn secondary" onclick="addRow()"><i class="fas fa-plus" style="margin-right:4px;"></i> Add Row</div>
+  </div>
+</div>
+
+<!-- Library Modal -->
+<div class="modal-overlay" id="lib-modal">
+  <div class="library-modal">
+    <div class="modal-header">
+      <div class="modal-title"><i class="fas fa-bookmark" style="color:var(--premium-sapphire);"></i> My Component Library</div>
+      <button class="modal-close" onclick="document.getElementById('lib-modal').style.display='none'">&times;</button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:12px;color:#6b7280;margin-bottom:12px;">No saved components yet. Use the <i class="fas fa-bookmark" style="color:var(--premium-gold);"></i> button on any row to save it.</p>
+    </div>
+    <div class="modal-footer">
+      <button class="action-btn secondary" onclick="document.getElementById('lib-modal').style.display='none'">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="calc-toast" id="toast"></div>
+
+<script>
+// ============================================================
+// ASCE 7-22 C&C WIND PRESSURE ENGINE
+// ============================================================
+
+const COMPONENT_TYPES = [
+  { id: 'window', label: 'Window', icon: 'fas fa-window-maximize' },
+  { id: 'door', label: 'Door', icon: 'fas fa-door-closed' },
+  { id: 'sgd', label: 'SGD', icon: 'fas fa-door-open' },
+  { id: 'shutter', label: 'Storm Shutter', icon: 'fas fa-shield-alt' }
+];
+const ZONES = [
+  { id: 4, label: 'Zone 4', sublabel: 'Interior Zone', icon: 'fas fa-arrows-alt-h' },
+  { id: 5, label: 'Zone 5', sublabel: 'Edge/Corner', icon: 'fas fa-external-link-square-alt' }
+];
+
+const Kd = 0.85; // Directionality factor for C&C
+
+// Kz lookup tables (ASCE 7-22 Table 26.10-1)
+const KZ_TABLE = {
+  B: { 0:0.57, 15:0.57, 20:0.62, 25:0.66, 30:0.70, 40:0.74, 50:0.79, 60:0.83, 70:0.86, 80:0.90, 90:0.92, 100:0.95, 120:1.00, 140:1.05, 160:1.09, 180:1.13, 200:1.16, 250:1.22, 300:1.28, 350:1.33, 400:1.37, 450:1.42, 500:1.46 },
+  C: { 0:0.85, 15:0.85, 20:0.90, 25:0.94, 30:0.98, 40:1.04, 50:1.09, 60:1.13, 70:1.17, 80:1.21, 90:1.24, 100:1.26, 120:1.31, 140:1.36, 160:1.39, 180:1.43, 200:1.46, 250:1.53, 300:1.59, 350:1.64, 400:1.69, 450:1.73, 500:1.77 },
+  D: { 0:1.03, 15:1.03, 20:1.08, 25:1.12, 30:1.16, 40:1.22, 50:1.27, 60:1.31, 70:1.34, 80:1.38, 90:1.40, 100:1.43, 120:1.48, 140:1.52, 160:1.55, 180:1.58, 200:1.61, 250:1.68, 300:1.73, 350:1.78, 400:1.82, 450:1.86, 500:1.89 }
+};
+
+function interpolateKz(height, exposure) {
+  const table = KZ_TABLE[exposure];
+  if (!table) return 0.85;
+  const heights = Object.keys(table).map(Number).sort((a,b) => a - b);
+  if (height <= heights[0]) return table[heights[0]];
+  if (height >= heights[heights.length-1]) return table[heights[heights.length-1]];
+  for (let i = 0; i < heights.length - 1; i++) {
+    if (height >= heights[i] && height <= heights[i+1]) {
+      const frac = (height - heights[i]) / (heights[i+1] - heights[i]);
+      return table[heights[i]] + frac * (table[heights[i+1]] - table[heights[i]]);
+    }
+  }
+  return 0.85;
+}
+
+// GCp values per ASCE 7-22 Figure 30.3-1 (h <= 60 ft)
+function getGCp_30_3_1(zone, area, type) {
+  const A = Math.max(10, Math.min(500, area));
+  const logA = Math.log10(A);
+  if (type === 'positive') {
+    if (A <= 10) return 1.0;
+    if (A >= 500) return 0.7;
+    return 1.1766 - 0.1766 * logA;
+  } else {
+    if (zone === 4) {
+      if (A <= 10) return -1.1;
+      if (A >= 500) return -0.8;
+      return -1.2766 + 0.1766 * logA;
+    } else { // zone 5
+      if (A <= 10) return -1.4;
+      if (A >= 500) return -0.8;
+      return -1.7532 + 0.3532 * logA;
+    }
+  }
+}
+
+// GCp values per ASCE 7-22 Figure 30.4-1 (h > 60 ft)
+function getGCp_30_4_1(zone, area, type) {
+  const A = Math.max(10, Math.min(500, area));
+  const logA = Math.log10(A);
+  if (type === 'positive') {
+    return 1.1792 - 0.2146 * logA;
+  } else {
+    if (zone === 4) {
+      return -1.0861 + 0.1431 * logA;
+    } else {
+      return -2.5445 + 0.5723 * logA;
+    }
+  }
+}
+
+function getGCp(zone, area, meanRoofHeight, type) {
+  if (meanRoofHeight <= 60) return getGCp_30_3_1(zone, area, type);
+  return getGCp_30_4_1(zone, area, type);
+}
+
+function getGCpi(enclosure) {
+  if (enclosure === 'partially_enclosed') return [0.55, -0.55];
+  if (enclosure === 'open') return [0.0];
+  return [0.18, -0.18]; // enclosed
+}
+
+function calculateDimensionA(width, length, roofHeight) {
+  const least = Math.min(width, length);
+  const opt1 = 0.10 * least;
+  const opt2 = 0.40 * roofHeight;
+  const aCalc = Math.min(opt1, opt2);
+  const minA = Math.max(0.04 * least, 4.0); // 4.0 ft minimum per FBC
+  return Math.max(aCalc, minA);
+}
+
+function calculatePressure(windSpeed, speedType, exposure, enclosure, roofHeight, bldgWidth, bldgLength, compWidthIn, compHeightIn, zone) {
+  // Convert component dims to ft and calc area
+  const compW_ft = compWidthIn / 12;
+  const compH_ft = compHeightIn / 12;
+  const effectiveArea = compW_ft * compH_ft;
+
+  // Wind speed conversion
+  const V = speedType === 'nominal' ? windSpeed * Math.sqrt(0.6) : windSpeed;
+
+  // Velocity pressure: qh = 0.00256 * Kz * Kzt * Kd * Ke * V^2
+  const Kz = interpolateKz(roofHeight, exposure);
+  const Kzt = 1.0; // flat terrain
+  const Ke = 1.0;  // elevation <= 1000 ft
+  const qh = 0.00256 * Kz * Kzt * Kd * Ke * (V * V);
+
+  // GCp
+  const gcpPos = getGCp(zone, effectiveArea, roofHeight, 'positive');
+  const gcpNeg = getGCp(zone, effectiveArea, roofHeight, 'negative');
+
+  // GCpi
+  const gcpiValues = getGCpi(enclosure);
+
+  // Calculate all cases
+  let maxPos = -Infinity, maxNeg = Infinity;
+  for (const gcpi of gcpiValues) {
+    const pPos = qh * (gcpPos - gcpi);
+    const pNeg = qh * (gcpNeg - gcpi);
+    if (pPos > maxPos) maxPos = pPos;
+    if (pNeg < maxNeg) maxNeg = pNeg;
+  }
+
+  return {
+    positive: Math.round(maxPos * 10) / 10,
+    negative: Math.round(maxNeg * 10) / 10,
+    qh: Math.round(qh * 10) / 10,
+    effectiveArea: Math.round(effectiveArea * 100) / 100,
+    Kz: Math.round(Kz * 1000) / 1000,
+    gcpPos: Math.round(gcpPos * 1000) / 1000,
+    gcpNeg: Math.round(gcpNeg * 1000) / 1000
+  };
+}
+
+// ============================================================
+// UI ENGINE
+// ============================================================
+
+let rowCount = 0;
+let rows = [];
+
+function getSetupParams() {
+  return {
+    windSpeed: parseFloat(document.getElementById('wind-speed').value) || 170,
+    speedType: document.getElementById('speed-type').value,
+    exposure: document.getElementById('exposure-cat').value,
+    enclosure: document.getElementById('enclosure').value,
+    roofHeight: parseFloat(document.getElementById('roof-height').value) || 15,
+    bldgWidth: parseFloat(document.getElementById('bldg-width').value) || 50,
+    bldgLength: parseFloat(document.getElementById('bldg-length').value) || 60
+  };
+}
+
+function updateProjectHeader() {
+  const p = getSetupParams();
+  const name = document.getElementById('project-name').value || 'Project';
+  const addr = document.getElementById('project-addr').value || '';
+  document.getElementById('project-title').textContent = name + (addr ? ' — ' + addr : '');
+  document.getElementById('project-params').innerHTML = '<i class="fas fa-wind" style="margin-right:4px;"></i> V = ' + p.windSpeed + ' mph • Exposure ' + p.exposure + ' • ' + (p.speedType === 'ultimate' ? 'LRFD' : 'ASD');
+
+  // Update edge strip
+  const a = calculateDimensionA(p.bldgWidth, p.bldgLength, p.roofHeight);
+  document.getElementById('a-value').textContent = a.toFixed(1);
+}
+
+function createTypeScroller(rowId, typeIndex) {
+  const t = COMPONENT_TYPES[typeIndex];
+  return `
+    <div class="mini-scroller">
+      <div class="scroll-arrow" onclick="cycleType(${rowId}, -1)">
+        <svg viewBox="0 0 14 8" fill="none"><path d="M1 7L7 1L13 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="type-mini-card" id="type-card-${rowId}">
+        <i class="${t.icon}"></i>
+        <div class="card-label">${t.label}</div>
+      </div>
+      <div class="scroll-arrow" onclick="cycleType(${rowId}, 1)">
+        <svg viewBox="0 0 14 8" fill="none"><path d="M1 1L7 7L13 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </div>`;
+}
+
+function createZoneScroller(rowId, zoneIndex) {
+  const z = ZONES[zoneIndex];
+  return `
+    <div class="mini-scroller">
+      <div class="scroll-arrow" onclick="cycleZone(${rowId}, -1)">
+        <svg viewBox="0 0 14 8" fill="none"><path d="M1 7L7 1L13 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="zone-mini-card" id="zone-card-${rowId}">
+        <i class="${z.icon}"></i>
+        <div class="zone-label">${z.label}</div>
+        <div class="zone-sublabel">${z.sublabel}</div>
+      </div>
+      <div class="scroll-arrow" onclick="cycleZone(${rowId}, 1)">
+        <svg viewBox="0 0 14 8" fill="none"><path d="M1 1L7 7L13 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </div>`;
+}
+
+function addRow(mark, typeIdx, zoneIdx, width, height, desc) {
+  rowCount++;
+  const id = rowCount;
+  const ti = typeIdx !== undefined ? typeIdx : 0;
+  const zi = zoneIdx !== undefined ? zoneIdx : 0;
+  const row = {
+    id, typeIndex: ti, zoneIndex: zi,
+    mark: mark || '', width: width || '', height: height || '', desc: desc || ''
+  };
+  rows.push(row);
+
+  const tbody = document.getElementById('entry-tbody');
+  const tr = document.createElement('tr');
+  tr.id = 'row-' + id;
+  tr.innerHTML = `
+    <td class="row-num">${rows.length}</td>
+    <td><input class="t-input mark" id="mark-${id}" value="${row.mark}" placeholder="Mark"></td>
+    <td id="type-cell-${id}">${createTypeScroller(id, ti)}</td>
+    <td id="zone-cell-${id}">${createZoneScroller(id, zi)}</td>
+    <td><input class="t-input dim" id="width-${id}" value="${row.width}" placeholder="W" onblur="onDimBlur(${id})"></td>
+    <td><input class="t-input dim" id="height-${id}" value="${row.height}" placeholder="H" onblur="onDimBlur(${id})"></td>
+    <td style="text-align:left"><input class="t-input desc" id="desc-${id}" value="${row.desc}" placeholder="Description"></td>
+    <td><span class="save-btn" onclick="saveToLibrary(${id})" title="Save to library"><i class="fas fa-bookmark"></i></span></td>
+    <td id="ppos-${id}"><span class="pressure-pending">—</span></td>
+    <td id="pneg-${id}"><span class="pressure-pending">—</span></td>
+    <td><span class="remove-btn" onclick="removeRow(${id})">&times;</span></td>
+  `;
+  tbody.appendChild(tr);
+}
+
+function removeRow(id) {
+  const tr = document.getElementById('row-' + id);
+  if (tr) tr.remove();
+  rows = rows.filter(r => r.id !== id);
+  renumberRows();
+}
+
+function renumberRows() {
+  const trs = document.querySelectorAll('#entry-tbody tr');
+  trs.forEach((tr, i) => {
+    const numCell = tr.querySelector('.row-num');
+    if (numCell) numCell.textContent = i + 1;
+  });
+}
+
+function cycleType(rowId, dir) {
+  const row = rows.find(r => r.id === rowId);
+  if (!row) return;
+  row.typeIndex = (row.typeIndex + dir + COMPONENT_TYPES.length) % COMPONENT_TYPES.length;
+  document.getElementById('type-cell-' + rowId).innerHTML = createTypeScroller(rowId, row.typeIndex);
+}
+
+function cycleZone(rowId, dir) {
+  const row = rows.find(r => r.id === rowId);
+  if (!row) return;
+  row.zoneIndex = (row.zoneIndex + dir + ZONES.length) % ZONES.length;
+  document.getElementById('zone-cell-' + rowId).innerHTML = createZoneScroller(rowId, row.zoneIndex);
+}
+
+function onDimBlur(rowId) {
+  const w = parseFloat(document.getElementById('width-' + rowId).value);
+  const h = parseFloat(document.getElementById('height-' + rowId).value);
+  if (w > 0 && h > 0) {
+    calculateRow(rowId);
+  }
+}
+
+function calculateRow(rowId) {
+  const row = rows.find(r => r.id === rowId);
+  if (!row) return;
+  const p = getSetupParams();
+  const w = parseFloat(document.getElementById('width-' + rowId).value);
+  const h = parseFloat(document.getElementById('height-' + rowId).value);
+  if (!w || !h) return;
+
+  const zone = ZONES[row.zoneIndex].id;
+  const result = calculatePressure(
+    p.windSpeed, p.speedType, p.exposure, p.enclosure,
+    p.roofHeight, p.bldgWidth, p.bldgLength,
+    w, h, zone
+  );
+
+  document.getElementById('ppos-' + rowId).innerHTML =
+    `<span class="pressure-val pos">+${result.positive.toFixed(1)} psf</span>`;
+  document.getElementById('pneg-' + rowId).innerHTML =
+    `<span class="pressure-val neg">${result.negative.toFixed(1)} psf</span>`;
+}
+
+function calculateAll() {
+  let calculated = 0;
+  rows.forEach(row => {
+    const w = parseFloat(document.getElementById('width-' + row.id).value);
+    const h = parseFloat(document.getElementById('height-' + row.id).value);
+    if (w > 0 && h > 0) {
+      calculateRow(row.id);
+      calculated++;
+    }
+  });
+  showToast(calculated + ' component' + (calculated !== 1 ? 's' : '') + ' calculated', 'success');
+}
+
+function showToast(msg, type) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.className = 'calc-toast ' + type;
+  toast.style.display = 'block';
+  setTimeout(() => { toast.style.display = 'none'; }, 2500);
+}
+
+// Library
+let library = JSON.parse(localStorage.getItem('wlc_component_library') || '[]');
+
+function updateLibCount() {
+  document.getElementById('lib-count').textContent = library.length;
+}
+
+function saveToLibrary(rowId) {
+  const row = rows.find(r => r.id === rowId);
+  if (!row) return;
+  const item = {
+    type: COMPONENT_TYPES[row.typeIndex].label,
+    typeIndex: row.typeIndex,
+    zoneIndex: row.zoneIndex,
+    width: document.getElementById('width-' + rowId).value,
+    height: document.getElementById('height-' + rowId).value,
+    desc: document.getElementById('desc-' + rowId).value,
+    mark: document.getElementById('mark-' + rowId).value
+  };
+  library.push(item);
+  localStorage.setItem('wlc_component_library', JSON.stringify(library));
+  updateLibCount();
+  showToast('Saved to library: ' + (item.desc || item.type), 'success');
+}
+
+// Setup listeners for auto-update header
+document.querySelectorAll('.setup-field input, .setup-field select').forEach(el => {
+  el.addEventListener('change', updateProjectHeader);
+  el.addEventListener('input', updateProjectHeader);
+});
+
+// Initialize with sample rows
+function init() {
+  updateProjectHeader();
+  updateLibCount();
+  addRow('A1', 2, 0, '73.38', '95.88', 'SGD770 2P/2T Sliding Glass Door');
+  addRow('B1', 0, 0, '69.38', '60.75', 'PW7720A Picture Window');
+  addRow('C1', 1, 1, '36.00', '80.00', 'Entry Door - Front');
+  addRow('D1', 3, 1, '48.00', '60.00', 'Accordion Shutter - Master BR');
+  addRow('E1', 0, 0, '48.00', '36.00', 'Casement Window - Kitchen');
+  // Add empty row
+  addRow();
+  // Calculate all filled rows
+  calculateAll();
+}
+
+init();
+</script>
+</body>
+</html>

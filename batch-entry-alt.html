@@ -155,27 +155,36 @@
   .zone-tag.z5-tag { background: rgba(239,68,68,0.12); color: #dc2626; border: 1px solid rgba(239,68,68,0.2); }
   .zone-tag.z4-tag { background: rgba(16,185,129,0.12); color: #059669; border: 1px solid rgba(16,185,129,0.2); }
 
-  /* Library CTA */
-  .library-cta {
-    display: flex; align-items: center; gap: 6px;
-    padding: 8px 14px; background: white;
-    border: 2px solid rgba(59,130,246,0.15); border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06); cursor: pointer;
-    transition: all 0.25s; white-space: nowrap;
-    font-size: 12px; font-weight: 600; color: var(--brand-primary);
-    position: relative; align-self: flex-start;
+  /* Library - Gold Ribbon */
+  .library-ribbon { align-self: flex-start; cursor: pointer; }
+  .library-ribbon .ribbon-btn {
+    display: flex; flex-direction: column; align-items: center;
+    transition: all 0.3s; position: relative;
   }
-  .library-cta i { font-size: 13px; color: var(--premium-sapphire); }
-  .library-cta .count {
-    position: absolute; top: -6px; right: -6px;
-    font-size: 9px; font-weight: 800; background: var(--premium-sapphire);
-    color: white; width: 18px; height: 18px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 2px 6px rgba(59,130,246,0.4);
+  .library-ribbon .ribbon-btn:hover { transform: translateY(-4px); }
+  .library-ribbon .ribbon-btn:hover .ribbon-shape {
+    filter: drop-shadow(0 10px 20px rgba(245,158,11,0.5));
   }
-  .library-cta:hover {
-    border-color: var(--premium-sapphire);
-    box-shadow: 0 4px 12px rgba(59,130,246,0.15); transform: translateY(-1px);
+  .library-ribbon .ribbon-shape {
+    transition: all 0.3s;
+    filter: drop-shadow(0 4px 10px rgba(245,158,11,0.3));
+  }
+  .library-ribbon .ribbon-content {
+    position: absolute; top: 0; left: 0; right: 0; height: 115px;
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; gap: 2px; pointer-events: none;
+  }
+  .library-ribbon .ribbon-count {
+    font-size: 38px; font-weight: 900; color: white;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.2); line-height: 1;
+  }
+  .library-ribbon .ribbon-label {
+    font-size: 9px; font-weight: 700; color: rgba(255,255,255,0.75);
+    text-transform: uppercase; letter-spacing: 1.5px;
+  }
+  .library-ribbon .ribbon-sublabel {
+    font-size: 12px; font-weight: 700; color: white;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.3); margin-top: 6px;
   }
 
   /* ===== MAIN TABLE ===== */
@@ -448,9 +457,24 @@
     </div>
   </div>
 
-  <div class="library-cta" onclick="document.getElementById('lib-modal').style.display='flex'">
-    <i class="fas fa-bookmark"></i> My Library
-    <span class="count" id="lib-count">0</span>
+  <div class="library-ribbon" onclick="document.getElementById('lib-modal').style.display='flex'">
+    <div class="ribbon-btn">
+      <svg class="ribbon-shape" width="100" height="135" viewBox="0 0 100 135" fill="none">
+        <path d="M10 0 H90 Q100 0 100 10 V118 L50 98 L0 118 V10 Q0 0 10 0Z" fill="url(#ribbonGrad)" />
+        <path d="M10 0 H90 Q100 0 100 10 V118 L50 98 L0 118 V10 Q0 0 10 0Z" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" />
+        <defs>
+          <linearGradient id="ribbonGrad" x1="0" y1="0" x2="100" y2="135" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#FBBF24"/>
+            <stop offset="100%" stop-color="#D97706"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <div class="ribbon-content">
+        <div class="ribbon-count" id="lib-count">0</div>
+        <div class="ribbon-label">Saved</div>
+      </div>
+      <div class="ribbon-sublabel">My Library</div>
+    </div>
   </div>
 </div>
 

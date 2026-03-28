@@ -61,32 +61,7 @@
   }
   .admin-banner .back-link:hover { background: rgba(147,197,253,0.1); }
 
-  /* ===== PROJECT SETUP BAR ===== */
-  .setup-bar {
-    max-width: 1200px; margin: 0 auto 16px;
-    padding: 16px 20px;
-  }
-  .setup-bar h2 {
-    font-size: 18px; font-weight: 800; color: var(--brand-primary); margin-bottom: 12px;
-  }
-  .setup-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 12px;
-  }
-  .setup-field label {
-    display: block; font-size: 10px; text-transform: uppercase;
-    letter-spacing: 1px; color: #6b7280; font-weight: 700; margin-bottom: 4px;
-  }
-  .setup-field input, .setup-field select {
-    width: 100%; padding: 8px 12px;
-    background: white; border: 2px solid rgba(203, 213, 225, 0.6);
-    border-radius: 10px; font-size: 13px; font-weight: 600;
-    color: #1f2937; font-family: inherit;
-  }
-  .setup-field input:focus, .setup-field select:focus {
-    outline: none; border-color: var(--brand-secondary);
-    box-shadow: 0 0 0 3px rgba(0, 24, 255, 0.1);
-  }
+  /* Setup fields hidden - params come from sidebar in production */
 
   /* ===== TOP BAR ===== */
   .top-bar {
@@ -365,59 +340,16 @@
   <a class="back-link" href="javascript:history.back()"><i class="fas fa-arrow-left" style="margin-right:4px;"></i> Back to Calculator</a>
 </div>
 
-<!-- Project Setup -->
-<div class="setup-bar glass-panel">
-  <h2><i class="fas fa-cog" style="color:var(--premium-sapphire); margin-right:8px;"></i> Project Setup</h2>
-  <div class="setup-grid">
-    <div class="setup-field">
-      <label>Project Name</label>
-      <input type="text" id="project-name" value="Gamblin Residence">
-    </div>
-    <div class="setup-field">
-      <label>Address</label>
-      <input type="text" id="project-addr" value="206 Seahorse CT, Marco Island FL 34145">
-    </div>
-    <div class="setup-field">
-      <label>Wind Speed (mph)</label>
-      <input type="number" id="wind-speed" value="170">
-    </div>
-    <div class="setup-field">
-      <label>Exposure Category</label>
-      <select id="exposure-cat">
-        <option value="B">B — Urban/Suburban</option>
-        <option value="C" selected>C — Open Terrain</option>
-        <option value="D">D — Flat/Unobstructed</option>
-      </select>
-    </div>
-    <div class="setup-field">
-      <label>Mean Roof Height (ft)</label>
-      <input type="number" id="roof-height" value="15">
-    </div>
-    <div class="setup-field">
-      <label>Building Width (ft)</label>
-      <input type="number" id="bldg-width" value="50">
-    </div>
-    <div class="setup-field">
-      <label>Building Length (ft)</label>
-      <input type="number" id="bldg-length" value="60">
-    </div>
-    <div class="setup-field">
-      <label>Enclosure</label>
-      <select id="enclosure">
-        <option value="enclosed" selected>Enclosed</option>
-        <option value="partially_enclosed">Partially Enclosed</option>
-        <option value="open">Open</option>
-      </select>
-    </div>
-    <div class="setup-field">
-      <label>Speed Type</label>
-      <select id="speed-type">
-        <option value="ultimate" selected>Ultimate (LRFD)</option>
-        <option value="nominal">Nominal (ASD)</option>
-      </select>
-    </div>
-  </div>
-</div>
+<!-- Hidden inputs - in production these come from the sidebar Project Setup stores -->
+<input type="hidden" id="project-name" value="Gamblin Residence">
+<input type="hidden" id="project-addr" value="206 Seahorse CT, Marco Island FL 34145">
+<input type="hidden" id="wind-speed" value="170">
+<input type="hidden" id="exposure-cat" value="C">
+<input type="hidden" id="roof-height" value="15">
+<input type="hidden" id="bldg-width" value="50">
+<input type="hidden" id="bldg-length" value="60">
+<input type="hidden" id="enclosure" value="enclosed">
+<input type="hidden" id="speed-type" value="ultimate">
 
 <!-- Top Bar: Edge Strip + Zone Guide + Library -->
 <div class="top-bar">
@@ -867,11 +799,7 @@ function saveToLibrary(rowId) {
   showToast('Saved to library: ' + (item.desc || item.type), 'success');
 }
 
-// Setup listeners for auto-update header
-document.querySelectorAll('.setup-field input, .setup-field select').forEach(el => {
-  el.addEventListener('change', updateProjectHeader);
-  el.addEventListener('input', updateProjectHeader);
-});
+// In production, project params come from sidebar stores
 
 // Initialize with sample rows
 function init() {

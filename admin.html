@@ -1017,8 +1017,21 @@
     <script>
         // Configuration
         const API_URL = 'https://api.windloadcalc.com';
-        const ADMIN_KEY = 'wlc-admin-2025-bf8SUb3EiKNzsz4';
         let currentAdminKey = '';
+
+        // Verify a candidate admin key against the backend.
+        // Returns true only if the backend accepts it.
+        async function verifyAdminKey(key) {
+            if (!key) return false;
+            try {
+                const response = await fetch(
+                    `${API_URL}/api/admin/audit-log?admin_key=${encodeURIComponent(key)}&limit=1`
+                );
+                return response.ok;
+            } catch (_) {
+                return false;
+            }
+        }
 
         // Campaign Pages Data
         const campaignPages = {
@@ -1711,6 +1724,7 @@
                 { title: 'Stucco Wall Wind Cracking', url: '/florida/palm-beach/stucco-wall-wind-cracking', county: 'palm-beach', type: 'Cladding', stagedDate: '2026-03-18' },
                 { title: 'Hurricane-Rated Sliding Glass Door', url: '/florida/palm-beach/hurricane-rated-sliding-glass-door', county: 'palm-beach', type: 'Doors', stagedDate: '2026-03-18' },
                 { title: 'Oceanfront Seawall Cap Wind', url: '/florida/palm-beach/oceanfront-seawall-cap-wind', county: 'palm-beach', type: 'Structural', stagedDate: '2026-03-18' },
+                { title: 'Vinyl vs Aluminum Window Wind Ratings', url: '/florida/palm-beach/vinyl-window-wind-rating', county: 'palm-beach', type: 'Windows', stagedDate: '2026-03-19' },
                 // Monroe
                 { title: 'Modular Home Wind Tie-Down Requirements', url: '/florida/monroe/modular-home-wind-tie-down', county: 'monroe', type: 'Structural', stagedDate: '2026-02-13' },
                 { title: 'Commercial Fish House Wind', url: '/florida/monroe/commercial-fish-house-wind', county: 'monroe', type: 'Specialty', stagedDate: '2026-03-14' },
@@ -1736,7 +1750,8 @@
                 { title: 'Keys Propane Tank Hurricane', url: '/florida/monroe/keys-propane-tank-hurricane', county: 'monroe', type: 'Specialty', stagedDate: '2026-03-18' },
                 { title: 'Keys Outdoor Shower Wind', url: '/florida/monroe/keys-outdoor-shower-wind', county: 'monroe', type: 'Specialty', stagedDate: '2026-03-18' },
                 { title: 'Mangrove Trimming Wind Exposure', url: '/florida/monroe/mangrove-trimming-wind-exposure', county: 'monroe', type: 'Wind Load', stagedDate: '2026-03-18' },
-                { title: 'Keys Fish Cleaning Table Wind', url: '/florida/monroe/keys-fish-cleaning-table-wind', county: 'monroe', type: 'Specialty', stagedDate: '2026-03-18' }
+                { title: 'Keys Fish Cleaning Table Wind', url: '/florida/monroe/keys-fish-cleaning-table-wind', county: 'monroe', type: 'Specialty', stagedDate: '2026-03-18' },
+                { title: 'Boat Ramp Canopy Wind Design', url: '/florida/monroe/keys-boat-ramp-canopy-wind', county: 'monroe', type: 'Specialty', stagedDate: '2026-03-19' }
             ]
         };
 
@@ -2021,16 +2036,30 @@
         });
 
         // Login
-        function doLogin() {
-            const key = document.getElementById('adminKeyInput').value;
-            if (key === ADMIN_KEY) {
+        async function doLogin() {
+            const key = document.getElementById('adminKeyInput').value.trim();
+            const err = document.getElementById('loginError');
+
+            if (!key) {
+                err.textContent = 'Please enter an admin key.';
+                err.style.display = 'block';
+                return;
+            }
+
+            err.style.display = 'none';
+            err.textContent = 'Verifying...';
+            err.style.display = 'block';
+
+            const valid = await verifyAdminKey(key);
+
+            if (valid) {
                 currentAdminKey = key;
                 document.getElementById('loginScreen').style.display = 'none';
                 document.getElementById('adminPanel').style.display = 'block';
                 localStorage.setItem('wlc_admin_key', key);
+                err.style.display = 'none';
                 loadCustomers(); // Load customers after login
             } else {
-                const err = document.getElementById('loginError');
                 err.textContent = 'Invalid admin key. Please try again.';
                 err.style.display = 'block';
             }
@@ -2172,16 +2201,19 @@
         }
 
         // Check for saved login
-        window.onload = function() {
+        window.onload = async function() {
             // Always update campaign stats on page load
             updateCampaignStats();
 
             const saved = localStorage.getItem('wlc_admin_key');
-            if (saved === ADMIN_KEY) {
+            if (saved && await verifyAdminKey(saved)) {
                 currentAdminKey = saved;
                 document.getElementById('loginScreen').style.display = 'none';
                 document.getElementById('adminPanel').style.display = 'block';
                 loadCustomers(); // Load customers on login
+            } else if (saved) {
+                // Saved key is no longer valid (e.g., rotated) — clear it
+                localStorage.removeItem('wlc_admin_key');
             }
             // Enter key to login
             document.getElementById('adminKeyInput').addEventListener('keypress', (e) => {

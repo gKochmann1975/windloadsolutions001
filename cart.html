@@ -4,11 +4,19 @@
     <meta charset="UTF-8">
     <meta name="description" content="WindLoadCalc.com - Cart. Professional wind load calculations and building intelligence platform for engineers and architects.">
 
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content="noindex, nofollow">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/svg+xml" href="images/windloadcalc-favicon.svg">
     <title>Shopping Cart | WindLoadCalc</title>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Shopping Cart | WindLoadCalc">
+    <meta property="og:description" content="Professional wind load calculations and building intelligence platform for engineers and architects.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://windloadcalc.com/cart.html">
+    <meta property="og:image" content="https://windloadcalc.com/images/wind-calculator-og.jpg">
+    <meta property="og:site_name" content="WindLoadCalc">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -933,7 +941,11 @@
                 }
             } catch (error) {
                 console.error('Signup error:', error);
-                showCheckoutError(error.message || 'Failed to create account. Please try again.');
+                if (error.message === 'Failed to fetch') {
+                    showCheckoutError('Unable to connect to server. Please check your internet connection, disable any ad blockers, and try again.');
+                } else {
+                    showCheckoutError(error.message || 'Failed to create account. Please try again.');
+                }
                 btn.disabled = false;
                 btn.innerHTML = '<i class="fas fa-lock"></i> Continue to Checkout';
             }

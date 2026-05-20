@@ -1,5 +1,64 @@
 # WindLoad Solutions - Claude Memory
 
+## SEO Rules — DO NOT VIOLATE (established 2026-05-19)
+
+These rules came out of a GSC indexing cleanup. Violating them risks Google manual
+actions or wasted crawl budget. Read before adding new pages or schema markup.
+
+### Structured data (JSON-LD)
+- **NEVER** add `aggregateRating`, `reviewCount`, or `ratingCount` to schema unless
+  the numbers reflect REAL customer reviews from a verifiable source (Stripe,
+  Google Business Profile, Trustpilot, etc.). Fake review schema is one of Google's
+  most-enforced policies and can trigger a sitewide manual action.
+- If asked to add testimonials/social proof markup, push back and ask where the
+  numbers come from. Made-up numbers are never acceptable.
+
+### `<meta name="robots">` + sitemap.xml must agree
+- A page tagged `noindex` must NOT appear in sitemap.xml. The contradiction
+  confuses Google and wastes crawl budget.
+- A page in sitemap.xml must NOT be tagged `noindex`.
+- When you add a new page: pick one — public (in sitemap, `index, follow`) or
+  private (out of sitemap, `noindex, nofollow`). Never both.
+
+### Gated app pages
+- Pages that require login or show "Upgrade Required" / "Welcome to X!" with no
+  public-readable content must be `noindex, follow` with a `<link rel="canonical">`
+  pointing to the corresponding marketing landing page.
+- Example: `building-intelligence-platform.html` (gated app) → canonical to
+  `building-intelligence-platform-landing.html` (real SEO target).
+
+### "Coming Soon" / placeholder pages
+- Must be `noindex, follow` and NOT in sitemap until the product ships.
+- When the product launches: flip back to `index, follow` AND re-add to sitemap
+  in the SAME commit.
+
+### Pages that should always be `noindex, nofollow`
+- account.html, dashboard.html, cart.html, login.html, admin.html
+- All `*-success.html` and `*-cancel.html` (Stripe redirect targets)
+- success.html, checkout-success.html, checkout-cancelled.html
+- bip-shop-success.html, bip-shop-cancel.html
+- calc-shop-success.html, calc-shop-cancel.html
+- reset-password.html, join-team.html, download.html
+
+### Subdomains — already blocked, keep them blocked
+- `api.windloadcalc.com` — `/robots.txt` route in `backend/app.py` blocks all crawlers
+- `calc.windloadcalc.com` — `/robots.txt` route + `noindex` meta in
+  `webapp/wind_load_app.py` blocks all crawlers (subscriber-only Dash app)
+- Do not undo these unless the user explicitly asks.
+
+### Legacy URL redirects (GitHub Pages-safe pattern)
+- GitHub Pages doesn't support server-side 301s. For legacy URLs, create
+  `{slug}/index.html` stub files with:
+  - `<meta name="robots" content="noindex, follow">`
+  - `<link rel="canonical" href="{destination}">`
+  - `<meta http-equiv="refresh" content="0; url={destination}">`
+  - `<script>window.location.replace("{destination}");</script>`
+  - Plain `<a href>` fallback in body
+- Examples already in repo: `asce-7-wind-load-calculator/`,
+  `components-and-cladding-wind-loads/`, `service-area/wind-load-analysis-idaho/`
+
+---
+
 ## IMPORTANT: Pre-Launch Checklist
 
 ### Before Going Live - MUST DO:

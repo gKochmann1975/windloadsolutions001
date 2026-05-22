@@ -7,7 +7,18 @@ ZIP: Any (e.g., 12345)
 
 ################################################################
 
+Admin Testing Panel
+Go to: 
 https://windloadcalc.com/building-intelligence-platform.html?admin=true
+
+-------------------------------------------------------------------------------------------
+
+To clear everything from any page, open browser DevTools (F12) and run this in the Console:
+
+localStorage.clear(); sessionStorage.clear(); alert('Cleared!'); location.href = 'https://windloadcalc.com/login.html';
+
+Or just use an Incognito window (Ctrl+Shift+N) for the cleanest fresh-user test.
+----------------------------------------------------------------
 
 Test URLs you can use now:
 URL	Experience
@@ -20,6 +31,20 @@ URL	Experience
 
 A purple testing banner will appear at the top showing which tier you're testing and what restrictions apply. None of these persist to localStorage - just refresh to reset.
 
+#################################################################
+
+Building Intelligence Platform (BIP)
+Test	Email	Subscription Tier
+
+✅ Free Trial		windloadcalcllc+bip-trial@gmail.com		7-day trial
+Starter Monthly		windloadcalcllc+bip-starter-mo@gmail.com	Starter
+Starter Annual		windloadcalcllc+bip-starter-yr@gmail.com	Starter
+Pro Monthly		windloadcalcllc+bip-pro-mo@gmail.com		Pro
+Pro Annual		windloadcalcllc+bip-pro-yr@gmail.com		Pro
+Premium Monthly		windloadcalcllc+bip-premium-mo@gmail.com	Premium
+Premium Annual		windloadcalcllc+bip-premium-yr@gmail.com	Premium
+Enterprise Monthly	windloadcalcllc+bip-ent-mo@gmail.com		Enterprise
+Enterprise Annual	windloadcalcllc+bip-ent-yr@gmail.com		Enterprise
 
 ################################################################################
 
@@ -39,21 +64,6 @@ Premium Annual		windloadcalcllc+calc-premium-yr@gmail.com	Premium
 
 #################################################################
 
-Building Intelligence Platform (BIP)
-Test	Email	Subscription Tier
-
-✅ Free Trial		windloadcalcllc+bip-trial@gmail.com		7-day trial
-Starter Monthly		windloadcalcllc+bip-starter-mo@gmail.com	Starter
-Starter Annual		windloadcalcllc+bip-starter-yr@gmail.com	Starter
-Pro Monthly		windloadcalcllc+bip-pro-mo@gmail.com		Pro
-Pro Annual		windloadcalcllc+bip-pro-yr@gmail.com		Pro
-Premium Monthly		windloadcalcllc+bip-premium-mo@gmail.com	Premium
-Premium Annual		windloadcalcllc+bip-premium-yr@gmail.com	Premium
-Enterprise Monthly	windloadcalcllc+bip-ent-mo@gmail.com		Enterprise
-Enterprise Annual	windloadcalcllc+bip-ent-yr@gmail.com		Enterprise
-
-#################################################################
-
 Both Products (Bundle Scenarios)
 Test	Email
 BIP + Calculator	windloadcalcllc+both-pro@gmail.com
@@ -61,3 +71,36 @@ BIP + Calculator	windloadcalcllc+both-pro@gmail.com
 ##################################################################################
 
 confirm works with Google signin for all scenarios
+
+
+#####################################################################################
+#####################################################################################
+
+ Admin Panel Buttons:
+Button	What it does
+🔍 Debug Info	Shows current auth state (unchanged)
+🗑️ Fresh Trial	Clears everything, reloads page → you get a NEW 7-day trial
+📦 All Storage Keys	Shows ALL localStorage keys and values - helpful to see what's stored
+🚪 Full Logout	Clears everything + cookies, then redirects to login page (won't auto-create trial)
+
+The key insight: When you click "Fresh Trial" (formerly "Reset Trial"), the page reloads and TrialManager.init() automatically creates a fresh new trial. That's why you appear to still be "remembered" - you're actually getting a brand new trial! If you want to be completely logged out without any trial data, use the new "Full Logout" button - it clears everything AND redirects you away from the BIP page so no new trial is auto-created.
+
+The browser is auto-filling your email/password from its built-in password manager - that's separate from localStorage. Here are your options: Quick Fix - Use Incognito/Private Window:
+Chrome: Ctrl+Shift+N
+Firefox: Ctrl+Shift+P
+Edge: Ctrl+Shift+N
+
+This gives you a completely fresh browser with no saved passwords, cookies, or localStorage. Or Clear 
+
+Browser's Saved Passwords:
+Go to browser settings → Passwords/Autofill
+Search for "windloadcalc"
+Delete the saved credentials
+
+Or Use a Different Test Email: Since you have email normalization disabled for testing, you can use any of these test aliases:
+
+windloadcalcllc+newuser1@gmail.com
+windloadcalcllc+newuser2@gmail.com
+windloadcalcllc+test-fresh@gmail.com
+
+Each alias is treated as a brand new user in the system. Recommended approach: Open an Incognito window - it's the fastest way to test the complete new user experience without any browser memory interfering.

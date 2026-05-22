@@ -10,3 +10,24 @@ videos/
 *.log
 node_modules/
 new_env/
+
+# Environment variables — root and any subdir. Vault secrets to E:/secrets/.
+.env
+.env.*
+!.env.example
+!.env.sample
+
+# Google OAuth credentials and related secret-bearing files —
+# secrets MUST NOT live inside a code repo.
+# Vault to E:/secrets/ instead. See feedback_secret_rotation_discipline.md.
+# NOTE: Google/OAuth/client_secret_*.json is ALREADY in git history (commit
+# 0d78aa9); this rule only prevents future re-adds. History rewrite +
+# credential rotation are tracked separately under master directive 2026-05-10.
+Google/
+
+# Other secret-format files
+.secrets/
+*credential*
+*client_secret*
+*.pem
+*.key

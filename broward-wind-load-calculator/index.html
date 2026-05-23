@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" type="image/svg+xml" href="/images/windloadcalc-favicon.svg">
+
+    <!-- SEO Meta -->
+    <title>Broward Wind Load Calculator — 170 mph HVHZ + FBC 2023 | WindLoadCalc</title>
+    <meta name="description" content="Instant Broward County wind load calculations per ASCE 7-22 and FBC 8th Edition. 170 mph HVHZ, NOA / TAS-rated products, impact protection. Free wind speed lookup.">
+    <meta name="keywords" content="Broward wind load calculator, Broward County wind speed, Fort Lauderdale wind load, Hollywood FL wind load, Pompano Beach wind load, HVHZ Broward, FBC 8th Edition Broward, NOA Broward County, ASCE 7-22 Broward, 170 mph HVHZ">
+    <link rel="canonical" href="https://windloadcalc.com/broward-wind-load-calculator">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Broward Wind Load Calculator — 170 mph HVHZ + FBC 2023">
+    <meta property="og:description" content="Instant Broward County wind load calculations per ASCE 7-22 and FBC 8th Edition. 170 mph HVHZ, NOA / TAS testing, free wind speed lookup by ZIP.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://windloadcalc.com/broward-wind-load-calculator">
+    <meta property="og:image" content="https://windloadcalc.com/images/wind-calculator-og.jpg">
+    <meta property="og:site_name" content="WindLoadCalc">
+
+    <!-- SoftwareApplication Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Broward Wind Load Calculator",
+        "alternateName": "WindLoadCalc Broward County",
+        "applicationCategory": "EngineeringApplication",
+        "applicationSubCategory": "Structural Engineering",
+        "operatingSystem": "Web Browser",
+        "description": "Wind load calculator for Broward County, Florida. Implements ASCE 7-22 and Florida Building Code 8th Edition (2023) with the Broward HVHZ override (170 mph Risk Category II) and Broward County Building Code Services Division amendments. Outputs permit-ready C&C and MWFRS pressures with NOA-compatible FL# references for Fort Lauderdale, Hollywood, Pompano Beach, Coral Springs, Pembroke Pines, Plantation, Davie, and all 31 Broward municipalities.",
+        "url": "https://windloadcalc.com/broward-wind-load-calculator",
+        "featureList": [
+            "Broward County 170 mph HVHZ wind speed override",
+            "ASCE 7-22 + FBC 8th Edition (2023) compliance",
+            "Broward County Building Code Services amendments",
+            "NOA (Notice of Acceptance) product matching",
+            "TAS 201 / 202 / 203 verification for impact-rated assemblies",
+            "Risk Category I / II / III / IV support",
+            "Exposure Category B / C / D",
+            "Components and Cladding pressures (Zone 4, 5, roof zones)",
+            "Main Wind Force Resisting System pressures",
+            "All 31 Broward municipalities (Fort Lauderdale, Hollywood, Pompano Beach, Coral Springs, etc.)",
+            "FI-24 bulletin alignment for the 8th Edition",
+            "Permit-ready PDF, Excel, and architectural schedule reports"
+        ],
+        "offers": {
+            "@type": "Offer",
+            "availability": "https://schema.org/InStock",
+            "url": "https://windloadcalc.com/wind-load-calculator-shop.html"
+        },
+        "provider": {
+            "@type": "Organization",
+            "name": "WindLoad Solutions",
+            "url": "https://windloadcalc.com"
+        }
+    }
+    </script>
+
+    <!-- BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [{
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://windloadcalc.com/"
+        },{
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Florida Wind Load Calculator",
+            "item": "https://windloadcalc.com/florida-wind-load-calculator"
+        },{
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Broward Wind Load Calculator",
+            "item": "https://windloadcalc.com/broward-wind-load-calculator"
+        }]
+    }
+    </script>
+
+    <!-- FAQPage (mirrors visible FAQ 1:1) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [{
+            "@type": "Question",
+            "name": "Is Broward County in the HVHZ?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Broward is one of only two High Velocity Hurricane Zone counties in Florida — Miami-Dade is the other. The entire county sits inside the HVHZ boundary, from the Atlantic coast at Hollywood and Fort Lauderdale all the way west to the Everglades line. That means every Broward jurisdiction — whether you are permitting in Pompano Beach, Coral Springs, Plantation, Davie, or unincorporated Broward — operates under HVHZ rules. There is no inland exemption inside the county. The Broward County Building Code Services Division administers the HVHZ provisions of the Florida Building Code with Broward-specific amendments layered on top."
+            }
+        },{
+            "@type": "Question",
+            "name": "What is the difference between Broward and Miami-Dade wind load requirements?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Both counties are HVHZ and both require NOA / TAS-tested products, but three differences matter on a permit submittal. First, the design wind speed: Broward uses 170 mph for Risk Category II, while Miami-Dade uses 175 mph. Second, the amendments: each county publishes its own technical bulletins (Broward through the Building Code Services Division, Miami-Dade through RER), and the two sets are not identical word-for-word — fire-rating cross-references, inspection sequencing, and submittal forms differ. Third, administration: Broward delegates a great deal of plan review authority to its 31 municipalities, while Miami-Dade keeps unincorporated review centralized. The same Miami-Dade NOA is accepted in Broward, but the calculation pressure target you have to meet is lower in Broward by virtue of the 170 vs 175 mph delta."
+            }
+        },{
+            "@type": "Question",
+            "name": "Do I need NOA for windows in Fort Lauderdale?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Fort Lauderdale is inside the Broward HVHZ, so any window, sliding glass door, entry door, garage door, or shutter installed in the city requires a Notice of Acceptance that explicitly covers HVHZ use. The NOA is most commonly issued by Miami-Dade County's Product Control Section, but Broward accepts it for use anywhere in the county. On the wind load report, each opening must be matched to an FL# (Florida Product Approval number) whose underlying NOA shows TAS 201 (Large Missile Impact), TAS 202 (Uniform Static Air Pressure), and TAS 203 (Cyclic Wind Pressure) test results meeting or exceeding the design pressure the calculator returns for that opening's zone."
+            }
+        },{
+            "@type": "Question",
+            "name": "Why is Broward 170 mph when Miami-Dade is 175 mph?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The 5 mph difference comes from how each county calibrated its post-Hurricane Andrew adoption. Miami-Dade, which took the most concentrated damage from Andrew in 1992, set a 175 mph design floor based on its own forensic engineering review. Broward sits one county north, took heavy but not catastrophic Andrew damage, and adopted 170 mph after a parallel but slightly less aggressive analysis. ASCE 7-22 baseline maps actually show similar values for both counties, but each county's adopted floor sits a few mph above the baseline to add margin. The numbers are not arbitrary — they correspond to a specific return-period and importance-factor calibration each county engineering office defended in adoption hearings."
+            }
+        },{
+            "@type": "Question",
+            "name": "What is the Broward FI-24 bulletin?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Florida Building Information (FI) bulletins are technical clarifications issued by Florida code authorities to interpret specific provisions of the Florida Building Code. The FI-24 bulletin addresses how the 8th Edition (2023) is to be applied in Broward, including transition rules from the 7th Edition, clarifications on HVHZ amendments, and guidance on product approval matching. If you are pulling a permit in Broward in 2026 and your project was designed under earlier guidance, FI-24 is the current Broward-authority document plan reviewers will reference. Cite it on submittals where your design predates the 8th Edition effective date but the permit application is being filed after it."
+            }
+        },{
+            "@type": "Question",
+            "name": "Do I need a PE stamp for Broward permits?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "It depends on scope and stories. Broward generally requires a Florida-licensed PE signature and seal on wind load calculations for new construction, additions, and most commercial work. Residential window and door replacement permits can often be filed with a manufacturer's installation instructions plus a wind load report referencing FL# approvals, without a separate PE seal, provided the design pressures are met. WindLoadCalc's in-house PE sign-and-seal service is available for Florida projects up to three stories — that covers most single-family, townhouse, and small commercial work in Broward, but it does not cover the high-rise condos and hotels along the Fort Lauderdale beach corridor. For mid- and high-rise Broward projects, you will need a structural engineer of record."
+            }
+        },{
+            "@type": "Question",
+            "name": "Are storm panels acceptable in Broward?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, storm panels are accepted in Broward as long as they carry an NOA that covers HVHZ use and the FL# is matched to each opening on the wind load report. The most common HVHZ-rated storm panel systems are aluminum corrugated panels, clear polycarbonate panels, and accordion shutters. Each system has tested design pressures that must equal or exceed the C&C pressure the calculator returns for the opening's zone (Zone 4 wall field, Zone 5 wall corner — corners typically govern). Broward plan reviewers will reject a submittal where the listed FL# storm panel rating is below the calculated design pressure, so the opening-by-opening match must be explicit on the report."
+            }
+        },{
+            "@type": "Question",
+            "name": "What is the cost difference between NOA-rated impact glass and storm panels in Broward?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "For a typical Broward single-family home, HVHZ-rated impact glass runs roughly $60 to $110 per square foot installed depending on product line, frame material, and DP rating. NOA-rated storm panels for the same openings come in much lower at around $15 to $30 per square foot, but they require manual deployment before each storm event. Accordion shutters fall in between at $25 to $45 per square foot and deploy quickly without removing panels from storage. The break-even depends on how often deployment is needed, insurance discount eligibility (impact glass usually wins the larger discount), and resale considerations. The wind load report itself is identical for either route — design pressures are governed by the building, not the protection method."
+            }
+        }]
+    }
+    </script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7;
+            color: #2d3748;
+            background: #ffffff;
+        }
+
+        /* Header */
+        .main-header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo-image { height: 80px; width: auto; }
+
+        .header-cta {
+            background: #0018ff;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .header-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 24, 255, 0.3);
+        }
+
+        /* Hero */
+        .article-header {
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            color: white;
+            padding: 4rem 0 3rem;
+            text-align: center;
+        }
+
+        .article-header .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .article-category {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .article-title {
+            font-size: 3rem;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .article-subtitle {
+            font-size: 1.25rem;
+            opacity: 0.95;
+            line-height: 1.6;
+            font-weight: 400;
+            margin-bottom: 2rem;
+        }
+
+        /* Hero ZIP form */
+        .zip-form {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 560px;
+            margin: 0 auto;
+        }
+
+        .zip-input {
+            flex: 1 1 220px;
+            padding: 1rem 1.25rem;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 50px;
+            outline: none;
+            color: #1f2937;
+            min-width: 0;
+        }
+
+        .zip-submit {
+            background: white;
+            color: #0018ff;
+            border: none;
+            padding: 1rem 1.75rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .zip-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .zip-note {
+            font-size: 0.85rem;
+            opacity: 0.85;
+            margin-top: 1rem;
+        }
+
+        /* Main content layout */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .main-content { min-width: 0; }
+
+        .sidebar {
+            position: sticky;
+            top: 100px;
+            align-self: start;
+        }
+
+        .sidebar-box {
+            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+            border: 2px solid #e5e7eb;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-box h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #181E57;
+            margin-bottom: 1.5rem;
+        }
+
+        .sidebar-box ul { list-style: none; }
+        .sidebar-box ul li { margin-bottom: 0.75rem; }
+        .sidebar-box a {
+            color: #4a5568;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: block;
+            padding: 0.5rem 0 0.5rem 1rem;
+            border-left: 3px solid transparent;
+        }
+        .sidebar-box a:hover {
+            color: #0018ff;
+            border-left-color: #0018ff;
+            padding-left: 1.5rem;
+        }
+
+        .sidebar-cta {
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .sidebar-cta h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .sidebar-cta p {
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            opacity: 0.95;
+        }
+
+        .sidebar-cta-button {
+            display: block;
+            background: white;
+            color: #0018ff;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Content typography */
+        .main-content h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #181E57;
+            margin: 3rem 0 1.5rem;
+            line-height: 1.3;
+            border-bottom: 3px solid #0018ff;
+            padding-bottom: 0.75rem;
+        }
+
+        .main-content h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin: 2rem 0 1rem;
+        }
+
+        .main-content p {
+            font-size: 1.08rem;
+            line-height: 1.8;
+            margin-bottom: 1.25rem;
+            color: #4a5568;
+        }
+
+        .main-content ul {
+            margin: 1.25rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .main-content ul li {
+            margin-bottom: 0.75rem;
+            color: #4a5568;
+            line-height: 1.7;
+        }
+
+        .main-content ul li strong { color: #0018ff; font-weight: 700; }
+
+        /* Wind speed table */
+        .wind-table-wrap { overflow-x: auto; margin: 2rem 0; }
+
+        .wind-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+        }
+
+        .wind-table th {
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            color: white;
+            padding: 1rem 1.25rem;
+            text-align: left;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .wind-table td {
+            padding: 0.9rem 1.25rem;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 0.98rem;
+        }
+
+        .wind-table tr:nth-child(even) td { background: #f9fafb; }
+        .wind-table tr:last-child td { border-bottom: none; }
+
+        .speed-cell { font-weight: 700; color: #0018ff; white-space: nowrap; }
+        .hvhz-badge {
+            display: inline-block;
+            background: #fef3c7;
+            color: #b45309;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.15rem 0.5rem;
+            border-radius: 10px;
+            margin-left: 0.4rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Info boxes */
+        .info-box {
+            background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%);
+            border-left: 4px solid #0018ff;
+            border-radius: 10px;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+        }
+
+        .info-box h4 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #0018ff;
+            margin-bottom: 0.75rem;
+        }
+
+        .info-box p { font-size: 1rem; line-height: 1.7; margin-bottom: 0; }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left: 4px solid #f59e0b;
+        }
+
+        .warning-box h4 { color: #b45309; }
+
+        /* County cards */
+        .county-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+            margin: 2rem 0;
+        }
+
+        .county-card {
+            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .county-card:hover {
+            border-color: #0018ff;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 24, 255, 0.1);
+        }
+
+        .county-card h4 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #181E57;
+            margin-bottom: 0.5rem;
+        }
+
+        .county-card .county-speed {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: #0018ff;
+            margin-bottom: 0.5rem;
+        }
+
+        .county-card p {
+            font-size: 0.92rem;
+            line-height: 1.55;
+            margin-bottom: 0;
+            color: #6b7280;
+        }
+
+        /* Process steps */
+        .process-steps { counter-reset: step; margin: 2rem 0; }
+
+        .process-step {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1.5rem 1.5rem 1.5rem 4.5rem;
+            margin-bottom: 1.25rem;
+            position: relative;
+        }
+
+        .process-step::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: 1.5rem;
+            top: 1.5rem;
+            width: 2rem;
+            height: 2rem;
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.05rem;
+        }
+
+        .process-step h4 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+        }
+
+        .process-step p {
+            font-size: 1rem;
+            margin-bottom: 0;
+        }
+
+        /* FAQ */
+        .faq-item {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .faq-item summary {
+            padding: 1.25rem 1.5rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #181E57;
+            cursor: pointer;
+            list-style: none;
+            position: relative;
+            padding-right: 3rem;
+        }
+
+        .faq-item summary::-webkit-details-marker { display: none; }
+
+        .faq-item summary::after {
+            content: '+';
+            position: absolute;
+            right: 1.25rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            color: #0018ff;
+            font-weight: 400;
+            line-height: 1;
+        }
+
+        .faq-item[open] summary::after { content: '−'; }
+
+        .faq-item .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            color: #4a5568;
+            line-height: 1.7;
+        }
+
+        /* Content CTA */
+        .content-cta {
+            background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 50%, #8b5cf6 100%);
+            background-size: 200% 200%;
+            border-radius: 20px;
+            padding: 3rem 2.5rem;
+            margin: 3rem 0;
+            text-align: center;
+            color: white;
+        }
+
+        .content-cta h3 {
+            font-size: 1.85rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .content-cta p {
+            font-size: 1.1rem;
+            margin-bottom: 1.75rem;
+            opacity: 0.95;
+            color: white;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: #0018ff;
+            padding: 1rem 2.25rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
+            font-size: 1.05rem;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+        }
+
+        .cta-button i { margin-left: 0.5rem; }
+
+        /* Internal links section */
+        .related-links {
+            background: #f9fafb;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .related-links h3 {
+            margin-top: 0;
+            color: #181E57;
+        }
+
+        .related-links ul {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+        }
+
+        .related-links ul li { margin: 0; }
+
+        .related-links a {
+            color: #0018ff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .related-links a:hover { text-decoration: underline; }
+
+        /* Footer */
+        .main-footer {
+            background: #1f2937;
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .footer-column ul { list-style: none; padding: 0; }
+        .footer-column li { margin-bottom: 0.5rem; font-size: 0.92rem; }
+        .footer-column a {
+            color: rgba(255, 255, 255, 0.75);
+            text-decoration: none;
+        }
+        .footer-column a:hover { color: white; }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .sidebar { position: static; }
+            .county-cards { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 640px) {
+            .article-title { font-size: 2rem; }
+            .article-subtitle { font-size: 1.05rem; }
+            .main-content h2 { font-size: 1.65rem; }
+            .process-step { padding-left: 3.5rem; }
+            .content-cta { padding: 2rem 1.5rem; }
+            .content-cta h3 { font-size: 1.4rem; }
+            .related-links ul { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: 1fr; }
+            .wind-table th, .wind-table td { padding: 0.7rem 0.85rem; font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="header-container">
+            <a href="/index.html">
+                <img src="/images/windloadcalc-logo.svg" alt="WindLoadCalc" class="logo-image">
+            </a>
+            <a href="/wind-load-calculator-shop.html" class="header-cta">Start Free Trial</a>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="article-header">
+        <div class="container">
+            <div class="article-category">Broward County Wind Load Calculator</div>
+            <h1 class="article-title">Broward Wind Load Calculator</h1>
+            <p class="article-subtitle">County-wide <strong>170 mph HVHZ</strong> design pressures per <strong>ASCE 7-22</strong> and the <strong>Florida Building Code 8th Edition (2023)</strong>. Permit-ready output that matches Broward County Building Code Services Division submittal expectations.</p>
+
+            <form class="zip-form" id="zip-form" onsubmit="return launchCalc(event)">
+                <input type="text" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" class="zip-input" id="zip-input" placeholder="Enter Broward ZIP (e.g. 33301)" aria-label="Broward County ZIP code">
+                <button type="submit" class="zip-submit">Get Broward Wind Pressures &rarr;</button>
+            </form>
+            <p class="zip-note">Free 7-day trial. No credit card required.</p>
+        </div>
+    </section>
+
+    <!-- Main content -->
+    <div class="content-wrapper">
+        <main class="main-content">
+            <p>Broward County is a single uniform wind load jurisdiction. From the high-rise oceanfront condominiums at Galt Ocean Mile down to the inland subdivisions of Pembroke Pines and the gated communities of Weston, every parcel inside the county line falls under the same High Velocity Hurricane Zone (HVHZ) rules and the same 170 mph design wind speed for Risk Category II construction. There is no "inland Broward" exemption — the HVHZ boundary follows the county boundary all the way to the Everglades.</p>
+
+            <p>That uniformity is helpful for designers: once you know the building is in Broward, you know the wind speed, the product approval pathway (NOA + TAS testing), and which authority administers the permit (Broward County Building Code Services Division, often delegated to one of the 31 incorporated municipalities). This page is the Broward-specific launch point for WindLoadCalc — enter any Broward ZIP and the calculator opens with 170 mph, HVHZ flag set, and county amendments accounted for in the output.</p>
+
+            <div class="info-box">
+                <h4><i class="fas fa-info-circle"></i> Why Broward is its own page</h4>
+                <p>Broward shares HVHZ status with Miami-Dade, but they are not the same jurisdiction. Different design wind speed (170 vs 175), different administering authority, different amendments, different submittal forms. A calculator output that says "Florida HVHZ" without distinguishing Broward from Miami-Dade can fail a Fort Lauderdale plan review even when the underlying physics is correct. This page (and the calculator behind it) treat Broward as Broward.</p>
+            </div>
+
+            <h2 id="wind-speeds">Broward County Wind Speed Quick Reference</h2>
+
+            <p>The table below lists representative design wind speeds for major Broward cities and ZIP codes, Risk Category II, under ASCE 7-22 and the Florida Building Code 8th Edition (2023). Because the entire county sits inside HVHZ at the same 170 mph floor, the design wind speed does not vary by ZIP — what changes between cities is exposure category (coastal Exposure D vs suburban Exposure C), local amendments handled at the municipal level, and which Building Code Services satellite office (or municipal building department) issues the permit.</p>
+
+            <div class="wind-table-wrap">
+                <table class="wind-table">
+                    <thead>
+                        <tr>
+                            <th>City / ZIP</th>
+                            <th>Risk Cat II Wind Speed</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Fort Lauderdale (33301) <span class="hvhz-badge">HVHZ</span></td>
+                            <td class="speed-cell">170 mph</td>
+                            <td>Atlantic beachfront — Exposure D within ~1 mi of coast</td>
+                        </tr>
+                        <tr>
+                            <td>Hollywood (33020) <span class="hvhz-badge">HVHZ</span></td>
+                            <td class="speed-cell">170 mph</td>
+                            <td>Beach district; mixed coastal/inland exposure</td>
+                        </tr>
+                        <tr>
+                            <td>Pompano Beach (33060) <span class="hvhz-badge">HVHZ</span></td>
+                            <td class="speed-cell">170 mph</td>
+                            <td>Atlantic coast; coastal high-rise corridor</td>
+                        </tr>
+                        <tr>
+                            <td>Deerfield Beach (33442) <span class="hvhz-badge">HVHZ</span></td>
+                            <td class="speed-cell">170 mph</td>
+                            <td>Northern Broward Atlantic coast</td>
+                        </tr>
+                        <tr>
+                            <td>Coral Springs (33071) <span class="hvhz-badge">HVHZ</span></td>
+                            <td class="speed-cell">170 mph</td>
+                            <td>NW Broward suburb; Exposure C typical</td>
+                        </tr>
+                        <tr>
+                            <td>Pembroke Pines <span class="hvhz-badge">HVHZ</span></td>
+                            <td class="speed-cell">170 mph</td>
+                            <td>SW Broward; inland but HVHZ-rules apply</td>
+                        </tr>
+                        <tr>
+                            <td>Plantation <span class="hvhz-badge">HVHZ</span></td>
+                            <td class="speed-cell">170 mph</td>
+                            <td>Central Broward suburb; municipal permitting</td>
+                        </tr>
+                        <tr>
+                            <td>Davie <span class="hvhz-badge">HVHZ</span></td>
+                            <td class="speed-cell">170 mph</td>
+                            <td>Central-west Broward; mixed residential / equestrian</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="warning-box info-box">
+                <h4><i class="fas fa-exclamation-triangle"></i> Wind speed is uniform; exposure category is not</h4>
+                <p>Every ZIP in Broward returns 170 mph for Risk Category II. What actually moves your design pressures up or down between two Broward addresses is exposure category: a beachfront condo on A1A is Exposure D, an inland Coral Springs single-family in a tree-shielded subdivision can be Exposure B, and a typical suburban site between is Exposure C. Always confirm exposure based on actual upwind terrain in every direction within 1500 ft, not assumed by city name. Risk Category III and IV buildings (assembly, schools, hospitals) carry higher derived wind speeds than 170 mph.</p>
+            </div>
+
+            <h2 id="hvhz">Broward Inside the HVHZ: What Actually Changes</h2>
+
+            <p>Broward and Miami-Dade are the only two counties in Florida designated as the High Velocity Hurricane Zone. The HVHZ provisions are baked into the Florida Building Code itself (Sections 1626 and related chapters) and have been since the post-Hurricane Andrew reforms of the mid-1990s. Inside Broward, four things work differently than in the rest of Florida:</p>
+
+            <ul>
+                <li><strong>Product approval pathway.</strong> Every window, sliding glass door, entry door, garage door, roof tile, shutter, and impact-rated assembly installed in Broward must carry an FL# whose underlying approval is HVHZ-compliant — almost always a Miami-Dade Notice of Acceptance (NOA). Broward accepts the Miami-Dade NOA as the canonical approval document.</li>
+                <li><strong>Test protocols.</strong> Products must pass TAS 201 (Large Missile Impact — typically a 9 lb 2x4 fired at 50 ft/sec), TAS 202 (Uniform Static Air Pressure to test at +1.5 design pressure), and TAS 203 (Cyclic Wind Pressure — 9,000 cycles at progressive pressure levels). These three tests together define an "HVHZ-rated" product.</li>
+                <li><strong>Plan submittal expectations.</strong> Broward plan reviewers expect to see each opening on a wind load report cross-referenced to a specific FL# / NOA whose tested design pressure equals or exceeds the calculator's output for that opening's zone. A wind load report that lists pressures without product approval matching is incomplete.</li>
+                <li><strong>Inspection sequencing.</strong> Broward inspectors verify NOA installation instructions on site — anchor type, anchor spacing, substrate, sealant pattern — to the letter of the NOA. Installing a compliant product incorrectly is a fail.</li>
+            </ul>
+
+            <p>Outside the HVHZ (the other 65 Florida counties), a product can be Florida-approved without going through the TAS 201/202/203 gauntlet. Inside Broward, it cannot. This is why HVHZ-rated impact windows are roughly two to three times the cost of comparable non-HVHZ impact windows: the testing alone costs the manufacturer a substantial amount per product line, and recertification is required when components change.</p>
+
+            <h2 id="fbc-8">Florida Building Code 8th Edition (2023) in Broward</h2>
+
+            <p>The Florida Building Code 8th Edition (2023) took effect statewide on <strong>December 31, 2024</strong>, replacing the 7th Edition (2020). The 8th Edition references ASCE 7-22 as the wind load standard. For Broward specifically, the relevant interpretive guidance is published as Florida Building Information (FI) bulletins; the current Broward-authority document for 8th Edition application is <strong>FI-24</strong>, which addresses transition rules, HVHZ amendment clarifications, and product approval matching under the new edition.</p>
+
+            <p>What changed between 7th Edition / ASCE 7-16 and 8th Edition / ASCE 7-22 that matters for Broward work:</p>
+
+            <ul>
+                <li><strong>Wind speed maps updated.</strong> ASCE 7-22 refreshed the underlying hurricane climatology and adjusted some return-period analyses. Broward's 170 mph county floor was unchanged in the adoption process — the floor sits above the baseline either way.</li>
+                <li><strong>Four enclosure classifications instead of three.</strong> ASCE 7-22 introduced "Partially Open" as a fourth enclosure category alongside Enclosed, Partially Enclosed, and Open. This matters in Broward for screen enclosures, lanais, and partially screened pool cages, which previously got squeezed into the wrong bucket.</li>
+                <li><strong>Edge strip "a" minimum at 4 feet.</strong> Florida (per FBC R301.2(7)) requires a 4-foot minimum edge strip dimension for residential C&C zones, where ASCE 7-22 elsewhere allows 3 feet. This applies in Broward.</li>
+                <li><strong>Reorganized Components and Cladding chapter.</strong> ASCE 7-22 Chapter 30 restructured C&C pressure procedures across six roof geometries. The calculator handles all six and applies the correct procedure based on roof shape, slope, and mean roof height.</li>
+            </ul>
+
+            <p>WindLoadCalc is FBC 8th Edition / ASCE 7-22 throughout. If you are pulling a Broward permit in 2026, the 8th Edition is what plan reviewers expect to see referenced on the wind load report. If a Broward project was designed under the 7th Edition and you are now applying for a permit, FI-24 outlines when redesign to the 8th Edition is required versus when the prior edition submittal can stand.</p>
+
+            <h2 id="county-overrides">Broward in the Florida HVHZ Landscape</h2>
+
+            <p>Broward is the second of Florida's two HVHZ counties, sitting directly north of Miami-Dade and south of Palm Beach. Together, the three Atlantic coast counties define the densest hurricane-design corridor in the United States — but each has its own design wind speed and its own administrative regime. The grid below shows how Broward fits between its neighbors:</p>
+
+            <div class="county-cards">
+                <a href="/miami-dade-wind-load-calculator" class="county-card">
+                    <h4>Miami-Dade County <span class="hvhz-badge">HVHZ</span></h4>
+                    <div class="county-speed">175 mph</div>
+                    <p>Directly south of Broward. Same HVHZ rules but 5 mph higher design floor. Plan review centralized under Miami-Dade RER; NOA originates here and is accepted statewide for HVHZ work.</p>
+                </a>
+                <a href="/broward-wind-load-calculator" class="county-card">
+                    <h4>Broward County <span class="hvhz-badge">HVHZ</span></h4>
+                    <div class="county-speed">170 mph</div>
+                    <p>This page. Entire county at 170 mph. Plan review distributed across 31 municipalities, coordinated by Broward County Building Code Services Division. NOA + TAS 201/202/203 required for all openings.</p>
+                </a>
+                <a href="/palm-beach-wind-load-calculator" class="county-card">
+                    <h4>Palm Beach County</h4>
+                    <div class="county-speed">165–170 mph</div>
+                    <p>Directly north of Broward. NOT HVHZ — uses Florida statewide Product Approval (FL#) rather than HVHZ-specific NOA. Coastal ZIPs at top of range, inland slightly lower.</p>
+                </a>
+                <a href="/collier-county-wind-load-calculator" class="county-card">
+                    <h4>Collier County</h4>
+                    <div class="county-speed">170 mph</div>
+                    <p>Gulf coast (Naples, Marco Island). Same 170 mph as Broward but NOT HVHZ — Florida statewide approval applies. Often used as the SW Florida comparable when sourcing products.</p>
+                </a>
+            </div>
+
+            <p>Practically speaking, the cleanest way to source impact-rated products for a Broward project is to specify HVHZ-rated assemblies — those are accepted everywhere in Florida, including Broward and Miami-Dade. The reverse is not true: a non-HVHZ Florida Product Approval will not cover a Broward opening even at the same wind speed, because the missing piece is the test protocol, not the pressure rating.</p>
+
+            <div class="info-box">
+                <h4><i class="fas fa-shield-alt"></i> Broward County Building Code Services Division</h4>
+                <p>The Building Code Services Division at the county level publishes Broward-specific amendments, FI bulletins, and inspector field directives that supplement the statewide Florida Building Code. Most actual plan review and permitting in Broward happens at the municipal level — each of the 31 incorporated cities operates its own building department under delegated authority — but the county is the umbrella authority and the appeal venue. Always confirm submittal forms with the specific municipality where the project sits; Fort Lauderdale's package differs from Hollywood's differs from unincorporated Broward.</p>
+            </div>
+
+            <div class="content-cta">
+                <h3>Get Pressures for Your Broward Project</h3>
+                <p>Enter your Broward ZIP, pick your risk category, and get a permit-ready C&amp;C report in under 15 minutes. NOA-matchable output by zone and opening.</p>
+                <a href="/wind-load-calculator-shop.html" class="cta-button">Start Free Trial <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <h2 id="how-to">How to Calculate Your Broward Wind Load</h2>
+
+            <div class="process-steps">
+                <div class="process-step">
+                    <h4>Enter your Broward ZIP code</h4>
+                    <p>Every Broward ZIP — 33301 Fort Lauderdale, 33020 Hollywood, 33442 Deerfield Beach, 33060 Pompano Beach, 33071 Coral Springs, and the rest — auto-populates 170 mph and sets the HVHZ flag. The county and authority fields fill in automatically so the report header carries the correct Broward attribution.</p>
+                </div>
+                <div class="process-step">
+                    <h4>Pick your Risk Category</h4>
+                    <p>Risk Category II covers most occupancies: single-family residences, townhouses, multifamily, retail, light commercial. Risk Category III applies to assembly buildings (above the occupancy threshold), schools, and jails. Risk Category IV covers essential facilities — hospitals, fire stations, emergency operations centers. The Broward 170 mph baseline scales up for III and IV.</p>
+                </div>
+                <div class="process-step">
+                    <h4>Set Exposure Category and building geometry</h4>
+                    <p>Exposure D applies to beachfront sites within roughly one mile of the open Atlantic — A1A frontage in Fort Lauderdale, Hollywood, Pompano, Deerfield. Exposure C is the default for most suburban Broward. Exposure B applies only when surrounded by densely packed buildings or mature tree canopy on all sides. Then enter length, width, mean roof height, roof slope (X over 12), and roof shape.</p>
+                </div>
+                <div class="process-step">
+                    <h4>Review the calculated pressures</h4>
+                    <p>The calculator returns MWFRS pressures for the structural system and Components &amp; Cladding pressures for each opening, broken down by zone: Zone 4 (wall field), Zone 5 (wall corner), and the corresponding roof zones for your roof shape (gable, hip, monoslope, multispan, sawtooth, dome). Zone 5 corners typically govern product selection.</p>
+                </div>
+                <div class="process-step">
+                    <h4>Match each opening to an HVHZ FL# and download the report</h4>
+                    <p>Cross-reference each calculated pressure against an HVHZ-compliant FL# (the underlying NOA must show TAS 201/202/203 results at or above your zone pressure). Export as PDF, Excel, or the architectural schedule .xlsx format. For Broward residential and small commercial projects up to three stories, request an in-house PE sign-and-seal; for mid- and high-rise Broward work, you will need an engineer of record outside this service.</p>
+                </div>
+            </div>
+
+            <h2 id="faq">Broward Wind Load FAQ</h2>
+
+            <details class="faq-item">
+                <summary>Is Broward County in the HVHZ?</summary>
+                <div class="faq-answer">Yes. Broward is one of only two High Velocity Hurricane Zone counties in Florida — Miami-Dade is the other. The entire county sits inside the HVHZ boundary, from the Atlantic coast at Hollywood and Fort Lauderdale all the way west to the Everglades line. That means every Broward jurisdiction — whether you are permitting in Pompano Beach, Coral Springs, Plantation, Davie, or unincorporated Broward — operates under HVHZ rules. There is no inland exemption inside the county. The Broward County Building Code Services Division administers the HVHZ provisions of the Florida Building Code with Broward-specific amendments layered on top.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>What is the difference between Broward and Miami-Dade wind load requirements?</summary>
+                <div class="faq-answer">Both counties are HVHZ and both require NOA / TAS-tested products, but three differences matter on a permit submittal. First, the design wind speed: Broward uses 170 mph for Risk Category II, while Miami-Dade uses 175 mph. Second, the amendments: each county publishes its own technical bulletins (Broward through the Building Code Services Division, Miami-Dade through RER), and the two sets are not identical word-for-word — fire-rating cross-references, inspection sequencing, and submittal forms differ. Third, administration: Broward delegates a great deal of plan review authority to its 31 municipalities, while Miami-Dade keeps unincorporated review centralized. The same Miami-Dade NOA is accepted in Broward, but the calculation pressure target you have to meet is lower in Broward by virtue of the 170 vs 175 mph delta.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>Do I need NOA for windows in Fort Lauderdale?</summary>
+                <div class="faq-answer">Yes. Fort Lauderdale is inside the Broward HVHZ, so any window, sliding glass door, entry door, garage door, or shutter installed in the city requires a Notice of Acceptance that explicitly covers HVHZ use. The NOA is most commonly issued by Miami-Dade County's Product Control Section, but Broward accepts it for use anywhere in the county. On the wind load report, each opening must be matched to an FL# (Florida Product Approval number) whose underlying NOA shows TAS 201 (Large Missile Impact), TAS 202 (Uniform Static Air Pressure), and TAS 203 (Cyclic Wind Pressure) test results meeting or exceeding the design pressure the calculator returns for that opening's zone.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>Why is Broward 170 mph when Miami-Dade is 175 mph?</summary>
+                <div class="faq-answer">The 5 mph difference comes from how each county calibrated its post-Hurricane Andrew adoption. Miami-Dade, which took the most concentrated damage from Andrew in 1992, set a 175 mph design floor based on its own forensic engineering review. Broward sits one county north, took heavy but not catastrophic Andrew damage, and adopted 170 mph after a parallel but slightly less aggressive analysis. ASCE 7-22 baseline maps actually show similar values for both counties, but each county's adopted floor sits a few mph above the baseline to add margin. The numbers are not arbitrary — they correspond to a specific return-period and importance-factor calibration each county engineering office defended in adoption hearings.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>What is the Broward FI-24 bulletin?</summary>
+                <div class="faq-answer">Florida Building Information (FI) bulletins are technical clarifications issued by Florida code authorities to interpret specific provisions of the Florida Building Code. The FI-24 bulletin addresses how the 8th Edition (2023) is to be applied in Broward, including transition rules from the 7th Edition, clarifications on HVHZ amendments, and guidance on product approval matching. If you are pulling a permit in Broward in 2026 and your project was designed under earlier guidance, FI-24 is the current Broward-authority document plan reviewers will reference. Cite it on submittals where your design predates the 8th Edition effective date but the permit application is being filed after it.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>Do I need a PE stamp for Broward permits?</summary>
+                <div class="faq-answer">It depends on scope and stories. Broward generally requires a Florida-licensed PE signature and seal on wind load calculations for new construction, additions, and most commercial work. Residential window and door replacement permits can often be filed with a manufacturer's installation instructions plus a wind load report referencing FL# approvals, without a separate PE seal, provided the design pressures are met. WindLoadCalc's in-house PE sign-and-seal service is available for Florida projects up to three stories — that covers most single-family, townhouse, and small commercial work in Broward, but it does not cover the high-rise condos and hotels along the Fort Lauderdale beach corridor. For mid- and high-rise Broward projects, you will need a structural engineer of record.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>Are storm panels acceptable in Broward?</summary>
+                <div class="faq-answer">Yes, storm panels are accepted in Broward as long as they carry an NOA that covers HVHZ use and the FL# is matched to each opening on the wind load report. The most common HVHZ-rated storm panel systems are aluminum corrugated panels, clear polycarbonate panels, and accordion shutters. Each system has tested design pressures that must equal or exceed the C&amp;C pressure the calculator returns for the opening's zone (Zone 4 wall field, Zone 5 wall corner — corners typically govern). Broward plan reviewers will reject a submittal where the listed FL# storm panel rating is below the calculated design pressure, so the opening-by-opening match must be explicit on the report.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>What is the cost difference between NOA-rated impact glass and storm panels in Broward?</summary>
+                <div class="faq-answer">For a typical Broward single-family home, HVHZ-rated impact glass runs roughly $60 to $110 per square foot installed depending on product line, frame material, and DP rating. NOA-rated storm panels for the same openings come in much lower at around $15 to $30 per square foot, but they require manual deployment before each storm event. Accordion shutters fall in between at $25 to $45 per square foot and deploy quickly without removing panels from storage. The break-even depends on how often deployment is needed, insurance discount eligibility (impact glass usually wins the larger discount), and resale considerations. The wind load report itself is identical for either route — design pressures are governed by the building, not the protection method.</div>
+            </details>
+
+            <h2 id="related">More Wind Load Resources</h2>
+
+            <div class="related-links">
+                <h3>Related calculators and guides</h3>
+                <ul>
+                    <li><a href="/florida-wind-load-calculator">Florida statewide wind load calculator</a></li>
+                    <li><a href="/miami-dade-wind-load-calculator">Miami-Dade County (175 mph HVHZ)</a></li>
+                    <li><a href="/palm-beach-wind-load-calculator">Palm Beach County (165–170 mph)</a></li>
+                    <li><a href="/collier-county-wind-load-calculator">Collier County / Naples (170 mph)</a></li>
+                    <li><a href="/asce-hazard-tool-alternative">ASCE Hazard Tool alternative</a></li>
+                    <li><a href="/shop/windows-doors-shutters.html">Windows, doors &amp; shutters C&amp;C calculator</a></li>
+                    <li><a href="/wind-load-calculator-shop.html">All calculators &amp; pricing</a></li>
+                    <li><a href="/Landing%20Pages/components-and-cladding-wind-loads.html">Components &amp; cladding fundamentals</a></li>
+                </ul>
+            </div>
+
+            <div class="content-cta">
+                <h3>Ready to Run Your Broward Numbers?</h3>
+                <p>Get instant 170 mph HVHZ design pressures for any Broward ZIP. NOA-matchable output, FBC 8th Edition aligned. Free 7-day trial, no credit card.</p>
+                <a href="/wind-load-calculator-shop.html" class="cta-button">View Plans &amp; Start Trial <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </main>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-box">
+                <h3>On This Page</h3>
+                <ul>
+                    <li><a href="#wind-speeds">Broward Wind Speeds</a></li>
+                    <li><a href="#hvhz">Broward in the HVHZ</a></li>
+                    <li><a href="#fbc-8">FBC 8th Edition</a></li>
+                    <li><a href="#county-overrides">Florida HVHZ Landscape</a></li>
+                    <li><a href="#how-to">How to Calculate</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#related">Related Resources</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-cta">
+                <h3>Try It Free</h3>
+                <p>Broward HVHZ 170 mph wind loads in 15 minutes. ASCE 7-22 + FBC 8th Edition. 7-day trial, no credit card.</p>
+                <a href="/wind-load-calculator-shop.html" class="sidebar-cta-button">Start Free Trial</a>
+            </div>
+
+            <div class="sidebar-box">
+                <h3>Related County Calculators</h3>
+                <ul>
+                    <li><a href="/florida-wind-load-calculator">Florida (statewide)</a></li>
+                    <li><a href="/miami-dade-wind-load-calculator">Miami-Dade (175 mph, HVHZ)</a></li>
+                    <li><a href="/palm-beach-wind-load-calculator">Palm Beach (165–170 mph)</a></li>
+                    <li><a href="/collier-county-wind-load-calculator">Collier County (170 mph)</a></li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="mailto:info@windloadcalc.com">info@windloadcalc.com</a></li>
+                    <li><a href="mailto:support@windloadcalc.com">support@windloadcalc.com</a></li>
+                    <li><a href="tel:8332723946">(833) 272-3946</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Calculators</h3>
+                <ul>
+                    <li><a href="/shop/windows-doors-shutters.html">Windows, Doors &amp; Shutters</a></li>
+                    <li><a href="/wind-load-calculator-shop.html">All Calculators &amp; Pricing</a></li>
+                    <li><a href="/wind-load-calculator-comparison.html">Calculator Comparison</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="/Landing%20Pages/free-wind-load-calculator.html">Free Demo</a></li>
+                    <li><a href="/Landing%20Pages/asce-7-wind-load-calculator.html">ASCE 7-22 Guide</a></li>
+                    <li><a href="/Landing%20Pages/components-and-cladding-wind-loads.html">C&amp;C Wind Loads</a></li>
+                    <li><a href="/faq.html">Wind Load FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="/why-us.html">About Us</a></li>
+                    <li><a href="/contact.html">Contact</a></li>
+                    <li><a href="/privacy-policy.html">Privacy</a></li>
+                    <li><a href="/terms-of-service.html">Terms</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 WindLoadCalc. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // ZIP launch — calc.windloadcalc.com accepts ?zip=NNNNN and auto-derives
+        // city / state / county / wind speed. Broward ZIPs all return 170 mph HVHZ.
+        function launchCalc(e) {
+            e.preventDefault();
+            var zip = (document.getElementById('zip-input').value || '').replace(/[^0-9]/g, '').slice(0, 5);
+            var target = 'https://calc.windloadcalc.com/';
+            if (zip.length === 5) {
+                target = target + '?zip=' + zip;
+            }
+            window.location.href = target;
+            return false;
+        }
+    </script>
+</body>
+</html>

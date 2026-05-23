@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" type="image/svg+xml" href="/images/windloadcalc-favicon.svg">
+
+    <!-- SEO Meta -->
+    <title>Miami-Dade Wind Load Calculator — 175 mph HVHZ + NOA | WindLoadCalc</title>
+    <meta name="description" content="Instant Miami-Dade wind load calculations per ASCE 7-22 and FBC 8th Edition. 175 mph HVHZ, NOA / TAS-rated products, impact protection. Free wind speed lookup.">
+    <meta name="keywords" content="Miami-Dade wind load calculator, HVHZ wind load, NOA Miami-Dade, TAS 201 impact, TAS 202 cyclic, TAS 203 air water, Miami wind speed 175 mph, FBC 8th Edition Miami, ASCE 7-22 Miami-Dade, Hialeah wind load, Coral Gables wind load, Homestead wind load">
+    <link rel="canonical" href="https://windloadcalc.com/miami-dade-wind-load-calculator">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Miami-Dade Wind Load Calculator — 175 mph HVHZ + NOA">
+    <meta property="og:description" content="Instant Miami-Dade wind load calculations per ASCE 7-22 + FBC 8th Edition. 175 mph HVHZ, NOA / TAS-rated products. Free ZIP lookup.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://windloadcalc.com/miami-dade-wind-load-calculator">
+    <meta property="og:image" content="https://windloadcalc.com/images/wind-calculator-og.jpg">
+    <meta property="og:site_name" content="WindLoadCalc">
+
+    <!-- SoftwareApplication Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Miami-Dade Wind Load Calculator",
+        "alternateName": "WindLoadCalc Miami-Dade HVHZ",
+        "applicationCategory": "EngineeringApplication",
+        "applicationSubCategory": "Structural Engineering",
+        "operatingSystem": "Web Browser",
+        "description": "Professional wind load calculator for Miami-Dade County projects in the High Velocity Hurricane Zone (HVHZ). Implements ASCE 7-22, Florida Building Code 8th Edition (2023), and Miami-Dade HVHZ amendments at the 175 mph Risk Category II design wind speed. Outputs C&C and MWFRS pressures formatted for Miami-Dade Building Code Compliance Office plan review, with TAS 201 / 202 / 203 product approval and NOA cross-referencing.",
+        "url": "https://windloadcalc.com/miami-dade-wind-load-calculator",
+        "featureList": [
+            "Miami-Dade HVHZ 175 mph Risk Category II design wind speed",
+            "ASCE 7-22 wind load calculations",
+            "Florida Building Code 8th Edition (2023) compliance",
+            "Miami-Dade HVHZ amendments support",
+            "NOA (Notice of Acceptance) product cross-referencing",
+            "TAS 201 Large Missile Impact compliance check",
+            "TAS 202 Uniform Static Air Pressure ratings",
+            "TAS 203 Cyclic Wind Pressure ratings",
+            "Risk Category I, II, III, IV wind speeds",
+            "Exposure Category B, C, D",
+            "Components and Cladding (C&C) pressures",
+            "Main Wind Force Resisting System (MWFRS) pressures",
+            "Permit-ready PDF, Excel, and Architectural Schedule reports"
+        ],
+        "offers": {
+            "@type": "Offer",
+            "availability": "https://schema.org/InStock",
+            "url": "https://windloadcalc.com/wind-load-calculator-shop.html"
+        },
+        "provider": {
+            "@type": "Organization",
+            "name": "WindLoad Solutions",
+            "url": "https://windloadcalc.com"
+        }
+    }
+    </script>
+
+    <!-- BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [{
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://windloadcalc.com/"
+        },{
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Florida Wind Load Calculator",
+            "item": "https://windloadcalc.com/florida-wind-load-calculator"
+        },{
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Miami-Dade Wind Load Calculator",
+            "item": "https://windloadcalc.com/miami-dade-wind-load-calculator"
+        }]
+    }
+    </script>
+
+    <!-- FAQPage (mirrors visible FAQ 1:1) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [{
+            "@type": "Question",
+            "name": "What is a Miami-Dade NOA and when do I need one?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "A Notice of Acceptance (NOA) is a product approval document issued by the Miami-Dade County Building Code Compliance Office. It certifies that a specific window, door, shutter, roof tile, roofing underlayment, or other building envelope assembly has passed the Miami-Dade HVHZ test protocols and is approved for use inside the High Velocity Hurricane Zone. If your project is anywhere in Miami-Dade County, every component installed in the building envelope must be covered by a current NOA, identified by an NOA number printed on the product label and listed in the Miami-Dade product approval database. The plan reviewer will check each opening on your wind load report against an NOA before issuing a permit."
+            }
+        },{
+            "@type": "Question",
+            "name": "Do I need TAS 201 impact testing for every product in Miami-Dade?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, for any product in the building envelope that is not behind permanent impact protection. TAS 201 is the Large Missile Impact test in which a 2x4 lumber projectile is fired at the product at 50 ft/s (or 80 ft/s for higher-rated assemblies). It is one of three mandatory HVHZ tests: TAS 201 (Large Missile Impact), TAS 202 (Uniform Static Air Pressure), and TAS 203 (Cyclic Wind Pressure). The only common exemptions are openings above 30 feet from grade that meet the small-missile criteria, and openings fully protected by an NOA-approved hurricane shutter. The calculator flags every opening that requires Large Missile Impact testing in the output report."
+            }
+        },{
+            "@type": "Question",
+            "name": "What is the difference between Miami-Dade requirements and broader Florida wind requirements?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Three things separate Miami-Dade from the rest of Florida. First, the design wind speed: Miami-Dade uses 175 mph for Risk Category II, the highest urban override in the state. Second, the product approval pathway: Miami-Dade requires a county-issued NOA, where most of Florida accepts the statewide Florida Product Approval (FL#) system. Third, the test protocols: Miami-Dade enforces TAS 201/202/203, which are stricter than the comparable AAMA and ASTM standards used elsewhere in Florida. A product approved for use in Naples or Sarasota is not automatically approved for use in Miami-Dade. Many manufacturers carry both ratings, but you must verify the NOA explicitly covers HVHZ installation."
+            }
+        },{
+            "@type": "Question",
+            "name": "Why is Miami-Dade 175 mph when the broader Florida baseline is around 170 mph?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Miami-Dade is denser and more exposed than any other urban county in Florida, and the failure mode of densely-packed structures in a major hurricane is fundamentally different from rural or low-density failure modes. After Hurricane Andrew (1992) leveled large sections of Homestead and south Miami-Dade, the county's post-storm forensic engineering investigations concluded that the design wind speed in use at the time was insufficient for the local exposure. The 175 mph value was set as a local override above whatever the underlying ASCE map produces, and it is now embedded in Miami-Dade HVHZ amendments to the Florida Building Code. The WindLoadCalc velocity finder applies this override automatically for every Miami-Dade ZIP code."
+            }
+        },{
+            "@type": "Question",
+            "name": "Are there exemptions for low-rise residential or small remodels in Miami-Dade?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No real exemption from the 175 mph design wind speed or the HVHZ product approval requirement, regardless of building size. A 1,200 sq ft single-family home remodel in Kendall is governed by the same wind speed and NOA requirements as a 40-story Brickell condo. There are some narrow scope exemptions — like-for-like cosmetic replacement of certain non-envelope components — but any window, door, or shutter replacement triggers HVHZ product approval review. The most common surprise for out-of-state contractors is that an impact window approved for use in Texas or the Carolinas is not automatically permittable in Miami-Dade; the product needs a Miami-Dade NOA, not just a generic ASTM E1996 rating."
+            }
+        },{
+            "@type": "Question",
+            "name": "Can I still use ASCE 7-16 for a Miami-Dade project instead of ASCE 7-22?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Only if the permit application was submitted under the previous code cycle. The Florida Building Code 8th Edition (2023) took effect December 31, 2024 and references ASCE 7-22. For permits submitted on or after that date, Miami-Dade plan reviewers will expect calculations under ASCE 7-22. The practical differences for Miami-Dade between ASCE 7-16 and 7-22 are relatively small (the 175 mph local override dominates the calculation either way), but the procedural changes — the new Partially Open enclosure classification, the reorganized Chapter 30 C&C procedures, and the 4 ft minimum edge strip 'a' dimension under FBC R301.2(7) — all need to be reflected in the submittal. WindLoadCalc runs under ASCE 7-22 by default."
+            }
+        },{
+            "@type": "Question",
+            "name": "Do I need a PE stamp on a Miami-Dade wind load report?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Miami-Dade plan review routinely requires a Florida-licensed PE seal on wind load calculations for any project beyond a straightforward like-for-like window or door replacement. For a residential remodel up to 3 stories, our in-house PE can seal the WindLoadCalc report directly. For Miami-Dade high-rise work — condos, mid-rise mixed-use, hotels — most projects are 4 or more stories, which falls outside the scope of our PE's licensure (our service is capped at 3 stories). In that case the calculator output is still useful as a working document, but the structural engineer of record on the project will need to seal the wind load analysis themselves. We can deliver the raw inputs, intermediate calculations, and pressure tables in a format their PE can review and adopt."
+            }
+        },{
+            "@type": "Question",
+            "name": "What's the difference between Miami-Dade Large Missile Level D and Level E?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The Miami-Dade missile level system rates impact resistance by the size and velocity of the test projectile. Level D is the standard Large Missile rating: a 9 lb 2x4 lumber projectile fired at 50 ft/s, used for most openings up to 30 ft above grade. Level E is the higher rating: the same 9 lb projectile fired at 80 ft/s, used for essential facilities, certain Risk Category III/IV projects, and any opening where the design analysis calls for it. Some glazing systems also carry separate Small Missile ratings (Levels A, B, C) for openings above 30 ft. The calculator includes Risk Category in its output so you can match the right impact level when selecting NOA-approved products."
+            }
+        }]
+    }
+    </script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7;
+            color: #2d3748;
+            background: #ffffff;
+        }
+
+        /* Header */
+        .main-header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo-image { height: 80px; width: auto; }
+
+        .header-cta {
+            background: #0018ff;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .header-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 24, 255, 0.3);
+        }
+
+        /* Hero */
+        .article-header {
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            color: white;
+            padding: 4rem 0 3rem;
+            text-align: center;
+        }
+
+        .article-header .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .article-category {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .article-title {
+            font-size: 3rem;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .article-subtitle {
+            font-size: 1.25rem;
+            opacity: 0.95;
+            line-height: 1.6;
+            font-weight: 400;
+            margin-bottom: 2rem;
+        }
+
+        /* Hero ZIP form */
+        .zip-form {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 560px;
+            margin: 0 auto;
+        }
+
+        .zip-input {
+            flex: 1 1 220px;
+            padding: 1rem 1.25rem;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 50px;
+            outline: none;
+            color: #1f2937;
+            min-width: 0;
+        }
+
+        .zip-submit {
+            background: white;
+            color: #0018ff;
+            border: none;
+            padding: 1rem 1.75rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .zip-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .zip-note {
+            font-size: 0.85rem;
+            opacity: 0.85;
+            margin-top: 1rem;
+        }
+
+        /* Main content layout */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .main-content { min-width: 0; }
+
+        .sidebar {
+            position: sticky;
+            top: 100px;
+            align-self: start;
+        }
+
+        .sidebar-box {
+            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+            border: 2px solid #e5e7eb;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-box h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #181E57;
+            margin-bottom: 1.5rem;
+        }
+
+        .sidebar-box ul { list-style: none; }
+        .sidebar-box ul li { margin-bottom: 0.75rem; }
+        .sidebar-box a {
+            color: #4a5568;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: block;
+            padding: 0.5rem 0 0.5rem 1rem;
+            border-left: 3px solid transparent;
+        }
+        .sidebar-box a:hover {
+            color: #0018ff;
+            border-left-color: #0018ff;
+            padding-left: 1.5rem;
+        }
+
+        .sidebar-cta {
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .sidebar-cta h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .sidebar-cta p {
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            opacity: 0.95;
+        }
+
+        .sidebar-cta-button {
+            display: block;
+            background: white;
+            color: #0018ff;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Content typography */
+        .main-content h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #181E57;
+            margin: 3rem 0 1.5rem;
+            line-height: 1.3;
+            border-bottom: 3px solid #0018ff;
+            padding-bottom: 0.75rem;
+        }
+
+        .main-content h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin: 2rem 0 1rem;
+        }
+
+        .main-content p {
+            font-size: 1.08rem;
+            line-height: 1.8;
+            margin-bottom: 1.25rem;
+            color: #4a5568;
+        }
+
+        .main-content ul {
+            margin: 1.25rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .main-content ul li {
+            margin-bottom: 0.75rem;
+            color: #4a5568;
+            line-height: 1.7;
+        }
+
+        .main-content ul li strong { color: #0018ff; font-weight: 700; }
+
+        /* Wind speed table */
+        .wind-table-wrap { overflow-x: auto; margin: 2rem 0; }
+
+        .wind-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+        }
+
+        .wind-table th {
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            color: white;
+            padding: 1rem 1.25rem;
+            text-align: left;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .wind-table td {
+            padding: 0.9rem 1.25rem;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 0.98rem;
+        }
+
+        .wind-table tr:nth-child(even) td { background: #f9fafb; }
+        .wind-table tr:last-child td { border-bottom: none; }
+
+        .speed-cell { font-weight: 700; color: #0018ff; white-space: nowrap; }
+        .hvhz-badge {
+            display: inline-block;
+            background: #fef3c7;
+            color: #b45309;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.15rem 0.5rem;
+            border-radius: 10px;
+            margin-left: 0.4rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Info boxes */
+        .info-box {
+            background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%);
+            border-left: 4px solid #0018ff;
+            border-radius: 10px;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+        }
+
+        .info-box h4 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #0018ff;
+            margin-bottom: 0.75rem;
+        }
+
+        .info-box p { font-size: 1rem; line-height: 1.7; margin-bottom: 0; }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left: 4px solid #f59e0b;
+        }
+
+        .warning-box h4 { color: #b45309; }
+
+        /* County cards */
+        .county-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+            margin: 2rem 0;
+        }
+
+        .county-card {
+            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .county-card:hover {
+            border-color: #0018ff;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 24, 255, 0.1);
+        }
+
+        .county-card h4 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #181E57;
+            margin-bottom: 0.5rem;
+        }
+
+        .county-card .county-speed {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: #0018ff;
+            margin-bottom: 0.5rem;
+        }
+
+        .county-card p {
+            font-size: 0.92rem;
+            line-height: 1.55;
+            margin-bottom: 0;
+            color: #6b7280;
+        }
+
+        /* Process steps */
+        .process-steps { counter-reset: step; margin: 2rem 0; }
+
+        .process-step {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1.5rem 1.5rem 1.5rem 4.5rem;
+            margin-bottom: 1.25rem;
+            position: relative;
+        }
+
+        .process-step::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: 1.5rem;
+            top: 1.5rem;
+            width: 2rem;
+            height: 2rem;
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.05rem;
+        }
+
+        .process-step h4 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+        }
+
+        .process-step p {
+            font-size: 1rem;
+            margin-bottom: 0;
+        }
+
+        /* FAQ */
+        .faq-item {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .faq-item summary {
+            padding: 1.25rem 1.5rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #181E57;
+            cursor: pointer;
+            list-style: none;
+            position: relative;
+            padding-right: 3rem;
+        }
+
+        .faq-item summary::-webkit-details-marker { display: none; }
+
+        .faq-item summary::after {
+            content: '+';
+            position: absolute;
+            right: 1.25rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            color: #0018ff;
+            font-weight: 400;
+            line-height: 1;
+        }
+
+        .faq-item[open] summary::after { content: '−'; }
+
+        .faq-item .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            color: #4a5568;
+            line-height: 1.7;
+        }
+
+        /* Content CTA */
+        .content-cta {
+            background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 50%, #8b5cf6 100%);
+            background-size: 200% 200%;
+            border-radius: 20px;
+            padding: 3rem 2.5rem;
+            margin: 3rem 0;
+            text-align: center;
+            color: white;
+        }
+
+        .content-cta h3 {
+            font-size: 1.85rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .content-cta p {
+            font-size: 1.1rem;
+            margin-bottom: 1.75rem;
+            opacity: 0.95;
+            color: white;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: #0018ff;
+            padding: 1rem 2.25rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
+            font-size: 1.05rem;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+        }
+
+        .cta-button i { margin-left: 0.5rem; }
+
+        /* Internal links section */
+        .related-links {
+            background: #f9fafb;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .related-links h3 {
+            margin-top: 0;
+            color: #181E57;
+        }
+
+        .related-links ul {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+        }
+
+        .related-links ul li { margin: 0; }
+
+        .related-links a {
+            color: #0018ff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .related-links a:hover { text-decoration: underline; }
+
+        /* Footer */
+        .main-footer {
+            background: #1f2937;
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .footer-column ul { list-style: none; padding: 0; }
+        .footer-column li { margin-bottom: 0.5rem; font-size: 0.92rem; }
+        .footer-column a {
+            color: rgba(255, 255, 255, 0.75);
+            text-decoration: none;
+        }
+        .footer-column a:hover { color: white; }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .sidebar { position: static; }
+            .county-cards { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 640px) {
+            .article-title { font-size: 2rem; }
+            .article-subtitle { font-size: 1.05rem; }
+            .main-content h2 { font-size: 1.65rem; }
+            .process-step { padding-left: 3.5rem; }
+            .content-cta { padding: 2rem 1.5rem; }
+            .content-cta h3 { font-size: 1.4rem; }
+            .related-links ul { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: 1fr; }
+            .wind-table th, .wind-table td { padding: 0.7rem 0.85rem; font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="header-container">
+            <a href="/index.html">
+                <img src="/images/windloadcalc-logo.svg" alt="WindLoadCalc" class="logo-image">
+            </a>
+            <a href="/wind-load-calculator-shop.html" class="header-cta">Start Free Trial</a>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="article-header">
+        <div class="container">
+            <div class="article-category">Miami-Dade Wind Load Calculator</div>
+            <h1 class="article-title">Miami-Dade Wind Load Calculator</h1>
+            <p class="article-subtitle">Instant design pressures at the Miami-Dade <strong>175 mph HVHZ</strong> design wind speed, per <strong>ASCE 7-22</strong>, <strong>FBC 8th Edition (2023)</strong>, and Miami-Dade HVHZ amendments. NOA and TAS 201 / 202 / 203 cross-referenced in every report.</p>
+
+            <form class="zip-form" id="zip-form" onsubmit="return launchCalc(event)">
+                <input type="text" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" class="zip-input" id="zip-input" placeholder="Enter Miami-Dade ZIP (e.g. 33101)" aria-label="Miami-Dade ZIP code">
+                <button type="submit" class="zip-submit">Get Miami-Dade Wind Pressures &rarr;</button>
+            </form>
+            <p class="zip-note">Free 7-day trial. No credit card required.</p>
+        </div>
+    </section>
+
+    <!-- Main content -->
+    <div class="content-wrapper">
+        <main class="main-content">
+            <p>Miami-Dade is the strictest building jurisdiction in the United States, and it is strict for a reason. The county sits at the southeast corner of Florida where the warm Atlantic, the Gulf Stream, and an unbroken hurricane corridor converge. The Miami-Dade building code did not develop in a vacuum — it was written and rewritten in the aftermath of Hurricane Andrew (1992), which destroyed roughly 49,000 homes in south Miami-Dade and forced the entire state of Florida to re-examine how it built for wind. Today, every window, every door, every shutter, every roof tile, every roofing underlayment, and every soffit installed inside Miami-Dade County must clear a product approval pathway that does not exist anywhere else in the country.</p>
+
+            <p>This page is the Miami-Dade-specific entry point to WindLoadCalc. Enter any Miami-Dade ZIP code above — from Aventura at the north county line down to Homestead and Florida City near the southern boundary — and the calculator launches preloaded with the <strong>175 mph HVHZ design wind speed</strong>, the correct Risk Category derivation, and the HVHZ flags that drive NOA and TAS protocol references in the output report.</p>
+
+            <div class="info-box">
+                <h4><i class="fas fa-info-circle"></i> Three things that make Miami-Dade different</h4>
+                <p>Any wind load tool used for a Miami-Dade permit submittal has to handle three jurisdiction-specific items correctly: (1) the 175 mph local design wind speed override, applied automatically county-wide; (2) the Miami-Dade NOA pathway for every envelope product, distinct from the broader Florida Product Approval (FL#) database; and (3) the TAS 201 / 202 / 203 test protocols, which are mandatory and stricter than the AAMA and ASTM standards used elsewhere. WindLoadCalc handles all three in a single workflow.</p>
+            </div>
+
+            <h2 id="wind-speeds">Miami-Dade Wind Speed Quick Reference</h2>
+
+            <p>Every ZIP code in Miami-Dade carries the same county-wide 175 mph design wind speed for Risk Category II buildings — the local override applies uniformly across all incorporated cities and unincorporated areas. What changes between locations is exposure (coastal versus inland), the surrounding terrain (open versus suburban versus dense urban), and the building's own geometry. The table below shows representative ZIP codes covering the major Miami-Dade submarkets, all at the same Risk Cat II design wind speed.</p>
+
+            <div class="wind-table-wrap">
+                <table class="wind-table">
+                    <thead>
+                        <tr>
+                            <th>City / Area</th>
+                            <th>Sample ZIP</th>
+                            <th>Risk Cat II Wind Speed</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Downtown Miami / Brickell <span class="hvhz-badge">HVHZ</span></td>
+                            <td>33101</td>
+                            <td class="speed-cell">175 mph</td>
+                            <td>Dense urban; Exposure B typical, Exposure C at waterfront</td>
+                        </tr>
+                        <tr>
+                            <td>Miami Beach <span class="hvhz-badge">HVHZ</span></td>
+                            <td>33139</td>
+                            <td class="speed-cell">175 mph</td>
+                            <td>Direct Atlantic exposure; Exposure D within 1 mi of open water</td>
+                        </tr>
+                        <tr>
+                            <td>Aventura <span class="hvhz-badge">HVHZ</span></td>
+                            <td>33180</td>
+                            <td class="speed-cell">175 mph</td>
+                            <td>North county line; high-rise condo concentration</td>
+                        </tr>
+                        <tr>
+                            <td>Coral Gables <span class="hvhz-badge">HVHZ</span></td>
+                            <td>33134</td>
+                            <td class="speed-cell">175 mph</td>
+                            <td>Historic district; tree canopy supports Exposure B</td>
+                        </tr>
+                        <tr>
+                            <td>Kendall <span class="hvhz-badge">HVHZ</span></td>
+                            <td>33176</td>
+                            <td class="speed-cell">175 mph</td>
+                            <td>Suburban residential; Exposure C common</td>
+                        </tr>
+                        <tr>
+                            <td>Doral <span class="hvhz-badge">HVHZ</span></td>
+                            <td>33178</td>
+                            <td class="speed-cell">175 mph</td>
+                            <td>Light industrial / commercial; Exposure C</td>
+                        </tr>
+                        <tr>
+                            <td>Hialeah <span class="hvhz-badge">HVHZ</span></td>
+                            <td>33010</td>
+                            <td class="speed-cell">175 mph</td>
+                            <td>Mixed residential / industrial; Exposure C</td>
+                        </tr>
+                        <tr>
+                            <td>Homestead <span class="hvhz-badge">HVHZ</span></td>
+                            <td>33030</td>
+                            <td class="speed-cell">175 mph</td>
+                            <td>South county; ground zero for Hurricane Andrew (1992)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="warning-box info-box">
+                <h4><i class="fas fa-exclamation-triangle"></i> Design speed is uniform — pressures are not</h4>
+                <p>The 175 mph value is constant across Miami-Dade, but the design pressures on a specific building will vary significantly based on Exposure Category, mean roof height, building footprint, and Risk Category. A 1-story home in suburban Kendall (Exposure C) and a 30-story condo on Miami Beach (Exposure D) start from the same wind speed but end up with very different C&C and MWFRS values. Always run the calculator for your specific project — never reuse pressures from a different building, even if it is in the same ZIP.</p>
+            </div>
+
+            <h2 id="hvhz">High Velocity Hurricane Zone — Miami-Dade is the Origin</h2>
+
+            <p>The High Velocity Hurricane Zone is not a feature added to the Florida Building Code; it is the foundation the rest of the code was built on. Miami-Dade was the first jurisdiction in the United States to mandate impact testing, cyclic pressure testing, and county-issued Notices of Acceptance for building envelope products. When Hurricane Andrew made landfall on August 24, 1992 as a Category 5 storm with estimated peak gusts above 165 mph in south Miami-Dade, the existing South Florida Building Code (then administered separately from the rest of the state) failed catastrophically. Roofs lifted; gable ends pushed in; openings breached and internal pressure built up faster than structures could vent. The forensic investigation that followed concluded that the failure was not random — it was systemic, and the code itself needed restructuring.</p>
+
+            <p>The Miami-Dade response was the original HVHZ amendment package, which later became the template for the statewide Florida Building Code. Inside Miami-Dade (and Broward, the second HVHZ county), three jurisdiction-specific requirements apply:</p>
+
+            <ul>
+                <li><strong>Notice of Acceptance (NOA).</strong> Every product in the building envelope — windows, doors, shutters, roofing assemblies, soffit, vents, garage doors — must carry a current Miami-Dade County NOA. The NOA number appears on the product label and is searchable in the Miami-Dade product approval database. Statewide Florida Product Approval (FL#) by itself is not sufficient for an HVHZ submittal.</li>
+                <li><strong>TAS 201 — Large Missile Impact.</strong> A 9 lb 2x4 lumber projectile fired at the product at 50 ft/s (or 80 ft/s for higher-rated assemblies). Most openings up to 30 ft above grade must pass Large Missile testing or be permanently protected by an NOA-approved shutter. This is the single most expensive HVHZ requirement; impact-rated glazing typically costs 2 to 3 times the price of non-impact glazing.</li>
+                <li><strong>TAS 202 / TAS 203 — Uniform Static + Cyclic Pressure.</strong> TAS 202 verifies the assembly can resist sustained design pressure without permanent deformation or air/water infiltration beyond limits. TAS 203 then subjects it to thousands of cycles of pressure reversal, simulating the gust-to-gust loading of a multi-hour hurricane. Many products that pass static pressure fail cyclic — TAS 203 is the test that exposes weak fasteners, sealants, and frame corners.</li>
+            </ul>
+
+            <p>Permit authority for all of this sits with the <strong>Miami-Dade County Building Code Compliance Office</strong> for unincorporated areas, and with the local municipal building department for the incorporated cities (Miami, Miami Beach, Coral Gables, Hialeah, Aventura, Doral, Homestead, and the smaller municipalities). All of them enforce the same Miami-Dade HVHZ amendments to the Florida Building Code, so the product approval pathway is the same regardless of which jurisdiction issues the permit.</p>
+
+            <h2 id="fbc-8">FBC 8th Edition (2023) + Miami-Dade HVHZ Amendments</h2>
+
+            <p>The Florida Building Code 8th Edition (2023) took effect <strong>December 31, 2024</strong> and references <strong>ASCE 7-22</strong> as the wind load standard. Miami-Dade's HVHZ amendments sit on top of the statewide code — they do not replace it. The base ASCE 7-22 procedures still govern the calculation method (Chapter 26 general provisions, Chapter 27 MWFRS Directional, Chapter 28 MWFRS Envelope, Chapter 30 Components and Cladding), but the 175 mph local design wind speed and the NOA / TAS product approval requirements supersede the rest-of-state defaults.</p>
+
+            <p>The procedural changes between ASCE 7-16 and ASCE 7-22 that matter most for Miami-Dade submittals:</p>
+
+            <ul>
+                <li><strong>Partially Open enclosure classification.</strong> ASCE 7-22 recognizes four enclosure types — Enclosed, Partially Open, Partially Enclosed, and Open — where ASCE 7-16 had three. Many Miami-Dade buildings with screened lanais, open garage bays, or hurricane shutters in the partially-deployed position now fall into the Partially Open category, which changes the GCpi internal pressure coefficient and shifts the calculated design pressures.</li>
+                <li><strong>Chapter 30 C&C reorganization.</strong> The new chapter restructures the C&C calculation flow for the six common roof shapes (gable, hip, monoslope, sawtooth, multispan, dome). For Miami-Dade flat-roof low-rise commercial — a very common roof type — the zone definitions and effective wind area curves have been refined.</li>
+                <li><strong>Edge strip "a" dimension.</strong> Florida (per FBC R301.2(7)) requires a 4 ft minimum edge strip dimension, where ASCE 7-22 elsewhere allows 3 ft. The calculator applies the 4 ft minimum automatically for any Florida ZIP, including all of Miami-Dade.</li>
+                <li><strong>Wind speed map refinements.</strong> The underlying ASCE 7-22 map shifted some coastal Florida contour lines based on updated hurricane climatology. For Miami-Dade specifically, the local 175 mph override dominates either way, but the underlying map value matters when deriving Risk Category III and IV design speeds.</li>
+            </ul>
+
+            <p>WindLoadCalc runs under ASCE 7-22 with the FBC 8th Edition and Miami-Dade HVHZ amendments layered on top. The report output includes a code reference block on the first page identifying the exact code edition, ASCE standard, and HVHZ amendments applied, so the plan reviewer can confirm compliance at a glance.</p>
+
+            <h2 id="county-overrides">Why Miami-Dade is 175 mph, Not the ASCE Baseline</h2>
+
+            <p>The baseline ASCE 7-22 wind speed map for southeast Florida produces values in the 165 to 170 mph range for Risk Category II at most south Florida ZIP codes. Miami-Dade has chosen to design at <strong>175 mph</strong>, a meaningful step up from the map. Two things drive this local override.</p>
+
+            <p>First, exposure density. Miami-Dade has the highest density of high-rise residential construction in the southeast United States. A failure mode that produces an acceptable casualty rate in a rural area becomes unacceptable when the failure happens in a high-rise corridor with tens of thousands of people in a half-mile radius. The post-Andrew, post-Wilma, and post-Irma forensic engineering investigations all reached the same conclusion: the building stock in Miami-Dade was overconcentrated relative to the underlying design assumptions, and the design wind speed needed to be set conservatively above the underlying map.</p>
+
+            <p>Second, the cost-benefit of incremental design pressure in this specific geography is overwhelmingly favorable. Going from 170 to 175 mph in design wind speed adds a single-digit percentage to construction cost on most building types, but it materially reduces the expected damage from a 100-year storm event. For a county with the property exposure of Miami-Dade, that trade is obvious — and the insurance market reinforces it.</p>
+
+            <p>Because the override is jurisdictional, the WindLoadCalc velocity finder applies 175 mph to every Miami-Dade ZIP automatically. You do not need to remember it, look it up, or override it manually. Sibling counties in the south Florida market work the same way: Broward applies 170 mph county-wide as a separate HVHZ jurisdiction, Collier applies 170 mph via a non-HVHZ local override, and Palm Beach varies between 165 and 170 mph by ZIP. The links below cross to each sibling county's dedicated page.</p>
+
+            <div class="county-cards">
+                <a href="/florida-wind-load-calculator" class="county-card">
+                    <h4>Florida Statewide Overview</h4>
+                    <div class="county-speed">130–180 mph</div>
+                    <p>Full Florida wind load reference — every region, every county override, FBC 8th Edition and ASCE 7-22 in one place.</p>
+                </a>
+                <a href="/broward-wind-load-calculator" class="county-card">
+                    <h4>Broward County <span class="hvhz-badge">HVHZ</span></h4>
+                    <div class="county-speed">170 mph</div>
+                    <p>Second HVHZ county. Same NOA + TAS pathway as Miami-Dade. Covers Fort Lauderdale, Hollywood, Pompano Beach, Coral Springs.</p>
+                </a>
+                <a href="/collier-county-wind-load-calculator" class="county-card">
+                    <h4>Collier County</h4>
+                    <div class="county-speed">170 mph</div>
+                    <p>SW Florida override (non-HVHZ). Florida Product Approval (FL#) accepted; NOA not required but common. Naples, Marco Island.</p>
+                </a>
+                <a href="/palm-beach-wind-load-calculator" class="county-card">
+                    <h4>Palm Beach County</h4>
+                    <div class="county-speed">165–170 mph</div>
+                    <p>Directly north of Broward but not HVHZ. Coastal ZIPs at the high end of the range, western inland ZIPs slightly lower.</p>
+                </a>
+            </div>
+
+            <div class="info-box">
+                <h4><i class="fas fa-shield-alt"></i> Common project types in Miami-Dade</h4>
+                <p>The calculator handles every common Miami-Dade project type: high-rise condos and apartments along Brickell and Miami Beach (Exposure D), mid-rise mixed-use in Doral and Aventura (Exposure C), single-family residential in Coral Gables, Pinecrest, Kendall, and Homestead (Exposure B or C), hurricane shutter retrofits, impact window replacements, soffit and fascia work, tile and metal roofing on residential, and TPO / modified bitumen on commercial. For each project type the output report identifies the right zones, pressures, and HVHZ product approval references for plan review.</p>
+            </div>
+
+            <div class="content-cta">
+                <h3>Get Pressures for Your Miami-Dade Project</h3>
+                <p>Enter your ZIP, pick your risk category, and get a permit-ready C&C report at the Miami-Dade 175 mph design wind speed in under 15 minutes.</p>
+                <a href="/wind-load-calculator-shop.html" class="cta-button">Start Free Trial <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <h2 id="how-to">How to Calculate Your Miami-Dade Wind Load</h2>
+
+            <div class="process-steps">
+                <div class="process-step">
+                    <h4>Enter your Miami-Dade ZIP code</h4>
+                    <p>The calculator looks up your ZIP, confirms it is in Miami-Dade County, and applies the 175 mph HVHZ design wind speed automatically. It also flags the project as HVHZ so the output report includes NOA and TAS 201 / 202 / 203 references for plan review. Works for every Miami-Dade ZIP from Aventura (33180) at the north line down through Homestead (33030) and Florida City at the south.</p>
+                </div>
+                <div class="process-step">
+                    <h4>Pick your Risk Category</h4>
+                    <p>Risk Category II covers single-family, multifamily, retail, and most commercial in Miami-Dade. Risk Category III adds assembly, schools, hotels above a threshold occupancy, and substantial-hazard buildings. Risk Category IV is essential facilities — hospitals, fire stations, EOCs, the Miami International Airport tower. The 175 mph base scales up for III and IV.</p>
+                </div>
+                <div class="process-step">
+                    <h4>Set Exposure Category and building geometry</h4>
+                    <p>For Miami-Dade: Exposure D applies to the Atlantic-facing strip of Miami Beach, Surfside, Sunny Isles, Bal Harbour, and Key Biscayne — anywhere within roughly 1 mile of unobstructed open water. Exposure C is the default for most suburban inland areas (Kendall, Doral, Hialeah, Homestead). Exposure B applies inside dense urban canyons (Brickell, downtown Miami) and inside the mature Coral Gables tree canopy. Then enter length, width, mean roof height, roof slope (X over 12), and roof shape.</p>
+                </div>
+                <div class="process-step">
+                    <h4>Review the calculated pressures</h4>
+                    <p>The calculator returns MWFRS pressures (for the structural system) and C&C pressures (for individual openings and cladding). The Miami-Dade output highlights Zone 4 (wall field) and Zone 5 (wall corner) values that drive the impact-rated window and door sizing, plus roof Zones 1, 2, and 3 for the roofing system. Every opening above 30 ft from grade is flagged for the relevant Missile Level rating.</p>
+                </div>
+                <div class="process-step">
+                    <h4>Download the permit report and select NOA-approved products</h4>
+                    <p>Export the report as PDF, Excel, or the architectural schedule format (drops directly into AutoCAD as a real .xlsx). For Miami-Dade residential remodels up to 3 stories, our in-house Florida PE can sign and seal the report. For 4+ story projects — which covers most Miami-Dade high-rise work — the structural engineer of record on the project will need to seal the wind load analysis themselves; the WindLoadCalc output is designed to be reviewable and adoptable by an outside PE.</p>
+                </div>
+            </div>
+
+            <h2 id="faq">Miami-Dade Wind Load FAQ</h2>
+
+            <details class="faq-item">
+                <summary>What is a Miami-Dade NOA and when do I need one?</summary>
+                <div class="faq-answer">A Notice of Acceptance (NOA) is a product approval document issued by the Miami-Dade County Building Code Compliance Office. It certifies that a specific window, door, shutter, roof tile, roofing underlayment, or other building envelope assembly has passed the Miami-Dade HVHZ test protocols and is approved for use inside the High Velocity Hurricane Zone. If your project is anywhere in Miami-Dade County, every component installed in the building envelope must be covered by a current NOA, identified by an NOA number printed on the product label and listed in the Miami-Dade product approval database. The plan reviewer will check each opening on your wind load report against an NOA before issuing a permit.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>Do I need TAS 201 impact testing for every product in Miami-Dade?</summary>
+                <div class="faq-answer">Yes, for any product in the building envelope that is not behind permanent impact protection. TAS 201 is the Large Missile Impact test in which a 2x4 lumber projectile is fired at the product at 50 ft/s (or 80 ft/s for higher-rated assemblies). It is one of three mandatory HVHZ tests: TAS 201 (Large Missile Impact), TAS 202 (Uniform Static Air Pressure), and TAS 203 (Cyclic Wind Pressure). The only common exemptions are openings above 30 feet from grade that meet the small-missile criteria, and openings fully protected by an NOA-approved hurricane shutter. The calculator flags every opening that requires Large Missile Impact testing in the output report.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>What is the difference between Miami-Dade requirements and broader Florida wind requirements?</summary>
+                <div class="faq-answer">Three things separate Miami-Dade from the rest of Florida. First, the design wind speed: Miami-Dade uses 175 mph for Risk Category II, the highest urban override in the state. Second, the product approval pathway: Miami-Dade requires a county-issued NOA, where most of Florida accepts the statewide Florida Product Approval (FL#) system. Third, the test protocols: Miami-Dade enforces TAS 201/202/203, which are stricter than the comparable AAMA and ASTM standards used elsewhere in Florida. A product approved for use in Naples or Sarasota is not automatically approved for use in Miami-Dade. Many manufacturers carry both ratings, but you must verify the NOA explicitly covers HVHZ installation.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>Why is Miami-Dade 175 mph when the broader Florida baseline is around 170 mph?</summary>
+                <div class="faq-answer">Miami-Dade is denser and more exposed than any other urban county in Florida, and the failure mode of densely-packed structures in a major hurricane is fundamentally different from rural or low-density failure modes. After Hurricane Andrew (1992) leveled large sections of Homestead and south Miami-Dade, the county's post-storm forensic engineering investigations concluded that the design wind speed in use at the time was insufficient for the local exposure. The 175 mph value was set as a local override above whatever the underlying ASCE map produces, and it is now embedded in Miami-Dade HVHZ amendments to the Florida Building Code. The WindLoadCalc velocity finder applies this override automatically for every Miami-Dade ZIP code.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>Are there exemptions for low-rise residential or small remodels in Miami-Dade?</summary>
+                <div class="faq-answer">No real exemption from the 175 mph design wind speed or the HVHZ product approval requirement, regardless of building size. A 1,200 sq ft single-family home remodel in Kendall is governed by the same wind speed and NOA requirements as a 40-story Brickell condo. There are some narrow scope exemptions — like-for-like cosmetic replacement of certain non-envelope components — but any window, door, or shutter replacement triggers HVHZ product approval review. The most common surprise for out-of-state contractors is that an impact window approved for use in Texas or the Carolinas is not automatically permittable in Miami-Dade; the product needs a Miami-Dade NOA, not just a generic ASTM E1996 rating.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>Can I still use ASCE 7-16 for a Miami-Dade project instead of ASCE 7-22?</summary>
+                <div class="faq-answer">Only if the permit application was submitted under the previous code cycle. The Florida Building Code 8th Edition (2023) took effect December 31, 2024 and references ASCE 7-22. For permits submitted on or after that date, Miami-Dade plan reviewers will expect calculations under ASCE 7-22. The practical differences for Miami-Dade between ASCE 7-16 and 7-22 are relatively small (the 175 mph local override dominates the calculation either way), but the procedural changes — the new Partially Open enclosure classification, the reorganized Chapter 30 C&C procedures, and the 4 ft minimum edge strip 'a' dimension under FBC R301.2(7) — all need to be reflected in the submittal. WindLoadCalc runs under ASCE 7-22 by default.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>Do I need a PE stamp on a Miami-Dade wind load report?</summary>
+                <div class="faq-answer">Miami-Dade plan review routinely requires a Florida-licensed PE seal on wind load calculations for any project beyond a straightforward like-for-like window or door replacement. For a residential remodel up to 3 stories, our in-house PE can seal the WindLoadCalc report directly. For Miami-Dade high-rise work — condos, mid-rise mixed-use, hotels — most projects are 4 or more stories, which falls outside the scope of our PE's licensure (our service is capped at 3 stories). In that case the calculator output is still useful as a working document, but the structural engineer of record on the project will need to seal the wind load analysis themselves. We can deliver the raw inputs, intermediate calculations, and pressure tables in a format their PE can review and adopt.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>What's the difference between Miami-Dade Large Missile Level D and Level E?</summary>
+                <div class="faq-answer">The Miami-Dade missile level system rates impact resistance by the size and velocity of the test projectile. Level D is the standard Large Missile rating: a 9 lb 2x4 lumber projectile fired at 50 ft/s, used for most openings up to 30 ft above grade. Level E is the higher rating: the same 9 lb projectile fired at 80 ft/s, used for essential facilities, certain Risk Category III/IV projects, and any opening where the design analysis calls for it. Some glazing systems also carry separate Small Missile ratings (Levels A, B, C) for openings above 30 ft. The calculator includes Risk Category in its output so you can match the right impact level when selecting NOA-approved products.</div>
+            </details>
+
+            <h2 id="related">More Wind Load Resources</h2>
+
+            <div class="related-links">
+                <h3>Related calculators and guides</h3>
+                <ul>
+                    <li><a href="/florida-wind-load-calculator">Florida statewide wind load calculator</a></li>
+                    <li><a href="/broward-wind-load-calculator">Broward HVHZ (170 mph) sibling page</a></li>
+                    <li><a href="/collier-county-wind-load-calculator">Collier County (Naples, Marco Island)</a></li>
+                    <li><a href="/palm-beach-wind-load-calculator">Palm Beach County calculator</a></li>
+                    <li><a href="/asce-hazard-tool-alternative">ASCE Hazard Tool alternative</a></li>
+                    <li><a href="/shop/windows-doors-shutters.html">Windows, doors &amp; shutters C&amp;C calculator</a></li>
+                    <li><a href="/wind-load-calculator-for-engineers.html">Tools for structural engineers</a></li>
+                    <li><a href="/wind-load-calculator-shop.html">All calculators &amp; pricing</a></li>
+                </ul>
+            </div>
+
+            <div class="content-cta">
+                <h3>Ready to Run Your Miami-Dade Numbers?</h3>
+                <p>Get instant 175 mph HVHZ pressures with NOA / TAS references for any Miami-Dade ZIP. Free 7-day trial. No credit card.</p>
+                <a href="/wind-load-calculator-shop.html" class="cta-button">View Plans &amp; Start Trial <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </main>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-box">
+                <h3>On This Page</h3>
+                <ul>
+                    <li><a href="#wind-speeds">Miami-Dade Wind Speeds</a></li>
+                    <li><a href="#hvhz">HVHZ — Miami-Dade Origin</a></li>
+                    <li><a href="#fbc-8">FBC 8th + HVHZ Amendments</a></li>
+                    <li><a href="#county-overrides">Why 175 mph</a></li>
+                    <li><a href="#how-to">How to Calculate</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#related">Related Resources</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-cta">
+                <h3>Try It Free</h3>
+                <p>Miami-Dade-ready ASCE 7-22 + FBC 8th Edition + HVHZ wind loads in 15 minutes. 7-day trial, no credit card.</p>
+                <a href="/wind-load-calculator-shop.html" class="sidebar-cta-button">Start Free Trial</a>
+            </div>
+
+            <div class="sidebar-box">
+                <h3>Related Florida Counties</h3>
+                <ul>
+                    <li><a href="/florida-wind-load-calculator">Florida Statewide</a></li>
+                    <li><a href="/broward-wind-load-calculator">Broward (170 mph, HVHZ)</a></li>
+                    <li><a href="/collier-county-wind-load-calculator">Collier County (170 mph)</a></li>
+                    <li><a href="/palm-beach-wind-load-calculator">Palm Beach (165-170 mph)</a></li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="mailto:info@windloadcalc.com">info@windloadcalc.com</a></li>
+                    <li><a href="mailto:support@windloadcalc.com">support@windloadcalc.com</a></li>
+                    <li><a href="tel:8332723946">(833) 272-3946</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Calculators</h3>
+                <ul>
+                    <li><a href="/shop/windows-doors-shutters.html">Windows, Doors &amp; Shutters</a></li>
+                    <li><a href="/wind-load-calculator-shop.html">All Calculators &amp; Pricing</a></li>
+                    <li><a href="/wind-load-calculator-comparison.html">Calculator Comparison</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="/Landing%20Pages/free-wind-load-calculator.html">Free Demo</a></li>
+                    <li><a href="/Landing%20Pages/asce-7-wind-load-calculator.html">ASCE 7-22 Guide</a></li>
+                    <li><a href="/Landing%20Pages/components-and-cladding-wind-loads.html">C&amp;C Wind Loads</a></li>
+                    <li><a href="/faq.html">Wind Load FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="/why-us.html">About Us</a></li>
+                    <li><a href="/contact.html">Contact</a></li>
+                    <li><a href="/privacy-policy.html">Privacy</a></li>
+                    <li><a href="/terms-of-service.html">Terms</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 WindLoadCalc. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // ZIP launch — calc.windloadcalc.com accepts ?zip=NNNNN and auto-derives
+        // city / state / county / wind speed (Miami 33101 -> FL, Miami-Dade, 175 mph HVHZ).
+        function launchCalc(e) {
+            e.preventDefault();
+            var zip = (document.getElementById('zip-input').value || '').replace(/[^0-9]/g, '').slice(0, 5);
+            var target = 'https://calc.windloadcalc.com/';
+            if (zip.length === 5) {
+                target = target + '?zip=' + zip;
+            }
+            window.location.href = target;
+            return false;
+        }
+    </script>
+</body>
+</html>

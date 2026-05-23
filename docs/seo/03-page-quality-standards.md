@@ -13,12 +13,12 @@
 2. **<30% chrome overlap with sibling pages.** Atlanta page and Chicago page on a sister site share 80%+ identical body text — that's the pattern Google's Helpful Content classifier flags. Test: paste two sibling page bodies into a diff tool. If less than 30% differs, rewrite.
 3. **No FAQ Q&A reused verbatim.** Every state/county/product page has its own FAQ section. The questions should be different even if the underlying topic overlaps (e.g., "What is HVHZ?" on Miami-Dade page → "Is Palm Beach in the HVHZ?" on Palm Beach page).
 4. **Unique image alt text per page.** No "wind load calculator screenshot" repeated 50 times. Each alt text describes what's actually in THAT image in context of THAT page.
-5. **"Last updated" date visible on the page.** Freshness signal Google reads. Update it whenever the page changes meaningfully (not on every typo fix).
+5. **"Last updated" date visible on the page — HARD CHECKLIST ITEM.** Freshness signal Google reads + E-E-A-T trust signal. Pattern: `<p class="last-updated">Last updated: {MMM DD, YYYY} — Reviewed by Bob, P.E. (Florida licensed). Serving wind load professionals since 2002.</p>` placed in the footer-bottom block. Update the date whenever the page changes meaningfully (not on every typo fix). Wave 1-2 pages shipped without this and had to be patched — never again.
 6. **Cite authority.** Every wind load number must reference its source (ASCE 7-22 Figure X, FBC 8th Edition Section Y, county jurisdiction ordinance Z). Vague "professional" claims without backing = E-E-A-T fail.
 
 ### Technical SEO
-7. **Title tag**: ≤60 chars, unique sitewide, includes primary keyword. Pattern: `{Specific Topic} — {Differentiator} | WindLoadCalc`
-8. **Meta description**: ~155 chars, unique sitewide, includes a value prop (not just keyword stuffing)
+7. **Title tag**: **≤60 chars HARD LIMIT**, unique sitewide, includes primary keyword. Pattern: `{Specific Topic} — {Differentiator}`. **Drop the trailing site-name (`| WindLoadCalc`) before dropping the keyword or differentiator** — Google auto-appends site name from canonical/OG, so the trailing brand is wasted SERP real estate when titles run long. Lesson learned from Wave 4 QA: 10 of 13 pages shipped with titles 62-73 chars and had to be patched in a follow-up pass.
+8. **Meta description**: ~155 chars (hard limit ~160), unique sitewide, includes a value prop (not just keyword stuffing)
 9. **Canonical**: clean URL, no `.html`, single self-canonical (or to a hub if it's a variant). NEVER two `<link rel="canonical">` tags.
 10. **Robots meta + sitemap.xml must agree.** A page in sitemap.xml MUST be `index, follow`. A `noindex` page MUST be out of sitemap. Pre-launch checklist: grep the sitemap for the URL, grep the file for the robots tag, confirm consistency.
 11. **JSON-LD**: minimum three schemas — `SoftwareApplication` + `FAQPage` (1:1 with visible FAQ, exact text match) + `BreadcrumbList`. NEVER `aggregateRating` / `reviewCount` / `ratingCount` unless we have a real third-party feed (Google Business, G2, Capterra). Self-asserted ratings = Google manual action risk.
@@ -43,6 +43,7 @@
 | Anti-pattern | Why it fails |
 |---|---|
 | Copy a sibling page and find-replace location name | Google's Helpful Content classifier reads HTML similarity at scale. Two pages with 90% identical chrome = entire site flagged. |
+| Reuse any 10+-word opening clause across 3+ sibling pages, even if the surrounding paragraph differs | The 30-word verbatim threshold catches obvious paste-jobs, but templating fingerprints often start at the opening clause. If "The calculator returns MWFRS pressures (for the structural system) and C&C pressures" opens process-step #4 on 7 pages, that's a pattern Google can detect at scale. Vary opening clauses per page from the start. Lesson learned from Wave 4 QA. |
 | Generate FAQ from a template ("What is wind load in {LOCATION}?") | Reads as machine-generated. Real FAQs answer real questions users ask. |
 | Stuff the primary keyword 20+ times | Keyword stuffing penalty. Modern Google is content-meaning aware. Use the keyword 2-4 times naturally. |
 | Use fake testimonials, fake reviews, fake aggregateRating | Schema spam violation. Manual action risk. The May 2026 incident on windloadcalc.com (fake 4.9 stars / 127 reviews) was caught and removed before Google manual-actioned us. Never again. |
@@ -90,9 +91,44 @@ If you find yourself writing identical paragraphs across sections 1-8 of two dif
 ## Audit cadence
 
 - **Pre-publish (every new page):** Manual review against this checklist. No exceptions.
+- **Post-batch (MANDATORY — every wave that ships ≥3 new pages):** QA agent runs the 6-check audit (see below) BEFORE the final commit/push. CRITICAL issues fix immediately, WARNING issues track for next session.
 - **30 days post-publish:** Pull GSC Performance + Page Indexing reports. Confirm the page is indexed. If not, diagnose (canonical issue? content too thin? sitemap miss?).
 - **90 days post-publish:** Review ranking position trend. If still page 5+ after 90 days for the target query, the page needs an attack-plan revision — likely content depth or backlink work.
 - **Quarterly sitewide:** Re-pull GSC Performance for all 3 domains. Identify pages losing rank. Cross-reference against recent edits. Roll back changes that hurt ranking.
+
+---
+
+## Post-batch QA agent — the 6 mandatory checks
+
+Codified 2026-05-23 after Wave 4 ship. Spawn one QA agent in background immediately after build agents finish, BEFORE the final commit/push.
+
+### Check 1 — FAQPage JSON-LD ↔ visible FAQ HTML must match 1:1
+Parse the `FAQPage` JSON-LD block, extract every Question + Answer text, compare against visible HTML (`<details>` / `<summary>` / `<div class="faq-item">` etc.). ANY divergence = Google Rich Results policy violation risk. Manual action exposure.
+
+### Check 2 — NO `aggregateRating` anywhere
+Grep all new pages for: `aggregateRating`, `reviewCount`, `ratingCount`, `ratingValue`, `bestRating`, `worstRating`, `Review` (as schema type). Zero hits expected. Per the May 2026 near-incident on windloadcalc.com.
+
+### Check 3 — Cross-sibling body-text overlap (Helpful Content survival)
+For each pair of new sibling pages, strip HTML/CSS/schema, extract body prose, identify any text BLOCK ≥50 words appearing verbatim in both. Acceptable: shared trust block (single paragraph), nav, footer, "Need help?" affordance. Unacceptable: FAQ answer reused, section-intro paragraph reused, how-to step text reused, wind-speed table row copied.
+
+### Check 4 — PE service scope claims
+Grep for "all 50 states", "nationwide" + PE/seal/stamp context. Verify all uses comply with FL-only ≤3 stories per Bob's licensure. Acceptable: nationwide users. Unacceptable: nationwide PE stamps.
+
+### Check 5 — Wind speed numerical accuracy
+For each state/county page, verify the quoted wind speed numbers against ASCE 7-16/7-22 + (for FL counties) `webapp/velocity_finder_core.py` for jurisdiction overrides. Framing as "approximate" acceptable; authoritative-sounding wrong numbers not.
+
+### Check 6 — Technical SEO consistency
+Per page verify: title ≤60 chars, meta ≤160 chars, exactly one `<link rel="canonical">` (clean URL, no `.html`), `<meta name="robots" content="index, follow">` present, URL in `sitemap.xml`, no duplicate meta/canonical tags.
+
+### Reporting format
+Structured Markdown with: executive summary (pass/fail counts) → per-check findings → CRITICAL/WARNING/COSMETIC tiered fix recommendations with file path + line range → recommended changes to this standards file → suggested additional checks for next audit.
+
+### When QA finds issues
+- **CRITICAL** (FAQ schema mismatch, fake aggregateRating, PE service scope drift, materially-wrong wind speed): fix BEFORE final push. If already pushed, revert and re-push the fix.
+- **WARNING** (minor cross-sibling overlap, title 61-65 chars, etc.): track in `docs/seo/qa-followups.md` (create if needed) for next session.
+- **COSMETIC** (subjective polish, optional improvement): note but don't block ship.
+
+See [[feedback_post_page_qa_standard]] in memory.
 
 ---
 

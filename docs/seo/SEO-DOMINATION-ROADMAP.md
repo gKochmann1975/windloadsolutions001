@@ -204,14 +204,15 @@ These are codified in saved memory and quality-checked into every wave brief.
 5. Verify no breaking changes occurred between session (calc app still accepts `?zip=`? Sitemap intact? Robots agree?)
 6. Brief agents per wave's per-page templates
 7. Launch in parallel where possible
-8. Review every agent's output before commit
-9. Commit per-wave (not per-page); one logical commit per repo per wave
-10. Push and verify on the live site
-11. Update this file's "What's live" section + add the commit hash
+8. **MANDATORY: After build agents finish but BEFORE the final commit/push, spawn the post-batch QA agent (the 6-check audit per [03-page-quality-standards.md](./03-page-quality-standards.md#post-batch-qa-agent--the-6-mandatory-checks)). Fix any CRITICAL issues found before pushing.**
+9. Review every agent's output before commit
+10. Commit per-wave (not per-page); one logical commit per repo per wave
+11. Push and verify on the live site
+12. Update this file's "What's live" section + add the commit hash
 
 ### Reviewing an agent's page output (sanity checklist)
 - [ ] Word count ≥1,500 (paste body into a counter)
-- [ ] Title ≤60 chars, unique sitewide (grep sitemap)
+- [ ] **Title ≤60 chars HARD** — count exactly; if over, drop the `| WindLoadCalc` suffix first (Google auto-appends from canonical)
 - [ ] Canonical clean URL, matches sitemap entry
 - [ ] Robots `index, follow` + sitemap includes the URL
 - [ ] 3 JSON-LD blocks present (SoftwareApplication + FAQPage + BreadcrumbList)
@@ -220,8 +221,9 @@ These are codified in saved memory and quality-checked into every wave brief.
 - [ ] 3 CTAs present (above-fold ZIP + mid + bottom)
 - [ ] At least 3 differentiation pillars activated (per [02](./02-differentiation-pillars.md))
 - [ ] Diff against sibling pages — body content must differ ≥70%
+- [ ] **No 10+-word opening clause reused across 3+ sibling pages** (catches templating fingerprints before they scale)
 - [ ] Wind speed numbers cite their source (ASCE 7-22 Fig X / FBC Section Y / county ordinance Z)
-- [ ] Visible "Last updated" date on the page
+- [ ] **Visible "Last updated" date + Reviewed-by trust block** in footer-bottom (HARD requirement after Wave 4 QA lesson)
 - [ ] No `aggregateRating` in any new schema (one more check — this is the big one)
 
 ### Handling a Helpful Content penalty warning (if it ever happens)

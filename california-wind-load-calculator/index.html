@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" type="image/svg+xml" href="/images/windloadcalc-favicon.svg">
+
+    <!-- SEO Meta -->
+    <title>California Wind Load Calculator — CBC 2022 + ASCE 7-16 | WindLoadCalc</title>
+    <meta name="description" content="Instant California wind load calculations per CBC 2022 + ASCE 7-16. Special wind regions (Banning, Tehachapi), seismic-aware. Free wind speed lookup.">
+    <meta name="keywords" content="California wind load calculator, CBC 2022 wind load, ASCE 7-16 California, Banning Pass wind speed, Tehachapi wind region, California special wind region, Los Angeles wind load, San Francisco wind load, California seismic vs wind">
+    <link rel="canonical" href="https://windloadcalc.com/california-wind-load-calculator">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="California Wind Load Calculator — CBC 2022 + ASCE 7-16">
+    <meta property="og:description" content="Honest California wind loads per CBC 2022 + ASCE 7-16. Special wind regions, seismic context, instant ZIP lookup.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://windloadcalc.com/california-wind-load-calculator">
+    <meta property="og:image" content="https://windloadcalc.com/images/wind-calculator-og.jpg">
+    <meta property="og:site_name" content="WindLoadCalc">
+
+    <!-- SoftwareApplication Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "California Wind Load Calculator",
+        "alternateName": "WindLoadCalc California",
+        "applicationCategory": "EngineeringApplication",
+        "applicationSubCategory": "Structural Engineering",
+        "operatingSystem": "Web Browser",
+        "description": "Wind load calculator for California projects. Implements the 2022 California Building Code (CBC) referencing ASCE 7-16. Handles California's special wind regions (Banning Pass, Tehachapi Pass, Cajon Pass, Altamont Pass, San Gorgonio Pass) and acknowledges that seismic design typically governs California lateral force design, with wind controlling for lightweight structures, signs, equipment, and components and cladding in specific cases.",
+        "url": "https://windloadcalc.com/california-wind-load-calculator",
+        "featureList": [
+            "ASCE 7-16 Wind Load Calculations for California",
+            "2022 California Building Code (CBC) compliance",
+            "California Special Wind Region handling (Banning, Tehachapi, Cajon, Altamont, San Gorgonio)",
+            "Risk Category I, II, III, IV support",
+            "Exposure Category B, C, D",
+            "Components and Cladding (C&C) pressures",
+            "Main Wind Force Resisting System (MWFRS) pressures",
+            "Plain-English explanation of when wind controls vs seismic",
+            "Permit-ready PDF and Excel reports"
+        ],
+        "offers": {
+            "@type": "Offer",
+            "availability": "https://schema.org/InStock",
+            "url": "https://windloadcalc.com/wind-load-calculator-shop.html"
+        },
+        "provider": {
+            "@type": "Organization",
+            "name": "WindLoad Solutions",
+            "url": "https://windloadcalc.com",
+            "foundingDate": "2002"
+        }
+    }
+    </script>
+
+    <!-- BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [{
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://windloadcalc.com/"
+        },{
+            "@type": "ListItem",
+            "position": 2,
+            "name": "California Wind Load Calculator",
+            "item": "https://windloadcalc.com/california-wind-load-calculator"
+        }]
+    }
+    </script>
+
+    <!-- FAQPage (mirrors visible FAQ 1:1) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [{
+            "@type": "Question",
+            "name": "Does wind or seismic control structural design in California?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "For most California buildings, seismic governs lateral force design. California sits across the most active seismic zones in the continental United States, and the Seismic Design Category (SDC) assigned to a site typically produces base shear demands that exceed wind base shear at the same site. That does not mean wind is irrelevant — wind frequently controls for lightweight structures, signs, freestanding walls, rooftop equipment, parapets, solar arrays, and the components and cladding (C&C) checks on any building. The honest engineering answer is: run both, compare, and design for the envelope. A wind load calculator that pretends California is just another state misses this nuance."
+            }
+        },{
+            "@type": "Question",
+            "name": "What are California's Special Wind Regions?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "ASCE 7-16 Figure 26.5-1B shades several California areas as Special Wind Regions, meaning the basic wind speed map does not directly apply and a site-specific study or a local jurisdiction value is required. The most well-known California Special Wind Regions are mountain passes that funnel and accelerate prevailing winds: the Banning Pass and San Gorgonio Pass (between the San Bernardino and San Jacinto mountains, near Palm Springs and Whitewater), the Tehachapi Pass (between the Sierra Nevada and Tehachapi Mountains), the Cajon Pass (north of San Bernardino), and the Altamont Pass (east of the Bay Area). Coastal headlands and parts of the Sierra Nevada and Cascade passes are also flagged. Design wind speeds in these regions can reach 110 to 130-plus mph in concentrated areas, dramatically higher than the surrounding terrain."
+            }
+        },{
+            "@type": "Question",
+            "name": "What's the wind speed in Los Angeles vs Palm Springs?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Most of urban Los Angeles falls in the ASCE 7-16 baseline range — roughly 95 to 110 mph for Risk Category II, depending on micro-location. Palm Springs (ZIP 92262) is a different story because it sits at the western edge of the San Gorgonio / Banning Pass Special Wind Region, where the local jurisdiction value is significantly higher than the surrounding desert. The right answer for any specific project address is to use the calculator, which reads ZIP-level data and flags Special Wind Region locations for verification with the local building department. Never assume the LA-basin baseline applies to a Coachella Valley or Inland Empire project."
+            }
+        },{
+            "@type": "Question",
+            "name": "Do I need a California PE or SE to stamp my wind load report?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. California requires a California-licensed Professional Engineer (PE) or Structural Engineer (SE) for sealed structural drawings on permitted projects. Hospital projects (OSHPD jurisdiction) and most public school projects (DSA jurisdiction) further require a California-licensed Structural Engineer specifically, not just a PE. WindLoadCalc generates the wind load calculations and reports your in-state engineer will use, but the seal must come from a California-licensed professional. We do not provide California PE or SE stamps — our in-house PE is licensed in Florida only and only for projects up to three stories there."
+            }
+        },{
+            "@type": "Question",
+            "name": "What's CBC 2022 and how does it use ASCE 7-16?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The 2022 California Building Code (CBC) is the current code adopted statewide by the California Building Standards Commission, with an effective date of January 1, 2023. The CBC is updated on a three-year intervening cycle (next major revision: 2025 CBC). CBC Chapter 16 governs structural design and adopts ASCE 7-16 by reference for wind loads, with California-specific amendments where needed. The CBC also incorporates additional adoptions from agencies including OSHPD (now HCAI for hospitals) and DSA (Division of the State Architect for schools), each of which can layer further wind or lateral requirements on top of the base ASCE 7-16 procedure for their jurisdiction."
+            }
+        },{
+            "@type": "Question",
+            "name": "When does wind load control over seismic in California?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Several recurring cases. First: lightweight structures where seismic base shear is low because the building mass is low (e.g., metal buildings, small storage sheds, certain pre-engineered systems). Second: tall slender appurtenances where wind moment exceeds seismic moment (signs, tall freestanding walls, parapets, rooftop equipment screens). Third: components and cladding on any building — C&C pressures are wind-driven regardless of seismic, and a glass curtain wall in San Francisco still has to resist the local wind GCp values. Fourth: solar arrays on flat roofs, where uplift from wind frequently dominates the connection design. Fifth: any Special Wind Region location, where elevated wind speeds can push wind demand past seismic at the same site. The calculator handles all of these — but you still have to run the seismic side separately."
+            }
+        },{
+            "@type": "Question",
+            "name": "Are coastal California cities in a special wind region?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Most of the coastal urban corridor (San Diego, Long Beach, Santa Monica, the entire San Francisco Bay shore, Ventura, the Monterey Peninsula) is NOT classified as a Special Wind Region for code purposes — those cities sit in the baseline ASCE 7-16 wind speed zone, typically 95 to 110 mph for Risk Category II. The Special Wind Region designation is reserved for terrain that produces measurably accelerated or atypical wind, primarily the mountain passes inland. That said, exposed coastal headlands, bluff tops, and certain Big Sur stretches can locally see higher winds and warrant Exposure D handling rather than the urban Exposure B / suburban Exposure C default. Use the calculator's exposure category selection to capture this correctly."
+            }
+        },{
+            "@type": "Question",
+            "name": "What's OSHPD and does it apply to my project?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "OSHPD (Office of Statewide Health Planning and Development) was reorganized into HCAI (Department of Health Care Access and Information) effective March 2022, and the structural-review function now operates as the Hospital Building Safety Board. The OSHPD / HCAI jurisdiction covers hospitals, skilled nursing facilities, and acute psychiatric facilities — anywhere patients cannot self-evacuate. If your project is a hospital or similar acute-care facility, you fall under OSHPD / HCAI review, not the local building department, and a California-licensed Structural Engineer is required. DSA (Division of the State Architect) is the parallel agency for public K-12 and community college projects. Both jurisdictions accept ASCE 7-16 wind load calculations but layer additional review and detail requirements. If you are not building a hospital or a public school, neither agency applies — your project goes through the local city or county building department."
+            }
+        }]
+    }
+    </script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7;
+            color: #2d3748;
+            background: #ffffff;
+        }
+
+        /* Header */
+        .main-header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo-image { height: 80px; width: auto; }
+
+        .header-cta {
+            background: #0018ff;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .header-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 24, 255, 0.3);
+        }
+
+        /* Hero */
+        .article-header {
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            color: white;
+            padding: 4rem 0 3rem;
+            text-align: center;
+        }
+
+        .article-header .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .article-category {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .article-title {
+            font-size: 3rem;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .article-subtitle {
+            font-size: 1.25rem;
+            opacity: 0.95;
+            line-height: 1.6;
+            font-weight: 400;
+            margin-bottom: 2rem;
+        }
+
+        /* Hero ZIP form */
+        .zip-form {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 560px;
+            margin: 0 auto;
+        }
+
+        .zip-input {
+            flex: 1 1 220px;
+            padding: 1rem 1.25rem;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 50px;
+            outline: none;
+            color: #1f2937;
+            min-width: 0;
+        }
+
+        .zip-submit {
+            background: white;
+            color: #0018ff;
+            border: none;
+            padding: 1rem 1.75rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .zip-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .zip-note {
+            font-size: 0.85rem;
+            opacity: 0.85;
+            margin-top: 1rem;
+        }
+
+        /* Main content layout */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .main-content { min-width: 0; }
+
+        .sidebar {
+            position: sticky;
+            top: 100px;
+            align-self: start;
+        }
+
+        .sidebar-box {
+            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+            border: 2px solid #e5e7eb;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-box h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #181E57;
+            margin-bottom: 1.5rem;
+        }
+
+        .sidebar-box ul { list-style: none; }
+        .sidebar-box ul li { margin-bottom: 0.75rem; }
+        .sidebar-box a {
+            color: #4a5568;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: block;
+            padding: 0.5rem 0 0.5rem 1rem;
+            border-left: 3px solid transparent;
+        }
+        .sidebar-box a:hover {
+            color: #0018ff;
+            border-left-color: #0018ff;
+            padding-left: 1.5rem;
+        }
+
+        .sidebar-cta {
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .sidebar-cta h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .sidebar-cta p {
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            opacity: 0.95;
+        }
+
+        .sidebar-cta-button {
+            display: block;
+            background: white;
+            color: #0018ff;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Content typography */
+        .main-content h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #181E57;
+            margin: 3rem 0 1.5rem;
+            line-height: 1.3;
+            border-bottom: 3px solid #0018ff;
+            padding-bottom: 0.75rem;
+        }
+
+        .main-content h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin: 2rem 0 1rem;
+        }
+
+        .main-content p {
+            font-size: 1.08rem;
+            line-height: 1.8;
+            margin-bottom: 1.25rem;
+            color: #4a5568;
+        }
+
+        .main-content ul {
+            margin: 1.25rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .main-content ul li {
+            margin-bottom: 0.75rem;
+            color: #4a5568;
+            line-height: 1.7;
+        }
+
+        .main-content ul li strong { color: #0018ff; font-weight: 700; }
+
+        /* Wind speed table */
+        .wind-table-wrap { overflow-x: auto; margin: 2rem 0; }
+
+        .wind-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+        }
+
+        .wind-table th {
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            color: white;
+            padding: 1rem 1.25rem;
+            text-align: left;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .wind-table td {
+            padding: 0.9rem 1.25rem;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 0.98rem;
+        }
+
+        .wind-table tr:nth-child(even) td { background: #f9fafb; }
+        .wind-table tr:last-child td { border-bottom: none; }
+
+        .speed-cell { font-weight: 700; color: #0018ff; white-space: nowrap; }
+        .swr-badge {
+            display: inline-block;
+            background: #fef3c7;
+            color: #b45309;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.15rem 0.5rem;
+            border-radius: 10px;
+            margin-left: 0.4rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Info boxes */
+        .info-box {
+            background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%);
+            border-left: 4px solid #0018ff;
+            border-radius: 10px;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+        }
+
+        .info-box h4 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #0018ff;
+            margin-bottom: 0.75rem;
+        }
+
+        .info-box p { font-size: 1rem; line-height: 1.7; margin-bottom: 0; }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left: 4px solid #f59e0b;
+        }
+
+        .warning-box h4 { color: #b45309; }
+
+        .seismic-box {
+            background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+            border-left: 4px solid #dc2626;
+        }
+
+        .seismic-box h4 { color: #b91c1c; }
+
+        /* Region cards */
+        .region-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+            margin: 2rem 0;
+        }
+
+        .region-card {
+            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1.5rem;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .region-card:hover {
+            border-color: #0018ff;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 24, 255, 0.1);
+        }
+
+        .region-card h4 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #181E57;
+            margin-bottom: 0.5rem;
+        }
+
+        .region-card .region-speed {
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: #0018ff;
+            margin-bottom: 0.5rem;
+        }
+
+        .region-card p {
+            font-size: 0.92rem;
+            line-height: 1.55;
+            margin-bottom: 0;
+            color: #6b7280;
+        }
+
+        /* Process steps */
+        .process-steps { counter-reset: step; margin: 2rem 0; }
+
+        .process-step {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1.5rem 1.5rem 1.5rem 4.5rem;
+            margin-bottom: 1.25rem;
+            position: relative;
+        }
+
+        .process-step::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: 1.5rem;
+            top: 1.5rem;
+            width: 2rem;
+            height: 2rem;
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.05rem;
+        }
+
+        .process-step h4 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+        }
+
+        .process-step p {
+            font-size: 1rem;
+            margin-bottom: 0;
+        }
+
+        /* FAQ */
+        .faq-item {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .faq-item summary {
+            padding: 1.25rem 1.5rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #181E57;
+            cursor: pointer;
+            list-style: none;
+            position: relative;
+            padding-right: 3rem;
+        }
+
+        .faq-item summary::-webkit-details-marker { display: none; }
+
+        .faq-item summary::after {
+            content: '+';
+            position: absolute;
+            right: 1.25rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            color: #0018ff;
+            font-weight: 400;
+            line-height: 1;
+        }
+
+        .faq-item[open] summary::after { content: '−'; }
+
+        .faq-item .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            color: #4a5568;
+            line-height: 1.7;
+        }
+
+        /* Content CTA */
+        .content-cta {
+            background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 50%, #8b5cf6 100%);
+            background-size: 200% 200%;
+            border-radius: 20px;
+            padding: 3rem 2.5rem;
+            margin: 3rem 0;
+            text-align: center;
+            color: white;
+        }
+
+        .content-cta h3 {
+            font-size: 1.85rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .content-cta p {
+            font-size: 1.1rem;
+            margin-bottom: 1.75rem;
+            opacity: 0.95;
+            color: white;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: #0018ff;
+            padding: 1rem 2.25rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
+            font-size: 1.05rem;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+        }
+
+        .cta-button i { margin-left: 0.5rem; }
+
+        /* Internal links section */
+        .related-links {
+            background: #f9fafb;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .related-links h3 {
+            margin-top: 0;
+            color: #181E57;
+        }
+
+        .related-links ul {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+        }
+
+        .related-links ul li { margin: 0; }
+
+        .related-links a {
+            color: #0018ff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .related-links a:hover { text-decoration: underline; }
+
+        .trust-signal {
+            background: #f9fafb;
+            border-top: 2px solid #e5e7eb;
+            border-bottom: 2px solid #e5e7eb;
+            padding: 1.5rem 2rem;
+            margin: 3rem 0 1.5rem;
+            font-size: 0.95rem;
+            color: #4a5568;
+            border-radius: 8px;
+        }
+
+        .trust-signal strong { color: #181E57; }
+
+        /* Footer */
+        .main-footer {
+            background: #1f2937;
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .footer-column ul { list-style: none; padding: 0; }
+        .footer-column li { margin-bottom: 0.5rem; font-size: 0.92rem; }
+        .footer-column a {
+            color: rgba(255, 255, 255, 0.75);
+            text-decoration: none;
+        }
+        .footer-column a:hover { color: white; }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .sidebar { position: static; }
+            .region-cards { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 640px) {
+            .article-title { font-size: 2rem; }
+            .article-subtitle { font-size: 1.05rem; }
+            .main-content h2 { font-size: 1.65rem; }
+            .process-step { padding-left: 3.5rem; }
+            .content-cta { padding: 2rem 1.5rem; }
+            .content-cta h3 { font-size: 1.4rem; }
+            .related-links ul { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: 1fr; }
+            .wind-table th, .wind-table td { padding: 0.7rem 0.85rem; font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="header-container">
+            <a href="/index.html">
+                <img src="/images/windloadcalc-logo.svg" alt="WindLoadCalc" class="logo-image">
+            </a>
+            <a href="/wind-load-calculator-shop.html" class="header-cta">Start Free Trial</a>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="article-header">
+        <div class="container">
+            <div class="article-category">California Wind Load Calculator</div>
+            <h1 class="article-title">California Wind Load Calculator</h1>
+            <p class="article-subtitle">Honest wind pressures per <strong>2022 California Building Code</strong> and <strong>ASCE 7-16</strong>. Built by engineers who know seismic usually controls in California — and who know exactly when wind doesn't.</p>
+
+            <form class="zip-form" id="zip-form" onsubmit="return launchCalc(event)">
+                <input type="text" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" class="zip-input" id="zip-input" placeholder="Enter California ZIP (e.g. 90015)" aria-label="California ZIP code">
+                <button type="submit" class="zip-submit">Get California Wind Pressures &rarr;</button>
+            </form>
+            <p class="zip-note">Free 7-day trial. No credit card required.</p>
+        </div>
+    </section>
+
+    <!-- Main content -->
+    <div class="content-wrapper">
+        <main class="main-content">
+            <p>California is not a hurricane state. If you have ever designed a structure here, you already know the lateral force conversation almost always starts with seismic — the San Andreas, the Hayward, the Newport-Inglewood, the Cascadia subduction interface. For most California buildings, the Seismic Design Category (SDC) you draw out of the soil report produces a base shear that wind cannot touch. Pretending otherwise — running a generic "national" wind load calculator and handing the output to a California engineer as if it were the controlling case — is a mistake that wastes time and erodes trust with your reviewer.</p>
+
+            <p>This page exists because California still needs an honest, well-built wind load tool. Wind controls more often than the casual answer ("just do seismic") implies: lightweight structures, signs and freestanding walls, parapets, rooftop equipment, solar arrays, components and cladding on every building, and anything sited in one of California's Special Wind Regions where the basic wind speed map literally does not apply. The right tool gives you the wind number quickly and accurately so you can compare it against your seismic demand, design for the envelope, and move on with your day.</p>
+
+            <p>Enter a California ZIP code above and the calculator launches preloaded with the correct ASCE 7-16 basic wind speed, the city and county designation, and a flag if the location falls inside a Special Wind Region that warrants jurisdictional confirmation.</p>
+
+            <div class="info-box seismic-box">
+                <h4><i class="fas fa-exclamation-circle"></i> The honest framing — wind is one factor, not the only factor</h4>
+                <p>If you came here looking for "California wind load calculator" expecting hurricane-style content, the right answer for most of your buildings is: run wind, run seismic, design for whichever governs. Usually that's seismic. Sometimes — and the rest of this page is about when — it's wind. The calculator does the math either way. Your structural engineer makes the call.</p>
+            </div>
+
+            <h2 id="wind-vs-seismic">Wind vs Seismic in California — When Wind Actually Controls</h2>
+
+            <p>This is the section that most "wind load calculator" sites skip. We are not skipping it, because if you build in California and you do not understand when wind matters versus when seismic dominates, you will either over-design (wasting your client's money) or under-design (failing plan check). Both bad. Here is the engineering reality.</p>
+
+            <h3>Why seismic usually wins in California</h3>
+
+            <p>The California Building Code, like the IBC it derives from, requires you to design lateral force resistance for both wind and seismic and use the envelope. In a high-seismic region — which is most of California west of the Sierra Nevada — the Seismic Design Category (SDC) assigned to your site is typically D, with some E and F locations near major active faults. Base shear scales with building weight and the spectral acceleration at your site period. For a typical concrete, masonry, or wood structure with normal mass, the seismic base shear ends up far larger than the wind base shear at the same site, especially for short buildings where wind has less surface area to push on.</p>
+
+            <p>So when you run both calculations for a typical two-story Bay Area apartment or a Los Angeles strip mall, seismic governs the lateral system. That is why California engineers' default mental model is "design for seismic, check wind."</p>
+
+            <h3>Cases where wind controls — these matter</h3>
+
+            <p>"Check wind" is not a formality. Wind frequently controls or contributes meaningfully in five recurring cases:</p>
+
+            <ul>
+                <li><strong>Lightweight structures.</strong> Metal buildings, pre-engineered structures, certain wood pavilions, small storage sheds, equipment enclosures — anywhere building weight is low. Low weight means low seismic base shear. Low seismic base shear means wind has a fighting chance, and often wins.</li>
+                <li><strong>Tall, slender appurtenances.</strong> Signs, freestanding walls, parapets, rooftop screens, antennas, equipment penthouses. Wind moment scales with height and projected area. Seismic moment scales with mass. For a tall, light appurtenance, wind moment wins almost every time. ASCE 7-16 Chapter 29 covers most of these.</li>
+                <li><strong>Components and cladding (C&C).</strong> Every window, door, curtain wall panel, roof tile, and skin element has to resist wind pressure regardless of what the seismic system is doing. A glass facade in downtown San Francisco still has to take the local C&C wind pressure (GCp times qz). Seismic does not absolve you of the C&C calculation.</li>
+                <li><strong>Solar arrays and rooftop equipment.</strong> Flat-roof PV racking is dominated by wind uplift and overturning on the panels, not by seismic mass effects. Connection design at the standoff to the roof structure is almost always a wind problem first. With California's accelerated solar deployment under Title 24, this case is everywhere.</li>
+                <li><strong>Anywhere inside a Special Wind Region.</strong> The ASCE 7-16 basic wind speed map does not directly apply in California's Special Wind Regions (mountain passes — see the next section). Local wind speeds can reach 110 to 130-plus mph in concentrated areas, which can push wind base shear past seismic at the same site. If your project is in the Banning Pass, Tehachapi Pass, Cajon Pass, Altamont Pass, or San Gorgonio Pass area, wind is not a check — it is the design driver.</li>
+            </ul>
+
+            <p>The honest workflow: run wind through this calculator, run seismic through your seismic tool of choice, compare the demands at each level, and design the lateral system to the envelope. Components and cladding always require the wind side regardless. Special Wind Region projects deserve a conversation with the local building department before you commit to a number.</p>
+
+            <h2 id="cbc-2022">2022 California Building Code + ASCE 7-16 — What the Code Actually Says</h2>
+
+            <p>The current statewide code is the <strong>2022 California Building Code (CBC)</strong>, adopted by the California Building Standards Commission with an effective date of January 1, 2023. The CBC is updated on a three-year intervening cycle, with the next major revision scheduled for the 2025 CBC. The CBC is essentially the 2021 IBC with California-specific amendments — agency adoptions from HCAI (formerly OSHPD) for hospitals, DSA for K-12 and community college projects, the California Energy Commission for Title 24 energy, and so on.</p>
+
+            <p>For wind, CBC Chapter 16 adopts <strong>ASCE 7-16</strong> by reference. That is the standard you use for basic wind speed, exposure categorization, MWFRS pressures, components and cladding (C&C) pressures, and the full wind load procedure. Note that California has not yet adopted ASCE 7-22 statewide — the next CBC cycle will likely move there, but as of the 2022 CBC, ASCE 7-16 is the controlling reference for permitted projects.</p>
+
+            <p>A handful of plain-English definitions before going further (because not every reader is a structural engineer):</p>
+
+            <ul>
+                <li><strong>MWFRS</strong> — Main Wind Force Resisting System. The structural system that resists wind acting on the building as a whole (shear walls, braced frames, moment frames).</li>
+                <li><strong>C&C</strong> — Components and Cladding. The individual elements that resist wind directly applied to a small area (windows, doors, roof sheathing, cladding panels, roof tiles).</li>
+                <li><strong>Risk Category</strong> — A classification (I through IV) based on building occupancy and consequence of failure. Risk Cat II is the default (most occupancies). Risk Cat III covers schools and assembly; IV covers hospitals and emergency facilities. Higher category = higher design wind speed.</li>
+                <li><strong>Exposure Category</strong> — B (urban / suburban / wooded), C (open terrain, scattered obstructions), or D (flat unobstructed terrain, water surfaces, smooth shoreline). California urban cores are typically B; suburban / agricultural is C; coastal headlands and bayfronts are D.</li>
+                <li><strong>Basic wind speed (V)</strong> — The 3-second gust wind speed at 33 ft above ground in Exposure C, with a return period associated with the Risk Category. Comes off the ASCE 7-16 wind speed map.</li>
+                <li><strong>Special Wind Region</strong> — A geographic area where the basic wind speed map does not directly apply because of terrain effects. ASCE 7-16 Figure 26.5-1B identifies these (next section).</li>
+            </ul>
+
+            <p>California Special Wind Regions and certain micro-climate cases require either a site-specific wind study (rare for typical commercial work) or a local jurisdiction value from the building department (the practical answer most of the time). The calculator flags Special Wind Region ZIPs so you do not accidentally use the baseline map in a location where the map does not control.</p>
+
+            <h2 id="special-wind-regions">California Special Wind Regions — Where Wind Really Does Matter</h2>
+
+            <p>ASCE 7-16 Figure 26.5-1B shades several portions of California as <strong>Special Wind Regions</strong>. In these areas, terrain effects (mountain passes funneling and accelerating prevailing winds, coastal headland topography, regional channeling) produce local wind speeds high enough that the smoothed national map underrepresents the design demand. Inside a Special Wind Region, you cannot just read the contour line — you need to use a local jurisdiction-published value or commission a site-specific wind study.</p>
+
+            <p>California has more Special Wind Regions than any other Lower 48 state. The major ones:</p>
+
+            <div class="region-cards">
+                <div class="region-card">
+                    <h4>San Gorgonio / Banning Pass <span class="swr-badge">SWR</span></h4>
+                    <div class="region-speed">~110-130+ mph</div>
+                    <p>The gap between the San Bernardino and San Jacinto mountains funnels Pacific air toward the Coachella Valley. Concentrated wind speeds near Whitewater, Palm Springs (92262), and the I-10 corridor. The wind farm visible from the freeway exists for a reason.</p>
+                </div>
+                <div class="region-card">
+                    <h4>Tehachapi Pass <span class="swr-badge">SWR</span></h4>
+                    <div class="region-speed">~110-125 mph</div>
+                    <p>The pass between the southern Sierra Nevada and the Tehachapi Mountains connecting the San Joaquin Valley to the Mojave. Among the largest wind farm areas in the U.S. Affects projects near Tehachapi, Mojave, and the Kern County wind belt.</p>
+                </div>
+                <div class="region-card">
+                    <h4>Altamont Pass <span class="swr-badge">SWR</span></h4>
+                    <div class="region-speed">~110-120 mph</div>
+                    <p>The pass between the Bay Area and the Central Valley along I-580. Persistent westerly winds drive the historic Altamont wind resource area. Affects Livermore, Tracy, Mountain House, and eastern Alameda County projects.</p>
+                </div>
+                <div class="region-card">
+                    <h4>Cajon Pass <span class="swr-badge">SWR</span></h4>
+                    <div class="region-speed">~105-120 mph</div>
+                    <p>The pass between the San Bernardino and San Gabriel mountains carrying I-15 from the LA basin to the High Desert. Wind acceleration affects projects near the pass and into Hesperia, Victorville, and Apple Valley.</p>
+                </div>
+            </div>
+
+            <p>Beyond the four major passes, ASCE 7-16 Figure 26.5-1B also shades portions of the Sierra Nevada and Cascade ranges (Donner Pass, Carson Pass, Lassen-area passes), parts of the northern coastal headland country (sections of the Mendocino and Sonoma coast), and certain other channeled-wind terrain. If your project sits in any of these, do not trust a generic ASCE map lookup — confirm the design wind speed with the local jurisdiction before you commit to a value.</p>
+
+            <div class="info-box warning-box">
+                <h4><i class="fas fa-mountain"></i> Practical note for Special Wind Region projects</h4>
+                <p>Most California city and county building departments inside a Special Wind Region have a published local design wind speed for their jurisdiction. Riverside County, San Bernardino County, Kern County, and Alameda County all have wind-region overlay maps or standard local values for the passes within their boundaries. Call the building department before designing — getting their number on the front end is faster than a redline at plan check.</p>
+            </div>
+
+            <h2 id="wind-speed-table">California Wind Speed Quick Reference</h2>
+
+            <p>The table below lists approximate ASCE 7-16 basic wind speeds for Risk Category II (the most common occupancy — single-family residential, most multifamily, commercial retail, light industrial) at representative California metros and Special Wind Region locations. Confirm exact values for your specific project ZIP in the calculator, and confirm Special Wind Region values with the local building department.</p>
+
+            <div class="wind-table-wrap">
+                <table class="wind-table">
+                    <thead>
+                        <tr>
+                            <th>Metro / Region (Sample ZIP)</th>
+                            <th>Risk Cat II Wind Speed</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Los Angeles (90015 downtown)</td>
+                            <td class="speed-cell">~95-105 mph</td>
+                            <td>Urban Exposure B typical. Seismic SDC D typical.</td>
+                        </tr>
+                        <tr>
+                            <td>Beverly Hills (90210)</td>
+                            <td class="speed-cell">~95-105 mph</td>
+                            <td>Westside LA baseline. Hillside lots may shift exposure.</td>
+                        </tr>
+                        <tr>
+                            <td>San Francisco (94102 / 94110)</td>
+                            <td class="speed-cell">~95-110 mph</td>
+                            <td>Hill exposure and bay frontage can shift higher. Exposure D on shoreline.</td>
+                        </tr>
+                        <tr>
+                            <td>Oakland (94612)</td>
+                            <td class="speed-cell">~95-110 mph</td>
+                            <td>Bay influence; eastern hills slightly higher.</td>
+                        </tr>
+                        <tr>
+                            <td>San Jose (95110)</td>
+                            <td class="speed-cell">~95-105 mph</td>
+                            <td>Santa Clara Valley baseline.</td>
+                        </tr>
+                        <tr>
+                            <td>San Diego (92101 / 92103)</td>
+                            <td class="speed-cell">~95-110 mph</td>
+                            <td>Coastal influence; baseline ASCE map applies.</td>
+                        </tr>
+                        <tr>
+                            <td>Sacramento (95814 / 95816)</td>
+                            <td class="speed-cell">~95-105 mph</td>
+                            <td>Central Valley baseline.</td>
+                        </tr>
+                        <tr>
+                            <td>Ventura (93001, coastal)</td>
+                            <td class="speed-cell">~100-115 mph</td>
+                            <td>Coastal exposure D for sites near unobstructed water.</td>
+                        </tr>
+                        <tr>
+                            <td>Palm Springs (92262) <span class="swr-badge">SWR</span></td>
+                            <td class="speed-cell">~110-130+ mph</td>
+                            <td>San Gorgonio / Banning Pass region. Confirm with Riverside County.</td>
+                        </tr>
+                        <tr>
+                            <td>Tehachapi / Mojave area <span class="swr-badge">SWR</span></td>
+                            <td class="speed-cell">~110-125 mph</td>
+                            <td>Tehachapi Pass region. Confirm with Kern County.</td>
+                        </tr>
+                        <tr>
+                            <td>Livermore / Tracy <span class="swr-badge">SWR</span></td>
+                            <td class="speed-cell">~110-120 mph</td>
+                            <td>Altamont Pass corridor. Confirm with Alameda / San Joaquin counties.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="warning-box info-box">
+                <h4><i class="fas fa-exclamation-triangle"></i> These are reference values — confirm via the calculator and the local jurisdiction</h4>
+                <p>The values above are approximate ASCE 7-16 Risk Category II references for representative California locations. Your exact ZIP may differ depending on micro-terrain, exposure, and proximity to a Special Wind Region boundary. Risk Category III (schools, assembly) and Risk Category IV (hospitals, essential facilities) use higher wind speeds at the same location. Always run the calculator for your specific project address, and for any Special Wind Region location, call the local building department before designing.</p>
+            </div>
+
+            <h2 id="permits-licensure">California Permits, PE, SE, OSHPD, and DSA</h2>
+
+            <p>California's permitting and licensure landscape is more layered than most other states. Five things to know before you start a project:</p>
+
+            <h3>California-licensed PE or SE is required for sealed structural drawings</h3>
+
+            <p>California requires a California-licensed Professional Engineer (PE) for sealed structural drawings on virtually any permitted project. A PE license issued by another state is not accepted for original sealing in California — you need a California PE registered with the Board for Professional Engineers, Land Surveyors, and Geologists (BPELSG).</p>
+
+            <h3>Structural Engineer (SE) is a separate, higher California credential</h3>
+
+            <p>California issues a separate Structural Engineer (SE) license above the PE — there are fewer SEs than PEs in the state, and the SE has additional examination requirements. Certain project types specifically require an SE rather than a PE: most hospitals (under HCAI / former OSHPD jurisdiction), most public school buildings (DSA jurisdiction), essential facilities, and buildings above thresholds defined in the Business and Professions Code. For routine residential and small commercial work, a California PE is sufficient.</p>
+
+            <h3>HCAI (formerly OSHPD) reviews hospitals</h3>
+
+            <p>OSHPD (Office of Statewide Health Planning and Development) was reorganized into HCAI (Department of Health Care Access and Information) effective March 2022. The structural-review function for hospitals, skilled nursing facilities, and acute psychiatric facilities now operates as the Hospital Building Safety Board within HCAI. If you are building any of those facility types, you are under HCAI jurisdiction, not the local city or county building department. HCAI review is slower and more rigorous, and the SE seal requirement applies.</p>
+
+            <h3>DSA reviews K-12 and community college projects</h3>
+
+            <p>The Division of the State Architect (DSA) reviews public K-12 and community college projects (and some other state buildings). DSA is the structural counterpart for educational facilities. If you are working on a public school or community college project, DSA review applies — not the local building department.</p>
+
+            <h3>WindLoadCalc does not provide California PE or SE stamps</h3>
+
+            <p>Be explicit: our in-house Professional Engineer is licensed in Florida only and only provides sealing services for Florida residential and small commercial projects up to three stories. We do not provide California PE or SE stamps for any project, including OSHPD / HCAI or DSA work. WindLoadCalc generates the wind load calculations and the permit-ready report your California engineer will use — but the seal must come from a California-licensed professional you engage directly.</p>
+
+            <div class="content-cta">
+                <h3>Run Your California Wind Numbers</h3>
+                <p>Compare wind against seismic in minutes. Free 7-day trial. No credit card required.</p>
+                <a href="/wind-load-calculator-shop.html" class="cta-button">Start Free Trial <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <h2 id="how-to">How to Calculate California Wind Loads</h2>
+
+            <div class="process-steps">
+                <div class="process-step">
+                    <h4>Enter your California ZIP code</h4>
+                    <p>The calculator looks up your ZIP, determines the correct California county, and pulls the ASCE 7-16 baseline basic wind speed for the location. If your ZIP falls inside or near a Special Wind Region (Banning, Tehachapi, Cajon, Altamont, San Gorgonio), the output flags it so you know to confirm the value with the local building department before designing.</p>
+                </div>
+                <div class="process-step">
+                    <h4>Pick your Risk Category and Exposure</h4>
+                    <p>Risk Category II covers most occupancies (single-family, multifamily, retail, light commercial). Risk Category III adds assembly and schools. Risk Category IV is for essential facilities (hospitals, fire stations, EOCs). Exposure B for urban / suburban / wooded sites; C for open terrain; D for coastal headlands and large water frontage. California's urban cores default to B, suburban inland to C, and coastal bluffs to D.</p>
+                </div>
+                <div class="process-step">
+                    <h4>Enter building geometry</h4>
+                    <p>Length, width, mean roof height, roof slope (X over 12), roof shape, and enclosure classification (Enclosed, Partially Open, Partially Enclosed, or Open). The calculator handles the four ASCE enclosure types — useful for California carports, patio covers, and structures with large permanent openings.</p>
+                </div>
+                <div class="process-step">
+                    <h4>Review the wind pressures — then run your seismic case in parallel</h4>
+                    <p>The calculator returns MWFRS pressures (for the structural system) and C&C pressures (for individual cladding elements). For California, this is half the lateral conversation: run your seismic case in parallel (using SDC, spectral accelerations, and base shear for your structure type), then design the lateral system to whichever envelope governs. Components and cladding always use the wind side regardless of seismic.</p>
+                </div>
+                <div class="process-step">
+                    <h4>Download the permit report and hand it to your California PE or SE</h4>
+                    <p>Export as PDF, Excel, or the architectural schedule format (a real .xlsx drop-in for AutoCAD). Hand the report to your California-licensed Professional Engineer or Structural Engineer for review, integration with the seismic design, and sealing. For OSHPD / HCAI or DSA projects, your SE will coordinate the agency review directly. We do not seal California work — that is your in-state engineer's role.</p>
+                </div>
+            </div>
+
+            <h2 id="faq">California Wind Load FAQ</h2>
+
+            <details class="faq-item">
+                <summary>Does wind or seismic control structural design in California?</summary>
+                <div class="faq-answer">For most California buildings, seismic governs lateral force design. California sits across the most active seismic zones in the continental United States, and the Seismic Design Category (SDC) assigned to a site typically produces base shear demands that exceed wind base shear at the same site. That does not mean wind is irrelevant — wind frequently controls for lightweight structures, signs, freestanding walls, rooftop equipment, parapets, solar arrays, and the components and cladding (C&C) checks on any building. The honest engineering answer is: run both, compare, and design for the envelope. A wind load calculator that pretends California is just another state misses this nuance.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>What are California's Special Wind Regions?</summary>
+                <div class="faq-answer">ASCE 7-16 Figure 26.5-1B shades several California areas as Special Wind Regions, meaning the basic wind speed map does not directly apply and a site-specific study or a local jurisdiction value is required. The most well-known California Special Wind Regions are mountain passes that funnel and accelerate prevailing winds: the Banning Pass and San Gorgonio Pass (between the San Bernardino and San Jacinto mountains, near Palm Springs and Whitewater), the Tehachapi Pass (between the Sierra Nevada and Tehachapi Mountains), the Cajon Pass (north of San Bernardino), and the Altamont Pass (east of the Bay Area). Coastal headlands and parts of the Sierra Nevada and Cascade passes are also flagged. Design wind speeds in these regions can reach 110 to 130-plus mph in concentrated areas, dramatically higher than the surrounding terrain.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>What's the wind speed in Los Angeles vs Palm Springs?</summary>
+                <div class="faq-answer">Most of urban Los Angeles falls in the ASCE 7-16 baseline range — roughly 95 to 110 mph for Risk Category II, depending on micro-location. Palm Springs (ZIP 92262) is a different story because it sits at the western edge of the San Gorgonio / Banning Pass Special Wind Region, where the local jurisdiction value is significantly higher than the surrounding desert. The right answer for any specific project address is to use the calculator, which reads ZIP-level data and flags Special Wind Region locations for verification with the local building department. Never assume the LA-basin baseline applies to a Coachella Valley or Inland Empire project.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>Do I need a California PE or SE to stamp my wind load report?</summary>
+                <div class="faq-answer">Yes. California requires a California-licensed Professional Engineer (PE) or Structural Engineer (SE) for sealed structural drawings on permitted projects. Hospital projects (OSHPD jurisdiction) and most public school projects (DSA jurisdiction) further require a California-licensed Structural Engineer specifically, not just a PE. WindLoadCalc generates the wind load calculations and reports your in-state engineer will use, but the seal must come from a California-licensed professional. We do not provide California PE or SE stamps — our in-house PE is licensed in Florida only and only for projects up to three stories there.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>What's CBC 2022 and how does it use ASCE 7-16?</summary>
+                <div class="faq-answer">The 2022 California Building Code (CBC) is the current code adopted statewide by the California Building Standards Commission, with an effective date of January 1, 2023. The CBC is updated on a three-year intervening cycle (next major revision: 2025 CBC). CBC Chapter 16 governs structural design and adopts ASCE 7-16 by reference for wind loads, with California-specific amendments where needed. The CBC also incorporates additional adoptions from agencies including OSHPD (now HCAI for hospitals) and DSA (Division of the State Architect for schools), each of which can layer further wind or lateral requirements on top of the base ASCE 7-16 procedure for their jurisdiction.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>When does wind load control over seismic in California?</summary>
+                <div class="faq-answer">Several recurring cases. First: lightweight structures where seismic base shear is low because the building mass is low (e.g., metal buildings, small storage sheds, certain pre-engineered systems). Second: tall slender appurtenances where wind moment exceeds seismic moment (signs, tall freestanding walls, parapets, rooftop equipment screens). Third: components and cladding on any building — C&C pressures are wind-driven regardless of seismic, and a glass curtain wall in San Francisco still has to resist the local wind GCp values. Fourth: solar arrays on flat roofs, where uplift from wind frequently dominates the connection design. Fifth: any Special Wind Region location, where elevated wind speeds can push wind demand past seismic at the same site. The calculator handles all of these — but you still have to run the seismic side separately.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>Are coastal California cities in a special wind region?</summary>
+                <div class="faq-answer">Most of the coastal urban corridor (San Diego, Long Beach, Santa Monica, the entire San Francisco Bay shore, Ventura, the Monterey Peninsula) is NOT classified as a Special Wind Region for code purposes — those cities sit in the baseline ASCE 7-16 wind speed zone, typically 95 to 110 mph for Risk Category II. The Special Wind Region designation is reserved for terrain that produces measurably accelerated or atypical wind, primarily the mountain passes inland. That said, exposed coastal headlands, bluff tops, and certain Big Sur stretches can locally see higher winds and warrant Exposure D handling rather than the urban Exposure B / suburban Exposure C default. Use the calculator's exposure category selection to capture this correctly.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>What's OSHPD and does it apply to my project?</summary>
+                <div class="faq-answer">OSHPD (Office of Statewide Health Planning and Development) was reorganized into HCAI (Department of Health Care Access and Information) effective March 2022, and the structural-review function now operates as the Hospital Building Safety Board. The OSHPD / HCAI jurisdiction covers hospitals, skilled nursing facilities, and acute psychiatric facilities — anywhere patients cannot self-evacuate. If your project is a hospital or similar acute-care facility, you fall under OSHPD / HCAI review, not the local building department, and a California-licensed Structural Engineer is required. DSA (Division of the State Architect) is the parallel agency for public K-12 and community college projects. Both jurisdictions accept ASCE 7-16 wind load calculations but layer additional review and detail requirements. If you are not building a hospital or a public school, neither agency applies — your project goes through the local city or county building department.</div>
+            </details>
+
+            <h2 id="related">More Wind Load Resources</h2>
+
+            <div class="related-links">
+                <h3>Related calculators and guides</h3>
+                <ul>
+                    <li><a href="/florida-wind-load-calculator">Florida wind load calculator (FBC + ASCE 7-22)</a></li>
+                    <li><a href="/texas-wind-load-calculator">Texas wind load calculator (IBC + ASCE 7-16)</a></li>
+                    <li><a href="/north-carolina-wind-load-calculator">North Carolina wind load calculator</a></li>
+                    <li><a href="/south-carolina-wind-load-calculator">South Carolina wind load calculator</a></li>
+                    <li><a href="/louisiana-wind-load-calculator">Louisiana wind load calculator</a></li>
+                    <li><a href="/asce-hazard-tool-alternative">ASCE Hazard Tool alternative</a></li>
+                    <li><a href="/shop/windows-doors-shutters.html">Windows, doors &amp; shutters C&amp;C calculator</a></li>
+                    <li><a href="/wind-load-calculator-for-engineers.html">Wind load tools for structural engineers</a></li>
+                    <li><a href="/Landing%20Pages/components-and-cladding-wind-loads.html">Components &amp; cladding fundamentals</a></li>
+                    <li><a href="/wind-load-calculator-shop.html">All calculators &amp; pricing</a></li>
+                </ul>
+            </div>
+
+            <div class="content-cta">
+                <h3>Ready to Run Your California Numbers?</h3>
+                <p>Wind, seismic-aware, Special Wind Region-aware. Get instant ASCE 7-16 + CBC 2022 wind pressures for any California ZIP. Free 7-day trial. No credit card.</p>
+                <a href="/wind-load-calculator-shop.html" class="cta-button">View Plans &amp; Start Trial <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="trust-signal">
+                <p><strong>Reviewed by Bob, P.E. (Florida licensed).</strong> WindLoadCalc has been calculating ASCE wind loads since 2002 — across ASCE 7-98, 7-02, 7-05, 7-10, 7-16, and 7-22 editions. California PE / SE stamps not provided; engage a California-licensed engineer for sealed work. Last updated 2026-05-23.</p>
+            </div>
+        </main>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-box">
+                <h3>On This Page</h3>
+                <ul>
+                    <li><a href="#wind-vs-seismic">Wind vs Seismic</a></li>
+                    <li><a href="#cbc-2022">CBC 2022 + ASCE 7-16</a></li>
+                    <li><a href="#special-wind-regions">Special Wind Regions</a></li>
+                    <li><a href="#wind-speed-table">Wind Speed Reference</a></li>
+                    <li><a href="#permits-licensure">Permits, PE, SE, OSHPD</a></li>
+                    <li><a href="#how-to">How to Calculate</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#related">Related Resources</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-cta">
+                <h3>Try It Free</h3>
+                <p>California-aware ASCE 7-16 + CBC 2022 wind loads in 15 minutes. 7-day trial, no credit card.</p>
+                <a href="/wind-load-calculator-shop.html" class="sidebar-cta-button">Start Free Trial</a>
+            </div>
+
+            <div class="sidebar-box">
+                <h3>Other State Calculators</h3>
+                <ul>
+                    <li><a href="/florida-wind-load-calculator">Florida (FBC 8th Ed)</a></li>
+                    <li><a href="/texas-wind-load-calculator">Texas (IBC 2021)</a></li>
+                    <li><a href="/north-carolina-wind-load-calculator">North Carolina</a></li>
+                    <li><a href="/south-carolina-wind-load-calculator">South Carolina</a></li>
+                    <li><a href="/louisiana-wind-load-calculator">Louisiana</a></li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="mailto:info@windloadcalc.com">info@windloadcalc.com</a></li>
+                    <li><a href="mailto:support@windloadcalc.com">support@windloadcalc.com</a></li>
+                    <li><a href="tel:8332723946">(833) 272-3946</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Calculators</h3>
+                <ul>
+                    <li><a href="/shop/windows-doors-shutters.html">Windows, Doors &amp; Shutters</a></li>
+                    <li><a href="/wind-load-calculator-shop.html">All Calculators &amp; Pricing</a></li>
+                    <li><a href="/wind-load-calculator-comparison.html">Calculator Comparison</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="/Landing%20Pages/free-wind-load-calculator.html">Free Demo</a></li>
+                    <li><a href="/Landing%20Pages/asce-7-wind-load-calculator.html">ASCE 7 Guide</a></li>
+                    <li><a href="/Landing%20Pages/components-and-cladding-wind-loads.html">C&amp;C Wind Loads</a></li>
+                    <li><a href="/faq.html">Wind Load FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="/why-us.html">About Us</a></li>
+                    <li><a href="/contact.html">Contact</a></li>
+                    <li><a href="/privacy-policy.html">Privacy</a></li>
+                    <li><a href="/terms-of-service.html">Terms</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2002&ndash;2026 WindLoadCalc. All rights reserved. Calculating ASCE wind loads since 2002.</p>
+        </div>
+    </footer>
+
+    <script>
+        // ZIP launch — calc.windloadcalc.com accepts ?zip=NNNNN and auto-derives
+        // city / state / county / wind speed. California Special Wind Region ZIPs
+        // (e.g. 92262 Palm Springs / Banning Pass) get flagged in the app output.
+        function launchCalc(e) {
+            e.preventDefault();
+            var zip = (document.getElementById('zip-input').value || '').replace(/[^0-9]/g, '').slice(0, 5);
+            var target = 'https://calc.windloadcalc.com/';
+            if (zip.length === 5) {
+                target = target + '?zip=' + zip;
+            }
+            window.location.href = target;
+            return false;
+        }
+    </script>
+</body>
+</html>

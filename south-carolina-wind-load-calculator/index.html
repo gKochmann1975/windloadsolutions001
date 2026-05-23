@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" type="image/svg+xml" href="/images/windloadcalc-favicon.svg">
+
+    <!-- SEO Meta -->
+    <title>South Carolina Wind Load Calculator — Charleston 150 mph | WindLoadCalc</title>
+    <meta name="description" content="Instant South Carolina wind load calculations per ASCE 7. Charleston, Myrtle Beach, Hilton Head coastal 150 mph. Post-Hugo code-compliant. Free lookup.">
+    <meta name="keywords" content="South Carolina wind load calculator, Charleston wind load, Myrtle Beach wind load, Hilton Head wind load, SC building code wind, ASCE 7-16 South Carolina, post-Hugo SC code">
+    <link rel="canonical" href="https://windloadcalc.com/south-carolina-wind-load-calculator">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="South Carolina Wind Load Calculator — Charleston 150 mph">
+    <meta property="og:description" content="Instant South Carolina wind load calculations per ASCE 7. Coastal 150 mph for Charleston, Myrtle Beach, Hilton Head. Free wind speed lookup by ZIP.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://windloadcalc.com/south-carolina-wind-load-calculator">
+    <meta property="og:image" content="https://windloadcalc.com/images/wind-calculator-og.jpg">
+    <meta property="og:site_name" content="WindLoadCalc">
+
+    <!-- SoftwareApplication Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "South Carolina Wind Load Calculator",
+        "alternateName": "WindLoadCalc South Carolina",
+        "applicationCategory": "EngineeringApplication",
+        "applicationSubCategory": "Structural Engineering",
+        "operatingSystem": "Web Browser",
+        "description": "Professional wind load calculator for South Carolina projects. Implements ASCE 7 wind load procedures referenced by the South Carolina Building Code (currently the 2021 SC Building Code, IBC 2021 + ASCE 7-16 base, with IBC 2024 adoption pending). Covers coastal Charleston, Beaufort, Horry, and Georgetown counties (140-150 mph design), inland Midlands (110-120 mph), and the Upstate (105-115 mph). Built on 24+ years of ASCE wind load practice.",
+        "url": "https://windloadcalc.com/south-carolina-wind-load-calculator",
+        "featureList": [
+            "ASCE 7-16 Wind Load Calculations for South Carolina",
+            "Coastal SC support (Charleston, Beaufort, Horry, Georgetown)",
+            "Exposure D for coastal sites",
+            "Inland and Upstate SC pressure zones",
+            "Components and Cladding (C&C) pressures",
+            "Main Wind Force Resisting System (MWFRS) pressures",
+            "Risk Category I, II, III, IV support",
+            "Exposure Category B, C, D",
+            "Permit-ready PDF and Excel reports",
+            "Architectural schedule export (.xlsx for AutoCAD)"
+        ],
+        "offers": {
+            "@type": "Offer",
+            "availability": "https://schema.org/InStock",
+            "url": "https://windloadcalc.com/wind-load-calculator-shop.html"
+        },
+        "provider": {
+            "@type": "Organization",
+            "name": "WindLoad Solutions",
+            "url": "https://windloadcalc.com",
+            "foundingDate": "2002"
+        }
+    }
+    </script>
+
+    <!-- BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [{
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://windloadcalc.com/"
+        },{
+            "@type": "ListItem",
+            "position": 2,
+            "name": "South Carolina Wind Load Calculator",
+            "item": "https://windloadcalc.com/south-carolina-wind-load-calculator"
+        }]
+    }
+    </script>
+
+    <!-- FAQPage (mirrors visible FAQ 1:1) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [{
+            "@type": "Question",
+            "name": "What is the wind speed in Charleston?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Charleston sits on the South Carolina Atlantic coast and falls in the higher coastal wind speed band that runs from Beaufort up through Georgetown. Design wind speeds for Risk Category II buildings in the Charleston metropolitan area generally fall in the 140 to 150 mph range under ASCE 7-16, with the exact number depending on the specific ZIP code, distance from open water, and exposure category. ZIPs on the peninsula and on the barrier islands trend toward the high end of that range; ZIPs west of I-526 are slightly lower. Enter your Charleston ZIP in the calculator at the top of this page for the exact value."
+            }
+        },{
+            "@type": "Question",
+            "name": "How did Hurricane Hugo change South Carolina building codes?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Hurricane Hugo struck Charleston as a Category 4 storm on September 21, 1989, and remains the single most significant building-code event in South Carolina history. The post-Hugo damage investigations exposed how few coastal SC structures could survive a true major hurricane, and the response was substantial: South Carolina formalized a statewide Building Codes Council, accelerated adoption of the model International Building Code in the years that followed, mandated coastal wind speed maps with elevated values, and tightened requirements around impact-resistant openings and roof attachment in the coastal corridor. Every modern SC engineer working a coastal project still references the post-Hugo lessons either directly or through the code provisions Hugo set in motion."
+            }
+        },{
+            "@type": "Question",
+            "name": "Does WindLoadCalc support Charleston BAR review requirements?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The Charleston Board of Architectural Review (BAR) reviews exterior changes for historic-district properties on aesthetic and historic-preservation grounds. WindLoadCalc generates the structural wind load calculations and design pressures your project needs for permitting; it does not generate the architectural drawings, material specifications, or historic-context documentation that BAR review focuses on. A typical historic-Charleston window or shutter replacement project will use the WindLoadCalc output for the structural / building permit side, and a separate BAR submittal package for the historic-review side. The two run in parallel and both have to clear before construction."
+            }
+        },{
+            "@type": "Question",
+            "name": "What's the wind speed in Myrtle Beach?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Myrtle Beach is in Horry County on the northern South Carolina coast. Design wind speeds for Risk Category II buildings along the Grand Strand generally fall in the 140 to 150 mph range under ASCE 7-16, similar to the Charleston coast. ZIPs immediately fronting the Atlantic (29577, 29572, and the barrier-island ZIPs) sit at the higher end; ZIPs west of US 17 trend lower. Surfside Beach, Murrells Inlet, and Pawleys Island follow the same coastal band. Enter your Myrtle Beach ZIP in the calculator for the exact ASCE 7 value."
+            }
+        },{
+            "@type": "Question",
+            "name": "Do I need a South Carolina PE to seal my report?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. South Carolina requires a South Carolina-licensed Professional Engineer to seal structural drawings and calculations submitted for permit. WindLoadCalc generates the wind load calculations, pressures, and supporting documentation a SC PE can review and seal, but the sealing engineer must hold a current South Carolina license. WindLoadCalc does not currently provide PE sign-and-seal service for South Carolina projects; our in-house PE is Florida-licensed only. Plan to work with a SC-licensed engineer of record for the sealing step."
+            }
+        },{
+            "@type": "Question",
+            "name": "What's the difference between coastal SC and inland SC wind requirements?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Coastal South Carolina (Beaufort, Charleston, Berkeley, Dorchester, Georgetown, Horry, and parts of Colleton and Jasper counties) is in the hurricane-influenced design wind band, with Risk Category II values generally in the 140 to 150 mph range under ASCE 7-16. Inland SC (Columbia, the Midlands, and the Pee Dee interior) drops to roughly 110 to 120 mph as hurricane wind decay reduces design values inland. The Upstate (Greenville, Spartanburg, the Blue Ridge foothills) is the lowest at roughly 105 to 115 mph. Coastal sites also more often trigger Exposure D (within ~600 ft of open water) versus the Exposure C default that covers most inland sites. The combination of higher wind speed and higher exposure category is what makes coastal SC projects produce significantly larger design pressures than otherwise-identical inland projects."
+            }
+        },{
+            "@type": "Question",
+            "name": "Which ASCE edition does South Carolina use?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The currently effective South Carolina Building Code is the 2021 SC Building Code, which is based on the 2021 International Building Code and references ASCE 7-16 as the wind load standard. The SC Building Codes Council published its Notice of Intent to adopt the 2024 I-Codes in early 2025, with full implementation targeted for January 2027 — at which point the wind load standard will move to ASCE 7-22. Until that effective date, design SC projects to ASCE 7-16. The calculator handles both editions and will guide you to the right reference for your permit submittal date."
+            }
+        },{
+            "@type": "Question",
+            "name": "Are upstate SC mountains in a special wind region?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The South Carolina Upstate sits at the southern toe of the Blue Ridge / Southern Appalachian foothills. ASCE 7 identifies designated special wind regions where local topography produces wind speeds higher than the surrounding contour line would suggest — most of these in SC are concentrated in the higher-elevation pockets of Greenville, Pickens, and Oconee counties. Most Upstate sites are NOT in a special wind region and use the standard contour values, but the calculator will flag the special wind region designation if your specific ZIP triggers it. For ridge-top, escarpment, or hilltop sites anywhere in the Upstate, the topographic factor Kzt should be reviewed carefully by your PE — that adjustment can exceed the base wind speed effect for an exposed site."
+            }
+        }]
+    }
+    </script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7;
+            color: #2d3748;
+            background: #ffffff;
+        }
+
+        /* Header */
+        .main-header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo-image { height: 80px; width: auto; }
+
+        .header-cta {
+            background: #0018ff;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .header-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 24, 255, 0.3);
+        }
+
+        /* Hero */
+        .article-header {
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            color: white;
+            padding: 4rem 0 3rem;
+            text-align: center;
+        }
+
+        .article-header .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .article-category {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .article-title {
+            font-size: 3rem;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .article-subtitle {
+            font-size: 1.25rem;
+            opacity: 0.95;
+            line-height: 1.6;
+            font-weight: 400;
+            margin-bottom: 2rem;
+        }
+
+        /* Hero ZIP form */
+        .zip-form {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 560px;
+            margin: 0 auto;
+        }
+
+        .zip-input {
+            flex: 1 1 220px;
+            padding: 1rem 1.25rem;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 50px;
+            outline: none;
+            color: #1f2937;
+            min-width: 0;
+        }
+
+        .zip-submit {
+            background: white;
+            color: #0018ff;
+            border: none;
+            padding: 1rem 1.75rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .zip-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .zip-note {
+            font-size: 0.85rem;
+            opacity: 0.85;
+            margin-top: 1rem;
+        }
+
+        /* Main content layout */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .main-content { min-width: 0; }
+
+        .sidebar {
+            position: sticky;
+            top: 100px;
+            align-self: start;
+        }
+
+        .sidebar-box {
+            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+            border: 2px solid #e5e7eb;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-box h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #181E57;
+            margin-bottom: 1.5rem;
+        }
+
+        .sidebar-box ul { list-style: none; }
+        .sidebar-box ul li { margin-bottom: 0.75rem; }
+        .sidebar-box a {
+            color: #4a5568;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: block;
+            padding: 0.5rem 0 0.5rem 1rem;
+            border-left: 3px solid transparent;
+        }
+        .sidebar-box a:hover {
+            color: #0018ff;
+            border-left-color: #0018ff;
+            padding-left: 1.5rem;
+        }
+
+        .sidebar-cta {
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .sidebar-cta h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .sidebar-cta p {
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            opacity: 0.95;
+        }
+
+        .sidebar-cta-button {
+            display: block;
+            background: white;
+            color: #0018ff;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Content typography */
+        .main-content h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #181E57;
+            margin: 3rem 0 1.5rem;
+            line-height: 1.3;
+            border-bottom: 3px solid #0018ff;
+            padding-bottom: 0.75rem;
+        }
+
+        .main-content h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin: 2rem 0 1rem;
+        }
+
+        .main-content p {
+            font-size: 1.08rem;
+            line-height: 1.8;
+            margin-bottom: 1.25rem;
+            color: #4a5568;
+        }
+
+        .main-content ul {
+            margin: 1.25rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .main-content ul li {
+            margin-bottom: 0.75rem;
+            color: #4a5568;
+            line-height: 1.7;
+        }
+
+        .main-content ul li strong { color: #0018ff; font-weight: 700; }
+
+        /* Wind speed table */
+        .wind-table-wrap { overflow-x: auto; margin: 2rem 0; }
+
+        .wind-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+        }
+
+        .wind-table th {
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            color: white;
+            padding: 1rem 1.25rem;
+            text-align: left;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .wind-table td {
+            padding: 0.9rem 1.25rem;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 0.98rem;
+        }
+
+        .wind-table tr:nth-child(even) td { background: #f9fafb; }
+        .wind-table tr:last-child td { border-bottom: none; }
+
+        .speed-cell { font-weight: 700; color: #0018ff; white-space: nowrap; }
+        .coastal-badge {
+            display: inline-block;
+            background: #e0f2fe;
+            color: #0369a1;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.15rem 0.5rem;
+            border-radius: 10px;
+            margin-left: 0.4rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Info boxes */
+        .info-box {
+            background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%);
+            border-left: 4px solid #0018ff;
+            border-radius: 10px;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+        }
+
+        .info-box h4 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #0018ff;
+            margin-bottom: 0.75rem;
+        }
+
+        .info-box p { font-size: 1rem; line-height: 1.7; margin-bottom: 0; }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left: 4px solid #f59e0b;
+        }
+
+        .warning-box h4 { color: #b45309; }
+
+        .historical-box {
+            background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+            border-left: 4px solid #dc2626;
+        }
+
+        .historical-box h4 { color: #991b1b; }
+
+        /* Region cards */
+        .region-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+            margin: 2rem 0;
+        }
+
+        .region-card {
+            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .region-card:hover {
+            border-color: #0018ff;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 24, 255, 0.1);
+        }
+
+        .region-card h4 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #181E57;
+            margin-bottom: 0.5rem;
+        }
+
+        .region-card .region-speed {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: #0018ff;
+            margin-bottom: 0.5rem;
+        }
+
+        .region-card p {
+            font-size: 0.92rem;
+            line-height: 1.55;
+            margin-bottom: 0;
+            color: #6b7280;
+        }
+
+        /* Glossary inline */
+        .glossary-term {
+            background: #fef9c3;
+            border-radius: 4px;
+            padding: 0.05rem 0.3rem;
+            font-weight: 600;
+            color: #713f12;
+        }
+
+        /* Process steps */
+        .process-steps { counter-reset: step; margin: 2rem 0; }
+
+        .process-step {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1.5rem 1.5rem 1.5rem 4.5rem;
+            margin-bottom: 1.25rem;
+            position: relative;
+        }
+
+        .process-step::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: 1.5rem;
+            top: 1.5rem;
+            width: 2rem;
+            height: 2rem;
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.05rem;
+        }
+
+        .process-step h4 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+        }
+
+        .process-step p {
+            font-size: 1rem;
+            margin-bottom: 0;
+        }
+
+        /* FAQ */
+        .faq-item {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .faq-item summary {
+            padding: 1.25rem 1.5rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #181E57;
+            cursor: pointer;
+            list-style: none;
+            position: relative;
+            padding-right: 3rem;
+        }
+
+        .faq-item summary::-webkit-details-marker { display: none; }
+
+        .faq-item summary::after {
+            content: '+';
+            position: absolute;
+            right: 1.25rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            color: #0018ff;
+            font-weight: 400;
+            line-height: 1;
+        }
+
+        .faq-item[open] summary::after { content: '−'; }
+
+        .faq-item .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            color: #4a5568;
+            line-height: 1.7;
+        }
+
+        /* Content CTA */
+        .content-cta {
+            background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 50%, #8b5cf6 100%);
+            background-size: 200% 200%;
+            border-radius: 20px;
+            padding: 3rem 2.5rem;
+            margin: 3rem 0;
+            text-align: center;
+            color: white;
+        }
+
+        .content-cta h3 {
+            font-size: 1.85rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .content-cta p {
+            font-size: 1.1rem;
+            margin-bottom: 1.75rem;
+            opacity: 0.95;
+            color: white;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: #0018ff;
+            padding: 1rem 2.25rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
+            font-size: 1.05rem;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+        }
+
+        .cta-button i { margin-left: 0.5rem; }
+
+        /* Internal links section */
+        .related-links {
+            background: #f9fafb;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .related-links h3 {
+            margin-top: 0;
+            color: #181E57;
+        }
+
+        .related-links ul {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+        }
+
+        .related-links ul li { margin: 0; }
+
+        .related-links a {
+            color: #0018ff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .related-links a:hover { text-decoration: underline; }
+
+        /* Trust block */
+        .trust-block {
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2.5rem 0;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            text-align: center;
+        }
+
+        .trust-stat .num {
+            font-size: 2rem;
+            font-weight: 900;
+            color: #0018ff;
+            display: block;
+            line-height: 1;
+            margin-bottom: 0.4rem;
+        }
+
+        .trust-stat .label {
+            font-size: 0.92rem;
+            color: #475569;
+            font-weight: 600;
+        }
+
+        .last-updated {
+            font-size: 0.9rem;
+            color: #6b7280;
+            font-style: italic;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        /* Footer */
+        .main-footer {
+            background: #1f2937;
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .footer-column ul { list-style: none; padding: 0; }
+        .footer-column li { margin-bottom: 0.5rem; font-size: 0.92rem; }
+        .footer-column a {
+            color: rgba(255, 255, 255, 0.75);
+            text-decoration: none;
+        }
+        .footer-column a:hover { color: white; }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .sidebar { position: static; }
+            .region-cards { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: repeat(2, 1fr); }
+            .trust-block { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 640px) {
+            .article-title { font-size: 2rem; }
+            .article-subtitle { font-size: 1.05rem; }
+            .main-content h2 { font-size: 1.65rem; }
+            .process-step { padding-left: 3.5rem; }
+            .content-cta { padding: 2rem 1.5rem; }
+            .content-cta h3 { font-size: 1.4rem; }
+            .related-links ul { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: 1fr; }
+            .wind-table th, .wind-table td { padding: 0.7rem 0.85rem; font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="header-container">
+            <a href="/index.html">
+                <img src="/images/windloadcalc-logo.svg" alt="WindLoadCalc — South Carolina wind load calculator" class="logo-image">
+            </a>
+            <a href="/wind-load-calculator-shop.html" class="header-cta">Start Free Trial</a>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="article-header">
+        <div class="container">
+            <div class="article-category">South Carolina Wind Load Calculator</div>
+            <h1 class="article-title">South Carolina Wind Load Calculator</h1>
+            <p class="article-subtitle">Instant design pressures per <strong>ASCE 7-16</strong> referenced by the <strong>South Carolina Building Code</strong>. Coastal Charleston, Myrtle Beach, Hilton Head ready. Post-Hugo code-compliant from day one.</p>
+
+            <form class="zip-form" id="zip-form" onsubmit="return launchCalc(event)">
+                <input type="text" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" class="zip-input" id="zip-input" placeholder="Enter SC ZIP (e.g. 29401)" aria-label="South Carolina ZIP code">
+                <button type="submit" class="zip-submit">Get SC Wind Pressures &rarr;</button>
+            </form>
+            <p class="zip-note">Free 7-day trial. No credit card required.</p>
+        </div>
+    </section>
+
+    <!-- Main content -->
+    <div class="content-wrapper">
+        <main class="main-content">
+            <p>South Carolina is one of the most wind-exposed states on the East Coast, but its design problem is two-handed in a way that catches engineers and contractors out: the coast runs on hurricane-level wind speeds (the kind of numbers Charleston engineers know in their sleep after Hugo) while the Upstate behaves like an inland Midwestern state with topography in play. A single design assumption that works in Greenville will under-design a project in Mount Pleasant by 30+ psf, and a coastal-defaults approach will over-design a Columbia warehouse by enough to lose the bid. The SC wind problem isn't hard — it's just specific to where you are in the state.</p>
+
+            <p>This page is the South Carolina-specific landing for WindLoadCalc. Enter any SC ZIP code above and the calculator launches with the correct ASCE 7 wind speed, county designation, and a starting point for exposure category derived from the site's distance to open water. From there you pick risk category and building geometry and you get permit-ready pressures in minutes — using the same engine behind 24+ years of ASCE wind load practice.</p>
+
+            <div class="info-box">
+                <h4><i class="fas fa-info-circle"></i> Why this calculator is different</h4>
+                <p>We have been doing ASCE wind load work since 2002 — through ASCE 7-98, 7-02, 7-05, 7-10, 7-16, and now 7-22. SkyCiv and the other generic national calculators cover SC as a checkbox on a much larger international tool. This page (and the underlying calculator) is built for the SC permit reality: coastal hurricane corridor, Charleston historic-district overlay, Upstate topography, and SC PE sealing requirements. Plain-English explanations alongside the math, not a wall of variables.</p>
+            </div>
+
+            <h2 id="wind-speeds">South Carolina Wind Speed Quick Reference</h2>
+
+            <p>The table below lists representative design wind speeds for major South Carolina regions, Risk Category II (the most common occupancy — single-family residential and most multifamily, commercial retail, light industrial), under ASCE 7-16. These are baseline approximations; the calculator above returns the exact value for your specific ZIP code. <span class="glossary-term">Risk Category II</span> means a normal-occupancy building — not a hospital (IV), not an assembly building (III), and not a low-occupancy ag building (I).</p>
+
+            <div class="wind-table-wrap">
+                <table class="wind-table">
+                    <thead>
+                        <tr>
+                            <th>Region / County</th>
+                            <th>Risk Cat II Wind Speed</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Charleston metro (Charleston, Berkeley, Dorchester) <span class="coastal-badge">Coast</span></td>
+                            <td class="speed-cell">140–150 mph</td>
+                            <td>Peninsula and barrier-island ZIPs at the high end</td>
+                        </tr>
+                        <tr>
+                            <td>Beaufort County (Hilton Head, Bluffton) <span class="coastal-badge">Coast</span></td>
+                            <td class="speed-cell">140–150 mph</td>
+                            <td>Hilton Head Island and Daufuskie at the high end</td>
+                        </tr>
+                        <tr>
+                            <td>Horry County (Myrtle Beach) <span class="coastal-badge">Coast</span></td>
+                            <td class="speed-cell">140–150 mph</td>
+                            <td>Grand Strand ZIPs facing the Atlantic at the high end</td>
+                        </tr>
+                        <tr>
+                            <td>Georgetown County (Pawleys, Murrells Inlet) <span class="coastal-badge">Coast</span></td>
+                            <td class="speed-cell">140–150 mph</td>
+                            <td>Coastal Georgetown follows the Grand Strand band</td>
+                        </tr>
+                        <tr>
+                            <td>Colleton, Jasper, Hampton (low-country interior)</td>
+                            <td class="speed-cell">125–140 mph</td>
+                            <td>Transition zone between coast and Midlands</td>
+                        </tr>
+                        <tr>
+                            <td>Columbia / Midlands (Richland, Lexington, Sumter)</td>
+                            <td class="speed-cell">110–120 mph</td>
+                            <td>Inland; hurricane wind decay reduces design values</td>
+                        </tr>
+                        <tr>
+                            <td>Pee Dee interior (Florence, Marlboro, Darlington)</td>
+                            <td class="speed-cell">110–120 mph</td>
+                            <td>Inland north-central SC</td>
+                        </tr>
+                        <tr>
+                            <td>Upstate (Greenville, Spartanburg, Anderson)</td>
+                            <td class="speed-cell">105–115 mph</td>
+                            <td>Lowest base values; check special wind regions for ridge sites</td>
+                        </tr>
+                        <tr>
+                            <td>Blue Ridge foothills (Pickens, Oconee high country)</td>
+                            <td class="speed-cell">105–115 mph + Kzt</td>
+                            <td>Topographic factor often controls for exposed ridge sites</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="warning-box info-box">
+                <h4><i class="fas fa-exclamation-triangle"></i> These are approximate — confirm via the calculator</h4>
+                <p>The values above are baseline ASCE 7-16 Risk Category II references for major SC regions. Your exact ZIP code may differ — coastal vs. inland transitions, distance from open water, and Exposure D thresholds all shift the actual design pressure. Risk Category III (assembly, schools) and Risk Category IV (hospitals, essential facilities) require higher speeds derived from the same location. Always run the calculator for your specific project address before designing.</p>
+            </div>
+
+            <h2 id="sc-code">South Carolina Building Code &amp; ASCE 7 Adoption</h2>
+
+            <p>South Carolina runs its building code through the SC Building Codes Council, which adopts a version of the International Code Council family of model codes on a multi-year cycle. As of the date this page was updated, the currently effective standard is:</p>
+
+            <ul>
+                <li><strong>2021 South Carolina Building Code</strong> — based on the 2021 International Building Code (IBC).</li>
+                <li><strong>ASCE 7-16</strong> — referenced as the minimum design loads standard within the 2021 IBC chapter on structural loads.</li>
+                <li><strong>2021 South Carolina Residential Code</strong> — based on the 2021 International Residential Code (IRC) for one- and two-family dwellings and townhouses up to three stories.</li>
+            </ul>
+
+            <p>The SC Building Codes Council formally noticed adoption of the 2024 I-Codes in early 2025 and is working through the public comment and modification cycle. Full implementation of the 2024 SC Building Code — which will move the wind load standard to ASCE 7-22 — is targeted for January 2027. Until that effective date arrives, design your SC project to ASCE 7-16; after, design to ASCE 7-22.</p>
+
+            <p>The calculator handles both editions so the transition does not break your existing project library. As ASCE 7-22 brings <span class="glossary-term">four enclosure types</span> instead of three (Enclosed, Partially Open, Partially Enclosed, Open) and a re-organized Chapter 30 for Components and Cladding, you will see the relevant inputs appear or disappear depending on which code version you select for the project.</p>
+
+            <h2 id="hugo">Hurricane Hugo — The Storm That Rebuilt the SC Code</h2>
+
+            <p>Every South Carolina engineer of a certain vintage divides the state's building code history into two eras: before Hugo and after Hugo. Hurricane Hugo made landfall just north of Charleston on September 21–22, 1989 as a Category 4 storm, with sustained winds estimated at 140 mph and a storm surge that ran over 20 feet in places. It was, at the time, the costliest hurricane in U.S. history. Beyond the human and economic toll, the post-storm investigations made one engineering conclusion impossible to escape: a very large share of the residential and light-commercial stock in coastal SC could not survive a true major hurricane, and the code that built them was not strict enough.</p>
+
+            <div class="historical-box info-box">
+                <h4><i class="fas fa-history"></i> What Hugo specifically changed in SC practice</h4>
+                <p>The post-Hugo damage investigations directly drove (or accelerated) several SC code outcomes: formal statewide adoption of model codes through a centralized Building Codes Council rather than a patchwork of municipal codes; coastal wind speed maps with higher design values mandated for the hurricane corridor; tightened roof attachment and uplift requirements; broader use of impact-resistant glazing requirements in coastal counties; and a sustained inspection culture in counties like Charleston, Berkeley, and Dorchester that did not previously exist at the same intensity. The 2021 SC Building Code (and the ASCE 7-16 it references) is the descendant of decisions made in the rooms after Hugo.</p>
+            </div>
+
+            <p>Two practical takeaways for anyone designing in SC today:</p>
+
+            <ul>
+                <li><strong>Coastal SC wind speeds are not negotiable.</strong> If you treat a Mount Pleasant project the way a generic national tool treats it — assuming Atlantic seaboard "moderate" wind — you under-design. The 140–150 mph band for coastal SC exists because Hugo proved the lower numbers were insufficient.</li>
+                <li><strong>Roof attachment and impact protection are non-optional in the coastal corridor.</strong> Even a residential window-replacement scope in coastal SC will be reviewed against impact-rated or shutter-protected openings expectations. The wind load calculation drives the rated pressure each opening needs to meet, and the SC plan reviewer expects that number on the submittal.</li>
+            </ul>
+
+            <p>Subsequent storms — Hurricane Matthew (2016), Hurricane Florence (2018), and Hurricane Ian (2022, grazing Pawleys Island and the SC coast) — have reinforced the post-Hugo direction without fundamentally changing it. Hugo remains the inflection point.</p>
+
+            <div class="content-cta">
+                <h3>Get Pressures for Your South Carolina Project</h3>
+                <p>Enter your SC ZIP, pick your risk category, and get a permit-ready C&amp;C report in under 15 minutes.</p>
+                <a href="/wind-load-calculator-shop.html" class="cta-button">Start Free Trial <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <h2 id="charleston-bar">Charleston Historic District &amp; BAR Considerations</h2>
+
+            <p>Charleston is unusual among major American cities in that it operates one of the country's oldest and most active architectural review programs: the <strong>Board of Architectural Review</strong> (BAR), which oversees exterior changes to properties in the city's historic districts. If your project touches a historic-zoned property in downtown Charleston, the south of Broad neighborhood, the French Quarter, the Old &amp; Historic District, the Cannonborough-Elliotborough overlay, or any of the other regulated overlays, you have two parallel approval tracks running at the same time:</p>
+
+            <ul>
+                <li><strong>Building Permit (structural / code) track.</strong> This is where your wind load calculation lives. The City of Charleston (and the County of Charleston for unincorporated work) reviews structural drawings against the SC Building Code, including the ASCE 7-16 design pressures every window, door, shutter, and exterior element must meet. WindLoadCalc generates the calculation package and pressure schedule for this track.</li>
+                <li><strong>BAR (historic preservation) track.</strong> Separately, BAR reviews the proposed exterior change for compatibility with the historic character of the building and the surrounding district — material, profile, muntin pattern, color, hardware, sightline impact, and conformity with the Charleston Historic Design Guidelines. WindLoadCalc does not generate BAR documentation; that is an architectural and historic-context submittal.</li>
+            </ul>
+
+            <p>The two tracks interact in practical ways. For example, BAR will often require true-divided-light wood windows on a contributing historic property, which substantially constrains the product approval options that can meet a 140+ mph coastal Charleston design pressure. The right workflow is: run the wind load calculation first (so you know the pressure target), then shop products with BAR-compatible aesthetics that meet or exceed the target, then submit both tracks in parallel.</p>
+
+            <p>Outside the City of Charleston specifically, similar (less stringent) historic-district overlays exist in Beaufort, Georgetown, Camden, and other older SC municipalities. The same parallel-tracks logic applies.</p>
+
+            <h2 id="how-to">How to Calculate Your South Carolina Wind Load</h2>
+
+            <div class="process-steps">
+                <div class="process-step">
+                    <h4>Enter your South Carolina ZIP code</h4>
+                    <p>The calculator looks up your ZIP, determines the correct SC county, and pulls the ASCE 7-16 baseline wind speed. Coastal ZIPs (Charleston, Beaufort, Horry, Georgetown) will return values in the 140–150 mph band; Midlands and Upstate ZIPs will return lower values reflecting hurricane wind decay.</p>
+                </div>
+                <div class="process-step">
+                    <h4>Pick your Risk Category</h4>
+                    <p><span class="glossary-term">Risk Category II</span> covers most occupancies (single-family, multifamily, retail, light commercial). Risk Category III adds assembly, schools, and substantial-hazard buildings. Risk Category IV is for essential facilities (hospitals, fire stations, EOCs). Risk Category I is low-occupancy ag and storage. The wind speed scales upward with the category.</p>
+                </div>
+                <div class="process-step">
+                    <h4>Set Exposure Category and building geometry</h4>
+                    <p><span class="glossary-term">Exposure C</span> is the SC default for most suburban and rural sites. <span class="glossary-term">Exposure B</span> applies when the project is shielded by surrounding buildings or dense trees on all sides — common in older Charleston peninsula lots and Upstate wooded subdivisions. <span class="glossary-term">Exposure D</span> applies for coastal sites with unobstructed open water — Hilton Head ocean-front, Sullivan's Island, Pawleys Island, and the Grand Strand barrier strips routinely trigger it. Then enter the building dimensions: length, width, mean roof height, roof slope (X over 12), and roof shape.</p>
+                </div>
+                <div class="process-step">
+                    <h4>Review the calculated pressures</h4>
+                    <p>The calculator returns <span class="glossary-term">MWFRS</span> pressures (for the structural system — the Main Wind Force Resisting System) and <span class="glossary-term">C&amp;C</span> pressures (for individual windows, doors, shutters, and cladding elements — Components and Cladding). C&amp;C output includes zone breakdowns: Zone 4 (wall field), Zone 5 (wall corner), and the corresponding roof zones for your roof type. Each pressure is shown both as a number and as a plain-English explanation of which factor is driving it.</p>
+                </div>
+                <div class="process-step">
+                    <h4>Download the permit report</h4>
+                    <p>Export as PDF, Excel, or the architectural schedule format (a real .xlsx you can drop directly into AutoCAD as a window/door schedule). The PDF includes the ASCE 7 reference, the SC building code edition you selected, the velocity finder result for your ZIP, and the per-opening pressure schedule. Hand this package to your SC-licensed PE for review and seal.</p>
+                </div>
+            </div>
+
+            <h2 id="differentiators">Why South Carolina Engineers Choose WindLoadCalc</h2>
+
+            <div class="region-cards">
+                <div class="region-card">
+                    <h4>Since 2002</h4>
+                    <div class="region-speed">24+ yrs</div>
+                    <p>We have been calculating ASCE wind loads since the 1998 edition and have shipped tools through seven ASCE 7 revisions. SkyCiv launched around 2015 — we have a decade and a half of permit-tested practice they cannot retroactively claim.</p>
+                </div>
+                <div class="region-card">
+                    <h4>Plain-English explanations</h4>
+                    <div class="region-speed">Every term</div>
+                    <p>Every technical input — MWFRS, GCpi, Kzt, edge strip "a", exposure category — is defined plain-English the first time it appears. Built for the engineer, the architect, the contractor, and the plan reviewer to all read the same report.</p>
+                </div>
+                <div class="region-card">
+                    <h4>Modern, mobile-first</h4>
+                    <div class="region-speed">Fast UI</div>
+                    <p>Designed for the 2026 web, not the 2008 desktop. Horizontal step dial, real .xlsx exports, mobile-responsive everywhere. The legacy engineering tools look and feel their age — we don't.</p>
+                </div>
+                <div class="region-card">
+                    <h4>Same-day support</h4>
+                    <div class="region-speed">Real humans</div>
+                    <p>Email support@windloadcalc.com. Real same-day responses from the engineers who built the tool. No ticket queue, no community forum, no chasing a chatbot when a Charleston permit reviewer questions a pressure on a Tuesday afternoon.</p>
+                </div>
+            </div>
+
+            <div class="warning-box info-box">
+                <h4><i class="fas fa-stamp"></i> PE sealing for SC projects</h4>
+                <p>WindLoadCalc generates the wind load calculations and supporting documentation. South Carolina requires a <strong>South Carolina-licensed Professional Engineer</strong> to seal structural drawings submitted for permit. Our in-house PE is Florida-licensed only and cannot seal SC work. Plan to engage a SC-licensed engineer of record for the sealing step; our calculation package is designed to make that review fast.</p>
+            </div>
+
+            <h2 id="faq">South Carolina Wind Load FAQ</h2>
+
+            <details class="faq-item">
+                <summary>What is the wind speed in Charleston?</summary>
+                <div class="faq-answer">Charleston sits on the South Carolina Atlantic coast and falls in the higher coastal wind speed band that runs from Beaufort up through Georgetown. Design wind speeds for Risk Category II buildings in the Charleston metropolitan area generally fall in the 140 to 150 mph range under ASCE 7-16, with the exact number depending on the specific ZIP code, distance from open water, and exposure category. ZIPs on the peninsula and on the barrier islands trend toward the high end of that range; ZIPs west of I-526 are slightly lower. Enter your Charleston ZIP in the calculator at the top of this page for the exact value.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>How did Hurricane Hugo change South Carolina building codes?</summary>
+                <div class="faq-answer">Hurricane Hugo struck Charleston as a Category 4 storm on September 21, 1989, and remains the single most significant building-code event in South Carolina history. The post-Hugo damage investigations exposed how few coastal SC structures could survive a true major hurricane, and the response was substantial: South Carolina formalized a statewide Building Codes Council, accelerated adoption of the model International Building Code in the years that followed, mandated coastal wind speed maps with elevated values, and tightened requirements around impact-resistant openings and roof attachment in the coastal corridor. Every modern SC engineer working a coastal project still references the post-Hugo lessons either directly or through the code provisions Hugo set in motion.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>Does WindLoadCalc support Charleston BAR review requirements?</summary>
+                <div class="faq-answer">The Charleston Board of Architectural Review (BAR) reviews exterior changes for historic-district properties on aesthetic and historic-preservation grounds. WindLoadCalc generates the structural wind load calculations and design pressures your project needs for permitting; it does not generate the architectural drawings, material specifications, or historic-context documentation that BAR review focuses on. A typical historic-Charleston window or shutter replacement project will use the WindLoadCalc output for the structural / building permit side, and a separate BAR submittal package for the historic-review side. The two run in parallel and both have to clear before construction.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>What's the wind speed in Myrtle Beach?</summary>
+                <div class="faq-answer">Myrtle Beach is in Horry County on the northern South Carolina coast. Design wind speeds for Risk Category II buildings along the Grand Strand generally fall in the 140 to 150 mph range under ASCE 7-16, similar to the Charleston coast. ZIPs immediately fronting the Atlantic (29577, 29572, and the barrier-island ZIPs) sit at the higher end; ZIPs west of US 17 trend lower. Surfside Beach, Murrells Inlet, and Pawleys Island follow the same coastal band. Enter your Myrtle Beach ZIP in the calculator for the exact ASCE 7 value.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>Do I need a South Carolina PE to seal my report?</summary>
+                <div class="faq-answer">Yes. South Carolina requires a South Carolina-licensed Professional Engineer to seal structural drawings and calculations submitted for permit. WindLoadCalc generates the wind load calculations, pressures, and supporting documentation a SC PE can review and seal, but the sealing engineer must hold a current South Carolina license. WindLoadCalc does not currently provide PE sign-and-seal service for South Carolina projects; our in-house PE is Florida-licensed only. Plan to work with a SC-licensed engineer of record for the sealing step.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>What's the difference between coastal SC and inland SC wind requirements?</summary>
+                <div class="faq-answer">Coastal South Carolina (Beaufort, Charleston, Berkeley, Dorchester, Georgetown, Horry, and parts of Colleton and Jasper counties) is in the hurricane-influenced design wind band, with Risk Category II values generally in the 140 to 150 mph range under ASCE 7-16. Inland SC (Columbia, the Midlands, and the Pee Dee interior) drops to roughly 110 to 120 mph as hurricane wind decay reduces design values inland. The Upstate (Greenville, Spartanburg, the Blue Ridge foothills) is the lowest at roughly 105 to 115 mph. Coastal sites also more often trigger Exposure D (within ~600 ft of open water) versus the Exposure C default that covers most inland sites. The combination of higher wind speed and higher exposure category is what makes coastal SC projects produce significantly larger design pressures than otherwise-identical inland projects.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>Which ASCE edition does South Carolina use?</summary>
+                <div class="faq-answer">The currently effective South Carolina Building Code is the 2021 SC Building Code, which is based on the 2021 International Building Code and references ASCE 7-16 as the wind load standard. The SC Building Codes Council published its Notice of Intent to adopt the 2024 I-Codes in early 2025, with full implementation targeted for January 2027 — at which point the wind load standard will move to ASCE 7-22. Until that effective date, design SC projects to ASCE 7-16. The calculator handles both editions and will guide you to the right reference for your permit submittal date.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>Are upstate SC mountains in a special wind region?</summary>
+                <div class="faq-answer">The South Carolina Upstate sits at the southern toe of the Blue Ridge / Southern Appalachian foothills. ASCE 7 identifies designated special wind regions where local topography produces wind speeds higher than the surrounding contour line would suggest — most of these in SC are concentrated in the higher-elevation pockets of Greenville, Pickens, and Oconee counties. Most Upstate sites are NOT in a special wind region and use the standard contour values, but the calculator will flag the special wind region designation if your specific ZIP triggers it. For ridge-top, escarpment, or hilltop sites anywhere in the Upstate, the topographic factor Kzt should be reviewed carefully by your PE — that adjustment can exceed the base wind speed effect for an exposed site.</div>
+            </details>
+
+            <h2 id="related">More Wind Load Resources</h2>
+
+            <div class="related-links">
+                <h3>Related calculators and guides</h3>
+                <ul>
+                    <li><a href="/florida-wind-load-calculator">Florida wind load calculator (FBC + ASCE 7-22)</a></li>
+                    <li><a href="/north-carolina-wind-load-calculator">North Carolina wind load calculator</a></li>
+                    <li><a href="/texas-wind-load-calculator">Texas wind load calculator (TWIA)</a></li>
+                    <li><a href="/louisiana-wind-load-calculator">Louisiana wind load calculator (post-Ida)</a></li>
+                    <li><a href="/california-wind-load-calculator">California wind load calculator</a></li>
+                    <li><a href="/asce-hazard-tool-alternative">ASCE Hazard Tool alternative</a></li>
+                    <li><a href="/Landing%20Pages/asce-7-wind-load-calculator.html">ASCE 7 wind load calculator overview</a></li>
+                    <li><a href="/shop/windows-doors-shutters.html">Windows, doors &amp; shutters C&amp;C calculator</a></li>
+                    <li><a href="/wind-load-calculator-for-engineers.html">Wind load tools for structural engineers</a></li>
+                    <li><a href="/wind-load-calculator-shop.html">All calculators &amp; pricing</a></li>
+                </ul>
+            </div>
+
+            <div class="trust-block">
+                <div class="trust-stat">
+                    <span class="num">2002</span>
+                    <span class="label">Calculating ASCE wind loads since</span>
+                </div>
+                <div class="trust-stat">
+                    <span class="num">7</span>
+                    <span class="label">ASCE 7 editions navigated (7-98 → 7-22)</span>
+                </div>
+                <div class="trust-stat">
+                    <span class="num">24+</span>
+                    <span class="label">Years of permit-tested practice</span>
+                </div>
+            </div>
+
+            <div class="content-cta">
+                <h3>Ready to Run Your South Carolina Numbers?</h3>
+                <p>Get instant ASCE 7 wind pressures for any SC ZIP — Charleston coast, Myrtle Beach, Hilton Head, Columbia, Greenville. Free 7-day trial. No credit card.</p>
+                <a href="/wind-load-calculator-shop.html" class="cta-button">View Plans &amp; Start Trial <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <p class="last-updated">Last updated: May 23, 2026. Reflects 2021 SC Building Code (ASCE 7-16) as the currently effective edition; 2024 SC Building Code adoption (ASCE 7-22) is pending and targeted for January 2027. Reviewed by the WindLoadCalc engineering team — calculating ASCE wind loads since 2002.</p>
+        </main>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-box">
+                <h3>On This Page</h3>
+                <ul>
+                    <li><a href="#wind-speeds">SC Wind Speeds</a></li>
+                    <li><a href="#sc-code">SC Code &amp; ASCE 7</a></li>
+                    <li><a href="#hugo">Hurricane Hugo Legacy</a></li>
+                    <li><a href="#charleston-bar">Charleston BAR</a></li>
+                    <li><a href="#how-to">How to Calculate</a></li>
+                    <li><a href="#differentiators">Why WindLoadCalc</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#related">Related Resources</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-cta">
+                <h3>Try It Free</h3>
+                <p>SC-ready ASCE 7 wind loads in 15 minutes. 7-day trial, no credit card.</p>
+                <a href="/wind-load-calculator-shop.html" class="sidebar-cta-button">Start Free Trial</a>
+            </div>
+
+            <div class="sidebar-box">
+                <h3>Other State Calculators</h3>
+                <ul>
+                    <li><a href="/florida-wind-load-calculator">Florida (FBC + ASCE 7-22)</a></li>
+                    <li><a href="/north-carolina-wind-load-calculator">North Carolina</a></li>
+                    <li><a href="/texas-wind-load-calculator">Texas (TWIA)</a></li>
+                    <li><a href="/louisiana-wind-load-calculator">Louisiana</a></li>
+                    <li><a href="/california-wind-load-calculator">California</a></li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="mailto:info@windloadcalc.com">info@windloadcalc.com</a></li>
+                    <li><a href="mailto:support@windloadcalc.com">support@windloadcalc.com</a></li>
+                    <li><a href="tel:8332723946">(833) 272-3946</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Calculators</h3>
+                <ul>
+                    <li><a href="/shop/windows-doors-shutters.html">Windows, Doors &amp; Shutters</a></li>
+                    <li><a href="/wind-load-calculator-shop.html">All Calculators &amp; Pricing</a></li>
+                    <li><a href="/wind-load-calculator-comparison.html">Calculator Comparison</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="/Landing%20Pages/free-wind-load-calculator.html">Free Demo</a></li>
+                    <li><a href="/Landing%20Pages/asce-7-wind-load-calculator.html">ASCE 7 Guide</a></li>
+                    <li><a href="/Landing%20Pages/components-and-cladding-wind-loads.html">C&amp;C Wind Loads</a></li>
+                    <li><a href="/faq.html">Wind Load FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="/why-us.html">About Us</a></li>
+                    <li><a href="/contact.html">Contact</a></li>
+                    <li><a href="/privacy-policy.html">Privacy</a></li>
+                    <li><a href="/terms-of-service.html">Terms</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2002&ndash;2026 WindLoadCalc. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // ZIP launch — calc.windloadcalc.com accepts ?zip=NNNNN and auto-derives
+        // city / state / county / wind speed (Charleston 29401 -> SC, Charleston County, coastal band).
+        function launchCalc(e) {
+            e.preventDefault();
+            var zip = (document.getElementById('zip-input').value || '').replace(/[^0-9]/g, '').slice(0, 5);
+            var target = 'https://calc.windloadcalc.com/';
+            if (zip.length === 5) {
+                target = target + '?zip=' + zip;
+            }
+            window.location.href = target;
+            return false;
+        }
+    </script>
+</body>
+</html>

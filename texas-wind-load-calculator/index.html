@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" type="image/svg+xml" href="/images/windloadcalc-favicon.svg">
+
+    <!-- SEO Meta -->
+    <title>Texas Wind Load Calculator — ASCE 7-16 + TWIA | WindLoadCalc</title>
+    <meta name="description" content="Instant Texas wind load calculations per ASCE 7-16 + IBC 2021. Houston, Galveston, Corpus Christi, TWIA coastal counties supported. Free wind speed lookup.">
+    <meta name="keywords" content="Texas wind load calculator, TWIA wind load, Texas Windstorm Insurance Association, ASCE 7-16 Texas, Houston wind load, Galveston wind load, Corpus Christi wind load, Texas Gulf Coast wind speed, Texas IBC 2021">
+    <link rel="canonical" href="https://windloadcalc.com/texas-wind-load-calculator">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Texas Wind Load Calculator — ASCE 7-16 + TWIA Coastal">
+    <meta property="og:description" content="Instant Texas wind load calculations per ASCE 7-16 + IBC 2021. Houston, Galveston, Corpus Christi, TWIA coastal counties supported. Free wind speed lookup.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://windloadcalc.com/texas-wind-load-calculator">
+    <meta property="og:image" content="https://windloadcalc.com/images/wind-calculator-og.jpg">
+    <meta property="og:site_name" content="WindLoadCalc">
+
+    <!-- SoftwareApplication Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Texas Wind Load Calculator",
+        "alternateName": "WindLoadCalc Texas",
+        "applicationCategory": "EngineeringApplication",
+        "applicationSubCategory": "Structural Engineering",
+        "operatingSystem": "Web Browser",
+        "description": "Professional wind load calculator for Texas projects. Implements ASCE 7-16 and IBC 2021 with Texas Windstorm Insurance Association (TWIA) coastal county support across Cameron, Willacy, Kenedy, Kleberg, Nueces, San Patricio, Aransas, Refugio, Calhoun, Matagorda, Brazoria, Galveston, Chambers, Jefferson, and Orange counties plus the designated portion of Harris County.",
+        "url": "https://windloadcalc.com/texas-wind-load-calculator",
+        "featureList": [
+            "ASCE 7-16 Wind Load Calculations for Texas",
+            "IBC 2021 compliance",
+            "Texas Windstorm Insurance Association (TWIA) region support",
+            "Houston metro (Harris County) wind speeds",
+            "Galveston coastal wind speeds",
+            "Corpus Christi / Nueces County wind speeds",
+            "San Antonio, Austin, Dallas-Fort Worth inland wind speeds",
+            "Wind-borne debris region flagging",
+            "Components and Cladding (C&C) pressures",
+            "Main Wind Force Resisting System (MWFRS) pressures",
+            "Risk Category I, II, III, IV support",
+            "Exposure Category B, C, D",
+            "Permit-ready PDF and Excel reports"
+        ],
+        "offers": {
+            "@type": "Offer",
+            "availability": "https://schema.org/InStock",
+            "url": "https://windloadcalc.com/wind-load-calculator-shop.html"
+        },
+        "provider": {
+            "@type": "Organization",
+            "name": "WindLoad Solutions",
+            "url": "https://windloadcalc.com",
+            "foundingDate": "2002"
+        }
+    }
+    </script>
+
+    <!-- BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [{
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://windloadcalc.com/"
+        },{
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Texas Wind Load Calculator",
+            "item": "https://windloadcalc.com/texas-wind-load-calculator"
+        }]
+    }
+    </script>
+
+    <!-- FAQPage (mirrors visible FAQ 1:1) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [{
+            "@type": "Question",
+            "name": "What is TWIA and which Texas counties are in it?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "TWIA stands for Texas Windstorm Insurance Association. It is the state-created insurer of last resort for windstorm and hail coverage along the Texas Gulf Coast, where private carriers have historically pulled back. TWIA's designated catastrophe area covers 14 first-tier coastal counties — Cameron, Willacy, Kenedy, Kleberg, Nueces, San Patricio, Aransas, Refugio, Calhoun, Matagorda, Brazoria, Galveston, Chambers, Jefferson, and Orange — plus the eastern portion of Harris County (the part inside the seaward side of State Highway 146). Structures inside the TWIA region must be built and certified to specific windstorm building standards (the WPI-8 program) for the building to qualify for TWIA coverage. That is a separate compliance layer that sits on top of the regular IBC and ASCE 7 wind design."
+            }
+        },{
+            "@type": "Question",
+            "name": "Does WindLoadCalc support Texas wind-borne debris region requirements?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. The Texas coast inside the TWIA region is treated as a wind-borne debris area under ASCE 7-16 and IBC 2021 when the design wind speed exceeds 140 mph at any portion of the building, or when the building is within one mile of the coastal mean high water line and the speed is 130 mph or higher. WindLoadCalc flags these sites and produces a C&C report compatible with the impact-glazing or approved-shutter requirement. We do not, however, issue WPI-8 windstorm certifications — that is a Texas-licensed engineer or TDI-appointed Qualified Inspector deliverable."
+            }
+        },{
+            "@type": "Question",
+            "name": "What is the wind speed in Houston vs Galveston?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Houston and Galveston sit in very different wind speed regimes even though they are only about 50 miles apart. Galveston, on Galveston Island, is in the TWIA inner coastal zone and uses an ASCE 7-16 Risk Category II design wind speed in the 145–150 mph range. Most of Houston (the bulk of Harris County) sits inland of the TWIA boundary and uses around 130–140 mph, with the eastern portion of Harris County (inside the TWIA-designated seaward area along SH-146) falling closer to coastal values. Always confirm the exact value for your specific ZIP code through the calculator above; do not interpolate from a city name alone."
+            }
+        },{
+            "@type": "Question",
+            "name": "Can I use WindLoadCalc reports for Texas permit submittals?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. The C&C and MWFRS reports WindLoadCalc generates follow ASCE 7-16 and IBC 2021 in the Texas-relevant format that municipal plan reviewers in Houston, San Antonio, Austin, Dallas, Fort Worth, Corpus Christi, and the smaller coastal jurisdictions accept. If your project is inside the TWIA region and you need a WPI-8 windstorm certification for insurance eligibility, that certification has to be issued by a Texas-licensed PE or by a TDI-approved Qualified Inspector — not by WindLoadCalc. The wind load calculations we produce are normally an input to that certification, not a substitute for it."
+            }
+        },{
+            "@type": "Question",
+            "name": "Do I need a Texas-licensed PE to stamp my wind load report?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "If your local Texas jurisdiction requires a sealed engineering submittal, then yes — the seal must come from a PE licensed in Texas by the Texas Board of Professional Engineers and Land Surveyors. WindLoadCalc does not currently provide PE sign-and-seal for Texas projects; our in-house PE service is Florida-only, up to 3 stories. We recommend running your numbers in WindLoadCalc first and then handing the output to a Texas-licensed PE for review and seal. Many Texas residential window/door replacement permits do not require a stamped wind load report at all; commercial work and TWIA WPI-8 certifications generally do."
+            }
+        },{
+            "@type": "Question",
+            "name": "What is the difference between TWIA coastal and Florida HVHZ?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Both designations exist to address hurricane risk, but they work very differently. Florida's HVHZ (covering Miami-Dade and Broward counties) is a building-code construct under the Florida Building Code — it mandates higher design wind speeds, requires Miami-Dade NOA product approval, and enforces TAS 201/202/203 missile, cyclic, and pressure testing on installed products. Texas's TWIA region is primarily an insurance construct — TWIA is the state-chartered windstorm insurer of last resort, and to qualify for its coverage the building must be inspected and certified to TWIA's WPI-8 standards by a Texas PE or a TDI-approved Qualified Inspector. Florida HVHZ ties enforcement to permitting and product approval; Texas TWIA ties enforcement to insurance eligibility. Many coastal Texas builders treat WPI-8 as the de facto code because no one in the TWIA region can afford to lose windstorm coverage."
+            }
+        },{
+            "@type": "Question",
+            "name": "Which ASCE edition does Texas currently use?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "As of 2026, the State of Texas does not enforce a single statewide building code on most commercial and residential work — adoption is handled at the municipal or county level, and Texas is unusual in not having a mandatory statewide residential code outside the TWIA region. The Texas Department of Insurance windstorm standards reference IBC 2021 and ASCE 7-16, and most large Texas cities (Houston, San Antonio, Austin, Dallas, Fort Worth) have adopted some edition of IBC 2018 or IBC 2021 with local amendments. ASCE 7-22 is rolling into Texas adoption slowly and is not yet the dominant reference. WindLoadCalc defaults to ASCE 7-16 for Texas projects and will note any pending ASCE 7-22 transition for jurisdictions that adopt it."
+            }
+        },{
+            "@type": "Question",
+            "name": "Does WindLoadCalc account for Hurricane Beryl and Hurricane Harvey aftermath code updates?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Hurricane Harvey (2017) was primarily a flood event for the greater Houston metro and did not on its own trigger a Texas-wide wind code revision, although it sharpened focus on coastal exposure and roof attachment detailing. Hurricane Beryl (2024) made landfall on the central Texas coast and renewed conversations at TDI and the Texas Legislature about WPI-8 inspection capacity and TWIA solvency, but the underlying ASCE 7-16 wind speed maps for Texas have not been republished as a result. WindLoadCalc tracks active Texas code amendments by jurisdiction; if a city or county has formally adopted a post-storm amendment that affects wind load design (for example, a tightened exposure category requirement in a coastal zone), that amendment is layered into the calculator's output for that ZIP."
+            }
+        }]
+    }
+    </script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7;
+            color: #2d3748;
+            background: #ffffff;
+        }
+
+        /* Header */
+        .main-header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo-image { height: 80px; width: auto; }
+
+        .header-cta {
+            background: #0018ff;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .header-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 24, 255, 0.3);
+        }
+
+        /* Hero */
+        .article-header {
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            color: white;
+            padding: 4rem 0 3rem;
+            text-align: center;
+        }
+
+        .article-header .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .article-category {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .article-title {
+            font-size: 3rem;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .article-subtitle {
+            font-size: 1.25rem;
+            opacity: 0.95;
+            line-height: 1.6;
+            font-weight: 400;
+            margin-bottom: 2rem;
+        }
+
+        /* Hero ZIP form */
+        .zip-form {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 560px;
+            margin: 0 auto;
+        }
+
+        .zip-input {
+            flex: 1 1 220px;
+            padding: 1rem 1.25rem;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 50px;
+            outline: none;
+            color: #1f2937;
+            min-width: 0;
+        }
+
+        .zip-submit {
+            background: white;
+            color: #0018ff;
+            border: none;
+            padding: 1rem 1.75rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .zip-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .zip-note {
+            font-size: 0.85rem;
+            opacity: 0.85;
+            margin-top: 1rem;
+        }
+
+        /* Main content layout */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .main-content { min-width: 0; }
+
+        .sidebar {
+            position: sticky;
+            top: 100px;
+            align-self: start;
+        }
+
+        .sidebar-box {
+            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+            border: 2px solid #e5e7eb;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-box h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #181E57;
+            margin-bottom: 1.5rem;
+        }
+
+        .sidebar-box ul { list-style: none; }
+        .sidebar-box ul li { margin-bottom: 0.75rem; }
+        .sidebar-box a {
+            color: #4a5568;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: block;
+            padding: 0.5rem 0 0.5rem 1rem;
+            border-left: 3px solid transparent;
+        }
+        .sidebar-box a:hover {
+            color: #0018ff;
+            border-left-color: #0018ff;
+            padding-left: 1.5rem;
+        }
+
+        .sidebar-cta {
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .sidebar-cta h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .sidebar-cta p {
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            opacity: 0.95;
+        }
+
+        .sidebar-cta-button {
+            display: block;
+            background: white;
+            color: #0018ff;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Content typography */
+        .main-content h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #181E57;
+            margin: 3rem 0 1.5rem;
+            line-height: 1.3;
+            border-bottom: 3px solid #0018ff;
+            padding-bottom: 0.75rem;
+        }
+
+        .main-content h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin: 2rem 0 1rem;
+        }
+
+        .main-content p {
+            font-size: 1.08rem;
+            line-height: 1.8;
+            margin-bottom: 1.25rem;
+            color: #4a5568;
+        }
+
+        .main-content ul {
+            margin: 1.25rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .main-content ul li {
+            margin-bottom: 0.75rem;
+            color: #4a5568;
+            line-height: 1.7;
+        }
+
+        .main-content ul li strong { color: #0018ff; font-weight: 700; }
+
+        /* Wind speed table */
+        .wind-table-wrap { overflow-x: auto; margin: 2rem 0; }
+
+        .wind-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+        }
+
+        .wind-table th {
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            color: white;
+            padding: 1rem 1.25rem;
+            text-align: left;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .wind-table td {
+            padding: 0.9rem 1.25rem;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 0.98rem;
+        }
+
+        .wind-table tr:nth-child(even) td { background: #f9fafb; }
+        .wind-table tr:last-child td { border-bottom: none; }
+
+        .speed-cell { font-weight: 700; color: #0018ff; white-space: nowrap; }
+        .twia-badge {
+            display: inline-block;
+            background: #fef3c7;
+            color: #b45309;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.15rem 0.5rem;
+            border-radius: 10px;
+            margin-left: 0.4rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Info boxes */
+        .info-box {
+            background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%);
+            border-left: 4px solid #0018ff;
+            border-radius: 10px;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+        }
+
+        .info-box h4 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #0018ff;
+            margin-bottom: 0.75rem;
+        }
+
+        .info-box p { font-size: 1rem; line-height: 1.7; margin-bottom: 0; }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left: 4px solid #f59e0b;
+        }
+
+        .warning-box h4 { color: #b45309; }
+
+        /* Glossary */
+        .glossary-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .glossary-term {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 1rem 1.25rem;
+        }
+
+        .glossary-term dt {
+            font-weight: 700;
+            color: #181E57;
+            font-size: 1rem;
+            margin-bottom: 0.35rem;
+        }
+
+        .glossary-term dd {
+            font-size: 0.92rem;
+            color: #4a5568;
+            line-height: 1.55;
+        }
+
+        /* Process steps */
+        .process-steps { counter-reset: step; margin: 2rem 0; }
+
+        .process-step {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1.5rem 1.5rem 1.5rem 4.5rem;
+            margin-bottom: 1.25rem;
+            position: relative;
+        }
+
+        .process-step::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: 1.5rem;
+            top: 1.5rem;
+            width: 2rem;
+            height: 2rem;
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.05rem;
+        }
+
+        .process-step h4 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+        }
+
+        .process-step p {
+            font-size: 1rem;
+            margin-bottom: 0;
+        }
+
+        /* FAQ */
+        .faq-item {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .faq-item summary {
+            padding: 1.25rem 1.5rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #181E57;
+            cursor: pointer;
+            list-style: none;
+            position: relative;
+            padding-right: 3rem;
+        }
+
+        .faq-item summary::-webkit-details-marker { display: none; }
+
+        .faq-item summary::after {
+            content: '+';
+            position: absolute;
+            right: 1.25rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            color: #0018ff;
+            font-weight: 400;
+            line-height: 1;
+        }
+
+        .faq-item[open] summary::after { content: '−'; }
+
+        .faq-item .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            color: #4a5568;
+            line-height: 1.7;
+        }
+
+        /* Content CTA */
+        .content-cta {
+            background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 50%, #8b5cf6 100%);
+            background-size: 200% 200%;
+            border-radius: 20px;
+            padding: 3rem 2.5rem;
+            margin: 3rem 0;
+            text-align: center;
+            color: white;
+        }
+
+        .content-cta h3 {
+            font-size: 1.85rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .content-cta p {
+            font-size: 1.1rem;
+            margin-bottom: 1.75rem;
+            opacity: 0.95;
+            color: white;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: #0018ff;
+            padding: 1rem 2.25rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
+            font-size: 1.05rem;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+        }
+
+        .cta-button i { margin-left: 0.5rem; }
+
+        /* Trust block */
+        .trust-block {
+            background: #f9fafb;
+            border-left: 4px solid #181E57;
+            border-radius: 10px;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            font-size: 0.98rem;
+            color: #2d3748;
+        }
+
+        .trust-block strong { color: #181E57; }
+
+        /* Internal links section */
+        .related-links {
+            background: #f9fafb;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .related-links h3 {
+            margin-top: 0;
+            color: #181E57;
+        }
+
+        .related-links ul {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+        }
+
+        .related-links ul li { margin: 0; }
+
+        .related-links a {
+            color: #0018ff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .related-links a:hover { text-decoration: underline; }
+
+        /* Reviewed/last-updated */
+        .reviewed-line {
+            margin: 2rem 0 0;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e5e7eb;
+            font-size: 0.92rem;
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        .reviewed-line strong { color: #181E57; }
+
+        /* Footer */
+        .main-footer {
+            background: #1f2937;
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .footer-column ul { list-style: none; padding: 0; }
+        .footer-column li { margin-bottom: 0.5rem; font-size: 0.92rem; }
+        .footer-column a {
+            color: rgba(255, 255, 255, 0.75);
+            text-decoration: none;
+        }
+        .footer-column a:hover { color: white; }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .sidebar { position: static; }
+            .glossary-grid { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 640px) {
+            .article-title { font-size: 2rem; }
+            .article-subtitle { font-size: 1.05rem; }
+            .main-content h2 { font-size: 1.65rem; }
+            .process-step { padding-left: 3.5rem; }
+            .content-cta { padding: 2rem 1.5rem; }
+            .content-cta h3 { font-size: 1.4rem; }
+            .related-links ul { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: 1fr; }
+            .wind-table th, .wind-table td { padding: 0.7rem 0.85rem; font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="header-container">
+            <a href="/index.html">
+                <img src="/images/windloadcalc-logo.svg" alt="WindLoadCalc" class="logo-image">
+            </a>
+            <a href="/wind-load-calculator-shop.html" class="header-cta">Start Free Trial</a>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="article-header">
+        <div class="container">
+            <div class="article-category">Texas Wind Load Calculator</div>
+            <h1 class="article-title">Texas Wind Load Calculator</h1>
+            <p class="article-subtitle">Instant design pressures per <strong>ASCE 7-16</strong> and <strong>IBC 2021</strong> — built for the Texas Gulf Coast hurricane corridor with full <strong>TWIA</strong> coastal county support across Houston, Galveston, Corpus Christi, and the 14 first-tier counties from Cameron to Orange.</p>
+
+            <form class="zip-form" id="zip-form" onsubmit="return launchCalc(event)">
+                <input type="text" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" class="zip-input" id="zip-input" placeholder="Enter Texas ZIP (e.g. 77550)" aria-label="Texas ZIP code">
+                <button type="submit" class="zip-submit">Get Texas Wind Pressures &rarr;</button>
+            </form>
+            <p class="zip-note">Free 7-day trial. No credit card required.</p>
+        </div>
+    </section>
+
+    <!-- Main content -->
+    <div class="content-wrapper">
+        <main class="main-content">
+            <p>Texas is the wind-load problem nobody else solves well. The state spans roughly 800 miles east to west — from the Gulf hurricane corridor through the Hill Country to the far west desert — and the design wind speed at one address can be 60 mph higher than at another address in the same congressional district. On top of that, Texas is one of the few large states without a single mandatory statewide building code outside its Gulf coastal zone; adoption is municipal, amendments are common, and the only place where a unified windstorm standard genuinely bites is the 14-county <strong>TWIA</strong> region. Most generic wind load calculators flatten all of this into one number and call it Texas. That is how plan reviewers end up rejecting submittals.</p>
+
+            <p>This page is the Texas-specific landing for WindLoadCalc. Enter a Texas ZIP code above and the calculator launches preloaded with the correct ASCE 7-16 wind speed, the county designation, and a flag for whether the project sits inside the TWIA coastal area or the wind-borne debris region.</p>
+
+            <div class="trust-block">
+                <strong>Used by engineers, architects, and contractors since 2002.</strong> WindLoadCalc has been producing permit-grade wind load reports for more than two decades — through ASCE 7-95, 7-98, 7-02, 7-05, 7-10, 7-16, and now 7-22. Twenty-four years of permit feedback from real Texas, Florida, and Gulf Coast plan reviewers is built into how this tool handles edge cases.
+            </div>
+
+            <div class="info-box">
+                <h4><i class="fas fa-info-circle"></i> What "Texas-ready" actually means here</h4>
+                <p>Four things have to be right for a Texas wind load calculator to be useful: (1) it reads ASCE 7-16 wind speed maps correctly for Risk Categories I through IV; (2) it knows which side of the TWIA boundary your ZIP falls on; (3) it flags wind-borne debris status where the speed and coastal distance triggers it; and (4) it outputs a report a Texas plan reviewer (or a TDI Qualified Inspector preparing a WPI-8) will accept as the wind load input. WindLoadCalc does all four — and is explicit about what it does not do, like issue the WPI-8 certification itself.</p>
+            </div>
+
+            <h2 id="wind-speeds">Texas Wind Speed Quick Reference</h2>
+
+            <p>The table below lists representative ASCE 7-16 Risk Category II design wind speeds for major Texas metros, the TWIA coastal counties most often appearing on permits, and a far-west reference point. These are baseline approximations drawn from the ASCE 7-16 wind speed maps and the TWIA-region overlay; the calculator above returns the exact value for your specific ZIP code.</p>
+
+            <div class="wind-table-wrap">
+                <table class="wind-table">
+                    <thead>
+                        <tr>
+                            <th>Location / County</th>
+                            <th>Sample ZIP</th>
+                            <th>Risk Cat II Wind Speed</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Galveston (Galveston County) <span class="twia-badge">TWIA</span></td>
+                            <td>77550</td>
+                            <td class="speed-cell">~145–150 mph</td>
+                            <td>Inner TWIA coastal zone; wind-borne debris region</td>
+                        </tr>
+                        <tr>
+                            <td>Galveston west end (Galveston County) <span class="twia-badge">TWIA</span></td>
+                            <td>77554</td>
+                            <td class="speed-cell">~145–150 mph</td>
+                            <td>Same coastal regime as 77550</td>
+                        </tr>
+                        <tr>
+                            <td>Corpus Christi (Nueces County) <span class="twia-badge">TWIA</span></td>
+                            <td>78401</td>
+                            <td class="speed-cell">~140–145 mph</td>
+                            <td>TWIA coastal; SH-358 corridor</td>
+                        </tr>
+                        <tr>
+                            <td>Corpus Christi south side (Nueces County) <span class="twia-badge">TWIA</span></td>
+                            <td>78411</td>
+                            <td class="speed-cell">~140–145 mph</td>
+                            <td>TWIA coastal</td>
+                        </tr>
+                        <tr>
+                            <td>Houston east / SH-146 corridor (Harris County) <span class="twia-badge">TWIA partial</span></td>
+                            <td>77450 vicinity east</td>
+                            <td class="speed-cell">~135–140 mph</td>
+                            <td>Eastern Harris County inside designated TWIA area</td>
+                        </tr>
+                        <tr>
+                            <td>Houston downtown (Harris County)</td>
+                            <td>77002</td>
+                            <td class="speed-cell">~130 mph</td>
+                            <td>Inland of TWIA boundary</td>
+                        </tr>
+                        <tr>
+                            <td>Houston / Memorial (Harris County)</td>
+                            <td>77024</td>
+                            <td class="speed-cell">~130 mph</td>
+                            <td>Inland; standard ASCE 7-16</td>
+                        </tr>
+                        <tr>
+                            <td>San Antonio (Bexar County)</td>
+                            <td>78201</td>
+                            <td class="speed-cell">~105–110 mph</td>
+                            <td>Inland; well outside TWIA</td>
+                        </tr>
+                        <tr>
+                            <td>Austin (Travis County)</td>
+                            <td>78701</td>
+                            <td class="speed-cell">~105–110 mph</td>
+                            <td>Inland Hill Country edge</td>
+                        </tr>
+                        <tr>
+                            <td>Dallas (Dallas County)</td>
+                            <td>75201</td>
+                            <td class="speed-cell">~105 mph</td>
+                            <td>North Texas inland</td>
+                        </tr>
+                        <tr>
+                            <td>Fort Worth (Tarrant County)</td>
+                            <td>76101</td>
+                            <td class="speed-cell">~105 mph</td>
+                            <td>North Texas inland</td>
+                        </tr>
+                        <tr>
+                            <td>Far West Texas (El Paso County)</td>
+                            <td>79901</td>
+                            <td class="speed-cell">~90 mph</td>
+                            <td>Lowest design wind speed in the state</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="warning-box info-box">
+                <h4><i class="fas fa-exclamation-triangle"></i> These are approximate — confirm via the calculator</h4>
+                <p>The values above are baseline ASCE 7-16 Risk Category II references derived from the published wind speed maps and the TWIA region overlay. Your exact ZIP code may differ — coastal vs inland transitions, the TWIA boundary along SH-146 in Harris County, special wind regions, and Risk Category III/IV step-ups all shift the actual number. Run the calculator for your specific project address before designing or quoting.</p>
+            </div>
+
+            <h2 id="twia">TWIA: The Texas Coastal Layer Other Calculators Miss</h2>
+
+            <p>The <strong>Texas Windstorm Insurance Association</strong> — TWIA — is a state-chartered residual-market insurer created by the Texas Legislature in 1971. It exists because private carriers periodically stop writing windstorm coverage in the Gulf coastal zone after major hurricanes, and the Legislature decided the coast could not be left uninsurable. TWIA is the insurer of last resort for wind and hail on the Texas coast, and the only way a structure inside the TWIA region qualifies for that coverage is by being built or modified to TWIA's windstorm building standards and certified through the <strong>WPI-8</strong> inspection program administered by the Texas Department of Insurance.</p>
+
+            <p>The TWIA-designated catastrophe area covers <strong>14 first-tier coastal counties</strong>: Cameron, Willacy, Kenedy, Kleberg, Nueces, San Patricio, Aransas, Refugio, Calhoun, Matagorda, Brazoria, Galveston, Chambers, Jefferson, and Orange. It also covers the eastern slice of <strong>Harris County</strong> — specifically the area east of the seaward side of State Highway 146. That last bullet is the one that catches builders off guard: most of Houston is outside TWIA, but neighborhoods on the east edge near La Porte, Seabrook, and Shoreacres sit inside it and trigger the full coastal compliance package.</p>
+
+            <p>If your project is inside the TWIA region, four things change versus an inland Texas project:</p>
+
+            <ul>
+                <li><strong>Higher ASCE 7-16 design wind speed</strong> — the Gulf hurricane contour pushes the Risk Category II basic wind speed into the 140–150 mph range across most of the 14-county strip.</li>
+                <li><strong>WPI-8 certification</strong> required for TWIA insurance eligibility — issued by a Texas-licensed PE or a TDI-appointed Qualified Inspector, attesting that the structure was built per the TWIA specifications.</li>
+                <li><strong>Wind-borne debris region</strong> rules apply on most of the coastal strip — impact-resistant glazing or approved shutter systems become the practical baseline, even where the literal IBC trigger speed is borderline.</li>
+                <li><strong>Inspection at construction stages</strong>, not just final — TWIA's process typically requires the WPI-8 inspector on site at framing/sheathing milestones, not as a single end-of-project signoff.</li>
+            </ul>
+
+            <p>WindLoadCalc flags TWIA-region ZIP codes in its output so the wind load report you generate clearly shows the coastal designation. We do not, however, issue the WPI-8 certification itself — that has to come from a Texas-licensed PE or a TDI-approved Qualified Inspector. The right workflow is: run the wind loads in WindLoadCalc, hand the report to your TWIA-qualified engineer or inspector, and they incorporate it into the WPI-8 deliverable.</p>
+
+            <h2 id="codes">Texas Code Adoption: IBC 2021 + ASCE 7-16</h2>
+
+            <p>Texas is unusual among large states in that it does not enforce a single mandatory statewide building code for most commercial construction. Adoption happens at the city or county level, and amendments are common. There are two important exceptions: (1) the TWIA region, where the Texas Department of Insurance enforces a windstorm building standard tied to IBC and ASCE 7; and (2) Texas residential construction, where the Texas Industrialized Building Code Council administers the framework for industrialized/modular housing under a state-adopted IRC base.</p>
+
+            <p>As of 2026, the most common Texas adoption pattern looks like this:</p>
+
+            <ul>
+                <li><strong>IBC 2021 + ASCE 7-16</strong> for commercial work in most large cities (Houston, San Antonio, Austin, Dallas, Fort Worth) — with local amendments that vary jurisdiction to jurisdiction.</li>
+                <li><strong>IRC 2021</strong> as the common residential base where adopted, again with municipal amendments.</li>
+                <li><strong>TDI/TWIA windstorm standard</strong> referencing IBC 2021 + ASCE 7-16 for the 14-county coastal area plus eastern Harris.</li>
+                <li>A slow rollout of <strong>ASCE 7-22</strong> beginning in some early-adopter Texas jurisdictions, but not yet the dominant reference.</li>
+                <li><strong>Older editions still in use</strong> in some smaller Texas municipalities — IBC 2018 + ASCE 7-10 or 7-16 combinations are not extinct, particularly in rural counties.</li>
+            </ul>
+
+            <p>WindLoadCalc defaults to <strong>ASCE 7-16</strong> for Texas projects because that is what most active Texas plan reviewers expect on submittals today. If your local jurisdiction has formally adopted ASCE 7-22, contact us and we can switch the project basis. The calculator's underlying wind speed lookups, pressure coefficients, and exposure logic are all version-aware.</p>
+
+            <div class="info-box">
+                <h4><i class="fas fa-book"></i> Plain-English Texas wind terms glossary</h4>
+                <p style="margin-bottom:1rem;">Texas wind load conversations are dense with acronyms. Quick definitions so the rest of this page reads cleanly:</p>
+                <dl class="glossary-grid">
+                    <div class="glossary-term"><dt>TWIA</dt><dd>Texas Windstorm Insurance Association — state-chartered windstorm insurer of last resort for the Gulf coastal counties.</dd></div>
+                    <div class="glossary-term"><dt>TDI</dt><dd>Texas Department of Insurance — regulates TWIA and administers the WPI-8 windstorm inspection program.</dd></div>
+                    <div class="glossary-term"><dt>WPI-8</dt><dd>The windstorm building inspection certificate required for a structure inside the TWIA region to qualify for TWIA coverage.</dd></div>
+                    <div class="glossary-term"><dt>First-tier coastal county</dt><dd>One of 14 Texas counties bordering or directly behind the Gulf of Mexico where TWIA's catastrophe area applies.</dd></div>
+                    <div class="glossary-term"><dt>Wind-borne debris region</dt><dd>ASCE 7-16 designation that triggers impact-glazing or approved-shutter requirements on glazed openings.</dd></div>
+                    <div class="glossary-term"><dt>Basic wind speed (V)</dt><dd>The 3-second gust wind speed at 33 ft above grade in Exposure C, as mapped in ASCE 7. The starting input for every calculation.</dd></div>
+                    <div class="glossary-term"><dt>Exposure category</dt><dd>B (suburban/shielded), C (open terrain — the Texas default), or D (within ~1 mile of unobstructed coastal water). Drives pressure significantly.</dd></div>
+                    <div class="glossary-term"><dt>MWFRS</dt><dd>Main Wind Force Resisting System — pressures on the building's overall structural skeleton.</dd></div>
+                    <div class="glossary-term"><dt>C&amp;C</dt><dd>Components and Cladding — pressures on individual elements (windows, doors, sheathing panels) that transfer wind directly to the structure.</dd></div>
+                    <div class="glossary-term"><dt>Risk Category</dt><dd>I (low-occupancy), II (most buildings), III (substantial hazard — schools, assembly), IV (essential — hospitals, EOCs). Higher categories = higher design speed.</dd></div>
+                </dl>
+            </div>
+
+            <div class="content-cta">
+                <h3>Get Pressures for Your Texas Project</h3>
+                <p>Enter your ZIP, pick your risk category, and get a permit-ready C&amp;C report in under 15 minutes. Houston, Galveston, Corpus Christi, San Antonio, Dallas, Austin — every Texas ZIP supported.</p>
+                <a href="/wind-load-calculator-shop.html" class="cta-button">Start Free Trial <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <h2 id="hurricanes">Gulf Coast Hurricane Context: Harvey, Ike, Beryl</h2>
+
+            <p>You cannot talk about Texas wind design honestly without talking about the storms that shaped it. The modern Texas coastal code framework — TWIA's windstorm standard, the WPI-8 program, and the wind-borne debris region definition — is the cumulative result of decades of post-storm forensic engineering, not a static textbook.</p>
+
+            <h3>Hurricane Ike (2008) — Galveston</h3>
+            <p>Ike made landfall on Galveston Island as a strong Category 2 on September 13, 2008. The storm surge devastated the Bolivar Peninsula and the west end of Galveston Island, but it was the wind damage to wood-framed structures with inadequate roof-to-wall connections, missing hurricane straps, and unprotected glazing that drove a wave of WPI-8 enforcement tightening at TDI in the years that followed. If you have ever wondered why TWIA inspectors look so closely at sheathing nail patterns and clip schedules on the Texas coast, Ike is most of the reason.</p>
+
+            <h3>Hurricane Harvey (2017) — Houston metro</h3>
+            <p>Harvey was primarily a flood event for the greater Houston area — over 60 inches of rainfall in some locations and catastrophic riverine and urban flooding. Its wind impact on Houston proper was relatively modest because the storm weakened rapidly inland. But Harvey reframed the conversation about coastal exposure and the importance of getting Exposure Category right on the design side. Many Houston projects built in the 2000s used Exposure B reasoning that the post-Harvey rebuild started revisiting under tighter Exposure C scrutiny, especially in newer subdivisions where the "shielding" trees and buildings were not actually there.</p>
+
+            <h3>Hurricane Beryl (2024) — central Texas coast</h3>
+            <p>Beryl made landfall on the central Texas coast in July 2024 as a Category 1 hurricane, near Matagorda. Compared to Ike or Harvey, its peak wind speeds at landfall were lower, but the storm renewed the conversation at the Texas Legislature and TDI about WPI-8 inspector capacity (there is a chronic shortage of qualified inspectors on the coast), TWIA's solvency under repeated coastal losses, and the practical adequacy of the inland Exposure C assumption for newer coastal subdivisions. The underlying ASCE 7-16 wind speed maps were not republished as a result, but several coastal jurisdictions revisited their local amendments. (Date and category of Beryl per public NHC reporting and TDI follow-up; verify against the most recent NHC tropical cyclone report for any project where exact landfall details matter.)</p>
+
+            <p>For the purposes of this calculator, the practical takeaway is: <strong>coastal Exposure Category C/D matters more than the basic wind speed alone on the Texas Gulf Coast.</strong> A 145 mph site in Exposure D produces meaningfully higher C&amp;C pressures than the same 145 mph site in Exposure C — and the post-Ike, post-Harvey, post-Beryl Texas coastal inventory has consistently been worse for assuming Exposure B than for being honest about Exposure C or D.</p>
+
+            <h2 id="how-to">How to Calculate Your Texas Wind Load</h2>
+
+            <div class="process-steps">
+                <div class="process-step">
+                    <h4>Enter your Texas ZIP code</h4>
+                    <p>The calculator looks up your ZIP, determines the Texas county, and pulls the ASCE 7-16 baseline wind speed. For ZIPs inside the 14-county TWIA region (or the SH-146 slice of Harris County), it flags the project as TWIA so the report reflects coastal status. For Houston, San Antonio, Austin, Dallas, Fort Worth, and other inland metros, it uses the inland ASCE 7-16 reference without a TWIA flag.</p>
+                </div>
+                <div class="process-step">
+                    <h4>Pick your Risk Category</h4>
+                    <p>Risk Category II covers most occupancies (single-family, multifamily, retail, light commercial). Risk Category III adds assembly, schools, and substantial-hazard buildings. Risk Category IV is for essential facilities (hospitals, fire stations, EOCs). The design wind speed scales with the category — a Risk Category IV hospital in Galveston is meaningfully higher than a Risk Category II house at the same address.</p>
+                </div>
+                <div class="process-step">
+                    <h4>Set Exposure Category and building geometry</h4>
+                    <p>Exposure C is the Texas default for most suburban, rural, and open-prairie sites — which is the bulk of the state. Exposure B applies for sites genuinely shielded by buildings or dense trees on all sides (do not assume B just because a few trees exist). Exposure D applies for sites within roughly one mile of unobstructed open water — the standard for waterfront Galveston, Bolivar, Aransas, and similar. Then enter building dimensions: length, width, mean roof height, roof slope (X over 12), and roof shape.</p>
+                </div>
+                <div class="process-step">
+                    <h4>Review the calculated pressures and TWIA flags</h4>
+                    <p>The calculator returns MWFRS pressures (for the structural system) and C&amp;C pressures (for individual windows, doors, shutters, and cladding). C&amp;C output includes the zone breakdown: Zone 4 wall field, Zone 5 wall corner, and the matching roof zones for your roof type. If the project is in a wind-borne debris region, that flag appears at the top of the report so plan reviewers and impact-glazing specifiers see it immediately.</p>
+                </div>
+                <div class="process-step">
+                    <h4>Hand the report to a Texas-licensed PE for seal (where required)</h4>
+                    <p>Where your Texas jurisdiction requires a sealed wind load submittal, that seal must come from a PE licensed in Texas. WindLoadCalc does not provide Texas PE sign-and-seal — our in-house PE service is Florida-only, up to 3 stories. For TWIA WPI-8 work specifically, the certification has to come from a Texas-licensed PE or a TDI-approved Qualified Inspector. Generate the calculations here, then deliver them to your Texas engineer or inspector for review and sealing.</p>
+                </div>
+            </div>
+
+            <h2 id="faq">Texas Wind Load FAQ</h2>
+
+            <details class="faq-item">
+                <summary>What is TWIA and which Texas counties are in it?</summary>
+                <div class="faq-answer">TWIA stands for Texas Windstorm Insurance Association. It is the state-created insurer of last resort for windstorm and hail coverage along the Texas Gulf Coast, where private carriers have historically pulled back. TWIA's designated catastrophe area covers 14 first-tier coastal counties — Cameron, Willacy, Kenedy, Kleberg, Nueces, San Patricio, Aransas, Refugio, Calhoun, Matagorda, Brazoria, Galveston, Chambers, Jefferson, and Orange — plus the eastern portion of Harris County (the part inside the seaward side of State Highway 146). Structures inside the TWIA region must be built and certified to specific windstorm building standards (the WPI-8 program) for the building to qualify for TWIA coverage. That is a separate compliance layer that sits on top of the regular IBC and ASCE 7 wind design.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>Does WindLoadCalc support Texas wind-borne debris region requirements?</summary>
+                <div class="faq-answer">Yes. The Texas coast inside the TWIA region is treated as a wind-borne debris area under ASCE 7-16 and IBC 2021 when the design wind speed exceeds 140 mph at any portion of the building, or when the building is within one mile of the coastal mean high water line and the speed is 130 mph or higher. WindLoadCalc flags these sites and produces a C&amp;C report compatible with the impact-glazing or approved-shutter requirement. We do not, however, issue WPI-8 windstorm certifications — that is a Texas-licensed engineer or TDI-appointed Qualified Inspector deliverable.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>What is the wind speed in Houston vs Galveston?</summary>
+                <div class="faq-answer">Houston and Galveston sit in very different wind speed regimes even though they are only about 50 miles apart. Galveston, on Galveston Island, is in the TWIA inner coastal zone and uses an ASCE 7-16 Risk Category II design wind speed in the 145–150 mph range. Most of Houston (the bulk of Harris County) sits inland of the TWIA boundary and uses around 130–140 mph, with the eastern portion of Harris County (inside the TWIA-designated seaward area along SH-146) falling closer to coastal values. Always confirm the exact value for your specific ZIP code through the calculator above; do not interpolate from a city name alone.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>Can I use WindLoadCalc reports for Texas permit submittals?</summary>
+                <div class="faq-answer">Yes. The C&amp;C and MWFRS reports WindLoadCalc generates follow ASCE 7-16 and IBC 2021 in the Texas-relevant format that municipal plan reviewers in Houston, San Antonio, Austin, Dallas, Fort Worth, Corpus Christi, and the smaller coastal jurisdictions accept. If your project is inside the TWIA region and you need a WPI-8 windstorm certification for insurance eligibility, that certification has to be issued by a Texas-licensed PE or by a TDI-approved Qualified Inspector — not by WindLoadCalc. The wind load calculations we produce are normally an input to that certification, not a substitute for it.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>Do I need a Texas-licensed PE to stamp my wind load report?</summary>
+                <div class="faq-answer">If your local Texas jurisdiction requires a sealed engineering submittal, then yes — the seal must come from a PE licensed in Texas by the Texas Board of Professional Engineers and Land Surveyors. WindLoadCalc does not currently provide PE sign-and-seal for Texas projects; our in-house PE service is Florida-only, up to 3 stories. We recommend running your numbers in WindLoadCalc first and then handing the output to a Texas-licensed PE for review and seal. Many Texas residential window/door replacement permits do not require a stamped wind load report at all; commercial work and TWIA WPI-8 certifications generally do.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>What is the difference between TWIA coastal and Florida HVHZ?</summary>
+                <div class="faq-answer">Both designations exist to address hurricane risk, but they work very differently. Florida's HVHZ (covering Miami-Dade and Broward counties) is a building-code construct under the Florida Building Code — it mandates higher design wind speeds, requires Miami-Dade NOA product approval, and enforces TAS 201/202/203 missile, cyclic, and pressure testing on installed products. Texas's TWIA region is primarily an insurance construct — TWIA is the state-chartered windstorm insurer of last resort, and to qualify for its coverage the building must be inspected and certified to TWIA's WPI-8 standards by a Texas PE or a TDI-approved Qualified Inspector. Florida HVHZ ties enforcement to permitting and product approval; Texas TWIA ties enforcement to insurance eligibility. Many coastal Texas builders treat WPI-8 as the de facto code because no one in the TWIA region can afford to lose windstorm coverage.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>Which ASCE edition does Texas currently use?</summary>
+                <div class="faq-answer">As of 2026, the State of Texas does not enforce a single statewide building code on most commercial and residential work — adoption is handled at the municipal or county level, and Texas is unusual in not having a mandatory statewide residential code outside the TWIA region. The Texas Department of Insurance windstorm standards reference IBC 2021 and ASCE 7-16, and most large Texas cities (Houston, San Antonio, Austin, Dallas, Fort Worth) have adopted some edition of IBC 2018 or IBC 2021 with local amendments. ASCE 7-22 is rolling into Texas adoption slowly and is not yet the dominant reference. WindLoadCalc defaults to ASCE 7-16 for Texas projects and will note any pending ASCE 7-22 transition for jurisdictions that adopt it.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>Does WindLoadCalc account for Hurricane Beryl and Hurricane Harvey aftermath code updates?</summary>
+                <div class="faq-answer">Hurricane Harvey (2017) was primarily a flood event for the greater Houston metro and did not on its own trigger a Texas-wide wind code revision, although it sharpened focus on coastal exposure and roof attachment detailing. Hurricane Beryl (2024) made landfall on the central Texas coast and renewed conversations at TDI and the Texas Legislature about WPI-8 inspection capacity and TWIA solvency, but the underlying ASCE 7-16 wind speed maps for Texas have not been republished as a result. WindLoadCalc tracks active Texas code amendments by jurisdiction; if a city or county has formally adopted a post-storm amendment that affects wind load design (for example, a tightened exposure category requirement in a coastal zone), that amendment is layered into the calculator's output for that ZIP.</div>
+            </details>
+
+            <h2 id="related">More Wind Load Resources</h2>
+
+            <div class="related-links">
+                <h3>Related calculators and Florida county references</h3>
+                <ul>
+                    <li><a href="/florida-wind-load-calculator">Florida wind load calculator (FBC 8th + ASCE 7-22)</a></li>
+                    <li><a href="/miami-dade-wind-load-calculator">Miami-Dade HVHZ wind load calculator</a></li>
+                    <li><a href="/broward-wind-load-calculator">Broward County HVHZ wind load calculator</a></li>
+                    <li><a href="/collier-county-wind-load-calculator">Collier County wind load calculator (Naples)</a></li>
+                    <li><a href="/palm-beach-wind-load-calculator">Palm Beach County wind load calculator</a></li>
+                    <li><a href="/asce-hazard-tool-alternative">Faster ASCE Hazard Tool alternative</a></li>
+                    <li><a href="/shop/windows-doors-shutters.html">Windows, doors &amp; shutters C&amp;C calculator</a></li>
+                    <li><a href="/wind-load-calculator-shop.html">All calculators &amp; pricing</a></li>
+                </ul>
+            </div>
+
+            <div class="content-cta">
+                <h3>Calculate Texas Wind Loads Instantly</h3>
+                <p>Stop fighting the ASCE 7-16 maps and the TWIA boundary lookups by hand. Enter a Texas ZIP, get permit-ready pressures in under 15 minutes. Free 7-day trial. No credit card.</p>
+                <a href="/wind-load-calculator-shop.html" class="cta-button">View Plans &amp; Start Trial <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <p class="reviewed-line"><strong>Reviewed by Bob, P.E.</strong> (Florida licensed). <strong>Last updated 2026-05-23.</strong> WindLoadCalc has served wind load calculations since 2002 — over 24 years of permit-tested ASCE expertise across multiple editions (7-95, 7-98, 7-02, 7-05, 7-10, 7-16, 7-22). For Texas project questions, contact <a href="mailto:support@windloadcalc.com">support@windloadcalc.com</a>. Note: WindLoadCalc does not currently offer Texas PE sign-and-seal services; Texas projects requiring a sealed wind load report should engage a Texas-licensed PE for that step.</p>
+        </main>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-box">
+                <h3>On This Page</h3>
+                <ul>
+                    <li><a href="#wind-speeds">Texas Wind Speeds</a></li>
+                    <li><a href="#twia">TWIA Explained</a></li>
+                    <li><a href="#codes">Code Adoption (IBC 2021 + ASCE 7-16)</a></li>
+                    <li><a href="#hurricanes">Hurricane Context</a></li>
+                    <li><a href="#how-to">How to Calculate</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#related">Related Resources</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-cta">
+                <h3>Try It Free</h3>
+                <p>Texas-ready ASCE 7-16 + IBC 2021 wind loads with TWIA coastal awareness. 7-day trial, no credit card.</p>
+                <a href="/wind-load-calculator-shop.html" class="sidebar-cta-button">Start Free Trial</a>
+            </div>
+
+            <div class="sidebar-box">
+                <h3>Texas Metros Supported</h3>
+                <ul>
+                    <li><a href="#wind-speeds">Houston (Harris County)</a></li>
+                    <li><a href="#wind-speeds">Galveston (TWIA coastal)</a></li>
+                    <li><a href="#wind-speeds">Corpus Christi (TWIA)</a></li>
+                    <li><a href="#wind-speeds">San Antonio (inland)</a></li>
+                    <li><a href="#wind-speeds">Austin (inland)</a></li>
+                    <li><a href="#wind-speeds">Dallas / Fort Worth</a></li>
+                    <li><a href="#wind-speeds">El Paso (far west)</a></li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="mailto:info@windloadcalc.com">info@windloadcalc.com</a></li>
+                    <li><a href="mailto:support@windloadcalc.com">support@windloadcalc.com</a></li>
+                    <li><a href="tel:8332723946">(833) 272-3946</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Calculators</h3>
+                <ul>
+                    <li><a href="/shop/windows-doors-shutters.html">Windows, Doors &amp; Shutters</a></li>
+                    <li><a href="/wind-load-calculator-shop.html">All Calculators &amp; Pricing</a></li>
+                    <li><a href="/wind-load-calculator-comparison.html">Calculator Comparison</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="/Landing%20Pages/free-wind-load-calculator.html">Free Demo</a></li>
+                    <li><a href="/Landing%20Pages/asce-7-wind-load-calculator.html">ASCE 7 Guide</a></li>
+                    <li><a href="/Landing%20Pages/components-and-cladding-wind-loads.html">C&amp;C Wind Loads</a></li>
+                    <li><a href="/faq.html">Wind Load FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="/why-us.html">About Us</a></li>
+                    <li><a href="/contact.html">Contact</a></li>
+                    <li><a href="/privacy-policy.html">Privacy</a></li>
+                    <li><a href="/terms-of-service.html">Terms</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2002&ndash;2026 WindLoadCalc. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // ZIP launch — calc.windloadcalc.com accepts ?zip=NNNNN and auto-derives
+        // city / state / county / wind speed (Galveston 77550 -> TX, Galveston Cty, TWIA).
+        function launchCalc(e) {
+            e.preventDefault();
+            var zip = (document.getElementById('zip-input').value || '').replace(/[^0-9]/g, '').slice(0, 5);
+            var target = 'https://calc.windloadcalc.com/';
+            if (zip.length === 5) {
+                target = target + '?zip=' + zip;
+            }
+            window.location.href = target;
+            return false;
+        }
+    </script>
+</body>
+</html>

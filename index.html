@@ -5923,6 +5923,227 @@ body {
             </div>
         </section>
 
+        <!-- State / County Wind Load Calculators -->
+        <style>
+            .state-calculators-section {
+                padding: 4rem 0;
+                background: linear-gradient(180deg, rgba(0, 24, 255, 0.02) 0%, rgba(255, 255, 255, 1) 100%);
+            }
+            .state-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+                gap: 1.25rem;
+                margin-top: 2.5rem;
+            }
+            @media (max-width: 768px) {
+                .state-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 0.875rem;
+                }
+            }
+            .state-card {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                padding: 1.5rem 1rem;
+                border-radius: 16px;
+                background: rgba(255, 255, 255, 0.9);
+                border: 1px solid rgba(0, 24, 255, 0.08);
+                text-decoration: none;
+                color: #181E57;
+                transition: all 0.25s ease;
+                position: relative;
+                min-height: 180px;
+                justify-content: space-between;
+            }
+            .state-card:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 12px 32px rgba(0, 24, 255, 0.15);
+                border-color: rgba(0, 24, 255, 0.3);
+            }
+            .state-card-flag {
+                font-size: 2rem;
+                margin-bottom: 0.5rem;
+                line-height: 1;
+            }
+            .state-card h3 {
+                margin: 0.25rem 0;
+                font-size: 1.1rem;
+                font-weight: 700;
+                color: #181E57;
+            }
+            .state-card-speed {
+                margin: 0.25rem 0 0.75rem;
+                font-size: 0.85rem;
+                color: #4b5563;
+                font-weight: 500;
+                line-height: 1.3;
+            }
+            .state-card-cta {
+                display: inline-block;
+                margin-top: auto;
+                color: #0018ff;
+                font-weight: 600;
+                font-size: 0.9rem;
+            }
+            .state-card-badge {
+                position: absolute;
+                top: 0.625rem;
+                right: 0.625rem;
+                padding: 0.25rem 0.6rem;
+                border-radius: 999px;
+                font-size: 0.65rem;
+                font-weight: 700;
+                letter-spacing: 0.04em;
+                text-transform: uppercase;
+            }
+            .state-card-badge.hvhz {
+                background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+                color: white;
+            }
+            .state-card-badge.coastal {
+                background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);
+                color: white;
+            }
+            .state-fallback {
+                text-align: center;
+                margin-top: 2.5rem;
+                padding: 1.25rem;
+                background: rgba(0, 24, 255, 0.04);
+                border-radius: 12px;
+            }
+            .state-fallback p {
+                margin: 0;
+                color: #4b5563;
+                font-size: 0.95rem;
+            }
+            .state-fallback a {
+                color: #0018ff;
+                font-weight: 600;
+                text-decoration: none;
+            }
+            .state-fallback a:hover { text-decoration: underline; }
+        </style>
+        <section class="state-calculators-section" id="state-calculators">
+            <div class="container">
+                <div class="section-header center">
+                    <span class="section-badge electric-pulse">Geographic Coverage</span>
+                    <h2 class="section-title">
+                        Calculate Wind Loads <span class="electric-text">By State or County</span>
+                    </h2>
+                    <p class="section-subtitle">
+                        Jurisdiction-aware calculators built for your local code &mdash; HVHZ amendments, ASCE 7 editions, county overrides, FBC requirements &mdash; handled automatically.
+                    </p>
+                </div>
+
+                <div class="state-grid">
+                    <!-- Florida Hub -->
+                    <a href="florida-wind-load-calculator" class="state-card">
+                        <div class="state-card-flag">🌴</div>
+                        <h3>Florida</h3>
+                        <p class="state-card-speed">FBC 8th Edition<br>ASCE 7-22</p>
+                        <span class="state-card-cta">Calculate &rarr;</span>
+                    </a>
+
+                    <!-- Miami-Dade -->
+                    <a href="miami-dade-wind-load-calculator" class="state-card">
+                        <div class="state-card-badge hvhz">HVHZ</div>
+                        <div class="state-card-flag">🏙️</div>
+                        <h3>Miami-Dade</h3>
+                        <p class="state-card-speed">175 mph<br>NOA / TAS 201</p>
+                        <span class="state-card-cta">Calculate &rarr;</span>
+                    </a>
+
+                    <!-- Broward -->
+                    <a href="broward-wind-load-calculator" class="state-card">
+                        <div class="state-card-badge hvhz">HVHZ</div>
+                        <div class="state-card-flag">🌊</div>
+                        <h3>Broward</h3>
+                        <p class="state-card-speed">170 mph<br>HVHZ + FI-24</p>
+                        <span class="state-card-cta">Calculate &rarr;</span>
+                    </a>
+
+                    <!-- Collier -->
+                    <a href="collier-county-wind-load-calculator" class="state-card">
+                        <div class="state-card-flag">🏝️</div>
+                        <h3>Collier County</h3>
+                        <p class="state-card-speed">170 mph<br>Naples, Marco Island</p>
+                        <span class="state-card-cta">Calculate &rarr;</span>
+                    </a>
+
+                    <!-- Palm Beach -->
+                    <a href="palm-beach-wind-load-calculator" class="state-card">
+                        <div class="state-card-flag">⛱️</div>
+                        <h3>Palm Beach</h3>
+                        <p class="state-card-speed">165&ndash;170 mph<br>Boca, WPB, Jupiter</p>
+                        <span class="state-card-cta">Calculate &rarr;</span>
+                    </a>
+
+                    <!-- Texas -->
+                    <a href="texas-wind-load-calculator" class="state-card">
+                        <div class="state-card-badge coastal">TWIA</div>
+                        <div class="state-card-flag">🤠</div>
+                        <h3>Texas</h3>
+                        <p class="state-card-speed">ASCE 7-16<br>Gulf Coast + TWIA</p>
+                        <span class="state-card-cta">Calculate &rarr;</span>
+                    </a>
+
+                    <!-- North Carolina -->
+                    <a href="north-carolina-wind-load-calculator" class="state-card">
+                        <div class="state-card-flag">🏔️</div>
+                        <h3>North Carolina</h3>
+                        <p class="state-card-speed">Outer Banks 150 mph<br>Charlotte, Raleigh</p>
+                        <span class="state-card-cta">Calculate &rarr;</span>
+                    </a>
+
+                    <!-- South Carolina -->
+                    <a href="south-carolina-wind-load-calculator" class="state-card">
+                        <div class="state-card-flag">🏖️</div>
+                        <h3>South Carolina</h3>
+                        <p class="state-card-speed">Charleston 150 mph<br>Post-Hugo code</p>
+                        <span class="state-card-cta">Calculate &rarr;</span>
+                    </a>
+
+                    <!-- California -->
+                    <a href="california-wind-load-calculator" class="state-card">
+                        <div class="state-card-flag">🌉</div>
+                        <h3>California</h3>
+                        <p class="state-card-speed">CBC 2022 + ASCE 7-16<br>Special Wind Regions</p>
+                        <span class="state-card-cta">Calculate &rarr;</span>
+                    </a>
+
+                    <!-- Louisiana -->
+                    <a href="louisiana-wind-load-calculator" class="state-card">
+                        <div class="state-card-flag">🎷</div>
+                        <h3>Louisiana</h3>
+                        <p class="state-card-speed">Coastal 150+ mph<br>LSUCC + ASCE 7-16</p>
+                        <span class="state-card-cta">Calculate &rarr;</span>
+                    </a>
+
+                    <!-- Virginia -->
+                    <a href="virginia-wind-load-calculator" class="state-card">
+                        <div class="state-card-flag">⚓</div>
+                        <h3>Virginia</h3>
+                        <p class="state-card-speed">Hampton Roads 130 mph<br>VCC + ASCE 7-16</p>
+                        <span class="state-card-cta">Calculate &rarr;</span>
+                    </a>
+
+                    <!-- Hawaii -->
+                    <a href="hawaii-wind-load-calculator" class="state-card">
+                        <div class="state-card-flag">🌺</div>
+                        <h3>Hawaii</h3>
+                        <p class="state-card-speed">Post-Iniki code<br>4-county adoption</p>
+                        <span class="state-card-cta">Calculate &rarr;</span>
+                    </a>
+                </div>
+
+                <div class="state-fallback">
+                    <p>Don't see your state? <a href="https://calc.windloadcalc.com/">Find your wind speed by ZIP code &rarr;</a> &nbsp;|&nbsp; <a href="asce-hazard-tool-alternative">ASCE Hazard Tool alternative &rarr;</a></p>
+                </div>
+            </div>
+        </section>
+
         <!-- Features Section -->
         <section class="features-section" id="features">
             <div class="container">

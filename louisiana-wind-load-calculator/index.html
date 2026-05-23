@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" type="image/svg+xml" href="/images/windloadcalc-favicon.svg">
+
+    <!-- SEO Meta -->
+    <title>Louisiana Wind Load Calculator — Post-Katrina LSUCC + ASCE | WindLoadCalc</title>
+    <meta name="description" content="Instant Louisiana wind load calculations per LSUCC + ASCE 7. New Orleans, Baton Rouge, coastal parishes 150+ mph. Post-Katrina/Ida code-aware. Free lookup.">
+    <meta name="keywords" content="Louisiana wind load calculator, LSUCC wind load, ASCE 7 Louisiana, New Orleans wind load, coastal parish wind speed, post-Katrina building code, Hurricane Ida code, Lake Charles wind load">
+    <link rel="canonical" href="https://windloadcalc.com/louisiana-wind-load-calculator">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Louisiana Wind Load Calculator — Post-Katrina LSUCC + ASCE 7">
+    <meta property="og:description" content="Instant Louisiana wind load calculations. New Orleans, Baton Rouge, coastal parishes. LSUCC-aligned, ASCE 7-16 based. Free ZIP lookup.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://windloadcalc.com/louisiana-wind-load-calculator">
+    <meta property="og:image" content="https://windloadcalc.com/images/wind-calculator-og.jpg">
+    <meta property="og:site_name" content="WindLoadCalc">
+
+    <!-- SoftwareApplication Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Louisiana Wind Load Calculator",
+        "alternateName": "WindLoadCalc Louisiana",
+        "applicationCategory": "EngineeringApplication",
+        "applicationSubCategory": "Structural Engineering",
+        "operatingSystem": "Web Browser",
+        "description": "Professional wind load calculator for Louisiana projects. Aligned with the Louisiana State Uniform Construction Code (LSUCC) — currently 2021 IBC/IRC referencing ASCE 7-16 (effective January 1, 2023) — and aware of post-Katrina and post-Ida code evolution. Returns ZIP-level design wind speeds across all 64 Louisiana parishes including coastal Cameron, Plaquemines, Orleans, Jefferson, Lafourche, and Terrebonne.",
+        "url": "https://windloadcalc.com/louisiana-wind-load-calculator",
+        "featureList": [
+            "Louisiana State Uniform Construction Code (LSUCC) alignment",
+            "ASCE 7-16 wind load calculations per current LSUCC adoption",
+            "Coastal parish wind speeds (Cameron, Plaquemines, St. Bernard, Orleans, Jefferson, Lafourche, Terrebonne)",
+            "New Orleans Orleans Parish ZIP-level lookup",
+            "Baton Rouge / East Baton Rouge Parish wind speeds",
+            "Lake Charles / Calcasieu Parish (post-Laura/Delta 2020)",
+            "Shreveport / Caddo Parish inland north",
+            "Components and Cladding (C&C) pressures",
+            "Main Wind Force Resisting System (MWFRS) pressures",
+            "Risk Category I, II, III, IV support",
+            "Exposure Category B, C, D",
+            "Parish-level reporting (not county) — Louisiana terminology"
+        ],
+        "provider": {
+            "@type": "Organization",
+            "name": "WindLoad Solutions",
+            "url": "https://windloadcalc.com",
+            "foundingDate": "2002"
+        },
+        "offers": {
+            "@type": "Offer",
+            "availability": "https://schema.org/InStock",
+            "url": "https://windloadcalc.com/wind-load-calculator-shop.html"
+        }
+    }
+    </script>
+
+    <!-- BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [{
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://windloadcalc.com/"
+        },{
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Louisiana Wind Load Calculator",
+            "item": "https://windloadcalc.com/louisiana-wind-load-calculator"
+        }]
+    }
+    </script>
+
+    <!-- FAQPage (mirrors visible FAQ 1:1) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [{
+            "@type": "Question",
+            "name": "Why does Louisiana use parishes instead of counties?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Louisiana is the only U.S. state that uses 'parishes' as its primary civil subdivision instead of 'counties'. The term is a legacy of Louisiana's French and Spanish colonial period, when ecclesiastical parishes administered local governance under Catholic Church boundaries. After the Louisiana Purchase in 1803 the territory kept the parish nomenclature even as it adopted American civil structure. Today there are 64 parishes that function essentially the same as counties elsewhere — they handle local permitting, building inspections, and code enforcement — but the terminology matters: a Louisiana plan reviewer, permit application, or sealed drawing will always reference the parish, never a county. WindLoadCalc returns the parish name for every Louisiana ZIP."
+            }
+        },{
+            "@type": "Question",
+            "name": "How did Hurricane Katrina change Louisiana building codes?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Before Hurricane Katrina in August 2005, Louisiana had no statewide building code. Construction quality was a patchwork — some parishes enforced model codes, others enforced nothing. After Katrina exposed catastrophic failures in residential and light commercial construction across south Louisiana, the legislature passed Act 12 in 2005 establishing the Louisiana State Uniform Construction Code (LSUCC) as the first mandatory statewide code. It was rolled out parish by parish through 2006-2007. The LSUCC adopted the International Building Code (IBC), International Residential Code (IRC), and referenced ASCE 7 for wind and seismic loads. This single legislative response transformed Louisiana from a state with no enforceable wind code into one with a uniform statewide standard."
+            }
+        },{
+            "@type": "Question",
+            "name": "What is the design wind speed in New Orleans versus Lake Charles?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Both cities sit in high-exposure coastal zones, but the design wind speeds differ slightly based on ASCE 7-16 contours. New Orleans (Orleans Parish, ZIPs in the 70112-70131 range) generally falls in the 150-160 mph band for Risk Category II under ASCE 7-16. Lake Charles (Calcasieu Parish, 70601-70611) is similar — 150-160 mph Risk Category II — and was hit hard by Hurricane Laura in August 2020 followed by Hurricane Delta just six weeks later. Both events caused widespread damage to structures built before strict LSUCC enforcement matured. For an exact value, enter your specific ZIP into the calculator: lookup is by ZIP, not city name, because parish boundaries and coastal contours move the number across short distances."
+            }
+        },{
+            "@type": "Question",
+            "name": "Did Hurricane Ida 2021 trigger new Louisiana code updates?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Hurricane Ida made landfall as a Category 4 storm on August 29, 2021 — exactly 16 years after Katrina — and exposed weaknesses in some post-Katrina construction, particularly in Jefferson, Lafourche, St. Charles, and Terrebonne parishes where the eyewall passed. Ida did not immediately trigger a new LSUCC version, but it accelerated the regular three-year code review cycle. The LSUCC adopted the 2021 IBC and 2021 IRC effective January 1, 2023, partly informed by post-Ida forensic engineering. Specific changes included tighter roof deck attachment requirements and stricter wind-borne debris provisions in the southernmost coastal parishes. Future LSUCC adoption cycles are expected to continue integrating post-Ida lessons."
+            }
+        },{
+            "@type": "Question",
+            "name": "Does WindLoadCalc support Louisiana State Uniform Construction Code?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. The current LSUCC adoption (effective January 1, 2023) references the 2021 IBC, 2021 IRC, and ASCE 7-16 for wind and seismic loads. WindLoadCalc uses ASCE 7-16 procedures for Louisiana projects, including the wind speed contour maps in Chapter 26, the MWFRS pressure procedures in Chapter 27 and 28, and the Components and Cladding pressures in Chapter 30. The calculator output is structured so a Louisiana plan reviewer can verify each pressure against the referenced ASCE 7-16 figure or equation. When LSUCC adopts ASCE 7-22 in a future cycle, WindLoadCalc will be updated in step."
+            }
+        },{
+            "@type": "Question",
+            "name": "Do I need a Louisiana PE to seal my wind load report?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, for any project where a parish or municipality requires sealed structural drawings, the seal must come from a professional engineer licensed in Louisiana by the Louisiana Professional Engineering and Land Surveying Board (LAPELS). WindLoadCalc generates the calculation report — the underlying ASCE 7-16 wind pressures, the parish-specific wind speed, the Components and Cladding zone pressures — but the seal itself must be applied by your Louisiana-licensed PE. Our in-house PE is Florida-licensed only and cannot seal Louisiana submittals. Use WindLoadCalc to produce the calculation; partner with a Louisiana PE to seal it."
+            }
+        },{
+            "@type": "Question",
+            "name": "What are coastal parish wind speeds in Louisiana?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Louisiana's coastal parishes carry the highest design wind speeds in the state. Under ASCE 7-16 for Risk Category II buildings: Cameron, Plaquemines, and St. Bernard parishes typically fall in the 150-160 mph range. Orleans, Jefferson, Lafourche, and Terrebonne parishes range 150-160 mph depending on ZIP and proximity to the Gulf. Calcasieu (Lake Charles) and Vermilion sit in a similar 150-160 mph band. Moving inland, St. Tammany, East Baton Rouge, and Lafayette parishes drop to roughly 130-140 mph. North Louisiana parishes (Caddo around Shreveport, Ouachita around Monroe) sit at 110-120 mph — a substantial drop driven by distance from the Gulf coast hurricane corridor."
+            }
+        },{
+            "@type": "Question",
+            "name": "How does Louisiana's wind code compare to Florida's?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Louisiana and Florida both face hurricanes, but their codes diverged in important ways. Florida adopted a statewide hurricane code (FBC) after Hurricane Andrew in 1992 — 13 years before Louisiana — and Florida went further with its High Velocity Hurricane Zone (HVHZ) overlay in Miami-Dade and Broward counties, requiring NOA-approved products and TAS 201/202/203 testing. Louisiana has no equivalent to HVHZ; LSUCC applies the same ASCE 7-16 baseline across all 64 parishes with coastal parish wind speeds in the 150-160 mph range rather than Florida's 170-180 mph coastal overrides. Florida is currently on ASCE 7-22 (via FBC 8th Edition); Louisiana is on ASCE 7-16. Both states require state-licensed PEs to seal submittals. The narrower distinction: Florida's code is older, more granular, and more locally amended; Louisiana's code is younger, more uniform statewide, and still maturing post-Ida."
+            }
+        }]
+    }
+    </script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7;
+            color: #2d3748;
+            background: #ffffff;
+        }
+
+        /* Header */
+        .main-header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo-image { height: 80px; width: auto; }
+
+        .header-cta {
+            background: #0018ff;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .header-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 24, 255, 0.3);
+        }
+
+        /* Hero */
+        .article-header {
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            color: white;
+            padding: 4rem 0 3rem;
+            text-align: center;
+        }
+
+        .article-header .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .article-category {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .article-title {
+            font-size: 3rem;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .article-subtitle {
+            font-size: 1.25rem;
+            opacity: 0.95;
+            line-height: 1.6;
+            font-weight: 400;
+            margin-bottom: 2rem;
+        }
+
+        /* Hero ZIP form */
+        .zip-form {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 560px;
+            margin: 0 auto;
+        }
+
+        .zip-input {
+            flex: 1 1 220px;
+            padding: 1rem 1.25rem;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 50px;
+            outline: none;
+            color: #1f2937;
+            min-width: 0;
+        }
+
+        .zip-submit {
+            background: white;
+            color: #0018ff;
+            border: none;
+            padding: 1rem 1.75rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .zip-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .zip-note {
+            font-size: 0.85rem;
+            opacity: 0.85;
+            margin-top: 1rem;
+        }
+
+        /* Main content layout */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .main-content { min-width: 0; }
+
+        .sidebar {
+            position: sticky;
+            top: 100px;
+            align-self: start;
+        }
+
+        .sidebar-box {
+            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+            border: 2px solid #e5e7eb;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-box h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #181E57;
+            margin-bottom: 1.5rem;
+        }
+
+        .sidebar-box ul { list-style: none; }
+        .sidebar-box ul li { margin-bottom: 0.75rem; }
+        .sidebar-box a {
+            color: #4a5568;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: block;
+            padding: 0.5rem 0 0.5rem 1rem;
+            border-left: 3px solid transparent;
+        }
+        .sidebar-box a:hover {
+            color: #0018ff;
+            border-left-color: #0018ff;
+            padding-left: 1.5rem;
+        }
+
+        .sidebar-cta {
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .sidebar-cta h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .sidebar-cta p {
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            opacity: 0.95;
+        }
+
+        .sidebar-cta-button {
+            display: block;
+            background: white;
+            color: #0018ff;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Content typography */
+        .main-content h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #181E57;
+            margin: 3rem 0 1.5rem;
+            line-height: 1.3;
+            border-bottom: 3px solid #0018ff;
+            padding-bottom: 0.75rem;
+        }
+
+        .main-content h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin: 2rem 0 1rem;
+        }
+
+        .main-content p {
+            font-size: 1.08rem;
+            line-height: 1.8;
+            margin-bottom: 1.25rem;
+            color: #4a5568;
+        }
+
+        .main-content ul {
+            margin: 1.25rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .main-content ul li {
+            margin-bottom: 0.75rem;
+            color: #4a5568;
+            line-height: 1.7;
+        }
+
+        .main-content ul li strong { color: #0018ff; font-weight: 700; }
+
+        /* Wind speed table */
+        .wind-table-wrap { overflow-x: auto; margin: 2rem 0; }
+
+        .wind-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+        }
+
+        .wind-table th {
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            color: white;
+            padding: 1rem 1.25rem;
+            text-align: left;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .wind-table td {
+            padding: 0.9rem 1.25rem;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 0.98rem;
+        }
+
+        .wind-table tr:nth-child(even) td { background: #f9fafb; }
+        .wind-table tr:last-child td { border-bottom: none; }
+
+        .speed-cell { font-weight: 700; color: #0018ff; white-space: nowrap; }
+        .coastal-badge {
+            display: inline-block;
+            background: #fee2e2;
+            color: #b91c1c;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.15rem 0.5rem;
+            border-radius: 10px;
+            margin-left: 0.4rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Info boxes */
+        .info-box {
+            background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%);
+            border-left: 4px solid #0018ff;
+            border-radius: 10px;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+        }
+
+        .info-box h4 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #0018ff;
+            margin-bottom: 0.75rem;
+        }
+
+        .info-box p { font-size: 1rem; line-height: 1.7; margin-bottom: 0; }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left: 4px solid #f59e0b;
+        }
+
+        .warning-box h4 { color: #b45309; }
+
+        .history-box {
+            background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%);
+            border-left: 4px solid #7c3aed;
+        }
+
+        .history-box h4 { color: #6d28d9; }
+
+        /* Parish cards */
+        .parish-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+            margin: 2rem 0;
+        }
+
+        .parish-card {
+            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .parish-card:hover {
+            border-color: #0018ff;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 24, 255, 0.1);
+        }
+
+        .parish-card h4 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #181E57;
+            margin-bottom: 0.5rem;
+        }
+
+        .parish-card .parish-speed {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: #0018ff;
+            margin-bottom: 0.5rem;
+        }
+
+        .parish-card p {
+            font-size: 0.92rem;
+            line-height: 1.55;
+            margin-bottom: 0;
+            color: #6b7280;
+        }
+
+        /* Timeline */
+        .hurricane-timeline {
+            position: relative;
+            margin: 2rem 0 2.5rem;
+            padding-left: 2rem;
+            border-left: 3px solid #0018ff;
+        }
+
+        .timeline-event {
+            position: relative;
+            margin-bottom: 1.75rem;
+            padding-left: 0.5rem;
+        }
+
+        .timeline-event::before {
+            content: '';
+            position: absolute;
+            left: -2.625rem;
+            top: 0.4rem;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            background: #0018ff;
+            border: 3px solid #ffffff;
+            box-shadow: 0 0 0 2px #0018ff;
+        }
+
+        .timeline-event h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #181E57;
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-event .timeline-date {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #0018ff;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .timeline-event p {
+            font-size: 0.98rem;
+            margin-bottom: 0;
+        }
+
+        /* Process steps */
+        .process-steps { counter-reset: step; margin: 2rem 0; }
+
+        .process-step {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1.5rem 1.5rem 1.5rem 4.5rem;
+            margin-bottom: 1.25rem;
+            position: relative;
+        }
+
+        .process-step::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: 1.5rem;
+            top: 1.5rem;
+            width: 2rem;
+            height: 2rem;
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.05rem;
+        }
+
+        .process-step h4 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+        }
+
+        .process-step p {
+            font-size: 1rem;
+            margin-bottom: 0;
+        }
+
+        /* FAQ */
+        .faq-item {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .faq-item summary {
+            padding: 1.25rem 1.5rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #181E57;
+            cursor: pointer;
+            list-style: none;
+            position: relative;
+            padding-right: 3rem;
+        }
+
+        .faq-item summary::-webkit-details-marker { display: none; }
+
+        .faq-item summary::after {
+            content: '+';
+            position: absolute;
+            right: 1.25rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            color: #0018ff;
+            font-weight: 400;
+            line-height: 1;
+        }
+
+        .faq-item[open] summary::after { content: '−'; }
+
+        .faq-item .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            color: #4a5568;
+            line-height: 1.7;
+        }
+
+        /* Content CTA */
+        .content-cta {
+            background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 50%, #8b5cf6 100%);
+            background-size: 200% 200%;
+            border-radius: 20px;
+            padding: 3rem 2.5rem;
+            margin: 3rem 0;
+            text-align: center;
+            color: white;
+        }
+
+        .content-cta h3 {
+            font-size: 1.85rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .content-cta p {
+            font-size: 1.1rem;
+            margin-bottom: 1.75rem;
+            opacity: 0.95;
+            color: white;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: #0018ff;
+            padding: 1rem 2.25rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
+            font-size: 1.05rem;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+        }
+
+        .cta-button i { margin-left: 0.5rem; }
+
+        /* Trust block */
+        .trust-block {
+            background: #f9fafb;
+            border: 2px solid #e5e7eb;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2.5rem 0;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            text-align: center;
+        }
+
+        .trust-stat .trust-number {
+            font-size: 2rem;
+            font-weight: 900;
+            color: #0018ff;
+            line-height: 1;
+            margin-bottom: 0.4rem;
+        }
+
+        .trust-stat .trust-label {
+            font-size: 0.92rem;
+            color: #4a5568;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        /* Glossary */
+        .glossary {
+            background: #fafbfc;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+        }
+
+        .glossary dt {
+            font-weight: 700;
+            color: #181E57;
+            margin-top: 1rem;
+        }
+
+        .glossary dt:first-child { margin-top: 0; }
+
+        .glossary dd {
+            margin: 0.3rem 0 0;
+            color: #4a5568;
+            font-size: 0.98rem;
+        }
+
+        /* Internal links section */
+        .related-links {
+            background: #f9fafb;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .related-links h3 {
+            margin-top: 0;
+            color: #181E57;
+        }
+
+        .related-links ul {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+        }
+
+        .related-links ul li { margin: 0; }
+
+        .related-links a {
+            color: #0018ff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .related-links a:hover { text-decoration: underline; }
+
+        /* Footer */
+        .main-footer {
+            background: #1f2937;
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .footer-column ul { list-style: none; padding: 0; }
+        .footer-column li { margin-bottom: 0.5rem; font-size: 0.92rem; }
+        .footer-column a {
+            color: rgba(255, 255, 255, 0.75);
+            text-decoration: none;
+        }
+        .footer-column a:hover { color: white; }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        .last-updated {
+            font-size: 0.9rem;
+            color: #6b7280;
+            font-style: italic;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .sidebar { position: static; }
+            .parish-cards { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: repeat(2, 1fr); }
+            .trust-block { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 640px) {
+            .article-title { font-size: 2rem; }
+            .article-subtitle { font-size: 1.05rem; }
+            .main-content h2 { font-size: 1.65rem; }
+            .process-step { padding-left: 3.5rem; }
+            .content-cta { padding: 2rem 1.5rem; }
+            .content-cta h3 { font-size: 1.4rem; }
+            .related-links ul { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: 1fr; }
+            .wind-table th, .wind-table td { padding: 0.7rem 0.85rem; font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="header-container">
+            <a href="/index.html">
+                <img src="/images/windloadcalc-logo.svg" alt="WindLoadCalc — Louisiana wind load calculator since 2002" class="logo-image">
+            </a>
+            <a href="/wind-load-calculator-shop.html" class="header-cta">Start Free Trial</a>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="article-header">
+        <div class="container">
+            <div class="article-category">Louisiana Wind Load Calculator</div>
+            <h1 class="article-title">Louisiana Wind Load Calculator</h1>
+            <p class="article-subtitle">Instant design pressures aligned with the <strong>Louisiana State Uniform Construction Code (LSUCC)</strong> and <strong>ASCE 7-16</strong>. Coastal-parish-aware for New Orleans, Baton Rouge, Lafayette, Lake Charles, Houma, and Shreveport — built on a code that grew up after Katrina and Ida.</p>
+
+            <form class="zip-form" id="zip-form" onsubmit="return launchCalc(event)">
+                <input type="text" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" class="zip-input" id="zip-input" placeholder="Enter Louisiana ZIP (e.g. 70112)" aria-label="Louisiana ZIP code">
+                <button type="submit" class="zip-submit">Get Louisiana Wind Pressures &rarr;</button>
+            </form>
+            <p class="zip-note">Free 7-day trial. No credit card required.</p>
+        </div>
+    </section>
+
+    <!-- Main content -->
+    <div class="content-wrapper">
+        <main class="main-content">
+            <p>Louisiana is one of the most code-evolved states in the country, and that evolution did not happen because anyone wanted it. It happened because Hurricane Katrina exposed what no statewide building code looked like, and Hurricane Ida — sixteen years later, almost to the day — proved that the post-Katrina code still has more growing to do. Designing in Louisiana means designing inside a regulatory environment that is younger and more actively revised than almost anywhere else in the United States.</p>
+
+            <p>This page is the Louisiana-specific landing for WindLoadCalc. Enter a Louisiana ZIP code above and the calculator launches preloaded with the correct ASCE 7-16 design wind speed for that location, the parish it sits in, and the project structure ready for you to enter occupancy, geometry, and exposure.</p>
+
+            <div class="info-box">
+                <h4><i class="fas fa-info-circle"></i> What "Louisiana-ready" actually means here</h4>
+                <p>Three things have to be right for a Louisiana wind load calculator to be useful: (1) it reads the ASCE 7-16 wind speed contours that the current LSUCC adoption references; (2) it returns the correct parish name (not "county" — Louisiana never uses that word for civil subdivision); and (3) it outputs a report a Louisiana plan reviewer can verify against the referenced ASCE figures and equations. WindLoadCalc does all three.</p>
+            </div>
+
+            <!-- TRUST BLOCK -->
+            <div class="trust-block">
+                <div class="trust-stat">
+                    <div class="trust-number">24+</div>
+                    <div class="trust-label">Years of wind load expertise (since 2002)</div>
+                </div>
+                <div class="trust-stat">
+                    <div class="trust-number">7</div>
+                    <div class="trust-label">ASCE 7 editions navigated (7-95 through 7-22)</div>
+                </div>
+                <div class="trust-stat">
+                    <div class="trust-number">64</div>
+                    <div class="trust-label">Louisiana parishes covered</div>
+                </div>
+            </div>
+
+            <h2 id="wind-speeds">Louisiana Wind Speed Quick Reference</h2>
+
+            <p>The table below lists representative design wind speeds for major Louisiana regions, Risk Category II (the most common occupancy — single-family, most multifamily, retail, light commercial), under ASCE 7-16 as referenced by the current LSUCC adoption. These are baseline approximations for orientation only; the calculator above returns the exact value for your specific ZIP code.</p>
+
+            <div class="wind-table-wrap">
+                <table class="wind-table">
+                    <thead>
+                        <tr>
+                            <th>Region / Parish</th>
+                            <th>Risk Cat II Wind Speed</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Cameron Parish <span class="coastal-badge">Coast</span></td>
+                            <td class="speed-cell">150–160 mph</td>
+                            <td>Southwest LA coast; Hurricane Laura 2020 landfall</td>
+                        </tr>
+                        <tr>
+                            <td>Plaquemines Parish <span class="coastal-badge">Coast</span></td>
+                            <td class="speed-cell">150–160 mph</td>
+                            <td>Mississippi River delta; most exposed parish</td>
+                        </tr>
+                        <tr>
+                            <td>St. Bernard Parish <span class="coastal-badge">Coast</span></td>
+                            <td class="speed-cell">150–160 mph</td>
+                            <td>East of New Orleans; Katrina 2005 devastation</td>
+                        </tr>
+                        <tr>
+                            <td>Orleans Parish (New Orleans)</td>
+                            <td class="speed-cell">150–160 mph</td>
+                            <td>City of New Orleans; historic district overlays in French Quarter</td>
+                        </tr>
+                        <tr>
+                            <td>Jefferson Parish (Metairie, Kenner)</td>
+                            <td class="speed-cell">150–160 mph</td>
+                            <td>Greater New Orleans west; Hurricane Ida 2021 eyewall</td>
+                        </tr>
+                        <tr>
+                            <td>Lafourche / Terrebonne (Houma, Thibodaux) <span class="coastal-badge">Coast</span></td>
+                            <td class="speed-cell">150–160 mph</td>
+                            <td>South coastal LA; heavy Ida 2021 damage</td>
+                        </tr>
+                        <tr>
+                            <td>Calcasieu Parish (Lake Charles) <span class="coastal-badge">Coast</span></td>
+                            <td class="speed-cell">150–160 mph</td>
+                            <td>SW LA; Laura + Delta 2020 double-hit</td>
+                        </tr>
+                        <tr>
+                            <td>East Baton Rouge Parish (Baton Rouge)</td>
+                            <td class="speed-cell">130–140 mph</td>
+                            <td>State capital; inland from coast</td>
+                        </tr>
+                        <tr>
+                            <td>Lafayette Parish</td>
+                            <td class="speed-cell">130–140 mph</td>
+                            <td>Acadiana region; central south LA</td>
+                        </tr>
+                        <tr>
+                            <td>St. Tammany Parish (Covington, Slidell)</td>
+                            <td class="speed-cell">140–150 mph</td>
+                            <td>North shore Lake Pontchartrain</td>
+                        </tr>
+                        <tr>
+                            <td>Caddo Parish (Shreveport)</td>
+                            <td class="speed-cell">110–120 mph</td>
+                            <td>North LA; lowest design speeds in state</td>
+                        </tr>
+                        <tr>
+                            <td>Ouachita Parish (Monroe)</td>
+                            <td class="speed-cell">110–120 mph</td>
+                            <td>Northeast LA; comparable to Shreveport</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="warning-box info-box">
+                <h4><i class="fas fa-exclamation-triangle"></i> Verify the exact value for your ZIP</h4>
+                <p>These ranges are baseline orientations only. ASCE 7-16 contours cross parish boundaries in places, and the gradient from 160 mph at the Gulf to 110 mph at the Arkansas line is steep. Risk Category III (assembly, schools) and Risk Category IV (hospitals, essential facilities) use higher speeds. Always run the calculator for your specific project address before designing or submitting.</p>
+            </div>
+
+            <h2 id="lsucc-origin">The Post-Katrina LSUCC Origin Story</h2>
+
+            <p>It is hard to overstate how unusual Louisiana's pre-2005 building code situation was. Before Hurricane Katrina, Louisiana had no statewide building code at all. A handful of parishes — primarily Orleans, Jefferson, and a few suburban parishes around Baton Rouge — enforced model codes like the Standard Building Code (the regional pre-IBC code published by the Southern Building Code Congress International). The rest of the state, including most rural parishes and large stretches of the central and northern regions, enforced little or nothing. There was no statewide wind design requirement. There was no requirement that new residential construction even meet a minimum standard.</p>
+
+            <p>Hurricane Katrina made landfall on August 29, 2005. The storm killed more than 1,800 people, caused over $125 billion in damage, and produced one of the most documented post-storm forensic engineering investigations in American history. The Federal Emergency Management Agency's Mitigation Assessment Team reports — published over the following two years — catalogued the specific failure modes that ran through south Louisiana residential construction: insufficient roof-to-wall connections, undersized roof sheathing nailing, unrated overhead doors, garage doors that failed first and then admitted wind that lifted off entire roofs. Almost every one of those failures traced back to construction built to no enforceable code.</p>
+
+            <p>The Louisiana legislature responded faster than legislatures usually move. <strong>Act 12 of 2005</strong>, passed in a special session immediately after Katrina, created the Louisiana State Uniform Construction Code (LSUCC) and the Louisiana State Uniform Construction Code Council (LSUCCC) to administer it. The Act made the LSUCC the mandatory minimum building code for the entire state — every parish, every municipality, every project. The first adopted edition referenced the International Building Code, the International Residential Code, and ASCE 7 for wind and seismic loads. Phased rollout ran through 2006 and 2007, with full statewide enforcement in place by the latter year.</p>
+
+            <div class="history-box info-box">
+                <h4><i class="fas fa-landmark"></i> Louisiana went from no code to a model code in 24 months</h4>
+                <p>Most state-level building code reforms take a decade. Louisiana went from no enforceable wind code anywhere in the state to a uniform statewide standard in approximately two years — a legislative response so disproportionate to the previous baseline that academic policy analysts have studied it as a case in disaster-driven regulation. The cost of that delay before Katrina was the cost of the storm itself.</p>
+            </div>
+
+            <p>The LSUCC has been on a regular update cycle since. The 2009 edition aligned to the 2006 IBC/IRC. The 2012 update adopted the 2009 codes. Subsequent revisions in 2015 and 2018 progressively brought the state to current ASCE 7 references. The most recent adoption, effective <strong>January 1, 2023</strong>, references the <strong>2021 IBC, 2021 IRC, and ASCE 7-16</strong> as the wind load standard. A future cycle — currently expected in the next adoption window — will likely move Louisiana to ASCE 7-22, but as of this writing, projects in any Louisiana parish design to ASCE 7-16.</p>
+
+            <h2 id="ida-laura-lessons">Hurricane Ida 2021 + Laura/Delta 2020 — What the Code Learned</h2>
+
+            <p>The post-Katrina LSUCC built a baseline. Two more decades of hurricanes tested it.</p>
+
+            <div class="hurricane-timeline">
+                <div class="timeline-event">
+                    <span class="timeline-date">August 27, 2020</span>
+                    <h4>Hurricane Laura — Category 4 at Cameron Parish landfall</h4>
+                    <p>The strongest hurricane to hit southwest Louisiana since 1856 made landfall near Cameron with 150 mph sustained winds. Lake Charles took catastrophic damage. Buildings constructed to early LSUCC editions (2007-2010) performed measurably better than older stock, but mid-rise commercial structures showed roof system failures driven by uplift in a wind field the original ASCE 7-05 design assumptions underestimated.</p>
+                </div>
+                <div class="timeline-event">
+                    <span class="timeline-date">October 9, 2020</span>
+                    <h4>Hurricane Delta — Category 2 over Calcasieu (six weeks later)</h4>
+                    <p>Delta made landfall almost in the same location as Laura. Many roofs and envelopes already compromised by Laura but not yet repaired failed completely under Delta. The double-hit produced one of the largest construction-recovery contractor surges in modern Louisiana history and exposed how brittle partially-repaired structures are to follow-on wind events.</p>
+                </div>
+                <div class="timeline-event">
+                    <span class="timeline-date">August 29, 2021</span>
+                    <h4>Hurricane Ida — Category 4 on the 16th anniversary of Katrina</h4>
+                    <p>Ida made landfall at Port Fourchon (Lafourche Parish) with 150 mph sustained winds and pushed the eyewall through Jefferson, St. Charles, and lower St. John the Baptist parishes. Most post-Katrina LSUCC-era construction in Jefferson Parish performed as designed. The most damaged buildings clustered in older sections of Houma, Thibodaux, and the lower-lying parts of Lafourche where pre-LSUCC residential stock dominates. Ida did not trigger a new code in itself but accelerated specific revisions in the next LSUCC cycle.</p>
+                </div>
+                <div class="timeline-event">
+                    <span class="timeline-date">September 11, 2024</span>
+                    <h4>Hurricane Francine — Category 2 over Terrebonne</h4>
+                    <p>Francine struck the same general corridor as Ida three years later but at lower intensity. Post-Ida repair work plus tightened LSUCC enforcement in southern Lafourche and Terrebonne produced visibly better outcomes than 2021. The storm is now cited in LSUCCC adoption discussions as evidence that the regulatory direction is correct, even though the work is incomplete.</p>
+                </div>
+            </div>
+
+            <p>The pattern across these four storms is consistent: structures built to current LSUCC standards generally hold; structures built before LSUCC enforcement matured generally fail at rates the engineering forensics teams now expect. The narrower lesson — and the one most relevant for designers running new wind load calculations — is that the ASCE 7-16 wind speeds the LSUCC references are calibrated against observed performance in these specific storms, and using anything less is not conservative.</p>
+
+            <h2 id="parish-system">The Louisiana Parish System — Why It Matters for Permitting</h2>
+
+            <p>Louisiana is the only U.S. state where civil subdivisions are called parishes, not counties. The terminology traces to the French colonial period and the Catholic ecclesiastical structure that administered local governance before the Louisiana Purchase. When the territory became a U.S. state in 1812, the parish system was kept in place — entirely as a matter of legal continuity — and 64 parishes have administered local civil functions ever since.</p>
+
+            <p>For wind load and permit work, this matters in three ways:</p>
+
+            <ul>
+                <li><strong>Terminology in submittals.</strong> Plan reviewers, permit applications, sealed drawings, and code references in Louisiana always say "parish," never "county." Calling it the wrong word marks you as out-of-state and can slow a permit review while the reviewer satisfies themselves your work is otherwise locally informed.</li>
+                <li><strong>Permit authority lives at the parish level.</strong> The LSUCC is the statewide minimum, but enforcement and permit issuance happen at the parish or municipality level. Some parishes have unified permit offices; others delegate to incorporated cities. New Orleans (Orleans Parish) has the Department of Safety and Permits; Jefferson Parish has its own Department of Inspection and Code Enforcement; East Baton Rouge runs through the City-Parish of Baton Rouge.</li>
+                <li><strong>Local overlays exist on top of the LSUCC.</strong> The LSUCC sets the floor. Specific parishes — particularly Orleans for the French Quarter and Tremé historic districts — layer additional review requirements on top. The wind load calculation does not change, but the documentation expected at submittal can be more extensive in historic-overlay zones.</li>
+            </ul>
+
+            <p>WindLoadCalc returns the parish name automatically for any Louisiana ZIP entered. If your project address spans two ZIPs or sits near a parish line, run the address (not the ZIP) to be sure the parish on the report matches the parish that will be reviewing the permit.</p>
+
+            <div class="content-cta">
+                <h3>Get Pressures for Your Louisiana Project</h3>
+                <p>Enter your ZIP, pick your risk category, and get a Louisiana parish-aware C&amp;C report in under 15 minutes.</p>
+                <a href="/wind-load-calculator-shop.html" class="cta-button">Start Free Trial <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <h2 id="how-to">How to Calculate Your Louisiana Wind Load</h2>
+
+            <div class="process-steps">
+                <div class="process-step">
+                    <h4>Enter your Louisiana ZIP code</h4>
+                    <p>The calculator looks up the ZIP, returns the correct Louisiana parish, and pulls the ASCE 7-16 design wind speed from the contour maps. Coastal parishes (Cameron, Plaquemines, Orleans, Jefferson, Lafourche, Terrebonne, Calcasieu) return 150-160 mph baseline values; inland north parishes drop progressively to 110 mph.</p>
+                </div>
+                <div class="process-step">
+                    <h4>Pick your Risk Category</h4>
+                    <p>Risk Category II covers most occupancies (single-family, multifamily, retail, most commercial). Risk Category III covers assembly buildings, schools, and substantial-hazard facilities. Risk Category IV is for essential facilities (hospitals, fire stations, emergency operations centers). The design wind speed scales upward with the risk category at the same location.</p>
+                </div>
+                <div class="process-step">
+                    <h4>Set Exposure Category and building geometry</h4>
+                    <p>Exposure C is the Louisiana default for most suburban and rural sites — open terrain with scattered obstructions. Exposure B applies for sites shielded by surrounding buildings or dense trees on all sides (urban interior of New Orleans, dense parts of Baton Rouge). Exposure D applies for coastal sites within a mile of unobstructed open water — most of Cameron, Plaquemines, and the Gulf-facing fringe of other coastal parishes. Then enter building length, width, mean roof height, roof slope (X over 12), and roof shape.</p>
+                </div>
+                <div class="process-step">
+                    <h4>Review the calculated pressures</h4>
+                    <p>The calculator returns MWFRS pressures (for the lateral force-resisting system) and Components and Cladding pressures (for individual windows, doors, and cladding elements). C&amp;C output includes zone breakdowns — Zone 4 (wall field), Zone 5 (wall corner), and the corresponding roof zones for your roof type. Every pressure cites the specific ASCE 7-16 figure or equation it comes from.</p>
+                </div>
+                <div class="process-step">
+                    <h4>Hand the report to your Louisiana-licensed PE for seal</h4>
+                    <p>Louisiana requires a state-licensed PE to seal structural submittals. WindLoadCalc produces the calculation; the seal must come from a PE licensed by the Louisiana Professional Engineering and Land Surveying Board (LAPELS). Our in-house PE is Florida-licensed only and does not seal out-of-state work — but the report is structured to make a Louisiana PE's review and seal straightforward.</p>
+                </div>
+            </div>
+
+            <h3>Plain-English glossary (for non-engineers reading this)</h3>
+            <dl class="glossary">
+                <dt>LSUCC</dt>
+                <dd>Louisiana State Uniform Construction Code — the statewide minimum building code, administered by the LSUCCC, currently referencing 2021 IBC/IRC and ASCE 7-16.</dd>
+                <dt>ASCE 7-16</dt>
+                <dd>The American Society of Civil Engineers Standard 7 (2016 edition) — the load standard the LSUCC references for wind and seismic design.</dd>
+                <dt>Parish</dt>
+                <dd>Louisiana's term for what other states call a county. There are 64 parishes.</dd>
+                <dt>MWFRS</dt>
+                <dd>Main Wind Force Resisting System — the structural system (shear walls, diaphragms, moment frames) that resists wind loads on the whole building.</dd>
+                <dt>C&amp;C</dt>
+                <dd>Components and Cladding — individual elements (windows, doors, panels, fasteners) that resist wind locally over their tributary area.</dd>
+                <dt>Risk Category</dt>
+                <dd>ASCE 7 classification (I, II, III, IV) that scales design wind speed by the consequence of a building's failure. Hospitals and EOCs (IV) use higher wind speeds than residences (II) at the same location.</dd>
+                <dt>Exposure Category</dt>
+                <dd>How exposed the site is to open wind. B is sheltered/urban; C is open terrain with scattered obstructions (most of Louisiana); D is coastal within a mile of open water.</dd>
+            </dl>
+
+            <h2 id="parishes">Major Louisiana Parishes — Wind Design At-A-Glance</h2>
+
+            <div class="parish-cards">
+                <div class="parish-card">
+                    <h4>Orleans Parish</h4>
+                    <div class="parish-speed">150–160 mph</div>
+                    <p>City of New Orleans. ZIPs 70112, 70115, 70116, 70124, 70130. Historic district overlays in French Quarter and Marigny add documentation requirements at submittal.</p>
+                </div>
+                <div class="parish-card">
+                    <h4>East Baton Rouge Parish</h4>
+                    <div class="parish-speed">130–140 mph</div>
+                    <p>State capital. ZIPs 70801, 70806, 70808. Inland location pulls design speeds down meaningfully from coastal parish numbers.</p>
+                </div>
+                <div class="parish-card">
+                    <h4>Calcasieu Parish</h4>
+                    <div class="parish-speed">150–160 mph</div>
+                    <p>Lake Charles. ZIPs 70601, 70605, 70611. Hit by Laura (2020) + Delta (2020) consecutive landfalls; substantial post-storm construction underway through mid-2020s.</p>
+                </div>
+                <div class="parish-card">
+                    <h4>Lafayette Parish</h4>
+                    <div class="parish-speed">130–140 mph</div>
+                    <p>Acadiana region center. ZIPs 70501, 70503. Central south LA; inland from Gulf but coastal-adjacent enough to need careful Exposure category selection.</p>
+                </div>
+                <div class="parish-card">
+                    <h4>Terrebonne Parish</h4>
+                    <div class="parish-speed">150–160 mph</div>
+                    <p>Houma. ZIP 70360. Coastal South LA; eyewall corridor of Hurricane Ida (2021). High pre-LSUCC residential stock means new construction here is reshaping the local building inventory.</p>
+                </div>
+                <div class="parish-card">
+                    <h4>Caddo Parish</h4>
+                    <div class="parish-speed">110–120 mph</div>
+                    <p>Shreveport. ZIP 71101. Northwest LA. Lowest design wind speeds in the state — far enough inland that Gulf hurricanes are spent by the time they arrive (though tornado risk picks up).</p>
+                </div>
+            </div>
+
+            <h2 id="related">More Wind Load Resources</h2>
+
+            <div class="related-links">
+                <h3>Related calculators and guides</h3>
+                <ul>
+                    <li><a href="/florida-wind-load-calculator">Florida wind load calculator (HVHZ + FBC 8th Edition)</a></li>
+                    <li><a href="/miami-dade-wind-load-calculator">Miami-Dade County wind load calculator (175 mph)</a></li>
+                    <li><a href="/broward-wind-load-calculator">Broward County wind load calculator (170 mph)</a></li>
+                    <li><a href="/collier-county-wind-load-calculator">Collier County wind load calculator (170 mph)</a></li>
+                    <li><a href="/asce-hazard-tool-alternative">ASCE Hazard Tool alternative — instant ZIP lookup</a></li>
+                    <li><a href="/Landing%20Pages/asce-7-wind-load-calculator.html">ASCE 7 wind load calculator overview</a></li>
+                    <li><a href="/shop/windows-doors-shutters.html">Windows, doors &amp; shutters C&amp;C calculator</a></li>
+                    <li><a href="/Landing%20Pages/components-and-cladding-wind-loads.html">Components &amp; cladding fundamentals</a></li>
+                </ul>
+            </div>
+
+            <h2 id="faq">Louisiana Wind Load FAQ</h2>
+
+            <details class="faq-item">
+                <summary>Why does Louisiana use parishes instead of counties?</summary>
+                <div class="faq-answer">Louisiana is the only U.S. state that uses 'parishes' as its primary civil subdivision instead of 'counties'. The term is a legacy of Louisiana's French and Spanish colonial period, when ecclesiastical parishes administered local governance under Catholic Church boundaries. After the Louisiana Purchase in 1803 the territory kept the parish nomenclature even as it adopted American civil structure. Today there are 64 parishes that function essentially the same as counties elsewhere — they handle local permitting, building inspections, and code enforcement — but the terminology matters: a Louisiana plan reviewer, permit application, or sealed drawing will always reference the parish, never a county. WindLoadCalc returns the parish name for every Louisiana ZIP.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>How did Hurricane Katrina change Louisiana building codes?</summary>
+                <div class="faq-answer">Before Hurricane Katrina in August 2005, Louisiana had no statewide building code. Construction quality was a patchwork — some parishes enforced model codes, others enforced nothing. After Katrina exposed catastrophic failures in residential and light commercial construction across south Louisiana, the legislature passed Act 12 in 2005 establishing the Louisiana State Uniform Construction Code (LSUCC) as the first mandatory statewide code. It was rolled out parish by parish through 2006-2007. The LSUCC adopted the International Building Code (IBC), International Residential Code (IRC), and referenced ASCE 7 for wind and seismic loads. This single legislative response transformed Louisiana from a state with no enforceable wind code into one with a uniform statewide standard.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>What is the design wind speed in New Orleans versus Lake Charles?</summary>
+                <div class="faq-answer">Both cities sit in high-exposure coastal zones, but the design wind speeds differ slightly based on ASCE 7-16 contours. New Orleans (Orleans Parish, ZIPs in the 70112-70131 range) generally falls in the 150-160 mph band for Risk Category II under ASCE 7-16. Lake Charles (Calcasieu Parish, 70601-70611) is similar — 150-160 mph Risk Category II — and was hit hard by Hurricane Laura in August 2020 followed by Hurricane Delta just six weeks later. Both events caused widespread damage to structures built before strict LSUCC enforcement matured. For an exact value, enter your specific ZIP into the calculator: lookup is by ZIP, not city name, because parish boundaries and coastal contours move the number across short distances.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>Did Hurricane Ida 2021 trigger new Louisiana code updates?</summary>
+                <div class="faq-answer">Hurricane Ida made landfall as a Category 4 storm on August 29, 2021 — exactly 16 years after Katrina — and exposed weaknesses in some post-Katrina construction, particularly in Jefferson, Lafourche, St. Charles, and Terrebonne parishes where the eyewall passed. Ida did not immediately trigger a new LSUCC version, but it accelerated the regular three-year code review cycle. The LSUCC adopted the 2021 IBC and 2021 IRC effective January 1, 2023, partly informed by post-Ida forensic engineering. Specific changes included tighter roof deck attachment requirements and stricter wind-borne debris provisions in the southernmost coastal parishes. Future LSUCC adoption cycles are expected to continue integrating post-Ida lessons.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>Does WindLoadCalc support Louisiana State Uniform Construction Code?</summary>
+                <div class="faq-answer">Yes. The current LSUCC adoption (effective January 1, 2023) references the 2021 IBC, 2021 IRC, and ASCE 7-16 for wind and seismic loads. WindLoadCalc uses ASCE 7-16 procedures for Louisiana projects, including the wind speed contour maps in Chapter 26, the MWFRS pressure procedures in Chapter 27 and 28, and the Components and Cladding pressures in Chapter 30. The calculator output is structured so a Louisiana plan reviewer can verify each pressure against the referenced ASCE 7-16 figure or equation. When LSUCC adopts ASCE 7-22 in a future cycle, WindLoadCalc will be updated in step.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>Do I need a Louisiana PE to seal my wind load report?</summary>
+                <div class="faq-answer">Yes, for any project where a parish or municipality requires sealed structural drawings, the seal must come from a professional engineer licensed in Louisiana by the Louisiana Professional Engineering and Land Surveying Board (LAPELS). WindLoadCalc generates the calculation report — the underlying ASCE 7-16 wind pressures, the parish-specific wind speed, the Components and Cladding zone pressures — but the seal itself must be applied by your Louisiana-licensed PE. Our in-house PE is Florida-licensed only and cannot seal Louisiana submittals. Use WindLoadCalc to produce the calculation; partner with a Louisiana PE to seal it.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>What are coastal parish wind speeds in Louisiana?</summary>
+                <div class="faq-answer">Louisiana's coastal parishes carry the highest design wind speeds in the state. Under ASCE 7-16 for Risk Category II buildings: Cameron, Plaquemines, and St. Bernard parishes typically fall in the 150-160 mph range. Orleans, Jefferson, Lafourche, and Terrebonne parishes range 150-160 mph depending on ZIP and proximity to the Gulf. Calcasieu (Lake Charles) and Vermilion sit in a similar 150-160 mph band. Moving inland, St. Tammany, East Baton Rouge, and Lafayette parishes drop to roughly 130-140 mph. North Louisiana parishes (Caddo around Shreveport, Ouachita around Monroe) sit at 110-120 mph — a substantial drop driven by distance from the Gulf coast hurricane corridor.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>How does Louisiana's wind code compare to Florida's?</summary>
+                <div class="faq-answer">Louisiana and Florida both face hurricanes, but their codes diverged in important ways. Florida adopted a statewide hurricane code (FBC) after Hurricane Andrew in 1992 — 13 years before Louisiana — and Florida went further with its High Velocity Hurricane Zone (HVHZ) overlay in Miami-Dade and Broward counties, requiring NOA-approved products and TAS 201/202/203 testing. Louisiana has no equivalent to HVHZ; LSUCC applies the same ASCE 7-16 baseline across all 64 parishes with coastal parish wind speeds in the 150-160 mph range rather than Florida's 170-180 mph coastal overrides. Florida is currently on ASCE 7-22 (via FBC 8th Edition); Louisiana is on ASCE 7-16. Both states require state-licensed PEs to seal submittals. The narrower distinction: Florida's code is older, more granular, and more locally amended; Louisiana's code is younger, more uniform statewide, and still maturing post-Ida.</div>
+            </details>
+
+            <div class="content-cta">
+                <h3>Ready to Run Your Louisiana Numbers?</h3>
+                <p>Get instant LSUCC-aligned ASCE 7-16 wind pressures for any Louisiana ZIP. Built and maintained by the team that has been calculating wind loads since 2002. Free 7-day trial. No credit card.</p>
+                <a href="/wind-load-calculator-shop.html" class="cta-button">View Plans &amp; Start Trial <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <p class="last-updated"><strong>Last updated:</strong> May 23, 2026. Reflects LSUCC adoption effective January 1, 2023 (2021 IBC/IRC + ASCE 7-16). WindLoadCalc has been computing wind loads for U.S. permit submittals since 2002.</p>
+        </main>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-box">
+                <h3>On This Page</h3>
+                <ul>
+                    <li><a href="#wind-speeds">Louisiana Wind Speeds</a></li>
+                    <li><a href="#lsucc-origin">Post-Katrina LSUCC Origin</a></li>
+                    <li><a href="#ida-laura-lessons">Ida + Laura/Delta Lessons</a></li>
+                    <li><a href="#parish-system">Parish System Explainer</a></li>
+                    <li><a href="#how-to">How to Calculate</a></li>
+                    <li><a href="#parishes">Major Parishes</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#related">Related Resources</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-cta">
+                <h3>Try It Free</h3>
+                <p>Louisiana-ready LSUCC + ASCE 7-16 wind loads in 15 minutes. 7-day trial, no credit card.</p>
+                <a href="/wind-load-calculator-shop.html" class="sidebar-cta-button">Start Free Trial</a>
+            </div>
+
+            <div class="sidebar-box">
+                <h3>By The Numbers</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="border-left: none; padding-left: 0;"><strong style="color: #0018ff;">Since 2002</strong> — 24+ years of wind load expertise</li>
+                    <li style="border-left: none; padding-left: 0;"><strong style="color: #0018ff;">64 parishes</strong> — all of Louisiana covered</li>
+                    <li style="border-left: none; padding-left: 0;"><strong style="color: #0018ff;">ASCE 7-16</strong> — current LSUCC standard</li>
+                    <li style="border-left: none; padding-left: 0;"><strong style="color: #0018ff;">7 editions</strong> — ASCE 7-95 through 7-22 navigated</li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="mailto:info@windloadcalc.com">info@windloadcalc.com</a></li>
+                    <li><a href="mailto:support@windloadcalc.com">support@windloadcalc.com</a></li>
+                    <li><a href="tel:8332723946">(833) 272-3946</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Calculators</h3>
+                <ul>
+                    <li><a href="/shop/windows-doors-shutters.html">Windows, Doors &amp; Shutters</a></li>
+                    <li><a href="/wind-load-calculator-shop.html">All Calculators &amp; Pricing</a></li>
+                    <li><a href="/wind-load-calculator-comparison.html">Calculator Comparison</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="/Landing%20Pages/free-wind-load-calculator.html">Free Demo</a></li>
+                    <li><a href="/Landing%20Pages/asce-7-wind-load-calculator.html">ASCE 7 Guide</a></li>
+                    <li><a href="/Landing%20Pages/components-and-cladding-wind-loads.html">C&amp;C Wind Loads</a></li>
+                    <li><a href="/faq.html">Wind Load FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="/why-us.html">About Us — Since 2002</a></li>
+                    <li><a href="/contact.html">Contact</a></li>
+                    <li><a href="/privacy-policy.html">Privacy</a></li>
+                    <li><a href="/terms-of-service.html">Terms</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2002&ndash;2026 WindLoadCalc. All rights reserved. Wind load calculations for U.S. permit submittals since 2002.</p>
+        </div>
+    </footer>
+
+    <script>
+        // ZIP launch — calc.windloadcalc.com accepts ?zip=NNNNN and auto-derives
+        // city / state / parish / wind speed (New Orleans 70112 -> LA, Orleans Parish).
+        function launchCalc(e) {
+            e.preventDefault();
+            var zip = (document.getElementById('zip-input').value || '').replace(/[^0-9]/g, '').slice(0, 5);
+            var target = 'https://calc.windloadcalc.com/';
+            if (zip.length === 5) {
+                target = target + '?zip=' + zip;
+            }
+            window.location.href = target;
+            return false;
+        }
+    </script>
+</body>
+</html>

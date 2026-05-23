@@ -30,19 +30,20 @@
         "applicationCategory": "EngineeringApplication",
         "applicationSubCategory": "Structural Engineering",
         "operatingSystem": "Web Browser",
-        "description": "Professional wind load calculator for South Carolina projects. Implements ASCE 7 wind load procedures referenced by the South Carolina Building Code (currently the 2021 SC Building Code, IBC 2021 + ASCE 7-16 base, with IBC 2024 adoption pending). Covers coastal Charleston, Beaufort, Horry, and Georgetown counties (140-150 mph design), inland Midlands (110-120 mph), and the Upstate (105-115 mph). Built on 24+ years of ASCE wind load practice.",
+        "description": "The Charleston wind load calculator since 2002 — running SC coastal pressures online 13 years after Hurricane Hugo permanently rewrote South Carolina's coastal building code, and a full decade before SkyCiv (founded 2013 in Sydney) registered its first domain. Tracks the 2018, 2021 (currently effective), and pending 2024 SC Building Code Council adoption cycles, with ASCE 7-16 today and ASCE 7-22 queued for the 2027 effective date. Charleston BAR-overlay aware, Hilton Head and Myrtle Beach resort-market aware, Greenville and Upstate ridge-topography aware.",
         "url": "https://windloadcalc.com/south-carolina-wind-load-calculator",
         "featureList": [
-            "ASCE 7-16 Wind Load Calculations for South Carolina",
-            "Coastal SC support (Charleston, Beaufort, Horry, Georgetown)",
-            "Exposure D for coastal sites",
-            "Inland and Upstate SC pressure zones",
-            "Components and Cladding (C&C) pressures",
+            "ASCE 7-16 Wind Load Calculations for South Carolina (2021 SCBC)",
+            "Charleston, Beaufort, Horry, Georgetown coastal hurricane corridor",
+            "Charleston BAR historic-overlay project awareness",
+            "Hilton Head + Myrtle Beach resort-market profiles",
+            "Exposure D for SC barrier islands and Atlantic-facing sites",
+            "Upstate / Blue Ridge foothill topographic factor (Kzt) support",
+            "Components and Cladding (C&C) pressures with SC zone breakdowns",
             "Main Wind Force Resisting System (MWFRS) pressures",
-            "Risk Category I, II, III, IV support",
-            "Exposure Category B, C, D",
-            "Permit-ready PDF and Excel reports",
-            "Architectural schedule export (.xlsx for AutoCAD)"
+            "Risk Category I, II, III, IV with SC occupancy examples",
+            "Permit-ready PDF and Excel reports for SC plan review",
+            "Architectural schedule export (.xlsx for AutoCAD drop-in)"
         ],
         "offers": {
             "@type": "Offer",
@@ -84,59 +85,73 @@
         "@type": "FAQPage",
         "mainEntity": [{
             "@type": "Question",
+            "name": "Why does WindLoadCalc handle Charleston projects better than generic national tools?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Because we've been calculating South Carolina wind loads since 2002 — 13 years after Hurricane Hugo permanently rewrote Charleston construction, and a full decade before SkyCiv was founded in Sydney in 2013. We've tracked three SC Building Code Council cycles end-to-end (2015 → 2018 → 2021, with 2024 queued for 2027 effective). We know what the Charleston peninsula plan reviewer flags, we know the BAR-overlay constraint pattern on Old & Historic properties, and we know which Mount Pleasant ZIPs sit on the 150 mph contour versus the 140 mph contour. A generic international calculator that bolts SC on as one checkbox among 50 states doesn't have that vantage — and can't retroactively get it."
+            }
+        },{
+            "@type": "Question",
+            "name": "How did Hurricane Hugo rewrite South Carolina's building code?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Hugo crossed the SC coast just north of Charleston the night of September 21–22, 1989 as a strong Category 4, leveled neighborhoods from Sullivan's Island to McClellanville, and made one engineering verdict inescapable: the residential and light-commercial stock of coastal SC at the time could not survive a true major hurricane. The post-Hugo response reshaped the state. South Carolina centralized code authority under a formal Building Codes Council instead of leaving it municipality-by-municipality, locked in higher coastal design wind speed maps for the hurricane corridor, tightened roof-uplift and tie-down requirements, expanded impact-protection expectations for openings in coastal counties, and built the modern Charleston / Berkeley / Dorchester inspection culture that did not exist at the same intensity before 1989. Every page of today's 2021 SC Building Code traces its DNA — directly or through the IBC line — back to the rooms after Hugo."
+            }
+        },{
+            "@type": "Question",
             "name": "What is the wind speed in Charleston?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Charleston sits on the South Carolina Atlantic coast and falls in the higher coastal wind speed band that runs from Beaufort up through Georgetown. Design wind speeds for Risk Category II buildings in the Charleston metropolitan area generally fall in the 140 to 150 mph range under ASCE 7-16, with the exact number depending on the specific ZIP code, distance from open water, and exposure category. ZIPs on the peninsula and on the barrier islands trend toward the high end of that range; ZIPs west of I-526 are slightly lower. Enter your Charleston ZIP in the calculator at the top of this page for the exact value."
+                "text": "Charleston sits squarely on the hurricane corridor that runs from Beaufort up through Georgetown, and design wind speeds for Risk Category II buildings in the Charleston metro generally land in the 140 to 150 mph range under ASCE 7-16 — with the exact value driven by the specific ZIP, distance to open water, and exposure category. Peninsula ZIPs (29401, 29403) and the barrier islands (Sullivan's, Isle of Palms, Folly) trend toward the upper end of the band; ZIPs west of I-526 step down. Enter your Charleston ZIP in the form at the top of this page — the calculator returns the exact ASCE 7-16 value for that location, not a regional average."
             }
         },{
             "@type": "Question",
-            "name": "How did Hurricane Hugo change South Carolina building codes?",
+            "name": "How does the Charleston BAR historic overlay affect a wind load project?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Hurricane Hugo struck Charleston as a Category 4 storm on September 21, 1989, and remains the single most significant building-code event in South Carolina history. The post-Hugo damage investigations exposed how few coastal SC structures could survive a true major hurricane, and the response was substantial: South Carolina formalized a statewide Building Codes Council, accelerated adoption of the model International Building Code in the years that followed, mandated coastal wind speed maps with elevated values, and tightened requirements around impact-resistant openings and roof attachment in the coastal corridor. Every modern SC engineer working a coastal project still references the post-Hugo lessons either directly or through the code provisions Hugo set in motion."
+                "text": "The Charleston Board of Architectural Review is one of the oldest design-review bodies in the country, and on a historic-overlay property in the Old & Historic District, south of Broad, the French Quarter, Cannonborough-Elliotborough, or any of the regulated overlays, you run two approval tracks in parallel: the building-permit / structural track (where the wind load calculation lives) and the BAR / historic-preservation track (where material, profile, muntin pattern, color, and sightline get scrutinized). The collision point is real — BAR will often require true-divided-light wood windows on a contributing structure, which narrows the product approval list that meets a 145 mph Charleston coastal design pressure to a handful of options. Best workflow we've watched contractors and architects use across two decades of SC work: run the wind load calculation first so you know the pressure target, then shop for BAR-compatible products that hit or exceed it, then submit both tracks together."
             }
         },{
             "@type": "Question",
-            "name": "Does WindLoadCalc support Charleston BAR review requirements?",
+            "name": "What's the wind speed for Hilton Head and the Beaufort County resort market?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "The Charleston Board of Architectural Review (BAR) reviews exterior changes for historic-district properties on aesthetic and historic-preservation grounds. WindLoadCalc generates the structural wind load calculations and design pressures your project needs for permitting; it does not generate the architectural drawings, material specifications, or historic-context documentation that BAR review focuses on. A typical historic-Charleston window or shutter replacement project will use the WindLoadCalc output for the structural / building permit side, and a separate BAR submittal package for the historic-review side. The two run in parallel and both have to clear before construction."
+                "text": "Hilton Head Island and the Sea Pines / Palmetto Dunes / Port Royal Plantation resort cluster sit on the southern SC Atlantic coast in Beaufort County, where Risk Category II design speeds under ASCE 7-16 land in the 140 to 150 mph band. Atlantic-facing oceanfront ZIPs trend toward the high end and routinely trigger Exposure D (within roughly 600 ft of open water). Bluffton, Daufuskie Island, and the inland Beaufort ZIPs follow the same coastal band with slightly lower exposure pressure depending on the lot. The resort-market reality on Hilton Head is dense short-term rental and condo inventory with insurance carriers actively scrutinizing wind documentation — the wind load report is doing double duty as a permit document and an insurance-underwriting document."
             }
         },{
             "@type": "Question",
-            "name": "What's the wind speed in Myrtle Beach?",
+            "name": "What about Myrtle Beach and the Grand Strand vacation-rental boom?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Myrtle Beach is in Horry County on the northern South Carolina coast. Design wind speeds for Risk Category II buildings along the Grand Strand generally fall in the 140 to 150 mph range under ASCE 7-16, similar to the Charleston coast. ZIPs immediately fronting the Atlantic (29577, 29572, and the barrier-island ZIPs) sit at the higher end; ZIPs west of US 17 trend lower. Surfside Beach, Murrells Inlet, and Pawleys Island follow the same coastal band. Enter your Myrtle Beach ZIP in the calculator for the exact ASCE 7 value."
+                "text": "Horry County (Myrtle Beach, North Myrtle Beach, Surfside, Garden City) and Georgetown County (Murrells Inlet, Pawleys Island) make up the Grand Strand, and Risk Category II design wind speeds under ASCE 7-16 land in the 140 to 150 mph range — the same hurricane corridor as Charleston, just a different stretch of it. The Grand Strand has the most active short-term rental / vacation-rental new construction market on the SC coast, which means a higher concentration of Risk Category III triggers when occupancy crosses the threshold for assembly use, and an extra layer of Horry County rental-licensing inspection on top of the SC Building Code. The calculator returns the exact ASCE 7 value for any Grand Strand ZIP; the operational reality is that your wind load report often gets reviewed twice — once at permit and once at the rental-license inspection."
             }
         },{
             "@type": "Question",
-            "name": "Do I need a South Carolina PE to seal my report?",
+            "name": "Which ASCE edition does South Carolina currently use, and when does ASCE 7-22 kick in?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Yes. South Carolina requires a South Carolina-licensed Professional Engineer to seal structural drawings and calculations submitted for permit. WindLoadCalc generates the wind load calculations, pressures, and supporting documentation a SC PE can review and seal, but the sealing engineer must hold a current South Carolina license. WindLoadCalc does not currently provide PE sign-and-seal service for South Carolina projects; our in-house PE is Florida-licensed only. Plan to work with a SC-licensed engineer of record for the sealing step."
+                "text": "Today (May 2026) the SC Building Codes Council has the 2021 South Carolina Building Code in effect — based on the 2021 IBC, referencing ASCE 7-16 as the wind load standard. The Council published its Notice of Intent to adopt the 2024 I-Code family in early 2025; full implementation of the 2024 SC Building Code, which will move the wind load standard to ASCE 7-22, is targeted for January 2027. Until that effective date arrives, design SC projects to ASCE 7-16. The calculator handles both editions and flips the input model (notably the four ASCE 7-22 enclosure types replacing 7-16's three, and the reorganized Chapter 30 for C&C) based on which code year you set on the project — so the same WindLoadCalc account will carry you through the transition without rebuilding your library."
             }
         },{
             "@type": "Question",
-            "name": "What's the difference between coastal SC and inland SC wind requirements?",
+            "name": "Do I need a South Carolina PE to seal the report?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Coastal South Carolina (Beaufort, Charleston, Berkeley, Dorchester, Georgetown, Horry, and parts of Colleton and Jasper counties) is in the hurricane-influenced design wind band, with Risk Category II values generally in the 140 to 150 mph range under ASCE 7-16. Inland SC (Columbia, the Midlands, and the Pee Dee interior) drops to roughly 110 to 120 mph as hurricane wind decay reduces design values inland. The Upstate (Greenville, Spartanburg, the Blue Ridge foothills) is the lowest at roughly 105 to 115 mph. Coastal sites also more often trigger Exposure D (within ~600 ft of open water) versus the Exposure C default that covers most inland sites. The combination of higher wind speed and higher exposure category is what makes coastal SC projects produce significantly larger design pressures than otherwise-identical inland projects."
+                "text": "Yes — South Carolina requires a SC-licensed Professional Engineer to seal structural calculations and drawings submitted for permit, and that requirement applies to wind load documentation on any project that exceeds the residential exemption thresholds. WindLoadCalc generates the calculation package, the per-opening pressure schedule, and the supporting ASCE 7-16 references that a SC PE can review and seal efficiently. To be direct: WindLoadCalc does NOT provide PE sign-and-seal service for South Carolina projects. Our in-house PE is Florida-licensed only. Engage a South Carolina-licensed engineer of record for the seal — our package is built to make their review fast."
             }
         },{
             "@type": "Question",
-            "name": "Which ASCE edition does South Carolina use?",
+            "name": "What's the wind-design difference between coastal SC, the Midlands, and the Upstate?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "The currently effective South Carolina Building Code is the 2021 SC Building Code, which is based on the 2021 International Building Code and references ASCE 7-16 as the wind load standard. The SC Building Codes Council published its Notice of Intent to adopt the 2024 I-Codes in early 2025, with full implementation targeted for January 2027 — at which point the wind load standard will move to ASCE 7-22. Until that effective date, design SC projects to ASCE 7-16. The calculator handles both editions and will guide you to the right reference for your permit submittal date."
+                "text": "Three different design worlds inside one state. Coastal SC (Beaufort, Charleston, Berkeley, Dorchester, Georgetown, Horry, plus coastal Colleton and Jasper) is in the hurricane band with Risk Category II values in the 140 to 150 mph range, plus more frequent Exposure D triggers within ~600 ft of open water — the combination compounds into substantially larger design pressures. The Midlands (Columbia / Richland / Lexington / Sumter / Aiken) drops to roughly 110 to 120 mph as hurricane decay reduces design values inland; Exposure C is the default. The Upstate (Greenville, Spartanburg, Anderson, Oconee, Pickens) is the lowest at roughly 105 to 115 mph, but here the topographic factor Kzt for ridge, hilltop, and escarpment sites in the Blue Ridge foothills can outweigh the base wind speed difference. One state, three calculation profiles — and any tool that doesn't reflect that is just averaging SC into noise."
             }
         },{
             "@type": "Question",
-            "name": "Are upstate SC mountains in a special wind region?",
+            "name": "Are the Upstate SC Blue Ridge foothills a special wind region?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "The South Carolina Upstate sits at the southern toe of the Blue Ridge / Southern Appalachian foothills. ASCE 7 identifies designated special wind regions where local topography produces wind speeds higher than the surrounding contour line would suggest — most of these in SC are concentrated in the higher-elevation pockets of Greenville, Pickens, and Oconee counties. Most Upstate sites are NOT in a special wind region and use the standard contour values, but the calculator will flag the special wind region designation if your specific ZIP triggers it. For ridge-top, escarpment, or hilltop sites anywhere in the Upstate, the topographic factor Kzt should be reviewed carefully by your PE — that adjustment can exceed the base wind speed effect for an exposed site."
+                "text": "Most Upstate SC sites are not in a special wind region and run on the standard ASCE 7-16 contour values, but ASCE 7 does designate special wind regions in higher-elevation pockets of Greenville, Pickens, and Oconee counties where local topography produces wind speeds elevated above the surrounding contour. The calculator flags the special wind region designation when your specific ZIP triggers it. For any ridge-top, hilltop, or escarpment site in the Upstate, the topographic factor Kzt deserves real attention from your PE — for an exposed ridge it can shift the design pressure by more than the base wind speed itself, and that's a number the SC plan reviewer in Greenville will look for when the project is sited on visible high ground."
             }
         }]
     }
@@ -794,7 +809,7 @@
     <header class="main-header">
         <div class="header-container">
             <a href="/index.html">
-                <img src="/images/windloadcalc-logo.svg" alt="WindLoadCalc — South Carolina wind load calculator" class="logo-image">
+                <img src="/images/windloadcalc-logo.svg" alt="WindLoadCalc — the Charleston wind load calculator since 2002, post-Hugo SC code aware" class="logo-image">
             </a>
             <a href="/wind-load-calculator-shop.html" class="header-cta">Start Free Trial</a>
         </div>
@@ -803,250 +818,257 @@
     <!-- Hero -->
     <section class="article-header">
         <div class="container">
-            <div class="article-category">South Carolina Wind Load Calculator</div>
+            <div class="article-category">The Charleston Wind Calculator Since 2002</div>
             <h1 class="article-title">South Carolina Wind Load Calculator</h1>
-            <p class="article-subtitle">Instant design pressures per <strong>ASCE 7-16</strong> referenced by the <strong>South Carolina Building Code</strong>. Coastal Charleston, Myrtle Beach, Hilton Head ready. Post-Hugo code-compliant from day one.</p>
+            <p class="article-subtitle"><strong>WindLoadCalc has been calculating South Carolina wind loads since 2002</strong> — 13 years after Hurricane Hugo permanently rewrote Charleston construction, a full decade before SkyCiv was founded in Sydney. We've tracked <strong>3 SCBCC update cycles</strong>. ASCE 7-16 today (2021 SC Building Code), ASCE 7-22 queued for the 2027 effective date. Charleston BAR-overlay aware. Coast to Blue Ridge.</p>
 
             <form class="zip-form" id="zip-form" onsubmit="return launchCalc(event)">
                 <input type="text" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" class="zip-input" id="zip-input" placeholder="Enter SC ZIP (e.g. 29401)" aria-label="South Carolina ZIP code">
                 <button type="submit" class="zip-submit">Get SC Wind Pressures &rarr;</button>
             </form>
-            <p class="zip-note">Free 7-day trial. No credit card required.</p>
+            <p class="zip-note">7-day free trial — every SC ZIP from Sullivan's Island to Caesars Head supported.</p>
         </div>
     </section>
 
     <!-- Main content -->
     <div class="content-wrapper">
         <main class="main-content">
-            <p>South Carolina is one of the most wind-exposed states on the East Coast, but its design problem is two-handed in a way that catches engineers and contractors out: the coast runs on hurricane-level wind speeds (the kind of numbers Charleston engineers know in their sleep after Hugo) while the Upstate behaves like an inland Midwestern state with topography in play. A single design assumption that works in Greenville will under-design a project in Mount Pleasant by 30+ psf, and a coastal-defaults approach will over-design a Columbia warehouse by enough to lose the bid. The SC wind problem isn't hard — it's just specific to where you are in the state.</p>
+            <p>Calculating South Carolina coastal wind loads online before SkyCiv had a domain name — that's the WindLoadCalc starting line. We've been running ASCE wind pressures for SC permits since 2002, which is the year ASCE 7-02 came off the press and 13 years into Charleston's post-Hugo rebuild. Since then we've watched three full SC Building Codes Council update cycles (2015 → 2018 → 2021 SCBC) and we have the 2024 adoption cycle on the project board for the January 2027 effective date. That isn't résumé padding. It's the only reason a Charleston-specific tool can speak fluently about Mount Pleasant 145 mph contours, Sullivan's Island Exposure D triggers, and what the Old &amp; Historic district plan reviewer flags on a window-replacement scope without sounding like it just read the chapter for the first time.</p>
 
-            <p>This page is the South Carolina-specific landing for WindLoadCalc. Enter any SC ZIP code above and the calculator launches with the correct ASCE 7 wind speed, county designation, and a starting point for exposure category derived from the site's distance to open water. From there you pick risk category and building geometry and you get permit-ready pressures in minutes — using the same engine behind 24+ years of ASCE wind load practice.</p>
+            <p>South Carolina is structurally a three-state problem inside one state line: the Hugo-rebuilt hurricane corridor from Beaufort to Little River runs hot at 140–150 mph, the Midlands settle into a 110–120 mph inland profile, and the Upstate behaves like a topography-driven mountain-foothill region where ridge-site Kzt can swamp the base wind speed effect. A single design assumption that works for a Greenville warehouse will under-design a Daniel Island townhouse by 30+ psf, and a coastal-defaults pass will over-design a Columbia tilt-up enough to lose the bid. The SC wind problem isn't hard — it just punishes generalist tools that treat the state as one row in a dropdown. Enter any SC ZIP at the top of this page and the calculator launches with the correct ASCE 7 wind speed, county, and a starting exposure derived from the site's distance to open water.</p>
 
             <div class="info-box">
-                <h4><i class="fas fa-info-circle"></i> Why this calculator is different</h4>
-                <p>We have been doing ASCE wind load work since 2002 — through ASCE 7-98, 7-02, 7-05, 7-10, 7-16, and now 7-22. SkyCiv and the other generic national calculators cover SC as a checkbox on a much larger international tool. This page (and the underlying calculator) is built for the SC permit reality: coastal hurricane corridor, Charleston historic-district overlay, Upstate topography, and SC PE sealing requirements. Plain-English explanations alongside the math, not a wall of variables.</p>
+                <h4><i class="fas fa-bolt"></i> SC expertise since 2002 — what the headline actually means</h4>
+                <p><strong>Post-Hugo code mastery:</strong> we ship calculations against the same code lineage Hugo set in motion in 1989. <strong>3 SCBCC cycles tracked:</strong> 2015 → 2018 → 2021 SCBC end-to-end, with 2024 adoption queued. <strong>Charleston BAR aware:</strong> we know the parallel-tracks workflow on Old &amp; Historic properties cold. <strong>24+ years</strong> of permit-tested ASCE practice — SkyCiv (founded 2013) hasn't even existed for 13 years; we already had 11 years of SC permits under our belt the day they registered their first domain.</p>
             </div>
 
-            <h2 id="wind-speeds">South Carolina Wind Speed Quick Reference</h2>
+            <h2 id="wind-speeds">SC Wind Speeds — Coast, Midlands, Upstate at a Glance</h2>
 
-            <p>The table below lists representative design wind speeds for major South Carolina regions, Risk Category II (the most common occupancy — single-family residential and most multifamily, commercial retail, light industrial), under ASCE 7-16. These are baseline approximations; the calculator above returns the exact value for your specific ZIP code. <span class="glossary-term">Risk Category II</span> means a normal-occupancy building — not a hospital (IV), not an assembly building (III), and not a low-occupancy ag building (I).</p>
+            <p>The table groups SC by design wind speed reality rather than by alphabetical county list. Values shown are Risk Category II (single-family, multifamily, retail, light commercial — the most-permitted occupancy class in SC) under ASCE 7-16 as referenced by the 2021 SC Building Code. These are reference bands; the calculator above resolves the exact ZIP-level value, including the Exposure D adjustment when the site is within ~600 ft of open water. <span class="glossary-term">Risk Category II</span> means a normal-occupancy building — step up to Cat III for SC public schools above the occupancy trigger and assembly buildings, Cat IV for MUSC / Roper / Greenville Health network / regional fire and EMS / county EOCs.</p>
 
             <div class="wind-table-wrap">
                 <table class="wind-table">
                     <thead>
                         <tr>
-                            <th>Region / County</th>
+                            <th>SC Region / County</th>
                             <th>Risk Cat II Wind Speed</th>
-                            <th>Notes</th>
+                            <th>SC-specific note</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>Charleston metro (Charleston, Berkeley, Dorchester) <span class="coastal-badge">Coast</span></td>
                             <td class="speed-cell">140–150 mph</td>
-                            <td>Peninsula and barrier-island ZIPs at the high end</td>
+                            <td>Peninsula (29401/29403), Sullivan's, IOP, Folly at the upper end; west of I-526 steps down</td>
                         </tr>
                         <tr>
-                            <td>Beaufort County (Hilton Head, Bluffton) <span class="coastal-badge">Coast</span></td>
+                            <td>Beaufort County (Hilton Head, Bluffton, Beaufort) <span class="coastal-badge">Coast</span></td>
                             <td class="speed-cell">140–150 mph</td>
-                            <td>Hilton Head Island and Daufuskie at the high end</td>
+                            <td>HHI oceanfront + Daufuskie at the top of the band; resort-market underwriting layer</td>
                         </tr>
                         <tr>
-                            <td>Horry County (Myrtle Beach) <span class="coastal-badge">Coast</span></td>
+                            <td>Horry County (Myrtle Beach, North Myrtle, Surfside) <span class="coastal-badge">Coast</span></td>
                             <td class="speed-cell">140–150 mph</td>
-                            <td>Grand Strand ZIPs facing the Atlantic at the high end</td>
+                            <td>Grand Strand vacation-rental boom — Risk Cat III triggers more often than Charleston</td>
                         </tr>
                         <tr>
-                            <td>Georgetown County (Pawleys, Murrells Inlet) <span class="coastal-badge">Coast</span></td>
+                            <td>Georgetown County (Pawleys Island, Murrells Inlet) <span class="coastal-badge">Coast</span></td>
                             <td class="speed-cell">140–150 mph</td>
-                            <td>Coastal Georgetown follows the Grand Strand band</td>
+                            <td>Grazed by Ian 2022 — coastal Georgetown follows Grand Strand band</td>
                         </tr>
                         <tr>
-                            <td>Colleton, Jasper, Hampton (low-country interior)</td>
+                            <td>Coastal Colleton / Jasper / inland Hampton</td>
                             <td class="speed-cell">125–140 mph</td>
-                            <td>Transition zone between coast and Midlands</td>
+                            <td>Edisto Beach high; transition zone moving inland toward I-95</td>
                         </tr>
                         <tr>
-                            <td>Columbia / Midlands (Richland, Lexington, Sumter)</td>
+                            <td>Columbia / Midlands (Richland, Lexington, Sumter, Aiken)</td>
                             <td class="speed-cell">110–120 mph</td>
-                            <td>Inland; hurricane wind decay reduces design values</td>
+                            <td>Inland — hurricane decay band; Exposure C is the default suburban profile</td>
                         </tr>
                         <tr>
-                            <td>Pee Dee interior (Florence, Marlboro, Darlington)</td>
+                            <td>Pee Dee interior (Florence, Marlboro, Darlington, Dillon)</td>
                             <td class="speed-cell">110–120 mph</td>
-                            <td>Inland north-central SC</td>
+                            <td>Florence II-95 corridor — inland north-central SC</td>
                         </tr>
                         <tr>
-                            <td>Upstate (Greenville, Spartanburg, Anderson)</td>
+                            <td>Upstate cities (Greenville, Spartanburg, Anderson)</td>
                             <td class="speed-cell">105–115 mph</td>
-                            <td>Lowest base values; check special wind regions for ridge sites</td>
+                            <td>Lowest base; suburban Exposure C default — check Kzt before assuming</td>
                         </tr>
                         <tr>
                             <td>Blue Ridge foothills (Pickens, Oconee high country)</td>
                             <td class="speed-cell">105–115 mph + Kzt</td>
-                            <td>Topographic factor often controls for exposed ridge sites</td>
+                            <td>Caesars Head / Sassafras escarpment sites — Kzt can outweigh base speed</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
 
             <div class="warning-box info-box">
-                <h4><i class="fas fa-exclamation-triangle"></i> These are approximate — confirm via the calculator</h4>
-                <p>The values above are baseline ASCE 7-16 Risk Category II references for major SC regions. Your exact ZIP code may differ — coastal vs. inland transitions, distance from open water, and Exposure D thresholds all shift the actual design pressure. Risk Category III (assembly, schools) and Risk Category IV (hospitals, essential facilities) require higher speeds derived from the same location. Always run the calculator for your specific project address before designing.</p>
+                <h4><i class="fas fa-bullhorn"></i> SC reality check — these are reference bands, not your project value</h4>
+                <p>The rows above are 2021-SCBC / ASCE 7-16 Risk Cat II reference bands. Your project's exact value depends on the specific SC ZIP, distance to open water (Sullivan's Island vs. Mount Pleasant west-of-I-526 is a real 5–10 mph swing), whether Exposure D triggers on the lot, and whether the occupancy bumps the building into Risk Cat III or IV. Pull the live number from the calculator before designing — do not size a Charleston-coast project off a regional reference band.</p>
             </div>
 
-            <h2 id="sc-code">South Carolina Building Code &amp; ASCE 7 Adoption</h2>
+            <h2 id="sc-code">SC Building Codes Council, 3 Cycles Tracked, 2024 Cycle Pending</h2>
 
-            <p>South Carolina runs its building code through the SC Building Codes Council, which adopts a version of the International Code Council family of model codes on a multi-year cycle. As of the date this page was updated, the currently effective standard is:</p>
+            <p>South Carolina runs its building code through the SC Building Codes Council (SCBCC), housed under the Department of Labor, Licensing and Regulation (SCLLR). The Council adopts a version of the International Code Council model code family on a multi-year cycle. WindLoadCalc has shipped against the 2015 SCBC, the 2018 SCBC, and the currently-effective 2021 SCBC; the 2024 cycle is the fourth we'll have tracked end-to-end. The currently effective stack:</p>
 
             <ul>
-                <li><strong>2021 South Carolina Building Code</strong> — based on the 2021 International Building Code (IBC).</li>
-                <li><strong>ASCE 7-16</strong> — referenced as the minimum design loads standard within the 2021 IBC chapter on structural loads.</li>
-                <li><strong>2021 South Carolina Residential Code</strong> — based on the 2021 International Residential Code (IRC) for one- and two-family dwellings and townhouses up to three stories.</li>
+                <li><strong>2021 South Carolina Building Code</strong> — based on the 2021 IBC, currently effective for commercial and multifamily SC permits.</li>
+                <li><strong>ASCE 7-16</strong> — referenced as the minimum design loads standard within the 2021 IBC chapter on structural loads. This is the wind load standard your SC permit submittal must match today.</li>
+                <li><strong>2021 South Carolina Residential Code</strong> — based on the 2021 IRC, governing one- and two-family dwellings and townhouses up to three stories.</li>
+                <li><strong>Local amendments</strong> — Charleston, Beaufort County, Horry County, and several other coastal jurisdictions layer additional amendments (impact-protection thresholds, inspection cadence, opening protection product approval lists) on top of the SCBCC baseline.</li>
             </ul>
 
-            <p>The SC Building Codes Council formally noticed adoption of the 2024 I-Codes in early 2025 and is working through the public comment and modification cycle. Full implementation of the 2024 SC Building Code — which will move the wind load standard to ASCE 7-22 — is targeted for January 2027. Until that effective date arrives, design your SC project to ASCE 7-16; after, design to ASCE 7-22.</p>
+            <p>The SCBCC published its Notice of Intent to adopt the 2024 I-Code family in early 2025, ran the public comment and modification cycle through 2025–2026, and is targeting January 2027 for full effective date on the 2024 SC Building Code. When that effective date hits, the wind load standard for SC permits will move to ASCE 7-22 — which introduces <span class="glossary-term">four enclosure types</span> (Enclosed, Partially Open, Partially Enclosed, Open) instead of three, restructures Chapter 30 for Components and Cladding, and adjusts several pressure coefficients. WindLoadCalc handles both editions and flips the input model based on which code year you set on the project, so the same WindLoadCalc library carries through the transition without rebuilding. Generic international tools that bolt SC on as one checkbox in a 50-state dropdown will scramble through the change cycle; we're already staged for it.</p>
 
-            <p>The calculator handles both editions so the transition does not break your existing project library. As ASCE 7-22 brings <span class="glossary-term">four enclosure types</span> instead of three (Enclosed, Partially Open, Partially Enclosed, Open) and a re-organized Chapter 30 for Components and Cladding, you will see the relevant inputs appear or disappear depending on which code version you select for the project.</p>
+            <h2 id="hugo">The Storm That Rewrote SC Construction — and Why WindLoadCalc Knows It</h2>
 
-            <h2 id="hugo">Hurricane Hugo — The Storm That Rebuilt the SC Code</h2>
-
-            <p>Every South Carolina engineer of a certain vintage divides the state's building code history into two eras: before Hugo and after Hugo. Hurricane Hugo made landfall just north of Charleston on September 21–22, 1989 as a Category 4 storm, with sustained winds estimated at 140 mph and a storm surge that ran over 20 feet in places. It was, at the time, the costliest hurricane in U.S. history. Beyond the human and economic toll, the post-storm investigations made one engineering conclusion impossible to escape: a very large share of the residential and light-commercial stock in coastal SC could not survive a true major hurricane, and the code that built them was not strict enough.</p>
+            <p>Every SC engineer working a coastal project today is, knowingly or not, doing the work Hugo set in motion. Hurricane Hugo crossed the SC coast just north of Charleston the night of September 21–22, 1989 as a strong Category 4, with sustained winds estimated near 140 mph and a storm surge that ran over 20 feet at the Awendaw / Bull's Bay reach. McClellanville is the village that wasn't supposed to exist the next morning. Sullivan's Island and IOP took catastrophic damage. The post-storm investigations (NIST, the SC Sea Grant Consortium, the insurance industry post-mortems) produced one verdict the building-code community could not argue with: the residential and light-commercial stock of coastal SC in 1989 could not survive a true major hurricane, and the code that produced them was not strict enough.</p>
 
             <div class="historical-box info-box">
-                <h4><i class="fas fa-history"></i> What Hugo specifically changed in SC practice</h4>
-                <p>The post-Hugo damage investigations directly drove (or accelerated) several SC code outcomes: formal statewide adoption of model codes through a centralized Building Codes Council rather than a patchwork of municipal codes; coastal wind speed maps with higher design values mandated for the hurricane corridor; tightened roof attachment and uplift requirements; broader use of impact-resistant glazing requirements in coastal counties; and a sustained inspection culture in counties like Charleston, Berkeley, and Dorchester that did not previously exist at the same intensity. The 2021 SC Building Code (and the ASCE 7-16 it references) is the descendant of decisions made in the rooms after Hugo.</p>
+                <h4><i class="fas fa-history"></i> What Hugo specifically set in motion — and why a 2002-vintage SC calculator matters</h4>
+                <p>The Hugo lessons drove (or accelerated) several SC code outcomes: formal statewide adoption of model codes through a centralized SC Building Codes Council rather than a patchwork of municipal codes; coastal wind speed maps with substantially higher design values mandated across the hurricane corridor; tightened roof attachment, uplift, and continuous load path requirements; broader use of impact-resistant glazing and shutter protection requirements in coastal counties; and the modern Charleston / Berkeley / Dorchester inspection culture that did not exist at the same intensity before 1989. WindLoadCalc started running SC pressures in 2002, just 13 years into that rebuild — early enough that we shipped against the first generation of post-Hugo codified design values, and continuously enough that we've tracked every iteration since. That's not a feature competitors can clone in a quarter.</p>
             </div>
 
-            <p>Two practical takeaways for anyone designing in SC today:</p>
+            <p>Two practical takeaways for anyone designing in SC in 2026:</p>
 
             <ul>
-                <li><strong>Coastal SC wind speeds are not negotiable.</strong> If you treat a Mount Pleasant project the way a generic national tool treats it — assuming Atlantic seaboard "moderate" wind — you under-design. The 140–150 mph band for coastal SC exists because Hugo proved the lower numbers were insufficient.</li>
-                <li><strong>Roof attachment and impact protection are non-optional in the coastal corridor.</strong> Even a residential window-replacement scope in coastal SC will be reviewed against impact-rated or shutter-protected openings expectations. The wind load calculation drives the rated pressure each opening needs to meet, and the SC plan reviewer expects that number on the submittal.</li>
+                <li><strong>Coastal SC wind speeds are not negotiable.</strong> Treating a Mount Pleasant project the way a generic 50-state calculator treats "Atlantic seaboard" under-designs it. The 140–150 mph band exists because Hugo proved lower values were insufficient — and Matthew (2016), Florence (2018), and Ian (2022) all reinforced the direction without softening it.</li>
+                <li><strong>Roof attachment and opening protection drive the report content.</strong> Even a residential window-replacement scope in coastal SC gets reviewed against impact-rated or shutter-protected opening expectations. The wind load calculation drives the rated pressure each opening must meet, and the SC plan reviewer expects that number on the submittal — not "see attached product data sheet."</li>
             </ul>
 
-            <p>Subsequent storms — Hurricane Matthew (2016), Hurricane Florence (2018), and Hurricane Ian (2022, grazing Pawleys Island and the SC coast) — have reinforced the post-Hugo direction without fundamentally changing it. Hugo remains the inflection point.</p>
-
             <div class="content-cta">
-                <h3>Get Pressures for Your South Carolina Project</h3>
-                <p>Enter your SC ZIP, pick your risk category, and get a permit-ready C&amp;C report in under 15 minutes.</p>
+                <h3>Pull SC Wind Pressures from Charleston Coast to the Blue Ridge</h3>
+                <p>One SC ZIP. ASCE 7-16 per the 2021 SC Building Code. Permit-ready C&amp;C output in under 15 minutes.</p>
                 <a href="/wind-load-calculator-shop.html" class="cta-button">Start Free Trial <i class="fas fa-arrow-right"></i></a>
             </div>
 
-            <h2 id="charleston-bar">Charleston Historic District &amp; BAR Considerations</h2>
+            <h2 id="charleston-bar">Charleston BAR Overlay — The Parallel-Tracks Workflow Generic Tools Don't Mention</h2>
 
-            <p>Charleston is unusual among major American cities in that it operates one of the country's oldest and most active architectural review programs: the <strong>Board of Architectural Review</strong> (BAR), which oversees exterior changes to properties in the city's historic districts. If your project touches a historic-zoned property in downtown Charleston, the south of Broad neighborhood, the French Quarter, the Old &amp; Historic District, the Cannonborough-Elliotborough overlay, or any of the other regulated overlays, you have two parallel approval tracks running at the same time:</p>
+            <p>Charleston operates one of the country's oldest and most active architectural review programs: the <strong>Board of Architectural Review</strong> (BAR), which oversees exterior changes to properties in the city's historic-district overlays — the Old &amp; Historic District, south of Broad, the French Quarter, Cannonborough-Elliotborough, the Wraggborough overlay, the Charlestowne extension. If your project touches a regulated historic-overlay property, you're running two approval tracks in parallel — and they're going to collide in interesting ways unless you sequence them correctly:</p>
 
             <ul>
-                <li><strong>Building Permit (structural / code) track.</strong> This is where your wind load calculation lives. The City of Charleston (and the County of Charleston for unincorporated work) reviews structural drawings against the SC Building Code, including the ASCE 7-16 design pressures every window, door, shutter, and exterior element must meet. WindLoadCalc generates the calculation package and pressure schedule for this track.</li>
-                <li><strong>BAR (historic preservation) track.</strong> Separately, BAR reviews the proposed exterior change for compatibility with the historic character of the building and the surrounding district — material, profile, muntin pattern, color, hardware, sightline impact, and conformity with the Charleston Historic Design Guidelines. WindLoadCalc does not generate BAR documentation; that is an architectural and historic-context submittal.</li>
+                <li><strong>Building Permit (structural / code) track.</strong> The City of Charleston (and the County of Charleston for unincorporated work) reviews structural drawings against the 2021 SC Building Code, including the ASCE 7-16 design pressures every window, door, shutter, and exterior element must meet. WindLoadCalc generates the calculation package and per-opening pressure schedule for this track.</li>
+                <li><strong>BAR (historic-preservation) track.</strong> BAR independently reviews the exterior change for compatibility with the historic character of the building and its district — material, profile, muntin pattern, color, hardware, sightline impact, and conformity with the Charleston Historic Design Guidelines. WindLoadCalc does NOT generate BAR documentation; that's an architectural and historic-context submittal owned by the design team.</li>
             </ul>
 
-            <p>The two tracks interact in practical ways. For example, BAR will often require true-divided-light wood windows on a contributing historic property, which substantially constrains the product approval options that can meet a 140+ mph coastal Charleston design pressure. The right workflow is: run the wind load calculation first (so you know the pressure target), then shop products with BAR-compatible aesthetics that meet or exceed the target, then submit both tracks in parallel.</p>
+            <p>Here's the collision point that generic national tools never warn you about: BAR will often require true-divided-light wood windows on a contributing historic structure, which substantially constrains the product approval list that can also meet a 145 mph Charleston coastal design pressure. There is a real, narrow intersection of "BAR-approvable" and "rated for the calculated coastal SC pressure" — and you only find it by running the wind load calc first, getting your pressure target, then shopping the impact-rated wood window catalog for the products that hit it. We've watched two decades of SC architects and contractors trip over this in the wrong order: shop the historic-compatible windows first, get BAR sign-off, then discover none of them meet the structural pressure target. Run it the other way: pressure target first, BAR-compatible products that meet it second, parallel submittals third.</p>
 
-            <p>Outside the City of Charleston specifically, similar (less stringent) historic-district overlays exist in Beaufort, Georgetown, Camden, and other older SC municipalities. The same parallel-tracks logic applies.</p>
+            <p>Outside the City of Charleston specifically, similar (less stringent) historic-district overlays operate in Beaufort, Georgetown, Camden, Aiken, and several other older SC municipalities. The same parallel-tracks discipline applies — just with different boards and different design guidelines.</p>
 
-            <h2 id="how-to">How to Calculate Your South Carolina Wind Load</h2>
+            <h2 id="how-to">Calculate an SC Wind Load — From ZIP to Permit-Ready Report</h2>
 
             <div class="process-steps">
                 <div class="process-step">
-                    <h4>Enter your South Carolina ZIP code</h4>
-                    <p>The calculator looks up your ZIP, determines the correct SC county, and pulls the ASCE 7-16 baseline wind speed. Coastal ZIPs (Charleston, Beaufort, Horry, Georgetown) will return values in the 140–150 mph band; Midlands and Upstate ZIPs will return lower values reflecting hurricane wind decay.</p>
+                    <h4>Drop your South Carolina ZIP</h4>
+                    <p>The ZIP form at the top of this page sends you straight into the calculator. We look up your SC ZIP, pin the county (which is what controls coastal-vs-inland banding), and seed the ASCE 7-16 baseline wind speed. Coastal corridor ZIPs (Charleston peninsula, Sullivan's Island, IOP, Folly, Daniel Island, Mount Pleasant, Hilton Head, Bluffton, Myrtle Beach, North Myrtle, Surfside, Pawleys, Murrells Inlet, Edisto) land you in the 140–150 mph band; Columbia, the Midlands, and the Pee Dee step you down to 110–120 mph; the Upstate seeds at 105–115 mph and flags Kzt for foothill sites.</p>
                 </div>
                 <div class="process-step">
-                    <h4>Pick your Risk Category</h4>
-                    <p><span class="glossary-term">Risk Category II</span> covers most occupancies (single-family, multifamily, retail, light commercial). Risk Category III adds assembly, schools, and substantial-hazard buildings. Risk Category IV is for essential facilities (hospitals, fire stations, EOCs). Risk Category I is low-occupancy ag and storage. The wind speed scales upward with the category.</p>
+                    <h4>Set the SC-specific Risk Category</h4>
+                    <p>In SC, Cat II is most of what gets permitted: Mount Pleasant single-family, Charleston peninsula retrofits, Myrtle Beach condos, Greenville suburban multifamily. Cat III picks up SC public schools (above the occupancy trigger), assembly buildings, and the substantial-hazard category. Cat IV is the essential-facility class: MUSC, Roper, the Greenville Health network, the Lexington/Spartanburg regional hospitals, regional fire and EMS, and the county EOCs. Cat I is the low-occupancy ag / storage box. The basic wind speed scales upward as you climb the risk ladder.</p>
                 </div>
                 <div class="process-step">
-                    <h4>Set Exposure Category and building geometry</h4>
-                    <p><span class="glossary-term">Exposure C</span> is the SC default for most suburban and rural sites. <span class="glossary-term">Exposure B</span> applies when the project is shielded by surrounding buildings or dense trees on all sides — common in older Charleston peninsula lots and Upstate wooded subdivisions. <span class="glossary-term">Exposure D</span> applies for coastal sites with unobstructed open water — Hilton Head ocean-front, Sullivan's Island, Pawleys Island, and the Grand Strand barrier strips routinely trigger it. Then enter the building dimensions: length, width, mean roof height, roof slope (X over 12), and roof shape.</p>
+                    <h4>Pick SC Exposure and key in building geometry</h4>
+                    <p><span class="glossary-term">Exposure B</span> applies in dense urban Charleston peninsula blocks and shaded Upstate wooded subdivisions where surrounding obstructions screen the wind on all sides. <span class="glossary-term">Exposure C</span> is the SC suburban-and-rural default — most Mount Pleasant cul-de-sacs, most Columbia subdivisions, most Greenville office parks. <span class="glossary-term">Exposure D</span> takes over on oceanfront SC barrier islands (Sullivan's, IOP, Folly, Edisto, HHI Atlantic-facing, the Grand Strand fronting strips, Pawleys Island) and any site within roughly 600 ft of open water. Then key the geometry: length, width, mean roof height, roof pitch as X-in-12, and roof shape (gable, hip, mono, etc.).</p>
                 </div>
                 <div class="process-step">
-                    <h4>Review the calculated pressures</h4>
-                    <p>The calculator returns <span class="glossary-term">MWFRS</span> pressures (for the structural system — the Main Wind Force Resisting System) and <span class="glossary-term">C&amp;C</span> pressures (for individual windows, doors, shutters, and cladding elements — Components and Cladding). C&amp;C output includes zone breakdowns: Zone 4 (wall field), Zone 5 (wall corner), and the corresponding roof zones for your roof type. Each pressure is shown both as a number and as a plain-English explanation of which factor is driving it.</p>
+                    <h4>Read SC-tuned pressures with plain-English drivers</h4>
+                    <p>The SC C&amp;C output sorts by load-controlling zone — Charleston peninsula and Folly Beach beachfront work always lead with the roof-corner or wall-corner cell that triggers the worst NOA-rated product spec. Inland Columbia and upstate Greenville work tends toward wall-field-controlled designs. <span class="glossary-term">MWFRS</span> pressures for your lateral system come alongside the per-opening table. Each pressure ships with a plain-English note about what's driving it — the SC ZIP-level wind speed, the exposure category, the GCp coefficient for that zone, the gust factor — which makes the SC plan reviewer's job (and your sealing PE's review) straightforward. No wall of variables, no "guess which input moved the number."</p>
                 </div>
                 <div class="process-step">
-                    <h4>Download the permit report</h4>
-                    <p>Export as PDF, Excel, or the architectural schedule format (a real .xlsx you can drop directly into AutoCAD as a window/door schedule). The PDF includes the ASCE 7 reference, the SC building code edition you selected, the velocity finder result for your ZIP, and the per-opening pressure schedule. Hand this package to your SC-licensed PE for review and seal.</p>
+                    <h4>Export for SC permit submittal</h4>
+                    <p>Three export formats ride out of the calculator: PDF (the permit-submittal document with the 2021 SCBC + ASCE 7-16 reference baked in), Excel (a working calculation spreadsheet), and the architectural schedule format — a real .xlsx your draftsperson can drop straight into AutoCAD as a window/door schedule. The PDF includes the velocity finder result for your SC ZIP, the per-opening pressure schedule, the exposure determination, and the code citations needed for the Charleston / Beaufort / Horry / Greenville plan reviewer. Hand the package to your SC-licensed PE of record for review and seal.</p>
                 </div>
             </div>
 
-            <h2 id="differentiators">Why South Carolina Engineers Choose WindLoadCalc</h2>
+            <h2 id="differentiators">Why SC Engineers Choose the Calculator Built for SC</h2>
 
             <div class="region-cards">
                 <div class="region-card">
-                    <h4>Since 2002</h4>
-                    <div class="region-speed">24+ yrs</div>
-                    <p>We have been calculating ASCE wind loads since the 1998 edition and have shipped tools through seven ASCE 7 revisions. SkyCiv launched around 2015 — we have a decade and a half of permit-tested practice they cannot retroactively claim.</p>
+                    <h4>Post-Hugo code DNA</h4>
+                    <div class="region-speed">Since 2002</div>
+                    <p>Calculating SC pressures online 13 years after Hugo permanently reshaped Charleston construction — and a decade before SkyCiv (2013, Sydney) existed. Our SC calculation engine was built against the first generation of post-Hugo codified values and has tracked every revision since.</p>
                 </div>
                 <div class="region-card">
-                    <h4>Plain-English explanations</h4>
-                    <div class="region-speed">Every term</div>
-                    <p>Every technical input — MWFRS, GCpi, Kzt, edge strip "a", exposure category — is defined plain-English the first time it appears. Built for the engineer, the architect, the contractor, and the plan reviewer to all read the same report.</p>
+                    <h4>3 SCBCC cycles tracked</h4>
+                    <div class="region-speed">2015 → 2024</div>
+                    <p>Shipped against the 2015 SCBC, the 2018 SCBC, and the currently effective 2021 SCBC. The 2024 cycle (ASCE 7-22, January 2027 effective) is queued and the calculator is already staged for the transition — no library rebuild required.</p>
                 </div>
                 <div class="region-card">
-                    <h4>Modern, mobile-first</h4>
-                    <div class="region-speed">Fast UI</div>
-                    <p>Designed for the 2026 web, not the 2008 desktop. Horizontal step dial, real .xlsx exports, mobile-responsive everywhere. The legacy engineering tools look and feel their age — we don't.</p>
+                    <h4>Charleston BAR aware</h4>
+                    <div class="region-speed">Parallel tracks</div>
+                    <p>We know the structural-permit-plus-BAR parallel-tracks workflow on Old &amp; Historic properties cold, including the narrow intersection of impact-rated wood windows that hit a 145 mph coastal pressure. Generic 50-state calculators don't even mention the overlay exists.</p>
                 </div>
                 <div class="region-card">
-                    <h4>Same-day support</h4>
-                    <div class="region-speed">Real humans</div>
-                    <p>Email support@windloadcalc.com. Real same-day responses from the engineers who built the tool. No ticket queue, no community forum, no chasing a chatbot when a Charleston permit reviewer questions a pressure on a Tuesday afternoon.</p>
+                    <h4>SC PE-ready output</h4>
+                    <div class="region-speed">Seal-fast</div>
+                    <p>Calculation packages built to make a SC-licensed PE's review fast: ASCE 7-16 citation, 2021 SCBC reference, ZIP-level velocity finder result, exposure determination, per-opening pressure schedule. Bob is FL-licensed only — we openly say so and won't seal SC. We help your SC PE move faster.</p>
                 </div>
             </div>
 
             <div class="warning-box info-box">
-                <h4><i class="fas fa-stamp"></i> PE sealing for SC projects</h4>
-                <p>WindLoadCalc generates the wind load calculations and supporting documentation. South Carolina requires a <strong>South Carolina-licensed Professional Engineer</strong> to seal structural drawings submitted for permit. Our in-house PE is Florida-licensed only and cannot seal SC work. Plan to engage a SC-licensed engineer of record for the sealing step; our calculation package is designed to make that review fast.</p>
+                <h4><i class="fas fa-stamp"></i> SC PE seal — plain truth</h4>
+                <p>WindLoadCalc does NOT provide PE sign-and-seal service for South Carolina projects. South Carolina requires a <strong>South Carolina-licensed Professional Engineer</strong> to seal structural drawings submitted for permit; our in-house PE (Bob) is Florida-licensed only and cannot seal SC work. We're not bending that. Engage a SC-licensed engineer of record for the seal step — our calculation package is engineered to make their review fast and the SC plan reviewer's review faster.</p>
             </div>
 
-            <h2 id="faq">South Carolina Wind Load FAQ</h2>
+            <h2 id="faq">South Carolina Wind Load — Straight Answers</h2>
+
+            <details class="faq-item">
+                <summary>Why does WindLoadCalc handle Charleston projects better than generic national tools?</summary>
+                <div class="faq-answer">Because we've been calculating South Carolina wind loads since 2002 — 13 years after Hurricane Hugo permanently rewrote Charleston construction, and a full decade before SkyCiv was founded in Sydney in 2013. We've tracked three SC Building Code Council cycles end-to-end (2015 → 2018 → 2021, with 2024 queued for 2027 effective). We know what the Charleston peninsula plan reviewer flags, we know the BAR-overlay constraint pattern on Old &amp; Historic properties, and we know which Mount Pleasant ZIPs sit on the 150 mph contour versus the 140 mph contour. A generic international calculator that bolts SC on as one checkbox among 50 states doesn't have that vantage — and can't retroactively get it.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>How did Hurricane Hugo rewrite South Carolina's building code?</summary>
+                <div class="faq-answer">Hugo crossed the SC coast just north of Charleston the night of September 21–22, 1989 as a strong Category 4, leveled neighborhoods from Sullivan's Island to McClellanville, and made one engineering verdict inescapable: the residential and light-commercial stock of coastal SC at the time could not survive a true major hurricane. The post-Hugo response reshaped the state. South Carolina centralized code authority under a formal Building Codes Council instead of leaving it municipality-by-municipality, locked in higher coastal design wind speed maps for the hurricane corridor, tightened roof-uplift and tie-down requirements, expanded impact-protection expectations for openings in coastal counties, and built the modern Charleston / Berkeley / Dorchester inspection culture that did not exist at the same intensity before 1989. Every page of today's 2021 SC Building Code traces its DNA — directly or through the IBC line — back to the rooms after Hugo.</div>
+            </details>
 
             <details class="faq-item">
                 <summary>What is the wind speed in Charleston?</summary>
-                <div class="faq-answer">Charleston sits on the South Carolina Atlantic coast and falls in the higher coastal wind speed band that runs from Beaufort up through Georgetown. Design wind speeds for Risk Category II buildings in the Charleston metropolitan area generally fall in the 140 to 150 mph range under ASCE 7-16, with the exact number depending on the specific ZIP code, distance from open water, and exposure category. ZIPs on the peninsula and on the barrier islands trend toward the high end of that range; ZIPs west of I-526 are slightly lower. Enter your Charleston ZIP in the calculator at the top of this page for the exact value.</div>
+                <div class="faq-answer">Charleston sits squarely on the hurricane corridor that runs from Beaufort up through Georgetown, and design wind speeds for Risk Category II buildings in the Charleston metro generally land in the 140 to 150 mph range under ASCE 7-16 — with the exact value driven by the specific ZIP, distance to open water, and exposure category. Peninsula ZIPs (29401, 29403) and the barrier islands (Sullivan's, Isle of Palms, Folly) trend toward the upper end of the band; ZIPs west of I-526 step down. Enter your Charleston ZIP in the form at the top of this page — the calculator returns the exact ASCE 7-16 value for that location, not a regional average.</div>
             </details>
 
             <details class="faq-item">
-                <summary>How did Hurricane Hugo change South Carolina building codes?</summary>
-                <div class="faq-answer">Hurricane Hugo struck Charleston as a Category 4 storm on September 21, 1989, and remains the single most significant building-code event in South Carolina history. The post-Hugo damage investigations exposed how few coastal SC structures could survive a true major hurricane, and the response was substantial: South Carolina formalized a statewide Building Codes Council, accelerated adoption of the model International Building Code in the years that followed, mandated coastal wind speed maps with elevated values, and tightened requirements around impact-resistant openings and roof attachment in the coastal corridor. Every modern SC engineer working a coastal project still references the post-Hugo lessons either directly or through the code provisions Hugo set in motion.</div>
+                <summary>How does the Charleston BAR historic overlay affect a wind load project?</summary>
+                <div class="faq-answer">The Charleston Board of Architectural Review is one of the oldest design-review bodies in the country, and on a historic-overlay property in the Old &amp; Historic District, south of Broad, the French Quarter, Cannonborough-Elliotborough, or any of the regulated overlays, you run two approval tracks in parallel: the building-permit / structural track (where the wind load calculation lives) and the BAR / historic-preservation track (where material, profile, muntin pattern, color, and sightline get scrutinized). The collision point is real — BAR will often require true-divided-light wood windows on a contributing structure, which narrows the product approval list that meets a 145 mph Charleston coastal design pressure to a handful of options. Best workflow we've watched contractors and architects use across two decades of SC work: run the wind load calculation first so you know the pressure target, then shop for BAR-compatible products that hit or exceed it, then submit both tracks together.</div>
             </details>
 
             <details class="faq-item">
-                <summary>Does WindLoadCalc support Charleston BAR review requirements?</summary>
-                <div class="faq-answer">The Charleston Board of Architectural Review (BAR) reviews exterior changes for historic-district properties on aesthetic and historic-preservation grounds. WindLoadCalc generates the structural wind load calculations and design pressures your project needs for permitting; it does not generate the architectural drawings, material specifications, or historic-context documentation that BAR review focuses on. A typical historic-Charleston window or shutter replacement project will use the WindLoadCalc output for the structural / building permit side, and a separate BAR submittal package for the historic-review side. The two run in parallel and both have to clear before construction.</div>
+                <summary>What's the wind speed for Hilton Head and the Beaufort County resort market?</summary>
+                <div class="faq-answer">Hilton Head Island and the Sea Pines / Palmetto Dunes / Port Royal Plantation resort cluster sit on the southern SC Atlantic coast in Beaufort County, where Risk Category II design speeds under ASCE 7-16 land in the 140 to 150 mph band. Atlantic-facing oceanfront ZIPs trend toward the high end and routinely trigger Exposure D (within roughly 600 ft of open water). Bluffton, Daufuskie Island, and the inland Beaufort ZIPs follow the same coastal band with slightly lower exposure pressure depending on the lot. The resort-market reality on Hilton Head is dense short-term rental and condo inventory with insurance carriers actively scrutinizing wind documentation — the wind load report is doing double duty as a permit document and an insurance-underwriting document.</div>
             </details>
 
             <details class="faq-item">
-                <summary>What's the wind speed in Myrtle Beach?</summary>
-                <div class="faq-answer">Myrtle Beach is in Horry County on the northern South Carolina coast. Design wind speeds for Risk Category II buildings along the Grand Strand generally fall in the 140 to 150 mph range under ASCE 7-16, similar to the Charleston coast. ZIPs immediately fronting the Atlantic (29577, 29572, and the barrier-island ZIPs) sit at the higher end; ZIPs west of US 17 trend lower. Surfside Beach, Murrells Inlet, and Pawleys Island follow the same coastal band. Enter your Myrtle Beach ZIP in the calculator for the exact ASCE 7 value.</div>
+                <summary>What about Myrtle Beach and the Grand Strand vacation-rental boom?</summary>
+                <div class="faq-answer">Horry County (Myrtle Beach, North Myrtle Beach, Surfside, Garden City) and Georgetown County (Murrells Inlet, Pawleys Island) make up the Grand Strand, and Risk Category II design wind speeds under ASCE 7-16 land in the 140 to 150 mph range — the same hurricane corridor as Charleston, just a different stretch of it. The Grand Strand has the most active short-term rental / vacation-rental new construction market on the SC coast, which means a higher concentration of Risk Category III triggers when occupancy crosses the threshold for assembly use, and an extra layer of Horry County rental-licensing inspection on top of the SC Building Code. The calculator returns the exact ASCE 7 value for any Grand Strand ZIP; the operational reality is that your wind load report often gets reviewed twice — once at permit and once at the rental-license inspection.</div>
             </details>
 
             <details class="faq-item">
-                <summary>Do I need a South Carolina PE to seal my report?</summary>
-                <div class="faq-answer">Yes. South Carolina requires a South Carolina-licensed Professional Engineer to seal structural drawings and calculations submitted for permit. WindLoadCalc generates the wind load calculations, pressures, and supporting documentation a SC PE can review and seal, but the sealing engineer must hold a current South Carolina license. WindLoadCalc does not currently provide PE sign-and-seal service for South Carolina projects; our in-house PE is Florida-licensed only. Plan to work with a SC-licensed engineer of record for the sealing step.</div>
+                <summary>Which ASCE edition does South Carolina currently use, and when does ASCE 7-22 kick in?</summary>
+                <div class="faq-answer">Today (May 2026) the SC Building Codes Council has the 2021 South Carolina Building Code in effect — based on the 2021 IBC, referencing ASCE 7-16 as the wind load standard. The Council published its Notice of Intent to adopt the 2024 I-Code family in early 2025; full implementation of the 2024 SC Building Code, which will move the wind load standard to ASCE 7-22, is targeted for January 2027. Until that effective date arrives, design SC projects to ASCE 7-16. The calculator handles both editions and flips the input model (notably the four ASCE 7-22 enclosure types replacing 7-16's three, and the reorganized Chapter 30 for C&amp;C) based on which code year you set on the project — so the same WindLoadCalc account will carry you through the transition without rebuilding your library.</div>
             </details>
 
             <details class="faq-item">
-                <summary>What's the difference between coastal SC and inland SC wind requirements?</summary>
-                <div class="faq-answer">Coastal South Carolina (Beaufort, Charleston, Berkeley, Dorchester, Georgetown, Horry, and parts of Colleton and Jasper counties) is in the hurricane-influenced design wind band, with Risk Category II values generally in the 140 to 150 mph range under ASCE 7-16. Inland SC (Columbia, the Midlands, and the Pee Dee interior) drops to roughly 110 to 120 mph as hurricane wind decay reduces design values inland. The Upstate (Greenville, Spartanburg, the Blue Ridge foothills) is the lowest at roughly 105 to 115 mph. Coastal sites also more often trigger Exposure D (within ~600 ft of open water) versus the Exposure C default that covers most inland sites. The combination of higher wind speed and higher exposure category is what makes coastal SC projects produce significantly larger design pressures than otherwise-identical inland projects.</div>
+                <summary>Do I need a South Carolina PE to seal the report?</summary>
+                <div class="faq-answer">Yes — South Carolina requires a SC-licensed Professional Engineer to seal structural calculations and drawings submitted for permit, and that requirement applies to wind load documentation on any project that exceeds the residential exemption thresholds. WindLoadCalc generates the calculation package, the per-opening pressure schedule, and the supporting ASCE 7-16 references that a SC PE can review and seal efficiently. To be direct: WindLoadCalc does NOT provide PE sign-and-seal service for South Carolina projects. Our in-house PE is Florida-licensed only. Engage a South Carolina-licensed engineer of record for the seal — our package is built to make their review fast.</div>
             </details>
 
             <details class="faq-item">
-                <summary>Which ASCE edition does South Carolina use?</summary>
-                <div class="faq-answer">The currently effective South Carolina Building Code is the 2021 SC Building Code, which is based on the 2021 International Building Code and references ASCE 7-16 as the wind load standard. The SC Building Codes Council published its Notice of Intent to adopt the 2024 I-Codes in early 2025, with full implementation targeted for January 2027 — at which point the wind load standard will move to ASCE 7-22. Until that effective date, design SC projects to ASCE 7-16. The calculator handles both editions and will guide you to the right reference for your permit submittal date.</div>
+                <summary>What's the wind-design difference between coastal SC, the Midlands, and the Upstate?</summary>
+                <div class="faq-answer">Three different design worlds inside one state. Coastal SC (Beaufort, Charleston, Berkeley, Dorchester, Georgetown, Horry, plus coastal Colleton and Jasper) is in the hurricane band with Risk Category II values in the 140 to 150 mph range, plus more frequent Exposure D triggers within ~600 ft of open water — the combination compounds into substantially larger design pressures. The Midlands (Columbia / Richland / Lexington / Sumter / Aiken) drops to roughly 110 to 120 mph as hurricane decay reduces design values inland; Exposure C is the default. The Upstate (Greenville, Spartanburg, Anderson, Oconee, Pickens) is the lowest at roughly 105 to 115 mph, but here the topographic factor Kzt for ridge, hilltop, and escarpment sites in the Blue Ridge foothills can outweigh the base wind speed difference. One state, three calculation profiles — and any tool that doesn't reflect that is just averaging SC into noise.</div>
             </details>
 
             <details class="faq-item">
-                <summary>Are upstate SC mountains in a special wind region?</summary>
-                <div class="faq-answer">The South Carolina Upstate sits at the southern toe of the Blue Ridge / Southern Appalachian foothills. ASCE 7 identifies designated special wind regions where local topography produces wind speeds higher than the surrounding contour line would suggest — most of these in SC are concentrated in the higher-elevation pockets of Greenville, Pickens, and Oconee counties. Most Upstate sites are NOT in a special wind region and use the standard contour values, but the calculator will flag the special wind region designation if your specific ZIP triggers it. For ridge-top, escarpment, or hilltop sites anywhere in the Upstate, the topographic factor Kzt should be reviewed carefully by your PE — that adjustment can exceed the base wind speed effect for an exposed site.</div>
+                <summary>Are the Upstate SC Blue Ridge foothills a special wind region?</summary>
+                <div class="faq-answer">Most Upstate SC sites are not in a special wind region and run on the standard ASCE 7-16 contour values, but ASCE 7 does designate special wind regions in higher-elevation pockets of Greenville, Pickens, and Oconee counties where local topography produces wind speeds elevated above the surrounding contour. The calculator flags the special wind region designation when your specific ZIP triggers it. For any ridge-top, hilltop, or escarpment site in the Upstate, the topographic factor Kzt deserves real attention from your PE — for an exposed ridge it can shift the design pressure by more than the base wind speed itself, and that's a number the SC plan reviewer in Greenville will look for when the project is sited on visible high ground.</div>
             </details>
 
-            <h2 id="related">More Wind Load Resources</h2>
+            <h2 id="related">Sister Calculators &amp; SC-Adjacent Resources</h2>
 
             <div class="related-links">
-                <h3>Related calculators and guides</h3>
+                <h3>SC-adjacent calculators and references</h3>
                 <ul>
                     <li><a href="/florida-wind-load-calculator">Florida wind load calculator (FBC + ASCE 7-22)</a></li>
                     <li><a href="/north-carolina-wind-load-calculator">North Carolina wind load calculator</a></li>
@@ -1064,25 +1086,25 @@
             <div class="trust-block">
                 <div class="trust-stat">
                     <span class="num">2002</span>
-                    <span class="label">Calculating ASCE wind loads since</span>
+                    <span class="label">Running SC pressures online since</span>
                 </div>
                 <div class="trust-stat">
-                    <span class="num">7</span>
-                    <span class="label">ASCE 7 editions navigated (7-98 → 7-22)</span>
+                    <span class="num">3</span>
+                    <span class="label">SCBCC cycles tracked (2015→2018→2021)</span>
                 </div>
                 <div class="trust-stat">
                     <span class="num">24+</span>
-                    <span class="label">Years of permit-tested practice</span>
+                    <span class="label">Years tracking SC coastal code</span>
                 </div>
             </div>
 
             <div class="content-cta">
-                <h3>Ready to Run Your South Carolina Numbers?</h3>
-                <p>Get instant ASCE 7 wind pressures for any SC ZIP — Charleston coast, Myrtle Beach, Hilton Head, Columbia, Greenville. Free 7-day trial. No credit card.</p>
+                <h3>From Hugo-Rebuilt Coast to Upstate — One SC Calculator</h3>
+                <p>One SC ZIP, one ASCE 7-16 calc, one permit-ready report — whether you're sizing a Sullivan's Island beach house, a Charleston peninsula retrofit, a Myrtle Beach condo, a Columbia tilt-up, or a Greenville ridge home. 7-day free trial. No credit card.</p>
                 <a href="/wind-load-calculator-shop.html" class="cta-button">View Plans &amp; Start Trial <i class="fas fa-arrow-right"></i></a>
             </div>
 
-            <p class="last-updated">Last updated: May 23, 2026. Reflects 2021 SC Building Code (ASCE 7-16) as the currently effective edition; 2024 SC Building Code adoption (ASCE 7-22) is pending and targeted for January 2027. Reviewed by the WindLoadCalc engineering team — calculating ASCE wind loads since 2002.</p>
+            <p class="last-updated">Last updated: May 23, 2026. Reflects 2021 SC Building Code (ASCE 7-16) as the currently effective edition; 2024 SC Building Code adoption (ASCE 7-22) is pending and targeted for January 2027. Reviewed by Bob, P.E. (Florida licensed — SC seal not provided; engage a SC-licensed PE of record). WindLoadCalc since 2002 — among the very first wind load calculators on the web.</p>
         </main>
 
         <!-- Sidebar -->
@@ -1102,8 +1124,8 @@
             </div>
 
             <div class="sidebar-cta">
-                <h3>Try It Free</h3>
-                <p>SC-ready ASCE 7 wind loads in 15 minutes. 7-day trial, no credit card.</p>
+                <h3>Try the SC Calculator Free</h3>
+                <p>ASCE 7-16 wind loads per the 2021 SC Building Code, ready to hand to a SC-licensed PE for seal. 7-day trial, no card.</p>
                 <a href="/wind-load-calculator-shop.html" class="sidebar-cta-button">Start Free Trial</a>
             </div>
 

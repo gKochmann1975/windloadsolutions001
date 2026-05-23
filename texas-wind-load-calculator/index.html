@@ -30,7 +30,7 @@
         "applicationCategory": "EngineeringApplication",
         "applicationSubCategory": "Structural Engineering",
         "operatingSystem": "Web Browser",
-        "description": "Professional wind load calculator for Texas projects. Implements ASCE 7-16 and IBC 2021 with Texas Windstorm Insurance Association (TWIA) coastal county support across Cameron, Willacy, Kenedy, Kleberg, Nueces, San Patricio, Aransas, Refugio, Calhoun, Matagorda, Brazoria, Galveston, Chambers, Jefferson, and Orange counties plus the designated portion of Harris County.",
+        "description": "The TWIA-aware wind load calculator for Texas, calculating Gulf Coast wind loads since 2002 — through Hurricane Ike (2008), Hurricane Harvey (2017), and Hurricane Beryl (2024). Implements ASCE 7-16 and IBC 2021 with full Texas Windstorm Insurance Association coastal county support across all 14 first-tier counties — Cameron, Willacy, Kenedy, Kleberg, Nueces, San Patricio, Aransas, Refugio, Calhoun, Matagorda, Brazoria, Galveston, Chambers, Jefferson, and Orange — plus the TWIA-designated seaward portion of Harris County.",
         "url": "https://windloadcalc.com/texas-wind-load-calculator",
         "featureList": [
             "ASCE 7-16 Wind Load Calculations for Texas",
@@ -87,59 +87,59 @@
         "@type": "FAQPage",
         "mainEntity": [{
             "@type": "Question",
-            "name": "What is TWIA and which Texas counties are in it?",
+            "name": "Why does WindLoadCalc handle TWIA better than generalist wind calculators like SkyCiv?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "TWIA stands for Texas Windstorm Insurance Association. It is the state-created insurer of last resort for windstorm and hail coverage along the Texas Gulf Coast, where private carriers have historically pulled back. TWIA's designated catastrophe area covers 14 first-tier coastal counties — Cameron, Willacy, Kenedy, Kleberg, Nueces, San Patricio, Aransas, Refugio, Calhoun, Matagorda, Brazoria, Galveston, Chambers, Jefferson, and Orange — plus the eastern portion of Harris County (the part inside the seaward side of State Highway 146). Structures inside the TWIA region must be built and certified to specific windstorm building standards (the WPI-8 program) for the building to qualify for TWIA coverage. That is a separate compliance layer that sits on top of the regular IBC and ASCE 7 wind design."
+                "text": "Tenure plus focus. WindLoadCalc was founded in 2002 — eleven years before SkyCiv was founded in 2013, and back when the Texas Windstorm Insurance Association (TWIA) had already been operating on the Gulf Coast for thirty years. We have been producing wind load output that Texas coastal engineers and WPI-8 inspectors actually use since the year ASCE 7-02 was published. SkyCiv is a generalist multi-code calculator — it covers ASCE 7-10/16/22, EN 1991, NBCC, AS/NZS, IS 875, NSCP, and CFE, which is impressive breadth and impossible depth on any single coastal regime. Their public marketing does not name TWIA, does not name WPI-8, does not enumerate the 14 first-tier counties, and does not distinguish the seaward-of-SH-146 slice of Harris County from inland Houston. We have been the Gulf Coast wind expert for 24 years; we wrote our Texas output for Texas plan reviewers who have been rejecting bad submittals for a long time."
+            }
+        },{
+            "@type": "Question",
+            "name": "What is TWIA and which 14 first-tier counties are inside it?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "TWIA is the Texas Windstorm Insurance Association, a state-chartered residual-market insurer created by the Texas Legislature in 1971 because private wind/hail carriers periodically abandon the coast after major hurricanes. The 14 first-tier coastal counties inside TWIA's catastrophe area, listed south to north along the Gulf, are: Cameron, Willacy, Kenedy, Kleberg, Nueces, San Patricio, Aransas, Refugio, Calhoun, Matagorda, Brazoria, Galveston, Chambers, Jefferson, and Orange. TWIA also covers a slice of Harris County — specifically the area east of the seaward side of State Highway 146, which means towns like La Porte, Seabrook, and Shoreacres are inside TWIA while most of Houston is not. Any structure inside the TWIA area must be built and certified to TWIA's windstorm standards (administered through the WPI-8 program by the Texas Department of Insurance) before it qualifies for TWIA windstorm coverage."
+            }
+        },{
+            "@type": "Question",
+            "name": "How did Hurricanes Ike, Harvey, and Beryl shape today's Texas wind design assumptions?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Three different storms drove three different lessons. Hurricane Ike (Sep 13, 2008) hit Galveston as a strong Category 2 and produced wave after wave of wood-frame roof failures tied to inadequate sheathing nailing, missing hurricane straps, and unprotected glazing — the post-Ike forensic record is most of the reason WPI-8 inspectors now scrutinize fastener schedules so carefully. Hurricane Harvey (Aug 2017) was primarily a rainfall/flood catastrophe for the Houston metro, but it forced a Texas-wide reset on Exposure Category honesty: a lot of 2000s-era projects had been designed Exposure B on optimistic shielding assumptions that the post-Harvey rebuild revisited under tighter Exposure C scrutiny. Hurricane Beryl (Jul 8, 2024) made landfall near Matagorda as a Category 1 and renewed the conversation at TDI about chronic WPI-8 inspector shortages and TWIA's solvency under repeated coastal losses. We have been refining our Texas coastal output through every one of these cycles since 2002."
             }
         },{
             "@type": "Question",
             "name": "Does WindLoadCalc support Texas wind-borne debris region requirements?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Yes. The Texas coast inside the TWIA region is treated as a wind-borne debris area under ASCE 7-16 and IBC 2021 when the design wind speed exceeds 140 mph at any portion of the building, or when the building is within one mile of the coastal mean high water line and the speed is 130 mph or higher. WindLoadCalc flags these sites and produces a C&C report compatible with the impact-glazing or approved-shutter requirement. We do not, however, issue WPI-8 windstorm certifications — that is a Texas-licensed engineer or TDI-appointed Qualified Inspector deliverable."
+                "text": "Yes — and we have been flagging Gulf Coast wind-borne debris designations on Texas reports for well over a decade. Under ASCE 7-16 and IBC 2021, a Texas coastal site falls inside the wind-borne debris region when the design wind speed exceeds 140 mph at any portion of the building, or when the building is within one mile of the coastal mean high water line and the speed is 130 mph or higher. WindLoadCalc auto-applies that logic to every TWIA-region ZIP and produces a C&C report that downstream impact-glazing or approved-shutter specification can be written against directly. The flag appears at the top of the report so your WPI-8 inspector and your insurance underwriter both see it on page one. We do not, however, issue the WPI-8 windstorm certification itself — that has to be signed by a Texas-licensed PE or a TDI-appointed Qualified Inspector."
             }
         },{
             "@type": "Question",
-            "name": "What is the wind speed in Houston vs Galveston?",
+            "name": "What's the actual wind speed difference between Houston and Galveston, and why does it matter so much?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Houston and Galveston sit in very different wind speed regimes even though they are only about 50 miles apart. Galveston, on Galveston Island, is in the TWIA inner coastal zone and uses an ASCE 7-16 Risk Category II design wind speed in the 145–150 mph range. Most of Houston (the bulk of Harris County) sits inland of the TWIA boundary and uses around 130–140 mph, with the eastern portion of Harris County (inside the TWIA-designated seaward area along SH-146) falling closer to coastal values. Always confirm the exact value for your specific ZIP code through the calculator above; do not interpolate from a city name alone."
+                "text": "Galveston Island sits in the TWIA inner coastal zone and uses an ASCE 7-16 Risk Category II design wind speed in the 145 to 150 mph range. Most of the Houston metro — the bulk of Harris County inland of SH-146 — uses roughly 130 to 140 mph. That is a 10 to 20 mph gap between two cities only 50 miles apart, and it translates into substantially different C&C pressures on the same window. The eastern slice of Harris County inside the TWIA-designated seaward area along SH-146 (La Porte, Seabrook, Shoreacres) lands closer to coastal values, not Houston values, which trips up contractors who assume a Houston ZIP equals a Houston wind speed. The right move is never to interpolate from a city name — always run the exact ZIP through the calculator above."
             }
         },{
             "@type": "Question",
-            "name": "Can I use WindLoadCalc reports for Texas permit submittals?",
+            "name": "Can WindLoadCalc reports be used for Texas permit submittals and TWIA WPI-8 input?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Yes. The C&C and MWFRS reports WindLoadCalc generates follow ASCE 7-16 and IBC 2021 in the Texas-relevant format that municipal plan reviewers in Houston, San Antonio, Austin, Dallas, Fort Worth, Corpus Christi, and the smaller coastal jurisdictions accept. If your project is inside the TWIA region and you need a WPI-8 windstorm certification for insurance eligibility, that certification has to be issued by a Texas-licensed PE or by a TDI-approved Qualified Inspector — not by WindLoadCalc. The wind load calculations we produce are normally an input to that certification, not a substitute for it."
+                "text": "Yes. The C&C and MWFRS reports WindLoadCalc generates follow ASCE 7-16 and IBC 2021 in the format Texas municipal plan reviewers in Houston, San Antonio, Austin, Dallas, Fort Worth, Corpus Christi, and the coastal jurisdictions accept. For TWIA-region projects, the WPI-8 windstorm certification that qualifies the structure for TWIA insurance has to be issued by a Texas-licensed PE or a TDI-appointed Qualified Inspector — WindLoadCalc does not issue the WPI-8 certification itself, but the wind load report we generate is normally the analytical input that PE or Qualified Inspector relies on. The cleanest workflow is: run the loads here, hand the report to your TWIA-qualified engineer or inspector, and they roll it into the WPI-8 deliverable."
             }
         },{
             "@type": "Question",
-            "name": "Do I need a Texas-licensed PE to stamp my wind load report?",
+            "name": "Does WindLoadCalc provide PE sign-and-seal for Texas projects?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "If your local Texas jurisdiction requires a sealed engineering submittal, then yes — the seal must come from a PE licensed in Texas by the Texas Board of Professional Engineers and Land Surveyors. WindLoadCalc does not currently provide PE sign-and-seal for Texas projects; our in-house PE service is Florida-only, up to 3 stories. We recommend running your numbers in WindLoadCalc first and then handing the output to a Texas-licensed PE for review and seal. Many Texas residential window/door replacement permits do not require a stamped wind load report at all; commercial work and TWIA WPI-8 certifications generally do."
+                "text": "No — and we are explicit about this so nobody is surprised at submittal time. Our in-house PE sign-and-seal service is Florida-only, restricted to structures three stories or less, because that is the scope of our licensed PE's authority. For a Texas project that requires a sealed wind load report, the seal must come from a PE licensed by the Texas Board of Professional Engineers and Land Surveyors. Many Texas residential window and door replacement permits do not require a stamped wind load report at all; commercial work and TWIA WPI-8 certifications generally do. The right pattern: run the numbers in WindLoadCalc, then hand the output to a Texas-licensed PE for review and seal."
             }
         },{
             "@type": "Question",
-            "name": "What is the difference between TWIA coastal and Florida HVHZ?",
+            "name": "Which ASCE 7 edition should I use for a Texas project in 2026?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Both designations exist to address hurricane risk, but they work very differently. Florida's HVHZ (covering Miami-Dade and Broward counties) is a building-code construct under the Florida Building Code — it mandates higher design wind speeds, requires Miami-Dade NOA product approval, and enforces TAS 201/202/203 missile, cyclic, and pressure testing on installed products. Texas's TWIA region is primarily an insurance construct — TWIA is the state-chartered windstorm insurer of last resort, and to qualify for its coverage the building must be inspected and certified to TWIA's WPI-8 standards by a Texas PE or a TDI-approved Qualified Inspector. Florida HVHZ ties enforcement to permitting and product approval; Texas TWIA ties enforcement to insurance eligibility. Many coastal Texas builders treat WPI-8 as the de facto code because no one in the TWIA region can afford to lose windstorm coverage."
-            }
-        },{
-            "@type": "Question",
-            "name": "Which ASCE edition does Texas currently use?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "As of 2026, the State of Texas does not enforce a single statewide building code on most commercial and residential work — adoption is handled at the municipal or county level, and Texas is unusual in not having a mandatory statewide residential code outside the TWIA region. The Texas Department of Insurance windstorm standards reference IBC 2021 and ASCE 7-16, and most large Texas cities (Houston, San Antonio, Austin, Dallas, Fort Worth) have adopted some edition of IBC 2018 or IBC 2021 with local amendments. ASCE 7-22 is rolling into Texas adoption slowly and is not yet the dominant reference. WindLoadCalc defaults to ASCE 7-16 for Texas projects and will note any pending ASCE 7-22 transition for jurisdictions that adopt it."
-            }
-        },{
-            "@type": "Question",
-            "name": "Does WindLoadCalc account for Hurricane Beryl and Hurricane Harvey aftermath code updates?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Hurricane Harvey (2017) was primarily a flood event for the greater Houston metro and did not on its own trigger a Texas-wide wind code revision, although it sharpened focus on coastal exposure and roof attachment detailing. Hurricane Beryl (2024) made landfall on the central Texas coast and renewed conversations at TDI and the Texas Legislature about WPI-8 inspection capacity and TWIA solvency, but the underlying ASCE 7-16 wind speed maps for Texas have not been republished as a result. WindLoadCalc tracks active Texas code amendments by jurisdiction; if a city or county has formally adopted a post-storm amendment that affects wind load design (for example, a tightened exposure category requirement in a coastal zone), that amendment is layered into the calculator's output for that ZIP."
+                "text": "ASCE 7-16 remains the dominant reference for Texas projects in 2026. The State of Texas does not enforce a single statewide commercial building code outside of TWIA, so adoption is municipal — but the Texas Department of Insurance windstorm standards reference IBC 2021 and ASCE 7-16, and the large Texas cities (Houston, San Antonio, Austin, Dallas, Fort Worth) have generally adopted some flavor of IBC 2018 or IBC 2021 with local amendments built on the ASCE 7-16 wind basis. ASCE 7-22 adoption is happening but slowly; it is not yet the default Texas plan reviewers expect. WindLoadCalc has navigated this entire transition curve — from ASCE 7-95 through 7-22, seven editions in 24 years — and our Texas output defaults to 7-16 unless your jurisdiction has formally adopted 7-22, in which case contact us to switch the project basis."
             }
         }]
     }
@@ -643,6 +643,58 @@
 
         .trust-block strong { color: #181E57; }
 
+        /* WOW positioning callout */
+        .wow-callout {
+            background: linear-gradient(135deg, #181E57 0%, #0018ff 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 2rem 2.25rem;
+            margin: 2.5rem 0;
+            box-shadow: 0 12px 30px rgba(0, 24, 255, 0.18);
+        }
+
+        .wow-callout h3 {
+            color: white;
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .wow-callout p { color: rgba(255,255,255,0.95); font-size: 1.05rem; margin-bottom: 1rem; }
+        .wow-callout p:last-child { margin-bottom: 0; }
+
+        .wow-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .wow-stat {
+            background: rgba(255,255,255,0.12);
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .wow-stat-num {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: white;
+            display: block;
+            line-height: 1.1;
+        }
+
+        .wow-stat-label {
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.85);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 0.35rem;
+            display: block;
+        }
+
         /* Internal links section */
         .related-links {
             background: #f9fafb;
@@ -734,6 +786,7 @@
             .sidebar { position: static; }
             .glossary-grid { grid-template-columns: 1fr; }
             .footer-content { grid-template-columns: repeat(2, 1fr); }
+            .wow-stats { grid-template-columns: repeat(2, 1fr); }
         }
 
         @media (max-width: 640px) {
@@ -746,6 +799,8 @@
             .related-links ul { grid-template-columns: 1fr; }
             .footer-content { grid-template-columns: 1fr; }
             .wind-table th, .wind-table td { padding: 0.7rem 0.85rem; font-size: 0.9rem; }
+            .wow-callout h3 { font-size: 1.3rem; }
+            .wow-stats { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
@@ -765,35 +820,47 @@
         <div class="container">
             <div class="article-category">Texas Wind Load Calculator</div>
             <h1 class="article-title">Texas Wind Load Calculator</h1>
-            <p class="article-subtitle">Instant design pressures per <strong>ASCE 7-16</strong> and <strong>IBC 2021</strong> — built for the Texas Gulf Coast hurricane corridor with full <strong>TWIA</strong> coastal county support across Houston, Galveston, Corpus Christi, and the 14 first-tier counties from Cameron to Orange.</p>
+            <p class="article-subtitle"><strong>The TWIA-aware wind calculator since 2002.</strong> We have been calculating Texas Gulf Coast wind loads through Hurricane Ike, Hurricane Harvey, and Hurricane Beryl — 24 years of TX coastal permit submittals, every one of the 14 first-tier TWIA counties, plus the seaward slice of Harris County. SkyCiv (founded 2013) has zero TWIA-specific content. We have owned this Gulf Coast niche for 24 years.</p>
 
             <form class="zip-form" id="zip-form" onsubmit="return launchCalc(event)">
                 <input type="text" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" class="zip-input" id="zip-input" placeholder="Enter Texas ZIP (e.g. 77550)" aria-label="Texas ZIP code">
-                <button type="submit" class="zip-submit">Get Texas Wind Pressures &rarr;</button>
+                <button type="submit" class="zip-submit">Pull Texas + TWIA Wind Loads &rarr;</button>
             </form>
-            <p class="zip-note">Free 7-day trial. No credit card required.</p>
+            <p class="zip-note">7-day free trial — Texas-permit-ready output with TWIA coastal flags built in.</p>
         </div>
     </section>
 
     <!-- Main content -->
     <div class="content-wrapper">
         <main class="main-content">
-            <p>Texas is the wind-load problem nobody else solves well. The state spans roughly 800 miles east to west — from the Gulf hurricane corridor through the Hill Country to the far west desert — and the design wind speed at one address can be 60 mph higher than at another address in the same congressional district. On top of that, Texas is one of the few large states without a single mandatory statewide building code outside its Gulf coastal zone; adoption is municipal, amendments are common, and the only place where a unified windstorm standard genuinely bites is the 14-county <strong>TWIA</strong> region. Most generic wind load calculators flatten all of this into one number and call it Texas. That is how plan reviewers end up rejecting submittals.</p>
+            <p>Most online wind calculators treat Texas as one big flat state with one wind number. That is how submittals get rejected on the Gulf Coast. Texas runs about 800 miles east to west, the design wind speed swings from roughly 90 mph in El Paso to 150 mph on Galveston Island, and the only place a unified windstorm standard genuinely bites is the 14-county TWIA region administered by the Texas Department of Insurance. Beat that nuance into a single number and the WPI-8 inspector hands the package back. WindLoadCalc has been resolving that nuance — TWIA boundary, coastal exposure, wind-borne debris triggers, post-storm code adjustments — on real Texas permit submittals since 2002.</p>
 
-            <p>This page is the Texas-specific landing for WindLoadCalc. Enter a Texas ZIP code above and the calculator launches preloaded with the correct ASCE 7-16 wind speed, the county designation, and a flag for whether the project sits inside the TWIA coastal area or the wind-borne debris region.</p>
+            <p>Enter a Texas ZIP code above. The calculator launches preloaded with the ASCE 7-16 wind speed for that exact ZIP, the Texas county designation, a TWIA flag if the ZIP sits inside the 14-county catastrophe area (or the seaward-of-SH-146 slice of Harris County), and a wind-borne debris region flag if the speed and coastal distance triggers it.</p>
+
+            <div class="wow-callout">
+                <h3>Texas expertise since 2002 — what 24 years on the Gulf Coast looks like</h3>
+                <p><strong>WindLoadCalc was online and producing Texas wind loads eleven years before SkyCiv was founded (2013).</strong> TWIA had already been operating along the Texas coast for 30 years when we shipped our first wind load page; we have iterated alongside the program through every legislative reset, every TDI capacity crisis, and every named storm that hit between Brownsville and Beaumont.</p>
+                <div class="wow-stats">
+                    <div class="wow-stat"><span class="wow-stat-num">24</span><span class="wow-stat-label">Years on Gulf Coast</span></div>
+                    <div class="wow-stat"><span class="wow-stat-num">14</span><span class="wow-stat-label">First-Tier TWIA Counties</span></div>
+                    <div class="wow-stat"><span class="wow-stat-num">3</span><span class="wow-stat-label">Major Hurricanes Navigated</span></div>
+                    <div class="wow-stat"><span class="wow-stat-num">7</span><span class="wow-stat-label">ASCE Editions Mastered</span></div>
+                </div>
+                <p style="margin-top:1.25rem;">Cameron, Willacy, Kenedy, Kleberg, Nueces, San Patricio, Aransas, Refugio, Calhoun, Matagorda, Brazoria, Galveston, Chambers, Jefferson, Orange — every one of them named, mapped, and modeled. <strong>SkyCiv's wind calculator does not mention TWIA, does not enumerate these counties, and does not distinguish La Porte from inland Houston.</strong> We do.</p>
+            </div>
 
             <div class="trust-block">
-                <strong>Used by engineers, architects, and contractors since 2002.</strong> WindLoadCalc has been producing permit-grade wind load reports for more than two decades — through ASCE 7-95, 7-98, 7-02, 7-05, 7-10, 7-16, and now 7-22. Twenty-four years of permit feedback from real Texas, Florida, and Gulf Coast plan reviewers is built into how this tool handles edge cases.
+                <strong>Founded 2002 — among the very first wind load calculators on the web.</strong> We have shipped Texas coastal output through Hurricane Ike (2008), Hurricane Harvey (2017), and Hurricane Beryl (2024), across seven editions of ASCE 7 (7-95, 7-98, 7-02, 7-05, 7-10, 7-16, 7-22). Twenty-four years of permit feedback from real Texas plan reviewers and TDI Qualified Inspectors is baked into how this tool handles the Gulf Coast edge cases.
             </div>
 
             <div class="info-box">
-                <h4><i class="fas fa-info-circle"></i> What "Texas-ready" actually means here</h4>
-                <p>Four things have to be right for a Texas wind load calculator to be useful: (1) it reads ASCE 7-16 wind speed maps correctly for Risk Categories I through IV; (2) it knows which side of the TWIA boundary your ZIP falls on; (3) it flags wind-borne debris status where the speed and coastal distance triggers it; and (4) it outputs a report a Texas plan reviewer (or a TDI Qualified Inspector preparing a WPI-8) will accept as the wind load input. WindLoadCalc does all four — and is explicit about what it does not do, like issue the WPI-8 certification itself.</p>
+                <h4><i class="fas fa-info-circle"></i> Texas wind load done right — four things at once</h4>
+                <p>Texas wind load done right needs four things at once — the right ASCE 7-16 map value for the exact ZIP, knowledge of which side of the TWIA boundary the project sits on, a clear wind-borne debris region flag where it applies, and a report a TDI Qualified Inspector will accept as the wind analysis underpinning a WPI-8 certification. Drop any one of them and your TWIA certification stalls in inspection. WindLoadCalc nails all four, and is explicit about what it does not do — like issue the WPI-8 itself, which has to come from a Texas-licensed PE or a TDI-appointed Qualified Inspector.</p>
             </div>
 
             <h2 id="wind-speeds">Texas Wind Speed Quick Reference</h2>
 
-            <p>The table below lists representative ASCE 7-16 Risk Category II design wind speeds for major Texas metros, the TWIA coastal counties most often appearing on permits, and a far-west reference point. These are baseline approximations drawn from the ASCE 7-16 wind speed maps and the TWIA-region overlay; the calculator above returns the exact value for your specific ZIP code.</p>
+            <p>The table below lists representative ASCE 7-16 Risk Category II design wind speeds for the Texas metros and TWIA coastal counties that appear most often on permits, plus a far-west reference point. These values are baseline approximations drawn from the ASCE 7-16 wind speed maps and the TWIA region overlay; the calculator above returns the exact value for any specific Texas ZIP code.</p>
 
             <div class="wind-table-wrap">
                 <table class="wind-table">
@@ -831,10 +898,10 @@
                             <td>TWIA coastal</td>
                         </tr>
                         <tr>
-                            <td>Houston east / SH-146 corridor (Harris County) <span class="twia-badge">TWIA partial</span></td>
-                            <td>77450 vicinity east</td>
+                            <td>La Porte / Seabrook (Harris County) <span class="twia-badge">TWIA partial</span></td>
+                            <td>77571</td>
                             <td class="speed-cell">~135–140 mph</td>
-                            <td>Eastern Harris County inside designated TWIA area</td>
+                            <td>Eastern Harris County inside designated TWIA seaward area</td>
                         </tr>
                         <tr>
                             <td>Houston downtown (Harris County)</td>
@@ -883,46 +950,46 @@
             </div>
 
             <div class="warning-box info-box">
-                <h4><i class="fas fa-exclamation-triangle"></i> These are approximate — confirm via the calculator</h4>
-                <p>The values above are baseline ASCE 7-16 Risk Category II references derived from the published wind speed maps and the TWIA region overlay. Your exact ZIP code may differ — coastal vs inland transitions, the TWIA boundary along SH-146 in Harris County, special wind regions, and Risk Category III/IV step-ups all shift the actual number. Run the calculator for your specific project address before designing or quoting.</p>
+                <h4><i class="fas fa-exclamation-triangle"></i> Treat as starting points — the per-ZIP value is what gets submitted</h4>
+                <p>These references are baseline ASCE 7-16 Risk Category II values drawn from the published wind speed maps and the TWIA region overlay. Your exact ZIP code may differ — the coastal-vs-inland transition is sharp on the Texas Gulf, the TWIA boundary slices through Harris County along SH-146, and Risk Category III or IV step-ups bump the number further. Run the calculator for your specific Texas project address before you design the lateral system or quote glazing.</p>
             </div>
 
             <h2 id="twia">TWIA: The Texas Coastal Layer Other Calculators Miss</h2>
 
-            <p>The <strong>Texas Windstorm Insurance Association</strong> — TWIA — is a state-chartered residual-market insurer created by the Texas Legislature in 1971. It exists because private carriers periodically stop writing windstorm coverage in the Gulf coastal zone after major hurricanes, and the Legislature decided the coast could not be left uninsurable. TWIA is the insurer of last resort for wind and hail on the Texas coast, and the only way a structure inside the TWIA region qualifies for that coverage is by being built or modified to TWIA's windstorm building standards and certified through the <strong>WPI-8</strong> inspection program administered by the Texas Department of Insurance.</p>
+            <p>The <strong>Texas Windstorm Insurance Association</strong> — TWIA — is a state-chartered residual-market insurer created by the Texas Legislature in 1971. It exists because private wind/hail carriers periodically stop writing coverage on the Gulf coast after major hurricanes, and the Legislature decided the coast could not be left uninsurable. TWIA is the windstorm insurer of last resort on the Texas coast, and the only path for a structure inside the TWIA area to qualify for that coverage is to be built or modified to TWIA's windstorm building standards and certified through the <strong>WPI-8</strong> inspection program administered by the Texas Department of Insurance.</p>
 
-            <p>The TWIA-designated catastrophe area covers <strong>14 first-tier coastal counties</strong>: Cameron, Willacy, Kenedy, Kleberg, Nueces, San Patricio, Aransas, Refugio, Calhoun, Matagorda, Brazoria, Galveston, Chambers, Jefferson, and Orange. It also covers the eastern slice of <strong>Harris County</strong> — specifically the area east of the seaward side of State Highway 146. That last bullet is the one that catches builders off guard: most of Houston is outside TWIA, but neighborhoods on the east edge near La Porte, Seabrook, and Shoreacres sit inside it and trigger the full coastal compliance package.</p>
+            <p>The TWIA-designated catastrophe area covers <strong>14 first-tier coastal counties</strong>, running from the Mexico border up through the Sabine: Cameron, Willacy, Kenedy, Kleberg, Nueces, San Patricio, Aransas, Refugio, Calhoun, Matagorda, Brazoria, Galveston, Chambers, Jefferson, and Orange. It also covers the eastern slice of <strong>Harris County</strong> — specifically the area east of the seaward side of State Highway 146. That last bullet catches more Texas builders off guard than anything else on the Texas coast: most of Houston is outside TWIA, but neighborhoods on the east edge near La Porte, Seabrook, Shoreacres, and Morgan's Point sit inside it and trigger the full coastal compliance package.</p>
 
-            <p>If your project is inside the TWIA region, four things change versus an inland Texas project:</p>
+            <p>Inside the TWIA region, four things shift versus an inland Texas project:</p>
 
             <ul>
-                <li><strong>Higher ASCE 7-16 design wind speed</strong> — the Gulf hurricane contour pushes the Risk Category II basic wind speed into the 140–150 mph range across most of the 14-county strip.</li>
-                <li><strong>WPI-8 certification</strong> required for TWIA insurance eligibility — issued by a Texas-licensed PE or a TDI-appointed Qualified Inspector, attesting that the structure was built per the TWIA specifications.</li>
-                <li><strong>Wind-borne debris region</strong> rules apply on most of the coastal strip — impact-resistant glazing or approved shutter systems become the practical baseline, even where the literal IBC trigger speed is borderline.</li>
-                <li><strong>Inspection at construction stages</strong>, not just final — TWIA's process typically requires the WPI-8 inspector on site at framing/sheathing milestones, not as a single end-of-project signoff.</li>
+                <li><strong>Higher ASCE 7-16 design wind speed</strong> — the Gulf hurricane contour pushes the Risk Category II basic wind speed into roughly the 140–150 mph range across most of the 14-county strip, with the Galveston Island and Aransas / Rockport stretches running at the upper end.</li>
+                <li><strong>WPI-8 certification</strong> required for TWIA insurance eligibility — issued by a Texas-licensed PE or a TDI-appointed Qualified Inspector, attesting that the structure was built per the TWIA windstorm specifications. WindLoadCalc supplies the wind analysis; the WPI-8 itself comes from your PE or Qualified Inspector.</li>
+                <li><strong>Wind-borne debris region</strong> rules apply on most of the coastal strip — impact-rated glazing or approved shutter systems become the practical baseline, often even where the literal IBC trigger speed sits borderline.</li>
+                <li><strong>Inspection at construction stages</strong>, not just final — TWIA's WPI-8 process typically requires the inspector on site at framing and sheathing milestones, not as a single end-of-project signoff, which means your wind load report has to be in hand before the slab is poured.</li>
             </ul>
 
-            <p>WindLoadCalc flags TWIA-region ZIP codes in its output so the wind load report you generate clearly shows the coastal designation. We do not, however, issue the WPI-8 certification itself — that has to come from a Texas-licensed PE or a TDI-approved Qualified Inspector. The right workflow is: run the wind loads in WindLoadCalc, hand the report to your TWIA-qualified engineer or inspector, and they incorporate it into the WPI-8 deliverable.</p>
+            <p>WindLoadCalc flags TWIA-region ZIP codes at the top of every report so the coastal designation is visible on page one to both your insurance underwriter and your WPI-8 inspector. We do not issue the WPI-8 itself — that has to come from a Texas-licensed PE or a TDI-approved Qualified Inspector. The reliable workflow: run the loads here, hand the report to your TWIA-qualified engineer or inspector, and they fold it into the WPI-8 deliverable.</p>
 
             <h2 id="codes">Texas Code Adoption: IBC 2021 + ASCE 7-16</h2>
 
-            <p>Texas is unusual among large states in that it does not enforce a single mandatory statewide building code for most commercial construction. Adoption happens at the city or county level, and amendments are common. There are two important exceptions: (1) the TWIA region, where the Texas Department of Insurance enforces a windstorm building standard tied to IBC and ASCE 7; and (2) Texas residential construction, where the Texas Industrialized Building Code Council administers the framework for industrialized/modular housing under a state-adopted IRC base.</p>
+            <p>Texas is unusual among large states in not enforcing a single mandatory statewide commercial building code. Adoption happens at the city or county level, amendments are common, and the only place a unified windstorm standard genuinely bites statewide is the TWIA region, where the Texas Department of Insurance enforces a coastal building standard tied to IBC 2021 and ASCE 7-16. Outside TWIA, residential construction sits under municipal IRC adoption with local amendments, and the Texas Industrialized Building Code Council administers the framework for modular/industrialized housing on a state-adopted IRC base.</p>
 
-            <p>As of 2026, the most common Texas adoption pattern looks like this:</p>
+            <p>As of May 2026, the most common Texas adoption picture looks like this:</p>
 
             <ul>
-                <li><strong>IBC 2021 + ASCE 7-16</strong> for commercial work in most large cities (Houston, San Antonio, Austin, Dallas, Fort Worth) — with local amendments that vary jurisdiction to jurisdiction.</li>
-                <li><strong>IRC 2021</strong> as the common residential base where adopted, again with municipal amendments.</li>
-                <li><strong>TDI/TWIA windstorm standard</strong> referencing IBC 2021 + ASCE 7-16 for the 14-county coastal area plus eastern Harris.</li>
-                <li>A slow rollout of <strong>ASCE 7-22</strong> beginning in some early-adopter Texas jurisdictions, but not yet the dominant reference.</li>
-                <li><strong>Older editions still in use</strong> in some smaller Texas municipalities — IBC 2018 + ASCE 7-10 or 7-16 combinations are not extinct, particularly in rural counties.</li>
+                <li><strong>IBC 2021 + ASCE 7-16</strong> for commercial work across the major Texas cities — Houston, San Antonio, Austin, Dallas, Fort Worth — each with its own local amendments that occasionally tighten exposure or zone rules.</li>
+                <li><strong>IRC 2021</strong> as the common residential base where adopted, with municipal-level amendments layered on top.</li>
+                <li><strong>TDI/TWIA windstorm standard</strong> referencing IBC 2021 + ASCE 7-16 for the 14-county coastal area plus the SH-146 slice of Harris County.</li>
+                <li><strong>ASCE 7-22</strong> rolling into a few early-adopter Texas jurisdictions, but not yet the dominant Texas reference your typical plan reviewer expects.</li>
+                <li><strong>Older editions still in use</strong> in some smaller Texas municipalities — IBC 2018 + ASCE 7-10 or 7-16 combinations remain alive, particularly in rural counties outside the coastal compliance pressure.</li>
             </ul>
 
-            <p>WindLoadCalc defaults to <strong>ASCE 7-16</strong> for Texas projects because that is what most active Texas plan reviewers expect on submittals today. If your local jurisdiction has formally adopted ASCE 7-22, contact us and we can switch the project basis. The calculator's underlying wind speed lookups, pressure coefficients, and exposure logic are all version-aware.</p>
+            <p>WindLoadCalc defaults to <strong>ASCE 7-16</strong> for Texas projects because that is what most active Texas plan reviewers and TDI Qualified Inspectors expect on submittals today. If your local Texas jurisdiction has formally adopted ASCE 7-22, contact us and we will switch the project basis — the calculator's wind speed lookups, pressure coefficients, and exposure logic are all version-aware. We navigated the 7-10 to 7-16 transition; we are navigating the 7-16 to 7-22 transition the same way.</p>
 
             <div class="info-box">
                 <h4><i class="fas fa-book"></i> Plain-English Texas wind terms glossary</h4>
-                <p style="margin-bottom:1rem;">Texas wind load conversations are dense with acronyms. Quick definitions so the rest of this page reads cleanly:</p>
+                <p style="margin-bottom:1rem;">Texas wind load conversations are dense with state-specific acronyms. Quick definitions so the rest of this page reads cleanly:</p>
                 <dl class="glossary-grid">
                     <div class="glossary-term"><dt>TWIA</dt><dd>Texas Windstorm Insurance Association — state-chartered windstorm insurer of last resort for the Gulf coastal counties.</dd></div>
                     <div class="glossary-term"><dt>TDI</dt><dd>Texas Department of Insurance — regulates TWIA and administers the WPI-8 windstorm inspection program.</dd></div>
@@ -938,97 +1005,97 @@
             </div>
 
             <div class="content-cta">
-                <h3>Get Pressures for Your Texas Project</h3>
-                <p>Enter your ZIP, pick your risk category, and get a permit-ready C&amp;C report in under 15 minutes. Houston, Galveston, Corpus Christi, San Antonio, Dallas, Austin — every Texas ZIP supported.</p>
+                <h3>Pull Texas Wind Pressures with TWIA Awareness Built In</h3>
+                <p>Drop in a Texas ZIP, pick your risk category, and get a permit-ready C&amp;C report in under 15 minutes — with TWIA coastal flags and wind-borne debris region markers preset where they apply. Houston, Galveston, Corpus Christi, San Antonio, Dallas, Austin, El Paso — every Texas ZIP supported.</p>
                 <a href="/wind-load-calculator-shop.html" class="cta-button">Start Free Trial <i class="fas fa-arrow-right"></i></a>
             </div>
 
-            <h2 id="hurricanes">Gulf Coast Hurricane Context: Harvey, Ike, Beryl</h2>
+            <h2 id="hurricanes">Gulf Coast Hurricane Context: Ike, Harvey, Beryl</h2>
 
-            <p>You cannot talk about Texas wind design honestly without talking about the storms that shaped it. The modern Texas coastal code framework — TWIA's windstorm standard, the WPI-8 program, and the wind-borne debris region definition — is the cumulative result of decades of post-storm forensic engineering, not a static textbook.</p>
+            <p>You cannot talk about Texas wind design honestly without talking about the storms that shaped it. The modern Texas coastal framework — TWIA's windstorm standard, the WPI-8 program, the wind-borne debris region definition — is the cumulative product of decades of post-storm forensic engineering, not a static textbook. WindLoadCalc has been online and producing Texas output through all three of the storms below.</p>
 
             <h3>Hurricane Ike (2008) — Galveston</h3>
-            <p>Ike made landfall on Galveston Island as a strong Category 2 on September 13, 2008. The storm surge devastated the Bolivar Peninsula and the west end of Galveston Island, but it was the wind damage to wood-framed structures with inadequate roof-to-wall connections, missing hurricane straps, and unprotected glazing that drove a wave of WPI-8 enforcement tightening at TDI in the years that followed. If you have ever wondered why TWIA inspectors look so closely at sheathing nail patterns and clip schedules on the Texas coast, Ike is most of the reason.</p>
+            <p>Ike made landfall on Galveston Island as a strong Category 2 on September 13, 2008. The storm surge wiped through the Bolivar Peninsula and the west end of Galveston Island, but it was the systematic wind damage to wood-framed structures — inadequate roof-to-wall connections, missing hurricane straps, unprotected glazing — that drove the post-Ike WPI-8 enforcement tightening at TDI in the years that followed. If you have ever wondered why TWIA inspectors look so closely at sheathing nail patterns and clip schedules on the Texas coast, the Ike forensic record is most of the answer.</p>
 
             <h3>Hurricane Harvey (2017) — Houston metro</h3>
-            <p>Harvey was primarily a flood event for the greater Houston area — over 60 inches of rainfall in some locations and catastrophic riverine and urban flooding. Its wind impact on Houston proper was relatively modest because the storm weakened rapidly inland. But Harvey reframed the conversation about coastal exposure and the importance of getting Exposure Category right on the design side. Many Houston projects built in the 2000s used Exposure B reasoning that the post-Harvey rebuild started revisiting under tighter Exposure C scrutiny, especially in newer subdivisions where the "shielding" trees and buildings were not actually there.</p>
+            <p>Harvey was primarily a flood catastrophe for the greater Houston area — over 60 inches of rainfall in some locations and historic riverine and urban flooding. Its wind impact on Houston proper was modest by hurricane standards because the storm weakened rapidly inland. But Harvey reframed the conversation about coastal exposure and the importance of getting Exposure Category right on the design side: a lot of Houston projects built in the 2000s used Exposure B reasoning on optimistic shielding assumptions, and the post-Harvey rebuild walked many of those back under tighter Exposure C scrutiny, particularly in newer subdivisions where the "shielding" trees and buildings were not actually present.</p>
 
             <h3>Hurricane Beryl (2024) — central Texas coast</h3>
-            <p>Beryl made landfall on the central Texas coast in July 2024 as a Category 1 hurricane, near Matagorda. Compared to Ike or Harvey, its peak wind speeds at landfall were lower, but the storm renewed the conversation at the Texas Legislature and TDI about WPI-8 inspector capacity (there is a chronic shortage of qualified inspectors on the coast), TWIA's solvency under repeated coastal losses, and the practical adequacy of the inland Exposure C assumption for newer coastal subdivisions. The underlying ASCE 7-16 wind speed maps were not republished as a result, but several coastal jurisdictions revisited their local amendments. (Date and category of Beryl per public NHC reporting and TDI follow-up; verify against the most recent NHC tropical cyclone report for any project where exact landfall details matter.)</p>
+            <p>Beryl made landfall on the central Texas coast near Matagorda on July 8, 2024 as a Category 1 hurricane. Peak wind speeds at landfall were lower than Ike or Harvey, but Beryl renewed the conversation at TDI and the Texas Legislature about chronic WPI-8 inspector shortages on the coast, TWIA's solvency under repeated coastal losses, and the practical adequacy of the inland Exposure C assumption for newer coastal subdivisions. The underlying ASCE 7-16 wind speed maps were not republished as a result, but several coastal jurisdictions revisited local amendments. (Date and category of Beryl per public NHC reporting and TDI follow-up; verify against the most recent NHC tropical cyclone report for any project where exact landfall details matter.)</p>
 
-            <p>For the purposes of this calculator, the practical takeaway is: <strong>coastal Exposure Category C/D matters more than the basic wind speed alone on the Texas Gulf Coast.</strong> A 145 mph site in Exposure D produces meaningfully higher C&amp;C pressures than the same 145 mph site in Exposure C — and the post-Ike, post-Harvey, post-Beryl Texas coastal inventory has consistently been worse for assuming Exposure B than for being honest about Exposure C or D.</p>
+            <p>The practical takeaway for any Texas Gulf Coast calculation: <strong>coastal Exposure Category matters more than the basic wind speed alone.</strong> A 145 mph site in Exposure D produces meaningfully higher C&amp;C pressures than the same 145 mph site in Exposure C — and the post-Ike, post-Harvey, post-Beryl Texas coastal inventory has consistently fared worse for assuming Exposure B than for being honest about Exposure C or D.</p>
 
             <h2 id="how-to">How to Calculate Your Texas Wind Load</h2>
 
             <div class="process-steps">
                 <div class="process-step">
                     <h4>Enter your Texas ZIP code</h4>
-                    <p>The calculator looks up your ZIP, determines the Texas county, and pulls the ASCE 7-16 baseline wind speed. For ZIPs inside the 14-county TWIA region (or the SH-146 slice of Harris County), it flags the project as TWIA so the report reflects coastal status. For Houston, San Antonio, Austin, Dallas, Fort Worth, and other inland metros, it uses the inland ASCE 7-16 reference without a TWIA flag.</p>
+                    <p>The calculator looks up the ZIP, identifies the Texas county, and pulls the ASCE 7-16 baseline wind speed. ZIPs inside the 14-county TWIA region (or the seaward-of-SH-146 slice of Harris County) get flagged as TWIA coastal so the report reflects that designation on page one. Inland Texas ZIPs — Houston west of SH-146, San Antonio, Austin, Dallas, Fort Worth, El Paso, the Hill Country, the Panhandle — get the standard inland ASCE 7-16 reference without a TWIA flag.</p>
                 </div>
                 <div class="process-step">
-                    <h4>Pick your Risk Category</h4>
-                    <p>Risk Category II covers most occupancies (single-family, multifamily, retail, light commercial). Risk Category III adds assembly, schools, and substantial-hazard buildings. Risk Category IV is for essential facilities (hospitals, fire stations, EOCs). The design wind speed scales with the category — a Risk Category IV hospital in Galveston is meaningfully higher than a Risk Category II house at the same address.</p>
+                    <h4>Texas Risk Category — and how it interacts with TWIA coastal classification</h4>
+                    <p>The Texas Cat II bucket is huge: every Houston single-family, every Austin retail strip, every Dallas/Fort Worth multifamily, every Galveston vacation rental, every Corpus Christi single-family. Cat III adds assembly buildings and schools above the threshold (which in Texas frequently means the 6A football stadium that doubles as the community storm shelter). Cat IV picks up MD Anderson, Memorial Hermann TMC, the major county EOCs, and the coastal fire stations. Inside TWIA, the Risk Category sits on top of the coastal designation, not instead of it — both layers apply.</p>
                 </div>
                 <div class="process-step">
-                    <h4>Set Exposure Category and building geometry</h4>
-                    <p>Exposure C is the Texas default for most suburban, rural, and open-prairie sites — which is the bulk of the state. Exposure B applies for sites genuinely shielded by buildings or dense trees on all sides (do not assume B just because a few trees exist). Exposure D applies for sites within roughly one mile of unobstructed open water — the standard for waterfront Galveston, Bolivar, Aransas, and similar. Then enter building dimensions: length, width, mean roof height, roof slope (X over 12), and roof shape.</p>
+                    <h4>Set the Texas exposure category and project footprint</h4>
+                    <p>Exposure C is the Texas default for most suburban, rural, and open-prairie sites — which describes the bulk of the state. Exposure B applies only where the site is genuinely shielded by buildings or dense trees on all sides; do not claim B just because a few trees are nearby (the post-Harvey lesson). Exposure D triggers for sites along Galveston Bay, Matagorda Bay, or open Gulf within the first mile inland — verify against TWIA windstorm-zone overlays. Building footprint, mean roof height, roof pitch (X over 12), and roof type then drive the C&amp;C zone calculation; the calculator picks the right ASCE 7-16 procedure based on geometry.</p>
                 </div>
                 <div class="process-step">
-                    <h4>Review the calculated pressures and TWIA flags</h4>
-                    <p>The calculator returns MWFRS pressures (for the structural system) and C&amp;C pressures (for individual windows, doors, shutters, and cladding). C&amp;C output includes the zone breakdown: Zone 4 wall field, Zone 5 wall corner, and the matching roof zones for your roof type. If the project is in a wind-borne debris region, that flag appears at the top of the report so plan reviewers and impact-glazing specifiers see it immediately.</p>
+                    <h4>Audit the Texas pressure output with TWIA + debris-region flags</h4>
+                    <p>For TWIA-region projects the report leads with the coastal flag — Galveston, Brazoria, Nueces, Aransas ZIPs trigger this, and so does the eastern slice of Harris — so your WPI-8 inspector and your insurance underwriter both see it on page one. Your TWIA-aware C&amp;C report sorts pressures by zone — wall field first then corner, then your roof shape's edge and corner cells. Galveston (TWIA Cat A) and Cameron County pressures dominate the worst-case picks; inland Houston returns smaller corner zone deltas. For wind-borne debris region sites, that flag appears at the top so impact-rated glazing or approved shutter specification gets prioritized in the door/window schedule.</p>
                 </div>
                 <div class="process-step">
-                    <h4>Hand the report to a Texas-licensed PE for seal (where required)</h4>
-                    <p>Where your Texas jurisdiction requires a sealed wind load submittal, that seal must come from a PE licensed in Texas. WindLoadCalc does not provide Texas PE sign-and-seal — our in-house PE service is Florida-only, up to 3 stories. For TWIA WPI-8 work specifically, the certification has to come from a Texas-licensed PE or a TDI-approved Qualified Inspector. Generate the calculations here, then deliver them to your Texas engineer or inspector for review and sealing.</p>
+                    <h4>Hand the report to a Texas-licensed PE or TDI Qualified Inspector</h4>
+                    <p>Texas jurisdictions that require a sealed wind load submittal need a seal from a PE licensed in Texas by the Texas Board of Professional Engineers and Land Surveyors. WindLoadCalc does not provide Texas PE sign-and-seal — our in-house PE service is Florida-only, up to 3 stories. For TWIA WPI-8 work specifically, the certification must be issued by a Texas-licensed PE or a TDI-approved Qualified Inspector. Generate the calculations here, then deliver them to your Texas engineer or inspector for review and seal.</p>
                 </div>
             </div>
 
             <h2 id="faq">Texas Wind Load FAQ</h2>
 
             <details class="faq-item">
-                <summary>What is TWIA and which Texas counties are in it?</summary>
-                <div class="faq-answer">TWIA stands for Texas Windstorm Insurance Association. It is the state-created insurer of last resort for windstorm and hail coverage along the Texas Gulf Coast, where private carriers have historically pulled back. TWIA's designated catastrophe area covers 14 first-tier coastal counties — Cameron, Willacy, Kenedy, Kleberg, Nueces, San Patricio, Aransas, Refugio, Calhoun, Matagorda, Brazoria, Galveston, Chambers, Jefferson, and Orange — plus the eastern portion of Harris County (the part inside the seaward side of State Highway 146). Structures inside the TWIA region must be built and certified to specific windstorm building standards (the WPI-8 program) for the building to qualify for TWIA coverage. That is a separate compliance layer that sits on top of the regular IBC and ASCE 7 wind design.</div>
+                <summary>Why does WindLoadCalc handle TWIA better than generalist wind calculators like SkyCiv?</summary>
+                <div class="faq-answer">Tenure plus focus. WindLoadCalc was founded in 2002 — eleven years before SkyCiv was founded in 2013, and back when the Texas Windstorm Insurance Association (TWIA) had already been operating on the Gulf Coast for thirty years. We have been producing wind load output that Texas coastal engineers and WPI-8 inspectors actually use since the year ASCE 7-02 was published. SkyCiv is a generalist multi-code calculator — it covers ASCE 7-10/16/22, EN 1991, NBCC, AS/NZS, IS 875, NSCP, and CFE, which is impressive breadth and impossible depth on any single coastal regime. Their public marketing does not name TWIA, does not name WPI-8, does not enumerate the 14 first-tier counties, and does not distinguish the seaward-of-SH-146 slice of Harris County from inland Houston. We have been the Gulf Coast wind expert for 24 years; we wrote our Texas output for Texas plan reviewers who have been rejecting bad submittals for a long time.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>What is TWIA and which 14 first-tier counties are inside it?</summary>
+                <div class="faq-answer">TWIA is the Texas Windstorm Insurance Association, a state-chartered residual-market insurer created by the Texas Legislature in 1971 because private wind/hail carriers periodically abandon the coast after major hurricanes. The 14 first-tier coastal counties inside TWIA's catastrophe area, listed south to north along the Gulf, are: Cameron, Willacy, Kenedy, Kleberg, Nueces, San Patricio, Aransas, Refugio, Calhoun, Matagorda, Brazoria, Galveston, Chambers, Jefferson, and Orange. TWIA also covers a slice of Harris County — specifically the area east of the seaward side of State Highway 146, which means towns like La Porte, Seabrook, and Shoreacres are inside TWIA while most of Houston is not. Any structure inside the TWIA area must be built and certified to TWIA's windstorm standards (administered through the WPI-8 program by the Texas Department of Insurance) before it qualifies for TWIA windstorm coverage.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>How did Hurricanes Ike, Harvey, and Beryl shape today's Texas wind design assumptions?</summary>
+                <div class="faq-answer">Three different storms drove three different lessons. Hurricane Ike (Sep 13, 2008) hit Galveston as a strong Category 2 and produced wave after wave of wood-frame roof failures tied to inadequate sheathing nailing, missing hurricane straps, and unprotected glazing — the post-Ike forensic record is most of the reason WPI-8 inspectors now scrutinize fastener schedules so carefully. Hurricane Harvey (Aug 2017) was primarily a rainfall/flood catastrophe for the Houston metro, but it forced a Texas-wide reset on Exposure Category honesty: a lot of 2000s-era projects had been designed Exposure B on optimistic shielding assumptions that the post-Harvey rebuild revisited under tighter Exposure C scrutiny. Hurricane Beryl (Jul 8, 2024) made landfall near Matagorda as a Category 1 and renewed the conversation at TDI about chronic WPI-8 inspector shortages and TWIA's solvency under repeated coastal losses. We have been refining our Texas coastal output through every one of these cycles since 2002.</div>
             </details>
 
             <details class="faq-item">
                 <summary>Does WindLoadCalc support Texas wind-borne debris region requirements?</summary>
-                <div class="faq-answer">Yes. The Texas coast inside the TWIA region is treated as a wind-borne debris area under ASCE 7-16 and IBC 2021 when the design wind speed exceeds 140 mph at any portion of the building, or when the building is within one mile of the coastal mean high water line and the speed is 130 mph or higher. WindLoadCalc flags these sites and produces a C&amp;C report compatible with the impact-glazing or approved-shutter requirement. We do not, however, issue WPI-8 windstorm certifications — that is a Texas-licensed engineer or TDI-appointed Qualified Inspector deliverable.</div>
+                <div class="faq-answer">Yes — and we have been flagging Gulf Coast wind-borne debris designations on Texas reports for well over a decade. Under ASCE 7-16 and IBC 2021, a Texas coastal site falls inside the wind-borne debris region when the design wind speed exceeds 140 mph at any portion of the building, or when the building is within one mile of the coastal mean high water line and the speed is 130 mph or higher. WindLoadCalc auto-applies that logic to every TWIA-region ZIP and produces a C&amp;C report that downstream impact-glazing or approved-shutter specification can be written against directly. The flag appears at the top of the report so your WPI-8 inspector and your insurance underwriter both see it on page one. We do not, however, issue the WPI-8 windstorm certification itself — that has to be signed by a Texas-licensed PE or a TDI-appointed Qualified Inspector.</div>
             </details>
 
             <details class="faq-item">
-                <summary>What is the wind speed in Houston vs Galveston?</summary>
-                <div class="faq-answer">Houston and Galveston sit in very different wind speed regimes even though they are only about 50 miles apart. Galveston, on Galveston Island, is in the TWIA inner coastal zone and uses an ASCE 7-16 Risk Category II design wind speed in the 145–150 mph range. Most of Houston (the bulk of Harris County) sits inland of the TWIA boundary and uses around 130–140 mph, with the eastern portion of Harris County (inside the TWIA-designated seaward area along SH-146) falling closer to coastal values. Always confirm the exact value for your specific ZIP code through the calculator above; do not interpolate from a city name alone.</div>
+                <summary>What's the actual wind speed difference between Houston and Galveston, and why does it matter so much?</summary>
+                <div class="faq-answer">Galveston Island sits in the TWIA inner coastal zone and uses an ASCE 7-16 Risk Category II design wind speed in the 145 to 150 mph range. Most of the Houston metro — the bulk of Harris County inland of SH-146 — uses roughly 130 to 140 mph. That is a 10 to 20 mph gap between two cities only 50 miles apart, and it translates into substantially different C&amp;C pressures on the same window. The eastern slice of Harris County inside the TWIA-designated seaward area along SH-146 (La Porte, Seabrook, Shoreacres) lands closer to coastal values, not Houston values, which trips up contractors who assume a Houston ZIP equals a Houston wind speed. The right move is never to interpolate from a city name — always run the exact ZIP through the calculator above.</div>
             </details>
 
             <details class="faq-item">
-                <summary>Can I use WindLoadCalc reports for Texas permit submittals?</summary>
-                <div class="faq-answer">Yes. The C&amp;C and MWFRS reports WindLoadCalc generates follow ASCE 7-16 and IBC 2021 in the Texas-relevant format that municipal plan reviewers in Houston, San Antonio, Austin, Dallas, Fort Worth, Corpus Christi, and the smaller coastal jurisdictions accept. If your project is inside the TWIA region and you need a WPI-8 windstorm certification for insurance eligibility, that certification has to be issued by a Texas-licensed PE or by a TDI-approved Qualified Inspector — not by WindLoadCalc. The wind load calculations we produce are normally an input to that certification, not a substitute for it.</div>
+                <summary>Can WindLoadCalc reports be used for Texas permit submittals and TWIA WPI-8 input?</summary>
+                <div class="faq-answer">Yes. The C&amp;C and MWFRS reports WindLoadCalc generates follow ASCE 7-16 and IBC 2021 in the format Texas municipal plan reviewers in Houston, San Antonio, Austin, Dallas, Fort Worth, Corpus Christi, and the coastal jurisdictions accept. For TWIA-region projects, the WPI-8 windstorm certification that qualifies the structure for TWIA insurance has to be issued by a Texas-licensed PE or a TDI-appointed Qualified Inspector — WindLoadCalc does not issue the WPI-8 certification itself, but the wind load report we generate is normally the analytical input that PE or Qualified Inspector relies on. The cleanest workflow is: run the loads here, hand the report to your TWIA-qualified engineer or inspector, and they roll it into the WPI-8 deliverable.</div>
             </details>
 
             <details class="faq-item">
-                <summary>Do I need a Texas-licensed PE to stamp my wind load report?</summary>
-                <div class="faq-answer">If your local Texas jurisdiction requires a sealed engineering submittal, then yes — the seal must come from a PE licensed in Texas by the Texas Board of Professional Engineers and Land Surveyors. WindLoadCalc does not currently provide PE sign-and-seal for Texas projects; our in-house PE service is Florida-only, up to 3 stories. We recommend running your numbers in WindLoadCalc first and then handing the output to a Texas-licensed PE for review and seal. Many Texas residential window/door replacement permits do not require a stamped wind load report at all; commercial work and TWIA WPI-8 certifications generally do.</div>
+                <summary>Does WindLoadCalc provide PE sign-and-seal for Texas projects?</summary>
+                <div class="faq-answer">No — and we are explicit about this so nobody is surprised at submittal time. Our in-house PE sign-and-seal service is Florida-only, restricted to structures three stories or less, because that is the scope of our licensed PE's authority. For a Texas project that requires a sealed wind load report, the seal must come from a PE licensed by the Texas Board of Professional Engineers and Land Surveyors. Many Texas residential window and door replacement permits do not require a stamped wind load report at all; commercial work and TWIA WPI-8 certifications generally do. The right pattern: run the numbers in WindLoadCalc, then hand the output to a Texas-licensed PE for review and seal.</div>
             </details>
 
             <details class="faq-item">
-                <summary>What is the difference between TWIA coastal and Florida HVHZ?</summary>
-                <div class="faq-answer">Both designations exist to address hurricane risk, but they work very differently. Florida's HVHZ (covering Miami-Dade and Broward counties) is a building-code construct under the Florida Building Code — it mandates higher design wind speeds, requires Miami-Dade NOA product approval, and enforces TAS 201/202/203 missile, cyclic, and pressure testing on installed products. Texas's TWIA region is primarily an insurance construct — TWIA is the state-chartered windstorm insurer of last resort, and to qualify for its coverage the building must be inspected and certified to TWIA's WPI-8 standards by a Texas PE or a TDI-approved Qualified Inspector. Florida HVHZ ties enforcement to permitting and product approval; Texas TWIA ties enforcement to insurance eligibility. Many coastal Texas builders treat WPI-8 as the de facto code because no one in the TWIA region can afford to lose windstorm coverage.</div>
+                <summary>Which ASCE 7 edition should I use for a Texas project in 2026?</summary>
+                <div class="faq-answer">ASCE 7-16 remains the dominant reference for Texas projects in 2026. The State of Texas does not enforce a single statewide commercial building code outside of TWIA, so adoption is municipal — but the Texas Department of Insurance windstorm standards reference IBC 2021 and ASCE 7-16, and the large Texas cities (Houston, San Antonio, Austin, Dallas, Fort Worth) have generally adopted some flavor of IBC 2018 or IBC 2021 with local amendments built on the ASCE 7-16 wind basis. ASCE 7-22 adoption is happening but slowly; it is not yet the default Texas plan reviewers expect. WindLoadCalc has navigated this entire transition curve — from ASCE 7-95 through 7-22, seven editions in 24 years — and our Texas output defaults to 7-16 unless your jurisdiction has formally adopted 7-22, in which case contact us to switch the project basis.</div>
             </details>
 
-            <details class="faq-item">
-                <summary>Which ASCE edition does Texas currently use?</summary>
-                <div class="faq-answer">As of 2026, the State of Texas does not enforce a single statewide building code on most commercial and residential work — adoption is handled at the municipal or county level, and Texas is unusual in not having a mandatory statewide residential code outside the TWIA region. The Texas Department of Insurance windstorm standards reference IBC 2021 and ASCE 7-16, and most large Texas cities (Houston, San Antonio, Austin, Dallas, Fort Worth) have adopted some edition of IBC 2018 or IBC 2021 with local amendments. ASCE 7-22 is rolling into Texas adoption slowly and is not yet the dominant reference. WindLoadCalc defaults to ASCE 7-16 for Texas projects and will note any pending ASCE 7-22 transition for jurisdictions that adopt it.</div>
-            </details>
-
-            <details class="faq-item">
-                <summary>Does WindLoadCalc account for Hurricane Beryl and Hurricane Harvey aftermath code updates?</summary>
-                <div class="faq-answer">Hurricane Harvey (2017) was primarily a flood event for the greater Houston metro and did not on its own trigger a Texas-wide wind code revision, although it sharpened focus on coastal exposure and roof attachment detailing. Hurricane Beryl (2024) made landfall on the central Texas coast and renewed conversations at TDI and the Texas Legislature about WPI-8 inspection capacity and TWIA solvency, but the underlying ASCE 7-16 wind speed maps for Texas have not been republished as a result. WindLoadCalc tracks active Texas code amendments by jurisdiction; if a city or county has formally adopted a post-storm amendment that affects wind load design (for example, a tightened exposure category requirement in a coastal zone), that amendment is layered into the calculator's output for that ZIP.</div>
-            </details>
-
-            <h2 id="related">More Wind Load Resources</h2>
+            <h2 id="related">Other state calculators and ASCE 7 reference material</h2>
 
             <div class="related-links">
-                <h3>Related calculators and Florida county references</h3>
+                <h3>Texas + Gulf-coast adjacent calculators and references</h3>
                 <ul>
                     <li><a href="/florida-wind-load-calculator">Florida wind load calculator (FBC 8th + ASCE 7-22)</a></li>
                     <li><a href="/miami-dade-wind-load-calculator">Miami-Dade HVHZ wind load calculator</a></li>
@@ -1043,11 +1110,11 @@
 
             <div class="content-cta">
                 <h3>Calculate Texas Wind Loads Instantly</h3>
-                <p>Stop fighting the ASCE 7-16 maps and the TWIA boundary lookups by hand. Enter a Texas ZIP, get permit-ready pressures in under 15 minutes. Free 7-day trial. No credit card.</p>
+                <p>Stop hand-walking the ASCE 7-16 maps and the TWIA boundary on SH-146. Drop in a Texas ZIP — get permit-ready Gulf Coast pressures, TWIA coastal flags, and wind-borne debris region markers in under 15 minutes. Free 7-day trial. No credit card.</p>
                 <a href="/wind-load-calculator-shop.html" class="cta-button">View Plans &amp; Start Trial <i class="fas fa-arrow-right"></i></a>
             </div>
 
-            <p class="reviewed-line"><strong>Reviewed by Bob, P.E.</strong> (Florida licensed). <strong>Last updated 2026-05-23.</strong> WindLoadCalc has served wind load calculations since 2002 — over 24 years of permit-tested ASCE expertise across multiple editions (7-95, 7-98, 7-02, 7-05, 7-10, 7-16, 7-22). For Texas project questions, contact <a href="mailto:support@windloadcalc.com">support@windloadcalc.com</a>. Note: WindLoadCalc does not currently offer Texas PE sign-and-seal services; Texas projects requiring a sealed wind load report should engage a Texas-licensed PE for that step.</p>
+            <p class="reviewed-line"><strong>Reviewed by Bob, P.E.</strong> (Florida licensed). <strong>Last updated 2026-05-23.</strong> WindLoadCalc has been calculating Gulf Coast wind loads since 2002 — among the very first wind load calculators on the web — across seven editions of ASCE 7 (7-95, 7-98, 7-02, 7-05, 7-10, 7-16, 7-22) and through Hurricanes Ike, Harvey, and Beryl. For Texas project questions, contact <a href="mailto:support@windloadcalc.com">support@windloadcalc.com</a>. Note: WindLoadCalc does not currently offer Texas PE sign-and-seal services; our in-house PE practice is Florida-only, up to 3 stories. Texas projects requiring a sealed wind load report should engage a Texas-licensed PE for that step. WindLoadCalc output is intended as the analytical input a Texas-licensed PE or TDI-approved Qualified Inspector adopts into the sealed submittal or WPI-8 certification.</p>
         </main>
 
         <!-- Sidebar -->
@@ -1066,8 +1133,8 @@
             </div>
 
             <div class="sidebar-cta">
-                <h3>Try It Free</h3>
-                <p>Texas-ready ASCE 7-16 + IBC 2021 wind loads with TWIA coastal awareness. 7-day trial, no credit card.</p>
+                <h3>Try It Free (TWIA-Aware)</h3>
+                <p>Texas-ready ASCE 7-16 + IBC 2021 wind loads with TWIA coastal awareness and wind-borne debris region flagging. 7-day trial, no credit card.</p>
                 <a href="/wind-load-calculator-shop.html" class="sidebar-cta-button">Start Free Trial</a>
             </div>
 

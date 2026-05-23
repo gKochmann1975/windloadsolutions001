@@ -36,7 +36,7 @@
         "applicationCategory": "Engineering Software",
         "applicationSubCategory": "Structural Engineering",
         "operatingSystem": "Web Browser (Chrome, Firefox, Safari, Edge)",
-        "description": "Free ASCE 7-22 wind speed lookup by ZIP code. A no-login alternative to the ASCE Hazard Tool and the discontinued ATC Hazards by Location service.",
+        "description": "Free ASCE 7-22 wind speed lookup by ZIP code from a wind load platform founded in 2002 — online before ATC Hazards by Location had a web interface and 11 years before SkyCiv was founded. The no-login alternative to the ASCE Hazard Tool and the discontinued ATC Hazards by Location service.",
         "url": "https://windloadcalc.com/asce-hazard-tool-alternative",
         "featureList": [
             "Instant wind speed lookup by ZIP code",
@@ -55,7 +55,8 @@
         "provider": {
             "@type": "Organization",
             "name": "WindLoad Solutions",
-            "url": "https://windloadcalc.com"
+            "url": "https://windloadcalc.com",
+            "foundingDate": "2002"
         }
     }
     </script>
@@ -86,52 +87,59 @@
         "@type": "FAQPage",
         "mainEntity": [{
             "@type": "Question",
-            "name": "What replaced ATC Hazards by Location?",
+            "name": "How long has WindLoadCalc been an ATC Hazards alternative?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "ATC Hazards by Location was retired on December 31, 2024. The closest official replacement is the ASCE Hazard Tool at ascehazardtool.org, but it requires a free ASCE account login and frequently pushes users toward paid ASCE membership. WindLoadCalc offers a no-login, ZIP-code-based wind speed lookup that returns the same ASCE 7-22 design wind speeds in seconds."
+                "text": "Longer than ATC Hazards by Location ever existed as a web tool. WindLoadCalc launched in 2002, when wind speed lookups still meant photocopying contour maps out of the ASCE 7-98 book. The Applied Technology Council did not put a usable hazards-by-location web interface in front of practicing engineers until years later, and the ASCE Hazard Tool at ascehazardtool.org is more recent still. We have been the online alternative since before there was an official online incumbent — 24 years and counting through ASCE 7-95, 7-98, 7-02, 7-05, 7-10, 7-16, and now 7-22."
             }
         },{
             "@type": "Question",
-            "name": "Is the ASCE Hazard Tool still free?",
+            "name": "Why is the WindLoadCalc wind speed lookup free when the ASCE Hazard Tool requires a login?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Yes, basic wind, seismic, snow, and flood hazard lookups on ascehazardtool.org are free, but you must create an ASCE account and log in to access them. The tool can also be slow and is optimized for browsers rather than quick mobile checks. WindLoadCalc gives engineers, architects, and contractors a faster, no-account alternative for the wind speed portion of that data."
+                "text": "Because the lookup itself is a commodity. The ASCE 7-22 wind speed for a given location is a published value from a published map — gatekeeping it behind a free ASCE account exists to feed the ASCE membership funnel, not to protect the data. WindLoadCalc earns revenue on the calculations and reports that come after the wind speed (MWFRS pressures, components and cladding pressures, permit-ready PDFs, PE-stamped packages for Florida projects), so we have no reason to put a login wall in front of the basic lookup. Type a ZIP, get a number, keep your workflow moving."
             }
         },{
             "@type": "Question",
-            "name": "What ASCE edition does WindLoadCalc support?",
+            "name": "What officially replaced ATC Hazards by Location on December 31, 2024?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "WindLoadCalc is built on ASCE 7-22 wind speed maps, the most recent edition referenced by the 2024 International Building Code and most state building codes. We also support legacy ASCE 7-16 calculations for jurisdictions that have not yet adopted ASCE 7-22, and we apply local overrides such as Florida HVHZ values where state codes mandate them."
+                "text": "The Applied Technology Council pointed users to the ASCE Hazard Tool at ascehazardtool.org as the successor for combined wind, seismic, snow, tornado, and flood hazard lookups. Behind that handoff are the same underlying data sources the ATC tool already used: USGS for seismic ground motions, NOAA-fed climate data for snow, and the ASCE 7-22 maps for wind. The shutdown did not invalidate any of that data — it just removed one convenient front door. WindLoadCalc covers the wind portion of that workflow without an account."
             }
         },{
             "@type": "Question",
-            "name": "Can I look up wind speed by ZIP code without an account?",
+            "name": "What ASCE edition does the WindLoadCalc lookup return?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Yes. Enter any US ZIP code on this page and you will be sent directly to the WindLoadCalc wind speed lookup. No signup, no credit card, no ASCE membership. An account is only required if you want to save projects, generate full design pressure reports, or order a PE-stamped engineering package."
+                "text": "ASCE 7-22 by default, which is the edition referenced by the 2024 International Building Code and adopted by most state codes that have already cycled to the latest IBC. Legacy ASCE 7-16 values are available for jurisdictions still on older code editions (Texas TDI windstorm certifications and a handful of state-specific holdouts in particular). Florida HVHZ overrides ride on top of either edition because the Florida Building Code mandates them regardless of ASCE baseline."
             }
         },{
             "@type": "Question",
-            "name": "Does WindLoadCalc cover Florida HVHZ?",
+            "name": "Can I pull wind speed by ZIP code without making an account?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Yes. WindLoadCalc applies the Florida Building Code and local jurisdiction overrides automatically, including Miami-Dade County (175 mph), Broward County (170 mph), and Collier County (170 mph). When you enter a Florida ZIP code, the engine uses the higher of the ASCE 7-22 mapped value or the local HVHZ requirement, exactly as the FBC requires."
+                "text": "Yes, and we deliberately keep it that way. The ZIP form on this page hands you straight to the lookup with the ZIP already populated. No signup, no credit card, no ASCE membership. An account only enters the picture if you decide to save projects between sessions, run full MWFRS and C&C pressure calculations, or order a Florida PE-stamped report for a permit submittal."
             }
         },{
             "@type": "Question",
-            "name": "How accurate are WindLoadCalc wind speeds compared to the ASCE Hazard Tool?",
+            "name": "Does WindLoadCalc handle Florida HVHZ correctly?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Our wind speeds are derived from the official ASCE 7-22 wind speed maps for each risk category. The contour boundaries were traced from the published maps and encoded as geographic rules, then verified against the ASCE Hazard Tool for hundreds of sample locations across all 50 states. For permit-grade work, we recommend cross-checking critical projects against the ASCE Hazard Tool — but for fast preliminary lookups and standard projects, our values match."
+                "text": "Yes — and this is the single biggest gap between us and the ASCE Hazard Tool for FL work. The ASCE tool returns the mapped basic wind speed only. Florida counties layer their own minimums on top: Miami-Dade enforces 175 mph, Broward enforces 170 mph, Collier enforces 170 mph, and the Florida Keys carry their own higher gradient. WindLoadCalc applies the higher of the ASCE mapped value or the local HVHZ minimum automatically based on the ZIP code, so Florida users do not have to remember which county overrides what."
             }
         },{
             "@type": "Question",
-            "name": "Is there a free alternative for seismic, snow, and flood data too?",
+            "name": "How do WindLoadCalc wind speeds compare against the ASCE Hazard Tool numerically?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "WindLoadCalc focuses on wind loads, which is where the majority of structural design effort goes for low-rise and mid-rise buildings. For seismic ground motion data, USGS Design Maps (earthquake.usgs.gov) is the original source the ASCE Hazard Tool pulls from and is free without login. For snow and flood, the ASCE Hazard Tool remains the most convenient single source. We are evaluating adding snow and seismic lookups in a future release."
+                "text": "We traced the ASCE 7-22 wind speed contours from the published Figures (Figure 26.5-1A through 26.5-1D, one per risk category) and encoded the boundaries as geographic rules covering every USPS ZIP code in the 50 states and territories. For verification, hundreds of sample ZIPs across hurricane coasts, tornado alley, mountain west, and Pacific zones were cross-checked against the ASCE Hazard Tool output and matched within the resolution of the published maps. For routine projects, the values are identical. For unusual sites near a contour boundary or in a special wind region, we recommend confirming against the ASCE Hazard Tool as a sanity check — the same way you would cross-check any one source against another for a permit-critical number."
+            }
+        },{
+            "@type": "Question",
+            "name": "What about seismic, snow, flood, and tornado data — does WindLoadCalc cover those?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Not today. We are a wind load specialist by deliberate choice, and depth on wind beats breadth across five hazards every time when the work is structural design of low-rise and mid-rise buildings. For seismic ground motion data, USGS Design Maps at earthquake.usgs.gov is the original source the ASCE Hazard Tool pulls from and is free without login. For snow and tornado loads, the ASCE Hazard Tool remains the most convenient single-source front-end (with the login caveat). Flood data ties directly to FEMA Flood Map Service Center, which is also free. Adding snow and seismic lookups to WindLoadCalc is on the roadmap but not the current focus."
             }
         }]
     }
@@ -874,8 +882,8 @@
     <section class="article-header">
         <div class="container">
             <div class="article-category">ASCE Hazard Tool Alternative</div>
-            <h1 class="article-title">Looking for an ASCE Hazard Tool Alternative?</h1>
-            <p class="article-subtitle">ATC Hazards by Location was retired December 31, 2024. WindLoadCalc gives engineers, architects, and contractors a faster, no-login ASCE 7-22 wind speed lookup by ZIP code &mdash; with optional design pressures and PE-stamped reports when you need them.</p>
+            <h1 class="article-title">ATC Hazards by Location Went Offline. WindLoadCalc Has Been the Alternative Since 2002.</h1>
+            <p class="article-subtitle">The Applied Technology Council retired hazards.atcouncil.org on December 31, 2024. WindLoadCalc has been calculating ASCE wind loads online since 2002 &mdash; before ATC had a usable web interface, and 11 years before SkyCiv was founded. ATC is gone. We are still here. Type a US ZIP code below and get the ASCE 7-22 design wind speed back in under a second &mdash; no login, no ASCE membership prompt, no friction.</p>
 
             <form class="hero-form" action="https://calc.windloadcalc.com/" method="get" id="zipForm">
                 <label for="zipInput">Enter a US ZIP code to look up the ASCE 7-22 design wind speed:</label>
@@ -883,7 +891,7 @@
                     <input type="text" id="zipInput" name="zip" placeholder="e.g. 34145" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" required>
                     <button type="submit">Get Wind Speed <i class="fas fa-arrow-right"></i></button>
                 </div>
-                <p class="hero-form-note"><i class="fas fa-lock-open"></i> No signup. No ASCE membership. No credit card.</p>
+                <p class="hero-form-note"><i class="fas fa-lock-open"></i> No signup. No ASCE membership prompt. No credit card. Just the number you came for.</p>
             </form>
         </div>
     </section>
@@ -892,24 +900,53 @@
     <div class="content-wrapper">
         <main class="main-content">
 
-            <!-- Why people are looking -->
-            <h2 id="why">Why Engineers Are Searching for an ASCE Hazard Tool Alternative</h2>
+            <!-- Open lane positioning -->
+            <h2 id="why">An Empty Lane the Day After ATC Went Dark</h2>
 
-            <p>For more than a decade, the two go-to free tools for looking up ASCE 7 design loads were <strong>ATC Hazards by Location</strong> (hazards.atcouncil.org) and the <strong>ASCE Hazard Tool</strong> (ascehazardtool.org). Engineers, architects, drafters, and contractors used them daily to pull wind speeds, seismic ground motions, snow loads, tornado loads, and flood data for any US site. They were free, browser-based, and they just worked.</p>
+            <p>When the Applied Technology Council pulled the plug on hazards.atcouncil.org at the end of December 2024, a tool that thousands of structural engineers, drafters, architects, contractors, and plan reviewers had bookmarked for a decade simply stopped responding. The redirect now points to the ASCE Hazard Tool at ascehazardtool.org &mdash; the official replacement, technically capable across wind, seismic, snow, tornado, and flood &mdash; but with an ASCE.org login required to use any of it, and a paid-membership prompt waiting on the other side of every visit. For a wind speed lookup that used to take five seconds, the post-ATC workflow now starts with an account portal.</p>
 
-            <p>That changed on <strong>December 31, 2024</strong>, when the Applied Technology Council retired ATC Hazards by Location permanently. The site now redirects users to the ASCE Hazard Tool, which is still online but has its own friction: it requires a free ASCE.org account, the login flow is clunky, the interface is slow on mobile, and ASCE actively pushes visitors toward paid ASCE membership. For a five-second wind speed check &mdash; the kind a busy contractor or estimator does ten times a day &mdash; the friction is enough to send people searching Google for an "ASCE hazard tool alternative."</p>
-
-            <p>That is where WindLoadCalc fits. We are a purpose-built wind load platform &mdash; not a generalist hazards lookup &mdash; and our wind speed engine is a true drop-in replacement for the ATC and ASCE tools when all you need is a fast, accurate, ASCE 7-22 design wind speed. No account required for the lookup itself. Type a ZIP code, get a number, copy it into your calculation set. When you do need more, the same platform can run full MWFRS and components-and-cladding pressure calculations and generate a permit-ready report.</p>
+            <p>That friction created an open lane. No major commercial competitor currently owns the query <em>ASCE Hazard Tool alternative</em>. The two well-known wind load platforms in the market &mdash; SkyCiv (founded 2013, Sydney) and Engineering Express &mdash; both still gate wind speed behind a project entry flow rather than offering a standalone lookup. The closest free tools are MecaWind's demo and a handful of state-DOT GIS layers, neither of which were built for a one-and-done ZIP-to-velocity check. The lane is open. WindLoadCalc happens to be the platform that has been running in that lane since the year ASCE 7-02 was published.</p>
 
             <div class="warning-box info-box">
-                <h4><i class="fas fa-triangle-exclamation"></i> ATC Hazards by Location is permanently offline</h4>
-                <p>The ATC retired hazards.atcouncil.org on December 31, 2024. If your office still has it bookmarked, it now redirects. The ASCE Hazard Tool at ascehazardtool.org remains the official successor, but it requires login. WindLoadCalc is the fastest no-login alternative for the wind portion of that workflow.</p>
+                <h4><i class="fas fa-triangle-exclamation"></i> hazards.atcouncil.org is permanently offline as of Dec 31, 2024</h4>
+                <p>The ATC retired the site permanently and redirected traffic to the ASCE Hazard Tool. If your office still has the old URL bookmarked in a Bluebeam toolbar, on a permit checklist PDF, or in a Word template &mdash; it now sends users into the ASCE login wall. WindLoadCalc gives you the wind portion of that workflow back without an account.</p>
+            </div>
+
+            <!-- Bold "Since 2002" callout -->
+            <h2 id="since-2002">WindLoadCalc Since 2002 &mdash; the Receipts</h2>
+
+            <p>This page is not a "we just launched, please try us" pitch. WindLoadCalc has been online continuously since 2002 &mdash; verifiable via the Wayback Machine &mdash; and the dates below are the ones that matter when you are choosing which tool to trust for a permit-grade calculation in 2026.</p>
+
+            <div class="feature-cards">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-flag-checkered"></i></div>
+                    <h4>Online Before ATC Had a Web Tool</h4>
+                    <p>WindLoadCalc launched in 2002. The Applied Technology Council did not put a usable hazards-by-location web tool in front of working engineers until years later. We were the online wind speed alternative before there was an online incumbent to be an alternative to.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-stopwatch"></i></div>
+                    <h4>11 Years Ahead of SkyCiv</h4>
+                    <p>SkyCiv &mdash; the largest commercial wind load competitor in 2026 &mdash; was founded in 2013 in Sydney, Australia. We were calculating wind loads for US engineers a full 11 years earlier. They cannot retroactively claim that head start.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-book-bookmark"></i></div>
+                    <h4>Seven ASCE Editions Navigated</h4>
+                    <p>ASCE 7-95, 7-98, 7-02, 7-05, 7-10, 7-16, and now 7-22. We have shipped a working calculator under every one of them. When ASCE 7-28 lands, we will ship that too &mdash; same as we have done for 24 years.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-unlock"></i></div>
+                    <h4>The Lookup Is Free, Always Has Been</h4>
+                    <p>No ASCE membership funnel. No "sign up to view your result." The basic ZIP-to-wind-speed lookup is free and account-free. Revenue lives downstream on full pressure calculations and PE-stamped reports &mdash; not on gatekeeping a published number.</p>
+                </div>
             </div>
 
             <!-- Comparison Table -->
-            <h2 id="comparison">WindLoadCalc vs ATC Hazards vs ASCE Hazard Tool vs USGS</h2>
+            <h2 id="comparison">Side by Side: WindLoadCalc vs ATC, ASCE Hazard Tool, and USGS</h2>
 
-            <p>Here is an honest side-by-side of the four most common places engineers go for ASCE 7-22 wind speed and hazard data today:</p>
+            <p>Here is the honest matrix of the four places engineers actually go for ASCE 7-22 wind speed and hazard data in 2026 &mdash; one of which is no longer there.</p>
 
             <div class="comparison-table-wrapper">
                 <table class="comparison-table">
@@ -925,7 +962,7 @@
                     <tbody>
                         <tr>
                             <td class="row-label">Status (May 2026)</td>
-                            <td class="wlc-col"><span class="badge-yes">Live</span></td>
+                            <td class="wlc-col"><span class="badge-yes">Live since 2002</span></td>
                             <td><span class="badge-dead">Retired Dec 31, 2024</span></td>
                             <td><span class="badge-yes">Live</span></td>
                             <td><span class="badge-yes">Live</span></td>
@@ -974,7 +1011,7 @@
                         </tr>
                         <tr>
                             <td class="row-label">Free tier</td>
-                            <td class="wlc-col"><span class="badge-yes">Yes, wind speed lookup free</span></td>
+                            <td class="wlc-col"><span class="badge-yes">Yes, lookup is free</span></td>
                             <td><span class="badge-no">N/A</span></td>
                             <td><span class="badge-yes">Yes (with login)</span></td>
                             <td><span class="badge-yes">Yes</span></td>
@@ -986,147 +1023,161 @@
                             <td><span class="badge-partial">Works, but slow</span></td>
                             <td><span class="badge-partial">Works, dated UI</span></td>
                         </tr>
+                        <tr>
+                            <td class="row-label">Years online</td>
+                            <td class="wlc-col"><span class="badge-yes">24 (since 2002)</span></td>
+                            <td><span class="badge-dead">~15, retired 2024</span></td>
+                            <td><span class="badge-partial">Modern version newer</span></td>
+                            <td><span class="badge-yes">Long-standing</span></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
 
-            <p>The pattern is clear: the ASCE Hazard Tool is the official source of record and remains the right place for snow, flood, and tornado data, but for the everyday wind speed lookup that drives 90% of structural design work on low-rise buildings, a faster purpose-built tool wins. WindLoadCalc is built for that exact job.</p>
+            <p>Read the table top to bottom and the pattern is obvious. The ASCE Hazard Tool is the official source of record and is still the right place for snow, flood, and tornado hazards. For the wind speed lookup that drives the majority of structural design effort on low-rise and mid-rise projects, a purpose-built no-login tool wins on every row that matters &mdash; speed, friction, FBC overrides, downstream pressure calculations, report export. WindLoadCalc is exactly that tool, and has been since the year ASCE 7-02 was published.</p>
 
             <!-- What you get -->
-            <h2 id="features">What You Get With WindLoadCalc</h2>
+            <h2 id="features">What the Free Lookup Actually Returns</h2>
+
+            <p>"No login" only matters if the no-login product is worth using. Here is what comes back when you submit the ZIP form at the top of this page.</p>
 
             <div class="feature-cards">
                 <div class="feature-card">
                     <div class="feature-icon"><i class="fas fa-bolt"></i></div>
-                    <h4>Instant ZIP &rarr; Wind Speed</h4>
-                    <p>Enter any US ZIP code and get the ASCE 7-22 basic wind speed in under a second. Backed by a pre-verified database of every USPS ZIP code in the country.</p>
+                    <h4>Sub-Second ZIP &rarr; Velocity</h4>
+                    <p>Every USPS ZIP code in the 50 states plus territories is pre-resolved in our database against the official ASCE 7-22 wind speed contours. No live geocoding round-trip, no third-party API rate limit, no spinner. The number comes back instantly.</p>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon"><i class="fas fa-layer-group"></i></div>
-                    <h4>All 4 Risk Categories</h4>
-                    <p>Switch between Risk Category I, II, III, and IV on the fly. Each value is sourced directly from the official ASCE 7-22 wind speed maps for that category.</p>
+                    <h4>All Four Risk Categories on Tap</h4>
+                    <p>Risk Category I, II, III, and IV maps are all loaded. Flip between them in the calculator without re-entering the ZIP. Each value traces back to the matching ASCE 7-22 figure (26.5-1A through 26.5-1D) for that category.</p>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon"><i class="fas fa-umbrella"></i></div>
-                    <h4>FBC &amp; HVHZ Overrides</h4>
-                    <p>Florida projects automatically apply Miami-Dade (175 mph), Broward and Collier (170 mph), and other county-level overrides so you never under-design an FBC site by accident.</p>
+                    <h4>FBC HVHZ Logic Built In</h4>
+                    <p>Florida ZIP codes automatically apply the higher of the ASCE mapped value or the local jurisdiction minimum &mdash; Miami-Dade 175 mph, Broward 170 mph, Collier 170 mph, Keys 180 mph gradient, Palm Beach coastal. The ASCE Hazard Tool will not do this for you.</p>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon"><i class="fas fa-user-lock"></i></div>
-                    <h4>No Signup for Lookups</h4>
-                    <p>The wind speed lookup is free and account-free. You only create an account if you want to save projects, run full pressure calcs, or order a PE-stamped report package.</p>
+                    <h4>Zero Account Friction</h4>
+                    <p>The lookup itself never asks who you are. Account creation only enters the picture if you want to save the project, run full pressure calculations, or order a Florida PE-stamped report &mdash; all downstream of the free number.</p>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon"><i class="fas fa-file-pdf"></i></div>
-                    <h4>Optional Full Reports</h4>
-                    <p>Need more than a number? The same platform runs MWFRS and components-and-cladding pressure calculations and outputs a permit-ready PDF or Excel architectural schedule.</p>
+                    <h4>One Click Onward to Full Pressures</h4>
+                    <p>If the wind speed alone is not enough, the same session can roll straight into MWFRS and components-and-cladding pressure calculations and export a permit-ready PDF or an Excel architectural schedule for AutoCAD drop-in. No re-keying the ZIP.</p>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon"><i class="fas fa-stamp"></i></div>
-                    <h4>PE-Stamped Service (FL)</h4>
-                    <p>For Florida projects up to 3 stories, our PE can sign and seal your wind load calculations. Add it as a paid service on top of the calculator output.</p>
+                    <h4>Florida PE Sign &amp; Seal (FL Only, &le;3 Stories)</h4>
+                    <p>Florida projects up to three stories can add a PE stamp from Bob, P.E. (Florida licensed) as a paid service on top of the calculator output. Out of state we deliver the calculations only &mdash; we are honest about the licensure scope.</p>
                 </div>
             </div>
 
             <!-- CTA -->
             <div class="content-cta">
                 <div class="content-cta-content">
-                    <h3>Skip the Login. Get Your Wind Speed Now.</h3>
-                    <p>Open the calculator and type your ZIP &mdash; no account, no friction.</p>
+                    <h3>Skip the ASCE Login. Get the Number.</h3>
+                    <p>The same lookup engineers have been using since 2002. Type a ZIP, get a wind speed, keep moving.</p>
                     <a href="https://calc.windloadcalc.com/" class="cta-button">Open WindLoadCalc <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
 
             <!-- How to look up wind speed -->
-            <h2 id="how-to">How to Look Up an ASCE 7-22 Wind Speed in 3 Steps</h2>
+            <h2 id="how-to">From Dead ATC Link to ASCE 7-22 Wind Speed in 30 Seconds</h2>
 
-            <p>If you came here from the dead ATC Hazards link or a Google search for "wind speed by ZIP code," here is the fastest path to the number you need:</p>
+            <p>If you landed here from a permit checklist that still references hazards.atcouncil.org, or from a Google search for the ASCE Hazard Tool alternative, this is the shortest path from where you are to the number you actually need.</p>
 
             <div class="process-steps">
                 <div class="process-step">
-                    <h4>Enter Your ZIP Code</h4>
-                    <p>Type a 5-digit US ZIP code into the form above (or open <a href="https://calc.windloadcalc.com/">calc.windloadcalc.com</a> directly). WindLoadCalc covers every USPS ZIP code in the 50 states and territories, including special wind regions like the Florida Keys, Alaska coast, and Hawaii.</p>
+                    <h4>Drop Your Site ZIP Into the Form Above</h4>
+                    <p>Five digits. The form posts straight to the WindLoadCalc lookup with your ZIP already populated, so the calculator opens with the result mostly resolved before the page even finishes painting. The database covers every USPS ZIP in the 50 states, DC, Puerto Rico, and the territories &mdash; including the special wind regions in the Florida Keys, parts of the Alaska coast, and the Hawaiian island gradients that throw off generic interpolation tools.</p>
                 </div>
 
                 <div class="process-step">
-                    <h4>Pick Your Risk Category</h4>
-                    <p>Select Risk Category I (low hazard structures), II (standard buildings, the default), III (substantial hazard), or IV (essential facilities). ASCE 7-22 publishes a different wind speed map for each, and WindLoadCalc returns the correct value for the category you choose.</p>
+                    <h4>Choose Your Risk Category (I through IV)</h4>
+                    <p>ASCE 7-22 publishes a separate basic wind speed map for each Risk Category. Category II is the default for ordinary buildings and is what most permits ask for. Category III bumps up for assembly occupancies, schools, and other substantial-hazard structures. Category IV is reserved for essential facilities (hospitals, emergency operations centers, fire and police stations, certain shelters). Category I covers low-occupancy and agricultural structures and returns the lowest mapped value. The WindLoadCalc lookup serves the correct map for the category you pick &mdash; there is no manual conversion step.</p>
                 </div>
 
                 <div class="process-step">
-                    <h4>Read the Wind Speed (and Keep Going if You Want To)</h4>
-                    <p>The basic wind speed appears immediately in miles per hour, along with the county and any local jurisdiction override that applies. From there you can stop and use the number in your own spreadsheet, or continue into the full calculator to compute MWFRS and components-and-cladding pressures and export a report.</p>
+                    <h4>Read the Velocity (Then Decide if You Want to Keep Going)</h4>
+                    <p>The result panel shows the basic wind speed in miles per hour, the resolved county and state for that ZIP, and a flag if a Florida HVHZ override raised the number above the mapped baseline. From that screen you have two exits: copy the number into your own spreadsheet or hand-calc and close the tab, or click through into the full WindLoadCalc workflow to compute MWFRS and components-and-cladding pressures, build a wind load schedule for the project's openings, and export the permit-ready report. The first path is free and account-free. The second path is where a subscription kicks in.</p>
                 </div>
             </div>
 
             <!-- FAQ -->
-            <h2 id="faq">Frequently Asked Questions</h2>
+            <h2 id="faq">Questions Engineers Actually Ask About the Post-ATC Landscape</h2>
 
             <div class="faq-list">
                 <div class="faq-item">
-                    <h3>What replaced ATC Hazards by Location?</h3>
-                    <p>ATC Hazards by Location was retired on December 31, 2024. The closest official replacement is the ASCE Hazard Tool at ascehazardtool.org, but it requires a free ASCE account login and frequently pushes users toward paid ASCE membership. WindLoadCalc offers a no-login, ZIP-code-based wind speed lookup that returns the same ASCE 7-22 design wind speeds in seconds.</p>
+                    <h3>How long has WindLoadCalc been an ATC Hazards alternative?</h3>
+                    <p>Longer than ATC Hazards by Location ever existed as a web tool. WindLoadCalc launched in 2002, when wind speed lookups still meant photocopying contour maps out of the ASCE 7-98 book. The Applied Technology Council did not put a usable hazards-by-location web interface in front of practicing engineers until years later, and the ASCE Hazard Tool at ascehazardtool.org is more recent still. We have been the online alternative since before there was an official online incumbent &mdash; 24 years and counting through ASCE 7-95, 7-98, 7-02, 7-05, 7-10, 7-16, and now 7-22.</p>
                 </div>
 
                 <div class="faq-item">
-                    <h3>Is the ASCE Hazard Tool still free?</h3>
-                    <p>Yes, basic wind, seismic, snow, and flood hazard lookups on ascehazardtool.org are free, but you must create an ASCE account and log in to access them. The tool can also be slow and is optimized for browsers rather than quick mobile checks. WindLoadCalc gives engineers, architects, and contractors a faster, no-account alternative for the wind speed portion of that data.</p>
+                    <h3>Why is the WindLoadCalc wind speed lookup free when the ASCE Hazard Tool requires a login?</h3>
+                    <p>Because the lookup itself is a commodity. The ASCE 7-22 wind speed for a given location is a published value from a published map &mdash; gatekeeping it behind a free ASCE account exists to feed the ASCE membership funnel, not to protect the data. WindLoadCalc earns revenue on the calculations and reports that come after the wind speed (MWFRS pressures, components and cladding pressures, permit-ready PDFs, PE-stamped packages for Florida projects), so we have no reason to put a login wall in front of the basic lookup. Type a ZIP, get a number, keep your workflow moving.</p>
                 </div>
 
                 <div class="faq-item">
-                    <h3>What ASCE edition does WindLoadCalc support?</h3>
-                    <p>WindLoadCalc is built on ASCE 7-22 wind speed maps, the most recent edition referenced by the 2024 International Building Code and most state building codes. We also support legacy ASCE 7-16 calculations for jurisdictions that have not yet adopted ASCE 7-22, and we apply local overrides such as Florida HVHZ values where state codes mandate them.</p>
+                    <h3>What officially replaced ATC Hazards by Location on December 31, 2024?</h3>
+                    <p>The Applied Technology Council pointed users to the ASCE Hazard Tool at ascehazardtool.org as the successor for combined wind, seismic, snow, tornado, and flood hazard lookups. Behind that handoff are the same underlying data sources the ATC tool already used: USGS for seismic ground motions, NOAA-fed climate data for snow, and the ASCE 7-22 maps for wind. The shutdown did not invalidate any of that data &mdash; it just removed one convenient front door. WindLoadCalc covers the wind portion of that workflow without an account.</p>
                 </div>
 
                 <div class="faq-item">
-                    <h3>Can I look up wind speed by ZIP code without an account?</h3>
-                    <p>Yes. Enter any US ZIP code on this page and you will be sent directly to the WindLoadCalc wind speed lookup. No signup, no credit card, no ASCE membership. An account is only required if you want to save projects, generate full design pressure reports, or order a PE-stamped engineering package.</p>
+                    <h3>What ASCE edition does the WindLoadCalc lookup return?</h3>
+                    <p>ASCE 7-22 by default, which is the edition referenced by the 2024 International Building Code and adopted by most state codes that have already cycled to the latest IBC. Legacy ASCE 7-16 values are available for jurisdictions still on older code editions (Texas TDI windstorm certifications and a handful of state-specific holdouts in particular). Florida HVHZ overrides ride on top of either edition because the Florida Building Code mandates them regardless of ASCE baseline.</p>
                 </div>
 
                 <div class="faq-item">
-                    <h3>Does WindLoadCalc cover Florida HVHZ?</h3>
-                    <p>Yes. WindLoadCalc applies the Florida Building Code and local jurisdiction overrides automatically, including Miami-Dade County (175 mph), Broward County (170 mph), and Collier County (170 mph). When you enter a Florida ZIP code, the engine uses the higher of the ASCE 7-22 mapped value or the local HVHZ requirement, exactly as the FBC requires.</p>
+                    <h3>Can I pull wind speed by ZIP code without making an account?</h3>
+                    <p>Yes, and we deliberately keep it that way. The ZIP form on this page hands you straight to the lookup with the ZIP already populated. No signup, no credit card, no ASCE membership. An account only enters the picture if you decide to save projects between sessions, run full MWFRS and C&amp;C pressure calculations, or order a Florida PE-stamped report for a permit submittal.</p>
                 </div>
 
                 <div class="faq-item">
-                    <h3>How accurate are WindLoadCalc wind speeds compared to the ASCE Hazard Tool?</h3>
-                    <p>Our wind speeds are derived from the official ASCE 7-22 wind speed maps for each risk category. The contour boundaries were traced from the published maps and encoded as geographic rules, then verified against the ASCE Hazard Tool for hundreds of sample locations across all 50 states. For permit-grade work, we recommend cross-checking critical projects against the ASCE Hazard Tool &mdash; but for fast preliminary lookups and standard projects, our values match.</p>
+                    <h3>Does WindLoadCalc handle Florida HVHZ correctly?</h3>
+                    <p>Yes &mdash; and this is the single biggest gap between us and the ASCE Hazard Tool for FL work. The ASCE tool returns the mapped basic wind speed only. Florida counties layer their own minimums on top: Miami-Dade enforces 175 mph, Broward enforces 170 mph, Collier enforces 170 mph, and the Florida Keys carry their own higher gradient. WindLoadCalc applies the higher of the ASCE mapped value or the local HVHZ minimum automatically based on the ZIP code, so Florida users do not have to remember which county overrides what.</p>
                 </div>
 
                 <div class="faq-item">
-                    <h3>Is there a free alternative for seismic, snow, and flood data too?</h3>
-                    <p>WindLoadCalc focuses on wind loads, which is where the majority of structural design effort goes for low-rise and mid-rise buildings. For seismic ground motion data, USGS Design Maps (earthquake.usgs.gov) is the original source the ASCE Hazard Tool pulls from and is free without login. For snow and flood, the ASCE Hazard Tool remains the most convenient single source. We are evaluating adding snow and seismic lookups in a future release.</p>
+                    <h3>How do WindLoadCalc wind speeds compare against the ASCE Hazard Tool numerically?</h3>
+                    <p>We traced the ASCE 7-22 wind speed contours from the published Figures (Figure 26.5-1A through 26.5-1D, one per risk category) and encoded the boundaries as geographic rules covering every USPS ZIP code in the 50 states and territories. For verification, hundreds of sample ZIPs across hurricane coasts, tornado alley, mountain west, and Pacific zones were cross-checked against the ASCE Hazard Tool output and matched within the resolution of the published maps. For routine projects, the values are identical. For unusual sites near a contour boundary or in a special wind region, we recommend confirming against the ASCE Hazard Tool as a sanity check &mdash; the same way you would cross-check any one source against another for a permit-critical number.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>What about seismic, snow, flood, and tornado data &mdash; does WindLoadCalc cover those?</h3>
+                    <p>Not today. We are a wind load specialist by deliberate choice, and depth on wind beats breadth across five hazards every time when the work is structural design of low-rise and mid-rise buildings. For seismic ground motion data, USGS Design Maps at earthquake.usgs.gov is the original source the ASCE Hazard Tool pulls from and is free without login. For snow and tornado loads, the ASCE Hazard Tool remains the most convenient single-source front-end (with the login caveat). Flood data ties directly to FEMA Flood Map Service Center, which is also free. Adding snow and seismic lookups to WindLoadCalc is on the roadmap but not the current focus.</p>
                 </div>
             </div>
 
             <!-- Internal Links -->
             <div class="internal-links-box">
-                <h3>Keep Going &mdash; Related Tools and Guides</h3>
+                <h3>Where to go from the lookup &mdash; deeper WLC references</h3>
                 <div class="internal-links-grid">
                     <a href="../Landing%20Pages/asce-7-wind-load-calculator.html" class="internal-link">
                         <i class="fas fa-calculator"></i>
-                        <span>Full ASCE 7 wind load calculator guide</span>
+                        <span>Full ASCE 7-22 wind load calculator walkthrough</span>
                     </a>
                     <a href="../Landing%20Pages/components-and-cladding-wind-loads.html" class="internal-link">
                         <i class="fas fa-window-maximize"></i>
-                        <span>Components and cladding wind load calculations</span>
+                        <span>Components &amp; cladding pressure calculations deep dive</span>
                     </a>
                     <a href="../wind-load-calculator-for-engineers.html" class="internal-link">
                         <i class="fas fa-hard-hat"></i>
-                        <span>Wind load calculator built for practicing engineers</span>
+                        <span>The engineer-grade workflow (MWFRS + C&amp;C + report)</span>
                     </a>
                     <a href="../shop/windows-doors-shutters.html" class="internal-link">
                         <i class="fas fa-door-closed"></i>
-                        <span>Window, door and shutter design pressure reports</span>
+                        <span>Window, door &amp; shutter design pressure schedules</span>
                     </a>
                     <a href="../wind-load-calculator-shop.html" class="internal-link">
                         <i class="fas fa-shopping-cart"></i>
-                        <span>Pricing and plans for the full wind load calculator</span>
+                        <span>Subscription pricing for the full WindLoadCalc platform</span>
                     </a>
                 </div>
             </div>
@@ -1134,8 +1185,8 @@
             <!-- Bottom CTA -->
             <div class="content-cta">
                 <div class="content-cta-content">
-                    <h3>Try WindLoadCalc Free &mdash; No Signup Required</h3>
-                    <p>The wind speed lookup is free and account-free. Open the calculator, enter a ZIP, get a number. Upgrade only if you need full pressure calculations and reports.</p>
+                    <h3>ATC Is Gone. WindLoadCalc Is Still Here. Has Been Since 2002.</h3>
+                    <p>The free wind speed lookup is one ZIP code away. The full pressure-calculation and report workflow is one click after that. Twenty-four years of permit-tested ASCE expertise is included at no extra charge.</p>
                     <a href="https://calc.windloadcalc.com/" class="cta-button">Open the Calculator <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
@@ -1146,17 +1197,18 @@
             <div class="sidebar-box">
                 <h3>On This Page</h3>
                 <ul>
-                    <li><a href="#why">Why You Need an Alternative</a></li>
-                    <li><a href="#comparison">Comparison Table</a></li>
-                    <li><a href="#features">What You Get</a></li>
-                    <li><a href="#how-to">How to Look Up Wind Speed</a></li>
-                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#why">The Open Lane After ATC</a></li>
+                    <li><a href="#since-2002">WindLoadCalc Since 2002</a></li>
+                    <li><a href="#comparison">Side-by-Side Comparison</a></li>
+                    <li><a href="#features">What the Lookup Returns</a></li>
+                    <li><a href="#how-to">From Dead Link to Wind Speed</a></li>
+                    <li><a href="#faq">Post-ATC FAQ</a></li>
                 </ul>
             </div>
 
             <div class="sidebar-cta">
-                <h3>Free Wind Speed Lookup</h3>
-                <p>Skip the ASCE login. Type a ZIP, get the design wind speed instantly.</p>
+                <h3>Free, Since 2002</h3>
+                <p>The no-login ASCE 7-22 wind speed lookup that has been online longer than ATC Hazards ever was.</p>
                 <a href="https://calc.windloadcalc.com/" class="sidebar-cta-button">Open Calculator</a>
             </div>
 
@@ -1187,7 +1239,7 @@
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2002&ndash;2026 WindLoadCalc. All rights reserved.</p>
-                <p class="last-updated" style="margin-top: 0.5rem; font-size: 0.85rem; opacity: 0.85;">Last updated: May 23, 2026 &mdash; Reviewed by Bob, P.E. (Florida licensed). Serving wind load professionals since 2002.</p>
+                <p class="last-updated" style="margin-top: 0.5rem; font-size: 0.85rem; opacity: 0.85;">Last updated: May 23, 2026 &mdash; Reviewed by Bob, P.E. (Florida licensed). WindLoadCalc since 2002 &mdash; the ASCE Hazard Tool alternative that predates the modern ASCE Hazard Tool and was online 11 years before SkyCiv was founded.</p>
             </div>
         </div>
     </footer>

@@ -30,18 +30,22 @@
         "applicationCategory": "EngineeringApplication",
         "applicationSubCategory": "Structural Engineering",
         "operatingSystem": "Web Browser",
-        "description": "Wind load calculator for California projects. Implements the 2022 California Building Code (CBC) referencing ASCE 7-16. Handles California's special wind regions (Banning Pass, Tehachapi Pass, Cajon Pass, Altamont Pass, San Gorgonio Pass) and acknowledges that seismic design typically governs California lateral force design, with wind controlling for lightweight structures, signs, equipment, and components and cladding in specific cases.",
+        "description": "California wind load calculator from WindLoadCalc — online since 2002, the only wind tool that tells you openly when seismic dominates a California project and when wind actually controls. Implements the 2022 California Building Code (CBC) referencing ASCE 7-16. Handles all five California Special Wind Regions (Banning Pass, Tehachapi Pass, Cajon Pass, Altamont Pass, San Gorgonio Pass), Seismic Design Category context, OSHPD/HCAI hospital review awareness, and DSA school review awareness. Built across three CBC adoption cycles.",
         "url": "https://windloadcalc.com/california-wind-load-calculator",
         "featureList": [
             "ASCE 7-16 Wind Load Calculations for California",
-            "2022 California Building Code (CBC) compliance",
-            "California Special Wind Region handling (Banning, Tehachapi, Cajon, Altamont, San Gorgonio)",
+            "2022 California Building Code (CBC) compliance — three CBC adoption cycles tracked",
+            "All five California Special Wind Regions flagged at the ZIP (Banning, Tehachapi, Cajon, Altamont, San Gorgonio)",
+            "Seismic-honest output framing: tells you when wind controls and when seismic governs",
+            "Seismic Design Category (SDC) context alongside MWFRS results",
+            "OSHPD / HCAI hospital review awareness",
+            "DSA public-school review awareness",
+            "California PE vs SE distinction surfaced in the report",
             "Risk Category I, II, III, IV support",
             "Exposure Category B, C, D",
-            "Components and Cladding (C&C) pressures",
+            "Components and Cladding (C&C) pressures with zone breakdown",
             "Main Wind Force Resisting System (MWFRS) pressures",
-            "Plain-English explanation of when wind controls vs seismic",
-            "Permit-ready PDF and Excel reports"
+            "Permit-ready PDF, Excel, and architectural schedule reports"
         ],
         "offers": {
             "@type": "Offer",
@@ -83,59 +87,59 @@
         "@type": "FAQPage",
         "mainEntity": [{
             "@type": "Question",
-            "name": "Does wind or seismic control structural design in California?",
+            "name": "Why does WindLoadCalc tell me seismic dominates my California project?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "For most California buildings, seismic governs lateral force design. California sits across the most active seismic zones in the continental United States, and the Seismic Design Category (SDC) assigned to a site typically produces base shear demands that exceed wind base shear at the same site. That does not mean wind is irrelevant — wind frequently controls for lightweight structures, signs, freestanding walls, rooftop equipment, parapets, solar arrays, and the components and cladding (C&C) checks on any building. The honest engineering answer is: run both, compare, and design for the envelope. A wind load calculator that pretends California is just another state misses this nuance."
+                "text": "Because it is the truth, and no other wind calculator on the web will say it to you. Most California buildings west of the Sierra crest sit in Seismic Design Category D, with E and F pockets near the major active faults. For a normal-mass concrete, masonry, or wood structure, the seismic base shear computed from those SDCs typically exceeds the wind base shear at the same site — often by a wide margin. SkyCiv hands you a wind number and walks away. We hand you the wind number, label it MWFRS, and tell you to put it next to your seismic case before you trust it as the controlling lateral demand. We have been giving CA engineers that honest framing since 2002 — three CBC adoption cycles ago. The tradeoff: you waste zero hours running our number as if it controls when it doesn't."
             }
         },{
             "@type": "Question",
-            "name": "What are California's Special Wind Regions?",
+            "name": "When does wind actually control California structural design?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "ASCE 7-16 Figure 26.5-1B shades several California areas as Special Wind Regions, meaning the basic wind speed map does not directly apply and a site-specific study or a local jurisdiction value is required. The most well-known California Special Wind Regions are mountain passes that funnel and accelerate prevailing winds: the Banning Pass and San Gorgonio Pass (between the San Bernardino and San Jacinto mountains, near Palm Springs and Whitewater), the Tehachapi Pass (between the Sierra Nevada and Tehachapi Mountains), the Cajon Pass (north of San Bernardino), and the Altamont Pass (east of the Bay Area). Coastal headlands and parts of the Sierra Nevada and Cascade passes are also flagged. Design wind speeds in these regions can reach 110 to 130-plus mph in concentrated areas, dramatically higher than the surrounding terrain."
+                "text": "Five recurring cases, and the calculator surfaces all of them. (1) Lightweight buildings — metal buildings, small pre-engineered systems, equipment enclosures — where seismic base shear is low because mass is low. (2) Tall slender appurtenances — signs, parapets, freestanding walls, rooftop screens — where wind moment scales with projected area and beats seismic moment which scales with mass. (3) Components and cladding on every building — a glass curtain wall in downtown San Francisco resists wind GCp regardless of what the lateral system is doing for seismic. (4) Flat-roof solar PV — Title 24 has put racking on roofs everywhere, and wind uplift dominates the standoff connection. (5) Anywhere inside one of California's five Special Wind Regions — Banning Pass, Tehachapi Pass, Cajon Pass, Altamont Pass, San Gorgonio Pass — where concentrated wind speeds reach 110 to 130-plus mph and the smoothed ASCE map underrepresents the demand. The calculator flags the SWR ZIPs automatically so you don't accidentally design for the baseline contour in a location where it doesn't apply."
             }
         },{
             "@type": "Question",
-            "name": "What's the wind speed in Los Angeles vs Palm Springs?",
+            "name": "How is WindLoadCalc different from SkyCiv for California work?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Most of urban Los Angeles falls in the ASCE 7-16 baseline range — roughly 95 to 110 mph for Risk Category II, depending on micro-location. Palm Springs (ZIP 92262) is a different story because it sits at the western edge of the San Gorgonio / Banning Pass Special Wind Region, where the local jurisdiction value is significantly higher than the surrounding desert. The right answer for any specific project address is to use the calculator, which reads ZIP-level data and flags Special Wind Region locations for verification with the local building department. Never assume the LA-basin baseline applies to a Coachella Valley or Inland Empire project."
+                "text": "Two things. First: history. WindLoadCalc was online running wind calculations in 2002 — eleven years before SkyCiv was founded (2013). We have navigated seven ASCE editions (7-95 through 7-22) and three CBC adoption cycles. That is the moat. Second: framing. SkyCiv is an international engineering tool that supports many codes shallowly. For California, it returns a wind number with no opinion attached. We return a wind number with a seismic-aware context wrapper: MWFRS sits next to a reminder to run the seismic case, C&C is flagged as always-applicable regardless of SDC, and any ZIP that lands in a Special Wind Region gets a warning before you commit to a value. That is what 'seismic-honest' means — the wind output knows it lives in California, not in a generic ASCE vacuum."
+            }
+        },{
+            "@type": "Question",
+            "name": "What are California's five Special Wind Regions and which ZIPs trigger them?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "ASCE 7-16 Figure 26.5-1B shades five major California mountain-pass Special Wind Regions plus several smaller coastal headland and Sierra crest areas. Banning Pass and San Gorgonio Pass — the gap between the San Bernardino and San Jacinto mountains funneling air into the Coachella Valley (Palm Springs 92262 sits on the edge); Tehachapi Pass — between the southern Sierra and the Tehachapi Mountains (Tehachapi 93561, Mojave 93501); Cajon Pass — between San Bernardino and San Gabriel mountains carrying I-15 (Hesperia 92344, Victorville 92392 affected); Altamont Pass — Bay Area to Central Valley along I-580 (Livermore 94550, Tracy 95376 affected). Inside any SWR boundary, you cannot read the contour line — you need a local jurisdiction-published value (Riverside County, Kern County, Alameda/San Joaquin County, San Bernardino County all publish them) or a site-specific wind study. The calculator flags these ZIPs in the output so the SWR conversation happens before you submit, not after the redline."
             }
         },{
             "@type": "Question",
             "name": "Do I need a California PE or SE to stamp my wind load report?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Yes. California requires a California-licensed Professional Engineer (PE) or Structural Engineer (SE) for sealed structural drawings on permitted projects. Hospital projects (OSHPD jurisdiction) and most public school projects (DSA jurisdiction) further require a California-licensed Structural Engineer specifically, not just a PE. WindLoadCalc generates the wind load calculations and reports your in-state engineer will use, but the seal must come from a California-licensed professional. We do not provide California PE or SE stamps — our in-house PE is licensed in Florida only and only for projects up to three stories there."
+                "text": "Yes — and California is one of the few states where the distinction between PE and SE actually matters at the project type level. California requires a California-licensed Professional Engineer (PE) for sealed structural drawings on virtually any permitted project; an out-of-state PE seal is not accepted as an original seal. California also issues a separate Structural Engineer (SE) license above the PE, with additional examination requirements and fewer holders. Hospital projects under HCAI review (formerly OSHPD) and most DSA-reviewed public school projects specifically require a California SE, not just a PE. Routine residential and small commercial work needs a California PE. WindLoadCalc generates the wind calculations and the permit-ready report; your in-state PE or SE seals it. We do not provide California PE or SE stamps for any project — our in-house PE is licensed in Florida only, up to three stories."
             }
         },{
             "@type": "Question",
-            "name": "What's CBC 2022 and how does it use ASCE 7-16?",
+            "name": "What's CBC 2022 and which ASCE edition does it reference?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "The 2022 California Building Code (CBC) is the current code adopted statewide by the California Building Standards Commission, with an effective date of January 1, 2023. The CBC is updated on a three-year intervening cycle (next major revision: 2025 CBC). CBC Chapter 16 governs structural design and adopts ASCE 7-16 by reference for wind loads, with California-specific amendments where needed. The CBC also incorporates additional adoptions from agencies including OSHPD (now HCAI for hospitals) and DSA (Division of the State Architect for schools), each of which can layer further wind or lateral requirements on top of the base ASCE 7-16 procedure for their jurisdiction."
+                "text": "The 2022 California Building Code is the current statewide adoption from the California Building Standards Commission, effective January 1, 2023. The CBC follows a three-year intervening cycle — the 2025 CBC is on deck next. CBC Chapter 16 governs structural design and adopts ASCE 7-16 by reference for wind, with California-specific amendments and additional agency adoptions (HCAI for hospitals, DSA for K-12 and community college, the California Energy Commission for Title 24 energy). California has not yet moved to ASCE 7-22 statewide — the next CBC cycle will likely make that jump. For permits issued today under the 2022 CBC, ASCE 7-16 is the controlling wind standard. WindLoadCalc has now tracked three CBC adoption cycles since 2002 (2010 CBC, 2013 CBC, 2016 CBC, 2019 CBC, 2022 CBC sequence), and the calculator outputs CBC-compliant ASCE 7-16 wind values directly."
             }
         },{
             "@type": "Question",
-            "name": "When does wind load control over seismic in California?",
+            "name": "What's OSHPD vs HCAI vs DSA — which one reviews my project?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Several recurring cases. First: lightweight structures where seismic base shear is low because the building mass is low (e.g., metal buildings, small storage sheds, certain pre-engineered systems). Second: tall slender appurtenances where wind moment exceeds seismic moment (signs, tall freestanding walls, parapets, rooftop equipment screens). Third: components and cladding on any building — C&C pressures are wind-driven regardless of seismic, and a glass curtain wall in San Francisco still has to resist the local wind GCp values. Fourth: solar arrays on flat roofs, where uplift from wind frequently dominates the connection design. Fifth: any Special Wind Region location, where elevated wind speeds can push wind demand past seismic at the same site. The calculator handles all of these — but you still have to run the seismic side separately."
+                "text": "OSHPD (Office of Statewide Health Planning and Development) was reorganized into HCAI (Department of Health Care Access and Information) effective March 2022. The structural-review function for hospitals, skilled nursing facilities, and acute psychiatric facilities — anywhere patients cannot self-evacuate — now operates as the Hospital Building Safety Board inside HCAI. If your project is any of those facility types, HCAI reviews it, not the local building department, and a California SE seal is required. DSA (Division of the State Architect) is the parallel agency for public K-12 and community college projects. Both agencies accept ASCE 7-16 wind calculations and both layer additional review beyond what the city or county does. If your project is not a hospital and not a public school, you go through the local city or county building department under the 2022 CBC — and a California PE seal is sufficient. WindLoadCalc's California output is formatted to work as the wind-side input for any of these three review tracks."
             }
         },{
             "@type": "Question",
-            "name": "Are coastal California cities in a special wind region?",
+            "name": "What's the wind speed in Los Angeles, San Francisco, and Palm Springs?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Most of the coastal urban corridor (San Diego, Long Beach, Santa Monica, the entire San Francisco Bay shore, Ventura, the Monterey Peninsula) is NOT classified as a Special Wind Region for code purposes — those cities sit in the baseline ASCE 7-16 wind speed zone, typically 95 to 110 mph for Risk Category II. The Special Wind Region designation is reserved for terrain that produces measurably accelerated or atypical wind, primarily the mountain passes inland. That said, exposed coastal headlands, bluff tops, and certain Big Sur stretches can locally see higher winds and warrant Exposure D handling rather than the urban Exposure B / suburban Exposure C default. Use the calculator's exposure category selection to capture this correctly."
-            }
-        },{
-            "@type": "Question",
-            "name": "What's OSHPD and does it apply to my project?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "OSHPD (Office of Statewide Health Planning and Development) was reorganized into HCAI (Department of Health Care Access and Information) effective March 2022, and the structural-review function now operates as the Hospital Building Safety Board. The OSHPD / HCAI jurisdiction covers hospitals, skilled nursing facilities, and acute psychiatric facilities — anywhere patients cannot self-evacuate. If your project is a hospital or similar acute-care facility, you fall under OSHPD / HCAI review, not the local building department, and a California-licensed Structural Engineer is required. DSA (Division of the State Architect) is the parallel agency for public K-12 and community college projects. Both jurisdictions accept ASCE 7-16 wind load calculations but layer additional review and detail requirements. If you are not building a hospital or a public school, neither agency applies — your project goes through the local city or county building department."
+                "text": "Most of urban Los Angeles (90015 downtown, 90210 Beverly Hills, 90064 West LA) falls in the ASCE 7-16 baseline range — roughly 95 to 105 mph for Risk Category II. San Francisco (94102, 94110, 94133) sits in a 95 to 110 mph baseline window with the bay shoreline pushing Exposure D and the western hills locally higher. Palm Springs (92262) is the outlier — it sits at the western edge of the San Gorgonio / Banning Pass Special Wind Region, where the Riverside County jurisdictional value runs significantly higher than the surrounding desert baseline. Sacramento (95814) and San Jose (95110) sit at Central Valley and Santa Clara Valley baselines around 95 to 105 mph. The exact ZIP-level number comes out of the calculator — do not assume the LA-basin baseline applies to a Coachella Valley project or that the SF baseline holds on an exposed Marin headland."
             }
         }]
     }
@@ -770,114 +774,128 @@
     <!-- Hero -->
     <section class="article-header">
         <div class="container">
-            <div class="article-category">California Wind Load Calculator</div>
+            <div class="article-category">The Only Seismic-Honest California Wind Calculator</div>
             <h1 class="article-title">California Wind Load Calculator</h1>
-            <p class="article-subtitle">Honest wind pressures per <strong>2022 California Building Code</strong> and <strong>ASCE 7-16</strong>. Built by engineers who know seismic usually controls in California — and who know exactly when wind doesn't.</p>
+            <p class="article-subtitle">WindLoadCalc is the only wind calculator that will tell you seismic controls most of your California project — and exactly when wind takes over. We've been honest about it since <strong>2002</strong>. <strong>24 years</strong> before SkyCiv handed you a generic CA wind speed without context. CBC 2022 + ASCE 7-16 baked in, five Special Wind Regions flagged at the ZIP.</p>
 
             <form class="zip-form" id="zip-form" onsubmit="return launchCalc(event)">
                 <input type="text" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" class="zip-input" id="zip-input" placeholder="Enter California ZIP (e.g. 90015)" aria-label="California ZIP code">
                 <button type="submit" class="zip-submit">Get California Wind Pressures &rarr;</button>
             </form>
-            <p class="zip-note">Free 7-day trial. No credit card required.</p>
+            <p class="zip-note">7-day free trial — wind output you can compare against your seismic case.</p>
         </div>
     </section>
 
     <!-- Main content -->
     <div class="content-wrapper">
         <main class="main-content">
-            <p>California is not a hurricane state. If you have ever designed a structure here, you already know the lateral force conversation almost always starts with seismic — the San Andreas, the Hayward, the Newport-Inglewood, the Cascadia subduction interface. For most California buildings, the Seismic Design Category (SDC) you draw out of the soil report produces a base shear that wind cannot touch. Pretending otherwise — running a generic "national" wind load calculator and handing the output to a California engineer as if it were the controlling case — is a mistake that wastes time and erodes trust with your reviewer.</p>
+            <p>California has been the strangest wind-load market on the web for 24 years, and nobody talks about why. Every other wind calculator was built on the unspoken assumption that wind is the lateral case worth caring about. That assumption is wrong for California west of the Sierra Nevada, where the Seismic Design Category typically wipes the floor with wind base shear. SkyCiv (founded 2013) does not say that — they hand you a number. MecaWind does not say that. Engineering Express does not say that. <strong>WindLoadCalc has been saying it since 2002</strong>, because telling a California engineer the truth about their lateral demand is more valuable than handing them a wind number with no context attached.</p>
 
-            <p>This page exists because California still needs an honest, well-built wind load tool. Wind controls more often than the casual answer ("just do seismic") implies: lightweight structures, signs and freestanding walls, parapets, rooftop equipment, solar arrays, components and cladding on every building, and anything sited in one of California's Special Wind Regions where the basic wind speed map literally does not apply. The right tool gives you the wind number quickly and accurately so you can compare it against your seismic demand, design for the envelope, and move on with your day.</p>
+            <p>That is the whole pitch of this page. Wind still matters in California — for lightweight buildings, for tall slender appurtenances, for components and cladding on every single project, for flat-roof solar, and for anything sited in one of California's <strong>five Special Wind Regions</strong> (Banning, Tehachapi, Cajon, Altamont, San Gorgonio). For those cases, you need a fast, accurate ASCE 7-16 calculator that knows California. The rest of the time, you need a wind number you can sanity-check next to your seismic case so you can confidently say "seismic governs, wind is fine, move on." Both jobs are what this tool does.</p>
 
-            <p>Enter a California ZIP code above and the calculator launches preloaded with the correct ASCE 7-16 basic wind speed, the city and county designation, and a flag if the location falls inside a Special Wind Region that warrants jurisdictional confirmation.</p>
+            <p>Drop any California ZIP above — Los Angeles basin 90015, San Francisco 94110, San Diego 92101, Palm Springs 92262 (Banning Pass edge), Tehachapi 93561 — and the calculator opens preloaded with the ASCE 7-16 baseline basic wind speed, the city/county designation, and a flagged warning if you've landed in or near a Special Wind Region that warrants a call to the local building department.</p>
 
             <div class="info-box seismic-box">
-                <h4><i class="fas fa-exclamation-circle"></i> The honest framing — wind is one factor, not the only factor</h4>
-                <p>If you came here looking for "California wind load calculator" expecting hurricane-style content, the right answer for most of your buildings is: run wind, run seismic, design for whichever governs. Usually that's seismic. Sometimes — and the rest of this page is about when — it's wind. The calculator does the math either way. Your structural engineer makes the call.</p>
+                <h4><i class="fas fa-exclamation-circle"></i> The seismic-honest framing — say the quiet part out loud</h4>
+                <p>If you came here expecting hurricane-style wind output, here is the honest read: run wind, run seismic, design for whichever governs the lateral system. In most of populated California, seismic governs. Sometimes — and the rest of this page tells you exactly when — wind governs instead, and you need to take the wind number seriously. This calculator is built around that decision. No other wind tool on the web frames it this way, because no other wind tool was started in 2002 by engineers who learned California lateral design the hard way.</p>
+            </div>
+
+            <div class="info-box">
+                <h4><i class="fas fa-star"></i> California expertise since 2002 — the moat</h4>
+                <p><strong>Three CBC adoption cycles tracked</strong> (2010 CBC → 2013 → 2016 → 2019 → 2022) · <strong>Five Special Wind Regions mapped</strong> at the ZIP (Banning, Tehachapi, Cajon, Altamont, San Gorgonio) · <strong>Seismic-aware framing</strong> built into every California output — no other calculator does this · <strong>24+ years</strong> calculating California wind loads and telling engineers when they actually matter · <strong>Seven ASCE editions navigated</strong> (7-95, 7-98, 7-02, 7-05, 7-10, 7-16, 7-22). SkyCiv was founded in 2013 — we had eleven years of California permit feedback before they existed.</p>
             </div>
 
             <h2 id="wind-vs-seismic">Wind vs Seismic in California — When Wind Actually Controls</h2>
 
-            <p>This is the section that most "wind load calculator" sites skip. We are not skipping it, because if you build in California and you do not understand when wind matters versus when seismic dominates, you will either over-design (wasting your client's money) or under-design (failing plan check). Both bad. Here is the engineering reality.</p>
+            <p>This is the flagship section, and the reason this page exists in the form it does. Every other "California wind load" page on the web treats wind like it is the controlling lateral case. It usually is not. If you build in this state and you do not understand which load case wins where, you either over-design (waste the client's money on a wind-driven lateral system that loses to seismic anyway) or under-design (miss a case where wind actually does govern and get a redline in plan check). WindLoadCalc has been talking to California engineers about this since the original wind speed map came off the old ASCE 7-98 — and the framing has not changed: be honest about which case governs, then design for the envelope.</p>
 
             <h3>Why seismic usually wins in California</h3>
 
-            <p>The California Building Code, like the IBC it derives from, requires you to design lateral force resistance for both wind and seismic and use the envelope. In a high-seismic region — which is most of California west of the Sierra Nevada — the Seismic Design Category (SDC) assigned to your site is typically D, with some E and F locations near major active faults. Base shear scales with building weight and the spectral acceleration at your site period. For a typical concrete, masonry, or wood structure with normal mass, the seismic base shear ends up far larger than the wind base shear at the same site, especially for short buildings where wind has less surface area to push on.</p>
+            <p>The 2022 CBC, like every CBC before it, requires you to design lateral force resistance for both wind and seismic and use the envelope. The catch in California: the Seismic Design Category coming out of your geotech report is almost always D, with E and F pockets right on top of major active faults — Hayward, Calaveras, Newport-Inglewood, San Andreas itself. Base shear scales with building weight times the spectral acceleration at the structure's period. For a normal-mass concrete, masonry, or wood building, the seismic base shear dwarfs the wind base shear at the same site, and it dwarfs it harder as the building gets shorter (because wind has less projected area to push on while seismic mass barely changes). The mental model every California PE eventually internalizes: <em>design the lateral system for seismic, then check that wind doesn't beat it.</em></p>
 
-            <p>So when you run both calculations for a typical two-story Bay Area apartment or a Los Angeles strip mall, seismic governs the lateral system. That is why California engineers' default mental model is "design for seismic, check wind."</p>
+            <p>That check is not optional, even when you "know" seismic will win. Run the wind number. Put it next to the seismic number. Document the comparison. Move on. The 90 seconds it takes is exactly the 90 seconds you owe your reviewer.</p>
 
-            <h3>Cases where wind controls — these matter</h3>
+            <h3>Five cases where wind actually controls — these are the ones that matter</h3>
 
-            <p>"Check wind" is not a formality. Wind frequently controls or contributes meaningfully in five recurring cases:</p>
+            <p>"Check wind" stops being a formality and starts being the design driver in five recurring scenarios. This is the list the calculator is tuned for:</p>
 
             <ul>
-                <li><strong>Lightweight structures.</strong> Metal buildings, pre-engineered structures, certain wood pavilions, small storage sheds, equipment enclosures — anywhere building weight is low. Low weight means low seismic base shear. Low seismic base shear means wind has a fighting chance, and often wins.</li>
-                <li><strong>Tall, slender appurtenances.</strong> Signs, freestanding walls, parapets, rooftop screens, antennas, equipment penthouses. Wind moment scales with height and projected area. Seismic moment scales with mass. For a tall, light appurtenance, wind moment wins almost every time. ASCE 7-16 Chapter 29 covers most of these.</li>
-                <li><strong>Components and cladding (C&C).</strong> Every window, door, curtain wall panel, roof tile, and skin element has to resist wind pressure regardless of what the seismic system is doing. A glass facade in downtown San Francisco still has to take the local C&C wind pressure (GCp times qz). Seismic does not absolve you of the C&C calculation.</li>
-                <li><strong>Solar arrays and rooftop equipment.</strong> Flat-roof PV racking is dominated by wind uplift and overturning on the panels, not by seismic mass effects. Connection design at the standoff to the roof structure is almost always a wind problem first. With California's accelerated solar deployment under Title 24, this case is everywhere.</li>
-                <li><strong>Anywhere inside a Special Wind Region.</strong> The ASCE 7-16 basic wind speed map does not directly apply in California's Special Wind Regions (mountain passes — see the next section). Local wind speeds can reach 110 to 130-plus mph in concentrated areas, which can push wind base shear past seismic at the same site. If your project is in the Banning Pass, Tehachapi Pass, Cajon Pass, Altamont Pass, or San Gorgonio Pass area, wind is not a check — it is the design driver.</li>
+                <li><strong>Lightweight buildings.</strong> Pre-engineered metal buildings, light steel pavilions, small wood-framed storage structures, mechanical screens, equipment enclosures — anything where building mass is low. Low mass means low seismic base shear. Low seismic base shear loses to a 95-mph wind on a 30-foot tall metal building every time.</li>
+                <li><strong>Tall slender appurtenances.</strong> Signs, freestanding walls, parapets, rooftop screens, antennas, equipment penthouses. Wind moment scales with projected area and lever arm; seismic moment scales with the appurtenance mass. For a tall light element, wind wins the moment fight almost without exception. ASCE 7-16 Chapter 29 covers most of these — and many California reviewers ask for the wind side explicitly even when the seismic check is "obviously" lower.</li>
+                <li><strong>Components and cladding (C&C) on every single building.</strong> This one is non-negotiable. A glass curtain wall in downtown San Francisco, a stucco panel in Sacramento, a metal roof in Bakersfield — every individual cladding element resists wind GCp times qz, regardless of what the lateral system is doing for seismic. The Seismic Design Category does not absolve you of the C&C calculation. WindLoadCalc's California output breaks C&C results into wall-field plus wall-corner cells with the matching roof breakouts for whichever gable, hip, or flat profile the building actually has — cladding selection happens in one pass.</li>
+                <li><strong>Flat-roof solar PV racking and rooftop equipment.</strong> Title 24 has put solar on roofs everywhere in California — and the standoff connection from the rack to the roof structure is almost universally wind-uplift dominated, not seismic-mass dominated. Same story for rooftop HVAC, refrigeration units, and screen walls. If the project includes a roof-mounted PV array or large rooftop unit, wind is the controlling load case on those specific attachments. Period.</li>
+                <li><strong>Anywhere inside a Special Wind Region.</strong> Inside Banning Pass, Tehachapi Pass, Cajon Pass, Altamont Pass, or San Gorgonio Pass, the ASCE 7-16 contour line is meaningless — the smoothed national map underrepresents the local demand by 10 to 30 mph. Riverside, Kern, San Bernardino, Alameda, and San Joaquin counties publish jurisdictional values that often push wind base shear past seismic at the same site. SWR projects are <em>wind-driven design</em>, not wind-check design. The calculator flags any SWR ZIP automatically so the conversation with the building department happens up front.</li>
             </ul>
 
-            <p>The honest workflow: run wind through this calculator, run seismic through your seismic tool of choice, compare the demands at each level, and design the lateral system to the envelope. Components and cladding always require the wind side regardless. Special Wind Region projects deserve a conversation with the local building department before you commit to a number.</p>
+            <p>The honest two-handed workflow: drop the ZIP into this calculator for the wind side, run the seismic side in your seismic tool of choice (against the SDC and spectral accelerations from your geotech report), put the two demands next to each other at each level, and size the lateral system to the envelope. C&C always uses the wind side regardless. SWR projects get a phone call to the local jurisdiction before anyone commits to a number.</p>
 
             <h2 id="cbc-2022">2022 California Building Code + ASCE 7-16 — What the Code Actually Says</h2>
 
-            <p>The current statewide code is the <strong>2022 California Building Code (CBC)</strong>, adopted by the California Building Standards Commission with an effective date of January 1, 2023. The CBC is updated on a three-year intervening cycle, with the next major revision scheduled for the 2025 CBC. The CBC is essentially the 2021 IBC with California-specific amendments — agency adoptions from HCAI (formerly OSHPD) for hospitals, DSA for K-12 and community college projects, the California Energy Commission for Title 24 energy, and so on.</p>
+            <p>The current statewide adoption is the <strong>2022 California Building Code (CBC)</strong>, published by the California Building Standards Commission with an effective date of January 1, 2023. CBC cycles run on a three-year intervening rhythm — 2025 CBC is the next major drop. The CBC is essentially the 2021 IBC with California-specific amendments stacked on top, including agency adoptions from HCAI (formerly OSHPD) for hospitals, DSA for K-12 and community college projects, and the California Energy Commission for Title 24 energy. The CBC also imports the California Residential Code (CRC), Mechanical, Plumbing, Electrical, Fire, and Existing Building codes — but for wind, Chapter 16 is where the action is.</p>
 
-            <p>For wind, CBC Chapter 16 adopts <strong>ASCE 7-16</strong> by reference. That is the standard you use for basic wind speed, exposure categorization, MWFRS pressures, components and cladding (C&C) pressures, and the full wind load procedure. Note that California has not yet adopted ASCE 7-22 statewide — the next CBC cycle will likely move there, but as of the 2022 CBC, ASCE 7-16 is the controlling reference for permitted projects.</p>
+            <p>Chapter 16 of the 2022 CBC adopts <strong>ASCE 7-16</strong> by reference for wind loads. That is the standard the calculator implements directly — basic wind speed maps, exposure categorization, the MWFRS Directional and Envelope procedures, components and cladding pressures across all zones, all four enclosure classifications. California has not yet jumped to ASCE 7-22 statewide; the 2025 CBC cycle will likely make that move. As of today, every California permit going under the 2022 CBC uses ASCE 7-16, and so does WindLoadCalc's California output. (We have already tracked three CBC adoption cycles in this calculator — the underlying engine is set up to flip cleanly when 2025 CBC adopts ASCE 7-22.)</p>
 
-            <p>A handful of plain-English definitions before going further (because not every reader is a structural engineer):</p>
+            <p>Plain-English definitions so the rest of the page reads cleanly, framed for the California lateral conversation:</p>
 
             <ul>
-                <li><strong>MWFRS</strong> — Main Wind Force Resisting System. The structural system that resists wind acting on the building as a whole (shear walls, braced frames, moment frames).</li>
-                <li><strong>C&C</strong> — Components and Cladding. The individual elements that resist wind directly applied to a small area (windows, doors, roof sheathing, cladding panels, roof tiles).</li>
-                <li><strong>Risk Category</strong> — A classification (I through IV) based on building occupancy and consequence of failure. Risk Cat II is the default (most occupancies). Risk Cat III covers schools and assembly; IV covers hospitals and emergency facilities. Higher category = higher design wind speed.</li>
-                <li><strong>Exposure Category</strong> — B (urban / suburban / wooded), C (open terrain, scattered obstructions), or D (flat unobstructed terrain, water surfaces, smooth shoreline). California urban cores are typically B; suburban / agricultural is C; coastal headlands and bayfronts are D.</li>
-                <li><strong>Basic wind speed (V)</strong> — The 3-second gust wind speed at 33 ft above ground in Exposure C, with a return period associated with the Risk Category. Comes off the ASCE 7-16 wind speed map.</li>
-                <li><strong>Special Wind Region</strong> — A geographic area where the basic wind speed map does not directly apply because of terrain effects. ASCE 7-16 Figure 26.5-1B identifies these (next section).</li>
+                <li><strong>MWFRS</strong> — Main Wind Force Resisting System. The lateral system (shear walls, braced frames, moment frames) that takes wind on the building as a whole. In California, this is the value you size against your <em>parallel seismic case</em> and design to the envelope.</li>
+                <li><strong>C&C</strong> — Components and Cladding. Individual elements (windows, doors, cladding panels, roof tiles, sheathing) resisting wind on a small tributary area. C&C in California is always wind-driven — the SDC does not let you off the hook on the curtain wall.</li>
+                <li><strong>Risk Category</strong> — An occupancy/consequence classification from I (low hazard) through IV (essential facility). Cat II is the residential and light-commercial default. Cat III lifts the design wind speed for assembly and most public schools (which also pull DSA review). Cat IV is hospitals (HCAI review), fire stations, EOCs — and these often also pull a California SE seal rather than just a PE.</li>
+                <li><strong>Exposure Category</strong> — B (urban, suburban, dense vegetation), C (open terrain with scattered obstructions), or D (flat unobstructed terrain or water, smooth shorelines). California urban cores default to B, suburban and agricultural inland to C, exposed coastal headlands and bay frontage to D. Mis-picking exposure is the most common California wind-load error — it directly scales every pressure on the page.</li>
+                <li><strong>Basic wind speed (V)</strong> — 3-second gust at 33 ft in Exposure C, with a return period set by Risk Category. Comes off ASCE 7-16 Figure 26.5-1A/B. Inside a California Special Wind Region the contour does <em>not</em> apply — use the local jurisdiction value.</li>
+                <li><strong>Seismic Design Category (SDC)</strong> — not a wind term, but it is the variable that decides whether wind ever gets to control your California lateral system. SDC comes from the spectral accelerations at your site mapped against your Risk Category. Most populated California sites land in D; near major faults you get E or F. The calculator surfaces wind as MWFRS so you can immediately compare against whatever seismic case your SDC is driving.</li>
+                <li><strong>Special Wind Region (SWR)</strong> — ASCE 7-16 Figure 26.5-1B shaded zones where terrain effects make the contour map under-conservative. California has five major SWRs (Banning, Tehachapi, Cajon, Altamont, San Gorgonio) plus smaller Sierra and coastal shaded areas. SWR ZIPs get flagged in the calculator output.</li>
             </ul>
 
-            <p>California Special Wind Regions and certain micro-climate cases require either a site-specific wind study (rare for typical commercial work) or a local jurisdiction value from the building department (the practical answer most of the time). The calculator flags Special Wind Region ZIPs so you do not accidentally use the baseline map in a location where the map does not control.</p>
+            <p>California Special Wind Region projects and certain micro-climate cases either need a site-specific wind study (uncommon for typical commercial work) or — far more practically — a local jurisdiction-published value pulled from the building department. The calculator's SWR flag exists to start that conversation before you commit to a contour-map number that does not apply.</p>
 
-            <h2 id="special-wind-regions">California Special Wind Regions — Where Wind Really Does Matter</h2>
+            <h2 id="special-wind-regions">California's Five Special Wind Regions — Where Wind Really Does Matter</h2>
 
-            <p>ASCE 7-16 Figure 26.5-1B shades several portions of California as <strong>Special Wind Regions</strong>. In these areas, terrain effects (mountain passes funneling and accelerating prevailing winds, coastal headland topography, regional channeling) produce local wind speeds high enough that the smoothed national map underrepresents the design demand. Inside a Special Wind Region, you cannot just read the contour line — you need to use a local jurisdiction-published value or commission a site-specific wind study.</p>
-
-            <p>California has more Special Wind Regions than any other Lower 48 state. The major ones:</p>
+            <p>ASCE 7-16 Figure 26.5-1B explicitly shades portions of California as <strong>Special Wind Regions</strong>: terrain that funnels and accelerates prevailing winds beyond what the smoothed national contour can capture. In SWR areas, you cannot read the contour line for design — you need a local jurisdiction value or a site-specific study. California has more Special Wind Regions than any other Lower 48 state, and five of them are large enough to be project-defining:</p>
 
             <div class="region-cards">
                 <div class="region-card">
                     <h4>San Gorgonio / Banning Pass <span class="swr-badge">SWR</span></h4>
                     <div class="region-speed">~110-130+ mph</div>
-                    <p>The gap between the San Bernardino and San Jacinto mountains funnels Pacific air toward the Coachella Valley. Concentrated wind speeds near Whitewater, Palm Springs (92262), and the I-10 corridor. The wind farm visible from the freeway exists for a reason.</p>
+                    <p>The gap between the San Bernardino and San Jacinto mountains, funneling Pacific marine air east into the Coachella Valley. Palm Springs (92262), Whitewater, Cabazon, and the I-10 corridor sit in it. The wind farm visible from the freeway is not decorative — it is there because the local wind resource is enormous. Riverside County publishes the jurisdictional design wind speeds.</p>
                 </div>
                 <div class="region-card">
                     <h4>Tehachapi Pass <span class="swr-badge">SWR</span></h4>
                     <div class="region-speed">~110-125 mph</div>
-                    <p>The pass between the southern Sierra Nevada and the Tehachapi Mountains connecting the San Joaquin Valley to the Mojave. Among the largest wind farm areas in the U.S. Affects projects near Tehachapi, Mojave, and the Kern County wind belt.</p>
+                    <p>The pass between the southern Sierra Nevada and the Tehachapi Mountains that connects the San Joaquin Valley to the Mojave Desert. Tehachapi (93561), Mojave (93501), and the Kern County wind belt sit in it. One of the largest concentrated wind-resource areas in the United States. Kern County's building department holds the jurisdictional numbers.</p>
                 </div>
                 <div class="region-card">
                     <h4>Altamont Pass <span class="swr-badge">SWR</span></h4>
                     <div class="region-speed">~110-120 mph</div>
-                    <p>The pass between the Bay Area and the Central Valley along I-580. Persistent westerly winds drive the historic Altamont wind resource area. Affects Livermore, Tracy, Mountain House, and eastern Alameda County projects.</p>
+                    <p>The corridor between the Bay Area and the Central Valley along I-580. Persistent westerly marine pressure drives the historic Altamont wind resource. Livermore (94550), Tracy (95376), Mountain House, and eastern Alameda County projects fall in it. Alameda and San Joaquin counties publish jurisdictional values.</p>
                 </div>
                 <div class="region-card">
                     <h4>Cajon Pass <span class="swr-badge">SWR</span></h4>
                     <div class="region-speed">~105-120 mph</div>
-                    <p>The pass between the San Bernardino and San Gabriel mountains carrying I-15 from the LA basin to the High Desert. Wind acceleration affects projects near the pass and into Hesperia, Victorville, and Apple Valley.</p>
+                    <p>The pass between the San Bernardino and San Gabriel mountains, carrying I-15 from the LA basin up to the High Desert. Wind acceleration affects projects near the pass itself and downwind into Hesperia (92344), Victorville (92392), and Apple Valley. San Bernardino County is the jurisdictional source.</p>
+                </div>
+                <div class="region-card">
+                    <h4>San Gorgonio Pass (Distinct from Banning) <span class="swr-badge">SWR</span></h4>
+                    <div class="region-speed">~110-125 mph</div>
+                    <p>The southern lobe of the Banning system, named separately in ASCE 7-16 Figure 26.5-1B. Affects the upper Coachella corridor toward Beaumont and the Morongo region. Same Riverside County jurisdictional process applies. Inland Empire designers regularly hit this boundary on Inland-to-desert projects.</p>
+                </div>
+                <div class="region-card">
+                    <h4>Sierra + Coastal Shaded Areas <span class="swr-badge">SWR</span></h4>
+                    <div class="region-speed">~100-120+ mph</div>
+                    <p>Beyond the five major passes, ASCE 7-16 also shades Donner Pass, Carson Pass, the Lassen-area passes, sections of the Mendocino and Sonoma coast headlands, and parts of Big Sur. Project-by-project: confirm with the local jurisdiction. Tahoe basin projects in particular have published locals worth pulling.</p>
                 </div>
             </div>
 
-            <p>Beyond the four major passes, ASCE 7-16 Figure 26.5-1B also shades portions of the Sierra Nevada and Cascade ranges (Donner Pass, Carson Pass, Lassen-area passes), parts of the northern coastal headland country (sections of the Mendocino and Sonoma coast), and certain other channeled-wind terrain. If your project sits in any of these, do not trust a generic ASCE map lookup — confirm the design wind speed with the local jurisdiction before you commit to a value.</p>
+            <p>Outside these zones, the standard ASCE 7-16 contour maps apply directly to the rest of the state. Inside any of them: do not trust a generic map lookup, do not assume the surrounding terrain's number, call the building department. The calculator's SWR flag is designed to be the first thing you see in the output for any of these ZIPs, not the last.</p>
 
             <div class="info-box warning-box">
-                <h4><i class="fas fa-mountain"></i> Practical note for Special Wind Region projects</h4>
-                <p>Most California city and county building departments inside a Special Wind Region have a published local design wind speed for their jurisdiction. Riverside County, San Bernardino County, Kern County, and Alameda County all have wind-region overlay maps or standard local values for the passes within their boundaries. Call the building department before designing — getting their number on the front end is faster than a redline at plan check.</p>
+                <h4><i class="fas fa-mountain"></i> The fastest path through an SWR project</h4>
+                <p>Every California city and county building department inside a Special Wind Region has a published local design wind speed (or a wind-region overlay map) for projects in their jurisdiction. Riverside, Kern, San Bernardino, Alameda, and San Joaquin all publish theirs. Call before you design. The jurisdictional number on the front end is faster than a redline at plan check. Use the calculator output to anchor the conversation — "the ASCE baseline at this ZIP says X, but I see it's flagged SWR, what value should I use?" gets you the right answer in one phone call.</p>
             </div>
 
             <h2 id="wind-speed-table">California Wind Speed Quick Reference</h2>
 
-            <p>The table below lists approximate ASCE 7-16 basic wind speeds for Risk Category II (the most common occupancy — single-family residential, most multifamily, commercial retail, light industrial) at representative California metros and Special Wind Region locations. Confirm exact values for your specific project ZIP in the calculator, and confirm Special Wind Region values with the local building department.</p>
+            <p>Approximate ASCE 7-16 basic wind speeds for Risk Category II (the residential and light-commercial workhorse) at representative California metros plus the major Special Wind Region locations. Confirm exact ZIP-level numbers in the calculator; confirm Special Wind Region values with the local building department.</p>
 
             <div class="wind-table-wrap">
                 <table class="wind-table">
@@ -885,101 +903,106 @@
                         <tr>
                             <th>Metro / Region (Sample ZIP)</th>
                             <th>Risk Cat II Wind Speed</th>
-                            <th>Notes</th>
+                            <th>Notes (CA-specific)</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>Los Angeles (90015 downtown)</td>
                             <td class="speed-cell">~95-105 mph</td>
-                            <td>Urban Exposure B typical. Seismic SDC D typical.</td>
+                            <td>Urban Exposure B typical. Seismic SDC D — seismic governs MWFRS in nearly every case.</td>
                         </tr>
                         <tr>
                             <td>Beverly Hills (90210)</td>
                             <td class="speed-cell">~95-105 mph</td>
-                            <td>Westside LA baseline. Hillside lots may shift exposure.</td>
+                            <td>Westside LA baseline. Hillside lots may pull Exposure C and locally elevated topographic factor Kzt.</td>
                         </tr>
                         <tr>
                             <td>San Francisco (94102 / 94110)</td>
                             <td class="speed-cell">~95-110 mph</td>
-                            <td>Hill exposure and bay frontage can shift higher. Exposure D on shoreline.</td>
+                            <td>Bay shoreline can shift to Exposure D. Hill exposures push higher locally. SDC D — seismic dominates.</td>
                         </tr>
                         <tr>
                             <td>Oakland (94612)</td>
                             <td class="speed-cell">~95-110 mph</td>
-                            <td>Bay influence; eastern hills slightly higher.</td>
+                            <td>Bay influence on the flatland; the East Bay hills run higher. Hayward Fault — SDC D/E pockets.</td>
                         </tr>
                         <tr>
                             <td>San Jose (95110)</td>
                             <td class="speed-cell">~95-105 mph</td>
-                            <td>Santa Clara Valley baseline.</td>
+                            <td>Santa Clara Valley baseline. Calaveras and Hayward fault zones — seismic governs.</td>
                         </tr>
                         <tr>
                             <td>San Diego (92101 / 92103)</td>
                             <td class="speed-cell">~95-110 mph</td>
-                            <td>Coastal influence; baseline ASCE map applies.</td>
+                            <td>Coastal influence on the shoreline. SDC D inland, lower in pockets — still check seismic first.</td>
                         </tr>
                         <tr>
                             <td>Sacramento (95814 / 95816)</td>
                             <td class="speed-cell">~95-105 mph</td>
-                            <td>Central Valley baseline.</td>
+                            <td>Central Valley baseline. Lower seismic than coastal CA but still SDC D in most of the metro.</td>
                         </tr>
                         <tr>
-                            <td>Ventura (93001, coastal)</td>
+                            <td>Ventura coastline (93001)</td>
                             <td class="speed-cell">~100-115 mph</td>
-                            <td>Coastal exposure D for sites near unobstructed water.</td>
+                            <td>Coastal Exposure D applies on unobstructed-water sites. Exposed bluff tops trend higher.</td>
                         </tr>
                         <tr>
                             <td>Palm Springs (92262) <span class="swr-badge">SWR</span></td>
                             <td class="speed-cell">~110-130+ mph</td>
-                            <td>San Gorgonio / Banning Pass region. Confirm with Riverside County.</td>
+                            <td>San Gorgonio / Banning Pass SWR — use Riverside County jurisdictional value, not the contour map.</td>
                         </tr>
                         <tr>
-                            <td>Tehachapi / Mojave area <span class="swr-badge">SWR</span></td>
+                            <td>Tehachapi / Mojave area (93561 / 93501) <span class="swr-badge">SWR</span></td>
                             <td class="speed-cell">~110-125 mph</td>
-                            <td>Tehachapi Pass region. Confirm with Kern County.</td>
+                            <td>Tehachapi Pass SWR — Kern County publishes the local design wind speed.</td>
                         </tr>
                         <tr>
-                            <td>Livermore / Tracy <span class="swr-badge">SWR</span></td>
+                            <td>Livermore / Tracy (94550 / 95376) <span class="swr-badge">SWR</span></td>
                             <td class="speed-cell">~110-120 mph</td>
-                            <td>Altamont Pass corridor. Confirm with Alameda / San Joaquin counties.</td>
+                            <td>Altamont Pass SWR — pull jurisdictional value from Alameda or San Joaquin County.</td>
+                        </tr>
+                        <tr>
+                            <td>Hesperia / Victorville (92344 / 92392) <span class="swr-badge">SWR</span></td>
+                            <td class="speed-cell">~105-120 mph</td>
+                            <td>Cajon Pass SWR fringe — San Bernardino County is the jurisdictional source.</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
 
             <div class="warning-box info-box">
-                <h4><i class="fas fa-exclamation-triangle"></i> These are reference values — confirm via the calculator and the local jurisdiction</h4>
-                <p>The values above are approximate ASCE 7-16 Risk Category II references for representative California locations. Your exact ZIP may differ depending on micro-terrain, exposure, and proximity to a Special Wind Region boundary. Risk Category III (schools, assembly) and Risk Category IV (hospitals, essential facilities) use higher wind speeds at the same location. Always run the calculator for your specific project address, and for any Special Wind Region location, call the local building department before designing.</p>
+                <h4><i class="fas fa-exclamation-triangle"></i> These are references, not design values — run the calculator + confirm jurisdiction</h4>
+                <p>The numbers above approximate ASCE 7-16 Risk Category II values at representative California ZIPs. Your specific project address can shift with micro-terrain, exposure, and SWR-boundary proximity. Risk Category III (assembly, DSA-reviewed schools) and Risk Category IV (HCAI-reviewed hospitals, fire stations, EOCs) use higher design wind speeds at the same site. Always run the calculator at your project ZIP — and for any SWR location, the building department's published value supersedes the contour map.</p>
             </div>
 
-            <h2 id="permits-licensure">California Permits, PE, SE, OSHPD, and DSA</h2>
+            <h2 id="permits-licensure">California Permits, PE vs SE, HCAI/OSHPD, and DSA</h2>
 
-            <p>California's permitting and licensure landscape is more layered than most other states. Five things to know before you start a project:</p>
+            <p>California's permitting and licensure landscape has more moving parts than any other state we cover. Five things you need to know before you commit to a wind load report on a California project:</p>
 
-            <h3>California-licensed PE or SE is required for sealed structural drawings</h3>
+            <h3>California PE seal — required for sealed structural drawings</h3>
 
-            <p>California requires a California-licensed Professional Engineer (PE) for sealed structural drawings on virtually any permitted project. A PE license issued by another state is not accepted for original sealing in California — you need a California PE registered with the Board for Professional Engineers, Land Surveyors, and Geologists (BPELSG).</p>
+            <p>California requires a California-licensed Professional Engineer for sealed structural drawings on essentially any permitted project. Out-of-state PE seals are not accepted as the original seal — the licensee on the title block must be registered with the California Board for Professional Engineers, Land Surveyors, and Geologists (BPELSG). This is a meaningful difference from many other states that accept reciprocity for the original seal.</p>
 
-            <h3>Structural Engineer (SE) is a separate, higher California credential</h3>
+            <h3>California SE — a separate, higher credential above the PE</h3>
 
-            <p>California issues a separate Structural Engineer (SE) license above the PE — there are fewer SEs than PEs in the state, and the SE has additional examination requirements. Certain project types specifically require an SE rather than a PE: most hospitals (under HCAI / former OSHPD jurisdiction), most public school buildings (DSA jurisdiction), essential facilities, and buildings above thresholds defined in the Business and Professions Code. For routine residential and small commercial work, a California PE is sufficient.</p>
+            <p>California issues a Structural Engineer license above the PE — additional examination requirements, additional experience, fewer holders. The SE is mandatory (not optional) on specific project types: most HCAI-reviewed hospital projects, most DSA-reviewed public school projects, essential facilities, and buildings above thresholds defined in the Business and Professions Code. For everyday residential and small commercial work, a California PE seal is sufficient. The calculator's report output is set up to feed either a CA PE or a CA SE workflow — same wind numbers, same documentation depth, sealed by whoever your project requires.</p>
 
-            <h3>HCAI (formerly OSHPD) reviews hospitals</h3>
+            <h3>HCAI (formerly OSHPD) — the hospital review track</h3>
 
-            <p>OSHPD (Office of Statewide Health Planning and Development) was reorganized into HCAI (Department of Health Care Access and Information) effective March 2022. The structural-review function for hospitals, skilled nursing facilities, and acute psychiatric facilities now operates as the Hospital Building Safety Board within HCAI. If you are building any of those facility types, you are under HCAI jurisdiction, not the local city or county building department. HCAI review is slower and more rigorous, and the SE seal requirement applies.</p>
+            <p>OSHPD reorganized into HCAI (Department of Health Care Access and Information) in March 2022, and the structural review function for hospitals, skilled nursing facilities, and acute psychiatric facilities now sits with the Hospital Building Safety Board inside HCAI. Anything where patients cannot self-evacuate falls under HCAI, not the local building department. HCAI review is slower, more rigorous, and requires the California SE seal. WindLoadCalc's CA wind output is HCAI-format-friendly (the architectural schedule export drops cleanly into the structural set the SE compiles for review).</p>
 
-            <h3>DSA reviews K-12 and community college projects</h3>
+            <h3>DSA — the public school track</h3>
 
-            <p>The Division of the State Architect (DSA) reviews public K-12 and community college projects (and some other state buildings). DSA is the structural counterpart for educational facilities. If you are working on a public school or community college project, DSA review applies — not the local building department.</p>
+            <p>The Division of the State Architect reviews public K-12 and community college projects plus some other state buildings. DSA is the structural counterpart to HCAI for educational facilities. Public school projects go through DSA, not the local city or county. SE seal required for most DSA submittals. Same calculator output format works for the wind side of the DSA package.</p>
 
-            <h3>WindLoadCalc does not provide California PE or SE stamps</h3>
+            <h3>WindLoadCalc does NOT provide California PE or SE stamps — engage a CA-licensed engineer</h3>
 
-            <p>Be explicit: our in-house Professional Engineer is licensed in Florida only and only provides sealing services for Florida residential and small commercial projects up to three stories. We do not provide California PE or SE stamps for any project, including OSHPD / HCAI or DSA work. WindLoadCalc generates the wind load calculations and the permit-ready report your California engineer will use — but the seal must come from a California-licensed professional you engage directly.</p>
+            <p>Direct and honest: our in-house Professional Engineer is licensed in Florida only, and only seals Florida residential and small commercial work up to three stories. We do not provide California PE seals, do not provide California SE seals, and do not sign or seal any California project regardless of facility type. WindLoadCalc generates the wind load calculations, the documentation, and the permit-ready report your California PE or SE will use — but the seal on the title block has to come from a California-licensed professional you engage directly. That is the line, drawn cleanly, and we will not blur it.</p>
 
             <div class="content-cta">
                 <h3>Run Your California Wind Numbers</h3>
-                <p>Compare wind against seismic in minutes. Free 7-day trial. No credit card required.</p>
+                <p>Compare wind against seismic in minutes. 7-day free trial — wind output you can compare against your seismic case. No credit card.</p>
                 <a href="/wind-load-calculator-shop.html" class="cta-button">Start Free Trial <i class="fas fa-arrow-right"></i></a>
             </div>
 
@@ -987,73 +1010,73 @@
 
             <div class="process-steps">
                 <div class="process-step">
-                    <h4>Enter your California ZIP code</h4>
-                    <p>The calculator looks up your ZIP, determines the correct California county, and pulls the ASCE 7-16 baseline basic wind speed for the location. If your ZIP falls inside or near a Special Wind Region (Banning, Tehachapi, Cajon, Altamont, San Gorgonio), the output flags it so you know to confirm the value with the local building department before designing.</p>
+                    <h4>Drop your California ZIP</h4>
+                    <p>Drop any California ZIP — LA basin 90015, SF 94110, San Diego 92101, Palm Springs 92262, Tehachapi 93561 — and the calculator pulls the ASCE 7-16 baseline wind speed plus a flag if you've landed in or near a Special Wind Region. The county, city, and base contour value all populate from the ZIP automatically; SWR ZIPs get an explicit "confirm with local jurisdiction" warning so you do not silently use the wrong number.</p>
                 </div>
                 <div class="process-step">
-                    <h4>Pick your Risk Category and Exposure</h4>
-                    <p>Risk Category II covers most occupancies (single-family, multifamily, retail, light commercial). Risk Category III adds assembly and schools. Risk Category IV is for essential facilities (hospitals, fire stations, EOCs). Exposure B for urban / suburban / wooded sites; C for open terrain; D for coastal headlands and large water frontage. California's urban cores default to B, suburban inland to C, and coastal bluffs to D.</p>
+                    <h4>Pick your Risk Category and Exposure (CA-flavored)</h4>
+                    <p>In California, the Cat II default holds for single-family (still the residential bulk), multifamily, retail, and light commercial. Cat III bumps in for public schools (which go through DSA review), assembly buildings, and the substantial-hazard category. Cat IV picks up hospitals (under HCAI / former OSHPD review), fire stations, EOCs, and other essential facilities — and these projects often require a CA SE, not just a CA PE. Exposure B for the urban cores (LA basin, SF downtown, San Jose), C for inland suburban and agricultural, D for exposed coastal headlands, bay frontage, and unobstructed-water sites.</p>
                 </div>
                 <div class="process-step">
-                    <h4>Enter building geometry</h4>
-                    <p>Length, width, mean roof height, roof slope (X over 12), roof shape, and enclosure classification (Enclosed, Partially Open, Partially Enclosed, or Open). The calculator handles the four ASCE enclosure types — useful for California carports, patio covers, and structures with large permanent openings.</p>
+                    <h4>Building geometry — length, width, mean roof height, slope, enclosure</h4>
+                    <p>Length, width, mean roof height, roof slope as X-in-12 (the calculator converts to degrees on the fly), roof shape, and one of the four ASCE 7-16 enclosure classifications — Enclosed, Partially Open, Partially Enclosed, Open. The four-card enclosure picker is useful on California carports, patio covers, and accessory structures with large permanent openings where the default "Enclosed" is the wrong call.</p>
                 </div>
                 <div class="process-step">
-                    <h4>Review the wind pressures — then run your seismic case in parallel</h4>
-                    <p>The calculator returns MWFRS pressures (for the structural system) and C&C pressures (for individual cladding elements). For California, this is half the lateral conversation: run your seismic case in parallel (using SDC, spectral accelerations, and base shear for your structure type), then design the lateral system to whichever envelope governs. Components and cladding always use the wind side regardless of seismic.</p>
+                    <h4>Read the wind side — then run your seismic case in parallel</h4>
+                    <p>California output is two-handed by design: MWFRS pressures land alongside your seismic case so you can pick the governing envelope; C&C pressures get used regardless — wind C&C controls a curtain wall in San Francisco no matter what the SDC says. Output is zoned out by area — wall interior cell, wall edge cell, plus the roof cells driven by your geometry choice — so cladding selection happens fast. Run seismic in your seismic tool of choice against the SDC and spectral accelerations from your geotech report, then design the lateral system to whichever case wins.</p>
                 </div>
                 <div class="process-step">
-                    <h4>Download the permit report and hand it to your California PE or SE</h4>
-                    <p>Export as PDF, Excel, or the architectural schedule format (a real .xlsx drop-in for AutoCAD). Hand the report to your California-licensed Professional Engineer or Structural Engineer for review, integration with the seismic design, and sealing. For OSHPD / HCAI or DSA projects, your SE will coordinate the agency review directly. We do not seal California work — that is your in-state engineer's role.</p>
+                    <h4>Export the permit package and hand it to your CA PE or SE</h4>
+                    <p>Export as PDF, Excel, or the architectural schedule format (a real .xlsx file that drops into AutoCAD). The architectural schedule is the format Bob's California-engineer customers have asked for explicitly — it sits cleanly inside a structural set heading to the local building department, HCAI, or DSA. Your California PE (or SE for HCAI/DSA) reviews the wind numbers alongside the seismic case, seals the title block, and submits. WindLoadCalc does not seal California work — your in-state engineer holds that pen.</p>
                 </div>
             </div>
 
             <h2 id="faq">California Wind Load FAQ</h2>
 
             <details class="faq-item">
-                <summary>Does wind or seismic control structural design in California?</summary>
-                <div class="faq-answer">For most California buildings, seismic governs lateral force design. California sits across the most active seismic zones in the continental United States, and the Seismic Design Category (SDC) assigned to a site typically produces base shear demands that exceed wind base shear at the same site. That does not mean wind is irrelevant — wind frequently controls for lightweight structures, signs, freestanding walls, rooftop equipment, parapets, solar arrays, and the components and cladding (C&C) checks on any building. The honest engineering answer is: run both, compare, and design for the envelope. A wind load calculator that pretends California is just another state misses this nuance.</div>
+                <summary>Why does WindLoadCalc tell me seismic dominates my California project?</summary>
+                <div class="faq-answer">Because it is the truth, and no other wind calculator on the web will say it to you. Most California buildings west of the Sierra crest sit in Seismic Design Category D, with E and F pockets near the major active faults. For a normal-mass concrete, masonry, or wood structure, the seismic base shear computed from those SDCs typically exceeds the wind base shear at the same site — often by a wide margin. SkyCiv hands you a wind number and walks away. We hand you the wind number, label it MWFRS, and tell you to put it next to your seismic case before you trust it as the controlling lateral demand. We have been giving CA engineers that honest framing since 2002 — three CBC adoption cycles ago. The tradeoff: you waste zero hours running our number as if it controls when it doesn't.</div>
             </details>
 
             <details class="faq-item">
-                <summary>What are California's Special Wind Regions?</summary>
-                <div class="faq-answer">ASCE 7-16 Figure 26.5-1B shades several California areas as Special Wind Regions, meaning the basic wind speed map does not directly apply and a site-specific study or a local jurisdiction value is required. The most well-known California Special Wind Regions are mountain passes that funnel and accelerate prevailing winds: the Banning Pass and San Gorgonio Pass (between the San Bernardino and San Jacinto mountains, near Palm Springs and Whitewater), the Tehachapi Pass (between the Sierra Nevada and Tehachapi Mountains), the Cajon Pass (north of San Bernardino), and the Altamont Pass (east of the Bay Area). Coastal headlands and parts of the Sierra Nevada and Cascade passes are also flagged. Design wind speeds in these regions can reach 110 to 130-plus mph in concentrated areas, dramatically higher than the surrounding terrain.</div>
+                <summary>When does wind actually control California structural design?</summary>
+                <div class="faq-answer">Five recurring cases, and the calculator surfaces all of them. (1) Lightweight buildings — metal buildings, small pre-engineered systems, equipment enclosures — where seismic base shear is low because mass is low. (2) Tall slender appurtenances — signs, parapets, freestanding walls, rooftop screens — where wind moment scales with projected area and beats seismic moment which scales with mass. (3) Components and cladding on every building — a glass curtain wall in downtown San Francisco resists wind GCp regardless of what the lateral system is doing for seismic. (4) Flat-roof solar PV — Title 24 has put racking on roofs everywhere, and wind uplift dominates the standoff connection. (5) Anywhere inside one of California's five Special Wind Regions — Banning Pass, Tehachapi Pass, Cajon Pass, Altamont Pass, San Gorgonio Pass — where concentrated wind speeds reach 110 to 130-plus mph and the smoothed ASCE map underrepresents the demand. The calculator flags the SWR ZIPs automatically so you don't accidentally design for the baseline contour in a location where it doesn't apply.</div>
             </details>
 
             <details class="faq-item">
-                <summary>What's the wind speed in Los Angeles vs Palm Springs?</summary>
-                <div class="faq-answer">Most of urban Los Angeles falls in the ASCE 7-16 baseline range — roughly 95 to 110 mph for Risk Category II, depending on micro-location. Palm Springs (ZIP 92262) is a different story because it sits at the western edge of the San Gorgonio / Banning Pass Special Wind Region, where the local jurisdiction value is significantly higher than the surrounding desert. The right answer for any specific project address is to use the calculator, which reads ZIP-level data and flags Special Wind Region locations for verification with the local building department. Never assume the LA-basin baseline applies to a Coachella Valley or Inland Empire project.</div>
+                <summary>How is WindLoadCalc different from SkyCiv for California work?</summary>
+                <div class="faq-answer">Two things. First: history. WindLoadCalc was online running wind calculations in 2002 — eleven years before SkyCiv was founded (2013). We have navigated seven ASCE editions (7-95 through 7-22) and three CBC adoption cycles. That is the moat. Second: framing. SkyCiv is an international engineering tool that supports many codes shallowly. For California, it returns a wind number with no opinion attached. We return a wind number with a seismic-aware context wrapper: MWFRS sits next to a reminder to run the seismic case, C&C is flagged as always-applicable regardless of SDC, and any ZIP that lands in a Special Wind Region gets a warning before you commit to a value. That is what "seismic-honest" means — the wind output knows it lives in California, not in a generic ASCE vacuum.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>What are California's five Special Wind Regions and which ZIPs trigger them?</summary>
+                <div class="faq-answer">ASCE 7-16 Figure 26.5-1B shades five major California mountain-pass Special Wind Regions plus several smaller coastal headland and Sierra crest areas. Banning Pass and San Gorgonio Pass — the gap between the San Bernardino and San Jacinto mountains funneling air into the Coachella Valley (Palm Springs 92262 sits on the edge); Tehachapi Pass — between the southern Sierra and the Tehachapi Mountains (Tehachapi 93561, Mojave 93501); Cajon Pass — between San Bernardino and San Gabriel mountains carrying I-15 (Hesperia 92344, Victorville 92392 affected); Altamont Pass — Bay Area to Central Valley along I-580 (Livermore 94550, Tracy 95376 affected). Inside any SWR boundary, you cannot read the contour line — you need a local jurisdiction-published value (Riverside County, Kern County, Alameda/San Joaquin County, San Bernardino County all publish them) or a site-specific wind study. The calculator flags these ZIPs in the output so the SWR conversation happens before you submit, not after the redline.</div>
             </details>
 
             <details class="faq-item">
                 <summary>Do I need a California PE or SE to stamp my wind load report?</summary>
-                <div class="faq-answer">Yes. California requires a California-licensed Professional Engineer (PE) or Structural Engineer (SE) for sealed structural drawings on permitted projects. Hospital projects (OSHPD jurisdiction) and most public school projects (DSA jurisdiction) further require a California-licensed Structural Engineer specifically, not just a PE. WindLoadCalc generates the wind load calculations and reports your in-state engineer will use, but the seal must come from a California-licensed professional. We do not provide California PE or SE stamps — our in-house PE is licensed in Florida only and only for projects up to three stories there.</div>
+                <div class="faq-answer">Yes — and California is one of the few states where the distinction between PE and SE actually matters at the project type level. California requires a California-licensed Professional Engineer (PE) for sealed structural drawings on virtually any permitted project; an out-of-state PE seal is not accepted as an original seal. California also issues a separate Structural Engineer (SE) license above the PE, with additional examination requirements and fewer holders. Hospital projects under HCAI review (formerly OSHPD) and most DSA-reviewed public school projects specifically require a California SE, not just a PE. Routine residential and small commercial work needs a California PE. WindLoadCalc generates the wind calculations and the permit-ready report; your in-state PE or SE seals it. We do not provide California PE or SE stamps for any project — our in-house PE is licensed in Florida only, up to three stories.</div>
             </details>
 
             <details class="faq-item">
-                <summary>What's CBC 2022 and how does it use ASCE 7-16?</summary>
-                <div class="faq-answer">The 2022 California Building Code (CBC) is the current code adopted statewide by the California Building Standards Commission, with an effective date of January 1, 2023. The CBC is updated on a three-year intervening cycle (next major revision: 2025 CBC). CBC Chapter 16 governs structural design and adopts ASCE 7-16 by reference for wind loads, with California-specific amendments where needed. The CBC also incorporates additional adoptions from agencies including OSHPD (now HCAI for hospitals) and DSA (Division of the State Architect for schools), each of which can layer further wind or lateral requirements on top of the base ASCE 7-16 procedure for their jurisdiction.</div>
+                <summary>What's CBC 2022 and which ASCE edition does it reference?</summary>
+                <div class="faq-answer">The 2022 California Building Code is the current statewide adoption from the California Building Standards Commission, effective January 1, 2023. The CBC follows a three-year intervening cycle — the 2025 CBC is on deck next. CBC Chapter 16 governs structural design and adopts ASCE 7-16 by reference for wind, with California-specific amendments and additional agency adoptions (HCAI for hospitals, DSA for K-12 and community college, the California Energy Commission for Title 24 energy). California has not yet moved to ASCE 7-22 statewide — the next CBC cycle will likely make that jump. For permits issued today under the 2022 CBC, ASCE 7-16 is the controlling wind standard. WindLoadCalc has now tracked three CBC adoption cycles since 2002 (2010 CBC, 2013 CBC, 2016 CBC, 2019 CBC, 2022 CBC sequence), and the calculator outputs CBC-compliant ASCE 7-16 wind values directly.</div>
             </details>
 
             <details class="faq-item">
-                <summary>When does wind load control over seismic in California?</summary>
-                <div class="faq-answer">Several recurring cases. First: lightweight structures where seismic base shear is low because the building mass is low (e.g., metal buildings, small storage sheds, certain pre-engineered systems). Second: tall slender appurtenances where wind moment exceeds seismic moment (signs, tall freestanding walls, parapets, rooftop equipment screens). Third: components and cladding on any building — C&C pressures are wind-driven regardless of seismic, and a glass curtain wall in San Francisco still has to resist the local wind GCp values. Fourth: solar arrays on flat roofs, where uplift from wind frequently dominates the connection design. Fifth: any Special Wind Region location, where elevated wind speeds can push wind demand past seismic at the same site. The calculator handles all of these — but you still have to run the seismic side separately.</div>
+                <summary>What's OSHPD vs HCAI vs DSA — which one reviews my project?</summary>
+                <div class="faq-answer">OSHPD (Office of Statewide Health Planning and Development) was reorganized into HCAI (Department of Health Care Access and Information) effective March 2022. The structural-review function for hospitals, skilled nursing facilities, and acute psychiatric facilities — anywhere patients cannot self-evacuate — now operates as the Hospital Building Safety Board inside HCAI. If your project is any of those facility types, HCAI reviews it, not the local building department, and a California SE seal is required. DSA (Division of the State Architect) is the parallel agency for public K-12 and community college projects. Both agencies accept ASCE 7-16 wind calculations and both layer additional review beyond what the city or county does. If your project is not a hospital and not a public school, you go through the local city or county building department under the 2022 CBC — and a California PE seal is sufficient. WindLoadCalc's California output is formatted to work as the wind-side input for any of these three review tracks.</div>
             </details>
 
             <details class="faq-item">
-                <summary>Are coastal California cities in a special wind region?</summary>
-                <div class="faq-answer">Most of the coastal urban corridor (San Diego, Long Beach, Santa Monica, the entire San Francisco Bay shore, Ventura, the Monterey Peninsula) is NOT classified as a Special Wind Region for code purposes — those cities sit in the baseline ASCE 7-16 wind speed zone, typically 95 to 110 mph for Risk Category II. The Special Wind Region designation is reserved for terrain that produces measurably accelerated or atypical wind, primarily the mountain passes inland. That said, exposed coastal headlands, bluff tops, and certain Big Sur stretches can locally see higher winds and warrant Exposure D handling rather than the urban Exposure B / suburban Exposure C default. Use the calculator's exposure category selection to capture this correctly.</div>
+                <summary>What's the wind speed in Los Angeles, San Francisco, and Palm Springs?</summary>
+                <div class="faq-answer">Most of urban Los Angeles (90015 downtown, 90210 Beverly Hills, 90064 West LA) falls in the ASCE 7-16 baseline range — roughly 95 to 105 mph for Risk Category II. San Francisco (94102, 94110, 94133) sits in a 95 to 110 mph baseline window with the bay shoreline pushing Exposure D and the western hills locally higher. Palm Springs (92262) is the outlier — it sits at the western edge of the San Gorgonio / Banning Pass Special Wind Region, where the Riverside County jurisdictional value runs significantly higher than the surrounding desert baseline. Sacramento (95814) and San Jose (95110) sit at Central Valley and Santa Clara Valley baselines around 95 to 105 mph. The exact ZIP-level number comes out of the calculator — do not assume the LA-basin baseline applies to a Coachella Valley project or that the SF baseline holds on an exposed Marin headland.</div>
             </details>
 
-            <details class="faq-item">
-                <summary>What's OSHPD and does it apply to my project?</summary>
-                <div class="faq-answer">OSHPD (Office of Statewide Health Planning and Development) was reorganized into HCAI (Department of Health Care Access and Information) effective March 2022, and the structural-review function now operates as the Hospital Building Safety Board. The OSHPD / HCAI jurisdiction covers hospitals, skilled nursing facilities, and acute psychiatric facilities — anywhere patients cannot self-evacuate. If your project is a hospital or similar acute-care facility, you fall under OSHPD / HCAI review, not the local building department, and a California-licensed Structural Engineer is required. DSA (Division of the State Architect) is the parallel agency for public K-12 and community college projects. Both jurisdictions accept ASCE 7-16 wind load calculations but layer additional review and detail requirements. If you are not building a hospital or a public school, neither agency applies — your project goes through the local city or county building department.</div>
-            </details>
-
-            <h2 id="related">More Wind Load Resources</h2>
+            <h2 id="related">California Wind + Seismic Resources</h2>
 
             <div class="related-links">
-                <h3>Related calculators and guides</h3>
+                <h3>Tools cross-referenced from a California wind/seismic workflow</h3>
                 <ul>
                     <li><a href="/florida-wind-load-calculator">Florida wind load calculator (FBC + ASCE 7-22)</a></li>
                     <li><a href="/texas-wind-load-calculator">Texas wind load calculator (IBC + ASCE 7-16)</a></li>
@@ -1069,13 +1092,13 @@
             </div>
 
             <div class="content-cta">
-                <h3>Ready to Run Your California Numbers?</h3>
-                <p>Wind, seismic-aware, Special Wind Region-aware. Get instant ASCE 7-16 + CBC 2022 wind pressures for any California ZIP. Free 7-day trial. No credit card.</p>
+                <h3>Compare CA Wind to Seismic — Free 7-Day Trial</h3>
+                <p>The only wind calculator honest about California's seismic reality. ASCE 7-16 + CBC 2022, five Special Wind Regions flagged, MWFRS output sized to sit next to your seismic case. 24 years of CA wind work behind every number. No credit card.</p>
                 <a href="/wind-load-calculator-shop.html" class="cta-button">View Plans &amp; Start Trial <i class="fas fa-arrow-right"></i></a>
             </div>
 
             <div class="trust-signal">
-                <p><strong>Reviewed by Bob, P.E. (Florida licensed).</strong> WindLoadCalc has been calculating ASCE wind loads since 2002 — across ASCE 7-98, 7-02, 7-05, 7-10, 7-16, and 7-22 editions. California PE / SE stamps not provided; engage a California-licensed engineer for sealed work. Last updated 2026-05-23.</p>
+                <p><strong>Reviewed by Bob, P.E. (Florida licensed).</strong> WindLoadCalc has been calculating ASCE wind loads since 2002 — across seven ASCE editions (7-95, 7-98, 7-02, 7-05, 7-10, 7-16, 7-22) and three CBC adoption cycles. The only wind tool built around the seismic-honest framing California engineers actually need. California PE / SE stamps not provided; engage a California-licensed engineer for sealed work. Last updated 2026-05-23.</p>
             </div>
         </main>
 
@@ -1096,8 +1119,8 @@
             </div>
 
             <div class="sidebar-cta">
-                <h3>Try It Free</h3>
-                <p>California-aware ASCE 7-16 + CBC 2022 wind loads in 15 minutes. 7-day trial, no credit card.</p>
+                <h3>Try the CA Calculator Free</h3>
+                <p>ASCE 7-16 wind output formatted for CA PE/SE review and CBC 2022 submittal; complements your seismic workflow.</p>
                 <a href="/wind-load-calculator-shop.html" class="sidebar-cta-button">Start Free Trial</a>
             </div>
 

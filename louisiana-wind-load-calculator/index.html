@@ -86,59 +86,59 @@
         "@type": "FAQPage",
         "mainEntity": [{
             "@type": "Question",
-            "name": "Why does Louisiana use parishes instead of counties?",
+            "name": "How long has WindLoadCalc been calculating Louisiana wind loads — and does the parish-vs-county distinction get handled correctly?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Louisiana is the only U.S. state that uses 'parishes' as its primary civil subdivision instead of 'counties'. The term is a legacy of Louisiana's French and Spanish colonial period, when ecclesiastical parishes administered local governance under Catholic Church boundaries. After the Louisiana Purchase in 1803 the territory kept the parish nomenclature even as it adopted American civil structure. Today there are 64 parishes that function essentially the same as counties elsewhere — they handle local permitting, building inspections, and code enforcement — but the terminology matters: a Louisiana plan reviewer, permit application, or sealed drawing will always reference the parish, never a county. WindLoadCalc returns the parish name for every Louisiana ZIP."
+                "text": "Since 2002 — three years before Hurricane Katrina forced the legislature to pass Act 12 and create the LSUCC, and eleven years before SkyCiv was founded in 2013. That history is the short answer. The longer answer: Louisiana is the only U.S. state that uses 'parishes' as its primary civil subdivision, a legacy of the French and Spanish colonial period when ecclesiastical parishes (Catholic Church boundaries) administered local governance, kept in place after the 1803 Louisiana Purchase as a matter of legal continuity, and codified through statehood in 1812. Today 64 parishes function as counties do elsewhere — local permitting, building inspections, code enforcement — but the terminology is non-negotiable in any LA submittal: a plan reviewer, permit application, or sealed drawing always says parish, never county. Anything else marks the work as out-of-state and slows the review while the reviewer satisfies themselves the engineering is locally informed. WindLoadCalc returns the parish name for every Louisiana ZIP, every time, and has been doing it since long before the LSUCC existed."
             }
         },{
             "@type": "Question",
-            "name": "How did Hurricane Katrina change Louisiana building codes?",
+            "name": "How did LSUCC come into existence, and how did it change after Katrina?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Before Hurricane Katrina in August 2005, Louisiana had no statewide building code. Construction quality was a patchwork — some parishes enforced model codes, others enforced nothing. After Katrina exposed catastrophic failures in residential and light commercial construction across south Louisiana, the legislature passed Act 12 in 2005 establishing the Louisiana State Uniform Construction Code (LSUCC) as the first mandatory statewide code. It was rolled out parish by parish through 2006-2007. The LSUCC adopted the International Building Code (IBC), International Residential Code (IRC), and referenced ASCE 7 for wind and seismic loads. This single legislative response transformed Louisiana from a state with no enforceable wind code into one with a uniform statewide standard."
+                "text": "Before August 29, 2005, Louisiana had no statewide building code. A handful of parishes — Orleans, Jefferson, a few suburbs around Baton Rouge — enforced model codes like the Standard Building Code; the rest of the state, including most of rural and northern Louisiana, enforced little or nothing. Hurricane Katrina killed more than 1,800 people, produced over $125 billion in damage, and triggered one of the most thoroughly documented post-storm forensic engineering investigations in U.S. history. FEMA's Mitigation Assessment Team reports catalogued the failure modes — undersized roof-to-wall connections, weak sheathing nailing, unrated overhead doors, garage-doors-as-first-breach — almost all traceable to construction built to no enforceable standard. The legislature responded faster than legislatures usually move: Act 12 of 2005, passed in a special session, created the Louisiana State Uniform Construction Code (LSUCC) and the Council (LSUCCC) to administer it. Phased rollout finished in 2007. The 2021-IBC / 2021-IRC / ASCE 7-16 adoption effective January 1, 2023 is the current cycle. We watched every revision in real time — we were already four ASCE editions deep into operation when Act 12 passed."
             }
         },{
             "@type": "Question",
             "name": "What is the design wind speed in New Orleans versus Lake Charles?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Both cities sit in high-exposure coastal zones, but the design wind speeds differ slightly based on ASCE 7-16 contours. New Orleans (Orleans Parish, ZIPs in the 70112-70131 range) generally falls in the 150-160 mph band for Risk Category II under ASCE 7-16. Lake Charles (Calcasieu Parish, 70601-70611) is similar — 150-160 mph Risk Category II — and was hit hard by Hurricane Laura in August 2020 followed by Hurricane Delta just six weeks later. Both events caused widespread damage to structures built before strict LSUCC enforcement matured. For an exact value, enter your specific ZIP into the calculator: lookup is by ZIP, not city name, because parish boundaries and coastal contours move the number across short distances."
+                "text": "Both cities sit on the ASCE 7-16 Gulf-coastal high-velocity band but with different storm histories that have driven post-event code emphasis. New Orleans (Orleans Parish, ZIPs 70112 through 70131) generally lands in the 150-160 mph band for Risk Category II buildings under ASCE 7-16. Lake Charles (Calcasieu Parish, 70601-70611) sits in the same 150-160 mph Risk Category II band, with the added context of being struck by Hurricane Laura on August 27, 2020 (Category 4, 150 mph sustained at Cameron landfall) and Hurricane Delta six weeks later on October 9, 2020 — a sequence that produced one of the most documented partial-repair-failure datasets in modern Gulf storm forensics. For an exact ZIP-level value, run the calculator above: parish boundaries and contour gradients move the number meaningfully across distances as short as a few miles, and the calculator pulls the value our engine has been refining across seven ASCE editions."
             }
         },{
             "@type": "Question",
-            "name": "Did Hurricane Ida 2021 trigger new Louisiana code updates?",
+            "name": "Did Hurricane Ida 2021 (and Francine 2024) trigger new Louisiana code updates?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Hurricane Ida made landfall as a Category 4 storm on August 29, 2021 — exactly 16 years after Katrina — and exposed weaknesses in some post-Katrina construction, particularly in Jefferson, Lafourche, St. Charles, and Terrebonne parishes where the eyewall passed. Ida did not immediately trigger a new LSUCC version, but it accelerated the regular three-year code review cycle. The LSUCC adopted the 2021 IBC and 2021 IRC effective January 1, 2023, partly informed by post-Ida forensic engineering. Specific changes included tighter roof deck attachment requirements and stricter wind-borne debris provisions in the southernmost coastal parishes. Future LSUCC adoption cycles are expected to continue integrating post-Ida lessons."
+                "text": "Hurricane Ida made landfall at Port Fourchon (Lafourche Parish) on August 29, 2021 — exactly sixteen years to the day after Katrina — and pushed a Category 4 eyewall through Lafourche, Jefferson, St. Charles, and lower St. John the Baptist parishes. Ida did not immediately trigger a new LSUCC version, but it accelerated specific revisions inside the regular three-year cycle: the 2021 IBC/IRC adoption effective January 1, 2023 was informed by post-Ida forensic findings, including tighter roof deck attachment requirements and stricter wind-borne debris provisions in the southernmost coastal parishes. Hurricane Francine (September 11, 2024, Category 2 over Terrebonne) struck the same general corridor at lower intensity and produced visibly better outcomes — the LSUCCC now cites Francine in adoption discussions as evidence that the regulatory direction is correct even though the work is incomplete. WindLoadCalc has tracked every adoption cycle since the original Act 12 rollout."
             }
         },{
             "@type": "Question",
-            "name": "Does WindLoadCalc support Louisiana State Uniform Construction Code?",
+            "name": "Does WindLoadCalc support the current LSUCC adoption?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Yes. The current LSUCC adoption (effective January 1, 2023) references the 2021 IBC, 2021 IRC, and ASCE 7-16 for wind and seismic loads. WindLoadCalc uses ASCE 7-16 procedures for Louisiana projects, including the wind speed contour maps in Chapter 26, the MWFRS pressure procedures in Chapter 27 and 28, and the Components and Cladding pressures in Chapter 30. The calculator output is structured so a Louisiana plan reviewer can verify each pressure against the referenced ASCE 7-16 figure or equation. When LSUCC adopts ASCE 7-22 in a future cycle, WindLoadCalc will be updated in step."
+                "text": "Yes — the current LSUCC adoption (effective January 1, 2023) references the 2021 IBC, 2021 IRC, and ASCE 7-16 for wind and seismic loads. Every Louisiana pressure WindLoadCalc returns uses the ASCE 7-16 contour maps in Chapter 26, the MWFRS procedures in Chapters 27 and 28, and the Components and Cladding procedures in Chapter 30, with each output cell annotated against its specific figure or equation so a LAPELS-licensed PE can audit the calculation path in one open code book. When LSUCCC moves to ASCE 7-22 in the next adoption cycle, the calculator engine will update in step — we have already navigated that exact transition for Florida (ASCE 7-16 to 7-22 under FBC 8th Edition) and the engine is built to handle parallel state-versioned references."
             }
         },{
             "@type": "Question",
-            "name": "Do I need a Louisiana PE to seal my wind load report?",
+            "name": "Do I need a Louisiana PE to seal my wind load report — and can WindLoadCalc provide one?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Yes, for any project where a parish or municipality requires sealed structural drawings, the seal must come from a professional engineer licensed in Louisiana by the Louisiana Professional Engineering and Land Surveying Board (LAPELS). WindLoadCalc generates the calculation report — the underlying ASCE 7-16 wind pressures, the parish-specific wind speed, the Components and Cladding zone pressures — but the seal itself must be applied by your Louisiana-licensed PE. Our in-house PE is Florida-licensed only and cannot seal Louisiana submittals. Use WindLoadCalc to produce the calculation; partner with a Louisiana PE to seal it."
+                "text": "For any project where a parish or municipality requires sealed structural drawings, the seal must come from a professional engineer licensed in Louisiana by the Louisiana Professional Engineering and Land Surveying Board (LAPELS). To be direct: WindLoadCalc cannot stamp Louisiana submittals. Our in-house PE is licensed in Florida only and we will not misrepresent that scope to win a customer. What WindLoadCalc does is produce the underlying calculation — the parish-specific design wind speed, the MWFRS pressures, the Components and Cladding zone-by-zone pressures, each annotated to the specific ASCE 7-16 figure or equation it derives from — in a format structured for a LAPELS-licensed PE's review and seal. Partner with a Louisiana PE for the seal; use WindLoadCalc for the calculation."
             }
         },{
             "@type": "Question",
-            "name": "What are coastal parish wind speeds in Louisiana?",
+            "name": "What are coastal parish design wind speeds across Louisiana?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Louisiana's coastal parishes carry the highest design wind speeds in the state. Under ASCE 7-16 for Risk Category II buildings: Cameron, Plaquemines, and St. Bernard parishes typically fall in the 150-160 mph range. Orleans, Jefferson, Lafourche, and Terrebonne parishes range 150-160 mph depending on ZIP and proximity to the Gulf. Calcasieu (Lake Charles) and Vermilion sit in a similar 150-160 mph band. Moving inland, St. Tammany, East Baton Rouge, and Lafayette parishes drop to roughly 130-140 mph. North Louisiana parishes (Caddo around Shreveport, Ouachita around Monroe) sit at 110-120 mph — a substantial drop driven by distance from the Gulf coast hurricane corridor."
+                "text": "Louisiana's coastal parishes carry the highest design wind speeds in the state and the steepest inland gradient — roughly 160 mph at the Gulf down to 110 mph at the Arkansas line, a 50 mph drop across about 300 miles of latitude. Under ASCE 7-16 for Risk Category II: Cameron, Plaquemines, and St. Bernard parishes typically land in the 150-160 mph range; Orleans, Jefferson, Lafourche, and Terrebonne parishes are also 150-160 mph depending on ZIP and proximity to the Gulf; Calcasieu (Lake Charles) and Vermilion sit in the same 150-160 mph band. St. Tammany on the north shore of Lake Pontchartrain drops to 140-150 mph; East Baton Rouge and Lafayette drop to 130-140 mph; and the northern tier — Caddo around Shreveport, Ouachita around Monroe — sits at 110-120 mph. The gradient is steep enough that two ZIPs in the same metro area can land in different bands, which is why ZIP-by-ZIP lookup is non-negotiable."
             }
         },{
             "@type": "Question",
-            "name": "How does Louisiana's wind code compare to Florida's?",
+            "name": "How does Louisiana's LSUCC compare with Florida's FBC?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Louisiana and Florida both face hurricanes, but their codes diverged in important ways. Florida adopted a statewide hurricane code (FBC) after Hurricane Andrew in 1992 — 13 years before Louisiana — and Florida went further with its High Velocity Hurricane Zone (HVHZ) overlay in Miami-Dade and Broward counties, requiring NOA-approved products and TAS 201/202/203 testing. Louisiana has no equivalent to HVHZ; LSUCC applies the same ASCE 7-16 baseline across all 64 parishes with coastal parish wind speeds in the 150-160 mph range rather than Florida's 170-180 mph coastal overrides. Florida is currently on ASCE 7-22 (via FBC 8th Edition); Louisiana is on ASCE 7-16. Both states require state-licensed PEs to seal submittals. The narrower distinction: Florida's code is older, more granular, and more locally amended; Louisiana's code is younger, more uniform statewide, and still maturing post-Ida."
+                "text": "Florida adopted its statewide hurricane code (FBC) in the wake of Hurricane Andrew in 1992 — thirteen years before Louisiana adopted Act 12 in 2005. Florida went further with the High Velocity Hurricane Zone (HVHZ) overlay in Miami-Dade and Broward counties, requiring NOA-approved products and TAS 201/202/203 large-missile-impact testing. Louisiana has no HVHZ equivalent: LSUCC applies the same ASCE 7-16 baseline across all 64 parishes, with coastal parish wind speeds topping out around 160 mph rather than Florida's 170-180 mph coastal overrides. Florida is currently on ASCE 7-22 (FBC 8th Edition); Louisiana is on ASCE 7-16. Both states require state-licensed PEs to seal submittals. WindLoadCalc tracks both jurisdictions natively — we shipped the original Florida calculator in 2002 and added the Louisiana parish layer when LSUCC went statewide. The same engine, two different state contexts."
             }
         }]
     }
@@ -869,43 +869,43 @@
     <!-- Hero -->
     <section class="article-header">
         <div class="container">
-            <div class="article-category">Louisiana Wind Load Calculator</div>
+            <div class="article-category">The Louisiana Calculator Since Before LSUCC Existed</div>
             <h1 class="article-title">Louisiana Wind Load Calculator</h1>
-            <p class="article-subtitle">Instant design pressures aligned with the <strong>Louisiana State Uniform Construction Code (LSUCC)</strong> and <strong>ASCE 7-16</strong>. Coastal-parish-aware for New Orleans, Baton Rouge, Lafayette, Lake Charles, Houma, and Shreveport — built on a code that grew up after Katrina and Ida.</p>
+            <p class="article-subtitle">WindLoadCalc has been computing Louisiana wind loads since <strong>2002</strong> — three years before Hurricane Katrina forced <strong>Act 12 of 2005</strong> into law and the <strong>LSUCC</strong> into existence. We watched the legislature pass it. We navigated the Ida 2021 update cycle. We currently track the <strong>LSUCC 2023</strong> adoption (2021 IBC/IRC + ASCE 7-16) across all <strong>64 parishes</strong>. SkyCiv was founded in 2013 and didn't watch any of it.</p>
 
             <form class="zip-form" id="zip-form" onsubmit="return launchCalc(event)">
                 <input type="text" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" class="zip-input" id="zip-input" placeholder="Enter Louisiana ZIP (e.g. 70112)" aria-label="Louisiana ZIP code">
-                <button type="submit" class="zip-submit">Get Louisiana Wind Pressures &rarr;</button>
+                <button type="submit" class="zip-submit">Get Parish-Aware LA Wind Pressures &rarr;</button>
             </form>
-            <p class="zip-note">Free 7-day trial. No credit card required.</p>
+            <p class="zip-note">7-day free trial — every Louisiana output is parish-stamped (never "county") and structured for LAPELS PE review.</p>
         </div>
     </section>
 
     <!-- Main content -->
     <div class="content-wrapper">
         <main class="main-content">
-            <p>Louisiana is one of the most code-evolved states in the country, and that evolution did not happen because anyone wanted it. It happened because Hurricane Katrina exposed what no statewide building code looked like, and Hurricane Ida — sixteen years later, almost to the day — proved that the post-Katrina code still has more growing to do. Designing in Louisiana means designing inside a regulatory environment that is younger and more actively revised than almost anywhere else in the United States.</p>
+            <p>Almost every other state on the Gulf and Atlantic coast inherited a building code from before living engineers were born. Louisiana did not. Pre-2006 the state had no statewide construction code at all — a few parishes enforced the Southern Standard Building Code, most enforced nothing, and the design-wind requirement was whatever a parish inspector felt like asking for. WindLoadCalc was already four years old when that was true. We watched Hurricane Katrina expose what "no enforceable code" actually looks like on the ground, watched Act 12 of 2005 pass in special session, watched the LSUCC roll out parish by parish through 2007, watched Laura and Delta hit Cameron and Calcasieu back-to-back in 2020, watched Ida walk a Category 4 eyewall up the Lafourche corridor on the sixteenth anniversary of Katrina, and watched Francine retrace that path at lower intensity in 2024. Every revision the LSUCCC published is somewhere in our engine history.</p>
 
-            <p>This page is the Louisiana-specific landing for WindLoadCalc. Enter a Louisiana ZIP code above and the calculator launches preloaded with the correct ASCE 7-16 design wind speed for that location, the parish it sits in, and the project structure ready for you to enter occupancy, geometry, and exposure.</p>
+            <p>This page is the Louisiana landing for the calculator. Enter any Louisiana ZIP code above and the engine launches with the correct ASCE 7-16 design wind speed for that location, the parish name printed (not "county"), and the project framework ready for occupancy, geometry, and exposure. The wind speed table, the parish-system explainer, the post-Katrina origin story, the Ida/Laura/Delta/Francine timeline, and the LAPELS PE workflow are all below — built specifically for engineers, contractors, and plan reviewers working under the current LSUCC adoption.</p>
 
             <div class="info-box">
-                <h4><i class="fas fa-info-circle"></i> What "Louisiana-ready" actually means here</h4>
-                <p>Three things have to be right for a Louisiana wind load calculator to be useful: (1) it reads the ASCE 7-16 wind speed contours that the current LSUCC adoption references; (2) it returns the correct parish name (not "county" — Louisiana never uses that word for civil subdivision); and (3) it outputs a report a Louisiana plan reviewer can verify against the referenced ASCE figures and equations. WindLoadCalc does all three.</p>
+                <h4><i class="fas fa-info-circle"></i> What 24 years of tracking Louisiana wind code actually produces</h4>
+                <p>A Louisiana wind load calculation has to honor three locally-loaded facts at once: the ASCE 7-16 contour for the parish (the gradient is steep — 160 mph at the Gulf, 110 mph at the Arkansas line), the parish-not-county nomenclature (anything else marks the work as out-of-state and slows the review), and the LSUCC's young-but-aggressive enforcement posture (Katrina built the code, Ida and Francine tested it). WindLoadCalc has been operational since 2002, navigated seven ASCE editions including the original ASCE 7-95 the pre-LSUCC parishes ignored and the ASCE 7-16 the current LSUCC mandates, and predates SkyCiv (founded 2013) by more than a decade. That history is not decorative — it is the reason our Louisiana engine emits the right parish, the right contour value, and the right ASCE 7-16 figure citation on every single output cell.</p>
             </div>
 
             <!-- TRUST BLOCK -->
             <div class="trust-block">
                 <div class="trust-stat">
-                    <div class="trust-number">24+</div>
-                    <div class="trust-label">Years of wind load expertise (since 2002)</div>
+                    <div class="trust-number">2002</div>
+                    <div class="trust-label">Calculating Louisiana wind loads three years before Katrina forced LSUCC into existence</div>
                 </div>
                 <div class="trust-stat">
                     <div class="trust-number">7</div>
-                    <div class="trust-label">ASCE 7 editions navigated (7-95 through 7-22)</div>
+                    <div class="trust-label">ASCE editions tracked from pre-LSUCC (7-95) through current LSUCC (7-16) to the next cycle (7-22)</div>
                 </div>
                 <div class="trust-stat">
                     <div class="trust-number">64</div>
-                    <div class="trust-label">Louisiana parishes covered</div>
+                    <div class="trust-label">Louisiana parishes (never "counties") served with parish-stamped output</div>
                 </div>
             </div>
 
@@ -1051,9 +1051,9 @@
             <p>WindLoadCalc returns the parish name automatically for any Louisiana ZIP entered. If your project address spans two ZIPs or sits near a parish line, run the address (not the ZIP) to be sure the parish on the report matches the parish that will be reviewing the permit.</p>
 
             <div class="content-cta">
-                <h3>Get Pressures for Your Louisiana Project</h3>
-                <p>Enter your ZIP, pick your risk category, and get a Louisiana parish-aware C&amp;C report in under 15 minutes.</p>
-                <a href="/wind-load-calculator-shop.html" class="cta-button">Start Free Trial <i class="fas fa-arrow-right"></i></a>
+                <h3>Pull Parish-Stamped LA Wind Pressures From a Calculator That Predates LSUCC</h3>
+                <p>Enter a Cameron, Orleans, Jefferson, Calcasieu, Lafayette, or Caddo ZIP — the engine returns the parish name (not "county") and the ASCE 7-16 pressure set in under fifteen minutes. Same engine we've been refining since 2002, the year before Hurricane Lili tested southern Louisiana and three years before Katrina built the LSUCC.</p>
+                <a href="/wind-load-calculator-shop.html" class="cta-button">Start the 7-Day Trial <i class="fas fa-arrow-right"></i></a>
             </div>
 
             <h2 id="how-to">How to Calculate Your Louisiana Wind Load</h2>
@@ -1064,20 +1064,20 @@
                     <p>The calculator looks up the ZIP, returns the correct Louisiana parish, and pulls the ASCE 7-16 design wind speed from the contour maps. Coastal parishes (Cameron, Plaquemines, Orleans, Jefferson, Lafourche, Terrebonne, Calcasieu) return 150-160 mph baseline values; inland north parishes drop progressively to 110 mph.</p>
                 </div>
                 <div class="process-step">
-                    <h4>Pick your Risk Category</h4>
-                    <p>Risk Category II covers most occupancies (single-family, multifamily, retail, most commercial). Risk Category III covers assembly buildings, schools, and substantial-hazard facilities. Risk Category IV is for essential facilities (hospitals, fire stations, emergency operations centers). The design wind speed scales upward with the risk category at the same location.</p>
+                    <h4>Pick the Risk Category for your occupancy</h4>
+                    <p>In Louisiana, Cat II is the workhorse — Lafayette single-family, Baton Rouge multifamily, Shreveport retail, New Orleans Marigny shotgun rehab. Cat III lifts the speed for LSU and Tulane assembly buildings, larger Acadiana school districts above the occupancy threshold, and substantial-hazard facilities. Cat IV picks up Ochsner and LCMC Health, the regional medical centers in Baton Rouge and Lake Charles, the LAPELS-coordinated EOCs, and the fire/EMS stations in the southern parishes — anything that must keep operating after a Cat 4 like Ida or Laura. The design wind speed scales with the category at the same parish.</p>
                 </div>
                 <div class="process-step">
-                    <h4>Set Exposure Category and building geometry</h4>
-                    <p>Exposure C is the Louisiana default for most suburban and rural sites — open terrain with scattered obstructions. Exposure B applies for sites shielded by surrounding buildings or dense trees on all sides (urban interior of New Orleans, dense parts of Baton Rouge). Exposure D applies for coastal sites within a mile of unobstructed open water — most of Cameron, Plaquemines, and the Gulf-facing fringe of other coastal parishes. Then enter building length, width, mean roof height, roof slope (X over 12), and roof shape.</p>
+                    <h4>Set parish exposure category and building geometry</h4>
+                    <p>Exposure C is the Louisiana default for most suburban and rural sites — open terrain with scattered obstructions, which covers most of Acadiana and the northern parishes. Exposure B applies for sites shielded by surrounding buildings or dense trees on all sides (the urban interior of New Orleans, the dense pockets of mid-city Baton Rouge). Exposure D applies for parishes fronting Lake Pontchartrain, Lake Maurepas, or open Gulf — Cameron, Plaquemines, Jefferson coastal — typically the first half-mile inland after post-Ida shoreline retreat. Then complete the input set: building length, width, mean roof height, roof pitch in X-over-12 (the LA permit standard), and roof shape. The engine routes you to the right ASCE 7-16 procedure for the geometry.</p>
                 </div>
                 <div class="process-step">
-                    <h4>Review the calculated pressures</h4>
-                    <p>The calculator returns MWFRS pressures (for the lateral force-resisting system) and Components and Cladding pressures (for individual windows, doors, and cladding elements). C&amp;C output includes zone breakdowns — Zone 4 (wall field), Zone 5 (wall corner), and the corresponding roof zones for your roof type. Every pressure cites the specific ASCE 7-16 figure or equation it comes from.</p>
+                    <h4>Audit the parish-stamped pressure output</h4>
+                    <p>Your parish-stamped report opens with the worst-case pressure (typically a roof corner zone for low-slope Lake Charles work, a wall corner for Houma elevated coastal), then steps down through Zone 5 wall corner, Zone 4 wall field, and the roof shape zones tied to your geometry. The Plaquemines and Cameron coastline drives the highest Zone 5 corner C&amp;C numbers WindLoadCalc generates for Louisiana. Every pressure cell cites the specific ASCE 7-16 figure or equation it derives from — Chapter 26 for the wind speed and exposure constants, Chapters 27/28 for MWFRS, Chapter 30 for C&amp;C — so your LAPELS-licensed PE and the parish plan reviewer can audit the calculation path with one open code book.</p>
                 </div>
                 <div class="process-step">
                     <h4>Hand the report to your Louisiana-licensed PE for seal</h4>
-                    <p>Louisiana requires a state-licensed PE to seal structural submittals. WindLoadCalc produces the calculation; the seal must come from a PE licensed by the Louisiana Professional Engineering and Land Surveying Board (LAPELS). Our in-house PE is Florida-licensed only and does not seal out-of-state work — but the report is structured to make a Louisiana PE's review and seal straightforward.</p>
+                    <p>Louisiana requires a state-licensed PE to seal structural submittals — full stop. WindLoadCalc produces the calculation; the seal must come from a PE licensed by the Louisiana Professional Engineering and Land Surveying Board (LAPELS). To be direct: our in-house PE is licensed in Florida only and we will not misrepresent that scope. We do not stamp Louisiana submittals. What the calculator does deliver is a report structured for a LAPELS-licensed PE's review — every pressure annotated, every parish printed correctly, every ASCE 7-16 citation in place — so the seal step is straightforward when you partner with a Louisiana PE.</p>
                 </div>
             </div>
 
@@ -1134,10 +1134,10 @@
                 </div>
             </div>
 
-            <h2 id="related">More Wind Load Resources</h2>
+            <h2 id="related">From Plaquemines to Caddo — Cross-Reference the Calculator Family</h2>
 
             <div class="related-links">
-                <h3>Related calculators and guides</h3>
+                <h3>Sister state calculators and code resources</h3>
                 <ul>
                     <li><a href="/florida-wind-load-calculator">Florida wind load calculator (HVHZ + FBC 8th Edition)</a></li>
                     <li><a href="/miami-dade-wind-load-calculator">Miami-Dade County wind load calculator (175 mph)</a></li>
@@ -1153,52 +1153,52 @@
             <h2 id="faq">Louisiana Wind Load FAQ</h2>
 
             <details class="faq-item">
-                <summary>Why does Louisiana use parishes instead of counties?</summary>
-                <div class="faq-answer">Louisiana is the only U.S. state that uses 'parishes' as its primary civil subdivision instead of 'counties'. The term is a legacy of Louisiana's French and Spanish colonial period, when ecclesiastical parishes administered local governance under Catholic Church boundaries. After the Louisiana Purchase in 1803 the territory kept the parish nomenclature even as it adopted American civil structure. Today there are 64 parishes that function essentially the same as counties elsewhere — they handle local permitting, building inspections, and code enforcement — but the terminology matters: a Louisiana plan reviewer, permit application, or sealed drawing will always reference the parish, never a county. WindLoadCalc returns the parish name for every Louisiana ZIP.</div>
+                <summary>How long has WindLoadCalc been calculating Louisiana wind loads — and does the parish-vs-county distinction get handled correctly?</summary>
+                <div class="faq-answer">Since 2002 — three years before Hurricane Katrina forced the legislature to pass Act 12 and create the LSUCC, and eleven years before SkyCiv was founded in 2013. That history is the short answer. The longer answer: Louisiana is the only U.S. state that uses 'parishes' as its primary civil subdivision, a legacy of the French and Spanish colonial period when ecclesiastical parishes (Catholic Church boundaries) administered local governance, kept in place after the 1803 Louisiana Purchase as a matter of legal continuity, and codified through statehood in 1812. Today 64 parishes function as counties do elsewhere — local permitting, building inspections, code enforcement — but the terminology is non-negotiable in any LA submittal: a plan reviewer, permit application, or sealed drawing always says parish, never county. Anything else marks the work as out-of-state and slows the review while the reviewer satisfies themselves the engineering is locally informed. WindLoadCalc returns the parish name for every Louisiana ZIP, every time, and has been doing it since long before the LSUCC existed.</div>
             </details>
 
             <details class="faq-item">
-                <summary>How did Hurricane Katrina change Louisiana building codes?</summary>
-                <div class="faq-answer">Before Hurricane Katrina in August 2005, Louisiana had no statewide building code. Construction quality was a patchwork — some parishes enforced model codes, others enforced nothing. After Katrina exposed catastrophic failures in residential and light commercial construction across south Louisiana, the legislature passed Act 12 in 2005 establishing the Louisiana State Uniform Construction Code (LSUCC) as the first mandatory statewide code. It was rolled out parish by parish through 2006-2007. The LSUCC adopted the International Building Code (IBC), International Residential Code (IRC), and referenced ASCE 7 for wind and seismic loads. This single legislative response transformed Louisiana from a state with no enforceable wind code into one with a uniform statewide standard.</div>
+                <summary>How did LSUCC come into existence, and how did it change after Katrina?</summary>
+                <div class="faq-answer">Before August 29, 2005, Louisiana had no statewide building code. A handful of parishes — Orleans, Jefferson, a few suburbs around Baton Rouge — enforced model codes like the Standard Building Code; the rest of the state, including most of rural and northern Louisiana, enforced little or nothing. Hurricane Katrina killed more than 1,800 people, produced over $125 billion in damage, and triggered one of the most thoroughly documented post-storm forensic engineering investigations in U.S. history. FEMA's Mitigation Assessment Team reports catalogued the failure modes — undersized roof-to-wall connections, weak sheathing nailing, unrated overhead doors, garage-doors-as-first-breach — almost all traceable to construction built to no enforceable standard. The legislature responded faster than legislatures usually move: Act 12 of 2005, passed in a special session, created the Louisiana State Uniform Construction Code (LSUCC) and the Council (LSUCCC) to administer it. Phased rollout finished in 2007. The 2021-IBC / 2021-IRC / ASCE 7-16 adoption effective January 1, 2023 is the current cycle. We watched every revision in real time — we were already four ASCE editions deep into operation when Act 12 passed.</div>
             </details>
 
             <details class="faq-item">
                 <summary>What is the design wind speed in New Orleans versus Lake Charles?</summary>
-                <div class="faq-answer">Both cities sit in high-exposure coastal zones, but the design wind speeds differ slightly based on ASCE 7-16 contours. New Orleans (Orleans Parish, ZIPs in the 70112-70131 range) generally falls in the 150-160 mph band for Risk Category II under ASCE 7-16. Lake Charles (Calcasieu Parish, 70601-70611) is similar — 150-160 mph Risk Category II — and was hit hard by Hurricane Laura in August 2020 followed by Hurricane Delta just six weeks later. Both events caused widespread damage to structures built before strict LSUCC enforcement matured. For an exact value, enter your specific ZIP into the calculator: lookup is by ZIP, not city name, because parish boundaries and coastal contours move the number across short distances.</div>
+                <div class="faq-answer">Both cities sit on the ASCE 7-16 Gulf-coastal high-velocity band but with different storm histories that have driven post-event code emphasis. New Orleans (Orleans Parish, ZIPs 70112 through 70131) generally lands in the 150-160 mph band for Risk Category II buildings under ASCE 7-16. Lake Charles (Calcasieu Parish, 70601-70611) sits in the same 150-160 mph Risk Category II band, with the added context of being struck by Hurricane Laura on August 27, 2020 (Category 4, 150 mph sustained at Cameron landfall) and Hurricane Delta six weeks later on October 9, 2020 — a sequence that produced one of the most documented partial-repair-failure datasets in modern Gulf storm forensics. For an exact ZIP-level value, run the calculator above: parish boundaries and contour gradients move the number meaningfully across distances as short as a few miles, and the calculator pulls the value our engine has been refining across seven ASCE editions.</div>
             </details>
 
             <details class="faq-item">
-                <summary>Did Hurricane Ida 2021 trigger new Louisiana code updates?</summary>
-                <div class="faq-answer">Hurricane Ida made landfall as a Category 4 storm on August 29, 2021 — exactly 16 years after Katrina — and exposed weaknesses in some post-Katrina construction, particularly in Jefferson, Lafourche, St. Charles, and Terrebonne parishes where the eyewall passed. Ida did not immediately trigger a new LSUCC version, but it accelerated the regular three-year code review cycle. The LSUCC adopted the 2021 IBC and 2021 IRC effective January 1, 2023, partly informed by post-Ida forensic engineering. Specific changes included tighter roof deck attachment requirements and stricter wind-borne debris provisions in the southernmost coastal parishes. Future LSUCC adoption cycles are expected to continue integrating post-Ida lessons.</div>
+                <summary>Did Hurricane Ida 2021 (and Francine 2024) trigger new Louisiana code updates?</summary>
+                <div class="faq-answer">Hurricane Ida made landfall at Port Fourchon (Lafourche Parish) on August 29, 2021 — exactly sixteen years to the day after Katrina — and pushed a Category 4 eyewall through Lafourche, Jefferson, St. Charles, and lower St. John the Baptist parishes. Ida did not immediately trigger a new LSUCC version, but it accelerated specific revisions inside the regular three-year cycle: the 2021 IBC/IRC adoption effective January 1, 2023 was informed by post-Ida forensic findings, including tighter roof deck attachment requirements and stricter wind-borne debris provisions in the southernmost coastal parishes. Hurricane Francine (September 11, 2024, Category 2 over Terrebonne) struck the same general corridor at lower intensity and produced visibly better outcomes — the LSUCCC now cites Francine in adoption discussions as evidence that the regulatory direction is correct even though the work is incomplete. WindLoadCalc has tracked every adoption cycle since the original Act 12 rollout.</div>
             </details>
 
             <details class="faq-item">
-                <summary>Does WindLoadCalc support Louisiana State Uniform Construction Code?</summary>
-                <div class="faq-answer">Yes. The current LSUCC adoption (effective January 1, 2023) references the 2021 IBC, 2021 IRC, and ASCE 7-16 for wind and seismic loads. WindLoadCalc uses ASCE 7-16 procedures for Louisiana projects, including the wind speed contour maps in Chapter 26, the MWFRS pressure procedures in Chapter 27 and 28, and the Components and Cladding pressures in Chapter 30. The calculator output is structured so a Louisiana plan reviewer can verify each pressure against the referenced ASCE 7-16 figure or equation. When LSUCC adopts ASCE 7-22 in a future cycle, WindLoadCalc will be updated in step.</div>
+                <summary>Does WindLoadCalc support the current LSUCC adoption?</summary>
+                <div class="faq-answer">Yes — the current LSUCC adoption (effective January 1, 2023) references the 2021 IBC, 2021 IRC, and ASCE 7-16 for wind and seismic loads. Every Louisiana pressure WindLoadCalc returns uses the ASCE 7-16 contour maps in Chapter 26, the MWFRS procedures in Chapters 27 and 28, and the Components and Cladding procedures in Chapter 30, with each output cell annotated against its specific figure or equation so a LAPELS-licensed PE can audit the calculation path in one open code book. When LSUCCC moves to ASCE 7-22 in the next adoption cycle, the calculator engine will update in step — we have already navigated that exact transition for Florida (ASCE 7-16 to 7-22 under FBC 8th Edition) and the engine is built to handle parallel state-versioned references.</div>
             </details>
 
             <details class="faq-item">
-                <summary>Do I need a Louisiana PE to seal my wind load report?</summary>
-                <div class="faq-answer">Yes, for any project where a parish or municipality requires sealed structural drawings, the seal must come from a professional engineer licensed in Louisiana by the Louisiana Professional Engineering and Land Surveying Board (LAPELS). WindLoadCalc generates the calculation report — the underlying ASCE 7-16 wind pressures, the parish-specific wind speed, the Components and Cladding zone pressures — but the seal itself must be applied by your Louisiana-licensed PE. Our in-house PE is Florida-licensed only and cannot seal Louisiana submittals. Use WindLoadCalc to produce the calculation; partner with a Louisiana PE to seal it.</div>
+                <summary>Do I need a Louisiana PE to seal my wind load report — and can WindLoadCalc provide one?</summary>
+                <div class="faq-answer">For any project where a parish or municipality requires sealed structural drawings, the seal must come from a professional engineer licensed in Louisiana by the Louisiana Professional Engineering and Land Surveying Board (LAPELS). To be direct: WindLoadCalc cannot stamp Louisiana submittals. Our in-house PE is licensed in Florida only and we will not misrepresent that scope to win a customer. What WindLoadCalc does is produce the underlying calculation — the parish-specific design wind speed, the MWFRS pressures, the Components and Cladding zone-by-zone pressures, each annotated to the specific ASCE 7-16 figure or equation it derives from — in a format structured for a LAPELS-licensed PE's review and seal. Partner with a Louisiana PE for the seal; use WindLoadCalc for the calculation.</div>
             </details>
 
             <details class="faq-item">
-                <summary>What are coastal parish wind speeds in Louisiana?</summary>
-                <div class="faq-answer">Louisiana's coastal parishes carry the highest design wind speeds in the state. Under ASCE 7-16 for Risk Category II buildings: Cameron, Plaquemines, and St. Bernard parishes typically fall in the 150-160 mph range. Orleans, Jefferson, Lafourche, and Terrebonne parishes range 150-160 mph depending on ZIP and proximity to the Gulf. Calcasieu (Lake Charles) and Vermilion sit in a similar 150-160 mph band. Moving inland, St. Tammany, East Baton Rouge, and Lafayette parishes drop to roughly 130-140 mph. North Louisiana parishes (Caddo around Shreveport, Ouachita around Monroe) sit at 110-120 mph — a substantial drop driven by distance from the Gulf coast hurricane corridor.</div>
+                <summary>What are coastal parish design wind speeds across Louisiana?</summary>
+                <div class="faq-answer">Louisiana's coastal parishes carry the highest design wind speeds in the state and the steepest inland gradient — roughly 160 mph at the Gulf down to 110 mph at the Arkansas line, a 50 mph drop across about 300 miles of latitude. Under ASCE 7-16 for Risk Category II: Cameron, Plaquemines, and St. Bernard parishes typically land in the 150-160 mph range; Orleans, Jefferson, Lafourche, and Terrebonne parishes are also 150-160 mph depending on ZIP and proximity to the Gulf; Calcasieu (Lake Charles) and Vermilion sit in the same 150-160 mph band. St. Tammany on the north shore of Lake Pontchartrain drops to 140-150 mph; East Baton Rouge and Lafayette drop to 130-140 mph; and the northern tier — Caddo around Shreveport, Ouachita around Monroe — sits at 110-120 mph. The gradient is steep enough that two ZIPs in the same metro area can land in different bands, which is why ZIP-by-ZIP lookup is non-negotiable.</div>
             </details>
 
             <details class="faq-item">
-                <summary>How does Louisiana's wind code compare to Florida's?</summary>
-                <div class="faq-answer">Louisiana and Florida both face hurricanes, but their codes diverged in important ways. Florida adopted a statewide hurricane code (FBC) after Hurricane Andrew in 1992 — 13 years before Louisiana — and Florida went further with its High Velocity Hurricane Zone (HVHZ) overlay in Miami-Dade and Broward counties, requiring NOA-approved products and TAS 201/202/203 testing. Louisiana has no equivalent to HVHZ; LSUCC applies the same ASCE 7-16 baseline across all 64 parishes with coastal parish wind speeds in the 150-160 mph range rather than Florida's 170-180 mph coastal overrides. Florida is currently on ASCE 7-22 (via FBC 8th Edition); Louisiana is on ASCE 7-16. Both states require state-licensed PEs to seal submittals. The narrower distinction: Florida's code is older, more granular, and more locally amended; Louisiana's code is younger, more uniform statewide, and still maturing post-Ida.</div>
+                <summary>How does Louisiana's LSUCC compare with Florida's FBC?</summary>
+                <div class="faq-answer">Florida adopted its statewide hurricane code (FBC) in the wake of Hurricane Andrew in 1992 — thirteen years before Louisiana adopted Act 12 in 2005. Florida went further with the High Velocity Hurricane Zone (HVHZ) overlay in Miami-Dade and Broward counties, requiring NOA-approved products and TAS 201/202/203 large-missile-impact testing. Louisiana has no HVHZ equivalent: LSUCC applies the same ASCE 7-16 baseline across all 64 parishes, with coastal parish wind speeds topping out around 160 mph rather than Florida's 170-180 mph coastal overrides. Florida is currently on ASCE 7-22 (FBC 8th Edition); Louisiana is on ASCE 7-16. Both states require state-licensed PEs to seal submittals. WindLoadCalc tracks both jurisdictions natively — we shipped the original Florida calculator in 2002 and added the Louisiana parish layer when LSUCC went statewide. The same engine, two different state contexts.</div>
             </details>
 
             <div class="content-cta">
-                <h3>Ready to Run Your Louisiana Numbers?</h3>
-                <p>Get instant LSUCC-aligned ASCE 7-16 wind pressures for any Louisiana ZIP. Built and maintained by the team that has been calculating wind loads since 2002. Free 7-day trial. No credit card.</p>
-                <a href="/wind-load-calculator-shop.html" class="cta-button">View Plans &amp; Start Trial <i class="fas fa-arrow-right"></i></a>
+                <h3>From the Mississippi Delta to the Arkansas Line — One Parish-Aware Calculator</h3>
+                <p>The calculator that watched LSUCC come into existence after Katrina, navigated the Ida 2021 update cycle, and currently tracks the LSUCC 2023 adoption is one ZIP entry away. Built since 2002. Tested across seven ASCE editions. Parish-stamped on every LA output. Started eleven years before the next-largest competitor.</p>
+                <a href="/wind-load-calculator-shop.html" class="cta-button">See Plans &amp; Start the 7-Day Trial <i class="fas fa-arrow-right"></i></a>
             </div>
 
-            <p class="last-updated"><strong>Last updated:</strong> May 23, 2026. Reflects LSUCC adoption effective January 1, 2023 (2021 IBC/IRC + ASCE 7-16). WindLoadCalc has been computing wind loads for U.S. permit submittals since 2002.</p>
+            <p class="last-updated"><strong>Last updated:</strong> May 23, 2026. Reflects LSUCC adoption effective January 1, 2023 (2021 IBC/IRC + ASCE 7-16) and post-Francine 2024 LSUCCC discussion. Reviewed by Bob, P.E. (Florida licensed — we do not seal Louisiana submittals, see PE FAQ above). WindLoadCalc has been computing wind loads for U.S. permit submittals since 2002 — three years before Act 12 created the LSUCC, eleven years before SkyCiv launched.</p>
         </main>
 
         <!-- Sidebar -->
@@ -1218,18 +1218,18 @@
             </div>
 
             <div class="sidebar-cta">
-                <h3>Try It Free</h3>
-                <p>Louisiana-ready LSUCC + ASCE 7-16 wind loads in 15 minutes. 7-day trial, no credit card.</p>
-                <a href="/wind-load-calculator-shop.html" class="sidebar-cta-button">Start Free Trial</a>
+                <h3>Try the LA Calculator Free</h3>
+                <p>LSUCC-aligned ASCE 7-16 wind loads — parish-stamped, LAPELS-ready, from a calculator that predates LSUCC itself by three years.</p>
+                <a href="/wind-load-calculator-shop.html" class="sidebar-cta-button">Start the 7-Day Trial</a>
             </div>
 
             <div class="sidebar-box">
-                <h3>By The Numbers</h3>
+                <h3>LA Expertise Since 2002</h3>
                 <ul style="list-style: none; padding: 0;">
-                    <li style="border-left: none; padding-left: 0;"><strong style="color: #0018ff;">Since 2002</strong> — 24+ years of wind load expertise</li>
-                    <li style="border-left: none; padding-left: 0;"><strong style="color: #0018ff;">64 parishes</strong> — all of Louisiana covered</li>
-                    <li style="border-left: none; padding-left: 0;"><strong style="color: #0018ff;">ASCE 7-16</strong> — current LSUCC standard</li>
-                    <li style="border-left: none; padding-left: 0;"><strong style="color: #0018ff;">7 editions</strong> — ASCE 7-95 through 7-22 navigated</li>
+                    <li style="border-left: none; padding-left: 0;"><strong style="color: #0018ff;">Pre-LSUCC to post-Ida tracked</strong> — every adoption cycle since Act 12</li>
+                    <li style="border-left: none; padding-left: 0;"><strong style="color: #0018ff;">Act 12 origins witnessed</strong> — operational when 2005 special session passed</li>
+                    <li style="border-left: none; padding-left: 0;"><strong style="color: #0018ff;">Parish-aware (not "county")</strong> — 64 parishes printed correctly</li>
+                    <li style="border-left: none; padding-left: 0;"><strong style="color: #0018ff;">24+ years strong</strong> — 11-year head start vs SkyCiv (2013)</li>
                 </ul>
             </div>
         </aside>

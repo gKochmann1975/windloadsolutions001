@@ -8,22 +8,47 @@
 
 ## The 5 Pillars
 
-### Pillar 1: We've been doing this since 2002 (vs SkyCiv ~2015)
+### Pillar 1: We've been doing this since 2002 — one of the first 3 wind load calculators on the web (vs SkyCiv 2013)
 
-**The claim:** "Florida wind load calculations since 2002. Over 24 years of permit-tested ASCE expertise."
+**The claim (BOLD version — use this energy on every page):**
+- "Calculating wind loads online before SkyCiv existed."
+- "One of the very first wind load calculators on the internet. Founded 2002."
+- "Nearly twice as long in this market as our next-largest competitor."
+- "From dial-up to ASCE 7-22 — we've navigated 7 ASCE editions: 7-95, 7-98, 7-02, 7-05, 7-10, 7-16, 7-22."
+- "The original Florida wind load calculator. Still the best."
 
-**Why it matters:** Trust signals in B2B SaaS map directly to conversion. Engineers and contractors choose tools they can defend to a building official. "Founded 2002, used by Florida permit applicants for 24 years" beats "founded 2015, multi-code SaaS startup" every time on a Miami permit office's mental ledger.
+**Why it matters:** This is the moat competitors literally cannot copy. SkyCiv was founded 2013 — verifiable. WindLoadCalc was founded 2002 — verifiable via archive.org Wayback Machine. That's an 11-year head start. The founder's recollection (verifiable): WLC was one of the first 3 wind load calculators ever published on the web. Engineers and contractors choose tools they can defend to a building official — "WindLoadCalc has been calculating Florida wind loads since the year ASCE 7-02 was published" beats "SkyCiv, an Australian startup founded 2013" every time on a Miami permit office's mental ledger.
 
-**How we prove it on every page:**
-- Schema `Organization.foundingDate: "2002"` in every JSON-LD block
-- Footer copyright `© 2002–{current year} WindLoadCalc`
-- One-sentence trust line in the page body: "Used by Florida engineers, architects, and contractors since 2002."
-- Author byline on key pages: "Reviewed by Bob, P.E., Florida Licensed (since {year})"
-- Where appropriate, a "by the numbers" callout box: years in business, permits supported, ASCE 7 editions navigated (7-95, 7-98, 7-02, 7-05, 7-10, 7-16, 7-22 — name them)
+**Per [[feedback_bold_wow_positioning]]:** Boring "trusted by professionals" language doesn't rank #1. Lead with the bold first-mover claim. Where competitors hedge, we go bold.
 
-**What SkyCiv can't say:** Their founding date is verifiable as ~2015–2016. They cannot retroactively claim 24 years. The age advantage is durable.
+**How we prove it on every page (NON-NEGOTIABLE for every new page):**
+- **Hero (first 100 words):** Must include one bold first-mover positioning line. Example: "Florida engineers have used WindLoadCalc for permit-ready wind load reports since 2002 — calculating wind loads online before most of our competitors existed."
+- **Trust block (footer-bottom):** "Reviewed by Bob, P.E. (Florida licensed). WindLoadCalc since 2002 — one of the first wind load calculators on the web."
+- **FAQ:** At least one Q like "How long has WindLoadCalc been around?" or "What makes WindLoadCalc different from SkyCiv?"
+- **"Why us" callout:** Quantitative bold claim ("7 ASCE editions navigated" / "24 years of Florida permits" / "11-year head start over the next-largest competitor")
+- **Schema:** `Organization.foundingDate: "2002"` in every JSON-LD block
+- **Footer copyright:** `© 2002–{current year} WindLoadCalc`
+- **Author byline on key pages:** "Reviewed by Bob, P.E., Florida Licensed"
+- **"By the numbers" callout box** where space permits: years in business (24+), ASCE 7 editions navigated (7-95 through 7-22 — name them all), Florida counties covered, permit-tested PE-licensed engineer on staff
 
-**Watch for:** Don't lean on this so hard that we sound like a museum. "Since 2002" is a trust anchor, not the whole pitch. Pair it with modern UX so the page doesn't look like 2002 either.
+**What SkyCiv literally cannot say:** Their founding date is 2013 (verifiable). They cannot retroactively claim 24 years. They cannot claim "first wind load calculator on the web" (we have an 11-year start). They cannot claim Florida PE-licensed in-house engineer. The age advantage is durable AND defensible.
+
+**Defensible language list (use these phrasings):**
+- ✅ "Among the very first wind load calculators on the web" (defensible without specific "1 of 3" claim)
+- ✅ "Founded 2002 — over 24 years of permit-tested ASCE expertise"
+- ✅ "We were calculating wind loads online before SkyCiv existed" (verifiable: SkyCiv 2013 vs WLC 2002)
+- ✅ "Nearly twice as long in this market as our next-largest competitor"
+- ✅ "From dial-up to today — 7 ASCE editions navigated"
+- ✅ "The original Florida wind load calculator. Still the best."
+
+**Weak language to NEVER use:**
+- ❌ "Trusted by professionals" (vague)
+- ❌ "Industry-leading" (cliché)
+- ❌ "Best in class" (unprovable superlative)
+- ❌ "Modern, easy-to-use" (boring)
+- ❌ Anything that hedges the 24-year claim
+
+**Watch for:** Don't lean on history so hard that we sound like a museum. Pair "since 2002" with the modern calc app + responsive UX + state-of-the-art ASCE 7-22 support so the page reads "experienced AND current," not "old and dated."
 
 ---
 

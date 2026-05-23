@@ -10,7 +10,7 @@
 
 ### Content
 1. **≥1,500 unique words of body content.** Boilerplate header/nav/footer doesn't count. Inline calculator UI doesn't count. Schema markup doesn't count. The actual prose a human reads — that's what we measure.
-2. **<30% chrome overlap with sibling pages.** Atlanta page and Chicago page on a sister site share 80%+ identical body text — that's the pattern Google's Helpful Content classifier flags. Test: paste two sibling page bodies into a diff tool. If less than 30% differs, rewrite.
+2. **ZERO shared sentences in main body content across sibling pages — NOT "below Google's threshold."** The project standard is "all pages not alike at all," higher than Google's measurable Helpful Content classifier bar. ANY ≥10-word clause or paragraph opener repeated across 2+ sibling pages = CRITICAL violation requiring rewrite. Only boilerplate (nav, footer, copyright, single-paragraph trust block in footer-bottom) may be shared. See [[feedback_zero_templated_body_content]] in memory.
 3. **No FAQ Q&A reused verbatim.** Every state/county/product page has its own FAQ section. The questions should be different even if the underlying topic overlaps (e.g., "What is HVHZ?" on Miami-Dade page → "Is Palm Beach in the HVHZ?" on Palm Beach page).
 4. **Unique image alt text per page.** No "wind load calculator screenshot" repeated 50 times. Each alt text describes what's actually in THAT image in context of THAT page.
 5. **"Last updated" date visible on the page — HARD CHECKLIST ITEM.** Freshness signal Google reads + E-E-A-T trust signal. Pattern: `<p class="last-updated">Last updated: {MMM DD, YYYY} — Reviewed by Bob, P.E. (Florida licensed). Serving wind load professionals since 2002.</p>` placed in the footer-bottom block. Update the date whenever the page changes meaningfully (not on every typo fix). Wave 1-2 pages shipped without this and had to be patched — never again.
@@ -108,8 +108,29 @@ Parse the `FAQPage` JSON-LD block, extract every Question + Answer text, compare
 ### Check 2 — NO `aggregateRating` anywhere
 Grep all new pages for: `aggregateRating`, `reviewCount`, `ratingCount`, `ratingValue`, `bestRating`, `worstRating`, `Review` (as schema type). Zero hits expected. Per the May 2026 near-incident on windloadcalc.com.
 
-### Check 3 — Cross-sibling body-text overlap (Helpful Content survival)
-For each pair of new sibling pages, strip HTML/CSS/schema, extract body prose, identify any text BLOCK ≥50 words appearing verbatim in both. Acceptable: shared trust block (single paragraph), nav, footer, "Need help?" affordance. Unacceptable: FAQ answer reused, section-intro paragraph reused, how-to step text reused, wind-speed table row copied.
+### Check 3 — Cross-sibling body-text overlap (HARDENED 2026-05-23)
+**Threshold: ≥10 words shared = CRITICAL violation (was ≥30 words / WARNING in earlier version — tightened after Wave 4 templated process-step opener incident).**
+
+For each pair of new sibling pages, strip HTML/CSS/schema, extract body prose, identify ANY ≥10-word clause appearing verbatim or near-verbatim in both.
+
+Acceptable shared content (boilerplate only — universally classifier-safe):
+- Site navigation, footer link lists, copyright text
+- Single short-paragraph trust block in footer-bottom (e.g., "Reviewed by Bob, P.E. — serving since 2002")
+- CSS classes + JSON-LD schema types (data inside must still differ per page)
+- HTML structural patterns (form structure, list structure)
+
+Unacceptable (any ≥10-word match = CRITICAL, must rewrite before push):
+- Section H2 / H3 headings shared across pages
+- Opening clauses of paragraphs (first 10+ words)
+- Process-step text (every page's "how to calculate" walkthrough must be uniquely worded)
+- FAQ questions OR answers
+- Table column descriptions / cell prose
+- ZIP form headlines / subheads / placeholder text
+- Internal-link block intro sentences
+- Bottom CTA headlines + value-prop bullets
+- Any in-body explainer paragraph
+
+If QA Check 3 finds shared body content: FIX BEFORE PUSHING. Never carry templated text forward to next session.
 
 ### Check 4 — PE service scope claims
 Grep for "all 50 states", "nationwide" + PE/seal/stamp context. Verify all uses comply with FL-only ≤3 stories per Bob's licensure. Acceptable: nationwide users. Unacceptable: nationwide PE stamps.

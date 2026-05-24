@@ -132,8 +132,29 @@ Unacceptable (any ≥10-word match = CRITICAL, must rewrite before push):
 
 If QA Check 3 finds shared body content: FIX BEFORE PUSHING. Never carry templated text forward to next session.
 
-### Check 4 — PE service scope claims
-Grep for "all 50 states", "nationwide" + PE/seal/stamp context. Verify all uses comply with FL-only ≤3 stories per Bob's licensure. Acceptable: nationwide users. Unacceptable: nationwide PE stamps.
+### Check 4 — PE service scope claims + Bob anonymity (EXPANDED 2026-05-24)
+
+**Part A — Scope:** Grep for "all 50 states", "nationwide" + PE/seal/stamp context. Verify all uses comply with FL-only ≤3 stories per the in-house PE's licensure. Acceptable: nationwide users. Unacceptable: nationwide PE stamps.
+
+**Part B — Anonymity (HARD RULE):** Grep every new page for: `Bob` (case-sensitive). The in-house Florida-licensed PE who handles sign-and-seal requests MUST remain anonymous on every customer-facing page. ANY hit on the literal name "Bob" or any reference to his individual PE company is a CRITICAL violation requiring immediate rewrite.
+
+Acceptable phrasings (use these instead):
+- "our in-house Florida-licensed P.E."
+- "WindLoadCalc's in-house Professional Engineer"
+- "a Florida-licensed P.E. on our team"
+- "Reviewed by WindLoadCalc's Florida P.E."
+- "in-house FL-licensed P.E. on staff"
+
+Forbidden:
+- ❌ "Bob"
+- ❌ "Bob, P.E."
+- ❌ "Reviewed by Bob"
+- ❌ "Bob's wind load practice"
+- ❌ Anything that names him personally
+
+This rule extends to: page body, FAQ visible HTML, FAQPage JSON-LD schema, hero subtitles, trust blocks, schema descriptions, meta descriptions, OG tags. Every public surface.
+
+See [[feedback_bob_anonymous_no_name]] in memory.
 
 ### Check 5 — Wind speed numerical accuracy
 For each state/county page, verify the quoted wind speed numbers against ASCE 7-16/7-22 + (for FL counties) `webapp/velocity_finder_core.py` for jurisdiction overrides. Framing as "approximate" acceptable; authoritative-sounding wrong numbers not.

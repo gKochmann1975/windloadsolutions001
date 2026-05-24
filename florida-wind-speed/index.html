@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://windloadcalc.com/florida-wind-speed/">
+
+    <title>Florida Wind Speed by County — ASCE 7-22 + FBC R301.2(7) Reference | WindLoadCalc</title>
+    <meta name="description" content="Florida wind speed by county: FBC R301.2(7) overrides for Miami-Dade (175), Broward (170), Collier (170). Plus ASCE 7-22 map values. Free ZIP lookup.">
+    <meta name="keywords" content="florida wind speed, florida wind speed by county, florida wind speed by zip, FBC R301.2(7) wind speed, florida building code wind speed, HVHZ wind speed, miami-dade broward collier wind speed">
+
+    <link rel="icon" type="image/svg+xml" href="../images/windloadcalc-favicon.svg">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Florida Wind Speed by County — ASCE 7-22 + FBC R301.2(7) Reference">
+    <meta property="og:description" content="The Florida wind speed reference hub. Miami-Dade 175, Broward 170, Collier 170 mph FBC overrides plus ASCE 7-22 map values for every county.">
+    <meta property="og:url" content="https://windloadcalc.com/florida-wind-speed/">
+    <meta property="og:site_name" content="WindLoadCalc">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Florida Wind Speed by County">
+    <meta name="twitter:description" content="FBC R301.2(7) wind speed overrides for Florida counties, plus ASCE 7-22 baseline. Free ZIP lookup.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- JSON-LD: CollectionPage + BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Florida Wind Speed by County",
+        "url": "https://windloadcalc.com/florida-wind-speed/",
+        "description": "Hub page for Florida wind speed references by county. Covers Florida Building Code R301.2(7) jurisdictional overrides for Miami-Dade, Broward, and Collier counties, plus ASCE 7-22 map values for the remaining counties.",
+        "isAccessibleForFree": true,
+        "hasPart": [
+            {"@type": "WebPage", "name": "Miami-Dade County Wind Speed (175 mph, HVHZ)", "url": "https://windloadcalc.com/florida-wind-speed/miami-dade-county.html"},
+            {"@type": "WebPage", "name": "Broward County Wind Speed (170 mph, HVHZ)", "url": "https://windloadcalc.com/florida-wind-speed/broward-county.html"},
+            {"@type": "WebPage", "name": "Collier County Wind Speed (170 mph)", "url": "https://windloadcalc.com/florida-wind-speed/collier-county.html"},
+            {"@type": "WebPage", "name": "Monroe County (Keys) Wind Speed", "url": "https://windloadcalc.com/florida-wind-speed/monroe-county.html"},
+            {"@type": "WebPage", "name": "Lee County Wind Speed", "url": "https://windloadcalc.com/florida-wind-speed/lee-county.html"}
+        ],
+        "provider": {"@type": "Organization", "name": "WindLoad Solutions", "url": "https://windloadcalc.com", "foundingDate": "2002"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://windloadcalc.com/"},
+            {"@type": "ListItem", "position": 2, "name": "Florida Wind Speed", "item": "https://windloadcalc.com/florida-wind-speed/"}
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {"@type": "Question", "name": "Which Florida counties have FBC wind speed overrides?", "acceptedAnswer": {"@type": "Answer", "text": "Three Florida counties have hardcoded Florida Building Code R301.2(7) jurisdictional wind speed overrides in our engine: Miami-Dade (165/175/186/195 mph for Risk Cat I/II/III/IV), Broward (156/170/180/185 mph), and Collier (151/170/180/190 mph). Other counties default to the ASCE 7-22 Figure 26.5-1 map value at the ZIP centroid. Additional counties are pending verification."}},
+            {"@type": "Question", "name": "What is HVHZ?", "acceptedAnswer": {"@type": "Answer", "text": "HVHZ stands for High Velocity Hurricane Zone, a Florida Building Code designation requiring Notice of Acceptance (NOA) product approval and missile impact testing (TAS 201, 202, 203). Only Miami-Dade and Broward counties are HVHZ. Monroe County is NOT HVHZ despite its high wind speeds in the Keys."}},
+            {"@type": "Question", "name": "Why does Miami-Dade use 175 mph when the ASCE map shows around 170 mph?", "acceptedAnswer": {"@type": "Answer", "text": "Florida Building Code R301.2(7) gives Miami-Dade County the authority to adopt a wind speed that exceeds the ASCE 7-22 Figure 26.5-1 contour value. The FBC value (175 mph Risk Cat II) is the legally enforceable value for permit submission. Designing to the ASCE map value alone will not pass plan review in Miami-Dade."}},
+            {"@type": "Question", "name": "Does Florida use ASCE 7-22?", "acceptedAnswer": {"@type": "Answer", "text": "Florida Building Code 8th Edition (2023) adopts ASCE 7-22 by reference with Florida-specific amendments. The ASCE 7-22 standard is the baseline; FBC R301.2(7) county overrides supersede it where adopted. For most Florida counties (those without an override), ASCE 7-22 governs."}}
+        ]
+    }
+    </script>
+
+    <style>
+        :root {
+            --brand-primary: #0018ff;
+            --brand-dark: #181E57;
+            --brand-gradient: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            --gold: #E8B530;
+            --bg-page: #FAFAF7;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --text-muted: #9ca3af;
+            --text-ivory: #F5F1EA;
+            --border-subtle: rgba(24, 30, 87, 0.08);
+            --shadow-card: 0 20px 60px rgba(24, 30, 87, 0.12), 0 4px 16px rgba(24, 30, 87, 0.06);
+            --radius-card: 16px;
+            --radius-pill: 999px;
+            --font-serif: 'EB Garamond', Georgia, 'Times New Roman', serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-mono: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-sans); line-height: 1.65; color: var(--text-primary); background: var(--bg-page); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        a { color: var(--brand-primary); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        .promo-banner { background: var(--brand-dark); color: var(--text-ivory); padding: 0.7rem 1.5rem; text-align: center; font-size: 0.875rem; font-weight: 500; }
+        .promo-banner a { color: var(--text-ivory); transition: color 0.2s ease; }
+        .promo-banner a:hover { color: var(--gold); text-decoration: none; }
+
+        .site-header { background: rgba(255,255,255,0.97); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-subtle); padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
+        .site-header .logo { font-family: var(--font-serif); font-weight: 700; font-size: 1.5rem; color: var(--brand-dark); }
+        .site-header .nav-cta { display: flex; gap: 0.75rem; align-items: center; }
+        .nav-link-subtle { color: var(--text-secondary); font-size: 0.9rem; font-weight: 500; padding: 0.5rem 0.75rem; }
+        .nav-cta-primary { background: var(--brand-primary); color: white; padding: 0.65rem 1.25rem; border-radius: var(--radius-pill); font-weight: 600; font-size: 0.9rem; }
+        .nav-cta-primary:hover { background: var(--brand-dark); color: white; text-decoration: none; }
+
+        .breadcrumb { background: var(--bg-page); padding: 1rem 1.5rem; font-size: 0.875rem; color: var(--text-secondary); border-bottom: 1px solid var(--border-subtle); }
+        .breadcrumb .inner { max-width: 1280px; margin: 0 auto; }
+        .breadcrumb a { color: var(--text-secondary); }
+        .breadcrumb .sep { margin: 0 0.5rem; color: var(--text-muted); }
+        .breadcrumb .current { color: var(--brand-dark); font-weight: 600; }
+
+        .hero { background: var(--brand-gradient); color: var(--text-ivory); padding: 4rem 1.5rem 3rem; position: relative; overflow: hidden; }
+        .hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 30%, rgba(232,181,48,0.08) 0%, transparent 60%); pointer-events: none; }
+        .hero-inner { max-width: 1280px; margin: 0 auto; position: relative; }
+        .hero-eyebrow { display: inline-block; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.25rem; }
+        .hero h1 { font-family: var(--font-serif); font-weight: 600; font-size: clamp(2.25rem, 5vw, 3.75rem); line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1.25rem; color: white; max-width: 900px; }
+        .hero-subhead { font-size: 1.125rem; line-height: 1.55; color: rgba(245,241,234,0.85); margin-bottom: 1.75rem; max-width: 720px; }
+        .hero-tagline { font-family: var(--font-mono); font-size: 0.8125rem; color: rgba(245,241,234,0.6); }
+
+        .section { padding: 3.5rem 1.5rem; }
+        .section.bg-white { background: white; }
+        .section .inner { max-width: 1280px; margin: 0 auto; }
+        .section-eyebrow { display: inline-block; font-family: var(--font-mono); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--brand-primary); margin-bottom: 0.75rem; }
+        .section h2 { font-family: var(--font-serif); font-size: clamp(1.75rem, 3vw, 2.25rem); font-weight: 600; color: var(--brand-dark); letter-spacing: -0.015em; line-height: 1.2; margin-bottom: 1rem; }
+        .section p { color: var(--text-primary); line-height: 1.75; margin-bottom: 1rem; font-size: 1rem; max-width: 800px; }
+
+        .county-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+        .county-card { display: block; background: white; border: 1px solid var(--border-subtle); border-radius: var(--radius-card); padding: 1.75rem; box-shadow: var(--shadow-card); transition: transform 0.2s ease, box-shadow 0.2s ease; text-decoration: none; color: inherit; }
+        .county-card:hover { transform: translateY(-3px); box-shadow: 0 28px 80px rgba(24,30,87,0.16), 0 6px 20px rgba(24,30,87,0.08); text-decoration: none; }
+        .county-card.gold { border-left: 4px solid var(--gold); }
+        .county-card.blue { border-left: 4px solid var(--brand-primary); }
+        .county-card .eyebrow { font-family: var(--font-mono); font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 0.5rem; }
+        .county-card.gold .eyebrow { color: var(--gold); }
+        .county-card.blue .eyebrow { color: var(--brand-primary); }
+        .county-card .county-name { font-family: var(--font-serif); font-size: 1.5rem; font-weight: 600; color: var(--brand-dark); margin-bottom: 0.5rem; line-height: 1.2; }
+        .county-card .speed { font-family: var(--font-serif); font-size: 2.5rem; font-weight: 700; color: var(--brand-dark); line-height: 1; font-variant-numeric: tabular-nums; margin-bottom: 0.4rem; }
+        .county-card .speed-label { font-family: var(--font-sans); font-size: 0.875rem; font-weight: 500; color: var(--text-secondary); margin-bottom: 1rem; }
+        .county-card .cities { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 1rem; }
+        .county-card .source { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); border-top: 1px solid var(--border-subtle); padding-top: 0.75rem; }
+
+        .quick-ref-table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; background: white; border: 1px solid var(--border-subtle); border-radius: var(--radius-card); overflow: hidden; }
+        .quick-ref-table th { text-align: left; padding: 1rem; background: var(--brand-dark); color: white; font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.04em; text-transform: uppercase; font-weight: 600; }
+        .quick-ref-table td { padding: 0.9rem 1rem; border-bottom: 1px solid var(--border-subtle); font-variant-numeric: tabular-nums; }
+        .quick-ref-table tr:last-child td { border-bottom: none; }
+        .quick-ref-table td:first-child { font-weight: 600; color: var(--brand-dark); }
+        .quick-ref-table td.speed { font-family: var(--font-mono); font-weight: 600; }
+        .quick-ref-table .gold-bg { background: rgba(232,181,48,0.08); }
+
+        .calc-cta { background: var(--brand-dark); color: var(--text-ivory); padding: 2.5rem; border-radius: var(--radius-card); margin-top: 2rem; text-align: center; }
+        .calc-cta h3 { font-family: var(--font-serif); font-size: 1.75rem; color: white; margin-bottom: 0.75rem; }
+        .calc-cta p { color: rgba(245,241,234,0.85); margin-bottom: 1.5rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .calc-cta a { display: inline-block; background: var(--gold); color: var(--brand-dark); padding: 0.75rem 1.75rem; border-radius: var(--radius-pill); font-weight: 700; text-decoration: none; transition: transform 0.2s ease; }
+        .calc-cta a:hover { transform: translateY(-2px); text-decoration: none; color: var(--brand-dark); }
+
+        .faq-item { background: white; border: 1px solid var(--border-subtle); border-radius: 10px; margin-bottom: 0.75rem; overflow: hidden; }
+        .faq-q { display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 1.5rem; background: none; border: none; font-family: inherit; font-size: 1rem; font-weight: 600; color: var(--brand-dark); text-align: left; cursor: pointer; width: 100%; }
+        .faq-q:hover { background: var(--bg-page); }
+        .faq-q .chevron { color: var(--text-muted); transition: transform 0.2s ease; }
+        .faq-q[aria-expanded="true"] .chevron { transform: rotate(180deg); }
+        .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+        .faq-a.open { max-height: 600px; }
+        .faq-a-inner { padding: 0 1.5rem 1.25rem; color: var(--text-secondary); line-height: 1.7; font-size: 0.95rem; }
+
+        .trust-strip { background: var(--brand-dark); color: var(--text-ivory); padding: 3rem 1.5rem; text-align: center; }
+        .trust-strip .tagline { font-family: var(--font-serif); font-size: 1.5rem; color: white; margin-bottom: 0.75rem; }
+        .trust-strip .meta { font-family: var(--font-mono); font-size: 0.8125rem; color: rgba(245,241,234,0.65); letter-spacing: 0.04em; }
+
+        .site-footer { background: white; border-top: 1px solid var(--border-subtle); padding: 2.5rem 1.5rem; color: var(--text-secondary); font-size: 0.875rem; }
+        .site-footer-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        .site-footer a { color: var(--text-secondary); }
+        .site-footer a:hover { color: var(--brand-primary); }
+
+        @media (max-width: 700px) {
+            .hero { padding: 2.5rem 1rem 2rem; }
+            .section { padding: 2.5rem 1rem; }
+            .county-grid { grid-template-columns: 1fr; gap: 1rem; }
+            .county-card { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Promo banner -->
+    <div class="promo-banner">
+        <a href="../free-wind-load-calculator.html">Free Wind Load Calculator with Florida Building Code overrides &rarr;</a>
+    </div>
+
+    <!-- Header -->
+    <header class="site-header">
+        <a href="../" class="logo">WindLoadCalc</a>
+        <nav class="nav-cta" aria-label="Primary">
+            <a href="../" class="nav-link-subtle">Home</a>
+            <a href="../free-wind-load-calculator.html" class="nav-link-subtle">Free Calculator</a>
+            <a href="../calc-landing.html" class="nav-cta-primary">Pro version</a>
+        </nav>
+    </header>
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <div class="inner">
+            <a href="../">Home</a>
+            <span class="sep">/</span>
+            <span class="current">Florida Wind Speed</span>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-inner">
+            <span class="hero-eyebrow">Florida wind speed reference</span>
+            <h1>Florida wind speed by county. The number your plan reviewer will check against.</h1>
+            <p class="hero-subhead">
+                Florida Building Code R301.2(7) lets counties adopt wind speeds that supersede the ASCE 7-22 basic wind speed map. Miami-Dade, Broward, and Collier have done so. The rest of the state defaults to the ASCE 7-22 map value at the ZIP centroid. This page is the single source of truth for both.
+            </p>
+            <p class="hero-tagline">Calculating wind loads since 2002, online since 2006.</p>
+        </div>
+    </section>
+
+    <!-- Quick reference table -->
+    <section class="section bg-white">
+        <div class="inner">
+            <span class="section-eyebrow">Quick reference</span>
+            <h2>All five covered counties at a glance.</h2>
+            <p>
+                Risk Category II shown in the headline column. The full Risk Category I / II / III / IV breakdown is on each county's dedicated page. Gold-highlighted rows have a verified Florida Building Code R301.2(7) override; blue-highlighted rows use the ASCE 7-22 map value at the county centroid pending FBC verification.
+            </p>
+
+            <table class="quick-ref-table">
+                <thead>
+                    <tr>
+                        <th>County</th>
+                        <th>Risk Cat II</th>
+                        <th>HVHZ</th>
+                        <th>Reference</th>
+                        <th>Detail page</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="gold-bg">
+                        <td>Miami-Dade</td>
+                        <td class="speed">175 mph</td>
+                        <td>Yes</td>
+                        <td>FBC R301.2(7) override</td>
+                        <td><a href="miami-dade-county.html">Miami-Dade detail &rarr;</a></td>
+                    </tr>
+                    <tr class="gold-bg">
+                        <td>Broward</td>
+                        <td class="speed">170 mph</td>
+                        <td>Yes</td>
+                        <td>FBC R301.2(7) override</td>
+                        <td><a href="broward-county.html">Broward detail &rarr;</a></td>
+                    </tr>
+                    <tr class="gold-bg">
+                        <td>Collier</td>
+                        <td class="speed">170 mph</td>
+                        <td>No</td>
+                        <td>FBC R301.2(7) override</td>
+                        <td><a href="collier-county.html">Collier detail &rarr;</a></td>
+                    </tr>
+                    <tr>
+                        <td>Monroe (Keys)</td>
+                        <td class="speed">~180 mph</td>
+                        <td>No</td>
+                        <td>ASCE 7-22 Fig 26.5-1B (FBC override pending)</td>
+                        <td><a href="monroe-county.html">Monroe detail &rarr;</a></td>
+                    </tr>
+                    <tr>
+                        <td>Lee</td>
+                        <td class="speed">map</td>
+                        <td>No</td>
+                        <td>ASCE 7-22 Fig 26.5-1B (FBC override pending)</td>
+                        <td><a href="lee-county.html">Lee detail &rarr;</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- County cards -->
+    <section class="section">
+        <div class="inner">
+            <span class="section-eyebrow">By county</span>
+            <h2>Pick your county.</h2>
+            <p>Each county page includes the full Risk Cat I/II/III/IV breakdown, a live ZIP lookup, the hurricane history that shaped the local code, and county-specific FAQs.</p>
+
+            <div class="county-grid">
+                <a href="miami-dade-county.html" class="county-card gold">
+                    <div class="eyebrow">FBC R301.2(7) &middot; HVHZ</div>
+                    <div class="county-name">Miami-Dade County</div>
+                    <div class="speed">175 mph</div>
+                    <div class="speed-label">Risk Category II &middot; FBC-enforced</div>
+                    <div class="cities">Miami &middot; Hialeah &middot; Coral Gables &middot; Doral &middot; Homestead &middot; Kendall &middot; Aventura</div>
+                    <div class="source">Andrew 1992 ground zero. HVHZ origin.</div>
+                </a>
+                <a href="broward-county.html" class="county-card gold">
+                    <div class="eyebrow">FBC R301.2(7) &middot; HVHZ</div>
+                    <div class="county-name">Broward County</div>
+                    <div class="speed">170 mph</div>
+                    <div class="speed-label">Risk Category II &middot; FBC-enforced</div>
+                    <div class="cities">Fort Lauderdale &middot; Hollywood &middot; Pembroke Pines &middot; Coral Springs &middot; Pompano Beach</div>
+                    <div class="source">Wilma 2005. Second HVHZ jurisdiction.</div>
+                </a>
+                <a href="collier-county.html" class="county-card gold">
+                    <div class="eyebrow">FBC R301.2(7)</div>
+                    <div class="county-name">Collier County</div>
+                    <div class="speed">170 mph</div>
+                    <div class="speed-label">Risk Category II &middot; FBC-enforced</div>
+                    <div class="cities">Naples &middot; Marco Island &middot; Immokalee &middot; Golden Gate &middot; Ave Maria</div>
+                    <div class="source">WindLoadCalc home market. Irma 2017 Marco landfall.</div>
+                </a>
+                <a href="monroe-county.html" class="county-card blue">
+                    <div class="eyebrow">ASCE 7-22 map &middot; FBC pending</div>
+                    <div class="county-name">Monroe County (Keys)</div>
+                    <div class="speed">~180 mph</div>
+                    <div class="speed-label">ASCE 7-22 Fig 26.5-1B &middot; Lower Keys</div>
+                    <div class="cities">Key West &middot; Marathon &middot; Key Largo &middot; Islamorada &middot; Big Pine</div>
+                    <div class="source">Not HVHZ. Irma 2017 Cudjoe Cat 4. 1935 Labor Day Cat 5.</div>
+                </a>
+                <a href="lee-county.html" class="county-card blue">
+                    <div class="eyebrow">ASCE 7-22 map &middot; FBC pending</div>
+                    <div class="county-name">Lee County</div>
+                    <div class="speed">ASCE map</div>
+                    <div class="speed-label">ZIP-by-ZIP, per Fig 26.5-1B</div>
+                    <div class="cities">Cape Coral &middot; Fort Myers &middot; Bonita Springs &middot; Sanibel &middot; Estero</div>
+                    <div class="source">Ian 2022 Cayo Costa Cat 4. Post-Ian rebuild active.</div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- HVHZ explainer -->
+    <section class="section bg-white">
+        <div class="inner">
+            <span class="section-eyebrow">HVHZ</span>
+            <h2>What "HVHZ" means and which counties carry it.</h2>
+            <p>
+                <strong>High Velocity Hurricane Zone</strong> is a Florida Building Code designation that triggers a separate product approval pathway. HVHZ-zoned projects require Notice of Acceptance (NOA) documentation from the Miami-Dade Building Code Compliance Office, plus missile impact testing under TAS 201 (Large Missile), TAS 202 (Forced Entry), and TAS 203 (Air Pressure Cyclic) for every opening protection product.
+            </p>
+            <p>
+                <strong>Only Miami-Dade and Broward counties are HVHZ.</strong> Despite higher wind speeds in the Keys (Monroe County) and the post-Andrew origin of the designation, no other Florida county is currently HVHZ-zoned. This is a common misconception worth correcting on every project that imports HVHZ assumptions into non-HVHZ jurisdictions.
+            </p>
+        </div>
+    </section>
+
+    <!-- FBC vs ASCE -->
+    <section class="section">
+        <div class="inner">
+            <span class="section-eyebrow">FBC vs ASCE</span>
+            <h2>Why the two numbers can differ.</h2>
+            <p>
+                ASCE 7-22 is a consensus engineering standard. The Florida Building Code is a legally enforceable code. The relationship between them is straightforward: <strong>the 8th Edition of the Florida Building Code (2023) adopts ASCE 7-22 by reference</strong>, then layers Florida-specific amendments on top. Section R301.2(7) of the Residential code is where Florida counties get the authority to set a wind speed that exceeds the ASCE 7-22 Figure 26.5-1B map contour value.
+            </p>
+            <p>
+                When that authority is used &mdash; in Miami-Dade, Broward, and Collier counties as of the 2023 FBC edition &mdash; the FBC value becomes the legally enforceable design wind speed for permit submission in that county. Designing to the raw ASCE map value alone will fail plan review. When the authority is not used (most other Florida counties), the ASCE 7-22 map value governs, looked up at the project site or the ZIP centroid for a quick check.
+            </p>
+        </div>
+    </section>
+
+    <!-- Calc CTA -->
+    <section class="section bg-white">
+        <div class="inner">
+            <div class="calc-cta">
+                <h3>Need a specific ZIP right now?</h3>
+                <p>Run any Florida ZIP through the free calculator. FBC overrides are applied automatically. Every coefficient cited. No signup, no meter.</p>
+                <a href="../free-wind-load-calculator.html">Open the free calculator &rarr;</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section">
+        <div class="inner">
+            <span class="section-eyebrow">FAQ</span>
+            <h2>Common questions.</h2>
+
+            <div class="faq-item">
+                <button class="faq-q" aria-expanded="false"><span>Which Florida counties have FBC wind speed overrides?</span><span class="chevron">&#9662;</span></button>
+                <div class="faq-a"><div class="faq-a-inner">Three Florida counties have hardcoded Florida Building Code R301.2(7) jurisdictional wind speed overrides in our engine: Miami-Dade (165/175/186/195 mph for Risk Cat I/II/III/IV), Broward (156/170/180/185 mph), and Collier (151/170/180/190 mph). Other counties default to the ASCE 7-22 Figure 26.5-1 map value at the ZIP centroid. Additional counties are pending verification.</div></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q" aria-expanded="false"><span>What is HVHZ?</span><span class="chevron">&#9662;</span></button>
+                <div class="faq-a"><div class="faq-a-inner">HVHZ stands for High Velocity Hurricane Zone, a Florida Building Code designation requiring Notice of Acceptance (NOA) product approval and missile impact testing (TAS 201, 202, 203). Only Miami-Dade and Broward counties are HVHZ. Monroe County is NOT HVHZ despite its high wind speeds in the Keys.</div></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q" aria-expanded="false"><span>Why does Miami-Dade use 175 mph when the ASCE map shows around 170 mph?</span><span class="chevron">&#9662;</span></button>
+                <div class="faq-a"><div class="faq-a-inner">Florida Building Code R301.2(7) gives Miami-Dade County the authority to adopt a wind speed that exceeds the ASCE 7-22 Figure 26.5-1 contour value. The FBC value (175 mph Risk Cat II) is the legally enforceable value for permit submission. Designing to the ASCE map value alone will not pass plan review in Miami-Dade.</div></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q" aria-expanded="false"><span>Does Florida use ASCE 7-22?</span><span class="chevron">&#9662;</span></button>
+                <div class="faq-a"><div class="faq-a-inner">Florida Building Code 8th Edition (2023) adopts ASCE 7-22 by reference with Florida-specific amendments. The ASCE 7-22 standard is the baseline; FBC R301.2(7) county overrides supersede it where adopted. For most Florida counties (those without an override), ASCE 7-22 governs.</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust strip -->
+    <section class="trust-strip">
+        <div>
+            <p class="tagline">Calculating wind loads since 2002, online since 2006.</p>
+            <p class="meta">One of the very first wind load calculators on the web &middot; In-house Florida-licensed P.E. reviews jurisdictional overrides</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="site-footer-inner">
+            <div>&copy; 2026 WindLoad Solutions. All rights reserved.</div>
+            <div>
+                <a href="../">Home</a> &nbsp;&middot;&nbsp;
+                <a href="../free-wind-load-calculator.html">Free Calculator</a> &nbsp;&middot;&nbsp;
+                <a href="../calc-landing.html">Pro version</a> &nbsp;&middot;&nbsp;
+                <a href="../terms-of-service.html">Terms</a> &nbsp;&middot;&nbsp;
+                <a href="../privacy-policy.html">Privacy</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.faq-q').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const expanded = btn.getAttribute('aria-expanded') === 'true';
+                btn.setAttribute('aria-expanded', String(!expanded));
+                btn.nextElementSibling.classList.toggle('open', !expanded);
+            });
+        });
+    </script>
+</body>
+</html>

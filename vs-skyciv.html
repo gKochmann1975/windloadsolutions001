@@ -1,0 +1,1722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://windloadcalc.com/vs-skyciv.html">
+
+    <title>WindLoadCalc vs SkyCiv: Free Wind Load Calculator Comparison (2026) | windloadcalc.com</title>
+    <meta name="description" content="WindLoadCalc vs SkyCiv: honest comparison. WindLoadCalc applies Florida Building Code overrides (Miami-Dade 175, Broward/Collier 170) that SkyCiv doesn't.">
+    <meta name="keywords" content="WindLoadCalc vs SkyCiv, SkyCiv alternative, SkyCiv comparison, wind load calculator comparison, ASCE 7-22 calculator, Florida Building Code wind speed, Miami-Dade wind speed software, free wind load calculator, structural engineering software comparison">
+
+    <link rel="icon" type="image/svg+xml" href="images/windloadcalc-favicon.svg">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="WindLoadCalc vs SkyCiv: An Honest Wind Load Calculator Comparison (2026)">
+    <meta property="og:description" content="If you do multi-load global engineering across 9 codes, SkyCiv is a strong fit. If you do ASCE 7-22 wind loads &mdash; especially Florida HVHZ &mdash; WindLoadCalc is purpose-built.">
+    <meta property="og:url" content="https://windloadcalc.com/vs-skyciv.html">
+    <meta property="og:image" content="https://windloadcalc.com/images/wind-calculator-og.jpg">
+    <meta property="og:site_name" content="WindLoadCalc">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="WindLoadCalc vs SkyCiv: An Honest Comparison (2026)">
+    <meta name="twitter:description" content="Where each tool legitimately wins. Same Miami-Dade address, side-by-side output. No invented review counts.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- ============================================ -->
+    <!-- JSON-LD SCHEMA: Article                       -->
+    <!-- ============================================ -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "WindLoadCalc vs SkyCiv: An Honest Wind Load Calculator Comparison (2026)",
+        "description": "Side-by-side comparison of WindLoadCalc and SkyCiv wind load calculators: code coverage, free-tier limits, Florida Building Code jurisdictional overrides, pricing, and where each tool legitimately wins.",
+        "author": {
+            "@type": "Organization",
+            "name": "WindLoadCalc Editorial",
+            "url": "https://windloadcalc.com"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "WindLoad Solutions",
+            "url": "https://windloadcalc.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://windloadcalc.com/images/windloadcalc-logo.png"
+            }
+        },
+        "datePublished": "2026-05-24",
+        "dateModified": "2026-05-24",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://windloadcalc.com/vs-skyciv.html"
+        },
+        "about": [
+            {"@type": "Thing", "name": "Wind load calculation software"},
+            {"@type": "Thing", "name": "ASCE 7-22"},
+            {"@type": "Thing", "name": "Florida Building Code"}
+        ],
+        "inLanguage": "en-US"
+    }
+    </script>
+
+    <!-- ============================================ -->
+    <!-- JSON-LD SCHEMA: FAQPage                       -->
+    <!-- ============================================ -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Is WindLoadCalc free?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "There is a fully free public calculator at windloadcalc.com/free-wind-load-calculator.html with no signup and no rate meter. It returns the design pressure for one wall component with every coefficient cited to ASCE 7-22. For multi-component schedules, MWFRS, all six roof shapes, Excel export, project saving, and team seats, the paid subscription (starts under $40/month, published on the Pro landing page) is required. The free tool is a slice of the paid product, not a trial that expires."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Does SkyCiv handle Florida Building Code wind speeds?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "SkyCiv returns the ASCE 7-22 basic wind speed at the map value. That is the correct standards value. It does not apply the Florida Building Code R301.2(7) jurisdictional minimums that supersede the ASCE map value in Miami-Dade (175 mph for Risk Cat II), Broward (170 mph), and Collier (170 mph). For a permit submission in those counties, the plan reviewer checks against the FBC value, not the ASCE map value."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Why does WindLoadCalc return 175 mph for Miami when SkyCiv shows ~170 mph?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Both numbers are correct for what each tool is calculating. SkyCiv returns the ASCE 7-22 standard map value at the project ZIP centroid. WindLoadCalc applies the Florida Building Code R301.2(7) jurisdictional minimum that legally supersedes the ASCE map value inside Miami-Dade county. The FBC value is the one a Miami-Dade plan reviewer will check against on a permit submission, so it is the practically useful number for a Florida HVHZ project."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What's the difference between ASCE 7-22 and the Florida Building Code?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "ASCE 7-22 is a national consensus standard (Minimum Design Loads and Associated Criteria for Buildings and Other Structures, 2022 edition) published by the American Society of Civil Engineers. The Florida Building Code is the legally adopted state building code; the 8th Edition (2023) adopts ASCE 7-22 by reference and then amends specific values, including the R301.2(7) county wind speed table that raises wind speeds in Miami-Dade, Broward, and Collier above the ASCE 7-22 map values. ASCE 7 is a standard; FBC and IBC are codes. The code wins when they disagree."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Can I use WindLoadCalc's free calculator without signing up?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes. The free calculator at windloadcalc.com/free-wind-load-calculator.html has no signup, no email gate, and no per-week or per-day solve limit. You enter a ZIP and component dimensions and you get the design pressure with every coefficient cited. The paid Pro subscription adds multi-component schedules, MWFRS calculations, all six roof shapes, Excel export, PE-stampable PDFs, and project save."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Does WindLoadCalc support all the same load types as SkyCiv?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "No. WindLoadCalc is a wind load specialist. SkyCiv's load tools cover wind, snow, seismic, dead, and live load combinations within a broader structural engineering software suite that includes FEA, beam, plate, foundation, and 3D structural design (S3D). If you need a multi-load combination engine inside a single integrated structural design tool, SkyCiv is the better fit. If you do wind load work specifically and want depth on ASCE 7-22 plus Florida Building Code, WindLoadCalc is purpose-built for that workflow."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What if I'm doing wind load work in Canada, Europe, or Australia?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "SkyCiv covers nine codes including ASCE 7, AS/NZS 1170 (Australia/New Zealand), EN 1991 (Eurocode), and NBCC (Canada). WindLoadCalc is ASCE 7-22 and Florida Building Code only. For international wind load work outside the United States, SkyCiv's geographic breadth is the practical advantage. WindLoadCalc has no plans to add non-US codes in the near term."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How is the free tool different from the paid WindLoadCalc subscription?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The free tool solves one wall component at a time (Zones 4 and 5) with the ASCE 7-22 + FBC engine and shows every coefficient cited. The Pro subscription adds: multi-component window/door schedules across an entire project, MWFRS (Main Wind Force Resisting System) calculations, all six C&C roof shapes, Architectural Schedule export to real .xlsx for AutoCAD, Engineering Report PDF, project save and team seats, and Florida PE sign-and-seal service (in-house Florida-licensed P.E., max 3 stories, Florida projects only)."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <!-- ============================================ -->
+    <!-- JSON-LD SCHEMA: BreadcrumbList                -->
+    <!-- ============================================ -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://windloadcalc.com/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Compare",
+                "item": "https://windloadcalc.com/compare/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "vs SkyCiv",
+                "item": "https://windloadcalc.com/vs-skyciv.html"
+            }
+        ]
+    }
+    </script>
+
+    <style>
+        /* ============================================ */
+        /* DESIGN TOKENS                                */
+        /* ============================================ */
+        :root {
+            --brand-primary: #0018ff;
+            --brand-dark: #181E57;
+            --brand-gradient: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            --gold: #E8B530;
+            --gold-soft: rgba(232, 181, 48, 0.08);
+            --suction-red: #DC2626;
+            --pressure-blue: #0018ff;
+
+            --bg-page: #FAFAF7;
+            --bg-card: #ffffff;
+            --bg-card-glass: rgba(255, 255, 255, 0.97);
+
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --text-muted: #9ca3af;
+            --text-ivory: #F5F1EA;
+
+            --border-subtle: rgba(24, 30, 87, 0.08);
+            --border-input: rgba(24, 30, 87, 0.15);
+            --border-input-focus: var(--brand-primary);
+
+            --shadow-card: 0 20px 60px rgba(24, 30, 87, 0.12), 0 4px 16px rgba(24, 30, 87, 0.06);
+            --shadow-badge: 0 8px 24px rgba(232, 181, 48, 0.18);
+
+            --radius-card: 16px;
+            --radius-input: 10px;
+            --radius-pill: 999px;
+
+            --font-serif: 'EB Garamond', Georgia, 'Times New Roman', serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-mono: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+        }
+
+        /* ============================================ */
+        /* RESET                                        */
+        /* ============================================ */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-sans);
+            line-height: 1.65;
+            color: var(--text-primary);
+            background: var(--bg-page);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+        button { font-family: inherit; cursor: pointer; }
+        a { color: var(--brand-primary); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        /* ============================================ */
+        /* TOP-NAV SITE-WIDE BANNER                     */
+        /* ============================================ */
+        .wlc-promo-banner {
+            background: var(--brand-dark);
+            color: var(--text-ivory);
+            padding: 0.65rem 1.5rem;
+            text-align: center;
+            font-size: 0.875rem;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+            position: relative;
+            z-index: 1001;
+        }
+        .wlc-promo-banner a {
+            color: var(--text-ivory);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .wlc-promo-banner a:hover { color: var(--gold); text-decoration: none; }
+        .wlc-promo-banner .arrow {
+            transition: transform 0.2s ease;
+            display: inline-block;
+        }
+        .wlc-promo-banner a:hover .arrow { transform: translateX(4px); }
+
+        /* ============================================ */
+        /* HEADER                                       */
+        /* ============================================ */
+        .site-header {
+            background: var(--bg-card-glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .site-header .logo {
+            font-family: var(--font-serif);
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--brand-dark);
+            text-decoration: none;
+            letter-spacing: -0.01em;
+        }
+        .site-header .logo:hover { text-decoration: none; color: var(--brand-primary); }
+        .site-header .nav-cta {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+        .nav-link-subtle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 0.5rem 0.75rem;
+        }
+        .nav-link-subtle:hover { color: var(--brand-primary); text-decoration: none; }
+        .nav-cta-primary {
+            background: var(--brand-primary);
+            color: white;
+            padding: 0.65rem 1.25rem;
+            border-radius: var(--radius-pill);
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+        .nav-cta-primary:hover {
+            background: var(--brand-dark);
+            color: white;
+            text-decoration: none;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(0, 24, 255, 0.25);
+        }
+
+        /* ============================================ */
+        /* BREADCRUMBS                                  */
+        /* ============================================ */
+        .breadcrumbs {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 1.5rem 0;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            letter-spacing: 0.04em;
+        }
+        .breadcrumbs a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+        .breadcrumbs a:hover { color: var(--brand-primary); text-decoration: underline; }
+        .breadcrumbs .sep { margin: 0 0.5rem; opacity: 0.5; }
+        .breadcrumbs .current { color: var(--brand-dark); font-weight: 600; }
+
+        /* ============================================ */
+        /* HERO                                         */
+        /* ============================================ */
+        .hero {
+            background: var(--brand-gradient);
+            padding: 4rem 1.5rem 5rem;
+            position: relative;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 70% 30%, rgba(232, 181, 48, 0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .hero-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            color: var(--text-ivory);
+        }
+        .hero-eyebrow {
+            display: inline-block;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1.25rem;
+        }
+        .hero h1 {
+            font-family: var(--font-serif);
+            font-weight: 600;
+            font-size: clamp(2rem, 4.2vw, 3.5rem);
+            line-height: 1.12;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.5rem;
+            color: white;
+            max-width: 900px;
+        }
+        .hero h1 .hl {
+            background: linear-gradient(180deg, transparent 60%, rgba(232, 181, 48, 0.3) 60%);
+            padding: 0 0.1em;
+        }
+        .hero-date {
+            font-family: var(--font-mono);
+            font-size: 0.8125rem;
+            color: rgba(245, 241, 234, 0.6);
+            letter-spacing: 0.02em;
+            margin-bottom: 2rem;
+        }
+
+        /* TL;DR box */
+        .tldr {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-left: 4px solid var(--gold);
+            border-radius: var(--radius-card);
+            padding: 1.75rem 2rem;
+            backdrop-filter: blur(12px);
+            max-width: 880px;
+        }
+        .tldr-label {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+        .tldr p {
+            font-size: 1.0625rem;
+            line-height: 1.65;
+            color: rgba(245, 241, 234, 0.95);
+            margin-bottom: 0.75rem;
+        }
+        .tldr p:last-child { margin-bottom: 0; }
+        .tldr strong { color: white; font-weight: 600; }
+
+        /* ============================================ */
+        /* CONTENT SECTIONS                             */
+        /* ============================================ */
+        .content-section {
+            padding: 4rem 1.5rem;
+            background: white;
+            border-top: 1px solid var(--border-subtle);
+        }
+        .content-section.bg-page { background: var(--bg-page); }
+        .content-section.bg-dark {
+            background: var(--brand-dark);
+            color: var(--text-ivory);
+        }
+        .content-section.bg-dark h2,
+        .content-section.bg-dark h3 { color: white; }
+        .content-section.bg-dark p { color: rgba(245, 241, 234, 0.9); }
+        .content-inner {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+        .content-inner.wide { max-width: 1200px; }
+        .section-eyebrow {
+            display: inline-block;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--brand-primary);
+            margin-bottom: 0.75rem;
+        }
+        .content-section.bg-dark .section-eyebrow { color: var(--gold); }
+        .content-inner h2 {
+            font-family: var(--font-serif);
+            font-size: clamp(1.75rem, 3vw, 2.25rem);
+            font-weight: 600;
+            color: var(--brand-dark);
+            letter-spacing: -0.015em;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+        .content-inner h3 {
+            font-family: var(--font-sans);
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--brand-dark);
+            margin-bottom: 0.5rem;
+            margin-top: 1.75rem;
+        }
+        .content-inner p {
+            color: var(--text-primary);
+            line-height: 1.75;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+        .content-inner ul, .content-inner ol {
+            padding-left: 1.25rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+        .content-inner li { margin-bottom: 0.4rem; }
+        .lead {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            max-width: 760px;
+        }
+
+        /* ============================================ */
+        /* QUICK VERDICT CARDS                          */
+        /* ============================================ */
+        .verdict-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .verdict-card {
+            background: white;
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-card);
+            padding: 1.75rem 1.75rem 2rem;
+            box-shadow: var(--shadow-card);
+        }
+        .verdict-card.wlc { border-left: 4px solid var(--gold); }
+        .verdict-card.skyciv { border-left: 4px solid var(--brand-primary); }
+        .verdict-card .card-label {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+        .verdict-card .card-name {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--brand-dark);
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+        .verdict-card .card-tag {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.25rem;
+            line-height: 1.5;
+        }
+        .verdict-card h4 {
+            font-size: 0.8125rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--brand-dark);
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        .verdict-card ul { padding-left: 1.1rem; margin-bottom: 0; }
+        .verdict-card li {
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            margin-bottom: 0.3rem;
+            line-height: 1.55;
+        }
+
+        /* ============================================ */
+        /* COMPARISON MATRIX TABLE                      */
+        /* ============================================ */
+        .matrix-wrap {
+            margin-top: 2rem;
+            overflow-x: auto;
+            background: white;
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-card);
+            box-shadow: var(--shadow-card);
+        }
+        .matrix-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            min-width: 720px;
+        }
+        .matrix-table thead th {
+            text-align: left;
+            padding: 1rem;
+            background: var(--brand-dark);
+            color: white;
+            font-weight: 600;
+            font-size: 0.8125rem;
+            font-family: var(--font-mono);
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            position: sticky;
+            top: 0;
+        }
+        .matrix-table thead th:not(:first-child) { text-align: center; }
+        .matrix-table tbody td {
+            padding: 0.9rem 1rem;
+            border-bottom: 1px solid var(--border-subtle);
+            vertical-align: top;
+            line-height: 1.5;
+        }
+        .matrix-table tbody tr:last-child td { border-bottom: none; }
+        .matrix-table tbody tr:nth-child(even) td { background: rgba(24, 30, 87, 0.02); }
+        .matrix-table .feature-name {
+            font-family: var(--font-mono);
+            font-size: 0.825rem;
+            font-weight: 600;
+            color: var(--brand-dark);
+            width: 32%;
+        }
+        .matrix-table .col-wlc, .matrix-table .col-skyciv {
+            width: 26%;
+            color: var(--text-primary);
+            font-size: 0.875rem;
+        }
+        .matrix-table .col-winner {
+            width: 16%;
+            text-align: center;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+        .matrix-table .winner-wlc {
+            background: var(--gold-soft) !important;
+            color: var(--brand-dark);
+        }
+        .matrix-table .winner-skyciv {
+            background: rgba(0, 24, 255, 0.04) !important;
+            color: var(--brand-primary);
+        }
+        .matrix-table .winner-tie { color: var(--text-muted); }
+
+        /* ============================================ */
+        /* KILLER EVIDENCE PANEL                        */
+        /* ============================================ */
+        .evidence {
+            margin-top: 2rem;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        .evidence-scenario {
+            background: white;
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-card);
+            padding: 1.75rem 2rem;
+            box-shadow: var(--shadow-card);
+        }
+        .evidence-scenario h3 {
+            margin-top: 0;
+            font-family: var(--font-mono);
+            font-size: 0.8125rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+        }
+        .evidence-scenario .address {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--brand-dark);
+            line-height: 1.3;
+            margin-bottom: 0.5rem;
+        }
+        .evidence-scenario .inputs {
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .evidence-results {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+        }
+        .evidence-card {
+            background: white;
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-card);
+            padding: 1.75rem;
+            box-shadow: var(--shadow-card);
+        }
+        .evidence-card.wlc { border-left: 4px solid var(--gold); }
+        .evidence-card.skyciv { border-left: 4px solid var(--brand-primary); }
+        .evidence-card .tool-name {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+        }
+        .evidence-card .speed-big {
+            font-family: var(--font-serif);
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 700;
+            line-height: 1;
+            color: var(--brand-dark);
+            font-variant-numeric: tabular-nums;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.25rem;
+        }
+        .evidence-card .speed-unit {
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-left: 0.4rem;
+        }
+        .evidence-card .source-line {
+            font-family: var(--font-mono);
+            font-size: 0.8125rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            padding-top: 0.75rem;
+            border-top: 1px solid var(--border-subtle);
+            margin-top: 0.75rem;
+        }
+        .evidence-card .source-line strong { color: var(--brand-dark); }
+
+        .evidence-caption {
+            background: var(--bg-page);
+            border-left: 4px solid var(--brand-dark);
+            border-radius: 0 var(--radius-card) var(--radius-card) 0;
+            padding: 1.5rem 1.75rem;
+            font-family: var(--font-serif);
+            font-size: 1.0625rem;
+            line-height: 1.6;
+            color: var(--brand-dark);
+            font-style: italic;
+        }
+        .evidence-caption strong { font-style: normal; color: var(--brand-dark); }
+
+        /* ============================================ */
+        /* WHERE EACH WINS — TWO-COL                    */
+        /* ============================================ */
+        .wins-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .wins-col h3 {
+            font-family: var(--font-serif);
+            font-size: 1.375rem;
+            font-weight: 600;
+            color: var(--brand-dark);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--gold);
+        }
+        .wins-col.skyciv-col h3 { border-bottom-color: var(--brand-primary); }
+        .wins-col ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .wins-col li {
+            padding: 0.875rem 0;
+            border-bottom: 1px solid var(--border-subtle);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--text-primary);
+        }
+        .wins-col li:last-child { border-bottom: none; }
+        .wins-col li strong {
+            display: block;
+            color: var(--brand-dark);
+            margin-bottom: 0.2rem;
+            font-size: 0.9375rem;
+        }
+
+        /* ============================================ */
+        /* FREE-TIER REALITY CHECK                      */
+        /* ============================================ */
+        .free-tier-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .free-tier-card {
+            background: white;
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-card);
+            padding: 1.75rem;
+            box-shadow: var(--shadow-card);
+        }
+        .free-tier-card.wlc { border-top: 4px solid var(--gold); }
+        .free-tier-card.skyciv { border-top: 4px solid var(--brand-primary); }
+        .free-tier-card h3 {
+            margin-top: 0;
+            font-family: var(--font-serif);
+            font-size: 1.375rem;
+            font-weight: 700;
+            color: var(--brand-dark);
+            margin-bottom: 0.5rem;
+        }
+        .free-tier-card .price-line {
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.25rem;
+        }
+        .free-tier-card .price-line strong {
+            color: var(--brand-dark);
+            font-size: 1.125rem;
+        }
+        .free-tier-card ul { list-style: none; padding-left: 0; }
+        .free-tier-card li {
+            padding: 0.5rem 0;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            line-height: 1.55;
+            display: flex;
+            gap: 0.6rem;
+            align-items: flex-start;
+        }
+        .free-tier-card li::before {
+            content: "—";
+            font-family: var(--font-mono);
+            color: var(--text-muted);
+            flex-shrink: 0;
+            margin-top: 0.05rem;
+        }
+
+        /* ============================================ */
+        /* PRICING / MIGRATION CALLOUTS                 */
+        /* ============================================ */
+        .callout {
+            background: var(--bg-page);
+            border-left: 4px solid var(--brand-primary);
+            border-radius: 0 var(--radius-card) var(--radius-card) 0;
+            padding: 1.5rem 1.75rem;
+            margin: 1.5rem 0;
+        }
+        .callout strong { color: var(--brand-dark); }
+
+        /* ============================================ */
+        /* TRUST STRIP                                  */
+        /* ============================================ */
+        .trust-strip {
+            background: var(--brand-dark);
+            color: var(--text-ivory);
+            padding: 3rem 1.5rem;
+            text-align: center;
+        }
+        .trust-strip-inner {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .trust-strip-tagline {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: 0.75rem;
+            color: white;
+        }
+        .trust-strip-meta {
+            font-family: var(--font-mono);
+            font-size: 0.8125rem;
+            color: rgba(245, 241, 234, 0.65);
+            letter-spacing: 0.04em;
+        }
+
+        /* ============================================ */
+        /* FAQ                                          */
+        /* ============================================ */
+        .faq-item {
+            background: white;
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-input);
+            margin-bottom: 0.75rem;
+            overflow: hidden;
+        }
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem 1.5rem;
+            background: none;
+            border: none;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--brand-dark);
+            text-align: left;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.15s ease;
+        }
+        .faq-question:hover { background: var(--bg-page); }
+        .faq-question .chevron {
+            margin-left: 1rem;
+            color: var(--text-muted);
+            transition: transform 0.2s ease;
+            font-size: 0.85rem;
+        }
+        .faq-question[aria-expanded="true"] .chevron { transform: rotate(180deg); }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .faq-answer.open { max-height: 800px; }
+        .faq-answer-inner {
+            padding: 0 1.5rem 1.25rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        /* ============================================ */
+        /* SOFT CTA BLOCK                               */
+        /* ============================================ */
+        .soft-cta {
+            background: white;
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-card);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-card);
+            text-align: center;
+            margin-top: 2rem;
+        }
+        .soft-cta h3 {
+            font-family: var(--font-serif);
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--brand-dark);
+            margin-bottom: 0.75rem;
+            line-height: 1.25;
+        }
+        .soft-cta p {
+            color: var(--text-secondary);
+            font-size: 1.0625rem;
+            margin-bottom: 1.5rem;
+            max-width: 560px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .soft-cta-buttons {
+            display: inline-flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .soft-cta-btn-primary {
+            display: inline-block;
+            padding: 0.85rem 1.75rem;
+            background: var(--brand-primary);
+            color: white;
+            border-radius: var(--radius-pill);
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        .soft-cta-btn-primary:hover {
+            background: var(--brand-dark);
+            color: white;
+            text-decoration: none;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 24px rgba(0, 24, 255, 0.25);
+        }
+        .soft-cta-btn-secondary {
+            display: inline-block;
+            padding: 0.85rem 1.75rem;
+            background: transparent;
+            border: 1.5px solid var(--border-input);
+            color: var(--brand-dark);
+            border-radius: var(--radius-pill);
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        .soft-cta-btn-secondary:hover {
+            border-color: var(--brand-primary);
+            color: var(--brand-primary);
+            text-decoration: none;
+        }
+
+        /* ============================================ */
+        /* DATE-STAMP / DISCLAIMER FOOTER LINE          */
+        /* ============================================ */
+        .accuracy-note {
+            text-align: center;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            padding: 1.5rem;
+            background: var(--bg-page);
+            border-top: 1px solid var(--border-subtle);
+            line-height: 1.6;
+        }
+        .accuracy-note strong { color: var(--text-secondary); }
+
+        /* ============================================ */
+        /* FOOTER                                       */
+        /* ============================================ */
+        .site-footer {
+            background: white;
+            border-top: 1px solid var(--border-subtle);
+            padding: 2.5rem 1.5rem;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+        .site-footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .site-footer a { color: var(--text-secondary); }
+        .site-footer a:hover { color: var(--brand-primary); }
+
+        /* ============================================ */
+        /* RESPONSIVE                                   */
+        /* ============================================ */
+        @media (max-width: 900px) {
+            .verdict-grid,
+            .evidence-results,
+            .wins-grid,
+            .free-tier-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            .hero { padding: 2.5rem 1rem 3rem; }
+            .content-section { padding: 3rem 1rem; }
+            .soft-cta { padding: 1.75rem; }
+            .evidence-scenario { padding: 1.5rem; }
+            .evidence-card { padding: 1.5rem; }
+            .tldr { padding: 1.5rem; }
+        }
+        @media (max-width: 600px) {
+            .site-footer-inner { flex-direction: column; text-align: center; }
+            .matrix-table { font-size: 0.825rem; }
+            .matrix-table thead th,
+            .matrix-table tbody td { padding: 0.65rem 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================ -->
+    <!-- TOP-NAV SITE-WIDE BANNER                     -->
+    <!-- ============================================ -->
+    <div class="wlc-promo-banner" role="region" aria-label="Free tool announcement">
+        <a href="/free-wind-load-calculator.html">
+            Free Wind Load Calculator with Florida Building Code overrides
+            <span class="arrow">&rarr;</span>
+        </a>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- HEADER                                        -->
+    <!-- ============================================ -->
+    <header class="site-header">
+        <a href="/" class="logo">WindLoadCalc</a>
+        <nav class="nav-cta" aria-label="Primary">
+            <a href="/" class="nav-link-subtle">Home</a>
+            <a href="/free-wind-load-calculator.html" class="nav-link-subtle">Free calculator</a>
+            <a href="/account.html" class="nav-link-subtle">Sign in</a>
+            <a href="/calc-landing.html" class="nav-cta-primary">Pro version</a>
+        </nav>
+    </header>
+
+    <!-- ============================================ -->
+    <!-- BREADCRUMBS                                   -->
+    <!-- ============================================ -->
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep">/</span>
+        <a href="/compare/">Compare</a>
+        <span class="sep">/</span>
+        <span class="current">vs SkyCiv</span>
+    </nav>
+
+    <!-- ============================================ -->
+    <!-- HERO + TL;DR                                  -->
+    <!-- ============================================ -->
+    <section class="hero">
+        <div class="hero-inner">
+            <span class="hero-eyebrow">Comparison &middot; Editorial</span>
+            <h1>
+                WindLoadCalc vs SkyCiv: An <span class="hl">honest</span> wind load calculator comparison (2026).
+            </h1>
+            <p class="hero-date">Updated 2026-05-24 &middot; By WindLoadCalc Editorial</p>
+
+            <div class="tldr">
+                <span class="tldr-label">TL;DR &mdash; Who each tool is for</span>
+                <p>
+                    <strong>If you do multi-load global engineering across 9 codes</strong> (wind plus snow, seismic, dead, live; ASCE plus Eurocode plus AS/NZS plus NBCC), SkyCiv is a strong fit and sits inside a broader structural design suite.
+                </p>
+                <p>
+                    <strong>If you do ASCE 7-22 wind loads</strong> &mdash; especially in Florida HVHZ jurisdictions where county-specific code overrides supersede the ASCE map &mdash; WindLoadCalc is purpose-built for the job, with the Florida Building Code values baked into the lookup engine.
+                </p>
+                <p>
+                    Both tools are honest about what they do. The rest of this page is the detail.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- 1. QUICK VERDICT                              -->
+    <!-- ============================================ -->
+    <section class="content-section">
+        <div class="content-inner wide">
+            <span class="section-eyebrow">1. Quick verdict</span>
+            <h2>Which tool fits which engineer.</h2>
+            <p class="lead">
+                Both products solve real problems. They are not, however, the same product. Here is how to decide in under a minute.
+            </p>
+
+            <div class="verdict-grid">
+                <div class="verdict-card wlc">
+                    <div class="card-label">Pick WindLoadCalc if</div>
+                    <div class="card-name">You do US wind loads, especially Florida.</div>
+                    <p class="card-tag">A wind-load specialist with the Florida Building Code jurisdictional values that supersede the ASCE 7-22 map in HVHZ counties.</p>
+
+                    <h4>Best for</h4>
+                    <ul>
+                        <li>Florida residential and light-commercial engineers, especially Miami-Dade, Broward, Collier (HVHZ)</li>
+                        <li>Window and door schedule work that needs real .xlsx output for AutoCAD drop-in</li>
+                        <li>Anyone who wants every coefficient cited to its ASCE 7-22 section in the output</li>
+                        <li>Engineers who need a Florida PE sign-and-seal on residential wind load reports (max 3 stories)</li>
+                    </ul>
+                </div>
+
+                <div class="verdict-card skyciv">
+                    <div class="card-label">Pick SkyCiv if</div>
+                    <div class="card-name">You do multi-load, multi-code structural work.</div>
+                    <p class="card-tag">A broad structural engineering suite covering wind, snow, seismic, dead, live loads across 9 international codes plus FEA and design modules.</p>
+
+                    <h4>Best for</h4>
+                    <ul>
+                        <li>International projects: Canada (NBCC), Australia/NZ (AS/NZS 1170), Europe (EN 1991)</li>
+                        <li>Engineers who need wind plus snow plus seismic in the same project file</li>
+                        <li>Teams already running S3D, beam, plate, or foundation design inside the SkyCiv ecosystem</li>
+                        <li>Workflows where wind load is one input to a larger structural model, not the deliverable itself</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- 2. COMPANY BACKGROUND                         -->
+    <!-- ============================================ -->
+    <section class="content-section bg-page">
+        <div class="content-inner">
+            <span class="section-eyebrow">2. Company background</span>
+            <h2>Two tools, two origin stories.</h2>
+
+            <h3>SkyCiv (2013, Sydney, Australia)</h3>
+            <p>
+                SkyCiv launched in 2013 out of Sydney as a cloud-based structural analysis tool. The company built outward from a 3D structural model (S3D) into a broader engineering suite that now spans beam analysis, plate, foundation, and integrated load generators. The wind load calculator is one entry point in that suite. SkyCiv's strength is geographic and structural breadth: nine codes, multiple load types, multiple disciplines under one login.
+            </p>
+
+            <h3>WindLoadCalc (2002 in Naples, Florida; online 2006)</h3>
+            <p>
+                WindLoadCalc was created in Naples, Florida in 2002, calculating wind loads by hand for local architects and engineers in Collier County and the surrounding hurricane belt. It went online in 2006 as one of the very first wind load calculators on the open web &mdash; calculating wind loads online before SkyCiv existed as a company. The product has stayed deliberately narrow: ASCE 7-22 wind loads, with Florida Building Code jurisdictional handling that the company has been navigating since the 2001 FBC was the new edition.
+            </p>
+
+            <p>
+                The 24-year gap matters less than what each team chose to do with the time. SkyCiv built outward into a structural suite. WindLoadCalc built downward into the specifics of how wind loads are actually calculated, reviewed, and permitted in the United States &mdash; especially in Florida.
+            </p>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- 3. COMPARISON MATRIX                          -->
+    <!-- ============================================ -->
+    <section class="content-section">
+        <div class="content-inner wide">
+            <span class="section-eyebrow">3. Feature comparison</span>
+            <h2>The 15-row matrix.</h2>
+            <p class="lead">
+                Feature-by-feature. Gold rows mark places where WindLoadCalc is the better fit; blue rows mark places where SkyCiv is. Where the answer depends on user need, the row says so.
+            </p>
+
+            <div class="matrix-wrap">
+                <table class="matrix-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>WindLoadCalc</th>
+                            <th>SkyCiv</th>
+                            <th>Winner</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="feature-name">Year established (firm)</td>
+                            <td class="col-wlc">2002 (Naples, FL)</td>
+                            <td class="col-skyciv">2013 (Sydney, AU)</td>
+                            <td class="col-winner winner-wlc">WLC (11-year head start)</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Year online</td>
+                            <td class="col-wlc">2006</td>
+                            <td class="col-skyciv">2014</td>
+                            <td class="col-winner winner-wlc">WLC</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Codes/standards covered</td>
+                            <td class="col-wlc">ASCE 7-22, FBC 2023 (incl. HVHZ)</td>
+                            <td class="col-skyciv">9 codes incl. ASCE, AS/NZS, EN, NBCC</td>
+                            <td class="col-winner winner-skyciv">SkyCiv (geographic breadth)</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Load types</td>
+                            <td class="col-wlc">Wind only</td>
+                            <td class="col-skyciv">Wind, snow, seismic, dead, live</td>
+                            <td class="col-winner winner-skyciv">SkyCiv (multi-load)</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">FBC jurisdictional overrides (Miami-Dade 175, Broward/Collier 170)</td>
+                            <td class="col-wlc">Yes &mdash; built into ZIP lookup</td>
+                            <td class="col-skyciv">No &mdash; returns ASCE 7-22 map value only</td>
+                            <td class="col-winner winner-wlc">WLC</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Free tier limits</td>
+                            <td class="col-wlc">Free public calculator, no solve cap</td>
+                            <td class="col-skyciv">3 wind solves/week, 3 map lookups/day</td>
+                            <td class="col-winner winner-wlc">WLC</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Roof shapes in free tier</td>
+                            <td class="col-wlc">Single-component wall (Zones 4, 5)</td>
+                            <td class="col-skyciv">Gable + open pitched only</td>
+                            <td class="col-winner winner-wlc">WLC</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">C&amp;C zone calculations</td>
+                            <td class="col-wlc">Yes &mdash; Zones 4, 5 per ASCE 7-22 Ch 30</td>
+                            <td class="col-skyciv">Yes (paid tiers)</td>
+                            <td class="col-winner winner-tie">Tie (paid) / WLC (free)</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Florida PE sign/seal service</td>
+                            <td class="col-wlc">Yes &mdash; in-house FL P.E., &le;3 stories, FL only</td>
+                            <td class="col-skyciv">No (software only)</td>
+                            <td class="col-winner winner-wlc">WLC (scope-limited)</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Global engineering software suite (FEA, design modules)</td>
+                            <td class="col-wlc">No</td>
+                            <td class="col-skyciv">Yes &mdash; S3D, beam, plate, foundation</td>
+                            <td class="col-winner winner-skyciv">SkyCiv</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Pricing transparency</td>
+                            <td class="col-wlc">Published monthly/annual on site</td>
+                            <td class="col-skyciv">Published, but free&rarr;paid limits not surfaced until you hit them</td>
+                            <td class="col-winner winner-wlc">WLC</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Report format options</td>
+                            <td class="col-wlc">Engineering Report + Architectural Schedule (real .xlsx for AutoCAD)</td>
+                            <td class="col-skyciv">PDF report</td>
+                            <td class="col-winner winner-wlc">WLC</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Project save/share</td>
+                            <td class="col-wlc">Yes &mdash; projects, team seats</td>
+                            <td class="col-skyciv">Yes (paid tiers)</td>
+                            <td class="col-winner winner-tie">Tie</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">ASCE 7 edition focus</td>
+                            <td class="col-wlc">ASCE 7-22 deep specialization</td>
+                            <td class="col-skyciv">ASCE 7-10/16/22 breadth</td>
+                            <td class="col-winner winner-tie">Depends on user need</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Coefficient transparency in output</td>
+                            <td class="col-wlc">Every Kz, GCp, GCpi cited to ASCE section</td>
+                            <td class="col-skyciv">Number returned, derivation not shown</td>
+                            <td class="col-winner winner-wlc">WLC</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- 4. WHERE SKYCIV LEGITIMATELY WINS             -->
+    <!-- ============================================ -->
+    <section class="content-section bg-page">
+        <div class="content-inner">
+            <span class="section-eyebrow">4. Where SkyCiv legitimately wins</span>
+            <h2>Things SkyCiv does that WindLoadCalc does not.</h2>
+            <p class="lead">
+                Not every project is a Florida wind load schedule. If your work looks like the items below, SkyCiv is the honest recommendation.
+            </p>
+
+            <div class="wins-grid">
+                <div class="wins-col skyciv-col">
+                    <h3>SkyCiv strengths</h3>
+                    <ul>
+                        <li>
+                            <strong>Multi-code geographic coverage.</strong>
+                            Nine codes including ASCE 7, AS/NZS 1170, EN 1991 (Eurocode), and NBCC. If you have projects outside the United States, WindLoadCalc cannot help &mdash; SkyCiv probably can.
+                        </li>
+                        <li>
+                            <strong>Multi-load combination engine.</strong>
+                            Wind plus snow plus seismic plus dead plus live in one project file, with the load combinations that go with them. WindLoadCalc handles wind only.
+                        </li>
+                        <li>
+                            <strong>Structural design suite.</strong>
+                            S3D 3D structural modeling, beam analysis, plate analysis, foundation design, integrated load generators. Wind is one input to a much larger workflow.
+                        </li>
+                        <li>
+                            <strong>ASCE 7 edition breadth.</strong>
+                            Supports ASCE 7-10 and 7-16 in addition to 7-22 &mdash; useful for projects in jurisdictions that have not yet adopted the 2022 edition. WindLoadCalc focuses on 7-22.
+                        </li>
+                        <li>
+                            <strong>Established global brand.</strong>
+                            Larger marketing presence and a wider third-party knowledge base. If you want a tool your firm has likely already heard of, that is real.
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="wins-col skyciv-col">
+                    <h3>When SkyCiv is the right call</h3>
+                    <ul>
+                        <li>
+                            <strong>You are an integrated structural engineer.</strong>
+                            Your deliverable is a structural model, not a wind load report. Wind is one input among many.
+                        </li>
+                        <li>
+                            <strong>You work in multiple countries.</strong>
+                            US plus Canada plus EU. WindLoadCalc is US-only and has no plans to add Eurocode or NBCC.
+                        </li>
+                        <li>
+                            <strong>You need snow or seismic alongside wind.</strong>
+                            Load combinations matter more to you than depth on any single load type.
+                        </li>
+                        <li>
+                            <strong>You are already in the SkyCiv ecosystem.</strong>
+                            S3D users get value out of using the matched wind tool, even if it lacks Florida-specific overrides.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- 5. WHERE WINDLOADCALC LEGITIMATELY WINS       -->
+    <!-- ============================================ -->
+    <section class="content-section">
+        <div class="content-inner">
+            <span class="section-eyebrow">5. Where WindLoadCalc legitimately wins</span>
+            <h2>Things WindLoadCalc does that SkyCiv does not.</h2>
+            <p class="lead">
+                When the project is a US wind load &mdash; particularly a Florida HVHZ wind load &mdash; the calculus reverses.
+            </p>
+
+            <div class="wins-grid">
+                <div class="wins-col">
+                    <h3>WindLoadCalc strengths</h3>
+                    <ul>
+                        <li>
+                            <strong>Florida Building Code R301.2(7) overrides built in.</strong>
+                            Miami-Dade returns 175 mph for Risk Cat II. Broward returns 170 mph. Collier returns 170 mph. These supersede the ASCE 7-22 map value and are what plan reviewers actually check against. SkyCiv returns the ASCE map value at the ZIP centroid, which is below the legally enforceable value in those counties.
+                        </li>
+                        <li>
+                            <strong>Truly free public calculator.</strong>
+                            No signup, no email gate, no per-week solve meter. Our <a href="/free-wind-load-calculator.html">free wind load calculator</a> runs the same ASCE 7-22 + FBC engine the paid product uses.
+                        </li>
+                        <li>
+                            <strong>Coefficient transparency.</strong>
+                            Every K<sub>z</sub>, K<sub>zt</sub>, K<sub>d</sub>, K<sub>e</sub>, GC<sub>p</sub>, and GC<sub>pi</sub> is cited to its ASCE section in the report output. You can hand the report to a peer reviewer without follow-up emails.
+                        </li>
+                        <li>
+                            <strong>Real .xlsx Architectural Schedule.</strong>
+                            Window and door schedules export to a real Excel file that drops into AutoCAD. Not a PDF you have to retype.
+                        </li>
+                        <li>
+                            <strong>In-house Florida PE sign-and-seal.</strong>
+                            For Florida residential projects up to three stories, our in-house Florida-licensed Professional Engineer signs and seals the report. (Out-of-state PE stamps not offered.)
+                        </li>
+                        <li>
+                            <strong>24 years of FBC navigation.</strong>
+                            WindLoadCalc has been calculating to the FBC since the 2001 edition &mdash; seven editions of Florida code change handled in production.
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="wins-col">
+                    <h3>When WindLoadCalc is the right call</h3>
+                    <ul>
+                        <li>
+                            <strong>You permit work in Florida.</strong>
+                            Especially Miami-Dade, Broward, or Collier, where the FBC override is the difference between an approved and a rejected submission.
+                        </li>
+                        <li>
+                            <strong>Your deliverable is the wind load report.</strong>
+                            Not a structural model &mdash; the report itself, with PE sign-and-seal where applicable.
+                        </li>
+                        <li>
+                            <strong>You do window and door schedules.</strong>
+                            Where the .xlsx output for AutoCAD saves you the retyping step.
+                        </li>
+                        <li>
+                            <strong>You want every coefficient defensible.</strong>
+                            Peer reviewers and plan examiners get the source citation in the report, not a black-box number.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- 6. KILLER EVIDENCE — SIDE-BY-SIDE             -->
+    <!-- ============================================ -->
+    <section class="content-section bg-dark">
+        <div class="content-inner wide">
+            <span class="section-eyebrow">6. Same address, two answers</span>
+            <h2>Killer evidence: Miami-Dade, side-by-side.</h2>
+            <p class="lead" style="color: rgba(245, 241, 234, 0.85);">
+                The single clearest reason to know the difference. Identical project, identical inputs, two correct answers that mean different things to a plan reviewer.
+            </p>
+
+            <div class="evidence">
+                <div class="evidence-scenario">
+                    <h3>The scenario</h3>
+                    <div class="address">1234 Brickell Ave, Miami FL 33129</div>
+                    <div class="inputs">
+                        Single-family residence &middot; 2 stories &middot; Risk Cat II &middot; Exposure C &middot; 25 ft mean roof height &middot; 6/12 gable
+                    </div>
+                </div>
+
+                <div class="evidence-results">
+                    <div class="evidence-card skyciv">
+                        <div class="tool-name">SkyCiv Free Wind Calculator</div>
+                        <div class="speed-big">169<span class="speed-unit">mph</span></div>
+                        <div class="source-line">
+                            <strong>Source:</strong> ASCE 7-22 Figure 26.5-1 basic wind speed map value at the project ZIP centroid.
+                        </div>
+                    </div>
+
+                    <div class="evidence-card wlc">
+                        <div class="tool-name">WindLoadCalc Free Calculator</div>
+                        <div class="speed-big">175<span class="speed-unit">mph</span></div>
+                        <div class="source-line">
+                            <strong>Source:</strong> Florida Building Code R301.2(7) jurisdictional minimum for Miami-Dade County, Risk Category II.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="evidence-caption">
+                    "Both tools are correct for what they're calculating. SkyCiv returns the ASCE 7-22 standard value. WindLoadCalc applies the Florida Building Code jurisdictional minimum that a Miami-Dade permit reviewer will check against."
+                </div>
+
+                <p style="color: rgba(245, 241, 234, 0.85); font-size: 0.95rem; line-height: 1.7;">
+                    On a 25-ft single-family residence, the gap between 169 mph and 175 mph translates to roughly a 7% higher design pressure on every exterior wall and roof component &mdash; because velocity pressure scales with the square of wind speed. That is the difference between a glazing schedule that passes review and one that gets returned with a red mark. The number is not what a calculator should round off in a Florida coastal county.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- 7. FREE-TIER REALITY CHECK                    -->
+    <!-- ============================================ -->
+    <section class="content-section">
+        <div class="content-inner">
+            <span class="section-eyebrow">7. Free-tier reality check</span>
+            <h2>What each tool actually gives you for $0.</h2>
+            <p class="lead">
+                Both products have free entry points. The shape of those entry points is very different.
+            </p>
+
+            <div class="free-tier-grid">
+                <div class="free-tier-card wlc">
+                    <h3>WindLoadCalc &mdash; free public calculator</h3>
+                    <div class="price-line"><strong>$0</strong> &middot; no signup &middot; no rate meter</div>
+                    <ul>
+                        <li>Unlimited solves (no per-week, per-day, or lifetime cap)</li>
+                        <li>ASCE 7-22 + Florida Building Code engine</li>
+                        <li>Single wall component (Zones 4, 5) with positive and negative design pressure</li>
+                        <li>Every coefficient cited to ASCE section in the on-page output</li>
+                        <li>All 4 Risk Categories, all 4 enclosure classifications, exposures B/C/D</li>
+                        <li>33,783 US ZIP code lookup with FBC overrides for Miami-Dade, Broward, Collier</li>
+                        <li>No email gate &mdash; load the page, get an answer</li>
+                    </ul>
+                </div>
+
+                <div class="free-tier-card skyciv">
+                    <h3>SkyCiv &mdash; free wind load calculator</h3>
+                    <div class="price-line"><strong>$0</strong> &middot; signup required &middot; metered</div>
+                    <ul>
+                        <li>Publicly stated free-tier limits: 3 wind solves per week, 3 map lookups per day</li>
+                        <li>ASCE 7-10/16/22 engine, plus the additional codes in their suite</li>
+                        <li>Roof shapes in the free tier limited to gable plus open pitched (per SkyCiv's documentation)</li>
+                        <li>PDF report output</li>
+                        <li>ASCE 7-22 standard map value &mdash; no FBC jurisdictional overrides applied</li>
+                        <li>Account required to save or revisit projects</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="callout">
+                <strong>Verified note:</strong> SkyCiv's free-tier limits cited above reflect publicly available SkyCiv documentation as of 2026-05-24. Free-tier specifics on third-party products do change &mdash; refer to <a href="https://skyciv.com/pricing/" rel="external">skyciv.com/pricing/</a> for the current values directly from SkyCiv.
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- 8. PRICING TRANSPARENCY                       -->
+    <!-- ============================================ -->
+    <section class="content-section bg-page">
+        <div class="content-inner">
+            <span class="section-eyebrow">8. Pricing transparency</span>
+            <h2>Pricing, side-by-side.</h2>
+            <p class="lead">
+                Both products publish paid pricing on their respective sites. We are linking out instead of restating &mdash; published prices change, and the source of truth is each vendor's own pricing page.
+            </p>
+
+            <h3>SkyCiv</h3>
+            <p>
+                SkyCiv's paid plans are published at <a href="https://skyciv.com/pricing/" rel="external">skyciv.com/pricing/</a>. Plans bundle the wind load calculator with the rest of the SkyCiv structural suite (S3D, beam, plate, foundation, etc.), so the cost reflects access to the full suite rather than the wind tool in isolation. Free-tier limits are not surfaced on the calculator page itself &mdash; you typically learn the cap when you hit it.
+            </p>
+
+            <h3>WindLoadCalc</h3>
+            <p>
+                WindLoadCalc Pro pricing is published at <a href="/calc-landing.html">windloadcalc.com/calc-landing.html</a>, with monthly and annual options and a 7-day free trial of the full product. There is no separate enterprise tier and no per-user metering inside a subscription; team seats are included at the published tier prices. The <a href="/free-wind-load-calculator.html">free public calculator</a> remains free permanently and is not a trial.
+            </p>
+
+            <div class="callout">
+                We deliberately do not characterize SkyCiv as "expensive" or "cheap." That is a judgment that depends on whether you actually use the parts of the SkyCiv suite you are paying for. If you only use the wind tool, the per-feature cost is one thing; if you use S3D, beam, plate, and foundation alongside it, the per-feature cost is very different.
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- 9. MIGRATION NOTES                            -->
+    <!-- ============================================ -->
+    <section class="content-section">
+        <div class="content-inner">
+            <span class="section-eyebrow">9. Migration notes</span>
+            <h2>Switching from SkyCiv to WindLoadCalc.</h2>
+            <p class="lead">
+                If you have decided the Florida-specific or wind-only workflow fits you better, here is what changes.
+            </p>
+
+            <h3>What carries over directly</h3>
+            <ul>
+                <li>Your project inputs (ZIP, Risk Category, Exposure, mean roof height, component dimensions) are the same fields with the same meaning. ASCE 7-22 is ASCE 7-22.</li>
+                <li>Your enclosure classification choice transfers (Enclosed, Partially Open, Partially Enclosed, Open).</li>
+                <li>Your understanding of GC<sub>p</sub>, GC<sub>pi</sub>, K<sub>z</sub>, K<sub>zt</sub>, K<sub>d</sub>, K<sub>e</sub> is unchanged &mdash; same equations, same standard.</li>
+            </ul>
+
+            <h3>What changes in the output</h3>
+            <ul>
+                <li>For Miami-Dade, Broward, and Collier ZIPs, the basic wind speed returned will be the FBC R301.2(7) value, not the ASCE 7-22 map value. If you compared the two tools side by side, the design pressures will be approximately 4&ndash;7% higher because velocity pressure scales with V&sup2;.</li>
+                <li>The report shows every coefficient with its ASCE 7-22 section reference (a "Reference" column with the source spelled out for each row). SkyCiv's PDF returns the numerical result without the line-by-line derivation.</li>
+                <li>You get a real .xlsx Architectural Schedule output in addition to the Engineering Report PDF, formatted for AutoCAD drop-in.</li>
+            </ul>
+
+            <h3>What you give up</h3>
+            <ul>
+                <li>Non-US code support. WindLoadCalc does not do AS/NZS, Eurocode, or NBCC, and is not planning to.</li>
+                <li>Snow, seismic, dead, and live load combinations. WindLoadCalc is wind only.</li>
+                <li>The integrated structural design suite (S3D, beam, plate, foundation). If your workflow lives inside that suite, switching may not make sense.</li>
+            </ul>
+
+            <h3>Practical first project</h3>
+            <p>
+                The fastest way to evaluate the switch is to re-run a recent Florida project on the <a href="/free-wind-load-calculator.html">WindLoadCalc free tool</a> and compare the design pressure against your existing SkyCiv output. If your project is in a county WindLoadCalc covers with an FBC override, you will see the difference immediately. If your project is outside Florida, the design pressure will match within rounding (both tools are reading the same ASCE 7-22 map).
+            </p>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- TRUST STRIP                                   -->
+    <!-- ============================================ -->
+    <section class="trust-strip">
+        <div class="trust-strip-inner">
+            <p class="trust-strip-tagline">
+                Calculating wind loads since 2002, online since 2006.
+            </p>
+            <p class="trust-strip-meta">
+                One of the very first wind load calculators on the web &middot; 11-year firm head start over SkyCiv (2013) &middot; In-house FL-licensed P.E. reviews jurisdictional overrides
+            </p>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- 10. FAQ                                       -->
+    <!-- ============================================ -->
+    <section class="content-section">
+        <div class="content-inner">
+            <span class="section-eyebrow">10. Frequently asked</span>
+            <h2>Common questions about WindLoadCalc vs SkyCiv.</h2>
+
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false"><span>Is WindLoadCalc free?</span><span class="chevron">&#9662;</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    There is a fully free public calculator at <a href="/free-wind-load-calculator.html">windloadcalc.com/free-wind-load-calculator.html</a> with no signup and no rate meter. It returns the design pressure for one wall component with every coefficient cited to ASCE 7-22. For multi-component schedules, MWFRS, all six roof shapes, Excel export, project saving, and team seats, the paid subscription is required (pricing published on the <a href="/calc-landing.html">Pro landing page</a>). The free tool is a slice of the paid product, not a trial that expires.
+                </div></div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false"><span>Does SkyCiv handle Florida Building Code wind speeds?</span><span class="chevron">&#9662;</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    SkyCiv returns the ASCE 7-22 basic wind speed at the map value. That is the correct standards value. It does not apply the Florida Building Code R301.2(7) jurisdictional minimums that supersede the ASCE map value in Miami-Dade (175 mph for Risk Cat II), Broward (170 mph), and Collier (170 mph). For a permit submission in those counties, the plan reviewer checks against the FBC value, not the ASCE map value. SkyCiv is not claiming to apply FBC overrides &mdash; the tool is doing what it says: returning the ASCE standard.
+                </div></div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false"><span>Why does WindLoadCalc return 175 mph for Miami when SkyCiv shows ~170 mph?</span><span class="chevron">&#9662;</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    Both numbers are correct for what each tool is calculating. SkyCiv returns the ASCE 7-22 standard map value at the project ZIP centroid (approximately 169&ndash;170 mph for the Miami area depending on exact location). WindLoadCalc applies the Florida Building Code R301.2(7) jurisdictional minimum that legally supersedes the ASCE map value inside Miami-Dade county (175 mph for Risk Cat II). The FBC value is the one a Miami-Dade plan reviewer will check against on a permit submission, so it is the practically useful number for a Florida HVHZ project.
+                </div></div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false"><span>What's the difference between ASCE 7-22 and the Florida Building Code?</span><span class="chevron">&#9662;</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    ASCE 7-22 is a national consensus <strong>standard</strong> (Minimum Design Loads and Associated Criteria for Buildings and Other Structures, 2022 edition) published by the American Society of Civil Engineers. The Florida Building Code is the legally adopted state <strong>code</strong>; the 8th Edition (2023) adopts ASCE 7-22 by reference and then amends specific values, including the R301.2(7) county wind speed table that raises wind speeds in Miami-Dade, Broward, and Collier above the ASCE 7-22 map values. ASCE 7 is a standard; FBC and IBC are codes. The code wins when they disagree.
+                </div></div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false"><span>Can I use WindLoadCalc's free calculator without signing up?</span><span class="chevron">&#9662;</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    Yes. The <a href="/free-wind-load-calculator.html">free calculator</a> has no signup, no email gate, and no per-week or per-day solve limit. You enter a ZIP and component dimensions and you get the design pressure with every coefficient cited. The paid Pro subscription adds multi-component schedules, MWFRS calculations, all six roof shapes, Excel export, PE-stampable PDFs, and project save.
+                </div></div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false"><span>Does WindLoadCalc support all the same load types as SkyCiv?</span><span class="chevron">&#9662;</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    No. WindLoadCalc is a wind load specialist. SkyCiv's load tools cover wind, snow, seismic, dead, and live load combinations within a broader structural engineering software suite that includes FEA, beam, plate, foundation, and 3D structural design (S3D). If you need a multi-load combination engine inside a single integrated structural design tool, SkyCiv is the better fit. If you do wind load work specifically and want depth on ASCE 7-22 plus Florida Building Code, WindLoadCalc is purpose-built for that workflow.
+                </div></div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false"><span>What if I'm doing wind load work in Canada, Europe, or Australia?</span><span class="chevron">&#9662;</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    SkyCiv covers nine codes including ASCE 7, AS/NZS 1170 (Australia/New Zealand), EN 1991 (Eurocode), and NBCC (Canada). WindLoadCalc is ASCE 7-22 and Florida Building Code only. For international wind load work outside the United States, SkyCiv's geographic breadth is the practical advantage. WindLoadCalc has no plans to add non-US codes in the near term.
+                </div></div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false"><span>How is the free tool different from the paid WindLoadCalc subscription?</span><span class="chevron">&#9662;</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    The free tool solves one wall component at a time (Zones 4 and 5) with the ASCE 7-22 + FBC engine and shows every coefficient cited. The Pro subscription adds: multi-component window/door schedules across an entire project, MWFRS (Main Wind Force Resisting System) calculations, all six C&amp;C roof shapes, Architectural Schedule export to real .xlsx for AutoCAD, Engineering Report PDF, project save and team seats, and Florida PE sign-and-seal service (in-house Florida-licensed P.E., max 3 stories, Florida projects only).
+                </div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- 11. SOFT CTA                                  -->
+    <!-- ============================================ -->
+    <section class="content-section bg-page">
+        <div class="content-inner">
+            <span class="section-eyebrow">11. See for yourself</span>
+            <h2>Run the same ZIP through both tools.</h2>
+            <p class="lead">
+                The fastest comparison is the one you do yourself. Try the WindLoadCalc free tool with one of your real Florida projects &mdash; or any US ZIP &mdash; and see what comes back.
+            </p>
+
+            <div class="soft-cta">
+                <h3>Try WindLoadCalc's free calculator.</h3>
+                <p>
+                    No signup. No rate meter. Same ASCE 7-22 + Florida Building Code engine the paid product uses. The <a href="/free-wind-load-calculator.html">ZIP-based wind speed lookup</a> takes about eight seconds to give you a design pressure with every coefficient cited.
+                </p>
+                <div class="soft-cta-buttons">
+                    <a href="/free-wind-load-calculator.html" class="soft-cta-btn-primary">Open the free calculator &rarr;</a>
+                    <a href="/calc-landing.html" class="soft-cta-btn-secondary">See the Pro version</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- ACCURACY NOTE                                 -->
+    <!-- ============================================ -->
+    <div class="accuracy-note">
+        <strong>Comparison accurate as of 2026-05-24</strong>, based on publicly available SkyCiv documentation. &nbsp;
+        "SkyCiv" is a trademark of SkyCiv Engineering Pty Ltd, referenced here for comparison purposes (nominative fair use). &nbsp;
+        WindLoadCalc is not affiliated with, endorsed by, or sponsored by SkyCiv.
+    </div>
+
+    <!-- ============================================ -->
+    <!-- FOOTER                                        -->
+    <!-- ============================================ -->
+    <footer class="site-footer">
+        <div class="site-footer-inner">
+            <div>&copy; 2026 WindLoad Solutions. All rights reserved.</div>
+            <div>
+                <a href="/">Home</a> &nbsp;&middot;&nbsp;
+                <a href="/free-wind-load-calculator.html">Free calculator</a> &nbsp;&middot;&nbsp;
+                <a href="/calc-landing.html">Pro version</a> &nbsp;&middot;&nbsp;
+                <a href="/terms-of-service.html">Terms</a> &nbsp;&middot;&nbsp;
+                <a href="/privacy-policy.html">Privacy</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================ -->
+    <!-- JAVASCRIPT — FAQ accordion only               -->
+    <!-- ============================================ -->
+    <script>
+    (function() {
+        'use strict';
+
+        // FAQ accordion
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        faqQuestions.forEach(function(q) {
+            q.addEventListener('click', function() {
+                const expanded = q.getAttribute('aria-expanded') === 'true';
+                const answer = q.nextElementSibling;
+                q.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+                if (answer && answer.classList.contains('faq-answer')) {
+                    answer.classList.toggle('open', !expanded);
+                }
+            });
+        });
+    })();
+    </script>
+
+</body>
+</html>

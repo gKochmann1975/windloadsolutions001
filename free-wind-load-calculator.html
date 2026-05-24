@@ -1275,7 +1275,7 @@
                 <span class="hero-eyebrow">Free &middot; No signup &middot; No meter</span>
                 <h1>
                     Design pressure in eight seconds. <br>
-                    With <span class="hl">Florida Building Code overrides</span> SkyCiv doesn't have.
+                    With <span class="hl">Florida Building Code overrides</span> built in.
                 </h1>
                 <p class="hero-subhead">
                     The only free wind load calculator that returns the legally enforceable wind speed for Miami-Dade, Broward, and Collier counties &mdash; not the ASCE map value your plan reviewer will reject.
@@ -1760,6 +1760,11 @@
                 document.querySelectorAll('[data-risk]').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
                 state.risk_cat = btn.dataset.risk;
+                // Wind speed depends on risk category — refresh the FBC badge too,
+                // not just the pressure. Without this, the badge gets stuck showing
+                // the previous risk category's value (e.g., Collier Cat I = 151 mph
+                // when the user has Cat II = 170 mph selected).
+                onZipChange();
                 onInputChange();
             });
         });

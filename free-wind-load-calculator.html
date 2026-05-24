@@ -250,12 +250,28 @@
         /* DESIGN TOKENS                                */
         /* ============================================ */
         :root {
+            /* Brand tokens — pulled directly from windloadcalc.com homepage :root.
+               Do not redefine; do not invent. */
             --brand-primary: #0018ff;
             --brand-dark: #181E57;
+            --dark-navy: #0f172a;
+            --light-navy: #1e293b;
+
+            /* Hero gradient: matches homepage .hero-section background EXACTLY */
+            --hero-gradient: linear-gradient(135deg, var(--dark-navy) 0%, var(--light-navy) 50%, #0a0f1f 100%);
+            --hero-overlay: linear-gradient(135deg, rgba(0, 24, 255, 0.1) 0%, rgba(24, 30, 87, 0.3) 100%);
             --brand-gradient: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
-            /* Accent: brand electric-orange (matches homepage --electric-orange).
-               Used ONLY for the FBC override badge — the "verified, special" moment. */
-            --gold: #f59e0b;
+
+            /* Electric brand palette — matches homepage */
+            --electric-cyan: #00ffff;
+            --electric-blue: #0080ff;
+            --electric-purple: #7c3aed;
+            --electric-orange: #f59e0b;
+            --electric-green: #10b981;
+            --electric-yellow: #fbbf24;
+
+            /* Aliases kept for backward compat in existing rules below */
+            --gold: var(--electric-orange);
             --gold-soft: rgba(245, 158, 11, 0.1);
             --suction-red: #DC2626;
             --pressure-blue: #0018ff;
@@ -374,26 +390,27 @@
         .nav-cta-primary {
             background: var(--brand-primary);
             color: white;
-            padding: 0.65rem 1.25rem;
-            border-radius: var(--radius-pill);
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: all 0.2s ease;
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            border: 2px solid var(--brand-primary);
         }
         .nav-cta-primary:hover {
-            background: var(--brand-dark);
+            background: #0012cc;
             color: white;
             text-decoration: none;
-            transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(0, 24, 255, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 24, 255, 0.4);
         }
 
         /* ============================================ */
-        /* HERO                                         */
+        /* HERO  — matches homepage .hero-section pattern   */
         /* ============================================ */
         .hero {
-            background: var(--brand-gradient);
-            padding: 4rem 1.5rem 6rem;
+            background: var(--hero-gradient);
+            padding: 5rem 1.5rem 5rem;
             position: relative;
             overflow: hidden;
         }
@@ -401,7 +418,7 @@
             content: "";
             position: absolute;
             inset: 0;
-            background: radial-gradient(ellipse at 70% 30%, rgba(232, 181, 48, 0.08) 0%, transparent 60%);
+            background: var(--hero-overlay);
             pointer-events: none;
         }
         .hero-inner {
@@ -412,68 +429,88 @@
             gap: 4rem;
             align-items: start;
             position: relative;
+            z-index: 1;
         }
-        .hero-copy { color: var(--text-ivory); padding-top: 1rem; }
+        .hero-copy { color: white; padding-top: 1rem; }
         .hero-eyebrow {
-            display: inline-block;
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            font-weight: 500;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: var(--gold);
-            margin-bottom: 1.25rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem 1.25rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0, 255, 255, 0.15);
+            letter-spacing: 0.02em;
+            text-transform: none;
+        }
+        .hero-eyebrow::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            background: var(--electric-cyan);
+            border-radius: 50%;
+            box-shadow: 0 0 12px var(--electric-cyan);
         }
         .hero h1 {
-            font-family: var(--font-serif);
-            font-weight: 600;
-            font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+            font-weight: 900;
+            font-size: clamp(2.5rem, 5.5vw, 4.5rem);
             line-height: 1.1;
             letter-spacing: -0.02em;
-            margin-bottom: 1.25rem;
+            margin-bottom: 1.5rem;
             color: white;
         }
         .hero h1 .hl {
-            background: linear-gradient(180deg, transparent 60%, rgba(232, 181, 48, 0.3) 60%);
-            padding: 0 0.1em;
+            background: linear-gradient(135deg, var(--electric-cyan) 0%, var(--electric-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 30px rgba(0, 255, 255, 0.5));
         }
         .hero-subhead {
-            font-size: 1.125rem;
+            font-size: 1.25rem;
             line-height: 1.55;
-            color: rgba(245, 241, 234, 0.85);
-            margin-bottom: 1.75rem;
-            max-width: 540px;
+            color: rgba(255, 255, 255, 0.92);
+            margin-bottom: 2rem;
+            max-width: 580px;
         }
         .trust-pills {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
+            gap: 0.65rem;
             margin-bottom: 2rem;
         }
         .trust-pill {
             display: inline-flex;
             align-items: center;
-            gap: 0.4rem;
-            padding: 0.4rem 0.9rem;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: var(--radius-pill);
-            font-size: 0.8rem;
-            font-weight: 500;
-            color: rgba(245, 241, 234, 0.95);
-            backdrop-filter: blur(8px);
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(0, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: white;
+            box-shadow: 0 4px 16px rgba(0, 255, 255, 0.08);
         }
         .trust-pill .dot {
-            width: 6px;
-            height: 6px;
-            background: var(--gold);
+            width: 7px;
+            height: 7px;
+            background: var(--electric-cyan);
             border-radius: 50%;
+            box-shadow: 0 0 8px var(--electric-cyan);
         }
         .hero-tagline {
-            font-family: var(--font-mono);
-            font-size: 0.8125rem;
-            color: rgba(245, 241, 234, 0.6);
-            letter-spacing: 0.02em;
+            font-size: 0.9rem;
+            color: rgba(0, 255, 255, 0.85);
+            font-weight: 500;
+            letter-spacing: 0.01em;
         }
 
         /* ============================================ */
@@ -1277,8 +1314,8 @@
             <div class="hero-copy">
                 <span class="hero-eyebrow">Free &middot; No signup &middot; No meter</span>
                 <h1>
-                    Design pressure in eight seconds. <br>
-                    With <span class="hl">Florida Building Code overrides</span> built in.
+                    Design pressure in <span class="hl">eight seconds</span>.<br>
+                    With Florida Building Code overrides built in.
                 </h1>
                 <p class="hero-subhead">
                     The only free wind load calculator that returns the legally enforceable wind speed for Miami-Dade, Broward, and Collier counties &mdash; not the ASCE map value your plan reviewer will reject.

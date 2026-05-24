@@ -67,8 +67,9 @@
    TOP NAVIGATION CARDS
    ================================================================ */
 .top-navigation {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 1.5rem;
     margin-bottom: 3rem;
 }
@@ -85,6 +86,8 @@
     display: flex;
     align-items: center;
     gap: 1rem;
+    flex: 1 1 280px;
+    max-width: 360px;
 }
 
 .nav-card:hover {
@@ -1464,7 +1467,13 @@ button:hover {
     }
     
     .top-navigation {
-        grid-template-columns: 1fr;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .top-navigation .nav-card {
+        flex: 1 1 auto;
+        max-width: none;
     }
     
     .feature-header-row {

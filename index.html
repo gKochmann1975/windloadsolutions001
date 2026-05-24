@@ -6375,7 +6375,162 @@ body {
                 </div>
             </div>
         </section>
-        <!-- Testimonials section intentionally removed 2026-05-24 per founder. Real customer testimonials from 20+ years of WindLoadCalc are being recovered from email/Stripe/customer outreach. When real, permission-authorized quotes are ready, a new section will be added back here. Do NOT add fake / placeholder / template testimonials — per memory/feedback_defensible_scale_claims.md. -->
+        <!-- Real Customer Testimonials — recovered from September 2024 "We want your feedback" Gmail campaign (windloadsolutions@gmail.com). Both customers replied to an explicit "we'd love a testimonial for our website" request — documented permission to publish. Audit trail: docs/seo/real-testimonials-from-gmail.md. Adding more as customers grant permission. -->
+        <style>
+            .testimonials-section {
+                padding: 4rem 0;
+                background: linear-gradient(180deg, rgba(0, 24, 255, 0.03) 0%, rgba(255, 255, 255, 1) 100%);
+            }
+            .testimonials-grid-real {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+                gap: 1.75rem;
+                margin: 2.5rem 0 1.5rem;
+            }
+            @media (max-width: 768px) {
+                .testimonials-grid-real { grid-template-columns: 1fr; gap: 1.25rem; }
+            }
+            .testimonial-card-real {
+                background: white;
+                border-radius: 18px;
+                padding: 2rem 1.75rem;
+                border: 1px solid rgba(0, 24, 255, 0.1);
+                box-shadow: 0 4px 16px rgba(0, 24, 255, 0.06);
+                display: flex;
+                flex-direction: column;
+                position: relative;
+                transition: transform 0.25s ease, box-shadow 0.25s ease;
+            }
+            .testimonial-card-real:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 16px 36px rgba(0, 24, 255, 0.12);
+            }
+            .testimonial-card-real::before {
+                content: "\201C";
+                position: absolute;
+                top: -0.5rem;
+                left: 1.25rem;
+                font-size: 5rem;
+                line-height: 1;
+                color: #0018ff;
+                opacity: 0.25;
+                font-family: Georgia, serif;
+            }
+            .testimonial-stars {
+                color: #fbbf24;
+                font-size: 1.25rem;
+                letter-spacing: 0.1em;
+                margin-bottom: 1rem;
+            }
+            .testimonial-stars span {
+                margin-left: 0.5rem;
+                color: #6b7280;
+                font-size: 0.85rem;
+                font-weight: 600;
+                letter-spacing: normal;
+            }
+            .testimonial-quote-real {
+                font-size: 1.1rem;
+                line-height: 1.65;
+                color: #1f2937;
+                margin: 0 0 1.5rem;
+                flex-grow: 1;
+                font-style: italic;
+            }
+            .testimonial-author-real {
+                border-top: 1px solid rgba(0, 24, 255, 0.1);
+                padding-top: 1rem;
+            }
+            .testimonial-author-name {
+                font-size: 1.1rem;
+                font-weight: 800;
+                color: #181E57;
+                margin-bottom: 0.15rem;
+            }
+            .testimonial-author-title {
+                font-size: 0.95rem;
+                color: #4b5563;
+                font-weight: 600;
+                margin-bottom: 0.15rem;
+            }
+            .testimonial-author-company {
+                font-size: 0.95rem;
+                color: #0018ff;
+                font-weight: 700;
+            }
+            .testimonial-author-date {
+                font-size: 0.85rem;
+                color: #9ca3af;
+                margin-top: 0.25rem;
+            }
+            .testimonials-more-note {
+                text-align: center;
+                margin: 0 auto 2rem;
+                max-width: 720px;
+                padding: 1rem 1.25rem;
+                background: rgba(0, 24, 255, 0.04);
+                border-radius: 12px;
+                color: #4b5563;
+                font-size: 0.95rem;
+                line-height: 1.5;
+            }
+        </style>
+        <section class="testimonials-section">
+            <div class="container">
+                <div class="section-header center">
+                    <span class="section-badge electric-pulse">Real Customers, Real Words</span>
+                    <h2 class="section-title">
+                        What <span class="electric-text">Florida Engineers + Contractors</span> Say
+                    </h2>
+                    <p class="section-subtitle">
+                        Verified customer testimonials &mdash; names, companies, and quotes verbatim, with documented permission to publish.
+                    </p>
+                </div>
+
+                <div class="testimonials-grid-real">
+                    <!-- Tracy Lape / Encompass Storm Defense (Sep 21, 2024) -->
+                    <div class="testimonial-card-real">
+                        <div class="testimonial-stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733; <span>5 Stars (customer&rsquo;s words)</span></div>
+                        <p class="testimonial-quote-real">We&rsquo;ve used Wind Load Solutions for a while now, and we would recommend this program quite readily. We&rsquo;ve tried other programs in the past, and they were complicated to use, almost cumbersome. They give you all the necessary tools and reference links to get the job completed. Also, I can&rsquo;t say enough about Greg&rsquo;s helpfulness and knowledge of the entire operation.</p>
+                        <div class="testimonial-author-real">
+                            <div class="testimonial-author-name">Tracy Lape</div>
+                            <div class="testimonial-author-company">Encompass Storm Defense</div>
+                            <div class="testimonial-author-date">September 2024</div>
+                        </div>
+                    </div>
+
+                    <!-- Rich Badders / Shorelines Design Group (Sep 18, 2024) -->
+                    <div class="testimonial-card-real">
+                        <p class="testimonial-quote-real">We use the wind load solutions calculator daily at our firm. We love it because it&rsquo;s user friendly and accurate. We use the software exclusively for all of our wind pressure design needs for over 3 years now and have successfully permitted hundreds of projects using it.</p>
+                        <div class="testimonial-author-real">
+                            <div class="testimonial-author-name">Rich Badders</div>
+                            <div class="testimonial-author-title">President</div>
+                            <div class="testimonial-author-company">Shorelines Design Group &middot; Dunedin, FL</div>
+                            <div class="testimonial-author-date">September 2024</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonials-more-note">
+                    <strong>More real testimonials coming.</strong> We&rsquo;re recovering 20+ years of customer feedback that was lost in our 2025 site rebuild. New customer testimonials are added here as each customer grants written permission to republish.
+                </div>
+
+                <div class="trust-logos">
+                    <div class="trust-logo-item">
+                        <i class="fas fa-university"></i>
+                        <span>Used by Florida Building Departments + Plan Reviewers Since 2002</span>
+                    </div>
+                    <div class="trust-logo-item">
+                        <i class="fas fa-certificate"></i>
+                        <span>ASCE 7-22 + FBC 8th Edition Current</span>
+                    </div>
+                    <div class="trust-logo-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>In-House FL P.E. Sign-and-Seal Available</span>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- CTA Section -->
         <section class="final-cta-section">

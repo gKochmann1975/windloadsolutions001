@@ -25,10 +25,8 @@
     <meta name="twitter:title" content="Free Wind Load Calculator — ASCE 7-22 + Florida HVHZ Overrides">
     <meta name="twitter:description" content="The only free wind load calculator that returns the legally enforceable wind speed for Florida HVHZ counties.">
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Fonts: brand system stack — matches windloadcalc.com homepage exactly -->
+    <!-- (no Google Fonts dependency) -->
 
     <!-- ============================================ -->
     <!-- JSON-LD SCHEMA: WebApplication                -->
@@ -255,8 +253,10 @@
             --brand-primary: #0018ff;
             --brand-dark: #181E57;
             --brand-gradient: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
-            --gold: #E8B530;
-            --gold-soft: rgba(232, 181, 48, 0.08);
+            /* Accent: brand electric-orange (matches homepage --electric-orange).
+               Used ONLY for the FBC override badge — the "verified, special" moment. */
+            --gold: #f59e0b;
+            --gold-soft: rgba(245, 158, 11, 0.1);
             --suction-red: #DC2626;
             --pressure-blue: #0018ff;
 
@@ -274,15 +274,18 @@
             --border-input-focus: var(--brand-primary);
 
             --shadow-card: 0 20px 60px rgba(24, 30, 87, 0.12), 0 4px 16px rgba(24, 30, 87, 0.06);
-            --shadow-badge: 0 8px 24px rgba(232, 181, 48, 0.18);
+            --shadow-badge: 0 8px 24px rgba(245, 158, 11, 0.2);
 
             --radius-card: 16px;
             --radius-input: 10px;
             --radius-pill: 999px;
 
-            --font-serif: 'EB Garamond', Georgia, 'Times New Roman', serif;
-            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            --font-mono: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+            /* Brand fonts: system sans-serif (matches homepage). Variable names
+               preserved (--font-serif, --font-mono) so existing rules continue
+               to work without rewriting every selector. */
+            --font-serif: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            --font-mono: 'SF Mono', Consolas, Monaco, 'Courier New', monospace;
         }
 
         /* ============================================ */

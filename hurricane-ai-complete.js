@@ -7,9 +7,12 @@
 // =====================================================
 // CONFIGURATION
 // =====================================================
+// The Gemini API key lives on the server (Railway env var GEMINI_API_KEY).
+// This file POSTs the built prompt to our backend, which proxies to Gemini.
+// Do NOT put the API key in client-side code — the previous embedded key
+// leaked and the GCP project was suspended for abuse.
 
-const GEMINI_API_KEY = 'REDACTED-LEAKED-GEMINI-KEY-2026-05-24';
-const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
+const HURRICANE_AI_ENDPOINT = 'https://api.windloadcalc.com/api/bip/hurricane-ai/ask';
 
 // Global AI instance
 let hurricaneAI = null;
@@ -162,39 +165,25 @@ Answer the user's question now:`;
         return prompt;
     }
 
-    // Call Gemini API
+    // Call our backend, which proxies to Gemini server-side using the
+    // env-stored API key. Backend handles all Gemini-specific request shape.
     async callGemini(prompt) {
         try {
-            const response = await fetch(GEMINI_API_URL, {
+            const response = await fetch(HURRICANE_AI_ENDPOINT, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'x-goog-api-key': GEMINI_API_KEY
-                },
-                body: JSON.stringify({
-                    contents: [{
-                        parts: [{
-                            text: prompt
-                        }]
-                    }],
-                    generationConfig: {
-                        temperature: 0.7,
-                        topK: 40,
-                        topP: 0.95,
-                        maxOutputTokens: 1024,
-                    }
-                })
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ prompt })
             });
 
-            if (!response.ok) {
-                const errorData = await response.json().catch(() => ({}));
-                throw new Error(`Gemini API error: ${response.status} - ${errorData.error?.message || 'Unknown error'}`);
+            const data = await response.json().catch(() => ({}));
+
+            if (!response.ok || !data.success) {
+                throw new Error(data.error || `Request failed (${response.status})`);
             }
 
-            const data = await response.json();
-            return data.candidates[0].content.parts[0].text;
+            return data.text;
         } catch (error) {
-            console.error('Gemini API Error:', error);
+            console.error('Hurricane AI error:', error);
             throw error;
         }
     }

@@ -81,7 +81,7 @@
                 "name": "Is WindLoadCalc free?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "There is a fully free public calculator at windloadcalc.com/free-wind-load-calculator.html with no signup and no rate meter. It returns the design pressure for one wall component with every coefficient cited to ASCE 7-22. For multi-component schedules, MWFRS, all six roof shapes, Excel export, project saving, and team seats, the paid subscription (starts under $40/month, published on the Pro landing page) is required. The free tool is a slice of the paid product, not a trial that expires."
+                    "text": "There is a fully free public calculator at windloadcalc.com/free-wind-load-calculator.html with no signup and no rate meter. It returns the design pressure for one wall component with every coefficient cited to ASCE 7-22. For multi-component schedules, MWFRS, all six roof shapes, Excel export, project saving, and team seats, the paid subscription (starts under $40/month, published on the Full Calculator landing page) is required. The free tool is a slice of the paid product, not a trial that expires."
                 }
             },
             {
@@ -241,7 +241,8 @@
             font-size: 0.875rem;
             font-weight: 500;
             letter-spacing: 0.01em;
-            position: relative;
+            position: sticky;
+            top: 0;
             z-index: 1001;
         }
         .wlc-promo-banner a {
@@ -259,7 +260,7 @@
         .wlc-promo-banner a:hover .arrow { transform: translateX(4px); }
 
         /* ============================================ */
-        /* HEADER                                       */
+        /* HEADER  — stacked-sticky: pins below banner    */
         /* ============================================ */
         .site-header {
             background: var(--bg-card-glass);
@@ -271,18 +272,24 @@
             justify-content: space-between;
             align-items: center;
             position: sticky;
-            top: 0;
+            top: 38px;
             z-index: 1000;
         }
         .site-header .logo {
-            font-family: var(--font-serif);
-            font-weight: 700;
-            font-size: 1.5rem;
-            color: var(--brand-dark);
+            display: inline-flex;
+            align-items: center;
             text-decoration: none;
-            letter-spacing: -0.01em;
         }
-        .site-header .logo:hover { text-decoration: none; color: var(--brand-primary); }
+        .site-header .logo img {
+            display: block;
+            height: 60px;
+            width: auto;
+        }
+        .site-header .logo:hover { text-decoration: none; opacity: 0.85; }
+        @media (max-width: 600px) {
+            .site-header { padding: 0.5rem 1rem; top: 34px; }
+            .site-header .logo img { height: 48px; }
+        }
         .site-header .nav-cta {
             display: flex;
             gap: 0.75rem;
@@ -1045,12 +1052,12 @@
     <!-- HEADER                                        -->
     <!-- ============================================ -->
     <header class="site-header">
-        <a href="/" class="logo">WindLoadCalc</a>
+        <a href="/" class="logo" aria-label="WindLoadCalc home"><img src="/images/windloadcalc-logo.svg" alt="WindLoadCalc"></a>
         <nav class="nav-cta" aria-label="Primary">
             <a href="/" class="nav-link-subtle">Home</a>
             <a href="/free-wind-load-calculator.html" class="nav-link-subtle">Free calculator</a>
             <a href="/account.html" class="nav-link-subtle">Sign in</a>
-            <a href="/calc-landing.html" class="nav-cta-primary">Pro version</a>
+            <a href="/wind-load-calculator-landing.html" class="nav-cta-primary">Full Calculator</a>
         </nav>
     </header>
 
@@ -1519,7 +1526,7 @@
 
             <h3>WindLoadCalc</h3>
             <p>
-                WindLoadCalc Pro pricing is published at <a href="/calc-landing.html">windloadcalc.com/calc-landing.html</a>, with monthly and annual options and a 7-day free trial of the full product. There is no separate enterprise tier and no per-user metering inside a subscription; team seats are included at the published tier prices. The <a href="/free-wind-load-calculator.html">free public calculator</a> remains free permanently and is not a trial.
+                WindLoadCalc full subscription pricing is published at <a href="/wind-load-calculator-landing.html">windloadcalc.com/wind-load-calculator-landing.html</a>, with monthly and annual options and a 7-day free trial of the full product. There is no separate enterprise tier and no per-user metering inside a subscription; team seats are included at the published tier prices. The <a href="/free-wind-load-calculator.html">free public calculator</a> remains free permanently and is not a trial.
             </p>
 
             <div class="callout">
@@ -1592,7 +1599,7 @@
             <div class="faq-item">
                 <button class="faq-question" aria-expanded="false"><span>Is WindLoadCalc free?</span><span class="chevron">&#9662;</span></button>
                 <div class="faq-answer"><div class="faq-answer-inner">
-                    There is a fully free public calculator at <a href="/free-wind-load-calculator.html">windloadcalc.com/free-wind-load-calculator.html</a> with no signup and no rate meter. It returns the design pressure for one wall component with every coefficient cited to ASCE 7-22. For multi-component schedules, MWFRS, all six roof shapes, Excel export, project saving, and team seats, the paid subscription is required (pricing published on the <a href="/calc-landing.html">Pro landing page</a>). The free tool is a slice of the paid product, not a trial that expires.
+                    There is a fully free public calculator at <a href="/free-wind-load-calculator.html">windloadcalc.com/free-wind-load-calculator.html</a> with no signup and no rate meter. It returns the design pressure for one wall component with every coefficient cited to ASCE 7-22. For multi-component schedules, MWFRS, all six roof shapes, Excel export, project saving, and team seats, the paid subscription is required (pricing published on the <a href="/wind-load-calculator-landing.html">Full Calculator landing page</a>). The free tool is a slice of the paid product, not a trial that expires.
                 </div></div>
             </div>
 
@@ -1665,7 +1672,7 @@
                 </p>
                 <div class="soft-cta-buttons">
                     <a href="/free-wind-load-calculator.html" class="soft-cta-btn-primary">Open the free calculator &rarr;</a>
-                    <a href="/calc-landing.html" class="soft-cta-btn-secondary">See the Pro version</a>
+                    <a href="/wind-load-calculator-landing.html" class="soft-cta-btn-secondary">See the Full Calculator</a>
                 </div>
             </div>
         </div>
@@ -1689,7 +1696,7 @@
             <div>
                 <a href="/">Home</a> &nbsp;&middot;&nbsp;
                 <a href="/free-wind-load-calculator.html">Free calculator</a> &nbsp;&middot;&nbsp;
-                <a href="/calc-landing.html">Pro version</a> &nbsp;&middot;&nbsp;
+                <a href="/wind-load-calculator-landing.html">Full Calculator</a> &nbsp;&middot;&nbsp;
                 <a href="/terms-of-service.html">Terms</a> &nbsp;&middot;&nbsp;
                 <a href="/privacy-policy.html">Privacy</a>
             </div>

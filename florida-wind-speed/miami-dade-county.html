@@ -229,7 +229,8 @@
             font-size: 0.875rem;
             font-weight: 500;
             letter-spacing: 0.01em;
-            position: relative;
+            position: sticky;
+            top: 0;
             z-index: 1001;
         }
         .wlc-promo-banner a {
@@ -244,7 +245,7 @@
         .wlc-promo-banner a:hover .arrow { transform: translateX(4px); }
 
         /* ============================================ */
-        /* HEADER                                        */
+        /* HEADER  — stacked-sticky: pins below banner    */
         /* ============================================ */
         .site-header {
             background: var(--bg-card-glass);
@@ -256,17 +257,24 @@
             justify-content: space-between;
             align-items: center;
             position: sticky;
-            top: 0;
+            top: 38px;
             z-index: 1000;
         }
         .site-header .logo {
-            font-family: var(--font-serif);
-            font-weight: 700;
-            font-size: 1.5rem;
-            color: var(--brand-dark);
-            letter-spacing: -0.01em;
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
         }
-        .site-header .logo:hover { text-decoration: none; color: var(--brand-primary); }
+        .site-header .logo img {
+            display: block;
+            height: 60px;
+            width: auto;
+        }
+        .site-header .logo:hover { text-decoration: none; opacity: 0.85; }
+        @media (max-width: 600px) {
+            .site-header { padding: 0.5rem 1rem; top: 34px; }
+            .site-header .logo img { height: 48px; }
+        }
         .site-header .nav-cta { display: flex; gap: 0.75rem; align-items: center; }
         .nav-link-subtle {
             color: var(--text-secondary);
@@ -901,11 +909,11 @@
     <!-- HEADER                                        -->
     <!-- ============================================ -->
     <header class="site-header">
-        <a href="/" class="logo">WindLoadCalc</a>
+        <a href="/" class="logo" aria-label="WindLoadCalc home"><img src="/images/windloadcalc-logo.svg" alt="WindLoadCalc"></a>
         <nav class="nav-cta" aria-label="Primary">
             <a href="/" class="nav-link-subtle">Home</a>
             <a href="../account.html" class="nav-link-subtle">Sign in</a>
-            <a href="../calc-landing.html" class="nav-cta-primary">Pro version</a>
+            <a href="../wind-load-calculator-landing.html" class="nav-cta-primary">Full Calculator</a>
         </nav>
     </header>
 
@@ -1249,7 +1257,7 @@
             </p>
             <div class="trust-strip-cta-row">
                 <a href="../free-wind-load-calculator.html" class="cta-primary">Try the free wind load calculator &rarr;</a>
-                <a href="../calc-landing.html" class="cta-secondary">Pro version with full pressure calculations</a>
+                <a href="../wind-load-calculator-landing.html" class="cta-secondary">Full Calculator with pressure calculations &rarr;</a>
             </div>
             <p style="margin-top: 1.25rem; font-family: var(--font-mono); font-size: 0.75rem; color: rgba(245, 241, 234, 0.5);">
                 See the <a href="../free-wind-load-calculator.html#methodology" style="color: var(--gold);">ASCE 7-22 wind speed by ZIP methodology</a> for the underlying calculation engine.
@@ -1265,7 +1273,7 @@
             <div>&copy; 2026 WindLoad Solutions. All rights reserved.</div>
             <div>
                 <a href="/">Home</a> &nbsp;&middot;&nbsp;
-                <a href="../calc-landing.html">Pro version</a> &nbsp;&middot;&nbsp;
+                <a href="../wind-load-calculator-landing.html">Full Calculator</a> &nbsp;&middot;&nbsp;
                 <a href="../free-wind-load-calculator.html">Free calculator</a> &nbsp;&middot;&nbsp;
                 <a href="../terms">Terms</a> &nbsp;&middot;&nbsp;
                 <a href="../privacy">Privacy</a>

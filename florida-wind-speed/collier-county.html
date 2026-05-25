@@ -141,12 +141,19 @@
         a:hover { text-decoration: underline; }
         button { font-family: inherit; cursor: pointer; }
 
-        .wlc-promo-banner { background: var(--brand-dark); color: var(--text-ivory); padding: 0.65rem 1.5rem; text-align: center; font-size: 0.875rem; font-weight: 500; position: relative; z-index: 1001; }
+        /* Stacked-sticky: banner pins at top, header pins just below. */
+        .wlc-promo-banner { background: var(--brand-dark); color: var(--text-ivory); padding: 0.65rem 1.5rem; text-align: center; font-size: 0.875rem; font-weight: 500; position: sticky; top: 0; z-index: 1001; }
         .wlc-promo-banner a { color: var(--text-ivory); text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; }
         .wlc-promo-banner a:hover { color: var(--gold); }
 
-        .site-header { background: var(--bg-card-glass); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-subtle); padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
-        .site-header .logo { font-family: var(--font-serif); font-weight: 700; font-size: 1.5rem; color: var(--brand-dark); text-decoration: none; }
+        .site-header { background: var(--bg-card-glass); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-subtle); padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 38px; z-index: 1000; }
+        .site-header .logo { display: inline-flex; align-items: center; text-decoration: none; }
+        .site-header .logo img { display: block; height: 60px; width: auto; }
+        .site-header .logo:hover { text-decoration: none; opacity: 0.85; }
+        @media (max-width: 600px) {
+            .site-header { padding: 0.5rem 1rem; top: 34px; }
+            .site-header .logo img { height: 48px; }
+        }
         .site-header .nav-cta { display: flex; gap: 0.75rem; align-items: center; }
         .nav-link-subtle { color: var(--text-secondary); font-size: 0.9rem; font-weight: 500; padding: 0.5rem 0.75rem; }
         .nav-link-subtle:hover { color: var(--brand-primary); text-decoration: none; }
@@ -269,11 +276,11 @@
     </div>
 
     <header class="site-header">
-        <a href="../" class="logo">WindLoadCalc</a>
+        <a href="../" class="logo" aria-label="WindLoadCalc home"><img src="/images/windloadcalc-logo.svg" alt="WindLoadCalc"></a>
         <nav class="nav-cta" aria-label="Primary">
             <a href="../" class="nav-link-subtle">Home</a>
             <a href="../account.html" class="nav-link-subtle">Sign in</a>
-            <a href="../calc-landing.html" class="nav-cta-primary">Pro version</a>
+            <a href="../wind-load-calculator-landing.html" class="nav-cta-primary">Full Calculator</a>
         </nav>
     </header>
 
@@ -476,7 +483,7 @@
             </p>
             <div class="trust-strip-cta">
                 <a href="../free-wind-load-calculator.html" class="primary">Run the free calculator &rarr;</a>
-                <a href="../calc-landing.html" class="ghost">See the Pro version</a>
+                <a href="../wind-load-calculator-landing.html" class="ghost">See the Full Calculator</a>
             </div>
         </div>
     </section>
@@ -486,7 +493,7 @@
             <div>&copy; 2026 WindLoad Solutions. All rights reserved.</div>
             <div>
                 <a href="../">Home</a> &nbsp;&middot;&nbsp;
-                <a href="../calc-landing.html">Pro version</a> &nbsp;&middot;&nbsp;
+                <a href="../wind-load-calculator-landing.html">Full Calculator</a> &nbsp;&middot;&nbsp;
                 <a href="../terms-of-service.html">Terms</a> &nbsp;&middot;&nbsp;
                 <a href="../privacy-policy.html">Privacy</a>
             </div>

@@ -365,7 +365,9 @@
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border-subtle);
-            padding: 1rem 1.5rem;
+            /* Header padding matches homepage .header-container (0 3rem) exactly,
+               with vertical breathing so the 100px logo isn't crammed. */
+            padding: 1rem 3rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -378,15 +380,23 @@
             align-items: center;
             text-decoration: none;
         }
-        .site-header .logo img {
+        /* Logo sized to match homepage .logo-image EXACTLY (100 / 80 / 70 across
+           the same 768 / 480 breakpoints homepage uses). Class name kept the
+           same so future style changes propagate. */
+        .site-header .logo-image {
             display: block;
-            height: 70px;
+            height: 100px;
             width: auto;
         }
         .site-header .logo:hover { text-decoration: none; opacity: 0.85; }
-        @media (max-width: 600px) {
-            .site-header { padding: 0.5rem 0.75rem; top: 34px; }
-            .site-header .logo img { height: 56px; }
+        @media (max-width: 768px) {
+            .site-header { padding: 0.75rem 1.5rem; }
+            .site-header .logo-image { height: 80px; }
+            .site-header .header-right { gap: 0.75rem; }
+        }
+        @media (max-width: 480px) {
+            .site-header { padding: 0.5rem 1rem; top: 34px; }
+            .site-header .logo-image { height: 70px; }
             .site-header .header-right { gap: 0.5rem; }
             .header-cta { padding: 0.55rem 1rem; font-size: 0.85rem; border-width: 1.5px; }
         }
@@ -803,8 +813,8 @@
         }
         .calc-section-inner .pressure-card {
             position: sticky;
-            /* clear sticky banner (38px) + sticky header (~102px with 70px logo + 1rem padding) + breathing */
-            top: calc(38px + 102px + 1rem);
+            /* clear sticky banner (38px) + sticky header (~132px with 100px logo + 1rem padding) + breathing */
+            top: calc(38px + 132px + 1rem);
         }
 
         /* The big result card */
@@ -1433,7 +1443,7 @@
     <!-- ============================================ -->
     <header class="site-header">
         <a href="/" class="logo" aria-label="WindLoadCalc home">
-            <img src="/images/windloadcalc-logo.svg" alt="WindLoadCalc">
+            <img src="/images/windloadcalc-logo.svg" alt="WindLoadCalc" class="logo-image">
         </a>
         <nav class="header-right" aria-label="Primary">
             <a href="/wind-load-calculator-landing.html" class="header-cta primary">Full Calculator</a>

@@ -3022,6 +3022,29 @@ body {
     animation: pulse 2s ease-in-out infinite;
 }
 
+/* Accessibility: respect users who've opted out of motion (vestibular
+   disorders, etc.). Disables all pulse + glow animations. Also addresses
+   Lighthouse "non-composited animations" advisory by giving these users
+   a fully static experience. */
+@media (prefers-reduced-motion: reduce) {
+    .electric-pulse,
+    .hero-action-btn.green.electric-pulse,
+    .hero-action-btn.orange.electric-pulse,
+    .electric-orb,
+    *[class*="electric-pulse"] {
+        animation: none !important;
+    }
+    /* Also calm down any other infinite animations site-wide */
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
 .hero-btn.secondary {
     background: rgba(255, 255, 255, 0.1);
     color: white;
@@ -5135,10 +5158,16 @@ body {
     <main>
         <!-- Hero Section with Video Background -->
         <section class="hero-section">
-            <video class="hero-video" autoplay muted loop playsinline>
-                <source src="videos/index-homepage.webm" type="video/webm">
-                <source src="videos/index-homepage.mp4" type="video/mp4">
-            </video>
+            <!-- 2026-05-25: removed broken <source> tags pointing to
+                 videos/index-homepage.{webm,mp4}. The videos/ folder is
+                 gitignored (large files) so these were 404'ing for every
+                 visitor, polluting the browser console and degrading
+                 the Best Practices Lighthouse score. The .hero-section
+                 gradient now shows as the intended visual fallback.
+                 To re-enable: upload videos to a CDN (Cloudflare R2,
+                 S3, Bunny CDN, etc.) and add <source> tags pointing
+                 to the CDN URLs. Keep videos OUT of the git repo. -->
+            <video class="hero-video" autoplay muted loop playsinline></video>
             <div class="hero-overlay"></div>
             
             <div class="container hero-content">

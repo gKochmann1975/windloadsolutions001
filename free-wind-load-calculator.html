@@ -301,7 +301,11 @@
                to work without rewriting every selector. */
             --font-serif: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            --font-mono: 'SF Mono', Consolas, Monaco, 'Courier New', monospace;
+            /* --font-mono was bleeding typewriter feel across every label/button.
+               Aliased to sans so the brand reads consistently. --font-equation
+               is kept monospace ONLY for actual math formulas where alignment matters. */
+            --font-mono: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            --font-equation: 'SF Mono', Consolas, Monaco, 'Courier New', monospace;
         }
 
         /* ============================================ */
@@ -383,40 +387,51 @@
         @media (max-width: 600px) {
             .site-header { padding: 0.5rem 0.75rem; top: 34px; }
             .site-header .logo img { height: 56px; }
-            .site-header .nav-cta { gap: 0.35rem; }
-            .nav-link-subtle { padding: 0.4rem 0.5rem; font-size: 0.8rem; }
-            .nav-cta-primary { padding: 0.55rem 1rem; font-size: 0.85rem; border-width: 1px; }
+            .site-header .header-right { gap: 0.5rem; }
+            .header-cta { padding: 0.55rem 1rem; font-size: 0.85rem; border-width: 1.5px; }
         }
         @media (max-width: 380px) {
-            .nav-link-subtle[href="/"] { display: none; }
+            .header-cta:not(.primary) { display: none; }
         }
-        .site-header .nav-cta {
+        /* Header CTA pattern — matches homepage .header-cta exactly.
+           Uses the homepage's scrolled-state colors because this header
+           is glass over a bright background, not transparent over a hero. */
+        .site-header .header-right {
             display: flex;
-            gap: 0.75rem;
             align-items: center;
+            gap: 1rem;
         }
-        .nav-link-subtle {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            font-weight: 500;
-            padding: 0.5rem 0.75rem;
-        }
-        .nav-link-subtle:hover { color: var(--brand-primary); text-decoration: none; }
-        .nav-cta-primary {
-            background: var(--brand-primary);
-            color: white;
+        .header-cta {
+            color: var(--brand-primary);
+            background: rgba(0, 24, 255, 0.08);
+            border: 2px solid rgba(0, 24, 255, 0.3);
             padding: 0.8rem 1.8rem;
             border-radius: 50px;
             font-weight: 700;
             font-size: 0.95rem;
+            cursor: pointer;
             transition: all 0.3s ease;
-            border: 2px solid var(--brand-primary);
+            text-decoration: none;
+            white-space: nowrap;
+            backdrop-filter: blur(10px);
         }
-        .nav-cta-primary:hover {
-            background: #0012cc;
-            color: white;
+        .header-cta:hover {
+            background: rgba(0, 24, 255, 0.15);
+            border-color: rgba(0, 24, 255, 0.55);
+            color: var(--brand-primary);
             text-decoration: none;
             transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 24, 255, 0.2);
+        }
+        .header-cta.primary {
+            background: var(--brand-primary);
+            color: white;
+            border-color: var(--brand-primary);
+        }
+        .header-cta.primary:hover {
+            background: #0012cc;
+            border-color: #0012cc;
+            color: white;
             box-shadow: 0 8px 25px rgba(0, 24, 255, 0.4);
         }
 
@@ -536,7 +551,12 @@
             border: 1px solid rgba(255, 255, 255, 0.6);
             border-radius: var(--radius-card);
             padding: 2rem;
-            box-shadow: var(--shadow-card);
+            /* Glow + deep shadow combo so the card lifts off the dark navy bg
+               with the same visual depth as the homepage's hero cards. */
+            box-shadow:
+                0 0 0 1px rgba(0, 255, 255, 0.08),
+                0 24px 60px rgba(0, 0, 0, 0.35),
+                0 8px 24px rgba(0, 24, 255, 0.18);
             position: relative;
         }
         .calc-card-title {
@@ -614,9 +634,9 @@
         }
         .seg-btn:hover { background: rgba(255, 255, 255, 0.5); color: var(--brand-dark); }
         .seg-btn.active {
-            background: var(--brand-primary);
+            background: linear-gradient(135deg, var(--brand-primary) 0%, var(--electric-blue) 100%);
             color: white;
-            box-shadow: 0 2px 6px rgba(0, 24, 255, 0.25);
+            box-shadow: 0 4px 14px rgba(0, 24, 255, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.15);
         }
 
         /* Enclosure card grid */
@@ -637,11 +657,12 @@
             cursor: pointer;
             transition: all 0.15s ease;
         }
-        .enclosure-btn:hover { border-color: var(--brand-primary); }
+        .enclosure-btn:hover { border-color: var(--brand-primary); box-shadow: 0 4px 14px rgba(0, 24, 255, 0.08); }
         .enclosure-btn.active {
-            background: var(--brand-dark);
+            background: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand-primary) 100%);
             color: white;
-            border-color: var(--brand-dark);
+            border-color: var(--brand-primary);
+            box-shadow: 0 6px 20px rgba(0, 24, 255, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.12);
         }
         .enclosure-btn small {
             display: block;
@@ -737,31 +758,41 @@
         /* ============================================ */
         .calc-section {
             padding: 3.5rem 1.5rem 5rem;
-            background: var(--bg-page);
+            /* Dark navy gradient continues the hero so the page reads as one
+               continuous brand experience instead of cream tech-doc. The white
+               calc cards now have real depth against this background. */
+            background:
+                radial-gradient(ellipse at top, rgba(0, 24, 255, 0.18) 0%, transparent 55%),
+                radial-gradient(ellipse at bottom right, rgba(0, 255, 255, 0.08) 0%, transparent 60%),
+                linear-gradient(180deg, #0f172a 0%, #131c3a 50%, #0a0f1f 100%);
             position: relative;
         }
         .calc-section-heading {
             max-width: 1280px;
-            margin: 0 auto 2rem;
+            margin: 0 auto 2.25rem;
             text-align: center;
         }
         .calc-section-heading h2 {
             font-family: var(--font-serif);
-            font-size: clamp(1.5rem, 2.4vw, 1.875rem);
-            font-weight: 700;
-            color: var(--brand-dark);
-            letter-spacing: -0.015em;
-            line-height: 1.2;
-            margin-bottom: 0.6rem;
+            font-size: clamp(1.65rem, 2.6vw, 2.125rem);
+            font-weight: 800;
+            color: white;
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+            margin-bottom: 0.75rem;
         }
         .calc-section-heading p {
-            color: var(--text-secondary);
+            color: rgba(255, 255, 255, 0.78);
             line-height: 1.6;
-            max-width: 680px;
+            max-width: 720px;
             margin: 0 auto;
             font-size: 0.95rem;
         }
-        .calc-section-heading p a { font-weight: 600; }
+        .calc-section-heading p a {
+            color: var(--electric-cyan);
+            font-weight: 600;
+        }
+        .calc-section-heading p a:hover { color: white; }
         .calc-section-inner {
             max-width: 1280px;
             margin: 0 auto;
@@ -781,8 +812,11 @@
             background: white;
             border-radius: var(--radius-card);
             padding: 2rem;
-            border: 1px solid var(--border-subtle);
-            box-shadow: var(--shadow-card);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow:
+                0 0 0 1px rgba(0, 255, 255, 0.08),
+                0 24px 60px rgba(0, 0, 0, 0.35),
+                0 8px 24px rgba(0, 24, 255, 0.18);
         }
         .pressure-card-header {
             display: flex;
@@ -828,13 +862,30 @@
         .pressure-value {
             font-family: var(--font-serif);
             font-size: clamp(2.75rem, 5vw, 4.25rem);
-            font-weight: 700;
+            font-weight: 800;
             line-height: 1;
             font-variant-numeric: tabular-nums;
-            letter-spacing: -0.02em;
-            color: var(--brand-dark);
+            letter-spacing: -0.025em;
+            background: linear-gradient(135deg, var(--brand-primary) 0%, var(--electric-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 4px 16px rgba(0, 24, 255, 0.18));
         }
-        .pressure-value.empty { color: var(--text-muted); opacity: 0.35; }
+        .pressure-block.negative .pressure-value {
+            background: linear-gradient(135deg, var(--suction-red) 0%, #f97316 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 4px 16px rgba(220, 38, 38, 0.18));
+        }
+        .pressure-value.empty {
+            background: none;
+            -webkit-text-fill-color: var(--text-muted);
+            color: var(--text-muted);
+            opacity: 0.35;
+            filter: none;
+        }
         .pressure-value .unit {
             font-family: var(--font-sans);
             font-size: 0.4em;
@@ -842,6 +893,11 @@
             color: var(--text-secondary);
             margin-left: 0.25rem;
             letter-spacing: 0;
+            /* Override the parent's gradient text fill so the "psf" stays visible */
+            background: none;
+            -webkit-background-clip: border-box;
+            background-clip: border-box;
+            -webkit-text-fill-color: var(--text-secondary);
         }
         .pressure-description {
             font-size: 0.875rem;
@@ -1379,10 +1435,9 @@
         <a href="/" class="logo" aria-label="WindLoadCalc home">
             <img src="/images/windloadcalc-logo.svg" alt="WindLoadCalc">
         </a>
-        <nav class="nav-cta" aria-label="Primary">
-            <a href="/" class="nav-link-subtle">Home</a>
-            <a href="/account.html" class="nav-link-subtle">Sign in</a>
-            <a href="/wind-load-calculator-landing.html" class="nav-cta-primary">Full Calculator</a>
+        <nav class="header-right" aria-label="Primary">
+            <a href="/wind-load-calculator-landing.html" class="header-cta primary">Full Calculator</a>
+            <a href="/account.html" class="header-cta">Member Login</a>
         </nav>
     </header>
 
@@ -1671,12 +1726,12 @@
             <span class="section-eyebrow">Methodology</span>
             <h2>How design pressure is calculated.</h2>
             <p>Per ASCE 7-22 Chapter 30, the design pressure for a wall component is:</p>
-            <p style="font-family: var(--font-mono); font-size: 1rem; background: var(--bg-page); padding: 1rem; border-radius: 8px; border-left: 3px solid var(--brand-primary);">
+            <p style="font-family: var(--font-equation); font-size: 1rem; background: var(--bg-page); padding: 1rem; border-radius: 8px; border-left: 3px solid var(--brand-primary);">
                 p = q<sub>h</sub> &times; [(GC<sub>p</sub>) &minus; (GC<sub>pi</sub>)] &nbsp;&nbsp;&nbsp;<span style="color: var(--text-muted);">(Eq. 30.3-1)</span>
             </p>
 
             <h3>Where</h3>
-            <p style="font-family: var(--font-mono); font-size: 0.95rem; background: var(--bg-page); padding: 1rem; border-radius: 8px;">
+            <p style="font-family: var(--font-equation); font-size: 0.95rem; background: var(--bg-page); padding: 1rem; border-radius: 8px;">
                 q<sub>h</sub> = 0.00256 &times; K<sub>z</sub> &times; K<sub>zt</sub> &times; K<sub>d</sub> &times; K<sub>e</sub> &times; V<sup>2</sup>  &nbsp;&nbsp;<span style="color: var(--text-muted);">(Eq. 26.10-1)</span>
             </p>
 

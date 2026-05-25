@@ -137,7 +137,7 @@
         /* Header */
         .main-header {
             position: fixed;
-            top: 0;
+            top: var(--banner-h, 44px);
             left: 0;
             right: 0;
             z-index: 1000;
@@ -2390,6 +2390,10 @@
    CSS VARIABLES - Electric Theme
    ============================================ */
 :root {
+    /* Top promo banner height — JS overrides with actual measured value
+       to handle text wrapping; these are pre-paint fallbacks so the
+       fixed header never sits behind the banner on first paint. */
+    --banner-h: 44px;
     /* Electric Colors */
     --electric-cyan: #00ffff;
     --electric-blue: #0080ff;
@@ -2479,7 +2483,7 @@ body {
    ============================================ */
 .main-header {
     position: fixed;
-    top: 0;
+    top: var(--banner-h, 44px);
     left: 0;
     right: 0;
     z-index: 1000;
@@ -2487,6 +2491,12 @@ body {
     padding: var(--spacing-lg) 0;
     transition: all var(--transition-normal);
 }
+
+/* Pre-paint fallback for the banner height on viewports where the
+   promo banner wraps to 2 lines, so the fixed header never overlaps
+   the banner before JS measures the actual height. */
+@media (max-width: 720px) { :root { --banner-h: 64px; } }
+@media (max-width: 380px) { :root { --banner-h: 72px; } }
 
 .main-header.scrolled {
     background: rgba(255, 255, 255, 0.95);
@@ -5016,10 +5026,10 @@ body {
 <body>
     <!-- ============================================ -->
     <!-- TOP-NAV SITE-WIDE PROMO BANNER (NEW 2026-05) -->
-    <!-- Scrolls away normally so the existing fixed -->
-    <!-- header behavior is preserved.                -->
+    <!-- Pinned at top:0; header is pushed down by    -->
+    <!-- --banner-h so the logo never sits behind it. -->
     <!-- ============================================ -->
-    <div style="background:#181E57;color:#F5F1EA;padding:0.7rem 1.5rem;text-align:center;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:0.875rem;font-weight:500;letter-spacing:0.01em;position:relative;z-index:1001;">
+    <div id="topPromoBanner" style="background:#181E57;color:#F5F1EA;padding:0.7rem 1.5rem;text-align:center;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:0.875rem;font-weight:500;letter-spacing:0.01em;position:fixed;top:0;left:0;right:0;z-index:1001;">
         <a href="free-wind-load-calculator.html" style="color:#F5F1EA;text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;transition:color 0.2s ease;" onmouseover="this.style.color='#E8B530'" onmouseout="this.style.color='#F5F1EA'">
             <span>Free Wind Load Calculator with Florida Building Code overrides</span>
             <span style="display:inline-block;transition:transform 0.2s ease;">&rarr;</span>
@@ -6732,7 +6742,7 @@ body {
 
         function initializeHeaderScroll() {
             const header = document.getElementById('main-header');
-            
+
             window.addEventListener('scroll', function() {
                 if (window.scrollY > 100) {
                     header.classList.add('scrolled');
@@ -6740,6 +6750,24 @@ body {
                     header.classList.remove('scrolled');
                 }
             });
+        }
+
+        function syncTopBannerHeight() {
+            const banner = document.getElementById('topPromoBanner');
+            if (!banner) return;
+            const set = function() {
+                const h = banner.offsetHeight;
+                if (h > 0) document.documentElement.style.setProperty('--banner-h', h + 'px');
+            };
+            set();
+            window.addEventListener('resize', set);
+            window.addEventListener('orientationchange', set);
+            if (document.fonts && document.fonts.ready) document.fonts.ready.then(set);
+        }
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', syncTopBannerHeight);
+        } else {
+            syncTopBannerHeight();
         }
 
         function initializeVideo() {

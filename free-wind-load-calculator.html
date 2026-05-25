@@ -376,13 +376,19 @@
         }
         .site-header .logo img {
             display: block;
-            height: 60px;
+            height: 70px;
             width: auto;
         }
         .site-header .logo:hover { text-decoration: none; opacity: 0.85; }
         @media (max-width: 600px) {
-            .site-header { padding: 0.5rem 1rem; top: 34px; }
-            .site-header .logo img { height: 48px; }
+            .site-header { padding: 0.5rem 0.75rem; top: 34px; }
+            .site-header .logo img { height: 56px; }
+            .site-header .nav-cta { gap: 0.35rem; }
+            .nav-link-subtle { padding: 0.4rem 0.5rem; font-size: 0.8rem; }
+            .nav-cta-primary { padding: 0.55rem 1rem; font-size: 0.85rem; border-width: 1px; }
+        }
+        @media (max-width: 380px) {
+            .nav-link-subtle[href="/"] { display: none; }
         }
         .site-header .nav-cta {
             display: flex;
@@ -766,8 +772,8 @@
         }
         .calc-section-inner .pressure-card {
             position: sticky;
-            /* clear sticky banner (38px) + sticky header (~92px with 60px logo) + breathing */
-            top: calc(38px + 92px + 1rem);
+            /* clear sticky banner (38px) + sticky header (~102px with 70px logo + 1rem padding) + breathing */
+            top: calc(38px + 102px + 1rem);
         }
 
         /* The big result card */
@@ -1283,6 +1289,57 @@
         }
 
         /* ============================================ */
+        /* PRO-LOCK + DAILY-METER (free-tier gating)    */
+        /* ============================================ */
+        .seg-btn.locked {
+            opacity: 0.55;
+            position: relative;
+            cursor: pointer;
+        }
+        .seg-btn.locked:hover { opacity: 0.75; }
+        .seg-btn.locked .lock-tag {
+            display: inline-block;
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            background: var(--gold, #f5a623);
+            color: #2a1d00;
+            padding: 0.1rem 0.35rem;
+            border-radius: 4px;
+            margin-left: 0.25rem;
+            vertical-align: middle;
+            text-transform: uppercase;
+        }
+        .input-group-hint-line {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-top: 0.4rem;
+            line-height: 1.4;
+        }
+        .input-group-hint-line a {
+            color: var(--brand-primary);
+            font-weight: 600;
+        }
+        .daily-meter {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-top: 0.75rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid var(--border-subtle);
+            text-align: center;
+        }
+        .daily-meter.warning { color: #b45309; }
+        .daily-meter.limit-reached {
+            color: #991b1b;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        .daily-meter a {
+            color: var(--brand-primary);
+            font-weight: 600;
+        }
+
+        /* ============================================ */
         /* RESPONSIVE                                   */
         /* ============================================ */
         @media (max-width: 900px) {
@@ -1384,9 +1441,10 @@
                     <div class="segmented" role="radiogroup" aria-label="Risk Category">
                         <button type="button" class="seg-btn" data-risk="1">I</button>
                         <button type="button" class="seg-btn active" data-risk="2">II</button>
-                        <button type="button" class="seg-btn" data-risk="3">III</button>
-                        <button type="button" class="seg-btn" data-risk="4">IV</button>
+                        <button type="button" class="seg-btn locked" data-risk="3" data-locked="1">III <span class="lock-tag">Pro</span></button>
+                        <button type="button" class="seg-btn locked" data-risk="4" data-locked="1">IV <span class="lock-tag">Pro</span></button>
                     </div>
+                    <div class="input-group-hint-line">Essential facilities (hospitals, schools, emergency response) require the <a href="/wind-load-calculator-landing.html">Full Calculator</a>.</div>
                 </div>
 
                 <!-- BUILDING -->
@@ -1477,6 +1535,8 @@
                     </div>
                     <a href="/wind-load-calculator-landing.html" class="post-result-cta-btn">Start 7-day free trial &rarr;</a>
                 </div>
+
+                <div class="daily-meter" id="daily-meter" hidden></div>
             </div>
         </div>
     </section>
@@ -1816,6 +1876,10 @@
         // ----------------------------------------
         document.querySelectorAll('[data-risk]').forEach(btn => {
             btn.addEventListener('click', () => {
+                if (btn.dataset.locked === '1') {
+                    showUpgradeToast('Risk Category III &amp; IV', 'Essential facilities require the Full Calculator.');
+                    return;
+                }
                 document.querySelectorAll('[data-risk]').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
                 state.risk_cat = btn.dataset.risk;
@@ -1948,7 +2012,59 @@
             pressureTimer = setTimeout(() => fetchPressure(), 300);
         }
 
+        // ----------------------------------------
+        // Daily free-calc limit (localStorage)
+        // ----------------------------------------
+        const DAILY_LIMIT = 10;
+        function todayKey() {
+            const d = new Date();
+            return `wlc_free_calc_${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+        }
+        function getDailyCount() {
+            try { return parseInt(localStorage.getItem(todayKey()) || '0', 10); } catch(e) { return 0; }
+        }
+        function bumpDailyCount() {
+            const n = getDailyCount() + 1;
+            try { localStorage.setItem(todayKey(), String(n)); } catch(e) {}
+            return n;
+        }
+        function renderDailyMeter() {
+            const used = getDailyCount();
+            const meter = document.getElementById('daily-meter');
+            if (!meter) return;
+            if (used <= 0) { meter.hidden = true; return; }
+            meter.hidden = false;
+            if (used >= DAILY_LIMIT) {
+                meter.className = 'daily-meter limit-reached';
+                meter.innerHTML = `Daily free limit reached (${used}/${DAILY_LIMIT}). <a href="/wind-load-calculator-landing.html">Start 7-day free trial &rarr;</a>`;
+            } else if (used >= 7) {
+                meter.className = 'daily-meter warning';
+                meter.innerHTML = `${used}/${DAILY_LIMIT} free calcs used today &mdash; <a href="/wind-load-calculator-landing.html">unlimited with Pro</a>`;
+            } else {
+                meter.className = 'daily-meter';
+                meter.innerHTML = `${used}/${DAILY_LIMIT} free calcs used today`;
+            }
+        }
+
+        function showUpgradeToast(title, body) {
+            const t = document.getElementById('upgrade-toast');
+            t.querySelector('.toast-title').innerHTML = title;
+            t.querySelector('.toast-body').innerHTML = body;
+            t.classList.add('visible');
+        }
+
         async function fetchPressure() {
+            // Free-tier daily limit — block the API call once exhausted
+            if (getDailyCount() >= DAILY_LIMIT) {
+                pressureStatus.textContent = '! daily limit reached';
+                pressureStatus.classList.remove('live');
+                renderDailyMeter();
+                showUpgradeToast(
+                    `Daily free limit reached (${DAILY_LIMIT}/${DAILY_LIMIT})`,
+                    'The Full Calculator removes the daily cap and adds Excel export, PE stamps, and multi-component schedules.'
+                );
+                return;
+            }
             try {
                 const res = await fetch(`${API_BASE}/api/public/design-pressure`, {
                     method: 'POST',
@@ -1980,6 +2096,8 @@
             }
 
             state.calcCount++;
+            bumpDailyCount();
+            renderDailyMeter();
             maybeShowToast();
 
             const pos = data.pressures.max_positive_psf;
@@ -2053,6 +2171,9 @@
         toastClose.addEventListener('click', () => {
             upgradeToast.classList.remove('visible');
         });
+
+        // Paint the daily meter on load so returning users see their remaining count
+        renderDailyMeter();
 
         // ----------------------------------------
         // Utility

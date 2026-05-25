@@ -1,0 +1,66 @@
+# Caddyfile — Railway static site serving config
+# Added 2026-05-25 to deliver security headers PSI Best Practices flagged
+# as missing. Before this file existed, Railway auto-detected the static
+# site and served it with default headers (no HSTS, no COOP, no XFO).
+#
+# This config keeps static-file serving behavior identical to the prior
+# auto-detect; the only change is the added response headers below.
+#
+# If anything routes differently after deploy (404s on previously-working
+# URLs, missing assets), check the file_server defaults and add explicit
+# rewrites here.
+
+:{$PORT:80} {
+    root * /app
+    encode gzip zstd
+    file_server
+
+    # === Security headers ===
+    # All flagged by PSI Best Practices on 2026-05-25 as missing.
+    # All are HIGH-severity per Lighthouse + low-risk for this site
+    # (pure static content, no cross-origin embed use cases, no
+    # framed-embed scenarios).
+    header {
+        # HSTS: force HTTPS for 1 year, include subdomains.
+        # Safe because windloadcalc.com is fully on HTTPS (Railway-managed
+        # TLS cert). Subdomains: api.windloadcalc.com is HTTPS, calc.
+        # windloadcalc.com is HTTPS. No HTTP-only subdomains exist.
+        Strict-Transport-Security "max-age=31536000; includeSubDomains"
+
+        # COOP: same-origin-allow-popups (NOT plain same-origin).
+        # The allow-popups variant prevents window.opener attacks from
+        # cross-origin documents while still allowing OAuth popups
+        # (Google Sign-In uses a popup window). Plain same-origin would
+        # break Google OAuth callback flow.
+        Cross-Origin-Opener-Policy "same-origin-allow-popups"
+
+        # XFO: SAMEORIGIN. Mitigates clickjacking by preventing other
+        # domains from iframe-embedding this site. We don't have any
+        # legitimate cross-origin iframe-embed use case.
+        X-Frame-Options "SAMEORIGIN"
+
+        # Referrer-Policy: strict-origin-when-cross-origin. Modern
+        # browser default. Sends full URL on same-origin nav, only
+        # origin on cross-origin nav, nothing on HTTPS->HTTP. Privacy
+        # win, no functional impact.
+        Referrer-Policy "strict-origin-when-cross-origin"
+
+        # X-Content-Type-Options: nosniff. Prevents browsers from MIME-
+        # sniffing responses (e.g., interpreting a .txt as executable
+        # JS). Safe blanket directive.
+        X-Content-Type-Options "nosniff"
+
+        # Permissions-Policy: lock down APIs we don't use. Empty allowlists
+        # mean no origin can use these APIs from this site.
+        Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+
+        # Cache: extend static-asset caching. PSI flagged 10-minute TTL
+        # on /images/ and /js/ as too short. 1 year for fingerprintable
+        # assets; HTML kept short so content updates ship fast.
+        ?Cache-Control "public, max-age=31536000, immutable"
+    }
+
+    # HTML files: short cache so content updates land quickly
+    @html path *.html /
+    header @html Cache-Control "public, max-age=300, must-revalidate"
+}

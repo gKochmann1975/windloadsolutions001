@@ -12,7 +12,7 @@
     const cartButton = document.createElement('div');
     cartButton.id = 'floating-cart-btn';
     cartButton.innerHTML = `
-        <a href="${cartUrl}" style="
+        <a href="${cartUrl}" aria-label="View shopping cart" style="
             position: fixed;
             bottom: 30px;
             right: 30px;

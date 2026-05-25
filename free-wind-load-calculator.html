@@ -325,6 +325,8 @@
         /* ============================================ */
         /* TOP-NAV SITE-WIDE BANNER (NEW)               */
         /* ============================================ */
+        /* Stacked-sticky pattern: banner pins at top, header pins just below it.
+           Both stay visible as the user scrolls. No body-padding hack needed. */
         .wlc-promo-banner {
             background: var(--brand-dark);
             color: var(--text-ivory);
@@ -333,7 +335,8 @@
             font-size: 0.875rem;
             font-weight: 500;
             letter-spacing: 0.01em;
-            position: relative;
+            position: sticky;
+            top: 0;
             z-index: 1001;
         }
         .wlc-promo-banner a {
@@ -363,18 +366,24 @@
             justify-content: space-between;
             align-items: center;
             position: sticky;
-            top: 0;
+            top: 38px; /* sit just below the sticky promo banner */
             z-index: 1000;
         }
         .site-header .logo {
-            font-family: var(--font-serif);
-            font-weight: 700;
-            font-size: 1.5rem;
-            color: var(--brand-dark);
+            display: inline-flex;
+            align-items: center;
             text-decoration: none;
-            letter-spacing: -0.01em;
         }
-        .site-header .logo:hover { text-decoration: none; color: var(--brand-primary); }
+        .site-header .logo img {
+            display: block;
+            height: 42px;
+            width: auto;
+        }
+        .site-header .logo:hover { text-decoration: none; opacity: 0.85; }
+        @media (max-width: 600px) {
+            .site-header { padding: 0.75rem 1rem; top: 34px; }
+            .site-header .logo img { height: 34px; }
+        }
         .site-header .nav-cta {
             display: flex;
             gap: 0.75rem;
@@ -406,11 +415,11 @@
         }
 
         /* ============================================ */
-        /* HERO  — matches homepage .hero-section pattern   */
+        /* HERO  — full-width centered headline             */
         /* ============================================ */
         .hero {
             background: var(--hero-gradient);
-            padding: 5rem 1.5rem 5rem;
+            padding: 5rem 1.5rem 4rem;
             position: relative;
             overflow: hidden;
         }
@@ -422,16 +431,13 @@
             pointer-events: none;
         }
         .hero-inner {
-            max-width: 1280px;
+            max-width: 920px;
             margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: start;
+            text-align: center;
             position: relative;
             z-index: 1;
+            color: white;
         }
-        .hero-copy { color: white; padding-top: 1rem; }
         .hero-eyebrow {
             display: inline-flex;
             align-items: center;
@@ -459,10 +465,10 @@
         }
         .hero h1 {
             font-weight: 900;
-            font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+            font-size: clamp(2.25rem, 5.5vw, 4.25rem);
             line-height: 1.1;
             letter-spacing: -0.02em;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.25rem;
             color: white;
         }
         .hero h1 .hl {
@@ -473,17 +479,18 @@
             filter: drop-shadow(0 0 30px rgba(0, 255, 255, 0.5));
         }
         .hero-subhead {
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             line-height: 1.55;
             color: rgba(255, 255, 255, 0.92);
-            margin-bottom: 2rem;
-            max-width: 580px;
+            margin: 0 auto 1.75rem;
+            max-width: 680px;
         }
         .trust-pills {
             display: flex;
             flex-wrap: wrap;
             gap: 0.65rem;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
+            justify-content: center;
         }
         .trust-pill {
             display: inline-flex;
@@ -718,36 +725,49 @@
         .fbc-badge.error .fbc-badge-eyebrow .dot { background: var(--suction-red); }
 
         /* ============================================ */
-        /* RESULT SECTION (below hero, second screen)   */
+        /* CALC + OUTPUT SECTION                        */
+        /* Inputs (left) and live pressure (right)      */
+        /* side-by-side, with output sticky on scroll.  */
         /* ============================================ */
-        .result-section {
-            padding: 4rem 1.5rem 5rem;
+        .calc-section {
+            padding: 3.5rem 1.5rem 5rem;
             background: var(--bg-page);
+            position: relative;
         }
-        .result-inner {
+        .calc-section-heading {
             max-width: 1280px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1.2fr;
-            gap: 3rem;
+            margin: 0 auto 2rem;
+            text-align: center;
         }
-        .result-copy h2 {
+        .calc-section-heading h2 {
             font-family: var(--font-serif);
-            font-size: 2rem;
-            font-weight: 600;
+            font-size: clamp(1.5rem, 2.4vw, 1.875rem);
+            font-weight: 700;
             color: var(--brand-dark);
             letter-spacing: -0.015em;
             line-height: 1.2;
-            margin-bottom: 1rem;
+            margin-bottom: 0.6rem;
         }
-        .result-copy p {
+        .calc-section-heading p {
             color: var(--text-secondary);
-            line-height: 1.65;
-            margin-bottom: 1rem;
+            line-height: 1.6;
+            max-width: 680px;
+            margin: 0 auto;
+            font-size: 0.95rem;
         }
-        .result-copy .small {
-            font-size: 0.875rem;
-            color: var(--text-muted);
+        .calc-section-heading p a { font-weight: 600; }
+        .calc-section-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+        .calc-section-inner .pressure-card {
+            position: sticky;
+            /* clear sticky banner (38px) + sticky header (~74px) + breathing room */
+            top: calc(38px + 74px + 1rem);
         }
 
         /* The big result card */
@@ -1266,11 +1286,12 @@
         /* RESPONSIVE                                   */
         /* ============================================ */
         @media (max-width: 900px) {
-            .hero-inner { grid-template-columns: 1fr; gap: 2rem; }
-            .result-inner { grid-template-columns: 1fr; gap: 2rem; }
+            .calc-section-inner { grid-template-columns: 1fr; gap: 1.5rem; }
+            .calc-section-inner .pressure-card { position: static; }
             .howto-steps { grid-template-columns: 1fr; }
             .definition-list { grid-template-columns: 1fr; }
-            .hero { padding: 2rem 1rem 3rem; }
+            .hero { padding: 3rem 1rem 2.5rem; }
+            .calc-section { padding: 2.5rem 1rem 4rem; }
             .content-section { padding: 3rem 1rem; }
             .pressure-value-row { grid-template-columns: 1fr; }
             .enclosure-grid { grid-template-columns: 1fr; }
@@ -1298,40 +1319,55 @@
     <!-- HEADER                                        -->
     <!-- ============================================ -->
     <header class="site-header">
-        <a href="/" class="logo">WindLoadCalc</a>
+        <a href="/" class="logo" aria-label="WindLoadCalc home">
+            <img src="/images/windloadcalc-logo.svg" alt="WindLoadCalc">
+        </a>
         <nav class="nav-cta" aria-label="Primary">
             <a href="/" class="nav-link-subtle">Home</a>
             <a href="/account.html" class="nav-link-subtle">Sign in</a>
-            <a href="/calc-landing.html" class="nav-cta-primary">Pro version</a>
+            <a href="/wind-load-calculator-landing.html" class="nav-cta-primary">Full Calculator</a>
         </nav>
     </header>
 
     <!-- ============================================ -->
-    <!-- HERO + CALCULATOR                             -->
+    <!-- HERO  — full-width centered headline             -->
     <!-- ============================================ -->
     <section class="hero">
         <div class="hero-inner">
-            <div class="hero-copy">
-                <span class="hero-eyebrow">Free &middot; No signup &middot; No meter</span>
-                <h1>
-                    Design pressure in <span class="hl">eight seconds</span>.<br>
-                    With Florida Building Code overrides built in.
-                </h1>
-                <p class="hero-subhead">
-                    The only free wind load calculator that returns the legally enforceable wind speed for Miami-Dade, Broward, and Collier counties &mdash; not the ASCE map value your plan reviewer will reject.
-                </p>
-                <div class="trust-pills">
-                    <span class="trust-pill"><span class="dot"></span>FBC overrides built in</span>
-                    <span class="trust-pill"><span class="dot"></span>Every coefficient cited</span>
-                    <span class="trust-pill"><span class="dot"></span>33,783 US ZIPs covered</span>
-                </div>
-                <p class="hero-tagline">
-                    Calculating wind loads since 2002, online since 2006.
-                </p>
+            <span class="hero-eyebrow">Free &middot; No signup &middot; No meter</span>
+            <h1>
+                Design pressure in <span class="hl">eight seconds</span>.<br>
+                With Florida Building Code overrides built in.
+            </h1>
+            <p class="hero-subhead">
+                The only free wind load calculator that returns the legally enforceable wind speed for Miami-Dade, Broward, and Collier counties &mdash; not the ASCE map value your plan reviewer will reject.
+            </p>
+            <div class="trust-pills">
+                <span class="trust-pill"><span class="dot"></span>FBC overrides built in</span>
+                <span class="trust-pill"><span class="dot"></span>Every coefficient cited</span>
+                <span class="trust-pill"><span class="dot"></span>33,783 US ZIPs covered</span>
             </div>
+            <p class="hero-tagline">
+                Calculating wind loads since 2002, online since 2006.
+            </p>
+        </div>
+    </section>
 
+    <!-- ============================================ -->
+    <!-- CALC + LIVE OUTPUT  (side by side)            -->
+    <!-- Inputs left, pressure right (sticky).         -->
+    <!-- ============================================ -->
+    <section class="calc-section">
+        <div class="calc-section-heading">
+            <h2>Try it live &mdash; pressure updates as you type.</h2>
+            <p>
+                Same ASCE 7-22 + Florida Building Code engine the paid version runs. Every coefficient traceable to its source. One wall component at a time &mdash; for a full schedule across every opening, <a href="/wind-load-calculator-landing.html">try the Full Calculator free for 7 days &rarr;</a>
+            </p>
+        </div>
+
+        <div class="calc-section-inner">
             <div class="calc-card">
-                <div class="calc-card-title">Free Wind Load Calculator</div>
+                <div class="calc-card-title">Inputs</div>
 
                 <!-- LOCATION -->
                 <div class="input-group">
@@ -1397,23 +1433,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- ============================================ -->
-    <!-- RESULT SECTION                                -->
-    <!-- ============================================ -->
-    <section class="result-section">
-        <div class="result-inner">
-            <div class="result-copy">
-                <h2>Your design pressure</h2>
-                <p>
-                    Computed live as you change inputs. Uses the same ASCE 7-22 + Florida Building Code engine the paid version runs &mdash; every coefficient traceable to its source.
-                </p>
-                <p class="small">
-                    The pressure shown is for ONE wall component. Need a schedule across every opening on a project, with Excel export, PE-stampable PDFs, and MWFRS results? <a href="/calc-landing.html">Try the full version free for 7 days &rarr;</a>
-                </p>
-            </div>
 
             <div class="pressure-card">
                 <div class="pressure-card-header">
@@ -1456,7 +1475,7 @@
                     <div class="post-result-cta-body">
                         The full version handles unlimited components, Excel export for AutoCAD, PE-stampable PDFs, MWFRS, and all six roof shapes.
                     </div>
-                    <a href="/calc-landing.html" class="post-result-cta-btn">Start 7-day free trial &rarr;</a>
+                    <a href="/wind-load-calculator-landing.html" class="post-result-cta-btn">Start 7-day free trial &rarr;</a>
                 </div>
             </div>
         </div>
@@ -1730,7 +1749,7 @@
             <div>&copy; 2026 WindLoad Solutions. All rights reserved.</div>
             <div>
                 <a href="/">Home</a> &nbsp;&middot;&nbsp;
-                <a href="/calc-landing.html">Pro version</a> &nbsp;&middot;&nbsp;
+                <a href="/wind-load-calculator-landing.html">Full Calculator</a> &nbsp;&middot;&nbsp;
                 <a href="/terms">Terms</a> &nbsp;&middot;&nbsp;
                 <a href="/privacy">Privacy</a>
             </div>
@@ -1744,9 +1763,9 @@
         <button class="toast-close" id="toast-close" aria-label="Dismiss">&times;</button>
         <div class="toast-title">You're clearly doing real work.</div>
         <div class="toast-body">
-            The Pro version handles unlimited components, Excel export for AutoCAD, PE-stampable PDFs, and all six roof shapes.
+            The full calculator handles unlimited components, Excel export for AutoCAD, PE-stampable PDFs, and all six roof shapes.
         </div>
-        <a href="/calc-landing.html" class="toast-btn">7 days free &rarr;</a>
+        <a href="/wind-load-calculator-landing.html" class="toast-btn">7 days free &rarr;</a>
     </div>
 
     <!-- ============================================ -->

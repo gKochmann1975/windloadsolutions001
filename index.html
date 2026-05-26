@@ -5158,16 +5158,9 @@ body {
     <main>
         <!-- Hero Section with Video Background -->
         <section class="hero-section">
-            <!-- 2026-05-25: removed broken <source> tags pointing to
-                 videos/index-homepage.{webm,mp4}. The videos/ folder is
-                 gitignored (large files) so these were 404'ing for every
-                 visitor, polluting the browser console and degrading
-                 the Best Practices Lighthouse score. The .hero-section
-                 gradient now shows as the intended visual fallback.
-                 To re-enable: upload videos to a CDN (Cloudflare R2,
-                 S3, Bunny CDN, etc.) and add <source> tags pointing
-                 to the CDN URLs. Keep videos OUT of the git repo. -->
-            <video class="hero-video" autoplay muted loop playsinline></video>
+            <video class="hero-video" autoplay muted loop playsinline preload="auto">
+                <source src="videos/index-homepage.mp4" type="video/mp4">
+            </video>
             <div class="hero-overlay"></div>
             
             <div class="container hero-content">

@@ -8,51 +8,9 @@
     const isInShopSubfolder = window.location.pathname.includes('/shop/');
     const cartUrl = isInShopSubfolder ? '../cart.html' : 'cart.html';
 
-    // Create floating cart button
-    const cartButton = document.createElement('div');
-    cartButton.id = 'floating-cart-btn';
-    cartButton.innerHTML = `
-        <a href="${cartUrl}" aria-label="View shopping cart" style="
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: linear-gradient(135deg, #0018ff, #0080ff);
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 8px 30px rgba(0, 24, 255, 0.4);
-            text-decoration: none;
-            z-index: 9999;
-            transition: all 0.3s ease;
-        " onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="9" cy="21" r="1"></circle>
-                <circle cx="20" cy="21" r="1"></circle>
-                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-            </svg>
-            <span id="cart-badge" style="
-                position: absolute;
-                top: -5px;
-                right: -5px;
-                background: #dc2626;
-                color: white;
-                width: 24px;
-                height: 24px;
-                border-radius: 50%;
-                display: none;
-                align-items: center;
-                justify-content: center;
-                font-size: 0.8rem;
-                font-weight: 700;
-                border: 2px solid white;
-            ">0</span>
-        </a>
-    `;
-    document.body.appendChild(cartButton);
+    // NOTE: The floating bottom-right cart bubble was removed (2026-06-11) because it
+    // duplicated the cart link injected into the header below and overlapped content
+    // on mobile. The header cart (addCartToHeader) is now the single cart entry point.
 
     // Replace "Subscribe Now" buttons with "Add to Cart" buttons
     document.addEventListener('DOMContentLoaded', function() {

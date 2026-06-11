@@ -7273,9 +7273,18 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (heroSection && heroContent) {
         window.addEventListener('scroll', function() {
+            // Parallax is a DESKTOP-ONLY effect. On mobile the hero is short, so
+            // translating its content downward (and fading it) pushes the buttons
+            // and stat cards over the next section. Disable + clear inline styles.
+            if (window.innerWidth <= 768) {
+                heroContent.style.transform = '';
+                heroContent.style.opacity = '';
+                return;
+            }
+
             const scrolled = window.pageYOffset;
             const parallaxSpeed = 0.5;
-            
+
             if (scrolled < window.innerHeight) {
                 heroContent.style.transform = `translateY(${scrolled * parallaxSpeed}px)`;
                 heroContent.style.opacity = 1 - (scrolled / window.innerHeight) * 0.5;

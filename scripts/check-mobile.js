@@ -35,15 +35,24 @@ const EXCLUDE = /(?:^|[\\/])(?:website|Lib|venv|venv_clean|new_env|\.backups|nod
 // false positives are cheaper than a broken homepage. `severity: 'CRITICAL'`
 // fails the build; 'HIGH' warns.
 
-// Media-query context of a match: the condition string of the nearest preceding
-// @media, lowercased ('' = top-level). Lets rules fire only where they matter
-// (portrait mobile) instead of on legitimate desktop/landscape rules.
+// Media-query context of a match: the innermost @media condition ACTIVE at the
+// given index ('' = top-level), determined by brace-balanced parsing so a
+// top-level rule that follows a closed @media block is NOT mis-attributed to it.
+// Lets rules fire only where they matter (portrait mobile), not on legitimate
+// desktop/landscape rules.
 function nearestMedia(text, index) {
-  const at = text.lastIndexOf('@media', index);
-  if (at === -1) return '';
-  const brace = text.indexOf('{', at);
-  if (brace === -1 || brace > index) return '';
-  return text.slice(at + 6, brace).trim().toLowerCase();
+  const re = /@media([^{]*)\{|\{|\}/g;
+  const stack = [];
+  let m;
+  while ((m = re.exec(text)) && m.index < index) {
+    if (m[0] === '}') stack.pop();
+    else if (m[0] === '{') stack.push(null); // plain block (selector/keyframe)
+    else stack.push(m[1].trim().toLowerCase()); // @media ... {
+  }
+  for (let i = stack.length - 1; i >= 0; i--) {
+    if (stack[i]) return stack[i];
+  }
+  return '';
 }
 const isPortraitMobile = (q) => /max-width/.test(q) && !/landscape/.test(q);
 const isSmallWidth = (q) => {
@@ -57,7 +66,9 @@ const RULES = [
     severity: 'CRITICAL',
     why: 'Hero <h1>/subtitle set to display:none on mobile — invisible headline (bad UX + the indexable H1 is hidden from Google).',
     fix: 'Show the heading on mobile with clamp() sizing instead of hiding it.',
-    re: /\.hero-(?:title|subtitle)\s*\{[^}]*?display\s*:\s*none[^}]*?\}/gi,
+    // Catches both `.hero-title{display:none}` and the grouped form
+    // `.hero-section h1, .hero-section p, .header-cta { display:none }`.
+    re: /(?:\.hero-(?:title|subtitle)|\.hero-(?:section|content)\s+(?:h1|p))[^{}]*\{[^}]*?display\s*:\s*none[^}]*?\}/gi,
     accept: (q) => q === '' || isPortraitMobile(q), // skip landscape-only hides
   },
   {

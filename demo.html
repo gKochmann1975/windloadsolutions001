@@ -1712,7 +1712,7 @@
         }
 
         .hero-action-btn i {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             filter: drop-shadow(0 0 8px currentColor);
         }
 
@@ -1981,12 +1981,29 @@
         }
 
         @media (max-width: 480px) {
-            /* Hide desktop hero content and CTAs on mobile */
-            .hero-section h1,
-            .hero-section p,
+            /* Hide desktop hero CTAs + header CTA on mobile; keep heading visible */
             .hero-cta-buttons,
             .header-cta {
                 display: none !important;
+            }
+
+            /* Show hero headline + subtitle on mobile (scaled down, never hidden) */
+            .hero-title {
+                display: block;
+                font-size: clamp(2rem, 8vw, 2.6rem);
+                margin-bottom: 1rem;
+            }
+
+            .hero-subtitle {
+                display: block;
+                font-size: 1.05rem;
+            }
+
+            /* Hero can't clip the now-visible content */
+            .hero-section {
+                height: auto !important;
+                min-height: 100vh !important;
+                overflow: visible !important;
             }
 
             /* Show mobile buttons */
@@ -2009,22 +2026,23 @@
                 display: inline-flex !important;
                 align-items: center !important;
                 justify-content: center !important;
+                gap: 0.6rem !important;
                 margin: 0 auto !important;
-                padding: 1.8rem 2.2rem !important;
-                font-size: 1.65rem !important;
+                padding: 1rem 1.5rem !important;
+                font-size: 1.05rem !important;
                 font-weight: 700 !important;
-                white-space: nowrap !important;
+                white-space: normal !important;
                 box-sizing: border-box !important;
                 border-radius: 50px !important;
                 line-height: 1.3 !important;
                 text-align: center !important;
-                width: auto !important;
-                max-width: calc(100vw - 1.5rem) !important;
+                width: 100% !important;
+                max-width: 340px !important;
             }
 
             .hero-buttons-mobile .hero-btn i,
             .hero-buttons-mobile .hero-action-btn i {
-                font-size: 1.8rem !important;
+                font-size: 1.2rem !important;
             }
         }
     </style>

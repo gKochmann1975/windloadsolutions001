@@ -1263,6 +1263,12 @@
             .related-grid {
                 grid-template-columns: 1fr;
             }
+
+            /* Hide header CTAs on mobile so they don't overflow off-screen
+               (the hamburger menu carries these links). */
+            .header-cta {
+                display: none !important;
+            }
         }
     </style>
 </head>
@@ -1695,7 +1701,7 @@
                     </h3>
                     <p style="color: rgba(255, 255, 255, 0.9); font-size: 0.95rem;">25% off for building departments, universities, and government agencies</p>
                 </div>
-                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem;">
                     <div style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.95) 100%); backdrop-filter: blur(20px); padding: 1.2rem; border-radius: 12px; text-align: center; border: 2px solid rgba(255, 255, 255, 0.8); transition: all 0.3s ease; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 12px 40px rgba(0, 0, 0, 0.25)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 32px rgba(0, 0, 0, 0.15)';">
                         <h4 style="font-size: 1rem; font-weight: 700; color: #111827; margin-bottom: 0.5rem;">Individual</h4>
                         <p style="font-size: 1.8rem; font-weight: 800; color: #0018ff; margin-bottom: 0.25rem;">$21<span style="font-size: 0.9rem; color: #64748b; font-weight: 600;">/mo</span></p>
@@ -1743,7 +1749,7 @@
             </div>
 
             <!-- Feature Cards Grid with Custom SVGs - 2x2 layout -->
-            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; max-width: 1000px; margin: 0 auto;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2rem; max-width: 1000px; margin: 0 auto;">
 
                 <!-- Multi-Format Export -->
                 <div id="exports" style="background: white; border-radius: 16px; padding: 2rem; border: 2px solid #e5e7eb; transition: all 0.3s ease; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 20px 40px rgba(0, 0, 0, 0.3)'; this.style.borderColor='#0018ff';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 30px rgba(0, 0, 0, 0.2)'; this.style.borderColor='#e5e7eb';">

@@ -1954,6 +1954,9 @@
             uniqueZips: new Set(),
             calcCount: 0,
             toastShown: false,
+            // Last displayed pressures — daily count only increments when these change
+            lastPos: null,
+            lastNeg: null,
         };
 
         // DOM
@@ -2120,17 +2123,16 @@
         // ----------------------------------------
         const DAILY_LIMIT = 10;
         function todayKey() {
+            // UTC to match the server's usage_date (utcnow), so the client meter
+            // and the server quota roll over on the same day boundary.
             const d = new Date();
-            return `wlc_free_calc_${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+            return `wlc_free_calc_${d.getUTCFullYear()}-${String(d.getUTCMonth()+1).padStart(2,'0')}-${String(d.getUTCDate()).padStart(2,'0')}`;
         }
         function getDailyCount() {
             try { return parseInt(localStorage.getItem(todayKey()) || '0', 10); } catch(e) { return 0; }
         }
-        function bumpDailyCount() {
-            const n = getDailyCount() + 1;
-            try { localStorage.setItem(todayKey(), String(n)); } catch(e) {}
-            return n;
-        }
+        // (Daily count is now authoritative SERVER-SIDE; the client only mirrors
+        // the server's data.usage.used into localStorage for the meter display.)
         function renderDailyMeter() {
             const used = getDailyCount();
             const meter = document.getElementById('daily-meter');
@@ -2157,17 +2159,10 @@
         }
 
         async function fetchPressure() {
-            // Free-tier daily limit — block the API call once exhausted
-            if (getDailyCount() >= DAILY_LIMIT) {
-                pressureStatus.textContent = '! daily limit reached';
-                pressureStatus.classList.remove('live');
-                renderDailyMeter();
-                showUpgradeToast(
-                    `Daily free limit reached (${DAILY_LIMIT}/${DAILY_LIMIT})`,
-                    'The Full Calculator removes the daily cap and adds Excel export, PE stamps, and multi-component schedules.'
-                );
-                return;
-            }
+            // No client-side pre-block: the SERVER is the authoritative quota.
+            // Always let the request through and let the 429 below be the gate —
+            // this avoids pessimistically blocking when localStorage is stale or
+            // cleared (the server decides based on real per-IP state).
             try {
                 const res = await fetch(`${API_BASE}/api/public/design-pressure`, {
                     method: 'POST',
@@ -2184,6 +2179,26 @@
                     }),
                 });
                 const data = await res.json();
+
+                // The server is the AUTHORITATIVE quota (per IP, can't be bypassed
+                // by clearing storage). Mirror its count into localStorage so the
+                // meter reflects the real remaining calcs.
+                if (data && data.usage && typeof data.usage.used === 'number') {
+                    try { localStorage.setItem(todayKey(), String(data.usage.used)); } catch(e) {}
+                }
+
+                if (res.status === 429 || (data && data.limit_reached)) {
+                    try { localStorage.setItem(todayKey(), String(DAILY_LIMIT)); } catch(e) {}
+                    pressureStatus.textContent = '! daily limit reached';
+                    pressureStatus.classList.remove('live');
+                    renderDailyMeter();
+                    showUpgradeToast(
+                        `Daily free limit reached (${DAILY_LIMIT}/${DAILY_LIMIT})`,
+                        'The Full Calculator removes the daily cap and adds Excel export, PE stamps, and multi-component schedules.'
+                    );
+                    return;
+                }
+
                 renderPressure(data, res.ok);
             } catch (err) {
                 pressureStatus.textContent = '! network';
@@ -2198,13 +2213,24 @@
                 return;
             }
 
-            state.calcCount++;
-            bumpDailyCount();
-            renderDailyMeter();
-            maybeShowToast();
-
             const pos = data.pressures.max_positive_psf;
             const neg = data.pressures.max_negative_psf;
+
+            // The daily quota is counted + enforced SERVER-SIDE (data.usage, already
+            // mirrored into localStorage by fetchPressure). Here we only track
+            // engagement intent for the upgrade nudge, advancing when the displayed
+            // wind pressures actually change. Compare at the SAME 1-decimal precision
+            // we render (toFixed(1)) so a sub-display-precision wobble doesn't count.
+            const dispPos = pos.toFixed(1);
+            const dispNeg = neg.toFixed(1);
+            const pressuresChanged = (dispPos !== state.lastPos || dispNeg !== state.lastNeg);
+            if (pressuresChanged) {
+                state.lastPos = dispPos;
+                state.lastNeg = dispNeg;
+                state.calcCount++;
+                maybeShowToast();
+            }
+            renderDailyMeter();
 
             pressurePositive.innerHTML = `+${pos.toFixed(1)}<span class="unit">psf</span>`;
             pressurePositive.classList.remove('empty');

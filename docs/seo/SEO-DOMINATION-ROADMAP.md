@@ -4,7 +4,7 @@
 
 **Maintained by:** Gregory + Claude sessions
 **First drafted:** 2026-05-23
-**Last meaningful update:** 2026-05-23
+**Last meaningful update:** 2026-06-11 (added Track 2 — GEO / AI search visibility; logged work shipped since draft)
 
 This is the master document. Every wave references the detail files below. Update this file when strategy shifts; update the detail files when content/tactics shift.
 
@@ -20,6 +20,7 @@ This is the master document. Every wave references the detail files below. Updat
 | **[04-funnel-architecture.md](./04-funnel-architecture.md)** | How every page funnels to purchase (Google → TOFU → calc app → trial → paid) |
 | **[wave-4-non-fl-states-DETAILED.md](./wave-4-non-fl-states-DETAILED.md)** | Ready-to-execute brief for the next ship (TX, NC, SC, CA, LA + 4 cleanup tasks) |
 | **[waves-5-6-7-future-roadmap.md](./waves-5-6-7-future-roadmap.md)** | Stubs for cities (Wave 5), product-types (Wave 6), specialty (Wave 7) |
+| **[outreach/directory-listings.md](./outreach/directory-listings.md)** | Track 2 / GEO — ready-to-paste software-directory listing copy (G2, Capterra, SourceForge, AlternativeTo) |
 
 ---
 
@@ -45,6 +46,13 @@ This is the master document. Every wave references the detail files below. Updat
 - **WLco recovered** from the templated-content penalty (747 pages noindexed)
 - **WLS surgical-cleaned** without losing the 1,044 clicks/90d of traffic the original blanket-noindex plan would have killed
 - **Calc app deep-links work** — visitors entering a ZIP on any landing page land at the calculator with city/state/county/wind speed pre-populated
+
+### Shipped since this draft (logged 2026-06-11, verified from git history)
+- **`wind-load-software.html`** — NEW head-term product page targeting "wind load software" (commit `b6e0cfd`). Browser-based hero + video, glassmorphism competitor comparison (vs SkyCiv/MecaWind), SoftwareApplication + FAQPage schema, in sitemap, self-canonical, live. This is the on-site half of the GEO play — see **Track 2** below.
+- **Sitewide fake-stats scrub COMPLETE** — every fabricated "99.8% / 10,000+ / SLA %" claim removed across WLC + BIP; replaced with defensible specifics (24-year moat, "thousands of engineers", 100% permit approval over 24 years). Hard rule #1 now clean sitewide.
+- **Free calculator brand-matched** to homepage (logo sizing, header, accents); fake $49 homepage price replaced with real $14.99–$39.99 tiers (commit `5bcde1d`).
+- **Mobile-first fixes** rolled out to homepage + 16 tier-1 pages (hero, banner overlap, nav, parallax-off-on-phones).
+- **PE sign-and-seal scoped to anonymous in-house Florida P.E.** sitewide (commit `9d218d3`).
 
 ### What's NOT live yet (queued for Wave 4+)
 - 5 non-FL state pages (TX, NC, SC, CA, LA) — high priority, **1,364 WLS clicks/90d** currently uncaptured by WLC
@@ -106,6 +114,41 @@ We don't beat SkyCiv on multi-code breadth (they support 8 codes). We beat them 
 | **Wave 8+** | Backlinks, PR, video, international codes, free resources | n/a | Waves 4-7 ranking proves the page-quality formula | TBD |
 
 **Total Wave 4-7 buildout:** ~35-50 new pages, 4-7 sessions of work spread across ~6-12 months as data informs each wave.
+
+---
+
+## Track 2 — GEO / AI Search Visibility (get cited in AI Overviews)
+
+**Added 2026-06-11.** A PARALLEL track to the geographic page-waves above — different
+problem, different tactics. Triggered by Greg seeing the Google AI Overview for "wind
+load software" list MecaWind/SkyCiv/Dlubal/Digital Canal but **not WindLoadCalc**, and
+WLC not even on page 3 of classic results.
+
+**The problem:** Google's AI Overview + ChatGPT/Perplexity answer "wind load software"
+by synthesizing *third-party* roundups (G2, Capterra, "best wind load software" lists).
+WindLoadCalc is absent from those sources, so it never appears in the AI answer — even
+when we rank in classic results. AI engines cite **entities that appear across multiple
+independent sources**, not just your own site.
+
+**Two halves:**
+1. **On-site (DONE 2026-06-11):** `wind-load-software.html` — head-term page with an
+   AI-extractable definition + a competitor comparison *table* (tables get lifted
+   near-verbatim into AI answers). Honest "we rank one strong page + own the comparison
+   narrative", NOT "hold multiple #1s" — that SERP is owned by funded competitors.
+2. **Off-site (PENDING — the actual unlock):** get WindLoadCalc listed in the directories
+   AI engines read from. Full ready-to-paste listing kit:
+   **[outreach/directory-listings.md](./outreach/directory-listings.md)**.
+
+**Pending action list (user-driven — needs Greg's logins, in effort/payoff order):**
+- [ ] **AlternativeTo** — list as alternative to MecaWind / SkyCiv (5 min, fastest win)
+- [ ] **Capterra** vendor signup → auto-syndicates to GetApp + Software Advice (3 listings, 1 form)
+- [ ] **G2** — claim profile; then request HONEST reviews from real customers (Eduardo/Door
+      Styles, Rich Badders, Manuel/Damar). **NEVER fake reviews** — Hard rule #1 territory.
+- [ ] **SourceForge / Slashdot** business-software listing
+- [ ] (optional) Draft + send a genuine-review-request email to real customers
+
+**Success signal:** WindLoadCalc named in the Google AI Overview / Perplexity answer for
+"wind load software" and "best wind load software"; referral traffic from G2/Capterra in GSC.
 
 ---
 
@@ -256,3 +299,4 @@ These are codified in saved memory and quality-checked into every wave brief.
 - [04-funnel-architecture.md](./04-funnel-architecture.md)
 - [wave-4-non-fl-states-DETAILED.md](./wave-4-non-fl-states-DETAILED.md)
 - [waves-5-6-7-future-roadmap.md](./waves-5-6-7-future-roadmap.md)
+- [outreach/directory-listings.md](./outreach/directory-listings.md) — Track 2 / GEO listing kit

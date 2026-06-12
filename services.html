@@ -777,7 +777,7 @@
         }
 
         .stat-number {
-            font-size: 3.5rem;
+            font-size: clamp(1.5rem, 0.8rem + 2.6vw, 3.5rem);
             font-weight: 900;
             background: linear-gradient(135deg, #0018ff 0%, #FF6B35 50%, #181E57 100%);
             -webkit-background-clip: text;
@@ -785,7 +785,9 @@
             background-clip: text;
             display: block;
             margin-bottom: 1rem;
-            line-height: 1;
+            line-height: 1.1;
+            overflow-wrap: break-word;
+            word-break: break-word;
         }
 
         .stat-label {

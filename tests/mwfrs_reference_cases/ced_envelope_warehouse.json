@@ -1,0 +1,64 @@
+{
+  "source": "CED Engineering S02-048 — Calculating Wind Loads on Buildings Using the Envelope Procedure of ASCE 7-22 Code",
+  "url": "https://www.cedengineering.com/userfiles/S02-048%20-%20Calculating%20Wind%20Loads%20on%20Buildings%20Using%20the%20Envelope%20Procedure%20of%20ASCE%207-22%20Code%20-%20US.pdf",
+  "asce_edition": "ASCE 7-22",
+  "edition_verified": true,
+  "procedure": "MWFRS Envelope (Chapter 28)",
+  "description": "Low-rise commercial/warehouse metal building, gable roof at 18.4 degrees, Exposure C, flat terrain, enclosed",
+  "extraction_date": "2026-06-13",
+  "extracted_by": "Claude Opus 4.7 via pdftotext from S02-048 PDF",
+  "limitations": [
+    "Source has internal inconsistency: Step 2 cites V=116 mph (from ASCE 7 Hazard Tool), but Step 5 uses V=115 mph in the qh calculation. Final pressures are computed with V=115. Using V=115 here to match the final-pressure math.",
+    "GCpf table values (Tables 3 and 4 in source) did NOT extract from PDF — they are image-based. Only one Surface 1 worked-out p value (+10.0 / +20.6 psf) is in the text. Full GCpf surface-by-surface table needs to be transcribed visually from the PDF before this case is complete.",
+    "CED is continuing-ed course material, not ASCE-published. Treat as informational, not authoritative."
+  ],
+  "inputs": {
+    "wind_speed_mph": 115,
+    "speed_type": "ultimate",
+    "exposure_category": "C",
+    "enclosure_classification": "enclosed",
+    "mean_roof_height_ft": 36.7,
+    "eave_height_ft": 20,
+    "building_width_ft": 200,
+    "building_length_ft": 250,
+    "roof_slope_deg": 18.4,
+    "roof_slope_pitch": "4:12",
+    "elevation_ft": 0,
+    "has_topographic_effects": false,
+    "risk_category": "II",
+    "state": "TX"
+  },
+  "expected_intermediates": {
+    "Kd": 0.85,
+    "Kzt": 1.0,
+    "Ke": 1.0,
+    "Kh_at_mean_roof_height": 1.02,
+    "qh_psf_per_ced": 34.6,
+    "qh_psf_per_asce_7_22_eq_26_10_1": 29.4,
+    "qh_formula_per_source_ced": "CED uses qh = 0.00256 * Kh * Kzt * Ke * V^2  (CED claims Kd moved to p in 7-22 — INCORRECT per book page 277)",
+    "qh_formula_per_asce_7_22": "qh = 0.00256 * Kz * Kzt * Ke * Kd * V^2  (book page 277 Eq. 26.10-1, Kd IS in qh — verified 2026-06-13)",
+    "kd_placement_resolution": "Engine matches ASCE 7-22 book. CED is wrong about formula. Compare engine FINAL pressures to CED, NOT engine qh to CED qh.",
+    "GCpi_positive": 0.18,
+    "GCpi_negative": -0.18,
+    "zone_dimension_a_ft": 14.7,
+    "zone_a_formula_note": "a = min(0.1*200=20, 0.4*36.7=14.7, but >= max(0.04*200=8, 3)). Controls at 14.7."
+  },
+  "expected_final_pressures": {
+    "load_case_1_surface_1": {
+      "GCpf": 0.52,
+      "p_with_positive_gcpi_psf": 10.0,
+      "p_with_negative_gcpi_psf": 20.6,
+      "formula_per_source": "p = qh * Kd * (GCpf - GCpi)  where qh=34.6, Kd=0.85"
+    },
+    "other_surfaces_load_case_1": "NOT EXTRACTED — see limitations. Need to read PDF figure tables visually.",
+    "load_case_2": "NOT EXTRACTED — see limitations.",
+    "load_case_3_torsional": "Zone T pressures = 25% of full design pressures (per source). Specific values NOT EXTRACTED.",
+    "load_case_4_torsional": "NOT EXTRACTED — see limitations."
+  },
+  "engine_comparison_notes": {
+    "kd_placement_resolution_2026_06_13": "VERIFIED against ASCE 7-22 book page 277. Eq. 26.10-1 has Kd INSIDE qz. Engine is CORRECT. CED PDF was wrong about a formula change.",
+    "final_p_check": "Engine should produce p = 20.6 psf for Surface 1 Load Case 1 with negative GCpi. Same as CED. Use this as the primary comparison target.",
+    "intermediate_qh_warning": "Engine's qh = 29.4 psf (correct per 7-22). CED's qh = 34.6 psf (their non-standard removal of Kd). Do NOT flag this difference as a bug — they are different quantities.",
+    "harness_comparison_target": "Use FINAL DESIGN PRESSURE p only when comparing engine output to CED. Skip qh comparison."
+  }
+}

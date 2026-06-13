@@ -1,0 +1,36 @@
+{
+  "source": "LittlePEng — Wind Load Calculation as per ASCE 7-22",
+  "url": "https://www.littlepeng.com/single-post/wind-load-calculation-as-per-asce-7-22",
+  "asce_edition": "ASCE 7-22",
+  "edition_verified": true,
+  "procedure": "Single-surface MWFRS-style velocity pressure + design pressure",
+  "description": "Brief overview-level calculation. Useful only as a qz / single-surface sanity check, NOT a full MWFRS reference.",
+  "extraction_date": "2026-06-13",
+  "extracted_by": "Claude Opus 4.7 via WebFetch summary",
+  "limitations": [
+    "Single-surface calc only — no leeward, side, roof, or internal-pressure cases shown.",
+    "Source places Kd inside qz (the 7-16 form), which CONTRADICTS the CED source's stated 7-22 Kd-moved-to-p change. So the LittlePEng formula structure itself is suspect for 7-22 — they may be using the older 7-16 convention while citing 7-22.",
+    "Article is introductory blog content, not authoritative."
+  ],
+  "inputs": {
+    "wind_speed_mph": 120,
+    "exposure_category": "C",
+    "height_ft": 30,
+    "Kzt": 1.0,
+    "Ke": 1.0,
+    "G_gust_factor": 0.85,
+    "Cp": 0.8,
+    "risk_category": "II"
+  },
+  "expected_intermediates": {
+    "Kz_at_30ft": 0.98,
+    "Kd": 0.85,
+    "qz_psf_per_source": 30.7,
+    "qz_formula_per_source": "qz = 0.00256 * Kz * Kzt * Kd * Ke * V^2  (Kd IS in qz per this source — disagrees with CED on edition treatment)"
+  },
+  "expected_final_pressures": {
+    "single_surface_p_psf": 20.9,
+    "single_surface_formula": "p = qz * G * Cp = 30.7 * 0.85 * 0.8 = 20.876 ~ 20.9 psf"
+  },
+  "use_as_test": "ONLY use to sanity-check the single-surface qz * G * Cp pipeline. Do NOT use as authoritative for Kd placement — sources disagree."
+}

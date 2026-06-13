@@ -110,6 +110,19 @@ function checkPage(file, text, smap) {
     if (!/property=["']og:title["']/i.test(text)) add('LOW', 'NO_OG_TITLE', 'Missing og:title.');
     if (!/property=["']og:description["']/i.test(text)) add('LOW', 'NO_OG_DESC', 'Missing og:description.');
     if (!/property=["']og:image["']/i.test(text)) add('LOW', 'NO_OG_IMAGE', 'Missing og:image (no social/AI thumbnail).');
+
+    // og:image present but pointing at a file that doesn't exist = a broken
+    // social/AI thumbnail (404). Only checks our-own/relative paths.
+    const ogImg = firstGroup(/property=["']og:image["'][^>]*content=["']([^"']+)["']/i, text);
+    if (ogImg) {
+      let p = ogImg.replace(/^https?:\/\/(?:www\.)?windloadcalc\.com/i, '');
+      if (!/^https?:\/\//i.test(p)) {
+        p = p.replace(/^\//, '').split(/[?#]/)[0];
+        if (p && !fs.existsSync(path.join(ROOT, p))) {
+          add('HIGH', 'BROKEN_OG_IMAGE', `og:image references a missing file (404): ${ogImg}`);
+        }
+      }
+    }
   }
 
   // --- structured data ---

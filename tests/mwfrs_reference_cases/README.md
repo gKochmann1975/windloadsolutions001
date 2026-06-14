@@ -90,12 +90,13 @@ UNCONSERVATIVE (too-low) pressures. Florida/sea-level customers unaffected
 (Ke=1.0 via guard). Mountain-state customers (CO, NM, AZ, UT, etc.) affected.
 **Needs user decision + safe-deploy (branch, incognito test) before fixing live C&C.**
 
-### Open: GCpf table (Fig 28.3-1) needs separate verification
+### RESOLVED: GCpf table (Fig 28.3-1) — engine is correct
 
-Harness Test 3 shows engine GCpf for surface 1 at θ=18.4° = 0.5161 vs CED's
-0.52 (final p 20.44/9.87 vs CED 20.6/10.0, ~1% off). Could be engine
-interpolation vs CED rounding, or an engine GCpf-table value. Verify the
-envelope GCpf tables against ASCE 7-22 Fig 28.3-1 (not yet in the ledger).
+2026-06-14 audit: the engine's GCpf=0.5161 for surface 1 at θ=18.4° is the
+correct linear interpolation between the 5° and 20° anchors; CED's 0.52 is that
+value rounded to 2 decimals. The engine is more precise, not wrong. All 74
+Fig 28.3-1 GCpf anchors (4 load-case dicts) verified against the ledger + book
+scans — all match. Closed.
 
 ## Files in this folder
 

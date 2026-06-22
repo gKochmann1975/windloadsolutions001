@@ -2503,8 +2503,8 @@ body {
 /* Pre-paint fallback for the banner height on viewports where the
    promo banner wraps to 2 lines, so the fixed header never overlaps
    the banner before JS measures the actual height. */
-@media (max-width: 720px) { :root { --banner-h: 64px; } }
-@media (max-width: 380px) { :root { --banner-h: 72px; } }
+@media (max-width: 768px) { :root { --banner-h: 80px; } }
+@media (max-width: 400px) { :root { --banner-h: 88px; } }
 
 .main-header.scrolled {
     background: rgba(255, 255, 255, 0.95);
@@ -6806,8 +6806,15 @@ body {
                 if (h > 0) document.documentElement.style.setProperty('--banner-h', h + 'px');
             };
             set();
+            // ResizeObserver keeps --banner-h exact through text wrap, font load,
+            // and orientation changes — eliminates the first-paint measurement race
+            // that let the fixed header slide up behind the banner on mobile.
+            if (window.ResizeObserver) {
+                new ResizeObserver(set).observe(banner);
+            }
             window.addEventListener('resize', set);
             window.addEventListener('orientationchange', set);
+            window.addEventListener('load', set);
             if (document.fonts && document.fonts.ready) document.fonts.ready.then(set);
         }
         if (document.readyState === 'loading') {

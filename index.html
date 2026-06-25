@@ -208,14 +208,30 @@ nav.scrolled .logo-image{height:70px;filter:none}
   background:linear-gradient(90deg,#34D399,#3a5bff);transform:scaleX(0);transform-origin:left;transition:transform .25s var(--luxe)}
 .nav-links a.l:hover{opacity:1}
 .nav-links a.l:hover::after{transform:scaleX(1)}
-/* mobile hamburger + drawer */
-.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;z-index:60}
+/* right cluster: quick links + always-visible hamburger (opens the FULL site menu) */
+.nav-right{display:flex;align-items:center;gap:18px}
+.hamburger{display:flex;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;z-index:60}
 .hamburger span{display:block;width:26px;height:3px;border-radius:2px;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.6);transition:.3s var(--luxe)}
 .hamburger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
 .hamburger.open span:nth-child(2){opacity:0}
 .hamburger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
 .nav-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);opacity:0;visibility:hidden;transition:.3s var(--luxe);z-index:55}
 .nav-overlay.open{opacity:1;visibility:visible}
+/* Full site menu drawer (ALL nav links) — opens on every breakpoint via the hamburger */
+.full-menu{position:fixed;top:0;right:0;height:100vh;width:min(90vw,380px);z-index:60;
+  background:rgba(10,14,30,.985);backdrop-filter:blur(18px);border-left:1px solid var(--line);
+  box-shadow:-24px 0 60px rgba(0,0,0,.55);transform:translateX(100%);transition:transform .3s var(--luxe);
+  overflow-y:auto;padding:74px 0 28px}
+.full-menu.open{transform:translateX(0)}
+.fm-head{display:flex;align-items:center;justify-content:space-between;padding:0 26px 14px;border-bottom:1px solid var(--line)}
+.fm-head span{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.fm-close{background:none;border:none;color:#fff;font-size:24px;line-height:1;cursor:pointer;padding:2px 8px}
+.fm-group{padding:14px 26px 4px;border-bottom:1px solid var(--line)}
+.fm-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9db0ff;margin-bottom:6px}
+.fm-group a{display:block;padding:9px 0;font-size:15px;color:#dbe3f5;font-weight:500;transition:color .15s}
+.fm-group a:hover{color:#fff}
+.fm-actions{display:flex;flex-direction:column;gap:10px;padding:20px 26px 0}
+.fm-actions .btn{width:100%;justify-content:center;padding:14px;font-size:15px}
 .btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;border-radius:11px;cursor:pointer;transition:.25s var(--luxe);border:none;font-family:inherit}
 .btn-ghost{background:rgba(255,255,255,.06);color:#fff;padding:11px 18px;font-size:14px;border:1px solid rgba(255,255,255,.22)}
 .btn-ghost:hover{border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.12)}
@@ -338,20 +354,10 @@ section{position:relative;z-index:1;padding:84px 0}
 .footer-bottom{border-top:1px solid var(--line);margin-top:36px;padding-top:22px;text-align:center;color:var(--muted);font-size:13px}
 
 @media(max-width:880px){
-  .hamburger{display:flex}
   .logo-image{height:64px}
   nav.scrolled .logo-image{height:52px}
-  /* nav-links becomes an off-canvas drawer */
-  .nav-links{position:fixed;top:0;right:0;height:100vh;width:min(84vw,340px);
-    flex-direction:column;align-items:stretch;justify-content:flex-start;gap:4px;
-    background:rgba(10,14,30,.98);backdrop-filter:blur(18px);border-left:1px solid var(--line);
-    padding:92px 26px 28px;transform:translateX(100%);transition:transform .3s var(--luxe);
-    box-shadow:-20px 0 60px rgba(0,0,0,.55);z-index:58}
-  .nav-links.open{transform:translateX(0)}
-  .nav-links a.l{font-size:17px;opacity:1;width:100%;padding:15px 2px;border-bottom:1px solid var(--line);text-shadow:none;color:#fff}
-  .nav-links a.l::after{display:none}
-  nav.scrolled .nav-links a.l{color:#fff;text-shadow:none}
-  .nav-links .btn{width:100%;justify-content:center;margin-top:10px;font-size:16px;padding:15px}
+  /* hide the inline quick links on mobile — the hamburger's full menu covers everything */
+  .nav-links{display:none}
   .glass-body{grid-template-columns:1fr;padding:20px}
   .glass-top .url{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
   .feat-grid{grid-template-columns:1fr}
@@ -381,18 +387,53 @@ section{position:relative;z-index:1;padding:84px 0}
   <a class="logo" href="https://windloadcalc.com/">
     <img height="100" width="300" src="images/windloadcalc-logo.svg" alt="WindLoadCalc — Wind Load Calculator logo" class="logo-image">
   </a>
-  <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
-    <span></span><span></span><span></span>
-  </button>
-  <div class="nav-links" id="navLinks">
-    <a class="l" href="https://windloadcalc.com/building-intelligence-platform-shop.html">BIP</a>
-    <a class="l" href="#why">Why us</a>
-    <a class="l" href="https://windloadcalc.com/wind-load-calculator-shop.html">Pricing</a>
-    <a class="btn btn-ghost" href="https://windloadcalc.com/login.html">Log in</a>
-    <a class="btn btn-primary" href="https://windloadcalc.com/demo.html">Start free trial</a>
+  <div class="nav-right">
+    <div class="nav-links" id="navLinks">
+      <a class="l" href="https://windloadcalc.com/building-intelligence-platform-shop.html">BIP</a>
+      <a class="l" href="#why">Why us</a>
+      <a class="l" href="https://windloadcalc.com/wind-load-calculator-shop.html">Pricing</a>
+      <a class="btn btn-ghost" href="https://windloadcalc.com/login.html">Log in</a>
+      <a class="btn btn-primary" href="https://windloadcalc.com/demo.html">Start free trial</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Open full menu" aria-expanded="false" aria-controls="fullMenu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </div></nav>
 <div class="nav-overlay" id="navOverlay"></div>
+<aside class="full-menu" id="fullMenu" aria-label="Site menu">
+  <div class="fm-head"><span>Menu</span><button class="fm-close" id="fmClose" aria-label="Close menu">&times;</button></div>
+  <div class="fm-group">
+    <div class="fm-label">Calculators &amp; Platform</div>
+    <a href="https://windloadcalc.com/wind-load-calculator-landing.html">Wind Load Calculators</a>
+    <a href="https://windloadcalc.com/building-intelligence-platform-landing.html">Building Intelligence Platform</a>
+    <a href="https://windloadcalc.com/wind-load-calculator-comparison.html">Calculator Comparison</a>
+    <a href="https://windloadcalc.com/demo.html">Free Wind Load Calculator</a>
+  </div>
+  <div class="fm-group">
+    <div class="fm-label">Shop &amp; Pricing</div>
+    <a href="https://windloadcalc.com/wind-load-calculator-shop.html">Wind Load Calculators — Pricing</a>
+    <a href="https://windloadcalc.com/building-intelligence-platform-shop.html">Building Intelligence Platform — Pricing</a>
+  </div>
+  <div class="fm-group">
+    <div class="fm-label">For Professionals</div>
+    <a href="https://windloadcalc.com/wind-load-calculator-for-engineers.html">Engineers</a>
+    <a href="https://windloadcalc.com/wind-load-calculator-for-architects.html">Architects</a>
+    <a href="https://windloadcalc.com/wind-loads-for-consultants.html">Consultants</a>
+    <a href="https://windloadcalc.com/contractors-wind-load-calculator.html">Contractors</a>
+  </div>
+  <div class="fm-group">
+    <div class="fm-label">Company</div>
+    <a href="https://windloadcalc.com/services.html">Services</a>
+    <a href="https://windloadcalc.com/why-us.html">Why Us</a>
+    <a href="https://windloadcalc.com/faq.html">FAQ</a>
+    <a href="https://windloadcalc.com/contact.html">Contact Us</a>
+  </div>
+  <div class="fm-actions">
+    <a class="btn btn-ghost" href="https://windloadcalc.com/login.html">Log in</a>
+    <a class="btn btn-primary" href="https://windloadcalc.com/demo.html">Start free trial →</a>
+  </div>
+</aside>
 
 <div class="hero-stage">
   <video class="hero-video" autoplay muted loop playsinline preload="auto"
@@ -651,21 +692,24 @@ section{position:relative;z-index:1;padding:84px 0}
   function onScroll(){ nav.classList.toggle('scrolled', window.scrollY>40); }
   onScroll(); window.addEventListener('scroll',onScroll,{passive:true});
 })();
-// mobile hamburger menu
+// full site menu (hamburger — all breakpoints)
 (function(){
   var ham=document.getElementById('hamburger'),
-      nl=document.getElementById('navLinks'),
-      ov=document.getElementById('navOverlay');
+      fm=document.getElementById('fullMenu'),
+      ov=document.getElementById('navOverlay'),
+      fc=document.getElementById('fmClose');
+  if(!ham||!fm) return;
   function setMenu(open){
-    nl.classList.toggle('open',open);
+    fm.classList.toggle('open',open);
     ov.classList.toggle('open',open);
     ham.classList.toggle('open',open);
     ham.setAttribute('aria-expanded',open);
     document.body.style.overflow=open?'hidden':'';
   }
-  ham.addEventListener('click',function(){ setMenu(!nl.classList.contains('open')); });
+  ham.addEventListener('click',function(){ setMenu(!fm.classList.contains('open')); });
   ov.addEventListener('click',function(){ setMenu(false); });
-  nl.querySelectorAll('a').forEach(function(a){ a.addEventListener('click',function(){ setMenu(false); }); });
+  if(fc) fc.addEventListener('click',function(){ setMenu(false); });
+  fm.querySelectorAll('a').forEach(function(a){ a.addEventListener('click',function(){ setMenu(false); }); });
   window.addEventListener('keydown',function(e){ if(e.key==='Escape') setMenu(false); });
 })();
 // IP → location → real wind speed. The gauge V becomes the visitor's actual ASCE 7-22

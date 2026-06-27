@@ -23,26 +23,19 @@
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            /* dark-glass family (matches wind-load-calculator-landing.html) */
-            --blue:#0018FF; --blue-deep:#181E57; --blue-bright:#3a5bff;
-            --muted:#94a3b8; --line:rgba(255,255,255,.08); --bg:#070a18; --surface:rgba(255,255,255,.04);
-            --gold:#E8B530; --luxe:cubic-bezier(.22,.61,.36,1);
-
-            /* account-page semantic tokens (restyled for dark) */
             --primary-blue: #0018ff;
             --dark-blue: #181E57;
             --electric-green: #00ff88;
             --success-green: #10b981;
             --warning-orange: #f59e0b;
             --error-red: #ef4444;
-            --text-primary: #e8edf7;
-            --text-secondary: #aeb8cf;
-            --bg-light: rgba(255,255,255,.05);
-            --border-color: rgba(255,255,255,.12);
+            --text-primary: #1f2937;
+            --text-secondary: #64748b;
+            --bg-light: #f8fafc;
+            --border-color: #e2e8f0;
         }
 
         * {
@@ -50,88 +43,81 @@
             padding: 0;
             box-sizing: border-box;
         }
-        html{scroll-behavior:smooth}
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             min-height: 100vh;
-            background: var(--bg);
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
             color: var(--text-primary);
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-            line-height: 1.55;
         }
-        a{text-decoration:none;color:inherit}
 
-        /* Background aurora + grid */
-        .aurora{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
-        .aurora span{position:absolute;border-radius:50%;filter:blur(90px);opacity:.5}
-        .aurora .a1{width:620px;height:620px;background:#0018FF;top:-180px;left:-120px;animation:drift1 18s var(--luxe) infinite alternate}
-        .aurora .a2{width:540px;height:540px;background:#10B981;bottom:-200px;right:-120px;opacity:.28;animation:drift2 22s var(--luxe) infinite alternate}
-        .aurora .a3{width:420px;height:420px;background:#181E57;top:34%;right:16%;opacity:.55;animation:drift1 26s var(--luxe) infinite alternate-reverse}
-        @keyframes drift1{to{transform:translate(80px,60px) scale(1.15)}}
-        @keyframes drift2{to{transform:translate(-70px,-50px) scale(1.1)}}
-        .grid-tex{position:fixed;inset:0;z-index:0;pointer-events:none;
-          background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
-          background-size:54px 54px;mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000 40%,transparent 100%)}
+        /* Header */
+        .account-header {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
 
-        /* ===== Canonical dark-glass nav (solid by default — no dark hero here) ===== */
-        nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:.3s var(--luxe);
-          backdrop-filter:blur(14px);border-bottom:1px solid var(--line);
-          background:linear-gradient(90deg, rgba(240,244,255,.97) 0%, rgba(223,232,255,.93) 13%, rgba(22,28,58,.92) 46%, rgba(7,10,24,.95) 100%)}
-        .nav-in{display:flex;align-items:center;justify-content:space-between;padding:8px clamp(24px,4vw,48px);transition:padding .3s var(--luxe)}
-        .logo{z-index:1001;display:flex;align-items:center}
-        .logo-image{height:64px;width:auto;display:block;transition:all .3s ease}
-        .nav-right{display:flex;align-items:center;gap:18px}
-        .nav-links{display:flex;align-items:center;gap:28px}
-        .nav-links a.l{position:relative;font-size:14px;color:#fff;font-weight:500;opacity:.88;transition:opacity .2s var(--luxe);text-shadow:0 1px 8px rgba(0,0,0,.45)}
-        .nav-links a.l:hover{opacity:1}
-        .btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;border-radius:11px;cursor:pointer;transition:.25s var(--luxe);border:none;font-family:inherit}
-        .btn-ghost{background:rgba(255,255,255,.06);color:#fff;padding:11px 18px;font-size:14px;border:1px solid rgba(255,255,255,.22)}
-        .btn-ghost:hover{border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.12)}
-        .nav-links .btn-primary{background:linear-gradient(135deg,#0018FF,#2540ff);color:#fff;padding:12px 22px;font-size:14px;box-shadow:0 10px 30px rgba(0,24,255,.45)}
-        .nav-links .btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(0,24,255,.6)}
-        .hamburger{display:flex;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;z-index:60}
-        .hamburger span{display:block;width:26px;height:3px;border-radius:2px;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.6);transition:.3s var(--luxe)}
-        .hamburger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
-        .hamburger.open span:nth-child(2){opacity:0}
-        .hamburger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
-        .nav-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);opacity:0;visibility:hidden;transition:.3s var(--luxe);z-index:55}
-        .nav-overlay.open{opacity:1;visibility:visible}
-        .full-menu{position:fixed;top:0;right:0;height:100vh;height:100dvh;width:min(90vw,380px);z-index:60;
-          background:rgba(10,14,30,.985);backdrop-filter:blur(18px);border-left:1px solid var(--line);
-          box-shadow:-24px 0 60px rgba(0,0,0,.55);transform:translateX(100%);transition:transform .3s var(--luxe);overflow-y:auto;padding:74px 0 28px}
-        .full-menu.open{transform:translateX(0)}
-        .fm-head{display:flex;align-items:center;justify-content:space-between;padding:0 26px 14px;border-bottom:1px solid var(--line)}
-        .fm-head span{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-        .fm-close{background:none;border:none;color:#fff;font-size:24px;line-height:1;cursor:pointer;padding:2px 8px}
-        .fm-group{padding:14px 26px 4px;border-bottom:1px solid var(--line)}
-        .fm-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9db0ff;margin-bottom:6px}
-        .fm-group a{display:block;padding:9px 0;font-size:15px;color:#dbe3f5;font-weight:500;transition:color .15s}
-        .fm-group a:hover{color:#fff}
-        .fm-actions{display:flex;flex-direction:column;gap:10px;padding:20px 26px 0}
-        .fm-actions .btn{width:100%;justify-content:center;padding:14px;font-size:15px}
-        .fm-actions .btn-primary{background:linear-gradient(135deg,#0018FF,#2540ff);color:#fff;box-shadow:0 10px 30px rgba(0,24,255,.45)}
+        .header-logo-container {
+            display: inline-block;
+            background: #ffffff;
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-logo {
+            height: 45px;
+            display: block;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .header-nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .header-nav a:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .header-nav .logout-btn {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .header-nav .logout-btn:hover {
+            background: rgba(239, 68, 68, 0.8);
+            border-color: transparent;
+        }
 
         /* Main Container */
         .account-container {
-            position: relative;
-            z-index: 1;
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
-            padding-top: 110px; /* clear fixed nav */
         }
 
         /* Welcome Banner */
         .welcome-banner {
-            background: var(--surface);
-            border: 1px solid var(--line);
+            background: white;
             border-radius: 16px;
             padding: 2rem;
             margin-bottom: 2rem;
-            backdrop-filter: blur(6px);
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.32);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -141,9 +127,8 @@
 
         .welcome-text h1 {
             font-size: 1.8rem;
-            font-weight: 800;
-            letter-spacing: -.02em;
-            color: #fff;
+            font-weight: 700;
+            color: var(--dark-blue);
             margin-bottom: 0.5rem;
         }
 
@@ -163,21 +148,21 @@
         }
 
         .account-status.active {
-            background: rgba(16, 185, 129, 0.14);
-            color: #6ee7b7;
-            border: 2px solid rgba(16, 185, 129, 0.4);
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0.1) 100%);
+            color: #059669;
+            border: 2px solid rgba(16, 185, 129, 0.3);
         }
 
         .account-status.trial {
-            background: rgba(58, 91, 255, 0.16);
-            color: #9db0ff;
-            border: 2px solid rgba(58, 91, 255, 0.45);
+            background: linear-gradient(135deg, rgba(0, 24, 255, 0.15) 0%, rgba(0, 24, 255, 0.1) 100%);
+            color: var(--primary-blue);
+            border: 2px solid rgba(0, 24, 255, 0.3);
         }
 
         .account-status.expired {
-            background: rgba(239, 68, 68, 0.16);
-            color: #fca5a5;
-            border: 2px solid rgba(239, 68, 68, 0.4);
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(239, 68, 68, 0.1) 100%);
+            color: var(--error-red);
+            border: 2px solid rgba(239, 68, 68, 0.3);
         }
 
         /* Tabs Navigation */
@@ -185,12 +170,10 @@
             display: flex;
             gap: 0.5rem;
             margin-bottom: 2rem;
-            background: var(--surface);
-            border: 1px solid var(--line);
+            background: white;
             padding: 0.5rem;
-            border-radius: 14px;
-            backdrop-filter: blur(6px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
             overflow-x: auto;
         }
 
@@ -202,24 +185,22 @@
             font-weight: 600;
             font-size: 0.95rem;
             cursor: pointer;
-            border-radius: 10px;
+            border-radius: 8px;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
             gap: 0.5rem;
             white-space: nowrap;
-            font-family: inherit;
         }
 
         .tab-btn:hover {
-            background: rgba(255,255,255,.06);
-            color: #fff;
+            background: var(--bg-light);
+            color: var(--text-primary);
         }
 
         .tab-btn.active {
-            background: linear-gradient(135deg, #0018FF, #2540ff);
+            background: var(--primary-blue);
             color: white;
-            box-shadow: 0 8px 22px rgba(0,24,255,.4);
         }
 
         .tab-btn i {
@@ -243,13 +224,11 @@
 
         /* Card Styles */
         .card {
-            background: var(--surface);
-            border: 1px solid var(--line);
-            border-radius: 18px;
+            background: white;
+            border-radius: 16px;
             padding: 1.5rem;
             margin-bottom: 1.5rem;
-            backdrop-filter: blur(6px);
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.32);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
         }
 
         .card-header {
@@ -258,20 +237,20 @@
             align-items: center;
             margin-bottom: 1.5rem;
             padding-bottom: 1rem;
-            border-bottom: 1px solid var(--line);
+            border-bottom: 2px solid var(--bg-light);
         }
 
         .card-title {
             font-size: 1.2rem;
             font-weight: 700;
-            color: #fff;
+            color: var(--dark-blue);
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
 
         .card-title i {
-            color: #9db0ff;
+            color: var(--primary-blue);
         }
 
         /* Form Styles */
@@ -290,30 +269,25 @@
         .form-input {
             width: 100%;
             padding: 0.9rem 1rem;
-            border: 1px solid var(--border-color);
-            border-radius: 11px;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
             font-size: 1rem;
-            font-family: inherit;
-            background: rgba(7,10,24,.45);
-            color: var(--text-primary);
             transition: all 0.3s ease;
         }
 
-        .form-input::placeholder { color: #6b7694; }
-
         .form-input:focus {
             outline: none;
-            border-color: var(--blue-bright);
-            box-shadow: 0 0 0 4px rgba(58, 91, 255, 0.18);
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 4px rgba(0, 24, 255, 0.1);
         }
 
         .form-input:disabled {
-            background: rgba(255,255,255,.03);
+            background: var(--bg-light);
             color: var(--text-secondary);
         }
 
         /* Buttons */
-        .btn-primary {
+        .btn {
             padding: 0.9rem 1.8rem;
             border: none;
             border-radius: 50px;
@@ -324,74 +298,42 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            background: linear-gradient(135deg, #0018FF, #2540ff);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
             color: white;
-            box-shadow: 0 10px 30px rgba(0,24,255,.35);
-            font-family: inherit;
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 16px 40px rgba(0, 24, 255, 0.5);
-        }
-
-        /* account-page generic .btn (distinct from nav .btn) */
-        .account-container .btn,
-        .card .btn,
-        .welcome-banner .btn {
-            padding: 0.9rem 1.8rem;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.95rem;
+            box-shadow: 0 8px 25px rgba(0, 24, 255, 0.3);
         }
 
         .btn-secondary {
-            padding: 0.9rem 1.8rem;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-family: inherit;
-            background: rgba(255,255,255,.06);
-            color: #fff;
-            border: 1px solid rgba(255,255,255,.22);
+            background: var(--bg-light);
+            color: var(--text-primary);
+            border: 2px solid var(--border-color);
         }
 
         .btn-secondary:hover {
-            background: rgba(255,255,255,.12);
-            border-color: rgba(255,255,255,.4);
+            background: var(--border-color);
         }
 
         .btn-success {
             background: linear-gradient(135deg, var(--success-green) 0%, #059669 100%);
             color: white;
-            border: none;
         }
 
         .btn-danger {
             background: linear-gradient(135deg, var(--error-red) 0%, #dc2626 100%);
             color: white;
-            border: none;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-family: inherit;
-            font-weight: 600;
-            border-radius: 50px;
-            padding: 0.9rem 1.8rem;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
         }
 
         /* Subscription Cards */
         .subscription-card {
-            background: rgba(255,255,255,.04);
-            border: 1px solid var(--border-color);
+            background: linear-gradient(135deg, var(--bg-light) 0%, white 100%);
+            border: 2px solid var(--border-color);
             border-radius: 16px;
             padding: 1.5rem;
             margin-bottom: 1rem;
@@ -405,7 +347,7 @@
         .subscription-info h3 {
             font-size: 1.1rem;
             font-weight: 700;
-            color: #fff;
+            color: var(--dark-blue);
             margin-bottom: 0.5rem;
         }
 
@@ -460,8 +402,8 @@
         }
 
         .seat-usage {
-            background: rgba(0, 255, 136, 0.08);
-            border: 1px solid rgba(0, 255, 136, 0.3);
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1) 0%, rgba(0, 200, 100, 0.05) 100%);
+            border: 2px solid rgba(0, 255, 136, 0.3);
             border-radius: 12px;
             padding: 1rem 1.5rem;
             display: flex;
@@ -472,7 +414,7 @@
         .seat-usage .number {
             font-size: 2rem;
             font-weight: 800;
-            color: #34D399;
+            color: var(--success-green);
         }
 
         .seat-usage .label {
@@ -485,14 +427,13 @@
             justify-content: space-between;
             align-items: center;
             padding: 1rem;
-            border-radius: 12px;
+            border-radius: 10px;
             margin-bottom: 0.75rem;
-            background: rgba(255,255,255,.04);
-            border: 1px solid var(--line);
+            background: var(--bg-light);
         }
 
         .team-member-row:hover {
-            background: rgba(255,255,255,.07);
+            background: var(--border-color);
         }
 
         .member-info {
@@ -512,7 +453,6 @@
             color: white;
             font-weight: 700;
             font-size: 1.1rem;
-            flex: none;
         }
 
         .member-details h4 {
@@ -535,18 +475,18 @@
         }
 
         .status-active {
-            background: rgba(16, 185, 129, 0.16);
-            color: #6ee7b7;
+            background: rgba(16, 185, 129, 0.15);
+            color: #059669;
         }
 
         .status-pending {
-            background: rgba(245, 158, 11, 0.16);
-            color: #fcd34d;
+            background: rgba(245, 158, 11, 0.15);
+            color: #d97706;
         }
 
         .status-owner {
-            background: rgba(58, 91, 255, 0.18);
-            color: #9db0ff;
+            background: rgba(0, 24, 255, 0.15);
+            color: var(--primary-blue);
         }
 
         /* Invite Form */
@@ -555,7 +495,7 @@
             gap: 1rem;
             margin-top: 1.5rem;
             padding-top: 1.5rem;
-            border-top: 1px solid var(--line);
+            border-top: 2px solid var(--bg-light);
         }
 
         .invite-form .form-input {
@@ -571,7 +511,7 @@
 
         .no-team-access i {
             font-size: 3rem;
-            color: rgba(255,255,255,.18);
+            color: var(--border-color);
             margin-bottom: 1rem;
         }
 
@@ -591,8 +531,8 @@
         .spinner {
             width: 40px;
             height: 40px;
-            border: 4px solid rgba(255,255,255,.12);
-            border-top-color: var(--blue-bright);
+            border: 4px solid var(--border-color);
+            border-top-color: var(--primary-blue);
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
@@ -604,7 +544,7 @@
         /* Alert Messages */
         .alert {
             padding: 1rem 1.5rem;
-            border-radius: 12px;
+            border-radius: 10px;
             margin-bottom: 1rem;
             display: flex;
             align-items: center;
@@ -612,27 +552,27 @@
         }
 
         .alert-success {
-            background: rgba(16, 185, 129, 0.14);
-            color: #6ee7b7;
+            background: rgba(16, 185, 129, 0.15);
+            color: #059669;
             border: 1px solid rgba(16, 185, 129, 0.3);
         }
 
         .alert-error {
-            background: rgba(239, 68, 68, 0.14);
-            color: #fca5a5;
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--error-red);
             border: 1px solid rgba(239, 68, 68, 0.3);
         }
 
         .alert-info {
-            background: rgba(58, 91, 255, 0.12);
-            color: #9db0ff;
-            border: 1px solid rgba(58, 91, 255, 0.3);
+            background: rgba(0, 24, 255, 0.1);
+            color: var(--primary-blue);
+            border: 1px solid rgba(0, 24, 255, 0.3);
         }
 
         /* My Teams Section (for team members) */
         .my-teams-card {
-            background: linear-gradient(160deg, rgba(14,165,233,.14), rgba(255,255,255,.03));
-            border: 1px solid rgba(14, 165, 233, 0.4);
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 2px solid #0ea5e9;
         }
 
         /* Quick Access Buttons */
@@ -649,8 +589,8 @@
             align-items: center;
             justify-content: center;
             padding: 1.5rem;
-            background: var(--surface);
-            border: 1px solid var(--border-color);
+            background: white;
+            border: 2px solid var(--border-color);
             border-radius: 16px;
             text-decoration: none;
             color: var(--text-primary);
@@ -658,14 +598,14 @@
         }
 
         .quick-access-btn:hover {
-            border-color: var(--blue-bright);
+            border-color: var(--primary-blue);
             transform: translateY(-3px);
-            box-shadow: 0 16px 36px rgba(0, 24, 255, 0.2);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
         }
 
         .quick-access-btn i {
             font-size: 2rem;
-            color: #9db0ff;
+            color: var(--primary-blue);
             margin-bottom: 0.75rem;
         }
 
@@ -676,8 +616,8 @@
 
         /* Project Cards */
         .project-card {
-            background: rgba(255,255,255,.04);
-            border: 1px solid var(--border-color);
+            background: linear-gradient(135deg, var(--bg-light) 0%, white 100%);
+            border: 2px solid var(--border-color);
             border-radius: 16px;
             padding: 1.5rem;
             margin-bottom: 1rem;
@@ -685,8 +625,8 @@
         }
 
         .project-card:hover {
-            border-color: var(--blue-bright);
-            box-shadow: 0 8px 24px rgba(0, 24, 255, 0.18);
+            border-color: var(--primary-blue);
+            box-shadow: 0 4px 15px rgba(0, 24, 255, 0.1);
         }
 
         .project-card-header {
@@ -698,7 +638,7 @@
         .project-name {
             font-size: 1.1rem;
             font-weight: 700;
-            color: #fff;
+            color: var(--dark-blue);
             margin-bottom: 0.3rem;
         }
 
@@ -716,7 +656,7 @@
             flex-wrap: wrap;
             margin-top: 0.75rem;
             padding-top: 0.75rem;
-            border-top: 1px solid var(--line);
+            border-top: 1px solid var(--border-color);
         }
 
         .project-meta span {
@@ -747,7 +687,7 @@
 
         .no-projects i {
             font-size: 3rem;
-            color: rgba(255,255,255,.18);
+            color: var(--border-color);
             margin-bottom: 1rem;
         }
 
@@ -756,23 +696,16 @@
             margin-bottom: 0.5rem;
         }
 
-        /* ===== Dark footer (canonical) ===== */
-        .main-footer{position:relative;z-index:1;border-top:1px solid var(--line);padding:54px 0 28px;background:rgba(0,0,0,.25)}
-        .main-footer .container{max-width:1180px;margin:0 auto;padding:0 28px}
-        .footer-content{display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
-        .footer-column h3{font-size:15px;font-weight:700;color:#fff;margin-bottom:15px}
-        .footer-column ul{list-style:none}
-        .footer-column li{margin-bottom:9px;font-size:14px;color:#aeb8cf}
-        .footer-column a{color:#aeb8cf;transition:color .2s}
-        .footer-column a:hover{color:#fff}
-        .footer-bottom{border-top:1px solid var(--line);margin-top:34px;padding-top:20px;text-align:center;color:var(--muted);font-size:13px}
-
         /* Responsive */
-        @media (max-width: 880px){ .nav-links{display:none} .footer-content{grid-template-columns:repeat(2,1fr)} }
         @media (max-width: 768px) {
+            .account-header {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
             .account-container {
                 padding: 1rem;
-                padding-top: 96px;
             }
 
             .welcome-banner {
@@ -802,64 +735,20 @@
                 grid-template-columns: repeat(2, 1fr);
             }
         }
-        @media (max-width: 560px){ .footer-content{grid-template-columns:1fr} }
     </style>
     <link rel="canonical" href="https://windloadcalc.com/account.html">
 </head>
 <body>
-    <div class="aurora"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
-    <div class="grid-tex"></div>
-
-    <!-- ===== Canonical dark-glass nav ===== -->
-    <nav id="nav"><div class="nav-in">
-      <a class="logo" href="https://windloadcalc.com/"><img height="100" width="300" src="images/windloadcalc-logo.svg" alt="WindLoadCalc — ASCE 7-22 Wind Load Calculator logo" class="logo-image"></a>
-      <div class="nav-right">
-        <div class="nav-links">
-          <a class="l" href="https://windloadcalc.com/free-wind-load-calculator.html">Free tool</a>
-          <a class="l" href="https://windloadcalc.com/wind-load-calculator-comparison.html">Compare</a>
-          <a class="l" href="https://windloadcalc.com/wind-load-calculator-shop.html">Pricing</a>
-          <a class="l" href="https://windloadcalc.com/why-us.html">Why us</a>
-          <a class="btn btn-ghost" href="#" onclick="logout(); return false;">Log out</a>
-          <a class="btn btn-primary" href="https://calc.windloadcalc.com">Open calculator</a>
-        </div>
-        <button class="hamburger" id="hamburger" aria-label="Open full menu" aria-expanded="false" aria-controls="fullMenu"><span></span><span></span><span></span></button>
-      </div>
-    </div></nav>
-    <div class="nav-overlay" id="navOverlay"></div>
-    <aside class="full-menu" id="fullMenu" aria-label="Site menu">
-  <div class="fm-head"><span>Menu</span><button class="fm-close" id="fmClose" aria-label="Close menu">&times;</button></div>
-  <div class="fm-group">
-    <div class="fm-label">Wind Load Calculators</div>
-    <a href="https://windloadcalc.com/wind-load-calculator-landing.html">Overview</a>
-    <a href="https://windloadcalc.com/free-wind-load-calculator.html">Free Trial</a>
-    <a href="https://windloadcalc.com/wind-load-calculator-comparison.html">Calculator Comparison</a>
-    <a href="https://windloadcalc.com/wind-load-calculator-shop.html">Pricing</a>
-  </div>
-  <div class="fm-group">
-    <div class="fm-label">Building Intelligence Platform</div>
-    <a href="https://windloadcalc.com/building-intelligence-platform-landing.html">Overview</a>
-    <a href="https://windloadcalc.com/building-intelligence-platform.html">Free Trial</a>
-    <a href="https://windloadcalc.com/building-intelligence-platform-shop.html">Pricing</a>
-  </div>
-  <div class="fm-group">
-    <div class="fm-label">For Professionals</div>
-    <a href="https://windloadcalc.com/wind-load-calculator-for-engineers.html">Engineers</a>
-    <a href="https://windloadcalc.com/wind-load-calculator-for-architects.html">Architects</a>
-    <a href="https://windloadcalc.com/wind-loads-for-consultants.html">Consultants</a>
-    <a href="https://windloadcalc.com/contractors-wind-load-calculator.html">Contractors</a>
-  </div>
-  <div class="fm-group">
-    <div class="fm-label">Company</div>
-    <a href="https://windloadcalc.com/services.html">Services</a>
-    <a href="https://windloadcalc.com/why-us.html">Why Us</a>
-    <a href="https://windloadcalc.com/faq.html">FAQ</a>
-    <a href="https://windloadcalc.com/contact.html">Contact Us</a>
-  </div>
-  <div class="fm-actions">
-    <a class="btn btn-ghost" href="https://windloadcalc.com/login.html">Log in</a>
-    <a class="btn btn-primary" href="https://windloadcalc.com/free-wind-load-calculator.html">Start Free Trial &rarr;</a>
-  </div>
-</aside>
+    <!-- Header -->
+    <header class="account-header">
+        <a href="index.html" class="header-logo-container">
+            <img src="images/windloadcalc-logo.png" alt="WindLoadCalc" class="header-logo">
+        </a>
+        <nav class="header-nav">
+            <a href="index.html"><i class="fas fa-home"></i> Home</a>
+            <a href="#" class="logout-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </nav>
+    </header>
 
     <!-- Main Content -->
     <div class="account-container">
@@ -1049,39 +938,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Footer -->
-    <footer class="main-footer"><div class="container">
-      <div class="footer-content">
-        <div class="footer-column"><h3>Contact Information</h3><ul>
-          <li><strong>General Inquiries</strong></li>
-          <li><a href="mailto:info@windloadcalc.com">info@windloadcalc.com</a></li>
-          <li><a href="tel:8332723946">(833) 272-3946</a></li>
-          <li style="margin-top:.6rem"><strong>Sales</strong></li>
-          <li><a href="mailto:sales@windloadcalc.com">sales@windloadcalc.com</a></li>
-        </ul></div>
-        <div class="footer-column"><h3>Wind Load Calculators</h3><ul>
-          <li><a href="https://windloadcalc.com/wind-load-calculator-shop.html">All Calculators &amp; Pricing</a></li>
-          <li><a href="https://windloadcalc.com/shop/windows-doors-shutters.html">Windows, Doors &amp; Shutters</a></li>
-          <li><a href="https://windloadcalc.com/shop/mwfrs.html" rel="nofollow">MWFRS Calculator</a></li>
-          <li><a href="https://windloadcalc.com/shop/roofing.html" rel="nofollow">Roofing Calculator</a></li>
-        </ul></div>
-        <div class="footer-column"><h3>Resources</h3><ul>
-          <li><a href="https://windloadcalc.com/free-wind-load-calculator.html">Free Wind Load Calculator</a></li>
-          <li><a href="https://windloadcalc.com/asce-7-wind-load-calculator/">ASCE 7-22 Guide</a></li>
-          <li><a href="https://windloadcalc.com/components-and-cladding-wind-loads/">C&amp;C Wind Loads</a></li>
-          <li><a href="https://windloadcalc.com/building-intelligence-platform-shop.html">BIP Plans</a></li>
-        </ul></div>
-        <div class="footer-column"><h3>Company</h3><ul>
-          <li><a href="https://windloadcalc.com/why-us.html">About Us</a></li>
-          <li><a href="https://windloadcalc.com/contact.html">Contact</a></li>
-          <li><a href="https://windloadcalc.com/services.html">Professional Services</a></li>
-          <li><a href="https://windloadcalc.com/privacy-policy.html">Privacy Policy</a></li>
-          <li><a href="https://windloadcalc.com/terms-of-service.html">Terms of Service</a></li>
-        </ul></div>
-      </div>
-      <div class="footer-bottom"><p>&copy; 2026 WindLoadCalc · WindLoad Solutions, LLC — online since 2006. ASCE 7-22 &amp; 7-16 wind load software.</p></div>
-    </div></footer>
 
     <script>
         // API Configuration
@@ -1854,22 +1710,6 @@
                 alert.remove();
             }, 5000);
         }
-    </script>
-
-    <!-- Menu-toggle JS (separate from the account app script above) -->
-    <script>
-    (function(){
-      var ham=document.getElementById('hamburger'), fm=document.getElementById('fullMenu'),
-          ov=document.getElementById('navOverlay'), fc=document.getElementById('fmClose');
-      if(!ham||!fm) return;
-      function setMenu(open){ fm.classList.toggle('open',open); ov.classList.toggle('open',open); ham.classList.toggle('open',open);
-        ham.setAttribute('aria-expanded',open); document.body.style.overflow=open?'hidden':''; }
-      ham.addEventListener('click',function(){ setMenu(!fm.classList.contains('open')); });
-      ov.addEventListener('click',function(){ setMenu(false); });
-      if(fc) fc.addEventListener('click',function(){ setMenu(false); });
-      fm.querySelectorAll('a').forEach(function(a){ a.addEventListener('click',function(){ setMenu(false); }); });
-      window.addEventListener('keydown',function(e){ if(e.key==='Escape') setMenu(false); });
-    })();
     </script>
 </body>
 </html>

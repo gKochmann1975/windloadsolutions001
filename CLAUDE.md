@@ -90,6 +90,15 @@ actions or wasted crawl budget. Read before adding new pages or schema markup.
   Pricing-tier rows may be 3–4 across on wide desktop but must collapse responsively (→ 2×2 →
   1 col) so they never orphan. **Always 1 column on mobile.**
 
+### CTA hover (same on every shop page)
+- **Primary CTA** (Add to Cart / Choose plan): on hover, the blue gradient shifts to **vibrant green**
+  `linear-gradient(135deg,#0a8f5b,#34D399)` (the "go/buy" signal) + `transform:translateY(-3px) scale(1.02)`
+  + green glow `box-shadow:0 18px 42px rgba(16,185,129,.55)`.
+- **Secondary CTA** (Contact Sales): on hover, **fills white with navy text** `background:#fff;color:#0d1233`
+  + same lift/scale (set the contrasting text color in the SAME rule per the contrast rule — never white-on-white).
+- The base button needs a `transition` (e.g. `transition:all .25-.3s ease`) so the color animates.
+  Touch only `:hover` rules — never the structural `order`.
+
 ---
 
 ## IMPORTANT: Pre-Launch Checklist

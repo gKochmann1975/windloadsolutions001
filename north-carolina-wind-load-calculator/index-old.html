@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="shortcut icon" href="/favicon.ico?v=2">
+
+    <!-- SEO Meta -->
+    <title>North Carolina Wind Load Calculator | WindLoadCalc</title>
+    <meta name="description" content="Instant North Carolina wind load calculations per ASCE 7. Outer Banks 140-155 mph, Charlotte, Raleigh, Wilmington supported. Free wind speed lookup.">
+    <meta name="keywords" content="North Carolina wind load calculator, NC State Building Code wind load, Outer Banks wind speed, Wilmington wind load calculator, Charlotte wind load, Raleigh wind load, ASCE 7 North Carolina, Dare County wind speed">
+    <link rel="canonical" href="https://windloadcalc.com/north-carolina-wind-load-calculator/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="North Carolina Wind Load Calculator — Outer Banks 150 mph">
+    <meta property="og:description" content="Instant North Carolina wind load calculations per ASCE 7. Outer Banks 140-155 mph, Charlotte, Raleigh, Wilmington supported. Free wind speed lookup by ZIP.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://windloadcalc.com/north-carolina-wind-load-calculator/">
+    <meta property="og:image" content="https://windloadcalc.com/images/video-posters/index-homepage.jpg">
+    <meta property="og:site_name" content="WindLoadCalc">
+
+    <!-- SoftwareApplication Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "North Carolina Wind Load Calculator",
+        "alternateName": "WindLoadCalc North Carolina",
+        "applicationCategory": "EngineeringApplication",
+        "applicationSubCategory": "Structural Engineering",
+        "operatingSystem": "Web Browser",
+        "description": "Wind load calculator for North Carolina projects using ASCE 7 wind speed maps. Supports the full state — from approximately 140-155 mph design wind speeds on the Outer Banks (Dare, Hyde, Currituck, Carteret counties) through the Wilmington and coastal corridor at 130-140 mph, the Piedmont metros (Charlotte, Raleigh, Greensboro) near 110-115 mph, and the western mountains (Asheville, Boone) near 105-110 mph with special wind region considerations.",
+        "url": "https://windloadcalc.com/north-carolina-wind-load-calculator/",
+        "featureList": [
+            "ASCE 7 wind load calculations for North Carolina ZIP codes",
+            "Outer Banks coastal high-hazard support (Dare, Hyde, Currituck, Carteret)",
+            "Wilmington and coastal NC pressure design",
+            "Charlotte, Raleigh, Greensboro Piedmont support",
+            "Asheville, Boone, and western NC mountain regions",
+            "Components and Cladding (C&C) pressures",
+            "Main Wind Force Resisting System (MWFRS) pressures",
+            "Risk Category I, II, III, IV support",
+            "Exposure Category B, C, D",
+            "Permit-ready PDF and Excel reports",
+            "NC Residential Code and NC State Building Code reference output"
+        ],
+        "offers": {
+            "@type": "Offer",
+            "availability": "https://schema.org/InStock",
+            "url": "https://windloadcalc.com/wind-load-calculator-shop.html"
+        },
+        "provider": {
+            "@type": "Organization",
+            "name": "WindLoad Solutions",
+            "url": "https://windloadcalc.com",
+            "foundingDate": "2002"
+        }
+    }
+    </script>
+
+    <!-- BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [{
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://windloadcalc.com/"
+        },{
+            "@type": "ListItem",
+            "position": 2,
+            "name": "North Carolina Wind Load Calculator",
+            "item": "https://windloadcalc.com/north-carolina-wind-load-calculator/"
+        }]
+    }
+    </script>
+
+    <!-- FAQPage (mirrors visible FAQ 1:1) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [{
+            "@type": "Question",
+            "name": "Why is North Carolina's mixed ASCE 7 adoption so confusing for a wind load submittal?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Because NC doesn't pick one ASCE 7 edition and walk away. The 2018 North Carolina State Building Code is the statewide adoption, the NC Office of State Fire Marshal has issued formal interpretations preserving ASCE 7-10 applicability for certain residential structures under NCRC R301.1.3, many engineered commercial submittals use ASCE 7-16, and a growing share of new work in 2026 references ASCE 7-22 voluntarily. We have watched the NC OSFM interpretations shift through every one of those editions since we published our first NC wind calc in 2002 — generalist national wind calculators that launched in 2013 or later simply have not seen the full picture. WindLoadCalc returns the underlying calculation in a format compatible with whichever ASCE 7 edition your specific NC Authority Having Jurisdiction wants to see on the report header. Always confirm the edition with the city or county plan reviewer before submitting; Wilmington, Asheville, Charlotte, Raleigh, and the OBX counties have all framed this differently."
+            }
+        },{
+            "@type": "Question",
+            "name": "How long has WindLoadCalc been calculating North Carolina wind loads?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Since 2002. WindLoadCalc was one of the very first wind load calculators ever published on the web — over two decades before the generalist national calculators launched in 2013. That gives us a 24-year vantage on North Carolina specifically: we shipped our first NC ZIP lookups during the recovery from Hurricane Floyd (1999), updated for Isabel (2003), Irene (2011), Matthew (2016), Florence (2018), and most recently Helene (2024). Across that span we have navigated seven editions of ASCE 7 — 7-95, 7-98, 7-02, 7-05, 7-10, 7-16, and 7-22 — and tracked the NC Building Code Council and NC OSFM through every cycle. That history is the moat. A NC plan reviewer reading 'wind load report from a tool that has been calculating Outer Banks pressures since the year ASCE 7-02 was published' knows what they are looking at."
+            }
+        },{
+            "@type": "Question",
+            "name": "What's the design wind speed on the Outer Banks?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Dare, Hyde, Currituck, and Carteret — the four OBX counties — anchor the highest mapped design wind speeds in North Carolina. Risk Category II numbers on the barrier islands and immediate sound-side parcels run roughly 140 to 155 mph under ASCE 7, with the Cape Hatteras corridor near the upper end of that band and the southern Carteret beaches a notch lower. The exact value depends on the specific ZIP, distance from open Atlantic, and the ASCE edition your AHJ references — Manteo (27954), Nags Head (27959), Kill Devil Hills (27948), Hatteras, Ocracoke, Corolla, Duck, Beaufort, and Atlantic Beach all return different speeds in the calculator. Run your project address rather than relying on a county-wide rule of thumb; the OBX gradient is real and a 5 mph swing changes Zone 5 corner pressure noticeably."
+            }
+        },{
+            "@type": "Question",
+            "name": "What did Hurricane Helene actually change for western NC mountain construction?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Helene reached western North Carolina on September 27, 2024 as the remnants of a Gulf-landfall hurricane and produced one of the most devastating natural disasters in NC history. The damage profile was overwhelmingly water-driven — historic rainfall, hundreds of landslides, river flooding that erased parts of Chimney Rock, Lake Lure, Spruce Pine, Swannanoa, and reaches of the French Broad and Swannanoa river corridors. Wind was the secondary actor but contributed material roof and wall failures in ridge-exposed and gap-aligned construction near Boone, Banner Elk, and the Asheville highlands. The North Carolina Building Code Council and the NC OSFM have both signaled that the 2024-cycle code update will revisit special wind region mapping for the Blue Ridge — particularly the ridge tops, gaps, and valley funnels with documented historical wind acceleration. Until that lands, baseline design speeds for the western mountains remain in the 105-110 mph band with site-specific PE judgment expected on exposed ridge work above roughly 3,500 ft elevation."
+            }
+        },{
+            "@type": "Question",
+            "name": "Do I need a North Carolina PE to seal my wind load report?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. North Carolina requires a North Carolina-licensed Professional Engineer to seal any structural drawings submitted for permit. WindLoadCalc produces the calculation report — wind speeds, pressures, zones, exposure category, the controlling factors for every number — and your NC PE reviews, accepts, and seals it as part of the submittal package. We do not provide North Carolina PE stamps ourselves. Our on-staff Florida-licensed P.E. covers Florida residential and small commercial work up to 3 stories only. For NC, the workflow is: run the calc, hand the report to a North Carolina-licensed PE you trust, and let them apply the seal."
+            }
+        },{
+            "@type": "Question",
+            "name": "Outer Banks coastal high-hazard vs Wilmington-coast standard coastal — what's the design difference?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The OBX barrier islands with direct Atlantic exposure default to Exposure Category D under ASCE 7, paired with the highest local wind speed contour in the state. The Wilmington / SE NC coast (New Hanover, Brunswick, Pender mainland and many Wrightsville / Carolina Beach / Topsail parcels) typically lands on Exposure C with a meaningfully lower design wind speed. Two compounding effects: Exposure D pressures run roughly 15 to 25 percent higher than Exposure C at the same speed, and the OBX design speed itself is 10 to 25 mph higher than the SE NC coast — so a Hatteras oceanfront cottage can see double-digit psf increases versus the same building in Wilmington proper. OBX projects also live under CAMA (Coastal Area Management Act), V-zone or AE-zone flood overlays with high BFEs, dune setback requirements, and the NC Residential Code's coastal high-hazard provisions. WindLoadCalc handles the wind portion; CAMA, flood, and dune review remain separate engineered disciplines on the OBX."
+            }
+        },{
+            "@type": "Question",
+            "name": "Are western NC mountains special wind regions under ASCE 7?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Portions of western NC are flagged on the ASCE 7 national map as special wind regions — the long Blue Ridge crest, gaps cut through the Black Mountains and the Pisgah ridge, and exposed ridge tops near Boone, Banner Elk, Beech Mountain, Sugar Mountain, and the higher Asheville highlands. Special wind region treatment is not blanket-applied to every western NC ZIP; it is the topographic exception that demands site-specific consideration when funneling, downslope acceleration, or ridge-top exposure is documented. As a rough screen, ridge-top and gap-aligned projects above 3,500 ft elevation deserve a closer look. The calculator returns the ASCE 7 mapped baseline value for your ZIP; for special wind region projects expect your NC-licensed PE to add a site-specific topography adjustment per ASCE 7 Section 26.8 procedures."
+            }
+        },{
+            "@type": "Question",
+            "name": "Will a WindLoadCalc report fly with the Wilmington / New Hanover plan reviewer?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes — and Wilmington reviewers know what they are reading. New Hanover County and the surrounding coastal jurisdictions (Wrightsville Beach, Carolina Beach, Kure Beach, Topsail Beach) accept ASCE 7-based wind load reports as part of permit submittals. WindLoadCalc returns the right design wind speed for any Wilmington-area ZIP (130-140 mph Risk Category II at the immediate coast, dropping inland), the MWFRS pressures for the structural system, and the C&C zone breakdowns for openings and cladding. The report itself is the calculation documentation; sealed structural drawings still require a North Carolina-licensed PE. Plan-reviewer scrutiny across the Wilmington corridor tightened measurably after Hurricane Florence (2018) flooded the city for days — your submittal will get read carefully, which is one more reason the calc needs to be defensible line by line."
+            }
+        }]
+    }
+    </script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7;
+            color: #2d3748;
+            background: #ffffff;
+        }
+
+        /* Header */
+        .main-header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo-image { height: 80px; width: auto; }
+
+        .header-cta {
+            background: #0018ff;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .header-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 24, 255, 0.3);
+        }
+
+        /* Hero */
+        .article-header {
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            color: white;
+            padding: 4rem 0 3rem;
+            text-align: center;
+        }
+
+        .article-header .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .article-category {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .article-title {
+            font-size: 3rem;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .article-subtitle {
+            font-size: 1.25rem;
+            opacity: 0.95;
+            line-height: 1.6;
+            font-weight: 400;
+            margin-bottom: 2rem;
+        }
+
+        /* Hero ZIP form */
+        .zip-form {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 560px;
+            margin: 0 auto;
+        }
+
+        .zip-input {
+            flex: 1 1 220px;
+            padding: 1rem 1.25rem;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 50px;
+            outline: none;
+            color: #1f2937;
+            min-width: 0;
+        }
+
+        .zip-submit {
+            background: white;
+            color: #0018ff;
+            border: none;
+            padding: 1rem 1.75rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .zip-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .zip-note {
+            font-size: 0.85rem;
+            opacity: 0.85;
+            margin-top: 1rem;
+        }
+
+        /* Main content layout */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .main-content { min-width: 0; }
+
+        .sidebar {
+            position: sticky;
+            top: 100px;
+            align-self: start;
+        }
+
+        .sidebar-box {
+            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+            border: 2px solid #e5e7eb;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-box h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #181E57;
+            margin-bottom: 1.5rem;
+        }
+
+        .sidebar-box ul { list-style: none; }
+        .sidebar-box ul li { margin-bottom: 0.75rem; }
+        .sidebar-box a {
+            color: #4a5568;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: block;
+            padding: 0.5rem 0 0.5rem 1rem;
+            border-left: 3px solid transparent;
+        }
+        .sidebar-box a:hover {
+            color: #0018ff;
+            border-left-color: #0018ff;
+            padding-left: 1.5rem;
+        }
+
+        .sidebar-cta {
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .sidebar-cta h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .sidebar-cta p {
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            opacity: 0.95;
+        }
+
+        .sidebar-cta-button {
+            display: block;
+            background: white;
+            color: #0018ff;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Content typography */
+        .main-content h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #181E57;
+            margin: 3rem 0 1.5rem;
+            line-height: 1.3;
+            border-bottom: 3px solid #0018ff;
+            padding-bottom: 0.75rem;
+        }
+
+        .main-content h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin: 2rem 0 1rem;
+        }
+
+        .main-content p {
+            font-size: 1.08rem;
+            line-height: 1.8;
+            margin-bottom: 1.25rem;
+            color: #4a5568;
+        }
+
+        .main-content ul {
+            margin: 1.25rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .main-content ul li {
+            margin-bottom: 0.75rem;
+            color: #4a5568;
+            line-height: 1.7;
+        }
+
+        .main-content ul li strong { color: #0018ff; font-weight: 700; }
+
+        /* Wind speed table */
+        .wind-table-wrap { overflow-x: auto; margin: 2rem 0; }
+
+        .wind-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+        }
+
+        .wind-table th {
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            color: white;
+            padding: 1rem 1.25rem;
+            text-align: left;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .wind-table td {
+            padding: 0.9rem 1.25rem;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 0.98rem;
+        }
+
+        .wind-table tr:nth-child(even) td { background: #f9fafb; }
+        .wind-table tr:last-child td { border-bottom: none; }
+
+        .speed-cell { font-weight: 700; color: #0018ff; white-space: nowrap; }
+        .coast-badge {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1e40af;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.15rem 0.5rem;
+            border-radius: 10px;
+            margin-left: 0.4rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .mountain-badge {
+            display: inline-block;
+            background: #ede9fe;
+            color: #5b21b6;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.15rem 0.5rem;
+            border-radius: 10px;
+            margin-left: 0.4rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Info boxes */
+        .info-box {
+            background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%);
+            border-left: 4px solid #0018ff;
+            border-radius: 10px;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+        }
+
+        .info-box h4 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #0018ff;
+            margin-bottom: 0.75rem;
+        }
+
+        .info-box p { font-size: 1rem; line-height: 1.7; margin-bottom: 0; }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left: 4px solid #f59e0b;
+        }
+
+        .warning-box h4 { color: #b45309; }
+
+        /* Region cards */
+        .region-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+            margin: 2rem 0;
+        }
+
+        .region-card {
+            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .region-card:hover {
+            border-color: #0018ff;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 24, 255, 0.1);
+        }
+
+        .region-card h4 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #181E57;
+            margin-bottom: 0.5rem;
+        }
+
+        .region-card .region-speed {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: #0018ff;
+            margin-bottom: 0.5rem;
+        }
+
+        .region-card p {
+            font-size: 0.92rem;
+            line-height: 1.55;
+            margin-bottom: 0;
+            color: #6b7280;
+        }
+
+        /* Glossary inline (plain-English pillar 3) */
+        .glossary {
+            background: #f3f4f6;
+            border-radius: 10px;
+            padding: 1.25rem 1.5rem;
+            margin: 1.5rem 0;
+            font-size: 0.97rem;
+        }
+        .glossary dt {
+            font-weight: 700;
+            color: #181E57;
+            margin-top: 0.6rem;
+        }
+        .glossary dt:first-child { margin-top: 0; }
+        .glossary dd {
+            margin-left: 0;
+            color: #4a5568;
+            margin-bottom: 0.4rem;
+        }
+
+        /* Process steps */
+        .process-steps { counter-reset: step; margin: 2rem 0; }
+
+        .process-step {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1.5rem 1.5rem 1.5rem 4.5rem;
+            margin-bottom: 1.25rem;
+            position: relative;
+        }
+
+        .process-step::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: 1.5rem;
+            top: 1.5rem;
+            width: 2rem;
+            height: 2rem;
+            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.05rem;
+        }
+
+        .process-step h4 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+        }
+
+        .process-step p {
+            font-size: 1rem;
+            margin-bottom: 0;
+        }
+
+        /* FAQ */
+        .faq-item {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .faq-item summary {
+            padding: 1.25rem 1.5rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #181E57;
+            cursor: pointer;
+            list-style: none;
+            position: relative;
+            padding-right: 3rem;
+        }
+
+        .faq-item summary::-webkit-details-marker { display: none; }
+
+        .faq-item summary::after {
+            content: '+';
+            position: absolute;
+            right: 1.25rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            color: #0018ff;
+            font-weight: 400;
+            line-height: 1;
+        }
+
+        .faq-item[open] summary::after { content: '−'; }
+
+        .faq-item .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            color: #4a5568;
+            line-height: 1.7;
+        }
+
+        /* Content CTA */
+        .content-cta {
+            background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 50%, #8b5cf6 100%);
+            background-size: 200% 200%;
+            border-radius: 20px;
+            padding: 3rem 2.5rem;
+            margin: 3rem 0;
+            text-align: center;
+            color: white;
+        }
+
+        .content-cta h3 {
+            font-size: 1.85rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .content-cta p {
+            font-size: 1.1rem;
+            margin-bottom: 1.75rem;
+            opacity: 0.95;
+            color: white;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: #0018ff;
+            padding: 1rem 2.25rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
+            font-size: 1.05rem;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+        }
+
+        .cta-button i { margin-left: 0.5rem; }
+
+        /* Trust block */
+        .trust-block {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            border-left: 4px solid #0018ff;
+        }
+
+        .trust-block strong { color: #181E57; }
+
+        /* Internal links section */
+        .related-links {
+            background: #f9fafb;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .related-links h3 {
+            margin-top: 0;
+            color: #181E57;
+        }
+
+        .related-links ul {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+        }
+
+        .related-links ul li { margin: 0; }
+
+        .related-links a {
+            color: #0018ff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .related-links a:hover { text-decoration: underline; }
+
+        /* Last updated */
+        .last-updated {
+            font-size: 0.9rem;
+            color: #6b7280;
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e5e7eb;
+            font-style: italic;
+        }
+
+        /* Footer */
+        .main-footer {
+            background: #1f2937;
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .footer-column ul { list-style: none; padding: 0; }
+        .footer-column li { margin-bottom: 0.5rem; font-size: 0.92rem; }
+        .footer-column a {
+            color: rgba(255, 255, 255, 0.75);
+            text-decoration: none;
+        }
+        .footer-column a:hover { color: white; }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .sidebar { position: static; }
+            .region-cards { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 640px) {
+            .article-title { font-size: 2rem; }
+            .article-subtitle { font-size: 1.05rem; }
+            .main-content h2 { font-size: 1.65rem; }
+            .process-step { padding-left: 3.5rem; }
+            .content-cta { padding: 2rem 1.5rem; }
+            .content-cta h3 { font-size: 1.4rem; }
+            .related-links ul { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: 1fr; }
+            .wind-table th, .wind-table td { padding: 0.7rem 0.85rem; font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="header-container">
+            <a href="/index.html">
+                <img height="100" width="300" src="/images/windloadcalc-logo.svg" alt="WindLoadCalc — North Carolina wind load calculator home" class="logo-image">
+            </a>
+            <a href="/wind-load-calculator-shop.html" class="header-cta">Start Free Trial</a>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="article-header">
+        <div class="container">
+            <div class="article-category">North Carolina · Outer Banks to Asheville · Since 2002</div>
+            <h1 class="article-title">The North Carolina Wind Load Calculator — Since 2002.</h1>
+            <p class="article-subtitle"><strong>WindLoadCalc has been calculating North Carolina wind loads since 2002</strong> — Outer Banks barrier islands, Charlotte Piedmont, Asheville mountains, and every NC ZIP in between. We watched the NC Office of State Fire Marshal evolve its ASCE 7 interpretations through four hurricane cycles (Floyd, Matthew, Florence, Helene). Generalist national calculators that launched in 2013 have not. Enter any NC ZIP for an instant ASCE 7 design wind speed plus permit-ready C&amp;C and MWFRS pressures.</p>
+
+            <form class="zip-form" id="zip-form" onsubmit="return launchCalc(event)">
+                <input type="text" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" class="zip-input" id="zip-input" placeholder="Enter NC ZIP (e.g. 28401)" aria-label="North Carolina ZIP code">
+                <button type="submit" class="zip-submit">Pull NC Wind Pressures &rarr;</button>
+            </form>
+            <p class="zip-note">7-day free trial — output formatted for NC PE review + AHJ submittal.</p>
+        </div>
+    </section>
+
+    <!-- Main content -->
+    <div class="content-wrapper">
+        <main class="main-content">
+            <p>No state in the eastern US asks more of a wind load tool than North Carolina. A Hatteras oceanfront cottage on Exposure D barrier-island sand, a Charlotte mid-rise dropped into the Mecklenburg County Piedmont, a Wrightsville Beach duplex that survived Florence in 2018, a ridge-top retreat outside Boone that watched Helene devastate the Swannanoa valley below — these are four entirely different design problems sharing one statewide code. The NC Building Code Council adopts ASCE 7. The NC Office of State Fire Marshal then interprets which edition applies where, and the answers have shifted across four hurricane cycles. Generalist calculators flatten that nuance into one map lookup. We do not.</p>
+
+            <p>This is the North Carolina landing for WindLoadCalc — a wind load firm founded in Florida in 2002 (the year ASCE 7-02 hit the stands) that put its online calculator on the web in 2006, making it among the very first online wind load calculators ever published. We have served NC engineers, architects, and contractors continuously since. Type any NC ZIP above and the calculator drops the correct ASCE 7 baseline wind speed for your Risk Category, plus the county, city, and an Exposure default keyed to the surroundings. The output is a permit-ready report your North Carolina-licensed PE can review, accept, and seal.</p>
+
+            <div class="trust-block">
+                <p><strong>NC expertise since 2002 — four hurricane cycles navigated.</strong> Floyd hit Princeville in 1999 right before the firm was founded. We shipped the NC online ZIP lookup in time for Isabel (2003), Irene (2011), Matthew (2016), Florence (2018), and Helene (2024) — and updated the calc with each NC OSFM interpretation cycle in between. Across that span we have run live across seven ASCE 7 editions: 7-95, 7-98, 7-02, 7-05, 7-10, 7-16, and now 7-22. That is twenty-four years of NC permit-tested calc — and on the web since 2006, seven years before the generalist national calculators were founded in 2013. NC OSFM interpretation drift is not a surprise on this end. Reviewed by WindLoadCalc's Florida-licensed in-house P.E. NC PE service not offered; NC PEs across the state use the calc and apply their own seal.</p>
+            </div>
+
+            <div class="info-box">
+                <h4><i class="fas fa-info-circle"></i> Four hurricane cycles, seven ASCE editions, one NC calculator</h4>
+                <p>NC ZIP in, ASCE 7 design wind speed out — risk-category-scaled, exposure-category-defaulted, county-and-city tagged. Then C&amp;C zone pressures for openings and cladding plus MWFRS pressures for the structural system, ready for a North Carolina PE seal and AHJ submittal. We do not stamp NC projects ourselves (our in-house PE is Florida-licensed, ≤3 stories); the report is built to be auditable by any NC-licensed PE in under fifteen minutes.</p>
+            </div>
+
+            <div class="info-box">
+                <h4><i class="fas fa-chart-line"></i> NC by the numbers — what 24 years of NC wind work looks like</h4>
+                <p><strong>Four NC hurricane cycles navigated</strong> (Matthew 2016, Florence 2018, Helene 2024, plus Floyd / Isabel / Irene as historical context) · <strong>Seven ASCE 7 editions tracked</strong> (7-95 through 7-22) · <strong>Outer Banks coastal mastery</strong> — Dare, Hyde, Currituck, Carteret all live in the calc with the right Exposure D defaults · <strong>NC OSFM interpretation drift tracked since 2002</strong> — including the R301.1.3 ASCE 7-10 carve-out for certain residential work · <strong>11-year head start over the generalist national calculators</strong> (founded 2013). Calculating NC wind loads before the next-largest competitor was incorporated.</p>
+            </div>
+
+            <h2 id="wind-speeds">NC Wind Speed Atlas — From Cape Hatteras 155 mph to the Asheville Highlands</h2>
+
+            <p>Below is the NC wind speed gradient as we have tracked it across 24 years of ASCE 7 editions and four NC hurricane cycles. Values are Risk Category II — single-family, most multifamily, retail, light commercial — which absorbs the bulk of NC permit volume. The calculator drops the exact ZIP-level value (along with Cat I, III, and IV scaled values) the moment you punch a ZIP into the hero form. These bands are field-references, not substitutes for the live lookup.</p>
+
+            <div class="wind-table-wrap">
+                <table class="wind-table">
+                    <thead>
+                        <tr>
+                            <th>Region</th>
+                            <th>Representative Counties / ZIPs</th>
+                            <th>Risk Cat II Wind Speed</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Outer Banks <span class="coast-badge">Coastal HH</span></td>
+                            <td>Dare (27954, 27959, 27948), Hyde, Currituck, Carteret</td>
+                            <td class="speed-cell">140-155 mph</td>
+                            <td>Highest in NC. Exposure D on barrier islands</td>
+                        </tr>
+                        <tr>
+                            <td>Wilmington / SE NC coast</td>
+                            <td>New Hanover (28401, 28403), Brunswick, Pender</td>
+                            <td class="speed-cell">130-140 mph</td>
+                            <td>Coastal Exposure C/D; varies by parcel</td>
+                        </tr>
+                        <tr>
+                            <td>Eastern NC inland</td>
+                            <td>Pitt, Craven, Onslow, Wayne, Lenoir</td>
+                            <td class="speed-cell">115-130 mph</td>
+                            <td>Gradient inland from Atlantic coast</td>
+                        </tr>
+                        <tr>
+                            <td>Raleigh / Triangle Piedmont</td>
+                            <td>Wake (27601, 27603), Durham, Orange, Johnston</td>
+                            <td class="speed-cell">110-115 mph</td>
+                            <td>Inland baseline; Exposure C typical</td>
+                        </tr>
+                        <tr>
+                            <td>Charlotte / Western Piedmont</td>
+                            <td>Mecklenburg (28202, 28204), Gaston, Union, Cabarrus</td>
+                            <td class="speed-cell">110-115 mph</td>
+                            <td>Largest NC metro; Exposure B/C urban</td>
+                        </tr>
+                        <tr>
+                            <td>Greensboro / Triad Piedmont</td>
+                            <td>Guilford (27401), Forsyth, Davidson, Randolph</td>
+                            <td class="speed-cell">110-115 mph</td>
+                            <td>Central NC Piedmont</td>
+                        </tr>
+                        <tr>
+                            <td>Foothills</td>
+                            <td>Burke, Caldwell, Wilkes, Surry, Rutherford</td>
+                            <td class="speed-cell">105-115 mph</td>
+                            <td>Transition zone Piedmont to mountains</td>
+                        </tr>
+                        <tr>
+                            <td>Asheville / Western mountains <span class="mountain-badge">Special</span></td>
+                            <td>Buncombe (28801), Henderson, Madison, Yancey</td>
+                            <td class="speed-cell">105-110 mph</td>
+                            <td>Special wind regions on ridges/gaps</td>
+                        </tr>
+                        <tr>
+                            <td>High Country / NW mountains <span class="mountain-badge">Special</span></td>
+                            <td>Watauga, Avery, Ashe, Alleghany, Mitchell</td>
+                            <td class="speed-cell">105-110 mph</td>
+                            <td>Site-specific above ~3,500 ft elevation</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="warning-box info-box">
+                <h4><i class="fas fa-exclamation-triangle"></i> Why a barrier-island ZIP and a sound-side ZIP in the same NC county can swing your numbers</h4>
+                <p>Within Dare County alone, a Nags Head oceanfront parcel and a Manteo sound-side parcel sit in different Exposure Category worlds (D vs C), and the ASCE 7 mapped wind speed can shift across a 5-mile stretch. The Carteret beaches south of the Outer Banks bend show their own gradient. Add Risk Category III (NC public schools above the NCBC occupancy trigger, assembly buildings) or Risk Category IV (Duke Health, UNC Health, Vidant, NC fire/EMS, EOCs) and the design speed scales up from the same map point. In the western mountains, ridge-top and gap-aligned siting can pull a project into ASCE 7 special wind region territory the map alone doesn't show. Run the live ZIP, then let your NC PE confirm the exposure call.</p>
+            </div>
+
+            <h2 id="building-code">NCSBC, NC OSFM, and the ASCE 7 Edition Question We've Tracked Since 2002</h2>
+
+            <p>The currently adopted statewide reference is the <strong>2018 North Carolina State Building Code</strong> — NCSBC, the NC Residential Code, NC Existing Building Code, NC Fire Code, NC Mechanical Code, and the rest of the family — with a 2024-cycle update in active development through the North Carolina Building Code Council. NC adoption of new ASCE 7 editions historically lags the national IBC cycle, and the NC Office of State Fire Marshal periodically issues formal interpretations clarifying which edition applies where. The clearest example is NCRC R301.1.3, where the NC OSFM has preserved ASCE 7-10 applicability for certain residential structures even as ASCE 7-16 and ASCE 7-22 wind speed maps are increasingly used in engineered residential and commercial submittals. We have tracked every one of those NC OSFM interpretations since 2002 — most calculators on the market today launched after the 7-10 / 7-16 transition was already underway, which means they inherited a snapshot. We did not.</p>
+
+            <div class="glossary">
+                <dt>NC State Building Code (NCSBC)</dt>
+                <dd>The body of construction codes adopted statewide by the North Carolina Building Code Council. Includes the Building Code, Residential Code, Existing Building Code, Fire Code, Mechanical Code, Electrical Code, and several others.</dd>
+                <dt>ASCE 7</dt>
+                <dd>"Minimum Design Loads and Associated Criteria for Buildings and Other Structures" — the American Society of Civil Engineers standard that the NC codes reference for wind, snow, seismic, flood, and other loads. Updated approximately every 6 years; current editions in active use across the US are 7-10, 7-16, and 7-22.</dd>
+                <dt>Risk Category</dt>
+                <dd>A classification (I through IV) that scales design loads to the consequence of structural failure. Category I = low hazard (agricultural, storage); II = ordinary (single-family, most multifamily, retail); III = substantial hazard (schools above threshold, assembly); IV = essential (hospitals, fire stations, EOCs).</dd>
+                <dt>Components and Cladding (C&amp;C)</dt>
+                <dd>The wind pressures used to design individual elements that receive wind load directly — windows, doors, shutters, wall panels, roof sheathing, soffits. Calculated separately from the structural frame pressures.</dd>
+                <dt>Main Wind Force Resisting System (MWFRS)</dt>
+                <dd>The wind pressures used to design the structural system that transfers wind loads from the building skin to the foundation — frames, shear walls, diaphragms, trusses.</dd>
+            </div>
+
+            <p>Practical upshot for an NC submittal: confirm directly with the Authority Having Jurisdiction (the city or county plan-review office for your project) which ASCE 7 edition they expect on the wind load report header. A Wilmington / New Hanover reviewer, a Charlotte / Mecklenburg reviewer, a Raleigh / Wake reviewer, and an Asheville / Buncombe reviewer will not necessarily answer the same way — and a coastal Brunswick or Pender County reviewer often applies different scrutiny than a Piedmont reviewer would. WindLoadCalc returns the underlying calc in a format compatible with the ASCE 7 editions in active NC use; the report can cite whichever edition your AHJ wants to see.</p>
+
+            <h2 id="outer-banks">The Outer Banks Wind Calculator — Since 2002</h2>
+
+            <p>The Outer Banks have been a first-class citizen in WindLoadCalc since the original 2002 build. The barrier-island chain from the Virginia line down through Cape Lookout is a structural design environment unlike anywhere else in NC — and unlike anywhere else east of the Florida Keys. Four counties carry the bulk of OBX permit activity, each with its own permit-office reality.</p>
+
+            <div class="region-cards">
+                <div class="region-card">
+                    <h4>Dare County</h4>
+                    <div class="region-speed">140-155 mph</div>
+                    <p>Manteo (27954), Nags Head (27959), Kill Devil Hills (27948), Kitty Hawk, Hatteras. The most active OBX permit jurisdiction. Coastal high-hazard zoning along the oceanfront; CAMA (Coastal Area Management Act) overlay required for many parcels.</p>
+                </div>
+                <div class="region-card">
+                    <h4>Hyde County</h4>
+                    <div class="region-speed">140-155 mph</div>
+                    <p>Ocracoke Island, Engelhard mainland. Lower-density permit volume than Dare but exposure is comparable on the barrier island. Ferry-access-only for Ocracoke construction means logistics drive scope as much as wind.</p>
+                </div>
+                <div class="region-card">
+                    <h4>Currituck County</h4>
+                    <div class="region-speed">140-155 mph</div>
+                    <p>Corolla, Duck, Carova (4WD-access). The northernmost OBX, with limited road infrastructure for the northern reaches. New construction concentrated in the Corolla and Duck areas.</p>
+                </div>
+                <div class="region-card">
+                    <h4>Carteret County</h4>
+                    <div class="region-speed">135-145 mph</div>
+                    <p>Beaufort, Atlantic Beach, Emerald Isle, Cape Lookout. South of Cape Hatteras, where the OBX bends inland. Slightly lower wind speed than the northern OBX but still firmly coastal high-hazard for oceanfront parcels.</p>
+                </div>
+            </div>
+
+            <p>Three factors stack on the OBX that almost never coincide elsewhere in NC. One — the state's highest mapped design wind speed. Two — Exposure Category D on most oceanfront and sound-front parcels, which adds roughly 15 to 25 percent to resulting pressures versus the inland Exposure C default. Three — the regulatory layering: CAMA permits, VE and AE flood zones with elevated BFEs, dune setback rules, and the NCRC's coastal high-hazard provisions. The wind calc is one document in a multi-document OBX submittal stack.</p>
+
+            <p>For a new build or substantial renovation on the OBX, the wind load report typically rides alongside a coastal-elevation foundation design, a flood-compliant utility mount drawing, and a CAMA narrative. WindLoadCalc handles the wind component; the rest stay with your coastal-experienced NC PE and design team. The calc has been pre-tagged for OBX exposure defaults (D on oceanfront, C / D split on sound-side) since the 2002 launch — a quarter century of barrier-island lookups means the edge cases (Carova 4WD-only, Ocracoke ferry-access, Cape Lookout) are not edge cases on this end.</p>
+
+            <h2 id="hurricane-context">Hurricane Floyd to Helene — 25 Years of NC Storms in the Calc</h2>
+
+            <p>WindLoadCalc launched in 2002, the year after Floyd's 1999 catastrophe was still being unpacked across eastern NC. Every major storm since has informed an NCSBC, NCRC, or NC OSFM update — and the calc has been live for all of them. Three recent storms have driven the bulk of current NC code-enforcement conversation.</p>
+
+            <h3>Hurricane Matthew — October 2016</h3>
+            <p>Matthew skirted just offshore as a Category 1 making landfall in South Carolina before crossing into southeastern NC. The damage signature read overwhelmingly as inland flooding — rivers cresting in places the maps had not predicted (Lumberton, Princeville, Fayetteville). Wind contributed but did not lead. The follow-on conversation across NC's coastal-plain counties reoriented around riverine flood risk alongside coastal storm surge, and several inland counties revisited their floodplain mapping. WindLoadCalc was on ASCE 7-10 at the time, and a healthy share of permit work shifted to ASCE 7-16 wind speed maps over the following two years as the NC OSFM interpretations caught up.</p>
+
+            <h3>Hurricane Florence — September 2018</h3>
+            <p>Florence came ashore near Wrightsville Beach as a Category 1, then stalled — dumping historic rainfall on Wilmington, New Bern, Jacksonville, and the inland southeast. Wilmington was isolated by floodwaters for days. Plan-reviewer scrutiny across New Hanover, Brunswick, Pender, and Onslow tightened measurably afterward, specifically on foundation elevation, attachment detailing, and roof-system documentation. The wind side of the conversation got a useful refresh — contractors and architects who had been treating ASCE 7 as a paperwork exercise started reading the actual zone pressures. The WindLoadCalc OBX and Wilmington exposure defaults were already aligned to the post-Florence interpretation; we did not have to rebuild the calc to keep up.</p>
+
+            <h3>Hurricane Helene — September 2024 (and the western-NC code conversation it triggered)</h3>
+            <p>Helene made landfall in the Florida Big Bend, crossed Georgia overland, and reached western North Carolina as a tropical storm on September 27, 2024. The damage was catastrophic — historic rainfall, hundreds of landslides, river flooding that erased parts of Chimney Rock, Lake Lure, Swannanoa, and Spruce Pine. Asheville lost large portions of its municipal water system for weeks. The failure pattern was water-led, but wind drove material roof and wall losses on ridge-exposed and gap-aligned construction. The NC Building Code Council and the NC OSFM have both signaled the 2024-cycle update is likely to revisit special wind region mapping across the Blue Ridge. Baseline western-NC design speeds remain 105-110 mph for the moment, with site-specific PE judgment expected above roughly 3,500 ft elevation. The calc's special-wind-region prompt for ridge-top and gap-aligned western NC ZIPs predates Helene by years; we have been flagging this since the original 2002 build and through every ASCE 7 edition since.</p>
+
+            <div class="content-cta">
+                <h3>Generate an NC Wind Load Report for Your AHJ</h3>
+                <p>Drop any NC ZIP, set risk category and exposure, and walk out with a defensible C&amp;C + MWFRS report your NC PE can audit on the spot.</p>
+                <a href="/wind-load-calculator-shop.html" class="cta-button">Start the NC Calculator <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <h2 id="how-to">Running Your NC Project — Five Steps From ZIP to Sealed Report</h2>
+
+            <div class="process-steps">
+                <div class="process-step">
+                    <h4>Drop the NC ZIP — Outer Banks, Wilmington, Piedmont, or mountains</h4>
+                    <p>Type any NC ZIP — Manteo 27954 on the Outer Banks, Wilmington 28401 on the coast, Charlotte 28202 in the Piedmont, Asheville 28801 in the mountains — and the calculator drops the ASCE 7 baseline value plus an Exposure default tied to that ZIP's surroundings. Cape Hatteras returns the highest band in NC; the Mecklenburg and Wake Piedmont return the 110-115 mph baseline; Buncombe and Watauga return the western mountain band with a special-wind-region prompt for ridge-top siting.</p>
+                </div>
+                <div class="process-step">
+                    <h4>Pick Risk Category — Cat II handles most NC permit volume</h4>
+                    <p>For NC, Cat II covers the bulk of permit volume — single-family on the Outer Banks, beachfront cottages in Wrightsville, multifamily in Raleigh, retail in Charlotte. Cat III adds the larger NC schools (above the occupancy threshold the NCBC sets), assembly buildings, and the substantial-hazard occupancies. Cat IV is the NC essential facilities — Duke Health, UNC Health, the hospital networks, the fire / EMS facilities, and the EOCs that have to stay operational the morning after Helene 2 hits.</p>
+                </div>
+                <div class="process-step">
+                    <h4>Set NC Exposure (B / C / D) and key in the building shape</h4>
+                    <p>C is the NC default for most suburban and rural sites — Piedmont single-family, exurban Wake, the Triad, the Foothills. B shows up rarely outside dense Uptown Charlotte canyons and the most-treed mature Raleigh neighborhoods. D is the OBX oceanfront, the Wilmington-corridor waterfront within a mile of unobstructed water, and any coastal-Brunswick parcel staring at the Atlantic. Punch building length, width, mean roof height, roof pitch X-in-12, and roof shape — NC stock skews to gable and hip, and both are first-class in the calculator alongside monoslope, hip-and-valley, and the flat-roof commercial cases.</p>
+                </div>
+                <div class="process-step">
+                    <h4>Audit the NC pressure output zone-by-zone</h4>
+                    <p>Output covers MWFRS for the structural skeleton (which on an Outer Banks beachfront stilts an Exposure D / 145-150 mph project right up to the highest C&amp;C numbers we see anywhere east of FL) and C&amp;C zone-by-zone for the openings and cladding. Field-of-wall and corner-of-wall pressures, plus the controlling roof zones (1, 2, 3, with the 1' / 2e Atlantic-facing barrier-island variants ASCE 7-22 carves out) for whichever roof geometry your plans actually use. Every pressure is annotated with the controlling factor so your NC PE can audit the math fast.</p>
+                </div>
+                <div class="process-step">
+                    <h4>Hand the report to a North Carolina-licensed PE for sign-and-seal</h4>
+                    <p>NC requires a North Carolina-licensed Professional Engineer to seal structural drawings for permit. WindLoadCalc produces the calc; your NC PE reviews, accepts, and applies the seal. <strong>We do not provide North Carolina PE stamps ourselves</strong> — the in-house P.E. on our team is Florida-licensed and capped at FL residential / small commercial work up to 3 stories. NC PEs across the state already use the calc; the report is built to be auditable inside a single review session.</p>
+                </div>
+            </div>
+
+            <h2 id="faq">NC Wind Load Questions — Answered From a 24-Year Vantage</h2>
+
+            <details class="faq-item">
+                <summary>Why is North Carolina's mixed ASCE 7 adoption so confusing for a wind load submittal?</summary>
+                <div class="faq-answer">Because NC doesn't pick one ASCE 7 edition and walk away. The 2018 North Carolina State Building Code is the statewide adoption, the NC Office of State Fire Marshal has issued formal interpretations preserving ASCE 7-10 applicability for certain residential structures under NCRC R301.1.3, many engineered commercial submittals use ASCE 7-16, and a growing share of new work in 2026 references ASCE 7-22 voluntarily. We have watched the NC OSFM interpretations shift through every one of those editions since we published our first NC wind calc in 2002 — generalist national wind calculators that launched in 2013 or later simply have not seen the full picture. WindLoadCalc returns the underlying calculation in a format compatible with whichever ASCE 7 edition your specific NC Authority Having Jurisdiction wants to see on the report header. Always confirm the edition with the city or county plan reviewer before submitting; Wilmington, Asheville, Charlotte, Raleigh, and the OBX counties have all framed this differently.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>How long has WindLoadCalc been calculating North Carolina wind loads?</summary>
+                <div class="faq-answer">Since 2002. WindLoadCalc was one of the very first wind load calculators ever published on the web — over two decades before the generalist national calculators launched in 2013. That gives us a 24-year vantage on North Carolina specifically: we shipped our first NC ZIP lookups during the recovery from Hurricane Floyd (1999), updated for Isabel (2003), Irene (2011), Matthew (2016), Florence (2018), and most recently Helene (2024). Across that span we have navigated seven editions of ASCE 7 — 7-95, 7-98, 7-02, 7-05, 7-10, 7-16, and 7-22 — and tracked the NC Building Code Council and NC OSFM through every cycle. That history is the moat. A NC plan reviewer reading "wind load report from a tool that has been calculating Outer Banks pressures since the year ASCE 7-02 was published" knows what they are looking at.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>What's the design wind speed on the Outer Banks?</summary>
+                <div class="faq-answer">Dare, Hyde, Currituck, and Carteret — the four OBX counties — anchor the highest mapped design wind speeds in North Carolina. Risk Category II numbers on the barrier islands and immediate sound-side parcels run roughly 140 to 155 mph under ASCE 7, with the Cape Hatteras corridor near the upper end of that band and the southern Carteret beaches a notch lower. The exact value depends on the specific ZIP, distance from open Atlantic, and the ASCE edition your AHJ references — Manteo (27954), Nags Head (27959), Kill Devil Hills (27948), Hatteras, Ocracoke, Corolla, Duck, Beaufort, and Atlantic Beach all return different speeds in the calculator. Run your project address rather than relying on a county-wide rule of thumb; the OBX gradient is real and a 5 mph swing changes Zone 5 corner pressure noticeably.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>What did Hurricane Helene actually change for western NC mountain construction?</summary>
+                <div class="faq-answer">Helene reached western North Carolina on September 27, 2024 as the remnants of a Gulf-landfall hurricane and produced one of the most devastating natural disasters in NC history. The damage profile was overwhelmingly water-driven — historic rainfall, hundreds of landslides, river flooding that erased parts of Chimney Rock, Lake Lure, Spruce Pine, Swannanoa, and reaches of the French Broad and Swannanoa river corridors. Wind was the secondary actor but contributed material roof and wall failures in ridge-exposed and gap-aligned construction near Boone, Banner Elk, and the Asheville highlands. The North Carolina Building Code Council and the NC OSFM have both signaled that the 2024-cycle code update will revisit special wind region mapping for the Blue Ridge — particularly the ridge tops, gaps, and valley funnels with documented historical wind acceleration. Until that lands, baseline design speeds for the western mountains remain in the 105-110 mph band with site-specific PE judgment expected on exposed ridge work above roughly 3,500 ft elevation.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>Do I need a North Carolina PE to seal my wind load report?</summary>
+                <div class="faq-answer">Yes. North Carolina requires a North Carolina-licensed Professional Engineer to seal any structural drawings submitted for permit. WindLoadCalc produces the calculation report — wind speeds, pressures, zones, exposure category, the controlling factors for every number — and your NC PE reviews, accepts, and seals it as part of the submittal package. We do not provide North Carolina PE stamps ourselves. Our on-staff Florida-licensed P.E. covers Florida residential and small commercial work up to 3 stories only. For NC, the workflow is: run the calc, hand the report to a North Carolina-licensed PE you trust, and let them apply the seal.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>Outer Banks coastal high-hazard vs Wilmington-coast standard coastal — what's the design difference?</summary>
+                <div class="faq-answer">The OBX barrier islands with direct Atlantic exposure default to Exposure Category D under ASCE 7, paired with the highest local wind speed contour in the state. The Wilmington / SE NC coast (New Hanover, Brunswick, Pender mainland and many Wrightsville / Carolina Beach / Topsail parcels) typically lands on Exposure C with a meaningfully lower design wind speed. Two compounding effects: Exposure D pressures run roughly 15 to 25 percent higher than Exposure C at the same speed, and the OBX design speed itself is 10 to 25 mph higher than the SE NC coast — so a Hatteras oceanfront cottage can see double-digit psf increases versus the same building in Wilmington proper. OBX projects also live under CAMA (Coastal Area Management Act), V-zone or AE-zone flood overlays with high BFEs, dune setback requirements, and the NC Residential Code's coastal high-hazard provisions. WindLoadCalc handles the wind portion; CAMA, flood, and dune review remain separate engineered disciplines on the OBX.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>Are western NC mountains special wind regions under ASCE 7?</summary>
+                <div class="faq-answer">Portions of western NC are flagged on the ASCE 7 national map as special wind regions — the long Blue Ridge crest, gaps cut through the Black Mountains and the Pisgah ridge, and exposed ridge tops near Boone, Banner Elk, Beech Mountain, Sugar Mountain, and the higher Asheville highlands. Special wind region treatment is not blanket-applied to every western NC ZIP; it is the topographic exception that demands site-specific consideration when funneling, downslope acceleration, or ridge-top exposure is documented. As a rough screen, ridge-top and gap-aligned projects above 3,500 ft elevation deserve a closer look. The calculator returns the ASCE 7 mapped baseline value for your ZIP; for special wind region projects expect your NC-licensed PE to add a site-specific topography adjustment per ASCE 7 Section 26.8 procedures.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary>Will a WindLoadCalc report fly with the Wilmington / New Hanover plan reviewer?</summary>
+                <div class="faq-answer">Yes — and Wilmington reviewers know what they are reading. New Hanover County and the surrounding coastal jurisdictions (Wrightsville Beach, Carolina Beach, Kure Beach, Topsail Beach) accept ASCE 7-based wind load reports as part of permit submittals. WindLoadCalc returns the right design wind speed for any Wilmington-area ZIP (130-140 mph Risk Category II at the immediate coast, dropping inland), the MWFRS pressures for the structural system, and the C&amp;C zone breakdowns for openings and cladding. The report itself is the calculation documentation; sealed structural drawings still require a North Carolina-licensed PE. Plan-reviewer scrutiny across the Wilmington corridor tightened measurably after Hurricane Florence (2018) flooded the city for days — your submittal will get read carefully, which is one more reason the calc needs to be defensible line by line.</div>
+            </details>
+
+            <h2 id="related">North Carolina sister pages and ASCE 7 deep-dives</h2>
+
+            <div class="related-links">
+                <h3>NC-adjacent calculators, code references, and 24-year-old context</h3>
+                <ul>
+                    <li><a href="/florida-wind-load-calculator">Florida wind load calculator — where we started in 2002</a></li>
+                    <li><a href="/south-carolina-wind-load-calculator">South Carolina wind load calculator — Charleston coast next door</a></li>
+                    <li><a href="/virginia-wind-load-calculator">Virginia wind load calculator — Hampton Roads + DelMarVa</a></li>
+                    <li><a href="/asce-hazard-tool-alternative">ASCE Hazard Tool alternative — faster than the official tool</a></li>
+                    <li><a href="/miami-dade-wind-load-calculator">Miami-Dade County 175 mph HVHZ calculator</a></li>
+                    <li><a href="/broward-wind-load-calculator">Broward County 170 mph HVHZ calculator</a></li>
+                    <li><a href="/collier-county-wind-load-calculator">Collier County 170 mph override calculator</a></li>
+                    <li><a href="/palm-beach-wind-load-calculator">Palm Beach County coastal gradient calculator</a></li>
+                    <li><a href="/shop/windows-doors-shutters.html">Windows, doors &amp; shutters C&amp;C calculator</a></li>
+                    <li><a href="/wind-load-calculator-shop.html">All calculators &amp; pricing — start a 7-day trial</a></li>
+                    <li><a href="/asce-7-wind-load-calculator/">ASCE 7-22 wind load calculator — what changed from 7-16</a></li>
+                    <li><a href="/components-and-cladding-wind-loads/">Components &amp; cladding fundamentals — Zones 4, 5, and the rest</a></li>
+                </ul>
+            </div>
+
+            <div class="content-cta">
+                <h3>From Hatteras to the High Country — One NC Calculator</h3>
+                <p>Outer Banks 155 mph. Wilmington 135. Charlotte 110. Asheville 105 + special-wind-region prompt. One tool, one ZIP, one report — and 24 years of NC-specific calc history behind the answer.</p>
+                <a href="/wind-load-calculator-shop.html" class="cta-button">Open the NC Calculator <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <p class="last-updated">Reviewed by WindLoadCalc's Florida-licensed in-house P.E. WindLoadCalc.com was founded in 2002 and put its calculator online in 2006 — calculating North Carolina wind loads on the web seven years before the generalist national calculators were founded in 2013. Last updated 2026-05-23.</p>
+        </main>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-box">
+                <h3>Jump to the NC content you need</h3>
+                <ul>
+                    <li><a href="#wind-speeds">NC wind speed atlas (Hatteras to Asheville)</a></li>
+                    <li><a href="#building-code">NCSBC + NC OSFM ASCE 7 edition map</a></li>
+                    <li><a href="#outer-banks">Outer Banks since 2002</a></li>
+                    <li><a href="#hurricane-context">Floyd to Helene — 25 years in the calc</a></li>
+                    <li><a href="#how-to">Five steps from ZIP to sealed NC report</a></li>
+                    <li><a href="#faq">NC questions from a 24-year vantage</a></li>
+                    <li><a href="#related">NC sister pages &amp; ASCE 7 deep-dives</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-cta">
+                <h3>Try the NC Calculator Free</h3>
+                <p>ASCE 7 wind loads for any NC ZIP, formatted for state PE review and the Authority Having Jurisdiction.</p>
+                <a href="/wind-load-calculator-shop.html" class="sidebar-cta-button">Start the NC Trial</a>
+            </div>
+
+            <div class="sidebar-box">
+                <h3>NC wind speed bands at a glance</h3>
+                <ul>
+                    <li><a href="#outer-banks">OBX barrier islands · 140-155 mph · Exposure D</a></li>
+                    <li><a href="#wind-speeds">Wilmington / SE coast · 130-140 mph · Exposure C/D</a></li>
+                    <li><a href="#wind-speeds">Charlotte / Raleigh Piedmont · 110-115 mph · Exposure C</a></li>
+                    <li><a href="#wind-speeds">Asheville / Blue Ridge · 105-110 mph · special-wind possible</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-box">
+                <h3>Since 2002 — by the NC numbers</h3>
+                <ul>
+                    <li>24+ years of NC wind calc</li>
+                    <li>4 NC hurricane cycles navigated</li>
+                    <li>7 ASCE 7 editions tracked live (7-95 → 7-22)</li>
+                    <li>11-year head start over the generalist national calculators (founded 2013)</li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="mailto:info@windloadcalc.com">info@windloadcalc.com</a></li>
+                    <li><a href="mailto:support@windloadcalc.com">support@windloadcalc.com</a></li>
+                    <li><a href="tel:8332723946">(833) 272-3946</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Calculators</h3>
+                <ul>
+                    <li><a href="/shop/windows-doors-shutters.html">Windows, Doors &amp; Shutters</a></li>
+                    <li><a href="/wind-load-calculator-shop.html">All Calculators &amp; Pricing</a></li>
+                    <li><a href="/wind-load-calculator-comparison.html">Calculator Comparison</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="/free-wind-load-calculator.html">Free Demo</a></li>
+                    <li><a href="/asce-7-wind-load-calculator/">ASCE 7-22 Guide</a></li>
+                    <li><a href="/components-and-cladding-wind-loads/">C&amp;C Wind Loads</a></li>
+                    <li><a href="/faq.html">Wind Load FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="/why-us.html">About Us</a></li>
+                    <li><a href="/contact.html">Contact</a></li>
+                    <li><a href="/privacy-policy.html">Privacy</a></li>
+                    <li><a href="/terms-of-service.html">Terms</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2002&ndash;2026 WindLoadCalc. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // ZIP launch — calc.windloadcalc.com accepts ?zip=NNNNN and auto-derives
+        // city / state / county / wind speed.
+        function launchCalc(e) {
+            e.preventDefault();
+            var zip = (document.getElementById('zip-input').value || '').replace(/[^0-9]/g, '').slice(0, 5);
+            var target = 'https://calc.windloadcalc.com/';
+            if (zip.length === 5) {
+                target = target + '?zip=' + zip;
+            }
+            window.location.href = target;
+            return false;
+        }
+    </script>
+</body>
+</html>

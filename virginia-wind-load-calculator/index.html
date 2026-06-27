@@ -2,27 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="index, follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
     <link rel="manifest" href="/site.webmanifest">
     <link rel="shortcut icon" href="/favicon.ico?v=2">
 
-    <!-- SEO Meta -->
-    <title>Virginia Wind Load Calculator — VCC + ASCE 7-16</title>
-    <meta name="description" content="The Hampton Roads wind calculator since 2002. ASCE 7-16 + 2021 VCC, Naval Station Norfolk, Eastern Shore, NoVA, 38 independent cities — per-ZIP, permit-ready.">
+    <title>Virginia Wind Load Calculator — VCC + ASCE 7-16, Per-ZIP</title>
+    <meta name="description" content="Virginia wind load calculator since 2002. ASCE 7-16 under the 2021 VCC — Hampton Roads 115-130 mph, Eastern Shore 120-135 mph, NoVA and the Blue Ridge — per-ZIP, permit-ready.">
     <meta name="keywords" content="Virginia wind load calculator, VCC wind load, ASCE 7-16 Virginia, Hampton Roads wind load, Norfolk wind load calculator, Virginia Beach wind load, Richmond wind load, NoVA wind load, Eastern Shore Virginia wind">
-    <link rel="canonical" href="https://windloadcalc.com/virginia-wind-load-calculator/">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Virginia Wind Load Calculator — Hampton Roads since 2002">
-    <meta property="og:description" content="Calculating Virginia wind loads since 2002 — through Hurricane Isabel and every VCC cycle. Generalist national calculators don't mention the VCC cycle-lag. We do.">
+    <meta property="og:title" content="Virginia Wind Load Calculator — Hampton Roads to the Blue Ridge">
+    <meta property="og:description" content="ASCE 7-16 under the 2021 Virginia Construction Code. Coastal Hampton Roads, the Eastern Shore, NoVA and the mountains — one per-ZIP calculator, permit-ready since 2002.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://windloadcalc.com/virginia-wind-load-calculator/">
     <meta property="og:image" content="https://windloadcalc.com/images/video-posters/index-homepage.jpg">
     <meta property="og:site_name" content="WindLoadCalc">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Virginia Wind Load Calculator — Hampton Roads to the Blue Ridge">
+    <meta name="twitter:description" content="ASCE 7-16 under the 2021 Virginia Construction Code. Per-ZIP coastal-vs-inland wind loads, permit-ready since 2002.">
+    <meta name="twitter:image" content="https://windloadcalc.com/images/video-posters/index-homepage.jpg">
+
+    <link rel="canonical" href="https://windloadcalc.com/virginia-wind-load-calculator/">
 
     <!-- SoftwareApplication Schema -->
     <script type="application/ld+json">
@@ -66,21 +72,10 @@
 
     <!-- BreadcrumbList -->
     <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [{
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://windloadcalc.com/"
-        },{
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Virginia Wind Load Calculator",
-            "item": "https://windloadcalc.com/virginia-wind-load-calculator/"
-        }]
-    }
+    { "@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://windloadcalc.com/"},
+      {"@type":"ListItem","position":2,"name":"Virginia Wind Load Calculator","item":"https://windloadcalc.com/virginia-wind-load-calculator/"}
+    ]}
     </script>
 
     <!-- FAQPage (mirrors visible FAQ 1:1) -->
@@ -90,1095 +85,595 @@
         "@type": "FAQPage",
         "mainEntity": [{
             "@type": "Question",
-            "name": "What's the wind speed in Norfolk / Virginia Beach?",
+            "name": "What's the design wind speed in Norfolk and Virginia Beach?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Norfolk (ZIPs 23510, 23507) and Virginia Beach (23451, 23452) sit in the Hampton Roads coastal zone and typically use ASCE 7-16 Risk Category II design wind speeds in the 115-130 mph range, with the highest values clustered along the Chesapeake Bay and oceanfront ZIPs of Virginia Beach. The calculator pulls the exact ZIP-specific value rather than a single citywide figure, because Hampton Roads has noticeable variation between Naval Station Norfolk's waterfront and inland Chesapeake suburbs only a few miles apart."
+                "text": "Norfolk (ZIPs 23510, 23507) and Virginia Beach (23451, 23452) fall in the Hampton Roads coastal band: roughly 115-130 mph for ASCE 7-16 Risk Category II. Oceanfront and Bay-front ZIPs run highest. The calculator returns the exact per-ZIP value."
             }
         },{
             "@type": "Question",
-            "name": "Does Virginia have a special coastal high-hazard zone?",
+            "name": "Does the Eastern Shore have higher wind speeds than Hampton Roads?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "No. Virginia does not have a code-defined high-hazard or High Velocity Hurricane Zone equivalent to Florida's HVHZ. The Virginia Construction Code treats coastal Hampton Roads, the Eastern Shore, and the rest of the state under a single set of ASCE 7 wind load rules. What changes is the basic wind speed itself (higher near the Atlantic, lower in the Blue Ridge) and the local exposure category (Exposure D for sites within a mile of unobstructed open water in the Chesapeake Bay or Atlantic). Coastal jurisdictions may also add their own permit-review overlays, but there is no separate product-approval program comparable to Miami-Dade NOA."
+                "text": "Yes. Accomack and Northampton counties — Chincoteague, Onancock, Cape Charles, the barrier islands — carry the state's highest design wind speeds: about 120-135 mph for Risk Category II under ASCE 7-16. Exposure D applies broadly there."
             }
         },{
             "@type": "Question",
-            "name": "What is the Virginia Construction Code (VCC) and how does it use ASCE 7?",
+            "name": "Why is Exposure D such a big deal on Virginia's coast?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "The Virginia Construction Code (VCC) is the commercial portion of the Virginia Uniform Statewide Building Code (USBC). It is updated on a three-year cycle by the Virginia Board of Housing and Community Development and historically lags the IBC by one cycle. The current edition in force is the 2021 VCC, which adopts the 2018 IBC with Virginia amendments and references ASCE 7-16 as the wind load standard. A new edition based on the 2021 IBC (and ASCE 7-16 again, since the 2021 IBC also references 7-16) is in the adoption pipeline; verify the effective edition with your locality before a final submittal."
+                "text": "Exposure D applies within roughly one mile of unobstructed open water, and the Chesapeake Bay counts. Two waterfront lots a few hundred feet apart can split between D and C. That choice changes the velocity pressure materially."
             }
         },{
             "@type": "Question",
-            "name": "How did Hurricane Isabel 2003 change Hampton Roads construction?",
+            "name": "Which ASCE 7 edition does Virginia use right now?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Hurricane Isabel made landfall on the Outer Banks in September 2003 and pushed a multi-foot storm surge into Hampton Roads, with significant flooding in Norfolk, Portsmouth, Poquoson, and the Chesapeake Bay watershed. Wind damage was widespread but generally below catastrophic structural failure. The post-Isabel reviews drove three durable changes locally: stricter freeboard requirements in FEMA flood zones, more aggressive enforcement of opening protection for new coastal residential work, and broader adoption of Exposure D for waterfront sites. Wind speed map values themselves did not change as a result of Isabel; the lessons were primarily about flood-plus-wind interaction and product-installation quality."
+                "text": "ASCE 7-16. The 2021 Virginia Construction Code adopts the 2018 IBC, which references 7-16. Virginia has not adopted an edition tied to 7-22. Submit to 7-16 unless your locality has accepted 7-22 in advance."
             }
         },{
             "@type": "Question",
-            "name": "Do I need a Virginia PE to seal my wind load report?",
+            "name": "Why does Virginia's building code lag the national IBC cycle?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Yes. Sealed structural drawings and wind load reports submitted to a Virginia building official must be sealed by a professional engineer licensed by the Virginia Board for Architects, Professional Engineers, Land Surveyors, Certified Interior Designers and Landscape Architects (APELSCIDLA). WindLoadCalc generates the numbers, the C&C zone breakdown, and the report formatting your VA PE will need to review and seal, but we do not provide PE sign-and-seal for Virginia projects. Our partner PE is Florida-licensed only, and we never claim out-of-state stamping authority."
+                "text": "Virginia maintains its own statewide code (the USBC) rather than adopting the IBC unmodified. The Board's three-year cycle drifts past the ICC's, plus public comment and amendment drafting. The VCC has run about one IBC cycle behind for years."
             }
         },{
             "@type": "Question",
-            "name": "What's the wind speed on the Eastern Shore?",
+            "name": "Does Virginia have an HVHZ or product-approval program like Florida?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "The Eastern Shore of Virginia (Accomack County and Northampton County, including Chincoteague, Onancock, Cape Charles, and the barrier island communities) carries the highest design wind speeds in the state under ASCE 7-16, typically 120-135 mph for Risk Category II depending on how close the ZIP sits to the Atlantic or the Bay. The Eastern Shore is also where Exposure D applies most broadly because there is so little intervening terrain between the water and the structure. If you are designing for Chincoteague or any oceanfront barrier island ZIP, expect the calculator output to be meaningfully higher than mainland Hampton Roads."
+                "text": "No. Virginia has no High Velocity Hurricane Zone and no Miami-Dade-style NOA program. The VCC applies one ASCE 7 wind chapter statewide. What changes by location is the basic wind speed and exposure category."
             }
         },{
             "@type": "Question",
-            "name": "Are NoVA jurisdictions different for wind load requirements?",
+            "name": "What did Hurricane Isabel change for Hampton Roads design?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Northern Virginia (Arlington, Fairfax, Loudoun, Prince William, Alexandria, Falls Church, and the rest of the NoVA jurisdictions in the Washington metro orbit) uses the same statewide Virginia Construction Code and the same ASCE 7-16 wind load standard as the rest of Virginia. Basic wind speeds in NoVA are lower than Hampton Roads — typically 105-115 mph for Risk Category II — because the region is well inland. What's different in NoVA is the permit process: dense urban building stock, complex zoning, county and city building department review queues, and tighter coordination with DC-area projects. The numbers are simpler; the paperwork is not."
+                "text": "Isabel made a Category 2 landfall on the Outer Banks in September 2003 and pushed surge into Hampton Roads. The ASCE map values did not change. Enforcement did: stricter flood-zone freeboard, tighter opening protection, broader Exposure D."
             }
         },{
             "@type": "Question",
-            "name": "Which ASCE edition does Virginia currently use?",
+            "name": "Are Northern Virginia projects different from Hampton Roads?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Virginia currently uses ASCE 7-16 as the referenced wind load standard, via the 2021 Virginia Construction Code (which adopts the 2018 IBC). Virginia has not yet adopted an IBC edition that references ASCE 7-22, so do not design Virginia projects to ASCE 7-22 unless your local building official has explicitly accepted it as an alternative compliance path. WindLoadCalc generates ASCE 7-16 output for Virginia ZIP codes by default; if your jurisdiction has accepted 7-22 in advance, you can request the 7-22 variant in the report settings."
+                "text": "Same statewide VCC, same ASCE 7-16, lower numbers. NoVA Risk Category II runs about 105-115 mph — a thunderstorm climate, not a hurricane one. The real difference is the permit queue at Fairfax, Arlington, and Loudoun."
             }
         },{
             "@type": "Question",
-            "name": "Why does Virginia's VCC lag the IBC cycle?",
+            "name": "Do I need a Virginia-licensed PE to seal the report?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Two reasons, both structural to how Virginia governs its building code. First, the Virginia Uniform Statewide Building Code (USBC) is updated by the Virginia Board of Housing and Community Development on a fixed three-year regulatory rulemaking cycle that does not synchronize with the ICC's three-year IBC publication cycle — they drift past each other. Second, the Board's process layers in a formal public-comment period, technical review, and Virginia-specific amendment drafting on top of every base IBC edition, which adds 12-24 months before the new VCC is effective. The practical result is that the VCC has been one IBC cycle behind for most of the past two decades. When most states moved to the 2021 IBC and ASCE 7-16, Virginia was wrapping up the 2018 IBC adoption — and the current 2021 VCC still references ASCE 7-16, not 7-22. WindLoadCalc has been working around that cycle-lag on Virginia permits since 2002 and ships ASCE 7-16 output as the Virginia default rather than auto-jumping to the newest standard."
+                "text": "Yes. A structural submittal to a Virginia building official must be sealed by a PE licensed by the Virginia Board (APELSCIDLA). WindLoadCalc produces the numbers, the C&C zone breakdown, and the report your VA PE reviews and seals."
             }
         },{
             "@type": "Question",
-            "name": "How long has WindLoadCalc been calculating Hampton Roads and Virginia wind loads?",
+            "name": "How long has WindLoadCalc handled Virginia wind loads?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Since 2002. We've tracked every Virginia Construction Code cycle from the 2003 VCC (Hurricane Isabel year) through the current 2021 VCC. Hampton Roads naval-base construction, NoVA federal-tenant data centers, Eastern Shore barrier-island work, and Shenandoah Valley special wind regions — all four Virginias, navigated across seven ASCE 7 editions. Generalist national calculators don't acknowledge the VCC cycle-lag. We've been working around it on Virginia permits for 24 years."
+                "text": "Since 2002, online since 2006 — across seven ASCE 7 editions and every VCC cycle from the Isabel era to the 2021 code. Hampton Roads naval bases, NoVA data centers, Eastern Shore barrier islands: 100% approval over 24 years."
             }
         }]
     }
     </script>
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.7;
-            color: #2d3748;
-            background: #ffffff;
-        }
-
-        /* Header */
-        .main-header {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: white;
-            padding: 1rem 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-        }
-
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .logo-image { height: 80px; width: auto; }
-
-        .header-cta {
-            background: #0018ff;
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 50px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .header-cta:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 24, 255, 0.3);
-        }
-
-        /* Hero */
-        .article-header {
-            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
-            color: white;
-            padding: 4rem 0 3rem;
-            text-align: center;
-        }
-
-        .article-header .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .article-category {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .article-title {
-            font-size: 3rem;
-            font-weight: 900;
-            line-height: 1.2;
-            margin-bottom: 1.5rem;
-        }
-
-        .article-subtitle {
-            font-size: 1.25rem;
-            opacity: 0.95;
-            line-height: 1.6;
-            font-weight: 400;
-            margin-bottom: 2rem;
-        }
-
-        /* Hero ZIP form */
-        .zip-form {
-            display: flex;
-            gap: 0.75rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            max-width: 560px;
-            margin: 0 auto;
-        }
-
-        .zip-input {
-            flex: 1 1 220px;
-            padding: 1rem 1.25rem;
-            font-size: 1.1rem;
-            border: none;
-            border-radius: 50px;
-            outline: none;
-            color: #1f2937;
-            min-width: 0;
-        }
-
-        .zip-submit {
-            background: white;
-            color: #0018ff;
-            border: none;
-            padding: 1rem 1.75rem;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-        }
-
-        .zip-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
-
-        .zip-note {
-            font-size: 0.85rem;
-            opacity: 0.85;
-            margin-top: 1rem;
-        }
-
-        /* Main content layout */
-        .content-wrapper {
-            display: grid;
-            grid-template-columns: 1fr 300px;
-            gap: 4rem;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-        }
-
-        .main-content { min-width: 0; }
-
-        .sidebar {
-            position: sticky;
-            top: 100px;
-            align-self: start;
-        }
-
-        .sidebar-box {
-            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
-            border: 2px solid #e5e7eb;
-            border-radius: 15px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .sidebar-box h3 {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #181E57;
-            margin-bottom: 1.5rem;
-        }
-
-        .sidebar-box ul { list-style: none; }
-        .sidebar-box ul li { margin-bottom: 0.75rem; }
-        .sidebar-box a {
-            color: #4a5568;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            display: block;
-            padding: 0.5rem 0 0.5rem 1rem;
-            border-left: 3px solid transparent;
-        }
-        .sidebar-box a:hover {
-            color: #0018ff;
-            border-left-color: #0018ff;
-            padding-left: 1.5rem;
-        }
-
-        .sidebar-cta {
-            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
-            border-radius: 15px;
-            padding: 2rem;
-            text-align: center;
-            color: white;
-        }
-
-        .sidebar-cta h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            color: white;
-        }
-
-        .sidebar-cta p {
-            margin-bottom: 1.5rem;
-            font-size: 0.95rem;
-            opacity: 0.95;
-        }
-
-        .sidebar-cta-button {
-            display: block;
-            background: white;
-            color: #0018ff;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            font-weight: 700;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .sidebar-cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.3);
-        }
-
-        /* Content typography */
-        .main-content h2 {
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: #181E57;
-            margin: 3rem 0 1.5rem;
-            line-height: 1.3;
-            border-bottom: 3px solid #0018ff;
-            padding-bottom: 0.75rem;
-        }
-
-        .main-content h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #2d3748;
-            margin: 2rem 0 1rem;
-        }
-
-        .main-content p {
-            font-size: 1.08rem;
-            line-height: 1.8;
-            margin-bottom: 1.25rem;
-            color: #4a5568;
-        }
-
-        .main-content ul {
-            margin: 1.25rem 0;
-            padding-left: 1.5rem;
-        }
-
-        .main-content ul li {
-            margin-bottom: 0.75rem;
-            color: #4a5568;
-            line-height: 1.7;
-        }
-
-        .main-content ul li strong { color: #0018ff; font-weight: 700; }
-
-        /* Wind speed table */
-        .wind-table-wrap { overflow-x: auto; margin: 2rem 0; }
-
-        .wind-table {
-            width: 100%;
-            border-collapse: collapse;
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
-        }
-
-        .wind-table th {
-            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
-            color: white;
-            padding: 1rem 1.25rem;
-            text-align: left;
-            font-weight: 700;
-            font-size: 0.95rem;
-        }
-
-        .wind-table td {
-            padding: 0.9rem 1.25rem;
-            border-bottom: 1px solid #e5e7eb;
-            font-size: 0.98rem;
-        }
-
-        .wind-table tr:nth-child(even) td { background: #f9fafb; }
-        .wind-table tr:last-child td { border-bottom: none; }
-
-        .speed-cell { font-weight: 700; color: #0018ff; white-space: nowrap; }
-        .coast-badge {
-            display: inline-block;
-            background: #dcfce7;
-            color: #166534;
-            font-size: 0.75rem;
-            font-weight: 700;
-            padding: 0.15rem 0.5rem;
-            border-radius: 10px;
-            margin-left: 0.4rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        /* Info boxes */
-        .info-box {
-            background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%);
-            border-left: 4px solid #0018ff;
-            border-radius: 10px;
-            padding: 1.5rem 2rem;
-            margin: 2rem 0;
-        }
-
-        .info-box h4 {
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: #0018ff;
-            margin-bottom: 0.75rem;
-        }
-
-        .info-box p { font-size: 1rem; line-height: 1.7; margin-bottom: 0; }
-
-        .warning-box {
-            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-            border-left: 4px solid #f59e0b;
-        }
-
-        .warning-box h4 { color: #b45309; }
-
-        /* Region cards */
-        .region-cards {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.25rem;
-            margin: 2rem 0;
-        }
-
-        .region-card {
-            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
-            border: 2px solid #e5e7eb;
-            border-radius: 12px;
-            padding: 1.5rem;
-            display: block;
-        }
-
-        .region-card h4 {
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: #181E57;
-            margin-bottom: 0.5rem;
-        }
-
-        .region-card .region-speed {
-            font-size: 1.6rem;
-            font-weight: 900;
-            color: #0018ff;
-            margin-bottom: 0.5rem;
-        }
-
-        .region-card p {
-            font-size: 0.92rem;
-            line-height: 1.55;
-            margin-bottom: 0;
-            color: #6b7280;
-        }
-
-        /* Process steps */
-        .process-steps { counter-reset: step; margin: 2rem 0; }
-
-        .process-step {
-            background: white;
-            border: 2px solid #e5e7eb;
-            border-radius: 12px;
-            padding: 1.5rem 1.5rem 1.5rem 4.5rem;
-            margin-bottom: 1.25rem;
-            position: relative;
-        }
-
-        .process-step::before {
-            counter-increment: step;
-            content: counter(step);
-            position: absolute;
-            left: 1.5rem;
-            top: 1.5rem;
-            width: 2rem;
-            height: 2rem;
-            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 1.05rem;
-        }
-
-        .process-step h4 {
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: #2d3748;
-            margin-bottom: 0.5rem;
-        }
-
-        .process-step p {
-            font-size: 1rem;
-            margin-bottom: 0;
-        }
-
-        /* FAQ */
-        .faq-item {
-            background: white;
-            border: 2px solid #e5e7eb;
-            border-radius: 12px;
-            margin-bottom: 1rem;
-            overflow: hidden;
-        }
-
-        .faq-item summary {
-            padding: 1.25rem 1.5rem;
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #181E57;
-            cursor: pointer;
-            list-style: none;
-            position: relative;
-            padding-right: 3rem;
-        }
-
-        .faq-item summary::-webkit-details-marker { display: none; }
-
-        .faq-item summary::after {
-            content: '+';
-            position: absolute;
-            right: 1.25rem;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 1.5rem;
-            color: #0018ff;
-            font-weight: 400;
-            line-height: 1;
-        }
-
-        .faq-item[open] summary::after { content: '−'; }
-
-        .faq-item .faq-answer {
-            padding: 0 1.5rem 1.5rem;
-            color: #4a5568;
-            line-height: 1.7;
-        }
-
-        /* Content CTA */
-        .content-cta {
-            background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 50%, #8b5cf6 100%);
-            background-size: 200% 200%;
-            border-radius: 20px;
-            padding: 3rem 2.5rem;
-            margin: 3rem 0;
-            text-align: center;
-            color: white;
-        }
-
-        .content-cta h3 {
-            font-size: 1.85rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            color: white;
-        }
-
-        .content-cta p {
-            font-size: 1.1rem;
-            margin-bottom: 1.75rem;
-            opacity: 0.95;
-            color: white;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: white;
-            color: #0018ff;
-            padding: 1rem 2.25rem;
-            border-radius: 50px;
-            font-weight: 700;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
-            font-size: 1.05rem;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
-        }
-
-        .cta-button i { margin-left: 0.5rem; }
-
-        /* Trust block */
-        .trust-block {
-            background: #f9fafb;
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 2rem 0;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            text-align: center;
-        }
-
-        .trust-stat .num {
-            font-size: 2rem;
-            font-weight: 900;
-            color: #0018ff;
-            display: block;
-            line-height: 1;
-            margin-bottom: 0.25rem;
-        }
-
-        .trust-stat .label {
-            font-size: 0.9rem;
-            color: #4a5568;
-            line-height: 1.4;
-        }
-
-        /* Internal links section */
-        .related-links {
-            background: #f9fafb;
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 2rem 0;
-        }
-
-        .related-links h3 {
-            margin-top: 0;
-            color: #181E57;
-        }
-
-        .related-links ul {
-            list-style: none;
-            padding: 0;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0.75rem;
-        }
-
-        .related-links ul li { margin: 0; }
-
-        .related-links a {
-            color: #0018ff;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .related-links a:hover { text-decoration: underline; }
-
-        .last-updated {
-            color: #6b7280;
-            font-size: 0.9rem;
-            text-align: right;
-            font-style: italic;
-            margin-top: 3rem;
-            padding-top: 1rem;
-            border-top: 1px solid #e5e7eb;
-        }
-
-        /* Footer */
-        .main-footer {
-            background: #1f2937;
-            color: white;
-            padding: 3rem 0 1.5rem;
-        }
-
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-        }
-
-        .footer-column h3 {
-            font-size: 1rem;
-            margin-bottom: 1rem;
-            color: white;
-        }
-
-        .footer-column ul { list-style: none; padding: 0; }
-        .footer-column li { margin-bottom: 0.5rem; font-size: 0.92rem; }
-        .footer-column a {
-            color: rgba(255, 255, 255, 0.75);
-            text-decoration: none;
-        }
-        .footer-column a:hover { color: white; }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
-            margin-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 0.9rem;
-        }
-
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .content-wrapper {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-            .sidebar { position: static; }
-            .region-cards { grid-template-columns: 1fr; }
-            .trust-block { grid-template-columns: 1fr; }
-            .footer-content { grid-template-columns: repeat(2, 1fr); }
-        }
-
-        @media (max-width: 640px) {
-            .article-title { font-size: 2rem; }
-            .article-subtitle { font-size: 1.05rem; }
-            .main-content h2 { font-size: 1.65rem; }
-            .process-step { padding-left: 3.5rem; }
-            .content-cta { padding: 2rem 1.5rem; }
-            .content-cta h3 { font-size: 1.4rem; }
-            .related-links ul { grid-template-columns: 1fr; }
-            .footer-content { grid-template-columns: 1fr; }
-            .wind-table th, .wind-table td { padding: 0.7rem 0.85rem; font-size: 0.9rem; }
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#0018FF; --blue-deep:#181E57; --blue-bright:#3a5bff;
+  --muted:#94a3b8; --line:rgba(255,255,255,.08); --bg:#070a18; --surface:rgba(255,255,255,.04);
+  --gold:#E8B530; --luxe:cubic-bezier(.22,.61,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:#e8edf7;
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.55}
+a{text-decoration:none;color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+.aurora{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.aurora span{position:absolute;border-radius:50%;filter:blur(90px);opacity:.5}
+.aurora .a1{width:620px;height:620px;background:#0018FF;top:-180px;left:-120px;animation:drift1 18s var(--luxe) infinite alternate}
+.aurora .a2{width:540px;height:540px;background:#10B981;bottom:-200px;right:-120px;opacity:.28;animation:drift2 22s var(--luxe) infinite alternate}
+.aurora .a3{width:420px;height:420px;background:#181E57;top:34%;right:16%;opacity:.55;animation:drift1 26s var(--luxe) infinite alternate-reverse}
+@keyframes drift1{to{transform:translate(80px,60px) scale(1.15)}}
+@keyframes drift2{to{transform:translate(-70px,-50px) scale(1.1)}}
+.grid-tex{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:54px 54px;mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000 40%,transparent 100%)}
+
+/* Nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:.3s var(--luxe);background:transparent;border-bottom:1px solid transparent}
+nav.scrolled{backdrop-filter:blur(14px);border-bottom:1px solid var(--line);
+  background:linear-gradient(90deg, rgba(240,244,255,.97) 0%, rgba(223,232,255,.93) 13%, rgba(22,28,58,.92) 46%, rgba(7,10,24,.95) 100%)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;padding:12px clamp(24px,4vw,48px);transition:padding .3s var(--luxe)}
+nav.scrolled .nav-in{padding:8px clamp(24px,4vw,48px)}
+.logo{z-index:1001;display:flex;align-items:center}
+.logo-image{height:84px;width:auto;display:block;filter:drop-shadow(0 2px 10px rgba(0,0,0,.4));transition:all .3s ease}
+nav.scrolled .logo-image{height:64px;filter:none}
+.nav-right{display:flex;align-items:center;gap:18px}
+.nav-links{display:flex;align-items:center;gap:28px}
+.nav-links a.l{position:relative;font-size:14px;color:#fff;font-weight:500;opacity:.88;transition:opacity .2s var(--luxe);text-shadow:0 1px 8px rgba(0,0,0,.45)}
+.nav-links a.l:hover{opacity:1}
+.btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;border-radius:11px;cursor:pointer;transition:.25s var(--luxe);border:none;font-family:inherit}
+.btn-ghost{background:rgba(255,255,255,.06);color:#fff;padding:11px 18px;font-size:14px;border:1px solid rgba(255,255,255,.22)}
+.btn-ghost:hover{border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.12)}
+.btn-primary{background:linear-gradient(135deg,#0018FF,#2540ff);color:#fff;padding:12px 22px;font-size:14px;box-shadow:0 10px 30px rgba(0,24,255,.45)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(0,24,255,.6)}
+.hamburger{display:flex;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;z-index:60}
+.hamburger span{display:block;width:26px;height:3px;border-radius:2px;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.6);transition:.3s var(--luxe)}
+.hamburger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+.nav-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);opacity:0;visibility:hidden;transition:.3s var(--luxe);z-index:55}
+.nav-overlay.open{opacity:1;visibility:visible}
+.full-menu{position:fixed;top:0;right:0;height:100vh;height:100dvh;width:min(90vw,380px);z-index:60;
+  background:rgba(10,14,30,.985);backdrop-filter:blur(18px);border-left:1px solid var(--line);
+  box-shadow:-24px 0 60px rgba(0,0,0,.55);transform:translateX(100%);transition:transform .3s var(--luxe);overflow-y:auto;padding:74px 0 28px}
+.full-menu.open{transform:translateX(0)}
+.fm-head{display:flex;align-items:center;justify-content:space-between;padding:0 26px 14px;border-bottom:1px solid var(--line)}
+.fm-head span{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.fm-close{background:none;border:none;color:#fff;font-size:24px;line-height:1;cursor:pointer;padding:2px 8px}
+.fm-group{padding:14px 26px 4px;border-bottom:1px solid var(--line)}
+.fm-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9db0ff;margin-bottom:6px}
+.fm-group a{display:block;padding:9px 0;font-size:15px;color:#dbe3f5;font-weight:500;transition:color .15s}
+.fm-group a:hover{color:#fff}
+.fm-actions{display:flex;flex-direction:column;gap:10px;padding:20px 26px 0}
+.fm-actions .btn{width:100%;justify-content:center;padding:14px;font-size:15px}
+
+/* Hero (aurora only — no video) */
+.hero-stage{position:relative;overflow:hidden;isolation:isolate}
+.hero-veil{position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(ellipse 70% 60% at 50% 26%, rgba(0,24,255,.18), transparent 62%),
+    linear-gradient(180deg, rgba(7,10,24,.66) 0%, rgba(7,10,24,.42) 32%, rgba(7,10,24,.72) 74%, var(--bg) 100%)}
+header{position:relative;z-index:2;padding:165px 0 70px;text-align:center}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;background:rgba(7,10,24,.5);border:1px solid rgba(58,91,255,.45);
+  color:#c3cdff;font-size:13px;font-weight:600;padding:8px 16px;border-radius:999px;margin-bottom:24px;backdrop-filter:blur(6px)}
+.eyebrow .dot{width:7px;height:7px;border-radius:50%;background:#34D399;box-shadow:0 0 0 4px rgba(52,211,153,.25)}
+h1{font-size:clamp(34px,5.2vw,58px);line-height:1.05;font-weight:800;letter-spacing:-.025em;max-width:18ch;margin:0 auto 16px;text-shadow:0 4px 28px rgba(0,0,0,.45)}
+h1 .grad{background:linear-gradient(110deg,#34D399,#10B981 55%,#3a5bff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{font-size:clamp(16px,2vw,19px);color:#d3dbef;max-width:64ch;margin:0 auto 22px;text-shadow:0 2px 14px rgba(0,0,0,.5)}
+.sub strong{color:#fff}
+.zip-form{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;max-width:520px;margin:8px auto 14px}
+.zip-input{flex:1 1 200px;min-width:0;padding:14px 18px;font-size:16px;border:1px solid rgba(255,255,255,.2);border-radius:12px;
+  background:rgba(255,255,255,.08);color:#fff;outline:none}
+.zip-input::placeholder{color:#aeb8cf}
+.zip-input:focus{border-color:rgba(58,91,255,.6);background:rgba(255,255,255,.12)}
+.hero-trust{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;font-size:13px;color:#cdd6ec;margin-top:6px}
+.hero-trust span{display:inline-flex;align-items:center;gap:6px}
+.hero-trust .ck{color:#34D399;font-weight:800}
+.stat-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:34px}
+.stat-tile{background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:14px;padding:16px 22px;min-width:150px;backdrop-filter:blur(6px)}
+.stat-tile .n{font-size:24px;font-weight:800;letter-spacing:-.02em;background:linear-gradient(135deg,#fff,#9db0ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat-tile .l{font-size:12.5px;color:#aeb8cf;margin-top:3px}
+
+section{position:relative;z-index:1;padding:54px 0}
+.sec-head{text-align:center;max-width:68ch;margin:0 auto 36px}
+.sec-head h2{font-size:clamp(26px,3.2vw,38px);font-weight:800;letter-spacing:-.02em;margin-bottom:12px}
+.sec-head p{color:#aeb8cf;font-size:16px}
+
+.glass{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:26px 26px}
+.lead{font-size:17px;color:#d3dbef;max-width:72ch;margin:0 auto 14px;text-align:center}
+
+/* Fact cards */
+.fact-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:8px}
+.fact{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 18px}
+.fact .n{font-size:22px;font-weight:800;letter-spacing:-.02em;background:linear-gradient(135deg,#fff,#9db0ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.fact .l{font-size:13px;color:#aeb8cf;margin-top:5px;line-height:1.5}
+
+/* Region cards */
+.region-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.region{background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:16px;padding:22px 20px;transition:.3s var(--luxe)}
+.region:hover{border-color:rgba(58,91,255,.45);transform:translateY(-4px)}
+.region .coast{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#04221a;
+  background:linear-gradient(135deg,#34D399,#10B981);padding:3px 9px;border-radius:999px;margin-bottom:10px}
+.region .inland{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#cdd6ec;
+  background:rgba(58,91,255,.18);border:1px solid rgba(58,91,255,.4);padding:3px 9px;border-radius:999px;margin-bottom:10px}
+.region h3{font-size:16px;font-weight:700;margin-bottom:4px}
+.region .speed{font-size:23px;font-weight:800;letter-spacing:-.02em;color:#9db0ff;margin-bottom:8px}
+.region p{font-size:13px;color:#aeb8cf;line-height:1.55}
+
+/* Table */
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:16px;background:var(--surface)}
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px;min-width:640px}
+.tbl th,.tbl td{padding:12px 16px;text-align:left;border-bottom:1px solid var(--line)}
+.tbl thead th{font-weight:800;font-size:13px;background:rgba(0,24,255,.12);color:#c3cdff}
+.tbl td.speed{font-weight:700;color:#6ee7b7;white-space:nowrap}
+.tbl tbody tr:last-child td{border-bottom:none}
+.tbl tbody tr:hover{background:rgba(255,255,255,.03)}
+.tbl .cb{display:inline-block;font-size:10px;font-weight:800;color:#04221a;background:linear-gradient(135deg,#34D399,#10B981);padding:1px 7px;border-radius:999px;margin-left:6px;text-transform:uppercase}
+
+/* Callout */
+.callout{background:rgba(0,24,255,.1);border:1px solid rgba(58,91,255,.3);border-radius:14px;padding:18px 22px;margin-top:24px}
+.callout.warn{background:rgba(232,181,48,.08);border-color:rgba(232,181,48,.35)}
+.callout h4{font-size:15px;font-weight:800;margin-bottom:8px;color:#c3cdff}
+.callout.warn h4{color:var(--gold)}
+.callout p{font-size:14px;color:#cdd6ec;line-height:1.6}
+.callout ul{list-style:none;margin-top:8px}
+.callout li{font-size:13.5px;color:#c2cce0;padding:5px 0 5px 18px;position:relative;line-height:1.5}
+.callout li::before{content:"";position:absolute;left:0;top:11px;width:6px;height:6px;border-radius:50%;background:#34D399}
+.callout li b{color:#fff}
+
+/* Two-col prose blocks */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.split .glass h3{font-size:18px;font-weight:800;margin-bottom:10px}
+.split .glass p{font-size:14px;color:#aeb8cf;margin-bottom:10px;line-height:1.6}
+.split .glass p:last-child{margin-bottom:0}
+.split .glass strong{color:#dbe3f5}
+
+/* bullets */
+.blist{list-style:none;max-width:80ch;margin:0 auto}
+.blist li{font-size:14.5px;color:#c2cce0;padding:7px 0 7px 22px;position:relative;line-height:1.6}
+.blist li::before{content:"";position:absolute;left:0;top:14px;width:7px;height:7px;border-radius:50%;background:#34D399}
+.blist li b{color:#fff}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;counter-reset:step}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px 18px}
+.step .num{width:32px;height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#fff;background:linear-gradient(135deg,#0018FF,#2540ff);margin-bottom:11px}
+.step h4{font-size:14px;font-weight:700;margin-bottom:5px}
+.step p{font-size:12.5px;color:#aeb8cf;line-height:1.55}
+
+/* proof band */
+.proof{background:linear-gradient(135deg,rgba(0,24,255,.12),rgba(16,185,129,.08));border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.proof-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:8px}
+.proof-item{text-align:center}
+.proof-item .n{font-size:30px;font-weight:800;letter-spacing:-.03em;background:linear-gradient(135deg,#fff,#9db0ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.proof-item .c{font-size:13.5px;color:#cdd6ec;margin-top:4px;line-height:1.5}
+
+/* FAQ */
+.faq{max-width:860px;margin:0 auto}
+.faq details{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 22px;margin-bottom:12px}
+.faq summary{font-size:16px;font-weight:700;cursor:pointer;list-style:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";float:right;color:#9db0ff;font-weight:800}
+.faq details[open] summary::after{content:"–"}
+.faq p{margin-top:11px;color:#aeb8cf;font-size:14.5px;line-height:1.65}
+
+/* related */
+.rel-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;max-width:860px;margin:0 auto}
+.rel-grid a{display:block;background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:13px 16px;font-size:14px;color:#c2cce0;font-weight:600;transition:.2s var(--luxe)}
+.rel-grid a:hover{border-color:rgba(58,91,255,.5);color:#fff}
+
+.final{text-align:center}
+.final .glass2{background:linear-gradient(160deg,rgba(0,24,255,.18),rgba(16,185,129,.1));border:1px solid rgba(58,91,255,.4);border-radius:26px;padding:50px 40px;box-shadow:0 40px 100px rgba(0,24,255,.25)}
+.final h2{font-size:clamp(26px,3.6vw,40px);font-weight:800;letter-spacing:-.02em;margin-bottom:14px}
+.final p{color:#cdd6ec;font-size:16px;max-width:62ch;margin:0 auto 22px}
+.final p a{color:#34D399;font-weight:600}
+.updated{color:var(--muted);font-size:12.5px;text-align:center;margin-top:30px;line-height:1.6}
+
+.main-footer{position:relative;z-index:1;border-top:1px solid var(--line);padding:54px 0 28px;background:rgba(0,0,0,.25)}
+.main-footer .container{max-width:1180px;margin:0 auto;padding:0 28px}
+.footer-content{display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
+.footer-column h3{font-size:15px;font-weight:700;color:#fff;margin-bottom:15px}
+.footer-column ul{list-style:none}
+.footer-column li{margin-bottom:9px;font-size:14px;color:#aeb8cf}
+.footer-column a{color:#aeb8cf;transition:color .2s}
+.footer-column a:hover{color:#fff}
+.footer-bottom{border-top:1px solid var(--line);margin-top:34px;padding-top:20px;text-align:center;color:var(--muted);font-size:13px}
+
+@media(max-width:980px){
+  .fact-grid{grid-template-columns:repeat(2,1fr)}
+  .region-grid,.split,.proof-grid{grid-template-columns:1fr}
+  .steps{grid-template-columns:repeat(2,1fr)}
+  .proof-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:880px){.nav-links{display:none}.footer-content{grid-template-columns:repeat(2,1fr)}header{padding:128px 0 44px}}
+@media(max-width:560px){.wrap{padding:0 20px}.fact-grid{grid-template-columns:1fr}.steps{grid-template-columns:1fr}.proof-grid{grid-template-columns:1fr}.rel-grid{grid-template-columns:1fr}.footer-content{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.aurora span{animation:none}}
+</style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="main-header">
-        <div class="header-container">
-            <a href="/index.html">
-                <img height="100" width="300" src="/images/windloadcalc-logo.svg" alt="WindLoadCalc" class="logo-image">
-            </a>
-            <a href="/wind-load-calculator-shop.html" class="header-cta">Start Free Trial</a>
-        </div>
-    </header>
+<div class="aurora"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
+<div class="grid-tex"></div>
 
-    <!-- Hero -->
-    <section class="article-header">
-        <div class="container">
-            <div class="article-category">Virginia Wind Load Calculator</div>
-            <h1 class="article-title">Virginia Wind Load Calculator</h1>
-            <p class="article-subtitle">WindLoadCalc has been calculating Virginia wind loads since <strong>2002</strong> — through <strong>Hurricane Isabel (2003)</strong>, every VCC update cycle, and Hampton Roads naval-base construction booms. Generalist national wind calculators don't mention the VCC cycle-lag. <strong>We do.</strong></p>
-
-            <form class="zip-form" id="zip-form" onsubmit="return launchCalc(event)">
-                <input type="text" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" class="zip-input" id="zip-input" placeholder="Enter Virginia ZIP (e.g. 23510)" aria-label="Virginia ZIP code">
-                <button type="submit" class="zip-submit">Get Virginia Wind Pressures &rarr;</button>
-            </form>
-            <p class="zip-note">7-day free trial — output formatted for VA PE review and VCC-aligned submittal.</p>
-        </div>
-    </section>
-
-    <!-- Main content -->
-    <div class="content-wrapper">
-        <main class="main-content">
-            <p>Virginia is the Atlantic state that doesn't fit anywhere — and the Virginia Construction Code (VCC) is the building code that doesn't act like anyone else's. Inside a single statewide rulebook, Norfolk is sizing windows for a Category 2 surge that last arrived in 2003, Arlington is processing a federal-tenant data center on a thunderstorm-design wind climate, Chincoteague is designing a beach house behind a barrier-island dune, and Wise County is figuring out topographic Kzt on a coal-country ridge. The VCC hands all four of them the same wind load chapter — but the basic wind speed at the ZIP can swing 40 mph between an Eastern Shore beach lot and a far-western mountain hollow. Picking the right number is the entire calculation. WindLoadCalc.com was founded in Florida in 2002 and put its calculator online in 2006 — running Naval Station Norfolk-area wind pressures on the web since 2006.</p>
-
-            <p>Virginia also has a building-code quirk almost nobody outside the Commonwealth understands: <strong>38 independent cities</strong> that exist outside any county, each its own permit authority. Norfolk, Virginia Beach, Chesapeake, Hampton, Newport News, Richmond, Alexandria, Roanoke, Lynchburg, Petersburg — none of them sit inside the county that surrounds them on a map. Your ZIP lookup has to route to the right jurisdiction or your permit package arrives at the wrong building department. This page is the Virginia-specific landing for WindLoadCalc. Enter a Virginia ZIP above and the calculator launches preloaded with the correct ASCE 7-16 wind speed, the correct county-or-independent-city authority, and a sensible default exposure for that ZIP's surroundings.</p>
-
-            <div class="info-box">
-                <h4><i class="fas fa-info-circle"></i> What 24 years of Virginia permits has taught us</h4>
-                <p>A Virginia wind load calculator has to do four things competitors built in 2013 still get wrong: <strong>(1)</strong> match the ASCE 7 edition currently in force under the VCC — today that's ASCE 7-16, not 7-22, because Virginia is a cycle behind the IBC and stays that way on purpose; <strong>(2)</strong> route the ZIP to the right authority among Virginia's 38 independent cities and 95 counties rather than collapsing both into "county"; <strong>(3)</strong> handle Exposure D for Chesapeake Bay and Atlantic waterfront where Isabel-era reviews quietly broadened how the category gets applied; and <strong>(4)</strong> produce output a Virginia plan reviewer recognizes as a clean ASCE 7-16 submittal, not a generic ASCE 7-22 print-out that triggers a "wrong edition" kickback. We've solved all four, and we don't claim PE sign-and-seal we cannot legally provide in the Commonwealth.</p>
-            </div>
-
-            <div class="trust-block">
-                <div class="trust-stat">
-                    <span class="num">2002</span>
-                    <span class="label">Calculating Virginia wind loads online — years before today's generalist national calculators existed</span>
-                </div>
-                <div class="trust-stat">
-                    <span class="num">Isabel</span>
-                    <span class="label">+ every post-Isabel VCC cycle navigated since 2003</span>
-                </div>
-                <div class="trust-stat">
-                    <span class="num">38</span>
-                    <span class="label">VA independent cities understood — Hampton Roads + NoVA + Eastern Shore mapped</span>
-                </div>
-            </div>
-
-            <h2 id="wind-speeds">Virginia Wind Speed Quick Reference</h2>
-
-            <p>Six bands cover the Commonwealth from Cape Charles to Cumberland Gap under ASCE 7-16 Risk Category II. The Eastern Shore tops out highest, Naval Station Norfolk and the Virginia Beach oceanfront sit just below, and the far-western coalfields land near the national low end. The table is the contour-map summary; the calculator returns the exact per-ZIP number — which inside a single Hampton Roads city can differ between a 23510 downtown Norfolk lot and a 23451 Virginia Beach oceanfront lot only fifteen miles apart.</p>
-
-            <div class="wind-table-wrap">
-                <table class="wind-table">
-                    <thead>
-                        <tr>
-                            <th>Region</th>
-                            <th>Sample ZIPs</th>
-                            <th>Risk Cat II Wind Speed</th>
-                            <th>Typical Exposure</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Eastern Shore (Accomack, Northampton) <span class="coast-badge">Coast</span></td>
-                            <td>23336, 23310</td>
-                            <td class="speed-cell">120-135 mph</td>
-                            <td>D (waterfront) / C</td>
-                        </tr>
-                        <tr>
-                            <td>Hampton Roads (Norfolk, Virginia Beach, Chesapeake, Hampton, Newport News) <span class="coast-badge">Coast</span></td>
-                            <td>23510, 23451, 23320</td>
-                            <td class="speed-cell">115-130 mph</td>
-                            <td>D (Bay/ocean front) / C</td>
-                        </tr>
-                        <tr>
-                            <td>Richmond &amp; Piedmont</td>
-                            <td>23219, 23220</td>
-                            <td class="speed-cell">105-115 mph</td>
-                            <td>C / B (urban)</td>
-                        </tr>
-                        <tr>
-                            <td>Northern Virginia (Arlington, Fairfax, Loudoun)</td>
-                            <td>22030, 22201</td>
-                            <td class="speed-cell">105-115 mph</td>
-                            <td>B (urban) / C</td>
-                        </tr>
-                        <tr>
-                            <td>Shenandoah Valley &amp; Blue Ridge</td>
-                            <td>24011, 22801</td>
-                            <td class="speed-cell">100-110 mph</td>
-                            <td>C</td>
-                        </tr>
-                        <tr>
-                            <td>Far Western VA Mountains (Wise, Lee, Buchanan)</td>
-                            <td>24293, 24210</td>
-                            <td class="speed-cell">95-105 mph</td>
-                            <td>C / B</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="warning-box info-box">
-                <h4><i class="fas fa-exclamation-triangle"></i> Bands are indicative — the ZIP is the truth</h4>
-                <p>VA's ASCE 7-16 contour lines were drawn for a national map, not for Virginia's independent-city boundary chaos. A Norfolk ZIP and a Virginia Beach ZIP separated by the Lafayette River are routinely on opposite sides of a contour. A Fairfax County ZIP and a City of Falls Church ZIP across one street are on the same contour but different permit authorities. The calculator resolves to the actual ZIP, the actual jurisdiction, and the actual independent-city plan-review office — never a county-average shortcut.</p>
-            </div>
-
-            <h2 id="vcc">The Virginia Construction Code (VCC) and ASCE 7</h2>
-
-            <p>Virginia is one of the relatively few states that maintains its own statewide building code rather than directly adopting the model IBC unmodified. The Virginia Uniform Statewide Building Code (USBC) is the umbrella; the <strong>Virginia Construction Code (VCC)</strong> is its commercial / nonresidential portion, and the <strong>Virginia Residential Code (VRC)</strong> is its one- and two-family dwelling portion. Both are updated by the Virginia Board of Housing and Community Development on a three-year cycle.</p>
-
-            <p>The current edition in force is the <strong>2021 VCC</strong>, which adopts the 2018 IBC with Virginia amendments and references <strong>ASCE 7-16</strong> as the wind load standard. Historically Virginia has lagged the IBC by one cycle: when 2024 IBC editions arrive at most states, Virginia is typically still on the prior 2021-based cycle. The next adoption (likely a 2024-base USBC) is in the regulatory pipeline; before any final submittal, verify the effective edition with the locality processing the permit.</p>
-
-            <p>What this means for a wind load calculation in Virginia today:</p>
-
-            <ul>
-                <li><strong>Use ASCE 7-16</strong> as your standard, not ASCE 7-22. Virginia has not yet adopted an IBC edition that references 7-22. Submitting a 7-22 calculation without prior locality approval risks a plan-review kickback.</li>
-                <li><strong>Wind speed maps are the 7-16 maps</strong> — the same maps you would use in most of the Mid-Atlantic and South currently. WindLoadCalc applies these by default for Virginia ZIPs.</li>
-                <li><strong>Three building enclosure types apply</strong> — Enclosed, Partially Enclosed, Open — per ASCE 7-16. The fourth "Partially Open" classification was added in 7-22 and does not formally apply in Virginia yet. If you have a lanai-equivalent screened enclosure on a Virginia Beach single-family home, you are using Partially Enclosed (or Open) under the 7-16 rules.</li>
-                <li><strong>Edge strip "a" minimum is 3 ft</strong> per ASCE 7-16 (the 4 ft FBC-specific override does not apply in Virginia).</li>
-            </ul>
-
-            <p>Locality-level amendments do exist in Virginia, but they are administrative (permit fees, inspection sequencing, submittal package contents) rather than structural — the USBC explicitly preempts most local code amendments to the technical content. That is materially different from Florida, where Miami-Dade, Broward, and Collier can and do override the state-baseline wind speeds. In Virginia, the wind speed at a given lat/lng is the wind speed; localities do not push it up the way coastal Florida counties do.</p>
-
-            <h2 id="hampton-roads">Hampton Roads — The Coastal Market That Anchors Virginia</h2>
-
-            <p>If there is a Virginia equivalent to "Miami-Dade and Broward" in terms of construction volume per square mile, it is Hampton Roads. The region is a tightly interconnected metro covering Norfolk, Virginia Beach, Chesapeake, Hampton, Newport News, Portsmouth, Suffolk, and Williamsburg, plus the small but consequential cities of Poquoson and Smithfield. The combined population is just under two million, and the construction pipeline is unusual because it is anchored by something that exists almost nowhere else in the United States: the largest naval base in the world.</p>
-
-            <p><strong>Naval Station Norfolk</strong> alone drives a continuous stream of federal, Department of Defense, and defense-contractor construction in the Hampton Roads footprint — barracks renovations, hangar additions, fleet support facilities, contractor office buildings, and the entire ecosystem of housing, retail, and infrastructure that supports a base community of more than 75,000 active-duty personnel. Federal work has its own DoD UFC criteria layered on top of the VCC, but the wind load chapter still routes through ASCE 7-16, and the wind speeds at the Norfolk waterfront are the same numbers the private-sector contractor a mile inland is using.</p>
-
-            <p>Coastal Hampton Roads wind speeds under ASCE 7-16 Risk Category II run roughly 115-130 mph, with the highest values concentrated along the Chesapeake Bay frontage and the Virginia Beach oceanfront. Ocean City-side ZIPs of Virginia Beach (23451, 23452) sit at the higher end. Downtown Norfolk (23510) and the Chesapeake suburbs (23320) trend somewhat lower because they are further from open water, although they still demand careful Exposure category selection — Exposure D applies to sites within roughly one mile of unobstructed open water, and the Chesapeake Bay qualifies as open water for this purpose.</p>
-
-            <p><strong>Hurricane Isabel (September 2003)</strong> is the modern reference event for Hampton Roads wind exposure. Isabel made landfall on the Outer Banks of North Carolina as a Category 2 and tracked inland across southeast Virginia, pushing a substantial storm surge into the Hampton Roads waterways. Wind damage in Norfolk, Portsmouth, Poquoson, and the rural Northern Neck was extensive — millions of dollars in residential roofing, fencing, signage, and tree damage — and the post-storm reviews refocused the region on three things: opening protection on new coastal residential work, freeboard requirements in FEMA flood zones, and aggressive adoption of Exposure D for waterfront sites that had previously been categorized as Exposure C. The ASCE map values themselves did not move materially as a result of Isabel; the lessons were about correctly applying the existing standard.</p>
-
-            <p>More recent storms — Florence (2018, primarily NC but with VA tropical-storm-force winds), Michael (2018, weakened by VA landfall), Ida (2021, remnant flooding), and various tropical systems that grazed the Outer Banks — have reinforced rather than reset the Isabel-era lessons. Hampton Roads contractors and engineers operate today on the assumption that a Category 2 landfall is plausible in any given season and that opening protection, properly-applied Exposure D, and a clean wind load calculation are not optional details.</p>
-
-            <h2 id="nova">Northern Virginia — Same Code, Different Market</h2>
-
-            <p>Northern Virginia (NoVA) is structurally a different market from Hampton Roads even though both use the same statewide VCC. The cluster of jurisdictions in the Washington metro orbit — Arlington County, Fairfax County, Loudoun County, Prince William County, the City of Alexandria, the City of Falls Church, the City of Manassas, the Town of Vienna, the Town of Herndon, and a half-dozen smaller incorporated places — is dense, urban, and dominated by mid-rise commercial, multifamily residential, and the institutional federal contractor presence that mirrors what Naval Station Norfolk does for Hampton Roads (but spread across many tenants instead of one base).</p>
-
-            <p>Wind speeds in NoVA are noticeably lower than Hampton Roads. Risk Category II values under ASCE 7-16 run roughly 105-115 mph across the region — high enough to matter for a thunderstorm-derived design event, but well below hurricane-design coastal numbers. The wind environment in NoVA is dominated by thunderstorm downbursts, occasional nor'easter wind events, and the residual edges of tropical systems that have weakened by the time they reach the I-95 corridor. Hurricane-force sustained wind at the Arlington waterfront is genuinely rare.</p>
-
-            <p>What is materially different about NoVA from a calculator-user perspective is the permit and review environment. Fairfax County, for example, has one of the busiest county-level building review queues in the United States. Arlington's Department of Community Planning, Housing &amp; Development operates with the rigor of a major city building department. Loudoun County is processing a continuous wave of large-format data center construction (the global epicenter of cloud data center buildout). Each of these processes is administratively involved enough that having a clean, well-formatted wind load report — with the right ASCE edition, the right Risk Category, the right Exposure, and a clear C&amp;C zone breakdown — saves more review cycles than the underlying numerical complexity would suggest.</p>
-
-            <p>WindLoadCalc was designed with this kind of reviewer-friendly output in mind. The report layout, the way zones are visualized, and the inline plain-English explanations of why each pressure landed where it did are not just user-experience polish — they reduce the volume of "please clarify" requests during plan review. For NoVA contractors processing multiple permits a month, that compound time savings is the practical case for using a purpose-built calculator instead of a spreadsheet.</p>
-
-            <div class="content-cta">
-                <h3>Pull VA Wind Pressures for Your Hampton Roads, NoVA, or Mountain Project</h3>
-                <p>One Virginia ZIP gets you the right ASCE 7-16 number, the right independent-city or county authority, and a C&amp;C report your VA PE will recognize as a 2021-VCC submittal — in under 15 minutes.</p>
-                <a href="/wind-load-calculator-shop.html" class="cta-button">Start Free Trial <i class="fas fa-arrow-right"></i></a>
-            </div>
-
-            <h2 id="regions">Six Virginias, One Calculator</h2>
-
-            <p>Cross the Commonwealth from Cape Charles to Cumberland Gap and the wind-load conversation changes every two hundred miles. A Hampton Roads naval-base contractor and a Wise County roofer share a code and share nothing else. Six bands, six different reviewer expectations.</p>
-
-            <div class="region-cards">
-                <div class="region-card">
-                    <h4>Hampton Roads <span class="coast-badge">Coast</span></h4>
-                    <div class="region-speed">115-130 mph</div>
-                    <p>Norfolk, Virginia Beach, Chesapeake, Hampton, Newport News, Portsmouth. Naval Station Norfolk anchors federal construction. Exposure D applies to most waterfront sites. Hurricane Isabel 2003 is the modern design reference.</p>
-                </div>
-                <div class="region-card">
-                    <h4>Eastern Shore <span class="coast-badge">Coast</span></h4>
-                    <div class="region-speed">120-135 mph</div>
-                    <p>Accomack and Northampton counties: Chincoteague, Onancock, Cape Charles, and the barrier islands. Highest wind speeds in the state. Exposure D dominates because there is little intervening terrain.</p>
-                </div>
-                <div class="region-card">
-                    <h4>Richmond &amp; Piedmont</h4>
-                    <div class="region-speed">105-115 mph</div>
-                    <p>Richmond metro, Henrico, Chesterfield, Hanover, and the I-95 corridor south through Petersburg. Thunderstorm and weakened-tropical wind regime. Exposure B in dense urban Richmond, Exposure C in surrounding suburbs.</p>
-                </div>
-                <div class="region-card">
-                    <h4>Northern Virginia</h4>
-                    <div class="region-speed">105-115 mph</div>
-                    <p>Arlington, Fairfax, Loudoun, Prince William, Alexandria, Falls Church. Dense urban &amp; suburban DC-metro market. High permit volume, high data center construction activity. Exposure B is common.</p>
-                </div>
-                <div class="region-card">
-                    <h4>Shenandoah Valley</h4>
-                    <div class="region-speed">100-110 mph</div>
-                    <p>Winchester, Harrisonburg, Staunton, Lexington along the I-81 corridor. Lower wind speeds; rural and small-town building stock. Exposure C in open agricultural settings is the default.</p>
-                </div>
-                <div class="region-card">
-                    <h4>Far Western Mountains</h4>
-                    <div class="region-speed">95-105 mph</div>
-                    <p>Wise, Lee, Buchanan, Tazewell, Dickenson counties. The lowest design wind speeds in Virginia. Topographic effects (Kzt) start to matter on ridge-top projects in a way they do not east of the Blue Ridge.</p>
-                </div>
-            </div>
-
-            <h2 id="how-to">How to Calculate Your Virginia Wind Load</h2>
-
-            <div class="process-steps">
-                <div class="process-step">
-                    <h4>Enter your Virginia ZIP code</h4>
-                    <p>The calculator looks up your ZIP, identifies the county or independent city (Virginia has 38 independent cities that operate outside any county, which often surprises out-of-state users), and pulls the ASCE 7-16 baseline wind speed for the four risk categories. Hampton Roads ZIPs are flagged for default Exposure D consideration; Shenandoah ZIPs default to Exposure C; NoVA urban ZIPs default to Exposure B.</p>
-                </div>
-                <div class="process-step">
-                    <h4>Pick your Risk Category</h4>
-                    <p>In VA, Cat II runs the gamut — Norfolk single-family, NoVA mid-rise, Richmond rowhouse rehab, Shenandoah agricultural. Cat III is the larger schools and the assembly buildings (the bumped category matters specifically in coastal Hampton Roads, where many schools double as emergency shelters and get Cat III by occupancy or Cat IV by use). Cat IV picks up the VCU/UVA/VA Tech medical centers, Sentara, Inova Fairfax, the fire/EMS facilities, and the state and federal EOCs. The wind speed scales with category.</p>
-                </div>
-                <div class="process-step">
-                    <h4>Confirm Exposure Category and enter building geometry</h4>
-                    <p>For Hampton Roads waterfront and Eastern Shore projects, double-check whether Exposure D applies — within roughly one mile of unobstructed open water. For most of NoVA and Richmond, Exposure B (urban / suburban with closely-spaced buildings on all sides) is correct. Punch building length, width, mean roof height, roof pitch (rise-per-12-run, the VA permit standard), and roof type. The calculator drops the right Chapter 30 C&amp;C procedure based on shape.</p>
-                </div>
-                <div class="process-step">
-                    <h4>Read VA-tuned pressures with VCC citation trail</h4>
-                    <p>Output ships MWFRS for the structural frame plus C&amp;C broken zone-by-zone — Zone 4 wall field, Zone 5 corner, plus the roof zones for whichever shape you selected (1/2/3 for gable/hip, the matching set for the other geometries). Every value is annotated with the controlling factor (wind speed, Kz, Kd, GCp) so your VA PE can audit the calculation path quickly.</p>
-                </div>
-                <div class="process-step">
-                    <h4>Hand the report to a VA-licensed PE for sign and seal</h4>
-                    <p>Export the report as PDF, Excel, or the architectural schedule format (a real .xlsx your engineer or drafter can drop into AutoCAD). A Virginia-licensed professional engineer must seal the final submittal package — Virginia requires VA PE licensure for any structural sealing of work in the Commonwealth, and WindLoadCalc does not provide out-of-state PE service. The numbers and the formatting are done for them; the seal is theirs to apply.</p>
-                </div>
-            </div>
-
-            <h2 id="faq">Virginia Wind Load FAQ</h2>
-
-            <details class="faq-item">
-                <summary>What's the wind speed in Norfolk / Virginia Beach?</summary>
-                <div class="faq-answer">Norfolk (ZIPs 23510, 23507) and Virginia Beach (23451, 23452) sit in the Hampton Roads coastal zone and typically use ASCE 7-16 Risk Category II design wind speeds in the 115-130 mph range, with the highest values clustered along the Chesapeake Bay and oceanfront ZIPs of Virginia Beach. The calculator pulls the exact ZIP-specific value rather than a single citywide figure, because Hampton Roads has noticeable variation between Naval Station Norfolk's waterfront and inland Chesapeake suburbs only a few miles apart.</div>
-            </details>
-
-            <details class="faq-item">
-                <summary>Does Virginia have a special coastal high-hazard zone?</summary>
-                <div class="faq-answer">No. Virginia does not have a code-defined high-hazard or High Velocity Hurricane Zone equivalent to Florida's HVHZ. The Virginia Construction Code treats coastal Hampton Roads, the Eastern Shore, and the rest of the state under a single set of ASCE 7 wind load rules. What changes is the basic wind speed itself (higher near the Atlantic, lower in the Blue Ridge) and the local exposure category (Exposure D for sites within a mile of unobstructed open water in the Chesapeake Bay or Atlantic). Coastal jurisdictions may also add their own permit-review overlays, but there is no separate product-approval program comparable to Miami-Dade NOA.</div>
-            </details>
-
-            <details class="faq-item">
-                <summary>What is the Virginia Construction Code (VCC) and how does it use ASCE 7?</summary>
-                <div class="faq-answer">The Virginia Construction Code (VCC) is the commercial portion of the Virginia Uniform Statewide Building Code (USBC). It is updated on a three-year cycle by the Virginia Board of Housing and Community Development and historically lags the IBC by one cycle. The current edition in force is the 2021 VCC, which adopts the 2018 IBC with Virginia amendments and references ASCE 7-16 as the wind load standard. A new edition based on the 2021 IBC (and ASCE 7-16 again, since the 2021 IBC also references 7-16) is in the adoption pipeline; verify the effective edition with your locality before a final submittal.</div>
-            </details>
-
-            <details class="faq-item">
-                <summary>How did Hurricane Isabel 2003 change Hampton Roads construction?</summary>
-                <div class="faq-answer">Hurricane Isabel made landfall on the Outer Banks in September 2003 and pushed a multi-foot storm surge into Hampton Roads, with significant flooding in Norfolk, Portsmouth, Poquoson, and the Chesapeake Bay watershed. Wind damage was widespread but generally below catastrophic structural failure. The post-Isabel reviews drove three durable changes locally: stricter freeboard requirements in FEMA flood zones, more aggressive enforcement of opening protection for new coastal residential work, and broader adoption of Exposure D for waterfront sites. Wind speed map values themselves did not change as a result of Isabel; the lessons were primarily about flood-plus-wind interaction and product-installation quality.</div>
-            </details>
-
-            <details class="faq-item">
-                <summary>Do I need a Virginia PE to seal my wind load report?</summary>
-                <div class="faq-answer">Yes. Sealed structural drawings and wind load reports submitted to a Virginia building official must be sealed by a professional engineer licensed by the Virginia Board for Architects, Professional Engineers, Land Surveyors, Certified Interior Designers and Landscape Architects (APELSCIDLA). WindLoadCalc generates the numbers, the C&amp;C zone breakdown, and the report formatting your VA PE will need to review and seal, but we do not provide PE sign-and-seal for Virginia projects. Our partner PE is Florida-licensed only, and we never claim out-of-state stamping authority.</div>
-            </details>
-
-            <details class="faq-item">
-                <summary>What's the wind speed on the Eastern Shore?</summary>
-                <div class="faq-answer">The Eastern Shore of Virginia (Accomack County and Northampton County, including Chincoteague, Onancock, Cape Charles, and the barrier island communities) carries the highest design wind speeds in the state under ASCE 7-16, typically 120-135 mph for Risk Category II depending on how close the ZIP sits to the Atlantic or the Bay. The Eastern Shore is also where Exposure D applies most broadly because there is so little intervening terrain between the water and the structure. If you are designing for Chincoteague or any oceanfront barrier island ZIP, expect the calculator output to be meaningfully higher than mainland Hampton Roads.</div>
-            </details>
-
-            <details class="faq-item">
-                <summary>Are NoVA jurisdictions different for wind load requirements?</summary>
-                <div class="faq-answer">Northern Virginia (Arlington, Fairfax, Loudoun, Prince William, Alexandria, Falls Church, and the rest of the NoVA jurisdictions in the Washington metro orbit) uses the same statewide Virginia Construction Code and the same ASCE 7-16 wind load standard as the rest of Virginia. Basic wind speeds in NoVA are lower than Hampton Roads — typically 105-115 mph for Risk Category II — because the region is well inland. What's different in NoVA is the permit process: dense urban building stock, complex zoning, county and city building department review queues, and tighter coordination with DC-area projects. The numbers are simpler; the paperwork is not.</div>
-            </details>
-
-            <details class="faq-item">
-                <summary>Which ASCE edition does Virginia currently use?</summary>
-                <div class="faq-answer">Virginia currently uses ASCE 7-16 as the referenced wind load standard, via the 2021 Virginia Construction Code (which adopts the 2018 IBC). Virginia has not yet adopted an IBC edition that references ASCE 7-22, so do not design Virginia projects to ASCE 7-22 unless your local building official has explicitly accepted it as an alternative compliance path. WindLoadCalc generates ASCE 7-16 output for Virginia ZIP codes by default; if your jurisdiction has accepted 7-22 in advance, you can request the 7-22 variant in the report settings.</div>
-            </details>
-
-            <details class="faq-item">
-                <summary>Why does Virginia's VCC lag the IBC cycle?</summary>
-                <div class="faq-answer">Two reasons, both structural to how Virginia governs its building code. First, the Virginia Uniform Statewide Building Code (USBC) is updated by the Virginia Board of Housing and Community Development on a fixed three-year regulatory rulemaking cycle that does not synchronize with the ICC's three-year IBC publication cycle &mdash; they drift past each other. Second, the Board's process layers in a formal public-comment period, technical review, and Virginia-specific amendment drafting on top of every base IBC edition, which adds 12-24 months before the new VCC is effective. The practical result is that the VCC has been one IBC cycle behind for most of the past two decades. When most states moved to the 2021 IBC and ASCE 7-16, Virginia was wrapping up the 2018 IBC adoption &mdash; and the current 2021 VCC still references ASCE 7-16, not 7-22. WindLoadCalc has been working around that cycle-lag on Virginia permits since 2002 and ships ASCE 7-16 output as the Virginia default rather than auto-jumping to the newest standard.</div>
-            </details>
-
-            <details class="faq-item">
-                <summary>How long has WindLoadCalc been calculating Hampton Roads and Virginia wind loads?</summary>
-                <div class="faq-answer">Since 2002. We've tracked every Virginia Construction Code cycle from the 2003 VCC (Hurricane Isabel year) through the current 2021 VCC. Hampton Roads naval-base construction, NoVA federal-tenant data centers, Eastern Shore barrier-island work, and Shenandoah Valley special wind regions &mdash; all four Virginias, navigated across seven ASCE 7 editions. Generalist national calculators don't acknowledge the VCC cycle-lag. We've been working around it on Virginia permits for 24 years.</div>
-            </details>
-
-            <h2 id="related">Sister state calculators and ASCE 7-16 references</h2>
-
-            <div class="related-links">
-                <h3>VA + Mid-Atlantic adjacent calculators</h3>
-                <ul>
-                    <li><a href="/florida-wind-load-calculator">Florida Wind Load Calculator (HVHZ, FBC)</a></li>
-                    <li><a href="/miami-dade-wind-load-calculator">Miami-Dade County wind load calculator</a></li>
-                    <li><a href="/broward-wind-load-calculator">Broward County wind load calculator</a></li>
-                    <li><a href="/collier-county-wind-load-calculator">Collier County wind load calculator</a></li>
-                    <li><a href="/palm-beach-wind-load-calculator">Palm Beach County wind load calculator</a></li>
-                    <li><a href="/asce-7-wind-load-calculator/">ASCE 7 wind load calculator overview</a></li>
-                    <li><a href="/shop/windows-doors-shutters.html">Windows, doors &amp; shutters C&amp;C calculator</a></li>
-                    <li><a href="/wind-load-calculator-shop.html">All calculators and pricing</a></li>
-                    <li><a href="/wind-load-calculator-for-engineers.html">Wind load tools for structural engineers</a></li>
-                    <li><a href="/wind-load-calculator-for-architects.html">Wind load workflow for architects</a></li>
-                </ul>
-            </div>
-
-            <div class="content-cta">
-                <h3>From the Eastern Shore to Wise County &mdash; one VA calculator.</h3>
-                <p>Chincoteague oceanfront, Naval Station Norfolk waterfront, Fairfax data center, Roanoke ridge-top &mdash; one ZIP lookup, one 2021-VCC-aligned ASCE 7-16 calc, one VA-PE-review-ready report. Calculating Virginia wind loads since 2002, well before today's generalist national calculators existed.</p>
-                <a href="/wind-load-calculator-shop.html" class="cta-button">View Plans &amp; Start Trial <i class="fas fa-arrow-right"></i></a>
-            </div>
-
-            <p class="last-updated">Last updated: May 23, 2026 &mdash; Reviewed against the 2021 Virginia Construction Code (current effective edition) and ASCE 7-16 as adopted by reference. Reviewed by WindLoadCalc's in-house Florida-licensed P.E. (VA PE sign-and-seal not offered &mdash; have your Virginia PE seal the final submittal). Serving wind load professionals since 2002; online calculator on the web since 2006.</p>
-        </main>
-
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <div class="sidebar-box">
-                <h3>On This Page</h3>
-                <ul>
-                    <li><a href="#wind-speeds">Virginia Wind Speeds</a></li>
-                    <li><a href="#vcc">Virginia Construction Code</a></li>
-                    <li><a href="#hampton-roads">Hampton Roads Deep-Dive</a></li>
-                    <li><a href="#nova">Northern Virginia (NoVA)</a></li>
-                    <li><a href="#regions">All Five VA Regions</a></li>
-                    <li><a href="#how-to">How to Calculate</a></li>
-                    <li><a href="#faq">FAQ</a></li>
-                    <li><a href="#related">Related Resources</a></li>
-                </ul>
-            </div>
-
-            <div class="sidebar-cta">
-                <h3>Try the VA Calculator Free</h3>
-                <p>Per-ZIP ASCE 7-16 wind loads aligned to the current 2021 VCC, formatted for VA PE review and locality submittal.</p>
-                <a href="/wind-load-calculator-shop.html" class="sidebar-cta-button">Start Free Trial</a>
-            </div>
-
-            <div class="sidebar-box">
-                <h3>Related State Calculators</h3>
-                <ul>
-                    <li><a href="/florida-wind-load-calculator">Florida (HVHZ, 175 mph Miami)</a></li>
-                    <li><a href="/miami-dade-wind-load-calculator">Miami-Dade County</a></li>
-                    <li><a href="/broward-wind-load-calculator">Broward County</a></li>
-                    <li><a href="/collier-county-wind-load-calculator">Collier County</a></li>
-                    <li><a href="/palm-beach-wind-load-calculator">Palm Beach County</a></li>
-                </ul>
-            </div>
-        </aside>
+<nav id="nav"><div class="wrap nav-in">
+  <a class="logo" href="https://windloadcalc.com/"><img height="100" width="300" src="/images/windloadcalc-logo.svg" alt="WindLoadCalc — ASCE 7-16 Wind Load Calculator logo" class="logo-image"></a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a class="l" href="https://windloadcalc.com/free-wind-load-calculator.html">Free tool</a>
+      <a class="l" href="https://windloadcalc.com/wind-load-calculator-comparison.html">Compare</a>
+      <a class="l" href="https://windloadcalc.com/wind-load-calculator-shop.html">Pricing</a>
+      <a class="l" href="https://windloadcalc.com/why-us.html">Why us</a>
+      <a class="btn btn-ghost" href="https://windloadcalc.com/login.html">Log in</a>
+      <a class="btn btn-primary" href="https://windloadcalc.com/wind-load-calculator-shop.html">Start free trial</a>
     </div>
+    <button class="hamburger" id="hamburger" aria-label="Open full menu" aria-expanded="false" aria-controls="fullMenu"><span></span><span></span><span></span></button>
+  </div>
+</div></nav>
+<div class="nav-overlay" id="navOverlay"></div>
+<aside class="full-menu" id="fullMenu" aria-label="Site menu">
+  <div class="fm-head"><span>Menu</span><button class="fm-close" id="fmClose" aria-label="Close menu">&times;</button></div>
+  <div class="fm-group">
+    <div class="fm-label">Wind Load Calculators</div>
+    <a href="https://windloadcalc.com/wind-load-calculator-landing.html">Overview</a>
+    <a href="https://windloadcalc.com/free-wind-load-calculator.html">Free Trial</a>
+    <a href="https://windloadcalc.com/wind-load-calculator-comparison.html">Calculator Comparison</a>
+    <a href="https://windloadcalc.com/wind-load-calculator-shop.html">Pricing</a>
+  </div>
+  <div class="fm-group">
+    <div class="fm-label">Building Intelligence Platform</div>
+    <a href="https://windloadcalc.com/building-intelligence-platform-landing.html">Overview</a>
+    <a href="https://windloadcalc.com/building-intelligence-platform.html">Free Trial</a>
+    <a href="https://windloadcalc.com/building-intelligence-platform-shop.html">Pricing</a>
+  </div>
+  <div class="fm-group">
+    <div class="fm-label">For Professionals</div>
+    <a href="https://windloadcalc.com/wind-load-calculator-for-engineers.html">Engineers</a>
+    <a href="https://windloadcalc.com/wind-load-calculator-for-architects.html">Architects</a>
+    <a href="https://windloadcalc.com/wind-loads-for-consultants.html">Consultants</a>
+    <a href="https://windloadcalc.com/contractors-wind-load-calculator.html">Contractors</a>
+  </div>
+  <div class="fm-group">
+    <div class="fm-label">Company</div>
+    <a href="https://windloadcalc.com/services.html">Services</a>
+    <a href="https://windloadcalc.com/why-us.html">Why Us</a>
+    <a href="https://windloadcalc.com/faq.html">FAQ</a>
+    <a href="https://windloadcalc.com/contact.html">Contact Us</a>
+  </div>
+  <div class="fm-actions">
+    <a class="btn btn-ghost" href="https://windloadcalc.com/login.html">Log in</a>
+    <a class="btn btn-primary" href="https://windloadcalc.com/free-wind-load-calculator.html">Start Free Trial &rarr;</a>
+  </div>
+</aside>
 
-    <!-- Footer -->
-    <footer class="main-footer">
-        <div class="footer-content">
-            <div class="footer-column">
-                <h3>Contact</h3>
-                <ul>
-                    <li><a href="mailto:info@windloadcalc.com">info@windloadcalc.com</a></li>
-                    <li><a href="mailto:support@windloadcalc.com">support@windloadcalc.com</a></li>
-                    <li><a href="tel:8332723946">(833) 272-3946</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h3>Calculators</h3>
-                <ul>
-                    <li><a href="/shop/windows-doors-shutters.html">Windows, Doors &amp; Shutters</a></li>
-                    <li><a href="/wind-load-calculator-shop.html">All Calculators &amp; Pricing</a></li>
-                    <li><a href="/wind-load-calculator-comparison.html">Calculator Comparison</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h3>Resources</h3>
-                <ul>
-                    <li><a href="/free-wind-load-calculator.html">Free Demo</a></li>
-                    <li><a href="/asce-7-wind-load-calculator/">ASCE 7 Guide</a></li>
-                    <li><a href="/components-and-cladding-wind-loads/">C&amp;C Wind Loads</a></li>
-                    <li><a href="/faq.html">Wind Load FAQ</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h3>Company</h3>
-                <ul>
-                    <li><a href="/why-us.html">About Us</a></li>
-                    <li><a href="/contact.html">Contact</a></li>
-                    <li><a href="/privacy-policy.html">Privacy</a></li>
-                    <li><a href="/terms-of-service.html">Terms</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2002&ndash;2026 WindLoadCalc. All rights reserved.</p>
-        </div>
-    </footer>
+<div class="hero-stage">
+  <div class="hero-veil"></div>
+  <header><div class="wrap">
+    <div class="eyebrow"><span class="dot"></span>ASCE 7-16 · 2021 Virginia Construction Code · since 2002</div>
+    <h1>Virginia wind loads, <span class="grad">coast to ridge</span></h1>
+    <p class="sub">One state, four wind climates. The basic wind speed at a Virginia ZIP can swing <strong>40 mph</strong> from an Eastern Shore beach lot to a far-western mountain hollow. We return the exact per-ZIP value under <strong>ASCE 7-16</strong>.</p>
+    <form class="zip-form" id="zip-form" onsubmit="return launchCalc(event)">
+      <input type="text" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" class="zip-input" id="zip-input" placeholder="Enter a Virginia ZIP (e.g. 23510)" aria-label="Virginia ZIP code">
+      <button type="submit" class="btn btn-primary" style="padding:14px 22px">Get VA wind pressures →</button>
+    </form>
+    <div class="hero-trust">
+      <span><span class="ck">✓</span> Per-ZIP, not citywide averages</span>
+      <span><span class="ck">✓</span> Formatted for VA PE review</span>
+      <span><span class="ck">✓</span> 7-day free trial</span>
+    </div>
+    <div class="stat-row">
+      <div class="stat-tile"><div class="n">120-135</div><div class="l">mph · Eastern Shore Risk Cat II</div></div>
+      <div class="stat-tile"><div class="n">95-105</div><div class="l">mph · far-western mountains</div></div>
+      <div class="stat-tile"><div class="n">ASCE 7-16</div><div class="l">current VA standard, not 7-22</div></div>
+      <div class="stat-tile"><div class="n">Since 2002</div><div class="l">VA wind loads, online 2006</div></div>
+    </div>
+  </div></header>
+</div>
 
-    <script>
-        // ZIP launch — calc.windloadcalc.com accepts ?zip=NNNNN and auto-derives
-        // city / state / county / wind speed. For Virginia ZIPs the calc app routes
-        // to ASCE 7-16 by default (per current VCC adoption).
-        function launchCalc(e) {
-            e.preventDefault();
-            var zip = (document.getElementById('zip-input').value || '').replace(/[^0-9]/g, '').slice(0, 5);
-            var target = 'https://calc.windloadcalc.com/';
-            if (zip.length === 5) {
-                target = target + '?zip=' + zip;
-            }
-            window.location.href = target;
-            return false;
-        }
-    </script>
+<!-- Intro -->
+<section><div class="wrap">
+  <p class="lead">Virginia is the Atlantic state that refuses to fit one box. Norfolk sizes openings for a Category 2 surge. Chincoteague designs behind a barrier-island dune. Arlington designs to a thunderstorm climate. Wise County wrestles ridge-top topography.</p>
+  <p class="lead" style="margin-bottom:0">The 2021 Virginia Construction Code hands all four the same ASCE 7-16 wind chapter. Picking the right basic wind speed for the ZIP <strong style="color:#fff">is</strong> the calculation. That is the one thing a generic national tool skips.</p>
+</div></section>
+
+<!-- Fast facts -->
+<section style="padding-top:8px"><div class="wrap">
+  <div class="fact-grid">
+    <div class="fact"><div class="n">38</div><div class="l">independent cities that sit outside any county — each its own permit authority</div></div>
+    <div class="fact"><div class="n">2018 IBC</div><div class="l">adopted by the 2021 VCC, which references ASCE 7-16 for wind</div></div>
+    <div class="fact"><div class="n">Isabel '03</div><div class="l">the Category 2 Outer Banks landfall that reset coastal enforcement</div></div>
+    <div class="fact"><div class="n">Exposure D</div><div class="l">applies within ~1 mile of open water — the Bay counts</div></div>
+  </div>
+</div></section>
+
+<!-- Wind speed reference -->
+<section id="wind-speeds"><div class="wrap">
+  <div class="sec-head">
+    <h2>Virginia wind speed, region by region</h2>
+    <p>Six bands span the Commonwealth under ASCE 7-16 Risk Category II. The table summarizes the contour map — the calculator returns the precise per-ZIP figure.</p>
+  </div>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>Region</th><th>Sample ZIPs</th><th>Risk Cat II speed</th><th>Typical exposure</th></tr></thead>
+      <tbody>
+        <tr><td>Eastern Shore — Accomack, Northampton <span class="cb">Coast</span></td><td>23336, 23310</td><td class="speed">120-135 mph</td><td>D (waterfront) / C</td></tr>
+        <tr><td>Hampton Roads — Norfolk, Va. Beach, Chesapeake <span class="cb">Coast</span></td><td>23510, 23451, 23320</td><td class="speed">115-130 mph</td><td>D (Bay/ocean) / C</td></tr>
+        <tr><td>Richmond &amp; Piedmont</td><td>23219, 23220</td><td class="speed">105-115 mph</td><td>C / B (urban)</td></tr>
+        <tr><td>Northern Virginia — Arlington, Fairfax, Loudoun</td><td>22030, 22201</td><td class="speed">105-115 mph</td><td>B (urban) / C</td></tr>
+        <tr><td>Shenandoah Valley &amp; Blue Ridge</td><td>24011, 22801</td><td class="speed">100-110 mph</td><td>C</td></tr>
+        <tr><td>Far-western mountains — Wise, Lee, Buchanan</td><td>24293, 24210</td><td class="speed">95-105 mph</td><td>C / B</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout warn">
+    <h4>The band is a hint. The ZIP is the answer.</h4>
+    <p>Virginia's contour lines were drawn for a national map, not its independent-city patchwork. Two Hampton Roads ZIPs across the Lafayette River can land on opposite sides of one contour — and on different permit authorities.</p>
+    <p style="margin-top:8px">The calculator resolves the real ZIP and the real reviewing office.</p>
+  </div>
+</div></section>
+
+<!-- Coastal vs inland angle -->
+<section id="coast-inland"><div class="wrap">
+  <div class="sec-head">
+    <h2>The coastal-Virginia divide</h2>
+    <p>Tidewater and the mountains share a code and share nothing else about wind. Here is the split that drives every Virginia calculation.</p>
+  </div>
+  <div class="split">
+    <div class="glass">
+      <span class="region coast" style="margin-bottom:12px">Tidewater · Hampton Roads</span>
+      <h3>Hurricane-design coast</h3>
+      <p><strong>115-130 mph</strong>, Risk Cat II, with the oceanfront and Chesapeake Bay frontage at the top of the band. Naval Station Norfolk anchors a steady stream of federal and defense-contractor work along that same waterfront.</p>
+      <p>The trap here is exposure. Sites within about a mile of open water take <strong>Exposure D</strong>, and the Bay qualifies. Two lots a few hundred feet apart can split between D and C.</p>
+      <p>Hurricane Isabel (September 2003) is the modern reference event. It did not move the map values; it tightened how the existing standard gets applied on the coast.</p>
+    </div>
+    <div class="glass">
+      <span class="region inland" style="margin-bottom:12px">Piedmont · Valley · Mountains</span>
+      <h3>Thunderstorm-design interior</h3>
+      <p><strong>95-115 mph</strong> across Richmond, NoVA, the Shenandoah Valley and the far west. The design event is a thunderstorm downburst or a weakened tropical remnant, not a hurricane landfall.</p>
+      <p>Exposure shifts inland: dense urban Richmond and Arlington lean <strong>Exposure B</strong>; open Valley farmland is <strong>Exposure C</strong>. The numbers get gentler as you climb west.</p>
+      <p>Past the Blue Ridge, topographic effects (<strong>Kzt</strong>) start to bite on ridge-top projects in Wise, Lee and Buchanan — a factor the coast rarely worries about.</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- Regions -->
+<section id="regions"><div class="wrap">
+  <div class="sec-head">
+    <h2>Six Virginias, one calculator</h2>
+    <p>Cape Charles to Cumberland Gap, the wind conversation changes every couple hundred miles.</p>
+  </div>
+  <div class="region-grid">
+    <div class="region"><span class="coast">Coast</span><h3>Eastern Shore</h3><div class="speed">120-135 mph</div><p>Accomack and Northampton: Chincoteague, Onancock, Cape Charles, the barrier islands. The state's highest speeds. Exposure D dominates — almost nothing stands between water and structure.</p></div>
+    <div class="region"><span class="coast">Coast</span><h3>Hampton Roads</h3><div class="speed">115-130 mph</div><p>Norfolk, Virginia Beach, Chesapeake, Hampton, Newport News, Portsmouth. Naval Station Norfolk drives federal work. Most waterfront sites take Exposure D. Isabel 2003 is the design reference.</p></div>
+    <div class="region"><span class="inland">Inland</span><h3>Richmond &amp; Piedmont</h3><div class="speed">105-115 mph</div><p>Richmond metro, Henrico, Chesterfield, Hanover, and the I-95 run south to Petersburg. Thunderstorm and weakened-tropical regime. Exposure B downtown, C in the suburbs.</p></div>
+    <div class="region"><span class="inland">Inland</span><h3>Northern Virginia</h3><div class="speed">105-115 mph</div><p>Arlington, Fairfax, Loudoun, Prince William, Alexandria, Falls Church. Dense DC-metro market, heavy data-center buildout, busy review queues. Exposure B is common.</p></div>
+    <div class="region"><span class="inland">Inland</span><h3>Shenandoah Valley</h3><div class="speed">100-110 mph</div><p>Winchester, Harrisonburg, Staunton, Lexington along I-81. Gentler speeds, rural and small-town stock. Open agricultural Exposure C is the default.</p></div>
+    <div class="region"><span class="inland">Inland</span><h3>Far-western mountains</h3><div class="speed">95-105 mph</div><p>Wise, Lee, Buchanan, Tazewell, Dickenson. The state's lowest design speeds — but ridge-top topographic effects (Kzt) finally start to matter here.</p></div>
+  </div>
+</div></section>
+
+<!-- VCC code section -->
+<section id="vcc"><div class="wrap">
+  <div class="sec-head">
+    <h2>The VCC cycle-lag, and why it matters</h2>
+    <p>Virginia runs its own statewide code instead of adopting the IBC straight. That choice puts it about one cycle behind — on purpose.</p>
+  </div>
+  <ul class="blist">
+    <li><b>Use ASCE 7-16, not 7-22.</b> The 2021 VCC adopts the 2018 IBC, which references ASCE 7-16. Submitting a 7-22 calc without prior locality sign-off risks a "wrong edition" kickback.</li>
+    <li><b>Three enclosure types, not four.</b> ASCE 7-16 has Enclosed, Partially Enclosed, and Open. The "Partially Open" class arrived in 7-22 and does not formally apply in Virginia yet.</li>
+    <li><b>Edge strip "a" is 3 ft.</b> That is the ASCE 7-16 minimum. Florida's 4 ft FBC override has no force in the Commonwealth.</li>
+    <li><b>Wind speed is the wind speed.</b> Localities tune fees and inspection sequencing, but the USBC preempts technical amendments — no county can push your basic wind speed up the way coastal Florida does.</li>
+    <li><b>Route to the right authority.</b> With 38 independent cities outside any county, a ZIP lookup that collapses everything into "county" sends your package to the wrong building department.</li>
+  </ul>
+  <div class="callout">
+    <h4>Why the lag exists</h4>
+    <p>The Board of Housing and Community Development runs a fixed three-year cycle that drifts past the ICC's. Add a public-comment period and Virginia amendment drafting, and a new VCC lands 12-24 months behind.</p>
+    <p style="margin-top:8px">That gap has held for two decades. We have shipped ASCE 7-16 as the Virginia default through all of it.</p>
+  </div>
+</div></section>
+
+<!-- How it works -->
+<section id="how-to"><div class="wrap">
+  <div class="sec-head"><h2>How a Virginia calc runs</h2><p>ZIP to permit-ready report in five steps.</p></div>
+  <div class="steps">
+    <div class="step"><div class="num">1</div><h4>Enter the ZIP</h4><p>We resolve the county or independent city and pull the ASCE 7-16 speed for all four risk categories.</p></div>
+    <div class="step"><div class="num">2</div><h4>Pick Risk Category</h4><p>Cat II for most homes and mid-rise; Cat III/IV for schools, hospitals and EOCs that scale the speed up.</p></div>
+    <div class="step"><div class="num">3</div><h4>Confirm exposure</h4><p>D near Bay or ocean, B in urban NoVA and Richmond, C for open Valley terrain.</p></div>
+    <div class="step"><div class="num">4</div><h4>Read the pressures</h4><p>MWFRS plus C&amp;C zone-by-zone, each value annotated with its controlling factor.</p></div>
+    <div class="step"><div class="num">5</div><h4>Hand off to a VA PE</h4><p>Export PDF, Excel or the schedule format. Your Virginia PE seals the final submittal.</p></div>
+  </div>
+</div></section>
+
+<!-- Proof band -->
+<section class="proof"><div class="wrap">
+  <div class="sec-head"><h2>Why Virginia reviewers trust the output</h2><p>No paid testimonials — a verifiable record and a clean ASCE 7-16 print-out.</p></div>
+  <div class="proof-grid">
+    <div class="proof-item"><div class="n">100%</div><div class="c">permit approval across 24 years of work</div></div>
+    <div class="proof-item"><div class="n">Since 2002</div><div class="c">running Virginia wind loads; online since 2006</div></div>
+    <div class="proof-item"><div class="n">7 editions</div><div class="c">of ASCE 7 navigated — currently shipping 7-16 for VA</div></div>
+    <div class="proof-item"><div class="n">All 50 states</div><div class="c">PE sign-and-seal available through the firm's PE network</div></div>
+  </div>
+</div></section>
+
+<!-- FAQ -->
+<section id="faq"><div class="wrap">
+  <div class="sec-head"><h2>Virginia wind load FAQ</h2></div>
+  <div class="faq">
+    <details open><summary>What's the design wind speed in Norfolk and Virginia Beach?</summary><p>Norfolk (ZIPs 23510, 23507) and Virginia Beach (23451, 23452) fall in the Hampton Roads coastal band: roughly 115-130 mph for ASCE 7-16 Risk Category II. Oceanfront and Bay-front ZIPs run highest. The calculator returns the exact per-ZIP value.</p></details>
+    <details><summary>Does the Eastern Shore have higher wind speeds than Hampton Roads?</summary><p>Yes. Accomack and Northampton counties — Chincoteague, Onancock, Cape Charles, the barrier islands — carry the state's highest design wind speeds: about 120-135 mph for Risk Category II under ASCE 7-16. Exposure D applies broadly there.</p></details>
+    <details><summary>Why is Exposure D such a big deal on Virginia's coast?</summary><p>Exposure D applies within roughly one mile of unobstructed open water, and the Chesapeake Bay counts. Two waterfront lots a few hundred feet apart can split between D and C. That choice changes the velocity pressure materially.</p></details>
+    <details><summary>Which ASCE 7 edition does Virginia use right now?</summary><p>ASCE 7-16. The 2021 Virginia Construction Code adopts the 2018 IBC, which references 7-16. Virginia has not adopted an edition tied to 7-22. Submit to 7-16 unless your locality has accepted 7-22 in advance.</p></details>
+    <details><summary>Why does Virginia's building code lag the national IBC cycle?</summary><p>Virginia maintains its own statewide code (the USBC) rather than adopting the IBC unmodified. The Board's three-year cycle drifts past the ICC's, plus public comment and amendment drafting. The VCC has run about one IBC cycle behind for years.</p></details>
+    <details><summary>Does Virginia have an HVHZ or product-approval program like Florida?</summary><p>No. Virginia has no High Velocity Hurricane Zone and no Miami-Dade-style NOA program. The VCC applies one ASCE 7 wind chapter statewide. What changes by location is the basic wind speed and exposure category.</p></details>
+    <details><summary>What did Hurricane Isabel change for Hampton Roads design?</summary><p>Isabel made a Category 2 landfall on the Outer Banks in September 2003 and pushed surge into Hampton Roads. The ASCE map values did not change. Enforcement did: stricter flood-zone freeboard, tighter opening protection, broader Exposure D.</p></details>
+    <details><summary>Are Northern Virginia projects different from Hampton Roads?</summary><p>Same statewide VCC, same ASCE 7-16, lower numbers. NoVA Risk Category II runs about 105-115 mph — a thunderstorm climate, not a hurricane one. The real difference is the permit queue at Fairfax, Arlington, and Loudoun.</p></details>
+    <details><summary>Do I need a Virginia-licensed PE to seal the report?</summary><p>Yes. A structural submittal to a Virginia building official must be sealed by a PE licensed by the Virginia Board (APELSCIDLA). WindLoadCalc produces the numbers, the C&amp;C zone breakdown, and the report your VA PE reviews and seals.</p></details>
+    <details><summary>How long has WindLoadCalc handled Virginia wind loads?</summary><p>Since 2002, online since 2006 — across seven ASCE 7 editions and every VCC cycle from the Isabel era to the 2021 code. Hampton Roads naval bases, NoVA data centers, Eastern Shore barrier islands: 100% approval over 24 years.</p></details>
+  </div>
+</div></section>
+
+<!-- Related -->
+<section id="related"><div class="wrap">
+  <div class="sec-head"><h2>Related calculators &amp; references</h2></div>
+  <div class="rel-grid">
+    <a href="/asce-7-wind-load-calculator/">ASCE 7 wind load calculator overview →</a>
+    <a href="/shop/windows-doors-shutters.html">Windows, doors &amp; shutters C&amp;C calculator →</a>
+    <a href="/free-wind-load-calculator.html">Free per-ZIP wind speed lookup →</a>
+    <a href="/components-and-cladding-wind-loads/">Components &amp; cladding wind loads →</a>
+    <a href="/wind-load-calculator-for-engineers.html">Wind load tools for structural engineers →</a>
+    <a href="/wind-load-calculator-for-architects.html">Wind load workflow for architects →</a>
+    <a href="/florida-wind-load-calculator/">Florida wind load calculator (HVHZ, FBC) →</a>
+    <a href="/wind-load-calculator-shop.html">All calculators &amp; pricing →</a>
+  </div>
+</div></section>
+
+<!-- Final CTA -->
+<section class="final"><div class="wrap">
+  <div class="glass2">
+    <h2>From Chincoteague to Cumberland Gap, one VA calculator</h2>
+    <p>Eastern Shore oceanfront, Naval Station Norfolk, a Fairfax data center, a Roanoke ridge-top — one ZIP lookup, one 2021-VCC ASCE 7-16 calc, one report your Virginia PE can seal. Or run the <a href="/free-wind-load-calculator.html">free lookup</a> first.</p>
+    <div class="zip-form" style="margin-bottom:6px">
+      <a class="btn btn-primary" style="padding:15px 28px;font-size:15px" href="/wind-load-calculator-shop.html">Start free trial →</a>
+      <a class="btn btn-ghost" style="padding:15px 28px;font-size:15px" href="/contact.html">Contact sales</a>
+    </div>
+    <div class="hero-trust" style="margin-top:10px">
+      <span><span class="ck">✓</span> No credit card required</span>
+      <span><span class="ck">✓</span> Per-ZIP ASCE 7-16</span>
+      <span><span class="ck">✓</span> Cancel anytime</span>
+    </div>
+  </div>
+  <p class="updated">Last reviewed against the 2021 Virginia Construction Code and ASCE 7-16 as adopted by reference. Reviewed by our in-house Florida-licensed P.E.; VA PE sign-and-seal available through the firm's PE network. Serving wind load professionals since 2002.</p>
+</div></section>
+
+<!-- Footer -->
+<footer class="main-footer"><div class="container">
+  <div class="footer-content">
+    <div class="footer-column"><h3>Contact Information</h3><ul>
+      <li><strong>General Inquiries</strong></li>
+      <li><a href="mailto:info@windloadcalc.com">info@windloadcalc.com</a></li>
+      <li><a href="tel:8332723946">(833) 272-3946</a></li>
+      <li style="margin-top:.6rem"><strong>Sales</strong></li>
+      <li><a href="mailto:sales@windloadcalc.com">sales@windloadcalc.com</a></li>
+    </ul></div>
+    <div class="footer-column"><h3>Wind Load Calculators</h3><ul>
+      <li><a href="/wind-load-calculator-shop.html">All Calculators &amp; Pricing</a></li>
+      <li><a href="/shop/windows-doors-shutters.html">Windows, Doors &amp; Shutters</a></li>
+      <li><a href="/wind-load-calculator-comparison.html">Calculator Comparison</a></li>
+    </ul></div>
+    <div class="footer-column"><h3>Resources</h3><ul>
+      <li><a href="/free-wind-load-calculator.html">Free Wind Load Calculator</a></li>
+      <li><a href="/asce-7-wind-load-calculator/">ASCE 7 Guide</a></li>
+      <li><a href="/components-and-cladding-wind-loads/">C&amp;C Wind Loads</a></li>
+      <li><a href="/faq.html">Wind Load FAQ</a></li>
+    </ul></div>
+    <div class="footer-column"><h3>Company</h3><ul>
+      <li><a href="/why-us.html">About Us</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+      <li><a href="/privacy-policy.html">Privacy Policy</a></li>
+      <li><a href="/terms-of-service.html">Terms of Service</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2002&ndash;2026 WindLoadCalc · WindLoad Solutions, LLC — online since 2006. ASCE 7-16 &amp; 7-22 wind load software.</p></div>
+</div></footer>
+
+<script>
+(function(){
+  var nav=document.getElementById('nav');
+  function onScroll(){ nav.classList.toggle('scrolled', window.scrollY>40); }
+  onScroll(); window.addEventListener('scroll',onScroll,{passive:true});
+})();
+(function(){
+  var ham=document.getElementById('hamburger'), fm=document.getElementById('fullMenu'),
+      ov=document.getElementById('navOverlay'), fc=document.getElementById('fmClose');
+  if(!ham||!fm) return;
+  function setMenu(open){ fm.classList.toggle('open',open); ov.classList.toggle('open',open); ham.classList.toggle('open',open);
+    ham.setAttribute('aria-expanded',open); document.body.style.overflow=open?'hidden':''; }
+  ham.addEventListener('click',function(){ setMenu(!fm.classList.contains('open')); });
+  ov.addEventListener('click',function(){ setMenu(false); });
+  if(fc) fc.addEventListener('click',function(){ setMenu(false); });
+  fm.querySelectorAll('a').forEach(function(a){ a.addEventListener('click',function(){ setMenu(false); }); });
+  window.addEventListener('keydown',function(e){ if(e.key==='Escape') setMenu(false); });
+})();
+// ZIP launch — calc.windloadcalc.com accepts ?zip=NNNNN and auto-derives
+// city / state / county / wind speed. Virginia ZIPs route to ASCE 7-16 by default.
+function launchCalc(e){
+  e.preventDefault();
+  var zip=(document.getElementById('zip-input').value||'').replace(/[^0-9]/g,'').slice(0,5);
+  var target='https://calc.windloadcalc.com/';
+  if(zip.length===5){ target=target+'?zip='+zip; }
+  window.location.href=target;
+  return false;
+}
+</script>
 </body>
 </html>

@@ -2,53 +2,51 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="index, follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
     <link rel="manifest" href="/site.webmanifest">
     <link rel="shortcut icon" href="/favicon.ico?v=2">
 
-    <!-- SEO Meta -->
-    <title>Hawaii Wind Load Calculator — Post-Iniki + ASCE 7-16</title>
-    <meta name="description" content="Instant Hawaii wind load calculations per state code + ASCE 7. Honolulu, Maui, Kauai, Big Island county codes supported. Post-Iniki aware. Free lookup.">
-    <meta name="keywords" content="Hawaii wind load calculator, Honolulu wind load, Maui wind load, Kauai wind load calculator, Big Island wind load, Hawaii state building code, Hurricane Iniki, Hawaii ASCE 7-16, Hawaii special wind region">
-    <link rel="canonical" href="https://windloadcalc.com/hawaii-wind-load-calculator/">
+    <title>Hawaii Wind Load Calculator — CCPR + ASCE 7-16 Island Wind Speeds</title>
+    <meta name="description" content="Hawaii wind load calculator built for CCPR County Product Review and ASCE 7-16 special wind regions. Honolulu, Maui, Kauai, Big Island ZIPs — channeling between islands flagged. Free wind speed lookup.">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Hawaii Wind Load Calculator — Post-Iniki Code + ASCE 7-16">
-    <meta property="og:description" content="Instant Hawaii wind load calculations for Honolulu, Maui, Kauai, Big Island. Post-Iniki aware, county-by-county code support. Free wind speed lookup by ZIP.">
+    <meta property="og:title" content="Hawaii Wind Load Calculator — CCPR + ASCE 7-16">
+    <meta property="og:description" content="ASCE 7-16 island wind speeds with CCPR product approval and special-wind-region channeling flagged across all four Hawaii counties. Free ZIP lookup.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://windloadcalc.com/hawaii-wind-load-calculator/">
     <meta property="og:image" content="https://windloadcalc.com/images/video-posters/index-homepage.jpg">
     <meta property="og:site_name" content="WindLoadCalc">
 
-    <!-- SoftwareApplication Schema -->
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Hawaii Wind Load Calculator — CCPR + ASCE 7-16">
+    <meta name="twitter:description" content="ASCE 7-16 island wind speeds with CCPR product approval and special-wind-region channeling flagged across all four Hawaii counties.">
+    <meta name="twitter:image" content="https://windloadcalc.com/images/video-posters/index-homepage.jpg">
+
+    <link rel="canonical" href="https://windloadcalc.com/hawaii-wind-load-calculator/">
+
+    <!-- SoftwareApplication schema -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
         "name": "Hawaii Wind Load Calculator",
-        "alternateName": "WindLoadCalc Hawaii — The Post-Iniki Calculator Since 2002",
         "applicationCategory": "EngineeringApplication",
         "applicationSubCategory": "Structural Engineering",
         "operatingSystem": "Web Browser",
-        "description": "The post-Iniki Hawaii wind load calculator since 2002 — launched ten years after Hurricane Iniki rewrote Kauai construction practice, and the only ASCE 7-16 Hawaii calculator that treats the four-county adoption maze (City and County of Honolulu, Maui County, Kauai County, Hawaii County) as a real problem instead of a generic ZIP lookup. Separates trade-wind serviceability from hurricane design, isolates ASCE 7-16 Chapter 6 tsunami loading from wind loading so the two codes are never conflated, and flags Big Island volcanic exposure considerations on Hawaii County projects near Kilauea and Mauna Loa.",
+        "description": "ASCE 7-16 wind load calculator for Hawaii, with CCPR County Product Review certification awareness, special-wind-region channeling alerts, and Coastal Exposure D defaults across all four island counties.",
         "url": "https://windloadcalc.com/hawaii-wind-load-calculator/",
         "featureList": [
-            "Calculating Hawaii wind loads online before most generalist national wind calculators existed",
-            "Launched 2002 — ten years after Hurricane Iniki rewrote Kauai construction",
-            "Four-county adoption maze tracked: Honolulu, Maui, Kauai, Hawaii County",
-            "ASCE 7-16 wind speed mapping for all eight major Hawaiian islands",
-            "Special Wind Region alerts for interior Maui isthmus + windward slopes + ridge sites",
-            "Coastal Exposure D defaulted along windward open-ocean shoreline",
-            "Trade-wind serviceability vs hurricane design separated explicitly",
-            "Tsunami code (ASCE 7-16 Chapter 6) flagged as separate from wind code — never conflated",
-            "Volcanic exposure considerations surfaced for Big Island south-flank projects",
-            "Connection-schedule emphasis (post-Iniki Hawaii practice: connections govern, not member sizing)",
-            "Output formatted for HRS Chapter 464 Hawaii-licensed PE review",
-            "Components and Cladding (C&C) + MWFRS pressures with Zone 4/5 + roof zones"
+            "ASCE 7-16 wind speed mapping for all four Hawaii counties",
+            "CCPR (County Product Review) certification awareness",
+            "Special Wind Region channeling alerts per Section 26.5.3",
+            "Coastal Exposure D defaulted along open-ocean shoreline",
+            "Topographic factor Kzt flagged per Section 26.8 on ridge and saddle sites",
+            "Output formatted for HRS Chapter 464 Hawaii-licensed PE review"
         ],
         "offers": {
             "@type": "Offer",
@@ -64,1198 +62,542 @@
     }
     </script>
 
-    <!-- BreadcrumbList -->
+    <!-- FAQPage schema — 1:1 with visible FAQ -->
     <script type="application/ld+json">
     {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [{
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://windloadcalc.com/"
-        },{
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Hawaii Wind Load Calculator",
-            "item": "https://windloadcalc.com/hawaii-wind-load-calculator/"
-        }]
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "What is CCPR and why does Hawaii use it instead of a statewide product approval?", "acceptedAnswer": { "@type": "Answer", "text": "CCPR stands for County Product Review. Hawaii has no statewide product-approval list. Each county accepts windows, doors, and shutters on its own. The calculator surfaces the certified product pressure to compare against the required ASCE 7-16 demand." } },
+        { "@type": "Question", "name": "Why does Hawaii get flagged as a Special Wind Region?", "acceptedAnswer": { "@type": "Answer", "text": "ASCE 7-16 Section 26.5.3 designates parts of Hawaii as Special Wind Regions. Wind accelerates as it channels between islands and over ridges. The map speed is then not controlling; the engineer refines V and applies Kzt per Section 26.8." } },
+        { "@type": "Question", "name": "What ASCE 7-16 wind speeds apply to populated Hawaii ZIPs?", "acceptedAnswer": { "@type": "Answer", "text": "Most populated Hawaii ZIPs sit in roughly 105 to 130 mph Risk Category II — Honolulu 96813, Waikiki 96815, Wailuku 96793, Kahului 96732, Kihei 96753, Lihue 96766, Princeville 96722, Hilo 96720, Kailua-Kona 96740." } },
+        { "@type": "Question", "name": "Does WindLoadCalc PE-stamp Hawaii reports?", "acceptedAnswer": { "@type": "Answer", "text": "Our in-house P.E. is Florida-licensed only. Hawaii Revised Statutes Chapter 464 requires a Hawaii-licensed engineer to seal permit work. The calculator produces the analysis; your Hawaii PE seals it. Sign-and-seal in all 50 states runs via our PE network." } },
+        { "@type": "Question", "name": "Which Hawaii counties does the calculator cover?", "acceptedAnswer": { "@type": "Answer", "text": "All four. Honolulu (Oahu) under Honolulu DPP, Maui County under Maui DPW, Kauai County under Kauai DPW, and Hawaii County (Big Island) under Hawaii County DPW. Each runs its own CCPR review on top of the State Building Code." } },
+        { "@type": "Question", "name": "Why does the calculator default to Exposure D on the coast?", "acceptedAnswer": { "@type": "Answer", "text": "Most populated Hawaii sites sit within a mile of open ocean — Exposure D under ASCE 7-16. We default D on windward shoreline, apply C for inland sites, and B in canopied or shielded interiors." } },
+        { "@type": "Question", "name": "Can I run Hawaii wind speeds before subscribing?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The free lookup returns the ASCE 7-16 baseline design wind speed for any Hawaii ZIP, no signup. The paid calculator adds C&C pressures, the connection schedule, CCPR product comparison, and the Engineering Report." } }
+      ]
     }
     </script>
 
-    <!-- FAQPage (mirrors visible FAQ 1:1) -->
+    <!-- Breadcrumb schema -->
     <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [{
-            "@type": "Question",
-            "name": "Why does WindLoadCalc separate trade winds from tsunami code from wind code? Most calculators don't.",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Because in Hawaii these are three completely different problems and conflating them gets buildings designed wrong. Trade winds are a daily serviceability and fatigue load — the 15 to 25 mph northeast flow that runs across the islands most of the year, well below ASCE 7-16 design speeds, but real for window seal cycling, lanai uplift fatigue, and salt-laden connector corrosion. Hurricane wind loads come from the Cat 4 Iniki-class tail of the distribution and are governed by ASCE 7-16 Chapters 26 through 30. Tsunami loads come from ASCE 7-16 Chapter 6 (Tsunami Loads and Effects), driven by Pacific seismic sources, and have nothing to do with the wind code — Hilo has been devastated by tsunamis in 1946 and 1960 with no wind component at all. A generic calculator that treats Hawaii as a ZIP code with one wind speed cannot distinguish these three. WindLoadCalc does, because we have been working Hawaii since 2002 and we have watched engineers get burned by tools that quietly merged a tsunami inundation case into a hurricane wind case and produced a single useless number."
-            }
-        },{
-            "@type": "Question",
-            "name": "How long has WindLoadCalc been doing Hawaii — and why does that matter post-Iniki?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "WindLoadCalc launched in 2002 — exactly ten years after Hurricane Iniki struck Kauai on September 11, 1992 as a Category 4 storm with sustained 145 mph winds and gusts above 175 mph. By the time we shipped, the post-Iniki forensic engineering literature was complete, the Hawaii counties had already started rewriting connection-detailing requirements, hurricane clips had moved from optional to standard, and the lesson that connections (not member sizes) govern Hawaii wood-frame design was settled practice. We built the calculator into that reality from day one. The generalist national wind calculators that arrived later, by contrast, treat Hawaii as one entry in a global ZIP catalogue rather than as the only U.S. tropical archipelago with a Cat-4-landfall forensic record reshaping its codes. We have been here for over 24 years and seven ASCE editions (7-95, 7-98, 7-02, 7-05, 7-10, 7-16, 7-22). Iniki is not history to us — it is the reason this calculator exists in the form it does."
-            }
-        },{
-            "@type": "Question",
-            "name": "Do the four Hawaii counties actually adopt different codes? Isn't there a state code?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Yes, and yes. The State of Hawaii Building Code provides a uniform IBC-plus-ASCE-7-16 baseline, but each of the four counties — City and County of Honolulu, Maui County, Kauai County, and Hawaii County / Big Island — adopts the state code on its own timeline and stacks its own local amendments on top. Honolulu DPP (Department of Planning and Permitting) tends to track the state baseline closely. Maui DPW carries post-Iniki and post-Lahaina amendments tightening connection requirements and high-wind detailing. Kauai DPW Building Division — the agency for the island Iniki actually hit — places particularly aggressive emphasis on continuous load path detailing and hurricane clip installation on every residential permit. Hawaii County DPW layers in provisions for Big Island volcanic exposure that the other three counties never see. The county is the permit authority. The state code is the floor, not the ceiling. WindLoadCalc has tracked all four county adoptions for over two decades — a generic global calculator cannot, because it doesn't know the maze exists."
-            }
-        },{
-            "@type": "Question",
-            "name": "What does ASCE 7-16 actually say about Hawaii wind speeds — including special wind regions?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Under ASCE 7-16 mapping the populated parts of Oahu (Honolulu ZIPs 96813, 96815, 96816), Maui (Wailuku 96793, Kahului 96732, Kihei 96753), Kauai (Lihue 96766, Princeville 96722), and Hawaii County (Hilo 96720, Kailua-Kona 96740) sit in roughly the 105 to 130 mph Risk Category II range. ASCE 7-16 also designates portions of the Hawaiian Islands as Special Wind Regions per Section 26.5.3, meaning the basic wind speed on the standard map is not necessarily controlling — the engineer of record is required to determine the basic wind speed using regional climatic data and a rational analysis of topographic acceleration where the site sits on a ridge, in a saddle, in the central Maui isthmus between West Maui and Haleakala, or on a steep windward slope. Coastal Exposure D applies along every island's open-ocean shoreline by default. The WindLoadCalc engine returns the baseline ASCE 7-16 value and raises an SWR alert where the ZIP centroid sits inside a designated special wind region; the Hawaii-licensed engineer of record refines from there using Section 26.5.3 and applies a topographic factor Kzt above 1.0 per Section 26.8 when warranted."
-            }
-        },{
-            "@type": "Question",
-            "name": "Does WindLoadCalc PE-stamp Hawaii reports?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "No. WindLoadCalc's in-house P.E. is licensed in the State of Florida only, restricted to projects three stories or less — that scope does not extend to Hawaii. Hawaii Revised Statutes Chapter 464 requires that any engineering work performed for permit purposes in Hawaii be sealed by an engineer holding an active Hawaii license. WindLoadCalc generates the underlying ASCE 7-16 wind pressure calculation, the connection-uplift schedule, the Zone 4 / Zone 5 / roof-zone C&C breakdown, and the report content in the format Hawaii plan reviewers expect — and your Hawaii-licensed structural or civil engineer reviews it, takes responsibility for the analysis, and seals the document for permit submittal. Most island engineers we have worked with over 24 years will accept a clean WindLoadCalc report as the analysis basis and seal it under their own review. What we don't do is pretend our Florida-only PE service applies across the Pacific."
-            }
-        },{
-            "@type": "Question",
-            "name": "Why do Hawaii engineers care more about connections than member sizes?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Because Iniki forensics proved that members survive Cat 4 wind loads and connections do not — and that lesson is now built into how every working Hawaii structural engineer talks about wood-frame design. When the FEMA Building Performance Assessment Team and the NIST investigators walked the wreckage on Kauai in late 1992 and early 1993, they catalogued failure after failure where 2x rafters and studs were intact but the metal connectors, toe-nails, and gable-end bracing had let go — roofs lifted whole off walls, walls peeled away from sills, gable ends pushed inward, garage doors failed and pressurized interiors until roofs ballooned off within minutes. The post-Iniki literature drove continuous-load-path detailing into standard Hawaii residential practice and made hurricane clips, metal connectors, and rated garage doors baseline rather than optional. A Hawaii wind load report that emphasizes member sizing and treats the connector schedule as an afterthought is reading the problem backwards. WindLoadCalc surfaces the uplift loads and the connection schedule alongside the pressure tables because the post-Iniki Hawaii engineering community has been clear since 1993 that this is where Hawaii designs actually fail."
-            }
-        },{
-            "@type": "Question",
-            "name": "What does the Big Island add that the other three counties don't have?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Volcanic exposure, full stop. Hawaii County is the only one of the four counties with active basaltic volcanism inside its jurisdiction — Kilauea on the south flank and Mauna Loa above it. That changes structural design in two ways the wind code itself does not capture. First, volcanic ash loading on roofs during eruption events adds a transient roof load on top of whatever ASCE 7-16 wind load and snow/rain combination is already controlling — relevant in lava zones 1, 2, and 3 and on roof slopes that don't shed ash readily. Second, vog (volcanic fog — sulfur dioxide plus water vapor plus fine particulate) accelerates corrosion of metal connectors, fasteners, and exposed steel by a factor that coastal Florida engineers literally do not see, and that drives Hawaii County projects toward more aggressive corrosion-resistance specs on the same hurricane clips and continuous load path hardware Kauai post-Iniki practice already requires. Honolulu, Maui, and Kauai projects do not face this. Big Island projects do. WindLoadCalc returns the ASCE 7-16 wind load values that apply across all four counties; the volcanic loading and vog corrosion overlay is a Hawaii County conversation the engineer of record has with the building official."
-            }
-        },{
-            "@type": "Question",
-            "name": "How is Hawaii's hurricane code different from Florida's, when you've been doing both since 2002?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Three concrete differences worth knowing if you work both markets. (1) ASCE edition: Hawaii references ASCE 7-16 through the current State Building Code adoptions; Florida is on ASCE 7-22 under FBC 8th Edition (2023) — so the same calculation done on identical geometry returns slightly different pressures depending on which state you're in. (2) Jurisdictional shape: Florida has one statewide FBC with two HVHZ counties (Miami-Dade and Broward) carrying NOA / TAS 201 / TAS 202 / TAS 203 product approval overlays, while Hawaii fragments into four county adoptions each with its own amendments — there is no Hawaii HVHZ analog, but there are four code mosaics to track instead of one. (3) Design speed range: Florida coastal Risk Category II ranges roughly 140 to 180 mph (Collier 170, Broward 170, Miami-Dade 175, Keys ~180), while most populated Hawaii ZIPs sit at 105 to 130 mph — Hawaii's lower numbers reflect that historical Cat-4 hurricane landfalls have been less frequent than along the U.S. southeast coast, but the design still has to absorb the Iniki-class event when it comes. WindLoadCalc has been navigating both markets since 2002 — that is the practical reason we kept Florida and Hawaii on separate landing pages with separate engines rather than rolling everything into one global form the way general-purpose national calculators do."
-            }
-        }]
-    }
+    { "@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://windloadcalc.com/"},
+      {"@type":"ListItem","position":2,"name":"Wind Load Calculator","item":"https://windloadcalc.com/wind-load-calculator-landing.html"},
+      {"@type":"ListItem","position":3,"name":"Hawaii Wind Load Calculator","item":"https://windloadcalc.com/hawaii-wind-load-calculator/"}
+    ]}
     </script>
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.7;
-            color: #2d3748;
-            background: #ffffff;
-        }
-
-        /* Header */
-        .main-header {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: white;
-            padding: 1rem 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-        }
-
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .logo-image { height: 80px; width: auto; }
-
-        .header-cta {
-            background: #0018ff;
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 50px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .header-cta:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 24, 255, 0.3);
-        }
-
-        /* Hero */
-        .article-header {
-            background: linear-gradient(135deg, #0a7c5a 0%, #0018ff 60%, #181E57 100%);
-            color: white;
-            padding: 4rem 0 3rem;
-            text-align: center;
-        }
-
-        .article-header .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .article-category {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .article-title {
-            font-size: 3rem;
-            font-weight: 900;
-            line-height: 1.2;
-            margin-bottom: 1.5rem;
-        }
-
-        .article-subtitle {
-            font-size: 1.25rem;
-            opacity: 0.95;
-            line-height: 1.6;
-            font-weight: 400;
-            margin-bottom: 2rem;
-        }
-
-        /* Hero ZIP form */
-        .zip-form {
-            display: flex;
-            gap: 0.75rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            max-width: 560px;
-            margin: 0 auto;
-        }
-
-        .zip-input {
-            flex: 1 1 220px;
-            padding: 1rem 1.25rem;
-            font-size: 1.1rem;
-            border: none;
-            border-radius: 50px;
-            outline: none;
-            color: #1f2937;
-            min-width: 0;
-        }
-
-        .zip-submit {
-            background: white;
-            color: #0018ff;
-            border: none;
-            padding: 1rem 1.75rem;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-        }
-
-        .zip-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
-
-        .zip-note {
-            font-size: 0.85rem;
-            opacity: 0.85;
-            margin-top: 1rem;
-        }
-
-        /* Main content layout */
-        .content-wrapper {
-            display: grid;
-            grid-template-columns: 1fr 300px;
-            gap: 4rem;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-        }
-
-        .main-content { min-width: 0; }
-
-        .sidebar {
-            position: sticky;
-            top: 100px;
-            align-self: start;
-        }
-
-        .sidebar-box {
-            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
-            border: 2px solid #e5e7eb;
-            border-radius: 15px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .sidebar-box h3 {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #181E57;
-            margin-bottom: 1.5rem;
-        }
-
-        .sidebar-box ul { list-style: none; }
-        .sidebar-box ul li { margin-bottom: 0.75rem; }
-        .sidebar-box a {
-            color: #4a5568;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            display: block;
-            padding: 0.5rem 0 0.5rem 1rem;
-            border-left: 3px solid transparent;
-        }
-        .sidebar-box a:hover {
-            color: #0018ff;
-            border-left-color: #0018ff;
-            padding-left: 1.5rem;
-        }
-
-        .sidebar-cta {
-            background: linear-gradient(135deg, #0a7c5a 0%, #0018ff 100%);
-            border-radius: 15px;
-            padding: 2rem;
-            text-align: center;
-            color: white;
-        }
-
-        .sidebar-cta h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            color: white;
-        }
-
-        .sidebar-cta p {
-            margin-bottom: 1.5rem;
-            font-size: 0.95rem;
-            opacity: 0.95;
-        }
-
-        .sidebar-cta-button {
-            display: block;
-            background: white;
-            color: #0018ff;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            font-weight: 700;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .sidebar-cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.3);
-        }
-
-        /* Content typography */
-        .main-content h2 {
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: #181E57;
-            margin: 3rem 0 1.5rem;
-            line-height: 1.3;
-            border-bottom: 3px solid #0018ff;
-            padding-bottom: 0.75rem;
-        }
-
-        .main-content h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #2d3748;
-            margin: 2rem 0 1rem;
-        }
-
-        .main-content p {
-            font-size: 1.08rem;
-            line-height: 1.8;
-            margin-bottom: 1.25rem;
-            color: #4a5568;
-        }
-
-        .main-content ul {
-            margin: 1.25rem 0;
-            padding-left: 1.5rem;
-        }
-
-        .main-content ul li {
-            margin-bottom: 0.75rem;
-            color: #4a5568;
-            line-height: 1.7;
-        }
-
-        .main-content ul li strong { color: #0018ff; font-weight: 700; }
-
-        /* Wind speed table */
-        .wind-table-wrap { overflow-x: auto; margin: 2rem 0; }
-
-        .wind-table {
-            width: 100%;
-            border-collapse: collapse;
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
-        }
-
-        .wind-table th {
-            background: linear-gradient(135deg, #0a7c5a 0%, #0018ff 100%);
-            color: white;
-            padding: 1rem 1.25rem;
-            text-align: left;
-            font-weight: 700;
-            font-size: 0.95rem;
-        }
-
-        .wind-table td {
-            padding: 0.9rem 1.25rem;
-            border-bottom: 1px solid #e5e7eb;
-            font-size: 0.98rem;
-        }
-
-        .wind-table tr:nth-child(even) td { background: #f9fafb; }
-        .wind-table tr:last-child td { border-bottom: none; }
-
-        .speed-cell { font-weight: 700; color: #0018ff; white-space: nowrap; }
-        .swr-badge {
-            display: inline-block;
-            background: #fef3c7;
-            color: #b45309;
-            font-size: 0.75rem;
-            font-weight: 700;
-            padding: 0.15rem 0.5rem;
-            border-radius: 10px;
-            margin-left: 0.4rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .exp-d-badge {
-            display: inline-block;
-            background: #dbeafe;
-            color: #1d4ed8;
-            font-size: 0.75rem;
-            font-weight: 700;
-            padding: 0.15rem 0.5rem;
-            border-radius: 10px;
-            margin-left: 0.4rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        /* Info boxes */
-        .info-box {
-            background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%);
-            border-left: 4px solid #0018ff;
-            border-radius: 10px;
-            padding: 1.5rem 2rem;
-            margin: 2rem 0;
-        }
-
-        .info-box h4 {
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: #0018ff;
-            margin-bottom: 0.75rem;
-        }
-
-        .info-box p { font-size: 1rem; line-height: 1.7; margin-bottom: 0; }
-
-        .warning-box {
-            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-            border-left: 4px solid #f59e0b;
-        }
-
-        .warning-box h4 { color: #b45309; }
-
-        .iniki-box {
-            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
-            border-left: 4px solid #b91c1c;
-        }
-
-        .iniki-box h4 { color: #b91c1c; }
-
-        /* County cards */
-        .county-cards {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.25rem;
-            margin: 2rem 0;
-        }
-
-        .county-card {
-            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
-            border: 2px solid #e5e7eb;
-            border-radius: 12px;
-            padding: 1.5rem;
-            text-decoration: none;
-            color: inherit;
-            transition: all 0.3s ease;
-            display: block;
-        }
-
-        .county-card:hover {
-            border-color: #0018ff;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 24, 255, 0.1);
-        }
-
-        .county-card h4 {
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: #181E57;
-            margin-bottom: 0.5rem;
-        }
-
-        .county-card .county-speed {
-            font-size: 1.6rem;
-            font-weight: 900;
-            color: #0018ff;
-            margin-bottom: 0.5rem;
-        }
-
-        .county-card p {
-            font-size: 0.92rem;
-            line-height: 1.55;
-            margin-bottom: 0;
-            color: #6b7280;
-        }
-
-        /* Process steps */
-        .process-steps { counter-reset: step; margin: 2rem 0; }
-
-        .process-step {
-            background: white;
-            border: 2px solid #e5e7eb;
-            border-radius: 12px;
-            padding: 1.5rem 1.5rem 1.5rem 4.5rem;
-            margin-bottom: 1.25rem;
-            position: relative;
-        }
-
-        .process-step::before {
-            counter-increment: step;
-            content: counter(step);
-            position: absolute;
-            left: 1.5rem;
-            top: 1.5rem;
-            width: 2rem;
-            height: 2rem;
-            background: linear-gradient(135deg, #0a7c5a 0%, #0018ff 100%);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 1.05rem;
-        }
-
-        .process-step h4 {
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: #2d3748;
-            margin-bottom: 0.5rem;
-        }
-
-        .process-step p {
-            font-size: 1rem;
-            margin-bottom: 0;
-        }
-
-        /* FAQ */
-        .faq-item {
-            background: white;
-            border: 2px solid #e5e7eb;
-            border-radius: 12px;
-            margin-bottom: 1rem;
-            overflow: hidden;
-        }
-
-        .faq-item summary {
-            padding: 1.25rem 1.5rem;
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #181E57;
-            cursor: pointer;
-            list-style: none;
-            position: relative;
-            padding-right: 3rem;
-        }
-
-        .faq-item summary::-webkit-details-marker { display: none; }
-
-        .faq-item summary::after {
-            content: '+';
-            position: absolute;
-            right: 1.25rem;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 1.5rem;
-            color: #0018ff;
-            font-weight: 400;
-            line-height: 1;
-        }
-
-        .faq-item[open] summary::after { content: '−'; }
-
-        .faq-item .faq-answer {
-            padding: 0 1.5rem 1.5rem;
-            color: #4a5568;
-            line-height: 1.7;
-        }
-
-        /* Content CTA */
-        .content-cta {
-            background: linear-gradient(135deg, #0a7c5a 0%, #0018ff 50%, #8b5cf6 100%);
-            background-size: 200% 200%;
-            border-radius: 20px;
-            padding: 3rem 2.5rem;
-            margin: 3rem 0;
-            text-align: center;
-            color: white;
-        }
-
-        .content-cta h3 {
-            font-size: 1.85rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            color: white;
-        }
-
-        .content-cta p {
-            font-size: 1.1rem;
-            margin-bottom: 1.75rem;
-            opacity: 0.95;
-            color: white;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: white;
-            color: #0018ff;
-            padding: 1rem 2.25rem;
-            border-radius: 50px;
-            font-weight: 700;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
-            font-size: 1.05rem;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
-        }
-
-        .cta-button i { margin-left: 0.5rem; }
-
-        /* Internal links section */
-        .related-links {
-            background: #f9fafb;
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 2rem 0;
-        }
-
-        .related-links h3 {
-            margin-top: 0;
-            color: #181E57;
-        }
-
-        .related-links ul {
-            list-style: none;
-            padding: 0;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0.75rem;
-        }
-
-        .related-links ul li { margin: 0; }
-
-        .related-links a {
-            color: #0018ff;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .related-links a:hover { text-decoration: underline; }
-
-        /* Trust block */
-        .trust-block {
-            background: linear-gradient(135deg, #f1f5f9 0%, #ffffff 100%);
-            border: 2px solid #cbd5e1;
-            border-radius: 12px;
-            padding: 1.75rem 2rem;
-            margin: 2.5rem 0;
-            display: flex;
-            gap: 1.5rem;
-            align-items: center;
-        }
-
-        .trust-block .trust-icon {
-            font-size: 2.5rem;
-            color: #0018ff;
-            flex-shrink: 0;
-        }
-
-        .trust-block p {
-            margin-bottom: 0;
-            font-size: 1rem;
-            color: #334155;
-        }
-
-        .trust-block strong { color: #181E57; }
-
-        /* Last updated */
-        .last-updated {
-            text-align: center;
-            font-size: 0.9rem;
-            color: #6b7280;
-            margin: 2rem 0 0;
-            padding-top: 1.5rem;
-            border-top: 1px solid #e5e7eb;
-        }
-
-        /* Footer */
-        .main-footer {
-            background: #1f2937;
-            color: white;
-            padding: 3rem 0 1.5rem;
-        }
-
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-        }
-
-        .footer-column h3 {
-            font-size: 1rem;
-            margin-bottom: 1rem;
-            color: white;
-        }
-
-        .footer-column ul { list-style: none; padding: 0; }
-        .footer-column li { margin-bottom: 0.5rem; font-size: 0.92rem; }
-        .footer-column a {
-            color: rgba(255, 255, 255, 0.75);
-            text-decoration: none;
-        }
-        .footer-column a:hover { color: white; }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
-            margin-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 0.9rem;
-        }
-
-        /* Bold positioning callout */
-        .wow-callout {
-            background: linear-gradient(135deg, #181E57 0%, #0018ff 100%);
-            border-radius: 16px;
-            padding: 2rem 2.25rem;
-            margin: 2.5rem 0;
-            color: white;
-            box-shadow: 0 12px 30px rgba(0, 24, 255, 0.18);
-        }
-
-        .wow-callout h3 {
-            color: white;
-            font-size: 1.4rem;
-            margin: 0 0 1.25rem;
-            font-weight: 800;
-            letter-spacing: -0.01em;
-        }
-
-        .wow-callout-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.25rem;
-        }
-
-        .wow-stat {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.16);
-            border-radius: 10px;
-            padding: 1rem 1rem 1.1rem;
-        }
-
-        .wow-stat .num {
-            display: block;
-            font-size: 1.8rem;
-            font-weight: 900;
-            line-height: 1.1;
-            margin-bottom: 0.35rem;
-            color: #ffffff;
-        }
-
-        .wow-stat .label {
-            font-size: 0.85rem;
-            line-height: 1.45;
-            opacity: 0.92;
-        }
-
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .content-wrapper {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-            .sidebar { position: static; }
-            .county-cards { grid-template-columns: 1fr; }
-            .footer-content { grid-template-columns: repeat(2, 1fr); }
-            .wow-callout-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-
-        @media (max-width: 640px) {
-            .article-title { font-size: 2rem; }
-            .article-subtitle { font-size: 1.05rem; }
-            .main-content h2 { font-size: 1.65rem; }
-            .process-step { padding-left: 3.5rem; }
-            .content-cta { padding: 2rem 1.5rem; }
-            .content-cta h3 { font-size: 1.4rem; }
-            .related-links ul { grid-template-columns: 1fr; }
-            .footer-content { grid-template-columns: 1fr; }
-            .wind-table th, .wind-table td { padding: 0.7rem 0.85rem; font-size: 0.9rem; }
-            .trust-block { flex-direction: column; text-align: center; }
-            .wow-callout-grid { grid-template-columns: 1fr; }
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#0018FF; --blue-deep:#181E57; --blue-bright:#3a5bff;
+  --muted:#94a3b8; --line:rgba(255,255,255,.08); --bg:#070a18; --surface:rgba(255,255,255,.04);
+  --gold:#E8B530; --luxe:cubic-bezier(.22,.61,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:#e8edf7;
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.55}
+a{text-decoration:none;color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+.aurora{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.aurora span{position:absolute;border-radius:50%;filter:blur(90px);opacity:.5}
+.aurora .a1{width:620px;height:620px;background:#0018FF;top:-180px;left:-120px;animation:drift1 18s var(--luxe) infinite alternate}
+.aurora .a2{width:540px;height:540px;background:#10B981;bottom:-200px;right:-120px;opacity:.28;animation:drift2 22s var(--luxe) infinite alternate}
+.aurora .a3{width:420px;height:420px;background:#181E57;top:34%;right:16%;opacity:.55;animation:drift1 26s var(--luxe) infinite alternate-reverse}
+@keyframes drift1{to{transform:translate(80px,60px) scale(1.15)}}
+@keyframes drift2{to{transform:translate(-70px,-50px) scale(1.1)}}
+.grid-tex{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:54px 54px;mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000 40%,transparent 100%)}
+
+/* Nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:.3s var(--luxe);background:transparent;border-bottom:1px solid transparent}
+nav.scrolled{backdrop-filter:blur(14px);border-bottom:1px solid var(--line);
+  background:linear-gradient(90deg, rgba(240,244,255,.97) 0%, rgba(223,232,255,.93) 13%, rgba(22,28,58,.92) 46%, rgba(7,10,24,.95) 100%)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;padding:12px clamp(24px,4vw,48px);transition:padding .3s var(--luxe)}
+nav.scrolled .nav-in{padding:8px clamp(24px,4vw,48px)}
+.logo{z-index:1001;display:flex;align-items:center}
+.logo-image{height:84px;width:auto;display:block;filter:drop-shadow(0 2px 10px rgba(0,0,0,.4));transition:all .3s ease}
+nav.scrolled .logo-image{height:64px;filter:none}
+.nav-right{display:flex;align-items:center;gap:18px}
+.nav-links{display:flex;align-items:center;gap:28px}
+.nav-links a.l{position:relative;font-size:14px;color:#fff;font-weight:500;opacity:.88;transition:opacity .2s var(--luxe);text-shadow:0 1px 8px rgba(0,0,0,.45)}
+.nav-links a.l:hover{opacity:1}
+.btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;border-radius:11px;cursor:pointer;transition:.25s var(--luxe);border:none;font-family:inherit}
+.btn-ghost{background:rgba(255,255,255,.06);color:#fff;padding:11px 18px;font-size:14px;border:1px solid rgba(255,255,255,.22)}
+.btn-ghost:hover{border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.12)}
+.btn-primary{background:linear-gradient(135deg,#0018FF,#2540ff);color:#fff;padding:12px 22px;font-size:14px;box-shadow:0 10px 30px rgba(0,24,255,.45)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(0,24,255,.6)}
+.hamburger{display:flex;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;z-index:60}
+.hamburger span{display:block;width:26px;height:3px;border-radius:2px;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.6);transition:.3s var(--luxe)}
+.hamburger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+.nav-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);opacity:0;visibility:hidden;transition:.3s var(--luxe);z-index:55}
+.nav-overlay.open{opacity:1;visibility:visible}
+.full-menu{position:fixed;top:0;right:0;height:100vh;height:100dvh;width:min(90vw,380px);z-index:60;
+  background:rgba(10,14,30,.985);backdrop-filter:blur(18px);border-left:1px solid var(--line);
+  box-shadow:-24px 0 60px rgba(0,0,0,.55);transform:translateX(100%);transition:transform .3s var(--luxe);overflow-y:auto;padding:74px 0 28px}
+.full-menu.open{transform:translateX(0)}
+.fm-head{display:flex;align-items:center;justify-content:space-between;padding:0 26px 14px;border-bottom:1px solid var(--line)}
+.fm-head span{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.fm-close{background:none;border:none;color:#fff;font-size:24px;line-height:1;cursor:pointer;padding:2px 8px}
+.fm-group{padding:14px 26px 4px;border-bottom:1px solid var(--line)}
+.fm-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9db0ff;margin-bottom:6px}
+.fm-group a{display:block;padding:9px 0;font-size:15px;color:#dbe3f5;font-weight:500;transition:color .15s}
+.fm-group a:hover{color:#fff}
+.fm-actions{display:flex;flex-direction:column;gap:10px;padding:20px 26px 0}
+.fm-actions .btn{width:100%;justify-content:center;padding:14px;font-size:15px}
+
+/* Hero (aurora-only, no video) */
+.hero-stage{position:relative;overflow:hidden;isolation:isolate}
+.hero-veil{position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(ellipse 70% 60% at 50% 26%, rgba(0,24,255,.18), transparent 62%),
+    linear-gradient(180deg, rgba(7,10,24,.66) 0%, rgba(7,10,24,.42) 32%, rgba(7,10,24,.72) 74%, var(--bg) 100%)}
+header{position:relative;z-index:2;padding:165px 0 70px;text-align:center}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;background:rgba(7,10,24,.5);border:1px solid rgba(58,91,255,.45);
+  color:#c3cdff;font-size:13px;font-weight:600;padding:8px 16px;border-radius:999px;margin-bottom:24px;backdrop-filter:blur(6px)}
+.eyebrow .dot{width:7px;height:7px;border-radius:50%;background:#34D399;box-shadow:0 0 0 4px rgba(52,211,153,.25)}
+h1{font-size:clamp(34px,5.2vw,58px);line-height:1.05;font-weight:800;letter-spacing:-.025em;max-width:18ch;margin:0 auto 16px;text-shadow:0 4px 28px rgba(0,0,0,.45)}
+h1 .grad{background:linear-gradient(110deg,#34D399,#10B981 55%,#3a5bff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{font-size:clamp(16px,2vw,19px);color:#d3dbef;max-width:64ch;margin:0 auto 22px;text-shadow:0 2px 14px rgba(0,0,0,.5)}
+.sub strong{color:#fff}
+.zip-form{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;max-width:520px;margin:8px auto 16px}
+.zip-input{flex:1 1 220px;min-width:0;padding:14px 18px;font-size:16px;border:none;border-radius:12px;outline:none;color:#1f2937}
+.zip-submit{background:linear-gradient(135deg,#34D399,#10B981);color:#04221a;border:none;padding:14px 22px;border-radius:12px;font-weight:800;font-size:15px;cursor:pointer;white-space:nowrap;font-family:inherit;transition:.25s var(--luxe)}
+.zip-submit:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(16,185,129,.4)}
+.hero-trust{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;font-size:13px;color:#cdd6ec;margin-top:6px}
+.hero-trust span{display:inline-flex;align-items:center;gap:6px}
+.hero-trust .ck{color:#34D399;font-weight:800}
+.stat-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:34px}
+.stat-tile{background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:14px;padding:16px 22px;min-width:150px;backdrop-filter:blur(6px)}
+.stat-tile .n{font-size:24px;font-weight:800;letter-spacing:-.02em;background:linear-gradient(135deg,#fff,#9db0ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat-tile .l{font-size:12.5px;color:#aeb8cf;margin-top:3px}
+
+section{position:relative;z-index:1;padding:62px 0}
+.sec-head{text-align:center;max-width:70ch;margin:0 auto 40px}
+.sec-head h2{font-size:clamp(26px,3.2vw,38px);font-weight:800;letter-spacing:-.02em;margin-bottom:12px}
+.sec-head p{color:#aeb8cf;font-size:16px}
+
+/* Fact cards */
+.benefits{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.benefit{display:flex;align-items:flex-start;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.benefit .ic{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex:none;background:linear-gradient(135deg,rgba(0,24,255,.3),rgba(24,30,87,.5));border:1px solid rgba(58,91,255,.4);font-size:18px}
+.benefit b{font-size:14px;font-weight:700;display:block}
+.benefit small{font-size:12.5px;color:var(--muted)}
+
+/* Glass cards (counties / differentiators) */
+.diff-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.diff{position:relative;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:26px 24px;box-shadow:0 12px 32px rgba(0,0,0,.32);transition:.35s var(--luxe)}
+.diff:hover{transform:translateY(-5px);border-color:rgba(58,91,255,.5);box-shadow:0 20px 44px rgba(0,24,255,.18)}
+.diff .badge{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#04221a;background:linear-gradient(135deg,#34D399,#10B981);padding:4px 10px;border-radius:999px;margin-bottom:14px}
+.diff h3{font-size:18px;font-weight:800;margin-bottom:6px;letter-spacing:-.01em}
+.diff .tag{font-size:13px;color:#9db0ff;font-weight:600;margin-bottom:12px;display:block}
+.diff p{font-size:14px;color:#aeb8cf;margin-bottom:12px}
+.diff ul{list-style:none}
+.diff ul li{font-size:13.5px;color:#c2cce0;padding:5px 0 5px 18px;position:relative;line-height:1.5}
+.diff ul li::before{content:"";position:absolute;left:0;top:11px;width:6px;height:6px;border-radius:50%;background:#34D399}
+.diff ul li b{color:#fff}
+
+.pill-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:34px}
+.pill{font-size:13px;font-weight:600;color:#c2cce0;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:8px 16px}
+.pill::before{content:"\2713 ";color:#34D399;font-weight:800}
+
+/* Wind speed table */
+.cmp-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:16px;background:var(--surface)}
+.cmp{width:100%;border-collapse:collapse;font-size:13.5px;min-width:720px}
+.cmp th,.cmp td{padding:12px 16px;text-align:left;border-bottom:1px solid var(--line)}
+.cmp thead th{font-weight:800;font-size:13px;background:rgba(16,185,129,.1);color:#6ee7b7}
+.cmp td.speed{color:#fff;font-weight:700;white-space:nowrap}
+.cmp tbody tr:last-child td{border-bottom:none}
+.cmp tbody tr:hover{background:rgba(255,255,255,.03)}
+.tagchip{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:2px 7px;border-radius:8px;margin-left:6px}
+.tagchip.swr{background:rgba(232,181,48,.18);color:#facc55}
+.tagchip.expd{background:rgba(58,91,255,.2);color:#9db0ff}
+
+/* Steps */
+.steps{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;counter-reset:step}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px 20px;position:relative}
+.step .num{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;color:#fff;background:linear-gradient(135deg,#0018FF,#2540ff);margin-bottom:12px;box-shadow:0 8px 20px rgba(0,24,255,.4)}
+.step h4{font-size:15px;font-weight:700;margin-bottom:6px}
+.step p{font-size:13.5px;color:#aeb8cf}
+
+/* Callout */
+.callout{background:linear-gradient(135deg,rgba(0,24,255,.12),rgba(16,185,129,.08));border:1px solid rgba(58,91,255,.35);border-radius:18px;padding:26px 28px;margin-top:8px}
+.callout h3{font-size:18px;font-weight:800;margin-bottom:10px}
+.callout p{font-size:14.5px;color:#cdd6ec}
+.callout ul{list-style:none;margin-top:10px}
+.callout ul li{font-size:14px;color:#c2cce0;padding:5px 0 5px 18px;position:relative;line-height:1.5}
+.callout ul li::before{content:"";position:absolute;left:0;top:11px;width:6px;height:6px;border-radius:50%;background:#facc55}
+.callout ul li b{color:#fff}
+
+/* Proof band */
+.proof{background:linear-gradient(135deg,rgba(0,24,255,.12),rgba(16,185,129,.08));border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:8px}
+.proof-item{text-align:center}
+.proof-item .n{font-size:30px;font-weight:800;letter-spacing:-.03em;background:linear-gradient(135deg,#fff,#9db0ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.proof-item .c{font-size:14px;color:#cdd6ec;margin-top:4px}
+
+/* FAQ */
+.faq{max-width:860px;margin:0 auto}
+.faq details{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 22px;margin-bottom:12px}
+.faq summary{font-size:16px;font-weight:700;cursor:pointer;list-style:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";float:right;color:#9db0ff;font-weight:800}
+.faq details[open] summary::after{content:"\2013"}
+.faq p{margin-top:11px;color:#aeb8cf;font-size:14.5px}
+
+.final{text-align:center}
+.final .glass2{background:linear-gradient(160deg,rgba(0,24,255,.18),rgba(16,185,129,.1));border:1px solid rgba(58,91,255,.4);border-radius:26px;padding:54px 40px;box-shadow:0 40px 100px rgba(0,24,255,.25)}
+.final h2{font-size:clamp(28px,3.6vw,42px);font-weight:800;letter-spacing:-.02em;margin-bottom:14px}
+.final p{color:#cdd6ec;font-size:17px;max-width:60ch;margin:0 auto 22px}
+.final p a{color:#34D399;font-weight:600}
+
+.main-footer{position:relative;z-index:1;border-top:1px solid var(--line);padding:54px 0 28px;background:rgba(0,0,0,.25)}
+.main-footer .container{max-width:1180px;margin:0 auto;padding:0 28px}
+.footer-content{display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
+.footer-column h3{font-size:15px;font-weight:700;color:#fff;margin-bottom:15px}
+.footer-column ul{list-style:none}
+.footer-column li{margin-bottom:9px;font-size:14px;color:#aeb8cf}
+.footer-column a{color:#aeb8cf;transition:color .2s}
+.footer-column a:hover{color:#fff}
+.footer-bottom{border-top:1px solid var(--line);margin-top:34px;padding-top:20px;text-align:center;color:var(--muted);font-size:13px}
+
+@media(max-width:980px){
+  .benefits{grid-template-columns:repeat(2,1fr)}
+  .diff-grid,.proof-grid{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+}
+@media(max-width:880px){.nav-links{display:none}.footer-content{grid-template-columns:repeat(2,1fr)}header{padding:128px 0 44px}}
+@media(max-width:560px){.wrap{padding:0 20px}.benefits{grid-template-columns:1fr}.footer-content{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.aurora span{animation:none}}
+</style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="main-header">
-        <div class="header-container">
-            <a href="/index.html">
-                <img height="100" width="300" src="/images/windloadcalc-logo.svg" alt="WindLoadCalc — Hawaii post-Iniki wind load calculator since 2002" class="logo-image">
-            </a>
-            <a href="/wind-load-calculator-shop.html" class="header-cta">Start Free Trial</a>
-        </div>
-    </header>
+<div class="aurora"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
+<div class="grid-tex"></div>
 
-    <!-- Hero -->
-    <section class="article-header">
-        <div class="container">
-            <div class="article-category">The Post-Iniki Hawaii Wind Calculator — Since 2002</div>
-            <h1 class="article-title">Hawaii Wind Load Calculator</h1>
-            <p class="article-subtitle"><strong>WindLoadCalc has been calculating Hawaii wind loads since 2002 — ten years after Hurricane Iniki reshaped Kauai construction permanently.</strong> We track all four county code adoptions (Honolulu, Maui, Kauai, Hawaii County), keep trade-wind serviceability separate from ASCE 7-16 hurricane design, isolate ASCE 7-16 Chapter 6 tsunami loading from wind loading so the two are never conflated, and flag Big Island volcanic exposure on Hawaii County projects. Generalist national wind calculators treat Hawaii as a generic ZIP. We don't.</p>
-
-            <form class="zip-form" id="zip-form" onsubmit="return launchCalc(event)">
-                <input type="text" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" class="zip-input" id="zip-input" placeholder="Enter Hawaii ZIP (e.g. 96813)" aria-label="Hawaii ZIP code">
-                <button type="submit" class="zip-submit">Pull Post-Iniki Hawaii Pressures &rarr;</button>
-            </form>
-            <p class="zip-note">7-day free trial — every Hawaii report is special-wind-region aware and built for HRS Chapter 464 PE review.</p>
-        </div>
-    </section>
-
-    <!-- Main content -->
-    <div class="content-wrapper">
-        <main class="main-content">
-            <p><strong>Hawaii is the only U.S. state in the tropics, the only one whose modern wood-frame practice was written into existence by a single Category 4 landfall, and the only one that fragments wind-code adoption across four independent county authorities sitting on top of a state baseline.</strong> Hurricane Iniki struck Kauai on September 11, 1992 with sustained 145 mph winds and gusts above 175 mph. Ten years later — in 2002 — WindLoadCalc launched, with the post-Iniki forensic engineering literature already locked in as the foundation of how we treat Hawaii. The generalist national wind calculators most often compared to us today arrived more than a decade later. Long after Iniki. Long after we did.</p>
-
-            <p>That gap is the entire point of this page. A generic global calculator can hand you a ZIP lookup. What it cannot hand you is twenty-four years of tracking how Honolulu DPP, Maui DPW, Kauai DPW, and Hawaii County DPW adopt and amend the State Building Code on independent timelines, of watching engineers get burned by tools that quietly merged tsunami inundation cases into hurricane wind cases, of building Special Wind Region alerts into the engine because the central Maui isthmus and Kauai ridge sites are not generic Exposure C, of knowing that on Big Island the conversation also includes vog corrosion and ash loading near Kilauea. Enter a Hawaii ZIP above and the calculator launches preloaded with the right county, the ASCE 7-16 baseline value, an SWR alert if your site is inside a designated special wind region, and the Exposure D default along any windward open-ocean shore.</p>
-
-            <div class="wow-callout">
-                <h3>Hawaii expertise since 2002 — what twenty-four years actually buys you</h3>
-                <div class="wow-callout-grid">
-                    <div class="wow-stat">
-                        <span class="num">10 yrs</span>
-                        <span class="label">Post-Iniki when we launched. The forensic literature was already settled practice.</span>
-                    </div>
-                    <div class="wow-stat">
-                        <span class="num">4 / 4</span>
-                        <span class="label">Hawaii county adoptions tracked — Honolulu DPP, Maui DPW, Kauai DPW, Hawaii County DPW.</span>
-                    </div>
-                    <div class="wow-stat">
-                        <span class="num">3 codes</span>
-                        <span class="label">Trade winds, hurricane wind (ASCE 7-16 Ch. 26-30), tsunami (Ch. 6) — held separate. Never conflated.</span>
-                    </div>
-                    <div class="wow-stat">
-                        <span class="num">11 yrs</span>
-                        <span class="label">Head start over the generalist national wind calculators that arrived later. The age advantage is not a feature competitors can ship.</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="trust-block">
-                <div class="trust-icon"><i class="fas fa-anchor"></i></div>
-                <p><strong>Calculating Hawaii wind loads online before most generalist national wind calculators existed.</strong> WindLoadCalc has been generating permit-ready wind load reports across seven ASCE 7 editions — 7-95, 7-98, 7-02, 7-05, 7-10, 7-16, 7-22 — for U.S. coastal and hurricane-zone work, including Hawaii since the calculator first shipped in 2002. Hawaii's exposure is not Florida's, and our engine has known that for over twenty-four years.</p>
-            </div>
-
-            <div class="info-box">
-                <h4><i class="fas fa-info-circle"></i> What "Hawaii-ready" actually means on this calculator</h4>
-                <p>Hawaii wind load done right reads the ASCE 7-16 island maps correctly, raises a Special Wind Region alert on every site where the standard map value is not controlling (interior Maui isthmus, windward slopes, ridge sites, the Pali, anywhere ASCE 7-16 Section 26.5.3 expects rational topographic refinement), defaults to Exposure D along the windward open-ocean coastline of every island, keeps daily trade-wind serviceability questions separate from Cat-4 hurricane design and both of those separate from ASCE 7-16 Chapter 6 tsunami loading, surfaces Big Island volcanic exposure considerations on Hawaii County projects, and produces a report a Hawaii-licensed PE under HRS Chapter 464 will accept as the analysis basis for a sealed permit submittal. WindLoadCalc does each of those, and has since 2002 — the only U.S. wind load calculator on the web at the time.</p>
-            </div>
-
-            <h2 id="wind-speeds">ASCE 7-16 Wind Speeds Across the Hawaiian Chain</h2>
-
-            <p>Population centers across the four counties cluster between roughly 105 and 130 mph under ASCE 7-16 Risk Category II — far below Florida's coastal 140 to 180 mph range, but with an Iniki-class tail event that controls every connection schedule on the island. The table below lists representative design wind speeds for representative ZIPs on each island. The calculator engine returns the precise ASCE 7-16 value for any Hawaii ZIP you enter and flags Special Wind Region sites where the standard map is not controlling under Section 26.5.3.</p>
-
-            <div class="wind-table-wrap">
-                <table class="wind-table">
-                    <thead>
-                        <tr>
-                            <th>City / Island</th>
-                            <th>County</th>
-                            <th>Sample ZIP</th>
-                            <th>Risk Cat II Wind Speed</th>
-                            <th>Hawaii-specific notes</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Honolulu (downtown)</td>
-                            <td>City &amp; County of Honolulu (Oahu)</td>
-                            <td>96813</td>
-                            <td class="speed-cell">~105–115 mph</td>
-                            <td>Leeward urban core under Honolulu DPP; state baseline applies</td>
-                        </tr>
-                        <tr>
-                            <td>Waikiki / Diamond Head</td>
-                            <td>City &amp; County of Honolulu</td>
-                            <td>96815</td>
-                            <td class="speed-cell">~110–120 mph <span class="exp-d-badge">Exp D</span></td>
-                            <td>South-shore open ocean — Exposure D defaults on; lanai uplift fatigue real</td>
-                        </tr>
-                        <tr>
-                            <td>Kaimuki / Kahala</td>
-                            <td>City &amp; County of Honolulu</td>
-                            <td>96816</td>
-                            <td class="speed-cell">~105–115 mph</td>
-                            <td>South Oahu residential — partially-open enclosure common for lanai screens</td>
-                        </tr>
-                        <tr>
-                            <td>Wailuku</td>
-                            <td>Maui County (Maui DPW)</td>
-                            <td>96793</td>
-                            <td class="speed-cell">~115–130 mph <span class="swr-badge">SWR check</span></td>
-                            <td>Central Maui isthmus — topographic channeling between West Maui &amp; Haleakala</td>
-                        </tr>
-                        <tr>
-                            <td>Kahului</td>
-                            <td>Maui County (Maui DPW)</td>
-                            <td>96732</td>
-                            <td class="speed-cell">~115–130 mph <span class="swr-badge">SWR check</span></td>
-                            <td>North Maui shore + isthmus exposure — refine basic V per Sec. 26.5.3</td>
-                        </tr>
-                        <tr>
-                            <td>Lihue</td>
-                            <td>Kauai County (Kauai DPW)</td>
-                            <td>96766</td>
-                            <td class="speed-cell">~105–125 mph</td>
-                            <td>Iniki landfall island — connection schedule + continuous load path govern</td>
-                        </tr>
-                        <tr>
-                            <td>Hilo</td>
-                            <td>Hawaii County (DPW)</td>
-                            <td>96720</td>
-                            <td class="speed-cell">~105–125 mph</td>
-                            <td>Windward Big Island — also a 1946 / 1960 tsunami history city (separate code)</td>
-                        </tr>
-                        <tr>
-                            <td>Kailua-Kona</td>
-                            <td>Hawaii County (DPW)</td>
-                            <td>96740</td>
-                            <td class="speed-cell">~105–115 mph</td>
-                            <td>Leeward Big Island — vog corrosion + South Flank volcanic exposure overlay</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="warning-box info-box">
-                <h4><i class="fas fa-exclamation-triangle"></i> The standard ASCE map is not the controlling answer for every Hawaii ZIP</h4>
-                <p>ASCE 7-16 Section 26.5.3 designates portions of the Hawaiian Islands as Special Wind Regions, which is the standard's way of saying out loud that the contours on the printed map do not capture Pali winds, central Maui isthmus channeling, or windward ridge acceleration on Kauai and the Big Island. On any SWR site the design engineer is required to determine the basic wind speed using regional climatic data and a rational topographic analysis — and Section 26.8 brings in a topographic factor Kzt above 1.0 where the site sits on a ridge, in a saddle, or on a steep windward slope. WindLoadCalc returns the ASCE 7-16 baseline plus the SWR alert. Your Hawaii-licensed PE refines from there. A calculator that hides this step behind a single ZIP lookup is selling Hawaii a Florida tool.</p>
-            </div>
-
-            <h2 id="four-counties">The Four-County Adoption Maze — Decoded for 24 Years</h2>
-
-            <p>No other state structures wind-code adoption the way Hawaii does. There is one State of Hawaii Building Code (IBC + ASCE 7-16) sitting underneath, and then four independent county authorities — each its own permit office, each adopting the state baseline on its own timeline, each stacking local amendments on top. WindLoadCalc has tracked all four since the calculator launched in 2002. The generalist national wind calculators, which entered the market more than a decade later, treat Hawaii as one row in a global ZIP catalogue. The mosaic below is the practical difference.</p>
-
-            <div class="county-cards">
-                <div class="county-card">
-                    <h4>City &amp; County of Honolulu</h4>
-                    <div class="county-speed">Oahu</div>
-                    <p>The state's population center and largest permit office — Honolulu DPP (Department of Planning and Permitting) covers all of Oahu, from Pearl City to Kaneohe to Waianae. Honolulu typically tracks the State Building Code baseline closely; amendments are lighter touch than Maui or Kauai. The single permit authority for the entire island.</p>
-                </div>
-                <div class="county-card">
-                    <h4>Maui County</h4>
-                    <div class="county-speed">Maui + Lanai + Molokai</div>
-                    <p>Maui DPW permits across three islands. Post-Iniki amendments tightened connection requirements and high-wind detailing; post-Lahaina (the 2023 wildfire) added scrutiny on rebuild detailing and fire-related provisions that intersect the wind code at the connector schedule. Special Wind Region scrutiny matters on every central-isthmus and West Maui ridge site.</p>
-                </div>
-                <div class="county-card">
-                    <h4>Kauai County</h4>
-                    <div class="county-speed">Kauai + Niihau</div>
-                    <p>The island Iniki actually hit — and the county where continuous load path detailing, hurricane clip installation, and gable-end bracing carry the most aggressive plan-review attention. Kauai DPW Building Division covers Kauai and privately-held Niihau. Single-family wood-frame work here is reviewed against the lessons the storm taught the building department in 1992.</p>
-                </div>
-                <div class="county-card">
-                    <h4>Hawaii County (Big Island)</h4>
-                    <div class="county-speed">Hawaii Island</div>
-                    <p>The only one of the four with active volcanism inside its jurisdiction — Kilauea and Mauna Loa. Hawaii County DPW layers volcanic-exposure provisions (lava zone overlays, ash-load considerations on slopes near eruption events, vog-driven corrosion specs on connector hardware) onto the ASCE 7-16 wind code. No other Hawaii county has this layer; no continental U.S. county does either.</p>
-                </div>
-            </div>
-
-            <p>Practical consequence: a Maui project may need connector hardware a Honolulu project does not. A Kauai single-family rebuild gets plan-review eyes on its gable bracing that an Oahu rebuild may not. A Hawaii County south-flank project may carry corrosion specs and lava-zone disclosures the other three counties never see. WindLoadCalc returns the ASCE 7-16 baseline that all four counties use as the analysis basis; the county-specific amendments are a conversation the engineer of record has with the right DPW or DPP plan reviewer at the detailing stage. We can hand them a clean baseline because we have been watching all four adopt code for over two decades.</p>
-
-            <h2 id="iniki">Hurricane Iniki, September 11, 1992 — Why This Calculator Exists</h2>
-
-            <p>Iniki made landfall on the south shore of Kauai as a Category 4 storm. Sustained winds were estimated at 145 mph with gusts well above 175 mph. Iniki remained the strongest hurricane to strike Hawaii in recorded history; Hurricane Lane in 2018 matched the intensity offshore as a Category 5 but did not make landfall, and Tropical Storm Olivia later that same year made Maui landfall at much lower intensity. Iniki is still the storm of record, and the storm every working Hawaii structural engineer references when explaining what their connection schedules are actually designed against.</p>
-
-            <div class="iniki-box info-box">
-                <h4><i class="fas fa-wind"></i> What Iniki did to Kauai — and what the forensics changed</h4>
-                <p>Roughly <strong>14,000 structures</strong> destroyed or severely damaged. Approximately 1,400 Kauai homes destroyed outright. Estimated property loss above $3.1 billion in 1992 dollars (over $6.5 billion in 2026 dollars). Power and potable water gone for weeks. The FEMA Building Performance Assessment Team, the National Institute of Standards and Technology, and the structural engineering community walked the wreckage and catalogued the same failure modes repeating across the island — uplifted roofs, gable-end blowouts, garage doors that failed and pressurized interiors until the roof ballooned off, broken roof-to-wall connections. Member sizes had held; connections had not. The forensic record was clear by 1993, and Hawaii construction practice changed permanently as a result. Ten years later, WindLoadCalc launched into that already-changed reality.</p>
-            </div>
-
-            <p>Three things the post-Iniki literature drove into standard Hawaii practice — and that this calculator surfaces as a result:</p>
-
-            <ul>
-                <li><strong>Continuous load path detailing is the design.</strong> Roof-to-wall, wall-to-foundation, gable-end-to-structure — every connection in the load path is now explicitly traced through every Hawaii residential design. Hurricane clips and metal connectors that were optional pre-Iniki are baseline on every permit.</li>
-                <li><strong>Garage doors are a code-attention item.</strong> Iniki demonstrated that a failed garage door is the start of a cascading structural failure — pressurized interior, roof balloons off within minutes, walls follow. Wind-rated garage doors are standard on Hawaii single-family coastal exposure permits as a direct result.</li>
-                <li><strong>Connections govern, not member sizing.</strong> Every working Hawaii structural engineer will tell you the same thing. Members size easily under ASCE 7-16 wind loads. Connections are where Hawaii buildings actually fail. WindLoadCalc reports therefore lead with uplift loads and connector schedule alongside pressure tables — not buried under them.</li>
-            </ul>
-
-            <p>This is why the calculator exists in the form it does, and why it has not changed that emphasis in twenty-four years. A platform that arrived in the market in 2013, well after this practice settled, can list ASCE 7 numbers next to a Hawaii ZIP. What it cannot do is build the engine around the lessons Iniki taught — because it was not here to take the lessons.</p>
-
-            <h2 id="tropical-context">Trade Winds, Storm Surge, Tsunami, Volcano — Four Different Codes, Four Different Calculations</h2>
-
-            <p>Hawaii is the only U.S. state where the design environment stacks four physically distinct loading regimes onto a single coastal structure, and where confusing any two of them produces dangerously wrong answers. <strong>This calculator separates them on purpose.</strong> A generic platform that quietly merges them is the failure mode we built the engine to avoid.</p>
-
-            <h3>Trade winds — the daily 15-to-25 mph serviceability load</h3>
-            <p>The northeast trade flow runs across the islands most of the year at speeds well below ASCE 7-16 design thresholds — typically 15 to 25 mph, gusting to 35 mph in stronger trade conditions. Structurally trade winds do not control sizing. Operationally they fatigue everything that touches the building envelope: window seal cycling, screen tear on lanai enclosures, lanai roof uplift fatigue, awning hinge wear, persistent salt-laden corrosion on every exposed connector. Hawaii engineers who have been at this for decades will often spec heavier hardware on exposed-coast residential than a clean ASCE 7-16 calculation requires, because the daily trade-wind load grinds components that survive a single design event but do not survive thirty years of cycling. WindLoadCalc surfaces this as a serviceability consideration on coastal Hawaii output — separate from the hurricane design pressures.</p>
-
-            <h3>Storm surge — FEMA FIRM territory, coordinated with the wind code</h3>
-            <p>Coastal Hawaii is subject to storm surge during hurricane landfall, but surge elevation requirements come from the FEMA Flood Insurance Rate Maps, not from ASCE 7. A south-shore Honolulu lot may sit in a V-zone with breakaway-wall and freeboard requirements that interact with the ASCE 7-16 wind pressures the calculator returns — both calculations have to satisfy the permit, and they are run independently before being assembled at the design stage.</p>
-
-            <h3>Tsunami exposure — ASCE 7-16 Chapter 6. Not the wind code. Never the wind code.</h3>
-            <p>Hawaii has tsunami inundation zones along most coastlines, particularly on every island's windward face and in low-lying coastal communities. Hilo has been devastated by tsunamis twice in living memory — April 1, 1946 (159 dead, generated by an Aleutian seismic event with no wind component at all) and May 23, 1960 (61 dead, generated by the Great Chilean Earthquake). Neither was a wind event. Both events drove tsunami inundation modeling that is now codified in ASCE 7-16 Chapter 6 (Tsunami Loads and Effects), and that code is run independently from the wind code on any Hawaii project inside a tsunami design zone. <strong>Conflating tsunami loading with wind loading produces wrong numbers in both directions, and Hawaii is the U.S. state where this trap is most likely to bite — because it is the only state where both regimes apply seriously and simultaneously.</strong> WindLoadCalc returns ASCE 7-16 wind loads only. Tsunami inundation is a separate Chapter 6 calculation your engineer runs alongside, and the governing forces are reconciled at the design stage. A calculator that hands you a single Hawaii "load number" is hiding something. We don't.</p>
-
-            <h3>Volcanic exposure — Hawaii County only, on top of the wind code</h3>
-            <p>Big Island sits on Kilauea and Mauna Loa, and active basaltic volcanism creates two structural design considerations the wind code itself does not capture. Volcanic ash on roofs during eruption events adds transient roof loading on top of whatever ASCE 7-16 wind, snow, or rain combination is controlling — particularly relevant in lava zones 1 through 3 and on roof slopes that do not shed ash. Vog (volcanic fog — sulfur dioxide plus water vapor plus fine particulate) accelerates corrosion of metal connectors and exposed steel at rates coastal Florida engineers literally do not see. The result is more aggressive corrosion-resistance specs on the same hurricane clips and continuous load path hardware Kauai post-Iniki practice already requires. Honolulu, Maui, and Kauai projects do not have this overlay. Hawaii County projects do, and the calculator flags it on Big Island ZIPs because it is not the kind of thing a generalist national engine will mention.</p>
-
-            <h2 id="how-to">Running a Hawaii Wind Load on This Calculator</h2>
-
-            <div class="process-steps">
-                <div class="process-step">
-                    <h4>Drop in your Hawaii ZIP — engine routes to the correct county and flags SWR sites automatically</h4>
-                    <p>Enter the ZIP, and the engine maps it to one of the four Hawaii county authorities — Honolulu DPP, Maui DPW, Kauai DPW, or Hawaii County DPW — pulls the ASCE 7-16 baseline wind speed, defaults Exposure D for any windward open-ocean site within one mile of unobstructed coastline, and raises a Special Wind Region alert per Section 26.5.3 if the ZIP centroid sits inside a designated SWR (central Maui isthmus, windward slopes, the Pali, ridge sites on Kauai and the Big Island). Big Island ZIPs additionally surface the vog corrosion and lava-zone considerations the other three counties do not face.</p>
-                </div>
-                <div class="process-step">
-                    <h4>Choose Risk Category by what your Hawaii project actually is</h4>
-                    <p>In Hawaii, Cat II covers most of the four counties' permit volume — Honolulu single-family, Maui condos, Big Island custom homes, Kauai resort renovations. Cat III adds larger DOE schools above the occupancy threshold and the assembly buildings (Hawaii Convention Center, the larger Waikiki venues, the major resort ballrooms). Cat IV picks up Queen's, Kapiolani, Maui Memorial, the county fire and EMS facilities, and the county and state EOCs — every facility that has to remain functional through and after the next Iniki-class event.</p>
-                </div>
-                <div class="process-step">
-                    <h4>Confirm Exposure and topographic factor — Hawaii is rarely generic Exposure C</h4>
-                    <p>Exposure D defaults on for any site within one mile of unobstructed open ocean — which is most of populated coastal Hawaii. Exposure C applies inland for suburban and rural sites without dense canopy or surrounding buildings. Exposure B applies in tropical-canopied or building-shielded interiors (parts of Manoa, parts of upcountry Maui). On any ridge, saddle, central isthmus, or steep windward slope your Hawaii-licensed PE applies a topographic factor Kzt above 1.0 per ASCE 7-16 Section 26.8 — the calculator surfaces the flag, the PE refines the number.</p>
-                </div>
-                <div class="process-step">
-                    <h4>Enter geometry — Hawaii output leads with the connection schedule, not just the pressure table</h4>
-                    <p>Building footprint, mean roof height, X-in-12 pitch, and roof shape drive both C&amp;C and MWFRS engines. Output for Hawaii leads with MWFRS (and the connection schedule the post-Iniki Hawaii engineering community treats as more important than member sizing) plus C&amp;C broken into Zone 4 wall field, Zone 5 corner, and the appropriate roof zones for your shape — lanai screens read directly off the partially-open enclosure pressures so screen contractors get a number they can specify mesh against.</p>
-                </div>
-                <div class="process-step">
-                    <h4>Hand the report to your Hawaii-licensed PE for sign and seal under HRS Chapter 464</h4>
-                    <p>Export as PDF, real-Excel (.xlsx) architectural schedule for AutoCAD drop-in, or CSV. Hawaii Revised Statutes Chapter 464 requires that engineering work for permit purposes in Hawaii be sealed by a Hawaii-licensed engineer — and our in-house PE is Florida-only, three stories or less, so we explicitly do not seal Hawaii reports. The output is built to be the clean analysis basis your island engineer reviews, takes responsibility for, and seals under their own license. Most Hawaii engineers we have worked with over twenty-four years are comfortable with exactly that workflow.</p>
-                </div>
-            </div>
-
-            <div class="content-cta">
-                <h3>Pull ASCE 7-16 Hawaii Wind Loads for Your PE</h3>
-                <p>Enter your ZIP. The engine routes to the right county, raises the Special Wind Region alert if your site needs one, separates trade winds and tsunami from the hurricane load, and produces a report HRS Ch. 464 Hawaii PEs will sign and seal under their own review.</p>
-                <a href="/wind-load-calculator-shop.html" class="cta-button">Start Free Trial <i class="fas fa-arrow-right"></i></a>
-            </div>
-
-            <h2 id="faq">Hawaii Wind Load FAQ — Answered by 24 Years of Doing This</h2>
-
-            <details class="faq-item">
-                <summary>Why does WindLoadCalc separate trade winds from tsunami code from wind code? Most calculators don't.</summary>
-                <div class="faq-answer">Because in Hawaii these are three completely different problems and conflating them gets buildings designed wrong. Trade winds are a daily serviceability and fatigue load — the 15 to 25 mph northeast flow that runs across the islands most of the year, well below ASCE 7-16 design speeds, but real for window seal cycling, lanai uplift fatigue, and salt-laden connector corrosion. Hurricane wind loads come from the Cat 4 Iniki-class tail of the distribution and are governed by ASCE 7-16 Chapters 26 through 30. Tsunami loads come from ASCE 7-16 Chapter 6 (Tsunami Loads and Effects), driven by Pacific seismic sources, and have nothing to do with the wind code — Hilo has been devastated by tsunamis in 1946 and 1960 with no wind component at all. A generic calculator that treats Hawaii as a ZIP code with one wind speed cannot distinguish these three. WindLoadCalc does, because we have been working Hawaii since 2002 and we have watched engineers get burned by tools that quietly merged a tsunami inundation case into a hurricane wind case and produced a single useless number.</div>
-            </details>
-
-            <details class="faq-item">
-                <summary>How long has WindLoadCalc been doing Hawaii — and why does that matter post-Iniki?</summary>
-                <div class="faq-answer">WindLoadCalc launched in 2002 — exactly ten years after Hurricane Iniki struck Kauai on September 11, 1992 as a Category 4 storm with sustained 145 mph winds and gusts above 175 mph. By the time we shipped, the post-Iniki forensic engineering literature was complete, the Hawaii counties had already started rewriting connection-detailing requirements, hurricane clips had moved from optional to standard, and the lesson that connections (not member sizes) govern Hawaii wood-frame design was settled practice. We built the calculator into that reality from day one. The generalist national wind calculators that arrived later, by contrast, treat Hawaii as one entry in a global ZIP catalogue rather than as the only U.S. tropical archipelago with a Cat-4-landfall forensic record reshaping its codes. We have been here for over 24 years and seven ASCE editions (7-95, 7-98, 7-02, 7-05, 7-10, 7-16, 7-22). Iniki is not history to us — it is the reason this calculator exists in the form it does.</div>
-            </details>
-
-            <details class="faq-item">
-                <summary>Do the four Hawaii counties actually adopt different codes? Isn't there a state code?</summary>
-                <div class="faq-answer">Yes, and yes. The State of Hawaii Building Code provides a uniform IBC-plus-ASCE-7-16 baseline, but each of the four counties — City and County of Honolulu, Maui County, Kauai County, and Hawaii County / Big Island — adopts the state code on its own timeline and stacks its own local amendments on top. Honolulu DPP (Department of Planning and Permitting) tends to track the state baseline closely. Maui DPW carries post-Iniki and post-Lahaina amendments tightening connection requirements and high-wind detailing. Kauai DPW Building Division — the agency for the island Iniki actually hit — places particularly aggressive emphasis on continuous load path detailing and hurricane clip installation on every residential permit. Hawaii County DPW layers in provisions for Big Island volcanic exposure that the other three counties never see. The county is the permit authority. The state code is the floor, not the ceiling. WindLoadCalc has tracked all four county adoptions for over two decades — a generic global calculator cannot, because it doesn't know the maze exists.</div>
-            </details>
-
-            <details class="faq-item">
-                <summary>What does ASCE 7-16 actually say about Hawaii wind speeds — including special wind regions?</summary>
-                <div class="faq-answer">Under ASCE 7-16 mapping the populated parts of Oahu (Honolulu ZIPs 96813, 96815, 96816), Maui (Wailuku 96793, Kahului 96732, Kihei 96753), Kauai (Lihue 96766, Princeville 96722), and Hawaii County (Hilo 96720, Kailua-Kona 96740) sit in roughly the 105 to 130 mph Risk Category II range. ASCE 7-16 also designates portions of the Hawaiian Islands as Special Wind Regions per Section 26.5.3, meaning the basic wind speed on the standard map is not necessarily controlling — the engineer of record is required to determine the basic wind speed using regional climatic data and a rational analysis of topographic acceleration where the site sits on a ridge, in a saddle, in the central Maui isthmus between West Maui and Haleakala, or on a steep windward slope. Coastal Exposure D applies along every island's open-ocean shoreline by default. The WindLoadCalc engine returns the baseline ASCE 7-16 value and raises an SWR alert where the ZIP centroid sits inside a designated special wind region; the Hawaii-licensed engineer of record refines from there using Section 26.5.3 and applies a topographic factor Kzt above 1.0 per Section 26.8 when warranted.</div>
-            </details>
-
-            <details class="faq-item">
-                <summary>Does WindLoadCalc PE-stamp Hawaii reports?</summary>
-                <div class="faq-answer">No. WindLoadCalc's in-house P.E. is licensed in the State of Florida only, restricted to projects three stories or less — that scope does not extend to Hawaii. Hawaii Revised Statutes Chapter 464 requires that any engineering work performed for permit purposes in Hawaii be sealed by an engineer holding an active Hawaii license. WindLoadCalc generates the underlying ASCE 7-16 wind pressure calculation, the connection-uplift schedule, the Zone 4 / Zone 5 / roof-zone C&amp;C breakdown, and the report content in the format Hawaii plan reviewers expect — and your Hawaii-licensed structural or civil engineer reviews it, takes responsibility for the analysis, and seals the document for permit submittal. Most island engineers we have worked with over 24 years will accept a clean WindLoadCalc report as the analysis basis and seal it under their own review. What we don't do is pretend our Florida-only PE service applies across the Pacific.</div>
-            </details>
-
-            <details class="faq-item">
-                <summary>Why do Hawaii engineers care more about connections than member sizes?</summary>
-                <div class="faq-answer">Because Iniki forensics proved that members survive Cat 4 wind loads and connections do not — and that lesson is now built into how every working Hawaii structural engineer talks about wood-frame design. When the FEMA Building Performance Assessment Team and the NIST investigators walked the wreckage on Kauai in late 1992 and early 1993, they catalogued failure after failure where 2x rafters and studs were intact but the metal connectors, toe-nails, and gable-end bracing had let go — roofs lifted whole off walls, walls peeled away from sills, gable ends pushed inward, garage doors failed and pressurized interiors until roofs ballooned off within minutes. The post-Iniki literature drove continuous-load-path detailing into standard Hawaii residential practice and made hurricane clips, metal connectors, and rated garage doors baseline rather than optional. A Hawaii wind load report that emphasizes member sizing and treats the connector schedule as an afterthought is reading the problem backwards. WindLoadCalc surfaces the uplift loads and the connection schedule alongside the pressure tables because the post-Iniki Hawaii engineering community has been clear since 1993 that this is where Hawaii designs actually fail.</div>
-            </details>
-
-            <details class="faq-item">
-                <summary>What does the Big Island add that the other three counties don't have?</summary>
-                <div class="faq-answer">Volcanic exposure, full stop. Hawaii County is the only one of the four counties with active basaltic volcanism inside its jurisdiction — Kilauea on the south flank and Mauna Loa above it. That changes structural design in two ways the wind code itself does not capture. First, volcanic ash loading on roofs during eruption events adds a transient roof load on top of whatever ASCE 7-16 wind load and snow/rain combination is already controlling — relevant in lava zones 1, 2, and 3 and on roof slopes that don't shed ash readily. Second, vog (volcanic fog — sulfur dioxide plus water vapor plus fine particulate) accelerates corrosion of metal connectors, fasteners, and exposed steel by a factor that coastal Florida engineers literally do not see, and that drives Hawaii County projects toward more aggressive corrosion-resistance specs on the same hurricane clips and continuous load path hardware Kauai post-Iniki practice already requires. Honolulu, Maui, and Kauai projects do not face this. Big Island projects do. WindLoadCalc returns the ASCE 7-16 wind load values that apply across all four counties; the volcanic loading and vog corrosion overlay is a Hawaii County conversation the engineer of record has with the building official.</div>
-            </details>
-
-            <details class="faq-item">
-                <summary>How is Hawaii's hurricane code different from Florida's, when you've been doing both since 2002?</summary>
-                <div class="faq-answer">Three concrete differences worth knowing if you work both markets. (1) ASCE edition: Hawaii references ASCE 7-16 through the current State Building Code adoptions; Florida is on ASCE 7-22 under FBC 8th Edition (2023) — so the same calculation done on identical geometry returns slightly different pressures depending on which state you're in. (2) Jurisdictional shape: Florida has one statewide FBC with two HVHZ counties (Miami-Dade and Broward) carrying NOA / TAS 201 / TAS 202 / TAS 203 product approval overlays, while Hawaii fragments into four county adoptions each with its own amendments — there is no Hawaii HVHZ analog, but there are four code mosaics to track instead of one. (3) Design speed range: Florida coastal Risk Category II ranges roughly 140 to 180 mph (Collier 170, Broward 170, Miami-Dade 175, Keys ~180), while most populated Hawaii ZIPs sit at 105 to 130 mph — Hawaii's lower numbers reflect that historical Cat-4 hurricane landfalls have been less frequent than along the U.S. southeast coast, but the design still has to absorb the Iniki-class event when it comes. WindLoadCalc has been navigating both markets since 2002 — that is the practical reason we kept Florida and Hawaii on separate landing pages with separate engines rather than rolling everything into one global form the way general-purpose national calculators do.</div>
-            </details>
-
-            <h2 id="related">Pacific-Basin sibling calculators and ASCE 7-16 reference material</h2>
-
-            <div class="related-links">
-                <h3>Pacific-Basin & ASCE 7-16 reference set</h3>
-                <ul>
-                    <li><a href="/florida-wind-load-calculator">Florida wind load calculator (FBC + ASCE 7-22 hub)</a></li>
-                    <li><a href="/miami-dade-wind-load-calculator">Miami-Dade County wind load calculator (HVHZ)</a></li>
-                    <li><a href="/broward-wind-load-calculator">Broward County wind load calculator (HVHZ)</a></li>
-                    <li><a href="/collier-county-wind-load-calculator">Collier County wind load calculator (Naples)</a></li>
-                    <li><a href="/palm-beach-wind-load-calculator">Palm Beach County wind load calculator</a></li>
-                    <li><a href="/asce-hazard-tool-alternative">ASCE Hazard Tool alternative</a></li>
-                    <li><a href="/asce-7-wind-load-calculator/">ASCE 7 wind load calculator overview</a></li>
-                    <li><a href="/shop/windows-doors-shutters.html">Windows, doors &amp; shutters C&amp;C calculator</a></li>
-                    <li><a href="/wind-load-calculator-shop.html">All calculators and pricing</a></li>
-                </ul>
-            </div>
-
-            <div class="content-cta">
-                <h3>From Honolulu to Hilo to Hana — One Calculator, All Four Counties</h3>
-                <p>ASCE 7-16 wind loads for any Hawaii ZIP across Honolulu DPP, Maui DPW, Kauai DPW, and Hawaii County DPW. SWR-aware, trade-winds-and-tsunami-separated, formatted for HRS Chapter 464 Hawaii PE review. The post-Iniki calculator since 2002.</p>
-                <a href="/wind-load-calculator-shop.html" class="cta-button">View Plans &amp; Start Trial <i class="fas fa-arrow-right"></i></a>
-            </div>
-
-            <p class="last-updated">Last updated: May 23, 2026 &middot; Wind load calculations since 2002, online since 2006 &middot; Reviewed by an in-house Florida-licensed P.E. (Hawaii reports sealed by your Hawaii-licensed PE under HRS Ch. 464) &middot; Questions? <a href="mailto:support@windloadcalc.com">support@windloadcalc.com</a></p>
-        </main>
-
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <div class="sidebar-box">
-                <h3>On This Page</h3>
-                <ul>
-                    <li><a href="#wind-speeds">ASCE 7-16 Hawaii Wind Speeds</a></li>
-                    <li><a href="#four-counties">Four-County Adoption Maze</a></li>
-                    <li><a href="#iniki">Hurricane Iniki 1992</a></li>
-                    <li><a href="#tropical-context">Trade / Surge / Tsunami / Volcano</a></li>
-                    <li><a href="#how-to">Running a Hawaii Calc</a></li>
-                    <li><a href="#faq">Hawaii FAQ</a></li>
-                    <li><a href="#related">Related Resources</a></li>
-                </ul>
-            </div>
-
-            <div class="sidebar-cta">
-                <h3>Try the HI Calculator Free</h3>
-                <p>ASCE 7-16 wind loads for all four Hawaii counties, SWR-aware, trade-winds-and-tsunami-separated, formatted for HI PE review under HRS Ch. 464.</p>
-                <a href="/wind-load-calculator-shop.html" class="sidebar-cta-button">Start Free Trial</a>
-            </div>
-
-            <div class="sidebar-box">
-                <h3>Hawaii Counties</h3>
-                <ul>
-                    <li><a href="#four-counties">Honolulu (Oahu)</a></li>
-                    <li><a href="#four-counties">Maui County</a></li>
-                    <li><a href="#four-counties">Kauai County</a></li>
-                    <li><a href="#four-counties">Hawaii County (Big Island)</a></li>
-                </ul>
-            </div>
-
-            <div class="sidebar-box">
-                <h3>Other State Calculators</h3>
-                <ul>
-                    <li><a href="/florida-wind-load-calculator">Florida (FBC 8th Ed)</a></li>
-                    <li><a href="/miami-dade-wind-load-calculator">Miami-Dade (HVHZ)</a></li>
-                    <li><a href="/broward-wind-load-calculator">Broward (HVHZ)</a></li>
-                </ul>
-            </div>
-        </aside>
+<nav id="nav"><div class="wrap nav-in">
+  <a class="logo" href="https://windloadcalc.com/"><img height="100" width="300" src="/images/windloadcalc-logo.svg" alt="WindLoadCalc — Hawaii wind load calculator logo" class="logo-image"></a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a class="l" href="https://windloadcalc.com/free-wind-load-calculator.html">Free tool</a>
+      <a class="l" href="https://windloadcalc.com/wind-load-calculator-comparison.html">Compare</a>
+      <a class="l" href="https://windloadcalc.com/wind-load-calculator-shop.html">Pricing</a>
+      <a class="l" href="https://windloadcalc.com/why-us.html">Why us</a>
+      <a class="btn btn-ghost" href="https://windloadcalc.com/login.html">Log in</a>
+      <a class="btn btn-primary" href="https://windloadcalc.com/wind-load-calculator-shop.html">Start free trial</a>
     </div>
+    <button class="hamburger" id="hamburger" aria-label="Open full menu" aria-expanded="false" aria-controls="fullMenu"><span></span><span></span><span></span></button>
+  </div>
+</div></nav>
+<div class="nav-overlay" id="navOverlay"></div>
+<aside class="full-menu" id="fullMenu" aria-label="Site menu">
+  <div class="fm-head"><span>Menu</span><button class="fm-close" id="fmClose" aria-label="Close menu">&times;</button></div>
+  <div class="fm-group">
+    <div class="fm-label">Wind Load Calculators</div>
+    <a href="https://windloadcalc.com/wind-load-calculator-landing.html">Overview</a>
+    <a href="https://windloadcalc.com/free-wind-load-calculator.html">Free Trial</a>
+    <a href="https://windloadcalc.com/wind-load-calculator-comparison.html">Calculator Comparison</a>
+    <a href="https://windloadcalc.com/wind-load-calculator-shop.html">Pricing</a>
+  </div>
+  <div class="fm-group">
+    <div class="fm-label">Building Intelligence Platform</div>
+    <a href="https://windloadcalc.com/building-intelligence-platform-landing.html">Overview</a>
+    <a href="https://windloadcalc.com/building-intelligence-platform.html">Free Trial</a>
+    <a href="https://windloadcalc.com/building-intelligence-platform-shop.html">Pricing</a>
+  </div>
+  <div class="fm-group">
+    <div class="fm-label">For Professionals</div>
+    <a href="https://windloadcalc.com/wind-load-calculator-for-engineers.html">Engineers</a>
+    <a href="https://windloadcalc.com/wind-load-calculator-for-architects.html">Architects</a>
+    <a href="https://windloadcalc.com/wind-loads-for-consultants.html">Consultants</a>
+    <a href="https://windloadcalc.com/contractors-wind-load-calculator.html">Contractors</a>
+  </div>
+  <div class="fm-group">
+    <div class="fm-label">Company</div>
+    <a href="https://windloadcalc.com/services.html">Services</a>
+    <a href="https://windloadcalc.com/why-us.html">Why Us</a>
+    <a href="https://windloadcalc.com/faq.html">FAQ</a>
+    <a href="https://windloadcalc.com/contact.html">Contact Us</a>
+  </div>
+  <div class="fm-actions">
+    <a class="btn btn-ghost" href="https://windloadcalc.com/login.html">Log in</a>
+    <a class="btn btn-primary" href="https://windloadcalc.com/free-wind-load-calculator.html">Start Free Trial &rarr;</a>
+  </div>
+</aside>
 
-    <!-- Footer -->
-    <footer class="main-footer">
-        <div class="footer-content">
-            <div class="footer-column">
-                <h3>Contact</h3>
-                <ul>
-                    <li><a href="mailto:info@windloadcalc.com">info@windloadcalc.com</a></li>
-                    <li><a href="mailto:support@windloadcalc.com">support@windloadcalc.com</a></li>
-                    <li><a href="tel:8332723946">(833) 272-3946</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h3>Calculators</h3>
-                <ul>
-                    <li><a href="/shop/windows-doors-shutters.html">Windows, Doors &amp; Shutters</a></li>
-                    <li><a href="/wind-load-calculator-shop.html">All Calculators &amp; Pricing</a></li>
-                    <li><a href="/wind-load-calculator-comparison.html">Calculator Comparison</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h3>Resources</h3>
-                <ul>
-                    <li><a href="/free-wind-load-calculator.html">Free Demo</a></li>
-                    <li><a href="/asce-7-wind-load-calculator/">ASCE 7 Guide</a></li>
-                    <li><a href="/components-and-cladding-wind-loads/">C&amp;C Wind Loads</a></li>
-                    <li><a href="/faq.html">Wind Load FAQ</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h3>Company</h3>
-                <ul>
-                    <li><a href="/why-us.html">About Us</a></li>
-                    <li><a href="/contact.html">Contact</a></li>
-                    <li><a href="/privacy-policy.html">Privacy</a></li>
-                    <li><a href="/terms-of-service.html">Terms</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2002&ndash;2026 WindLoadCalc. All rights reserved. Wind load calculations since 2002.</p>
-        </div>
-    </footer>
+<!-- Hero -->
+<div class="hero-stage">
+  <div class="hero-veil"></div>
+  <header><div class="wrap">
+    <div class="eyebrow"><span class="dot"></span>ASCE 7-16 · CCPR County Product Review · Special wind region aware</div>
+    <h1>Hawaii wind load calculator <span class="grad">tuned for island wind</span></h1>
+    <p class="sub">Wind <strong>channels and accelerates between the islands</strong>. Hawaii sits in ASCE 7-16 special wind regions, and every county runs its own CCPR product review. This calculator was built for both.</p>
+    <form class="zip-form" id="zip-form" onsubmit="return launchCalc(event)">
+      <input type="text" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" class="zip-input" id="zip-input" placeholder="Enter Hawaii ZIP (e.g. 96813)" aria-label="Hawaii ZIP code">
+      <button type="submit" class="zip-submit">Pull Hawaii wind speeds →</button>
+    </form>
+    <div class="hero-trust">
+      <span><span class="ck">✓</span> Free wind speed lookup</span>
+      <span><span class="ck">✓</span> No credit card required</span>
+      <span><span class="ck">✓</span> Built for HRS Ch. 464 PE review</span>
+    </div>
+    <div class="stat-row">
+      <div class="stat-tile"><div class="n">105–130 mph</div><div class="l">Most populated HI ZIPs (Risk Cat II)</div></div>
+      <div class="stat-tile"><div class="n">4 counties</div><div class="l">Each with its own CCPR review</div></div>
+      <div class="stat-tile"><div class="n">ASCE 7-16</div><div class="l">Hawaii's adopted standard</div></div>
+      <div class="stat-tile"><div class="n">Since 2002</div><div class="l">100% permit approval over 24 years</div></div>
+    </div>
+  </div></header>
+</div>
 
-    <script>
-        // ZIP launch — calc.windloadcalc.com accepts ?zip=NNNNN and auto-derives
-        // city / state / county / wind speed (Honolulu 96813 -> HI, Oahu, ASCE 7-16 baseline).
-        function launchCalc(e) {
-            e.preventDefault();
-            var zip = (document.getElementById('zip-input').value || '').replace(/[^0-9]/g, '').slice(0, 5);
-            var target = 'https://calc.windloadcalc.com/';
-            if (zip.length === 5) {
-                target = target + '?zip=' + zip;
-            }
-            window.location.href = target;
-            return false;
-        }
-    </script>
+<!-- Fast facts -->
+<section><div class="wrap">
+  <div class="benefits">
+    <div class="benefit"><div class="ic">🌀</div><div><b>Special wind regions</b><small>Channeling flagged per §26.5.3</small></div></div>
+    <div class="benefit"><div class="ic">📋</div><div><b>CCPR aware</b><small>County Product Review, all 4 counties</small></div></div>
+    <div class="benefit"><div class="ic">🌊</div><div><b>Coastal Exposure D</b><small>Defaults on open-ocean shoreline</small></div></div>
+    <div class="benefit"><div class="ic">📄</div><div><b>Engineering Report</b><small>PDF, Excel, CSV — HRS 464 ready</small></div></div>
+  </div>
+</div></section>
+
+<!-- The island wind story -->
+<section><div class="wrap">
+  <div class="sec-head">
+    <h2>Why island terrain breaks a generic wind lookup</h2>
+    <p>Hawaii is the reason ASCE 7-16 has a special-wind-region clause. The printed map speed is a starting point, not the answer.</p>
+  </div>
+
+  <div class="callout">
+    <h3>Wind speeds up where it squeezes between islands and over ridges</h3>
+    <p>ASCE 7-16 Section 26.5.3 designates parts of the Hawaiian Islands as Special Wind Regions. On those sites the basic map speed is not controlling. The engineer of record refines it from regional data.</p>
+    <ul>
+      <li><b>Channeling:</b> wind accelerates through the gaps between islands and channels.</li>
+      <li><b>Central Maui isthmus:</b> the flat saddle between West Maui and Haleakala funnels flow.</li>
+      <li><b>Ridge and saddle sites:</b> topographic factor Kzt above 1.0 applies per Section 26.8.</li>
+      <li><b>Windward slopes and the Pali:</b> upslope acceleration well past the map value.</li>
+    </ul>
+  </div>
+</div></section>
+
+<!-- Wind speed table -->
+<section id="wind-speeds"><div class="wrap">
+  <div class="sec-head">
+    <h2>ASCE 7-16 wind speeds across the islands</h2>
+    <p>Representative Risk Category II design speeds by ZIP. The engine returns the precise baseline for any Hawaii ZIP and raises an SWR alert where the map is not controlling.</p>
+  </div>
+  <div class="cmp-wrap">
+    <table class="cmp">
+      <thead><tr><th>City / Island</th><th>County</th><th>Sample ZIP</th><th>Risk Cat II speed</th><th>Hawaii note</th></tr></thead>
+      <tbody>
+        <tr><td>Honolulu (downtown)</td><td>City &amp; County of Honolulu (Oahu)</td><td>96813</td><td class="speed">~105–115 mph</td><td>Leeward urban core, Honolulu DPP; state baseline</td></tr>
+        <tr><td>Waikiki / Diamond Head</td><td>City &amp; County of Honolulu</td><td>96815</td><td class="speed">~110–120 mph <span class="tagchip expd">Exp D</span></td><td>South-shore open ocean; lanai uplift fatigue real</td></tr>
+        <tr><td>Kaimuki / Kahala</td><td>City &amp; County of Honolulu</td><td>96816</td><td class="speed">~105–115 mph</td><td>South Oahu residential; partially-open lanai screens</td></tr>
+        <tr><td>Wailuku</td><td>Maui County (Maui DPW)</td><td>96793</td><td class="speed">~115–130 mph <span class="tagchip swr">SWR</span></td><td>Central Maui isthmus channeling</td></tr>
+        <tr><td>Kahului</td><td>Maui County (Maui DPW)</td><td>96732</td><td class="speed">~115–130 mph <span class="tagchip swr">SWR</span></td><td>North Maui shore + isthmus; refine V per §26.5.3</td></tr>
+        <tr><td>Kihei</td><td>Maui County (Maui DPW)</td><td>96753</td><td class="speed">~115–130 mph <span class="tagchip swr">SWR</span></td><td>South Maui leeward coast; SWR check</td></tr>
+        <tr><td>Lihue</td><td>Kauai County (Kauai DPW)</td><td>96766</td><td class="speed">~105–125 mph</td><td>Connection schedule + continuous load path govern</td></tr>
+        <tr><td>Princeville</td><td>Kauai County (Kauai DPW)</td><td>96722</td><td class="speed">~105–125 mph <span class="tagchip swr">SWR</span></td><td>North Kauai ridge + windward slope exposure</td></tr>
+        <tr><td>Hilo</td><td>Hawaii County (DPW)</td><td>96720</td><td class="speed">~105–125 mph</td><td>Windward Big Island; tsunami history is a separate code</td></tr>
+        <tr><td>Kailua-Kona</td><td>Hawaii County (DPW)</td><td>96740</td><td class="speed">~105–115 mph</td><td>Leeward Big Island; vog corrosion overlay</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="pill-row">
+    <span class="pill">Risk Categories I–IV</span>
+    <span class="pill">Exposure B / C / D</span>
+    <span class="pill">Kzt topographic factor flagged</span>
+    <span class="pill">Zone 4 / Zone 5 C&amp;C</span>
+    <span class="pill">Connection-uplift schedule</span>
+  </div>
+</div></section>
+
+<!-- CCPR + counties -->
+<section id="ccpr"><div class="wrap">
+  <div class="sec-head">
+    <h2>CCPR and the four-county permit map</h2>
+    <p>Hawaii has no statewide product-approval list. Each county runs its own County Product Review on top of the State Building Code baseline.</p>
+  </div>
+  <div class="diff-grid">
+    <div class="diff">
+      <span class="badge">CCPR</span>
+      <h3>County Product Review, county by county</h3>
+      <span class="tag">No single statewide approval — four review processes</span>
+      <p>A window or shutter accepted in one county is reviewed again in the next. The calculator surfaces the certified product pressure so you can check it against the required design pressure.</p>
+      <ul>
+        <li><b>Required vs. certified:</b> compare CCPR-listed pressure against ASCE 7-16 demand.</li>
+        <li><b>Per-county listing:</b> track which products each county has accepted.</li>
+        <li><b>Pass / fail flag:</b> catch an under-rated assembly before submittal.</li>
+      </ul>
+    </div>
+    <div class="diff">
+      <span class="badge">4 counties</span>
+      <h3>One state code, four permit offices</h3>
+      <span class="tag">The county is the permit authority — the state code is the floor</span>
+      <ul>
+        <li><b>Honolulu DPP:</b> all of Oahu, the largest permit office.</li>
+        <li><b>Maui DPW:</b> Maui, Lanai, and Molokai.</li>
+        <li><b>Kauai DPW:</b> Kauai and Niihau.</li>
+        <li><b>Hawaii County DPW:</b> the Big Island, plus a Big-Island-only volcanic overlay.</li>
+      </ul>
+      <p>Enter a ZIP and the engine routes to the right county before pulling the ASCE 7-16 baseline.</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- Beyond the wind code -->
+<section><div class="wrap">
+  <div class="sec-head">
+    <h2>Three loads Hawaii keeps separate</h2>
+    <p>On one island lot, several codes apply at once. Confusing any two produces wrong numbers. This calculator returns wind only and names the rest.</p>
+  </div>
+  <div class="diff-grid">
+    <div class="diff">
+      <h3>Trade winds vs. hurricane design</h3>
+      <span class="tag">Daily serviceability, not member sizing</span>
+      <p>The northeast trade flow runs most of the year, well below design speed. It fatigues window seals, lanai screens, and salt-exposed connectors.</p>
+      <p>Hurricane design covers the rare extreme event under ASCE 7-16. We flag trade-wind serviceability on coastal output, separate from design pressures.</p>
+    </div>
+    <div class="diff">
+      <h3>Tsunami is ASCE 7-16 Chapter 6 — not the wind code</h3>
+      <span class="tag">Hilo: 1946 and 1960, no wind component</span>
+      <p>Hilo was struck by tsunamis on April 1, 1946 (159 dead) and May 23, 1960 (61 dead). Neither was a wind event.</p>
+      <p>Tsunami inundation runs under ASCE 7-16 Chapter 6, alongside the wind calc. We return wind loads only and never conflate the two.</p>
+    </div>
+    <div class="diff">
+      <h3>Big Island volcanic exposure</h3>
+      <span class="tag">Hawaii County only</span>
+      <p>Kilauea and Mauna Loa add two design factors the wind code does not capture. Ash loading adds transient roof load during eruptions.</p>
+      <p>Vog (volcanic fog) accelerates connector corrosion, pushing more aggressive corrosion specs on the same hurricane hardware.</p>
+    </div>
+    <div class="diff">
+      <h3>Coastal Exposure D, not generic C</h3>
+      <span class="tag">Most populated Hawaii sites face open ocean</span>
+      <p>Sites within a mile of unobstructed open ocean are Exposure D. That is most of populated coastal Hawaii.</p>
+      <ul>
+        <li><b>Exposure D:</b> windward open-ocean shoreline, defaulted on.</li>
+        <li><b>Exposure C:</b> inland suburban and rural sites.</li>
+        <li><b>Exposure B:</b> tropical-canopied or building-shielded interiors.</li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+<!-- How it works -->
+<section id="how-to"><div class="wrap">
+  <div class="sec-head"><h2>Running a Hawaii wind load</h2><p>From a ZIP to an Engineering Report your Hawaii PE can seal.</p></div>
+  <div class="steps">
+    <div class="step"><div class="num">1</div><h4>Drop in your Hawaii ZIP</h4><p>The engine routes to the correct county, pulls the ASCE 7-16 baseline, and defaults Exposure D on open-ocean shoreline.</p></div>
+    <div class="step"><div class="num">2</div><h4>Read the SWR alert</h4><p>If the ZIP sits in a special wind region, you get a flag to refine V per §26.5.3 and apply Kzt per §26.8.</p></div>
+    <div class="step"><div class="num">3</div><h4>Set Risk Category and geometry</h4><p>Choose Cat I–IV, enter footprint, mean roof height, and X-in-12 pitch. C&amp;C and MWFRS engines run together.</p></div>
+    <div class="step"><div class="num">4</div><h4>Check CCPR products</h4><p>Compare each county-listed window, door, or shutter against the required design pressure before submittal.</p></div>
+    <div class="step"><div class="num">5</div><h4>Export for your Hawaii PE</h4><p>PDF, Excel, or CSV. Built as the analysis basis your HRS Chapter 464 licensed engineer reviews and seals.</p></div>
+    <div class="step" style="background:linear-gradient(160deg,rgba(0,24,255,.16),rgba(255,255,255,.03));border-color:rgba(58,91,255,.4)"><div class="num" style="background:linear-gradient(135deg,#34D399,#10B981)">→</div><h4>Try it free</h4><p>Run the free wind speed lookup on any Hawaii ZIP. <a href="https://windloadcalc.com/free-wind-load-calculator.html" style="color:#34D399;font-weight:700">Open it →</a></p></div>
+  </div>
+</div></section>
+
+<!-- Proof band -->
+<section class="proof"><div class="wrap">
+  <div class="sec-head"><h2>Why building departments trust the report</h2><p>No paid testimonials — defensible facts only.</p></div>
+  <div class="proof-grid">
+    <div class="proof-item"><div class="n">100%</div><div class="c">permit approval across 24 years of operation</div></div>
+    <div class="proof-item"><div class="n">Since 2002</div><div class="c">calculating wind loads on the web (online 2006)</div></div>
+    <div class="proof-item"><div class="n">All 50 states</div><div class="c">PE sign-and-seal via the firm's PE network</div></div>
+    <div class="proof-item"><div class="n">ASCE 7-16</div><div class="c">Hawaii's adopted standard, mapped to every ZIP</div></div>
+    <div class="proof-item"><div class="n">In-house P.E.</div><div class="c">Florida-licensed engineer behind the reports</div></div>
+    <div class="proof-item"><div class="n">100% cited</div><div class="c">every coefficient traces to its ASCE 7-16 section</div></div>
+  </div>
+</div></section>
+
+<!-- FAQ -->
+<section id="faq"><div class="wrap">
+  <div class="sec-head"><h2>Hawaii wind load FAQ</h2></div>
+  <div class="faq">
+    <details open><summary>What is CCPR and why does Hawaii use it instead of a statewide product approval?</summary><p>CCPR stands for County Product Review. Hawaii has no statewide product-approval list. Each county accepts windows, doors, and shutters on its own. The calculator surfaces the certified product pressure to compare against the required ASCE 7-16 demand.</p></details>
+    <details><summary>Why does Hawaii get flagged as a Special Wind Region?</summary><p>ASCE 7-16 Section 26.5.3 designates parts of Hawaii as Special Wind Regions. Wind accelerates as it channels between islands and over ridges. The map speed is then not controlling; the engineer refines V and applies Kzt per Section 26.8.</p></details>
+    <details><summary>What ASCE 7-16 wind speeds apply to populated Hawaii ZIPs?</summary><p>Most populated Hawaii ZIPs sit in roughly 105 to 130 mph Risk Category II — Honolulu 96813, Waikiki 96815, Wailuku 96793, Kahului 96732, Kihei 96753, Lihue 96766, Princeville 96722, Hilo 96720, Kailua-Kona 96740.</p></details>
+    <details><summary>Does WindLoadCalc PE-stamp Hawaii reports?</summary><p>Our in-house P.E. is Florida-licensed only. Hawaii Revised Statutes Chapter 464 requires a Hawaii-licensed engineer to seal permit work. The calculator produces the analysis; your Hawaii PE seals it. Sign-and-seal in all 50 states runs via our PE network.</p></details>
+    <details><summary>Which Hawaii counties does the calculator cover?</summary><p>All four. Honolulu (Oahu) under Honolulu DPP, Maui County under Maui DPW, Kauai County under Kauai DPW, and Hawaii County (Big Island) under Hawaii County DPW. Each runs its own CCPR review on top of the State Building Code.</p></details>
+    <details><summary>Why does the calculator default to Exposure D on the coast?</summary><p>Most populated Hawaii sites sit within a mile of open ocean — Exposure D under ASCE 7-16. We default D on windward shoreline, apply C for inland sites, and B in canopied or shielded interiors.</p></details>
+    <details><summary>Can I run Hawaii wind speeds before subscribing?</summary><p>Yes. The free lookup returns the ASCE 7-16 baseline design wind speed for any Hawaii ZIP, no signup. The paid calculator adds C&amp;C pressures, the connection schedule, CCPR product comparison, and the Engineering Report.</p></details>
+  </div>
+</div></section>
+
+<!-- Final CTA -->
+<section class="final"><div class="wrap">
+  <div class="glass2">
+    <h2>Pull Hawaii wind loads for your PE</h2>
+    <p>ASCE 7-16 for any island ZIP, special-wind-region aware, CCPR-ready, formatted for HRS Chapter 464 review. Or run the <a href="https://windloadcalc.com/free-wind-load-calculator.html">free wind speed lookup</a> first.</p>
+    <div class="zip-form" style="margin-bottom:6px">
+      <a class="btn btn-primary" style="padding:15px 28px;font-size:15px;border-radius:13px" href="https://windloadcalc.com/wind-load-calculator-shop.html">Start free trial →</a>
+      <a class="btn btn-ghost" style="padding:15px 28px;font-size:15px;border-radius:13px" href="https://windloadcalc.com/contact.html">Contact sales</a>
+    </div>
+    <div class="hero-trust" style="margin-top:10px">
+      <span><span class="ck">✓</span> No credit card required</span>
+      <span><span class="ck">✓</span> Cancel anytime</span>
+      <span><span class="ck">✓</span> 100% permit approval over 24 years</span>
+    </div>
+  </div>
+</div></section>
+
+<!-- Footer -->
+<footer class="main-footer"><div class="container">
+  <div class="footer-content">
+    <div class="footer-column"><h3>Contact</h3><ul>
+      <li><a href="mailto:info@windloadcalc.com">info@windloadcalc.com</a></li>
+      <li><a href="mailto:support@windloadcalc.com">support@windloadcalc.com</a></li>
+      <li><a href="tel:8332723946">(833) 272-3946</a></li>
+    </ul></div>
+    <div class="footer-column"><h3>Calculators</h3><ul>
+      <li><a href="https://windloadcalc.com/shop/windows-doors-shutters.html">Windows, Doors &amp; Shutters</a></li>
+      <li><a href="https://windloadcalc.com/wind-load-calculator-shop.html">All Calculators &amp; Pricing</a></li>
+      <li><a href="https://windloadcalc.com/wind-load-calculator-comparison.html">Calculator Comparison</a></li>
+    </ul></div>
+    <div class="footer-column"><h3>Resources</h3><ul>
+      <li><a href="https://windloadcalc.com/free-wind-load-calculator.html">Free Wind Load Calculator</a></li>
+      <li><a href="https://windloadcalc.com/asce-7-wind-load-calculator/">ASCE 7 Guide</a></li>
+      <li><a href="https://windloadcalc.com/components-and-cladding-wind-loads/">C&amp;C Wind Loads</a></li>
+      <li><a href="https://windloadcalc.com/faq.html">Wind Load FAQ</a></li>
+    </ul></div>
+    <div class="footer-column"><h3>Company</h3><ul>
+      <li><a href="https://windloadcalc.com/why-us.html">About Us</a></li>
+      <li><a href="https://windloadcalc.com/contact.html">Contact</a></li>
+      <li><a href="https://windloadcalc.com/privacy-policy.html">Privacy Policy</a></li>
+      <li><a href="https://windloadcalc.com/terms-of-service.html">Terms of Service</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2002–2026 WindLoadCalc · WindLoad Solutions, LLC — online since 2006. Hawaii reports sealed by your Hawaii-licensed PE under HRS Ch. 464.</p></div>
+</div></footer>
+
+<script>
+(function(){
+  var nav=document.getElementById('nav');
+  function onScroll(){ nav.classList.toggle('scrolled', window.scrollY>40); }
+  onScroll(); window.addEventListener('scroll',onScroll,{passive:true});
+})();
+(function(){
+  var ham=document.getElementById('hamburger'), fm=document.getElementById('fullMenu'),
+      ov=document.getElementById('navOverlay'), fc=document.getElementById('fmClose');
+  if(!ham||!fm) return;
+  function setMenu(open){ fm.classList.toggle('open',open); ov.classList.toggle('open',open); ham.classList.toggle('open',open);
+    ham.setAttribute('aria-expanded',open); document.body.style.overflow=open?'hidden':''; }
+  ham.addEventListener('click',function(){ setMenu(!fm.classList.contains('open')); });
+  ov.addEventListener('click',function(){ setMenu(false); });
+  if(fc) fc.addEventListener('click',function(){ setMenu(false); });
+  fm.querySelectorAll('a').forEach(function(a){ a.addEventListener('click',function(){ setMenu(false); }); });
+  window.addEventListener('keydown',function(e){ if(e.key==='Escape') setMenu(false); });
+})();
+function launchCalc(e){
+  e.preventDefault();
+  var zip=(document.getElementById('zip-input').value||'').replace(/[^0-9]/g,'').slice(0,5);
+  var target='https://calc.windloadcalc.com/';
+  if(zip.length===5){ target=target+'?zip='+zip; }
+  window.location.href=target;
+  return false;
+}
+</script>
 </body>
 </html>

@@ -2,29 +2,34 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="index, follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
     <link rel="manifest" href="/site.webmanifest">
     <link rel="shortcut icon" href="/favicon.ico?v=2">
 
-    <!-- SEO Meta -->
-    <title>Florida Wind Load Calculator — ASCE 7-22 + FBC 8th Edition</title>
-    <meta name="description" content="Instant Florida wind load calculations per ASCE 7-22 and FBC 8th Edition. Miami-Dade HVHZ, Collier 170 mph, Broward 170 mph supported. Free wind speed lookup.">
-    <meta name="keywords" content="Florida wind load calculator, FBC 8th Edition wind load, ASCE 7-22 Florida, Miami-Dade wind load, HVHZ wind load calculator, Broward wind load, Collier County wind load, Florida wind speed map">
-    <link rel="canonical" href="https://windloadcalc.com/florida-wind-load-calculator/">
+    <title>Florida Wind Load Calculator — ASCE 7-22 + FBC 8th Edition Statewide Hub</title>
+    <meta name="description" content="Florida wrote the nation's first statewide building code after Hurricane Andrew. Our Florida wind load calculator runs ASCE 7-22 + FBC 8th Edition across all 67 counties — HVHZ-tagged, county overrides applied. Free ZIP wind-speed lookup.">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Florida Wind Load Calculator — ASCE 7-22 + FBC 8th Edition">
-    <meta property="og:description" content="Instant Florida wind load calculations. Miami-Dade HVHZ, Collier 170 mph, Broward 170 mph supported. Free wind speed lookup by ZIP.">
+    <meta property="og:title" content="Florida Wind Load Calculator — Statewide ASCE 7-22 + FBC 8th Edition">
+    <meta property="og:description" content="The state that built the first statewide code, on one calculator. ASCE 7-22 + FBC 8th Edition, all 67 counties, HVHZ tagged, county overrides applied. Free ZIP lookup.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://windloadcalc.com/florida-wind-load-calculator/">
     <meta property="og:image" content="https://windloadcalc.com/images/video-posters/index-homepage.jpg">
     <meta property="og:site_name" content="WindLoadCalc">
 
-    <!-- SoftwareApplication Schema -->
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Florida Wind Load Calculator — Statewide ASCE 7-22 + FBC 8th Edition">
+    <meta name="twitter:description" content="The state that built the first statewide code, on one calculator. ASCE 7-22 + FBC 8th Edition, all 67 counties, HVHZ tagged, county overrides applied.">
+    <meta name="twitter:image" content="https://windloadcalc.com/images/video-posters/index-homepage.jpg">
+
+    <link rel="canonical" href="https://windloadcalc.com/florida-wind-load-calculator/">
+
+    <!-- SoftwareApplication schema -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -34,12 +39,12 @@
         "applicationCategory": "EngineeringApplication",
         "applicationSubCategory": "Structural Engineering",
         "operatingSystem": "Web Browser",
-        "description": "Professional wind load calculator for Florida projects. Implements ASCE 7-22 and Florida Building Code 8th Edition (2023), including High Velocity Hurricane Zone (HVHZ) requirements for Miami-Dade and Broward counties and county-level overrides for Collier (170 mph), Palm Beach (165-170 mph), and the Florida Keys (~180 mph).",
+        "description": "Statewide Florida wind load calculator implementing ASCE 7-22 and Florida Building Code 8th Edition (2023). Covers all 67 counties, the HVHZ overlay for Miami-Dade and Broward, and county overrides for Miami-Dade (175 mph), Broward (170 mph), Collier (170 mph), Palm Beach (165-170 mph), and the Florida Keys / Monroe (~180 mph).",
         "url": "https://windloadcalc.com/florida-wind-load-calculator/",
         "featureList": [
-            "ASCE 7-22 Wind Load Calculations for Florida",
+            "ASCE 7-22 wind load calculations for all 67 Florida counties",
             "Florida Building Code 8th Edition (2023) compliance",
-            "HVHZ (High Velocity Hurricane Zone) support",
+            "HVHZ (High Velocity Hurricane Zone) auto-tagging",
             "Miami-Dade County 175 mph override",
             "Broward County 170 mph override",
             "Collier County 170 mph override",
@@ -69,1163 +74,615 @@
     {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
-        "itemListElement": [{
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://windloadcalc.com/"
-        },{
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Florida Wind Load Calculator",
-            "item": "https://windloadcalc.com/florida-wind-load-calculator/"
-        }]
+        "itemListElement": [
+            {"@type":"ListItem","position":1,"name":"Home","item":"https://windloadcalc.com/"},
+            {"@type":"ListItem","position":2,"name":"Florida Wind Load Calculator","item":"https://windloadcalc.com/florida-wind-load-calculator/"}
+        ]
     }
     </script>
 
-    <!-- FAQPage (mirrors visible FAQ 1:1) -->
+    <!-- FAQPage — mirrors the visible FAQ 1:1 -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "FAQPage",
-        "mainEntity": [{
-            "@type": "Question",
-            "name": "How long has WindLoadCalc been around?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "WindLoadCalc.com was created in Naples, Florida in 2002 as a local wind load service for Collier County architects and engineers — same year ASCE 7-02 came out. We spent four years doing wind load engineering for the Naples market before launching the online calculator and selling it as a product in 2006. That makes us among the very first online wind load calculators ever published, online years before most generalist national wind calculators existed. Across 24 years the firm has navigated seven ASCE 7 editions for Florida engineers (7-95, 7-98, 7-02, 7-05, 7-10, 7-16, and now 7-22) and every Florida Building Code cycle through FBC 8th Edition. WindLoadCalc's in-house Florida-licensed P.E. reviews and stamps Florida residential and small commercial work up to three stories. That is the moat: a Naples-born Florida wind load calculator with an unbroken permit-submittal track record refined through every major hurricane code update since dial-up."
-            }
-        },{
-            "@type": "Question",
-            "name": "What makes WindLoadCalc different from the other wind load calculators?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Three things, in order of how they matter at a Florida permit counter. First, depth on Florida: county-level overrides for Miami-Dade (175 mph), Broward (170 mph), Collier (170 mph), and Monroe (~180 mph) are applied automatically — not a setting you have to remember to flip. The generalist international structural platforms are built to do everything everywhere; we were founded in 2002 as a Florida wind load specialist and never drifted off-target. Second, plain-English output: the report explains why each pressure landed where it did so a contractor or plan reviewer can audit it without picking up ASCE 7-22 Chapter 30. Third, an in-house Florida-licensed P.E. on staff who can sign and seal residential and small commercial work up to three stories — same-day to next-day turnaround on most stamp requests."
-            }
-        },{
-            "@type": "Question",
-            "name": "What is HVHZ, and how does WindLoadCalc handle it in Miami-Dade and Broward?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "HVHZ — the High Velocity Hurricane Zone — is the Florida Building Code overlay that covers Miami-Dade and Broward counties. It exists because those two counties were ground zero for Hurricane Andrew in 1992, and the post-Andrew forensic reports concluded that the standard Florida code was not strict enough for that density of exposed population. Inside HVHZ, three things change: design wind speeds are bumped (175 mph Miami-Dade, 170 mph Broward), every opening generally needs a Miami-Dade Notice of Acceptance (NOA) on top of statewide Florida Product Approval, and every NOA-eligible product has to pass TAS 201, 202, and 203 testing — large missile impact, uniform static air pressure, and cyclic wind pressure. WindLoadCalc auto-tags any Miami-Dade or Broward ZIP as HVHZ so the report shows the right pressures and the right product-approval call-outs without you flipping a switch."
-            }
-        },{
-            "@type": "Question",
-            "name": "Where does the 175 mph Miami-Dade design wind speed come from?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Short answer: it is a county-level override that supersedes the ASCE 7-22 map. Miami-Dade settled on 175 mph for Risk Cat II after Hurricane Andrew, and that number has held through every subsequent code cycle as the de facto baseline for HVHZ design. We host the full Hurricane Andrew-to-present story on the Miami-Dade Wind Load Calculator page — that is the canonical deep-dive. The takeaway for this page: any Miami-Dade ZIP returns 175 mph from our velocity finder automatically; never pull that number off a raw ASCE map for an HVHZ project."
-            }
-        },{
-            "@type": "Question",
-            "name": "Is the calculator current with FBC 8th Edition (effective December 31, 2024)?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Yes — the calculator was updated to FBC 8th Edition and ASCE 7-22 ahead of the December 31, 2024 effective date, and every Florida report it has generated since then runs on that combination. If your jurisdiction is still finishing out an FBC 7th Edition submittal that was permitted before the cutover (some counties phased the transition through Q1 2025), the older ASCE 7-16-based engine is still available on request — email support and we'll route you to the right module."
-            }
-        },{
-            "@type": "Question",
-            "name": "How do Naples, Marco Island, and the rest of Collier County come back?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Collier sits at 170 mph for Risk Cat II under the local jurisdiction override — one of the four Florida counties (with Miami-Dade, Broward, and Monroe) where we apply a speed higher than the raw ASCE 7-22 map. The full Collier story, including how Hurricane Ian (2022) sharpened the local enforcement on Naples Gulf-front exposure D, lives on the dedicated Collier County Wind Load Calculator page. Any 34xxx ZIP in Naples, Marco, or Immokalee returns the 170 mph value from our velocity finder automatically."
-            }
-        },{
-            "@type": "Question",
-            "name": "Are the Florida Keys really 180 mph — and does that change my product selection?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Monroe County (the Keys) carries roughly 180 mph for Risk Cat II under ASCE 7-22 — the highest design wind speed in the continental United States. The calculator handles every Monroe ZIP automatically with that speed applied, no separate workflow. What it does to your spec sheet, though: design pressures in Key West and Key Largo can run 30-40% above what a comparable Naples or Sarasota project sees, which almost always pushes opening selection into Large Missile Impact-rated assemblies (TAS 201-tested), heavier anchorage, and beefier mullion sections. The report flags the high-pressure zones so your product search starts narrow."
-            }
-        },{
-            "@type": "Question",
-            "name": "Can I get a Florida P.E. sign-and-seal through this service?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Yes — for Florida projects up to three stories. Our in-house P.E. is Florida-licensed and routinely seals wind load reports for window and door replacements, shutter packages, lanais, screen enclosures, raised lanais with structural framing, and similar residential-and-small-commercial scopes. He has worked through Florida hurricane codes since the early 2000s, so the seal sits behind a real review — not a rubber stamp. Out-of-state PE work is not offered through this service; if your project is in another state we can still generate the calculation but the seal needs a PE licensed in that jurisdiction."
-            }
-        },{
-            "@type": "Question",
-            "name": "Will this output clear a Florida residential remodel or window-replacement permit?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Yes — this is the highest-volume use case on the platform. The Windows, Doors & Shutters module generates a Florida C&C report sorted by zone — your wall-field cell, your wall-corner cell, and the appropriate roof zones for whichever gable, hip, mono, or other roof shape you selected — with the required design pressure printed next to each opening, plus a column for Florida Product Approval numbers (FL#) or Miami-Dade NOAs that you fill in from the manufacturer's data. Plan reviewers in Miami-Dade, Broward, Collier, Palm Beach, and the inland counties accept this exact format — we have 24 years of submittals telling us so."
-            }
-        },{
-            "@type": "Question",
-            "name": "How does Risk Category step the pressures up for Florida hospitals, schools, and assembly buildings?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "For the same Florida address, Risk Cat III bumps the design wind speed above Cat II (the schools, assembly halls, and Gulf-coast hotels above the 300-occupant threshold land here), and Risk Cat IV bumps it again (hospitals, fire stations, EOCs — the essential facilities that have to be functional the morning after a Cat 4 lands on the coast). The exact step depends on the location: a Collier Cat IV pushes well above the 170 mph Cat II override; a Monroe Cat IV stretches the Keys baseline further. The calculator pulls the right ASCE 7-22 speed for whichever of the four risk categories you select — same engine, same county overrides, just the appropriate tier."
-            }
-        }]
+        "mainEntity": [
+            {"@type":"Question","name":"Why does Florida need its own wind load calculator at all?","acceptedAnswer":{"@type":"Answer","text":"Because Florida is the only state running a single statewide building code with hurricane wind written into its DNA. After Hurricane Andrew flattened a swath of Miami-Dade in 1992, the state scrapped its patchwork of local codes and enacted the Florida Building Code in 2002 — the nation's first unified statewide code. A national tool treats Florida as one more state on the ASCE 7-22 map. Florida treats wind as the headline. That gap — between a map value and the value a Florida plan reviewer will actually accept — is the whole reason this calculator exists."}},
+            {"@type":"Question","name":"What is FBC 8th Edition, and what does it pin for wind?","acceptedAnswer":{"@type":"Answer","text":"FBC 8th Edition is the 2023 cycle of the Florida Building Code, enforceable December 31, 2024. It adopts ASCE 7-22 as the wind load standard, replacing the ASCE 7-16 basis that lived under FBC 7th Edition. The pairing carries four changes that move a real Florida pressure number: refreshed coastal wind-speed contours, a fourth enclosure class (Partially Open, GCpi of plus/minus 0.18) that catches most lanais and pool cages, a reorganized Chapter 30 C&C procedure by roof shape, and the Florida-only 4-foot edge strip minimum under FBC R301.2(7)."}},
+            {"@type":"Question","name":"Does the calculator cover the whole state, or just the coast?","acceptedAnswer":{"@type":"Answer","text":"All 67 counties, coast to interior. The statewide map runs from roughly 180 mph in the Keys down through 130 mph in the inland Panhandle and northeast Florida. The calculator resolves your county the instant your fifth ZIP digit lands, pulls the ASCE 7-22 baseline for that point, and layers any local override on top automatically — Miami-Dade 175 mph, Broward 170 mph, Collier 170 mph, Monroe ~180 mph. Inland counties that follow the raw ASCE baseline are handled the same way; you never choose."}},
+            {"@type":"Question","name":"What is HVHZ, and which counties does it cover?","acceptedAnswer":{"@type":"Answer","text":"The High Velocity Hurricane Zone is the strictest overlay inside the Florida Building Code, and it covers exactly two counties: Miami-Dade and Broward. It was written in direct response to Hurricane Andrew (1992), after forensic teams found the pre-Andrew code too weak for that density of exposed population. Inside HVHZ the design speeds bump (175 mph Miami-Dade, 170 mph Broward), every opening generally needs a Miami-Dade Notice of Acceptance on top of statewide Florida Product Approval, and products must clear TAS 201, 202, and 203 testing. The calculator stamps HVHZ on any Miami-Dade or Broward ZIP automatically."}},
+            {"@type":"Question","name":"What are TAS 201, 202, and 203?","acceptedAnswer":{"@type":"Answer","text":"They are the three Test Application Standards an HVHZ-rated assembly must pass. TAS 201 is Large Missile Impact — the 2x4 cannon-shot test. TAS 202 is Uniform Static Air Pressure. TAS 203 is Cyclic Wind Pressure. An assembly that clears all three earns a Miami-Dade NOA and qualifies for use in the HVHZ. That testing regime is why a Miami-Dade-rated impact window costs meaningfully more than a comparable rest-of-state unit."}},
+            {"@type":"Question","name":"Which Florida counties carry a wind speed above the ASCE map?","acceptedAnswer":{"@type":"Answer","text":"Four: Miami-Dade (175 mph), Broward (170 mph), Collier (170 mph), and effectively Monroe / the Keys (~180 mph). Palm Beach runs 165-170 mph and sits just at the edge. Each override traces to a specific post-storm forensic record — Andrew (1992) for Miami-Dade and Broward, Ian (2022) for Collier's tightening. Drop a ZIP from one of these counties into a generic national tool that does not know the override and you will undersize the project. Each has its own deep-dive county page; this hub links them all."}},
+            {"@type":"Question","name":"Can I get a Florida P.E. sign-and-seal through this service?","acceptedAnswer":{"@type":"Answer","text":"Yes, for Florida projects up to three stories. Our in-house engineer is Florida-licensed and routinely seals wind load reports for window and door replacements, shutter packages, lanais, screen enclosures, and similar residential and small-commercial scopes. Out-of-state PE work is not offered through this service — if your project is in another state we can still run the calculation, but the seal needs a P.E. licensed there. Note that the software output itself is an Engineering Report; the seal is the separate stamp step."}},
+            {"@type":"Question","name":"How long has this calculator been around?","acceptedAnswer":{"@type":"Answer","text":"The firm was founded in 2002 — the same year the Florida Building Code took effect — and the online calculator went live in 2006, among the very first on the web. Across 24 years it has navigated seven ASCE 7 editions (7-95 through 7-22) and every Florida code cycle through FBC 8th Edition, maintaining a 100% permit-approval record. Backed by an in-house Florida P.E. and a 50-state PE network for sealing beyond Florida."}}
+        ]
     }
     </script>
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.7;
-            color: #2d3748;
-            background: #ffffff;
-        }
-
-        /* Header */
-        .main-header {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: white;
-            padding: 1rem 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-        }
-
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .logo-image { height: 80px; width: auto; }
-
-        .header-cta {
-            background: #0018ff;
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 50px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .header-cta:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 24, 255, 0.3);
-        }
-
-        /* Hero */
-        .article-header {
-            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
-            color: white;
-            padding: 4rem 0 3rem;
-            text-align: center;
-        }
-
-        .article-header .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .article-category {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .article-title {
-            font-size: 3rem;
-            font-weight: 900;
-            line-height: 1.2;
-            margin-bottom: 1.5rem;
-        }
-
-        .article-subtitle {
-            font-size: 1.25rem;
-            opacity: 0.95;
-            line-height: 1.6;
-            font-weight: 400;
-            margin-bottom: 2rem;
-        }
-
-        /* Hero ZIP form */
-        .zip-form {
-            display: flex;
-            gap: 0.75rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            max-width: 560px;
-            margin: 0 auto;
-        }
-
-        .zip-input {
-            flex: 1 1 220px;
-            padding: 1rem 1.25rem;
-            font-size: 1.1rem;
-            border: none;
-            border-radius: 50px;
-            outline: none;
-            color: #1f2937;
-            min-width: 0;
-        }
-
-        .zip-submit {
-            background: white;
-            color: #0018ff;
-            border: none;
-            padding: 1rem 1.75rem;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-        }
-
-        .zip-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
-
-        .zip-note {
-            font-size: 0.85rem;
-            opacity: 0.85;
-            margin-top: 1rem;
-        }
-
-        /* Main content layout */
-        .content-wrapper {
-            display: grid;
-            grid-template-columns: 1fr 300px;
-            gap: 4rem;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-        }
-
-        .main-content { min-width: 0; }
-
-        .sidebar {
-            position: sticky;
-            top: 100px;
-            align-self: start;
-        }
-
-        .sidebar-box {
-            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
-            border: 2px solid #e5e7eb;
-            border-radius: 15px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .sidebar-box h3 {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #181E57;
-            margin-bottom: 1.5rem;
-        }
-
-        .sidebar-box ul { list-style: none; }
-        .sidebar-box ul li { margin-bottom: 0.75rem; }
-        .sidebar-box a {
-            color: #4a5568;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            display: block;
-            padding: 0.5rem 0 0.5rem 1rem;
-            border-left: 3px solid transparent;
-        }
-        .sidebar-box a:hover {
-            color: #0018ff;
-            border-left-color: #0018ff;
-            padding-left: 1.5rem;
-        }
-
-        .sidebar-cta {
-            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
-            border-radius: 15px;
-            padding: 2rem;
-            text-align: center;
-            color: white;
-        }
-
-        .sidebar-cta h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            color: white;
-        }
-
-        .sidebar-cta p {
-            margin-bottom: 1.5rem;
-            font-size: 0.95rem;
-            opacity: 0.95;
-        }
-
-        .sidebar-cta-button {
-            display: block;
-            background: white;
-            color: #0018ff;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            font-weight: 700;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .sidebar-cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.3);
-        }
-
-        /* Content typography */
-        .main-content h2 {
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: #181E57;
-            margin: 3rem 0 1.5rem;
-            line-height: 1.3;
-            border-bottom: 3px solid #0018ff;
-            padding-bottom: 0.75rem;
-        }
-
-        .main-content h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #2d3748;
-            margin: 2rem 0 1rem;
-        }
-
-        .main-content p {
-            font-size: 1.08rem;
-            line-height: 1.8;
-            margin-bottom: 1.25rem;
-            color: #4a5568;
-        }
-
-        .main-content ul {
-            margin: 1.25rem 0;
-            padding-left: 1.5rem;
-        }
-
-        .main-content ul li {
-            margin-bottom: 0.75rem;
-            color: #4a5568;
-            line-height: 1.7;
-        }
-
-        .main-content ul li strong { color: #0018ff; font-weight: 700; }
-
-        /* Wind speed table */
-        .wind-table-wrap { overflow-x: auto; margin: 2rem 0; }
-
-        .wind-table {
-            width: 100%;
-            border-collapse: collapse;
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
-        }
-
-        .wind-table th {
-            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
-            color: white;
-            padding: 1rem 1.25rem;
-            text-align: left;
-            font-weight: 700;
-            font-size: 0.95rem;
-        }
-
-        .wind-table td {
-            padding: 0.9rem 1.25rem;
-            border-bottom: 1px solid #e5e7eb;
-            font-size: 0.98rem;
-        }
-
-        .wind-table tr:nth-child(even) td { background: #f9fafb; }
-        .wind-table tr:last-child td { border-bottom: none; }
-
-        .speed-cell { font-weight: 700; color: #0018ff; white-space: nowrap; }
-        .hvhz-badge {
-            display: inline-block;
-            background: #fef3c7;
-            color: #b45309;
-            font-size: 0.75rem;
-            font-weight: 700;
-            padding: 0.15rem 0.5rem;
-            border-radius: 10px;
-            margin-left: 0.4rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        /* Info boxes */
-        .info-box {
-            background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%);
-            border-left: 4px solid #0018ff;
-            border-radius: 10px;
-            padding: 1.5rem 2rem;
-            margin: 2rem 0;
-        }
-
-        .info-box h4 {
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: #0018ff;
-            margin-bottom: 0.75rem;
-        }
-
-        .info-box p { font-size: 1rem; line-height: 1.7; margin-bottom: 0; }
-
-        .warning-box {
-            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-            border-left: 4px solid #f59e0b;
-        }
-
-        .warning-box h4 { color: #b45309; }
-
-        /* By the numbers */
-        .by-numbers {
-            background: linear-gradient(135deg, #181E57 0%, #0018ff 100%);
-            color: white;
-            border-radius: 18px;
-            padding: 2.5rem 2rem;
-            margin: 2.5rem 0;
-        }
-
-        .by-numbers h3 {
-            color: white;
-            font-size: 1.6rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-            text-align: center;
-        }
-
-        .by-numbers .by-numbers-sub {
-            text-align: center;
-            opacity: 0.9;
-            font-size: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .by-numbers-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 1.25rem;
-        }
-
-        .by-numbers-cell {
-            text-align: center;
-            padding: 1.25rem 0.5rem;
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-        }
-
-        .by-numbers-cell .big {
-            display: block;
-            font-size: 2rem;
-            font-weight: 900;
-            line-height: 1;
-            margin-bottom: 0.5rem;
-            color: #ffffff;
-        }
-
-        .by-numbers-cell .lbl {
-            display: block;
-            font-size: 0.82rem;
-            line-height: 1.35;
-            opacity: 0.92;
-        }
-
-        @media (max-width: 900px) {
-            .by-numbers-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-
-        /* County cards */
-        .county-cards {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.25rem;
-            margin: 2rem 0;
-        }
-
-        .county-card {
-            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
-            border: 2px solid #e5e7eb;
-            border-radius: 12px;
-            padding: 1.5rem;
-            text-decoration: none;
-            color: inherit;
-            transition: all 0.3s ease;
-            display: block;
-        }
-
-        .county-card:hover {
-            border-color: #0018ff;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 24, 255, 0.1);
-        }
-
-        .county-card h4 {
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: #181E57;
-            margin-bottom: 0.5rem;
-        }
-
-        .county-card .county-speed {
-            font-size: 1.6rem;
-            font-weight: 900;
-            color: #0018ff;
-            margin-bottom: 0.5rem;
-        }
-
-        .county-card p {
-            font-size: 0.92rem;
-            line-height: 1.55;
-            margin-bottom: 0;
-            color: #6b7280;
-        }
-
-        /* Process steps */
-        .process-steps { counter-reset: step; margin: 2rem 0; }
-
-        .process-step {
-            background: white;
-            border: 2px solid #e5e7eb;
-            border-radius: 12px;
-            padding: 1.5rem 1.5rem 1.5rem 4.5rem;
-            margin-bottom: 1.25rem;
-            position: relative;
-        }
-
-        .process-step::before {
-            counter-increment: step;
-            content: counter(step);
-            position: absolute;
-            left: 1.5rem;
-            top: 1.5rem;
-            width: 2rem;
-            height: 2rem;
-            background: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 1.05rem;
-        }
-
-        .process-step h4 {
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: #2d3748;
-            margin-bottom: 0.5rem;
-        }
-
-        .process-step p {
-            font-size: 1rem;
-            margin-bottom: 0;
-        }
-
-        /* FAQ */
-        .faq-item {
-            background: white;
-            border: 2px solid #e5e7eb;
-            border-radius: 12px;
-            margin-bottom: 1rem;
-            overflow: hidden;
-        }
-
-        .faq-item summary {
-            padding: 1.25rem 1.5rem;
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #181E57;
-            cursor: pointer;
-            list-style: none;
-            position: relative;
-            padding-right: 3rem;
-        }
-
-        .faq-item summary::-webkit-details-marker { display: none; }
-
-        .faq-item summary::after {
-            content: '+';
-            position: absolute;
-            right: 1.25rem;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 1.5rem;
-            color: #0018ff;
-            font-weight: 400;
-            line-height: 1;
-        }
-
-        .faq-item[open] summary::after { content: '−'; }
-
-        .faq-item .faq-answer {
-            padding: 0 1.5rem 1.5rem;
-            color: #4a5568;
-            line-height: 1.7;
-        }
-
-        /* Content CTA */
-        .content-cta {
-            background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 50%, #8b5cf6 100%);
-            background-size: 200% 200%;
-            border-radius: 20px;
-            padding: 3rem 2.5rem;
-            margin: 3rem 0;
-            text-align: center;
-            color: white;
-        }
-
-        .content-cta h3 {
-            font-size: 1.85rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            color: white;
-        }
-
-        .content-cta p {
-            font-size: 1.1rem;
-            margin-bottom: 1.75rem;
-            opacity: 0.95;
-            color: white;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: white;
-            color: #0018ff;
-            padding: 1rem 2.25rem;
-            border-radius: 50px;
-            font-weight: 700;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
-            font-size: 1.05rem;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
-        }
-
-        .cta-button i { margin-left: 0.5rem; }
-
-        /* Internal links section */
-        .related-links {
-            background: #f9fafb;
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 2rem 0;
-        }
-
-        .related-links h3 {
-            margin-top: 0;
-            color: #181E57;
-        }
-
-        .related-links ul {
-            list-style: none;
-            padding: 0;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0.75rem;
-        }
-
-        .related-links ul li { margin: 0; }
-
-        .related-links a {
-            color: #0018ff;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .related-links a:hover { text-decoration: underline; }
-
-        /* Footer */
-        .main-footer {
-            background: #1f2937;
-            color: white;
-            padding: 3rem 0 1.5rem;
-        }
-
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-        }
-
-        .footer-column h3 {
-            font-size: 1rem;
-            margin-bottom: 1rem;
-            color: white;
-        }
-
-        .footer-column ul { list-style: none; padding: 0; }
-        .footer-column li { margin-bottom: 0.5rem; font-size: 0.92rem; }
-        .footer-column a {
-            color: rgba(255, 255, 255, 0.75);
-            text-decoration: none;
-        }
-        .footer-column a:hover { color: white; }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
-            margin-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 0.9rem;
-        }
-
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .content-wrapper {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-            .sidebar { position: static; }
-            .county-cards { grid-template-columns: 1fr; }
-            .footer-content { grid-template-columns: repeat(2, 1fr); }
-        }
-
-        @media (max-width: 640px) {
-            .article-title { font-size: 2rem; }
-            .article-subtitle { font-size: 1.05rem; }
-            .main-content h2 { font-size: 1.65rem; }
-            .process-step { padding-left: 3.5rem; }
-            .content-cta { padding: 2rem 1.5rem; }
-            .content-cta h3 { font-size: 1.4rem; }
-            .related-links ul { grid-template-columns: 1fr; }
-            .footer-content { grid-template-columns: 1fr; }
-            .wind-table th, .wind-table td { padding: 0.7rem 0.85rem; font-size: 0.9rem; }
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#0018FF; --blue-deep:#181E57; --blue-bright:#3a5bff;
+  --muted:#94a3b8; --line:rgba(255,255,255,.08); --bg:#070a18; --surface:rgba(255,255,255,.04);
+  --gold:#E8B530; --luxe:cubic-bezier(.22,.61,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:#e8edf7;
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.55}
+a{text-decoration:none;color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+.aurora{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.aurora span{position:absolute;border-radius:50%;filter:blur(90px);opacity:.5}
+.aurora .a1{width:620px;height:620px;background:#0018FF;top:-180px;left:-120px;animation:drift1 18s var(--luxe) infinite alternate}
+.aurora .a2{width:540px;height:540px;background:#10B981;bottom:-200px;right:-120px;opacity:.28;animation:drift2 22s var(--luxe) infinite alternate}
+.aurora .a3{width:420px;height:420px;background:#181E57;top:34%;right:16%;opacity:.55;animation:drift1 26s var(--luxe) infinite alternate-reverse}
+@keyframes drift1{to{transform:translate(80px,60px) scale(1.15)}}
+@keyframes drift2{to{transform:translate(-70px,-50px) scale(1.1)}}
+.grid-tex{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:54px 54px;mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000 40%,transparent 100%)}
+
+/* Nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:.3s var(--luxe);background:transparent;border-bottom:1px solid transparent}
+nav.scrolled{backdrop-filter:blur(14px);border-bottom:1px solid var(--line);
+  background:linear-gradient(90deg, rgba(240,244,255,.97) 0%, rgba(223,232,255,.93) 13%, rgba(22,28,58,.92) 46%, rgba(7,10,24,.95) 100%)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;padding:12px clamp(24px,4vw,48px);transition:padding .3s var(--luxe)}
+nav.scrolled .nav-in{padding:8px clamp(24px,4vw,48px)}
+.logo{z-index:1001;display:flex;align-items:center}
+.logo-image{height:84px;width:auto;display:block;filter:drop-shadow(0 2px 10px rgba(0,0,0,.4));transition:all .3s ease}
+nav.scrolled .logo-image{height:64px;filter:none}
+.nav-right{display:flex;align-items:center;gap:18px}
+.nav-links{display:flex;align-items:center;gap:28px}
+.nav-links a.l{position:relative;font-size:14px;color:#fff;font-weight:500;opacity:.88;transition:opacity .2s var(--luxe);text-shadow:0 1px 8px rgba(0,0,0,.45)}
+.nav-links a.l:hover{opacity:1}
+.btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;border-radius:11px;cursor:pointer;transition:.25s var(--luxe);border:none;font-family:inherit}
+.btn-ghost{background:rgba(255,255,255,.06);color:#fff;padding:11px 18px;font-size:14px;border:1px solid rgba(255,255,255,.22)}
+.btn-ghost:hover{border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.12)}
+.btn-primary{background:linear-gradient(135deg,#0018FF,#2540ff);color:#fff;padding:12px 22px;font-size:14px;box-shadow:0 10px 30px rgba(0,24,255,.45)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(0,24,255,.6)}
+.hamburger{display:flex;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;z-index:60}
+.hamburger span{display:block;width:26px;height:3px;border-radius:2px;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.6);transition:.3s var(--luxe)}
+.hamburger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+.nav-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);opacity:0;visibility:hidden;transition:.3s var(--luxe);z-index:55}
+.nav-overlay.open{opacity:1;visibility:visible}
+.full-menu{position:fixed;top:0;right:0;height:100vh;height:100dvh;width:min(90vw,380px);z-index:60;
+  background:rgba(10,14,30,.985);backdrop-filter:blur(18px);border-left:1px solid var(--line);
+  box-shadow:-24px 0 60px rgba(0,0,0,.55);transform:translateX(100%);transition:transform .3s var(--luxe);overflow-y:auto;padding:74px 0 28px}
+.full-menu.open{transform:translateX(0)}
+.fm-head{display:flex;align-items:center;justify-content:space-between;padding:0 26px 14px;border-bottom:1px solid var(--line)}
+.fm-head span{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.fm-close{background:none;border:none;color:#fff;font-size:24px;line-height:1;cursor:pointer;padding:2px 8px}
+.fm-group{padding:14px 26px 4px;border-bottom:1px solid var(--line)}
+.fm-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9db0ff;margin-bottom:6px}
+.fm-group a{display:block;padding:9px 0;font-size:15px;color:#dbe3f5;font-weight:500;transition:color .15s}
+.fm-group a:hover{color:#fff}
+.fm-actions{display:flex;flex-direction:column;gap:10px;padding:20px 26px 0}
+.fm-actions .btn{width:100%;justify-content:center;padding:14px;font-size:15px}
+
+/* Hero — AURORA ONLY (no video) */
+.hero-stage{position:relative;overflow:hidden;isolation:isolate}
+.hero-veil{position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(ellipse 70% 60% at 50% 26%, rgba(0,24,255,.18), transparent 62%),
+    linear-gradient(180deg, rgba(7,10,24,.66) 0%, rgba(7,10,24,.42) 32%, rgba(7,10,24,.72) 74%, var(--bg) 100%)}
+header{position:relative;z-index:2;padding:165px 0 70px;text-align:center}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;background:rgba(7,10,24,.5);border:1px solid rgba(58,91,255,.45);
+  color:#c3cdff;font-size:13px;font-weight:600;padding:8px 16px;border-radius:999px;margin-bottom:24px;backdrop-filter:blur(6px)}
+.eyebrow .dot{width:7px;height:7px;border-radius:50%;background:#34D399;box-shadow:0 0 0 4px rgba(52,211,153,.25)}
+h1{font-size:clamp(34px,5.2vw,58px);line-height:1.05;font-weight:800;letter-spacing:-.025em;max-width:18ch;margin:0 auto 16px;text-shadow:0 4px 28px rgba(0,0,0,.45)}
+h1 .grad{background:linear-gradient(110deg,#34D399,#10B981 55%,#3a5bff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{font-size:clamp(16px,2vw,19px);color:#d3dbef;max-width:60ch;margin:0 auto 22px;text-shadow:0 2px 14px rgba(0,0,0,.5)}
+.sub strong{color:#fff}
+.zip-form{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;max-width:520px;margin:10px auto 16px}
+.zip-input{flex:1 1 220px;min-width:0;padding:14px 18px;font-size:16px;border:1px solid rgba(255,255,255,.2);border-radius:12px;
+  background:rgba(255,255,255,.08);color:#fff;outline:none}
+.zip-input::placeholder{color:#aeb8cf}
+.zip-input:focus{border-color:rgba(58,91,255,.6);background:rgba(255,255,255,.12)}
+.zip-submit{background:linear-gradient(135deg,#0018FF,#2540ff);color:#fff;border:none;padding:14px 22px;border-radius:12px;
+  font-weight:700;font-size:15px;cursor:pointer;white-space:nowrap;font-family:inherit;box-shadow:0 10px 30px rgba(0,24,255,.45)}
+.zip-submit:hover{transform:translateY(-2px)}
+.hero-trust{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;font-size:13px;color:#cdd6ec;margin-top:6px}
+.hero-trust span{display:inline-flex;align-items:center;gap:6px}
+.hero-trust .ck{color:#34D399;font-weight:800}
+.stat-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:34px}
+.stat-tile{background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:14px;padding:16px 22px;min-width:150px;backdrop-filter:blur(6px)}
+.stat-tile .n{font-size:26px;font-weight:800;letter-spacing:-.02em;background:linear-gradient(135deg,#fff,#9db0ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat-tile .l{font-size:12.5px;color:#aeb8cf;margin-top:3px}
+
+section{position:relative;z-index:1;padding:62px 0}
+.sec-head{text-align:center;max-width:66ch;margin:0 auto 40px}
+.sec-head h2{font-size:clamp(26px,3.2vw,38px);font-weight:800;letter-spacing:-.02em;margin-bottom:12px}
+.sec-head p{color:#aeb8cf;font-size:16px}
+.lead{max-width:72ch;margin:0 auto;text-align:center}
+.lead p{color:#c2cce0;font-size:16.5px;margin-bottom:14px}
+.lead p strong{color:#fff}
+
+/* Origin / story split */
+.split{display:grid;grid-template-columns:1.1fr .9fr;gap:26px;align-items:start}
+.story{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:28px 26px}
+.story h3{font-size:20px;font-weight:800;margin-bottom:10px;letter-spacing:-.01em}
+.story p{font-size:14.5px;color:#aeb8cf;margin-bottom:12px}
+.story p strong{color:#dbe3f5}
+.timeline{list-style:none}
+.timeline li{position:relative;padding:0 0 16px 26px;border-left:2px solid rgba(58,91,255,.3);margin-left:4px}
+.timeline li:last-child{border-left-color:transparent;padding-bottom:0}
+.timeline li::before{content:"";position:absolute;left:-7px;top:3px;width:12px;height:12px;border-radius:50%;background:#34D399;box-shadow:0 0 0 4px rgba(52,211,153,.18)}
+.timeline .yr{font-size:13px;font-weight:800;color:#34D399;display:block;margin-bottom:2px}
+.timeline .ev{font-size:13.5px;color:#c2cce0}
+
+/* Benefits bar */
+.benefits{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.benefit{display:flex;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.benefit .ic{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex:none;background:linear-gradient(135deg,rgba(0,24,255,.3),rgba(24,30,87,.5));border:1px solid rgba(58,91,255,.4)}
+.benefit .ic svg{width:20px;height:20px;stroke:#9db0ff;fill:none}
+.benefit b{font-size:14px;font-weight:700;display:block}
+.benefit small{font-size:12.5px;color:var(--muted)}
+
+/* Wind speed table */
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:16px;background:var(--surface)}
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px;min-width:560px}
+.tbl th,.tbl td{padding:12px 16px;text-align:left;border-bottom:1px solid var(--line)}
+.tbl thead th{font-weight:800;font-size:13px;background:rgba(0,24,255,.14)}
+.tbl tbody tr:last-child td{border-bottom:none}
+.tbl tbody tr:hover{background:rgba(255,255,255,.03)}
+.tbl .spd{font-weight:800;color:#6ee7b7;white-space:nowrap}
+.hvhz{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.05em;color:#04221a;background:linear-gradient(135deg,#34D399,#10B981);padding:2px 7px;border-radius:999px;margin-left:6px;text-transform:uppercase}
+.note{font-size:13px;color:#aeb8cf;margin-top:14px;text-align:center}
+
+/* Glass call-out cards */
+.cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.gcard{position:relative;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:26px 24px;box-shadow:0 12px 32px rgba(0,0,0,.32);transition:.35s var(--luxe)}
+.gcard:hover{transform:translateY(-5px);border-color:rgba(58,91,255,.5)}
+.gcard .badge{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#04221a;background:linear-gradient(135deg,#34D399,#10B981);padding:4px 10px;border-radius:999px;margin-bottom:13px}
+.gcard h3{font-size:18px;font-weight:800;margin-bottom:8px;letter-spacing:-.01em}
+.gcard p{font-size:14px;color:#aeb8cf;margin-bottom:10px}
+.gcard ul{list-style:none}
+.gcard ul li{font-size:13px;color:#c2cce0;padding:4px 0 4px 18px;position:relative;line-height:1.45}
+.gcard ul li::before{content:"";position:absolute;left:0;top:10px;width:6px;height:6px;border-radius:50%;background:#34D399}
+.gcard ul li b{color:#fff}
+
+/* County cards (link to county pages) */
+.county-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.county{display:flex;flex-direction:column;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:22px 22px;transition:.3s var(--luxe)}
+.county:hover{transform:translateY(-4px);border-color:rgba(58,91,255,.5);box-shadow:0 16px 36px rgba(0,24,255,.16)}
+.county .spd{font-size:30px;font-weight:800;letter-spacing:-.02em;background:linear-gradient(135deg,#fff,#9db0ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.county h4{font-size:16px;font-weight:700;margin:4px 0 6px}
+.county p{font-size:13px;color:#aeb8cf;margin-bottom:12px}
+.county .cta{margin-top:auto;font-size:13.5px;font-weight:700;color:#34D399}
+
+/* Steps */
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;counter-reset:step}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px 18px;position:relative}
+.step .num{width:32px;height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#fff;background:linear-gradient(135deg,#0018FF,#2540ff);margin-bottom:11px;box-shadow:0 8px 20px rgba(0,24,255,.4)}
+.step h4{font-size:14px;font-weight:700;margin-bottom:6px}
+.step p{font-size:12.5px;color:#aeb8cf}
+
+/* Proof band */
+.proof{background:linear-gradient(135deg,rgba(0,24,255,.12),rgba(16,185,129,.08));border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:8px}
+.proof-item{text-align:center}
+.proof-item .n{font-size:34px;font-weight:800;letter-spacing:-.03em;background:linear-gradient(135deg,#fff,#9db0ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.proof-item .c{font-size:14px;color:#cdd6ec;margin-top:4px}
+
+/* FAQ */
+.faq{max-width:860px;margin:0 auto}
+.faq details{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 22px;margin-bottom:12px}
+.faq summary{font-size:16px;font-weight:700;cursor:pointer;list-style:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";float:right;color:#9db0ff;font-weight:800}
+.faq details[open] summary::after{content:"–"}
+.faq p{margin-top:11px;color:#aeb8cf;font-size:14.5px}
+.faq p a{color:#34D399;font-weight:600}
+
+.final{text-align:center}
+.final .glass2{background:linear-gradient(160deg,rgba(0,24,255,.18),rgba(16,185,129,.1));border:1px solid rgba(58,91,255,.4);border-radius:26px;padding:54px 40px;box-shadow:0 40px 100px rgba(0,24,255,.25)}
+.final h2{font-size:clamp(28px,3.6vw,42px);font-weight:800;letter-spacing:-.02em;margin-bottom:14px}
+.final p{color:#cdd6ec;font-size:17px;max-width:60ch;margin:0 auto 22px}
+.final p a{color:#34D399;font-weight:600}
+.related{max-width:900px;margin:30px auto 0;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px 26px;text-align:left}
+.related h3{font-size:16px;font-weight:800;margin-bottom:12px}
+.related ul{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:8px 22px}
+.related li{font-size:14px}
+.related a{color:#9db0ff;font-weight:600}
+.related a:hover{color:#fff}
+
+.main-footer{position:relative;z-index:1;border-top:1px solid var(--line);padding:54px 0 28px;background:rgba(0,0,0,.25)}
+.main-footer .container{max-width:1180px;margin:0 auto;padding:0 28px}
+.footer-content{display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
+.footer-column h3{font-size:15px;font-weight:700;color:#fff;margin-bottom:15px}
+.footer-column ul{list-style:none}
+.footer-column li{margin-bottom:9px;font-size:14px;color:#aeb8cf}
+.footer-column a{color:#aeb8cf;transition:color .2s}
+.footer-column a:hover{color:#fff}
+.footer-bottom{border-top:1px solid var(--line);margin-top:34px;padding-top:20px;text-align:center;color:var(--muted);font-size:13px}
+
+@media(max-width:980px){
+  .benefits{grid-template-columns:repeat(2,1fr)}
+  .cards3,.county-grid,.proof-grid,.split{grid-template-columns:1fr}
+  .steps{grid-template-columns:repeat(2,1fr)}
+  .related ul{grid-template-columns:1fr}
+}
+@media(max-width:880px){.nav-links{display:none}.footer-content{grid-template-columns:repeat(2,1fr)}header{padding:128px 0 44px}}
+@media(max-width:560px){.wrap{padding:0 20px}.benefits{grid-template-columns:1fr}.steps{grid-template-columns:1fr}.footer-content{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.aurora span{animation:none}}
+</style>
 </head>
 <body>
-    <!-- ============================================ -->
-    <!-- TOP-NAV SITE-WIDE PROMO BANNER (NEW 2026-05) -->
-    <!-- ============================================ -->
-    <div style="background:#181E57;color:#F5F1EA;padding:0.7rem 1.5rem;text-align:center;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:0.875rem;font-weight:500;letter-spacing:0.01em;position:relative;z-index:1001;">
-        <a href="../free-wind-load-calculator.html" style="color:#F5F1EA;text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;transition:color 0.2s ease;" onmouseover="this.style.color='#E8B530'" onmouseout="this.style.color='#F5F1EA'">
-            <span>Free Wind Load Calculator with Florida Building Code overrides</span>
-            <span style="display:inline-block;transition:transform 0.2s ease;">&rarr;</span>
-        </a>
+<div class="aurora"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
+<div class="grid-tex"></div>
+
+<nav id="nav"><div class="wrap nav-in">
+  <a class="logo" href="https://windloadcalc.com/"><img height="100" width="300" src="/images/windloadcalc-logo.svg" alt="WindLoadCalc — ASCE 7-22 Wind Load Calculator logo" class="logo-image"></a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a class="l" href="https://windloadcalc.com/free-wind-load-calculator.html">Free tool</a>
+      <a class="l" href="https://windloadcalc.com/wind-load-calculator-comparison.html">Compare</a>
+      <a class="l" href="https://windloadcalc.com/wind-load-calculator-shop.html">Pricing</a>
+      <a class="l" href="https://windloadcalc.com/why-us.html">Why us</a>
+      <a class="btn btn-ghost" href="https://windloadcalc.com/login.html">Log in</a>
+      <a class="btn btn-primary" href="https://windloadcalc.com/wind-load-calculator-shop.html">Start free trial</a>
     </div>
+    <button class="hamburger" id="hamburger" aria-label="Open full menu" aria-expanded="false" aria-controls="fullMenu"><span></span><span></span><span></span></button>
+  </div>
+</div></nav>
+<div class="nav-overlay" id="navOverlay"></div>
+<aside class="full-menu" id="fullMenu" aria-label="Site menu">
+  <div class="fm-head"><span>Menu</span><button class="fm-close" id="fmClose" aria-label="Close menu">&times;</button></div>
+  <div class="fm-group"><div class="fm-label">Wind Load Calculators</div>
+    <a href="https://windloadcalc.com/wind-load-calculator-landing.html">Wind Load Calculators</a>
+    <a href="https://windloadcalc.com/wind-load-calculator-shop.html">Calculators — Pricing</a>
+    <a href="https://windloadcalc.com/free-wind-load-calculator.html">Free Wind Load Calculator</a>
+    <a href="https://windloadcalc.com/wind-load-calculator-comparison.html">Calculator Comparison</a>
+  </div>
+  <div class="fm-group"><div class="fm-label">Florida County Calculators</div>
+    <a href="https://windloadcalc.com/miami-dade-wind-load-calculator/">Miami-Dade (175 mph, HVHZ)</a>
+    <a href="https://windloadcalc.com/broward-wind-load-calculator/">Broward (170 mph, HVHZ)</a>
+    <a href="https://windloadcalc.com/collier-county-wind-load-calculator/">Collier (170 mph)</a>
+    <a href="https://windloadcalc.com/palm-beach-wind-load-calculator/">Palm Beach (165–170 mph)</a>
+  </div>
+  <div class="fm-group"><div class="fm-label">For Professionals</div>
+    <a href="https://windloadcalc.com/wind-load-calculator-for-engineers.html">Engineers</a>
+    <a href="https://windloadcalc.com/wind-load-calculator-for-architects.html">Architects</a>
+    <a href="https://windloadcalc.com/wind-loads-for-consultants.html">Consultants</a>
+    <a href="https://windloadcalc.com/contractors-wind-load-calculator.html">Contractors</a>
+  </div>
+  <div class="fm-group"><div class="fm-label">Company</div>
+    <a href="https://windloadcalc.com/services.html">Services</a>
+    <a href="https://windloadcalc.com/why-us.html">Why Us</a>
+    <a href="https://windloadcalc.com/faq.html">FAQ</a>
+    <a href="https://windloadcalc.com/contact.html">Contact Us</a>
+  </div>
+  <div class="fm-actions">
+    <a class="btn btn-ghost" href="https://windloadcalc.com/login.html">Log in</a>
+    <a class="btn btn-primary" href="https://windloadcalc.com/wind-load-calculator-shop.html">Start free trial →</a>
+  </div>
+</aside>
 
-    <!-- Header -->
-    <header class="main-header">
-        <div class="header-container">
-            <a href="/index.html">
-                <img height="100" width="300" src="/images/windloadcalc-logo.svg" alt="WindLoadCalc" class="logo-image">
-            </a>
-            <a href="/wind-load-calculator-shop.html" class="header-cta">Start Free Trial</a>
-        </div>
-    </header>
-
-    <!-- Hero -->
-    <section class="article-header">
-        <div class="container">
-            <div class="article-category">The Original Florida Wind Load Calculator &mdash; Firm Since 2002, Online Since 2006</div>
-            <h1 class="article-title">Florida Wind Load Calculator</h1>
-            <p class="article-subtitle"><strong>THE ORIGINAL Florida wind load calculator.</strong> WindLoadCalc.com was created in <strong>Naples, Florida in 2002</strong> as a local wind load service for Collier County architects and engineers. We went online in <strong>2006</strong> &mdash; among the very first online wind load calculators ever published, online years before most generalist national wind calculators existed. Seven ASCE editions later (7-95, 7-98, 7-02, 7-05, 7-10, 7-16, and now <strong>7-22</strong> with <strong>FBC 8th Edition</strong>), we still drop the same thing into your hand: a permit-ready report for any Florida ZIP, HVHZ-tagged when it lands in Miami-Dade or Broward.</p>
-
-            <form class="zip-form" id="zip-form" onsubmit="return launchCalc(event)">
-                <input type="text" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" class="zip-input" id="zip-input" placeholder="Enter Florida ZIP (e.g. 33101)" aria-label="Florida ZIP code">
-                <button type="submit" class="zip-submit">Get Florida Wind Pressures &rarr;</button>
-            </form>
-            <p class="zip-note">Includes 7-day free trial &mdash; Florida-permit-ready report on day one.</p>
-        </div>
-    </section>
-
-    <!-- Main content -->
-    <div class="content-wrapper">
-        <main class="main-content">
-            <p>We have been doing this since the year ASCE 7-02 was published. Twenty-four years. Seven Florida Building Code cycles. Hurricanes Andrew, Charley, Wilma, Irma, Michael, Ian, and the ones still to come. Every time the code changes &mdash; ASCE 7-95 to 7-98, then 7-02, 7-05, 7-10, 7-16, and now 7-22 &mdash; we have re-encoded the Florida wind speed maps, retraced the county overrides, and re-fielded the questions from Florida engineers and contractors trying to clear plan review the same week. That is the only thing this page is about: an ASCE 7-22 Florida wind load calculator built by people who were doing this online before most of the current competition graduated high school.</p>
-
-            <p>Type a Florida ZIP above and the calculator launches with the right ASCE 7-22 baseline already in hand, the county tagged, and any local jurisdiction override (Miami-Dade's 175 mph, Broward's 170 mph, Collier's 170 mph, Monroe's ~180 mph) applied on top. No "is this the right zone" guesswork. No copying a number off a PDF map and hoping the reviewer agrees.</p>
-
-            <div class="info-box">
-                <h4><i class="fas fa-info-circle"></i> Why a Florida-built calculator beats a Florida-aware one</h4>
-                <p>Most of the wind load tools you can buy today started life as international structural engineering platforms that grew a Florida switch. We started here. The first version of WindLoadCalc handled exactly one job &mdash; pull a Florida design wind speed and turn it into a permit-ready C&amp;C number &mdash; and every release since 2002 has been refinement of that single job. That is why the output drops into a Miami-Dade or Collier plan review without translation: the calculator was raised on those plan reviewers' comments.</p>
-            </div>
-
-            <div class="by-numbers" id="by-numbers">
-                <h3>WindLoadCalc Florida &mdash; By the Numbers</h3>
-                <p class="by-numbers-sub">The moat competitors literally cannot copy. Nearly twice as long in this market as our next-largest competitor.</p>
-                <div class="by-numbers-grid">
-                    <div class="by-numbers-cell">
-                        <span class="big">24+</span>
-                        <span class="lbl">Years engineering Florida wind loads (firm founded 2002)</span>
-                    </div>
-                    <div class="by-numbers-cell">
-                        <span class="big">2006</span>
-                        <span class="lbl">Calculator went live on the web &mdash; years before most generalist national wind calculators</span>
-                    </div>
-                    <div class="by-numbers-cell">
-                        <span class="big">7</span>
-                        <span class="lbl">ASCE editions navigated: 7-95 &rarr; 7-22</span>
-                    </div>
-                    <div class="by-numbers-cell">
-                        <span class="big">67</span>
-                        <span class="lbl">Florida counties covered with jurisdiction overrides</span>
-                    </div>
-                    <div class="by-numbers-cell">
-                        <span class="big">P.E.</span>
-                        <span class="lbl">Florida-licensed engineer on staff in-house</span>
-                    </div>
-                </div>
-            </div>
-
-            <h2 id="wind-speeds">Florida Wind Speed Quick Reference</h2>
-
-            <p>Below is the field cheat-sheet our subscribers print and tape to the wall &mdash; representative ASCE 7-22 Risk Category II design wind speeds for the major Florida regions under FBC 8th Edition (2023). Risk Cat II is what your single-family residences, condos, retail, and most lanai/pool-cage scopes land in. The calculator above returns the exact value for your specific ZIP, including local jurisdiction overrides; the table is the orienting glance before you type.</p>
-
-            <div class="wind-table-wrap">
-                <table class="wind-table">
-                    <thead>
-                        <tr>
-                            <th>Region / County</th>
-                            <th>Risk Cat II Wind Speed</th>
-                            <th>Notes</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Florida Keys / Monroe County</td>
-                            <td class="speed-cell">~180 mph</td>
-                            <td>Highest design wind speeds in the continental U.S.</td>
-                        </tr>
-                        <tr>
-                            <td>Miami-Dade County <span class="hvhz-badge">HVHZ</span></td>
-                            <td class="speed-cell">175 mph</td>
-                            <td>Local override; NOA + TAS testing required</td>
-                        </tr>
-                        <tr>
-                            <td>Broward County <span class="hvhz-badge">HVHZ</span></td>
-                            <td class="speed-cell">170 mph</td>
-                            <td>Local override; HVHZ product approval required</td>
-                        </tr>
-                        <tr>
-                            <td>Collier County (Naples, Marco Island)</td>
-                            <td class="speed-cell">170 mph</td>
-                            <td>Local override above ASCE baseline</td>
-                        </tr>
-                        <tr>
-                            <td>Palm Beach County</td>
-                            <td class="speed-cell">165–170 mph</td>
-                            <td>Coast values higher; varies by ZIP</td>
-                        </tr>
-                        <tr>
-                            <td>SW Florida (Lee, Charlotte, Sarasota)</td>
-                            <td class="speed-cell">150–160 mph</td>
-                            <td>Coast trends higher than inland</td>
-                        </tr>
-                        <tr>
-                            <td>Central Florida (Orlando metro, Polk, Lake)</td>
-                            <td class="speed-cell">140–150 mph</td>
-                            <td>Lower than coastal but still hurricane design</td>
-                        </tr>
-                        <tr>
-                            <td>NE Florida (Jacksonville, Duval, St. Johns)</td>
-                            <td class="speed-cell">130–140 mph</td>
-                            <td>Atlantic coast effects diminish heading north</td>
-                        </tr>
-                        <tr>
-                            <td>Florida Panhandle</td>
-                            <td class="speed-cell">130–150 mph</td>
-                            <td>Higher near Gulf coast, lower inland</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="warning-box info-box">
-                <h4><i class="fas fa-exclamation-triangle"></i> Treat the table as orientation, not as a design value</h4>
-                <p>Plug your actual ZIP into the calculator before you set a single design pressure on the drawing. A barrier island ZIP one bridge east of an inland ZIP can swing 20 mph; a Collier ZIP one parcel inland of the override zone can swing the other way. Risk Cat III (schools, assembly halls, gulf-coast hotels above the 300-person trigger) and Risk Cat IV (hospitals and EOCs that have to be operational the morning after a Cat 4 lands) push the number higher still. The table is for orienting; the calculator is for designing.</p>
-            </div>
-
-            <h2 id="hvhz">HVHZ &mdash; the Florida Code Overlay That Reshaped a Generation of Hurricane Design</h2>
-
-            <p>The <strong>High Velocity Hurricane Zone</strong> is the Florida Building Code carve-out covering Miami-Dade and Broward counties. It was born out of Hurricane Andrew (1992), when those two counties absorbed the worst residential damage on record at that point in Florida history and the post-storm forensic teams concluded the existing code was not strict enough for the most densely-populated stretch of coastline in the state. The HVHZ chapter was the regulatory response &mdash; and 30+ years later it is still the strictest hurricane jurisdiction in the United States.</p>
-
-            <p>Three things change the moment a project lands inside HVHZ:</p>
-
-            <ul>
-                <li><strong>Wind speeds bump above the ASCE map.</strong> Miami-Dade settles at 175 mph and Broward at 170 mph for Risk Cat II &mdash; both above what a raw ASCE 7-22 lookup would return. The bumps come from county-specific post-Andrew analysis, not from the national map.</li>
-                <li><strong>Miami-Dade NOA on top of Florida Product Approval.</strong> Every opening (window, door, shutter, roof tile, impact-rated assembly) installed in HVHZ generally needs a Miami-Dade Notice of Acceptance &mdash; an extra county-issued certification layered on top of the statewide FL# system. The NOA is recognized statewide for HVHZ work, which is why even Broward jobs reference Miami-Dade-issued approvals.</li>
-                <li><strong>TAS 201 / 202 / 203 product testing.</strong> HVHZ-rated assemblies must clear Test Application Standard 201 (Large Missile Impact &mdash; the 2x4 cannon-shot test), 202 (Uniform Static Air Pressure), and 203 (Cyclic Wind Pressure). Those three tests are why a Miami-Dade-rated impact window runs roughly 2&ndash;3&times; a comparable rest-of-state impact window: the testing regime is just more punishing.</li>
-            </ul>
-
-            <p>For any Miami-Dade or Broward ZIP, the calculator stamps HVHZ on the report header and prints the FL# column already flagged as "HVHZ-required" so the contractor knows which approvals to chase. Outside HVHZ &mdash; Collier, Palm Beach, Monroe (Keys), and the rest of Florida &mdash; statewide Florida Product Approval applies and the Miami-Dade NOA is optional (though many manufacturers carry both). The Miami-Dade and Broward pages go deeper on each county's specific HVHZ permit workflow; this page just gets you oriented to the overlay itself.</p>
-
-            <h2 id="fbc-8">FBC 8th Edition + ASCE 7-22 &mdash; The Current Florida Stack</h2>
-
-            <p>FBC 8th Edition is the seventh Florida code cycle we've shipped a calculator update for. (For the curious: we started on FBC 2001, then 2004, 2007, 2010, 2014, 2017, 2020, and now 2023 / 8th Edition.) The 8th Edition went enforceable <strong>December 31, 2024</strong> and pins <strong>ASCE 7-22</strong> as the wind load standard, replacing ASCE 7-16 that lived under FBC 7th. The shifts that actually move a Florida permit number:</p>
-
-            <ul>
-                <li><strong>Updated wind speed maps</strong> &mdash; revised hurricane climatology and return-period analysis nudged some coastal Florida contour lines (most visibly along the Lee/Collier coast post-Ian and the Panhandle post-Michael).</li>
-                <li><strong>The fourth enclosure type: Partially Open</strong> &mdash; ASCE 7-22 now recognizes four enclosure classifications (Enclosed, Partially Open, Partially Enclosed, Open) where 7-16 listed three. For Florida that matters constantly: most lanais, pool cages, and unscreened carports re-classify under Partially Open and pick up a GCpi of &plusmn;0.18.</li>
-                <li><strong>Chapter 30 C&amp;C restructure</strong> &mdash; the six roof shapes (gable, hip, monoslope, multispan gable, sawtooth, mansard) each got their own reorganized procedure; the calculator routes your roof type to the right Chapter 30 section without you choosing.</li>
-                <li><strong>The Florida-only 4-foot edge strip</strong> &mdash; FBC R301.2(7) overrides the ASCE 7-22 "3 ft elsewhere" minimum for edge strip dimension "a", forcing a 4-ft minimum on every Florida C&amp;C zone calc. This is the single most common rejection reason on first-time HVHZ submittals where the engineer used a national tool that defaulted to the ASCE 3-ft figure. We apply the 4-ft Florida minimum automatically.</li>
-            </ul>
-
-            <p>Every Florida calculator on the platform &mdash; Windows/Doors/Shutters, MWFRS, the six C&amp;C roof shapes, and the upcoming Solar Panels module &mdash; runs on the FBC 8th / ASCE 7-22 stack. If you have a grandfathered project that was permitted under FBC 7th and your AHJ is still accepting the older submittal package, our ASCE 7-16 engine is still online; email support and we'll route the project to it.</p>
-
-            <h2 id="county-overrides">The Four Florida Counties Where the ASCE Map Is Not the Final Answer</h2>
-
-            <p>Treat the ASCE 7-22 map as a continental-scale reference and Florida as the place where four specific counties have written their own footnote on it. Miami-Dade, Broward, Collier, and (effectively) Monroe each enforce a design wind speed at or above what the raw national map returns &mdash; each one tied back to a specific post-storm forensic record. Plug a ZIP from any of these four into a generic national tool that does not know about the override and you will undersize the project by 5&ndash;20 mph. That is the single failure mode this calculator was built to prevent.</p>
-
-            <p>The four overrides we apply automatically:</p>
-
-            <div class="county-cards">
-                <a href="/miami-dade-wind-load-calculator" class="county-card">
-                    <h4>Miami-Dade County <span class="hvhz-badge">HVHZ</span></h4>
-                    <div class="county-speed">175 mph</div>
-                    <p>Highest urban override in Florida. Requires NOA-approved products and TAS 201/202/203 testing. Covers Miami, Hialeah, Coral Gables, Homestead, and all unincorporated Miami-Dade.</p>
-                </a>
-                <a href="/broward-wind-load-calculator" class="county-card">
-                    <h4>Broward County <span class="hvhz-badge">HVHZ</span></h4>
-                    <div class="county-speed">170 mph</div>
-                    <p>Second HVHZ jurisdiction. Same NOA + TAS requirements as Miami-Dade. Covers Fort Lauderdale, Hollywood, Pompano Beach, Coral Springs, and all unincorporated Broward.</p>
-                </a>
-                <a href="/collier-county-wind-load-calculator" class="county-card">
-                    <h4>Collier County</h4>
-                    <div class="county-speed">170 mph</div>
-                    <p>SW Florida override. Florida statewide Product Approval (FL#) applies; HVHZ-specific NOA is not required but commonly used. Covers Naples, Marco Island, Immokalee, Everglades City.</p>
-                </a>
-                <a href="/palm-beach-wind-load-calculator" class="county-card">
-                    <h4>Palm Beach County</h4>
-                    <div class="county-speed">165–170 mph</div>
-                    <p>Atlantic coast just north of Broward. Coastal ZIPs sit at the high end; western ZIPs slightly lower. Adjacent to HVHZ but not designated HVHZ itself.</p>
-                </a>
-            </div>
-
-            <p>Other Florida counties — Monroe (Keys), Lee, Charlotte, Sarasota, Manatee, Brevard, Volusia, Indian River, St. Lucie, Martin — generally follow the ASCE 7-22 baseline values for their location, with no further county override. The calculator handles all 67 Florida counties; the four above just happen to be the ones where ignoring the override produces a meaningfully wrong design pressure.</p>
-
-            <div class="info-box">
-                <h4><i class="fas fa-shield-alt"></i> Why the overrides exist</h4>
-                <p>Each local override traces back to a specific post-storm investigation — Hurricane Andrew (1992) for Miami-Dade and Broward, Hurricane Wilma (2005) for Palm Beach refinements, Hurricane Ian (2022) for Collier's tightening. The county engineering offices reviewed actual building performance against the design wind speeds in effect at the time of construction, found the failure rate unacceptable at the baseline, and adopted higher local minimums. None of this is "extra conservatism" — it is calibrated to observed hurricane behavior in those specific geographies.</p>
-            </div>
-
-            <div class="content-cta">
-                <h3>See What Florida Wind Pressures Your Project Will Get Hit With</h3>
-                <p>From the Keys at ~180 mph to the Panhandle at 130 mph &mdash; one ZIP, one risk category, one report. Backed by a Florida wind load practice founded in 2002 and an online calculator that has been on the web since 2006.</p>
-                <a href="/wind-load-calculator-shop.html" class="cta-button">Start Free Trial <i class="fas fa-arrow-right"></i></a>
-            </div>
-
-            <h2 id="how-to">From Florida ZIP to FBC-Ready Report in Five Steps</h2>
-
-            <div class="process-steps">
-                <div class="process-step">
-                    <h4>Drop in any of Florida's 1,400+ ZIP codes</h4>
-                    <p>Type a Florida ZIP &mdash; 33040 in Key West, 32801 in downtown Orlando, 32502 in Pensacola, 33180 in Aventura &mdash; and the calculator resolves the county the moment your fifth digit lands. Behind that one input it pulls the ASCE 7-22 baseline, layers Miami-Dade's 175 mph or Broward/Collier's 170 mph or Monroe's ~180 mph on top where they apply, and stamps HVHZ on the project header before you click the next field.</p>
-                </div>
-                <div class="process-step">
-                    <h4>Select Risk Category (Florida occupancy guide)</h4>
-                    <p>For Florida, Risk Cat II picks up single-family residences, condos, retail, and most lanai/pool-cage scopes &mdash; the bread and butter of the Florida permit office. Cat III is the schools, assembly halls, and gulf-coast hotels above the 300-person trigger. Cat IV is the hospitals and EOCs that have to be operational the morning after a Cat 4 lands. The wind speed steps up with each tier from the same ASCE 7-22 county basis.</p>
-                </div>
-                <div class="process-step">
-                    <h4>Set Florida exposure category (B/C/D) and building geometry</h4>
-                    <p>Florida exposure almost always lands on C for inland suburban work and D for any Atlantic or Gulf parcel within a mile of open water &mdash; Pensacola Beach, Naples Gulf-front, the Atlantic barrier islands all default to D. Exposure B is rare outside the densest Miami high-rise canyons and the mature Coral Gables canopy. Then key in building length, width, mean roof height, roof pitch as X-in-12, and roof shape &mdash; the calculator uses these to drop the right C&amp;C zones for your geometry.</p>
-                </div>
-                <div class="process-step">
-                    <h4>Audit the Florida pressure output zone-by-zone</h4>
-                    <p>The output drops MWFRS pressures for the building's lateral spine plus C&amp;C pressures for every Florida product line you have to spec &mdash; impact glass, lanai screen, hurricane shutter, roof tile. C&amp;C numbers come back zone-broken so the Zone 5 wall corner (which almost always wins in Florida coastal projects) sits at the top of the table, ready to match against an FL# or Miami-Dade NOA.</p>
-                </div>
-                <div class="process-step">
-                    <h4>Export the permit packet &mdash; PE stamp optional</h4>
-                    <p>Pull the report as PDF, the new architectural schedule .xlsx (the same file your draftsperson drops straight into AutoCAD), or plain CSV. Florida projects up to 3 stories can route to our in-house Florida-licensed P.E. for sign-and-seal &mdash; most stamp requests turn around inside one business day. Out-of-state PE work is not offered through this service; our in-house P.E. is Florida-licensed.</p>
-                </div>
-            </div>
-
-            <!-- See Also: Free Wind Load Calculator (NEW 2026-05) -->
-            <div style="background:#FAFAF7;border:1px solid rgba(24,30,87,0.08);border-left:4px solid #E8B530;border-radius:12px;padding:1.5rem;margin:2rem 0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
-                <div style="font-family:'JetBrains Mono','SF Mono',Consolas,monospace;font-size:0.7rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#E8B530;margin-bottom:0.5rem;">Need a specific Florida ZIP?</div>
-                <div style="font-size:1rem;color:#1f2937;line-height:1.55;margin-bottom:0.75rem;">Our <strong>free wind load calculator</strong> handles ZIP-based lookup with Florida Building Code overrides built in. No signup, no meter, every coefficient cited.</div>
-                <a href="../free-wind-load-calculator.html" style="display:inline-block;padding:0.55rem 1.1rem;background:#0018ff;color:white;border-radius:999px;font-weight:600;font-size:0.875rem;text-decoration:none;">Try the Free Calculator &rarr;</a>
-            </div>
-
-            <h2 id="faq">Florida Wind Load FAQ</h2>
-
-            <details class="faq-item">
-                <summary>How long has WindLoadCalc been around?</summary>
-                <div class="faq-answer">WindLoadCalc.com was created in Naples, Florida in 2002 as a local wind load service for Collier County architects and engineers &mdash; same year ASCE 7-02 came out. We spent four years doing wind load engineering for the Naples market before launching the online calculator and selling it as a product in 2006. That makes us among the very first online wind load calculators ever published, online years before most generalist national wind calculators existed. Across 24 years the firm has navigated seven ASCE 7 editions for Florida engineers (7-95, 7-98, 7-02, 7-05, 7-10, 7-16, and now 7-22) and every Florida Building Code cycle through FBC 8th Edition. WindLoadCalc's in-house Florida-licensed P.E. reviews and stamps Florida residential and small commercial work up to three stories. That is the moat: a Naples-born Florida wind load calculator with an unbroken permit-submittal track record refined through every major hurricane code update since dial-up.</div>
-            </details>
-
-            <details class="faq-item">
-                <summary>What makes WindLoadCalc different from the other wind load calculators?</summary>
-                <div class="faq-answer">Three things, in order of how they matter at a Florida permit counter. First, depth on Florida: county-level overrides for Miami-Dade (175 mph), Broward (170 mph), Collier (170 mph), and Monroe (~180 mph) are applied automatically &mdash; not a setting you have to remember to flip. The generalist international structural platforms are built to do everything everywhere; we were founded in 2002 as a Florida wind load specialist and never drifted off-target. Second, plain-English output: the report explains why each pressure landed where it did so a contractor or plan reviewer can audit it without picking up ASCE 7-22 Chapter 30. Third, an in-house Florida-licensed P.E. on staff who can sign and seal residential and small commercial work up to three stories &mdash; same-day to next-day turnaround on most stamp requests.</div>
-            </details>
-
-            <details class="faq-item">
-                <summary>What is HVHZ, and how does WindLoadCalc handle it in Miami-Dade and Broward?</summary>
-                <div class="faq-answer">HVHZ &mdash; the High Velocity Hurricane Zone &mdash; is the Florida Building Code overlay that covers Miami-Dade and Broward counties. It exists because those two counties were ground zero for Hurricane Andrew in 1992, and the post-Andrew forensic reports concluded that the standard Florida code was not strict enough for that density of exposed population. Inside HVHZ, three things change: design wind speeds are bumped (175 mph Miami-Dade, 170 mph Broward), every opening generally needs a Miami-Dade Notice of Acceptance (NOA) on top of statewide Florida Product Approval, and every NOA-eligible product has to pass TAS 201, 202, and 203 testing &mdash; large missile impact, uniform static air pressure, and cyclic wind pressure. WindLoadCalc auto-tags any Miami-Dade or Broward ZIP as HVHZ so the report shows the right pressures and the right product-approval call-outs without you flipping a switch.</div>
-            </details>
-
-            <details class="faq-item">
-                <summary>Where does the 175 mph Miami-Dade design wind speed come from?</summary>
-                <div class="faq-answer">Short answer: it is a county-level override that supersedes the ASCE 7-22 map. Miami-Dade settled on 175 mph for Risk Cat II after Hurricane Andrew, and that number has held through every subsequent code cycle as the de facto baseline for HVHZ design. We host the full Hurricane Andrew-to-present story on the <a href="/miami-dade-wind-load-calculator">Miami-Dade Wind Load Calculator</a> page &mdash; that is the canonical deep-dive. The takeaway for this page: any Miami-Dade ZIP returns 175 mph from our velocity finder automatically; never pull that number off a raw ASCE map for an HVHZ project.</div>
-            </details>
-
-            <details class="faq-item">
-                <summary>Is the calculator current with FBC 8th Edition (effective December 31, 2024)?</summary>
-                <div class="faq-answer">Yes &mdash; the calculator was updated to FBC 8th Edition and ASCE 7-22 ahead of the December 31, 2024 effective date, and every Florida report it has generated since then runs on that combination. If your jurisdiction is still finishing out an FBC 7th Edition submittal that was permitted before the cutover (some counties phased the transition through Q1 2025), the older ASCE 7-16-based engine is still available on request &mdash; email support and we'll route you to the right module.</div>
-            </details>
-
-            <details class="faq-item">
-                <summary>How do Naples, Marco Island, and the rest of Collier County come back?</summary>
-                <div class="faq-answer">Collier sits at 170 mph for Risk Cat II under the local jurisdiction override &mdash; one of the four Florida counties (with Miami-Dade, Broward, and Monroe) where we apply a speed higher than the raw ASCE 7-22 map. The full Collier story, including how Hurricane Ian (2022) sharpened the local enforcement on Naples Gulf-front exposure D, lives on the dedicated <a href="/collier-county-wind-load-calculator">Collier County Wind Load Calculator</a> page. Any 34xxx ZIP in Naples, Marco, or Immokalee returns the 170 mph value from our velocity finder automatically.</div>
-            </details>
-
-            <details class="faq-item">
-                <summary>Are the Florida Keys really 180 mph &mdash; and does that change my product selection?</summary>
-                <div class="faq-answer">Monroe County (the Keys) carries roughly 180 mph for Risk Cat II under ASCE 7-22 &mdash; the highest design wind speed in the continental United States. The calculator handles every Monroe ZIP automatically with that speed applied, no separate workflow. What it does to your spec sheet, though: design pressures in Key West and Key Largo can run 30-40% above what a comparable Naples or Sarasota project sees, which almost always pushes opening selection into Large Missile Impact-rated assemblies (TAS 201-tested), heavier anchorage, and beefier mullion sections. The report flags the high-pressure zones so your product search starts narrow.</div>
-            </details>
-
-            <details class="faq-item">
-                <summary>Can I get a Florida P.E. sign-and-seal through this service?</summary>
-                <div class="faq-answer">Yes &mdash; for Florida projects up to three stories. Our in-house P.E. is Florida-licensed and routinely seals wind load reports for window and door replacements, shutter packages, lanais, screen enclosures, raised lanais with structural framing, and similar residential-and-small-commercial scopes. He has worked through Florida hurricane codes since the early 2000s, so the seal sits behind a real review &mdash; not a rubber stamp. Out-of-state PE work is not offered through this service; if your project is in another state we can still generate the calculation but the seal needs a PE licensed in that jurisdiction.</div>
-            </details>
-
-            <details class="faq-item">
-                <summary>Will this output clear a Florida residential remodel or window-replacement permit?</summary>
-                <div class="faq-answer">Yes &mdash; this is the highest-volume use case on the platform. The Windows, Doors &amp; Shutters module generates a Florida C&amp;C report sorted by zone &mdash; your wall-field cell, your wall-corner cell, and the appropriate roof zones for whichever gable, hip, mono, or other roof shape you selected &mdash; with the required design pressure printed next to each opening, plus a column for Florida Product Approval numbers (FL#) or Miami-Dade NOAs that you fill in from the manufacturer's data. Plan reviewers in Miami-Dade, Broward, Collier, Palm Beach, and the inland counties accept this exact format &mdash; we have 24 years of submittals telling us so.</div>
-            </details>
-
-            <details class="faq-item">
-                <summary>How does Risk Category step the pressures up for Florida hospitals, schools, and assembly buildings?</summary>
-                <div class="faq-answer">For the same Florida address, Risk Cat III bumps the design wind speed above Cat II (the schools, assembly halls, and Gulf-coast hotels above the 300-occupant threshold land here), and Risk Cat IV bumps it again (hospitals, fire stations, EOCs &mdash; the essential facilities that have to be functional the morning after a Cat 4 lands on the coast). The exact step depends on the location: a Collier Cat IV pushes well above the 170 mph Cat II override; a Monroe Cat IV stretches the Keys baseline further. The calculator pulls the right ASCE 7-22 speed for whichever of the four risk categories you select &mdash; same engine, same county overrides, just the appropriate tier.</div>
-            </details>
-
-            <h2 id="related">Florida-adjacent calculators, code references, and deeper guides</h2>
-
-            <div class="related-links">
-                <h3>Florida county deep-dives + ASCE 7 reference</h3>
-                <ul>
-                    <li><a href="/florida-wind-speed/">Florida wind speeds by county (Miami-Dade, Broward, Collier, Lee, Monroe)</a></li>
-                    <li><a href="/asce-7-wind-load-calculator/">ASCE 7-22 wind load calculator overview</a></li>
-                    <li><a href="/shop/windows-doors-shutters.html">Windows, doors &amp; shutters C&amp;C calculator</a></li>
-                    <li><a href="/wind-load-calculator-for-engineers.html">Wind load tools for structural engineers</a></li>
-                    <li><a href="/wind-load-calculator-for-architects.html">Wind load workflow for architects</a></li>
-                    <li><a href="/components-and-cladding-wind-loads/">Components &amp; cladding fundamentals</a></li>
-                    <li><a href="/free-wind-load-calculator.html">Try the free wind load calculator demo</a></li>
-                </ul>
-            </div>
-
-            <div class="content-cta">
-                <h3>From FL ZIP to FBC-Ready Report in Under 15 Minutes</h3>
-                <p>Twenty-four years of Florida permit work compressed into one tool. ASCE 7-22, FBC 8th Edition, county overrides applied, HVHZ tagged. 7-day free trial, no credit card.</p>
-                <a href="/wind-load-calculator-shop.html" class="cta-button">View Plans &amp; Start Trial <i class="fas fa-arrow-right"></i></a>
-            </div>
-        </main>
-
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <div class="sidebar-box">
-                <h3>On This Page</h3>
-                <ul>
-                    <li><a href="#by-numbers">By the Numbers</a></li>
-                    <li><a href="#wind-speeds">Florida Wind Speeds</a></li>
-                    <li><a href="#hvhz">What is HVHZ</a></li>
-                    <li><a href="#fbc-8">FBC 8th Edition</a></li>
-                    <li><a href="#county-overrides">County Overrides</a></li>
-                    <li><a href="#how-to">How to Calculate</a></li>
-                    <li><a href="#faq">FAQ</a></li>
-                    <li><a href="#related">Related Resources</a></li>
-                </ul>
-            </div>
-
-            <div class="sidebar-cta">
-                <h3>Try the FL Calculator Free</h3>
-                <p>The original Florida wind load calculator &mdash; firm engineering since 2002, online since 2006. ASCE 7-22, FBC 8th Edition, county overrides built in. 7-day trial, no credit card.</p>
-                <a href="/wind-load-calculator-shop.html" class="sidebar-cta-button">Start Free Trial</a>
-            </div>
-
-            <div class="sidebar-box">
-                <h3>Florida County Calculators</h3>
-                <ul>
-                    <li><a href="/miami-dade-wind-load-calculator">Miami-Dade (175 mph, HVHZ)</a></li>
-                    <li><a href="/broward-wind-load-calculator">Broward (170 mph, HVHZ)</a></li>
-                    <li><a href="/collier-county-wind-load-calculator">Collier County (170 mph)</a></li>
-                    <li><a href="/palm-beach-wind-load-calculator">Palm Beach (165-170 mph)</a></li>
-                </ul>
-            </div>
-        </aside>
+<!-- Hero (aurora only) -->
+<div class="hero-stage">
+  <div class="hero-veil"></div>
+  <header><div class="wrap">
+    <div class="eyebrow"><span class="dot"></span>ASCE 7-22 · FBC 8th Edition · all 67 Florida counties</div>
+    <h1>The state that wrote the <span class="grad">first statewide code</span></h1>
+    <p class="sub">Florida built the nation's first unified building code after Andrew. Our calculator runs <strong>ASCE 7-22 + FBC 8th Edition</strong> for every Florida ZIP — HVHZ tagged, county overrides applied.</p>
+    <form class="zip-form" id="zip-form" onsubmit="return launchCalc(event)">
+      <input type="text" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" class="zip-input" id="zip-input" placeholder="Florida ZIP (e.g. 33101)" aria-label="Florida ZIP code">
+      <button type="submit" class="zip-submit">Get wind pressures →</button>
+    </form>
+    <div class="hero-trust">
+      <span><span class="ck">✓</span> 7-day free trial</span>
+      <span><span class="ck">✓</span> No credit card</span>
+      <span><span class="ck">✓</span> Permit-ready report</span>
     </div>
+    <div class="stat-row">
+      <div class="stat-tile"><div class="n">2002</div><div class="l">First statewide code, post-Andrew</div></div>
+      <div class="stat-tile"><div class="n">67</div><div class="l">Florida counties covered</div></div>
+      <div class="stat-tile"><div class="n">~180 mph</div><div class="l">Top design speed (the Keys)</div></div>
+      <div class="stat-tile"><div class="n">100%</div><div class="l">Permit approval over 24 years</div></div>
+    </div>
+  </div></header>
+</div>
 
-    <!-- Footer -->
-    <footer class="main-footer">
-        <div class="footer-content">
-            <div class="footer-column">
-                <h3>Contact</h3>
-                <ul>
-                    <li><a href="mailto:info@windloadcalc.com">info@windloadcalc.com</a></li>
-                    <li><a href="mailto:support@windloadcalc.com">support@windloadcalc.com</a></li>
-                    <li><a href="tel:8332723946">(833) 272-3946</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h3>Calculators</h3>
-                <ul>
-                    <li><a href="/shop/windows-doors-shutters.html">Windows, Doors &amp; Shutters</a></li>
-                    <li><a href="/wind-load-calculator-shop.html">All Calculators &amp; Pricing</a></li>
-                    <li><a href="/wind-load-calculator-comparison.html">Calculator Comparison</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h3>Resources</h3>
-                <ul>
-                    <li><a href="/free-wind-load-calculator.html">Free Demo</a></li>
-                    <li><a href="/asce-7-wind-load-calculator/">ASCE 7-22 Guide</a></li>
-                    <li><a href="/components-and-cladding-wind-loads/">C&amp;C Wind Loads</a></li>
-                    <li><a href="/faq.html">Wind Load FAQ</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h3>Company</h3>
-                <ul>
-                    <li><a href="/why-us.html">About Us</a></li>
-                    <li><a href="/contact.html">Contact</a></li>
-                    <li><a href="/privacy-policy.html">Privacy</a></li>
-                    <li><a href="/terms-of-service.html">Terms</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2002&ndash;2026 WindLoadCalc. All rights reserved.</p>
-            <p class="last-updated" style="margin-top: 0.5rem; font-size: 0.85rem; opacity: 0.85;">Last updated: May 24, 2026 &mdash; Reviewed by our on-staff Florida-licensed P.E. WindLoadCalc.com was created in Naples in 2002 as a local wind load service for Collier County architects and engineers; the online calculator has been on the web since 2006 &mdash; among the very first online wind load calculators ever published, online years before most generalist national wind calculators existed. Free ZIP-based wind speed lookup with FBC overrides now available at our <a href="../free-wind-load-calculator.html" style="color:#facc15;">free wind load calculator</a>.</p>
-        </div>
-    </footer>
+<!-- Lead -->
+<section><div class="wrap">
+  <div class="lead">
+    <p><strong>Hurricane Andrew leveled a corner of Miami-Dade in 1992.</strong> Florida's answer was radical: scrap the local-code patchwork and write one code for the whole state.</p>
+    <p>The Florida Building Code took effect in <strong>2002</strong> — the first statewide code in the country. Wind was its center of gravity, and it has stayed there through every cycle since.</p>
+    <p>This page is the statewide hub. Type a ZIP, get the right number. The county pages go deep where the map gets local.</p>
+  </div>
+</div></section>
 
-    <script>
-        // ZIP launch — calc.windloadcalc.com accepts ?zip=NNNNN and auto-derives
-        // city / state / county / wind speed (Naples 34103 -> FL, Collier, 170 mph).
-        function launchCalc(e) {
-            e.preventDefault();
-            var zip = (document.getElementById('zip-input').value || '').replace(/[^0-9]/g, '').slice(0, 5);
-            var target = 'https://calc.windloadcalc.com/';
-            if (zip.length === 5) {
-                target = target + '?zip=' + zip;
-            }
-            window.location.href = target;
-            return false;
-        }
-    </script>
+<!-- Origin story split -->
+<section><div class="wrap">
+  <div class="split">
+    <div class="story">
+      <h3>Why Florida is different from all 49 others</h3>
+      <p>Every other state stitches together local amendments on top of a national model. Florida runs <strong>one code, statewide, hurricane-first</strong> — and it has since 2002.</p>
+      <p>That single fact changes everything downstream. The map value a national tool reads off ASCE 7-22 is not always the value a Florida plan reviewer accepts.</p>
+      <p>Four counties write their own higher number on top of it.</p>
+      <p>We were founded in 2002, the same year the code launched, and have shipped a calculator update for <strong>every Florida code cycle through FBC 8th Edition</strong>.</p>
+      <p>The output is built to clear a Florida counter, not translated to it.</p>
+    </div>
+    <div class="story">
+      <h3>The Florida wind story, in years</h3>
+      <ul class="timeline">
+        <li><span class="yr">1992</span><span class="ev">Hurricane Andrew exposes the pre-code patchwork in Miami-Dade and Broward.</span></li>
+        <li><span class="yr">2002</span><span class="ev">Florida Building Code takes effect — the nation's first unified statewide code.</span></li>
+        <li><span class="yr">2006</span><span class="ev">Our online calculator goes live — among the first wind tools on the web.</span></li>
+        <li><span class="yr">2022</span><span class="ev">Hurricane Ian sharpens Gulf-coast enforcement; Collier exposure tightens.</span></li>
+        <li><span class="yr">2024</span><span class="ev">FBC 8th Edition becomes enforceable Dec 31 — ASCE 7-22 is now the standard.</span></li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+<!-- Benefits -->
+<section><div class="wrap">
+  <div class="benefits">
+    <div class="benefit"><div class="ic"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div><div><b>Statewide coverage</b><small>All 67 counties, coast to interior</small></div></div>
+    <div class="benefit"><div class="ic"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><b>HVHZ auto-tagged</b><small>Miami-Dade &amp; Broward flagged</small></div></div>
+    <div class="benefit"><div class="ic"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg></div><div><b>County overrides</b><small>Applied without a switch</small></div></div>
+    <div class="benefit"><div class="ic"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M6 2h9l5 5v15H6z"/><path d="M14 2v6h6"/></svg></div><div><b>Permit-ready report</b><small>PDF, Excel, CSV</small></div></div>
+  </div>
+</div></section>
+
+<!-- Statewide wind map table -->
+<section id="wind-speeds"><div class="wrap">
+  <div class="sec-head">
+    <h2>The Florida wind map, region by region</h2>
+    <p>Representative ASCE 7-22 Risk Category II design speeds under FBC 8th Edition. The calculator returns the exact value for your ZIP — this is the orienting glance.</p>
+  </div>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>Region / County</th><th>Risk Cat II speed</th><th>What sets it</th></tr></thead>
+      <tbody>
+        <tr><td>Florida Keys / Monroe</td><td class="spd">~180 mph</td><td>Highest in the continental U.S.</td></tr>
+        <tr><td>Miami-Dade <span class="hvhz">HVHZ</span></td><td class="spd">175 mph</td><td>Local override; NOA + TAS testing</td></tr>
+        <tr><td>Broward <span class="hvhz">HVHZ</span></td><td class="spd">170 mph</td><td>Local override; HVHZ product approval</td></tr>
+        <tr><td>Collier (Naples, Marco)</td><td class="spd">170 mph</td><td>Local override above the baseline</td></tr>
+        <tr><td>Palm Beach</td><td class="spd">165–170 mph</td><td>Coast high; varies by ZIP</td></tr>
+        <tr><td>SW Florida (Lee, Charlotte, Sarasota)</td><td class="spd">150–160 mph</td><td>Coast trends higher than inland</td></tr>
+        <tr><td>Central Florida (Orlando, Polk, Lake)</td><td class="spd">140–150 mph</td><td>Inland but still hurricane design</td></tr>
+        <tr><td>NE Florida (Jacksonville, Duval, St. Johns)</td><td class="spd">130–140 mph</td><td>Atlantic effects ease heading north</td></tr>
+        <tr><td>Florida Panhandle</td><td class="spd">130–150 mph</td><td>Higher near the Gulf, lower inland</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">A barrier-island ZIP one bridge east of an inland ZIP can swing 20 mph. Orient with the table; design with the calculator.</p>
+</div></section>
+
+<!-- FBC 8 + ASCE 7-22 stack -->
+<section id="fbc-8"><div class="wrap">
+  <div class="sec-head">
+    <h2>The current stack: FBC 8th Edition + ASCE 7-22</h2>
+    <p>Four changes carry from the standard into a real Florida pressure number. The calculator handles each automatically.</p>
+  </div>
+  <div class="cards3">
+    <div class="gcard">
+      <span class="badge">Enclosure</span>
+      <h3>A fourth enclosure type</h3>
+      <p>ASCE 7-22 recognizes four classes where 7-16 listed three. For Florida this fires constantly.</p>
+      <ul>
+        <li>Enclosed, <b>Partially Open</b>, Partially Enclosed, Open</li>
+        <li>Most lanais, pool cages &amp; carports re-classify as Partially Open</li>
+        <li>That class picks up a <b>GCpi of ±0.18</b></li>
+      </ul>
+    </div>
+    <div class="gcard">
+      <span class="badge">C&amp;C</span>
+      <h3>The Florida 4-foot edge strip</h3>
+      <p>The single most common first-time rejection when a national tool defaults to the ASCE figure.</p>
+      <ul>
+        <li><b>FBC R301.2(7)</b> forces a 4-ft minimum on edge dimension "a"</li>
+        <li>It overrides the ASCE 7-22 "3 ft elsewhere" minimum</li>
+        <li>We apply the 4-ft Florida value on every C&amp;C zone</li>
+      </ul>
+    </div>
+    <div class="gcard">
+      <span class="badge">Roofs</span>
+      <h3>Chapter 30 routed by shape</h3>
+      <p>The roof procedures were reorganized; you pick a shape, not a section number.</p>
+      <ul>
+        <li>Gable, hip, monoslope, multispan, sawtooth, mansard</li>
+        <li>Each routes to its own <b>Chapter 30</b> procedure</li>
+        <li>Refreshed coastal contours nudged Lee/Collier &amp; Panhandle lines</li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+<!-- County overrides -->
+<section id="counties"><div class="wrap">
+  <div class="sec-head">
+    <h2>Four counties write their own number</h2>
+    <p>Each override traces to a specific post-storm forensic record. Each has a dedicated deep-dive page.</p>
+  </div>
+  <div class="county-grid">
+    <a class="county" href="https://windloadcalc.com/miami-dade-wind-load-calculator/">
+      <div class="spd">175 mph</div>
+      <h4>Miami-Dade <span class="hvhz">HVHZ</span></h4>
+      <p>Highest urban override. NOA-approved products and TAS 201/202/203 testing required across Miami, Hialeah, Coral Gables, Homestead.</p>
+      <span class="cta">Miami-Dade deep dive →</span>
+    </a>
+    <a class="county" href="https://windloadcalc.com/broward-wind-load-calculator/">
+      <div class="spd">170 mph</div>
+      <h4>Broward <span class="hvhz">HVHZ</span></h4>
+      <p>The second HVHZ jurisdiction, same NOA + TAS rules. Fort Lauderdale, Hollywood, Pompano Beach, Coral Springs.</p>
+      <span class="cta">Broward deep dive →</span>
+    </a>
+    <a class="county" href="https://windloadcalc.com/collier-county-wind-load-calculator/">
+      <div class="spd">170 mph</div>
+      <h4>Collier</h4>
+      <p>SW Florida override sharpened after Ian (2022). Statewide FL# applies; NOA optional. Naples, Marco, Immokalee, Everglades City.</p>
+      <span class="cta">Collier deep dive →</span>
+    </a>
+    <a class="county" href="https://windloadcalc.com/palm-beach-wind-load-calculator/">
+      <div class="spd">165–170 mph</div>
+      <h4>Palm Beach</h4>
+      <p>Atlantic coast just north of Broward. Coastal ZIPs at the high end, western lower. Adjacent to HVHZ but not designated.</p>
+      <span class="cta">Palm Beach deep dive →</span>
+    </a>
+  </div>
+  <p class="note">The other 63 counties — Monroe (Keys), Lee, Charlotte, Sarasota, Brevard, Volusia and the rest — follow their ASCE 7-22 baseline. The calculator handles all of them; these four are where ignoring the override produces a wrong pressure.</p>
+</div></section>
+
+<!-- HVHZ explainer -->
+<section id="hvhz"><div class="wrap">
+  <div class="sec-head">
+    <h2>HVHZ — the strictest overlay in the code</h2>
+    <p>The High Velocity Hurricane Zone covers exactly two counties: Miami-Dade and Broward. Three things change the moment a project lands inside it.</p>
+  </div>
+  <div class="cards3">
+    <div class="gcard">
+      <span class="badge">Speed</span>
+      <h3>Speeds bump above the map</h3>
+      <p>Both counties carry a county-specific number from post-Andrew analysis, not the national contour.</p>
+      <ul><li><b>175 mph</b> Miami-Dade, Risk Cat II</li><li><b>170 mph</b> Broward, Risk Cat II</li></ul>
+    </div>
+    <div class="gcard">
+      <span class="badge">Approval</span>
+      <h3>NOA on top of FL#</h3>
+      <p>Openings need a Miami-Dade Notice of Acceptance layered over statewide Florida Product Approval.</p>
+      <ul><li>NOA is recognized statewide for HVHZ work</li><li>Even Broward jobs reference Miami-Dade NOAs</li></ul>
+    </div>
+    <div class="gcard">
+      <span class="badge">Testing</span>
+      <h3>TAS 201 / 202 / 203</h3>
+      <p>Assemblies must clear all three Test Application Standards before they earn an NOA.</p>
+      <ul><li><b>201:</b> Large Missile Impact (the 2×4 cannon)</li><li><b>202:</b> Uniform Static Air Pressure</li><li><b>203:</b> Cyclic Wind Pressure</li></ul>
+    </div>
+  </div>
+</div></section>
+
+<!-- Steps -->
+<section id="how-to"><div class="wrap">
+  <div class="sec-head"><h2>Florida ZIP to FBC-ready report</h2><p>Five inputs, one report — the county logic runs underneath.</p></div>
+  <div class="steps">
+    <div class="step"><div class="num">1</div><h4>Drop a Florida ZIP</h4><p>County resolves on the fifth digit; baseline + override load together.</p></div>
+    <div class="step"><div class="num">2</div><h4>Pick Risk Category</h4><p>II for homes &amp; retail, III for schools, IV for hospitals &amp; EOCs.</p></div>
+    <div class="step"><div class="num">3</div><h4>Set exposure &amp; geometry</h4><p>C inland, D within a mile of open water; then dimensions and roof shape.</p></div>
+    <div class="step"><div class="num">4</div><h4>Read zones</h4><p>C&amp;C broken by zone — the corner cell that wins coastal jobs sits on top.</p></div>
+    <div class="step"><div class="num">5</div><h4>Export the packet</h4><p>PDF, .xlsx schedule, or CSV. PE seal optional for Florida ≤3 stories.</p></div>
+  </div>
+</div></section>
+
+<!-- Proof band -->
+<section class="proof"><div class="wrap">
+  <div class="sec-head"><h2>Why Florida counters trust the report</h2><p>No paid testimonials — a verifiable record on the state that started it all.</p></div>
+  <div class="proof-grid">
+    <div class="proof-item"><div class="n">100%</div><div class="c">permit approval across 24 years of Florida-stamped projects</div></div>
+    <div class="proof-item"><div class="n">Since 2002</div><div class="c">founded the year the Florida Building Code took effect (online 2006)</div></div>
+    <div class="proof-item"><div class="n">7 editions</div><div class="c">of ASCE 7 navigated (7-95 → 7-22), always on the current standard</div></div>
+    <div class="proof-item"><div class="n">67 counties</div><div class="c">covered statewide with jurisdiction overrides applied automatically</div></div>
+    <div class="proof-item"><div class="n">In-house P.E.</div><div class="c">Florida-licensed engineer behind the seal, plus a 50-state PE network</div></div>
+    <div class="proof-item"><div class="n">100% cited</div><div class="c">every coefficient traces to its ASCE 7-22 section — no black box</div></div>
+  </div>
+</div></section>
+
+<!-- FAQ -->
+<section id="faq"><div class="wrap">
+  <div class="sec-head"><h2>Florida wind load FAQ</h2></div>
+  <div class="faq">
+    <details open><summary>Why does Florida need its own wind load calculator at all?</summary><p>Because Florida is the only state running a single statewide building code with hurricane wind written into its DNA.</p><p>After Hurricane Andrew flattened a swath of Miami-Dade in 1992, the state scrapped its patchwork of local codes and enacted the Florida Building Code in 2002 — the nation's first unified statewide code.</p><p>A national tool treats Florida as one more state on the ASCE 7-22 map. Florida treats wind as the headline.</p><p>That gap — between a map value and the value a Florida plan reviewer will actually accept — is the whole reason this calculator exists.</p></details>
+    <details><summary>What is FBC 8th Edition, and what does it pin for wind?</summary><p>FBC 8th Edition is the 2023 cycle of the Florida Building Code, enforceable December 31, 2024. It adopts ASCE 7-22 as the wind load standard, replacing the ASCE 7-16 basis that lived under FBC 7th Edition.</p><p>The pairing carries four changes that move a real Florida pressure number:</p><ul><li>Refreshed coastal wind-speed contours</li><li>A fourth enclosure class (Partially Open, GCpi of ±0.18) that catches most lanais and pool cages</li><li>A reorganized Chapter 30 C&amp;C procedure by roof shape</li><li>The Florida-only 4-foot edge strip minimum under FBC R301.2(7)</li></ul></details>
+    <details><summary>Does the calculator cover the whole state, or just the coast?</summary><p>All 67 counties, coast to interior. The statewide map runs from roughly 180 mph in the Keys down through 130 mph in the inland Panhandle and northeast Florida.</p><p>The calculator resolves your county the instant your fifth ZIP digit lands, pulls the ASCE 7-22 baseline for that point, and layers any local override on top automatically.</p><p>That means Miami-Dade 175 mph, Broward 170 mph, Collier 170 mph, Monroe ~180 mph. Inland counties that follow the raw ASCE baseline are handled the same way; you never choose.</p></details>
+    <details><summary>What is HVHZ, and which counties does it cover?</summary><p>The High Velocity Hurricane Zone is the strictest overlay inside the Florida Building Code, and it covers exactly two counties: Miami-Dade and Broward.</p><p>It was written in direct response to Hurricane Andrew (1992), after forensic teams found the pre-Andrew code too weak for that density of exposed population.</p><p>Inside HVHZ the design speeds bump (175 mph Miami-Dade, 170 mph Broward). Every opening generally needs a Miami-Dade Notice of Acceptance on top of statewide Florida Product Approval, and products must clear TAS 201, 202, and 203 testing.</p><p>The calculator stamps HVHZ on any Miami-Dade or Broward ZIP automatically.</p></details>
+    <details><summary>What are TAS 201, 202, and 203?</summary><p>They are the three Test Application Standards an HVHZ-rated assembly must pass:</p><ul><li>TAS 201 is Large Missile Impact — the 2×4 cannon-shot test</li><li>TAS 202 is Uniform Static Air Pressure</li><li>TAS 203 is Cyclic Wind Pressure</li></ul><p>An assembly that clears all three earns a Miami-Dade NOA and qualifies for use in the HVHZ.</p><p>That testing regime is why a Miami-Dade-rated impact window costs meaningfully more than a comparable rest-of-state unit.</p></details>
+    <details><summary>Which Florida counties carry a wind speed above the ASCE map?</summary><p>Four: Miami-Dade (175 mph), Broward (170 mph), Collier (170 mph), and effectively Monroe / the Keys (~180 mph). Palm Beach runs 165–170 mph and sits just at the edge.</p><p>Each override traces to a specific post-storm forensic record — Andrew (1992) for Miami-Dade and Broward, Ian (2022) for Collier's tightening.</p><p>Drop a ZIP from one of these counties into a generic national tool that does not know the override and you will undersize the project.</p><p>Each has its own deep-dive county page; this hub links them all.</p></details>
+    <details><summary>Can I get a Florida P.E. sign-and-seal through this service?</summary><p>Yes, for Florida projects up to three stories. Our in-house engineer is Florida-licensed and routinely seals wind load reports for window and door replacements, shutter packages, lanais, screen enclosures, and similar residential and small-commercial scopes.</p><p>Out-of-state PE work is not offered through this service — if your project is in another state we can still run the calculation, but the seal needs a P.E. licensed there.</p><p>Note that the software output itself is an Engineering Report; the seal is the separate stamp step.</p></details>
+    <details><summary>How long has this calculator been around?</summary><p>The firm was founded in 2002 — the same year the Florida Building Code took effect — and the online calculator went live in 2006, among the very first on the web.</p><p>Across 24 years it has navigated seven ASCE 7 editions (7-95 through 7-22) and every Florida code cycle through FBC 8th Edition, maintaining a 100% permit-approval record.</p><p>Backed by an in-house Florida P.E. and a 50-state PE network for sealing beyond Florida.</p></details>
+  </div>
+</div></section>
+
+<!-- Final CTA -->
+<section class="final"><div class="wrap">
+  <div class="glass2">
+    <h2>One state, one code, one calculator</h2>
+    <p>From the Keys at ~180 mph to the inland Panhandle at 130 mph — type a ZIP and get the number a Florida counter will accept. Or run the <a href="https://windloadcalc.com/free-wind-load-calculator.html">free wind speed lookup</a> first.</p>
+    <div class="zip-form" style="margin-bottom:4px">
+      <a class="btn btn-primary btn-xl" style="padding:15px 28px;font-size:15px;border-radius:13px" href="https://windloadcalc.com/wind-load-calculator-shop.html">Start free trial →</a>
+      <a class="btn btn-ghost btn-xl" style="padding:15px 28px;font-size:15px;border-radius:13px" href="https://windloadcalc.com/contact.html">Talk to us</a>
+    </div>
+    <div class="hero-trust" style="margin-top:10px">
+      <span><span class="ck">✓</span> No credit card required</span>
+      <span><span class="ck">✓</span> Full access for 7 days</span>
+      <span><span class="ck">✓</span> Cancel anytime</span>
+    </div>
+    <div class="related">
+      <h3>Florida county deep-dives &amp; ASCE references</h3>
+      <ul>
+        <li><a href="https://windloadcalc.com/florida-wind-speed/">Florida wind speeds by county</a></li>
+        <li><a href="https://windloadcalc.com/asce-7-wind-load-calculator/">ASCE 7-22 calculator overview</a></li>
+        <li><a href="https://windloadcalc.com/shop/windows-doors-shutters.html">Windows, doors &amp; shutters C&amp;C</a></li>
+        <li><a href="https://windloadcalc.com/components-and-cladding-wind-loads/">Components &amp; cladding fundamentals</a></li>
+        <li><a href="https://windloadcalc.com/wind-load-calculator-for-engineers.html">Tools for structural engineers</a></li>
+        <li><a href="https://windloadcalc.com/free-wind-load-calculator.html">Free wind load calculator demo</a></li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+<!-- Footer -->
+<footer class="main-footer"><div class="container">
+  <div class="footer-content">
+    <div class="footer-column"><h3>Contact Information</h3><ul>
+      <li><strong>General Inquiries</strong></li>
+      <li><a href="mailto:info@windloadcalc.com">info@windloadcalc.com</a></li>
+      <li><a href="tel:8332723946">(833) 272-3946</a></li>
+      <li style="margin-top:.6rem"><strong>Support</strong></li>
+      <li><a href="mailto:support@windloadcalc.com">support@windloadcalc.com</a></li>
+    </ul></div>
+    <div class="footer-column"><h3>Florida County Calculators</h3><ul>
+      <li><a href="https://windloadcalc.com/miami-dade-wind-load-calculator/">Miami-Dade (175 mph)</a></li>
+      <li><a href="https://windloadcalc.com/broward-wind-load-calculator/">Broward (170 mph)</a></li>
+      <li><a href="https://windloadcalc.com/collier-county-wind-load-calculator/">Collier (170 mph)</a></li>
+      <li><a href="https://windloadcalc.com/palm-beach-wind-load-calculator/">Palm Beach (165–170 mph)</a></li>
+    </ul></div>
+    <div class="footer-column"><h3>Resources</h3><ul>
+      <li><a href="https://windloadcalc.com/free-wind-load-calculator.html">Free Wind Load Calculator</a></li>
+      <li><a href="https://windloadcalc.com/asce-7-wind-load-calculator/">ASCE 7-22 Guide</a></li>
+      <li><a href="https://windloadcalc.com/components-and-cladding-wind-loads/">C&amp;C Wind Loads</a></li>
+      <li><a href="https://windloadcalc.com/faq.html">Wind Load FAQ</a></li>
+    </ul></div>
+    <div class="footer-column"><h3>Company</h3><ul>
+      <li><a href="https://windloadcalc.com/why-us.html">About Us</a></li>
+      <li><a href="https://windloadcalc.com/contact.html">Contact</a></li>
+      <li><a href="https://windloadcalc.com/services.html">Professional Services</a></li>
+      <li><a href="https://windloadcalc.com/privacy-policy.html">Privacy Policy</a></li>
+      <li><a href="https://windloadcalc.com/terms-of-service.html">Terms of Service</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2002–2026 WindLoadCalc · WindLoad Solutions, LLC — founded 2002, online since 2006. ASCE 7-22 &amp; FBC 8th Edition wind load software for all 67 Florida counties.</p></div>
+</div></footer>
+
+<script>
+(function(){
+  var nav=document.getElementById('nav');
+  function onScroll(){ nav.classList.toggle('scrolled', window.scrollY>40); }
+  onScroll(); window.addEventListener('scroll',onScroll,{passive:true});
+})();
+(function(){
+  var ham=document.getElementById('hamburger'), fm=document.getElementById('fullMenu'),
+      ov=document.getElementById('navOverlay'), fc=document.getElementById('fmClose');
+  if(!ham||!fm) return;
+  function setMenu(open){ fm.classList.toggle('open',open); ov.classList.toggle('open',open); ham.classList.toggle('open',open);
+    ham.setAttribute('aria-expanded',open); document.body.style.overflow=open?'hidden':''; }
+  ham.addEventListener('click',function(){ setMenu(!fm.classList.contains('open')); });
+  ov.addEventListener('click',function(){ setMenu(false); });
+  if(fc) fc.addEventListener('click',function(){ setMenu(false); });
+  fm.querySelectorAll('a').forEach(function(a){ a.addEventListener('click',function(){ setMenu(false); }); });
+  window.addEventListener('keydown',function(e){ if(e.key==='Escape') setMenu(false); });
+})();
+function launchCalc(e){
+  e.preventDefault();
+  var zip=(document.getElementById('zip-input').value||'').replace(/[^0-9]/g,'').slice(0,5);
+  var target='https://calc.windloadcalc.com/';
+  if(zip.length===5){ target=target+'?zip='+zip; }
+  window.location.href=target;
+  return false;
+}
+</script>
 </body>
 </html>

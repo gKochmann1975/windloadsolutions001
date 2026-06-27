@@ -1,5 +1,5 @@
 # Marketing Copy — Platform Advantages ("Any device" + benefits)
-*2026-06-27. Truthful, GEO-optimized, NO competitor names (legal-safe + on-strategy). Security framing = "always secure / future-proofed," never "most secure" (we hold no SOC 2/ISO). "Most up to date" → phrased as "always the latest ASCE 7-22," not "more current than everyone" (some tools also do 7-22).*
+*2026-06-27. Truthful, GEO-optimized, NO competitor names (legal-safe + on-strategy). Security framing = "always secure / future-proofed," never "most secure" (we hold no SOC 2/ISO). "Most up to date" → phrased as "always the latest ASCE 7" (evergreen), not "more current than everyone" (some tools also do 7-22).*
 
 ## ✅ Already applied to `why-us.html`
 - New **4th pillar** in the "Why engineers stay with us" grid: *"Any device, always current — Modern web, not a desktop install."*

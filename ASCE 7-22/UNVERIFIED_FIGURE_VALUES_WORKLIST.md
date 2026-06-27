@@ -162,6 +162,10 @@ Static (29.4-10) + dynamic (29.4-11) GCgn/GCgm anchor curves — zones 1/2, two 
 ---
 
 ## CHAPTER 29 — CHIMNEYS (engine fixed 2026-06-21, but confirm Cf row mapping)
+> **2026-06-26:** dedicated cell-by-cell worksheet created —
+> **`ASCE 7-22/CHIMNEYS_TANKS_Cf_REFERENCE.md`** (every Cf cell + Kd-by-cross-section +
+> the D√qz threshold + the Octagonal-shares-Hexagonal assumption, each with a blank
+> "Book" column to tick). Use that sheet when verifying.
 ### [ ] Fig 29.4-1 round subcritical/supercritical mapping — `asce7_22_other_chimneys_tanks.py`
 Cf values themselves ARE in the ledger and match. Re-confirm the round-section regime→row mapping
 (D√qz ≤ 2.5 = subcritical single "All" row; > 2.5 = roughness rows) — this had a swap bug 2026-06-15. — [ ]
@@ -190,14 +194,23 @@ table. In-code says "verified pp.301-302". — [ ]
 ### [ ] Open Signs & Frames — `asce7_22_other_open_signs.py:61-71`
 Fig 29.4-2 C<sub>f</sub> keyed [member regime][ε band]:
 flat 2.0/1.8/1.6 · rounded-subcritical (D√qz≤2.5) 1.2/1.3/1.5 · rounded-supercritical (>2.5) 0.8/0.9/1.1 — [ ]
+> **2026-06-26:** dedicated worksheet — **`ASCE 7-22/OPEN_SIGNS_OPEN_FRAMES_Cf_REFERENCE.md`**
+> (9 Cf cells + ε bands + D√qz threshold + ε>0.7→solid routing). Use that sheet.
 
 ### [ ] Rooftop Equipment — `asce7_22_other_rooftop_equipment.py`
 (GC<sub>r</sub>) = **1.9** for A<sub>f</sub> ≤ 0.1·B·h, reduced linearly 1.9 → 1.0 for A<sub>f</sub>
 between 0.1·B·h and B·h (§29.4.1). Confirm the 1.9 anchor, the 1.0 floor, and the area band. — [ ]
+> **2026-06-26:** dedicated worksheet created — **`ASCE 7-22/ROOFTOP_EQUIPMENT_GCr_REFERENCE.md`**
+> (1.9/1.0 anchors, the 0.1·B·h → B·h reduction band, Eqs 29.4-2/29.4-3, Kd=0.85, and the
+> "no separate G / single GCr for both Fh & Fv" assumptions). This one is text+formula (no graph)
+> → quickest to confirm. Use that sheet.
 
 ### [ ] Trussed / Comm Towers — `asce7_22_other_towers.py:22-32`
 Fig 29.4-3 C<sub>f</sub>(ε): square = 4.0ε²−5.9ε+4.0 · triangle = 3.4ε²−4.7ε+3.4 ·
 round-member multiplier = 0.51ε²+0.57. Confirm all three polynomial coefficient sets. — [ ]
+> **2026-06-26:** dedicated worksheet — **`ASCE 7-22/TRUSSED_TOWERS_Cf_REFERENCE.md`**
+> (3 polynomial coefficient sets + round-member cap ≤1.0 + one-face Af). Formulas not graphs
+> → high-confidence verify. Use that sheet.
 
 ---
 

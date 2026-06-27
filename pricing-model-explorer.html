@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WindLoadCalc — Pricing Model Explorer (v2)</title>
+<style>
+  :root{--navy:#0d1233;--blue:#0018FF;--ink:#1e2433;--mut:#5b6478;--line:#e6e9f2;--em:#0a8f5b;--bg:#f4f6fb;--card:#fff;--warn:#b45309;--violet:#7c3aed}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.45}
+  header{background:linear-gradient(135deg,#0d1233,#181E57);color:#fff;padding:22px 26px}
+  header h1{margin:0;font-size:21px;font-weight:800}
+  header p{margin:5px 0 0;color:#b9c2e6;font-size:13px}
+  .wrap{max-width:1180px;margin:0 auto;padding:22px}
+  .ctrls{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:18px}
+  .seg{display:inline-flex;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  .seg button{border:0;background:#fff;color:var(--mut);font-weight:700;font-size:13px;padding:9px 15px;cursor:pointer}
+  .seg button.on{background:var(--blue);color:#fff}
+  .lbl{font-size:12px;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.04em;margin-right:4px}
+  .free2{background:#0a8f5b;color:#fff;font-size:11px;font-weight:800;padding:5px 11px;border-radius:20px;display:none}
+  .free2.show{display:inline-block}
+  .grid2{display:grid;grid-template-columns:1.25fr 1fr;gap:18px}
+  @media(max-width:900px){.grid2{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:18px}
+  .card h2{margin:0 0 4px;font-size:15px;font-weight:800;color:var(--navy)}
+  .card .sub{font-size:12.5px;color:var(--mut);margin-bottom:12px}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line)}
+  th{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--mut);font-weight:800}
+  td.r,th.r{text-align:right}
+  .prod{display:flex;align-items:center;gap:11px;padding:10px 12px;border:1px solid var(--line);border-radius:11px;margin-bottom:8px;cursor:pointer;transition:.12s;background:#fbfcff}
+  .prod:hover{border-color:#b9c2e6}
+  .prod.on{border-color:var(--blue);background:#f0f3ff;box-shadow:0 0 0 1px var(--blue) inset}
+  .prod input{width:18px;height:18px;accent-color:var(--blue);flex:none}
+  .prod .nm{font-weight:700;font-size:13.5px}
+  .prod .ds{font-size:11.5px;color:var(--mut)}
+  .prod .pr{margin-left:auto;text-align:right;font-weight:800;color:var(--navy);font-size:14px;white-space:nowrap}
+  .tag{display:inline-block;font-size:10px;font-weight:800;padding:2px 7px;border-radius:20px;margin-left:6px;vertical-align:middle}
+  .tag.core{background:#e7ecff;color:#1c2db8}.tag.prem{background:#fde9d6;color:#b45309}
+  .tag.std{background:#e3f3ec;color:#0a8f5b}.tag.lite{background:#eef1f6;color:#5b6478}
+  .panel{position:sticky;top:14px}
+  .big{font-size:30px;font-weight:900;color:var(--navy);line-height:1}
+  .big small{font-size:13px;color:var(--mut);font-weight:700}
+  .brk{margin-top:10px;font-size:12.5px}
+  .brk .it{display:flex;justify-content:space-between;padding:3px 0;color:var(--mut)}
+  .row{display:flex;justify-content:space-between;font-size:13px;padding:7px 0;border-bottom:1px dashed var(--line)}
+  .row b{color:var(--navy)}
+  .cbox{margin-top:13px;background:linear-gradient(135deg,#0018FF,#3b4ddb);color:#fff;border-radius:12px;padding:14px 15px}
+  .cbox .k{font-size:11.5px;font-weight:700;opacity:.9;text-transform:uppercase;letter-spacing:.05em}
+  .cbox .v{font-size:21px;font-weight:900;margin-top:3px}
+  .cbox .save{display:inline-block;margin-top:8px;background:#0a8f5b;border-radius:7px;padding:4px 10px;font-size:12.5px;font-weight:800}
+  .cbox .free{display:inline-block;margin-left:6px;background:rgba(255,255,255,.18);border-radius:7px;padding:4px 9px;font-size:11.5px;font-weight:800}
+  .tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  @media(max-width:900px){.tiers{grid-template-columns:1fr 1fr}}
+  @media(max-width:560px){.tiers{grid-template-columns:1fr}}
+  .tier{border:1px solid var(--line);border-radius:13px;padding:15px;background:#fbfcff;position:relative;display:flex;flex-direction:column}
+  .tier.pop{border-color:var(--blue);box-shadow:0 0 0 1px var(--blue) inset;background:#fff}
+  .tier .p8{position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:var(--blue);color:#fff;font-size:10px;font-weight:800;padding:3px 10px;border-radius:20px;white-space:nowrap}
+  .tier .tn{font-size:14px;font-weight:800;color:var(--navy)}
+  .tier .tp{font-size:25px;font-weight:900;color:var(--navy);margin:6px 0 0}
+  .tier .tp small{font-size:12px;color:var(--mut);font-weight:700}
+  .tier .ty{font-size:11.5px;color:var(--mut);margin-bottom:4px}
+  .tier .seats{font-size:11.5px;color:var(--blue);font-weight:800;margin-bottom:8px}
+  .tier ul{margin:0;padding-left:16px;font-size:12px;color:var(--ink)}
+  .tier ul li{margin:3px 0}
+  .tier.custom{background:linear-gradient(135deg,#0d1233,#222a6b);color:#fff;border:0}
+  .tier.custom .tn,.tier.custom .tp{color:#fff}.tier.custom .ty,.tier.custom .seats{color:#cdd6f5}.tier.custom ul{color:#e7ebfb}
+  .freebip{display:inline-block;background:#f3e8ff;color:#7c3aed;font-size:10px;font-weight:800;padding:2px 8px;border-radius:20px;margin-top:8px;width:fit-content}
+  .tier.custom .freebip{background:rgba(255,255,255,.16);color:#fff}
+  .bars td{padding:6px 10px;border:0}
+  .bar{height:22px;border-radius:5px;display:flex;align-items:center;justify-content:flex-end;color:#fff;font-size:11.5px;font-weight:800;padding-right:7px;min-width:34px}
+  .bar.us{background:linear-gradient(90deg,#0018FF,#4d63ff)}.bar.no{background:#cdd5e8;color:#5b6478}
+  .matrix td.sv{color:var(--em);font-weight:800}.matrix td.up{color:var(--warn);font-weight:700}
+  .strike{text-decoration:line-through;color:#9aa3b5}
+  .foot{font-size:11.5px;color:var(--mut);margin-top:6px}
+  .pill{display:inline-block;background:#eef1f6;border-radius:20px;padding:2px 9px;font-size:11px;font-weight:700;color:var(--mut)}
+  .note{background:#f5f0ff;border:1px solid #e3d4ff;color:#5b3aa8;border-radius:10px;padding:9px 12px;font-size:12px;margin-top:10px}
+  .promise{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:linear-gradient(135deg,#0d1233,#222a6b);color:#fff;border-radius:12px;padding:12px 15px;margin-bottom:14px;font-size:13px;font-weight:700}
+  .promise .chip{background:rgba(255,255,255,.14);border-radius:20px;padding:4px 11px;font-size:12px;font-weight:800}
+  .platrow{margin-top:7px;font-size:11px;font-weight:800;color:var(--blue)}
+  .tier.custom .platrow{color:#9fb4ff}
+  .platgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:0;font-size:12.5px;border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-top:4px}
+  .platgrid div{padding:8px 11px;border-bottom:1px solid var(--line)}
+  .platgrid .h{background:#f4f6fb;font-weight:800;color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.03em}
+  .platgrid .us{background:#eef3ff;font-weight:700;color:var(--navy)}
+  .yes{color:var(--em);font-weight:800}.no{color:#c0392b;font-weight:800}.meh{color:var(--warn);font-weight:700}
+</style>
+</head>
+<body>
+<header>
+  <h1>WindLoadCalc — Pricing Model Explorer <span style="opacity:.6;font-weight:700;font-size:14px">v2</span></h1>
+  <p>Bundle-first model · à-la-carte for 1 calc, "Complete" wins from 2 · modern web, any device · vs verified competitors (2026-06-27)</p>
+</header>
+<div class="wrap">
+
+  <div class="ctrls">
+    <span class="lbl">Billing</span>
+    <div class="seg" id="cycle"><button data-c="mo" class="on">Monthly</button><button data-c="yr">Annual</button></div>
+    <span class="free2" id="free2">✓ Annual = pay 10, get 12 — 2 MONTHS FREE</span>
+    <span class="pill" style="margin-left:auto">Paid upfront · ~97% margin · locks in the year</span>
+  </div>
+
+  <div class="grid2">
+    <!-- LEFT picker -->
+    <div class="card">
+      <h2>À la carte — for the 1-calc buyer</h2>
+      <div class="sub">Each calculator at its own price (no count discount). Watch what happens at 2 calculators — the <b>Complete bundle</b> already beats buying them separately.</div>
+      <div id="prods"></div>
+    </div>
+
+    <!-- RIGHT panel -->
+    <div>
+      <div class="card panel">
+        <h2 id="selCount">Your picks</h2>
+        <div class="sub" id="selList">No calculators selected.</div>
+        <div class="brk" id="brk"></div>
+        <div class="row"><span><b>À-la-carte subtotal</b></span><span class="big" style="font-size:20px" id="subTotal">$0</span></div>
+
+        <div class="cbox" id="cbox">
+          <div class="k" id="cboxK">Better deal</div>
+          <div class="v" id="cboxV"></div>
+          <div><span class="save" id="cboxSave"></span><span class="free" id="cboxFree">+ BIP free</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIERS -->
+  <div class="card">
+    <h2>WindLoad Complete — every calculator + BIP free</h2>
+    <div class="sub">When a customer needs more than one calc, Complete is the deal. Tiers differ on <b>software value only</b> — seats, BIP tier, reports, support. (PE sealing is a separate quoted service, never bundled.)</div>
+    <div class="promise">
+      <span>Every plan:</span>
+      <span class="chip">🖥️ 📱 Works on any device</span>
+      <span class="chip">⤓ No install</span>
+      <span class="chip">🔒 Always secure · future-proofed</span>
+      <span class="chip">↻ Always the latest ASCE 7-22</span>
+    </div>
+    <div class="tiers" id="tiers"></div>
+    <div class="note">★ <b>BIP scales with the plan</b> — Solo→BIP Starter, Pro→BIP Pro, Premium→BIP Premium. Software-only differentiation, zero liability.</div>
+  </div>
+
+  <!-- PLATFORM COMPARISON -->
+  <div class="card">
+    <h2>Platform &amp; device — where the incumbents fall short (verified 2026-06-27)</h2>
+    <div class="sub">The desktop incumbents can't follow you onto a phone or tablet. This is a real, sourced wedge.</div>
+    <div class="platgrid">
+      <div class="h">Tool</div><div class="h">Platform</div><div class="h">Mobile / tablet</div>
+      <div class="us">★ WindLoadCalc</div><div class="us">Modern web — any device, no install</div><div class="us yes">✓ Yes</div>
+      <div>MecaWind</div><div>Desktop Windows .exe</div><div class="no">✗ None</div>
+      <div>RISA-3D</div><div>Desktop Windows</div><div class="no">✗ None</div>
+      <div>ENERCALC</div><div>~43-yr desktop; "cloud" = streamed Windows VM</div><div class="no">✗ Not touch-usable</div>
+      <div>SkyCiv</div><div>Web + Revit plugin (heavy 3D)</div><div class="meh">~ Native app, light tasks</div>
+      <div>ClearCalcs</div><div>Fully web, form-based</div><div class="yes">✓ Yes (closest peer)</div>
+      <div>RISACalc</div><div>Web entrant (Chrome/FF/Edge)</div><div class="meh">~ Browser only</div>
+    </div>
+    <div class="foot">Truthful framing: "works on any device, no install" — wins vs the desktop incumbents (MecaWind, RISA-3D, ENERCALC). ClearCalcs/SkyCiv also web, so it's parity-of-access there, not a sweep. Security = "always secure / future-proofed," never "most secure" (no SOC 2/ISO held).</div>
+  </div>
+
+  <!-- SAVINGS MATRIX -->
+  <div class="card">
+    <h2>Why "get everything" wins — à-la-carte vs Complete</h2>
+    <div class="sub">As a customer adds calculators à la carte, the cost climbs — but Complete stays flat and includes BIP. The "save by switching" number grows with every calc. This is the funnel.</div>
+    <table class="matrix" id="matrix"></table>
+    <div class="foot">Basket order: Solar $79 → W/D $59 → MWFRS $59 → Roofs $59 → Other $49 → Signs $39. Complete = Solo ($99/mo) for this comparison.</div>
+  </div>
+
+  <!-- COMPETITORS -->
+  <div class="card">
+    <h2>Competitor comparison — full-suite annual (verified 2026-06-27)</h2>
+    <div class="sub">Complete Pro (annual, incl. BIP + dedicated solar) vs the market. We undercut the cloud suites and out-feature them; we don't chase MecaWind's cheap desktop tool.</div>
+    <table class="bars" id="bars"></table>
+    <table style="margin-top:14px">
+      <tr><th>Tool</th><th>Platform</th><th>Mobile / tablet</th><th>Solar?</th><th>BIP?</th><th class="r">Suite / yr</th></tr>
+      <tr><td><b>WindLoad Complete Pro</b> <span class="pill">us</span></td><td><b>Modern web — any device, no install</b></td><td>✅ yes</td><td>✅ §29.4</td><td>✅ free</td><td class="r" id="usYr">$1,290</td></tr>
+      <tr><td>MecaWind</td><td>Desktop Windows .exe</td><td>❌ none (desktop only)</td><td>✅</td><td>—</td><td class="r">$252</td></tr>
+      <tr><td>RISA-3D / RISACalc</td><td>Desktop / web entrant</td><td>❌ / ~browser</td><td>—</td><td>—</td><td class="r">~$1,000</td></tr>
+      <tr><td>SkyCiv Pro</td><td>Web + Revit plugin (heavy 3D)</td><td>~ native app, light tasks</td><td>quote-only</td><td>—</td><td class="r">~$1,250</td></tr>
+      <tr><td>ClearCalcs</td><td>Fully web, form-based</td><td>✅ web</td><td>—</td><td>—</td><td class="r">$1,190 / $1,490</td></tr>
+      <tr><td>ENERCALC SEL</td><td>~43-yr desktop; "cloud" = streamed Windows VM</td><td>❌ not touch-usable</td><td>❌ none</td><td>—</td><td class="r">$1,699</td></tr>
+    </table>
+    <div class="foot">Platform/device/security verified 2026-06-27 (sourced). MecaWind &amp; RISA-3D = desktop, no mobile. ENERCALC "cloud" = a streamed legacy Windows app. ~97% margin at every price. Security framing: "always secure, future-proofed" — never "most secure" (we hold no SOC 2/ISO either).</div>
+  </div>
+
+</div>
+
+<script>
+var PRODUCTS=[
+  {id:'wd',  nm:'Windows, Doors & Shutters', ds:'C&C openings — windows, doors, shutters, mulled', mo:59, cat:'core', on:true},
+  {id:'mwfrs',nm:'MWFRS Buildings',           ds:'Directional + Envelope (Ch 27/28)',               mo:59, cat:'core'},
+  {id:'roofs',nm:'C&C Roofs (all 6 shapes)',  ds:'Gable, Hip, Monoslope, Flat, Sawtooth, Multispan',mo:59, cat:'core'},
+  {id:'solar',nm:'Solar',                     ds:'Rooftop + Ground-mounted (§29.4)',                mo:79, cat:'prem'},
+  {id:'other',nm:'Other Structures',          ds:'Chimneys, Tanks, Towers, Rooftop Equipment',      mo:49, cat:'std'},
+  {id:'signs',nm:'Signs & Freestanding Walls',ds:'Solid signs, Open signs, Freestanding walls',     mo:39, cat:'lite'}
+];
+var TAGS={core:'Core',prem:'Premium',std:'Standard',lite:'Light'};
+var YR=10;            // annual = pay 10, get 12 ("2 months free")
+var SOLO=99;         // Complete entry price (monthly)
+var TIERS=[
+  {key:'Solo',price:99, seats:'1 seat', bip:'BIP Starter', pop:false,
+    feats:['All 6 wind calculators','Standard PDF reports','25 saved projects','Email support']},
+  {key:'Pro',price:129, seats:'3 seats', bip:'BIP Pro', pop:true,
+    feats:['All 6 wind calculators','Branded reports + CSV/Excel','Unlimited projects','Priority support']},
+  {key:'Premium',price:149, seats:'5 seats', bip:'BIP Premium', pop:false,
+    feats:['All 6 wind calculators','White-label reports + all exports','Revision history','Dedicated support']}
+];
+var FIRM={key:'Firm / Enterprise',yr:3500,seats:'Up to 10 seats',feats:['Everything in Premium','API access','SSO / SAML, PO & invoicing','Dedicated account manager','Custom above 10 seats']};
+var state={cycle:'mo'};
+
+function money(v){return '$'+Math.round(v).toLocaleString();}
+function conv(mo){return state.cycle==='yr'?mo*YR:mo;}
+function unit(){return state.cycle==='yr'?'/yr':'/mo';}
+
+var pe=document.getElementById('prods');
+PRODUCTS.forEach(function(p){
+  var d=document.createElement('label'); d.className='prod'+(p.on?' on':''); d.dataset.id=p.id;
+  d.innerHTML='<input type="checkbox" '+(p.on?'checked':'')+'>'+
+    '<div><div class="nm">'+p.nm+'<span class="tag '+p.cat+'">'+TAGS[p.cat]+'</span></div><div class="ds">'+p.ds+'</div></div>'+
+    '<div class="pr">$'+p.mo+'<span style="font-size:11px;color:#5b6478">/mo</span></div>';
+  d.querySelector('input').addEventListener('change',function(){p.on=this.checked;d.classList.toggle('on',this.checked);calc();});
+  pe.appendChild(d);
+});
+document.querySelectorAll('#cycle button').forEach(function(b){b.onclick=function(){
+  document.querySelectorAll('#cycle button').forEach(x=>x.classList.remove('on'));b.classList.add('on');
+  state.cycle=b.dataset.c;document.getElementById('free2').classList.toggle('show',state.cycle==='yr');
+  calc();tiers();matrix();bars();};});
+
+function calc(){
+  var sel=PRODUCTS.filter(p=>p.on); var n=sel.length;
+  var sub=sel.reduce((s,p)=>s+p.mo,0);
+  document.getElementById('selCount').textContent=n?('Your picks — '+n+' calculator'+(n>1?'s':'')):'Your picks';
+  document.getElementById('selList').textContent=n?sel.map(p=>p.nm).join(' · '):'No calculators selected.';
+  document.getElementById('brk').innerHTML=sel.map(p=>'<div class="it"><span>'+p.nm+'</span><span>'+money(conv(p.mo))+'</span></div>').join('');
+  document.getElementById('subTotal').textContent=money(conv(sub))+(state.cycle==='yr'?'/yr':'/mo');
+
+  // Complete nudge
+  var cb=document.getElementById('cbox');
+  if(n===0){cb.style.display='none';return;} cb.style.display='block';
+  if(sub>=SOLO){ // bundle is cheaper AND gives everything
+    document.getElementById('cboxK').textContent='★ Get everything for less';
+    document.getElementById('cboxV').innerHTML='Complete Solo — all 6 calcs + BIP — '+money(conv(SOLO))+unit();
+    document.getElementById('cboxSave').textContent='Save '+money(conv(sub-SOLO))+unit()+' vs your picks';
+    document.getElementById('cboxFree').style.display='inline-block';
+  } else { // 1 cheap calc — small step up to everything
+    document.getElementById('cboxK').textContent='Almost there';
+    document.getElementById('cboxV').innerHTML='Add all 6 calcs + BIP for just +'+money(conv(SOLO-sub))+unit();
+    document.getElementById('cboxSave').textContent='→ Complete Solo '+money(conv(SOLO))+unit();
+    document.getElementById('cboxFree').style.display='inline-block';
+  }
+}
+
+function tiers(){
+  var html='';
+  TIERS.forEach(function(t){
+    html+='<div class="tier'+(t.pop?' pop':'')+'">'+(t.pop?'<div class="p8">MOST POPULAR</div>':'')+
+      '<div class="tn">Complete '+t.key+'</div>'+
+      '<div class="tp">'+money(conv(t.price))+'<small>'+unit()+'</small></div>'+
+      '<div class="ty">'+(state.cycle==='yr'?'2 months free':('or '+money(t.price*YR)+'/yr — 2 mo free'))+'</div>'+
+      '<div class="seats">'+t.seats+'</div>'+
+      '<ul>'+t.feats.map(f=>'<li>'+f+'</li>').join('')+'</ul>'+
+      '<span class="freebip">★ '+t.bip+' included FREE</span>'+
+      '<div class="platrow">🖥️ 📱 Any device · no install</div></div>';
+  });
+  html+='<div class="tier custom"><div class="tn">'+FIRM.key+'</div>'+
+    '<div class="tp" style="font-size:20px;margin-top:6px">'+money(FIRM.yr)+'<small>/yr</small></div>'+
+    '<div class="ty">flat, beats SkyCiv $5,000/5-seat</div>'+
+    '<div class="seats">'+FIRM.seats+'</div>'+
+    '<ul>'+FIRM.feats.map(f=>'<li>'+f+'</li>').join('')+'</ul>'+
+    '<span class="freebip">★ BIP Pro included</span>'+
+    '<div class="platrow">🖥️ 📱 Any device · no install</div></div>';
+  document.getElementById('tiers').innerHTML=html;
+}
+
+function matrix(){
+  var basket=[79,59,59,59,49,39];
+  var rows='<tr><th># Calcs (à la carte)</th><th class="r">À-la-carte cost</th><th class="r">Complete Solo</th><th class="r">Save by switching</th></tr>';
+  for(var i=1;i<=6;i++){
+    var sub=basket.slice(0,i).reduce((a,b)=>a+b,0);
+    var diff=sub-SOLO;
+    var cell = diff>=0
+      ? '<td class="r sv">'+money(conv(diff))+' + BIP</td>'
+      : '<td class="r up">+'+money(conv(-diff))+' for everything</td>';
+    rows+='<tr><td>'+i+'</td><td class="r'+(i>=2?' strike':'')+'">'+money(conv(sub))+'</td><td class="r"><b>'+money(conv(SOLO))+'</b></td>'+cell+'</tr>';
+  }
+  document.getElementById('matrix').innerHTML=rows;
+}
+
+function bars(){
+  var us=129*YR;
+  var data=[
+    {n:'MecaWind Std (desktop)',v:252,cls:'no'},
+    {n:'RISACalc (7-16 only)',v:1000,cls:'no'},
+    {n:'ClearCalcs Pro',v:1190,cls:'no'},
+    {n:'★ WindLoad Complete Pro + BIP',v:us,cls:'us'},
+    {n:'SkyCiv Pro',v:1250,cls:'no'},
+    {n:'ClearCalcs Ultimate',v:1490,cls:'no'},
+    {n:'ENERCALC SEL (no solar)',v:1699,cls:'no'}
+  ];
+  var max=1699,html='';
+  data.forEach(function(d){var w=Math.max(6,(d.v/max)*100);
+    html+='<tr><td style="width:210px;font-size:12.5px;font-weight:'+(d.cls==='us'?'800':'600')+'">'+d.n+'</td>'+
+      '<td><div class="bar '+d.cls+'" style="width:'+w+'%">$'+d.v.toLocaleString()+'/yr</div></td></tr>';});
+  document.getElementById('bars').innerHTML=html;
+  document.getElementById('usYr').textContent='$'+us.toLocaleString();
+}
+
+calc();tiers();matrix();bars();
+</script>
+</body>
+</html>

@@ -2640,6 +2640,52 @@
 
     <!-- Google Sign-In SDK -->
     <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+    <!-- Dark-glass chrome — canonical nav + drawer. Fully scoped to #nav / #fullMenu so it
+         never touches the BIP app UI (which has its own .btn / .container styles). -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style id="dg-chrome">
+      :root{ --blue:#0018FF; --muted:#94a3b8; --line:rgba(255,255,255,.08); --bg:#070a18; --luxe:cubic-bezier(.22,.61,.36,1); }
+      #nav{position:fixed;top:0;left:0;right:0;z-index:1000;transition:.3s var(--luxe);background:transparent;border-bottom:1px solid transparent;font-family:'Inter',-apple-system,'Segoe UI',Roboto,sans-serif}
+      #nav.scrolled{backdrop-filter:blur(14px);border-bottom:1px solid var(--line);background:linear-gradient(90deg,rgba(240,244,255,.97) 0%,rgba(223,232,255,.93) 13%,rgba(22,28,58,.92) 46%,rgba(7,10,24,.95) 100%)}
+      body.trial-active #nav{top:50px}  /* sit below the fixed trial banner (replaces old .main-header offset) */
+      #nav .wrap.nav-in{max-width:none;display:flex;align-items:center;justify-content:space-between;padding:14px clamp(24px,4vw,48px);transition:padding .3s var(--luxe);margin:0}
+      #nav.scrolled .wrap.nav-in{padding:8px clamp(24px,4vw,48px)}
+      #nav .logo{z-index:1001;display:flex;align-items:center}
+      #nav .logo-image{height:100px;width:auto;display:block;filter:drop-shadow(0 2px 10px rgba(0,0,0,.3));transition:all .3s ease}
+      #nav.scrolled .logo-image{height:70px;filter:none}
+      #nav .nav-right{display:flex;align-items:center;gap:18px}
+      #nav .nav-links{display:flex;align-items:center;gap:30px}
+      #nav .nav-links a.l{position:relative;font-size:14px;color:#fff;font-weight:500;opacity:.85;transition:opacity .2s var(--luxe);text-shadow:0 1px 8px rgba(0,0,0,.45)}
+      #nav .nav-links a.l::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;border-radius:2px;background:linear-gradient(90deg,#34D399,#3a5bff);transform:scaleX(0);transform-origin:left;transition:transform .25s var(--luxe)}
+      #nav .nav-links a.l:hover{opacity:1}
+      #nav .nav-links a.l:hover::after{transform:scaleX(1)}
+      #nav.scrolled .nav-links a.l{color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.35)}
+      #nav .hamburger{display:flex;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;z-index:60}
+      #nav .hamburger span{display:block;width:26px;height:3px;border-radius:2px;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.6);transition:.3s var(--luxe)}
+      #nav .hamburger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+      #nav .hamburger.open span:nth-child(2){opacity:0}
+      #nav .hamburger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+      #navOverlay{position:fixed;inset:0;background:rgba(0,0,0,.55);opacity:0;visibility:hidden;transition:.3s var(--luxe);z-index:998}
+      #navOverlay.open{opacity:1;visibility:visible}
+      #fullMenu.full-menu{position:fixed;top:0;right:0;height:100vh;width:min(90vw,380px);z-index:1001;background:rgba(10,14,30,.985);backdrop-filter:blur(18px);border-left:1px solid var(--line);box-shadow:-24px 0 60px rgba(0,0,0,.55);transform:translateX(100%);transition:transform .3s var(--luxe);overflow-y:auto;padding:74px 0 28px;font-family:'Inter',-apple-system,'Segoe UI',Roboto,sans-serif}
+      #fullMenu.full-menu.open{transform:translateX(0)}
+      #fullMenu .fm-head{display:flex;align-items:center;justify-content:space-between;padding:0 26px 14px;border-bottom:1px solid var(--line)}
+      #fullMenu .fm-head span{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+      #fullMenu .fm-close{background:none;border:none;color:#fff;font-size:24px;line-height:1;cursor:pointer;padding:2px 8px}
+      #fullMenu .fm-group{padding:14px 26px 4px;border-bottom:1px solid var(--line)}
+      #fullMenu .fm-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9db0ff;margin-bottom:6px}
+      #fullMenu .fm-group a{display:block;padding:9px 0;font-size:15px;color:#dbe3f5;font-weight:500;transition:color .15s}
+      #fullMenu .fm-group a:hover{color:#fff}
+      #fullMenu .fm-actions{display:flex;flex-direction:column;gap:10px;padding:20px 26px 0}
+      #fullMenu .fm-actions .btn{width:100%;justify-content:center;padding:14px;font-size:15px}
+      #nav .btn,#fullMenu .btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;border-radius:11px;cursor:pointer;transition:.25s var(--luxe);border:none;font-family:inherit;text-decoration:none}
+      #nav .btn-ghost,#fullMenu .btn-ghost{background:rgba(255,255,255,.06);color:#fff;padding:11px 18px;font-size:14px;border:1px solid rgba(255,255,255,.22)}
+      #nav .btn-ghost:hover,#fullMenu .btn-ghost:hover{border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.12)}
+      #nav .btn-primary,#fullMenu .btn-primary{background:linear-gradient(135deg,#0018FF,#2540ff);color:#fff;padding:12px 22px;font-size:14px;box-shadow:0 10px 30px rgba(0,24,255,.45)}
+      #nav .btn-primary:hover,#fullMenu .btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(0,24,255,.6)}
+      @media(max-width:880px){ #nav .logo-image{height:64px} #nav.scrolled .logo-image{height:52px} #nav .nav-links{display:none} }
+    </style>
 </head>
 <body>
     
@@ -2838,89 +2884,60 @@
         </div>
     </div>
 
-    <!-- Header -->
-    <header class="main-header" id="main-header">
-        <div class="header-container">
-            <a href="index.html" class="logo">
-                <img height="100" width="300" src="images/windloadcalc-logo.svg" alt="windloadcalc Logo" class="logo-image">
-            </a>
-            
-            <!-- Full Hamburger Menu (Always available via hamburger button) -->
-            <nav class="nav-links" id="nav-menu">
-                <button class="nav-close" onclick="toggleNav()">&times;</button>
-                <a href="building-intelligence-platform.html">Building Intelligence Platform</a>
-                <a href="wind-load-calculator-comparison.html">Wind Load Calculator Comparison</a>
-
-                <!-- About Dropdown -->
-                <div class="nav-dropdown">
-                    <span class="nav-dropdown-toggle">About <span class="dropdown-arrow">▼</span></span>
-                    <div class="nav-dropdown-menu">
-                        <a href="building-intelligence-platform-landing.html">Building Intelligence Platform</a>
-                        <a href="wind-load-calculator-landing.html">Wind Load Calculators</a>
-                    </div>
-                </div>
-
-                <!-- Shop Dropdown -->
-                <div class="nav-dropdown">
-                    <span class="nav-dropdown-toggle">Shop <span class="dropdown-arrow">▼</span></span>
-                    <div class="nav-dropdown-menu">
-                        <a href="wind-load-calculator-shop.html">Wind Load Calculators</a>
-                        <a href="building-intelligence-platform-shop.html">Building Intelligence Platform</a>
-                    </div>
-                </div>
-
-                <a href="services.html">Services</a>
-
-                <!-- Professionals Dropdown -->
-                <div class="nav-dropdown">
-                    <span class="nav-dropdown-toggle">Professionals <span class="dropdown-arrow">▼</span></span>
-                    <div class="nav-dropdown-menu">
-                        <a href="wind-load-calculator-for-engineers.html">Engineers</a>
-                        <a href="wind-load-calculator-for-architects.html">Architects</a>
-                        <a href="wind-loads-for-consultants.html">Consultants</a>
-                        <a href="contractors-wind-load-calculator.html">Contractors</a>
-                    </div>
-                </div>
-
-                <a href="why-us.html">Why Us</a>
-                <a href="faq.html">FAQ</a>
-                <a href="contact.html">Contact Us</a>
-                <a href="demo.html">Free Calculator</a>
-            </nav>
-            
-            <!-- Simplified Desktop Nav (Shows when scrolled on desktop) -->
-            <nav class="nav-desktop-scrolled">
-                <a href="demo.html">Free Calculator</a>
-                <a href="building-intelligence-platform.html">B.I.P.</a>
-
-                <!-- Shop Dropdown (Simplified - only 2 items) -->
-                <div class="nav-dropdown">
-                    <span class="nav-dropdown-toggle">Shop <span class="dropdown-arrow">▼</span></span>
-                    <div class="nav-dropdown-menu">
-                        <a href="wind-load-calculator-shop.html">Wind Load Calculators</a>
-                        <a href="building-intelligence-platform-shop.html">Building Intelligence Platform</a>
-                    </div>
-                </div>
-
-                <a href="services.html">Services</a>
-                <a href="why-us.html">Why Us</a>
-            </nav>
-            
-            <!-- Header Right Side -->
-            <div class="header-right">
-                <a href="contact.html" class="header-cta primary">Let's Connect</a>
-                <a href="login.html" class="header-cta">Member Login</a>
-                <button class="hamburger" id="hamburger" onclick="toggleNav()" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-            </div>
+    <!-- Header / Nav (canonical dark-glass — synced from partials/full-menu.html) -->
+    <nav id="nav"><div class="wrap nav-in">
+      <a class="logo" href="https://windloadcalc.com/">
+        <img height="100" width="300" src="images/windloadcalc-logo.svg" alt="WindLoadCalc — Wind Load Calculator logo" class="logo-image">
+      </a>
+      <div class="nav-right">
+        <div class="nav-links">
+          <a class="l" href="https://windloadcalc.com/free-wind-load-calculator.html">Free tool</a>
+          <a class="l" href="https://windloadcalc.com/wind-load-calculator-comparison.html">Compare</a>
+          <a class="l" href="https://windloadcalc.com/wind-load-calculator-shop.html">Pricing</a>
+          <a class="l" href="https://windloadcalc.com/why-us.html">Why us</a>
+          <a class="btn btn-ghost" href="https://windloadcalc.com/login.html">Log in</a>
+          <a class="btn btn-primary" href="https://windloadcalc.com/wind-load-calculator-shop.html">Start free trial</a>
         </div>
-        
-        <!-- Mobile Menu Overlay -->
-        <div class="nav-overlay" id="nav-overlay" onclick="toggleNav()"></div>
-    </header>
+        <button class="hamburger" id="hamburger" aria-label="Open full menu" aria-expanded="false" aria-controls="fullMenu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div></nav>
+    <div class="nav-overlay" id="navOverlay"></div>
+<aside class="full-menu" id="fullMenu" aria-label="Site menu">
+  <div class="fm-head"><span>Menu</span><button class="fm-close" id="fmClose" aria-label="Close menu">&times;</button></div>
+  <div class="fm-group">
+    <div class="fm-label">Wind Load Calculators</div>
+    <a href="https://windloadcalc.com/wind-load-calculator-landing.html">Overview</a>
+    <a href="https://windloadcalc.com/free-wind-load-calculator.html">Free Trial</a>
+    <a href="https://windloadcalc.com/wind-load-calculator-comparison.html">Calculator Comparison</a>
+    <a href="https://windloadcalc.com/wind-load-calculator-shop.html">Pricing</a>
+  </div>
+  <div class="fm-group">
+    <div class="fm-label">Building Intelligence Platform</div>
+    <a href="https://windloadcalc.com/building-intelligence-platform-landing.html">Overview</a>
+    <a href="https://windloadcalc.com/building-intelligence-platform.html">Free Trial</a>
+    <a href="https://windloadcalc.com/building-intelligence-platform-shop.html">Pricing</a>
+  </div>
+  <div class="fm-group">
+    <div class="fm-label">For Professionals</div>
+    <a href="https://windloadcalc.com/wind-load-calculator-for-engineers.html">Engineers</a>
+    <a href="https://windloadcalc.com/wind-load-calculator-for-architects.html">Architects</a>
+    <a href="https://windloadcalc.com/wind-loads-for-consultants.html">Consultants</a>
+    <a href="https://windloadcalc.com/contractors-wind-load-calculator.html">Contractors</a>
+  </div>
+  <div class="fm-group">
+    <div class="fm-label">Company</div>
+    <a href="https://windloadcalc.com/services.html">Services</a>
+    <a href="https://windloadcalc.com/why-us.html">Why Us</a>
+    <a href="https://windloadcalc.com/faq.html">FAQ</a>
+    <a href="https://windloadcalc.com/contact.html">Contact Us</a>
+  </div>
+  <div class="fm-actions">
+    <a class="btn btn-ghost" href="https://windloadcalc.com/login.html">Log in</a>
+    <a class="btn btn-primary" href="https://windloadcalc.com/free-wind-load-calculator.html">Start Free Trial &rarr;</a>
+  </div>
+</aside>
 
     <main>
         <!-- Hero Section -->
@@ -3467,8 +3484,10 @@ Leaflet: ${typeof L !== 'undefined' ? 'LOADED' : 'NOT LOADED'}
         }
 
         function initializeHeaderScroll() {
+            // Old .main-header was replaced by the canonical #nav, whose scroll
+            // behavior is handled by the dark-glass chrome script. Guard to no-op.
             const header = document.getElementById('main-header');
-            
+            if (!header) return;
             window.addEventListener('scroll', function() {
                 if (window.scrollY > 100) {
                     header.classList.add('scrolled');
@@ -4204,6 +4223,34 @@ Leaflet: ${typeof L !== 'undefined' ? 'LOADED' : 'NOT LOADED'}
             
             console.log('🔒 Copy protection enabled for all users (all tiers)');
         })();
+    </script>
+
+    <!-- Dark-glass nav: solidify on scroll + hamburger drawer (canonical behavior) -->
+    <script>
+      (function(){
+        var nav=document.getElementById('nav');
+        if(nav){ var onScroll=function(){ nav.classList.toggle('scrolled', window.scrollY>40); };
+          onScroll(); window.addEventListener('scroll',onScroll,{passive:true}); }
+      })();
+      (function(){
+        var ham=document.getElementById('hamburger'),
+            fm=document.getElementById('fullMenu'),
+            ov=document.getElementById('navOverlay'),
+            fc=document.getElementById('fmClose');
+        if(!ham||!fm) return;
+        function setMenu(open){
+          fm.classList.toggle('open',open);
+          if(ov) ov.classList.toggle('open',open);
+          ham.classList.toggle('open',open);
+          ham.setAttribute('aria-expanded',open);
+          document.body.style.overflow=open?'hidden':'';
+        }
+        ham.addEventListener('click',function(){ setMenu(!fm.classList.contains('open')); });
+        if(ov) ov.addEventListener('click',function(){ setMenu(false); });
+        if(fc) fc.addEventListener('click',function(){ setMenu(false); });
+        fm.querySelectorAll('a').forEach(function(a){ a.addEventListener('click',function(){ setMenu(false); }); });
+        window.addEventListener('keydown',function(e){ if(e.key==='Escape') setMenu(false); });
+      })();
     </script>
 
 </body>

@@ -75,511 +75,6 @@
         }
 
 
-        /* ============================================
-           HEADER STYLES FROM INDEX.HTML
-           ============================================ */
-        /* Header */
-        .main-header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            background: transparent;
-            padding: 2rem 0;
-            transition: all 0.3s ease;
-        }
-
-        .main-header.scrolled {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            padding: 1rem 0;
-            box-shadow: 0 1px 20px rgba(0,0,0,0.1);
-        }
-
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 3rem;
-        }
-
-        .logo {
-            z-index: 1001;
-        }
-
-        .logo-image {
-            height: 100px;
-            width: auto;
-            filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
-            transition: all 0.3s ease;
-        }
-
-        .main-header.scrolled .logo-image {
-            height: 70px;
-            filter: none;
-        }
-
-        .header-right {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            z-index: 1001;
-        }
-
-        .header-cta {
-            background: rgba(255, 255, 255, 0.15);
-            color: white;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            padding: 0.8rem 1.8rem;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            white-space: nowrap;
-            backdrop-filter: blur(10px);
-        }
-
-        .header-cta:hover {
-            background: rgba(255, 255, 255, 0.25);
-            border-color: rgba(255, 255, 255, 0.6);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-        }
-
-        .header-cta.primary {
-            background: rgba(0, 24, 255, 0.9);
-            border-color: rgba(0, 24, 255, 0.3);
-        }
-
-        .header-cta.primary:hover {
-            background: rgba(0, 24, 255, 1);
-            border-color: rgba(0, 24, 255, 0.8);
-        }
-
-        .main-header.scrolled .header-cta {
-            color: #0018ff;
-            background: rgba(0, 24, 255, 0.1);
-            border-color: rgba(0, 24, 255, 0.3);
-        }
-
-        .main-header.scrolled .header-cta.primary {
-            color: white;
-            background: #0018ff;
-            border-color: #0018ff;
-        }
-
-        /* Hamburger Menu */
-        .hamburger {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            width: 28px;
-            height: 20px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 0;
-            z-index: 1002;
-        }
-
-
-        .hamburger span {
-            display: block;
-            height: 3px;
-            width: 100%;
-            background: white;
-            border-radius: 2px;
-            transition: all 0.3s ease;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
-        }
-
-        .main-header.scrolled .hamburger span {
-            background: #1f2937;
-            box-shadow: none;
-        }
-
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(6px, 6px);
-        }
-
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(8px, -8px);
-        }
-
-        /* Navigation Menu */
-        .nav-links {
-            display: none;
-            position: fixed;
-            top: 0;
-            right: 0;
-            height: 100vh;
-            width: 400px;
-            max-width: 85vw;
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(20px);
-            box-shadow: -10px 0 50px rgba(0,0,0,0.2);
-            padding: 4rem 2rem 2rem 2rem;
-            flex-direction: column;
-            gap: 1.5rem;
-            z-index: 9999;
-            transform: translateX(100%);
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            overflow-y: auto;
-            overflow-x: hidden;
-        }
-
-        .nav-links.active {
-            display: flex;
-            transform: translateX(0);
-        }
-
-        /* Keep hamburger visible and nav-links as side menu only */
-        @media (min-width: 1024px) {
-            /* Keep nav-links as hamburger menu only - never show horizontally */
-            .main-header.scrolled .nav-links:not(.active) {
-                /* Stays as side menu even on desktop */
-                display: none !important;
-            }
-
-            /* Keep hamburger visible on desktop when scrolled */
-            .main-header.scrolled .hamburger {
-                display: flex;
-            }
-
-            .main-header.scrolled .header-right {
-                gap: 2rem;
-                align-items: center;
-            }
-        }
-
-        /* Simplified Desktop Nav (Shows when scrolled) */
-        .nav-desktop-scrolled {
-            display: none;
-        }
-
-        @media (min-width: 1024px) {
-            .main-header.scrolled .nav-desktop-scrolled {
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                gap: 2rem;
-                overflow: visible;
-            }
-
-            .nav-desktop-scrolled a {
-                text-decoration: none;
-                font-size: 0.95rem;
-                padding: 0.5rem 1rem;
-                border-radius: 8px;
-                color: #374151;
-                font-weight: 600;
-                transition: all 0.2s ease;
-            }
-
-            .nav-desktop-scrolled a:hover {
-                background: rgba(0, 24, 255, 0.1);
-                color: #0018ff;
-            }
-
-            /* Simplified desktop nav dropdown styles */
-            .nav-desktop-scrolled .nav-dropdown {
-                position: relative;
-                z-index: 1001;
-            }
-
-            .nav-desktop-scrolled .nav-dropdown-toggle {
-                display: flex;
-                align-items: center;
-                font-size: 0.95rem;
-                padding: 0.5rem 1rem;
-                border-radius: 8px;
-                color: #374151;
-                font-weight: 600;
-                transition: all 0.2s ease;
-                cursor: pointer;
-            }
-
-            .nav-desktop-scrolled .dropdown-arrow {
-                font-size: 0.7rem;
-                margin-left: 0.3rem;
-            }
-
-            .nav-desktop-scrolled .nav-dropdown-menu {
-                position: absolute;
-                top: 100%;
-                left: 0;
-                background: white;
-                box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-                border-radius: 8px;
-                padding: 0.5rem 0;
-                min-width: 250px;
-                margin-top: 0.25rem;
-                z-index: 1002;
-                flex-direction: column;
-                opacity: 0;
-                visibility: hidden;
-                pointer-events: none;
-                transform: translateY(-10px);
-                transition: all 0.2s ease;
-                display: flex !important;
-                padding-left: 0;
-            }
-
-            .nav-desktop-scrolled .nav-dropdown:hover .nav-dropdown-menu {
-                opacity: 1;
-                visibility: visible;
-                pointer-events: auto;
-                transform: translateY(0);
-            }
-
-            .nav-desktop-scrolled .nav-dropdown-toggle:hover,
-            .nav-desktop-scrolled .nav-dropdown:hover .nav-dropdown-toggle {
-                background: rgba(0, 24, 255, 0.1);
-                color: #0018ff;
-            }
-
-            .nav-desktop-scrolled .nav-dropdown-menu a {
-                padding: 0.8rem 1.5rem;
-                font-size: 0.9rem;
-                border-radius: 0;
-            }
-
-            .nav-desktop-scrolled .nav-dropdown-menu a:hover {
-                background: rgba(0, 24, 255, 0.1);
-            }
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #1f2937;
-            font-weight: 600;
-            font-size: 1.2rem;
-            padding: 1.2rem 0;
-            border-bottom: 1px solid rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-
-        .nav-links a::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 0;
-            height: 3px;
-            background: linear-gradient(45deg, #0018ff, #181E57);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: #0018ff;
-            padding-left: 1rem;
-        }
-
-        .nav-links a:hover::before,
-        .nav-links a.active::before {
-            width: 50px;
-        }
-
-        .nav-close {
-            position: absolute;
-            top: 2rem;
-            right: 2rem;
-            background: none;
-            border: none;
-            font-size: 2.5rem;
-            color: #64748b;
-            cursor: pointer;
-            font-weight: 300;
-        }
-
-
-        .nav-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.6);
-            backdrop-filter: blur(5px);
-            z-index: 9998;
-        }
-
-        .nav-overlay.active {
-            display: block;
-        }
-
-        /* Navigation Dropdown Styles */
-        .nav-dropdown {
-            position: relative;
-        }
-
-        .nav-dropdown-toggle {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            cursor: pointer;
-            text-decoration: none;
-            color: #1f2937;
-            font-weight: 600;
-            font-size: 1.2rem;
-            padding: 1.2rem 0;
-            border-bottom: 1px solid rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .dropdown-arrow {
-            margin-left: 0.5rem;
-            font-size: 0.8rem;
-            transition: transform 0.3s ease;
-        }
-
-        .nav-dropdown.active .dropdown-arrow {
-            transform: rotate(180deg);
-        }
-
-        .nav-dropdown-menu {
-            display: none;
-            flex-direction: column;
-            padding-left: 1.5rem;
-            margin-top: 0.5rem;
-            gap: 0.5rem;
-            background: rgba(248, 250, 252, 0.95);
-            border-radius: 8px;
-            padding: 0.5rem 1.5rem;
-        }
-
-        .nav-dropdown.active .nav-dropdown-menu {
-            display: flex;
-        }
-
-
-        .nav-dropdown-menu a {
-            font-size: 1.05rem;
-            font-weight: 500;
-            padding: 0.8rem 0;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-        }
-
-        .nav-dropdown-menu a:last-child {
-            border-bottom: none;
-        }
-
-        /* Hover effects for hamburger menu */
-        .nav-dropdown-toggle:hover {
-            background: rgba(0, 24, 255, 0.05);
-            color: #0018ff;
-            padding-left: 1rem;
-            border-radius: 8px;
-        }
-
-        .nav-dropdown-menu a:hover {
-            background: rgba(0, 24, 255, 0.08);
-            color: #0018ff;
-            padding-left: 1rem;
-            border-radius: 6px;
-        }
-
-        /* Desktop dropdown styles */
-        @media (min-width: 1024px) {
-            /* CRITICAL: Prevent clipping of dropdowns */
-            .main-header.scrolled,
-            .main-header.scrolled .header-container,
-            .main-header.scrolled .header-right {
-                overflow: visible !important;
-            }
-            
-            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown-toggle {
-                display: flex;
-                align-items: center;
-                font-size: 0.95rem;
-                padding: 0.5rem 1rem;
-                border-bottom: none;
-                border-radius: 8px;
-                color: #374151;
-                transition: all 0.2s ease;
-                cursor: pointer;
-            }
-
-            .main-header.scrolled .nav-desktop-scrolled .dropdown-arrow {
-                font-size: 0.7rem;
-                margin-left: 0.3rem;
-            }
-
-            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown {
-                position: relative;
-                z-index: 1001;
-            }
-
-            /* Dropdown menu - always in DOM but invisible */
-            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown-menu {
-                position: absolute;
-                top: 100%;
-                left: 0;
-                background: white;
-                box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-                border-radius: 8px;
-                padding: 0.5rem 0;
-                min-width: 250px;
-                margin-top: 0.25rem;
-                z-index: 1002;
-                flex-direction: column;
-                
-                /* Hidden by default */
-                opacity: 0;
-                visibility: hidden;
-                pointer-events: none;
-                transform: translateY(-10px);
-                transition: all 0.2s ease;
-                
-                /* Force display flex always - CRITICAL */
-                display: flex !important;
-                
-                /* Remove any padding/border from parent that might clip */
-                padding-left: 0;
-            }
-
-            /* Show dropdown on hover */
-            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown:hover .nav-dropdown-menu {
-                opacity: 1;
-                visibility: visible;
-                pointer-events: auto;
-                transform: translateY(0);
-            }
-
-            /* Highlight toggle on hover */
-            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown-toggle:hover,
-            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown:hover .nav-dropdown-toggle {
-                background: rgba(0, 24, 255, 0.1);
-                color: #0018ff;
-            }
-
-            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown-menu a {
-                padding: 0.8rem 1.5rem;
-                font-size: 0.9rem;
-                border-bottom: none;
-                border-radius: 0;
-            }
-
-            .main-header.scrolled .nav-desktop-scrolled .nav-dropdown-menu a:hover {
-                background: rgba(0, 24, 255, 0.1);
-                padding-left: 1.5rem;
-            }
-        }
-
         /* Hero Section with Video */
         .hero-section {
             position: relative;
@@ -1266,254 +761,6 @@
             }
         }
 
-        /* ============================================
-           HEADER & FOOTER STYLES FROM INDEX.HTML
-           ============================================ */
-        /* Header */
-        .main-header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            background: transparent;
-            padding: 2rem 0;
-            transition: all 0.3s ease;
-        }
-
-        .main-header.scrolled {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            padding: 1rem 0;
-            box-shadow: 0 1px 20px rgba(0,0,0,0.1);
-        }
-
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 3rem;
-        }
-
-        .logo {
-            z-index: 1001;
-        }
-
-        .logo-image {
-            height: 100px;
-            width: auto;
-            filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
-            transition: all 0.3s ease;
-        }
-
-        .main-header.scrolled .logo-image {
-            height: 70px;
-            filter: none;
-        }
-
-        .header-right {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            z-index: 1001;
-        }
-
-        .header-cta {
-            background: rgba(255, 255, 255, 0.15);
-            color: white;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            padding: 0.8rem 1.8rem;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            white-space: nowrap;
-            backdrop-filter: blur(10px);
-        }
-
-        .header-cta:hover {
-            background: rgba(255, 255, 255, 0.25);
-            border-color: rgba(255, 255, 255, 0.6);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-        }
-
-        .header-cta.velocity-finder {
-            background: linear-gradient(135deg, #FF6B35 0%, #F7931E 50%, #FFD23F 100%);
-            color: #ffffff;
-            border: 2px solid rgba(255, 255, 255, 0.8);
-            font-weight: 700;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
-            box-shadow: 
-                0 4px 15px rgba(255, 107, 53, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
-        }
-
-        .header-cta.velocity-finder:hover {
-            background: linear-gradient(135deg, #FF5722 0%, #FF9800 50%, #FFC107 100%);
-            border-color: rgba(255, 255, 255, 1);
-            transform: translateY(-3px) scale(1.05);
-        }
-
-        .header-cta.primary {
-            background: rgba(0, 24, 255, 0.9);
-            border-color: rgba(0, 24, 255, 0.3);
-        }
-
-        .header-cta.primary:hover {
-            background: rgba(0, 24, 255, 1);
-            border-color: rgba(0, 24, 255, 0.8);
-        }
-
-        .main-header.scrolled .header-cta {
-            color: #0018ff;
-            background: rgba(0, 24, 255, 0.1);
-            border-color: rgba(0, 24, 255, 0.3);
-        }
-
-        .main-header.scrolled .header-cta.primary {
-            color: white;
-            background: #0018ff;
-            border-color: #0018ff;
-        }
-
-        /* Hamburger Menu */
-        .hamburger {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            width: 28px;
-            height: 20px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 0;
-            z-index: 1002;
-        }
-
-
-        .hamburger span {
-            display: block;
-            height: 3px;
-            width: 100%;
-            background: white;
-            border-radius: 2px;
-            transition: all 0.3s ease;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
-        }
-
-        .main-header.scrolled .hamburger span {
-            background: #1f2937;
-            box-shadow: none;
-        }
-
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(6px, 6px);
-        }
-
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(8px, -8px);
-        }
-
-        /* Navigation Menu - Fixed scrolling and mobile improvements */
-        .nav-links {
-            display: none;
-            position: fixed;
-            top: 0;
-            right: 0;
-            height: 100vh;
-            width: 400px;
-            max-width: 85vw;
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(20px);
-            box-shadow: -10px 0 50px rgba(0,0,0,0.2);
-            padding: 4rem 2rem 2rem 2rem;
-            flex-direction: column;
-            gap: 1.5rem;
-            z-index: 9999;
-            transform: translateX(100%);
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            overflow-y: auto;
-            overflow-x: hidden;
-        }
-
-        .nav-links.active {
-            display: flex;
-            transform: translateX(0);
-        }
-
-
-        .nav-links a {
-            text-decoration: none;
-            color: #1f2937;
-            font-weight: 600;
-            font-size: 1.2rem;
-            padding: 1.2rem 0;
-            border-bottom: 1px solid rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-
-        .nav-links a::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 0;
-            height: 3px;
-            background: linear-gradient(45deg, #0018ff, #181E57);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: #0018ff;
-            padding-left: 1rem;
-        }
-
-        .nav-links a:hover::before,
-        .nav-links a.active::before {
-            width: 50px;
-        }
-
-        .nav-close {
-            position: absolute;
-            top: 2rem;
-            right: 2rem;
-            background: none;
-            border: none;
-            font-size: 2.5rem;
-            color: #64748b;
-            cursor: pointer;
-            font-weight: 300;
-        }
-
-
-        .nav-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.6);
-            backdrop-filter: blur(5px);
-            z-index: 9998;
-        }
-
-        .nav-overlay.active {
-            display: block;
-        }
-
         .main-footer {
             background: linear-gradient(135deg, #1a1a1a 0%, #2d3748 50%, #1a1a1a 100%);
             color: white;
@@ -1687,8 +934,7 @@
 
         @media (max-width: 480px) {
             /* Hide desktop CTAs on mobile (mobile buttons replace them) */
-            .hero-cta-buttons,
-            .header-cta {
+            .hero-cta-buttons {
                 display: none !important;
             }
 
@@ -1743,47 +989,7 @@
                 font-size: 1.2rem !important;
             }
         }
-        /* ===== Dark-glass nav + family font (rebuild) ===== */
         body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
-        .main-header{display:none!important}
-        #nav-overlay{display:none!important}
-        .wcnav{position:sticky;top:0;z-index:1000;font-family:'Inter',sans-serif;
-          background:linear-gradient(90deg, rgba(240,244,255,.98) 0%, rgba(223,232,255,.95) 12%, rgba(22,28,58,.95) 46%, rgba(7,10,24,.97) 100%);
-          border-bottom:1px solid rgba(255,255,255,.08);backdrop-filter:blur(12px);box-shadow:0 8px 30px rgba(0,0,0,.18)}
-        .wcnav-in{display:flex;align-items:center;justify-content:space-between;max-width:1180px;margin:0 auto;padding:6px clamp(16px,4vw,48px)}
-        .wcnav-logo{display:flex;align-items:center}.wcnav-logo img{height:58px;width:auto;display:block}
-        .wcnav-right{display:flex;align-items:center;gap:16px}
-        .wcnav-links{display:flex;align-items:center;gap:22px}
-        .wcnav-links a{font-size:14px;color:#fff;font-weight:500;opacity:.9;text-decoration:none;text-shadow:0 1px 6px rgba(0,0,0,.4);transition:opacity .2s}
-        .wcnav-links a:hover{opacity:1;text-decoration:none}
-        .wcnav-btn{display:inline-flex;align-items:center;gap:7px;font-weight:700;border-radius:11px;text-decoration:none;transition:.25s cubic-bezier(.22,.61,.36,1);border:none}
-        .wcnav-ghost{background:rgba(255,255,255,.08);color:#fff;padding:9px 15px;font-size:14px;border:1px solid rgba(255,255,255,.28)}
-        .wcnav-ghost:hover{background:rgba(255,255,255,.16);color:#fff;text-decoration:none}
-        .wcnav-primary{background:linear-gradient(135deg,#0018FF,#2540ff);color:#fff;padding:10px 18px;font-size:14px;box-shadow:0 8px 22px rgba(0,24,255,.4)}
-        .wcnav-primary:hover{transform:translateY(-2px);color:#fff;text-decoration:none}
-        .wcnav-mobilecta{display:none;padding:8px 13px;font-size:13px}
-        .wcnav-ham{display:flex;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px}
-        .wcnav-ham span{display:block;width:25px;height:3px;border-radius:2px;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.5);transition:.3s cubic-bezier(.22,.61,.36,1)}
-        .wcnav-ham.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
-        .wcnav-ham.open span:nth-child(2){opacity:0}
-        .wcnav-ham.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
-        .wcnav-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);opacity:0;visibility:hidden;transition:.3s;z-index:9050}
-        .wcnav-overlay.open{opacity:1;visibility:visible}
-        .wcnav-menu{position:fixed;top:0;right:0;height:100vh;height:100dvh;width:min(90vw,380px);z-index:9060;
-          background:rgba(10,14,30,.985);backdrop-filter:blur(18px);border-left:1px solid rgba(255,255,255,.08);
-          box-shadow:-24px 0 60px rgba(0,0,0,.55);transform:translateX(100%);transition:transform .3s cubic-bezier(.22,.61,.36,1);overflow-y:auto;padding:22px 0 28px}
-        .wcnav-menu.open{transform:translateX(0)}
-        .wcnav-mhead{display:flex;align-items:center;justify-content:space-between;padding:0 26px 14px;border-bottom:1px solid rgba(255,255,255,.08)}
-        .wcnav-mhead span{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#94a3b8}
-        .wcnav-mclose{background:none;border:none;color:#fff;font-size:26px;line-height:1;cursor:pointer;padding:2px 8px}
-        .wcnav-group{padding:14px 26px 4px;border-bottom:1px solid rgba(255,255,255,.08)}
-        .wcnav-mlabel{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9db0ff;margin-bottom:6px}
-        .wcnav-group a{display:block;padding:9px 0;font-size:15px;color:#dbe3f5;font-weight:500;text-decoration:none}
-        .wcnav-group a:hover{color:#fff;text-decoration:none}
-        .wcnav-actions{display:flex;flex-direction:column;gap:10px;padding:20px 26px 0}
-        .wcnav-actions .wcnav-btn{width:100%;justify-content:center;padding:14px;font-size:15px}
-        @media(max-width:820px){.wcnav-links{display:none}.wcnav-mobilecta{display:inline-flex}}
-        @media(max-width:480px){.wcnav-logo img{height:50px}}
         /* closing CTA band */
         .cmp-final{background:linear-gradient(135deg,#070a18,#0a1f66);color:#e8edf7;padding:54px 24px;text-align:center;font-family:'Inter',sans-serif}
         .cmp-final h2{font-size:clamp(24px,3vw,34px);font-weight:800;margin-bottom:12px;color:#fff}
@@ -1803,6 +1009,55 @@
         .cmp-faq details[open] summary::after{content:"–"}
         .cmp-faq p{margin-top:11px;color:#aeb8cf;font-size:14.5px}
         .cmp-faq a{color:#34D399;font-weight:600}
+    </style>
+
+    <!-- ============================================================ -->
+    <!-- CANONICAL DARK-GLASS NAV (copied from wind-load-calculator-landing.html) -->
+    <!-- .btn/.btn-primary/.btn-ghost scoped to #nav/#fullMenu so they do not affect the page body -->
+    <!-- ============================================================ -->
+    <style>
+      :root{ --luxe:cubic-bezier(.22,.61,.36,1); --line:rgba(255,255,255,.08); --muted:#94a3b8; }
+      /* shared container used by the nav bar */
+      #nav .wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+      /* Nav */
+      nav#nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:.3s var(--luxe);background:transparent;border-bottom:1px solid transparent}
+      nav#nav.scrolled{backdrop-filter:blur(14px);border-bottom:1px solid var(--line);
+        background:linear-gradient(90deg, rgba(240,244,255,.97) 0%, rgba(223,232,255,.93) 13%, rgba(22,28,58,.92) 46%, rgba(7,10,24,.95) 100%)}
+      #nav .nav-in{display:flex;align-items:center;justify-content:space-between;padding:12px clamp(24px,4vw,48px);transition:padding .3s var(--luxe)}
+      nav#nav.scrolled .nav-in{padding:8px clamp(24px,4vw,48px)}
+      #nav .logo{z-index:1001;display:flex;align-items:center}
+      #nav .logo-image{height:84px;width:auto;display:block;filter:drop-shadow(0 2px 10px rgba(0,0,0,.4));transition:all .3s ease}
+      nav#nav.scrolled .logo-image{height:64px;filter:none}
+      #nav .nav-right{display:flex;align-items:center;gap:18px}
+      #nav .nav-links{display:flex;align-items:center;gap:28px}
+      #nav .nav-links a.l{position:relative;font-size:14px;color:#fff;font-weight:500;opacity:.88;transition:opacity .2s var(--luxe);text-shadow:0 1px 8px rgba(0,0,0,.45)}
+      #nav .nav-links a.l:hover{opacity:1}
+      #nav .btn,#fullMenu .btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;border-radius:11px;cursor:pointer;transition:.25s var(--luxe);border:none;font-family:inherit;text-decoration:none}
+      #nav .btn-ghost,#fullMenu .btn-ghost{background:rgba(255,255,255,.06);color:#fff;padding:11px 18px;font-size:14px;border:1px solid rgba(255,255,255,.22)}
+      #nav .btn-ghost:hover,#fullMenu .btn-ghost:hover{border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.12)}
+      #nav .btn-primary,#fullMenu .btn-primary{background:linear-gradient(135deg,#0018FF,#2540ff);color:#fff;padding:12px 22px;font-size:14px;box-shadow:0 10px 30px rgba(0,24,255,.45)}
+      #nav .btn-primary:hover,#fullMenu .btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(0,24,255,.6)}
+      #nav .hamburger{display:flex;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;z-index:60}
+      #nav .hamburger span{display:block;width:26px;height:3px;border-radius:2px;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.6);transition:.3s var(--luxe)}
+      #nav .hamburger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+      #nav .hamburger.open span:nth-child(2){opacity:0}
+      #nav .hamburger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+      .nav-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);opacity:0;visibility:hidden;transition:.3s var(--luxe);z-index:55}
+      .nav-overlay.open{opacity:1;visibility:visible}
+      .full-menu{position:fixed;top:0;right:0;height:100vh;height:100dvh;width:min(90vw,380px);z-index:60;
+        background:rgba(10,14,30,.985);backdrop-filter:blur(18px);border-left:1px solid var(--line);
+        box-shadow:-24px 0 60px rgba(0,0,0,.55);transform:translateX(100%);transition:transform .3s var(--luxe);overflow-y:auto;padding:74px 0 28px}
+      .full-menu.open{transform:translateX(0)}
+      .fm-head{display:flex;align-items:center;justify-content:space-between;padding:0 26px 14px;border-bottom:1px solid var(--line)}
+      .fm-head span{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+      .fm-close{background:none;border:none;color:#fff;font-size:24px;line-height:1;cursor:pointer;padding:2px 8px}
+      .fm-group{padding:14px 26px 4px;border-bottom:1px solid var(--line)}
+      .fm-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9db0ff;margin-bottom:6px}
+      .fm-group a{display:block;padding:9px 0;font-size:15px;color:#dbe3f5;font-weight:500;transition:color .15s;text-decoration:none}
+      .fm-group a:hover{color:#fff}
+      .fm-actions{display:flex;flex-direction:column;gap:10px;padding:20px 26px 0}
+      .fm-actions .btn{width:100%;justify-content:center;padding:14px;font-size:15px}
+      @media(max-width:880px){#nav .nav-links{display:none}}
     </style>
     <link rel="canonical" href="https://windloadcalc.com/wind-load-calculator-comparison.html">
     <script type="application/ld+json">
@@ -1851,149 +1106,55 @@
     </script>
 </head>
 <body>
-    <!-- ============================================ -->
-    <!-- TOP-NAV SITE-WIDE PROMO BANNER (NEW 2026-05) -->
-    <!-- ============================================ -->
-    <div style="background:#181E57;color:#F5F1EA;padding:0.7rem 1.5rem;text-align:center;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:0.875rem;font-weight:500;letter-spacing:0.01em;position:relative;z-index:1001;">
-        <a href="free-wind-load-calculator.html" style="color:#F5F1EA;text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;transition:color 0.2s ease;" onmouseover="this.style.color='#E8B530'" onmouseout="this.style.color='#F5F1EA'">
-            <span>Free Wind Load Calculator with Florida Building Code overrides</span>
-            <span style="display:inline-block;transition:transform 0.2s ease;">&rarr;</span>
-        </a>
+<nav id="nav"><div class="wrap nav-in">
+  <a class="logo" href="https://windloadcalc.com/"><img height="100" width="300" src="images/windloadcalc-logo.svg" alt="WindLoadCalc — ASCE 7-22 Wind Load Calculator logo" class="logo-image"></a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a class="l" href="https://windloadcalc.com/free-wind-load-calculator.html">Free tool</a>
+      <a class="l" href="https://windloadcalc.com/wind-load-calculator-comparison.html">Compare</a>
+      <a class="l" href="https://windloadcalc.com/wind-load-calculator-shop.html">Pricing</a>
+      <a class="l" href="https://windloadcalc.com/why-us.html">Why us</a>
+      <a class="btn btn-ghost" href="https://windloadcalc.com/login.html">Log in</a>
+      <a class="btn btn-primary" href="https://windloadcalc.com/wind-load-calculator-shop.html">Start free trial</a>
     </div>
-
-    <!-- Dark-glass nav (sticky) + full hamburger menu — replaces the legacy header (hidden via CSS) -->
-    <nav class="wcnav" id="wcnav">
-      <div class="wcnav-in">
-        <a class="wcnav-logo" href="/" aria-label="WindLoadCalc home"><img src="/images/windloadcalc-logo.svg" alt="WindLoadCalc — Wind Load Calculator"></a>
-        <div class="wcnav-right">
-          <div class="wcnav-links">
-            <a href="/wind-load-calculator-landing.html">Calculators</a>
-            <a href="/building-intelligence-platform-landing.html">BIP</a>
-            <a href="/free-wind-load-calculator.html">Free tool</a>
-            <a href="/wind-load-calculator-shop.html">Pricing</a>
-            <a class="wcnav-btn wcnav-ghost" href="/login.html">Log in</a>
-            <a class="wcnav-btn wcnav-primary" href="/wind-load-calculator-shop.html">Start free trial</a>
-          </div>
-          <a class="wcnav-mobilecta wcnav-btn wcnav-primary" href="/wind-load-calculator-shop.html">Trial</a>
-          <button class="wcnav-ham" id="wcnav-ham" aria-label="Open menu" aria-expanded="false" aria-controls="wcnav-menu"><span></span><span></span><span></span></button>
-        </div>
-      </div>
-    </nav>
-    <div class="wcnav-overlay" id="wcnav-overlay"></div>
-    <aside class="wcnav-menu" id="wcnav-menu" aria-label="Site menu">
-      <div class="wcnav-mhead"><span>Menu</span><button class="wcnav-mclose" id="wcnav-mclose" aria-label="Close menu">&times;</button></div>
-      <div class="wcnav-group"><div class="wcnav-mlabel">Wind Load Calculators</div>
-        <a href="/wind-load-calculator-landing.html">Wind Load Calculators</a>
-        <a href="/wind-load-calculator-shop.html">Calculators — Pricing</a>
-        <a href="/free-wind-load-calculator.html">Free Wind Load Calculator</a>
-        <a href="/wind-load-calculator-comparison.html">Calculator Comparison</a>
-      </div>
-      <div class="wcnav-group"><div class="wcnav-mlabel">Building Intelligence Platform</div>
-        <a href="/building-intelligence-platform-landing.html">Platform Overview</a>
-        <a href="/building-intelligence-platform-shop.html">BIP Pricing</a>
-        <a href="/building-intelligence-platform.html">Launch the App</a>
-      </div>
-      <div class="wcnav-group"><div class="wcnav-mlabel">For Professionals</div>
-        <a href="/wind-load-calculator-for-engineers.html">Engineers</a>
-        <a href="/wind-load-calculator-for-architects.html">Architects</a>
-        <a href="/wind-loads-for-consultants.html">Consultants</a>
-        <a href="/contractors-wind-load-calculator.html">Contractors</a>
-      </div>
-      <div class="wcnav-group"><div class="wcnav-mlabel">Company</div>
-        <a href="/services.html">Services</a>
-        <a href="/why-us.html">Why Us</a>
-        <a href="/faq.html">FAQ</a>
-        <a href="/contact.html">Contact Us</a>
-      </div>
-      <div class="wcnav-actions">
-        <a class="wcnav-btn wcnav-ghost" href="/login.html">Log in</a>
-        <a class="wcnav-btn wcnav-primary" href="/wind-load-calculator-shop.html">Start free trial →</a>
-      </div>
-    </aside>
-
-    <!-- Header (legacy — hidden via CSS, kept so existing toggleNav()/scroll JS never errors) -->
-    <header class="main-header" id="main-header">
-        <div class="header-container">
-            <a href="index.html" class="logo">
-                <img height="100" width="300" src="images/windloadcalc-logo.svg" alt="windloadcalc Logo" class="logo-image">
-            </a>
-            
-            <!-- Full Hamburger Menu (Always available via hamburger button) -->
-            <nav class="nav-links" id="nav-menu">
-                <button class="nav-close" onclick="toggleNav()">&times;</button>
-                <a href="building-intelligence-platform.html">Building Intelligence Platform</a>
-                <a href="wind-load-calculator-comparison.html">Wind Load Calculator Comparison</a>
-
-                <!-- About Dropdown -->
-                <div class="nav-dropdown">
-                    <span class="nav-dropdown-toggle">About <span class="dropdown-arrow">▼</span></span>
-                    <div class="nav-dropdown-menu">
-                        <a href="building-intelligence-platform-landing.html">Building Intelligence Platform</a>
-                        <a href="wind-load-calculator-landing.html">Wind Load Calculators</a>
-                    </div>
-                </div>
-
-                <!-- Shop Dropdown -->
-                <div class="nav-dropdown">
-                    <span class="nav-dropdown-toggle">Shop <span class="dropdown-arrow">▼</span></span>
-                    <div class="nav-dropdown-menu">
-                        <a href="wind-load-calculator-shop.html">Wind Load Calculators</a>
-                        <a href="building-intelligence-platform-shop.html">Building Intelligence Platform</a>
-                    </div>
-                </div>
-
-                <a href="services.html">Services</a>
-
-                <!-- Professionals Dropdown -->
-                <div class="nav-dropdown">
-                    <span class="nav-dropdown-toggle">Professionals <span class="dropdown-arrow">▼</span></span>
-                    <div class="nav-dropdown-menu">
-                        <a href="wind-load-calculator-for-engineers.html">Engineers</a>
-                        <a href="wind-load-calculator-for-architects.html">Architects</a>
-                        <a href="wind-loads-for-consultants.html">Consultants</a>
-                        <a href="contractors-wind-load-calculator.html">Contractors</a>
-                    </div>
-                </div>
-
-                <a href="why-us.html">Why Us</a>
-                <a href="faq.html">FAQ</a>
-                <a href="contact.html">Contact Us</a>
-                <a href="demo.html">Free Calculator</a>
-            </nav>
-
-            <!-- Simplified Desktop Nav (Shows when scrolled on desktop) -->
-            <nav class="nav-desktop-scrolled">
-                <a href="demo.html">Free Calculator</a>
-                <a href="building-intelligence-platform.html">B.I.P.</a>
-
-                <!-- Shop Dropdown (Simplified - only 2 items) -->
-                <div class="nav-dropdown">
-                    <span class="nav-dropdown-toggle">Shop <span class="dropdown-arrow">▼</span></span>
-                    <div class="nav-dropdown-menu">
-                        <a href="wind-load-calculator-shop.html">Wind Load Calculators</a>
-                        <a href="building-intelligence-platform-shop.html">Building Intelligence Platform</a>
-                    </div>
-                </div>
-
-                <a href="services.html">Services</a>
-                <a href="why-us.html">Why Us</a>
-            </nav>
-            
-            <!-- Header Right Side -->
-            <div class="header-right">
-                <a href="contact.html" class="header-cta primary">Let's Connect</a>
-                <a href="login.html" class="header-cta">Member Login</a>
-                <button class="hamburger" id="hamburger" onclick="toggleNav()" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-            </div>
-        </div>
-        
-        <!-- Mobile Menu Overlay -->
-        <div class="nav-overlay" id="nav-overlay" onclick="toggleNav()"></div>
-    </header>
+    <button class="hamburger" id="hamburger" aria-label="Open full menu" aria-expanded="false" aria-controls="fullMenu"><span></span><span></span><span></span></button>
+  </div>
+</div></nav>
+<div class="nav-overlay" id="navOverlay"></div>
+<aside class="full-menu" id="fullMenu" aria-label="Site menu">
+  <div class="fm-head"><span>Menu</span><button class="fm-close" id="fmClose" aria-label="Close menu">&times;</button></div>
+  <div class="fm-group">
+    <div class="fm-label">Wind Load Calculators</div>
+    <a href="https://windloadcalc.com/wind-load-calculator-landing.html">Overview</a>
+    <a href="https://windloadcalc.com/free-wind-load-calculator.html">Free Trial</a>
+    <a href="https://windloadcalc.com/wind-load-calculator-comparison.html">Calculator Comparison</a>
+    <a href="https://windloadcalc.com/wind-load-calculator-shop.html">Pricing</a>
+  </div>
+  <div class="fm-group">
+    <div class="fm-label">Building Intelligence Platform</div>
+    <a href="https://windloadcalc.com/building-intelligence-platform-landing.html">Overview</a>
+    <a href="https://windloadcalc.com/building-intelligence-platform.html">Free Trial</a>
+    <a href="https://windloadcalc.com/building-intelligence-platform-shop.html">Pricing</a>
+  </div>
+  <div class="fm-group">
+    <div class="fm-label">For Professionals</div>
+    <a href="https://windloadcalc.com/wind-load-calculator-for-engineers.html">Engineers</a>
+    <a href="https://windloadcalc.com/wind-load-calculator-for-architects.html">Architects</a>
+    <a href="https://windloadcalc.com/wind-loads-for-consultants.html">Consultants</a>
+    <a href="https://windloadcalc.com/contractors-wind-load-calculator.html">Contractors</a>
+  </div>
+  <div class="fm-group">
+    <div class="fm-label">Company</div>
+    <a href="https://windloadcalc.com/services.html">Services</a>
+    <a href="https://windloadcalc.com/why-us.html">Why Us</a>
+    <a href="https://windloadcalc.com/faq.html">FAQ</a>
+    <a href="https://windloadcalc.com/contact.html">Contact Us</a>
+  </div>
+  <div class="fm-actions">
+    <a class="btn btn-ghost" href="https://windloadcalc.com/login.html">Log in</a>
+    <a class="btn btn-primary" href="https://windloadcalc.com/free-wind-load-calculator.html">Start Free Trial &rarr;</a>
+  </div>
+</aside>
 
     <main>
         <!-- Hero Section -->
@@ -5254,31 +4415,6 @@
     </footer>
 
     <script>
-        // Navigation Functions
-        function toggleNav() {
-            const navMenu = document.getElementById('nav-menu');
-            const hamburger = document.getElementById('hamburger');
-            const overlay = document.getElementById('nav-overlay');
-            
-            navMenu.classList.toggle('active');
-            hamburger.classList.toggle('active');
-            overlay.classList.toggle('active');
-            
-            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
-        }
-
-        function initializeHeaderScroll() {
-            const header = document.getElementById('main-header');
-            
-            window.addEventListener('scroll', function() {
-                if (window.scrollY > 100) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
-            });
-        }
-
         // Tab Switching with Color Persistence
         document.addEventListener('DOMContentLoaded', function() {
             const tabButtons = document.querySelectorAll('.tab-button');
@@ -5349,46 +4485,9 @@
             });
         });
 
-        // Mobile dropdown toggle
-        document.addEventListener('DOMContentLoaded', function() {
-            const dropdownToggle = document.querySelector('.nav-dropdown-toggle');
-            const dropdownMenu = document.querySelector('.nav-dropdown-menu');
-            
-            if (dropdownToggle && dropdownMenu) {
-                dropdownToggle.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    dropdownMenu.classList.toggle('active');
-                });
-            }
-        });
     </script>
 
     <script>
-        // Navigation Functions
-        function toggleNav() {
-            const navMenu = document.getElementById('nav-menu');
-            const hamburger = document.getElementById('hamburger');
-            const overlay = document.getElementById('nav-overlay');
-            
-            navMenu.classList.toggle('active');
-            hamburger.classList.toggle('active');
-            overlay.classList.toggle('active');
-            
-            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
-        }
-
-        function initializeHeaderScroll() {
-            const header = document.getElementById('main-header');
-            
-            window.addEventListener('scroll', function() {
-                if (window.scrollY > 100) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
-            });
-        }
-
         function initializeVideo() {
             const video = document.querySelector('.hero-video');
             if (!video) return;
@@ -5418,59 +4517,28 @@
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
             initializeVideo();
-            initializeHeaderScroll();
-        });
-
-        // Dropdown menu toggle for mobile - supports multiple dropdowns
-        document.addEventListener('DOMContentLoaded', function() {
-            const dropdowns = document.querySelectorAll('.nav-dropdown');
-            
-            dropdowns.forEach(function(dropdown) {
-                const dropdownToggle = dropdown.querySelector('.nav-dropdown-toggle');
-                
-                if (dropdownToggle) {
-                    dropdownToggle.addEventListener('click', function(e) {
-                        const header = document.getElementById('main-header');
-                        const isScrolled = header && header.classList.contains('scrolled');
-                        const isMobile = window.innerWidth < 1024;
-                        
-                        // Check if this dropdown is in the hamburger menu (nav-links) or horizontal nav (nav-desktop-scrolled)
-                        const isInHamburgerMenu = dropdown.closest('.nav-links');
-                        const isInHorizontalNav = dropdown.closest('.nav-desktop-scrolled');
-                        
-                        // Hamburger menu dropdowns: ALWAYS toggle by click
-                        // Horizontal nav dropdowns: Toggle on mobile, hover on desktop when scrolled
-                        if (isInHamburgerMenu || isMobile || !isScrolled) {
-                            e.preventDefault();
-                            // Close other dropdowns
-                            dropdowns.forEach(function(otherDropdown) {
-                                if (otherDropdown !== dropdown) {
-                                    otherDropdown.classList.remove('active');
-                                }
-                            });
-                            // Toggle current dropdown
-                            dropdown.classList.toggle('active');
-                        }
-                        // On desktop when scrolled (and in horizontal nav), let CSS hover handle it
-                    });
-                }
-            });
         });
     </script>
-<script>
-/* Dark-glass nav hamburger drawer (rebuild) */
-(function(){
-  var ham=document.getElementById('wcnav-ham'), menu=document.getElementById('wcnav-menu'),
-      ov=document.getElementById('wcnav-overlay'), close=document.getElementById('wcnav-mclose');
-  if(!ham||!menu) return;
-  function setMenu(open){ menu.classList.toggle('open',open); ov.classList.toggle('open',open); ham.classList.toggle('open',open);
-    ham.setAttribute('aria-expanded',open); document.body.style.overflow=open?'hidden':''; }
-  ham.addEventListener('click',function(){ setMenu(!menu.classList.contains('open')); });
-  ov.addEventListener('click',function(){ setMenu(false); });
-  if(close) close.addEventListener('click',function(){ setMenu(false); });
-  menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click',function(){ setMenu(false); }); });
-  window.addEventListener('keydown',function(e){ if(e.key==='Escape') setMenu(false); });
-})();
-</script>
+
+    <!-- Canonical dark-glass nav: scroll listener + menu toggle (copied from wind-load-calculator-landing.html) -->
+    <script>
+    (function(){
+      var nav=document.getElementById('nav');
+      function onScroll(){ nav.classList.toggle('scrolled', window.scrollY>40); }
+      onScroll(); window.addEventListener('scroll',onScroll,{passive:true});
+    })();
+    (function(){
+      var ham=document.getElementById('hamburger'), fm=document.getElementById('fullMenu'),
+          ov=document.getElementById('navOverlay'), fc=document.getElementById('fmClose');
+      if(!ham||!fm) return;
+      function setMenu(open){ fm.classList.toggle('open',open); ov.classList.toggle('open',open); ham.classList.toggle('open',open);
+        ham.setAttribute('aria-expanded',open); document.body.style.overflow=open?'hidden':''; }
+      ham.addEventListener('click',function(){ setMenu(!fm.classList.contains('open')); });
+      ov.addEventListener('click',function(){ setMenu(false); });
+      if(fc) fc.addEventListener('click',function(){ setMenu(false); });
+      fm.querySelectorAll('a').forEach(function(a){ a.addEventListener('click',function(){ setMenu(false); }); });
+      window.addEventListener('keydown',function(e){ if(e.key==='Escape') setMenu(false); });
+    })();
+    </script>
 </body>
 </html>

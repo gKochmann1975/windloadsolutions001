@@ -236,6 +236,8 @@ section{position:relative;z-index:1;padding:62px 0}
 .pricing-card{position:relative;display:flex;flex-direction:column;background:rgba(255,255,255,.05);
   border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:2rem 1.5rem;padding-top:2.4rem;
   box-shadow:0 12px 32px rgba(0,0,0,.32);transition:.35s var(--luxe)}
+/* CLAUDE.md shop rule: primary CTA sits directly under the price block; features below the CTA (so all buttons align regardless of feature-list length) */
+.pricing-header{order:1}.pricing-amount{order:2}.price-note{order:3}.pricing-cta{order:4}.trial-link{order:5}.pricing-divider{order:6}
 .pricing-card:hover{transform:translateY(-6px);border-color:rgba(58,91,255,.5);box-shadow:0 22px 46px rgba(0,24,255,.2)}
 .pricing-card.featured{background:linear-gradient(165deg,rgba(16,185,129,.14),rgba(255,255,255,.03));border-color:rgba(52,211,153,.55)}
 .pricing-card.featured::before{content:'Most Popular';position:absolute;top:-12px;left:50%;transform:translateX(-50%);
@@ -250,7 +252,7 @@ section{position:relative;z-index:1;padding:62px 0}
 .price-note{font-size:.8rem;color:var(--muted);margin-bottom:1rem}
 .price-note strong{color:#34D399;font-weight:700}
 .pricing-divider{height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);margin:1rem 0}
-.pricing-features{flex-grow:1;margin-bottom:1.5rem}
+.pricing-features{order:7;margin-top:1rem;margin-bottom:0}
 .pricing-features h4{font-size:.72rem;font-weight:700;color:#dbe3f5;margin-bottom:.75rem;text-transform:uppercase;letter-spacing:.5px}
 .pricing-features ul{list-style:none;padding:0;margin:0}
 .pricing-features li{display:flex;align-items:flex-start;gap:.5rem;padding:.45rem 0;font-size:.85rem;color:#c2cce0}

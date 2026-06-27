@@ -459,7 +459,7 @@ window.VelocityFinder = (function() {
             .toggle-label {
                 font-size: 0.95rem;
                 font-weight: 600;
-                color: #64748b;
+                color: #94a3b8;
                 transition: color 0.3s ease;
             }
             
@@ -547,14 +547,14 @@ window.VelocityFinder = (function() {
                 cursor: pointer;
                 padding: 0.5rem 1rem;
                 border-radius: 8px;
-                border: 2px solid #e2e8f0;
-                background: white;
+                border: 2px solid rgba(255,255,255,0.1);
+                background: rgba(255,255,255,0.05);
                 transition: all 0.2s ease;
             }
 
             .solar-risk-radio:hover {
                 border-color: #0018ff;
-                background: #f0f4ff;
+                background: rgba(255,255,255,0.1);
             }
 
             .solar-risk-radio input[type="radio"] {
@@ -574,7 +574,7 @@ window.VelocityFinder = (function() {
             .solar-risk-label {
                 font-size: 0.9rem;
                 font-weight: 600;
-                color: #475569;
+                color: #94a3b8;
                 transition: color 0.2s ease;
             }
 
@@ -763,8 +763,8 @@ window.VelocityFinder = (function() {
                         
                         <!-- Professional Analysis Block -->
                         <div id="analysis-block" style="display: none; margin-top: 2rem;">
-                            <div id="location-intelligence-card" style="display: none; background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); border-radius: 20px; padding: 2rem; margin-bottom: 2rem; border: 2px solid rgba(59, 130, 246, 0.1);">
-                                <h3 style="color: #181E57; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <div id="location-intelligence-card" style="display: none; background: rgba(255,255,255,0.05); border-radius: 20px; padding: 2rem; margin-bottom: 2rem; border: 2px solid rgba(59, 130, 246, 0.1);">
+                                <h3 style="color: #fff; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
                                     ${SVG_ICONS.location} Location Intelligence
                                 </h3>
                                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
@@ -778,8 +778,8 @@ window.VelocityFinder = (function() {
                                 </div>
                             </div>
 
-                            <div id="velocity-comparison-card" style="display: none; background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); border-radius: 20px; padding: 2rem; margin-bottom: 2rem; border: 2px solid rgba(0, 24, 255, 0.1);">
-                                <h3 style="color: #181E57; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <div id="velocity-comparison-card" style="display: none; background: rgba(255,255,255,0.05); border-radius: 20px; padding: 2rem; margin-bottom: 2rem; border: 2px solid rgba(0, 24, 255, 0.1);">
+                                <h3 style="color: #fff; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
                                     ${SVG_ICONS.tornado} All Risk Categories <span id="velocity-card-authority-badge"></span>
                                 </h3>
                                 <div class="table-wrapper">
@@ -817,8 +817,8 @@ window.VelocityFinder = (function() {
                                 </div>
                             </div>
 
-                            <div id="market-intelligence-card" style="display: none; background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); border-radius: 20px; padding: 2rem; margin-bottom: 2rem; border: 2px solid rgba(34, 197, 94, 0.1);">
-                                <h3 style="color: #181E57; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <div id="market-intelligence-card" style="display: none; background: rgba(255,255,255,0.05); border-radius: 20px; padding: 2rem; margin-bottom: 2rem; border: 2px solid rgba(34, 197, 94, 0.1);">
+                                <h3 style="color: #fff; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
                                     ${SVG_ICONS.chart} Market Intelligence
                                 </h3>
                                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
@@ -833,8 +833,8 @@ window.VelocityFinder = (function() {
                                 </div>
                             </div>
 
-                            <div id="county-details-card" style="display: none; background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); border-radius: 20px; padding: 2rem; margin-bottom: 2rem; border: 2px solid rgba(168, 85, 247, 0.1);">
-                                <h3 style="color: #181E57; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <div id="county-details-card" style="display: none; background: rgba(255,255,255,0.05); border-radius: 20px; padding: 2rem; margin-bottom: 2rem; border: 2px solid rgba(168, 85, 247, 0.1);">
+                                <h3 style="color: #fff; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
                                     ${SVG_ICONS.building} County Information
                                 </h3>
                                 <div style="margin-bottom: 1rem;">
@@ -843,17 +843,17 @@ window.VelocityFinder = (function() {
                                     <div><strong>Location:</strong> <span id="county-state">N/A</span></div>
                                 </div>
                                 <div id="additional-counties-section" style="display: none;">
-                                    <h4 style="color: #181E57; margin-bottom: 0.5rem;">Additional Counties:</h4>
+                                    <h4 style="color: #fff; margin-bottom: 0.5rem;">Additional Counties:</h4>
                                     <div id="additional-counties-list"></div>
                                 </div>
                             </div>
 
-                            <div id="data-quality-indicator" style="display: none; background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border: 2px solid #f59e0b; border-radius: 15px; padding: 1rem; margin-bottom: 2rem;">
-                                <div id="quality-badge-text" style="color: #92400e;"></div>
+                            <div id="data-quality-indicator" style="display: none; background: linear-gradient(135deg, rgba(245,158,11,.14), rgba(245,158,11,.05)); border: 2px solid #f59e0b; border-radius: 15px; padding: 1rem; margin-bottom: 2rem;">
+                                <div id="quality-badge-text" style="color: #fcd34d;"></div>
                             </div>
 
-                            <div id="multi-county-alert" style="display: none; background: linear-gradient(135deg, #ddd6fe 0%, #c4b5fd 100%); border: 2px solid #8b5cf6; border-radius: 15px; padding: 1rem; margin-bottom: 2rem;">
-                                <div style="color: #5b21b6;">
+                            <div id="multi-county-alert" style="display: none; background: linear-gradient(135deg, rgba(139,92,246,.16), rgba(139,92,246,.06)); border: 2px solid #8b5cf6; border-radius: 15px; padding: 1rem; margin-bottom: 2rem;">
+                                <div style="color: #c4b5fd;">
                                     <strong>${SVG_ICONS.alert} Multi-County ZIP Code:</strong> This ZIP code spans <span id="multi-county-count">N/A</span> counties.
                                     <div id="multi-county-list"></div>
                                 </div>
@@ -863,11 +863,11 @@ window.VelocityFinder = (function() {
                         <!-- Interactive Map -->
                         <div style="margin-top: 2rem; padding-top: 2rem; border-top: 2px solid rgba(0, 24, 255, 0.1);">
                             <div class="map-header" style="text-align: center; margin-bottom: 1.5rem;">
-                                <h3 style="font-size: 1.5rem; font-weight: 700; color: #181E57; margin-bottom: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 0.75rem;">
+                                <h3 style="font-size: 1.5rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 0.75rem;">
                                     ${SVG_ICONS.map}
                                     Interactive Mapping Platform
                                 </h3>
-                                <p style="color: #64748b; font-size: 0.95rem;">
+                                <p style="color: #94a3b8; font-size: 0.95rem;">
                                     Click anywhere on the map for instant wind velocity calculations<br>
                                     <span style="display: inline-block; margin-top: 0.5rem; padding: 0.4rem 1rem; background: linear-gradient(135deg, rgba(0, 24, 255, 0.1) 0%, rgba(16, 185, 129, 0.1) 100%); border: 2px solid rgba(0, 24, 255, 0.3); border-radius: 20px; font-weight: 700; color: #0018ff;">
                                         Currently Using: <span id="map-risk-indicator">Category II (Standard Buildings)</span>
@@ -945,8 +945,8 @@ window.VelocityFinder = (function() {
                     
                     <div class="feature-content-card feature-content-hidden" id="hurricane-risk-content">
                         <!-- ZIP Code Hurricane Risk Analyzer -->
-                        <div style="background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%); border-radius: 20px; padding: 2rem; margin-bottom: 2rem; border: 2px solid #dc2626;">
-                            <h3 style="color: #991b1b; margin-bottom: 1.5rem; text-align: center; font-size: 1.5rem; font-weight: 700;">
+                        <div style="background: linear-gradient(135deg, rgba(220,38,38,.15), rgba(220,38,38,.06)); border-radius: 20px; padding: 2rem; margin-bottom: 2rem; border: 2px solid #dc2626;">
+                            <h3 style="color: #fca5a5; margin-bottom: 1.5rem; text-align: center; font-size: 1.5rem; font-weight: 700;">
                                 ${SVG_ICONS.location} ZIP Code Hurricane Risk Analyzer
                             </h3>
                             <div class="search-container">
@@ -973,23 +973,23 @@ window.VelocityFinder = (function() {
                             <h3 style="color: #1d4ed8; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
                                 ${SVG_ICONS.brain} Intelligent Hurricane Explorer
                             </h3>
-                            <p style="color: #475569; margin-bottom: 1rem;">
+                            <p style="color: #94a3b8; margin-bottom: 1rem;">
                                 Ask questions in plain English about hurricanes, risk analysis, or historical data
                             </p>
                             
-                            <div style="background: white; border-radius: 10px; padding: 1rem; margin-bottom: 1rem; border: 2px solid #dbeafe;">
+                            <div style="background: rgba(255,255,255,0.05); border-radius: 10px; padding: 1rem; margin-bottom: 1rem; border: 2px solid rgba(255,255,255,0.1);">
                                 <div style="font-weight: 600; color: #1d4ed8; margin-bottom: 0.5rem; font-size: 0.9rem;">💡 Try these examples:</div>
                                 <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
                                     <button onclick="document.getElementById('hurricane-nl-search').value='Show me all Category 4 hurricanes that hit Louisiana'; VelocityFinder.processNaturalLanguageSearch();" 
-                                            style="background: #eff6ff; border: 1px solid #3b82f6; color: #1e40af; padding: 0.4rem 0.8rem; border-radius: 15px; font-size: 0.85rem; cursor: pointer; transition: all 0.2s;">
+                                            style="background: rgba(255,255,255,0.05); border: 1px solid #3b82f6; color: #e8edf7; padding: 0.4rem 0.8rem; border-radius: 15px; font-size: 0.85rem; cursor: pointer; transition: all 0.2s;">
                                         Cat 4 in Louisiana
                                     </button>
                                     <button onclick="document.getElementById('hurricane-nl-search').value='What is the hurricane risk for Miami Beach?'; VelocityFinder.processNaturalLanguageSearch();" 
-                                            style="background: #eff6ff; border: 1px solid #3b82f6; color: #1e40af; padding: 0.4rem 0.8rem; border-radius: 15px; font-size: 0.85rem; cursor: pointer; transition: all 0.2s;">
+                                            style="background: rgba(255,255,255,0.05); border: 1px solid #3b82f6; color: #e8edf7; padding: 0.4rem 0.8rem; border-radius: 15px; font-size: 0.85rem; cursor: pointer; transition: all 0.2s;">
                                         Miami Beach Risk
                                     </button>
                                     <button onclick="document.getElementById('hurricane-nl-search').value='Compare hurricane frequency in the 1990s vs 2020s'; VelocityFinder.processNaturalLanguageSearch();" 
-                                            style="background: #eff6ff; border: 1px solid #3b82f6; color: #1e40af; padding: 0.4rem 0.8rem; border-radius: 15px; font-size: 0.85rem; cursor: pointer; transition: all 0.2s;">
+                                            style="background: rgba(255,255,255,0.05); border: 1px solid #3b82f6; color: #e8edf7; padding: 0.4rem 0.8rem; border-radius: 15px; font-size: 0.85rem; cursor: pointer; transition: all 0.2s;">
                                         1990s vs 2020s
                                     </button>
                                 </div>
@@ -1015,8 +1015,8 @@ window.VelocityFinder = (function() {
                         </div>
 
                         <!-- Hurricane Path Animator & History -->
-                        <div style="background: white; border-radius: 20px; padding: 2rem; margin-bottom: 2rem; border: 2px solid #e2e8f0;">
-                            <h3 style="color: #181E57; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <div style="background: rgba(255,255,255,0.05); border-radius: 20px; padding: 2rem; margin-bottom: 2rem; border: 2px solid rgba(255,255,255,0.1);">
+                            <h3 style="color: #fff; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
                                 ${SVG_ICONS.play} Hurricane Path Animator & History
                             </h3>
                             
@@ -1025,7 +1025,7 @@ window.VelocityFinder = (function() {
                                 .hurricane-mode-btn {
                                     padding: 0.75rem 1.5rem;
                                     border-radius: 8px;
-                                    border: 2px solid #e2e8f0;
+                                    border: 2px solid rgba(255,255,255,0.1);
                                     font-weight: 600;
                                     cursor: pointer;
                                     transition: all 0.3s ease;
@@ -1044,9 +1044,9 @@ window.VelocityFinder = (function() {
                                 }
                                 
                                 .hurricane-mode-btn:not(.active) {
-                                    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-                                    color: #64748b;
-                                    border-color: #cbd5e1;
+                                    background: rgba(255,255,255,0.08);
+                                    color: #94a3b8;
+                                    border-color: rgba(255,255,255,0.1);
                                 }
                                 
                                 .hurricane-mode-btn:not(.active):hover {
@@ -1084,15 +1084,15 @@ window.VelocityFinder = (function() {
                             
                             <!-- History Controls (hidden by default) -->
                             <div id="history-controls" style="display: none; text-align: center; margin-bottom: 1rem;">
-                                <p style="color: #64748b; margin-bottom: 0.5rem;">Use the timeline slider on the map to filter hurricanes by year range (1950-2024)</p>
+                                <p style="color: #94a3b8; margin-bottom: 0.5rem;">Use the timeline slider on the map to filter hurricanes by year range (1950-2024)</p>
                             </div>
                             
-                            <div id="hurricane-map" style="width: 100%; height: 500px; border-radius: 15px; border: 2px solid #e2e8f0;"></div>
+                            <div id="hurricane-map" style="width: 100%; height: 500px; border-radius: 15px; border: 2px solid rgba(255,255,255,0.1);"></div>
                         </div>
 
                         <!-- Hurricane Database & Statistics -->
-                        <div style="background: white; border-radius: 20px; padding: 2rem; margin-bottom: 2rem; border: 2px solid #e2e8f0;">
-                            <h3 style="color: #181E57; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <div style="background: rgba(255,255,255,0.05); border-radius: 20px; padding: 2rem; margin-bottom: 2rem; border: 2px solid rgba(255,255,255,0.1);">
+                            <h3 style="color: #fff; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
                                 ${SVG_ICONS.chart} Hurricane Statistics Dashboard
                             </h3>
                             
@@ -1162,8 +1162,8 @@ window.VelocityFinder = (function() {
                         </div>
 
                         <!-- Insurance & Cost Intelligence -->
-                        <div style="background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); border-radius: 20px; padding: 2rem; border: 2px solid #10b981;">
-                            <h3 style="color: #065f46; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <div style="background: linear-gradient(135deg, rgba(16,185,129,.14), rgba(16,185,129,.05)); border-radius: 20px; padding: 2rem; border: 2px solid #10b981;">
+                            <h3 style="color: #6ee7b7; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
                                 ${SVG_ICONS.dollarSign} Insurance & Mitigation Intelligence
                             </h3>
                             
@@ -1171,28 +1171,28 @@ window.VelocityFinder = (function() {
                                 <div class="hurricane-stat-card">
                                     <div class="hurricane-stat-label">Typical Hurricane Deductible</div>
                                     <div class="hurricane-stat-value" style="font-size: 1.5rem;">2-5%</div>
-                                    <div style="font-size: 0.85rem; color: #64748b;">of coverage amount</div>
+                                    <div style="font-size: 0.85rem; color: #94a3b8;">of coverage amount</div>
                                 </div>
                                 <div class="hurricane-stat-card">
                                     <div class="hurricane-stat-label">Impact Windows ROI</div>
                                     <div class="hurricane-stat-value" style="font-size: 1.5rem;">45%</div>
-                                    <div style="font-size: 0.85rem; color: #64748b;">insurance discount</div>
+                                    <div style="font-size: 0.85rem; color: #94a3b8;">insurance discount</div>
                                 </div>
                                 <div class="hurricane-stat-card">
                                     <div class="hurricane-stat-label">Roof Reinforcement</div>
                                     <div class="hurricane-stat-value" style="font-size: 1.5rem;">25%</div>
-                                    <div style="font-size: 0.85rem; color: #64748b;">insurance discount</div>
+                                    <div style="font-size: 0.85rem; color: #94a3b8;">insurance discount</div>
                                 </div>
                                 <div class="hurricane-stat-card">
                                     <div class="hurricane-stat-label">Hurricane Shutters</div>
                                     <div class="hurricane-stat-value" style="font-size: 1.5rem;">$15-30</div>
-                                    <div style="font-size: 0.85rem; color: #64748b;">per sq ft installed</div>
+                                    <div style="font-size: 0.85rem; color: #94a3b8;">per sq ft installed</div>
                                 </div>
                             </div>
 
                             <div style="margin-top: 2rem;">
-                                <h4 style="color: #065f46; margin-bottom: 1rem;">Mitigation Strategies</h4>
-                                <ul style="color: #475569; line-height: 1.8;">
+                                <h4 style="color: #6ee7b7; margin-bottom: 1rem;">Mitigation Strategies</h4>
+                                <ul style="color: #e8edf7; line-height: 1.8;">
                                     <li><strong>Impact-Resistant Windows:</strong> Can reduce insurance premiums by 45% in high-risk zones</li>
                                     <li><strong>Roof Reinforcement:</strong> Hurricane straps and enhanced fastening systems (25% discount)</li>
                                     <li><strong>Permanent Storm Shutters:</strong> Protection for all openings (20% discount)</li>
@@ -1414,7 +1414,7 @@ window.VelocityFinder = (function() {
                                     Add
                                 </button>
                             </div>
-                            <p style="text-align: center; color: #64748b; font-size: 0.9rem;">
+                            <p style="text-align: center; color: #94a3b8; font-size: 0.9rem;">
                                 Add up to 10 ZIP codes for side-by-side comparison
                             </p>
                         </div>
@@ -1785,7 +1785,7 @@ window.VelocityFinder = (function() {
 
         let tableHTML = `
             <div class="results-header">
-                <h3 style="color: #181E57; margin: 0;">Solar Site Results (${state.solarResults.length} locations)</h3>
+                <h3 style="color: #fff; margin: 0;">Solar Site Results (${state.solarResults.length} locations)</h3>
                 <div style="display: flex; gap: 0.5rem;">
                     <button class="btn-secondary" onclick="VelocityFinder.toggleResultsTable('solar-results-table')" id="solar-collapse-btn">
                         ${SVG_ICONS.chevronDown}
@@ -1860,7 +1860,7 @@ window.VelocityFinder = (function() {
 
         let tableHTML = `
             <div class="results-header">
-                <h3 style="color: #181E57; margin: 0;">Filter Results (${state.filterResults.length} locations${stateCountText})</h3>
+                <h3 style="color: #fff; margin: 0;">Filter Results (${state.filterResults.length} locations${stateCountText})</h3>
                 <div style="display: flex; gap: 0.5rem;">
                     <button class="btn-secondary" onclick="VelocityFinder.toggleResultsTable('filter-results-table')" id="filter-collapse-btn">
                         ${SVG_ICONS.chevronDown}
@@ -2153,7 +2153,7 @@ window.VelocityFinder = (function() {
         if (nearbyHurricanes.length > 0) {
             html += `
                 <div style="margin-top: 2rem;">
-                    <h4 style="color: #181E57; margin-bottom: 1rem;">Historical Hurricanes (within 50 miles)</h4>
+                    <h4 style="color: #fff; margin-bottom: 1rem;">Historical Hurricanes (within 50 miles)</h4>
                     <div class="hurricane-list">
             `;
 
@@ -2169,7 +2169,7 @@ window.VelocityFinder = (function() {
                             <span class="hurricane-category-badge ${categoryClass}">CAT ${hurricane.category}</span>
                         </div>
                         <div style="text-align: right;">
-                            <div style="font-size: 0.9rem; color: #64748b;">
+                            <div style="font-size: 0.9rem; color: #94a3b8;">
                                 Landfall: ${hurricane.landfall}<br>
                                 Damage: $${hurricane.damage?.toLocaleString() || 'N/A'}M
                             </div>
@@ -2184,9 +2184,9 @@ window.VelocityFinder = (function() {
             `;
         } else {
             html += `
-                <div style="background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); border-radius: 15px; padding: 2rem; margin-top: 2rem; text-align: center; border: 2px solid #10b981;">
-                    <h3 style="color: #065f46; margin-bottom: 0.5rem;">✓ No Historical Hurricane Impacts</h3>
-                    <p style="color: #047857;">This location has no recorded hurricane impacts within 50 miles since 1950.</p>
+                <div style="background: linear-gradient(135deg, rgba(16,185,129,.14), rgba(16,185,129,.05)); border-radius: 15px; padding: 2rem; margin-top: 2rem; text-align: center; border: 2px solid #10b981;">
+                    <h3 style="color: #6ee7b7; margin-bottom: 0.5rem;">✓ No Historical Hurricane Impacts</h3>
+                    <p style="color: #e8edf7;">This location has no recorded hurricane impacts within 50 miles since 1950.</p>
                 </div>
             `;
         }
@@ -2271,7 +2271,7 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
 
         const content = document.createElement('div');
         content.style.cssText = `
-            background: white;
+            background: #0f1424;
             border-radius: 20px;
             padding: 2rem;
             max-width: 800px;
@@ -2282,12 +2282,12 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
 
         content.innerHTML = `
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
-                <h2 style="color: #181E57; margin: 0; display: flex; align-items: center; gap: 0.5rem;">
+                <h2 style="color: #fff; margin: 0; display: flex; align-items: center; gap: 0.5rem;">
                     ${SVG_ICONS.brain} AI Hurricane Risk Report
                 </h2>
-                <button onclick="this.closest('[style*=\\'position: fixed\\']').remove()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #64748b;">×</button>
+                <button onclick="this.closest('[style*=\\'position: fixed\\']').remove()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #94a3b8;">×</button>
             </div>
-            <div style="white-space: pre-wrap; line-height: 1.8; color: #374151;">
+            <div style="white-space: pre-wrap; line-height: 1.8; color: #e8edf7;">
                 ${Utils.sanitizeHTML(reportText)}
             </div>
             <div style="margin-top: 2rem; text-align: center;">
@@ -2425,7 +2425,7 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
                         <span class="hurricane-category-badge ${categoryClass}">CAT ${hurricane.category}</span>
                     </div>
                     <div style="text-align: right;">
-                        <div style="font-size: 0.9rem; color: #64748b;">
+                        <div style="font-size: 0.9rem; color: #94a3b8;">
                             Year: ${hurricane.year}<br>
                             Landfall: ${hurricane.landfall}
                         </div>
@@ -2483,7 +2483,7 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
 
         const content = document.createElement('div');
         content.style.cssText = `
-            background: white;
+            background: #0f1424;
             border-radius: 20px;
             padding: 2rem;
             max-width: 600px;
@@ -2492,8 +2492,8 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
 
         content.innerHTML = `
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
-                <h2 style="color: #181E57; margin: 0;">${hurricane.name}</h2>
-                <button onclick="this.closest('[style*=\\'position: fixed\\']').remove()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #64748b;">×</button>
+                <h2 style="color: #fff; margin: 0;">${hurricane.name}</h2>
+                <button onclick="this.closest('[style*=\\'position: fixed\\']').remove()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #94a3b8;">×</button>
             </div>
             
             <div style="text-align: center; margin-bottom: 2rem;">
@@ -2512,7 +2512,7 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
             <div style="margin-bottom: 1rem;">
                 <strong>Affected States:</strong>
                 <div style="margin-top: 0.5rem;">
-                    ${hurricane.states.map(state => `<span style="display: inline-block; background: #e2e8f0; padding: 0.25rem 0.75rem; border-radius: 12px; margin: 0.25rem; font-size: 0.85rem;">${state}</span>`).join('')}
+                    ${hurricane.states.map(state => `<span style="display: inline-block; background: rgba(255,255,255,0.08); padding: 0.25rem 0.75rem; border-radius: 12px; margin: 0.25rem; font-size: 0.85rem;">${state}</span>`).join('')}
                 </div>
             </div>
 
@@ -2691,18 +2691,18 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
                 }).addTo(trackGroup);
                 
                 polyline.bindPopup(`
-                    <div style="background: white; padding: 1rem; border-radius: 12px; min-width: 250px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
-                        <div style="font-size: 1.25rem; font-weight: 700; color: #181E57; margin-bottom: 0.5rem;">
+                    <div style="background: #0f1424; padding: 1rem; border-radius: 12px; min-width: 250px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+                        <div style="font-size: 1.25rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem;">
                             ${hurricane.name}
                         </div>
                         <div style="background: ${hurricane.color}; color: white; display: inline-block; padding: 0.25rem 0.75rem; border-radius: 6px; font-weight: 600; margin-bottom: 0.75rem;">
                             Category ${hurricane.category}
                         </div>
-                        <div style="color: #64748b; font-size: 0.95rem; line-height: 1.6;">
-                            <strong style="color: #181E57;">Max Wind Speed:</strong> ${hurricane.windSpeed} mph<br>
-                            <strong style="color: #181E57;">Year:</strong> ${hurricane.year}<br>
-                            <strong style="color: #181E57;">Landfall:</strong> ${hurricane.landfall}<br>
-                            <strong style="color: #181E57;">Damage:</strong> $${hurricane.damage ? hurricane.damage.toLocaleString() : 'N/A'}M
+                        <div style="color: #94a3b8; font-size: 0.95rem; line-height: 1.6;">
+                            <strong style="color: #fff;">Max Wind Speed:</strong> ${hurricane.windSpeed} mph<br>
+                            <strong style="color: #fff;">Year:</strong> ${hurricane.year}<br>
+                            <strong style="color: #fff;">Landfall:</strong> ${hurricane.landfall}<br>
+                            <strong style="color: #fff;">Damage:</strong> $${hurricane.damage ? hurricane.damage.toLocaleString() : 'N/A'}M
                         </div>
                     </div>
                 `, {
@@ -2734,13 +2734,13 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
                             <div style="font-size: 1.1rem; font-weight: 700;">🌀 ${hurricane.name}</div>
                             <div style="font-size: 0.85rem; opacity: 0.9;">Category ${hurricane.category} Hurricane</div>
                         </div>
-                        <div style="padding: 12px 14px; background: #f8fafc;">
+                        <div style="padding: 12px 14px; background: rgba(255,255,255,0.05);">
                             <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
-                                <tr><td style="color: #64748b; padding: 4px 0;">Year</td><td style="text-align: right; font-weight: 600; color: #1e293b;">${hurricane.year}</td></tr>
-                                <tr><td style="color: #64748b; padding: 4px 0;">Max Winds</td><td style="text-align: right; font-weight: 600; color: #1e293b;">${hurricane.windSpeed || 'N/A'} mph</td></tr>
-                                <tr><td style="color: #64748b; padding: 4px 0;">Landfall</td><td style="text-align: right; font-weight: 600; color: #1e293b;">${hurricane.landfall || 'N/A'}</td></tr>
-                                <tr><td style="color: #64748b; padding: 4px 0;">Casualties</td><td style="text-align: right; font-weight: 600; color: #1e293b;">${hurricane.casualties ? hurricane.casualties.toLocaleString() : 'N/A'}</td></tr>
-                                <tr><td style="color: #64748b; padding: 4px 0;">Damage</td><td style="text-align: right; font-weight: 600; color: #1e293b;">${hurricane.damage ? '$' + hurricane.damage.toLocaleString() + 'M' : 'N/A'}</td></tr>
+                                <tr><td style="color: #94a3b8; padding: 4px 0;">Year</td><td style="text-align: right; font-weight: 600; color: #e8edf7;">${hurricane.year}</td></tr>
+                                <tr><td style="color: #94a3b8; padding: 4px 0;">Max Winds</td><td style="text-align: right; font-weight: 600; color: #e8edf7;">${hurricane.windSpeed || 'N/A'} mph</td></tr>
+                                <tr><td style="color: #94a3b8; padding: 4px 0;">Landfall</td><td style="text-align: right; font-weight: 600; color: #e8edf7;">${hurricane.landfall || 'N/A'}</td></tr>
+                                <tr><td style="color: #94a3b8; padding: 4px 0;">Casualties</td><td style="text-align: right; font-weight: 600; color: #e8edf7;">${hurricane.casualties ? hurricane.casualties.toLocaleString() : 'N/A'}</td></tr>
+                                <tr><td style="color: #94a3b8; padding: 4px 0;">Damage</td><td style="text-align: right; font-weight: 600; color: #e8edf7;">${hurricane.damage ? '$' + hurricane.damage.toLocaleString() + 'M' : 'N/A'}</td></tr>
                             </table>
                         </div>
                     </div>
@@ -3043,17 +3043,17 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
             })
         }).addTo(state.hurricaneMap)
         .bindPopup(`
-            <div style="background: white; padding: 1rem; border-radius: 12px; min-width: 250px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
-                <div style="font-size: 1.25rem; font-weight: 700; color: #181E57; margin-bottom: 0.5rem;">
+            <div style="background: #0f1424; padding: 1rem; border-radius: 12px; min-width: 250px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+                <div style="font-size: 1.25rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem;">
                     ${hurricane.name}
                 </div>
                 <div style="background: ${hurricane.color}; color: white; display: inline-block; padding: 0.25rem 0.75rem; border-radius: 6px; font-weight: 600; margin-bottom: 0.75rem;">
                     Category ${hurricane.category}
                 </div>
-                <div style="color: #64748b; font-size: 0.95rem; line-height: 1.6;">
-                    <strong style="color: #181E57;">Max Wind Speed:</strong> ${hurricane.windSpeed} mph<br>
-                    <strong style="color: #181E57;">Year:</strong> ${hurricane.year}<br>
-                    <strong style="color: #181E57;">Position:</strong> ${frame + 1} of ${hurricane.path.length}
+                <div style="color: #94a3b8; font-size: 0.95rem; line-height: 1.6;">
+                    <strong style="color: #fff;">Max Wind Speed:</strong> ${hurricane.windSpeed} mph<br>
+                    <strong style="color: #fff;">Year:</strong> ${hurricane.year}<br>
+                    <strong style="color: #fff;">Position:</strong> ${frame + 1} of ${hurricane.path.length}
                 </div>
             </div>
         `, {
@@ -3247,7 +3247,7 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
                     <br>
                     <strong>Or configure a custom path:</strong><br>
                     Add this before loading the script:<br>
-                    <code style="display: block; background: #f3f4f6; padding: 0.5rem; margin-top: 0.5rem; border-radius: 4px;">
+                    <code style="display: block; background: rgba(255,255,255,0.08); padding: 0.5rem; margin-top: 0.5rem; border-radius: 4px;">
                         &lt;script&gt;<br>
                         &nbsp;&nbsp;window.VELOCITY_FINDER_CONFIG = {<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;csvPath: '/your/custom/path/usps_zip_codes.csv'<br>
@@ -3275,7 +3275,7 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
             
             const content = document.createElement('div');
             content.style.cssText = `
-                background: white;
+                background: #0f1424;
                 border-radius: 20px;
                 padding: 2rem;
                 max-width: 700px;
@@ -3288,7 +3288,7 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
                     <h2 style="color: #dc2626; margin: 0;">⚠️ Configuration Required</h2>
                     <button onclick="this.closest('[style*=\\'position: fixed\\']').remove()" 
-                            style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #64748b;">×</button>
+                            style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #94a3b8;">×</button>
                 </div>
                 ${errorMessage}
                 <div style="text-align: center; margin-top: 1.5rem;">
@@ -4459,29 +4459,29 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
             // Category IV - No results anywhere in the US
             if (selectedRiskCategory === 'category-4') {
                 infoHTML = `
-                    <div class="info-panel" style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-radius: 12px; padding: 1.5rem; border-left: 4px solid #f59e0b;">
-                        <h4 style="color: #92400e; margin: 0 0 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
+                    <div class="info-panel" style="background: linear-gradient(135deg, rgba(245,158,11,.14), rgba(245,158,11,.05)); border-radius: 12px; padding: 1.5rem; border-left: 4px solid #f59e0b;">
+                        <h4 style="color: #fcd34d; margin: 0 0 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
                             <span style="font-size: 1.5rem;">⚠️</span>
                             Why No Results for Risk Category IV?
                         </h4>
-                        <p style="color: #78350f; margin: 0 0 1rem 0; line-height: 1.6;">
+                        <p style="color: #e8edf7; margin: 0 0 1rem 0; line-height: 1.6;">
                             <strong>Risk Category IV</strong> applies to <strong>essential facilities</strong> (hospitals, fire stations, emergency shelters)
                             that must remain operational during and after extreme wind events.
                         </p>
-                        <p style="color: #78350f; margin: 0 0 1rem 0; line-height: 1.6;">
+                        <p style="color: #e8edf7; margin: 0 0 1rem 0; line-height: 1.6;">
                             Per <strong>ASCE 7-22</strong>, the minimum design wind speed for Category IV structures is <strong>130 mph</strong>
                             nationwide. This exceeds the Solar Site Finder's 120 mph threshold for ideal solar installation locations.
                         </p>
-                        <div style="background: white; border-radius: 8px; padding: 1rem; margin-top: 1rem;">
-                            <p style="color: #1f2937; margin: 0 0 0.5rem 0; font-weight: 600;">Wind Speed Thresholds by Category:</p>
-                            <ul style="color: #4b5563; margin: 0; padding-left: 1.5rem; line-height: 1.8;">
+                        <div style="background: rgba(255,255,255,0.06); border-radius: 8px; padding: 1rem; margin-top: 1rem;">
+                            <p style="color: #fcd34d; margin: 0 0 0.5rem 0; font-weight: 600;">Wind Speed Thresholds by Category:</p>
+                            <ul style="color: #cbd5e1; margin: 0; padding-left: 1.5rem; line-height: 1.8;">
                                 <li><strong>Category I</strong> (Agricultural): Min 105 mph → 32,000+ eligible ZIPs</li>
                                 <li><strong>Category II</strong> (Standard): Min 115 mph → 5,700+ eligible ZIPs</li>
                                 <li><strong>Category III</strong> (Schools/Assembly): Min 120 mph → 2,600+ eligible ZIPs</li>
                                 <li><strong>Category IV</strong> (Hospitals/Emergency): Min 130 mph → <em>0 eligible ZIPs</em></li>
                             </ul>
                         </div>
-                        <p style="color: #78350f; margin: 1rem 0 0 0; font-style: italic;">
+                        <p style="color: #e8edf7; margin: 1rem 0 0 0; font-style: italic;">
                             💡 <strong>Tip:</strong> For solar site planning, use Category I or II which represent typical commercial and residential structures.
                         </p>
                     </div>
@@ -4493,24 +4493,24 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
                 if (!hasResults || !stateFilter) {
                     const statesWithResults = cat3States.map(s => stateNames[s]).join(', ');
                     infoHTML = `
-                        <div class="info-panel" style="background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%); border-radius: 12px; padding: 1.5rem; border-left: 4px solid #3b82f6;">
-                            <h4 style="color: #1e40af; margin: 0 0 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
+                        <div class="info-panel" style="background: linear-gradient(135deg, rgba(59,130,246,.14), rgba(59,130,246,.05)); border-radius: 12px; padding: 1.5rem; border-left: 4px solid #3b82f6;">
+                            <h4 style="color: #93c5fd; margin: 0 0 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
                                 <span style="font-size: 1.5rem;">ℹ️</span>
                                 ${stateFilter ? `No Results for ${stateName} in Risk Category III` : 'Risk Category III - Limited Geographic Coverage'}
                             </h4>
-                            <p style="color: #1e3a8a; margin: 0 0 1rem 0; line-height: 1.6;">
+                            <p style="color: #e8edf7; margin: 0 0 1rem 0; line-height: 1.6;">
                                 <strong>Risk Category III</strong> applies to buildings with <strong>high occupancy</strong> (schools, theaters, daycare facilities)
                                 where failure poses substantial risk to human life.
                             </p>
-                            <p style="color: #1e3a8a; margin: 0 0 1rem 0; line-height: 1.6;">
+                            <p style="color: #e8edf7; margin: 0 0 1rem 0; line-height: 1.6;">
                                 Due to ASCE 7-22's minimum wind speed of <strong>120 mph</strong> for Category III, only <strong>11 states</strong>
                                 in the interior Midwest and Southeast have locations meeting the ≤120 mph solar threshold.
                             </p>
-                            <div style="background: white; border-radius: 8px; padding: 1rem; margin-top: 1rem;">
-                                <p style="color: #1f2937; margin: 0 0 0.5rem 0; font-weight: 600;">States with Category III Solar Sites:</p>
-                                <p style="color: #4b5563; margin: 0; line-height: 1.6;">${statesWithResults}</p>
+                            <div style="background: rgba(255,255,255,0.06); border-radius: 8px; padding: 1rem; margin-top: 1rem;">
+                                <p style="color: #93c5fd; margin: 0 0 0.5rem 0; font-weight: 600;">States with Category III Solar Sites:</p>
+                                <p style="color: #cbd5e1; margin: 0; line-height: 1.6;">${statesWithResults}</p>
                             </div>
-                            <p style="color: #1e3a8a; margin: 1rem 0 0 0; font-style: italic;">
+                            <p style="color: #e8edf7; margin: 1rem 0 0 0; font-style: italic;">
                                 💡 <strong>Tip:</strong> ${stateFilter ? `Try selecting one of the states listed above, or switch to ` : 'For more results, try '}<strong>Category I</strong> or <strong>Category II</strong> for broader coverage.
                             </p>
                         </div>
@@ -4523,24 +4523,24 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
                 if (!hasResults || !stateFilter) {
                     const statesWithResults = cat2States.map(s => stateNames[s]).join(', ');
                     infoHTML = `
-                        <div class="info-panel" style="background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%); border-radius: 12px; padding: 1.5rem; border-left: 4px solid #22c55e;">
-                            <h4 style="color: #166534; margin: 0 0 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
+                        <div class="info-panel" style="background: linear-gradient(135deg, rgba(16,185,129,.14), rgba(16,185,129,.05)); border-radius: 12px; padding: 1.5rem; border-left: 4px solid #22c55e;">
+                            <h4 style="color: #6ee7b7; margin: 0 0 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
                                 <span style="font-size: 1.5rem;">ℹ️</span>
                                 ${stateFilter ? `No Results for ${stateName} in Risk Category II` : 'Risk Category II - Geographic Coverage'}
                             </h4>
-                            <p style="color: #15803d; margin: 0 0 1rem 0; line-height: 1.6;">
+                            <p style="color: #e8edf7; margin: 0 0 1rem 0; line-height: 1.6;">
                                 <strong>Risk Category II</strong> is the standard category for most buildings including <strong>residential, commercial,
                                 and industrial</strong> structures not classified as essential facilities.
                             </p>
-                            <p style="color: #15803d; margin: 0 0 1rem 0; line-height: 1.6;">
+                            <p style="color: #e8edf7; margin: 0 0 1rem 0; line-height: 1.6;">
                                 With ASCE 7-22's minimum wind speed of <strong>115 mph</strong> for Category II, only <strong>14 states</strong>
                                 in the interior Midwest and Southeast have locations meeting the ≤120 mph solar threshold.
                             </p>
-                            <div style="background: white; border-radius: 8px; padding: 1rem; margin-top: 1rem;">
-                                <p style="color: #1f2937; margin: 0 0 0.5rem 0; font-weight: 600;">States with Category II Solar Sites:</p>
-                                <p style="color: #4b5563; margin: 0; line-height: 1.6;">${statesWithResults}</p>
+                            <div style="background: rgba(255,255,255,0.06); border-radius: 8px; padding: 1rem; margin-top: 1rem;">
+                                <p style="color: #6ee7b7; margin: 0 0 0.5rem 0; font-weight: 600;">States with Category II Solar Sites:</p>
+                                <p style="color: #cbd5e1; margin: 0; line-height: 1.6;">${statesWithResults}</p>
                             </div>
-                            <p style="color: #15803d; margin: 1rem 0 0 0; font-style: italic;">
+                            <p style="color: #e8edf7; margin: 1rem 0 0 0; font-style: italic;">
                                 💡 <strong>Tip:</strong> ${stateFilter ? `Try selecting one of the states listed above, or switch to ` : 'For the broadest coverage, try '}<strong>Category I</strong> which covers nearly all continental US states.
                             </p>
                         </div>
@@ -4550,24 +4550,24 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
             // Category I - Only territories have no results
             else if (selectedRiskCategory === 'category-1' && stateFilter && cat1Territories.includes(stateFilter)) {
                 infoHTML = `
-                    <div class="info-panel" style="background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%); border-radius: 12px; padding: 1.5rem; border-left: 4px solid #ec4899;">
-                        <h4 style="color: #9d174d; margin: 0 0 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
+                    <div class="info-panel" style="background: linear-gradient(135deg, rgba(236,72,153,.14), rgba(236,72,153,.05)); border-radius: 12px; padding: 1.5rem; border-left: 4px solid #ec4899;">
+                        <h4 style="color: #f9a8d4; margin: 0 0 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
                             <span style="font-size: 1.5rem;">🌴</span>
                             No Results for ${stateName} - High Wind Zone Territory
                         </h4>
-                        <p style="color: #831843; margin: 0 0 1rem 0; line-height: 1.6;">
+                        <p style="color: #e8edf7; margin: 0 0 1rem 0; line-height: 1.6;">
                             <strong>${stateName}</strong> is located in a <strong>hurricane-prone region</strong> of the Caribbean/Pacific
                             with consistently high design wind speeds across all risk categories.
                         </p>
-                        <p style="color: #831843; margin: 0 0 1rem 0; line-height: 1.6;">
+                        <p style="color: #e8edf7; margin: 0 0 1rem 0; line-height: 1.6;">
                             Even for <strong>Category I</strong> (the lowest risk category), all ZIP codes in ${stateName} have
                             design wind speeds exceeding the 120 mph threshold for ideal solar installations.
                         </p>
-                        <div style="background: white; border-radius: 8px; padding: 1rem; margin-top: 1rem;">
-                            <p style="color: #1f2937; margin: 0 0 0.5rem 0; font-weight: 600;">US Territories with No Solar Sites (High Wind Zones):</p>
-                            <p style="color: #4b5563; margin: 0; line-height: 1.6;">Puerto Rico, US Virgin Islands, American Samoa, Guam, Northern Mariana Islands</p>
+                        <div style="background: rgba(255,255,255,0.06); border-radius: 8px; padding: 1rem; margin-top: 1rem;">
+                            <p style="color: #f9a8d4; margin: 0 0 0.5rem 0; font-weight: 600;">US Territories with No Solar Sites (High Wind Zones):</p>
+                            <p style="color: #cbd5e1; margin: 0; line-height: 1.6;">Puerto Rico, US Virgin Islands, American Samoa, Guam, Northern Mariana Islands</p>
                         </div>
-                        <p style="color: #831843; margin: 1rem 0 0 0; font-style: italic;">
+                        <p style="color: #e8edf7; margin: 1rem 0 0 0; font-style: italic;">
                             💡 <strong>Note:</strong> Solar installations are still possible in these territories but require enhanced wind-resistant mounting systems designed for high-wind zones.
                         </p>
                     </div>
@@ -4586,7 +4586,7 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
         
         let tableHTML = `
             <div class="results-header">
-                <h3 style="color: #181E57; margin: 0;">Solar Site Results (${results.length} locations)</h3>
+                <h3 style="color: #fff; margin: 0;">Solar Site Results (${results.length} locations)</h3>
                 <div style="display: flex; gap: 0.5rem;">
                     <button class="btn-secondary" onclick="VelocityFinder.toggleResultsTable('solar-results-table')" id="solar-collapse-btn">
                         ${SVG_ICONS.chevronDown}
@@ -4847,7 +4847,7 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
 
         let tableHTML = `
             <div class="results-header">
-                <h3 style="color: #181E57; margin: 0;">Filter Results (${results.length} locations${stateCountText})</h3>
+                <h3 style="color: #fff; margin: 0;">Filter Results (${results.length} locations${stateCountText})</h3>
                 <div style="display: flex; gap: 0.5rem;">
                     <button class="btn-secondary" onclick="VelocityFinder.toggleResultsTable('filter-results-table')" id="filter-collapse-btn">
                         ${SVG_ICONS.chevronDown}
@@ -5056,7 +5056,7 @@ Location: ${zipData.city}, ${zipData.state_name} (ZIP ${zip})`;
         listContainer.innerHTML = chipsHTML;
         
         let tableHTML = `
-            <h3 style="color: #181E57; margin-bottom: 1rem;">Comparison Table</h3>
+            <h3 style="color: #fff; margin-bottom: 1rem;">Comparison Table</h3>
             <div class="table-wrapper">
                 <table class="results-table">
                     <thead>

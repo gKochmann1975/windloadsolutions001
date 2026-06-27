@@ -245,7 +245,7 @@ section{position:relative;z-index:1;padding:62px 0}
   font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap;box-shadow:0 4px 15px rgba(16,185,129,.4)}
 .pricing-header h3{font-size:1.3rem;font-weight:800;color:#fff;margin-bottom:.4rem}
 .pricing-description{font-size:.85rem;color:var(--muted);margin-bottom:1rem}
-.pricing-amount{display:flex;align-items:baseline;gap:.3rem;margin-top:.9rem;margin-bottom:.5rem}
+.pricing-amount{display:flex;align-items:baseline;gap:.3rem;margin-bottom:.5rem}
 .price-currency{font-size:1.2rem;font-weight:700;color:#fff}
 .price-value{font-size:2.8rem;font-weight:800;color:#fff;line-height:1;background:linear-gradient(135deg,#fff,#9db0ff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .price-period{font-size:.9rem;color:var(--muted);font-weight:600}
@@ -265,11 +265,11 @@ section{position:relative;z-index:1;padding:62px 0}
 .pricing-cta.secondary{background:rgba(255,255,255,.06);color:#fff;border:1px solid rgba(255,255,255,.22)}
 .pricing-cta.secondary:hover{border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.12)}
 .trial-link{display:block;text-align:center;margin-top:.75rem;color:#9db0ff;font-weight:600;font-size:.85rem;text-decoration:none;transition:all .3s ease}
-/* CTA directly under the price (aligns all cards' buttons + reachable on mobile); features below */
-.pricing-cta{order:1;margin-top:.25rem}
-.trial-link{order:2;margin-bottom:.25rem}
-.pricing-divider{order:3}
-.pricing-features{order:4;margin-bottom:0}
+/* CTA sits directly UNDER the price block (price + billing note) — matches the BIP shop.
+   Order is set ONCE above (.pricing-cta{order:4}, after .price-note{order:3}).
+   NEVER set .pricing-cta to order:1 — that renders the button ABOVE the price. */
+.pricing-cta{margin-top:.5rem}
+.trial-link{margin-bottom:.25rem}
 .trial-link:hover{color:#fff;text-decoration:underline}
 .seal-band{margin-top:2rem;background:linear-gradient(160deg,rgba(0,24,255,.16),rgba(16,185,129,.08));
   border:1px solid rgba(58,91,255,.4);border-radius:18px;padding:1.8rem;text-align:center}

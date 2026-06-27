@@ -61,19 +61,29 @@ actions or wasted crawl budget. Read before adding new pages or schema markup.
 
 ## Shop / Pricing Page Format (apply to EVERY shop page — current + future products)
 
-### Pricing-card CTA placement
-- The primary **CTA (Add to Cart / Choose plan / Contact Sales) goes DIRECTLY UNDER the price
-  block** (price + billing note). **Features / description go BELOW the CTA.** Never pin the
-  button to the bottom of the card.
-- **Why:** (1) all cards' buttons align on one line regardless of feature-list length — a
-  bottom-anchored button makes columns look ragged; (2) the button is reachable on mobile without
-  scrolling past a long list.
-- **How:** card is `display:flex; flex-direction:column`; do NOT use `margin-top:auto` on the CTA
-  or a `flex:1`/`flex-grow:1` on the features that sinks it. Build the DOM as
-  **price → billing-note → CTA → (trial link) → features**, or reorder with flex `order`
-  (CTA below the price block, features after). Keep any "or Start Free Trial" link / billing
-  toggle with the CTA, above the features.
-- Live examples: `building-intelligence-platform-shop.html`, `shop/windows-doors-shutters.html`.
+### Pricing-card CTA placement — ONE canonical order for EVERY pricing page
+- **Canonical visual order, top → bottom, on every pricing card:**
+  **plan name → description → PRICE → billing-note → CTA (Add to Cart / Choose plan / Contact Sales)
+  → (or Start Free Trial link) → features.**
+- The **CTA goes DIRECTLY UNDER the price block** (price + billing note). The **price is ALWAYS
+  ABOVE the CTA — never below it.** Features go BELOW the CTA. Never pin the button to the bottom
+  of the card.
+- **`building-intelligence-platform-shop.html` is the reference layout.** Every other pricing page
+  (`shop/windows-doors-shutters.html` + all future product shops) must match it. If they diverge,
+  fix the other page to match BIP — do not change BIP.
+- **Why:** (1) the price is the thing the user evaluates first, so it reads above the action;
+  (2) all cards' buttons align on one line regardless of feature-list length — a bottom-anchored
+  button makes columns look ragged; (3) the button is reachable on mobile without scrolling past a
+  long list.
+- **How:** card is `display:flex; flex-direction:column`. Either build the DOM already in the
+  canonical order, OR set flex `order` ONCE so it resolves to that order. Do NOT use
+  `margin-top:auto` on the CTA or a `flex:1`/`flex-grow:1` on the features that sinks it. Keep any
+  "or Start Free Trial" link / billing toggle with the CTA, above the features.
+- **REGRESSION TRAP (this has bitten twice):** on `windows-doors-shutters.html` the card DOM is
+  `header, price, note, divider, features, button, trial-link` and the visual order is produced
+  with flex `order` (`.pricing-cta{order:4}` sits after `.price-note{order:3}`). **NEVER set
+  `.pricing-cta{order:1}`** — that pulls the button ABOVE the price. There must be exactly ONE
+  `order` declaration per element; do not add a second "override" block that flips it.
 
 ### Card grids — never orphan a card
 - Never leave a lone card alone on a row. Fit one row, else **2 per row** (4 → 2×2, not 3+1).

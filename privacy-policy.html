@@ -22,81 +22,8 @@
     <meta property="og:image" content="https://windloadcalc.com/images/video-posters/index-homepage.jpg">
     <meta property="og:site_name" content="WindLoadCalc">
 
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        .legal-container {
-            max-width: 900px;
-            margin: 60px auto;
-            padding: 40px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        .legal-container h1 {
-            color: #1e3a8a;
-            margin-bottom: 10px;
-        }
-        .legal-container .last-updated {
-            color: #666;
-            font-size: 0.9em;
-            margin-bottom: 30px;
-        }
-        .legal-container h2 {
-            color: #1e3a8a;
-            margin-top: 30px;
-            margin-bottom: 15px;
-            font-size: 1.4em;
-        }
-        .legal-container h3 {
-            color: #2563eb;
-            margin-top: 20px;
-            margin-bottom: 10px;
-            font-size: 1.1em;
-        }
-        .legal-container p {
-            line-height: 1.8;
-            margin-bottom: 15px;
-            color: #333;
-        }
-        .legal-container ul {
-            margin-left: 25px;
-            margin-bottom: 15px;
-        }
-        .legal-container li {
-            margin-bottom: 8px;
-            line-height: 1.6;
-        }
-        .contact-info {
-            background: #f8fafc;
-            padding: 20px;
-            border-radius: 6px;
-            margin-top: 30px;
-        }
-        .back-link {
-            display: inline-block;
-            margin-bottom: 20px;
-            color: #2563eb;
-            text-decoration: none;
-        }
-        .back-link:hover {
-            text-decoration: underline;
-        }
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-        .data-table th, .data-table td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: left;
-        }
-        .data-table th {
-            background: #f8fafc;
-            font-weight: 600;
-        }
-    </style>
     <link rel="canonical" href="https://windloadcalc.com/privacy-policy.html">
+
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -111,308 +38,524 @@
         }
     }
     </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#0018FF; --blue-deep:#181E57; --blue-bright:#3a5bff;
+  --muted:#94a3b8; --line:rgba(255,255,255,.08); --bg:#070a18; --surface:rgba(255,255,255,.04);
+  --gold:#E8B530; --luxe:cubic-bezier(.22,.61,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:#e8edf7;
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.55}
+a{text-decoration:none;color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+.aurora{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.aurora span{position:absolute;border-radius:50%;filter:blur(90px);opacity:.5}
+.aurora .a1{width:620px;height:620px;background:#0018FF;top:-180px;left:-120px;animation:drift1 18s var(--luxe) infinite alternate}
+.aurora .a2{width:540px;height:540px;background:#10B981;bottom:-200px;right:-120px;opacity:.28;animation:drift2 22s var(--luxe) infinite alternate}
+.aurora .a3{width:420px;height:420px;background:#181E57;top:34%;right:16%;opacity:.55;animation:drift1 26s var(--luxe) infinite alternate-reverse}
+@keyframes drift1{to{transform:translate(80px,60px) scale(1.15)}}
+@keyframes drift2{to{transform:translate(-70px,-50px) scale(1.1)}}
+.grid-tex{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:54px 54px;mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000 40%,transparent 100%)}
+
+/* Nav — solid by default (no dark hero on this page) */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:.3s var(--luxe);
+  backdrop-filter:blur(14px);border-bottom:1px solid var(--line);
+  background:linear-gradient(90deg, rgba(240,244,255,.97) 0%, rgba(223,232,255,.93) 13%, rgba(22,28,58,.92) 46%, rgba(7,10,24,.95) 100%)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;padding:8px clamp(24px,4vw,48px);transition:padding .3s var(--luxe)}
+.logo{z-index:1001;display:flex;align-items:center}
+.logo-image{height:64px;width:auto;display:block;transition:all .3s ease}
+.nav-right{display:flex;align-items:center;gap:18px}
+.nav-links{display:flex;align-items:center;gap:28px}
+.nav-links a.l{position:relative;font-size:14px;color:#fff;font-weight:500;opacity:.88;transition:opacity .2s var(--luxe);text-shadow:0 1px 8px rgba(0,0,0,.45)}
+.nav-links a.l:hover{opacity:1}
+.btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;border-radius:11px;cursor:pointer;transition:.25s var(--luxe);border:none;font-family:inherit}
+.btn-ghost{background:rgba(255,255,255,.06);color:#fff;padding:11px 18px;font-size:14px;border:1px solid rgba(255,255,255,.22)}
+.btn-ghost:hover{border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.12)}
+.btn-primary{background:linear-gradient(135deg,#0018FF,#2540ff);color:#fff;padding:12px 22px;font-size:14px;box-shadow:0 10px 30px rgba(0,24,255,.45)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(0,24,255,.6)}
+.hamburger{display:flex;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;z-index:60}
+.hamburger span{display:block;width:26px;height:3px;border-radius:2px;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.6);transition:.3s var(--luxe)}
+.hamburger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+.nav-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);opacity:0;visibility:hidden;transition:.3s var(--luxe);z-index:55}
+.nav-overlay.open{opacity:1;visibility:visible}
+.full-menu{position:fixed;top:0;right:0;height:100vh;height:100dvh;width:min(90vw,380px);z-index:60;
+  background:rgba(10,14,30,.985);backdrop-filter:blur(18px);border-left:1px solid var(--line);
+  box-shadow:-24px 0 60px rgba(0,0,0,.55);transform:translateX(100%);transition:transform .3s var(--luxe);overflow-y:auto;padding:74px 0 28px}
+.full-menu.open{transform:translateX(0)}
+.fm-head{display:flex;align-items:center;justify-content:space-between;padding:0 26px 14px;border-bottom:1px solid var(--line)}
+.fm-head span{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.fm-close{background:none;border:none;color:#fff;font-size:24px;line-height:1;cursor:pointer;padding:2px 8px}
+.fm-group{padding:14px 26px 4px;border-bottom:1px solid var(--line)}
+.fm-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9db0ff;margin-bottom:6px}
+.fm-group a{display:block;padding:9px 0;font-size:15px;color:#dbe3f5;font-weight:500;transition:color .15s}
+.fm-group a:hover{color:#fff}
+.fm-actions{display:flex;flex-direction:column;gap:10px;padding:20px 26px 0}
+.fm-actions .btn{width:100%;justify-content:center;padding:14px;font-size:15px}
+
+/* Page title */
+.page-head{position:relative;z-index:1;padding:140px 0 24px;text-align:center}
+.page-head .eyebrow{display:inline-flex;align-items:center;gap:9px;background:rgba(7,10,24,.5);border:1px solid rgba(58,91,255,.45);
+  color:#c3cdff;font-size:13px;font-weight:600;padding:8px 16px;border-radius:999px;margin-bottom:18px;backdrop-filter:blur(6px)}
+.page-head .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:#34D399;box-shadow:0 0 0 4px rgba(52,211,153,.25)}
+.page-head h1{font-size:clamp(32px,4.4vw,48px);line-height:1.08;font-weight:800;letter-spacing:-.025em;margin:0 auto 8px}
+
+/* Legal content — readable glass card on dark bg */
+.legal-stage{position:relative;z-index:1;padding:14px 0 70px}
+.legal-card{max-width:900px;margin:0 auto;padding:clamp(28px,5vw,52px);
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:22px;
+  box-shadow:0 24px 60px rgba(0,0,0,.4);backdrop-filter:blur(10px)}
+.legal-card h1{color:#fff;font-size:clamp(26px,3.4vw,34px);font-weight:800;letter-spacing:-.02em;margin-bottom:10px}
+.legal-card .last-updated{color:#9db0ff;font-size:.95em;margin-bottom:28px;font-weight:600}
+.legal-card h2{color:#fff;margin-top:34px;margin-bottom:14px;font-size:1.4em;font-weight:800;letter-spacing:-.01em}
+.legal-card h3{color:#9db0ff;margin-top:22px;margin-bottom:10px;font-size:1.1em;font-weight:700}
+.legal-card p{line-height:1.8;margin-bottom:15px;color:#cdd6ec}
+.legal-card p strong,.legal-card li strong{color:#fff}
+.legal-card ul{margin-left:25px;margin-bottom:15px}
+.legal-card li{margin-bottom:8px;line-height:1.6;color:#cdd6ec}
+.legal-card a{color:#34D399;font-weight:600;text-decoration:none}
+.legal-card a:hover{text-decoration:underline}
+.contact-info{background:rgba(0,24,255,.1);border:1px solid rgba(58,91,255,.3);padding:22px;border-radius:14px;margin-top:30px}
+.contact-info p{margin-bottom:8px}
+.back-link{display:inline-block;margin-bottom:22px;color:#9db0ff;font-weight:600;text-decoration:none}
+.back-link:hover{text-decoration:underline;color:#fff}
+.data-table{width:100%;border-collapse:collapse;margin:20px 0}
+.data-table th,.data-table td{border:1px solid var(--line);padding:12px;text-align:left;color:#cdd6ec}
+.data-table th{background:rgba(255,255,255,.06);font-weight:700;color:#fff}
+.data-table td strong{color:#fff}
+
+/* Footer */
+.main-footer{position:relative;z-index:1;border-top:1px solid var(--line);padding:54px 0 28px;background:rgba(0,0,0,.25)}
+.main-footer .container{max-width:1180px;margin:0 auto;padding:0 28px}
+.footer-content{display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
+.footer-column h3{font-size:15px;font-weight:700;color:#fff;margin-bottom:15px}
+.footer-column ul{list-style:none}
+.footer-column li{margin-bottom:9px;font-size:14px;color:#aeb8cf}
+.footer-column a{color:#aeb8cf;transition:color .2s}
+.footer-column a:hover{color:#fff}
+.footer-bottom{border-top:1px solid var(--line);margin-top:34px;padding-top:20px;text-align:center;color:var(--muted);font-size:13px}
+
+@media(max-width:880px){.nav-links{display:none}.footer-content{grid-template-columns:repeat(2,1fr)}.page-head{padding:118px 0 18px}}
+@media(max-width:560px){.wrap{padding:0 20px}.footer-content{grid-template-columns:1fr}.legal-card{border-radius:0;border-left:none;border-right:none}}
+@media(prefers-reduced-motion:reduce){.aurora span{animation:none}}
+</style>
 </head>
 <body>
-    <div class="legal-container">
-        <a href="index.html" class="back-link">← Back to Home</a>
+<div class="aurora"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
+<div class="grid-tex"></div>
 
-        <h1>Privacy Policy</h1>
-        <p class="last-updated">Last Updated: November 11, 2025</p>
-
-        <p>WindLoadCalc, LLC ("we", "us", or "our") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our website and services.</p>
-
-        <p><strong>By using our Services, you agree to the collection and use of information in accordance with this Privacy Policy.</strong></p>
-
-        <h2>1. Information We Collect</h2>
-
-        <h3>1.1 Personal Information You Provide</h3>
-        <p>We collect personal information that you voluntarily provide when you:</p>
-        <ul>
-            <li><strong>Create an account:</strong> Email address, full name, phone number (optional)</li>
-            <li><strong>Make a purchase:</strong> Payment information (processed securely by Stripe), billing address</li>
-            <li><strong>Contact support:</strong> Email address, name, support inquiry details</li>
-            <li><strong>Use our calculators:</strong> Building parameters, project data, calculation inputs</li>
-        </ul>
-
-        <h3>1.2 Information Automatically Collected</h3>
-        <p>When you use our Services, we automatically collect certain information:</p>
-        <ul>
-            <li><strong>Usage Data:</strong> Pages viewed, features used, time spent, calculation history</li>
-            <li><strong>Device Information:</strong> Browser type, operating system, device type, screen resolution</li>
-            <li><strong>Log Data:</strong> IP address, access times, referring URLs, error logs</li>
-            <li><strong>Approximate Location:</strong> We use your IP address to estimate your approximate location (city/ZIP) so we can pre-fill the wind speed for your area on our homepage and tools. This is an estimate you can change at any time, and we do not use it to personally identify you.</li>
-            <li><strong>Cookies and Tracking:</strong> Session cookies, authentication tokens, preferences</li>
-        </ul>
-
-        <h3>1.3 Payment Information</h3>
-        <p>Payment card details are collected and processed directly by our payment processor, Stripe. We do not store your full credit card information on our servers. We only receive:</p>
-        <ul>
-            <li>Last 4 digits of your card</li>
-            <li>Card brand (Visa, Mastercard, etc.)</li>
-            <li>Expiration date</li>
-            <li>Payment status and transaction IDs</li>
-        </ul>
-
-        <h2>2. How We Use Your Information</h2>
-
-        <p>We use the collected information for the following purposes:</p>
-
-        <table class="data-table">
-            <thead>
-                <tr>
-                    <th>Purpose</th>
-                    <th>Description</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>Service Delivery</strong></td>
-                    <td>Process subscriptions, provide access to calculators, generate reports</td>
-                </tr>
-                <tr>
-                    <td><strong>Account Management</strong></td>
-                    <td>Create and maintain your account, authenticate users, manage subscriptions</td>
-                </tr>
-                <tr>
-                    <td><strong>Payment Processing</strong></td>
-                    <td>Process payments, issue refunds, prevent fraud, send receipts</td>
-                </tr>
-                <tr>
-                    <td><strong>Communication</strong></td>
-                    <td>Send transactional emails (receipts, password resets), respond to inquiries</td>
-                </tr>
-                <tr>
-                    <td><strong>Service Improvement</strong></td>
-                    <td>Analyze usage patterns, identify bugs, optimize performance</td>
-                </tr>
-                <tr>
-                    <td><strong>Security</strong></td>
-                    <td>Detect fraud, prevent abuse, enforce Terms of Service</td>
-                </tr>
-                <tr>
-                    <td><strong>Legal Compliance</strong></td>
-                    <td>Comply with legal obligations, respond to legal requests</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <h2>3. Legal Basis for Processing (GDPR)</h2>
-
-        <p>If you are located in the European Economic Area (EEA), our legal basis for processing your personal information includes:</p>
-        <ul>
-            <li><strong>Contract Performance:</strong> Processing necessary to provide Services you've subscribed to</li>
-            <li><strong>Legitimate Interest:</strong> Improving our Services, preventing fraud, ensuring security</li>
-            <li><strong>Consent:</strong> Marketing communications (you can opt out anytime)</li>
-            <li><strong>Legal Obligation:</strong> Compliance with applicable laws and regulations</li>
-        </ul>
-
-        <h2>4. How We Share Your Information</h2>
-
-        <h3>4.1 Service Providers</h3>
-        <p>We share information with third-party service providers who perform services on our behalf:</p>
-        <ul>
-            <li><strong>Stripe:</strong> Payment processing (see <a href="https://stripe.com/privacy" target="_blank">Stripe Privacy Policy</a>)</li>
-            <li><strong>Railway:</strong> Cloud hosting and infrastructure</li>
-            <li><strong>GitHub Pages:</strong> Static website hosting</li>
-            <li><strong>Gmail/Google Workspace:</strong> Transactional email delivery</li>
-            <li><strong>Redis Cloud:</strong> Session management and rate limiting</li>
-        </ul>
-
-        <h3>4.2 Business Transfers</h3>
-        <p>If we are involved in a merger, acquisition, or sale of assets, your information may be transferred. We will notify you of any such change.</p>
-
-        <h3>4.3 Legal Requirements</h3>
-        <p>We may disclose your information if required to do so by law or in response to valid requests by public authorities (e.g., court orders, subpoenas).</p>
-
-        <h3>4.4 With Your Consent</h3>
-        <p>We may share your information for any other purpose with your explicit consent.</p>
-
-        <h3>4.5 We DO NOT:</h3>
-        <ul>
-            <li>Sell your personal information to third parties</li>
-            <li>Share your calculation data with other users</li>
-            <li>Use your data for advertising purposes</li>
-            <li>Share your information with data brokers</li>
-        </ul>
-
-        <h2>5. Data Security</h2>
-
-        <h3>5.1 Security Measures</h3>
-        <p>We implement industry-standard security measures to protect your information:</p>
-        <ul>
-            <li><strong>Encryption:</strong> All data transmitted over HTTPS/TLS (SSL certificate)</li>
-            <li><strong>Database Security:</strong> Encrypted PostgreSQL database with access controls</li>
-            <li><strong>Password Protection:</strong> Passwords hashed using bcrypt (industry standard)</li>
-            <li><strong>Access Controls:</strong> Role-based access, principle of least privilege</li>
-            <li><strong>Rate Limiting:</strong> Protection against brute force attacks and abuse</li>
-            <li><strong>Monitoring:</strong> Automated fraud detection and security logging</li>
-        </ul>
-
-        <h3>5.2 Your Responsibility</h3>
-        <p>You are responsible for:</p>
-        <ul>
-            <li>Keeping your password confidential</li>
-            <li>Logging out after using shared computers</li>
-            <li>Notifying us immediately of any unauthorized access</li>
-        </ul>
-
-        <h3>5.3 No Absolute Security</h3>
-        <p>While we strive to protect your information, no method of transmission over the internet or electronic storage is 100% secure. We cannot guarantee absolute security.</p>
-
-        <h2>6. Data Retention</h2>
-
-        <p>We retain your information for as long as necessary to provide Services and comply with legal obligations:</p>
-
-        <table class="data-table">
-            <thead>
-                <tr>
-                    <th>Data Type</th>
-                    <th>Retention Period</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Account Information</td>
-                    <td>Duration of subscription + 90 days after cancellation</td>
-                </tr>
-                <tr>
-                    <td>Calculation History</td>
-                    <td>Duration of subscription + 90 days after cancellation</td>
-                </tr>
-                <tr>
-                    <td>Payment Records</td>
-                    <td>7 years (tax and legal requirements)</td>
-                </tr>
-                <tr>
-                    <td>Support Communications</td>
-                    <td>3 years after last contact</td>
-                </tr>
-                <tr>
-                    <td>Security Logs</td>
-                    <td>1 year</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <p>After these periods, we will delete or anonymize your information, unless longer retention is required by law.</p>
-
-        <h2>7. Your Privacy Rights</h2>
-
-        <h3>7.1 All Users</h3>
-        <p>Regardless of your location, you have the right to:</p>
-        <ul>
-            <li><strong>Access:</strong> Request a copy of your personal information</li>
-            <li><strong>Correction:</strong> Update or correct inaccurate information</li>
-            <li><strong>Deletion:</strong> Request deletion of your account and data</li>
-            <li><strong>Export:</strong> Download your calculation history and project data</li>
-            <li><strong>Object:</strong> Opt out of marketing communications</li>
-        </ul>
-
-        <h3>7.2 Additional Rights (GDPR - EEA Residents)</h3>
-        <p>If you are in the EEA, you also have:</p>
-        <ul>
-            <li><strong>Right to Restriction:</strong> Limit how we process your data</li>
-            <li><strong>Right to Portability:</strong> Receive your data in a structured, machine-readable format</li>
-            <li><strong>Right to Object:</strong> Object to processing based on legitimate interests</li>
-            <li><strong>Right to Withdraw Consent:</strong> Withdraw consent at any time</li>
-            <li><strong>Right to Lodge a Complaint:</strong> File a complaint with your local data protection authority</li>
-        </ul>
-
-        <h3>7.3 Additional Rights (CCPA - California Residents)</h3>
-        <p>If you are a California resident, you have:</p>
-        <ul>
-            <li>Right to know what personal information we collect</li>
-            <li>Right to know if we sell or share your personal information (we don't)</li>
-            <li>Right to delete your personal information</li>
-            <li>Right to non-discrimination for exercising your rights</li>
-        </ul>
-
-        <h3>7.4 How to Exercise Your Rights</h3>
-        <p>To exercise any of these rights, contact us at:</p>
-        <ul>
-            <li>Email: <a href="mailto:privacy@windloadcalc.com">privacy@windloadcalc.com</a></li>
-            <li>Or through your account settings for data export/deletion</li>
-        </ul>
-        <p>We will respond to your request within 30 days.</p>
-
-        <h2>8. Cookies and Tracking Technologies</h2>
-
-        <h3>8.1 What We Use</h3>
-        <p>We use the following types of cookies and tracking technologies:</p>
-
-        <table class="data-table">
-            <thead>
-                <tr>
-                    <th>Type</th>
-                    <th>Purpose</th>
-                    <th>Duration</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Essential Cookies</td>
-                    <td>Authentication, session management, security</td>
-                    <td>Session or 30 days</td>
-                </tr>
-                <tr>
-                    <td>Functional Cookies</td>
-                    <td>Remember preferences, saved calculations</td>
-                    <td>1 year</td>
-                </tr>
-                <tr>
-                    <td>Analytics Cookies</td>
-                    <td>Usage statistics, performance monitoring</td>
-                    <td>2 years</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <h3>8.2 Your Choices</h3>
-        <p>You can control cookies through your browser settings. Note that disabling essential cookies may affect functionality.</p>
-
-        <h2>9. Third-Party Links</h2>
-
-        <p>Our Services may contain links to third-party websites (e.g., documentation, code references). We are not responsible for the privacy practices of these external sites. We encourage you to review their privacy policies.</p>
-
-        <h2>10. Children's Privacy</h2>
-
-        <p>Our Services are not intended for individuals under 18 years of age. We do not knowingly collect personal information from children. If you believe we have collected information from a child, please contact us immediately.</p>
-
-        <h2>11. International Data Transfers</h2>
-
-        <p>Your information may be transferred to and processed in the United States or other countries where our service providers operate. These countries may have different data protection laws than your country.</p>
-
-        <p>For EEA residents, we ensure appropriate safeguards are in place, such as:</p>
-        <ul>
-            <li>Standard Contractual Clauses approved by the European Commission</li>
-            <li>Adequacy decisions by the European Commission</li>
-            <li>Service providers certified under recognized privacy frameworks</li>
-        </ul>
-
-        <h2>12. Changes to This Privacy Policy</h2>
-
-        <p>We may update this Privacy Policy from time to time. We will notify you of material changes by:</p>
-        <ul>
-            <li>Posting the updated Privacy Policy on our website</li>
-            <li>Updating the "Last Updated" date</li>
-            <li>Sending email notification to your registered email address</li>
-        </ul>
-
-        <p>Your continued use of our Services after changes become effective constitutes acceptance of the updated Privacy Policy.</p>
-
-        <h2>13. Contact Us</h2>
-
-        <div class="contact-info">
-            <p><strong>WindLoadCalc, LLC</strong></p>
-            <p><strong>Data Protection Contact:</strong></p>
-            <p>Email: <a href="mailto:privacy@windloadcalc.com">privacy@windloadcalc.com</a></p>
-            <p>General Support: <a href="mailto:support@windloadcalc.com">support@windloadcalc.com</a></p>
-            <p>Website: <a href="https://windloadcalc.com">windloadcalc.com</a></p>
-        </div>
-
-        <hr style="margin: 40px 0; border: none; border-top: 1px solid #ddd;">
-
-        <p style="font-size: 0.9em; color: #666;">If you have any questions or concerns about our privacy practices, please don't hesitate to contact us. We're here to help.</p>
+<nav id="nav"><div class="wrap nav-in">
+  <a class="logo" href="https://windloadcalc.com/"><img height="100" width="300" src="images/windloadcalc-logo.svg" alt="WindLoadCalc — ASCE 7-22 Wind Load Calculator logo" class="logo-image"></a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a class="l" href="https://windloadcalc.com/free-wind-load-calculator.html">Free tool</a>
+      <a class="l" href="https://windloadcalc.com/wind-load-calculator-comparison.html">Compare</a>
+      <a class="l" href="https://windloadcalc.com/wind-load-calculator-shop.html">Pricing</a>
+      <a class="l" href="https://windloadcalc.com/why-us.html">Why us</a>
+      <a class="btn btn-ghost" href="https://windloadcalc.com/login.html">Log in</a>
+      <a class="btn btn-primary" href="https://windloadcalc.com/wind-load-calculator-shop.html">Start free trial</a>
     </div>
+    <button class="hamburger" id="hamburger" aria-label="Open full menu" aria-expanded="false" aria-controls="fullMenu"><span></span><span></span><span></span></button>
+  </div>
+</div></nav>
+<div class="nav-overlay" id="navOverlay"></div>
+<aside class="full-menu" id="fullMenu" aria-label="Site menu">
+  <div class="fm-head"><span>Menu</span><button class="fm-close" id="fmClose" aria-label="Close menu">&times;</button></div>
+  <div class="fm-group">
+    <div class="fm-label">Wind Load Calculators</div>
+    <a href="https://windloadcalc.com/wind-load-calculator-landing.html">Overview</a>
+    <a href="https://windloadcalc.com/free-wind-load-calculator.html">Free Trial</a>
+    <a href="https://windloadcalc.com/wind-load-calculator-comparison.html">Calculator Comparison</a>
+    <a href="https://windloadcalc.com/wind-load-calculator-shop.html">Pricing</a>
+  </div>
+  <div class="fm-group">
+    <div class="fm-label">Building Intelligence Platform</div>
+    <a href="https://windloadcalc.com/building-intelligence-platform-landing.html">Overview</a>
+    <a href="https://windloadcalc.com/building-intelligence-platform.html">Free Trial</a>
+    <a href="https://windloadcalc.com/building-intelligence-platform-shop.html">Pricing</a>
+  </div>
+  <div class="fm-group">
+    <div class="fm-label">For Professionals</div>
+    <a href="https://windloadcalc.com/wind-load-calculator-for-engineers.html">Engineers</a>
+    <a href="https://windloadcalc.com/wind-load-calculator-for-architects.html">Architects</a>
+    <a href="https://windloadcalc.com/wind-loads-for-consultants.html">Consultants</a>
+    <a href="https://windloadcalc.com/contractors-wind-load-calculator.html">Contractors</a>
+  </div>
+  <div class="fm-group">
+    <div class="fm-label">Company</div>
+    <a href="https://windloadcalc.com/services.html">Services</a>
+    <a href="https://windloadcalc.com/why-us.html">Why Us</a>
+    <a href="https://windloadcalc.com/faq.html">FAQ</a>
+    <a href="https://windloadcalc.com/contact.html">Contact Us</a>
+  </div>
+  <div class="fm-actions">
+    <a class="btn btn-ghost" href="https://windloadcalc.com/login.html">Log in</a>
+    <a class="btn btn-primary" href="https://windloadcalc.com/free-wind-load-calculator.html">Start Free Trial &rarr;</a>
+  </div>
+</aside>
+
+<div class="page-head"><div class="wrap">
+  <div class="eyebrow"><span class="dot"></span>Legal · Your privacy matters</div>
+  <h1>Privacy Policy</h1>
+</div></div>
+
+<div class="legal-stage"><div class="wrap">
+  <div class="legal-card">
+    <a href="index.html" class="back-link">← Back to Home</a>
+
+    <h1>Privacy Policy</h1>
+    <p class="last-updated">Last Updated: November 11, 2025</p>
+
+    <p>WindLoadCalc, LLC ("we", "us", or "our") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our website and services.</p>
+
+    <p><strong>By using our Services, you agree to the collection and use of information in accordance with this Privacy Policy.</strong></p>
+
+    <h2>1. Information We Collect</h2>
+
+    <h3>1.1 Personal Information You Provide</h3>
+    <p>We collect personal information that you voluntarily provide when you:</p>
+    <ul>
+        <li><strong>Create an account:</strong> Email address, full name, phone number (optional)</li>
+        <li><strong>Make a purchase:</strong> Payment information (processed securely by Stripe), billing address</li>
+        <li><strong>Contact support:</strong> Email address, name, support inquiry details</li>
+        <li><strong>Use our calculators:</strong> Building parameters, project data, calculation inputs</li>
+    </ul>
+
+    <h3>1.2 Information Automatically Collected</h3>
+    <p>When you use our Services, we automatically collect certain information:</p>
+    <ul>
+        <li><strong>Usage Data:</strong> Pages viewed, features used, time spent, calculation history</li>
+        <li><strong>Device Information:</strong> Browser type, operating system, device type, screen resolution</li>
+        <li><strong>Log Data:</strong> IP address, access times, referring URLs, error logs</li>
+        <li><strong>Approximate Location:</strong> We use your IP address to estimate your approximate location (city/ZIP) so we can pre-fill the wind speed for your area on our homepage and tools. This is an estimate you can change at any time, and we do not use it to personally identify you.</li>
+        <li><strong>Cookies and Tracking:</strong> Session cookies, authentication tokens, preferences</li>
+    </ul>
+
+    <h3>1.3 Payment Information</h3>
+    <p>Payment card details are collected and processed directly by our payment processor, Stripe. We do not store your full credit card information on our servers. We only receive:</p>
+    <ul>
+        <li>Last 4 digits of your card</li>
+        <li>Card brand (Visa, Mastercard, etc.)</li>
+        <li>Expiration date</li>
+        <li>Payment status and transaction IDs</li>
+    </ul>
+
+    <h2>2. How We Use Your Information</h2>
+
+    <p>We use the collected information for the following purposes:</p>
+
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Purpose</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Service Delivery</strong></td>
+                <td>Process subscriptions, provide access to calculators, generate reports</td>
+            </tr>
+            <tr>
+                <td><strong>Account Management</strong></td>
+                <td>Create and maintain your account, authenticate users, manage subscriptions</td>
+            </tr>
+            <tr>
+                <td><strong>Payment Processing</strong></td>
+                <td>Process payments, issue refunds, prevent fraud, send receipts</td>
+            </tr>
+            <tr>
+                <td><strong>Communication</strong></td>
+                <td>Send transactional emails (receipts, password resets), respond to inquiries</td>
+            </tr>
+            <tr>
+                <td><strong>Service Improvement</strong></td>
+                <td>Analyze usage patterns, identify bugs, optimize performance</td>
+            </tr>
+            <tr>
+                <td><strong>Security</strong></td>
+                <td>Detect fraud, prevent abuse, enforce Terms of Service</td>
+            </tr>
+            <tr>
+                <td><strong>Legal Compliance</strong></td>
+                <td>Comply with legal obligations, respond to legal requests</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>3. Legal Basis for Processing (GDPR)</h2>
+
+    <p>If you are located in the European Economic Area (EEA), our legal basis for processing your personal information includes:</p>
+    <ul>
+        <li><strong>Contract Performance:</strong> Processing necessary to provide Services you've subscribed to</li>
+        <li><strong>Legitimate Interest:</strong> Improving our Services, preventing fraud, ensuring security</li>
+        <li><strong>Consent:</strong> Marketing communications (you can opt out anytime)</li>
+        <li><strong>Legal Obligation:</strong> Compliance with applicable laws and regulations</li>
+    </ul>
+
+    <h2>4. How We Share Your Information</h2>
+
+    <h3>4.1 Service Providers</h3>
+    <p>We share information with third-party service providers who perform services on our behalf:</p>
+    <ul>
+        <li><strong>Stripe:</strong> Payment processing (see <a href="https://stripe.com/privacy" target="_blank">Stripe Privacy Policy</a>)</li>
+        <li><strong>Railway:</strong> Cloud hosting and infrastructure</li>
+        <li><strong>GitHub Pages:</strong> Static website hosting</li>
+        <li><strong>Gmail/Google Workspace:</strong> Transactional email delivery</li>
+        <li><strong>Redis Cloud:</strong> Session management and rate limiting</li>
+    </ul>
+
+    <h3>4.2 Business Transfers</h3>
+    <p>If we are involved in a merger, acquisition, or sale of assets, your information may be transferred. We will notify you of any such change.</p>
+
+    <h3>4.3 Legal Requirements</h3>
+    <p>We may disclose your information if required to do so by law or in response to valid requests by public authorities (e.g., court orders, subpoenas).</p>
+
+    <h3>4.4 With Your Consent</h3>
+    <p>We may share your information for any other purpose with your explicit consent.</p>
+
+    <h3>4.5 We DO NOT:</h3>
+    <ul>
+        <li>Sell your personal information to third parties</li>
+        <li>Share your calculation data with other users</li>
+        <li>Use your data for advertising purposes</li>
+        <li>Share your information with data brokers</li>
+    </ul>
+
+    <h2>5. Data Security</h2>
+
+    <h3>5.1 Security Measures</h3>
+    <p>We implement industry-standard security measures to protect your information:</p>
+    <ul>
+        <li><strong>Encryption:</strong> All data transmitted over HTTPS/TLS (SSL certificate)</li>
+        <li><strong>Database Security:</strong> Encrypted PostgreSQL database with access controls</li>
+        <li><strong>Password Protection:</strong> Passwords hashed using bcrypt (industry standard)</li>
+        <li><strong>Access Controls:</strong> Role-based access, principle of least privilege</li>
+        <li><strong>Rate Limiting:</strong> Protection against brute force attacks and abuse</li>
+        <li><strong>Monitoring:</strong> Automated fraud detection and security logging</li>
+    </ul>
+
+    <h3>5.2 Your Responsibility</h3>
+    <p>You are responsible for:</p>
+    <ul>
+        <li>Keeping your password confidential</li>
+        <li>Logging out after using shared computers</li>
+        <li>Notifying us immediately of any unauthorized access</li>
+    </ul>
+
+    <h3>5.3 No Absolute Security</h3>
+    <p>While we strive to protect your information, no method of transmission over the internet or electronic storage is 100% secure. We cannot guarantee absolute security.</p>
+
+    <h2>6. Data Retention</h2>
+
+    <p>We retain your information for as long as necessary to provide Services and comply with legal obligations:</p>
+
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Data Type</th>
+                <th>Retention Period</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Account Information</td>
+                <td>Duration of subscription + 90 days after cancellation</td>
+            </tr>
+            <tr>
+                <td>Calculation History</td>
+                <td>Duration of subscription + 90 days after cancellation</td>
+            </tr>
+            <tr>
+                <td>Payment Records</td>
+                <td>7 years (tax and legal requirements)</td>
+            </tr>
+            <tr>
+                <td>Support Communications</td>
+                <td>3 years after last contact</td>
+            </tr>
+            <tr>
+                <td>Security Logs</td>
+                <td>1 year</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p>After these periods, we will delete or anonymize your information, unless longer retention is required by law.</p>
+
+    <h2>7. Your Privacy Rights</h2>
+
+    <h3>7.1 All Users</h3>
+    <p>Regardless of your location, you have the right to:</p>
+    <ul>
+        <li><strong>Access:</strong> Request a copy of your personal information</li>
+        <li><strong>Correction:</strong> Update or correct inaccurate information</li>
+        <li><strong>Deletion:</strong> Request deletion of your account and data</li>
+        <li><strong>Export:</strong> Download your calculation history and project data</li>
+        <li><strong>Object:</strong> Opt out of marketing communications</li>
+    </ul>
+
+    <h3>7.2 Additional Rights (GDPR - EEA Residents)</h3>
+    <p>If you are in the EEA, you also have:</p>
+    <ul>
+        <li><strong>Right to Restriction:</strong> Limit how we process your data</li>
+        <li><strong>Right to Portability:</strong> Receive your data in a structured, machine-readable format</li>
+        <li><strong>Right to Object:</strong> Object to processing based on legitimate interests</li>
+        <li><strong>Right to Withdraw Consent:</strong> Withdraw consent at any time</li>
+        <li><strong>Right to Lodge a Complaint:</strong> File a complaint with your local data protection authority</li>
+    </ul>
+
+    <h3>7.3 Additional Rights (CCPA - California Residents)</h3>
+    <p>If you are a California resident, you have:</p>
+    <ul>
+        <li>Right to know what personal information we collect</li>
+        <li>Right to know if we sell or share your personal information (we don't)</li>
+        <li>Right to delete your personal information</li>
+        <li>Right to non-discrimination for exercising your rights</li>
+    </ul>
+
+    <h3>7.4 How to Exercise Your Rights</h3>
+    <p>To exercise any of these rights, contact us at:</p>
+    <ul>
+        <li>Email: <a href="mailto:privacy@windloadcalc.com">privacy@windloadcalc.com</a></li>
+        <li>Or through your account settings for data export/deletion</li>
+    </ul>
+    <p>We will respond to your request within 30 days.</p>
+
+    <h2>8. Cookies and Tracking Technologies</h2>
+
+    <h3>8.1 What We Use</h3>
+    <p>We use the following types of cookies and tracking technologies:</p>
+
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Purpose</th>
+                <th>Duration</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Essential Cookies</td>
+                <td>Authentication, session management, security</td>
+                <td>Session or 30 days</td>
+            </tr>
+            <tr>
+                <td>Functional Cookies</td>
+                <td>Remember preferences, saved calculations</td>
+                <td>1 year</td>
+            </tr>
+            <tr>
+                <td>Analytics Cookies</td>
+                <td>Usage statistics, performance monitoring</td>
+                <td>2 years</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>8.2 Your Choices</h3>
+    <p>You can control cookies through your browser settings. Note that disabling essential cookies may affect functionality.</p>
+
+    <h2>9. Third-Party Links</h2>
+
+    <p>Our Services may contain links to third-party websites (e.g., documentation, code references). We are not responsible for the privacy practices of these external sites. We encourage you to review their privacy policies.</p>
+
+    <h2>10. Children's Privacy</h2>
+
+    <p>Our Services are not intended for individuals under 18 years of age. We do not knowingly collect personal information from children. If you believe we have collected information from a child, please contact us immediately.</p>
+
+    <h2>11. International Data Transfers</h2>
+
+    <p>Your information may be transferred to and processed in the United States or other countries where our service providers operate. These countries may have different data protection laws than your country.</p>
+
+    <p>For EEA residents, we ensure appropriate safeguards are in place, such as:</p>
+    <ul>
+        <li>Standard Contractual Clauses approved by the European Commission</li>
+        <li>Adequacy decisions by the European Commission</li>
+        <li>Service providers certified under recognized privacy frameworks</li>
+    </ul>
+
+    <h2>12. Changes to This Privacy Policy</h2>
+
+    <p>We may update this Privacy Policy from time to time. We will notify you of material changes by:</p>
+    <ul>
+        <li>Posting the updated Privacy Policy on our website</li>
+        <li>Updating the "Last Updated" date</li>
+        <li>Sending email notification to your registered email address</li>
+    </ul>
+
+    <p>Your continued use of our Services after changes become effective constitutes acceptance of the updated Privacy Policy.</p>
+
+    <h2>13. Contact Us</h2>
+
+    <div class="contact-info">
+        <p><strong>WindLoadCalc, LLC</strong></p>
+        <p><strong>Data Protection Contact:</strong></p>
+        <p>Email: <a href="mailto:privacy@windloadcalc.com">privacy@windloadcalc.com</a></p>
+        <p>General Support: <a href="mailto:support@windloadcalc.com">support@windloadcalc.com</a></p>
+        <p>Website: <a href="https://windloadcalc.com">windloadcalc.com</a></p>
+    </div>
+
+    <hr style="margin: 40px 0; border: none; border-top: 1px solid var(--line);">
+
+    <p style="font-size: 0.9em; color: #9db0ff;">If you have any questions or concerns about our privacy practices, please don't hesitate to contact us. We're here to help.</p>
+  </div>
+</div></div>
+
+<!-- Footer -->
+<footer class="main-footer"><div class="container">
+  <div class="footer-content">
+    <div class="footer-column"><h3>Contact Information</h3><ul>
+      <li><strong>General Inquiries</strong></li>
+      <li><a href="mailto:info@windloadcalc.com">info@windloadcalc.com</a></li>
+      <li><a href="tel:8332723946">(833) 272-3946</a></li>
+      <li style="margin-top:.6rem"><strong>Sales</strong></li>
+      <li><a href="mailto:sales@windloadcalc.com">sales@windloadcalc.com</a></li>
+    </ul></div>
+    <div class="footer-column"><h3>Wind Load Calculators</h3><ul>
+      <li><a href="https://windloadcalc.com/wind-load-calculator-shop.html">All Calculators &amp; Pricing</a></li>
+      <li><a href="https://windloadcalc.com/shop/windows-doors-shutters.html">Windows, Doors &amp; Shutters</a></li>
+      <li><a href="https://windloadcalc.com/shop/mwfrs.html" rel="nofollow">MWFRS Calculator</a></li>
+      <li><a href="https://windloadcalc.com/shop/roofing.html" rel="nofollow">Roofing Calculator</a></li>
+    </ul></div>
+    <div class="footer-column"><h3>Resources</h3><ul>
+      <li><a href="https://windloadcalc.com/free-wind-load-calculator.html">Free Wind Load Calculator</a></li>
+      <li><a href="https://windloadcalc.com/asce-7-wind-load-calculator/">ASCE 7-22 Guide</a></li>
+      <li><a href="https://windloadcalc.com/components-and-cladding-wind-loads/">C&amp;C Wind Loads</a></li>
+      <li><a href="https://windloadcalc.com/building-intelligence-platform-shop.html">BIP Plans</a></li>
+    </ul></div>
+    <div class="footer-column"><h3>Company</h3><ul>
+      <li><a href="https://windloadcalc.com/why-us.html">About Us</a></li>
+      <li><a href="https://windloadcalc.com/contact.html">Contact</a></li>
+      <li><a href="https://windloadcalc.com/services.html">Professional Services</a></li>
+      <li><a href="https://windloadcalc.com/privacy-policy.html">Privacy Policy</a></li>
+      <li><a href="https://windloadcalc.com/terms-of-service.html">Terms of Service</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 WindLoadCalc · WindLoad Solutions, LLC — online since 2006. ASCE 7-22 &amp; 7-16 wind load software.</p></div>
+</div></footer>
+
+<script>
+(function(){
+  var ham=document.getElementById('hamburger'), fm=document.getElementById('fullMenu'),
+      ov=document.getElementById('navOverlay'), fc=document.getElementById('fmClose');
+  if(!ham||!fm) return;
+  function setMenu(open){ fm.classList.toggle('open',open); ov.classList.toggle('open',open); ham.classList.toggle('open',open);
+    ham.setAttribute('aria-expanded',open); document.body.style.overflow=open?'hidden':''; }
+  ham.addEventListener('click',function(){ setMenu(!fm.classList.contains('open')); });
+  ov.addEventListener('click',function(){ setMenu(false); });
+  if(fc) fc.addEventListener('click',function(){ setMenu(false); });
+  fm.querySelectorAll('a').forEach(function(a){ a.addEventListener('click',function(){ setMenu(false); }); });
+  window.addEventListener('keydown',function(e){ if(e.key==='Escape') setMenu(false); });
+})();
+</script>
 </body>
 </html>

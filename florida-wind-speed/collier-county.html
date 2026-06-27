@@ -26,26 +26,48 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
+    <!-- WebPage schema -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "WebPage",
         "name": "Collier County Wind Speed Lookup",
         "url": "https://windloadcalc.com/florida-wind-speed/collier-county.html",
-        "description": "Florida Building Code R301.2(7) wind speeds for Collier County, all four ASCE 7-22 risk categories.",
-        "breadcrumb": {
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-                {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://windloadcalc.com/"},
-                {"@type": "ListItem", "position": 2, "name": "Florida Wind Speed", "item": "https://windloadcalc.com/florida-wind-speed/"},
-                {"@type": "ListItem", "position": 3, "name": "Collier County", "item": "https://windloadcalc.com/florida-wind-speed/collier-county.html"}
-            ]
-        }
+        "description": "Florida Building Code R301.2(7) wind speeds for Collier County, all four ASCE 7-22 risk categories."
     }
     </script>
 
+    <!-- SoftwareApplication schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "WindLoadCalc — Collier County Wind Speed Lookup",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web Browser",
+        "description": "Free ASCE 7-22 / Florida Building Code R301.2(7) wind speed lookup for every Collier County ZIP, all four risk categories.",
+        "url": "https://windloadcalc.com/florida-wind-speed/collier-county.html",
+        "offers": { "@type": "Offer", "url": "https://windloadcalc.com/collier-county-wind-load-calculator/", "category": "subscription" },
+        "provider": { "@type": "Organization", "name": "WindLoadCalc", "url": "https://windloadcalc.com" }
+    }
+    </script>
+
+    <!-- Breadcrumb schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://windloadcalc.com/"},
+            {"@type": "ListItem", "position": 2, "name": "Florida Wind Speed", "item": "https://windloadcalc.com/florida-wind-speed/"},
+            {"@type": "ListItem", "position": 3, "name": "Collier County", "item": "https://windloadcalc.com/florida-wind-speed/collier-county.html"}
+        ]
+    }
+    </script>
+
+    <!-- FAQPage schema — 1:1 with the visible FAQ -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -56,7 +78,7 @@
                 "name": "Why is Collier County 170 mph?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Florida Building Code R301.2(7) hardcodes 170 mph as Collier's Risk Category II basic wind speed because Collier sits inside the southwest Florida hurricane corridor and historical landfalls (Donna 1960, Wilma 2005, Irma 2017) repeatedly pushed Cat 3-plus winds across the entire county. The FBC value supersedes the ASCE 7-22 map for every permit issued by Collier Growth Management."
+                    "text": "Florida Building Code R301.2(7) hardcodes 170 mph as Collier's Risk Category II basic wind speed because Collier sits inside the southwest Florida hurricane corridor. Historical landfalls (Donna 1960, Wilma 2005, Irma 2017) repeatedly pushed Cat 3-plus winds across the entire county. The FBC value supersedes the ASCE 7-22 map for every permit issued by Collier Growth Management."
                 }
             },
             {
@@ -72,7 +94,7 @@
                 "name": "Does Marco Island use a different wind speed than Naples?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "No. Marco Island sits inside Collier County and uses the same 170 mph Risk Category II value as Naples, Bonita Bay, Pelican Marsh, Ave Maria, and Immokalee. What changes between the island and the mainland is exposure: most of Marco Island faces an unobstructed Gulf fetch and qualifies as Exposure D for west-facing components, while Naples subdivisions inland of US 41 often qualify as Exposure B or C."
+                    "text": "No. Marco Island sits inside Collier County and uses the same 170 mph Risk Category II value as Naples, Bonita Bay, Pelican Marsh, Ave Maria, and Immokalee. What changes between the island and the mainland is exposure. Most of Marco Island faces an unobstructed Gulf fetch and qualifies as Exposure D for west-facing components, while Naples subdivisions inland of US 41 often qualify as Exposure B or C."
                 }
             },
             {
@@ -88,13 +110,14 @@
                 "name": "What edition of the Florida Building Code does Collier enforce?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Collier County Growth Management Division currently enforces the Florida Building Code 8th Edition (2023), which adopts ASCE 7-22 by reference and incorporates the R301.2(7) jurisdictional wind speed table. The City of Naples and the City of Marco Island operate their own building divisions but apply the same code edition without additional amendment, so a project crossing municipal boundaries inside the county uses the same 170 mph value throughout."
+                    "text": "Collier County Growth Management Division currently enforces the Florida Building Code 8th Edition (2023), which adopts ASCE 7-22 by reference and incorporates the R301.2(7) jurisdictional wind speed table. The City of Naples and the City of Marco Island operate their own building divisions but apply the same code edition without additional amendment. So a project crossing municipal boundaries inside the county uses the same 170 mph value throughout."
                 }
             }
         ]
     }
     </script>
 
+    <!-- Place schema -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -110,472 +133,595 @@
     }
     </script>
 
-    <style>
-        :root {
-            --brand-primary: #0018ff;
-            --brand-dark: #181E57;
-            --brand-gradient: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
-            --gold: #E8B530;
-            --gold-soft: rgba(232, 181, 48, 0.08);
-            --suction-red: #DC2626;
-            --bg-page: #FAFAF7;
-            --bg-card: #ffffff;
-            --bg-card-glass: rgba(255, 255, 255, 0.97);
-            --text-primary: #1f2937;
-            --text-secondary: #6b7280;
-            --text-muted: #9ca3af;
-            --text-ivory: #F5F1EA;
-            --border-subtle: rgba(24, 30, 87, 0.08);
-            --border-input: rgba(24, 30, 87, 0.15);
-            --shadow-card: 0 20px 60px rgba(24, 30, 87, 0.12), 0 4px 16px rgba(24, 30, 87, 0.06);
-            --shadow-badge: 0 8px 24px rgba(232, 181, 48, 0.18);
-            --radius-card: 16px;
-            --radius-input: 10px;
-            --radius-pill: 999px;
-            --font-serif: 'EB Garamond', Georgia, 'Times New Roman', serif;
-            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            --font-mono: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { font-family: var(--font-sans); line-height: 1.65; color: var(--text-primary); background: var(--bg-page); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
-        a { color: var(--brand-primary); text-decoration: none; }
-        a:hover { text-decoration: underline; }
-        button { font-family: inherit; cursor: pointer; }
+<style>
+:root{
+  --blue:#0018FF; --blue-deep:#181E57; --blue-bright:#3a5bff;
+  --muted:#94a3b8; --line:rgba(255,255,255,.08); --bg:#070a18; --surface:rgba(255,255,255,.04);
+  --gold:#E8B530; --luxe:cubic-bezier(.22,.61,.36,1); --suction-red:#DC2626;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:#e8edf7;
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.55}
+a{text-decoration:none;color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+.aurora{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.aurora span{position:absolute;border-radius:50%;filter:blur(90px);opacity:.5}
+.aurora .a1{width:620px;height:620px;background:#0018FF;top:-180px;left:-120px;animation:drift1 18s var(--luxe) infinite alternate}
+.aurora .a2{width:540px;height:540px;background:#10B981;bottom:-200px;right:-120px;opacity:.28;animation:drift2 22s var(--luxe) infinite alternate}
+.aurora .a3{width:420px;height:420px;background:#181E57;top:34%;right:16%;opacity:.55;animation:drift1 26s var(--luxe) infinite alternate-reverse}
+@keyframes drift1{to{transform:translate(80px,60px) scale(1.15)}}
+@keyframes drift2{to{transform:translate(-70px,-50px) scale(1.1)}}
+.grid-tex{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:54px 54px;mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000 40%,transparent 100%)}
 
-        /* Stacked-sticky: banner pins at top, header pins just below. */
-        .wlc-promo-banner { background: var(--brand-dark); color: var(--text-ivory); padding: 0.65rem 1.5rem; text-align: center; font-size: 0.875rem; font-weight: 500; position: sticky; top: 0; z-index: 1001; }
-        .wlc-promo-banner a { color: var(--text-ivory); text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; }
-        .wlc-promo-banner a:hover { color: var(--gold); }
+/* Nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:.3s var(--luxe);background:transparent;border-bottom:1px solid transparent}
+nav.scrolled{backdrop-filter:blur(14px);border-bottom:1px solid var(--line);
+  background:linear-gradient(90deg, rgba(240,244,255,.97) 0%, rgba(223,232,255,.93) 13%, rgba(22,28,58,.92) 46%, rgba(7,10,24,.95) 100%)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;padding:12px clamp(24px,4vw,48px);transition:padding .3s var(--luxe)}
+nav.scrolled .nav-in{padding:8px clamp(24px,4vw,48px)}
+.logo{z-index:1001;display:flex;align-items:center}
+.logo-image{height:84px;width:auto;display:block;filter:drop-shadow(0 2px 10px rgba(0,0,0,.4));transition:all .3s ease}
+nav.scrolled .logo-image{height:64px;filter:none}
+.nav-right{display:flex;align-items:center;gap:18px}
+.nav-links{display:flex;align-items:center;gap:28px}
+.nav-links a.l{position:relative;font-size:14px;color:#fff;font-weight:500;opacity:.88;transition:opacity .2s var(--luxe);text-shadow:0 1px 8px rgba(0,0,0,.45)}
+.nav-links a.l:hover{opacity:1}
+.btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;border-radius:11px;cursor:pointer;transition:.25s var(--luxe);border:none;font-family:inherit}
+.btn-ghost{background:rgba(255,255,255,.06);color:#fff;padding:11px 18px;font-size:14px;border:1px solid rgba(255,255,255,.22)}
+.btn-ghost:hover{border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.12)}
+.btn-primary{background:linear-gradient(135deg,#0018FF,#2540ff);color:#fff;padding:12px 22px;font-size:14px;box-shadow:0 10px 30px rgba(0,24,255,.45)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(0,24,255,.6)}
+.hamburger{display:flex;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;z-index:60}
+.hamburger span{display:block;width:26px;height:3px;border-radius:2px;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.6);transition:.3s var(--luxe)}
+.hamburger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+.nav-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);opacity:0;visibility:hidden;transition:.3s var(--luxe);z-index:55}
+.nav-overlay.open{opacity:1;visibility:visible}
+.full-menu{position:fixed;top:0;right:0;height:100vh;height:100dvh;width:min(90vw,380px);z-index:60;
+  background:rgba(10,14,30,.985);backdrop-filter:blur(18px);border-left:1px solid var(--line);
+  box-shadow:-24px 0 60px rgba(0,0,0,.55);transform:translateX(100%);transition:transform .3s var(--luxe);overflow-y:auto;padding:74px 0 28px}
+.full-menu.open{transform:translateX(0)}
+.fm-head{display:flex;align-items:center;justify-content:space-between;padding:0 26px 14px;border-bottom:1px solid var(--line)}
+.fm-head span{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.fm-close{background:none;border:none;color:#fff;font-size:24px;line-height:1;cursor:pointer;padding:2px 8px}
+.fm-group{padding:14px 26px 4px;border-bottom:1px solid var(--line)}
+.fm-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9db0ff;margin-bottom:6px}
+.fm-group a{display:block;padding:9px 0;font-size:15px;color:#dbe3f5;font-weight:500;transition:color .15s}
+.fm-group a:hover{color:#fff}
+.fm-actions{display:flex;flex-direction:column;gap:10px;padding:20px 26px 0}
+.fm-actions .btn{width:100%;justify-content:center;padding:14px;font-size:15px}
 
-        .site-header { background: var(--bg-card-glass); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-subtle); padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 38px; z-index: 1000; }
-        .site-header .logo { display: inline-flex; align-items: center; text-decoration: none; }
-        .site-header .logo img { display: block; height: 60px; width: auto; }
-        .site-header .logo:hover { text-decoration: none; opacity: 0.85; }
-        @media (max-width: 600px) {
-            .site-header { padding: 0.5rem 1rem; top: 34px; }
-            .site-header .logo img { height: 48px; }
-        }
-        .site-header .nav-cta { display: flex; gap: 0.75rem; align-items: center; }
-        .nav-link-subtle { color: var(--text-secondary); font-size: 0.9rem; font-weight: 500; padding: 0.5rem 0.75rem; }
-        .nav-link-subtle:hover { color: var(--brand-primary); text-decoration: none; }
-        .nav-cta-primary { background: var(--brand-primary); color: white; padding: 0.65rem 1.25rem; border-radius: var(--radius-pill); font-weight: 600; font-size: 0.9rem; transition: all 0.2s ease; }
-        .nav-cta-primary:hover { background: var(--brand-dark); color: white; text-decoration: none; transform: translateY(-1px); }
+/* Hero (aurora-only, no video) */
+.hero-stage{position:relative;overflow:hidden;isolation:isolate}
+.hero-veil{position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(ellipse 70% 60% at 50% 26%, rgba(0,24,255,.18), transparent 62%),
+    linear-gradient(180deg, rgba(7,10,24,.40) 0%, rgba(7,10,24,.20) 32%, rgba(7,10,24,.55) 74%, var(--bg) 100%)}
+header{position:relative;z-index:2;padding:165px 0 70px;text-align:center}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;background:rgba(7,10,24,.5);border:1px solid rgba(232,181,48,.45);
+  color:#f0dca0;font-size:13px;font-weight:600;padding:8px 16px;border-radius:999px;margin-bottom:24px;backdrop-filter:blur(6px)}
+.eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px rgba(232,181,48,.25)}
+h1{font-size:clamp(34px,5.2vw,58px);line-height:1.05;font-weight:800;letter-spacing:-.025em;max-width:18ch;margin:0 auto 16px;text-shadow:0 4px 28px rgba(0,0,0,.45)}
+h1 .grad{background:linear-gradient(110deg,#f5d98a,#E8B530 55%,#3a5bff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-number{font-size:clamp(64px,12vw,92px);font-weight:800;letter-spacing:-.04em;line-height:1;margin:18px 0 4px;
+  background:linear-gradient(135deg,#fff,#E8B530);-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums}
+.hero-number .unit{font-size:.28em;font-weight:600;color:#cdd6ec;margin-left:.3rem;letter-spacing:.04em;-webkit-text-fill-color:#cdd6ec}
+.hero-num-cap{font-size:13.5px;color:#aeb8cf;letter-spacing:.04em;margin-bottom:22px}
+.sub{font-size:clamp(16px,2vw,19px);color:#d3dbef;max-width:66ch;margin:0 auto 22px;text-shadow:0 2px 14px rgba(0,0,0,.5)}
+.sub strong{color:#fff}
+.hero-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:8px 0 18px}
+.btn-xl{padding:15px 28px;font-size:15px;border-radius:13px}
+.btn-gold{background:linear-gradient(135deg,#E8B530,#caa01f);color:#1a1500;box-shadow:0 10px 30px rgba(232,181,48,.35)}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(232,181,48,.5)}
+.hero-tagline{font-size:13px;color:#9aa6c2;letter-spacing:.02em;margin-top:6px}
 
-        .hero { background: var(--brand-gradient); padding: 4rem 1.5rem 5rem; position: relative; overflow: hidden; }
-        .hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 30%, rgba(232, 181, 48, 0.08) 0%, transparent 60%); pointer-events: none; }
-        .hero-inner { max-width: 1100px; margin: 0 auto; position: relative; text-align: center; color: var(--text-ivory); }
-        .hero-eyebrow { display: inline-block; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.25rem; }
-        .hero h1 { font-family: var(--font-serif); font-weight: 600; font-size: clamp(2rem, 4vw, 3.25rem); line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1.5rem; color: white; }
-        .hero h1 .hl { background: linear-gradient(180deg, transparent 60%, rgba(232, 181, 48, 0.3) 60%); padding: 0 0.1em; }
-        .hero-number { font-family: var(--font-serif); font-weight: 700; font-size: clamp(4rem, 9vw, 5rem); color: var(--gold); line-height: 1; margin: 1rem 0 0.5rem; font-variant-numeric: tabular-nums; letter-spacing: -0.04em; }
-        .hero-number .unit { font-size: 0.3em; font-family: var(--font-sans); font-weight: 500; color: rgba(245,241,234,0.85); margin-left: 0.25rem; letter-spacing: 0.05em; }
-        .hero-number-caption { font-family: var(--font-mono); font-size: 0.8125rem; color: rgba(245,241,234,0.75); letter-spacing: 0.05em; margin-bottom: 2rem; }
-        .hero-subhead { font-size: 1.125rem; line-height: 1.55; color: rgba(245, 241, 234, 0.88); margin: 0 auto 1.5rem; max-width: 680px; }
-        .hero-tagline { font-family: var(--font-mono); font-size: 0.8125rem; color: rgba(245, 241, 234, 0.6); letter-spacing: 0.02em; }
+/* Breadcrumb trail */
+.crumb{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:18px 28px 0;font-size:12.5px;color:var(--muted);letter-spacing:.03em}
+.crumb a{color:var(--muted)}
+.crumb a:hover{color:#cdd6ec}
 
-        .content-section { padding: 4rem 1.5rem; background: white; border-top: 1px solid var(--border-subtle); }
-        .content-section.bg-page { background: var(--bg-page); }
-        .content-inner { max-width: 880px; margin: 0 auto; }
-        .content-inner.wide { max-width: 1200px; }
-        .section-eyebrow { display: inline-block; font-family: var(--font-mono); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--brand-primary); margin-bottom: 0.75rem; }
-        .content-inner h2 { font-family: var(--font-serif); font-size: clamp(1.75rem, 3vw, 2.25rem); font-weight: 600; color: var(--brand-dark); letter-spacing: -0.015em; line-height: 1.2; margin-bottom: 1rem; }
-        .content-inner h3 { font-family: var(--font-sans); font-size: 1.125rem; font-weight: 600; color: var(--brand-dark); margin: 1.75rem 0 0.5rem; }
-        .content-inner p { color: var(--text-primary); line-height: 1.75; margin-bottom: 1rem; font-size: 1rem; }
+section{position:relative;z-index:1;padding:54px 0}
+.sec-head{max-width:72ch;margin:0 auto 28px}
+.sec-eyebrow{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.sec-head h2{font-size:clamp(26px,3.2vw,38px);font-weight:800;letter-spacing:-.02em;margin-bottom:12px}
+.prose{max-width:72ch;margin:0 auto}
+.prose p{color:#c2cce0;font-size:15.5px;margin-bottom:14px}
+.prose p strong{color:#fff}
 
-        .mini-calc { background: white; border: 1px solid var(--border-subtle); border-radius: var(--radius-card); box-shadow: var(--shadow-card); padding: 2rem; margin-top: 1.5rem; }
-        .mini-calc-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem; }
-        .mini-calc-label { display: block; font-size: 0.8125rem; font-weight: 600; color: var(--brand-dark); margin-bottom: 0.5rem; }
-        .mini-calc-label .hint { font-weight: 400; color: var(--text-muted); font-size: 0.75rem; margin-left: 0.4rem; }
-        .mini-input { width: 100%; padding: 0.75rem 1rem; border: 1.5px solid var(--border-input); border-radius: var(--radius-input); font-family: var(--font-mono); font-size: 0.95rem; background: white; }
-        .mini-input:focus { outline: none; border-color: var(--brand-primary); box-shadow: 0 0 0 3px rgba(0, 24, 255, 0.1); }
-        .mini-segmented { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.25rem; background: rgba(24, 30, 87, 0.04); padding: 0.25rem; border-radius: var(--radius-input); }
-        .mini-seg-btn { padding: 0.6rem; background: transparent; border: none; border-radius: 6px; font-family: var(--font-mono); font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); cursor: pointer; }
-        .mini-seg-btn:hover { background: rgba(255,255,255,0.5); color: var(--brand-dark); }
-        .mini-seg-btn.active { background: var(--brand-primary); color: white; box-shadow: 0 2px 6px rgba(0, 24, 255, 0.25); }
+/* Glass mini-calc */
+.glass-card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:26px 24px;box-shadow:0 12px 32px rgba(0,0,0,.34);max-width:72ch;margin:18px auto 0}
+.mini-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:6px}
+.mini-label{display:block;font-size:12.5px;font-weight:700;color:#dbe3f5;margin-bottom:8px}
+.mini-label .hint{font-weight:500;color:var(--muted);font-size:11.5px;margin-left:.4rem}
+.mini-input{width:100%;padding:12px 14px;border:1.5px solid rgba(255,255,255,.16);border-radius:11px;font-size:15px;background:rgba(7,10,24,.5);color:#fff;font-variant-numeric:tabular-nums}
+.mini-input:focus{outline:none;border-color:var(--blue-bright);box-shadow:0 0 0 3px rgba(58,91,255,.25)}
+.mini-seg{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;background:rgba(7,10,24,.5);padding:5px;border-radius:11px}
+.seg-btn{padding:10px;background:transparent;border:none;border-radius:7px;font-size:14px;font-weight:700;color:var(--muted);cursor:pointer;transition:.2s}
+.seg-btn:hover{color:#fff}
+.seg-btn.active{background:linear-gradient(135deg,#0018FF,#2540ff);color:#fff;box-shadow:0 4px 14px rgba(0,24,255,.4)}
+.mini-badge{margin-top:18px;background:rgba(7,10,24,.55);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:12px;padding:18px 20px;opacity:0;transform:translateY(-6px);transition:opacity .24s,transform .24s;pointer-events:none}
+.mini-badge.visible{opacity:1;transform:translateY(0);pointer-events:auto}
+.mini-badge.asce-only{border-left-color:var(--blue-bright)}
+.mini-badge.error{border-left-color:var(--suction-red)}
+.mini-badge-eyebrow{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
+.mini-badge-eyebrow .dot{width:6px;height:6px;background:var(--gold);border-radius:50%}
+.mini-badge.asce-only .mini-badge-eyebrow,.mini-badge.asce-only .mini-badge-eyebrow .dot{color:var(--blue-bright);background:transparent}
+.mini-badge.asce-only .mini-badge-eyebrow .dot{background:var(--blue-bright)}
+.mini-badge.error .mini-badge-eyebrow,.mini-badge.error .mini-badge-eyebrow .dot{color:var(--suction-red)}
+.mini-badge.error .mini-badge-eyebrow .dot{background:var(--suction-red)}
+.mini-badge-location{font-size:15px;font-weight:700;color:#fff;margin-bottom:6px}
+.mini-badge-speed{font-size:34px;font-weight:800;color:#fff;line-height:1;margin-bottom:8px;font-variant-numeric:tabular-nums}
+.mini-badge-speed .lbl{font-size:.4em;font-weight:600;color:var(--muted);margin-left:.4rem}
+.mini-badge-citation{font-size:13.5px;color:#aeb8cf;line-height:1.5}
+.mini-badge-citation strong{color:#fff}
 
-        .mini-badge { margin-top: 1.25rem; background: white; border: 1px solid var(--border-subtle); border-left: 4px solid var(--gold); border-radius: var(--radius-input); padding: 1.25rem 1.5rem; box-shadow: var(--shadow-badge); opacity: 0; transform: translateY(-6px); transition: opacity .24s, transform .24s; pointer-events: none; }
-        .mini-badge.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
-        .mini-badge.asce-only { border-left-color: var(--brand-primary); box-shadow: 0 8px 24px rgba(0,24,255,0.10); }
-        .mini-badge.error { border-left-color: var(--suction-red); box-shadow: 0 8px 24px rgba(220,38,38,0.10); }
-        .mini-badge-eyebrow { display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.7rem; font-weight: 600; color: var(--gold); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.4rem; }
-        .mini-badge-eyebrow .dot { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; }
-        .mini-badge.asce-only .mini-badge-eyebrow { color: var(--brand-primary); }
-        .mini-badge.asce-only .mini-badge-eyebrow .dot { background: var(--brand-primary); }
-        .mini-badge.error .mini-badge-eyebrow { color: var(--suction-red); }
-        .mini-badge.error .mini-badge-eyebrow .dot { background: var(--suction-red); }
-        .mini-badge-location { font-family: var(--font-serif); font-size: 1.05rem; font-weight: 600; color: var(--brand-dark); margin-bottom: 0.4rem; }
-        .mini-badge-speed { font-family: var(--font-serif); font-size: 2rem; font-weight: 700; color: var(--brand-dark); line-height: 1; margin-bottom: 0.5rem; font-variant-numeric: tabular-nums; }
-        .mini-badge-speed .lbl { font-family: var(--font-sans); font-size: 0.5em; font-weight: 500; color: var(--text-secondary); margin-left: 0.4rem; }
-        .mini-badge-citation { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; }
-        .mini-badge-citation strong { color: var(--brand-dark); }
+/* Risk grid */
+.risk-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:72ch;margin:18px auto 0}
+.risk-cell{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px 14px;text-align:center}
+.risk-cell.highlight{background:linear-gradient(160deg,rgba(232,181,48,.16),rgba(255,255,255,.03));border-color:rgba(232,181,48,.5)}
+.risk-label{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
+.risk-value{font-size:30px;font-weight:800;color:#fff;line-height:1;font-variant-numeric:tabular-nums}
+.risk-value .unit{font-size:.42em;font-weight:600;color:var(--muted)}
 
-        .city-table-wrap { margin-top: 1.5rem; overflow-x: auto; background: white; border: 1px solid var(--border-subtle); border-radius: var(--radius-card); box-shadow: var(--shadow-card); }
-        .city-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
-        .city-table th { text-align: left; padding: 1rem; background: var(--brand-dark); color: white; font-weight: 600; font-size: 0.8125rem; font-family: var(--font-mono); letter-spacing: 0.04em; text-transform: uppercase; }
-        .city-table td { padding: 0.9rem 1rem; border-bottom: 1px solid var(--border-subtle); font-variant-numeric: tabular-nums; }
-        .city-table tr:last-child td { border-bottom: none; }
-        .city-table td:first-child { font-weight: 600; color: var(--brand-dark); }
-        .city-table .zip, .city-table .wind { font-family: var(--font-mono); }
-        .city-table .wind-gold { background: var(--gold-soft); font-weight: 600; color: var(--brand-dark); }
+/* City table */
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:16px;background:var(--surface);max-width:1000px;margin:18px auto 0}
+.city-tbl{width:100%;border-collapse:collapse;font-size:13.5px;min-width:640px}
+.city-tbl th{text-align:left;padding:13px 16px;background:rgba(7,10,24,.55);color:#9db0ff;font-weight:700;font-size:12px;letter-spacing:.04em;text-transform:uppercase;border-bottom:1px solid var(--line)}
+.city-tbl td{padding:12px 16px;border-bottom:1px solid var(--line);color:#c2cce0;font-variant-numeric:tabular-nums}
+.city-tbl tr:last-child td{border-bottom:none}
+.city-tbl td:first-child{font-weight:700;color:#fff}
+.city-tbl .wind-gold{color:var(--gold);font-weight:700}
 
-        .code-callout { margin-top: 1.5rem; padding: 1.5rem 1.75rem; background: var(--gold-soft); border-left: 4px solid var(--gold); border-radius: 0 var(--radius-card) var(--radius-card) 0; }
-        .code-callout h3 { margin-top: 0; color: var(--brand-dark); font-size: 1.1rem; }
-        .code-callout p { font-size: 0.95rem; margin-bottom: 0.75rem; }
-        .code-callout p:last-child { margin-bottom: 0; }
+/* Code callout */
+.callout{max-width:72ch;margin:18px auto 0;background:rgba(232,181,48,.07);border:1px solid rgba(232,181,48,.3);border-left:4px solid var(--gold);border-radius:0 14px 14px 0;padding:22px 24px}
+.callout h3{font-size:16px;font-weight:700;color:#fff;margin-bottom:12px}
+.callout p{font-size:14px;color:#c2cce0;margin-bottom:8px}
+.callout p:last-child{margin-bottom:0}
+.callout p strong{color:#fff}
 
-        .risk-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; margin: 1.5rem 0; }
-        .risk-cell { background: white; border: 1px solid var(--border-subtle); border-radius: var(--radius-input); padding: 1.25rem 1rem; text-align: center; }
-        .risk-cell.highlight { background: var(--gold-soft); border-color: var(--gold); }
-        .risk-cell-label { font-family: var(--font-mono); font-size: 0.7rem; font-weight: 600; color: var(--text-muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.4rem; }
-        .risk-cell-value { font-family: var(--font-serif); font-size: 1.75rem; font-weight: 700; color: var(--brand-dark); line-height: 1; }
-        .risk-cell-value .unit { font-size: 0.55em; font-family: var(--font-sans); font-weight: 500; color: var(--text-secondary); }
+/* FAQ */
+.faq{max-width:860px;margin:0 auto}
+.faq details{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 22px;margin-bottom:12px}
+.faq summary{font-size:16px;font-weight:700;cursor:pointer;list-style:none;color:#fff}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";float:right;color:#9db0ff;font-weight:800}
+.faq details[open] summary::after{content:"–"}
+.faq p{margin-top:11px;color:#aeb8cf;font-size:14.5px}
 
-        .trust-strip { background: var(--brand-dark); color: var(--text-ivory); padding: 3rem 1.5rem; text-align: center; }
-        .trust-strip-inner { max-width: 800px; margin: 0 auto; }
-        .trust-strip-tagline { font-family: var(--font-serif); font-size: 1.5rem; font-weight: 600; line-height: 1.4; margin-bottom: 0.75rem; color: white; }
-        .trust-strip-meta { font-family: var(--font-mono); font-size: 0.8125rem; color: rgba(245, 241, 234, 0.65); letter-spacing: 0.04em; }
-        .trust-strip-cta { margin-top: 1.5rem; display: inline-flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; }
-        .trust-strip-cta a { padding: 0.7rem 1.5rem; border-radius: var(--radius-pill); font-weight: 600; font-size: 0.9rem; text-decoration: none; transition: all 0.2s ease; }
-        .trust-strip-cta .primary { background: var(--gold); color: var(--brand-dark); }
-        .trust-strip-cta .primary:hover { background: white; }
-        .trust-strip-cta .ghost { border: 1.5px solid rgba(245,241,234,0.4); color: var(--text-ivory); }
-        .trust-strip-cta .ghost:hover { border-color: var(--gold); color: var(--gold); }
+/* Trust / final band */
+.final{text-align:center}
+.final .glass2{background:linear-gradient(160deg,rgba(0,24,255,.18),rgba(232,181,48,.1));border:1px solid rgba(58,91,255,.4);border-radius:26px;padding:54px 40px;box-shadow:0 40px 100px rgba(0,24,255,.25);max-width:860px;margin:0 auto}
+.final h2{font-size:clamp(24px,3vw,34px);font-weight:800;letter-spacing:-.02em;margin-bottom:14px}
+.final p{color:#cdd6ec;font-size:16px;max-width:60ch;margin:0 auto 22px}
+.final-meta{font-size:13px;color:#9aa6c2;margin-top:18px}
 
-        .faq-item { background: white; border: 1px solid var(--border-subtle); border-radius: var(--radius-input); margin-bottom: 0.75rem; overflow: hidden; }
-        .faq-question { display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 1.5rem; background: none; border: none; font-family: inherit; font-size: 1rem; font-weight: 600; color: var(--brand-dark); text-align: left; cursor: pointer; width: 100%; transition: background 0.15s ease; }
-        .faq-question:hover { background: var(--bg-page); }
-        .faq-question .chevron { margin-left: 1rem; color: var(--text-muted); transition: transform 0.2s ease; font-size: 0.85rem; }
-        .faq-question[aria-expanded="true"] .chevron { transform: rotate(180deg); }
-        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
-        .faq-answer.open { max-height: 600px; }
-        .faq-answer-inner { padding: 0 1.5rem 1.25rem; color: var(--text-secondary); line-height: 1.7; font-size: 0.95rem; }
+.main-footer{position:relative;z-index:1;border-top:1px solid var(--line);padding:54px 0 28px;background:rgba(0,0,0,.25)}
+.main-footer .container{max-width:1180px;margin:0 auto;padding:0 28px}
+.footer-content{display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
+.footer-column h3{font-size:15px;font-weight:700;color:#fff;margin-bottom:15px}
+.footer-column ul{list-style:none}
+.footer-column li{margin-bottom:9px;font-size:14px;color:#aeb8cf}
+.footer-column a{color:#aeb8cf;transition:color .2s}
+.footer-column a:hover{color:#fff}
+.footer-bottom{border-top:1px solid var(--line);margin-top:34px;padding-top:20px;text-align:center;color:var(--muted);font-size:13px}
 
-        .breadcrumb-trail { max-width: 880px; margin: 1rem auto -1rem; padding: 0 1.5rem; font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); letter-spacing: 0.05em; }
-        .breadcrumb-trail a { color: var(--text-muted); }
-        .breadcrumb-trail a:hover { color: var(--brand-primary); text-decoration: none; }
-
-        .site-footer { background: white; border-top: 1px solid var(--border-subtle); padding: 2.5rem 1.5rem; color: var(--text-secondary); font-size: 0.875rem; }
-        .site-footer-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
-        .site-footer a { color: var(--text-secondary); }
-        .site-footer a:hover { color: var(--brand-primary); }
-
-        @media (max-width: 900px) {
-            .mini-calc-row { grid-template-columns: 1fr; }
-            .risk-grid { grid-template-columns: repeat(2, 1fr); }
-            .hero { padding: 2.5rem 1rem 3.5rem; }
-            .content-section { padding: 3rem 1rem; }
-        }
-    </style>
+@media(max-width:980px){
+  .footer-content{grid-template-columns:repeat(2,1fr)}
+  .risk-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:880px){.nav-links{display:none}header{padding:128px 0 44px}}
+@media(max-width:560px){
+  .wrap{padding:0 20px}
+  .crumb{padding:16px 20px 0}
+  .mini-row{grid-template-columns:1fr}
+  .footer-content{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){.aurora span{animation:none}}
+</style>
 </head>
 <body>
+<div class="aurora"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
+<div class="grid-tex"></div>
 
-    <div class="wlc-promo-banner" role="region" aria-label="Free tool announcement">
-        <a href="../free-wind-load-calculator.html">
-            Free Wind Load Calculator with Florida Building Code overrides
-            <span class="arrow">&rarr;</span>
-        </a>
+<nav id="nav"><div class="wrap nav-in">
+  <a class="logo" href="https://windloadcalc.com/"><img height="100" width="300" src="../images/windloadcalc-logo.svg" alt="WindLoadCalc — ASCE 7-22 Wind Load Calculator logo" class="logo-image"></a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a class="l" href="https://windloadcalc.com/free-wind-load-calculator.html">Free tool</a>
+      <a class="l" href="https://windloadcalc.com/wind-load-calculator-comparison.html">Compare</a>
+      <a class="l" href="https://windloadcalc.com/wind-load-calculator-shop.html">Pricing</a>
+      <a class="l" href="https://windloadcalc.com/why-us.html">Why us</a>
+      <a class="btn btn-ghost" href="https://windloadcalc.com/login.html">Log in</a>
+      <a class="btn btn-primary" href="https://windloadcalc.com/wind-load-calculator-shop.html">Start free trial</a>
     </div>
+    <button class="hamburger" id="hamburger" aria-label="Open full menu" aria-expanded="false" aria-controls="fullMenu"><span></span><span></span><span></span></button>
+  </div>
+</div></nav>
+<div class="nav-overlay" id="navOverlay"></div>
+<aside class="full-menu" id="fullMenu" aria-label="Site menu">
+  <div class="fm-head"><span>Menu</span><button class="fm-close" id="fmClose" aria-label="Close menu">&times;</button></div>
+  <div class="fm-group">
+    <div class="fm-label">Wind Load Calculators</div>
+    <a href="https://windloadcalc.com/wind-load-calculator-landing.html">Overview</a>
+    <a href="https://windloadcalc.com/free-wind-load-calculator.html">Free Trial</a>
+    <a href="https://windloadcalc.com/wind-load-calculator-comparison.html">Calculator Comparison</a>
+    <a href="https://windloadcalc.com/wind-load-calculator-shop.html">Pricing</a>
+  </div>
+  <div class="fm-group">
+    <div class="fm-label">Building Intelligence Platform</div>
+    <a href="https://windloadcalc.com/building-intelligence-platform-landing.html">Overview</a>
+    <a href="https://windloadcalc.com/building-intelligence-platform.html">Free Trial</a>
+    <a href="https://windloadcalc.com/building-intelligence-platform-shop.html">Pricing</a>
+  </div>
+  <div class="fm-group">
+    <div class="fm-label">For Professionals</div>
+    <a href="https://windloadcalc.com/wind-load-calculator-for-engineers.html">Engineers</a>
+    <a href="https://windloadcalc.com/wind-load-calculator-for-architects.html">Architects</a>
+    <a href="https://windloadcalc.com/wind-loads-for-consultants.html">Consultants</a>
+    <a href="https://windloadcalc.com/contractors-wind-load-calculator.html">Contractors</a>
+  </div>
+  <div class="fm-group">
+    <div class="fm-label">Company</div>
+    <a href="https://windloadcalc.com/services.html">Services</a>
+    <a href="https://windloadcalc.com/why-us.html">Why Us</a>
+    <a href="https://windloadcalc.com/faq.html">FAQ</a>
+    <a href="https://windloadcalc.com/contact.html">Contact Us</a>
+  </div>
+  <div class="fm-actions">
+    <a class="btn btn-ghost" href="https://windloadcalc.com/login.html">Log in</a>
+    <a class="btn btn-primary" href="https://windloadcalc.com/free-wind-load-calculator.html">Start Free Trial &rarr;</a>
+  </div>
+</aside>
 
-    <header class="site-header">
-        <a href="../" class="logo" aria-label="WindLoadCalc home"><img height="100" width="300" src="/images/windloadcalc-logo.svg" alt="WindLoadCalc"></a>
-        <nav class="nav-cta" aria-label="Primary">
-            <a href="../" class="nav-link-subtle">Home</a>
-            <a href="../account.html" class="nav-link-subtle">Sign in</a>
-            <a href="../wind-load-calculator-landing.html" class="nav-cta-primary">Full Calculator</a>
-        </nav>
-    </header>
-
-    <section class="hero">
-        <div class="hero-inner">
-            <span class="hero-eyebrow">Florida Wind Speed &middot; Collier County</span>
-            <h1>Collier County wind speed is <span class="hl">170 mph</span> for Risk Category II.</h1>
-            <div class="hero-number">170<span class="unit">mph</span></div>
-            <div class="hero-number-caption">FBC R301.2(7) &middot; Countywide &middot; Naples / Marco / Immokalee</div>
-            <p class="hero-subhead">
-                Hometown number, hometown calculator. The same 170 mph value applies from the Gulf shore at Marco Island to the agricultural inland of Immokalee &mdash; we have been writing wind load reports against that target since the firm started in Naples in 2002.
-            </p>
-            <p class="hero-tagline">Calculating wind loads since 2002, online since 2006.</p>
-        </div>
-    </section>
-
-    <div class="breadcrumb-trail">
-        <a href="../">Home</a> &rsaquo; <a href="./">Florida Wind Speed</a> &rsaquo; Collier County
+<div class="hero-stage">
+  <div class="hero-veil"></div>
+  <header><div class="wrap">
+    <div class="eyebrow"><span class="dot"></span>Florida Wind Speed · Collier County</div>
+    <h1>Collier County wind speed is <span class="grad">170 mph</span></h1>
+    <div class="hero-number">170<span class="unit">mph</span></div>
+    <div class="hero-num-cap">FBC R301.2(7) · Risk Category II · Naples / Marco Island / Immokalee</div>
+    <p class="sub">The same <strong>170 mph</strong> design value applies countywide, from the Gulf shore at Marco Island to the agricultural inland at Immokalee. We have written wind load reports against that target since the firm started in Naples in 2002.</p>
+    <div class="hero-cta">
+      <a class="btn btn-gold btn-xl" href="https://windloadcalc.com/collier-county-wind-load-calculator/">Run the Collier wind load calculator →</a>
+      <a class="btn btn-ghost btn-xl" href="#lookup">Look up a ZIP</a>
     </div>
+    <p class="hero-tagline">Calculating wind loads since 2002, online since 2006.</p>
+  </div></header>
+</div>
 
-    <!-- SECTION 1: What wind speed does Collier use -->
-    <section class="content-section">
-        <div class="content-inner">
-            <span class="section-eyebrow">The number</span>
-            <h2>What wind speed does Collier County use?</h2>
-            <p>
-                Collier's basic wind speed is 170 mph for Risk Category II buildings, written into Florida Building Code R301.2(7) and applied without amendment by Collier County Growth Management, the City of Naples Building Department, and the City of Marco Island Building Services. That value covers single-family homes, the bulk of golf-community villas in places like Pelican Bay and Lely Resort, and most commercial structures permitted from US 41 east to State Road 29.
-            </p>
-            <p>
-                Unlike Broward and Miami-Dade, Collier is <strong>not</strong> a High-Velocity Hurricane Zone county. HVHZ status is reserved for the southeast corner of the peninsula by FBC Section 1620, so the missile-impact testing protocols (TAS 201/202/203) and the Miami-Dade NOA requirement do not apply to Collier permits. What Collier does inherit is the FBC R301.2(7) wind speed table, which sets the same 170 mph design value but routes product approval through standard Florida Product Approval listings rather than the HVHZ subset.
-            </p>
-            <p>
-                This is the foundational input for ASCE 7-22 Equation 26.10-1, where it gets squared and combined with Kz, Kzt, Kd, Ke, and the appropriate pressure coefficients. The basic wind speed enters the equation as 170, fixed; everything else is a per-project judgment about height, exposure, topography, and building geometry.
-            </p>
+<div class="crumb">
+  <a href="https://windloadcalc.com/">Home</a> › <a href="https://windloadcalc.com/florida-wind-speed/">Florida Wind Speed</a> › Collier County
+</div>
+
+<!-- The number -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-eyebrow">The number</span>
+      <h2>What wind speed does Collier County use?</h2>
+    </div>
+    <div class="prose">
+      <p>Collier's basic wind speed is 170 mph for Risk Category II buildings, written into Florida Building Code R301.2(7). Collier County Growth Management, the City of Naples, and the City of Marco Island all apply it without amendment.</p>
+      <p>That value covers single-family homes, the golf-community villas in places like Pelican Bay and Lely Resort, and most commercial structures permitted from US 41 east to State Road 29.</p>
+      <p>Unlike Broward and Miami-Dade, Collier is <strong>not</strong> a High-Velocity Hurricane Zone county.</p>
+      <p>HVHZ status is reserved for the southeast corner of the peninsula by FBC Section 1620, so the missile-impact protocols (TAS 201/202/203) and Miami-Dade NOA requirement do not apply here.</p>
+      <p>What Collier does inherit is the FBC R301.2(7) wind speed table. It sets the same 170 mph design value but routes product approval through standard Florida Product Approval listings rather than the HVHZ subset.</p>
+      <p>This 170 mph value is the foundational input for ASCE 7-22 Equation 26.10-1, where it gets squared and combined with Kz, Kzt, Kd, Ke, and the appropriate pressure coefficients. It enters fixed; everything else is a per-project judgment.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Live lookup -->
+<section id="lookup">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-eyebrow">Verify your ZIP</span>
+      <h2>Look up a Collier ZIP and see the FBC value live.</h2>
+    </div>
+    <div class="prose">
+      <p>Pre-filled to Naples (34102). Type any Collier ZIP or switch the risk category. The result appears below with the FBC R301.2(7) citation your plan reviewer looks for on the cover sheet.</p>
+    </div>
+    <div class="glass-card">
+      <div class="mini-row">
+        <div>
+          <label class="mini-label" for="co-zip">Collier ZIP <span class="hint">5-digit</span></label>
+          <input type="text" id="co-zip" class="mini-input" maxlength="5" inputmode="numeric" value="34102" autocomplete="postal-code">
         </div>
-    </section>
-
-    <!-- SECTION 2: Live calculator -->
-    <section class="content-section bg-page">
-        <div class="content-inner">
-            <span class="section-eyebrow">Verify your ZIP</span>
-            <h2>Look up a Collier ZIP and see the FBC value live.</h2>
-            <p>Pre-filled to Naples (34102). Type any Collier ZIP or switch the risk category and the result appears below, with the FBC R301.2(7) citation your plan reviewer is going to look for on the cover sheet.</p>
-
-            <div class="mini-calc">
-                <div class="mini-calc-row">
-                    <div>
-                        <label class="mini-calc-label" for="co-zip">Collier ZIP <span class="hint">5-digit</span></label>
-                        <input type="text" id="co-zip" class="mini-input" maxlength="5" inputmode="numeric" value="34102" autocomplete="postal-code">
-                    </div>
-                    <div>
-                        <label class="mini-calc-label">Risk Category <span class="hint">ASCE Table 1.5-1</span></label>
-                        <div class="mini-segmented" role="radiogroup" aria-label="Risk Category">
-                            <button type="button" class="mini-seg-btn" data-co-risk="1">I</button>
-                            <button type="button" class="mini-seg-btn active" data-co-risk="2">II</button>
-                            <button type="button" class="mini-seg-btn" data-co-risk="3">III</button>
-                            <button type="button" class="mini-seg-btn" data-co-risk="4">IV</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="mini-badge" id="co-badge" role="status" aria-live="polite"></div>
-            </div>
+        <div>
+          <label class="mini-label">Risk Category <span class="hint">ASCE Table 1.5-1</span></label>
+          <div class="mini-seg" role="radiogroup" aria-label="Risk Category">
+            <button type="button" class="seg-btn" data-co-risk="1">I</button>
+            <button type="button" class="seg-btn active" data-co-risk="2">II</button>
+            <button type="button" class="seg-btn" data-co-risk="3">III</button>
+            <button type="button" class="seg-btn" data-co-risk="4">IV</button>
+          </div>
         </div>
-    </section>
+      </div>
+      <div class="mini-badge" id="co-badge" role="status" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
 
-    <!-- All four risk cats -->
-    <section class="content-section">
-        <div class="content-inner">
-            <span class="section-eyebrow">All four risk categories</span>
-            <h2>FBC R301.2(7) wind speeds for Collier.</h2>
-            <p>Notice that Risk Cat IV (essential facilities) jumps to 190 mph &mdash; ten mph higher than Broward's Risk Cat IV value, even though both counties share the 170 mph Risk Cat II number. That reflects the steeper consequence-of-failure premium the Collier table builds into hospitals, EOCs, and shelters along the southwest hurricane corridor.</p>
-            <div class="risk-grid">
-                <div class="risk-cell">
-                    <div class="risk-cell-label">Risk Cat I</div>
-                    <div class="risk-cell-value">151<span class="unit">mph</span></div>
-                </div>
-                <div class="risk-cell highlight">
-                    <div class="risk-cell-label">Risk Cat II</div>
-                    <div class="risk-cell-value">170<span class="unit">mph</span></div>
-                </div>
-                <div class="risk-cell">
-                    <div class="risk-cell-label">Risk Cat III</div>
-                    <div class="risk-cell-value">180<span class="unit">mph</span></div>
-                </div>
-                <div class="risk-cell">
-                    <div class="risk-cell-label">Risk Cat IV</div>
-                    <div class="risk-cell-value">190<span class="unit">mph</span></div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- All four risk cats -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-eyebrow">All four risk categories</span>
+      <h2>FBC R301.2(7) wind speeds for Collier.</h2>
+    </div>
+    <div class="prose">
+      <p>Risk Cat IV (essential facilities) jumps to 190 mph — ten mph higher than Broward's Risk Cat IV value, even though both counties share the 170 mph Risk Cat II number.</p>
+      <p>That reflects the steeper consequence-of-failure premium the Collier table builds into hospitals, EOCs, and shelters.</p>
+    </div>
+    <div class="risk-grid">
+      <div class="risk-cell">
+        <div class="risk-label">Risk Cat I</div>
+        <div class="risk-value">151<span class="unit">mph</span></div>
+      </div>
+      <div class="risk-cell highlight">
+        <div class="risk-label">Risk Cat II</div>
+        <div class="risk-value">170<span class="unit">mph</span></div>
+      </div>
+      <div class="risk-cell">
+        <div class="risk-label">Risk Cat III</div>
+        <div class="risk-value">180<span class="unit">mph</span></div>
+      </div>
+      <div class="risk-cell">
+        <div class="risk-label">Risk Cat IV</div>
+        <div class="risk-value">190<span class="unit">mph</span></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- SECTION 3: Cities & ZIPs -->
-    <section class="content-section bg-page">
-        <div class="content-inner wide">
-            <span class="section-eyebrow">By city</span>
-            <h2>Collier cities, ZIPs, and Risk Cat II wind speed.</h2>
-            <p>The 170 mph value covers every populated ZIP inside county limits, from beachfront Marco Island to the inland farming communities around Ave Maria and Immokalee. Population centers are shown below; outlying ZIPs in eastern Collier (Big Cypress, Ochopee, Everglades City) also resolve to 170 mph.</p>
-            <div class="city-table-wrap">
-                <table class="city-table">
-                    <thead>
-                        <tr>
-                            <th>City</th>
-                            <th>Primary ZIP</th>
-                            <th>Wind Speed (Cat II)</th>
-                            <th>Typical Setting</th>
-                            <th>Reference</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>Naples (downtown)</td><td class="zip">34102</td><td class="wind wind-gold">170 mph</td><td>Coastal &middot; Gulf exposure</td><td>FBC R301.2(7)</td></tr>
-                        <tr><td>Marco Island</td><td class="zip">34145</td><td class="wind wind-gold">170 mph</td><td>Barrier island &middot; Gulf exposure</td><td>FBC R301.2(7)</td></tr>
-                        <tr><td>Immokalee</td><td class="zip">34142</td><td class="wind wind-gold">170 mph</td><td>Inland agricultural (~35 mi)</td><td>FBC R301.2(7)</td></tr>
-                        <tr><td>Golden Gate</td><td class="zip">34116</td><td class="wind wind-gold">170 mph</td><td>Inland suburban (~8 mi)</td><td>FBC R301.2(7)</td></tr>
-                        <tr><td>Ave Maria</td><td class="zip">34142</td><td class="wind wind-gold">170 mph</td><td>Inland planned community</td><td>FBC R301.2(7)</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </section>
+<!-- Cities & ZIPs -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-eyebrow">By city</span>
+      <h2>Collier cities, ZIPs, and Risk Cat II wind speed.</h2>
+    </div>
+    <div class="prose">
+      <p>The 170 mph value covers every populated ZIP inside county limits, from beachfront Marco Island to the inland farming communities around Ave Maria and Immokalee. Outlying ZIPs in eastern Collier (Big Cypress, Ochopee, Everglades City) also resolve to 170 mph.</p>
+    </div>
+    <div class="tbl-wrap">
+      <table class="city-tbl">
+        <thead>
+          <tr>
+            <th>City</th>
+            <th>Primary ZIP</th>
+            <th>Wind Speed (Cat II)</th>
+            <th>Typical Setting</th>
+            <th>Reference</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Naples (downtown)</td><td>34102</td><td class="wind-gold">170 mph</td><td>Coastal · Gulf exposure</td><td>FBC R301.2(7)</td></tr>
+          <tr><td>Marco Island</td><td>34145</td><td class="wind-gold">170 mph</td><td>Barrier island · Gulf exposure</td><td>FBC R301.2(7)</td></tr>
+          <tr><td>Immokalee</td><td>34142</td><td class="wind-gold">170 mph</td><td>Inland agricultural (~35 mi)</td><td>FBC R301.2(7)</td></tr>
+          <tr><td>Golden Gate</td><td>34116</td><td class="wind-gold">170 mph</td><td>Inland suburban (~8 mi)</td><td>FBC R301.2(7)</td></tr>
+          <tr><td>Ave Maria</td><td>34142</td><td class="wind-gold">170 mph</td><td>Inland planned community</td><td>FBC R301.2(7)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
 
-    <!-- SECTION 4: Hurricane history -->
-    <section class="content-section">
-        <div class="content-inner">
-            <span class="section-eyebrow">Storm record</span>
-            <h2>The southwest hurricane corridor: why Collier is rated this way.</h2>
-            <p>
-                Hurricane Irma (September 10, 2017) made its second Florida landfall on Marco Island as a Category 3 storm, with the eye coming ashore at roughly 3:35 PM EDT. The eyewall passed over Naples within ninety minutes, and the Naples Municipal Airport anemometer recorded a 142 mph gust before the instrument failed. Reconstruction analyses by the National Hurricane Center placed sustained winds in the 110-115 mph range along the Naples coast with gusts to 145 mph in the strongest squall lines. Post-Irma damage surveys produced a striking pattern: homes permitted after the 2002 FBC adoption &mdash; designed to the 170 mph target &mdash; held envelope integrity, while pre-1994 housing stock saw widespread roof and gable failures.
-            </p>
-            <p>
-                Hurricane Ian (September 28, 2022) tracked north of Collier and made its primary Cat 4 landfall at Cayo Costa in Lee County, but the storm's expansive southern eyewall scraped the Naples coast and pushed a record 7.26 ft surge into Naples Bay. Sustained winds at Marco Island peaked near 100 mph with gusts to 130 mph. Ian validated the 170 mph design speed in a different way than Irma did: it was the surge, not the wind, that caused most of the structural loss in Naples, but post-2002 buildings above the BFE again came through the wind loading intact.
-            </p>
-            <p>
-                Hurricane Wilma (October 2005) crossed the state from Cape Romano into Collier as a strong Cat 2 before exiting the east coast, and Hurricane Donna (September 1960) made landfall just south of Naples as a Cat 4 with 145 mph sustained winds &mdash; the storm that put southwest Florida on the modern hurricane map and arguably justifies every value above 140 mph in the FBC table to this day.
-            </p>
-        </div>
-    </section>
+<!-- Hurricane history -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-eyebrow">Storm record</span>
+      <h2>The southwest hurricane corridor: why Collier is rated this way.</h2>
+    </div>
+    <div class="prose">
+      <p>Hurricane Irma (September 10, 2017) made its second Florida landfall on Marco Island as a Category 3 storm, with the eye coming ashore around 3:35 PM EDT. The eyewall passed over Naples within ninety minutes.</p>
+      <p>The Naples Municipal Airport anemometer recorded a 142 mph gust before the instrument failed. Reconstruction analyses placed sustained winds in the 110-115 mph range along the Naples coast, with gusts to 145 mph in the strongest squall lines.</p>
+      <p>Post-Irma surveys produced a striking pattern. Homes permitted after the 2002 FBC adoption — designed to the 170 mph target — held envelope integrity, while pre-1994 housing stock saw widespread roof and gable failures.</p>
+      <p>Hurricane Ian (September 28, 2022) made its primary Cat 4 landfall at Cayo Costa in Lee County, north of Collier. But its expansive southern eyewall scraped the Naples coast and pushed a record 7.26 ft surge into Naples Bay.</p>
+      <p>Sustained winds at Marco Island peaked near 100 mph with gusts to 130 mph.</p>
+      <p>Ian validated the design speed differently than Irma: it was the surge, not the wind, that caused most structural loss in Naples. Post-2002 buildings above the BFE again came through the wind loading intact.</p>
+      <p>Hurricane Wilma (October 2005) crossed from Cape Romano into Collier as a strong Cat 2 before exiting the east coast.</p>
+      <p>Hurricane Donna (September 1960) made landfall just south of Naples as a Cat 4 with 145 mph sustained winds — the storm that put southwest Florida on the modern hurricane map.</p>
+    </div>
+  </div>
+</section>
 
-    <!-- SECTION 5: Code basis -->
-    <section class="content-section bg-page">
-        <div class="content-inner">
-            <span class="section-eyebrow">Code basis</span>
-            <h2>Permitting authority and code edition in Collier.</h2>
-            <p>
-                Building permits in Collier come from one of three offices depending on jurisdiction: Collier County Growth Management Division (unincorporated land, including most of East Naples, Golden Gate Estates, Immokalee, and Ave Maria), the City of Naples Building Department (everything inside Naples city limits), and the City of Marco Island Building Services (the island and Goodland). Everglades City operates its own building official as well, though volume there is small.
-            </p>
-            <p>
-                All four authorities currently enforce the Florida Building Code 8th Edition (2023), which references ASCE 7-22 and incorporates R301.2(7) verbatim. There are no Collier-specific amendments that change the 170 mph design value &mdash; what varies is paperwork: Naples requires its own elevation certificate form for coastal properties in the AE and VE flood zones, and Marco Island has a separate seawall and dune permitting process administered through the city engineer.
-            </p>
-            <p>
-                Local product approval follows the standard Florida Product Approval (FL#) listings published by the Department of Business and Professional Regulation. Plan submissions to any Collier authority should include FL# for every window, exterior door, garage door, and roof covering assembly, along with manufacturer cut sheets demonstrating the design pressure ratings meet or exceed the calculated demands from the 170 mph design value.
-            </p>
-            <div class="code-callout">
-                <h3>Collier permitting at a glance</h3>
-                <p><strong>Basic wind speed:</strong> 170 mph Risk Cat II (FBC R301.2(7))</p>
-                <p><strong>HVHZ status:</strong> Not HVHZ &mdash; standard Florida Product Approval applies</p>
-                <p><strong>Code edition:</strong> Florida Building Code 8th Edition (2023), ASCE 7-22 by reference</p>
-                <p><strong>Permitting authorities:</strong> Collier Growth Management, City of Naples, City of Marco Island, Everglades City</p>
-                <p><strong>Product approval:</strong> FL# listings via DBPR</p>
-            </div>
-        </div>
-    </section>
+<!-- Code basis -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-eyebrow">Code basis</span>
+      <h2>Permitting authority and code edition in Collier.</h2>
+    </div>
+    <div class="prose">
+      <p>Building permits in Collier come from one of three offices. Collier County Growth Management Division covers unincorporated land — most of East Naples, Golden Gate Estates, Immokalee, and Ave Maria.</p>
+      <p>The City of Naples Building Department covers everything inside Naples city limits, and the City of Marco Island Building Services covers the island and Goodland. Everglades City operates its own building official, though volume there is small.</p>
+      <p>All four authorities currently enforce the Florida Building Code 8th Edition (2023), which references ASCE 7-22 and incorporates R301.2(7) verbatim. There are no Collier-specific amendments that change the 170 mph design value.</p>
+      <p>What varies is paperwork. Naples requires its own elevation certificate form for coastal properties in the AE and VE flood zones, and Marco Island has a separate seawall and dune permitting process administered through the city engineer.</p>
+      <p>Local product approval follows the standard Florida Product Approval (FL#) listings published by the DBPR.</p>
+      <p>Submissions should include FL# for every window, exterior door, garage door, and roof covering assembly, with cut sheets showing design pressures meet the demands from the 170 mph value.</p>
+    </div>
+    <div class="callout">
+      <h3>Collier permitting at a glance</h3>
+      <p><strong>Basic wind speed:</strong> 170 mph Risk Cat II (FBC R301.2(7))</p>
+      <p><strong>HVHZ status:</strong> Not HVHZ — standard Florida Product Approval applies</p>
+      <p><strong>Code edition:</strong> Florida Building Code 8th Edition (2023), ASCE 7-22 by reference</p>
+      <p><strong>Permitting authorities:</strong> Collier Growth Management, City of Naples, City of Marco Island, Everglades City</p>
+      <p><strong>Product approval:</strong> FL# listings via DBPR</p>
+    </div>
+  </div>
+</section>
 
-    <!-- SECTION 6: FAQ -->
-    <section class="content-section">
-        <div class="content-inner">
-            <span class="section-eyebrow">Frequently asked</span>
-            <h2>Collier wind speed questions.</h2>
+<!-- From wind speed to pressures -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-eyebrow">Next step</span>
+      <h2>From the 170 mph wind speed to design pressures.</h2>
+    </div>
+    <div class="prose">
+      <p>This page settles the wind speed. The next decision is exposure, mean roof height, topography, and the pressure coefficients that turn 170 mph into the pounds-per-square-foot a plan reviewer wants to see.</p>
+      <p>The Collier wind load calculator runs that ASCE 7-22 math for you and produces an Engineering Report with every coefficient cited to its section. PE sign-and-seal is available nationwide through our licensed network.</p>
+      <p>For wind speeds in other Florida counties, return to the <a href="https://windloadcalc.com/florida-wind-speed/" style="color:#E8B530;font-weight:600">Florida wind speed hub</a>.</p>
+      <div class="hero-cta" style="justify-content:flex-start;margin-top:18px">
+        <a class="btn btn-gold btn-xl" href="https://windloadcalc.com/collier-county-wind-load-calculator/">Open the Collier wind load calculator →</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-            <div class="faq-item">
-                <button class="faq-question" aria-expanded="false"><span>Why is Collier County 170 mph?</span><span class="chevron">&#9662;</span></button>
-                <div class="faq-answer"><div class="faq-answer-inner">Florida Building Code R301.2(7) hardcodes 170 mph as Collier's Risk Category II basic wind speed because Collier sits inside the southwest Florida hurricane corridor and historical landfalls (Donna 1960, Wilma 2005, Irma 2017) repeatedly pushed Cat 3-plus winds across the entire county. The FBC value supersedes the ASCE 7-22 map for every permit issued by Collier Growth Management.</div></div>
-            </div>
-            <div class="faq-item">
-                <button class="faq-question" aria-expanded="false"><span>What was Hurricane Irma's wind speed in Naples?</span><span class="chevron">&#9662;</span></button>
-                <div class="faq-answer"><div class="faq-answer-inner">Naples experienced a sustained Cat 3 eyewall on the evening of September 10, 2017, with peak gusts measured at 142 mph at Naples Municipal Airport before the anemometer failed. Marco Island recorded the landfall, with reconstruction analyses placing peak gusts at 130-145 mph inland of the eye. The FBC 170 mph design value performed as intended: post-2002 construction designed to that target saw radically lower structural failure rates than older buildings.</div></div>
-            </div>
-            <div class="faq-item">
-                <button class="faq-question" aria-expanded="false"><span>Does Marco Island use a different wind speed than Naples?</span><span class="chevron">&#9662;</span></button>
-                <div class="faq-answer"><div class="faq-answer-inner">No. Marco Island sits inside Collier County and uses the same 170 mph Risk Category II value as Naples, Bonita Bay, Pelican Marsh, Ave Maria, and Immokalee. What changes between the island and the mainland is exposure: most of Marco Island faces an unobstructed Gulf fetch and qualifies as Exposure D for west-facing components, while Naples subdivisions inland of US 41 often qualify as Exposure B or C.</div></div>
-            </div>
-            <div class="faq-item">
-                <button class="faq-question" aria-expanded="false"><span>Is inland Immokalee the same wind speed as coastal Naples?</span><span class="chevron">&#9662;</span></button>
-                <div class="faq-answer"><div class="faq-answer-inner">Yes. Collier's 170 mph applies countywide, so Immokalee (~35 miles inland) carries the same basic wind speed as Naples Beach. The FBC override was specifically written to remove inland/coastal arguments at permit review. The exposure category will almost always be different &mdash; Immokalee's agricultural setting reads as Exposure C, while coastal Naples runs C or D &mdash; but the V value entering ASCE 7-22 Equation 26.10-1 is identical.</div></div>
-            </div>
-            <div class="faq-item">
-                <button class="faq-question" aria-expanded="false"><span>What edition of the Florida Building Code does Collier enforce?</span><span class="chevron">&#9662;</span></button>
-                <div class="faq-answer"><div class="faq-answer-inner">Collier County Growth Management Division currently enforces the Florida Building Code 8th Edition (2023), which adopts ASCE 7-22 by reference and incorporates the R301.2(7) jurisdictional wind speed table. The City of Naples and the City of Marco Island operate their own building divisions but apply the same code edition without additional amendment, so a project crossing municipal boundaries inside the county uses the same 170 mph value throughout.</div></div>
-            </div>
-        </div>
-    </section>
+<!-- FAQ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-eyebrow">Frequently asked</span>
+      <h2>Collier wind speed questions.</h2>
+    </div>
+    <div class="faq">
+      <details open><summary>Why is Collier County 170 mph?</summary><p>Florida Building Code R301.2(7) hardcodes 170 mph as Collier's Risk Category II basic wind speed because Collier sits inside the southwest Florida hurricane corridor.</p><p>Historical landfalls (Donna 1960, Wilma 2005, Irma 2017) repeatedly pushed Cat 3-plus winds across the entire county.</p><p>The FBC value supersedes the ASCE 7-22 map for every permit issued by Collier Growth Management.</p></details>
+      <details><summary>What was Hurricane Irma's wind speed in Naples?</summary><p>Naples experienced a sustained Cat 3 eyewall on the evening of September 10, 2017, with peak gusts measured at 142 mph at Naples Municipal Airport before the anemometer failed.</p><p>Marco Island recorded the landfall, with reconstruction analyses placing peak gusts at 130-145 mph inland of the eye.</p><p>The FBC 170 mph design value performed as intended: post-2002 construction designed to that target saw radically lower structural failure rates than older buildings.</p></details>
+      <details><summary>Does Marco Island use a different wind speed than Naples?</summary><p>No. Marco Island sits inside Collier County and uses the same 170 mph Risk Category II value as Naples, Bonita Bay, Pelican Marsh, Ave Maria, and Immokalee.</p><p>What changes between the island and the mainland is exposure.</p><p>Most of Marco Island faces an unobstructed Gulf fetch and qualifies as Exposure D for west-facing components, while Naples subdivisions inland of US 41 often qualify as Exposure B or C.</p></details>
+      <details><summary>Is inland Immokalee the same wind speed as coastal Naples?</summary><p>Yes. Collier's 170 mph applies countywide, so Immokalee (~35 miles inland) carries the same basic wind speed as Naples Beach.</p><p>The FBC override was specifically written to remove inland/coastal arguments at permit review.</p><p>The exposure category will almost always be different — Immokalee's agricultural setting reads as Exposure C, while coastal Naples runs C or D — but the V value entering ASCE 7-22 Equation 26.10-1 is identical.</p></details>
+      <details><summary>What edition of the Florida Building Code does Collier enforce?</summary><p>Collier County Growth Management Division currently enforces the Florida Building Code 8th Edition (2023), which adopts ASCE 7-22 by reference and incorporates the R301.2(7) jurisdictional wind speed table.</p><p>The City of Naples and the City of Marco Island operate their own building divisions but apply the same code edition without additional amendment.</p><p>So a project crossing municipal boundaries inside the county uses the same 170 mph value throughout.</p></details>
+    </div>
+  </div>
+</section>
 
-    <section class="trust-strip">
-        <div class="trust-strip-inner">
-            <p class="trust-strip-tagline">
-                Calculating wind loads since 2002, online since 2006.
-            </p>
-            <p class="trust-strip-meta">
-                Created in Naples, Florida &middot; One of the very first wind load calculators on the web &middot; In-house FL-licensed P.E. reviews jurisdictional overrides
-            </p>
-            <div class="trust-strip-cta">
-                <a href="../free-wind-load-calculator.html" class="primary">Run the free calculator &rarr;</a>
-                <a href="../wind-load-calculator-landing.html" class="ghost">See the Full Calculator</a>
-            </div>
-        </div>
-    </section>
+<!-- Final / trust -->
+<section class="final">
+  <div class="wrap">
+    <div class="glass2">
+      <h2>Calculating wind loads since 2002, online since 2006.</h2>
+      <p>Hometown number, hometown calculator. Created in Naples, Florida — one of the very first wind load calculators on the web, with an in-house FL-licensed P.E. reviewing jurisdictional overrides.</p>
+      <div class="hero-cta" style="margin-bottom:4px">
+        <a class="btn btn-gold btn-xl" href="https://windloadcalc.com/collier-county-wind-load-calculator/">Run the Collier calculator →</a>
+        <a class="btn btn-ghost btn-xl" href="https://windloadcalc.com/florida-wind-speed/">Other Florida counties</a>
+      </div>
+      <p class="final-meta">PE sign-and-seal available in all 50 states via our licensed engineer network.</p>
+    </div>
+  </div>
+</section>
 
-    <footer class="site-footer">
-        <div class="site-footer-inner">
-            <div>&copy; 2026 WindLoad Solutions. All rights reserved.</div>
-            <div>
-                <a href="../">Home</a> &nbsp;&middot;&nbsp;
-                <a href="../wind-load-calculator-landing.html">Full Calculator</a> &nbsp;&middot;&nbsp;
-                <a href="../terms-of-service.html">Terms</a> &nbsp;&middot;&nbsp;
-                <a href="../privacy-policy.html">Privacy</a>
-            </div>
-        </div>
-    </footer>
+<!-- Footer -->
+<footer class="main-footer"><div class="container">
+  <div class="footer-content">
+    <div class="footer-column"><h3>Contact Information</h3><ul>
+      <li><strong>General Inquiries</strong></li>
+      <li><a href="mailto:info@windloadcalc.com">info@windloadcalc.com</a></li>
+      <li><a href="tel:8332723946">(833) 272-3946</a></li>
+      <li style="margin-top:.6rem"><strong>Sales</strong></li>
+      <li><a href="mailto:sales@windloadcalc.com">sales@windloadcalc.com</a></li>
+    </ul></div>
+    <div class="footer-column"><h3>Wind Load Calculators</h3><ul>
+      <li><a href="https://windloadcalc.com/wind-load-calculator-shop.html">All Calculators &amp; Pricing</a></li>
+      <li><a href="https://windloadcalc.com/shop/windows-doors-shutters.html">Windows, Doors &amp; Shutters</a></li>
+      <li><a href="https://windloadcalc.com/shop/mwfrs.html" rel="nofollow">MWFRS Calculator</a></li>
+      <li><a href="https://windloadcalc.com/shop/roofing.html" rel="nofollow">Roofing Calculator</a></li>
+    </ul></div>
+    <div class="footer-column"><h3>Resources</h3><ul>
+      <li><a href="https://windloadcalc.com/free-wind-load-calculator.html">Free Wind Load Calculator</a></li>
+      <li><a href="https://windloadcalc.com/florida-wind-speed/">Florida Wind Speed</a></li>
+      <li><a href="https://windloadcalc.com/asce-7-wind-load-calculator/">ASCE 7-22 Guide</a></li>
+      <li><a href="https://windloadcalc.com/building-intelligence-platform-shop.html">BIP Plans</a></li>
+    </ul></div>
+    <div class="footer-column"><h3>Company</h3><ul>
+      <li><a href="https://windloadcalc.com/why-us.html">About Us</a></li>
+      <li><a href="https://windloadcalc.com/contact.html">Contact</a></li>
+      <li><a href="https://windloadcalc.com/services.html">Professional Services</a></li>
+      <li><a href="https://windloadcalc.com/privacy-policy.html">Privacy Policy</a></li>
+      <li><a href="https://windloadcalc.com/terms-of-service.html">Terms of Service</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 WindLoadCalc · WindLoad Solutions, LLC — online since 2006. ASCE 7-22 &amp; 7-16 wind load software.</p></div>
+</div></footer>
 
-    <script>
-    (function() {
-        'use strict';
-        const API_BASE = 'https://api.windloadcalc.com';
-        const state = { zip: '34102', risk_cat: '2' };
-        const inp = document.getElementById('co-zip');
-        const badge = document.getElementById('co-badge');
-        let zipTimer = null;
+<script>
+(function(){
+  var nav=document.getElementById('nav');
+  function onScroll(){ nav.classList.toggle('scrolled', window.scrollY>40); }
+  onScroll(); window.addEventListener('scroll',onScroll,{passive:true});
+})();
+(function(){
+  var ham=document.getElementById('hamburger'), fm=document.getElementById('fullMenu'),
+      ov=document.getElementById('navOverlay'), fc=document.getElementById('fmClose');
+  if(!ham||!fm) return;
+  function setMenu(open){ fm.classList.toggle('open',open); ov.classList.toggle('open',open); ham.classList.toggle('open',open);
+    ham.setAttribute('aria-expanded',open); document.body.style.overflow=open?'hidden':''; }
+  ham.addEventListener('click',function(){ setMenu(!fm.classList.contains('open')); });
+  ov.addEventListener('click',function(){ setMenu(false); });
+  if(fc) fc.addEventListener('click',function(){ setMenu(false); });
+  fm.querySelectorAll('a').forEach(function(a){ a.addEventListener('click',function(){ setMenu(false); }); });
+  window.addEventListener('keydown',function(e){ if(e.key==='Escape') setMenu(false); });
+})();
+(function() {
+  'use strict';
+  const API_BASE = 'https://api.windloadcalc.com';
+  const state = { zip: '34102', risk_cat: '2' };
+  const inp = document.getElementById('co-zip');
+  const badge = document.getElementById('co-badge');
+  let zipTimer = null;
 
-        document.querySelectorAll('[data-co-risk]').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('[data-co-risk]').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                state.risk_cat = btn.dataset.coRisk;
-                fetchSpeed();
-            });
-        });
-        inp.addEventListener('input', (e) => {
-            state.zip = e.target.value.replace(/\D/g, '').slice(0, 5);
-            e.target.value = state.zip;
-            clearTimeout(zipTimer);
-            if (state.zip.length !== 5) { badge.classList.remove('visible'); return; }
-            zipTimer = setTimeout(fetchSpeed, 300);
-        });
+  document.querySelectorAll('[data-co-risk]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('[data-co-risk]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      state.risk_cat = btn.dataset.coRisk;
+      fetchSpeed();
+    });
+  });
+  inp.addEventListener('input', (e) => {
+    state.zip = e.target.value.replace(/\D/g, '').slice(0, 5);
+    e.target.value = state.zip;
+    clearTimeout(zipTimer);
+    if (state.zip.length !== 5) { badge.classList.remove('visible'); return; }
+    zipTimer = setTimeout(fetchSpeed, 300);
+  });
 
-        async function fetchSpeed() {
-            if (state.zip.length !== 5) return;
-            try {
-                const url = `${API_BASE}/api/public/wind-speed?zip=${encodeURIComponent(state.zip)}&risk_cat=${encodeURIComponent(state.risk_cat)}`;
-                const res = await fetch(url);
-                const data = await res.json();
-                render(data, res.ok);
-            } catch (err) {
-                render({success: false, error: 'Could not reach lookup service.'}, false);
-            }
-        }
-        function render(data, ok) {
-            if (!ok || !data.success) {
-                badge.className = 'mini-badge error visible';
-                badge.innerHTML = `<div class="mini-badge-eyebrow"><span class="dot"></span>Lookup issue</div><div class="mini-badge-citation">${esc(data.error || 'Unknown error')}</div>`;
-                return;
-            }
-            if (data.source === 'fbc_override') {
-                badge.className = 'mini-badge visible';
-                const sup = data.supersedes_asce_value_mph ? `<br>Supersedes ASCE 7-22 map value: <strong>${data.supersedes_asce_value_mph} mph</strong>.` : '';
-                badge.innerHTML = `
-                    <div class="mini-badge-eyebrow"><span class="dot"></span>FBC Override &middot; Risk Cat ${data.risk_category}</div>
-                    <div class="mini-badge-location">${esc(data.city || '')}, ${esc(data.county || '')} County, FL</div>
-                    <div class="mini-badge-speed">${data.wind_speed_mph}<span class="lbl">mph required</span></div>
-                    <div class="mini-badge-citation"><strong>Florida Building Code R301.2(7)</strong> &mdash; legally enforced.${sup}</div>
-                `;
-            } else {
-                badge.className = 'mini-badge asce-only visible';
-                badge.innerHTML = `
-                    <div class="mini-badge-eyebrow"><span class="dot"></span>ASCE 7-22 Map &middot; Risk Cat ${data.risk_category}</div>
-                    <div class="mini-badge-location">${esc(data.city || '')}, ${esc(data.county || '')} County, FL</div>
-                    <div class="mini-badge-speed">${data.wind_speed_mph}<span class="lbl">mph</span></div>
-                    <div class="mini-badge-citation">ASCE 7-22 Figure 26.5-1 basic wind speed. No FBC override on this ZIP.</div>
-                `;
-            }
-        }
+  async function fetchSpeed() {
+    if (state.zip.length !== 5) return;
+    try {
+      const url = `${API_BASE}/api/public/wind-speed?zip=${encodeURIComponent(state.zip)}&risk_cat=${encodeURIComponent(state.risk_cat)}`;
+      const res = await fetch(url);
+      const data = await res.json();
+      render(data, res.ok);
+    } catch (err) {
+      render({success: false, error: 'Could not reach lookup service.'}, false);
+    }
+  }
+  function render(data, ok) {
+    if (!ok || !data.success) {
+      badge.className = 'mini-badge error visible';
+      badge.innerHTML = `<div class="mini-badge-eyebrow"><span class="dot"></span>Lookup issue</div><div class="mini-badge-citation">${esc(data.error || 'Unknown error')}</div>`;
+      return;
+    }
+    if (data.source === 'fbc_override') {
+      badge.className = 'mini-badge visible';
+      const sup = data.supersedes_asce_value_mph ? `<br>Supersedes ASCE 7-22 map value: <strong>${data.supersedes_asce_value_mph} mph</strong>.` : '';
+      badge.innerHTML = `
+        <div class="mini-badge-eyebrow"><span class="dot"></span>FBC Override · Risk Cat ${data.risk_category}</div>
+        <div class="mini-badge-location">${esc(data.city || '')}, ${esc(data.county || '')} County, FL</div>
+        <div class="mini-badge-speed">${data.wind_speed_mph}<span class="lbl">mph required</span></div>
+        <div class="mini-badge-citation"><strong>Florida Building Code R301.2(7)</strong> — legally enforced.${sup}</div>
+      `;
+    } else {
+      badge.className = 'mini-badge asce-only visible';
+      badge.innerHTML = `
+        <div class="mini-badge-eyebrow"><span class="dot"></span>ASCE 7-22 Map · Risk Cat ${data.risk_category}</div>
+        <div class="mini-badge-location">${esc(data.city || '')}, ${esc(data.county || '')} County, FL</div>
+        <div class="mini-badge-speed">${data.wind_speed_mph}<span class="lbl">mph</span></div>
+        <div class="mini-badge-citation">ASCE 7-22 Figure 26.5-1 basic wind speed. No FBC override on this ZIP.</div>
+      `;
+    }
+  }
 
-        document.querySelectorAll('.faq-question').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const expanded = btn.getAttribute('aria-expanded') === 'true';
-                btn.setAttribute('aria-expanded', String(!expanded));
-                btn.nextElementSibling.classList.toggle('open', !expanded);
-            });
-        });
+  function esc(s) { if (s == null) return ''; return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
 
-        function esc(s) { if (s == null) return ''; return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
-
-        fetchSpeed();
-    })();
-    </script>
+  fetchSpeed();
+})();
+</script>
 </body>
 </html>

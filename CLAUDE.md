@@ -59,6 +59,29 @@ actions or wasted crawl budget. Read before adding new pages or schema markup.
 
 ---
 
+## Shop / Pricing Page Format (apply to EVERY shop page — current + future products)
+
+### Pricing-card CTA placement
+- The primary **CTA (Add to Cart / Choose plan / Contact Sales) goes DIRECTLY UNDER the price
+  block** (price + billing note). **Features / description go BELOW the CTA.** Never pin the
+  button to the bottom of the card.
+- **Why:** (1) all cards' buttons align on one line regardless of feature-list length — a
+  bottom-anchored button makes columns look ragged; (2) the button is reachable on mobile without
+  scrolling past a long list.
+- **How:** card is `display:flex; flex-direction:column`; do NOT use `margin-top:auto` on the CTA
+  or a `flex:1`/`flex-grow:1` on the features that sinks it. Build the DOM as
+  **price → billing-note → CTA → (trial link) → features**, or reorder with flex `order`
+  (CTA below the price block, features after). Keep any "or Start Free Trial" link / billing
+  toggle with the CTA, above the features.
+- Live examples: `building-intelligence-platform-shop.html`, `shop/windows-doors-shutters.html`.
+
+### Card grids — never orphan a card
+- Never leave a lone card alone on a row. Fit one row, else **2 per row** (4 → 2×2, not 3+1).
+  Pricing-tier rows may be 3–4 across on wide desktop but must collapse responsively (→ 2×2 →
+  1 col) so they never orphan. **Always 1 column on mobile.**
+
+---
+
 ## IMPORTANT: Pre-Launch Checklist
 
 ### Before Going Live - MUST DO:

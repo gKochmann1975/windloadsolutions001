@@ -34,7 +34,7 @@
         "applicationCategory": "EngineeringApplication",
         "applicationSubCategory": "Structural Engineering",
         "operatingSystem": "Web Browser",
-        "description": "California wind load calculator from WindLoadCalc — firm founded 2002, online since 2006 (7 years before SkyCiv was founded), the only wind tool that tells you openly when seismic dominates a California project and when wind actually controls. Implements the 2022 California Building Code (CBC) referencing ASCE 7-16. Handles all five California Special Wind Regions (Banning Pass, Tehachapi Pass, Cajon Pass, Altamont Pass, San Gorgonio Pass), Seismic Design Category context, OSHPD/HCAI hospital review awareness, and DSA school review awareness. Built across three CBC adoption cycles.",
+        "description": "California wind load calculator from WindLoadCalc — firm founded 2002, online since 2006, the only wind tool that tells you openly when seismic dominates a California project and when wind actually controls. Implements the 2022 California Building Code (CBC) referencing ASCE 7-16. Handles all five California Special Wind Regions (Banning Pass, Tehachapi Pass, Cajon Pass, Altamont Pass, San Gorgonio Pass), Seismic Design Category context, OSHPD/HCAI hospital review awareness, and DSA school review awareness. Built across three CBC adoption cycles.",
         "url": "https://windloadcalc.com/california-wind-load-calculator/",
         "featureList": [
             "ASCE 7-16 Wind Load Calculations for California",
@@ -94,7 +94,7 @@
             "name": "Why does WindLoadCalc tell me seismic dominates my California project?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Because it is the truth, and no other wind calculator on the web will say it to you. Most California buildings west of the Sierra crest sit in Seismic Design Category D, with E and F pockets near the major active faults. For a normal-mass concrete, masonry, or wood structure, the seismic base shear computed from those SDCs typically exceeds the wind base shear at the same site — often by a wide margin. SkyCiv hands you a wind number and walks away. We hand you the wind number, label it MWFRS, and tell you to put it next to your seismic case before you trust it as the controlling lateral demand. We have been giving CA engineers that honest framing since 2002 — three CBC adoption cycles ago. The tradeoff: you waste zero hours running our number as if it controls when it doesn't."
+                "text": "Because it is the truth, and no other wind calculator on the web will say it to you. Most California buildings west of the Sierra crest sit in Seismic Design Category D, with E and F pockets near the major active faults. For a normal-mass concrete, masonry, or wood structure, the seismic base shear computed from those SDCs typically exceeds the wind base shear at the same site — often by a wide margin. Other online calculators hand you a wind number and walk away. We hand you the wind number, label it MWFRS, and tell you to put it next to your seismic case before you trust it as the controlling lateral demand. We have been giving CA engineers that honest framing since 2002 — three CBC adoption cycles ago. The tradeoff: you waste zero hours running our number as if it controls when it doesn't."
             }
         },{
             "@type": "Question",
@@ -105,10 +105,10 @@
             }
         },{
             "@type": "Question",
-            "name": "How is WindLoadCalc different from SkyCiv for California work?",
+            "name": "How is WindLoadCalc different from generalist national wind calculators for California work?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Two things. First: history. The WindLoadCalc firm was founded in 2002 — eleven years before SkyCiv was founded (2013) — and the online calculator went live on the web in 2006, putting us online 7 years before SkyCiv. We have navigated seven ASCE editions (7-95 through 7-22) and three CBC adoption cycles. That is the moat. Second: framing. SkyCiv is an international engineering tool that supports many codes shallowly. For California, it returns a wind number with no opinion attached. We return a wind number with a seismic-aware context wrapper: MWFRS sits next to a reminder to run the seismic case, C&C is flagged as always-applicable regardless of SDC, and any ZIP that lands in a Special Wind Region gets a warning before you commit to a value. That is what 'seismic-honest' means — the wind output knows it lives in California, not in a generic ASCE vacuum."
+                "text": "Two things. First: history. The WindLoadCalc firm was founded in 2002, and the online calculator went live on the web in 2006. We have navigated seven ASCE editions (7-95 through 7-22) and three CBC adoption cycles. That is the moat. Second: framing. A generalist national wind calculator is an international engineering tool that supports many codes shallowly. For California, it returns a wind number with no opinion attached. We return a wind number with a seismic-aware context wrapper: MWFRS sits next to a reminder to run the seismic case, C&C is flagged as always-applicable regardless of SDC, and any ZIP that lands in a Special Wind Region gets a warning before you commit to a value. That is what 'seismic-honest' means — the wind output knows it lives in California, not in a generic ASCE vacuum."
             }
         },{
             "@type": "Question",
@@ -780,7 +780,7 @@
         <div class="container">
             <div class="article-category">The Only Seismic-Honest California Wind Calculator</div>
             <h1 class="article-title">California Wind Load Calculator</h1>
-            <p class="article-subtitle">WindLoadCalc is the only wind calculator that will tell you seismic controls most of your California project — and exactly when wind takes over. We've been honest about it since our firm was founded in <strong>2002</strong>, and the online calculator has been delivering that framing on the web since <strong>2006</strong> — 7 years online before SkyCiv (2013) handed you a generic CA wind speed without context. CBC 2022 + ASCE 7-16 baked in, five Special Wind Regions flagged at the ZIP.</p>
+            <p class="article-subtitle">WindLoadCalc is the only wind calculator that will tell you seismic controls most of your California project — and exactly when wind takes over. We've been honest about it since our firm was founded in <strong>2002</strong>, and the online calculator has been delivering that framing on the web since <strong>2006</strong> — long before generalist national calculators handed you a generic CA wind speed without context. CBC 2022 + ASCE 7-16 baked in, five Special Wind Regions flagged at the ZIP.</p>
 
             <form class="zip-form" id="zip-form" onsubmit="return launchCalc(event)">
                 <input type="text" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" class="zip-input" id="zip-input" placeholder="Enter California ZIP (e.g. 90015)" aria-label="California ZIP code">
@@ -793,7 +793,7 @@
     <!-- Main content -->
     <div class="content-wrapper">
         <main class="main-content">
-            <p>California has been the strangest wind-load market on the web for two decades, and nobody talks about why. Every other wind calculator was built on the unspoken assumption that wind is the lateral case worth caring about. That assumption is wrong for California west of the Sierra Nevada, where the Seismic Design Category typically wipes the floor with wind base shear. SkyCiv (founded 2013) does not say that — they hand you a number. MecaWind does not say that. Engineering Express does not say that. <strong>WindLoadCalc has been saying it since 2002 at the firm level, and online since 2006</strong>, because telling a California engineer the truth about their lateral demand is more valuable than handing them a wind number with no context attached.</p>
+            <p>California has been the strangest wind-load market on the web for two decades, and nobody talks about why. Every other wind calculator was built on the unspoken assumption that wind is the lateral case worth caring about. That assumption is wrong for California west of the Sierra Nevada, where the Seismic Design Category typically wipes the floor with wind base shear. The generalist national wind calculators do not say that — they hand you a number. <strong>WindLoadCalc has been saying it since 2002 at the firm level, and online since 2006</strong>, because telling a California engineer the truth about their lateral demand is more valuable than handing them a wind number with no context attached.</p>
 
             <p>That is the whole pitch of this page. Wind still matters in California — for lightweight buildings, for tall slender appurtenances, for components and cladding on every single project, for flat-roof solar, and for anything sited in one of California's <strong>five Special Wind Regions</strong> (Banning, Tehachapi, Cajon, Altamont, San Gorgonio). For those cases, you need a fast, accurate ASCE 7-16 calculator that knows California. The rest of the time, you need a wind number you can sanity-check next to your seismic case so you can confidently say "seismic governs, wind is fine, move on." Both jobs are what this tool does.</p>
 
@@ -806,7 +806,7 @@
 
             <div class="info-box">
                 <h4><i class="fas fa-star"></i> California expertise — firm since 2002, online since 2006 — the moat</h4>
-                <p><strong>Three CBC adoption cycles tracked</strong> (2010 CBC → 2013 → 2016 → 2019 → 2022) · <strong>Five Special Wind Regions mapped</strong> at the ZIP (Banning, Tehachapi, Cajon, Altamont, San Gorgonio) · <strong>Seismic-aware framing</strong> built into every California output — no other calculator does this · <strong>24+ years</strong> of firm-level California wind load engineering, with the online calculator on the web since 2006 · <strong>Seven ASCE editions navigated</strong> (7-95, 7-98, 7-02, 7-05, 7-10, 7-16, 7-22). SkyCiv was founded in 2013 — firm-vs-firm we had an 11-year head start, online-vs-online we had a 7-year head start.</p>
+                <p><strong>Three CBC adoption cycles tracked</strong> (2010 CBC → 2013 → 2016 → 2019 → 2022) · <strong>Five Special Wind Regions mapped</strong> at the ZIP (Banning, Tehachapi, Cajon, Altamont, San Gorgonio) · <strong>Seismic-aware framing</strong> built into every California output — no other calculator does this · <strong>24+ years</strong> of firm-level California wind load engineering, with the online calculator on the web since 2006 · <strong>Seven ASCE editions navigated</strong> (7-95, 7-98, 7-02, 7-05, 7-10, 7-16, 7-22). We had a multi-year head start over the generalist national calculators that came later — both at the firm level and online.</p>
             </div>
 
             <h2 id="wind-vs-seismic">Wind vs Seismic in California — When Wind Actually Controls</h2>
@@ -1039,7 +1039,7 @@
 
             <details class="faq-item">
                 <summary>Why does WindLoadCalc tell me seismic dominates my California project?</summary>
-                <div class="faq-answer">Because it is the truth, and no other wind calculator on the web will say it to you. Most California buildings west of the Sierra crest sit in Seismic Design Category D, with E and F pockets near the major active faults. For a normal-mass concrete, masonry, or wood structure, the seismic base shear computed from those SDCs typically exceeds the wind base shear at the same site — often by a wide margin. SkyCiv hands you a wind number and walks away. We hand you the wind number, label it MWFRS, and tell you to put it next to your seismic case before you trust it as the controlling lateral demand. We have been giving CA engineers that honest framing since 2002 — three CBC adoption cycles ago. The tradeoff: you waste zero hours running our number as if it controls when it doesn't.</div>
+                <div class="faq-answer">Because it is the truth, and no other wind calculator on the web will say it to you. Most California buildings west of the Sierra crest sit in Seismic Design Category D, with E and F pockets near the major active faults. For a normal-mass concrete, masonry, or wood structure, the seismic base shear computed from those SDCs typically exceeds the wind base shear at the same site — often by a wide margin. Other online calculators hand you a wind number and walk away. We hand you the wind number, label it MWFRS, and tell you to put it next to your seismic case before you trust it as the controlling lateral demand. We have been giving CA engineers that honest framing since 2002 — three CBC adoption cycles ago. The tradeoff: you waste zero hours running our number as if it controls when it doesn't.</div>
             </details>
 
             <details class="faq-item">
@@ -1048,8 +1048,8 @@
             </details>
 
             <details class="faq-item">
-                <summary>How is WindLoadCalc different from SkyCiv for California work?</summary>
-                <div class="faq-answer">Two things. First: history. The WindLoadCalc firm was founded in 2002 — eleven years before SkyCiv was founded (2013) — and the online calculator went live on the web in 2006, putting us online 7 years before SkyCiv. We have navigated seven ASCE editions (7-95 through 7-22) and three CBC adoption cycles. That is the moat. Second: framing. SkyCiv is an international engineering tool that supports many codes shallowly. For California, it returns a wind number with no opinion attached. We return a wind number with a seismic-aware context wrapper: MWFRS sits next to a reminder to run the seismic case, C&C is flagged as always-applicable regardless of SDC, and any ZIP that lands in a Special Wind Region gets a warning before you commit to a value. That is what "seismic-honest" means — the wind output knows it lives in California, not in a generic ASCE vacuum.</div>
+                <summary>How is WindLoadCalc different from generalist national wind calculators for California work?</summary>
+                <div class="faq-answer">Two things. First: history. The WindLoadCalc firm was founded in 2002, and the online calculator went live on the web in 2006. We have navigated seven ASCE editions (7-95 through 7-22) and three CBC adoption cycles. That is the moat. Second: framing. A generalist national wind calculator is an international engineering tool that supports many codes shallowly. For California, it returns a wind number with no opinion attached. We return a wind number with a seismic-aware context wrapper: MWFRS sits next to a reminder to run the seismic case, C&C is flagged as always-applicable regardless of SDC, and any ZIP that lands in a Special Wind Region gets a warning before you commit to a value. That is what "seismic-honest" means — the wind output knows it lives in California, not in a generic ASCE vacuum.</div>
             </details>
 
             <details class="faq-item">

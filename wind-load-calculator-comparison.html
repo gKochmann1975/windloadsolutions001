@@ -1182,8 +1182,13 @@
         }
 
         @media (max-width: 768px) {
+            html, body { overflow-x: hidden; max-width: 100%; }
             body {
-                padding: 1rem;
+                padding: 0;            /* was 1rem — caused the inset "frame"; full-bleed like other pages */
+            }
+            .container {
+                padding-left: 1rem;    /* keep a content gutter so text doesn't touch the edges */
+                padding-right: 1rem;
             }
 
             .page-header h1 {

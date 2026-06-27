@@ -3,7 +3,7 @@
    ================================================================ */
 
 .building-intelligence-platform {
-    background: #070a18;
+    background: transparent; /* let the page-level aurora gradient show through */
     color: #e8edf7;
     padding: 2rem 0;
     min-height: 100vh;
@@ -2508,4 +2508,58 @@ svg {
 #advanced-search,
 #multi-compare {
     scroll-margin-top: 150px;
+}
+/* ================================================================
+   ICON ANIMATIONS + HOVER  (added 2026-06-27)
+   Gentle ambient motion matched to each icon's meaning, with an
+   intensified pop + colored glow on hover. Honors reduced-motion.
+   ================================================================ */
+.platform-icon svg,
+.nav-card-icon svg,
+.feature-large-icon svg { transform-origin: center; will-change: transform; }
+
+/* Ambient (slow, low-amplitude) */
+.nav-card-icon.velocity-icon svg,
+.feature-large-icon.velocity-icon svg { animation: wlc-sway 3.2s ease-in-out infinite; }
+.nav-card-icon.hurricane-icon svg,
+.feature-large-icon.hurricane-icon svg { animation: wlc-spin 7s linear infinite; }
+.nav-card-icon.solar-icon svg,
+.feature-large-icon.solar-icon svg { animation: wlc-spin 14s linear infinite; }
+.nav-card-icon.filter-icon svg,
+.feature-large-icon.filter-icon svg { animation: wlc-bob 2.8s ease-in-out infinite; }
+.nav-card-icon.compare-icon svg,
+.feature-large-icon.compare-icon svg { animation: wlc-eq 2.4s ease-in-out infinite; transform-origin: center bottom; }
+.platform-icon svg { animation: wlc-pulse 2.6s ease-in-out infinite; }
+
+/* Tile lift + icon pop on hover (whole card, the icon-card, or the tile itself) */
+.nav-card-icon, .feature-large-icon, .platform-icon { transition: transform .3s ease, box-shadow .3s ease; }
+.nav-card:hover .nav-card-icon,
+.feature-icon-card:hover .feature-large-icon,
+.nav-card-icon:hover,
+.feature-large-icon:hover { transform: scale(1.12) rotate(-3deg); }
+
+/* Per-type colored glow on hover */
+.nav-card:hover .nav-card-icon.velocity-icon, .feature-icon-card:hover .feature-large-icon.velocity-icon, .nav-card-icon.velocity-icon:hover, .feature-large-icon.velocity-icon:hover { box-shadow: 0 10px 28px rgba(0,102,255,.55); }
+.nav-card:hover .nav-card-icon.hurricane-icon, .feature-icon-card:hover .feature-large-icon.hurricane-icon, .nav-card-icon.hurricane-icon:hover, .feature-large-icon.hurricane-icon:hover { box-shadow: 0 10px 28px rgba(220,38,38,.55); }
+.nav-card:hover .nav-card-icon.solar-icon, .feature-icon-card:hover .feature-large-icon.solar-icon, .nav-card-icon.solar-icon:hover, .feature-large-icon.solar-icon:hover { box-shadow: 0 10px 28px rgba(255,208,0,.55); }
+.nav-card:hover .nav-card-icon.filter-icon, .feature-icon-card:hover .feature-large-icon.filter-icon, .nav-card-icon.filter-icon:hover, .feature-large-icon.filter-icon:hover { box-shadow: 0 10px 28px rgba(255,107,0,.55); }
+.nav-card:hover .nav-card-icon.compare-icon, .feature-icon-card:hover .feature-large-icon.compare-icon, .nav-card-icon.compare-icon:hover, .feature-large-icon.compare-icon:hover { box-shadow: 0 10px 28px rgba(0,221,85,.55); }
+
+/* Intensify the icon motion on hover */
+.nav-card:hover .solar-icon svg, .feature-icon-card:hover .feature-large-icon.solar-icon svg, .solar-icon:hover svg { animation-duration: 3.5s; }
+.nav-card:hover .hurricane-icon svg, .feature-icon-card:hover .feature-large-icon.hurricane-icon svg, .hurricane-icon:hover svg { animation-duration: 1.8s; }
+.nav-card:hover .velocity-icon svg, .feature-icon-card:hover .feature-large-icon.velocity-icon svg, .velocity-icon:hover svg { animation-duration: 1.4s; }
+.nav-card:hover .filter-icon svg, .feature-icon-card:hover .feature-large-icon.filter-icon svg, .filter-icon:hover svg { animation-duration: 1.2s; }
+.nav-card:hover .compare-icon svg, .feature-icon-card:hover .feature-large-icon.compare-icon svg, .compare-icon:hover svg { animation-duration: 1s; }
+
+@keyframes wlc-spin { to { transform: rotate(360deg); } }
+@keyframes wlc-sway { 0%,100% { transform: translateX(-2px) rotate(-5deg); } 50% { transform: translateX(2px) rotate(5deg); } }
+@keyframes wlc-bob { 0%,100% { transform: translateY(2px); } 50% { transform: translateY(-2px); } }
+@keyframes wlc-eq { 0%,100% { transform: scaleY(.82); } 50% { transform: scaleY(1.12); } }
+@keyframes wlc-pulse { 0%,100% { transform: scale(1); opacity: .9; } 50% { transform: scale(1.08); opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+    .platform-icon svg, .nav-card-icon svg, .feature-large-icon svg { animation: none !important; }
+    .nav-card:hover .nav-card-icon, .feature-icon-card:hover .feature-large-icon,
+    .nav-card-icon:hover, .feature-large-icon:hover { transform: none; }
 }

@@ -48,6 +48,19 @@
             box-sizing: border-box;
         }
         
+        /* ===== Canonical brand background (aurora gradient + grid), matches index.html/why-us ===== */
+        .aurora{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+        .aurora span{position:absolute;border-radius:50%;filter:blur(90px);opacity:.55}
+        .aurora .a1{width:620px;height:620px;background:#0018FF;top:-180px;left:-120px;animation:drift1 18s cubic-bezier(.22,.61,.36,1) infinite alternate}
+        .aurora .a2{width:540px;height:540px;background:#10B981;bottom:-200px;right:-120px;opacity:.32;animation:drift2 22s cubic-bezier(.22,.61,.36,1) infinite alternate}
+        .aurora .a3{width:420px;height:420px;background:#181E57;top:30%;right:18%;opacity:.6;animation:drift1 26s cubic-bezier(.22,.61,.36,1) infinite alternate-reverse}
+        @keyframes drift1{to{transform:translate(80px,60px) scale(1.15)}}
+        @keyframes drift2{to{transform:translate(-70px,-50px) scale(1.1)}}
+        .grid-tex{position:fixed;inset:0;z-index:-1;pointer-events:none;
+          background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+          background-size:54px 54px;mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000 40%,transparent 100%);-webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000 40%,transparent 100%)}
+        @media (prefers-reduced-motion: reduce){ .aurora span{animation:none} }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
@@ -2217,7 +2230,7 @@
            reskin the app, never the nav/hero/marketing sections.
            ================================================================ */
         #building-intelligence-platform .building-intelligence-platform {
-            background: #070a18;
+            background: transparent; /* aurora gradient shows through */
             color: #e8edf7;
         }
 
@@ -2387,7 +2400,7 @@
     <!-- Leaflet CSS (required for maps) -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <!-- Building Intelligence Platform CSS -->
-    <link rel="stylesheet" href="./css/building-intelligence-platform.css?v=20260627-dark">
+    <link rel="stylesheet" href="./css/building-intelligence-platform.css?v=20260627-aurora">
 
     <!-- Google Sign-In SDK -->
     <script src="https://accounts.google.com/gsi/client" async defer></script>
@@ -2440,7 +2453,10 @@
     </style>
 </head>
 <body>
-    
+    <!-- Canonical brand background: drifting aurora gradient + grid texture (matches index.html/why-us) -->
+    <div class="aurora" aria-hidden="true"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
+    <div class="grid-tex" aria-hidden="true"></div>
+
 <!-- ================================================================
      TRIAL SYSTEM SVG ICON DEFINITIONS
      ================================================================ -->
@@ -2854,7 +2870,7 @@
         
     <!-- Building Intelligence Platform JS -->
     <script src="./trial-manager.js?v=20251126b"></script>
-    <script src="./building-intelligence-platform.js?v=20260627-dark"></script>
+    <script src="./building-intelligence-platform.js?v=20260627-aurora"></script>
     <script>
         console.log('📊 Building Intelligence Platform loaded');
 

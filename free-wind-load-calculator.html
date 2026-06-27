@@ -490,7 +490,7 @@
             margin: 0 auto;
             text-align: center;
             position: relative;
-            z-index: 1;
+            z-index: 2;
             color: white;
         }
         .hero-eyebrow {
@@ -1481,6 +1481,8 @@
         }
 
         /* Hero aurora — body stays light & usable; aurora lives in the dark hero only */
+        .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+        .hero-veil{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(135deg,rgba(2,6,23,.74) 0%,rgba(10,15,40,.56) 100%)}
         .hero-aurora{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none}
         .hero-aurora span{position:absolute;border-radius:50%;filter:blur(80px);opacity:.5}
         .hero-aurora span:nth-child(1){width:480px;height:480px;background:#0018FF;top:-160px;left:-100px;animation:heroDrift 20s ease-in-out infinite alternate}
@@ -1571,7 +1573,7 @@
           <a class="l" href="https://windloadcalc.com/building-intelligence-platform-landing.html">BIP</a>
           <a class="l" href="https://windloadcalc.com/why-us.html">Why us</a>
           <a class="btn btn-ghost" href="https://windloadcalc.com/login.html">Log in</a>
-          <a class="btn btn-primary" href="https://windloadcalc.com/wind-load-calculator-shop.html">Start free trial</a>
+          <a class="btn btn-primary" href="https://windloadcalc.com/free-wind-load-calculator.html">Start free trial</a>
         </div>
         <button class="hamburger" id="hamburger" aria-label="Open full menu" aria-expanded="false" aria-controls="fullMenu"><span></span><span></span><span></span></button>
       </div>
@@ -1616,6 +1618,12 @@
     <!-- HERO  — full-width centered headline             -->
     <!-- ============================================ -->
     <section class="hero">
+        <video class="hero-video" autoplay muted loop playsinline preload="metadata"
+               poster="images/video-posters/windload-free-calculator.jpg">
+            <source src="videos/windload-free-calculator.webm" type="video/webm">
+            <source src="videos/windload-free-calculator.mp4" type="video/mp4">
+        </video>
+        <div class="hero-veil" aria-hidden="true"></div>
         <div class="hero-aurora" aria-hidden="true"><span></span><span></span><span></span></div>
         <div class="hero-inner">
             <span class="hero-eyebrow">Free Wind Load Calculator &middot; No signup &middot; No meter</span>

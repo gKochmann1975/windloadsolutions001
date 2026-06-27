@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="shortcut icon" href="/favicon.ico?v=2">
+
+    <title>WindLoadCalc vs RISA-3D / RISACalc: Current-Code Wind &amp; PE Seal (2026)</title>
+    <meta name="description" content="RISACalc's wind generator stops at ASCE 7-16; RISA-3D is a desktop FEA suite. WindLoadCalc runs ASCE 7-22, auto-applies Florida HVHZ values, and seals in all 50 states. An honest side-by-side.">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="WindLoadCalc vs RISA: Wind Specialist + Seal vs FEA Suite">
+    <meta property="og:description" content="RISA-3D is a real structural-analysis workhorse — but its wind generator tops out at ASCE 7-16 and seals nothing. WindLoadCalc does current-code wind plus a PE sign-and-seal in all 50 states.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://windloadcalc.com/vs-risa-new.html">
+    <meta property="og:image" content="https://windloadcalc.com/images/video-posters/wind-load-calculator-comparison.jpg">
+    <meta property="og:site_name" content="WindLoadCalc">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="WindLoadCalc vs RISA: Wind Specialist + Seal vs FEA Suite">
+    <meta name="twitter:description" content="Keep RISA-3D for FEA. Use WindLoadCalc for ASCE 7-22 wind numbers, Florida HVHZ accuracy, and a stamped deliverable.">
+    <meta name="twitter:image" content="https://windloadcalc.com/images/video-posters/wind-load-calculator-comparison.jpg">
+
+    <link rel="canonical" href="https://windloadcalc.com/vs-risa-new.html">
+
+    <!-- FAQPage schema — 1:1 with the visible FAQ (no fake ratings) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "Can RISACalc produce an ASCE 7-22 wind result?", "acceptedAnswer": { "@type": "Answer", "text": "Not according to RISA's own documentation. The RISACalc wind/seismic load generator supports ASCE 7-10 and ASCE 7-16 only, per RISA's help docs and the v4.2 release notes — it has no ASCE 7-22 wind option. WindLoadCalc runs ASCE 7-22 directly (and 7-16 when a project still calls for it), so you are pulling pressures from the edition the reviewer expects on a 2026 permit set." } },
+        { "@type": "Question", "name": "Does RISA stamp or seal drawings?", "acceptedAnswer": { "@type": "Answer", "text": "No. RISA-3D and RISACalc are software tools; nothing in their product pages offers a licensed-PE sign-and-seal deliverable in any state. WindLoadCalc pairs the calculation with an actual sealing service — an in-house Florida P.E. for FL work and a partner-PE network for the other states — so calculate and seal happen in one workflow." } },
+        { "@type": "Question", "name": "I already own RISA-3D — why add a separate wind tool?", "acceptedAnswer": { "@type": "Answer", "text": "Keep RISA-3D for the finite-element analysis and member design it does well. The wind generator bundled inside the RISA stack is a secondary feature that tops out at ASCE 7-16, outputs the raw map value with no Florida HVHZ override, and produces no per-coefficient citations or AutoCAD-ready schedule. Use WindLoadCalc for the current-code wind numbers and the sealed, permit-ready deliverable, then carry the loads back into RISA-3D for your structural model." } },
+        { "@type": "Question", "name": "Does WindLoadCalc do full 3D structural analysis like RISA-3D?", "acceptedAnswer": { "@type": "Answer", "text": "No, and it is not trying to. RISA-3D is a genuine finite-element structural-analysis and multi-material design suite (steel, concrete, wood, masonry, aluminum, cold-formed). WindLoadCalc is a dedicated wind-load specialist that produces the design pressures, certifications, and reports — it does not replace a general FEA engine. The two are complementary, not competing for the same job." } },
+        { "@type": "Question", "name": "What does WindLoadCalc cost compared with RISA?", "acceptedAnswer": { "@type": "Answer", "text": "WindLoadCalc plans start at $35/month with a 7-day free trial and no credit card, and everything runs in the browser. Published third-party figures put RISACalc near $1,000/year and RISA-3D roughly $2,070–$2,290/year per license (exact figures unverified); RISA-3D is also a Windows desktop install you have to manage. You can confirm WindLoadCalc's output against your RISA numbers using the free public tool before paying anything." } },
+        { "@type": "Question", "name": "How does WindLoadCalc handle Florida HVHZ wind speeds?", "acceptedAnswer": { "@type": "Answer", "text": "It auto-applies the Florida Building Code 8th Edition (2023) HVHZ overrides — for example, Miami-Dade's legally enforceable 175 mph value under FBC R301.2(7) — instead of just echoing the raw ASCE 7-22 map number. A wind generator that returns only the map result, like the one inside the RISA stack, leaves that jurisdictional step to you." } }
+      ]
+    }
+    </script>
+
+    <!-- Breadcrumb schema -->
+    <script type="application/ld+json">
+    { "@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://windloadcalc.com/"},
+      {"@type":"ListItem","position":2,"name":"Comparison","item":"https://windloadcalc.com/wind-load-calculator-comparison.html"},
+      {"@type":"ListItem","position":3,"name":"vs RISA","item":"https://windloadcalc.com/vs-risa-new.html"}
+    ]}
+    </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#0018FF; --blue-deep:#181E57; --blue-bright:#3a5bff;
+  --muted:#94a3b8; --line:rgba(255,255,255,.08); --bg:#070a18; --surface:rgba(255,255,255,.04);
+  --gold:#E8B530; --luxe:cubic-bezier(.22,.61,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:#e8edf7;
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.55}
+a{text-decoration:none;color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+.aurora{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.aurora span{position:absolute;border-radius:50%;filter:blur(90px);opacity:.5}
+.aurora .a1{width:620px;height:620px;background:#0018FF;top:-180px;left:-120px;animation:drift1 18s var(--luxe) infinite alternate}
+.aurora .a2{width:540px;height:540px;background:#10B981;bottom:-200px;right:-120px;opacity:.28;animation:drift2 22s var(--luxe) infinite alternate}
+.aurora .a3{width:420px;height:420px;background:#181E57;top:34%;right:16%;opacity:.55;animation:drift1 26s var(--luxe) infinite alternate-reverse}
+@keyframes drift1{to{transform:translate(80px,60px) scale(1.15)}}
+@keyframes drift2{to{transform:translate(-70px,-50px) scale(1.1)}}
+.grid-tex{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:54px 54px;mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000 40%,transparent 100%)}
+
+/* Nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:.3s var(--luxe);background:transparent;border-bottom:1px solid transparent}
+nav.scrolled{backdrop-filter:blur(14px);border-bottom:1px solid var(--line);
+  background:linear-gradient(90deg, rgba(240,244,255,.97) 0%, rgba(223,232,255,.93) 13%, rgba(22,28,58,.92) 46%, rgba(7,10,24,.95) 100%)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;padding:12px clamp(24px,4vw,48px);transition:padding .3s var(--luxe)}
+nav.scrolled .nav-in{padding:8px clamp(24px,4vw,48px)}
+.logo{z-index:1001;display:flex;align-items:center}
+.logo-image{height:84px;width:auto;display:block;filter:drop-shadow(0 2px 10px rgba(0,0,0,.4));transition:all .3s ease}
+nav.scrolled .logo-image{height:64px;filter:none}
+.nav-right{display:flex;align-items:center;gap:18px}
+.nav-links{display:flex;align-items:center;gap:28px}
+.nav-links a.l{position:relative;font-size:14px;color:#fff;font-weight:500;opacity:.88;transition:opacity .2s var(--luxe);text-shadow:0 1px 8px rgba(0,0,0,.45)}
+.nav-links a.l:hover{opacity:1}
+.btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;border-radius:11px;cursor:pointer;transition:.25s var(--luxe);border:none;font-family:inherit}
+.btn-ghost{background:rgba(255,255,255,.06);color:#fff;padding:11px 18px;font-size:14px;border:1px solid rgba(255,255,255,.22)}
+.btn-ghost:hover{border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.12)}
+.btn-primary{background:linear-gradient(135deg,#0018FF,#2540ff);color:#fff;padding:12px 22px;font-size:14px;box-shadow:0 10px 30px rgba(0,24,255,.45)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(0,24,255,.6)}
+.hamburger{display:flex;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;z-index:60}
+.hamburger span{display:block;width:26px;height:3px;border-radius:2px;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.6);transition:.3s var(--luxe)}
+.hamburger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+.nav-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);opacity:0;visibility:hidden;transition:.3s var(--luxe);z-index:55}
+.nav-overlay.open{opacity:1;visibility:visible}
+.full-menu{position:fixed;top:0;right:0;height:100vh;height:100dvh;width:min(90vw,380px);z-index:60;
+  background:rgba(10,14,30,.985);backdrop-filter:blur(18px);border-left:1px solid var(--line);
+  box-shadow:-24px 0 60px rgba(0,0,0,.55);transform:translateX(100%);transition:transform .3s var(--luxe);overflow-y:auto;padding:74px 0 28px}
+.full-menu.open{transform:translateX(0)}
+.fm-head{display:flex;align-items:center;justify-content:space-between;padding:0 26px 14px;border-bottom:1px solid var(--line)}
+.fm-head span{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.fm-close{background:none;border:none;color:#fff;font-size:24px;line-height:1;cursor:pointer;padding:2px 8px}
+.fm-group{padding:14px 26px 4px;border-bottom:1px solid var(--line)}
+.fm-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9db0ff;margin-bottom:6px}
+.fm-group a{display:block;padding:9px 0;font-size:15px;color:#dbe3f5;font-weight:500;transition:color .15s}
+.fm-group a:hover{color:#fff}
+.fm-actions{display:flex;flex-direction:column;gap:10px;padding:20px 26px 0}
+.fm-actions .btn{width:100%;justify-content:center;padding:14px;font-size:15px}
+
+/* Hero */
+.hero-stage{position:relative;overflow:hidden;isolation:isolate}
+.hero-veil{position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(ellipse 70% 60% at 50% 26%, rgba(0,24,255,.18), transparent 62%),
+    linear-gradient(180deg, rgba(7,10,24,.66) 0%, rgba(7,10,24,.42) 32%, rgba(7,10,24,.72) 74%, var(--bg) 100%)}
+header{position:relative;z-index:2;padding:165px 0 70px;text-align:center}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;background:rgba(7,10,24,.5);border:1px solid rgba(58,91,255,.45);
+  color:#c3cdff;font-size:13px;font-weight:600;padding:8px 16px;border-radius:999px;margin-bottom:24px;backdrop-filter:blur(6px)}
+.eyebrow .dot{width:7px;height:7px;border-radius:50%;background:#34D399;box-shadow:0 0 0 4px rgba(52,211,153,.25)}
+h1{font-size:clamp(34px,5.2vw,58px);line-height:1.05;font-weight:800;letter-spacing:-.025em;max-width:20ch;margin:0 auto 16px;text-shadow:0 4px 28px rgba(0,0,0,.45)}
+h1 .grad{background:linear-gradient(110deg,#34D399,#10B981 55%,#3a5bff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{font-size:clamp(16px,2vw,19px);color:#d3dbef;max-width:70ch;margin:0 auto 22px;text-shadow:0 2px 14px rgba(0,0,0,.5)}
+.sub strong{color:#fff}
+.hero-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:8px 0 18px}
+.btn-xl{padding:15px 28px;font-size:15px;border-radius:13px}
+.hero-trust{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;font-size:13px;color:#cdd6ec}
+.hero-trust span{display:inline-flex;align-items:center;gap:6px}
+.hero-trust .ck{color:#34D399;font-weight:800}
+
+section{position:relative;z-index:1;padding:62px 0}
+.sec-head{text-align:center;max-width:70ch;margin:0 auto 40px}
+.sec-head h2{font-size:clamp(26px,3.2vw,38px);font-weight:800;letter-spacing:-.02em;margin-bottom:12px}
+.sec-head p{color:#aeb8cf;font-size:16px}
+
+/* TL;DR verdict */
+.verdict{max-width:920px;margin:0 auto;background:linear-gradient(160deg,rgba(0,24,255,.14),rgba(16,185,129,.08));
+  border:1px solid rgba(58,91,255,.4);border-radius:20px;padding:30px 30px;box-shadow:0 18px 48px rgba(0,24,255,.18)}
+.verdict .lab{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.verdict p{font-size:16px;color:#d8e0f3;margin-bottom:12px}
+.verdict p:last-child{margin-bottom:0}
+.verdict strong{color:#fff}
+
+/* Two-sided cards */
+.sides{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.side{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:28px 26px;box-shadow:0 12px 32px rgba(0,0,0,.32)}
+.side.win{border-color:rgba(52,211,153,.5);background:linear-gradient(165deg,rgba(16,185,129,.12),rgba(255,255,255,.03))}
+.side .badge{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:4px 10px;border-radius:999px;margin-bottom:14px;color:#fff;background:rgba(255,255,255,.12)}
+.side.win .badge{color:#04221a;background:linear-gradient(135deg,#34D399,#10B981)}
+.side h3{font-size:20px;font-weight:800;margin-bottom:14px;letter-spacing:-.01em}
+.side ul{list-style:none}
+.side ul li{font-size:14px;color:#c2cce0;padding:7px 0 7px 22px;position:relative;line-height:1.5}
+.side ul li::before{content:"";position:absolute;left:0;top:14px;width:7px;height:7px;border-radius:50%;background:#9db0ff}
+.side.win ul li::before{background:#34D399}
+.side ul li b{color:#fff}
+
+/* Differentiator cards */
+.diff-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.diff{position:relative;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:28px 24px;box-shadow:0 12px 32px rgba(0,0,0,.32);transition:.35s var(--luxe)}
+.diff:hover{transform:translateY(-5px);border-color:rgba(58,91,255,.5);box-shadow:0 20px 44px rgba(0,24,255,.18)}
+.diff .badge{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#04221a;background:linear-gradient(135deg,#34D399,#10B981);padding:4px 10px;border-radius:999px;margin-bottom:14px}
+.diff h3{font-size:18px;font-weight:800;margin-bottom:8px;letter-spacing:-.01em}
+.diff p{font-size:14px;color:#aeb8cf}
+.diff p b{color:#dbe3f5}
+
+/* Moat callout */
+.moat{background:linear-gradient(135deg,rgba(0,24,255,.16),rgba(16,185,129,.1));border:1px solid rgba(58,91,255,.42);border-radius:24px;padding:42px 38px;text-align:center;max-width:980px;margin:0 auto;box-shadow:0 30px 80px rgba(0,24,255,.22)}
+.moat .lab{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.moat h2{font-size:clamp(24px,3vw,34px);font-weight:800;letter-spacing:-.02em;margin-bottom:14px}
+.moat p{font-size:16px;color:#d3dbef;max-width:66ch;margin:0 auto 10px}
+.moat p strong{color:#fff}
+
+/* Comparison table */
+.cmp-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:16px;background:var(--surface)}
+.cmp{width:100%;border-collapse:collapse;font-size:13.5px;min-width:720px}
+.cmp th,.cmp td{padding:13px 16px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+.cmp thead th{font-weight:800;font-size:13px}
+.cmp thead th.ours{background:rgba(16,185,129,.12);color:#6ee7b7}
+.cmp td:first-child,.cmp th:first-child{color:#dbe3f5;font-weight:600}
+.cmp td.ours{color:#d8f5ec;font-weight:600;background:rgba(16,185,129,.05)}
+.cmp tbody tr:last-child td{border-bottom:none}
+.cmp tbody tr:hover{background:rgba(255,255,255,.03)}
+.cmp .best{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.05em;color:#04221a;background:linear-gradient(135deg,#34D399,#10B981);padding:2px 8px;border-radius:999px;margin-left:6px}
+
+/* FAQ */
+.faq{max-width:860px;margin:0 auto}
+.faq details{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 22px;margin-bottom:12px}
+.faq summary{font-size:16px;font-weight:700;cursor:pointer;list-style:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";float:right;color:#9db0ff;font-weight:800}
+.faq details[open] summary::after{content:"–"}
+.faq p{margin-top:11px;color:#aeb8cf;font-size:14.5px}
+
+.final{text-align:center}
+.final .glass2{background:linear-gradient(160deg,rgba(0,24,255,.18),rgba(16,185,129,.1));border:1px solid rgba(58,91,255,.4);border-radius:26px;padding:54px 40px;box-shadow:0 40px 100px rgba(0,24,255,.25)}
+.final h2{font-size:clamp(28px,3.6vw,42px);font-weight:800;letter-spacing:-.02em;margin-bottom:14px}
+.final p{color:#cdd6ec;font-size:17px;max-width:62ch;margin:0 auto 22px}
+.final p a{color:#34D399;font-weight:600}
+
+.legal{max-width:860px;margin:0 auto;font-size:12.5px;color:var(--muted);line-height:1.6;text-align:center}
+
+.main-footer{position:relative;z-index:1;border-top:1px solid var(--line);padding:54px 0 28px;background:rgba(0,0,0,.25)}
+.main-footer .container{max-width:1180px;margin:0 auto;padding:0 28px}
+.footer-content{display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
+.footer-column h3{font-size:15px;font-weight:700;color:#fff;margin-bottom:15px}
+.footer-column ul{list-style:none}
+.footer-column li{margin-bottom:9px;font-size:14px;color:#aeb8cf}
+.footer-column a{color:#aeb8cf;transition:color .2s}
+.footer-column a:hover{color:#fff}
+.footer-bottom{border-top:1px solid var(--line);margin-top:34px;padding-top:20px;text-align:center;color:var(--muted);font-size:13px}
+
+@media(max-width:980px){
+  .diff-grid{grid-template-columns:1fr}
+  .sides{grid-template-columns:1fr}
+}
+@media(max-width:880px){.nav-links{display:none}.footer-content{grid-template-columns:repeat(2,1fr)}header{padding:128px 0 44px}}
+@media(max-width:560px){.wrap{padding:0 20px}.footer-content{grid-template-columns:1fr}.verdict,.moat{padding:26px 22px}}
+@media(prefers-reduced-motion:reduce){.aurora span{animation:none}}
+</style>
+</head>
+<body>
+<div class="aurora"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
+<div class="grid-tex"></div>
+
+<nav id="nav"><div class="wrap nav-in">
+  <a class="logo" href="https://windloadcalc.com/"><img height="100" width="300" src="images/windloadcalc-logo.svg" alt="WindLoadCalc — ASCE 7-22 Wind Load Calculator logo" class="logo-image"></a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a class="l" href="https://windloadcalc.com/free-wind-load-calculator.html">Free tool</a>
+      <a class="l" href="https://windloadcalc.com/wind-load-calculator-comparison.html">Compare</a>
+      <a class="l" href="https://windloadcalc.com/wind-load-calculator-shop.html">Pricing</a>
+      <a class="l" href="https://windloadcalc.com/why-us.html">Why us</a>
+      <a class="btn btn-ghost" href="https://windloadcalc.com/login.html">Log in</a>
+      <a class="btn btn-primary" href="https://windloadcalc.com/wind-load-calculator-shop.html">Start free trial</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Open full menu" aria-expanded="false" aria-controls="fullMenu"><span></span><span></span><span></span></button>
+  </div>
+</div></nav>
+<div class="nav-overlay" id="navOverlay"></div>
+<aside class="full-menu" id="fullMenu" aria-label="Site menu">
+  <div class="fm-head"><span>Menu</span><button class="fm-close" id="fmClose" aria-label="Close menu">&times;</button></div>
+  <div class="fm-group"><div class="fm-label">Wind Load Calculators</div>
+    <a href="https://windloadcalc.com/wind-load-calculator-landing.html">Wind Load Calculators</a>
+    <a href="https://windloadcalc.com/wind-load-calculator-shop.html">Calculators — Pricing</a>
+    <a href="https://windloadcalc.com/free-wind-load-calculator.html">Free Wind Load Calculator</a>
+    <a href="https://windloadcalc.com/wind-load-calculator-comparison.html">Calculator Comparison</a>
+  </div>
+  <div class="fm-group"><div class="fm-label">Building Intelligence Platform</div>
+    <a href="https://windloadcalc.com/building-intelligence-platform-landing.html">Platform Overview</a>
+    <a href="https://windloadcalc.com/building-intelligence-platform-shop.html">BIP Pricing</a>
+    <a href="https://windloadcalc.com/building-intelligence-platform.html">Launch the App</a>
+  </div>
+  <div class="fm-group"><div class="fm-label">For Professionals</div>
+    <a href="https://windloadcalc.com/wind-load-calculator-for-engineers.html">Engineers</a>
+    <a href="https://windloadcalc.com/wind-load-calculator-for-architects.html">Architects</a>
+    <a href="https://windloadcalc.com/wind-loads-for-consultants.html">Consultants</a>
+    <a href="https://windloadcalc.com/contractors-wind-load-calculator.html">Contractors</a>
+  </div>
+  <div class="fm-group"><div class="fm-label">Company</div>
+    <a href="https://windloadcalc.com/services.html">Services</a>
+    <a href="https://windloadcalc.com/why-us.html">Why Us</a>
+    <a href="https://windloadcalc.com/faq.html">FAQ</a>
+    <a href="https://windloadcalc.com/contact.html">Contact Us</a>
+  </div>
+  <div class="fm-actions">
+    <a class="btn btn-ghost" href="https://windloadcalc.com/login.html">Log in</a>
+    <a class="btn btn-primary" href="https://windloadcalc.com/wind-load-calculator-shop.html">Start free trial →</a>
+  </div>
+</aside>
+
+<!-- Hero -->
+<div class="hero-stage">
+  <div class="hero-veil"></div>
+  <header><div class="wrap">
+    <div class="eyebrow"><span class="dot"></span>WindLoadCalc vs RISA</div>
+    <h1>Current code. <span class="grad">Sealed.</span></h1>
+    <p class="sub">RISA-3D is a serious FEA workhorse — but its wind generator tops out at ASCE 7-16. We run current 7-22, apply Florida HVHZ, and PE-seal in all 50 states.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary btn-xl" href="https://windloadcalc.com/free-wind-load-calculator.html">Try the free calculator →</a>
+      <a class="btn btn-ghost btn-xl" href="https://windloadcalc.com/wind-load-calculator-shop.html">See plans &amp; pricing</a>
+    </div>
+    <div class="hero-trust">
+      <span><span class="ck">✓</span> No signup for the free tool</span>
+      <span><span class="ck">✓</span> ASCE 7-22 and 7-16</span>
+      <span><span class="ck">✓</span> Seals in all 50 states</span>
+    </div>
+  </div></header>
+</div>
+
+<!-- TL;DR verdict -->
+<section><div class="wrap">
+  <div class="verdict">
+    <div class="lab">Quick verdict</div>
+    <p>Different jobs. <strong>RISA-3D</strong> models a whole structure with FEA and checks members in steel, concrete, wood, masonry, and aluminum. <strong>WindLoadCalc</strong> does one thing exhaustively: turn an address into permit-ready ASCE 7-22 wind pressures — then seal them.</p>
+    <p>For a 2026 permit set, RISACalc's wind generator hits two walls: no ASCE 7-22 output, and no seal anywhere. WindLoadCalc closes both gaps. Carry the loads back into RISA-3D for the model.</p>
+  </div>
+</div></section>
+
+<!-- Both sides -->
+<section><div class="wrap">
+  <div class="sec-head">
+    <h2>Where each tool legitimately wins</h2>
+    <p>An honest split. RISA-3D earns its reputation on analysis; WindLoadCalc owns wind and seal.</p>
+  </div>
+  <div class="sides">
+    <div class="side">
+      <span class="badge">Pick RISA-3D when</span>
+      <h3>RISA-3D is the genuine structural workhorse</h3>
+      <ul>
+        <li><b>Full 3D FEA</b> of an entire framing system — load paths, deflections, reactions.</li>
+        <li><b>Multi-material member design:</b> steel, concrete, wood, masonry, aluminum, cold-formed, in one place.</li>
+        <li><b>Mature desktop suite</b> structural firms have trusted for decades.</li>
+        <li><b>Built-in load generation</b> right next to the model you're already building.</li>
+        <li>Need to <b>analyze and design the structure</b>, not just derive wind pressures? This is its home turf — and we don't try to replace it.</li>
+      </ul>
+    </div>
+    <div class="side win">
+      <span class="badge">Pick WindLoadCalc when</span>
+      <h3>WindLoadCalc owns the wind number and the stamp</h3>
+      <ul>
+        <li><b>Current code:</b> full ASCE 7-22 wind results today — the edition RISACalc's generator can't reach.</li>
+        <li><b>Calculate and seal in one workflow:</b> a licensed-PE deliverable in all 50 states.</li>
+        <li><b>Florida HVHZ done right:</b> auto-applies FBC R301.2(7) values like Miami-Dade's 175 mph — not the raw map number.</li>
+        <li><b>Reviewer-ready output:</b> every coefficient cites its ASCE 7-22 section, plus an AutoCAD-ready .xlsx schedule.</li>
+        <li><b>No install:</b> runs in the browser from $35/month, with a free tool to sanity-check first.</li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+<!-- The decisive wedge / differentiators -->
+<section><div class="wrap">
+  <div class="sec-head">
+    <h2>The three gaps that matter for a permit set</h2>
+    <p>From RISA's own docs and product pages — not invented weaknesses.</p>
+  </div>
+  <div class="diff-grid">
+    <div class="diff">
+      <span class="badge">Code edition</span>
+      <h3>RISACalc wind stops at 7-16</h3>
+      <p>RISA's help docs and RISACalc v4.2 release notes list a wind generator that supports <b>ASCE 7-10 and 7-16 only</b> — no 7-22 path. We run 7-22 directly, so pressures match what a 2026 reviewer expects.</p>
+    </div>
+    <div class="diff">
+      <span class="badge">The seal</span>
+      <h3>RISA stamps nothing, anywhere</h3>
+      <p>RISA-3D and RISACalc are software-only. <b>No sign-and-seal in any state</b>, per their product pages. We pair the calc with a real licensed-PE seal — in-house Florida P.E. for FL, a partner-PE network elsewhere.</p>
+    </div>
+    <div class="diff">
+      <span class="badge">Jurisdiction</span>
+      <h3>Raw map value vs enforceable value</h3>
+      <p>A generator that returns the bare ASCE map number leaves the code step to you. We <b>auto-apply Florida Building Code 8th Ed. (2023) HVHZ values</b> — the enforceable numbers a plan reviewer checks against.</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- Moat callout -->
+<section><div class="wrap">
+  <div class="moat">
+    <div class="lab">Calculate and seal in one workflow</div>
+    <h2>RISA computes. You still chase the stamp.</h2>
+    <p>RISA hands you a file and stops. You take it to a PE, wait, and pay separately. <strong>WindLoadCalc does both halves:</strong> the ASCE 7-22 calculation and a licensed-PE sign-and-seal across all 50 states, end to end.</p>
+    <p>Same job, one place. The wind numbers and the seal that makes them permit-ready come out together — no second vendor, no handoff.</p>
+  </div>
+</div></section>
+
+<!-- Comparison table -->
+<section><div class="wrap">
+  <div class="sec-head">
+    <h2>Side-by-side comparison</h2>
+    <p>Verified rows only. Pricing figures are third-party estimates, marked unverified.</p>
+  </div>
+  <div class="cmp-wrap">
+    <table class="cmp">
+      <thead><tr><th>Capability</th><th class="ours">WindLoadCalc <span class="best">Wind + seal</span></th><th>RISA-3D / RISACalc</th></tr></thead>
+      <tbody>
+        <tr><td>Latest ASCE edition for wind</td><td class="ours">ASCE 7-22 and 7-16</td><td>RISA-3D engine cites 7-22 on the structural side; RISACalc wind generator = 7-16 / 7-10 only</td></tr>
+        <tr><td>PE sign-and-seal service</td><td class="ours">Yes — licensed-PE network, all 50 states</td><td>None — software only, seals nothing in any state</td></tr>
+        <tr><td>Truly free public calculator (no signup / no card)</td><td class="ours">Yes (soft daily cap)</td><td>No — free trial only; tools behind a paid subscription</td></tr>
+        <tr><td>FBC / HVHZ jurisdictional overrides</td><td class="ours">Yes — Miami-Dade 175 mph etc. auto-applied (FBC R301.2(7))</td><td>Not advertised — raw ASCE map output</td></tr>
+        <tr><td>AutoCAD-ready .xlsx architectural schedule</td><td class="ours">Yes</td><td>No — printable PDF calc reports only</td></tr>
+        <tr><td>Per-coefficient ASCE section citations</td><td class="ours">Yes — 100% traceability</td><td>Not marketed as a feature</td></tr>
+        <tr><td>ZIP / address wind-speed lookup, all 4 Risk Categories</td><td class="ours">Yes — 33,783 ZIPs, ~30 sec</td><td>Manual site / parameter entry; no pre-verified ZIP database advertised</td></tr>
+        <tr><td>Product-certification tracking (FL Approval # / Miami-Dade NOA)</td><td class="ours">Yes</td><td>No</td></tr>
+        <tr><td>Platform</td><td class="ours">Web SaaS, nothing to install</td><td>RISA-3D = Windows desktop; RISACalc = cloud</td></tr>
+        <tr><td>Entry pricing</td><td class="ours">From $35/mo, 7-day free trial, no card</td><td>RISACalc ~$1,000/yr; RISA-3D ~$2,070–$2,290/yr (unverified)</td></tr>
+        <tr><td>Full 3D FEA &amp; multi-material design</td><td class="ours">No — wind-load specialist</td><td>Yes — RISA-3D core strength (steel / concrete / wood / masonry / aluminum)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div></section>
+
+<!-- Who should pick RISA -->
+<section><div class="wrap">
+  <div class="sec-head"><h2>Who should pick RISA-3D</h2></div>
+  <div class="verdict">
+    <div class="lab">Honest recommendation</div>
+    <p>Need full FEA and multi-material design — steel, concrete, wood, masonry, aluminum, cold-formed, not just wind? Pick RISA-3D. Its analysis engine is a real workhorse, and on the structural side it carries current standards like ASCE 7-22 and AISC 360-22.</p>
+    <p>WindLoadCalc doesn't do general FEA or member design, and won't pretend to. For many offices the honest answer is both: <strong>RISA-3D for the model, WindLoadCalc for the current-code wind loads and the sealed deliverable.</strong></p>
+  </div>
+</div></section>
+
+<!-- FAQ -->
+<section id="faq"><div class="wrap">
+  <div class="sec-head"><h2>Frequently asked questions</h2></div>
+  <div class="faq">
+    <details open><summary>Can RISACalc produce an ASCE 7-22 wind result?</summary><p>Not according to RISA's own documentation. The RISACalc wind/seismic load generator supports ASCE 7-10 and ASCE 7-16 only, per RISA's help docs and the v4.2 release notes — it has no ASCE 7-22 wind option. WindLoadCalc runs ASCE 7-22 directly (and 7-16 when a project still calls for it), so you are pulling pressures from the edition the reviewer expects on a 2026 permit set.</p></details>
+    <details><summary>Does RISA stamp or seal drawings?</summary><p>No. RISA-3D and RISACalc are software tools; nothing in their product pages offers a licensed-PE sign-and-seal deliverable in any state. WindLoadCalc pairs the calculation with an actual sealing service — an in-house Florida P.E. for FL work and a partner-PE network for the other states — so calculate and seal happen in one workflow.</p></details>
+    <details><summary>I already own RISA-3D — why add a separate wind tool?</summary><p>Keep RISA-3D for the finite-element analysis and member design it does well. The wind generator bundled inside the RISA stack is a secondary feature that tops out at ASCE 7-16, outputs the raw map value with no Florida HVHZ override, and produces no per-coefficient citations or AutoCAD-ready schedule. Use WindLoadCalc for the current-code wind numbers and the sealed, permit-ready deliverable, then carry the loads back into RISA-3D for your structural model.</p></details>
+    <details><summary>Does WindLoadCalc do full 3D structural analysis like RISA-3D?</summary><p>No, and it is not trying to. RISA-3D is a genuine finite-element structural-analysis and multi-material design suite (steel, concrete, wood, masonry, aluminum, cold-formed). WindLoadCalc is a dedicated wind-load specialist that produces the design pressures, certifications, and reports — it does not replace a general FEA engine. The two are complementary, not competing for the same job.</p></details>
+    <details><summary>What does WindLoadCalc cost compared with RISA?</summary><p>WindLoadCalc plans start at $35/month with a 7-day free trial and no credit card, and everything runs in the browser. Published third-party figures put RISACalc near $1,000/year and RISA-3D roughly $2,070–$2,290/year per license (exact figures unverified); RISA-3D is also a Windows desktop install you have to manage. You can confirm WindLoadCalc's output against your RISA numbers using the free public tool before paying anything.</p></details>
+    <details><summary>How does WindLoadCalc handle Florida HVHZ wind speeds?</summary><p>It auto-applies the Florida Building Code 8th Edition (2023) HVHZ overrides — for example, Miami-Dade's legally enforceable 175 mph value under FBC R301.2(7) — instead of just echoing the raw ASCE 7-22 map number. A wind generator that returns only the map result, like the one inside the RISA stack, leaves that jurisdictional step to you.</p></details>
+  </div>
+</div></section>
+
+<!-- Final CTA -->
+<section class="final"><div class="wrap">
+  <div class="glass2">
+    <h2>Verify our wind numbers against your RISA model</h2>
+    <p>Run an address through the <a href="free-wind-load-calculator.html">free wind speed lookup</a> — no signup, no card — and compare the ASCE 7-22 pressure to what your RISA stack returns. When you need it stamped, the seal is built into the same workflow.</p>
+    <div class="hero-cta" style="margin-bottom:6px">
+      <a class="btn btn-primary btn-xl" href="https://windloadcalc.com/free-wind-load-calculator.html">Open the free calculator →</a>
+      <a class="btn btn-ghost btn-xl" href="https://windloadcalc.com/wind-load-calculator-shop.html">See plans &amp; pricing</a>
+    </div>
+    <div class="hero-trust" style="margin-top:10px">
+      <span><span class="ck">✓</span> ASCE 7-22 and 7-16</span>
+      <span><span class="ck">✓</span> Florida HVHZ auto-applied</span>
+      <span><span class="ck">✓</span> Sealed in all 50 states</span>
+    </div>
+  </div>
+  <p class="legal" style="margin-top:28px">RISA, RISA-3D, and RISACalc are trademarks of their owner; WindLoadCalc is not affiliated with or endorsed by it. Comparison based on publicly available information as of June 2026. Pricing figures attributed to RISA are third-party estimates and are marked unverified.</p>
+</div></section>
+
+<!-- Footer -->
+<footer class="main-footer"><div class="container">
+  <div class="footer-content">
+    <div class="footer-column"><h3>Contact Information</h3><ul>
+      <li><strong>General Inquiries</strong></li>
+      <li><a href="mailto:info@windloadcalc.com">info@windloadcalc.com</a></li>
+      <li><a href="tel:8332723946">(833) 272-3946</a></li>
+      <li style="margin-top:.6rem"><strong>Sales</strong></li>
+      <li><a href="mailto:sales@windloadcalc.com">sales@windloadcalc.com</a></li>
+    </ul></div>
+    <div class="footer-column"><h3>Wind Load Calculators</h3><ul>
+      <li><a href="wind-load-calculator-shop.html">All Calculators &amp; Pricing</a></li>
+      <li><a href="shop/windows-doors-shutters.html">Windows, Doors &amp; Shutters</a></li>
+      <li><a href="shop/mwfrs.html" rel="nofollow">MWFRS Calculator</a></li>
+      <li><a href="shop/roofing.html" rel="nofollow">Roofing Calculator</a></li>
+    </ul></div>
+    <div class="footer-column"><h3>Resources</h3><ul>
+      <li><a href="/free-wind-load-calculator.html">Free Wind Load Calculator</a></li>
+      <li><a href="/asce-7-wind-load-calculator/">ASCE 7-22 Guide</a></li>
+      <li><a href="/components-and-cladding-wind-loads/">C&amp;C Wind Loads</a></li>
+      <li><a href="building-intelligence-platform-shop.html">BIP Plans</a></li>
+    </ul></div>
+    <div class="footer-column"><h3>Company</h3><ul>
+      <li><a href="why-us.html">About Us</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="services.html">Professional Services</a></li>
+      <li><a href="privacy-policy.html">Privacy Policy</a></li>
+      <li><a href="terms-of-service.html">Terms of Service</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 WindLoadCalc · WindLoad Solutions, LLC — online since 2006. ASCE 7-22 &amp; 7-16 wind load software.</p></div>
+</div></footer>
+
+<script>
+(function(){
+  var nav=document.getElementById('nav');
+  function onScroll(){ nav.classList.toggle('scrolled', window.scrollY>40); }
+  onScroll(); window.addEventListener('scroll',onScroll,{passive:true});
+})();
+(function(){
+  var ham=document.getElementById('hamburger'), fm=document.getElementById('fullMenu'),
+      ov=document.getElementById('navOverlay'), fc=document.getElementById('fmClose');
+  if(!ham||!fm) return;
+  function setMenu(open){ fm.classList.toggle('open',open); ov.classList.toggle('open',open); ham.classList.toggle('open',open);
+    ham.setAttribute('aria-expanded',open); document.body.style.overflow=open?'hidden':''; }
+  ham.addEventListener('click',function(){ setMenu(!fm.classList.contains('open')); });
+  ov.addEventListener('click',function(){ setMenu(false); });
+  if(fc) fc.addEventListener('click',function(){ setMenu(false); });
+  fm.querySelectorAll('a').forEach(function(a){ a.addEventListener('click',function(){ setMenu(false); }); });
+  window.addEventListener('keydown',function(e){ if(e.key==='Escape') setMenu(false); });
+})();
+</script>
+</body>
+</html>

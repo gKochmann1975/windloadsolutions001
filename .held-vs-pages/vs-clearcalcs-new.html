@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="shortcut icon" href="/favicon.ico?v=2">
+
+    <title>WindLoadCalc vs ClearCalcs (Calcs.com): Wind + Seal vs a Calc Suite</title>
+    <meta name="description" content="A focused look at ClearCalcs (now Calcs.com) next to WindLoadCalc for ASCE 7-22 wind. Coefficient traceability is a tie; the difference is the enforceable Florida value, a 50-state PE seal, and a no-signup free tool.">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="WindLoadCalc vs ClearCalcs (Calcs.com) — Wind Specialist + Seal">
+    <meta property="og:description" content="ClearCalcs is a broad cloud calc suite; WindLoadCalc is the wind specialist that returns the legally enforceable FBC value and seals the result in all 50 states.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://windloadcalc.com/vs-clearcalcs-new.html">
+    <meta property="og:image" content="https://windloadcalc.com/images/video-posters/wind-load-calculator-landing.jpg">
+    <meta property="og:site_name" content="WindLoadCalc">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="WindLoadCalc vs ClearCalcs (Calcs.com) — Wind Specialist + Seal">
+    <meta name="twitter:description" content="Traceability is a tie. The wedge is the enforceable Florida HVHZ value, a 50-state PE seal, and a truly-free public calculator.">
+    <meta name="twitter:image" content="https://windloadcalc.com/images/video-posters/wind-load-calculator-landing.jpg">
+
+    <link rel="canonical" href="https://windloadcalc.com/vs-clearcalcs-new.html">
+
+    <!-- FAQPage schema — 1:1 with the visible FAQ (no fake ratings) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "Is ClearCalcs accurate enough for ASCE 7-22 wind?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. ClearCalcs computes ASCE 7-22 C&C and MWFRS wind, exposes GCp/GCpi with equation references, and runs a traffic-light check system. On coefficient transparency the two products are genuinely even — we call that a tie. The divergence shows up after the math: ClearCalcs stops at the raw ASCE map wind speed, while WindLoadCalc layers the FBC HVHZ override on top and returns the value a Florida reviewer will actually enforce." } },
+        { "@type": "Question", "name": "Does ClearCalcs apply the Florida Building Code HVHZ wind speed automatically?", "acceptedAnswer": { "@type": "Answer", "text": "Not in any way their published wind page documents. On Calcs.com the basic wind speed comes from the ASCE 7-22 Figure 26.5-1 maps or manual entry, with no Miami-Dade, Broward, or Collier override layer described. WindLoadCalc auto-applies FBC R301.2(7) so a Miami-Dade project returns the enforceable 175 mph instead of only the interpolated map reading." } },
+        { "@type": "Question", "name": "Can I run a wind number on ClearCalcs for free?", "acceptedAnswer": { "@type": "Answer", "text": "Only temporarily. ClearCalcs gives a 14-day Pro-level trial that downgrades to read-only afterward, and wind is not included in the $66 Basic tier — you move to Pro (listed at $99/mo annual or $119/mo monthly) to keep creating calcs. WindLoadCalc keeps a public wind-speed-by-ZIP plus single-component pressure tool open with no account and no card, under a soft daily cap." } },
+        { "@type": "Question", "name": "ClearCalcs covers wood, steel, concrete and footings — why use a wind-only tool?", "acceptedAnswer": { "@type": "Answer", "text": "If your day is mixed member design, that breadth is the right reason to keep ClearCalcs — it is a real strength and we don't pretend otherwise. But a broad suite still leaves two things undone for a permit: it hands you the ASCE map value rather than the enforceable Florida number, and it cannot stamp anything. WindLoadCalc fills exactly those gaps for the wind portion of the job." } },
+        { "@type": "Question", "name": "Does ClearCalcs offer a PE sign-and-seal service?", "acceptedAnswer": { "@type": "Answer", "text": "No. ClearCalcs is design-calculation software; nothing on its wind or pricing pages offers a sealed deliverable in any jurisdiction, so you still have to locate and pay a separate engineer to stamp the output. WindLoadCalc routes the finished calc through an in-house Florida P.E. and a partner-PE network that signs and seals in all 50 states — the calculation and the seal live in one workflow." } },
+        { "@type": "Question", "name": "What about tornado loads, which ClearCalcs supports?", "acceptedAnswer": { "@type": "Answer", "text": "That's a fair point in their favor: ClearCalcs produces separate ASCE 7-22 tornado pressures when a tornado speed is supplied, and WindLoadCalc does not document tornado output today. If tornado design inside the same template is a hard requirement, weigh that honestly. For straight hurricane-region wind and a sealed permit package, the specialist still closes the loop the suite leaves open." } }
+      ]
+    }
+    </script>
+
+    <!-- Breadcrumb schema -->
+    <script type="application/ld+json">
+    { "@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://windloadcalc.com/"},
+      {"@type":"ListItem","position":2,"name":"Comparison","item":"https://windloadcalc.com/wind-load-calculator-comparison.html"},
+      {"@type":"ListItem","position":3,"name":"vs ClearCalcs","item":"https://windloadcalc.com/vs-clearcalcs-new.html"}
+    ]}
+    </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#0018FF; --blue-deep:#181E57; --blue-bright:#3a5bff;
+  --muted:#94a3b8; --line:rgba(255,255,255,.08); --bg:#070a18; --surface:rgba(255,255,255,.04);
+  --gold:#E8B530; --luxe:cubic-bezier(.22,.61,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:#e8edf7;
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.55}
+a{text-decoration:none;color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+.aurora{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.aurora span{position:absolute;border-radius:50%;filter:blur(90px);opacity:.5}
+.aurora .a1{width:620px;height:620px;background:#0018FF;top:-180px;left:-120px;animation:drift1 18s var(--luxe) infinite alternate}
+.aurora .a2{width:540px;height:540px;background:#10B981;bottom:-200px;right:-120px;opacity:.28;animation:drift2 22s var(--luxe) infinite alternate}
+.aurora .a3{width:420px;height:420px;background:#181E57;top:34%;right:16%;opacity:.55;animation:drift1 26s var(--luxe) infinite alternate-reverse}
+@keyframes drift1{to{transform:translate(80px,60px) scale(1.15)}}
+@keyframes drift2{to{transform:translate(-70px,-50px) scale(1.1)}}
+.grid-tex{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:54px 54px;mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000 40%,transparent 100%)}
+
+/* Nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:.3s var(--luxe);background:transparent;border-bottom:1px solid transparent}
+nav.scrolled{backdrop-filter:blur(14px);border-bottom:1px solid var(--line);
+  background:linear-gradient(90deg, rgba(240,244,255,.97) 0%, rgba(223,232,255,.93) 13%, rgba(22,28,58,.92) 46%, rgba(7,10,24,.95) 100%)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;padding:12px clamp(24px,4vw,48px);transition:padding .3s var(--luxe)}
+nav.scrolled .nav-in{padding:8px clamp(24px,4vw,48px)}
+.logo{z-index:1001;display:flex;align-items:center}
+.logo-image{height:84px;width:auto;display:block;filter:drop-shadow(0 2px 10px rgba(0,0,0,.4));transition:all .3s ease}
+nav.scrolled .logo-image{height:64px;filter:none}
+.nav-right{display:flex;align-items:center;gap:18px}
+.nav-links{display:flex;align-items:center;gap:28px}
+.nav-links a.l{position:relative;font-size:14px;color:#fff;font-weight:500;opacity:.88;transition:opacity .2s var(--luxe);text-shadow:0 1px 8px rgba(0,0,0,.45)}
+.nav-links a.l:hover{opacity:1}
+.btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;border-radius:11px;cursor:pointer;transition:.25s var(--luxe);border:none;font-family:inherit}
+.btn-ghost{background:rgba(255,255,255,.06);color:#fff;padding:11px 18px;font-size:14px;border:1px solid rgba(255,255,255,.22)}
+.btn-ghost:hover{border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.12)}
+.btn-primary{background:linear-gradient(135deg,#0018FF,#2540ff);color:#fff;padding:12px 22px;font-size:14px;box-shadow:0 10px 30px rgba(0,24,255,.45)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(0,24,255,.6)}
+.hamburger{display:flex;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;z-index:60}
+.hamburger span{display:block;width:26px;height:3px;border-radius:2px;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.6);transition:.3s var(--luxe)}
+.hamburger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+.nav-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);opacity:0;visibility:hidden;transition:.3s var(--luxe);z-index:55}
+.nav-overlay.open{opacity:1;visibility:visible}
+.full-menu{position:fixed;top:0;right:0;height:100vh;height:100dvh;width:min(90vw,380px);z-index:60;
+  background:rgba(10,14,30,.985);backdrop-filter:blur(18px);border-left:1px solid var(--line);
+  box-shadow:-24px 0 60px rgba(0,0,0,.55);transform:translateX(100%);transition:transform .3s var(--luxe);overflow-y:auto;padding:74px 0 28px}
+.full-menu.open{transform:translateX(0)}
+.fm-head{display:flex;align-items:center;justify-content:space-between;padding:0 26px 14px;border-bottom:1px solid var(--line)}
+.fm-head span{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.fm-close{background:none;border:none;color:#fff;font-size:24px;line-height:1;cursor:pointer;padding:2px 8px}
+.fm-group{padding:14px 26px 4px;border-bottom:1px solid var(--line)}
+.fm-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9db0ff;margin-bottom:6px}
+.fm-group a{display:block;padding:9px 0;font-size:15px;color:#dbe3f5;font-weight:500;transition:color .15s}
+.fm-group a:hover{color:#fff}
+.fm-actions{display:flex;flex-direction:column;gap:10px;padding:20px 26px 0}
+.fm-actions .btn{width:100%;justify-content:center;padding:14px;font-size:15px}
+
+/* Hero */
+header{position:relative;z-index:2;padding:165px 0 70px;text-align:center}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;background:rgba(7,10,24,.5);border:1px solid rgba(58,91,255,.45);
+  color:#c3cdff;font-size:13px;font-weight:600;padding:8px 16px;border-radius:999px;margin-bottom:24px;backdrop-filter:blur(6px)}
+.eyebrow .dot{width:7px;height:7px;border-radius:50%;background:#34D399;box-shadow:0 0 0 4px rgba(52,211,153,.25)}
+h1{font-size:clamp(34px,5.2vw,58px);line-height:1.05;font-weight:800;letter-spacing:-.025em;max-width:20ch;margin:0 auto 16px;text-shadow:0 4px 28px rgba(0,0,0,.45)}
+h1 .grad{background:linear-gradient(110deg,#34D399,#10B981 55%,#3a5bff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{font-size:clamp(16px,2vw,19px);color:#d3dbef;max-width:68ch;margin:0 auto 22px;text-shadow:0 2px 14px rgba(0,0,0,.5)}
+.sub strong{color:#fff}
+.hero-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:8px 0 18px}
+.btn-xl{padding:15px 28px;font-size:15px;border-radius:13px}
+.hero-trust{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;font-size:13px;color:#cdd6ec}
+.hero-trust span{display:inline-flex;align-items:center;gap:6px}
+.hero-trust .ck{color:#34D399;font-weight:800}
+
+section{position:relative;z-index:1;padding:62px 0}
+.sec-head{text-align:center;max-width:70ch;margin:0 auto 40px}
+.sec-head h2{font-size:clamp(26px,3.2vw,38px);font-weight:800;letter-spacing:-.02em;margin-bottom:12px}
+.sec-head p{color:#aeb8cf;font-size:16px}
+
+/* TL;DR verdict */
+.verdict{max-width:880px;margin:0 auto;background:linear-gradient(160deg,rgba(0,24,255,.14),rgba(16,185,129,.08));
+  border:1px solid rgba(58,91,255,.4);border-radius:20px;padding:30px 30px;box-shadow:0 18px 44px rgba(0,24,255,.16)}
+.verdict .lbl{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.verdict p{font-size:15.5px;color:#dbe3f5;margin-bottom:12px}
+.verdict p:last-child{margin-bottom:0}
+.verdict strong{color:#fff}
+.verdict .tie{color:#9db0ff;font-weight:700}
+
+/* Two-column both-sides */
+.sides{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.side{position:relative;border-radius:18px;padding:28px 24px;box-shadow:0 12px 32px rgba(0,0,0,.32)}
+.side.them{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12)}
+.side.us{background:linear-gradient(165deg,rgba(16,185,129,.14),rgba(255,255,255,.03));border:1px solid rgba(52,211,153,.5)}
+.side h3{font-size:19px;font-weight:800;margin-bottom:6px;letter-spacing:-.01em}
+.side .sub2{font-size:13px;font-weight:600;margin-bottom:14px;display:block}
+.side.them .sub2{color:#9db0ff}
+.side.us .sub2{color:#6ee7b7}
+.side ul{list-style:none}
+.side ul li{font-size:14px;color:#c2cce0;padding:7px 0 7px 24px;position:relative;line-height:1.5}
+.side ul li b{color:#fff}
+.side.them ul li::before{content:"›";position:absolute;left:4px;top:6px;color:#9db0ff;font-weight:800}
+.side.us ul li::before{content:"✓";position:absolute;left:2px;top:7px;color:#34D399;font-weight:800;font-size:13px}
+
+/* Moat callout */
+.moat{max-width:920px;margin:0 auto;text-align:center;background:rgba(232,181,48,.07);
+  border:1px solid rgba(232,181,48,.34);border-radius:20px;padding:36px 32px}
+.moat .eb{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.moat h2{font-size:clamp(24px,3vw,34px);font-weight:800;letter-spacing:-.02em;margin-bottom:14px}
+.moat p{color:#d3dbef;font-size:16px;max-width:64ch;margin:0 auto 10px}
+.moat p strong{color:#fff}
+
+/* Comparison table */
+.cmp-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:16px;background:var(--surface)}
+.cmp{width:100%;border-collapse:collapse;font-size:13.5px;min-width:720px}
+.cmp th,.cmp td{padding:12px 16px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+.cmp thead th{font-weight:800;font-size:13px}
+.cmp thead th.ours{background:rgba(16,185,129,.12);color:#6ee7b7}
+.cmp td:first-child,.cmp th:first-child{color:#dbe3f5;font-weight:600}
+.cmp td.ours{color:#d8f5ec;font-weight:600;background:rgba(16,185,129,.05)}
+.cmp td.tie{color:#cdd6ec}
+.cmp tbody tr:last-child td{border-bottom:none}
+.cmp tbody tr:hover{background:rgba(255,255,255,.03)}
+.cmp .best{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.05em;color:#04221a;background:linear-gradient(135deg,#34D399,#10B981);padding:2px 8px;border-radius:999px;margin-left:6px}
+.cmp .tiebadge{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.05em;color:#0b1230;background:#9db0ff;padding:2px 8px;border-radius:999px;margin-left:6px}
+
+/* Pick-them honesty block */
+.pick{max-width:880px;margin:0 auto;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:30px 28px}
+.pick h3{font-size:20px;font-weight:800;margin-bottom:12px}
+.pick p{font-size:15px;color:#c2cce0;margin-bottom:12px}
+.pick ul{list-style:none;margin:6px 0 4px}
+.pick ul li{font-size:14px;color:#c2cce0;padding:5px 0 5px 20px;position:relative}
+.pick ul li::before{content:"";position:absolute;left:0;top:11px;width:6px;height:6px;border-radius:50%;background:#9db0ff}
+
+/* Objection / rebuttal */
+.obj{max-width:880px;margin:0 auto}
+.obj .q{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-left:3px solid #9db0ff;border-radius:12px;padding:18px 22px;margin-bottom:16px;font-size:15.5px;color:#dbe3f5;font-style:italic}
+.obj .a{font-size:15.5px;color:#c2cce0}
+.obj .a strong{color:#fff}
+
+/* FAQ */
+.faq{max-width:860px;margin:0 auto}
+.faq details{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 22px;margin-bottom:12px}
+.faq summary{font-size:16px;font-weight:700;cursor:pointer;list-style:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";float:right;color:#9db0ff;font-weight:800}
+.faq details[open] summary::after{content:"–"}
+.faq p{margin-top:11px;color:#aeb8cf;font-size:14.5px}
+
+.final{text-align:center}
+.final .glass2{background:linear-gradient(160deg,rgba(0,24,255,.18),rgba(16,185,129,.1));border:1px solid rgba(58,91,255,.4);border-radius:26px;padding:54px 40px;box-shadow:0 40px 100px rgba(0,24,255,.25)}
+.final h2{font-size:clamp(28px,3.6vw,42px);font-weight:800;letter-spacing:-.02em;margin-bottom:14px}
+.final p{color:#cdd6ec;font-size:17px;max-width:62ch;margin:0 auto 22px}
+.final p a{color:#34D399;font-weight:600}
+
+.legal{max-width:880px;margin:34px auto 0;font-size:12.5px;color:var(--muted);text-align:center;line-height:1.6}
+
+.main-footer{position:relative;z-index:1;border-top:1px solid var(--line);padding:54px 0 28px;background:rgba(0,0,0,.25)}
+.main-footer .container{max-width:1180px;margin:0 auto;padding:0 28px}
+.footer-content{display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
+.footer-column h3{font-size:15px;font-weight:700;color:#fff;margin-bottom:15px}
+.footer-column ul{list-style:none}
+.footer-column li{margin-bottom:9px;font-size:14px;color:#aeb8cf}
+.footer-column a{color:#aeb8cf;transition:color .2s}
+.footer-column a:hover{color:#fff}
+.footer-bottom{border-top:1px solid var(--line);margin-top:34px;padding-top:20px;text-align:center;color:var(--muted);font-size:13px}
+
+@media(max-width:980px){
+  .sides{grid-template-columns:1fr}
+}
+@media(max-width:880px){.nav-links{display:none}.footer-content{grid-template-columns:repeat(2,1fr)}header{padding:128px 0 44px}}
+@media(max-width:560px){.wrap{padding:0 20px}.footer-content{grid-template-columns:1fr}.verdict,.moat,.pick{padding:24px 20px}}
+@media(prefers-reduced-motion:reduce){.aurora span{animation:none}}
+</style>
+</head>
+<body>
+<div class="aurora"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
+<div class="grid-tex"></div>
+
+<nav id="nav"><div class="wrap nav-in">
+  <a class="logo" href="https://windloadcalc.com/"><img height="100" width="300" src="images/windloadcalc-logo.svg" alt="WindLoadCalc — ASCE 7-22 Wind Load Calculator logo" class="logo-image"></a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a class="l" href="https://windloadcalc.com/free-wind-load-calculator.html">Free tool</a>
+      <a class="l" href="https://windloadcalc.com/wind-load-calculator-comparison.html">Compare</a>
+      <a class="l" href="https://windloadcalc.com/wind-load-calculator-shop.html">Pricing</a>
+      <a class="l" href="https://windloadcalc.com/why-us.html">Why us</a>
+      <a class="btn btn-ghost" href="https://windloadcalc.com/login.html">Log in</a>
+      <a class="btn btn-primary" href="https://windloadcalc.com/wind-load-calculator-shop.html">Start free trial</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Open full menu" aria-expanded="false" aria-controls="fullMenu"><span></span><span></span><span></span></button>
+  </div>
+</div></nav>
+<div class="nav-overlay" id="navOverlay"></div>
+<aside class="full-menu" id="fullMenu" aria-label="Site menu">
+  <div class="fm-head"><span>Menu</span><button class="fm-close" id="fmClose" aria-label="Close menu">&times;</button></div>
+  <div class="fm-group"><div class="fm-label">Wind Load Calculators</div>
+    <a href="https://windloadcalc.com/wind-load-calculator-landing.html">Wind Load Calculators</a>
+    <a href="https://windloadcalc.com/wind-load-calculator-shop.html">Calculators — Pricing</a>
+    <a href="https://windloadcalc.com/free-wind-load-calculator.html">Free Wind Load Calculator</a>
+    <a href="https://windloadcalc.com/wind-load-calculator-comparison.html">Calculator Comparison</a>
+  </div>
+  <div class="fm-group"><div class="fm-label">Building Intelligence Platform</div>
+    <a href="https://windloadcalc.com/building-intelligence-platform-landing.html">Platform Overview</a>
+    <a href="https://windloadcalc.com/building-intelligence-platform-shop.html">BIP Pricing</a>
+    <a href="https://windloadcalc.com/building-intelligence-platform.html">Launch the App</a>
+  </div>
+  <div class="fm-group"><div class="fm-label">For Professionals</div>
+    <a href="https://windloadcalc.com/wind-load-calculator-for-engineers.html">Engineers</a>
+    <a href="https://windloadcalc.com/wind-load-calculator-for-architects.html">Architects</a>
+    <a href="https://windloadcalc.com/wind-loads-for-consultants.html">Consultants</a>
+    <a href="https://windloadcalc.com/contractors-wind-load-calculator.html">Contractors</a>
+  </div>
+  <div class="fm-group"><div class="fm-label">Company</div>
+    <a href="https://windloadcalc.com/services.html">Services</a>
+    <a href="https://windloadcalc.com/why-us.html">Why Us</a>
+    <a href="https://windloadcalc.com/faq.html">FAQ</a>
+    <a href="https://windloadcalc.com/contact.html">Contact Us</a>
+  </div>
+  <div class="fm-actions">
+    <a class="btn btn-ghost" href="https://windloadcalc.com/login.html">Log in</a>
+    <a class="btn btn-primary" href="https://windloadcalc.com/wind-load-calculator-shop.html">Start free trial →</a>
+  </div>
+</aside>
+
+<!-- Hero -->
+<header><div class="wrap">
+  <div class="eyebrow"><span class="dot"></span>WindLoadCalc vs ClearCalcs</div>
+  <h1>Past the map value. <span class="grad">All the way to sealed.</span></h1>
+  <p class="sub">ClearCalcs is a strong multi-discipline suite — but it stops at the ASCE map value and seals nothing. We return the enforceable Florida number and PE-seal in all 50 states.</p>
+  <div class="hero-cta">
+    <a class="btn btn-primary btn-xl" href="https://windloadcalc.com/free-wind-load-calculator.html">Try the free wind calculator →</a>
+    <a class="btn btn-ghost btn-xl" href="https://windloadcalc.com/wind-load-calculator-shop.html">See plans &amp; pricing</a>
+  </div>
+  <div class="hero-trust">
+    <span><span class="ck">✓</span> No signup for the free tool</span>
+    <span><span class="ck">✓</span> Plans from $35/mo</span>
+    <span><span class="ck">✓</span> 7-day trial, no card</span>
+  </div>
+</div></header>
+
+<!-- TL;DR / quick verdict -->
+<section><div class="wrap">
+  <div class="verdict">
+    <div class="lbl">Quick verdict</div>
+    <p>Mixed structural work? ClearCalcs earns its place. Its library is real breadth — wood/NDS, steel/AISC, concrete/ACI 318, footings, frames — plus ASCE 7-22 tornado output. <span class="tie">On wind coefficient traceability the two are a tie.</span> ClearCalcs cites GCp/GCpi with equation refs and a traffic-light check; WindLoadCalc cites every value's ASCE 7-22 section.</p>
+    <p>The split is at the edges of the wind job. ClearCalcs returns the raw <strong>ASCE 7-22 map wind speed</strong>. WindLoadCalc adds the <strong>FBC 8th Ed (2023) HVHZ override</strong> — the number an inspector enforces — then <strong>calculates and seals in one workflow</strong>. Our public tool is free, no card. On ClearCalcs, wind sits behind the Pro tier after a 14-day trial.</p>
+  </div>
+</div></section>
+
+<!-- Both sides -->
+<section><div class="wrap">
+  <div class="sec-head">
+    <h2>Where each tool actually wins</h2>
+    <p>An honest split. Conceding their strengths is what makes the rest credible.</p>
+  </div>
+  <div class="sides">
+    <div class="side them">
+      <h3>Where ClearCalcs wins</h3>
+      <span class="sub2">Breadth across the whole structural day</span>
+      <ul>
+        <li><b>One subscription, many disciplines:</b> wood/NDS, steel/AISC, concrete/ACI 318, footings, retaining and shear walls, plus 2D frame and truss analysis with load linking.</li>
+        <li><b>Tornado loads in ASCE 7-22:</b> separate tornado pressures when a tornado speed is supplied — WindLoadCalc doesn't document this.</li>
+        <li><b>Multi-region codes:</b> Australian and European codes alongside US ASCE.</li>
+        <li><b>All-in-one cloud:</b> link loads straight through to member design under one login.</li>
+      </ul>
+    </div>
+    <div class="side us">
+      <h3>Where WindLoadCalc wins</h3>
+      <span class="sub2">Depth where wind meets the permit</span>
+      <ul>
+        <li><b>Enforceable Florida value:</b> we auto-apply FBC R301.2(7) HVHZ overrides (Miami-Dade 175 mph, Broward/Collier). ClearCalcs returns the map reading.</li>
+        <li><b>A seal, not just a number:</b> in-house FL P.E. plus a partner-PE network sealing in all 50 states. ClearCalcs seals nothing.</li>
+        <li><b>Free public calc:</b> wind speed by ZIP plus single-component pressure, no account, no card. ClearCalcs gates wind behind Pro after a 14-day trial.</li>
+        <li><b>33,783 pre-verified ZIPs:</b> every US ZIP, all four Risk Categories, in ~30 seconds. No coordinate hunting on a live map.</li>
+        <li><b>AutoCAD-ready output:</b> a real .xlsx Architectural Schedule for drawing drop-in, plus PDF/Excel/CSV/print.</li>
+        <li><b>Certification tracking:</b> FL Product Approval # / Miami-Dade NOA / HVHZ, with LA/NC/SC/HI modules.</li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+<!-- Moat callout -->
+<section><div class="wrap">
+  <div class="moat">
+    <div class="eb">The integration ClearCalcs leaves to you</div>
+    <h2>Calculate and get it sealed in one workflow</h2>
+    <p>ClearCalcs computes the wind calc well — then hands you a PDF and stops. <strong>WindLoadCalc carries the same ASCE 7-22 calc straight through to a PE sign-and-seal in all 50 states, without leaving the workflow.</strong></p>
+    <p>That's the gap between a finished spreadsheet and a permit-ready deliverable. With ClearCalcs you go find and pay a separate engineer to stamp the output. Here the calc and the signature live together.</p>
+  </div>
+</div></section>
+
+<!-- Comparison table -->
+<section><div class="wrap">
+  <div class="sec-head">
+    <h2>Feature-by-feature</h2>
+    <p>Verified rows only. Where they match us, we mark it a tie.</p>
+  </div>
+  <div class="cmp-wrap">
+    <table class="cmp">
+      <thead><tr><th>Capability</th><th class="ours">WindLoadCalc <span class="best">Wind + seal</span></th><th>ClearCalcs / Calcs.com</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>PE sign-and-seal (sealed permit deliverable)</td>
+          <td class="ours">Yes — in-house FL P.E. + partner-PE network, all 50 states</td>
+          <td>None — design-calculation software only; seals nothing anywhere</td>
+        </tr>
+        <tr>
+          <td>FBC 8th Ed (2023) HVHZ / Miami-Dade override</td>
+          <td class="ours">Auto-applied — returns the enforceable value (e.g. 175 mph Miami-Dade) per FBC R301.2(7)</td>
+          <td>Not documented — ASCE 7-22 Fig 26.5-1 map value or manual entry</td>
+        </tr>
+        <tr>
+          <td>Truly free, no-signup public calculator</td>
+          <td class="ours">Yes — wind speed by ZIP + single-component pressure, no card</td>
+          <td>No — 14-day Pro trial, then read-only; wind not in $66 Basic tier</td>
+        </tr>
+        <tr>
+          <td>Per-coefficient ASCE 7-22 citations <span class="tiebadge">Tie</span></td>
+          <td class="tie">Yes — every value cites its ASCE 7-22 section</td>
+          <td class="tie">Yes — GCp/GCpi + equation refs, traffic-light checks</td>
+        </tr>
+        <tr>
+          <td>Pre-verified US ZIP wind DB, all 4 Risk Categories</td>
+          <td class="ours">Yes — 33,783 ZIPs, ~30-second lookup</td>
+          <td>Not documented — live map lookup by coordinate or manual</td>
+        </tr>
+        <tr>
+          <td>AutoCAD-ready .xlsx Architectural Schedule</td>
+          <td class="ours">Yes — .xlsx drop-in, plus PDF/Excel/CSV/print</td>
+          <td>Not documented — branded PDF reports (data export exists)</td>
+        </tr>
+        <tr>
+          <td>Product-certification tracking (FL Approval / NOA / HVHZ)</td>
+          <td class="ours">Yes — FL# / Miami-Dade NOA / HVHZ; LA/NC/SC/HI modules</td>
+          <td>Not documented</td>
+        </tr>
+        <tr>
+          <td>Broad multi-discipline structural calcs</td>
+          <td>No — wind-load focused</td>
+          <td class="ours" style="background:rgba(157,176,255,.08);color:#cdd6ec">Yes — NDS/AISC/ACI 318, frames/trusses, load linking (their strength)</td>
+        </tr>
+        <tr>
+          <td>Tornado load per ASCE 7-22</td>
+          <td>Not documented</td>
+          <td class="ours" style="background:rgba(157,176,255,.08);color:#cdd6ec">Yes — separate tornado pressures when V_T specified</td>
+        </tr>
+        <tr>
+          <td>Entry pricing (annual)</td>
+          <td class="ours">Plans from $35/mo; 7-day free trial, no card</td>
+          <td>Wind requires Pro $99/mo annual ($119/mo monthly); Basic $66 excludes wind</td>
+        </tr>
+        <tr>
+          <td>Building-intelligence layer (hurricane score / solar / multi-ZIP)</td>
+          <td class="ours">Yes — BIP: NOAA 75-yr risk score, solar finder, 10-location compare</td>
+          <td>None documented</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="text-align:center;margin-top:14px;font-size:12.5px;color:#94a3b8">ClearCalcs/Calcs.com details reflect publicly available information as of June 2026. Pricing and feature tiers may change — verify on calcs.com.</p>
+</div></section>
+
+<!-- Who should pick ClearCalcs -->
+<section><div class="wrap">
+  <div class="pick">
+    <h3>Who should pick ClearCalcs</h3>
+    <p>The honest case for the other tool. Pick ClearCalcs when your job is broad, not wind-deep:</p>
+    <ul>
+      <li>You want one subscription for wood, steel, concrete, footings, retaining and shear walls, and 2D frame/truss analysis with load linking.</li>
+      <li>You need tornado-load output in the same ASCE 7-22 template as your wind.</li>
+      <li>You work across Australian or European codes as well as US ASCE.</li>
+      <li>You'd rather stay in one all-in-one cloud suite than add a focused specialist.</li>
+    </ul>
+    <p>In those cases ClearCalcs is the right call — WindLoadCalc won't replace your general calc library. Keep the suite for beams and footings. Reach for the specialist on the wind and the seal.</p>
+  </div>
+</div></section>
+
+<!-- Objection / rebuttal -->
+<section><div class="wrap">
+  <div class="sec-head"><h2>The objection worth answering</h2></div>
+  <div class="obj">
+    <div class="q">"ClearCalcs already does ASCE 7-22 wind — C&amp;C and MWFRS — with per-coefficient traceability and tornado loads, inside one suite that also covers my beams, steel and concrete. Why pay for a separate wind-only tool?"</div>
+    <p class="a">Fair question. On the math it's a draw — ClearCalcs computes it, and on coefficient citations we're at <strong>parity</strong>, not ahead. But two things their software can't do at any price. First, it stops at the ASCE map value. WindLoadCalc auto-applies the FBC 8th Ed (2023) HVHZ overrides — Miami-Dade's 175 mph and the rest — per FBC R301.2(7), which their own wind page never mentions. Second, ClearCalcs seals nothing, anywhere; WindLoadCalc carries the calc straight to a <strong>PE sign-and-seal in all 50 states</strong>. Add a free public calculator (wind isn't even in their $66 Basic tier — it's Pro $99+/mo after a 14-day trial) and the AutoCAD-ready .xlsx schedule, and for a permit-driven Florida workflow the specialist closes the loop the suite leaves open. Keep ClearCalcs for the rest of your library. Bring WindLoadCalc to the wind and the stamp.</p>
+  </div>
+</div></section>
+
+<!-- FAQ -->
+<section id="faq"><div class="wrap">
+  <div class="sec-head"><h2>WindLoadCalc vs ClearCalcs — questions</h2></div>
+  <div class="faq">
+    <details open><summary>Is ClearCalcs accurate enough for ASCE 7-22 wind?</summary><p>Yes. ClearCalcs computes ASCE 7-22 C&amp;C and MWFRS wind, exposes GCp/GCpi with equation references, and runs a traffic-light check system. On coefficient transparency the two products are genuinely even — we call that a tie. The divergence shows up after the math: ClearCalcs stops at the raw ASCE map wind speed, while WindLoadCalc layers the FBC HVHZ override on top and returns the value a Florida reviewer will actually enforce.</p></details>
+    <details><summary>Does ClearCalcs apply the Florida Building Code HVHZ wind speed automatically?</summary><p>Not in any way their published wind page documents. On Calcs.com the basic wind speed comes from the ASCE 7-22 Figure 26.5-1 maps or manual entry, with no Miami-Dade, Broward, or Collier override layer described. WindLoadCalc auto-applies FBC R301.2(7) so a Miami-Dade project returns the enforceable 175 mph instead of only the interpolated map reading.</p></details>
+    <details><summary>Can I run a wind number on ClearCalcs for free?</summary><p>Only temporarily. ClearCalcs gives a 14-day Pro-level trial that downgrades to read-only afterward, and wind is not included in the $66 Basic tier — you move to Pro (listed at $99/mo annual or $119/mo monthly) to keep creating calcs. WindLoadCalc keeps a public wind-speed-by-ZIP plus single-component pressure tool open with no account and no card, under a soft daily cap.</p></details>
+    <details><summary>ClearCalcs covers wood, steel, concrete and footings — why use a wind-only tool?</summary><p>If your day is mixed member design, that breadth is the right reason to keep ClearCalcs — it is a real strength and we don't pretend otherwise. But a broad suite still leaves two things undone for a permit: it hands you the ASCE map value rather than the enforceable Florida number, and it cannot stamp anything. WindLoadCalc fills exactly those gaps for the wind portion of the job.</p></details>
+    <details><summary>Does ClearCalcs offer a PE sign-and-seal service?</summary><p>No. ClearCalcs is design-calculation software; nothing on its wind or pricing pages offers a sealed deliverable in any jurisdiction, so you still have to locate and pay a separate engineer to stamp the output. WindLoadCalc routes the finished calc through an in-house Florida P.E. and a partner-PE network that signs and seals in all 50 states — the calculation and the seal live in one workflow.</p></details>
+    <details><summary>What about tornado loads, which ClearCalcs supports?</summary><p>That's a fair point in their favor: ClearCalcs produces separate ASCE 7-22 tornado pressures when a tornado speed is supplied, and WindLoadCalc does not document tornado output today. If tornado design inside the same template is a hard requirement, weigh that honestly. For straight hurricane-region wind and a sealed permit package, the specialist still closes the loop the suite leaves open.</p></details>
+  </div>
+</div></section>
+
+<!-- Final CTA -->
+<section class="final"><div class="wrap">
+  <div class="glass2">
+    <h2>Try the wind number before you pay anyone</h2>
+    <p>Run a ZIP through our <a href="free-wind-load-calculator.html">free wind calculator</a> and watch the Florida HVHZ override kick in. Compare it to whatever your suite returned. Ready for the full calc plus a sealed deliverable? The trial takes no card.</p>
+    <div class="hero-cta" style="margin-bottom:6px">
+      <a class="btn btn-primary btn-xl" href="free-wind-load-calculator.html">Open the free calculator →</a>
+      <a class="btn btn-ghost btn-xl" href="wind-load-calculator-shop.html">View plans &amp; start trial</a>
+    </div>
+    <div class="hero-trust" style="margin-top:10px">
+      <span><span class="ck">✓</span> Enforceable FBC value</span>
+      <span><span class="ck">✓</span> 50-state PE seal</span>
+      <span><span class="ck">✓</span> No card to try</span>
+    </div>
+  </div>
+  <p class="legal">ClearCalcs (and Calcs.com) is a trademark of its owner; WindLoadCalc is not affiliated with or endorsed by it. Comparison based on publicly available information as of June 2026.</p>
+</div></section>
+
+<!-- Footer -->
+<footer class="main-footer"><div class="container">
+  <div class="footer-content">
+    <div class="footer-column"><h3>Contact Information</h3><ul>
+      <li><strong>General Inquiries</strong></li>
+      <li><a href="mailto:info@windloadcalc.com">info@windloadcalc.com</a></li>
+      <li><a href="tel:8332723946">(833) 272-3946</a></li>
+      <li style="margin-top:.6rem"><strong>Sales</strong></li>
+      <li><a href="mailto:sales@windloadcalc.com">sales@windloadcalc.com</a></li>
+    </ul></div>
+    <div class="footer-column"><h3>Wind Load Calculators</h3><ul>
+      <li><a href="wind-load-calculator-shop.html">All Calculators &amp; Pricing</a></li>
+      <li><a href="shop/windows-doors-shutters.html">Windows, Doors &amp; Shutters</a></li>
+      <li><a href="shop/mwfrs.html" rel="nofollow">MWFRS Calculator</a></li>
+      <li><a href="shop/roofing.html" rel="nofollow">Roofing Calculator</a></li>
+    </ul></div>
+    <div class="footer-column"><h3>Resources</h3><ul>
+      <li><a href="/free-wind-load-calculator.html">Free Wind Load Calculator</a></li>
+      <li><a href="/asce-7-wind-load-calculator/">ASCE 7-22 Guide</a></li>
+      <li><a href="/components-and-cladding-wind-loads/">C&amp;C Wind Loads</a></li>
+      <li><a href="building-intelligence-platform-shop.html">BIP Plans</a></li>
+    </ul></div>
+    <div class="footer-column"><h3>Company</h3><ul>
+      <li><a href="why-us.html">About Us</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="services.html">Professional Services</a></li>
+      <li><a href="privacy-policy.html">Privacy Policy</a></li>
+      <li><a href="terms-of-service.html">Terms of Service</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 WindLoadCalc · WindLoad Solutions, LLC — online since 2006. ASCE 7-22 &amp; 7-16 wind load software.</p></div>
+</div></footer>
+
+<script>
+(function(){
+  var nav=document.getElementById('nav');
+  function onScroll(){ nav.classList.toggle('scrolled', window.scrollY>40); }
+  onScroll(); window.addEventListener('scroll',onScroll,{passive:true});
+})();
+(function(){
+  var ham=document.getElementById('hamburger'), fm=document.getElementById('fullMenu'),
+      ov=document.getElementById('navOverlay'), fc=document.getElementById('fmClose');
+  if(!ham||!fm) return;
+  function setMenu(open){ fm.classList.toggle('open',open); ov.classList.toggle('open',open); ham.classList.toggle('open',open);
+    ham.setAttribute('aria-expanded',open); document.body.style.overflow=open?'hidden':''; }
+  ham.addEventListener('click',function(){ setMenu(!fm.classList.contains('open')); });
+  ov.addEventListener('click',function(){ setMenu(false); });
+  if(fc) fc.addEventListener('click',function(){ setMenu(false); });
+  fm.querySelectorAll('a').forEach(function(a){ a.addEventListener('click',function(){ setMenu(false); }); });
+  window.addEventListener('keydown',function(e){ if(e.key==='Escape') setMenu(false); });
+})();
+</script>
+</body>
+</html>

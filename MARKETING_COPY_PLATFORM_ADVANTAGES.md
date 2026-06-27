@@ -13,19 +13,19 @@ Place under the product title or near the pricing cards on each shop page. Self-
 <!-- Any-device badge for shop/product pages -->
 <div style="display:inline-flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:13px;font-weight:600;color:#cdd6f5;margin:10px 0">
   <span style="display:inline-flex;align-items:center;gap:6px;background:rgba(52,211,153,.12);border:1px solid rgba(52,211,153,.35);color:#34D399;border-radius:999px;padding:5px 12px;font-weight:700">🖥️ 📱 Works on any device · no install</span>
-  <span style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:5px 12px">↻ Always the latest ASCE 7-22</span>
+  <span style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:5px 12px">↻ Always the latest ASCE 7</span>
   <a href="why-us.html#reasons" style="color:#34D399;font-weight:700;text-decoration:none">Learn more →</a>
 </div>
 ```
 
 Plain-text version (if a page wants copy, not a chip):
-> **Works on any device — desktop, tablet or phone. Nothing to install, always the latest ASCE 7-22.** [Learn more →](why-us.html#reasons)
+> **Works on any device — desktop, tablet or phone. Nothing to install, always the latest ASCE 7.** [Learn more →](why-us.html#reasons)
 
 ## The platform pillar copy (reference / reuse)
 **Any device, always current — Modern web, not a desktop install.**
 *Open a browser on any device and you're working.* WindLoadCalc runs entirely in your browser. Nothing to download, install, license to one PC, or keep patched — and it works the same on a desktop, a tablet on site, or your phone.
 - **Any device** — desktop, tablet or phone, no app to install
-- **Always the latest ASCE 7-22** — updated instantly, never a version that falls behind
+- **Always the latest ASCE 7** — updated instantly, never a version that falls behind
 - **Always secure & future-proofed** for the AI age, continuously maintained
 - **Your projects in the cloud** — start on one device, finish on another
 > Many wind tools are Windows-only desktop software you install and update by hand — some won't open on a tablet or phone at all. Ours just needs a browser.
@@ -45,7 +45,7 @@ Plain-text version (if a page wants copy, not a chip):
 ## Guardrails (locked rules — do not violate)
 - **NO competitor names anywhere on the site** (legal-safe; the site already scrubbed them; `vs-*` pages parked). Speak generically.
 - **Security = "always secure, future-proofed for the AI age."** Never "more/most secure." We hold no SOC 2/ISO.
-- **"Always the latest ASCE 7-22"** — not "more up to date than everyone" (incumbents also do 7-22; the honest win is *native + instant updates + any device*).
+- **"Always the latest ASCE 7"** — not "more up to date than everyone" (incumbents also do 7-22; the honest win is *native + instant updates + any device*).
 - Truthful/defensible only — no fabricated stats. (See `feedback_security_framing_and_support_phone`, `project_competitor_strategy`, `feedback_defensible_scale_claims`.)
 
 ## Coordination note

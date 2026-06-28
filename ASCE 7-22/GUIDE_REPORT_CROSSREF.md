@@ -75,6 +75,23 @@ Report rendered OK (13241 bytes); qh in report: YES · saved report: `ASCE 7-22/
 
 **3 / 3 published answers matched** (tolerance 0.20 psf).
 
+## C&C Flat Roof (Guide Ex 6.1 / §30.3 Fig 30.3-2A)
+
+Report rendered OK (12822 bytes); qh in report: YES · saved report: `ASCE 7-22/guide_report_crossref/flat_roof_report.html`
+
+| Answer | Guide (psf) | Our report (psf) | Δ | Match |
+|---|---:|---:|---:|:--:|
+| Zone 1  @A=10 (book -76.1) | -76.10 | -76.17 | 0.07 | ✅ |
+| Zone 1' @A=10 (book -43.7) | -43.70 | -43.75 | 0.05 | ✅ |
+| Zone 2  @A=10 (book -100.4) | -100.40 | -100.47 | 0.07 | ✅ |
+| Zone 3  @A=10 (book -136.9) | -136.90 | -136.94 | 0.04 | ✅ |
+| Zone 1  @A=300 (book -51.4) | -51.40 | -51.51 | 0.11 | ✅ |
+| Zone 1' @A=300 (book -34.0) | -34.00 | -34.09 | 0.09 | ✅ |
+| Zone 2  @A=300 (book -68.9) | -68.90 | -68.77 | 0.13 | ✅ |
+| Zone 3  @A=300 (book -73.3) | -73.30 | -73.53 | 0.23 | ✅ |
+
+**8 / 8 published answers matched** (tolerance 0.20 psf).
+
 ---
 
 ## Report paths pending (runbook step E1) — engine-level already WE-verified

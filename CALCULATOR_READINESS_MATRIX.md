@@ -32,16 +32,18 @@ Legend: ✅ done · ⚠️ partial/caveat · 🚫 not done
 | 11 | Chimneys & Tanks | ✅ | ✅ | ✅ | 🚫 | Cf book-verified (WE-10) |
 | 12 | Solar Rooftop | ✅ | ✅ | ⚠️ | 🚫 | §29.4 verified + snow wired; balanced snow only (drift/sliding/rain excluded); §29.4.3 two-load-case note pending |
 | 13 | Solar Ground-Mount | ⚠️ | ✅ | ⚠️ | 🚫 | figure-verified + regression-tested (WE-15/WE-22); no independent published worked example exists (§29.4.5 is new in 7-22). Needs snow + foundation. **UI gap below.** |
+| 14 | MWFRS Envelope | ✅ | ✅ | ✅ | 🚫 | wired 2026-06-28 (`/mwfrs/envelope`); Ch 28 Fig 28.3-1/2, all 4 load cases |
+| 15 | Open Signs & Frames | ✅ | ✅ | ✅ | 🚫 | wired 2026-06-28 (`/structures/open-signs`); §29.4 Fig 29.4-2 (ε≤0.7) |
+| 16 | Freestanding Walls | ✅ | ✅ | ✅ | 🚫 | wired 2026-06-28 (`/structures/walls`); §29.3 Fig 29.3-1, 3 load cases |
+| 17 | Trussed Towers | ✅ | ✅ | ✅ | 🚫 | wired 2026-06-28 (`/structures/towers`); §29.4 Fig 29.4-3 |
 
-## B. Engine VERIFIED but NOT on admin — just needs a route + UI (5)
+## B. Engine VERIFIED but NOT on admin — just needs a route + UI (1)
 
 | # | Calculator | ①Verified | ②On admin | Notes |
 |---|---|:--:|:--:|---|
-| 14 | MWFRS Envelope | ✅ | 🚫 | verified; **unwired** — most important visibility gap |
-| 15 | Dome / Arched Roof | ✅ | 🚫 | engine fixed+verified this session (Fig 30.3-7 / 30.3-8); unwired |
-| 16 | Open Signs & Frames | ✅ | 🚫 | Cf verified (WE-12); unwired |
-| 17 | Trussed Towers | ✅ | 🚫 | Cf verified (WE-11); unwired |
-| 18 | Freestanding Walls | ✅ | 🚫 | Cf verified (WE-13); unwired |
+| 18 | Dome / Arched Roof | ✅ | 🚫 | engine fixed+verified this session (Fig 30.3-7 / 30.3-8); **unwired — next to wire** |
+
+*(MWFRS Envelope, Open Signs, Freestanding Walls, Trussed Towers — wired 2026-06-28, now in section A.)*
 
 ## C. Engine-only, verification PENDING (3)
 
@@ -99,9 +101,9 @@ static `config` object (incl. opt-in `config.snow`, `config.reportEndpoint`, `co
 (gated on `config.snow`, with an "open in new tab" fallback for X-Frame-Options blocks).
 
 ## Recommended next actions (other-session order, adopted)
-1. **Wire the 4 pattern-ready unwired UIs** — Trussed Towers, Open Signs, Freestanding Walls,
-   MWFRS Envelope (engines verified; route+UI mirroring signs.html). Quickest ROI.
-2. **Wire Dome/Arched** (5th unwired; this session's engine) — same pattern.
+1. ✅ **DONE 2026-06-28** — wired Trussed Towers, Open Signs, Freestanding Walls, MWFRS Envelope
+   (endpoint + admin route + UI + nav, mirroring signs.html). Commit `d72fb70`. 17 calcs now on admin.
+2. **Wire Dome/Arched** (last unwired engine; this session's fix) — same pattern.
 3. **Ground-solar `row_spacing_S` input** so the Lc/S Zone-2 override is reachable (see ⚠️ above).
 4. **Admin Readiness page** rendering this matrix with a Test link per calc.
 5. **Workstream E** to make verified+wired calcs sellable (start MWFRS — no scope gaps).

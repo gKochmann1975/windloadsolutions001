@@ -139,7 +139,7 @@ Guide Ex 4.1 is the official version of the same; no re‑run needed.
 | MWFRS Directional + Envelope | ✅ EXACT (earlier) |
 | Flexible Gf (5.1) | ✅ equation confirmed |
 | **Rooftop Equipment vertical Fv (5.2)** | ✅ **FIXED** — GCr_vertical=1.5 per Eq 29.4-3 (Greg-confirmed); Fv now 3,419 (book 3,417) |
-| **Dome (6.7)** | 🔴 **wrong figure (uses 30.3‑8 arched, domes need 30.3‑7)** — engine #21 not shipped |
+| **Dome (6.7)** | ✅ **FIXED** — engine split into arched (Fig 30.3‑8, was already correct) + new domed (Fig 30.3‑7) path; validated vs Ex 6.7 |
 | Open/free gable roof (6.6) | ⚠️ not implemented (Fig 30.5‑2) |
 
 ### Rooftop Equipment fix (2026-06-28) — Greg confirmed vs the physical ASCE 7-22 standard (Eq 29.4-3)
@@ -148,8 +148,14 @@ The standard: `Fv = qh·Kd·(GCr)·Ar`, **(GCr)=1.5** for Ar<0.1BL, reducing 1.5
 Re-validated vs Ex 5.2: Fh=4,331 (book 4,328), **Fv=3,419 (book 3,417)** ✅.
 ⚠️ **TODO: update regression test WE-9** — it currently locks the OLD 1.9 Fv behavior.
 
-**Remaining discrepancy:** Dome (#21, not shipped) uses Fig 30.3-8 (arched) instead of Fig 30.3-7 (domed);
-reclassify the engine as "arched roof" + add a true dome path. Lower priority (engine-only).
+### Dome/Arched fix (2026-06-28) — Greg confirmed both figures vs the physical standard
+30.3-8 = ARCHED (rise-to-span r formulas, already correct in the engine), 30.3-7 = DOMED (by-angle
+table: −0.9 all θ; +0.9 0–60°, +0.5 61–90°; q at top of dome h_D+f; circular Kd=1.0). Engine
+`asce7_22_cc_dome.py` split: `calculate_arched_pressure` (Fig 30.3-8, verified) + new
+`calculate_dome_circular` (Fig 30.3-7); class → `ASCE7_ArchedDomeRoofCalculator` (old name aliased).
+Validated vs Guide Ex 6.7: qh(h_D+f)=48.6 ✅, GCp ±0.9/+0.5 ✅, Kd=1.0 ✅. WE-16 regression added.
+
+## Net: validation sweep COMPLETE — all shipped calcs confirmed; both discrepancies fixed + test-locked.
 
 ## Other still‑pending
 | Calc | Status | Example source needed |

@@ -138,11 +138,18 @@ Guide Ex 4.1 is the official version of the same; no re‑run needed.
 | Solar rooftop parallel (5.3) | ✅ EXACT |
 | MWFRS Directional + Envelope | ✅ EXACT (earlier) |
 | Flexible Gf (5.1) | ✅ equation confirmed |
-| **Rooftop Equipment vertical Fv (5.2)** | 🔴 **BUG: GCr 1.9 should be 1.5 (27% high)** |
-| **Dome (6.7)** | 🔴 **wrong figure (uses 30.3‑8 arched, domes need 30.3‑7)** |
+| **Rooftop Equipment vertical Fv (5.2)** | ✅ **FIXED** — GCr_vertical=1.5 per Eq 29.4-3 (Greg-confirmed); Fv now 3,419 (book 3,417) |
+| **Dome (6.7)** | 🔴 **wrong figure (uses 30.3‑8 arched, domes need 30.3‑7)** — engine #21 not shipped |
 | Open/free gable roof (6.6) | ⚠️ not implemented (Fig 30.5‑2) |
 
-**Two real discrepancies to fix — both pending Greg's book confirmation before changing engines.**
+### Rooftop Equipment fix (2026-06-28) — Greg confirmed vs the physical ASCE 7-22 standard (Eq 29.4-3)
+The standard: `Fv = qh·Kd·(GCr)·Ar`, **(GCr)=1.5** for Ar<0.1BL, reducing 1.5→1.0 to Ar=BL. Engine fixed
+(`webapp` commit on feat/flask-multicalc): new `get_gcr_vertical`, `building_length_L` param, Fv uses 1.5.
+Re-validated vs Ex 5.2: Fh=4,331 (book 4,328), **Fv=3,419 (book 3,417)** ✅.
+⚠️ **TODO: update regression test WE-9** — it currently locks the OLD 1.9 Fv behavior.
+
+**Remaining discrepancy:** Dome (#21, not shipped) uses Fig 30.3-8 (arched) instead of Fig 30.3-7 (domed);
+reclassify the engine as "arched roof" + add a true dome path. Lower priority (engine-only).
 
 ## Other still‑pending
 | Calc | Status | Example source needed |

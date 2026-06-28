@@ -50,6 +50,31 @@ Report rendered OK (35658 bytes); qh in report: YES · saved report: `ASCE 7-22/
 
 **17 / 17 published answers matched** (tolerance 0.20 psf).
 
+## Rooftop Equipment (Guide Ex 5.2 / §29.4.1)
+
+Report rendered OK (12830 bytes); qh in report: YES · saved report: `ASCE 7-22/guide_report_crossref/equipment_report.html`
+
+| Answer | Guide (psf) | Our report (psf) | Δ | Match |
+|---|---:|---:|---:|:--:|
+| Fh lateral (book 4,328 lb) | 4328.00 | 4331.13 | 3.13 | ✅ |
+| Fv uplift (book 3,417 lb) | 3417.00 | 3419.31 | 2.31 | ✅ |
+| GCr lateral | 1.90 | 1.90 | 0.00 | ✅ |
+| GCr vertical | 1.50 | 1.50 | 0.00 | ✅ |
+
+**4 / 4 published answers matched** (tolerance 0.20 psf).
+
+## Domed Roof (Guide Ex 6.7 / §30.3 Fig 30.3-7)
+
+Report rendered OK (13241 bytes); qh in report: YES · saved report: `ASCE 7-22/guide_report_crossref/dome_report.html`
+
+| Answer | Guide (psf) | Our report (psf) | Δ | Match |
+|---|---:|---:|---:|:--:|
+| qh at dome top (book 48.6 psf) | 48.60 | 48.62 | 0.02 | ✅ |
+| GCp positive | 0.90 | 0.90 | 0.00 | ✅ |
+| GCp negative | -0.90 | -0.90 | 0.00 | ✅ |
+
+**3 / 3 published answers matched** (tolerance 0.20 psf).
+
 ---
 
 ## Report paths pending (runbook step E1) — engine-level already WE-verified
@@ -62,6 +87,4 @@ These calcs are cross-referenced against the Guide at the **engine** level in `v
 | C&C Gable | Ex 6.2 | ✅ exact (6 zones) |
 | C&C Hip | Ex 6.3 | ✅ exact (3 zones) |
 | C&C Monoslope | Ex 6.5 | ✅ exact (6 zones) |
-| Rooftop Equipment | Ex 5.2 | ✅ Fh 4,331 (book 4,328), Fv 3,419 (book 3,417) |
-| Arched/Dome | Ex 6.7 | ✅ qh 48.6, GCp ±0.9, Kd=1.0 |
 | Solar rooftop (parallel) | Ex 5.3 | ✅ exact (has report path; add a report-level case here next) |

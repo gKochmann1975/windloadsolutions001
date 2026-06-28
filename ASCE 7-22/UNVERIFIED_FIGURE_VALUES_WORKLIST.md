@@ -19,7 +19,7 @@ ledger — needs your book read. 🔲 = not built yet (verify when built).
 | 1 | **C&C Windows / Doors** | LIVE | ✅ verified | Ch26 universals, Fig 30.3-1 (walls), Fig 30.4-1 | ledger-locked |
 | 2 | **MWFRS Building — Directional** | admin | ✅ verified | Ch27, Fig 27.3-1 | ledger-locked |
 | 3 | **MWFRS Building — Envelope** | admin | ✅ verified | Ch28, Fig 28.3-1 | ledger-locked |
-| 4 | **C&C Roof — Flat** | admin | ⬜ NEEDS READ | Fig 30.3-2A + overhang §30.7 | §C&C ROOFS below |
+| 4 | **C&C Roof — Flat** | admin | ✅ VERIFIED 2026-06-27 | Fig 30.3-2A + overhang §30.7 | ledger-locked + test WE-3 |
 | 5 | **C&C Roof — Gable** | admin | ⬜ NEEDS READ | Fig 30.3-2B/C/D | §C&C ROOFS |
 | 6 | **C&C Roof — Hip** | admin | ⬜ NEEDS READ | Fig 30.3-2E/F/G | §C&C ROOFS |
 | 7 | **C&C Roof — Monoslope** | admin | ⬜ NEEDS READ | Fig 30.3-5A/5B | §C&C ROOFS |
@@ -52,8 +52,9 @@ z_min — the 0.70 floor vs raw Table 26.10-1 cells (0.57/0.62/0.66). See the OP
 QUESTION section at the bottom. Conservative either way (no safety risk), but the
 *reported* intermediate Kz for low-rise Exp-B is the floor.
 
-**Bottom line: 19 calculators (#4–22) need your manual book cross-reference before
-they can ship.** The 3 production calculators (#1–3) are done. #18-22 are brand-new
+**Bottom line: 18 calculators (#5–22) need your manual book cross-reference before
+they can ship.** The 3 production calculators (#1–3) are done; **#4 C&C Flat Roof
+VERIFIED 2026-06-27** (ledger-locked + test WE-3). #18-22 are brand-new
 engines (no UI) built 2026-06-23; #20/#21/#22 use mostly READABLE tables/formulas
 (higher confidence); #18 is graph-traced (lower). MWFRS free roofs is blocked on scans.
 
@@ -81,7 +82,8 @@ between anchors. Confirm BOTH the anchor magnitudes AND the effective-area range
 
 ## C&C ROOFS
 
-### [ ] Fig 30.3-2A — Flat roof, h ≤ 60 ft  (book ~p.319) — `asce7_22_cc_roofs_flat.py:303-331`
+### [x] Fig 30.3-2A — Flat roof, h ≤ 60 ft  (book ~p.319) — `asce7_22_cc_roofs_flat.py:303-331`
+> ✅ VERIFIED 2026-06-27 — user confirmed "all match"; ledger-locked + regression test WE-3. All values below confirmed correct.
 > ⚠️ This is the PRIMARY path for the most common case (every 1–2 story flat roof).
 | Zone | A=10 | A=500 (or noted) | Confirm |
 |---|---|---|---|
@@ -92,7 +94,8 @@ between anchors. Confirm BOTH the anchor magnitudes AND the effective-area range
 | Zone 3 | −3.2 | −1.4 | [ ] |
 > Note: Zone 2 and Zone 3 share the same A=500 anchor (−1.4) — unusual, confirm explicitly.
 
-### [ ] Fig 30.3-2A overhangs / §30.7  — `asce7_22_cc_roofs_flat.py:375-398`
+### [x] Fig 30.3-2A overhangs / §30.7  — `asce7_22_cc_roofs_flat.py:375-398`
+> ✅ VERIFIED 2026-06-27 — confirmed with the field figure above.
 | Zone | A=10 | A=500 | Confirm |
 |---|---|---|---|
 | Zone 1′/1 | −1.7 | −1.0 (mid −1.6 @A=100) | [ ] |

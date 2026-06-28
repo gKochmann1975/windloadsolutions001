@@ -93,6 +93,26 @@ match to the digit. **First validation against the official ASCE Guide — flat�
 
 ---
 
+## ✅ #5–#8 — C&C roofs + Solar vs the OFFICIAL ASCE 7‑22 Guide (all EXACT)
+Source: *Wind Loads: Guide to ASCE 7‑22* (Stafford & Reinhold), pages captured.
+- **#5 Gable (Ex 6.2, θ=18.4°, Fig 30.3‑2B):** all 6 roof zone pressures EXACT (Panel A=10 + Purlin A=208).
+- **#6 Hip (Ex 6.3, θ=15°, Fig 30.3‑2E):** GCp all 3 zones EXACT at A=32 (−1.41/−1.97/−2.13); gable portion (Fig 30.3‑2B) also EXACT.
+- **#7 Monoslope (Ex 6.5, θ=14°, Fig 30.3‑5B):** all 6 zone pressures EXACT (A=20 + A=566).
+- **#8 Solar rooftop PARALLEL (Ex 5.3, §29.4.4):** p = qh·GCp·γE·γa EXACT — perimeter −24.1/book −24.2, interior −16.1, +16 psf min. (GCp from the validated monoslope roof.)
+
+## 🔴 #9 — Rooftop Equipment (Ex 5.2) — BUG FOUND (vertical uplift)
+**Lateral force Fh ✅ matches** (GCr=1.9 → 4,328 lb / 86.6 psf). **Vertical uplift Fv ❌**: our engine
+`asce7_22_other_rooftop_equipment.py:316` computes `Fv = qh·GCr·Ar` with **GCr=1.9**, but ASCE 7‑22
+§29.4.1 (Eq 29.4‑3) and the Guide use **GCr=1.5** for vertical. → engine Fv = 4,328 lb vs **book 3,417 lb**
+(**27% over‑estimate**; conservative/safe but non‑conforming). Two fixes needed: (1) vertical anchor
+1.5 (not 1.9); (2) the vertical reduction (1.5→1.0) should be driven by **Ar** (plan area), not Af.
+**The prior 2026‑06‑27 figure‑cell verification missed this — independent Guide validation caught it.**
+
+## ⚠️ #10 — Open/free roof (Ex 6.6) — N/A (not implemented)
+Engine `asce7_22_cc_free_roof.py` has `_CN_PITCHED = None` — gable/pitched free roofs (Fig 30.5‑2) not
+transcribed (monoslope only, and those Cₙ still pending). Ex 6.6 + Fig 30.5‑2 give the values to build it.
+(Free roofs are engine‑only, not in the imminent release.)
+
 ## Still to validate — pages CAPTURED (ASCE Guide images pp.93‑164), ready to run
 | Calc | ASCE Guide example (pages) | Status |
 |---|---|---|

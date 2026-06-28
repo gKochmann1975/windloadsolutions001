@@ -71,6 +71,16 @@ tower PE. Deferred until the above calculators are live.
 - **ASCE 7‑22 Chapter 2 (Load Combinations)** is needed by *every* calc that combines loads (wind+snow+dead). Single highest‑leverage scan after Ch 7.
 - Value verification: every new figure/table value goes through the same book cross‑ref as the wind chapters (see `ASCE 7-22/UNVERIFIED_FIGURE_VALUES_WORKLIST.md`).
 
+### Rain loads (ASCE 7‑22 Chapter 8) — OUT OF SCOPE (decided 2026‑06‑27)
+Chapter 8 rain loads are a **flat/low‑slope ROOF ponding** problem (R = 5.2(ds + dh), water accumulating
+when drains clog). **Not applicable** to the current calculators:
+- **Solar:** tilted panels shed water — no ponding on the array. (The rain that matters for solar is the
+  **rain‑on‑snow surcharge in Ch 7**, which *is* included.)
+- **Signs / walls / towers / chimneys:** not roof surfaces — N/A.
+- **C&C Roof calcs:** compute wind pressures (GCp), not roof framing/ponding capacity — N/A.
+→ **No Chapter 8 scan needed.** Revisit ONLY if we ever build a flat/low‑slope **roof structural/ponding
+design** calculator (then Ch 8 rain + ponding instability come into scope).
+
 ---
 
 ## Status summary

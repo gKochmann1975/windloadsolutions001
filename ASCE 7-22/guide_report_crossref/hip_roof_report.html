@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hip Roof C&C Wind Loads &mdash; GUIDE XREF — Hip Roof (Ex 6.3)</title>
+<style>
+  /* -- Page & Base --
+     Bottom margin is intentionally larger so the fixed .report-footer (in
+     print) has clear space to sit in. With a flat 0.75in margin the footer
+     was overlapping the last calc-step / reference bullet on each page,
+     leaving the text sliced in half across the page break. */
+  @page { size: letter portrait; margin: 0.75in 0.75in 1.25in 0.75in; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:    #1a3a5c;
+    --navy-lt: #2a5a8c;
+    --navy-bg: #f0f4f8;
+    --border:  #c8d6e5;
+    --text:    #333;
+    --pass:    #27ae60;
+    --fail:    #e74c3c;
+  }
+
+  body {
+    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.55;
+    max-width: 8.5in;
+    margin: 0 auto;
+    padding: 0.75in;
+    background: #fff;
+    color: var(--text);
+  }
+
+  /* -- Export Toolbar (screen only) -- */
+  .export-toolbar {
+    position: fixed;
+    top: 12px;
+    right: 18px;
+    display: flex;
+    gap: 6px;
+    z-index: 1000;
+    background: rgba(255,255,255,0.92);
+    padding: 6px 10px;
+    border-radius: 6px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+  }
+  .export-toolbar button {
+    background: #fff;
+    color: var(--navy);
+    border: 1.5px solid var(--navy);
+    border-radius: 4px;
+    padding: 4px 10px;
+    font-size: 9pt;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.15s;
+  }
+  .export-toolbar button:hover {
+    background: var(--navy);
+    color: #fff;
+  }
+  .export-toolbar button .icon {
+    font-size: 11pt;
+  }
+
+  /* -- Dual Logo Header -- */
+  .logo-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .logo-row-center {
+    justify-content: center;
+  }
+  .customer-logo {
+    max-width: 300px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .customer-logo img {
+    max-height: 55px;
+    max-width: 300px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
+  .wlc-logo {
+    width: 140px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .wlc-logo img {
+    max-height: 35px;
+    max-width: 140px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
+  .wlc-logo-large {
+    width: 280px;
+    height: 70px;
+  }
+  .wlc-logo-large img {
+    max-height: 70px;
+    max-width: 280px;
+  }
+
+  .report-title {
+    text-align: center;
+    padding: 10px 0 14px;
+    border-bottom: 3px solid var(--navy);
+    margin-bottom: 20px;
+  }
+  .report-title h1 {
+    font-size: 16pt;
+    color: var(--navy);
+    letter-spacing: 1.5px;
+    margin-bottom: 2px;
+  }
+  .report-title .subtitle {
+    font-size: 11pt;
+    color: var(--navy-lt);
+    font-weight: 400;
+  }
+
+  /* -- Section Headings -- */
+  h2 {
+    font-size: 13pt;
+    color: var(--navy);
+    margin: 26px 0 10px;
+    padding-bottom: 4px;
+    border-bottom: 2px solid var(--navy);
+  }
+  h2 .sec-num {
+    display: inline-block;
+    background: var(--navy);
+    color: #fff;
+    font-size: 10pt;
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+    border-radius: 3px;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+  h3 {
+    font-size: 11pt;
+    color: var(--navy-lt);
+    margin: 14px 0 6px;
+    font-weight: 600;
+  }
+
+  /* -- Project Info Block -- */
+  .project-info {
+    border: 2px solid var(--navy);
+    border-radius: 4px;
+    padding: 14px 18px;
+    margin-bottom: 22px;
+    background: var(--navy-bg);
+  }
+  .project-info table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .project-info td {
+    padding: 3px 10px;
+    vertical-align: top;
+    font-size: 10pt;
+  }
+  .project-info td.label {
+    font-weight: 700;
+    color: var(--navy);
+    width: 130px;
+    white-space: nowrap;
+  }
+  .project-info td.spacer {
+    width: 30px;
+  }
+
+  /* -- Data Tables -- */
+  table.data {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8px 0 18px;
+    font-size: 9.5pt;
+  }
+  table.data th {
+    background: var(--navy);
+    color: #fff;
+    padding: 6px 8px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 9pt;
+    border: 1px solid #15304d;
+  }
+  table.data td {
+    padding: 5px 8px;
+    border: 1px solid #dde3ea;
+    text-align: center;
+  }
+  table.data td.left { text-align: left; }
+  table.data tr:nth-child(even) { background: #f6f8fb; }
+  table.data tr:hover { background: #eaf0f7; }
+  table.data td.ref { font-size: 8.5pt; color: #666; text-align: left; }
+
+  /* -- Calc Step Boxes -- */
+  .calc-step {
+    background: #f5f7fa;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--navy);
+    padding: 10px 14px;
+    margin: 6px 0;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 9.5pt;
+    line-height: 1.7;
+    border-radius: 0 4px 4px 0;
+    overflow-x: auto;
+  }
+  .calc-step .result {
+    color: var(--navy);
+    font-weight: 700;
+  }
+  .calc-step .label {
+    color: #888;
+    font-style: italic;
+  }
+
+  /* -- Info Note -- */
+  .info-note {
+    background: #e8f0fe;
+    border: 1px solid #b4d0f0;
+    border-radius: 4px;
+    padding: 8px 14px;
+    margin: 8px 0 12px;
+    font-size: 9.5pt;
+    color: #1a3a5c;
+  }
+
+  /* -- Pass / Fail Badges -- */
+  .badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 3px;
+    font-weight: 700;
+    font-size: 8.5pt;
+    letter-spacing: 0.5px;
+  }
+  .badge-pass { background: #d4edda; color: #155724; }
+  .badge-fail { background: #f8d7da; color: #721c24; }
+
+  /* -- References List -- */
+  .ref-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 8px 0;
+  }
+  .ref-list li {
+    padding: 3px 0 3px 18px;
+    position: relative;
+    font-size: 10pt;
+  }
+  .ref-list li::before {
+    content: "\25A0";
+    color: var(--navy);
+    position: absolute;
+    left: 0;
+    font-size: 7pt;
+    top: 6px;
+  }
+
+  /* -- Footer -- */
+  .report-footer {
+    margin-top: 30px;
+    border-top: 2px solid var(--navy);
+    padding-top: 8px;
+    font-size: 8pt;
+    color: #888;
+  }
+  .footer-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-disclaimer {
+    margin-top: 6px;
+    font-size: 7.5pt;
+    color: #aaa;
+    text-align: center;
+    font-style: italic;
+    line-height: 1.4;
+  }
+
+  /* -- Print Styles -- */
+  @media print {
+    .export-toolbar { display: none !important; }
+
+    /* Force a page break before any section marked with .section-break
+       in the HTML (currently section 2 — Velocity Pressure). The
+       break-* / page-break-* rules below weren't reliably moving section 2
+       off page 1, so we trigger an explicit page break here. */
+    .section-break {
+      break-before: page;
+      page-break-before: always;
+    }
+
+    body {
+      padding: 0;
+      max-width: none;
+      font-size: 10pt;
+    }
+
+    /* Atomic blocks — must never be split across a page break.
+       Both the modern `break-inside` and legacy `page-break-inside` are
+       declared because Chrome's print engine still honors `page-break-*`
+       more reliably than the unprefixed `break-*` in some versions. */
+    .project-info,
+    table.data,
+    .calc-step,
+    .info-note,
+    .ref-list,
+    .ref-list li {
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    /* Section headings stay glued to whatever follows them. Without this,
+       an h2 can end up as the last visible line of a page with its table
+       or first calc-step forced to the next page (orphaned heading). */
+    h2, h3, h4 {
+      break-after: avoid;
+      page-break-after: avoid;
+      /* Belt-and-suspenders: ask the engine to keep the next two lines /
+         block with the heading even when break-after is ignored. */
+      orphans: 3;
+      widows: 3;
+    }
+
+    /* The on-screen .report-footer is replaced in print by the @page
+       bottom-left / -center / -right margin boxes injected at the bottom
+       of the generated HTML. Hiding it here prevents the old static text
+       (which couldn't show real page numbers) from also rendering. */
+    .report-footer {
+      display: none !important;
+    }
+    /* Header prints in BLACK text, not light navy/gray. */
+    .report-title h1,
+    .report-title .subtitle { color: #000 !important; }
+    .project-info td,
+    .project-info td.label { color: #000 !important; }
+  }
+</style></head><body>
+<div class="export-toolbar"><button onclick="window.print()"><span class="icon">&#128424;</span>Print</button></div>
+
+<div class="report-title">
+  <h1>HIP ROOF C&C WIND LOADS</h1>
+  <div class="subtitle">ASCE 7-22 §30.3 (Fig 30.3-2E) &mdash; ASCE 7-22</div>
+  <div class="subtitle" style="font-size:9.5pt;margin-top:4px;">International Building Code (IBC) 2021</div>
+</div>
+<div class="project-info"><table>
+  <tr><td class="label">Project:</td><td colspan="3">GUIDE XREF — Hip Roof (Ex 6.3)</td></tr>
+  <tr><td class="label">Owner / Client:</td><td colspan="3">&mdash;</td></tr>
+  <tr><td class="label">Address:</td><td colspan="3">&mdash;</td></tr>
+  <tr><td class="label">Job No.:</td><td>&mdash;</td><td class="label">Date:</td><td>June 28, 2026</td></tr>
+  <tr><td class="label">Building Code:</td><td colspan="3">International Building Code (IBC) 2021 / ASCE 7-22</td></tr>
+  <tr><td class="label">Engineer:</td><td colspan="3">&mdash;</td></tr>
+  <tr><td class="label">Prepared by:</td><td colspan="3">WindLoad Solutions &mdash; windloadcalc.com</td></tr>
+</table></div>
+
+<h2><span class="sec-num">1</span>Design Parameters</h2>
+<table class="data">
+  <tr><th>Parameter</th><th>Symbol</th><th>Value</th><th>Reference</th></tr>
+  <tr><td class="left">Basic Wind Speed</td><td>V</td><td>105 mph</td><td class="ref">ASCE 7-22 Fig. 26.5-1 (Risk Cat II)</td></tr>
+  <tr><td class="left">Wind Speed Type</td><td>&mdash;</td><td>Ultimate</td><td class="ref">Section 26.5</td></tr>
+  <tr><td class="left">Risk Category</td><td>&mdash;</td><td>II</td><td class="ref">Table 1.5-1</td></tr>
+  <tr><td class="left">Exposure Category</td><td>&mdash;</td><td>B</td><td class="ref">Section 26.7</td></tr>
+  <tr><td class="left">Enclosure</td><td>&mdash;</td><td>Enclosed</td><td class="ref">Section 26.12</td></tr><tr><td class="left">Internal Pressure Coeff.</td><td>GC<sub>pi</sub></td><td>±0.18</td><td class="ref">Table 26.13-1</td></tr>
+  <tr><td class="left">Building</td><td>B&times;L</td><td>80 &times; 48 ft</td><td class="ref">&mdash;</td></tr><tr><td class="left">Mean roof height</td><td>h</td><td>12.1 ft</td><td class="ref">&mdash;</td></tr><tr><td class="left">Roof slope</td><td>&theta;</td><td>15&deg;</td><td class="ref">Hip, 7&deg;&lt;&theta;&le;20&deg;</td></tr>
+</table>
+
+<h2><span class="sec-num">2</span>Velocity Pressure</h2>
+<table class="data">
+  <tr><th>Parameter</th><th>Symbol</th><th>Value</th><th>Reference</th></tr>
+  <tr><td class="left">Velocity Pressure Exposure Coeff.</td><td>K<sub>z</sub></td><td>0.7000</td><td class="ref">Table 26.10-1</td></tr>
+  <tr><td class="left">Topographic Factor</td><td>K<sub>zt</sub></td><td>1.0000</td><td class="ref">Section 26.8</td></tr>
+  <tr><td class="left">Directionality Factor</td><td>K<sub>d</sub></td><td>0.85</td><td class="ref">Table 26.6-1</td></tr>
+  <tr><td class="left">Ground Elevation Factor</td><td>K<sub>e</sub></td><td>1.0000</td><td class="ref">Section 26.9</td></tr>
+  
+  <tr><td class="left">Velocity Pressure</td><td>q<sub>h</sub></td><td><span class="result">16.79 psf</span></td><td class="ref">Eq. 26.10-1 (K<sub>d</sub> folded into q)</td></tr>
+</table>
+
+<h2><span class="sec-num">3</span>Design Wind Pressures</h2>
+<div class="calc-step"><span class="ref-tag">ASCE 7-22 §30.3 (Fig 30.3-2E)</span> p = q<sub>h</sub>(GC<sub>p</sub> &minus; GC<sub>pi</sub>)</div>
+<table class="data"><tr><th>Zone</th><th>Eff. Wind Area</th><th>GC<sub>p</sub></th><th>Design Pressure (uplift)</th></tr><tr><td class="left">Zone 1</td><td>32.00 ft&sup2;</td><td>-1.41</td><td><span class="result">-26.73 psf</span></td></tr><tr><td class="left">Zone 2</td><td>32.00 ft&sup2;</td><td>-1.97</td><td><span class="result">-36.15 psf</span></td></tr><tr><td class="left">Zone 3</td><td>32.00 ft&sup2;</td><td>-2.13</td><td><span class="result">-38.86 psf</span></td></tr></table>
+
+<h2><span class="sec-num">4</span>References</h2>
+<ul class="ref-list"><li>ASCE 7-22 §30.3, Fig 30.3-2E — Hip Roofs</li><li>Exp-B K_z floored at 0.70 (engine) vs book 0.57 — rendered pressures are conservative.</li></ul>
+
+<div class="report-footer-note" style="margin-top:18px;font-size:8.5pt;color:#666;">
+Calculations per ASCE 7-22. Generated by WindLoadCalc.com.
+</div>
+</body></html>

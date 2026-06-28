@@ -92,6 +92,33 @@ Report rendered OK (12822 bytes); qh in report: YES · saved report: `ASCE 7-22/
 
 **8 / 8 published answers matched** (tolerance 0.20 psf).
 
+## C&C Gable Roof (Guide Ex 6.2 / §30.3 Fig 30.3-2B)
+
+Report rendered OK (12819 bytes); qh in report: YES · saved report: `ASCE 7-22/guide_report_crossref/gable_roof_report.html`
+
+| Answer | Guide (psf) | Our report (psf) | Δ | Match |
+|---|---:|---:|---:|:--:|
+| Zone 1 panel @A=10 (book -64.1) | -64.10 | -64.00 | 0.10 | ✅ |
+| Zone 2 panel @A=10 (book -84.7) | -84.70 | -84.55 | 0.15 | ✅ |
+| Zone 3 panel @A=10 (book -111.1) | -111.10 | -110.98 | 0.12 | ✅ |
+| Zone 1 purlin @A=208 (book -24.7) | -24.70 | -24.71 | 0.01 | ✅ |
+| Zone 2 purlin @A=208 (book -34.7) | -34.70 | -34.64 | 0.06 | ✅ |
+| Zone 3 purlin @A=208 (book -58.2) | -58.20 | -58.13 | 0.07 | ✅ |
+
+**6 / 6 published answers matched** (tolerance 0.20 psf).
+
+## C&C Hip Roof (Guide Ex 6.3 / §30.3 Fig 30.3-2E) [GCp]
+
+Report rendered OK (12866 bytes); qh in report: YES · saved report: `ASCE 7-22/guide_report_crossref/hip_roof_report.html`
+
+| Answer | Guide (psf) | Our report (psf) | Δ | Match |
+|---|---:|---:|---:|:--:|
+| Zone 1 GCp (book -1.41) | -1.41 | -1.41 | 0.00 | ✅ |
+| Zone 2 GCp (book -1.97) | -1.97 | -1.97 | 0.00 | ✅ |
+| Zone 3 GCp (book -2.13) | -2.13 | -2.13 | 0.00 | ✅ |
+
+**3 / 3 published answers matched** (tolerance 0.20 psf).
+
 ---
 
 ## Report paths pending (runbook step E1) — engine-level already WE-verified

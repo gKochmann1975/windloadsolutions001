@@ -97,16 +97,27 @@ and invented an A=5000 point). PARALLEL panels only. **Plateau-ramp-plateau**, x
 
 ---
 
-## C. NEEDS BOOK-READ — adjustment-factor formulas (Eq 29.4-6, p.309 text)
-
-I read the §29.4.3 equation text but not at full confidence on coefficients. Confirm:
-| Factor | Engine formula | Confirm vs book |
+## C. ✅ CONFIRMED — adjustment-factor formulas (Eq 29.4-6, p.309) — USER BOOK-VERIFIED 2026-06-27
+All four formulas match the engine EXACTLY (read off clear p.309 crops). Test WE-14.
+| Factor | Engine formula | Book p.309 |
 |---|---|---|
-| γp (parapet) | `min(1.2, 0.9 + hpt/h)` | ❓ |
-| γc (chord) | `max(0.6 + 0.06·Lp, 0.8)` | ❓ |
-| Normalized area An | `(1000 / max(Lb,15)²) · A` | ❓ |
-| Lb | `min(0.4·√(h·WL), h, WS)` | ❓ |
-| ω interpolation gap | linear 5°–15° | ❓ |
+| γp (parapet) | `min(1.2, 0.9 + hpt/h)` | ✅ min(1.2, 0.9 + hpt/h) |
+| γc (chord) | `max(0.6 + 0.06·Lp, 0.8)` | ✅ max(0.6 + 0.06·Lp, 0.8) |
+| Normalized area An | `(1000 / max(Lb,15)²) · A` | ✅ Note 3 exact |
+| Lb | `min(0.4·√(h·WL), h, WS)` | ✅ min(0.4(hWL)^0.5, h, Ws) |
+| ω interpolation 5°–15° | linear | ✅ Note 2 |
+
+## C2. ENGINE ENFORCEMENT GAPS found in the p.309 read (rules, not values — values all OK)
+These are NOT value errors; the engine just doesn't enforce them (takes inputs as given).
+Build into the solar calc/UI/report:
+1. **θ ≤ 7° applicability guard** — Fig 29.4-7 is valid only for roof slope θ ≤ 7°. Engine has no guard. Add a reject/warn.
+2. **h = EAVE height for θ ≤ 10°** (Notation: "eave height shall be used for roof angle θ ≤ 10°"). Engine uses whatever `h` (mean roof height) is passed — does not switch to eave. Thread θ + eave.
+3. **Exposure thresholds DIFFER by method** — engine takes `is_exposed_panel` as a boolean and does not compute it:
+   - **§29.4.3 tilted (GCrn):** γE=1.5 within **1.5·Lp** from row end; exposed if d₁ to edge > 0.5h AND (d₁ to adjacent array > **max(4h₂, 4 ft)** OR d₂ to next panel > **max(4h₂, 4 ft)**).
+   - **§29.4.4 parallel (γa):** γE=1.5 within **2h₂** from edge; exposed if d₁ to edge > 0.5h AND (d₁ > **2h₂** OR d₂ > **2h₂**).
+   Add an `is_exposed(...)` helper per method.
+4. **Eq 29.4-7 (parallel) form:** p = qh·**Kd**·(GCp)·γE·γa, where (GCp) = the ROOF C&C coeff (Figs 30.3-2A…, already verified) — i.e. parallel/flush panels ride the roof's own GCp × γE × γa. Engine folds Kd into qh (same result). γa/§29.4.4 permitted when ω≤2°, h₂≤0.83 ft, gap rules.
+5. **Both load cases:** roof designed for solar-present AND solar-removed.
 
 ---
 

@@ -228,8 +228,10 @@ output end-to-end**, not just the engine.
 > to 0.70 vs the book's raw 0.57/0.62; disclosed). Rendered reports in `ASCE 7-22/guide_report_crossref/`.
 > **Generic report generator** (`generate_generic_engineering_report`) built; **UI "Generate Engineering
 > Report" buttons + `/api/report/{equipment,arched-dome,roof}` endpoints wired**. **ALL roof Guide
-> examples now proven at report level.** Next: **rooftop solar (Ex 5.3)** report-level case, then
-> the Other-Structures report paths (signs/walls/towers/chimneys/open-signs).
+> examples + rooftop solar (Ex 5.3) now proven at report level (64/64).** Remaining: route
+> `/api/report/solar` to the **parallel** method (needs a Ch-30 GC<sub>p</sub> input) for the §29.4.4 case;
+> and the **Other-Structures** report paths (signs/walls/towers/chimneys/open-signs) — none have a Guide
+> worked example, so those would be engine-level, not report-vs-Guide.
 
 ### E1 — Every calc needs an Engineering Report path
 Today only **W/D, MWFRS, and Solar** have report endpoints (`/api/report`, `/api/report/mwfrs`,

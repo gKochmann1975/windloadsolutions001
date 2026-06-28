@@ -30,7 +30,7 @@ ledger — needs your book read. 🔲 = not built yet (verify when built).
 | 12 | **Chimneys & Tanks** | admin | ⬜ NEEDS READ | Fig/Table 29.4-1 Cf row mapping | §CHIMNEYS below |
 | 13 | **Signs & Billboards** | admin | ⬜ NEEDS READ | §29.3, Fig 29.3-1 (solid-sign Cf) | §CH29 SPECIALIZED below |
 | 14 | **Open Signs & Frames** | admin | ⬜ NEEDS READ | Fig 29.4-2 (open-sign Cf, ε-banded) | §CH29 SPECIALIZED |
-| 15 | **Rooftop Equipment** | admin | ⬜ NEEDS READ | §29.4.1, (GCr) lateral/vertical | §CH29 SPECIALIZED |
+| 15 | **Rooftop Equipment** | admin | ✅ VERIFIED 2026-06-27 | §29.4.1, (GCr) lateral/vertical | ledger-locked + test WE-9 |
 | 16 | **Trussed / Comm Towers** | admin | ⬜ NEEDS READ | Fig 29.4-3 Cf(ε) + round-member factor | §CH29 SPECIALIZED |
 | 17 | **Fencing / Freestanding Walls** | admin | ⬜ NEEDS READ | §29.3, Fig 29.3-1 (solid-wall Cf) | §CH29 SPECIALIZED |
 | 18 | **Attached Canopies** | engine only | ⬜ NEEDS READ | Fig 30.9-1A/1B, 30.9-2A/2B (graphs) | §NEW ENGINES below |
@@ -52,12 +52,12 @@ z_min — the 0.70 floor vs raw Table 26.10-1 cells (0.57/0.62/0.66). See the OP
 QUESTION section at the bottom. Conservative either way (no safety risk), but the
 *reported* intermediate Kz for low-rise Exp-B is the floor.
 
-**Bottom line: 13 calculators (#10–22) need your manual book cross-reference before
-they can ship.** The 3 production calculators (#1–3) are done; **ALL 6 C&C ROOF SHAPES
-(#4–9: Flat, Gable, Hip, Monoslope, Multispan, Sawtooth) VERIFIED 2026-06-27** —
-ledger-locked + tests WE-3…WE-8 (131 assertions). Hip had one engine fix (2G Zone 2
-A-max 50→100); the other five matched as-coded. **Next cluster: Specialized + Solar
-(#10–17) and the engine-only scaffolds (#18–22).** #18-22 are brand-new
+**Bottom line: 12 calculators need your manual book cross-reference before they can
+ship.** Done: #1–3 production; **ALL 6 C&C ROOF SHAPES (#4–9) VERIFIED 2026-06-27**
+(tests WE-3…WE-8, 131 assertions; hip had one fix, 2G Zone 2 A-max 50→100); **#15
+Rooftop Equipment VERIFIED 2026-06-27** (physical book, test WE-9). **Remaining
+Specialized (#12–14,16,17): Chimneys, Signs, Open Signs, Towers, Walls — being
+re-read from the physical book (Option B). Then Solar (#10,11) + scaffolds (#18–22).** #18-22 are brand-new
 engines (no UI) built 2026-06-23; #20/#21/#22 use mostly READABLE tables/formulas
 (higher confidence); #18 is graph-traced (lower). MWFRS free roofs is blocked on scans.
 
@@ -208,7 +208,8 @@ flat 2.0/1.8/1.6 · rounded-subcritical (D√qz≤2.5) 1.2/1.3/1.5 · rounded-su
 > **2026-06-26:** dedicated worksheet — **`ASCE 7-22/OPEN_SIGNS_OPEN_FRAMES_Cf_REFERENCE.md`**
 > (9 Cf cells + ε bands + D√qz threshold + ε>0.7→solid routing). Use that sheet.
 
-### [ ] Rooftop Equipment — `asce7_22_other_rooftop_equipment.py`
+### [x] Rooftop Equipment — `asce7_22_other_rooftop_equipment.py`
+> ✅ VERIFIED 2026-06-27 (physical book, Option B) — GCr 1.9→1.0 over 0.1·B·h→B·h, both force eqs, single GCr, Kd=0.85 (folded into qh). Ledger-locked + test WE-9.
 (GC<sub>r</sub>) = **1.9** for A<sub>f</sub> ≤ 0.1·B·h, reduced linearly 1.9 → 1.0 for A<sub>f</sub>
 between 0.1·B·h and B·h (§29.4.1). Confirm the 1.9 anchor, the 1.0 floor, and the area band. — [ ]
 > **2026-06-26:** dedicated worksheet created — **`ASCE 7-22/ROOFTOP_EQUIPMENT_GCr_REFERENCE.md`**

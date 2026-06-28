@@ -50,10 +50,31 @@ including the GCpf figure (Fig 28.3‑1) interpolation at θ=18.4°, the qh, and
 
 ---
 
+## ✅ #3 — MWFRS Directional Procedure (Chapter 27, calc #2) — FULL end‑to‑end
+**Source:** MecaWind "Wind Example E‑Book" (ASCE 7‑10 worked example). Edition note: the directional
+wall Cp (Fig 27.3‑1: windward 0.8, leeward −0.3/−0.5 by L/B, side −0.7) and flat‑roof Cp (−0.9/−0.5/−0.3
+by distance/h‑L) are **unchanged 7‑10→7‑22**, and 7‑10 uses Kd‑in‑qz (same as our engine) — so this
+cleanly checks the 7‑22 directional assembly. Our **7‑22 engine** produced the values below.
+**Building:** flat roof 35 ft × 70 ft × 15 ft tall, Exposure D, Enclosed (±0.18), V=150 mph, sea level.
+Engine qh=50.43 psf (≈ example 50.44, Kd folded).
+
+| Surface | Engine (psf) | Published (psf) | |
+|---|---|---|---|
+| Windward wall | 25.21 / 43.37 | 25.22 / 43.38 | ✅ |
+| Leeward wall (L/B=2.0, Cp=−0.3) | −21.94 / −3.78 | −21.94 / −3.78 | ✅ |
+| Side wall (Cp=−0.7) | −39.08 / −20.93 | −39.09 / −20.93 | ✅ |
+| Roof 0–h (Cp=−0.9) | −47.66 / −29.50 | −47.67 / −29.51 | ✅ |
+| Roof h–2h (Cp=−0.5) | −30.51 / −12.36 | −30.52 / −12.36 | ✅ |
+| Roof >2h (Cp=−0.3) | −21.94 / −3.78 | −21.94 / −3.78 | ✅ |
+
+**Result: EXACT MATCH** (≤0.01 psf, qz rounding). Both MWFRS procedures (Directional + Envelope) now
+independently validated end‑to‑end.
+
+---
+
 ## Still to validate (need published examples)
 | Calc | Status | Example source needed |
 |---|---|---|
-| MWFRS Directional (Ch 27, #2) | base validated; full pending | CED S02‑047 (directional) or equiv |
 | C&C Roofs ×6 (#4–9) | figure‑verified; end‑to‑end pending | C&C worked example per shape |
 | Other Structures (#12–17) | figure‑verified; end‑to‑end pending | chimney/sign/tower worked examples |
 | Solar (#10/#11) | figure read still pending (graphs) | + snow/foundation (waiting on Ch 7/Ch 2 scans) |

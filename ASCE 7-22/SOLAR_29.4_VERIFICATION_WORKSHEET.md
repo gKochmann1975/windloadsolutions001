@@ -73,14 +73,19 @@ and invented an A=5000 point). PARALLEL panels only. **Plateau-ramp-plateau**, x
 > match the figure's range. Test WE-14 (gamma_a block). Endpoints (0.45/0.43) read off the
 > user's clear crop — confirm vs book if a hair different.
 
-### B3. Fig 29.4-10 — Ground static GCgn / GCgm (book p.312) — `solar_ground.py:81-102`
-`(A, value)`, endpoints only (engine log-interpolates A=1→10000):
-| Coeff | ω band | Zone 1 (A=1 → 10000) | Zone 2 (A=1 → 10000) |
+### B3. Fig 29.4-10 — Ground static GCgn / GCgm (book p.312) — ✅ USER BOOK-VERIFIED 2026-06-27
+**CORRECTED — engine was wrong on 7 of 8 curves** (mostly the plateau read TOO LOW →
+unconservative). User confirmed every curve 1-by-1. Shape: **plateau A=1→10, ramp,
+flat A=5000→10000**. Test WE-15.
+| Coeff | ω band | Zone 1 (plateau → @5000+) | Zone 2 (plateau → @5000+) |
 |---|---|---|---|
-| GCgn,static | 0–5° | 1.0 → 0.8 | 2.5 → 1.5 |
-| GCgn,static | 15–60° | 2.0 → 1.5 | 3.5 → 1.5 |
-| GCgm,static | 0–5° | 0.10 → 0.10 | 0.30 → 0.30 |
-| GCgm,static | 15–60° | 0.30 → 0.15 | 0.55 → 0.15 |
+| GCgn,static | 0–5° | ✅ 1.5 → 0.8 | ✅ 2.5 → 1.5 |
+| GCgn,static | 15–60° | ✅ 3.0 → 1.0 | ✅ 5.0 → 1.5 |
+| GCgm,static | 0–5° | ✅ 0.20 → 0.10 | ✅ 0.30 → 0.20 |
+| GCgm,static | 15–60° | ✅ 0.45 → 0.15 | ✅ 0.70 → 0.20 |
+> Engine fix: `_gcgn_static`/`_gcgm_static` re-anchored to 4 points each (was 2-point
+> straight log-line, wrong shape AND wrong values). Lookup clamp `max(1,min(10000,A))`
+> already correct. Webapp-only.
 
 ### B4. Fig 29.4-11 — Ground dynamic GCgn / GCgm (book p.313) — `solar_ground.py:121-166`
 `(Ns, value)`, linear-interp on Ns, 1% damping. 16 curves:

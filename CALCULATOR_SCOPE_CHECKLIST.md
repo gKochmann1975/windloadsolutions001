@@ -18,24 +18,33 @@ open‑sign, chimney/tank, trussed‑tower Cf; rooftop‑equipment GCr; Solar §
 3. *(later)* **ASCE 7‑22 Chapter 13 §13.6.12** — solar seismic (if scoped).
 4. *(later, telecom)* **ANSI/TIA‑222‑I (2024)** — the whole standard (separate from ASCE 7).
 5. *(ground‑mount solar foundations)* **ACI 318** footing/pier sections + a pile‑capacity reference.
-6. *(optional confirm)* IBC §1807.3.2.2 (constrained Eq 18‑2/18‑3) + §1806.3.4 isolated‑pole factor — a 2015 IBC is fine (these provisions are stable across editions).
+6. *(ground‑mount solar RACKING — to compete with SkyCiv)* **Aluminum Design Manual (ADM)** for the aluminum rails + **AISI S100** for cold‑formed members. **AISC 360 we already HAVE** (`AISC/`, free PDF).
+7. *(optional confirm)* IBC §1807.3.2.2 (constrained Eq 18‑2/18‑3) + §1806.3.4 isolated‑pole factor — a 2015 IBC is fine (these provisions are stable across editions).
 
 ---
 
 ## ☀️ SOLAR (rooftop + ground‑mount)
 | Component | Reference | Status |
 |---|---|---|
-| Wind loads | ASCE 7‑22 §29.4 (+ Ch 29) | ✅ have (values pending verify per worklist) |
-| **Snow loads** | ASCE 7‑22 **Ch 7** — ground snow, pf/ps, Ce/Ct/Is, sloped Cs, drift/unbalanced, rain‑on‑snow; rooftop‑solar provision; ground‑mount = monoslope (tilt ≤45°) / solid sign (>45°) | ❌ **need Ch 7** |
-| Load combinations | ASCE 7‑22 **Ch 2** (wind + snow + dead) | ❌ **need Ch 2** |
-| **Ground‑mount foundation** | IBC Ch 18 + ACI 318 (footings/piers) + pile/geotech | ❌ **need IBC Ch 18 + ACI** |
+| Wind loads — **rooftop** | ASCE 7‑22 §29.4 | ✅ book‑verified + **report‑level validated vs Guide Ex 5.3** (`GUIDE_REPORT_CROSSREF.md`) |
+| Wind loads — **ground‑mount** | ASCE 7‑22 §29.4.5 | ⚠️ engine done, but **no published worked example** to third‑party validate + **`row_spacing_S` UI gap** (Zone‑2 override unreachable — fix before ship) |
+| **Snow loads** | ASCE 7‑22 **Ch 7** (Ce/Ct/Cs/pm; ground snow pg) | ✅ **BUILT** — `asce7_22_snow.py` book‑verified, balanced snow wired into the solar report (drift/sliding/rain‑on‑snow excluded + labeled) |
+| Load combinations | ASCE 7‑22 **Ch 2** (wind + snow + dead) | ✅ **BUILT** — `asce7_22_load_combinations.py` (LRFD+ASD) in the report; factor lists pending one p.7‑10 confirm |
+| **Ground‑mount foundation** | embedded post = IBC §1807.3 Eq 18‑1 · footings/piers/ballast = IBC Ch 18 + ACI 318 | ⚠️ embedded‑post **reference ✅** (same as signs) but **NOT built**; footing/pier/ballast path **❌ needs ACI** |
+| **Racking / support structure (members + connections)** | **AISC 360** (steel posts/torque tubes, ✅ have) · **Aluminum Design Manual** (aluminum rails, ❌ need) · **AISI S100** (cold‑formed, ❌ need) | ❌ **NOT built — the SkyCiv‑competitive differentiator** (member sizing, deflection, connections). Separate, larger workstream — NOT an ASCE 7 extension. |
 | Rooftop anchor uplift + roof‑member check | wind/snow reactions + member design (AISC/NDS) | ⚠️ logic only |
 | Seismic (optional) | ASCE 7‑22 **Ch 13 §13.6.12** | ❌ need if included |
 
-**Note:** ground snow is **map/location‑based** (like wind speed) → plan a **ground‑snow lookup dataset**
-the same way as the wind‑velocity CSV (`usps_zip_codes.csv`), sourced from the ASCE 7‑22 snow maps /
-Hazard Tool. Competitive edge: SkyCiv's solar wind docs are on ASCE **7‑16**; we're on **7‑22**, and we'd
-bundle foundation (SkyCiv makes engineers leave the tool for that).
+**Ground snow** is map/location‑based (like wind speed) → today it's **manual entry via the embedded ASCE
+Hazard Tool** (required input); a `usps_zip_codes.csv`‑style lookup dataset is scaffolded for later.
+
+**Competing with SkyCiv (the full ground‑mount PV package).** SkyCiv's solar wind docs are on ASCE **7‑16**;
+we're on **7‑22**. The win is a single workflow that does **loads → racking members → foundation** — SkyCiv
+makes engineers leave the tool for the structure + foundation. To get there we need TWO new builds beyond the
+load engine: **(A) Racking/member design** (AISC 360 ✅ / Aluminum Design Manual ❌ / AISI S100 ❌) and
+**(B) Ground‑mount foundation** (embedded post buildable now; footings/piers/ballast need ACI 318). These are
+structural‑design modules, a different domain than the §29.4 wind coefficients — scope them as their own
+products/phases, not as part of "finish solar."
 
 ---
 
@@ -85,5 +94,9 @@ design** calculator (then Ch 8 rain + ponding instability come into scope).
 
 ## Status summary
 - **Signs/Fencing foundation:** ✅ reference complete (online) — buildable once wind side is verified.
-- **Solar snow + foundation:** blocked on **ASCE 7‑22 Ch 7 + Ch 2 scans** and **IBC Ch 18 + ACI** for ground‑mount foundations.
-- **Everything's wind side:** ✅ have references (values pending verification).
+- **Solar — rooftop:** ✅ wind report‑level validated (Guide Ex 5.3) + ✅ snow + ✅ load combos built into the report.
+- **Solar — ground‑mount:** wind engine done but **not validated** (no published example) + **`row_spacing_S` UI gap** to fix;
+  **foundation** (embedded‑post buildable now; footing/ballast needs ACI) and **racking** still to build.
+- **Solar RACKING (SkyCiv differentiator):** ❌ not started — needs Aluminum Design Manual + AISI S100 (AISC 360 ✅ have).
+  Separate structural‑design workstream; scope as its own product/phase.
+- **Everything's wind side:** ✅ have references (rooftop/MWFRS now report‑level validated; others engine‑level WE‑verified).

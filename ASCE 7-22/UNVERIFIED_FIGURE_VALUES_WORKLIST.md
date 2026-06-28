@@ -24,7 +24,7 @@ ledger — needs your book read. 🔲 = not built yet (verify when built).
 | 6 | **C&C Roof — Hip** | admin | ✅ VERIFIED 2026-06-27 | Fig 30.3-2E/F/G | ledger-locked + test WE-5 (1 fix: 2G Z2 A 50→100) |
 | 7 | **C&C Roof — Monoslope** | admin | ✅ VERIFIED 2026-06-27 | Fig 30.3-5A/5B | ledger-locked + test WE-6 |
 | 8 | **C&C Roof — Multispan** | admin | ✅ VERIFIED 2026-06-27 | Fig 30.3-4 | ledger-locked + test WE-7 |
-| 9 | **C&C Roof — Sawtooth** | admin | ⬜ NEEDS READ | Fig 30.3-6 | §C&C ROOFS |
+| 9 | **C&C Roof — Sawtooth** | admin | ✅ VERIFIED 2026-06-27 | Fig 30.3-6 | ledger-locked + test WE-8 |
 | 10 | **Rooftop Solar** | admin | ⬜ NEEDS READ | Fig 29.4-7, 29.4-8, Eq 29.4-6 | **dedicated worksheet** `SOLAR_29.4_VERIFICATION_WORKSHEET.md` |
 | 11 | **Ground-Mounted Solar** | admin | ⬜ NEEDS READ | Fig 29.4-10, 29.4-11 (+ Fig 29.4-9 zones) | **dedicated worksheet** (same file) |
 | 12 | **Chimneys & Tanks** | admin | ⬜ NEEDS READ | Fig/Table 29.4-1 Cf row mapping | §CHIMNEYS below |
@@ -52,11 +52,12 @@ z_min — the 0.70 floor vs raw Table 26.10-1 cells (0.57/0.62/0.66). See the OP
 QUESTION section at the bottom. Conservative either way (no safety risk), but the
 *reported* intermediate Kz for low-rise Exp-B is the floor.
 
-**Bottom line: 14 calculators (#9–22) need your manual book cross-reference before
-they can ship.** The 3 production calculators (#1–3) are done; **#4 Flat + #5 Gable +
-#6 Hip + #7 Monoslope + #8 Multispan C&C roofs VERIFIED 2026-06-27** (ledger-locked +
-tests WE-3…WE-7; hip had one engine fix: 2G Zone 2 A-max 50→100). **Only Sawtooth (#9)
-remains in the roof cluster.** #18-22 are brand-new
+**Bottom line: 13 calculators (#10–22) need your manual book cross-reference before
+they can ship.** The 3 production calculators (#1–3) are done; **ALL 6 C&C ROOF SHAPES
+(#4–9: Flat, Gable, Hip, Monoslope, Multispan, Sawtooth) VERIFIED 2026-06-27** —
+ledger-locked + tests WE-3…WE-8 (131 assertions). Hip had one engine fix (2G Zone 2
+A-max 50→100); the other five matched as-coded. **Next cluster: Specialized + Solar
+(#10–17) and the engine-only scaffolds (#18–22).** #18-22 are brand-new
 engines (no UI) built 2026-06-23; #20/#21/#22 use mostly READABLE tables/formulas
 (higher confidence); #18 is graph-traced (lower). MWFRS free roofs is blocked on scans.
 
@@ -132,7 +133,8 @@ between anchors. Confirm BOTH the anchor magnitudes AND the effective-area range
 **(30°<θ≤45°):** Pos +1.0/+0.8 · Z1 −2.0/−1.1 · Z2 −2.5/−1.7 · Z3 −2.6/−1.7 @(10/100) — [ ]
 > ⚠️ Upper anchor is A=100 (not 500). Confirm whether the curve plateaus at 100 or continues to 500.
 
-### [ ] Fig 30.3-6 — Sawtooth roof  — `asce7_22_cc_roofs_sawtooth.py:296-386`
+### [x] Fig 30.3-6 — Sawtooth roof  — `asce7_22_cc_roofs_sawtooth.py:296-386`
+> ✅ VERIFIED 2026-06-27 — user confirmed "all match". Per-zone positive, Z3 Span-A 3-point piecewise (−4.1/−3.7/−2.1), Z3 B/C/D start at A=100 — all confirmed. Ledger-locked + test WE-8. **Closes the C&C roof cluster.**
 Zone1 +0.7/+0.4, −2.2/−1.1 · Zone2 +1.1/+0.8 (@A=100), −3.2/−1.6 · Zone3 +0.8/+0.7 (@A=100) ·
 Zone3 neg Span A −4.1/−3.7/−2.1 (piecewise), Spans B/C/D −2.6/−1.9 (start A=100) — [ ]
 > Most complex of the roof figures; verify the Span-A piecewise curve and the A=100 start points carefully.

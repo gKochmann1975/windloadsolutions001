@@ -107,10 +107,18 @@ Copy this block per calculator. Order to release (your plan):
 **MWFRS + Roofs → Signs → Rooftop Equipment → Chimneys & Tanks → Solar → Telecom Towers.**
 
 ### B0 — Calculator is finished & verified (GATE 1)
-- [ ] Engine implemented; UI works on the multi-calc shell.
+- [ ] Engine implemented; UI works on the multi-calc shell. *(All 18 engines are wired to the
+      admin UI as of 2026-06-28 — see `CALCULATOR_READINESS_MATRIX.md`.)*
 - [ ] **All ASCE values book-verified** (cross-ref `UNVERIFIED_FIGURE_VALUES_WORKLIST.md`;
       no `# VERIFIED` on unverified figure values).
-- [ ] Sample calculations validated against known references.
+- [ ] Sample calculations validated against known references (engine-level: the WE-test suite,
+      `webapp/testing/validate_asce7_22.py`).
+- [ ] **Golden-report check — the TRUE test (PART E):** for any calc with a published ASCE 7-22
+      *Wind Loads Guide* worked example, run that example's exact inputs through the live
+      **Engineering Report** and confirm the report's final design numbers match the Guide's
+      published answer (within tolerance, accounting for the Kd-in-qz convention). The customer's
+      deliverable is the report — verifying the engine in isolation is necessary but **not
+      sufficient**. A calc with a Guide example does not pass GATE 1 until its golden-report passes.
 
 ### B1 — Backend entitlement wiring (fixes gating-audit B1/B2)
 - [ ] Define the **canonical `calculator_file`** identifier for this calc (the real engine
@@ -202,8 +210,65 @@ and skips duplicates, and skips re-sending the receipt on a pure replay. (Mirror
 
 ---
 
-## 6. Quick reference — current state (2026-06-27)
+## 6. PART E — Golden-report validation against the ASCE 7-22 Wind Loads Guide (the TRUE acceptance test)
 
+**The principle (Greg, 2026-06-28):** the engineer-facing product is the **Engineering Report**, not
+the engine. The real proof that a calculator is correct is that **our generated report produces the
+same answers as the worked examples we verified against in the *ASCE 7-22 Wind Loads — Guide to the
+Wind Load Provisions*** (Stafford & Reinhold). Engine unit tests (the WE suite) validate the math in
+isolation; the report path (endpoint → report generator → rendered HTML) is a **separate surface that
+can drift** — the Sealed-Deliverable audit (`audit_sealed_deliverable_pipeline_2026_06_22`) already
+caught a report hardcoding Kz/Ke/qh and under-reporting qh by 28–56%. So we validate the **report
+output end-to-end**, not just the engine.
+
+### E1 — Every calc needs an Engineering Report path
+Today only **W/D, MWFRS, and Solar** have report endpoints (`/api/report`, `/api/report/mwfrs`,
+`/api/report/solar`). To apply the examples to the platform, each shipped calc needs a report:
+- [ ] Build a report endpoint + template per calc family (C&C roofs incl. arched/dome, Signs,
+      Open Signs, Freestanding Walls, Rooftop Equipment, Chimneys & Tanks, Trussed Towers).
+      Reuse `report_generator.py` / the solar-report pattern; **never** recompute or hardcode
+      factors in the report — pull qh, K-factors, coefficients, and final pressures/forces
+      straight from the engine result dict (the lesson from the sealed-deliverable audit).
+- [ ] Wire the `📄 Generate Engineering Report` button (already supported by
+      `calc-workflow.js` via `config.reportEndpoint`) on each calc page.
+
+### E2 — Build the golden-report test set (one per Guide example)
+The authoritative example→answer mapping lives in `ASCE 7-22/ENGINE_VALIDATION_REPORT.md`. Known
+Guide worked examples already verified (extend as more are read):
+| Calc | Guide example | Published answer to match (report output) |
+|---|---|---|
+| Rooftop Equipment | Ex 5.2 | F_h ≈ 4,328 lb · F_v ≈ 3,417 lb |
+| Arched/Dome (dome) | Ex 6.7 | qh(h_D+f) ≈ 48.6 psf · GC_p ±0.9 |
+| MWFRS Directional / Envelope | Guide MWFRS examples | per ENGINE_VALIDATION_REPORT.md |
+| C&C Flat/Gable/Hip/Monoslope | Guide C&C examples | per ENGINE_VALIDATION_REPORT.md |
+| Solar (rooftop parallel) | Guide §29.4 example | per ENGINE_VALIDATION_REPORT.md |
+
+- [ ] Add a `webapp/testing/validate_reports_vs_guide.py` harness that, for each example:
+  1. builds the **exact Guide inputs** as a report-endpoint payload,
+  2. calls the report endpoint (or the report-generator function directly),
+  3. **parses the rendered report** for the headline outputs (qh, coefficients, design
+     pressures/forces), and
+  4. asserts they equal the Guide's published answer within tolerance (account for the
+     Kd-in-qz convention — compare FINAL pressures/forces, not intermediate q).
+- [ ] A failing golden-report is a **release blocker** for that calc (it means the report
+      deliverable disagrees with the book even if the engine unit test passes).
+
+### E3 — Gate + cadence
+- [ ] Tie E2 into B0: a calc with a Guide example cannot flip live until its golden-report passes.
+- [ ] Run `validate_reports_vs_guide.py` alongside `validate_asce7_22.py` (both must be green).
+- [ ] As we read more Guide examples, add a row + a golden-report case in the same commit.
+
+> Net: WE-suite proves the **engine** matches the book; PART E proves the **report the customer
+> downloads** matches the book. Both green = the calculator is truly verified end-to-end.
+
+---
+
+## 7. Quick reference — current state (2026-06-28)
+
+- **Engines:** all 18 wired to the **admin UI** and runnable (2026-06-28); see
+  `CALCULATOR_READINESS_MATRIX.md`. Engine math green: `validate_asce7_22.py` = 360 assertions pass.
+- **Report path exists for:** W/D, MWFRS, Solar only — **PART E** tracks building it for the rest
+  + the golden-report validation against the Guide.
 - **Live/sellable today:** Windows, Doors & Shutters only.
 - **Created in Stripe, not live:** MWFRS (3 tiers — see `PRICING_TABLE.md` for product IDs).
 - **Pricing locked (v3):** W/D $35, MWFRS $35, Roofs $35, Signs $25, Solar $45 (Starter base);

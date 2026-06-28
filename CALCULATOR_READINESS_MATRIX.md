@@ -36,14 +36,12 @@ Legend: ✅ done · ⚠️ partial/caveat · 🚫 not done
 | 15 | Open Signs & Frames | ✅ | ✅ | ✅ | 🚫 | wired 2026-06-28 (`/structures/open-signs`); §29.4 Fig 29.4-2 (ε≤0.7) |
 | 16 | Freestanding Walls | ✅ | ✅ | ✅ | 🚫 | wired 2026-06-28 (`/structures/walls`); §29.3 Fig 29.3-1, 3 load cases |
 | 17 | Trussed Towers | ✅ | ✅ | ✅ | 🚫 | wired 2026-06-28 (`/structures/towers`); §29.4 Fig 29.4-3 |
+| 18 | Arched & Dome Roofs | ✅ | ✅ | ✅ | 🚫 | wired 2026-06-28 (`/cc/arched-dome`); §30.3 Fig 30.3-8 (arched) + Fig 30.3-7 (dome), form toggle |
 
-## B. Engine VERIFIED but NOT on admin — just needs a route + UI (1)
+## B. Engine VERIFIED but NOT on admin — just needs a route + UI (0)
 
-| # | Calculator | ①Verified | ②On admin | Notes |
-|---|---|:--:|:--:|---|
-| 18 | Dome / Arched Roof | ✅ | 🚫 | engine fixed+verified this session (Fig 30.3-7 / 30.3-8); **unwired — next to wire** |
-
-*(MWFRS Envelope, Open Signs, Freestanding Walls, Trussed Towers — wired 2026-06-28, now in section A.)*
+✅ **All verified engines are now wired to the admin UI (2026-06-28).** MWFRS Envelope, Open Signs,
+Freestanding Walls, Trussed Towers (webapp `d72fb70`) + Arched/Dome (webapp `2ed8fad`) moved to section A.
 
 ## C. Engine-only, verification PENDING (3)
 
@@ -102,8 +100,10 @@ static `config` object (incl. opt-in `config.snow`, `config.reportEndpoint`, `co
 
 ## Recommended next actions (other-session order, adopted)
 1. ✅ **DONE 2026-06-28** — wired Trussed Towers, Open Signs, Freestanding Walls, MWFRS Envelope
-   (endpoint + admin route + UI + nav, mirroring signs.html). Commit `d72fb70`. 17 calcs now on admin.
-2. **Wire Dome/Arched** (last unwired engine; this session's fix) — same pattern.
+   (`d72fb70`) + Arched/Dome (`2ed8fad`). **All 18 engines now functional on admin.**
+2. **Golden-report validation vs the ASCE Guide (the TRUE test)** — build an Engineering Report path
+   for each calc, then assert the *report* output matches the Guide worked examples we verified
+   against (not just the engine). New roadmap **PART E** in `ROADMAP_CALCULATOR_RELEASE_AND_TESTING.md`.
 3. **Ground-solar `row_spacing_S` input** so the Lc/S Zone-2 override is reachable (see ⚠️ above).
 4. **Admin Readiness page** rendering this matrix with a Test link per calc.
 5. **Workstream E** to make verified+wired calcs sellable (start MWFRS — no scope gaps).

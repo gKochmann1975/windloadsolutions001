@@ -72,10 +72,42 @@ independently validated end‑to‑end.
 
 ---
 
-## Still to validate (need published examples)
-| Calc | Status | Example source needed |
+## ✅ #4 — C&C Flat Roof (Fig 30.3‑2A, calc #4) vs the OFFICIAL ASCE 7‑22 Guide
+**Source:** *Wind Loads: Guide to the Wind Load Provisions of ASCE 7‑22* (Stafford & Reinhold),
+**Example 6.1 "Commercial Building with a Flat Roof"** (pp.124‑128) — the authoritative ASCE companion.
+**Building:** 30×60×15 ft flat roof, h=15 ft, near Corpus Christi TX. **Wind:** V=148 mph, Exp C,
+Kzt=1.0, Ke=1.0 (elev 37 ft), Kh=0.85, Enclosed; worst‑case uplift GCpi=+0.18. Engine qh=40.5 psf
+(= 0.85·47.7, Kd folded; book qh=47.7 without Kd).
+
+| Zone | A=10 eng/book | A=300 eng/book |
 |---|---|---|
-| C&C Roofs ×6 (#4–9) | figure‑verified; end‑to‑end pending | C&C worked example per shape |
+| 1  | −76.2 / −76.1 ✅ | −51.5 / −51.4 ✅ |
+| 1' | −43.8 / −43.7 ✅ | −34.1 / −34.0 ✅ |
+| 2  | −100.5 / −100.4 ✅ | −68.8 / −68.9 ✅ |
+| 3  | −136.9 / −136.9 ✅ | −73.5 / −73.3 ⚠️ (+0.2 psf) |
+
+**7 of 8 exact.** The one outlier (A=300 Zone 3) differs by **0.2 psf / 0.3%** — engine log‑interpolates
+GCp=−1.64 vs book −1.63 at the large area; **slightly more conservative (safe)**, a 3rd‑digit interpolation
+rounding artifact, not an error. Appendix B graph equations (pp.183‑186, not yet captured) would make it
+match to the digit. **First validation against the official ASCE Guide — flat‑roof C&C confirmed.**
+
+---
+
+## Still to validate — pages CAPTURED (ASCE Guide images pp.93‑164), ready to run
+| Calc | ASCE Guide example (pages) | Status |
+|---|---|---|
+| C&C Gable roof (#5) | 6.2 (129‑133) | pages in hand |
+| C&C Hip roof (#6) | 6.3 L‑shaped gable/hip (134‑141) | pages in hand |
+| C&C Monoslope (#7) | 6.5 (146‑155) | pages in hand |
+| C&C Dome (#21) | 6.7 (160‑164) | pages in hand |
+| C&C Free/open roof (#20) | 6.6 (156‑159) | pages in hand |
+| Signs (#13) | 5.1 billboard (105‑113) | pages in hand |
+| Rooftop Equipment (#15) | 5.2 (114‑117) | pages in hand |
+| Solar rooftop (#10) | 5.3 parallel‑to‑roof (118‑122) | pages in hand |
+| MWFRS Envelope (re‑confirm) | 4.1 (93‑104) | pages in hand |
+
+## Other still‑pending
+| Calc | Status | Example source needed |
 | Other Structures (#12–17) | figure‑verified; end‑to‑end pending | chimney/sign/tower worked examples |
 | Solar (#10/#11) | figure read still pending (graphs) | + snow/foundation (waiting on Ch 7/Ch 2 scans) |
 

@@ -60,12 +60,18 @@ old code read LOWER than the book at small An, which was UNCONSERVATIVE). Anchor
 > intermediate An=10/100 not read. A single log-segment from An≤1→500/1000 may under-read
 > mid-range — add the An=10/100 gridline values when convenient for a truer curve.
 
-### B2. Fig 29.4-8 — Rooftop γa equalization (book p.310) — `solar_rooftop.py:115-123`
-PARALLEL panels only. `(A, γa)`:
-| Curve | A=10 | A=50 | A=100 | A=500 | A=1000 | A=5000 |
-|---|---|---|---|---|---|---|
-| Solid (gap ≥0.25", h2≈10") | 1.0 | 0.90 | 0.85 | 0.70 | 0.65 | 0.55 |
-| Dashed (gap ≥0.75", h2≤5") | 0.85 | 0.75 | 0.70 | 0.55 | 0.50 | 0.40 |
+### B2. Fig 29.4-8 — Rooftop γa equalization (book p.310) — ✅ USER BOOK-VERIFIED 2026-06-27
+**CORRECTED from physical book p.310** (prior JPEG-traced values were WRONG — too high,
+and invented an A=5000 point). PARALLEL panels only. **Plateau-ramp-plateau**, x-axis 1→1000:
+| Curve | A ≤ 10 (plateau) | A = 100 → 1000 (flat) |
+|---|---|---|
+| Solid (gap = 0.25", h2 = 10") | ✅ 0.80 | ✅ 0.45 |
+| Dashed (gaps ≥ 0.75", h2 ≤ 5") | ✅ 0.60 | ✅ 0.43 |
+
+> Shape: flat plateau to A=10, ramp down A=10→100, flat after. Engine fix 2026-06-27:
+> tables replaced + `get_gamma_a` clamp `max(10,min(5000,..))` → `max(1,min(1000,..))` to
+> match the figure's range. Test WE-14 (gamma_a block). Endpoints (0.45/0.43) read off the
+> user's clear crop — confirm vs book if a hair different.
 
 ### B3. Fig 29.4-10 — Ground static GCgn / GCgm (book p.312) — `solar_ground.py:81-102`
 `(A, value)`, endpoints only (engine log-interpolates A=1→10000):

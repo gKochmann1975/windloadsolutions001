@@ -221,6 +221,12 @@ can drift** — the Sealed-Deliverable audit (`audit_sealed_deliverable_pipeline
 caught a report hardcoding Kz/Ke/qh and under-reporting qh by 28–56%. So we validate the **report
 output end-to-end**, not just the engine.
 
+> **Status (2026-06-28):** harness built — `webapp/testing/validate_reports_vs_guide.py`.
+> **MWFRS Directional (Ch 27) + Envelope (Ch 28, Guide Ex 4.1) PASS report-level: 30/30 published
+> answers matched (≤0.04 psf)**, qh surfaced in the rendered report. Rendered reports saved under
+> `ASCE 7-22/guide_report_crossref/`; results in `ASCE 7-22/GUIDE_REPORT_CROSSREF.md`. Remaining
+> calcs need their report path (E1) before they can be added to the harness.
+
 ### E1 — Every calc needs an Engineering Report path
 Today only **W/D, MWFRS, and Solar** have report endpoints (`/api/report`, `/api/report/mwfrs`,
 `/api/report/solar`). To apply the examples to the platform, each shipped calc needs a report:
@@ -263,7 +269,24 @@ Guide worked examples already verified (extend as more are read):
 
 ---
 
-## 7. Quick reference — current state (2026-06-28)
+## 7. PART F — Free trials per calculator (pre-launch decision)
+
+**Decision needed before go-live (Greg, 2026-06-28).** Today there's one product (W/D) and its
+trial is the `trial-manager.js` / BIP pattern (3/hr · 10/day · 7-day). As the catalog grows we
+need a deliberate free-trial model. Open questions to resolve and wire **before** program #2 ships:
+
+- [ ] **Scope:** one global trial, or a **per-calculator** trial? (Does a W/D trial also unlock MWFRS, or is each calc its own trial?)
+- [ ] **Length + limits per calc** (uses/hr, uses/day, trial days) — same as W/D or tuned per product?
+- [ ] **Add-to-account flow:** when a paying customer adds a new calc, do they get a fresh trial of it, or unlock on purchase only?
+- [ ] **Bundle vs à-la-carte:** does "WindLoad Complete" get one trial covering everything, vs per-calc trials?
+- [ ] **Entry points:** per-calc "Start free trial" in the picker/nav, mapped to the trial entitlement.
+- [ ] **Abuse controls (LAUNCH BLOCKER):** `NORMALIZE_EMAIL_ALIASES=true` ON at launch (blocks +alias trial farming); confirm trial limits enforced server-side, not just client.
+
+Ties into **PART C** (nav rollout) and **Workstream E** (gating). Resolve before flipping program #2 live.
+
+---
+
+## 8. Quick reference — current state (2026-06-28)
 
 - **Engines:** all 18 wired to the **admin UI** and runnable (2026-06-28); see
   `CALCULATOR_READINESS_MATRIX.md`. Engine math green: `validate_asce7_22.py` = 360 assertions pass.

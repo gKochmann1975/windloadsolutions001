@@ -134,6 +134,19 @@ Report rendered OK (12904 bytes); qh in report: YES · saved report: `ASCE 7-22/
 
 **6 / 6 published answers matched** (tolerance 0.20 psf).
 
+## Rooftop Solar parallel (Guide Ex 5.3 / §29.4.4) [coeff]
+
+Report rendered OK (17600 bytes); qh in report: YES · saved report: `ASCE 7-22/guide_report_crossref/solar_rooftop_report.html`
+
+| Answer | Guide (psf) | Our report (psf) | Δ | Match |
+|---|---:|---:|---:|:--:|
+| gamma_E exposed (book 1.5) | 1.50 | 1.50 | 0.00 | ✅ |
+| gamma_E interior (book 1.0) | 1.00 | 1.00 | 0.00 | ✅ |
+| GCp from Ch 30 (book -1.24 -> 1.24) | 1.24 | 1.24 | 0.00 | ✅ |
+| gamma_a (book 0.67, Fig 29.4-8) | 0.67 | 0.69 | 0.02 | ✅ |
+
+**4 / 4 published answers matched** (tolerance 0.20 psf).
+
 ---
 
 ## Report paths pending (runbook step E1) — engine-level already WE-verified
@@ -142,7 +155,8 @@ These calcs are cross-referenced against the Guide at the **engine** level in `v
 
 | Calc | Guide example | Status |
 |---|---|---|
-| Solar rooftop (parallel) | Ex 5.3 | report path exists; report-level case is the next to add |
 | Open/free roof | Ex 6.6 | engine not implemented (Fig 30.5-2) — out of scope |
 
-**Exposure-B note:** Hip (Ex 6.3) and Monoslope (Ex 6.5) are validated at the **GC<sub>p</sub> coefficient** level (exact). The engine floors the Exposure-B velocity-pressure coefficient K<sub>z</sub> at 0.70 for low-rise (the documented WE-2 conservative choice), where the book uses the raw table value (0.57 / 0.62), so the rendered **pressures are conservative** (higher) by that ratio — disclosed, not an error.
+**Exposure-B note:** Hip (Ex 6.3), Monoslope (Ex 6.5), and Rooftop Solar parallel (Ex 5.3) are validated at the **coefficient** level (GC<sub>p</sub> / γ<sub>E</sub> / γ<sub>a</sub> — exact). The engine floors the Exposure-B velocity-pressure coefficient K<sub>z</sub> at 0.70 for low-rise (the documented WE-2 conservative choice), where the book uses the raw table value (0.57 / 0.62), so the rendered **pressures are conservative** (higher) by that ratio — disclosed, not an error.
+
+**Rooftop-solar note:** the validated case is **parallel-to-roof** (§29.4.4, the only solar worked example in the Guide). The `/api/report/solar` endpoint currently runs the **tilted** method (§29.4.3); routing it to the parallel method (needs a Chapter-30 GC<sub>p</sub> input) is a follow-up. The solar report **generator** already renders the parallel result (validated here).

@@ -135,6 +135,30 @@ apply the guard/eave. #4–5 remain UI/report wiring.
 
 ---
 
+## D. §29.4.5 ground-solar text — USER BOOK-VERIFIED 2026-06-28 (p.310 scan)
+
+| Item | Book p.310 | Engine | Status |
+|---|---|---|---|
+| Eq 29.4-8 `Fn = qh·Kd·(GCgn)·A` | confirmed | `Fn = qh·GCgn·A` (Kd folded into qh) | ✅ identical result |
+| Eq 29.4-9 `Mc = qh·Kd·(GCgm)·A·Lc` | confirmed | `Mn = qh·GCgm·A·Lc` (Kd in qh) | ✅ |
+| Eq 29.4-10/11 `GCgn/GCgm = ±static ± dynamic` | confirmed | matches | ✅ |
+| §29.4.5.1 scope: 6≤Lc≤14, Wg/Lc≥7, 0≤ω≤60, 0.5≤h/Lc≤0.8, 0.20≤Lc/S≤0.60 | confirmed | `check_applicability()` warns | ✅ |
+| **Zone override (a): 0.20 ≤ Lc/S < 0.25 → all rows Zone 2** | p.310 | **ADDED 2026-06-28** | ✅ fixed (was gap) |
+| **Zone override (b): Kzt > 1.0 → Zone 2 entire array** | p.310 | **ADDED 2026-06-28** | ✅ fixed (was gap) |
+| §29.4.3 two load cases: solar-present (sim. w/ roof loads, not under panels) + solar-removed | p.310 | report note (C2 #5) | ⏳ add to report |
+
+> Engine fix 2026-06-28: the two Zone-2 overrides were UNCONSERVATIVE gaps (a user-set
+> Zone 1 with Lc/S=0.22 or Kzt>1 used lower Zone-1 coefficients). Now forced to Zone 2.
+> Test WE-21. The scope geometric sub-limits (sp, SL, ST, ≥3 rows, ≤8% blockage) are
+> documented but only the main ratios are auto-checked — acceptable (warns, doesn't reject).
+
+## STILL OPEN (the only §29.4 value items left)
+- [ ] **Ns coefficient = 0.682** in `Ns = 0.682·n·Lc/V` — on **p.313** (Fig 29.4-11 notation), NOT p.310.
+- [ ] **A₁ = min(4·Lc², 500 ft²), A₂ = min(15·Lc², 1000 ft²)** — also **p.313**.
+- [ ] (Optional) Fig 29.4-7 rooftop GCrn mid-range gridpoints An=10 & An=100 per zone (p.308) — fidelity only.
+
+Once p.313 confirms Ns + A₁/A₂, flip `values_verified=True` + `pending:false` to lift the banner.
+
 ## How to use this
 Mark each B/C value ✅ or write the correct book value next to it. I'll patch the
 engine for any corrections, re-run the smoke tests, then build the Engineering Report

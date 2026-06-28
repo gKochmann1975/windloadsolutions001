@@ -21,7 +21,7 @@ ledger — needs your book read. 🔲 = not built yet (verify when built).
 | 3 | **MWFRS Building — Envelope** | admin | ✅ verified | Ch28, Fig 28.3-1 | ledger-locked |
 | 4 | **C&C Roof — Flat** | admin | ✅ VERIFIED 2026-06-27 | Fig 30.3-2A + overhang §30.7 | ledger-locked + test WE-3 |
 | 5 | **C&C Roof — Gable** | admin | ✅ VERIFIED 2026-06-27 | Fig 30.3-2B/C/D | ledger-locked + test WE-4 |
-| 6 | **C&C Roof — Hip** | admin | ⬜ NEEDS READ | Fig 30.3-2E/F/G | §C&C ROOFS |
+| 6 | **C&C Roof — Hip** | admin | ✅ VERIFIED 2026-06-27 | Fig 30.3-2E/F/G | ledger-locked + test WE-5 (1 fix: 2G Z2 A 50→100) |
 | 7 | **C&C Roof — Monoslope** | admin | ⬜ NEEDS READ | Fig 30.3-5A/5B | §C&C ROOFS |
 | 8 | **C&C Roof — Multispan** | admin | ⬜ NEEDS READ | Fig 30.3-4 | §C&C ROOFS |
 | 9 | **C&C Roof — Sawtooth** | admin | ⬜ NEEDS READ | Fig 30.3-6 | §C&C ROOFS |
@@ -52,9 +52,10 @@ z_min — the 0.70 floor vs raw Table 26.10-1 cells (0.57/0.62/0.66). See the OP
 QUESTION section at the bottom. Conservative either way (no safety risk), but the
 *reported* intermediate Kz for low-rise Exp-B is the floor.
 
-**Bottom line: 17 calculators (#6–22) need your manual book cross-reference before
-they can ship.** The 3 production calculators (#1–3) are done; **#4 C&C Flat Roof +
-#5 C&C Gable Roof VERIFIED 2026-06-27** (ledger-locked + tests WE-3 / WE-4). #18-22 are brand-new
+**Bottom line: 16 calculators (#7–22) need your manual book cross-reference before
+they can ship.** The 3 production calculators (#1–3) are done; **#4 Flat + #5 Gable +
+#6 Hip C&C roofs VERIFIED 2026-06-27** (ledger-locked + tests WE-3/WE-4/WE-5; hip had
+one engine fix: 2G Zone 2 A-max 50→100). #18-22 are brand-new
 engines (no UI) built 2026-06-23; #20/#21/#22 use mostly READABLE tables/formulas
 (higher confidence); #18 is graph-traced (lower). MWFRS free roofs is blocked on scans.
 
@@ -112,7 +113,8 @@ between anchors. Confirm BOTH the anchor magnitudes AND the effective-area range
 > between figures vs the current hard θ-bands (step discontinuity at 20°/27°) — same issue the hip
 > engine already fixed. Don't change interpolation until these cells are confirmed.
 
-### [ ] Fig 30.3-2E/F/G — Hip roof  — `asce7_22_cc_roofs_hip.py:184-265`
+### [x] Fig 30.3-2E/F/G — Hip roof  — `asce7_22_cc_roofs_hip.py:184-265`
+> ✅ VERIFIED 2026-06-27 — user reviewed all; 1 correction: **2G Zone 2 A-max 50 → 100** (magnitude −0.8 unchanged). Engine fixed (line 255), ledger-locked, regression test WE-5.
 **Fig 30.3-2E (7°<θ≤20°):** Pos +0.7/+0.3 · Z1 −1.8/−0.8 @(10/200) · Z2 −2.4/−1.3 @(10/200) · Z3 −2.6/−1.4 @(10/200) — [ ]
 **Fig 30.3-2F (20°<θ≤27°):** Z1 −1.4/−0.8 @(10/100) · Z2 −2.0/−1.0 @(10/200) · Z3 −2.0/−1.0 @(10/200) — [ ]
 **Fig 30.3-2G (27°<θ≤45°):** Z1 −1.5/−0.7 @(10/100) · Z2 −1.8/−0.8 @(10/50) · Z3 −2.4/−1.0 @(10/100) — [ ]

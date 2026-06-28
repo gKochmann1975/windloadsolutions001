@@ -20,8 +20,8 @@ Supersedes the solar rows in `UNVERIFIED_FIGURE_VALUES_WORKLIST.md` once you con
 | Combined coeff `GCgn = ±static ± dynamic` (Eq 29.4-10/11) | p.312/313 | `gcgn_total = gcgn_s + gcgn_d` | ✅ form match |
 | Ground zones = 1 & 2; rooftop zones = 1, 2, 3 | p.308 / p.312 fig titles | matches | ✅ |
 | ω bands: rooftop 0–5° & 15–35° (interp 5–15); ground static 0–5° & 15–60°, dynamic 0–15° & 15–60° | p.308 / p.312 / p.313 | matches | ✅ |
-| A1 = min(4·Lc², 500), A2 = min(15·Lc², 1000) | p.313 notation | `calculate_area_thresholds` | ✅ (confirm exact form) |
-| Ns reduced frequency, 1% damping basis | p.313 notation | `Ns = 0.682·n·Lc/V`, β=0.01 | ⚠️ confirm Ns coefficient 0.682 |
+| A1 = min(4·Lc², 500), A2 = min(15·Lc², 1000) | p.313 notation | `calculate_area_thresholds` | ✅ USER-VERIFIED 2026-06-28 (p.313) |
+| Ns reduced frequency, 1% damping basis | p.313 notation | `Ns = 0.682·n·Lc/V`, β=0.01 | ✅ USER-VERIFIED 2026-06-28 (p.313, coeff 0.682) |
 | Minimum design load 16 psf (§29.7) | §29.7 | `min_pressure_psf = 16.0` | ✅ |
 | Ch26 base (Kz, Ke, Kzt, terrain) | Ch26 | identical to other engines | ✅ (prior audit confirmed) |
 
@@ -152,12 +152,18 @@ apply the guard/eave. #4–5 remain UI/report wiring.
 > Test WE-21. The scope geometric sub-limits (sp, SL, ST, ≥3 rows, ≤8% blockage) are
 > documented but only the main ratios are auto-checked — acceptable (warns, doesn't reject).
 
-## STILL OPEN (the only §29.4 value items left)
-- [ ] **Ns coefficient = 0.682** in `Ns = 0.682·n·Lc/V` — on **p.313** (Fig 29.4-11 notation), NOT p.310.
-- [ ] **A₁ = min(4·Lc², 500 ft²), A₂ = min(15·Lc², 1000 ft²)** — also **p.313**.
-- [ ] (Optional) Fig 29.4-7 rooftop GCrn mid-range gridpoints An=10 & An=100 per zone (p.308) — fidelity only.
+## ✅ ALL §29.4 SOLAR VALUES VERIFIED — BANNER LIFTED 2026-06-28
+Every §29.4 figure + notation value is USER BOOK-VERIFIED: Fig 29.4-7 (B1), Fig 29.4-8 (B2),
+Fig 29.4-10 (B3), Fig 29.4-11 (B4), Eq 29.4-6 formulas (C), §29.4.5 text + Zone-2 overrides (D),
+and the p.313 notation (Ns coeff 0.682, A₁/A₂ thresholds — section A). Engine flags flipped:
+`pending:false` on both solar calc configs; `values_verified=True` in `/api/report/solar`;
+calc endpoints return `verified:true`. The "DRAFT — pending verification" banner no longer renders.
 
-Once p.313 confirms Ns + A₁/A₂, flip `values_verified=True` + `pending:false` to lift the banner.
+Remaining = NON-BLOCKING polish only:
+- [ ] (Optional) Fig 29.4-7 rooftop GCrn mid-range gridpoints An=10 & An=100 per zone (p.308) — curve fidelity between already-verified endpoints, not a correctness gap.
+- [ ] §29.4.3 solar-present / solar-removed two-load-case note — add as a report line (wiring).
+
+Solar calcs remain ADMIN-ONLY gated (separate from value verification) until you choose to ship.
 
 ## How to use this
 Mark each B/C value ✅ or write the correct book value next to it. I'll patch the

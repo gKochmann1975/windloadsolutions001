@@ -26,7 +26,7 @@ ledger — needs your book read. 🔲 = not built yet (verify when built).
 | 8 | **C&C Roof — Multispan** | admin | ✅ VERIFIED 2026-06-27 | Fig 30.3-4 | ledger-locked + test WE-7 |
 | 9 | **C&C Roof — Sawtooth** | admin | ✅ VERIFIED 2026-06-27 | Fig 30.3-6 | ledger-locked + test WE-8 |
 | 10 | **Rooftop Solar** | admin | ✅ VERIFIED 2026-06-27 (engine corrected) | Fig 29.4-7, 29.4-8, Eq 29.4-6 | test WE-14; GCrn + γa both fixed |
-| 11 | **Ground-Mounted Solar** | admin | ✅ VERIFIED 2026-06-27 (engine corrected) | Fig 29.4-10, 29.4-11 | tests WE-15/WE-16; static 7/8 + dynamic fixed |
+| 11 | **Ground-Mounted Solar** | admin | ✅ VERIFIED 2026-06-27 (engine corrected) | Fig 29.4-10, 29.4-11 | tests WE-15/WE-22 (dynamic; was WE-16); static 7/8 + dynamic fixed + Zone-2 overrides WE-21 |
 | 12 | **Chimneys & Tanks** | admin | ✅ VERIFIED 2026-06-27 | Fig/Table 29.4-1 Cf row mapping | ledger-locked + test WE-10 |
 | 13 | **Signs & Billboards** | admin | ✅ VERIFIED 2026-06-27 | §29.3, Fig 29.3-1 (solid-sign Cf) | ledger-locked + test WE-13 (shares 29.3-1 with #17) |
 | 14 | **Open Signs & Frames** | admin | ✅ VERIFIED 2026-06-27 | Fig 29.4-2 (open-sign Cf, ε-banded) | ledger-locked + test WE-12 |
@@ -55,7 +55,7 @@ QUESTION section at the bottom. Conservative either way (no safety risk), but th
 **✅✅ BOTTOM LINE: ALL 17 UI/admin calculators (#1–17) VALUE-VERIFIED against the physical
 book 2026-06-27.** (#18–22 are engine-only scaffolds with no UI — verify when built.)
 Done: #1–3 production; **ALL 6 C&C ROOFS (#4–9)**; **ALL SPECIALIZED (#12–17)**; **SOLAR
-rooftop (#10) + ground (#11)**. **292 regression assertions (WE-3…WE-16).**
+rooftop (#10) + ground (#11)**. **360 regression assertions (WE-1…WE-22; snow WE-18, combos WE-19, pg WE-20, Zone-2 overrides WE-21).**
 **Engine bugs caught + fixed this pass:** hip Fig 30.3-2G Z2 area (50→100); rooftop solar
 GCrn (Fig 29.4-7) + γa (Fig 29.4-8); ground solar static (Fig 29.4-10, 7/8 curves) +
 dynamic (Fig 29.4-11, shape + 5 cells). Most solar errors were UNCONSERVATIVE (engine read

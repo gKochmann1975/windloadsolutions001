@@ -88,7 +88,7 @@ flat A=5000→10000**. Test WE-15.
 > already correct. Webapp-only.
 
 ### B4. Fig 29.4-11 — Ground dynamic GCgn / GCgm (book p.313) — ✅ USER BOOK-VERIFIED 2026-06-27
-`(Ns, value)`, linear-interp on Ns, 1% damping. 16 curves. Test WE-16.
+`(Ns, value)`, linear-interp on Ns, 1% damping. 16 curves. Test WE-22 (renumbered from WE-16).
 **Shape CORRECTED (all 16):** flat plateau at Ns=0→0.2, ramp, flat plateau at Ns=0.7→0.8;
 mid point at **Ns=0.3** (engine had 0.35). Re-anchored to 4–5 points each.
 **5 GCgm VALUE corrections:** A≤A₁ ω0–15 Z2 start 0.36→**0.40**; A≤A₁ ω15–60 Z1 0.45→**0.40**

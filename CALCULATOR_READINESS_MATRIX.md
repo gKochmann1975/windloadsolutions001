@@ -31,7 +31,7 @@ Legend: ✅ done · ⚠️ partial/caveat · 🚫 not done
 | 10 | Rooftop Equipment | ✅ | ✅ | ✅ | 🚫 | Fv uplift bug FIXED (GCr 1.5, Eq 29.4-3) |
 | 11 | Chimneys & Tanks | ✅ | ✅ | ✅ | 🚫 | Cf book-verified (WE-10) |
 | 12 | Solar Rooftop | ✅ | ✅ | ⚠️ | 🚫 | §29.4 verified + snow wired; balanced snow only (drift/sliding/rain excluded); §29.4.3 two-load-case note pending |
-| 13 | Solar Ground-Mount | ⚠️ | ✅ | ⚠️ | 🚫 | figure values verified, but **no worked-example confirmation**; needs snow + foundation |
+| 13 | Solar Ground-Mount | ⚠️ | ✅ | ⚠️ | 🚫 | figure-verified + regression-tested (WE-15/WE-22); no independent published worked example exists (§29.4.5 is new in 7-22). Needs snow + foundation. **UI gap below.** |
 
 ## B. Engine VERIFIED but NOT on admin — just needs a route + UI (5)
 
@@ -54,9 +54,16 @@ Legend: ✅ done · ⚠️ partial/caveat · 🚫 not done
 ---
 
 ## Engine-math status: essentially COMPLETE
-- Validation suite `webapp/testing/validate_asce7_22.py`: **22 WE tests, 201 assertions, all pass.**
+- Validation suite `webapp/testing/validate_asce7_22.py`: **22 WE tests, 360 assertions, all pass.** Next free = WE-23.
 - All wired calcs verified against the physical book / ASCE Guide. Two real conformance bugs
   found and fixed this session (Rooftop Equipment Fv, Dome vs Arched figures) — both regression-locked.
+
+### ⚠️ Ground-solar Zone-2 override NOT reachable from UI (potential unconservative — BLOCKS ground solar)
+- §29.4.5.1 forces Zone 2 when **Lc/S < 0.25** OR **Kzt > 1.0** (WE-21). The engine implements both,
+  but the ground-solar UI **does not collect `row_spacing_S`**, so the Lc/S branch can never fire —
+  only the Kzt branch does. Closely-spaced ground rows (0.20 ≤ Lc/S < 0.25) would receive Zone-1
+  (lower) pressure when the code mandates Zone-2 (higher) → **under-design**. Must add an `S` input
+  (and thread it to the engine) before ground solar is shipped/sold. Source: other-session hand-off 2026-06-28.
 
 ### Open engineering items (none block the verified+wired core)
 - **Load Combinations (Ch 2)** — arithmetic locked (WE-19); factor lists still want one physical-book
@@ -84,8 +91,19 @@ Legend: ✅ done · ⚠️ partial/caveat · 🚫 not done
 - Other agent owned: snow, load-combos, solar engines/report/UI, §29.4 verification, signs/walls reductions.
 - This session owned: equipment Fv fix, dome/arched split, IBC foundation reference, commerce/Workstream E, admin Readiness page.
 
-## Recommended next actions
-1. **Wire the 5 verified-but-invisible engines** (MWFRS Envelope, Dome/Arched, Open Signs, Trussed Towers, Freestanding Walls) → route + UI so they're testable on admin.
-2. **Build the admin Readiness page** rendering this matrix with a Test link per calc.
-3. **Workstream E** to make the verified+wired calcs sellable (start with MWFRS — no scope gaps).
-4. Quick hygiene: load-combos p.7-10 book confirm; §29.4.3 two-load-case report note.
+## Wiring pattern (established by the solar work — reuse for the unwired engines)
+A calc is wired additively, mirroring `signs.html`, with **zero impact on other calcs**:
+static `config` object (incl. opt-in `config.snow`, `config.reportEndpoint`, `config.reportMount`)
++ a `/api/calc/<name>` endpoint that calls the engine + an admin Flask route + a `*.html` UI page
++ a `shell.js` nav entry. The snow inputs + Hazard-Tool iframe modal live in `calc-workflow.js`
+(gated on `config.snow`, with an "open in new tab" fallback for X-Frame-Options blocks).
+
+## Recommended next actions (other-session order, adopted)
+1. **Wire the 4 pattern-ready unwired UIs** — Trussed Towers, Open Signs, Freestanding Walls,
+   MWFRS Envelope (engines verified; route+UI mirroring signs.html). Quickest ROI.
+2. **Wire Dome/Arched** (5th unwired; this session's engine) — same pattern.
+3. **Ground-solar `row_spacing_S` input** so the Lc/S Zone-2 override is reachable (see ⚠️ above).
+4. **Admin Readiness page** rendering this matrix with a Test link per calc.
+5. **Workstream E** to make verified+wired calcs sellable (start MWFRS — no scope gaps).
+6. Hygiene: §29.4.3 two-load-case report note; load-combos p.7-10 book confirm;
+   `solar_report.py:2` stale "scaffold" docstring; signs/walls Note-3 reductions (unblocks signs-foundation).

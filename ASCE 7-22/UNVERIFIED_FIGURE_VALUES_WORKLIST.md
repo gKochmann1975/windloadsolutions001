@@ -27,7 +27,7 @@ ledger — needs your book read. 🔲 = not built yet (verify when built).
 | 9 | **C&C Roof — Sawtooth** | admin | ✅ VERIFIED 2026-06-27 | Fig 30.3-6 | ledger-locked + test WE-8 |
 | 10 | **Rooftop Solar** | admin | ⬜ NEEDS READ | Fig 29.4-7, 29.4-8, Eq 29.4-6 | **dedicated worksheet** `SOLAR_29.4_VERIFICATION_WORKSHEET.md` |
 | 11 | **Ground-Mounted Solar** | admin | ⬜ NEEDS READ | Fig 29.4-10, 29.4-11 (+ Fig 29.4-9 zones) | **dedicated worksheet** (same file) |
-| 12 | **Chimneys & Tanks** | admin | ⬜ NEEDS READ | Fig/Table 29.4-1 Cf row mapping | §CHIMNEYS below |
+| 12 | **Chimneys & Tanks** | admin | ✅ VERIFIED 2026-06-27 | Fig/Table 29.4-1 Cf row mapping | ledger-locked + test WE-10 |
 | 13 | **Signs & Billboards** | admin | ⬜ NEEDS READ | §29.3, Fig 29.3-1 (solid-sign Cf) | §CH29 SPECIALIZED below |
 | 14 | **Open Signs & Frames** | admin | ⬜ NEEDS READ | Fig 29.4-2 (open-sign Cf, ε-banded) | §CH29 SPECIALIZED |
 | 15 | **Rooftop Equipment** | admin | ✅ VERIFIED 2026-06-27 | §29.4.1, (GCr) lateral/vertical | ledger-locked + test WE-9 |
@@ -177,7 +177,8 @@ Static (29.4-10) + dynamic (29.4-11) GCgn/GCgm anchor curves — zones 1/2, two 
 > **`ASCE 7-22/CHIMNEYS_TANKS_Cf_REFERENCE.md`** (every Cf cell + Kd-by-cross-section +
 > the D√qz threshold + the Octagonal-shares-Hexagonal assumption, each with a blank
 > "Book" column to tick). Use that sheet when verifying.
-### [ ] Fig 29.4-1 round subcritical/supercritical mapping — `asce7_22_other_chimneys_tanks.py`
+### [x] Fig 29.4-1 round subcritical/supercritical mapping — `asce7_22_other_chimneys_tanks.py`
+> ✅ VERIFIED 2026-06-27 (physical book, Option B) — all 8 Cf rows × h/D(1/7/25), round D√qz=2.5 split direction, octagonal=hex row, Kd-by-section. Ledger-locked + test WE-10.
 Cf values themselves ARE in the ledger and match. Re-confirm the round-section regime→row mapping
 (D√qz ≤ 2.5 = subcritical single "All" row; > 2.5 = roughness rows) — this had a swap bug 2026-06-15. — [ ]
 

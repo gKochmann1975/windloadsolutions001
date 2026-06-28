@@ -221,11 +221,15 @@ can drift** — the Sealed-Deliverable audit (`audit_sealed_deliverable_pipeline
 caught a report hardcoding Kz/Ke/qh and under-reporting qh by 28–56%. So we validate the **report
 output end-to-end**, not just the engine.
 
-> **Status (2026-06-28):** harness built — `webapp/testing/validate_reports_vs_guide.py`.
-> **MWFRS Directional (Ch 27) + Envelope (Ch 28, Guide Ex 4.1) PASS report-level: 30/30 published
-> answers matched (≤0.04 psf)**, qh surfaced in the rendered report. Rendered reports saved under
-> `ASCE 7-22/guide_report_crossref/`; results in `ASCE 7-22/GUIDE_REPORT_CROSSREF.md`. Remaining
-> calcs need their report path (E1) before they can be added to the harness.
+> **Status (2026-06-28):** harness `webapp/testing/validate_reports_vs_guide.py` — **60/60 published
+> answers matched** across: MWFRS Directional + Envelope (Ex 4.1), Rooftop Equipment (Ex 5.2),
+> Domed Roof (Ex 6.7), C&C Flat (Ex 6.1) + Gable (Ex 6.2) at pressure level, C&C Hip (Ex 6.3) +
+> Monoslope (Ex 6.5) at GC<sub>p</sub> level (pressures conservative — engine floors Exp-B K<sub>z</sub>
+> to 0.70 vs the book's raw 0.57/0.62; disclosed). Rendered reports in `ASCE 7-22/guide_report_crossref/`.
+> **Generic report generator** (`generate_generic_engineering_report`) built; **UI "Generate Engineering
+> Report" buttons + `/api/report/{equipment,arched-dome,roof}` endpoints wired**. **ALL roof Guide
+> examples now proven at report level.** Next: **rooftop solar (Ex 5.3)** report-level case, then
+> the Other-Structures report paths (signs/walls/towers/chimneys/open-signs).
 
 ### E1 — Every calc needs an Engineering Report path
 Today only **W/D, MWFRS, and Solar** have report endpoints (`/api/report`, `/api/report/mwfrs`,

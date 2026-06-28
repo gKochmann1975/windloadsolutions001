@@ -28,11 +28,11 @@ ledger — needs your book read. 🔲 = not built yet (verify when built).
 | 10 | **Rooftop Solar** | admin | ⬜ NEEDS READ | Fig 29.4-7, 29.4-8, Eq 29.4-6 | **dedicated worksheet** `SOLAR_29.4_VERIFICATION_WORKSHEET.md` |
 | 11 | **Ground-Mounted Solar** | admin | ⬜ NEEDS READ | Fig 29.4-10, 29.4-11 (+ Fig 29.4-9 zones) | **dedicated worksheet** (same file) |
 | 12 | **Chimneys & Tanks** | admin | ✅ VERIFIED 2026-06-27 | Fig/Table 29.4-1 Cf row mapping | ledger-locked + test WE-10 |
-| 13 | **Signs & Billboards** | admin | ⬜ NEEDS READ | §29.3, Fig 29.3-1 (solid-sign Cf) | §CH29 SPECIALIZED below |
+| 13 | **Signs & Billboards** | admin | ✅ VERIFIED 2026-06-27 | §29.3, Fig 29.3-1 (solid-sign Cf) | ledger-locked + test WE-13 (shares 29.3-1 with #17) |
 | 14 | **Open Signs & Frames** | admin | ✅ VERIFIED 2026-06-27 | Fig 29.4-2 (open-sign Cf, ε-banded) | ledger-locked + test WE-12 |
 | 15 | **Rooftop Equipment** | admin | ✅ VERIFIED 2026-06-27 | §29.4.1, (GCr) lateral/vertical | ledger-locked + test WE-9 |
 | 16 | **Trussed / Comm Towers** | admin | ✅ VERIFIED 2026-06-27 | Fig 29.4-3 Cf(ε) + round-member factor | ledger-locked + test WE-11 |
-| 17 | **Fencing / Freestanding Walls** | admin | ⬜ NEEDS READ | §29.3, Fig 29.3-1 (solid-wall Cf) | §CH29 SPECIALIZED |
+| 17 | **Fencing / Freestanding Walls** | admin | ✅ VERIFIED 2026-06-27 | §29.3, Fig 29.3-1 (solid-wall Cf) | ledger-locked + test WE-13 |
 | 18 | **Attached Canopies** | engine only | ⬜ NEEDS READ | Fig 30.9-1A/1B, 30.9-2A/2B (graphs) | §NEW ENGINES below |
 | 19 | **Parapets (C&C)** | engine only | ⬜ partial | Fig 30.6-1 combo + roof Zones 2/3 (wall GCp ✅) | §NEW ENGINES |
 | 20 | **C&C Free Roofs (open bldgs)** | engine only | ⬜ NEEDS READ | Fig 30.5-1 Cn table (monoslope done; pitched/troughed pending) | §NEW ENGINES |
@@ -52,12 +52,13 @@ z_min — the 0.70 floor vs raw Table 26.10-1 cells (0.57/0.62/0.66). See the OP
 QUESTION section at the bottom. Conservative either way (no safety risk), but the
 *reported* intermediate Kz for low-rise Exp-B is the floor.
 
-**Bottom line: 12 calculators need your manual book cross-reference before they can
-ship.** Done: #1–3 production; **ALL 6 C&C ROOF SHAPES (#4–9) VERIFIED 2026-06-27**
-(tests WE-3…WE-8, 131 assertions; hip had one fix, 2G Zone 2 A-max 50→100); **#15
-Rooftop Equipment VERIFIED 2026-06-27** (physical book, test WE-9). **Remaining
-Specialized (#12–14,16,17): Chimneys, Signs, Open Signs, Towers, Walls — being
-re-read from the physical book (Option B). Then Solar (#10,11) + scaffolds (#18–22).** #18-22 are brand-new
+**Bottom line: SOLAR (#10, #11) is the only remaining VISIBLE calculator needing a book
+read** (log-scale graphs — physical book required), plus the engine-only scaffolds
+(#18–22). Done 2026-06-27 (physical book, Option B): #1–3 production; **ALL 6 C&C ROOF
+SHAPES (#4–9)**; **ALL SPECIALIZED — Rooftop Equipment (#15), Chimneys (#12), Trussed
+Towers (#16), Open Signs (#14), Signs (#13) + Freestanding Walls (#17)**. 15 of 22
+calculators verified; tests WE-3…WE-13 (201 assertions). Engine fixes: hip 2G Zone-2
+A-max 50→100. Open opt-in: signs/walls Notes 3 + double-faced reductions (conservative). #18-22 are brand-new
 engines (no UI) built 2026-06-23; #20/#21/#22 use mostly READABLE tables/formulas
 (higher confidence); #18 is graph-traced (lower). MWFRS free roofs is blocked on scans.
 
@@ -191,13 +192,15 @@ These five got the Option-6 UI this session, so per the "verify when UI-exposed"
 shipping. Engine values below are the real coded values (extracted 2026-06-22).
 Each should get its own cell-by-cell worksheet like solar did when you sit down to verify it.
 
-### [ ] Signs & Billboards (solid signs) — `asce7_22_other_signs_calculator.py`
+### [x] Signs & Billboards (solid signs) — `asce7_22_other_signs_calculator.py`
+> ✅ VERIFIED 2026-06-27 (physical book, Option B) — shares Fig 29.3-1 with freestanding walls (#17); full Case A/B grid + Case C + Notes 1–4 confirmed. Ledger-locked + test WE-13.
 F = q<sub>h</sub>·G·C<sub>f</sub>·A<sub>s</sub> (Eq. 29.3-1). Uses the **same Fig 29.3-1 C<sub>f</sub>
 table** as freestanding walls (Case A/B/C, s/h × B/s). — [ ]
 > A user reference exists: `SIGNS_FREESTANDING_WALLS_Cf_REFERENCE.md` (Feb 2026). Confirm
 > that against the book + lock into the ledger; don't trust the in-code "VERIFIED" comment alone.
 
-### [ ] Fencing / Freestanding Walls — `asce7_22_other_freestanding_walls.py:59-130`
+### [x] Fencing / Freestanding Walls — `asce7_22_other_freestanding_walls.py:59-130`
+> ✅ VERIFIED 2026-06-27 (physical book, Option B) — full Case A/B grid (7×12), Case C regions + B/s 13/45 subdivisions, return-corner reduction, Notes 1–4. Engine implements Note 1 + interpolation + return-corner; Notes 3 / double-faced reductions left OFF (conservative, opt-in pending). Ledger-locked + test WE-13.
 Fig 29.3-1 C<sub>f</sub>, keyed s/h ∈ {0.16..1.0} × B/s ∈ {0.05..45}. Case A/B sample row
 (s/h=1.0): C<sub>f</sub> = 1.80/1.70/1.65/1.55/1.45/1.40/1.35.../1.30. Plus Case C region
 table. In-code says "verified pp.301-302". — [ ]

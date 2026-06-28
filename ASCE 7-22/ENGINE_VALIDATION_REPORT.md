@@ -113,18 +113,36 @@ Engine `asce7_22_cc_free_roof.py` has `_CN_PITCHED = None` — gable/pitched fre
 transcribed (monoslope only, and those Cₙ still pending). Ex 6.6 + Fig 30.5‑2 give the values to build it.
 (Free roofs are engine‑only, not in the imminent release.)
 
-## Still to validate — pages CAPTURED (ASCE Guide images pp.93‑164), ready to run
-| Calc | ASCE Guide example (pages) | Status |
-|---|---|---|
-| C&C Gable roof (#5) | 6.2 (129‑133) | pages in hand |
-| C&C Hip roof (#6) | 6.3 L‑shaped gable/hip (134‑141) | pages in hand |
-| C&C Monoslope (#7) | 6.5 (146‑155) | pages in hand |
-| C&C Dome (#21) | 6.7 (160‑164) | pages in hand |
-| C&C Free/open roof (#20) | 6.6 (156‑159) | pages in hand |
-| Signs (#13) | 5.1 billboard (105‑113) | pages in hand |
-| Rooftop Equipment (#15) | 5.2 (114‑117) | pages in hand |
-| Solar rooftop (#10) | 5.3 parallel‑to‑roof (118‑122) | pages in hand |
-| MWFRS Envelope (re‑confirm) | 4.1 (93‑104) | pages in hand |
+## ✅ #11 — Flexible gust factor Gf (Signs Ex 5.1, engine #22)
+Billboard on flexible poles, n₁=0.7 Hz, β=0.01, Exp C. **Final Gf equation (26.11‑10) confirmed:**
+engine formula reproduces **Gf=1.35** from the book's verified intermediates (Iz=0.176, gQ=3.4, Q=0.926,
+gR=4.1, R²=1.93). Full input‑chain run deferred (#22 not shipped; needs V + sign height convention).
+The shipped Signs Cf (#13) is already WE‑verified.
+
+## 🔴 #12 — Dome (Ex 6.7) — WRONG FIGURE (engine #21, not shipped)
+Book Ex 6.7 domed roof C&C uses **Figure 30.3‑7** (Table G6‑19): GCp = +0.9/−0.9 (0–60°), +0.5/−0.9
+(60–90°) — a simple table. But `asce7_22_cc_dome.py` implements **Figure 30.3‑8** (ARCHED‑roof formulas,
+Zone A=1.68r…, Zone B=−0.84−1.2r). **30.3‑7 = domes, 30.3‑8 = arched/barrel — different figures.** The
+engine is really an *arched‑roof* engine; a true dome (Fig 30.3‑7) is not implemented. Not in release.
+
+## ✅ MWFRS Envelope (Ex 4.1) — already validated
+Same Envelope procedure already confirmed EXACT (all 8 zones) via the CED ASCE 7‑22 example (#2 above).
+Guide Ex 4.1 is the official version of the same; no re‑run needed.
+
+---
+
+## SWEEP SUMMARY (ASCE 7‑22 Guide, Stafford & Reinhold)
+| Calc | Result |
+|---|---|
+| C&C Flat (6.1), Gable (6.2), Hip (6.3), Monoslope (6.5) | ✅ EXACT |
+| Solar rooftop parallel (5.3) | ✅ EXACT |
+| MWFRS Directional + Envelope | ✅ EXACT (earlier) |
+| Flexible Gf (5.1) | ✅ equation confirmed |
+| **Rooftop Equipment vertical Fv (5.2)** | 🔴 **BUG: GCr 1.9 should be 1.5 (27% high)** |
+| **Dome (6.7)** | 🔴 **wrong figure (uses 30.3‑8 arched, domes need 30.3‑7)** |
+| Open/free gable roof (6.6) | ⚠️ not implemented (Fig 30.5‑2) |
+
+**Two real discrepancies to fix — both pending Greg's book confirmation before changing engines.**
 
 ## Other still‑pending
 | Calc | Status | Example source needed |

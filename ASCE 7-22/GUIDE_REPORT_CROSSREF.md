@@ -119,16 +119,30 @@ Report rendered OK (12866 bytes); qh in report: YES · saved report: `ASCE 7-22/
 
 **3 / 3 published answers matched** (tolerance 0.20 psf).
 
+## C&C Monoslope Roof (Guide Ex 6.5 / §30.3 Fig 30.3-5B) [GCp]
+
+Report rendered OK (12904 bytes); qh in report: YES · saved report: `ASCE 7-22/guide_report_crossref/monoslope_roof_report.html`
+
+| Answer | Guide (psf) | Our report (psf) | Δ | Match |
+|---|---:|---:|---:|:--:|
+| Z1 joist GCp @A=566 (-1.10) | -1.10 | -1.10 | 0.00 | ✅ |
+| Z2 joist GCp @A=566 (-1.20) | -1.20 | -1.20 | 0.00 | ✅ |
+| Z3 joist GCp @A=566 (-2.00) | -2.00 | -2.00 | 0.00 | ✅ |
+| Z1 panel GCp @A=20 (-1.24) | -1.24 | -1.24 | 0.00 | ✅ |
+| Z2 panel GCp @A=20 (-1.48) | -1.48 | -1.48 | 0.00 | ✅ |
+| Z3 panel GCp @A=20 (-2.63) | -2.63 | -2.63 | 0.00 | ✅ |
+
+**6 / 6 published answers matched** (tolerance 0.20 psf).
+
 ---
 
 ## Report paths pending (runbook step E1) — engine-level already WE-verified
 
 These calcs are cross-referenced against the Guide at the **engine** level in `validate_asce7_22.py` (360 assertions) but have **no Engineering Report path yet**, so a report-level cross-ref can't run until E1 builds their report endpoint:
 
-| Calc | Guide example | Engine cross-ref (ENGINE_VALIDATION_REPORT.md) |
+| Calc | Guide example | Status |
 |---|---|---|
-| C&C Flat Roof | Ex 6.1 | ✅ 7/8 exact (1 cell +0.3% conservative) |
-| C&C Gable | Ex 6.2 | ✅ exact (6 zones) |
-| C&C Hip | Ex 6.3 | ✅ exact (3 zones) |
-| C&C Monoslope | Ex 6.5 | ✅ exact (6 zones) |
-| Solar rooftop (parallel) | Ex 5.3 | ✅ exact (has report path; add a report-level case here next) |
+| Solar rooftop (parallel) | Ex 5.3 | report path exists; report-level case is the next to add |
+| Open/free roof | Ex 6.6 | engine not implemented (Fig 30.5-2) — out of scope |
+
+**Exposure-B note:** Hip (Ex 6.3) and Monoslope (Ex 6.5) are validated at the **GC<sub>p</sub> coefficient** level (exact). The engine floors the Exposure-B velocity-pressure coefficient K<sub>z</sub> at 0.70 for low-rise (the documented WE-2 conservative choice), where the book uses the raw table value (0.57 / 0.62), so the rendered **pressures are conservative** (higher) by that ratio — disclosed, not an error.

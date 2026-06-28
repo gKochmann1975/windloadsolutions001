@@ -31,7 +31,7 @@ ledger — needs your book read. 🔲 = not built yet (verify when built).
 | 13 | **Signs & Billboards** | admin | ⬜ NEEDS READ | §29.3, Fig 29.3-1 (solid-sign Cf) | §CH29 SPECIALIZED below |
 | 14 | **Open Signs & Frames** | admin | ⬜ NEEDS READ | Fig 29.4-2 (open-sign Cf, ε-banded) | §CH29 SPECIALIZED |
 | 15 | **Rooftop Equipment** | admin | ✅ VERIFIED 2026-06-27 | §29.4.1, (GCr) lateral/vertical | ledger-locked + test WE-9 |
-| 16 | **Trussed / Comm Towers** | admin | ⬜ NEEDS READ | Fig 29.4-3 Cf(ε) + round-member factor | §CH29 SPECIALIZED |
+| 16 | **Trussed / Comm Towers** | admin | ✅ VERIFIED 2026-06-27 | Fig 29.4-3 Cf(ε) + round-member factor | ledger-locked + test WE-11 |
 | 17 | **Fencing / Freestanding Walls** | admin | ⬜ NEEDS READ | §29.3, Fig 29.3-1 (solid-wall Cf) | §CH29 SPECIALIZED |
 | 18 | **Attached Canopies** | engine only | ⬜ NEEDS READ | Fig 30.9-1A/1B, 30.9-2A/2B (graphs) | §NEW ENGINES below |
 | 19 | **Parapets (C&C)** | engine only | ⬜ partial | Fig 30.6-1 combo + roof Zones 2/3 (wall GCp ✅) | §NEW ENGINES |
@@ -218,7 +218,8 @@ between 0.1·B·h and B·h (§29.4.1). Confirm the 1.9 anchor, the 1.0 floor, an
 > "no separate G / single GCr for both Fh & Fv" assumptions). This one is text+formula (no graph)
 > → quickest to confirm. Use that sheet.
 
-### [ ] Trussed / Comm Towers — `asce7_22_other_towers.py:22-32`
+### [x] Trussed / Comm Towers — `asce7_22_other_towers.py:22-32`
+> ✅ VERIFIED 2026-06-27 (physical book, Option B) — Square/Triangle polynomials + round-member (≤1.0) + diagonal (≤1.2) factors + Kd=0.85. Ledger-locked + test WE-11.
 Fig 29.4-3 C<sub>f</sub>(ε): square = 4.0ε²−5.9ε+4.0 · triangle = 3.4ε²−4.7ε+3.4 ·
 round-member multiplier = 0.51ε²+0.57. Confirm all three polynomial coefficient sets. — [ ]
 > **2026-06-26:** dedicated worksheet — **`ASCE 7-22/TRUSSED_TOWERS_Cf_REFERENCE.md`**

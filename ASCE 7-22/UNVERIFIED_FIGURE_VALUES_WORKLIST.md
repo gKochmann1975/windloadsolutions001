@@ -29,7 +29,7 @@ ledger — needs your book read. 🔲 = not built yet (verify when built).
 | 11 | **Ground-Mounted Solar** | admin | ⬜ NEEDS READ | Fig 29.4-10, 29.4-11 (+ Fig 29.4-9 zones) | **dedicated worksheet** (same file) |
 | 12 | **Chimneys & Tanks** | admin | ✅ VERIFIED 2026-06-27 | Fig/Table 29.4-1 Cf row mapping | ledger-locked + test WE-10 |
 | 13 | **Signs & Billboards** | admin | ⬜ NEEDS READ | §29.3, Fig 29.3-1 (solid-sign Cf) | §CH29 SPECIALIZED below |
-| 14 | **Open Signs & Frames** | admin | ⬜ NEEDS READ | Fig 29.4-2 (open-sign Cf, ε-banded) | §CH29 SPECIALIZED |
+| 14 | **Open Signs & Frames** | admin | ✅ VERIFIED 2026-06-27 | Fig 29.4-2 (open-sign Cf, ε-banded) | ledger-locked + test WE-12 |
 | 15 | **Rooftop Equipment** | admin | ✅ VERIFIED 2026-06-27 | §29.4.1, (GCr) lateral/vertical | ledger-locked + test WE-9 |
 | 16 | **Trussed / Comm Towers** | admin | ✅ VERIFIED 2026-06-27 | Fig 29.4-3 Cf(ε) + round-member factor | ledger-locked + test WE-11 |
 | 17 | **Fencing / Freestanding Walls** | admin | ⬜ NEEDS READ | §29.3, Fig 29.3-1 (solid-wall Cf) | §CH29 SPECIALIZED |
@@ -203,7 +203,8 @@ Fig 29.3-1 C<sub>f</sub>, keyed s/h ∈ {0.16..1.0} × B/s ∈ {0.05..45}. Case 
 table. In-code says "verified pp.301-302". — [ ]
 > Most detailed Ch29 table. Confirm Case A/B grid + Case C regions + the Case-C reduction note.
 
-### [ ] Open Signs & Frames — `asce7_22_other_open_signs.py:61-71`
+### [x] Open Signs & Frames — `asce7_22_other_open_signs.py:61-71`
+> ✅ VERIFIED 2026-06-27 (physical book, Option B) — all 9 Cf cells, ε-bands, round D√qz=2.5 split, ε>0.7→solid-sign guard, Kd=0.85. Ledger-locked + test WE-12.
 Fig 29.4-2 C<sub>f</sub> keyed [member regime][ε band]:
 flat 2.0/1.8/1.6 · rounded-subcritical (D√qz≤2.5) 1.2/1.3/1.5 · rounded-supercritical (>2.5) 0.8/0.9/1.1 — [ ]
 > **2026-06-26:** dedicated worksheet — **`ASCE 7-22/OPEN_SIGNS_OPEN_FRAMES_Cf_REFERENCE.md`**

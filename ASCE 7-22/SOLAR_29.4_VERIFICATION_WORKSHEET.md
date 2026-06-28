@@ -117,9 +117,13 @@ All four formulas match the engine EXACTLY (read off clear p.309 crops). Test WE
 | Lb | `min(0.4·√(h·WL), h, WS)` | ✅ min(0.4(hWL)^0.5, h, Ws) |
 | ω interpolation 5°–15° | linear | ✅ Note 2 |
 
-## C2. ENGINE ENFORCEMENT GAPS found in the p.309 read (rules, not values — values all OK)
-These are NOT value errors; the engine just doesn't enforce them (takes inputs as given).
-Build into the solar calc/UI/report:
+## C2. ENGINE ENFORCEMENT GAPS found in the p.309 read (rules, not values)
+**✅ #1–3 IMPLEMENTED 2026-06-28** in `asce7_22_other_solar_rooftop.py` (test WE-17),
+backward-compatible: new helpers `check_roof_slope_applicable(theta)` (raises if θ>7),
+`effective_roof_height(mean, eave, theta)` (eave for θ≤10), `is_exposed_tilted(...)` /
+`is_exposed_parallel(...)` (d₁/d₂ rule with the correct per-method thresholds). The
+tilted + parallel calc methods now take optional `roof_slope_theta` + `eave_height` and
+apply the guard/eave. #4–5 remain UI/report wiring.
 1. **θ ≤ 7° applicability guard** — Fig 29.4-7 is valid only for roof slope θ ≤ 7°. Engine has no guard. Add a reject/warn.
 2. **h = EAVE height for θ ≤ 10°** (Notation: "eave height shall be used for roof angle θ ≤ 10°"). Engine uses whatever `h` (mean roof height) is passed — does not switch to eave. Thread θ + eave.
 3. **Exposure thresholds DIFFER by method** — engine takes `is_exposed_panel` as a boolean and does not compute it:

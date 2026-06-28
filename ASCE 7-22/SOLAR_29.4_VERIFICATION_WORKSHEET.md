@@ -87,8 +87,13 @@ flat A=5000→10000**. Test WE-15.
 > straight log-line, wrong shape AND wrong values). Lookup clamp `max(1,min(10000,A))`
 > already correct. Webapp-only.
 
-### B4. Fig 29.4-11 — Ground dynamic GCgn / GCgm (book p.313) — `solar_ground.py:121-166`
-`(Ns, value)`, linear-interp on Ns, 1% damping. 16 curves:
+### B4. Fig 29.4-11 — Ground dynamic GCgn / GCgm (book p.313) — ✅ USER BOOK-VERIFIED 2026-06-27
+`(Ns, value)`, linear-interp on Ns, 1% damping. 16 curves. Test WE-16.
+**Shape CORRECTED (all 16):** flat plateau at Ns=0→0.2, ramp, flat plateau at Ns=0.7→0.8;
+mid point at **Ns=0.3** (engine had 0.35). Re-anchored to 4–5 points each.
+**5 GCgm VALUE corrections:** A≤A₁ ω0–15 Z2 start 0.36→**0.40**; A≤A₁ ω15–60 Z1 0.45→**0.40**
+& end 0.18→**0.10**; A≥A₂ ω0–15 Z1 start 0.18→**0.20**; A≥A₂ ω0–15 Z2 end 0.08→**0.10**.
+All GCgn values matched. The table below is the (now-corrected) plateau/mid/end values:
 | Coeff | Area | ω band | Zone 1 | Zone 2 |
 |---|---|---|---|---|
 | GCgn,dyn | A≤A1 | 0–15° | (0,1.2)(0.7,0.36) | (0,2.2)(0.7,0.80) |

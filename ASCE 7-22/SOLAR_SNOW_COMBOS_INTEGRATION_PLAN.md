@@ -69,13 +69,22 @@ the array itself.)
 ## 6. Verification follow-ups (book-lock, the way we did wind)
 Before any of this ships sealed, these need a physical-book confirm (mostly tables/formulas —
 faster than the solar graphs; `C_s` is the one GRAPH):
-- [ ] `p_f` formula — confirm `I_s` is removed (p.61)
-- [ ] **Table 7.3-1** `C_e` (terrain × exposure)
-- [ ] **Table 7.3-2** `C_t`
-- [ ] **Table 7.3-4** `p_m` (minimum, by risk category)
-- [ ] **Fig 7.4-1** `C_s` slope-factor curves (warm/cold roof × slippery/non-slippery) — GRAPH, will need clear crops
+- [x] `p_f` formula — `I_s` removed, `p_f = 0.7·C_e·C_t·p_g` ✅ **USER-VERIFIED 2026-06-28** (p.61)
+- [x] **Table 7.3-1** `C_e` (terrain × exposure) ✅ **USER-VERIFIED 2026-06-28**
+- [x] **Table 7.3-2** `C_t` ✅ **USER-VERIFIED 2026-06-28**
+- [x] **Table 7.3-3** `C_t` heated/UNVENTILATED roofs (R_roof × p_g, bilinear; foot b: R>50→1.2)
+      ✅ **USER-VERIFIED 2026-06-28** — *was a gap; not in the original engine skeleton*
+- [x] **Table 7.3-4** `p_m,max` = 25/30/35/40 psf (Risk I/II/III/IV); `p_m = min(p_g, p_m,max)`
+      ✅ **USER-VERIFIED 2026-06-28** (p.62) — *placeholder had used 20*
+- [x] **Fig 7.4-1** `C_s`: (a) C_t=1.1 → 30°/5°, (b) 1.1<C_t<1.2 → 37.5°/10°, (c) C_t≥1.2 → 45°/15°;
+      linear to 0 at 70°. ✅ **USER-VERIFIED 2026-06-28** (clear graph crops, like the solar figs)
 - [ ] Drift (§7.7) + sliding (§7.9) + rain-on-snow (§7.10) provisions if the report covers them
+      — **NOT yet implemented** (engine is balanced-snow only)
 - [ ] Ch 2 combos — confirm full LRFD + ASD lists (p.7–10)
+
+> **Status 2026-06-28:** `webapp/asce7_22_snow.py` BUILT + all balanced-snow factors book-verified;
+> `VALUES_PENDING_VERIFICATION = False`. Regression locked in `validate_asce7_22.py` **WE-18**
+> (25 assertions). Next: (b) `p_g` geodatabase lookup, then (c) combos + report sections.
 
 ## 7. Scope note
 This is a **new feature** (snow engine + a snow geodatabase lookup + combination logic +

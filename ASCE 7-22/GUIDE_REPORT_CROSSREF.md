@@ -4,15 +4,16 @@
 
 ## Solid Sign / Billboard (Guide Ex 5.1 / §29.3) [Cf]
 
-Report rendered OK (12453 bytes); qh in report: YES · saved report: `ASCE 7-22/guide_report_crossref/sign_report.html`
+Report rendered OK (12508 bytes); qh in report: YES · saved report: `ASCE 7-22/guide_report_crossref/sign_report.html`
 
 | Answer | Guide (psf) | Our report (psf) | Δ | Match |
 |---|---:|---:|---:|:--:|
 | Case A Cf (book 1.8) | 1.80 | 1.80 | 0.00 | ✅ |
 | Case C 0-s Cf (book 2.4) | 2.40 | 2.42 | 0.02 | ✅ |
 | Case C s-2s Cf (book 1.6) | 1.60 | 1.60 | 0.00 | ✅ |
+| Case C 2s-3s Cf (book 1.15) | 1.15 | 1.15 | 0.00 | ✅ |
 
-**3 / 3 published answers matched** (tolerance 0.20 psf).
+**4 / 4 published answers matched** (tolerance 0.20 psf).
 
 ## MWFRS Directional (E-Book / Ch 27)
 

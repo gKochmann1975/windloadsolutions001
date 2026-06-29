@@ -25,6 +25,24 @@ Pick ONE identifier per MWFRS calc and use it everywhere (gate + DB seed + confi
 
 ---
 
+## BUILD STATUS (2026-06-29) — Layer 1 code DONE on branches
+Branches: webapp `feat/mwfrs-sellable`, backend `feat/mwfrs-gating`. **Not deployed** (GitHub cap → after July 1; Stripe TEST first). No W/D regression (only new paths added).
+- ✅ **E1 taxonomy** — backend `00dc752`: 3 tier rows (`mwfrs_starter/pro/premium`, v3 prices) + legacy row, all real engine names; `config.py` map fixed.
+- ✅ **E2 gate** — webapp `a4665ac`: `require_calc_access` + `page_access_redirect_for` (parameterized, W/D path untouched); 3 MWFRS API endpoints + both page routes now entitlement-gated. Routes verified.
+- ✅ **E4 flips** — webapp `b180ec3` (mwfrs `live:True` + checkout codes) + backend `d1261ab` (seat limits 1/5/10).
+- ✅ **B4 webhook** — already fixed in code (`subscription_manager.py`); needs merge+deploy (E5).
+- ⏳ **E3 Stripe prices** — needs Stripe access (below). TEST-mode checkout AUTO-CREATES v3 prices from the seed amounts, so the full flow can be verified WITHOUT manual Stripe work first.
+- ⏳ **E5 deploy + E6 test-mode verify** — after July 1.
+
+### E3 detail (the one Stripe step)
+Existing MWFRS Stripe products (`PRICING_TABLE.md`): Starter `prod_UmKaD3vGP6mgoP`, Pro `prod_UmKaXZc31hbPIC`, Premium `prod_UmKaKSQdigYd83`. Current prices are the OLD annual + Premium annual-only. To match v3:
+- Add/replace **annual** prices: Starter $350, Pro $590, Premium $1490 (was $336/$564/$1428).
+- Add **Premium monthly $149**.
+- Write the resulting `price_id`s into the `mwfrs_*` `SubscriptionProduct` rows (`stripe_monthly_price_id` / `stripe_annual_price_id`).
+- **For TEST verification you can skip this** — first checkout auto-creates the v3 prices from the seed. Do the canonical-product alignment before PRODUCTION go-live (needs the Stripe key — I shouldn't run live-key mutations; you run it in the dashboard or hand me the TEST key).
+
+---
+
 ## Build steps (in order) — with the exact files
 
 ### E-1 · Reconcile the product taxonomy (fixes B2)

@@ -10,12 +10,12 @@
     <link rel="manifest" href="/site.webmanifest">
     <link rel="shortcut icon" href="/favicon.ico?v=2">
 
-    <title>MWFRS Wind Load Calculator — Launching Soon | WindLoadCalc</title>
-    <meta name="description" content="MWFRS wind load analysis under ASCE 7-22 — directional (Ch 27) and envelope (Ch 28) procedures for whole-building frames, diaphragms, and shear walls. Launching soon. Join the notify list for early access.">
+    <title>MWFRS Wind Load Calculator — ASCE 7-22 | WindLoadCalc</title>
+    <meta name="description" content="MWFRS wind load analysis under ASCE 7-22 — directional (Ch 27) and envelope (Ch 28) procedures for whole-building frames, diaphragms, and shear walls. Plans from $35/mo with a 7-day free trial.">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="MWFRS Wind Load Calculator — Launching Soon">
-    <meta property="og:description" content="ASCE 7-22 MWFRS analysis — directional and envelope procedures for whole-building frames, diaphragms, and shear walls. Launching soon.">
+    <meta property="og:title" content="MWFRS Wind Load Calculator — ASCE 7-22 | WindLoadCalc">
+    <meta property="og:description" content="ASCE 7-22 MWFRS analysis — directional and envelope procedures for whole-building frames, diaphragms, and shear walls. Plans from $35/mo with a 7-day free trial.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://windloadcalc.com/shop/mwfrs.html">
     <meta property="og:image" content="https://windloadcalc.com/images/video-posters/wind-load-calculator-shop.jpg">
@@ -34,7 +34,7 @@
         "name": "MWFRS Wind Load Calculator — WindLoadCalc",
         "applicationCategory": "BusinessApplication",
         "operatingSystem": "Web Browser",
-        "description": "ASCE 7-22 Main Wind Force Resisting System wind load analysis — directional (Chapter 27) and envelope (Chapter 28) procedures for whole-building structural frames, diaphragms, and shear walls. Launching soon.",
+        "description": "ASCE 7-22 Main Wind Force Resisting System wind load analysis — directional (Chapter 27) and envelope (Chapter 28) procedures for whole-building structural frames, diaphragms, and shear walls.",
         "url": "https://windloadcalc.com/shop/mwfrs.html",
         "provider": { "@type": "Organization", "name": "WindLoadCalc", "url": "https://windloadcalc.com" }
     }
@@ -55,13 +55,13 @@
       "@context": "https://schema.org",
       "@type": "FAQPage",
       "mainEntity": [
-        { "@type": "Question", "name": "When does the MWFRS calculator launch?", "acceptedAnswer": { "@type": "Answer", "text": "It is in active development now. Join the notify list and we will email you the moment it goes live, along with early-access details for the first wave of users." } },
+        { "@type": "Question", "name": "Is the MWFRS calculator available now?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The Directional (Chapter 27) and Envelope (Chapter 28) procedures are live, with a 7-day free trial." } },
         { "@type": "Question", "name": "What is MWFRS, and how is it different from Components & Cladding?", "acceptedAnswer": { "@type": "Answer", "text": "MWFRS covers the whole-building system that resists wind — frames, diaphragms, and shear walls — using building-wide pressures. Components & Cladding covers individual elements like windows, doors, and roof panels using localized peak pressures. Most projects need both." } },
         { "@type": "Question", "name": "Which ASCE 7-22 procedures will it support?", "acceptedAnswer": { "@type": "Answer", "text": "The directional procedure in Chapter 27 and the envelope procedure in Chapter 28. The calculator will guide you to the correct method based on building height, geometry, and your project requirements." } },
         { "@type": "Question", "name": "Will it produce a permit-ready Engineering Report?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Like our other calculators, it will generate a detailed Engineering Report with every step, coefficient, and ASCE 7-22 citation, exportable to PDF, Excel, CSV, or print." } },
         { "@type": "Question", "name": "Can a Professional Engineer sign and seal the results?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. PE sign-and-seal is available in all 50 states through our firm's licensed engineer network. Florida projects up to three stories are handled by our in-house Florida P.E." } },
         { "@type": "Question", "name": "Which ASCE edition will it use?", "acceptedAnswer": { "@type": "Answer", "text": "ASCE 7-22, the current edition. We have navigated 7 editions of ASCE 7 since 2002 and always build on the latest standard." } },
-        { "@type": "Question", "name": "How will pricing work?", "acceptedAnswer": { "@type": "Answer", "text": "MWFRS will be its own subscription, separate from Components & Cladding. You add only the calculators you need. Pricing and early-access offers will be shared with the notify list first." } },
+        { "@type": "Question", "name": "How does pricing work?", "acceptedAnswer": { "@type": "Answer", "text": "MWFRS is its own subscription, separate from Components & Cladding. Plans are $35/$59/$149 a month (Starter/Pro/Premium), or bundle everything with WindLoad Complete." } },
         { "@type": "Question", "name": "Can I use the calculators that are already live in the meantime?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Our Windows, Doors & Storm Shutters calculator is live today, and a free wind speed lookup handles every U.S. ZIP. Use those now while MWFRS is finalized." } }
       ]
     }
@@ -279,6 +279,48 @@ section{position:relative;z-index:1;padding:62px 0}
 @media(max-width:880px){.nav-links{display:none}.footer-content{grid-template-columns:repeat(2,1fr)}header{padding:128px 0 44px}}
 @media(max-width:560px){.wrap{padding:0 20px}.benefits{grid-template-columns:1fr}.footer-content{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){.aurora span{animation:none}}
+/* ===== Pricing (dark-glass; checkout via shared js/*.js — matches the W/D shop) ===== */
+.billing-toggle-section{text-align:center}
+.billing-toggle-container{display:inline-flex;align-items:center;gap:1rem;background:var(--surface);backdrop-filter:blur(10px);padding:.7rem 1.4rem;border-radius:50px;border:1px solid var(--line);box-shadow:0 8px 28px rgba(0,0,0,.35)}
+.billing-label{font-size:.95rem;font-weight:600;color:var(--muted);padding:0 .8rem;transition:all .3s ease}
+.billing-label.active{color:#fff;font-weight:700}
+.billing-toggle{position:relative;width:60px;height:32px;background:rgba(255,255,255,.18);border-radius:50px;cursor:pointer;transition:all .3s ease}
+.billing-toggle.annual{background:#0018ff;box-shadow:0 0 20px rgba(0,24,255,.45)}
+.billing-toggle-slider{position:absolute;top:4px;left:4px;width:24px;height:24px;background:white;border-radius:50%;transition:all .3s ease;box-shadow:0 2px 6px rgba(0,0,0,.3)}
+.billing-toggle.annual .billing-toggle-slider{transform:translateX(28px)}
+.savings-badge{display:inline-flex;align-items:center;gap:.5rem;background:linear-gradient(135deg,#34D399 0%,#059669 100%);color:#04221a;padding:.45rem 1.2rem;border-radius:50px;font-size:.82rem;font-weight:800;box-shadow:0 4px 18px rgba(16,185,129,.4)}
+.pricing-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;margin-top:2rem}
+.pricing-card{position:relative;display:flex;flex-direction:column;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:2rem 1.5rem;padding-top:2.4rem;box-shadow:0 12px 32px rgba(0,0,0,.32);transition:.35s var(--luxe)}
+.pricing-header{order:1}.pricing-amount{order:2}.price-note{order:3}.pricing-cta{order:4}.trial-link{order:5}.pricing-divider{order:6}.pricing-features{order:7}
+.pricing-card:hover{transform:translateY(-6px);border-color:rgba(58,91,255,.5);box-shadow:0 22px 46px rgba(0,24,255,.2)}
+.pricing-card.featured{background:linear-gradient(165deg,rgba(16,185,129,.14),rgba(255,255,255,.03));border-color:rgba(52,211,153,.55)}
+.pricing-card.featured::before{content:'Most Popular';position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#34D399,#10B981);color:#04221a;padding:.4rem 1.2rem;border-radius:50px;font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap;box-shadow:0 4px 15px rgba(16,185,129,.4)}
+.pricing-header h3{font-size:1.3rem;font-weight:800;color:#fff;margin-bottom:.4rem}
+.pricing-description{font-size:.85rem;color:var(--muted);margin-bottom:1rem}
+.pricing-amount{display:flex;align-items:baseline;gap:.3rem;margin-bottom:.5rem}
+.price-currency{font-size:1.2rem;font-weight:700;color:#fff}
+.price-value{font-size:2.8rem;font-weight:800;color:#fff;line-height:1;background:linear-gradient(135deg,#fff,#9db0ff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.price-period{font-size:.9rem;color:var(--muted);font-weight:600}
+.price-note{font-size:.8rem;color:var(--muted);margin-bottom:1rem}
+.price-note strong{color:#34D399;font-weight:700}
+.pricing-divider{height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);margin:1rem 0}
+.pricing-features h4{font-size:.72rem;font-weight:700;color:#dbe3f5;margin-bottom:.75rem;text-transform:uppercase;letter-spacing:.5px}
+.pricing-features ul{list-style:none;padding:0;margin:0}
+.pricing-features li{display:flex;align-items:flex-start;gap:.5rem;padding:.45rem 0;font-size:.85rem;color:#c2cce0}
+.pricing-features li svg{flex-shrink:0;margin-top:.1rem}
+.pricing-features li strong{color:#fff}
+.pricing-cta{display:block;text-align:center;padding:1rem 1.5rem;border-radius:50px;font-weight:700;font-size:.95rem;text-decoration:none;transition:all .3s ease;cursor:pointer;border:none;width:100%;font-family:inherit;margin-top:.5rem}
+.pricing-cta.primary{background:linear-gradient(135deg,#0018ff 0%,#2540ff 100%);color:#fff;box-shadow:0 8px 25px rgba(0,24,255,.4)}
+.pricing-cta.primary:hover{background:linear-gradient(135deg,#0a8f5b,#34D399);transform:translateY(-3px) scale(1.02);box-shadow:0 18px 42px rgba(16,185,129,.55)}
+.pricing-cta.secondary{background:rgba(255,255,255,.06);color:#fff;border:1px solid rgba(255,255,255,.22)}
+.pricing-cta.secondary:hover{background:#fff;color:#0d1233;border-color:#fff;transform:translateY(-3px) scale(1.02);box-shadow:0 14px 34px rgba(255,255,255,.22)}
+.trial-link{display:block;text-align:center;margin-top:.75rem;margin-bottom:.25rem;color:#9db0ff;font-weight:600;font-size:.85rem;text-decoration:none;transition:all .3s ease}
+.trial-link:hover{color:#fff;text-decoration:underline}
+.legal-note{text-align:center;margin-top:1.5rem;padding:1.2rem;background:var(--surface);border:1px solid var(--line);border-radius:14px}
+.legal-note p{font-size:.82rem;color:var(--muted);line-height:1.6;margin:0}
+.legal-note a{color:#9db0ff;font-weight:600}
+@media(max-width:980px){.pricing-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.pricing-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -355,11 +397,11 @@ section{position:relative;z-index:1;padding:62px 0}
 <div class="hero-stage">
   <div class="hero-veil"></div>
   <header><div class="wrap">
-    <div class="eyebrow"><span class="dot"></span>Launching soon · ASCE 7-22 · Chapters 27 &amp; 28</div>
+    <div class="eyebrow"><span class="dot"></span>ASCE 7-22 · Chapters 27 &amp; 28 · Available now</div>
     <h1>MWFRS wind loads, <span class="grad">whole-building</span></h1>
-    <p class="sub">Main Wind Force Resisting System analysis for frames, diaphragms, and shear walls — built on the <strong>directional and envelope procedures</strong> of ASCE 7-22. Get notified the moment it launches.</p>
+    <p class="sub">Main Wind Force Resisting System analysis for frames, diaphragms, and shear walls — built on the <strong>directional and envelope procedures</strong> of ASCE 7-22. Plans from $35/mo — start with a 7-day free trial, no credit card.</p>
     <div class="hero-cta">
-      <a class="btn btn-primary btn-xl" href="#notify">Get notified at launch →</a>
+      <a class="btn btn-primary btn-xl" href="#pricing">View plans &rarr;</a>
       <a class="btn btn-ghost btn-xl" href="#mwfrs-vs-cc">MWFRS or C&amp;C?</a>
     </div>
     <div class="hero-trust">
@@ -479,27 +521,90 @@ section{position:relative;z-index:1;padding:62px 0}
 </div></section>
 
 <!-- Notify / waitlist -->
-<section id="notify" class="notify"><div class="wrap">
-  <div class="glass2">
-    <div class="eb">● Launching soon</div>
-    <h2>Be first to run an MWFRS project</h2>
-    <p class="lead">Join the notify list for the launch date and early-access details. No spam — just one email when the calculator goes live.</p>
-
-    <form class="notify-form" id="notify-form">
-      <!-- Honeypot field - hidden from humans -->
-      <div style="position:absolute;left:-9999px;" aria-hidden="true">
-        <input type="text" name="website_url" tabindex="-1" autocomplete="off">
-      </div>
-      <input type="text" name="name" class="fin" placeholder="Your name" required>
-      <input type="email" name="email" class="fin" placeholder="Your email" required>
-      <input type="text" name="company" class="fin" placeholder="Company name (optional)">
-      <input type="hidden" name="formType" value="waitlist">
-      <input type="hidden" name="category" value="MWFRS Calculator">
-      <button type="submit" class="fbtn">Notify me at launch</button>
-    </form>
-
-    <p class="fnote">We'll email you as soon as the MWFRS calculator is ready. Prefer to talk? <a href="https://windloadcalc.com/contact.html" style="color:#9db0ff;font-weight:600">Contact our team →</a></p>
+<section id="pricing"><div class="wrap">
+  <div class="sec-head">
+    <h2>Simple, transparent pricing</h2>
+    <p>Add the MWFRS calculator to your account — Directional + Envelope in one workflow. Start with a 7-day free trial, no credit card.</p>
   </div>
+
+  <div class="billing-toggle-section" style="margin-bottom:1.6rem">
+    <div class="billing-toggle-container">
+      <span class="billing-label" id="monthly-label">Monthly</span>
+      <div class="billing-toggle annual" id="billing-toggle" onclick="toggleBilling()"><div class="billing-toggle-slider"></div></div>
+      <span class="billing-label active" id="annual-label">Annual</span>
+      <span class="savings-badge">2 months free</span>
+    </div>
+  </div>
+
+  <div class="pricing-grid">
+    <!-- Starter -->
+    <div class="pricing-card">
+      <div class="pricing-header"><h3>Starter</h3><p class="pricing-description">Solo engineers &amp; small firms</p></div>
+      <div class="pricing-amount"><span class="price-currency">$</span><span class="price-value" id="price-starter">29</span><span class="price-period" id="period-starter">/month</span></div>
+      <p class="price-note" id="note-starter"><strong>2 MONTHS FREE</strong> - Billed annually at $350/year</p>
+      <div class="pricing-divider"></div>
+      <div class="pricing-features"><h4>What's included:</h4><ul>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>1 user license</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Directional (Ch 27) + Envelope (Ch 28)</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span><strong>100 calculations/month</strong></span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Permit-ready Engineering Reports (PDF)</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Email support</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Free software updates</span></li>
+      </ul></div>
+      <button class="pricing-cta primary" data-product-code="mwfrs_starter" data-billing-cycle="annual">Add to Cart</button>
+      <a href="../login.html" class="trial-link">or Start 7-Day Free Trial</a>
+    </div>
+    <!-- Pro (featured) -->
+    <div class="pricing-card featured">
+      <div class="pricing-header"><h3>Pro</h3><p class="pricing-description">Teams up to 5 — best value</p></div>
+      <div class="pricing-amount"><span class="price-currency">$</span><span class="price-value" id="price-pro">49</span><span class="price-period" id="period-pro">/month</span></div>
+      <p class="price-note" id="note-pro"><strong>2 MONTHS FREE</strong> - Billed annually at $590/year</p>
+      <div class="pricing-divider"></div>
+      <div class="pricing-features"><h4>Everything in Starter, plus:</h4><ul>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span><strong>Up to 5 user licenses</strong></span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span><strong>500 calculations/month</strong></span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Priority email support</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Team admin dashboard</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Centralized billing</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Project templates</span></li>
+      </ul></div>
+      <button class="pricing-cta primary" data-product-code="mwfrs_pro" data-billing-cycle="annual">Add to Cart</button>
+      <a href="../login.html" class="trial-link">or Start 7-Day Free Trial</a>
+    </div>
+    <!-- Premium -->
+    <div class="pricing-card">
+      <div class="pricing-header"><h3>Premium</h3><p class="pricing-description">Teams up to 10, advanced features</p></div>
+      <div class="pricing-amount"><span class="price-currency">$</span><span class="price-value" id="price-premium">124</span><span class="price-period" id="period-premium">/month</span></div>
+      <p class="price-note" id="note-premium"><strong>2 MONTHS FREE</strong> - Billed annually at $1,490/year</p>
+      <div class="pricing-divider"></div>
+      <div class="pricing-features"><h4>Everything in Pro, plus:</h4><ul>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span><strong>Up to 10 user licenses</strong></span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span><strong>Unlimited calculations</strong></span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Phone support</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Onboarding training session</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Custom report branding</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Usage analytics</span></li>
+      </ul></div>
+      <button class="pricing-cta primary" data-product-code="mwfrs_premium" data-billing-cycle="annual">Add to Cart</button>
+      <a href="../login.html" class="trial-link">or Start 7-Day Free Trial</a>
+    </div>
+    <!-- Enterprise -->
+    <div class="pricing-card">
+      <div class="pricing-header"><h3>Enterprise</h3><p class="pricing-description">Unlimited users for large orgs</p></div>
+      <div class="pricing-amount"><span class="price-value" style="font-size:2rem;">Custom</span></div>
+      <p class="price-note">Contact us for custom pricing</p>
+      <div class="pricing-divider"></div>
+      <div class="pricing-features"><h4>Everything in Premium, plus:</h4><ul>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span><strong>Unlimited user licenses</strong></span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Dedicated account manager</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Custom training sessions</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>SLA &amp; priority support</span></li>
+      </ul></div>
+      <a href="../contact.html" class="pricing-cta secondary">Contact Sales</a>
+    </div>
+  </div>
+
+  <div class="legal-note"><p>Each calculator is its own subscription — add only what you need. MWFRS pairs naturally with <a href="windows-doors-shutters.html">Components &amp; Cladding</a>; bundle everything with <a href="../wind-load-calculator-shop.html">WindLoad Complete</a>.</p></div>
 </div></section>
 
 <!-- Perfect for -->
@@ -563,13 +668,13 @@ section{position:relative;z-index:1;padding:62px 0}
 <section id="faq"><div class="wrap">
   <div class="sec-head"><h2>Frequently asked questions</h2></div>
   <div class="faq">
-    <details open><summary>When does the MWFRS calculator launch?</summary><p>It is in active development now. Join the notify list and we will email you the moment it goes live, along with early-access details for the first wave of users.</p></details>
+    <details open><summary>Is the MWFRS calculator available now?</summary><p>Yes — the Directional (Chapter 27) and Envelope (Chapter 28) procedures are live, with a 7-day free trial. Add MWFRS to your account from the pricing above.</p></details>
     <details><summary>What is MWFRS, and how is it different from Components &amp; Cladding?</summary><p>MWFRS covers the whole-building system that resists wind — frames, diaphragms, and shear walls — using building-wide pressures. Components &amp; Cladding covers individual elements like windows, doors, and roof panels using localized peak pressures. Most projects need both.</p></details>
     <details><summary>Which ASCE 7-22 procedures will it support?</summary><p>The directional procedure in Chapter 27 and the envelope procedure in Chapter 28. The calculator will guide you to the correct method based on building height, geometry, and your project requirements.</p></details>
     <details><summary>Will it produce a permit-ready Engineering Report?</summary><p>Yes. Like our other calculators, it will generate a detailed Engineering Report with every step, coefficient, and ASCE 7-22 citation, exportable to PDF, Excel, CSV, or print.</p></details>
     <details><summary>Can a Professional Engineer sign and seal the results?</summary><p>Yes. PE sign-and-seal is available in all 50 states through our firm's licensed engineer network. Florida projects up to three stories are handled by our in-house Florida P.E.</p></details>
     <details><summary>Which ASCE edition will it use?</summary><p>ASCE 7-22, the current edition. We have navigated 7 editions of ASCE 7 since 2002 and always build on the latest standard.</p></details>
-    <details><summary>How will pricing work?</summary><p>MWFRS will be its own subscription, separate from Components &amp; Cladding. You add only the calculators you need. Pricing and early-access offers will be shared with the notify list first.</p></details>
+    <details><summary>How does pricing work?</summary><p>MWFRS is its own subscription, separate from Components &amp; Cladding — add only the calculators you need. Plans are $35 / $59 / $149 a month (Starter / Pro / Premium), or bundle everything with WindLoad Complete.</p></details>
     <details><summary>Can I use the calculators that are already live in the meantime?</summary><p>Yes. Our Windows, Doors &amp; Storm Shutters calculator is live today, and a free wind speed lookup handles every U.S. ZIP. Use those now while MWFRS is finalized.</p></details>
   </div>
 </div></section>
@@ -580,7 +685,7 @@ section{position:relative;z-index:1;padding:62px 0}
     <h2>Don't miss the launch</h2>
     <p>MWFRS analysis is coming to the same ASCE 7-22 platform thousands of professionals have trusted since 2002. Get on the notify list, or start with a <a href="https://windloadcalc.com/free-wind-load-calculator.html">free wind speed lookup</a> today.</p>
     <div class="hero-cta" style="margin-bottom:6px">
-      <a class="btn btn-primary btn-xl" href="#notify">Get notified at launch →</a>
+      <a class="btn btn-primary btn-xl" href="#pricing">View plans &rarr;</a>
       <a class="btn btn-ghost btn-xl" href="https://windloadcalc.com/contact.html">Contact our team</a>
     </div>
     <div class="hero-trust" style="margin-top:10px">
@@ -646,7 +751,7 @@ section{position:relative;z-index:1;padding:62px 0}
 
 <!-- Notify form (transplanted waitlist mechanism: reCAPTCHA v3 + honeypot + Apps Script endpoint) -->
 <script>
-    document.getElementById('notify-form').addEventListener('submit', function(e) {
+    var _nf = document.getElementById('notify-form'); if (_nf) _nf.addEventListener('submit', function(e) {
         e.preventDefault();
         const form = this;
         const submitButton = form.querySelector('.fbtn');
@@ -699,6 +804,33 @@ section{position:relative;z-index:1;padding:62px 0}
         });
     });
 </script>
+
+<!-- Billing toggle + Stripe checkout (shared cart JS — same wiring as the W/D shop) -->
+<script>
+  let isAnnual = true;
+  function toggleBilling(){
+    isAnnual = !isAnnual;
+    var t=document.getElementById('billing-toggle'),
+        ml=document.getElementById('monthly-label'), al=document.getElementById('annual-label');
+    if(isAnnual){t.classList.add('annual');ml.classList.remove('active');al.classList.add('active');}
+    else{t.classList.remove('annual');ml.classList.add('active');al.classList.remove('active');}
+    updatePricing();
+    var cycle = isAnnual ? 'annual' : 'monthly';
+    document.querySelectorAll('[data-product-code]').forEach(function(b){ b.setAttribute('data-billing-cycle', cycle); });
+  }
+  function updatePricing(){
+    document.getElementById('price-starter').textContent = isAnnual ? '29' : '35';
+    document.getElementById('note-starter').innerHTML = isAnnual ? '<strong>2 MONTHS FREE</strong> - Billed annually at $350/year' : 'Billed monthly';
+    document.getElementById('price-pro').textContent = isAnnual ? '49' : '59';
+    document.getElementById('note-pro').innerHTML = isAnnual ? '<strong>2 MONTHS FREE</strong> - Billed annually at $590/year' : 'Billed monthly';
+    document.getElementById('price-premium').textContent = isAnnual ? '124' : '149';
+    document.getElementById('note-premium').innerHTML = isAnnual ? '<strong>2 MONTHS FREE</strong> - Billed annually at $1,490/year' : 'Billed monthly';
+  }
+  document.addEventListener('DOMContentLoaded', updatePricing);
+</script>
+<script src="../js/stripe-checkout.js"></script>
+<script src="../js/shopping-cart.js"></script>
+<script src="../js/cart-header.js"></script>
 
 </body>
 </html>

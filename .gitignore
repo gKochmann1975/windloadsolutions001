@@ -48,3 +48,35 @@ Gmail (SMTP)/
 
 # Claude Code local config (may accumulate secrets in permissions allow-list)
 .claude/settings.local.json
+
+# Customer PII, mailing lists, send/provisioning logs, ops scripts — NEVER commit
+# to this PUBLIC GitHub Pages repo. Local ops artifacts only. A blanket
+# `git add -A` would otherwise leak customer emails, Stripe lists, and a
+# password-reset log. Vault sensitive copies to E:/secrets/. (2026-07-01)
+Scripts/*.csv
+Scripts/*.xlsx
+Scripts/customer_emails/
+Scripts/__pycache__/
+*MASTER_CUSTOMER_LIST*
+*orphan*customers*.csv
+*_log.csv
+EMAIL_TO_*.md
+email_to_*.md
+*SETUP_INSTRUCTIONS.md
+*HANDOVER*
+Lenovo claude sessions/
+analyze_*.ps1
+Scripts/*email*.py
+Scripts/*customer*.py
+Scripts/*legacy*.py
+
+# Copyrighted standard scans — local reference only, same policy as the *.pdf rule
+# above (this is how ASCE/IBC pages are read locally; never redistribute via the repo).
+ASCE 7-22/**/*.jpg
+ASCE 7-22/**/*.jpeg
+ASCE 7-22/**/*.png
+ASCE 7-22/*.xlsx
+ASCE 7-22/*.xlk
+IBC/**/*.jpg
+IBC/**/*.jpeg
+IBC/**/*.png

@@ -16,10 +16,21 @@ Pairs with `WORKSTREAM_E_MWFRS_PLAN.md` (what/why) and `GO_LIVE_SET.md` (MWFRS =
 - [ ] Have the Stripe **TEST** key (`sk_test_…`) and **LIVE** key ready.
 - [ ] `git -C webapp log --oneline -3` / `git -C backend log --oneline -3` show the E1–E4 commits.
 
-## Step 1 — Stripe align (TEST first)
-- [ ] `cd backend && STRIPE_API_KEY=sk_test_… python align_mwfrs_stripe_v3.py`  → review the dry-run plan.
-- [ ] `… python align_mwfrs_stripe_v3.py --apply`  → creates 3 products + v3 prices in **test**.
-- [ ] Note the printed `price_id`s + the UPDATE SQL.
+## Step 1 — Stripe align — ✅ DONE LIVE 2026-07-01
+- [x] TEST account was already v3-aligned (prior session).
+- [x] **LIVE aligned 2026-07-01** with the full `sk_live_` key. First added missing `product_code`
+      metadata to the 3 existing live products (they had none → would've duplicated), fixed the
+      script's `rk_live_` mode-detection + v15 `.get()` crash (commits `1b25066`, `9ccabdc`), then
+      `--apply`. Re-priced 3 annuals + created Premium monthly; **old prices archived**; default_price
+      repointed to v3. Verified: each product = exactly 2 active prices at v3. **0 MWFRS subs affected**
+      (39 W/D+BIP subs untouched).
+- **Canonical LIVE price IDs → use these in Step 4 DB wiring:**
+  ```sql
+  UPDATE subscription_products SET stripe_monthly_price_id='price_1Tmlv44TytVoqIhDpv4ToDnZ', stripe_annual_price_id='price_1ToXuP4TytVoqIhDyyVgHhZq' WHERE product_code='mwfrs_starter';
+  UPDATE subscription_products SET stripe_monthly_price_id='price_1Tmlv64TytVoqIhDxs6kkUJs', stripe_annual_price_id='price_1ToXuQ4TytVoqIhDXlvFRKm6' WHERE product_code='mwfrs_pro';
+  UPDATE subscription_products SET stripe_monthly_price_id='price_1ToXuQ4TytVoqIhDpcq8r7Ck', stripe_annual_price_id='price_1ToXuR4TytVoqIhDoHOVUlt1' WHERE product_code='mwfrs_premium';
+  ```
+  Products: Starter `prod_UmKaD3vGP6mgoP` · Pro `prod_UmKaXZc31hbPIC` · Premium `prod_UmKaKSQdigYd83`.
 
 ## Step 2 — Merge + push (so GitHub-deploy and CLI-deploy stay in sync)
 - [ ] webapp: merge `feat/mwfrs-sellable` → `feat/flask-multicalc` (+ `feat/flask-migration` for the live calc app); `git push`.

@@ -73,8 +73,8 @@
   --blue:#0018FF; --blue-deep:#181E57; --blue-bright:#3a5bff;
   --muted:#94a3b8; --line:rgba(255,255,255,.08); --bg:#070a18; --surface:rgba(255,255,255,.04);
   --gold:#E8B530; --luxe:cubic-bezier(.22,.61,.36,1);
-  /* MWFRS signature = violet/indigo — distinct from W/D (green), Solar (yellow), navy chrome */
-  --brand:#8b5cf6; --brand-lt:#a78bfa; --brand-2:#6366f1; --brand-deep:#6d28d9; --on-brand:#2b0b52;
+  /* MWFRS signature = blue #3b82f6 — MUST match the MWFRS card on wind-load-calculator-shop.html */
+  --brand:#3b82f6; --brand-lt:#60a5fa; --brand-2:#2563eb; --brand-deep:#1d4ed8; --on-brand:#0a1a3f;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -138,11 +138,11 @@ nav.scrolled .logo-image{height:64px;filter:none}
   background:radial-gradient(ellipse 70% 60% at 50% 26%, rgba(0,24,255,.18), transparent 62%),
     linear-gradient(180deg, rgba(7,10,24,.66) 0%, rgba(7,10,24,.42) 32%, rgba(7,10,24,.72) 74%, var(--bg) 100%)}
 header{position:relative;z-index:2;padding:165px 0 70px;text-align:center}
-.eyebrow{display:inline-flex;align-items:center;gap:9px;background:rgba(7,10,24,.5);border:1px solid rgba(139,92,246,.5);
+.eyebrow{display:inline-flex;align-items:center;gap:9px;background:rgba(7,10,24,.5);border:1px solid rgba(59,130,246,.5);
   color:#d8ccff;font-size:13px;font-weight:600;padding:8px 16px;border-radius:999px;margin-bottom:24px;backdrop-filter:blur(6px)}
-.eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--brand-lt);box-shadow:0 0 0 4px rgba(139,92,246,.28)}
+.eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--brand-lt);box-shadow:0 0 0 4px rgba(59,130,246,.28)}
 h1{font-size:clamp(34px,5.2vw,58px);line-height:1.05;font-weight:800;letter-spacing:-.025em;max-width:18ch;margin:0 auto 16px;text-shadow:0 4px 28px rgba(0,0,0,.45)}
-h1 .grad{background:linear-gradient(110deg,#c4b5fd,#8b5cf6 55%,#6366f1);-webkit-background-clip:text;background-clip:text;color:transparent}
+h1 .grad{background:linear-gradient(110deg,#93c5fd,#3b82f6 55%,#2563eb);-webkit-background-clip:text;background-clip:text;color:transparent}
 .sub{font-size:clamp(16px,2vw,19px);color:#d3dbef;max-width:66ch;margin:0 auto 22px;text-shadow:0 2px 14px rgba(0,0,0,.5)}
 .sub strong{color:#fff}
 .hero-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:8px 0 18px}
@@ -243,7 +243,7 @@ section{position:relative;z-index:1;padding:62px 0}
 .cat .cta{margin-top:auto;display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:13.5px;color:var(--ac)}
 
 /* Proof band */
-.proof{background:linear-gradient(135deg,rgba(99,102,241,.14),rgba(139,92,246,.1));border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.proof{background:linear-gradient(135deg,rgba(37,99,235,.14),rgba(59,130,246,.1));border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:8px}
 .proof-item{text-align:center}
 .proof-item .n{font-size:34px;font-weight:800;letter-spacing:-.03em;background:linear-gradient(135deg,#fff,#9db0ff);-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -259,7 +259,7 @@ section{position:relative;z-index:1;padding:62px 0}
 .faq p{margin-top:11px;color:#aeb8cf;font-size:14.5px}
 
 .final{text-align:center}
-.final .glass2{background:linear-gradient(160deg,rgba(99,102,241,.2),rgba(139,92,246,.12));border:1px solid rgba(139,92,246,.42);border-radius:26px;padding:54px 40px;box-shadow:0 40px 100px rgba(99,102,241,.25)}
+.final .glass2{background:linear-gradient(160deg,rgba(37,99,235,.2),rgba(59,130,246,.12));border:1px solid rgba(59,130,246,.42);border-radius:26px;padding:54px 40px;box-shadow:0 40px 100px rgba(37,99,235,.25)}
 .final h2{font-size:clamp(28px,3.6vw,42px);font-weight:800;letter-spacing:-.02em;margin-bottom:14px}
 .final p{color:#cdd6ec;font-size:17px;max-width:60ch;margin:0 auto 22px}
 .final p a{color:var(--brand-lt);font-weight:600}
@@ -290,18 +290,18 @@ section{position:relative;z-index:1;padding:62px 0}
 .billing-toggle.annual{background:#0018ff;box-shadow:0 0 20px rgba(0,24,255,.45)}
 .billing-toggle-slider{position:absolute;top:4px;left:4px;width:24px;height:24px;background:white;border-radius:50%;transition:all .3s ease;box-shadow:0 2px 6px rgba(0,0,0,.3)}
 .billing-toggle.annual .billing-toggle-slider{transform:translateX(28px)}
-.savings-badge{display:inline-flex;align-items:center;gap:.5rem;background:linear-gradient(135deg,var(--brand-lt) 0%,var(--brand) 100%);color:var(--on-brand);padding:.45rem 1.2rem;border-radius:50px;font-size:.82rem;font-weight:800;box-shadow:0 4px 18px rgba(139,92,246,.4)}
+.savings-badge{display:inline-flex;align-items:center;gap:.5rem;background:linear-gradient(135deg,var(--brand-lt) 0%,var(--brand) 100%);color:var(--on-brand);padding:.45rem 1.2rem;border-radius:50px;font-size:.82rem;font-weight:800;box-shadow:0 4px 18px rgba(59,130,246,.4)}
 .pricing-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;margin-top:2rem}
 .pricing-card{position:relative;display:flex;flex-direction:column;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:2rem 1.5rem;padding-top:2.4rem;box-shadow:0 12px 32px rgba(0,0,0,.32);transition:.35s var(--luxe)}
 .pricing-header{order:1}.pricing-amount{order:2}.price-note{order:3}.pricing-cta{order:4}.trial-link{order:5}.pricing-divider{order:6}.pricing-features{order:7}
 .pricing-card:hover{transform:translateY(-6px);border-color:rgba(58,91,255,.5);box-shadow:0 22px 46px rgba(0,24,255,.2)}
-.pricing-card.featured{background:linear-gradient(165deg,rgba(139,92,246,.16),rgba(255,255,255,.03));border-color:rgba(139,92,246,.55)}
-.pricing-card.featured::before{content:'Most Popular';position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--brand-lt),var(--brand));color:var(--on-brand);padding:.4rem 1.2rem;border-radius:50px;font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap;box-shadow:0 4px 15px rgba(139,92,246,.4)}
+.pricing-card.featured{background:linear-gradient(165deg,rgba(59,130,246,.16),rgba(255,255,255,.03));border-color:rgba(59,130,246,.55)}
+.pricing-card.featured::before{content:'Most Popular';position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--brand-lt),var(--brand));color:var(--on-brand);padding:.4rem 1.2rem;border-radius:50px;font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap;box-shadow:0 4px 15px rgba(59,130,246,.4)}
 .pricing-header h3{font-size:1.3rem;font-weight:800;color:#fff;margin-bottom:.4rem}
 .pricing-description{font-size:.85rem;color:var(--muted);margin-bottom:1rem}
 .pricing-amount{display:flex;align-items:baseline;gap:.3rem;margin-bottom:.5rem}
 .price-currency{font-size:1.2rem;font-weight:700;color:#fff}
-.price-value{font-size:2.8rem;font-weight:800;color:#fff;line-height:1;background:linear-gradient(135deg,#fff,#c4b5fd);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.price-value{font-size:2.8rem;font-weight:800;color:#fff;line-height:1;background:linear-gradient(135deg,#fff,#93c5fd);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .price-period{font-size:.9rem;color:var(--muted);font-weight:600}
 .price-note{font-size:.8rem;color:var(--muted);margin-bottom:1rem}
 .price-note strong{color:var(--brand-lt);font-weight:700}

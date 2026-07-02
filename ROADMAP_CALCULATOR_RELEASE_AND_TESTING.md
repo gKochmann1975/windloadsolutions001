@@ -15,6 +15,45 @@ rollout milestone, and the B4 webhook idempotency test+deploy plan.*
 
 ---
 
+## STATUS — updated 2026-07-01
+
+### ✅ Done this session (2026-07-01)
+- **Stripe LIVE aligned** for MWFRS: 3 tiers at v3 (Starter $35/$350, Pro $59/$590, Premium
+  $149/$1490), `product_code` metadata added to the live `prod_UmKa…` products, old prices
+  archived. 0 MWFRS subscribers affected. (Ran `backend/align_mwfrs_stripe_v3.py --apply` with
+  the full live key; script compat + rk_live_ mode bugs fixed.)
+- **MWFRS marketing page LIVE & correct**: `shop/mwfrs.html` — pricing cards moved to the TOP
+  (first section after hero, matching W/D), recolored **blue `#3b82f6` to match its shop card**,
+  card flipped **"Coming soon" → "● Available now"**, `robots` → `index,follow` + added to
+  `sitemap.xml`, `rel=nofollow` removed from MWFRS footer links across 30+ pages.
+- **All 5 shop pages branded by color** (W/D green, MWFRS blue, Roofing orange, Solar yellow,
+  Specialty purple): backgrounds now lead with each page's brand color (aurora + hero glow +
+  panels recolored; navy chrome kept). Colors must match the category-card `--ac` on
+  `wind-load-calculator-shop.html`.
+
+### ⚠️ PENDING before promoting MWFRS purchases to customers (do NOT send the newsletter first)
+The shop page is live and Stripe is aligned, but a real purchase must be proven to **complete
+AND unlock** end-to-end. Finish runbook `GO_LIVE_RUNBOOK_JULY1.md` Steps 3–5:
+- Deploy backend `feat/mwfrs-gating` + webapp `feat/mwfrs-sellable`.
+- Seed prod DB `mwfrs_*` rows + wire the canonical live price IDs (recorded in the runbook).
+- **Verify:** god-mode grant (no money) + one `4242` test purchase → MWFRS unlocks, exactly one sub row (B4). This closes the B2 "paid-but-locked" trap.
+
+### 📣 Business / sales follow-ups (raised 2026-07-01 — discuss, not tonight)
+1. **MWFRS launch Newsletter** — review + prepare an announcement to **current members** to
+   purchase MWFRS. Gate on the purchase-flow verification above. (See `feedback_security_framing_and_support_phone` for tone + the (833) support line.)
+2. **Lockheed Martin** wants to buy MWFRS — will need **another PO** (repeat purchase). Blocked on ↓.
+3. **Define the PO process on our system** — how a PO is intake'd, invoiced, and fulfilled
+   (grant entitlement without a Stripe card-checkout; comp/admin-grant path exists via
+   `backend/admin_routes.py`). Needs a documented workflow.
+4. **Customer-logo advertising** — research whether we may display customer logos (e.g.,
+   Lockheed Martin) on the site — trademark/permission/PO-terms. **Deferred ("not now").**
+
+### Next products to go live (waitlist → priced), each via the two-gate golden rule
+Roofing, Solar, Specialty — recolored/branded but still "Launching Soon"; add priced cards at
+top + Stripe + backend when each is verified & sellable, the same way MWFRS was done.
+
+---
+
 ## 0. Where everything lives (the switches & files)
 
 | Concern | File | What it controls |

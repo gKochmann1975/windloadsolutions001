@@ -420,6 +420,93 @@ section{position:relative;z-index:1;padding:62px 0}
   </div></header>
 </div>
 
+<!-- Pricing -->
+<section id="pricing"><div class="wrap">
+  <div class="sec-head">
+    <h2>Simple, transparent pricing</h2>
+    <p>Add the MWFRS calculator to your account — Directional + Envelope in one workflow. Start with a 7-day free trial, no credit card.</p>
+  </div>
+
+  <div class="billing-toggle-section" style="margin-bottom:1.6rem">
+    <div class="billing-toggle-container">
+      <span class="billing-label" id="monthly-label">Monthly</span>
+      <div class="billing-toggle annual" id="billing-toggle" onclick="toggleBilling()"><div class="billing-toggle-slider"></div></div>
+      <span class="billing-label active" id="annual-label">Annual</span>
+      <span class="savings-badge">2 months free</span>
+    </div>
+  </div>
+
+  <div class="pricing-grid">
+    <!-- Starter -->
+    <div class="pricing-card">
+      <div class="pricing-header"><h3>Starter</h3><p class="pricing-description">Solo engineers &amp; small firms</p></div>
+      <div class="pricing-amount"><span class="price-currency">$</span><span class="price-value" id="price-starter">29</span><span class="price-period" id="period-starter">/month</span></div>
+      <p class="price-note" id="note-starter"><strong>2 MONTHS FREE</strong> - Billed annually at $350/year</p>
+      <div class="pricing-divider"></div>
+      <div class="pricing-features"><h4>What's included:</h4><ul>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>1 user license</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Directional (Ch 27) + Envelope (Ch 28)</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span><strong>100 calculations/month</strong></span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Permit-ready Engineering Reports (PDF)</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Email support</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Free software updates</span></li>
+      </ul></div>
+      <button class="pricing-cta primary" data-product-code="mwfrs_starter" data-billing-cycle="annual">Add to Cart</button>
+      <a href="../login.html" class="trial-link">or Start 7-Day Free Trial</a>
+    </div>
+    <!-- Pro (featured) -->
+    <div class="pricing-card featured">
+      <div class="pricing-header"><h3>Pro</h3><p class="pricing-description">Teams up to 5 — best value</p></div>
+      <div class="pricing-amount"><span class="price-currency">$</span><span class="price-value" id="price-pro">49</span><span class="price-period" id="period-pro">/month</span></div>
+      <p class="price-note" id="note-pro"><strong>2 MONTHS FREE</strong> - Billed annually at $590/year</p>
+      <div class="pricing-divider"></div>
+      <div class="pricing-features"><h4>Everything in Starter, plus:</h4><ul>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span><strong>Up to 5 user licenses</strong></span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span><strong>500 calculations/month</strong></span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Priority email support</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Team admin dashboard</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Centralized billing</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Project templates</span></li>
+      </ul></div>
+      <button class="pricing-cta primary" data-product-code="mwfrs_pro" data-billing-cycle="annual">Add to Cart</button>
+      <a href="../login.html" class="trial-link">or Start 7-Day Free Trial</a>
+    </div>
+    <!-- Premium -->
+    <div class="pricing-card">
+      <div class="pricing-header"><h3>Premium</h3><p class="pricing-description">Teams up to 10, advanced features</p></div>
+      <div class="pricing-amount"><span class="price-currency">$</span><span class="price-value" id="price-premium">124</span><span class="price-period" id="period-premium">/month</span></div>
+      <p class="price-note" id="note-premium"><strong>2 MONTHS FREE</strong> - Billed annually at $1,490/year</p>
+      <div class="pricing-divider"></div>
+      <div class="pricing-features"><h4>Everything in Pro, plus:</h4><ul>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span><strong>Up to 10 user licenses</strong></span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span><strong>Unlimited calculations</strong></span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Phone support</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Onboarding training session</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Custom report branding</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Usage analytics</span></li>
+      </ul></div>
+      <button class="pricing-cta primary" data-product-code="mwfrs_premium" data-billing-cycle="annual">Add to Cart</button>
+      <a href="../login.html" class="trial-link">or Start 7-Day Free Trial</a>
+    </div>
+    <!-- Enterprise -->
+    <div class="pricing-card">
+      <div class="pricing-header"><h3>Enterprise</h3><p class="pricing-description">Unlimited users for large orgs</p></div>
+      <div class="pricing-amount"><span class="price-value" style="font-size:2rem;">Custom</span></div>
+      <p class="price-note">Contact us for custom pricing</p>
+      <div class="pricing-divider"></div>
+      <div class="pricing-features"><h4>Everything in Premium, plus:</h4><ul>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span><strong>Unlimited user licenses</strong></span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Dedicated account manager</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Custom training sessions</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>SLA &amp; priority support</span></li>
+      </ul></div>
+      <a href="../contact.html" class="pricing-cta secondary">Contact Sales</a>
+    </div>
+  </div>
+
+  <div class="legal-note"><p>Each calculator is its own subscription — add only what you need. MWFRS pairs naturally with <a href="windows-doors-shutters.html">Components &amp; Cladding</a>; bundle everything with <a href="../wind-load-calculator-shop.html">WindLoad Complete</a>.</p></div>
+</div></section>
+
 <!-- Benefits -->
 <section><div class="wrap">
   <div class="benefits">
@@ -520,93 +607,6 @@ section{position:relative;z-index:1;padding:62px 0}
   <p style="text-align:center;margin-top:24px;font-size:14px;color:#aeb8cf">Need C&amp;C now?
     <a href="https://windloadcalc.com/shop/windows-doors-shutters.html" style="color:#34D399;font-weight:600">Windows, Doors &amp; Storm Shutters is live →</a>
   </p>
-</div></section>
-
-<!-- Notify / waitlist -->
-<section id="pricing"><div class="wrap">
-  <div class="sec-head">
-    <h2>Simple, transparent pricing</h2>
-    <p>Add the MWFRS calculator to your account — Directional + Envelope in one workflow. Start with a 7-day free trial, no credit card.</p>
-  </div>
-
-  <div class="billing-toggle-section" style="margin-bottom:1.6rem">
-    <div class="billing-toggle-container">
-      <span class="billing-label" id="monthly-label">Monthly</span>
-      <div class="billing-toggle annual" id="billing-toggle" onclick="toggleBilling()"><div class="billing-toggle-slider"></div></div>
-      <span class="billing-label active" id="annual-label">Annual</span>
-      <span class="savings-badge">2 months free</span>
-    </div>
-  </div>
-
-  <div class="pricing-grid">
-    <!-- Starter -->
-    <div class="pricing-card">
-      <div class="pricing-header"><h3>Starter</h3><p class="pricing-description">Solo engineers &amp; small firms</p></div>
-      <div class="pricing-amount"><span class="price-currency">$</span><span class="price-value" id="price-starter">29</span><span class="price-period" id="period-starter">/month</span></div>
-      <p class="price-note" id="note-starter"><strong>2 MONTHS FREE</strong> - Billed annually at $350/year</p>
-      <div class="pricing-divider"></div>
-      <div class="pricing-features"><h4>What's included:</h4><ul>
-        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>1 user license</span></li>
-        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Directional (Ch 27) + Envelope (Ch 28)</span></li>
-        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span><strong>100 calculations/month</strong></span></li>
-        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Permit-ready Engineering Reports (PDF)</span></li>
-        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Email support</span></li>
-        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Free software updates</span></li>
-      </ul></div>
-      <button class="pricing-cta primary" data-product-code="mwfrs_starter" data-billing-cycle="annual">Add to Cart</button>
-      <a href="../login.html" class="trial-link">or Start 7-Day Free Trial</a>
-    </div>
-    <!-- Pro (featured) -->
-    <div class="pricing-card featured">
-      <div class="pricing-header"><h3>Pro</h3><p class="pricing-description">Teams up to 5 — best value</p></div>
-      <div class="pricing-amount"><span class="price-currency">$</span><span class="price-value" id="price-pro">49</span><span class="price-period" id="period-pro">/month</span></div>
-      <p class="price-note" id="note-pro"><strong>2 MONTHS FREE</strong> - Billed annually at $590/year</p>
-      <div class="pricing-divider"></div>
-      <div class="pricing-features"><h4>Everything in Starter, plus:</h4><ul>
-        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span><strong>Up to 5 user licenses</strong></span></li>
-        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span><strong>500 calculations/month</strong></span></li>
-        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Priority email support</span></li>
-        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Team admin dashboard</span></li>
-        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Centralized billing</span></li>
-        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Project templates</span></li>
-      </ul></div>
-      <button class="pricing-cta primary" data-product-code="mwfrs_pro" data-billing-cycle="annual">Add to Cart</button>
-      <a href="../login.html" class="trial-link">or Start 7-Day Free Trial</a>
-    </div>
-    <!-- Premium -->
-    <div class="pricing-card">
-      <div class="pricing-header"><h3>Premium</h3><p class="pricing-description">Teams up to 10, advanced features</p></div>
-      <div class="pricing-amount"><span class="price-currency">$</span><span class="price-value" id="price-premium">124</span><span class="price-period" id="period-premium">/month</span></div>
-      <p class="price-note" id="note-premium"><strong>2 MONTHS FREE</strong> - Billed annually at $1,490/year</p>
-      <div class="pricing-divider"></div>
-      <div class="pricing-features"><h4>Everything in Pro, plus:</h4><ul>
-        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span><strong>Up to 10 user licenses</strong></span></li>
-        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span><strong>Unlimited calculations</strong></span></li>
-        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Phone support</span></li>
-        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Onboarding training session</span></li>
-        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Custom report branding</span></li>
-        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Usage analytics</span></li>
-      </ul></div>
-      <button class="pricing-cta primary" data-product-code="mwfrs_premium" data-billing-cycle="annual">Add to Cart</button>
-      <a href="../login.html" class="trial-link">or Start 7-Day Free Trial</a>
-    </div>
-    <!-- Enterprise -->
-    <div class="pricing-card">
-      <div class="pricing-header"><h3>Enterprise</h3><p class="pricing-description">Unlimited users for large orgs</p></div>
-      <div class="pricing-amount"><span class="price-value" style="font-size:2rem;">Custom</span></div>
-      <p class="price-note">Contact us for custom pricing</p>
-      <div class="pricing-divider"></div>
-      <div class="pricing-features"><h4>Everything in Premium, plus:</h4><ul>
-        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span><strong>Unlimited user licenses</strong></span></li>
-        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Dedicated account manager</span></li>
-        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Custom training sessions</span></li>
-        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>SLA &amp; priority support</span></li>
-      </ul></div>
-      <a href="../contact.html" class="pricing-cta secondary">Contact Sales</a>
-    </div>
-  </div>
-
-  <div class="legal-note"><p>Each calculator is its own subscription — add only what you need. MWFRS pairs naturally with <a href="windows-doors-shutters.html">Components &amp; Cladding</a>; bundle everything with <a href="../wind-load-calculator-shop.html">WindLoad Complete</a>.</p></div>
 </div></section>
 
 <!-- Perfect for -->

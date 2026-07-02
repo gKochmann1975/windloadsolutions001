@@ -81,7 +81,7 @@
 <style>
 :root{
   --blue:#0018FF; --blue-deep:#181E57; --blue-bright:#3a5bff;
-  --muted:#94a3b8; --line:rgba(255,255,255,.08); --bg:#070a18; --surface:rgba(255,255,255,.04);
+  --muted:#94a3b8; --line:rgba(255,255,255,.08); --bg:#04110b; --surface:rgba(255,255,255,.04);
   --gold:#E8B530; --luxe:cubic-bezier(.22,.61,.36,1);
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -143,10 +143,10 @@ nav.scrolled .logo-image{height:64px;filter:none}
 /* Hero */
 .hero-stage{position:relative;overflow:hidden;isolation:isolate}
 .hero-veil{position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:radial-gradient(ellipse 70% 60% at 50% 26%, rgba(0,24,255,.18), transparent 62%),
+  background:radial-gradient(ellipse 70% 60% at 50% 26%, rgba(16,185,129,.18), transparent 62%),
     linear-gradient(180deg, rgba(7,10,24,.66) 0%, rgba(7,10,24,.42) 32%, rgba(7,10,24,.72) 74%, var(--bg) 100%)}
 header{position:relative;z-index:2;padding:165px 0 70px;text-align:center}
-.eyebrow{display:inline-flex;align-items:center;gap:9px;background:rgba(7,10,24,.5);border:1px solid rgba(58,91,255,.45);
+.eyebrow{display:inline-flex;align-items:center;gap:9px;background:rgba(7,10,24,.5);border:1px solid rgba(16,185,129,.45);
   color:#c3cdff;font-size:13px;font-weight:600;padding:8px 16px;border-radius:999px;margin-bottom:24px;backdrop-filter:blur(6px)}
 .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:#34D399;box-shadow:0 0 0 4px rgba(52,211,153,.25)}
 h1{font-size:clamp(34px,5.2vw,58px);line-height:1.05;font-weight:800;letter-spacing:-.025em;max-width:20ch;margin:0 auto 16px;text-shadow:0 4px 28px rgba(0,0,0,.45)}
@@ -175,7 +175,7 @@ section{position:relative;z-index:1;padding:62px 0}
 /* Benefits bar */
 .benefits{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 .benefit{display:flex;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
-.benefit .ic{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex:none;background:linear-gradient(135deg,rgba(0,24,255,.3),rgba(24,30,87,.5));border:1px solid rgba(58,91,255,.4)}
+.benefit .ic{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex:none;background:linear-gradient(135deg,rgba(16,185,129,.3),rgba(6,95,70,.5));border:1px solid rgba(16,185,129,.4)}
 .benefit .ic svg{width:20px;height:20px;stroke:#9db0ff}
 .benefit b{font-size:14px;font-weight:700;display:block}
 .benefit small{font-size:12.5px;color:var(--muted)}
@@ -183,7 +183,7 @@ section{position:relative;z-index:1;padding:62px 0}
 /* Differentiator cards */
 .diff-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
 .diff{position:relative;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:28px 24px;box-shadow:0 12px 32px rgba(0,0,0,.32);transition:.35s var(--luxe)}
-.diff:hover{transform:translateY(-5px);border-color:rgba(58,91,255,.5);box-shadow:0 20px 44px rgba(0,24,255,.18)}
+.diff:hover{transform:translateY(-5px);border-color:rgba(16,185,129,.5);box-shadow:0 20px 44px rgba(16,185,129,.18)}
 .diff .badge{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#04221a;background:linear-gradient(135deg,#34D399,#10B981);padding:4px 10px;border-radius:999px;margin-bottom:14px}
 .diff h3{font-size:19px;font-weight:800;margin-bottom:6px;letter-spacing:-.01em}
 .diff .tag{font-size:13px;color:#9db0ff;font-weight:600;margin-bottom:12px;display:block}
@@ -192,7 +192,7 @@ section{position:relative;z-index:1;padding:62px 0}
 .diff ul li{font-size:13px;color:#c2cce0;padding:4px 0 4px 18px;position:relative;line-height:1.45}
 .diff ul li::before{content:"";position:absolute;left:0;top:10px;width:6px;height:6px;border-radius:50%;background:#34D399}
 .diff ul li b{color:#fff}
-.diff .hl{font-size:13px;color:#cdd6ec;background:rgba(0,24,255,.1);border:1px solid rgba(58,91,255,.3);border-radius:10px;padding:10px 12px;margin-top:12px}
+.diff .hl{font-size:13px;color:#cdd6ec;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);border-radius:10px;padding:10px 12px;margin-top:12px}
 
 .pill-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:34px}
 .pill{font-size:13px;font-weight:600;color:#c2cce0;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:8px 16px}
@@ -201,19 +201,19 @@ section{position:relative;z-index:1;padding:62px 0}
 /* Steps */
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
 .step{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px 20px;position:relative}
-.step .num{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;color:#fff;background:linear-gradient(135deg,#0018FF,#2540ff);margin-bottom:12px;box-shadow:0 8px 20px rgba(0,24,255,.4)}
+.step .num{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;color:#fff;background:linear-gradient(135deg,#0018FF,rgb(16,185,129));margin-bottom:12px;box-shadow:0 8px 20px rgba(16,185,129,.4)}
 .step h4{font-size:15px;font-weight:700;margin-bottom:6px}
 .step p{font-size:13px;color:#aeb8cf}
 
 /* Audiences */
 .aud-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .aud{background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:16px;padding:22px 20px;transition:.3s var(--luxe)}
-.aud:hover{border-color:rgba(58,91,255,.45);transform:translateY(-4px)}
+.aud:hover{border-color:rgba(16,185,129,.45);transform:translateY(-4px)}
 .aud h4{font-size:16px;font-weight:700;margin-bottom:7px}
 .aud p{font-size:13.5px;color:#aeb8cf}
 
 /* Proof band */
-.proof{background:linear-gradient(135deg,rgba(0,24,255,.12),rgba(16,185,129,.08));border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.proof{background:linear-gradient(135deg,rgba(16,185,129,.12),rgba(16,185,129,.08));border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:8px}
 .proof-item{text-align:center}
 .proof-item .n{font-size:34px;font-weight:800;letter-spacing:-.03em;background:linear-gradient(135deg,#fff,#9db0ff);-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -226,7 +226,7 @@ section{position:relative;z-index:1;padding:62px 0}
 .billing-label{font-size:.95rem;font-weight:600;color:var(--muted);padding:0 .8rem;transition:all .3s ease}
 .billing-label.active{color:#fff;font-weight:700}
 .billing-toggle{position:relative;width:60px;height:32px;background:rgba(255,255,255,.18);border-radius:50px;cursor:pointer;transition:all .3s ease}
-.billing-toggle.annual{background:#0018ff;box-shadow:0 0 20px rgba(0,24,255,.45)}
+.billing-toggle.annual{background:#0018ff;box-shadow:0 0 20px rgba(16,185,129,.45)}
 .billing-toggle-slider{position:absolute;top:4px;left:4px;width:24px;height:24px;background:white;border-radius:50%;transition:all .3s ease;box-shadow:0 2px 6px rgba(0,0,0,.3)}
 .billing-toggle.annual .billing-toggle-slider{transform:translateX(28px)}
 .savings-badge{display:inline-flex;align-items:center;gap:.5rem;background:linear-gradient(135deg,#34D399 0%,#059669 100%);
@@ -238,7 +238,7 @@ section{position:relative;z-index:1;padding:62px 0}
   box-shadow:0 12px 32px rgba(0,0,0,.32);transition:.35s var(--luxe)}
 /* CLAUDE.md shop rule: primary CTA sits directly under the price block; features below the CTA (so all buttons align regardless of feature-list length) */
 .pricing-header{order:1}.pricing-amount{order:2}.price-note{order:3}.pricing-cta{order:4}.trial-link{order:5}.pricing-divider{order:6}
-.pricing-card:hover{transform:translateY(-6px);border-color:rgba(58,91,255,.5);box-shadow:0 22px 46px rgba(0,24,255,.2)}
+.pricing-card:hover{transform:translateY(-6px);border-color:rgba(16,185,129,.5);box-shadow:0 22px 46px rgba(16,185,129,.2)}
 .pricing-card.featured{background:linear-gradient(165deg,rgba(16,185,129,.14),rgba(255,255,255,.03));border-color:rgba(52,211,153,.55)}
 .pricing-card.featured::before{content:'Most Popular';position:absolute;top:-12px;left:50%;transform:translateX(-50%);
   background:linear-gradient(135deg,#34D399,#10B981);color:#04221a;padding:.4rem 1.2rem;border-radius:50px;
@@ -260,7 +260,7 @@ section{position:relative;z-index:1;padding:62px 0}
 .pricing-features li strong{color:#fff}
 .pricing-cta{display:block;text-align:center;padding:1rem 1.5rem;border-radius:50px;font-weight:700;font-size:.95rem;
   text-decoration:none;transition:all .3s ease;cursor:pointer;border:none;width:100%;font-family:inherit}
-.pricing-cta.primary{background:linear-gradient(135deg,#0018ff 0%,#2540ff 100%);color:#fff;box-shadow:0 8px 25px rgba(0,24,255,.4)}
+.pricing-cta.primary{background:linear-gradient(135deg,#0018ff 0%,rgb(16,185,129) 100%);color:#fff;box-shadow:0 8px 25px rgba(16,185,129,.4)}
 .pricing-cta.primary:hover{background:linear-gradient(135deg,#0a8f5b,#34D399);transform:translateY(-3px) scale(1.02);box-shadow:0 18px 42px rgba(16,185,129,.55)}
 .pricing-cta.secondary{background:rgba(255,255,255,.06);color:#fff;border:1px solid rgba(255,255,255,.22)}
 .pricing-cta.secondary:hover{background:#fff;color:#0d1233;border-color:#fff;transform:translateY(-3px) scale(1.02);box-shadow:0 14px 34px rgba(255,255,255,.22)}
@@ -271,19 +271,19 @@ section{position:relative;z-index:1;padding:62px 0}
 .pricing-cta{margin-top:.5rem}
 .trial-link{margin-bottom:.25rem}
 .trial-link:hover{color:#fff;text-decoration:underline}
-.seal-band{margin-top:2rem;background:linear-gradient(160deg,rgba(0,24,255,.16),rgba(16,185,129,.08));
-  border:1px solid rgba(58,91,255,.4);border-radius:18px;padding:1.8rem;text-align:center}
+.seal-band{margin-top:2rem;background:linear-gradient(160deg,rgba(16,185,129,.16),rgba(16,185,129,.08));
+  border:1px solid rgba(16,185,129,.4);border-radius:18px;padding:1.8rem;text-align:center}
 .seal-band h3{font-size:1.2rem;font-weight:800;color:#fff;margin-bottom:.5rem}
 .seal-band p{font-size:.95rem;color:#cdd6ec;max-width:62ch;margin:0 auto}
-.gov-band{margin-top:2rem;background:linear-gradient(160deg,rgba(0,24,255,.16),rgba(16,185,129,.08));
-  border:1px solid rgba(58,91,255,.4);border-radius:18px;padding:1.8rem}
+.gov-band{margin-top:2rem;background:linear-gradient(160deg,rgba(16,185,129,.16),rgba(16,185,129,.08));
+  border:1px solid rgba(16,185,129,.4);border-radius:18px;padding:1.8rem}
 .gov-band .gov-head{text-align:center;margin-bottom:1.4rem}
 .gov-band .gov-head h3{font-size:1.3rem;font-weight:800;color:#fff;margin-bottom:.4rem}
 .gov-band .gov-head p{font-size:.95rem;color:#cdd6ec;max-width:62ch;margin:0 auto}
 .gov-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
 .gov-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:14px;
   padding:1.3rem;text-align:center;box-shadow:0 12px 32px rgba(0,0,0,.28);transition:.3s var(--luxe)}
-.gov-card:hover{transform:translateY(-4px);border-color:rgba(58,91,255,.5)}
+.gov-card:hover{transform:translateY(-4px);border-color:rgba(16,185,129,.5)}
 .gov-card h4{font-size:1rem;font-weight:700;color:#fff;margin-bottom:.5rem}
 .gov-card .gp{display:block;font-size:1.8rem;font-weight:800;line-height:1;margin-bottom:.25rem;color:#9db0ff;text-decoration:none}
 .gov-card .gp span{font-size:.9rem;color:var(--muted);font-weight:600}
@@ -305,7 +305,7 @@ section{position:relative;z-index:1;padding:62px 0}
 .faq p{margin-top:11px;color:#aeb8cf;font-size:14.5px}
 
 .final{text-align:center}
-.final .glass2{background:linear-gradient(160deg,rgba(0,24,255,.18),rgba(16,185,129,.1));border:1px solid rgba(58,91,255,.4);border-radius:26px;padding:54px 40px;box-shadow:0 40px 100px rgba(0,24,255,.25)}
+.final .glass2{background:linear-gradient(160deg,rgba(16,185,129,.18),rgba(16,185,129,.1));border:1px solid rgba(16,185,129,.4);border-radius:26px;padding:54px 40px;box-shadow:0 40px 100px rgba(16,185,129,.25)}
 .final h2{font-size:clamp(28px,3.6vw,42px);font-weight:800;letter-spacing:-.02em;margin-bottom:14px}
 .final p{color:#cdd6ec;font-size:17px;max-width:60ch;margin:0 auto 22px}
 .final p a{color:#34D399;font-weight:600}

@@ -334,7 +334,7 @@
         /* RESET                                        */
         /* ============================================ */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
+        html { scroll-behavior: smooth; overflow-x: hidden; }
         body {
             font-family: var(--font-sans);
             line-height: 1.65;
@@ -1336,7 +1336,7 @@
             position: fixed;
             bottom: 1.5rem;
             right: 1.5rem;
-            max-width: 380px;
+            max-width: min(380px, calc(100vw - 2rem));
             background: white;
             border: 1px solid var(--border-subtle);
             border-radius: var(--radius-card);

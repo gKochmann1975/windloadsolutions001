@@ -87,6 +87,32 @@ found of ASCE suing a wind-load software company. Commercial competitors (SkyCiv
 Standards Design Group) openly publish ASCE 7 design wind speeds with no evident ASCE enforcement.
 Caveat: absence of found litigation ≠ zero risk.
 
+## 5B. National expansion beyond Florida — sourcing findings (2026-07-04)
+
+Florida is complete using **FGDL** (a Florida public agency that republished the underlying
+NIST-WindMaps data as clean, freely-usable FL GIS; layer license "None"). Research into the other
+priority states (TX, HI, NC, SC, LA, NY, VA, GA, CA) found:
+
+- **No FGDL-equivalent public state GIS exists for the other 9 states.** Every public
+  "windzones_asce7_22" dataset on ArcGIS Online is **Florida-only**. Florida is the exception.
+- **A national source exists and is technically usable:** ASCE's own public ArcGIS REST service
+  (`gis.asce.org/arcgis/rest/services/ASCE722`) returns the ASCE 7-22 wind contours for any US
+  location, all four risk categories (verified for Houston TX and Raleigh NC). **But it is ASCE's
+  own data/service** → the same commercial-use / database-rights question as the Hazard Tool (§5a–c).
+- **ARA's national download** (nextcloud.ara.com) was **unreachable**.
+- **NIST is the federal public-domain ORIGIN** of this data (17 U.S.C. §105). Locating NIST's own
+  direct publication of the national WindMaps would give every state Florida-level clean footing,
+  independent of ASCE.
+
+**Key point for counsel — this may collapse into ONE question:** our core basis is that the
+**code-adopted design wind speeds are uncopyrightable facts / public law**. If that holds, it holds
+for **every state**, regardless of which GIS renders the contours. FGDL was extra comfort, not the
+foundation. So:
+- *Q(j):* If the facts / public-law basis is sound, does it matter *which* GIS we read the values
+  from (FGDL vs. ASCE's own national service vs. NIST)? I.e., does a favorable answer on the core
+  question cover all 50 states, or does sourcing from **ASCE's own service** specifically create
+  additional exposure that FGDL/NIST would not?
+
 ## 6. Our provenance / defense file (available on request)
 Internal documentation records, per dataset: exact public source URL, that it is ASCE 7-22 as
 adopted by FBC (Fig 1609.3), pull date, required attribution, and computation method — evidence our

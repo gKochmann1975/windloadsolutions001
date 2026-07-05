@@ -169,3 +169,85 @@ Report rendered OK (150070 bytes); qh in report: n/a · saved report: `ASCE 7-22
 **Dome note:** the Domed Roof calc (Ex 6.7) has no live Engineering-Report endpoint yet; the verified dome **engine** (`asce7_22_cc_dome.ASCE7_ArchedDomeRoofCalculator.calculate_dome_circular`) result is rendered into a small C&C-style report table here — q<sub>h</sub> and (GC<sub>p</sub>) come straight from the engine (K<sub>d</sub>=1.0, q at h<sub>D</sub>+f per Note 1).
 
 **Rooftop-solar note:** the validated case is **parallel-to-roof** (§29.4.4, the only solar worked example in the Guide). The solar report **generator** renders the parallel result (γ<sub>E</sub> edge = 1.50, (GC<sub>p</sub>) = 1.24, γ<sub>a</sub> from Fig 29.4-8); the interior γ<sub>E</sub> = 1.00 is matched by the nearest-value rule.
+
+---
+
+## Report-vs-Engine Faithful Render (calcs without a Guide worked example)
+
+*Appended 2026-07-05 by `webapp/testing/validate_reports_faithful_render.py`. These three calcs have **book-verified engines** (validated in `webapp/testing/validate_asce7_22.py`, 360/0) but **no ASCE 7-22 Wind Loads Guide worked example**, so they cannot be Guide-cross-referenced. Instead each calc's engine is run with representative valid inputs, the KEY engineering values are pulled straight from the engine result dict, and the SAME Engineering-Report generator the live admin endpoint uses (see `report_roof` / `report_chimney` in `webapp/flask_app/calc_api.py`) renders the HTML. Every engine value is asserted to appear in the tag-stripped report (nearest rendered value) at the report's display precision — tolerance 0.20 for psf/coefficients, max(5 lb, 0.5%) for forces.*
+
+### Sawtooth Roof (C&C) (WE-8 / ASCE 7-22 Fig 30.3-6)
+
+Report rendered OK (146628 bytes); saved report: `ASCE 7-22/guide_report_crossref/sawtooth_faithful_report.html`
+
+| Value | Engine | Report | Δ | Match |
+|---|---:|---:|---:|:--:|
+| qh (psf, 2dp) | 46.02 | 46.02 | 0.000 | ✅ |
+| Kz (3dp) | 0.940 | 0.940 | 0.000 | ✅ |
+| Kzt (3dp) | 1.000 | 1.000 | 0.000 | ✅ |
+| Ke (3dp) | 1.000 | 1.000 | 0.000 | ✅ |
+| GCp positive | 0.770 | 0.770 | 0.000 | ✅ |
+| GCp negative | -3.980 | -3.980 | 0.000 | ✅ |
+| dimension a (ft, 2dp) | 10.00 | 10.00 | 0.000 | ✅ |
+| effective wind area (ft2, 2dp) | 20.00 | 20.00 | 0.000 | ✅ |
+| controlling +p (psf, 1dp) | 43.70 | 43.70 | 0.000 | ✅ |
+| controlling -p (psf, 1dp) | -191.40 | -191.40 | 0.000 | ✅ |
+| design p[0] Positive External, GCpi = +0.18 | 27.10 | 27.10 | 0.000 | ✅ |
+| design p[1] Negative External, GCpi = +0.18 | -191.40 | -191.40 | 0.000 | ✅ |
+| design p[2] Positive External, GCpi = -0.18 | 43.70 | 43.70 | 0.000 | ✅ |
+| design p[3] Negative External, GCpi = -0.18 | -174.90 | -174.90 | 0.000 | ✅ |
+
+**14 / 14 engine values rendered faithfully.**
+
+### Multi-span Gable Roof (C&C) (WE-7 / ASCE 7-22 Fig 30.3-4)
+
+Report rendered OK (146630 bytes); saved report: `ASCE 7-22/guide_report_crossref/multispan_faithful_report.html`
+
+| Value | Engine | Report | Δ | Match |
+|---|---:|---:|---:|:--:|
+| qh (psf, 2dp) | 41.80 | 41.80 | 0.000 | ✅ |
+| Kz (3dp) | 0.980 | 0.980 | 0.000 | ✅ |
+| Kzt (3dp) | 1.000 | 1.000 | 0.000 | ✅ |
+| Ke (3dp) | 1.000 | 1.000 | 0.000 | ✅ |
+| GCp positive | 0.524 | 0.524 | 0.000 | ✅ |
+| GCp negative | -2.010 | -2.010 | 0.000 | ✅ |
+| dimension a (ft, 2dp) | 12.00 | 12.00 | 0.000 | ✅ |
+| effective wind area (ft2, 2dp) | 24.00 | 24.00 | 0.000 | ✅ |
+| controlling +p (psf, 1dp) | 29.40 | 29.40 | 0.000 | ✅ |
+| controlling -p (psf, 1dp) | -91.50 | -91.50 | 0.000 | ✅ |
+| design p[0] Positive External, GCpi = +0.18 | 14.40 | 14.40 | 0.000 | ✅ |
+| design p[1] Negative External, GCpi = +0.18 | -91.50 | -91.50 | 0.000 | ✅ |
+| design p[2] Positive External, GCpi = -0.18 | 29.40 | 29.40 | 0.000 | ✅ |
+| design p[3] Negative External, GCpi = -0.18 | -76.50 | -76.50 | 0.000 | ✅ |
+
+**14 / 14 engine values rendered faithfully.**
+
+### Round Chimney / Tank (WE-10 / ASCE 7-22 Fig 29.4-1 (round))
+
+Report rendered OK (79120 bytes); saved report: `ASCE 7-22/guide_report_crossref/chimney_round_faithful_report.html`
+
+| Value | Engine | Report | Δ | Match |
+|---|---:|---:|---:|:--:|
+| Cf | 0.831 | 0.831 | 0.000 | ✅ |
+| qh/qz (psf, 2dp) | 72.58 | 72.58 | 0.000 | ✅ |
+| h/D (2dp) | 12.50 | 12.50 | 0.000 | ✅ |
+| total force F (lb) | 34,654 | 34,654 | 0.000 | ✅ |
+| base moment (kip·ft, 1dp) | 1,861.30 | 1,861.30 | 0.000 | ✅ |
+
+**5 / 5 engine values rendered faithfully.**
+
+### Square Chimney / Stack (WE-10 / ASCE 7-22 Fig 29.4-1 (square))
+
+Report rendered OK (79110 bytes); saved report: `ASCE 7-22/guide_report_crossref/chimney_square_faithful_report.html`
+
+| Value | Engine | Report | Δ | Match |
+|---|---:|---:|---:|:--:|
+| Cf | 1.500 | 1.500 | 0.000 | ✅ |
+| qh/qz (psf, 2dp) | 51.03 | 51.03 | 0.000 | ✅ |
+| h/D (2dp) | 10.00 | 10.00 | 0.000 | ✅ |
+| total force F (lb) | 20,166 | 20,166 | 0.000 | ✅ |
+| base moment (kip·ft, 1dp) | 639.80 | 639.80 | 0.000 | ✅ |
+
+**5 / 5 engine values rendered faithfully.**
+
+**Faithful-render TOTAL: 38 / 38 engine values rendered by their report.**

@@ -90,7 +90,7 @@ Report rendered OK (1416 bytes); qh in report: YES · saved report: `ASCE 7-22/g
 
 ## C&C Flat Roof (Guide Ex 6.1 / §30.3 Fig 30.3-2A)
 
-Report rendered OK (146553 bytes); qh in report: n/a · saved report: `ASCE 7-22/guide_report_crossref/flat_roof_report.html`
+Report rendered OK (146655 bytes); qh in report: n/a · saved report: `ASCE 7-22/guide_report_crossref/flat_roof_report.html`
 
 | Answer | Guide (psf) | Our report (psf) | Δ | Match |
 |---|---:|---:|---:|:--:|
@@ -107,7 +107,7 @@ Report rendered OK (146553 bytes); qh in report: n/a · saved report: `ASCE 7-22
 
 ## C&C Gable Roof (Guide Ex 6.2 / §30.3 Fig 30.3-2B)
 
-Report rendered OK (146554 bytes); qh in report: n/a · saved report: `ASCE 7-22/guide_report_crossref/gable_roof_report.html`
+Report rendered OK (146656 bytes); qh in report: n/a · saved report: `ASCE 7-22/guide_report_crossref/gable_roof_report.html`
 
 | Answer | Guide (psf) | Our report (psf) | Δ | Match |
 |---|---:|---:|---:|:--:|
@@ -122,7 +122,7 @@ Report rendered OK (146554 bytes); qh in report: n/a · saved report: `ASCE 7-22
 
 ## C&C Hip Roof (Guide Ex 6.3 / §30.3 Fig 30.3-2E) [GCp]
 
-Report rendered OK (146554 bytes); qh in report: n/a · saved report: `ASCE 7-22/guide_report_crossref/hip_roof_report.html`
+Report rendered OK (146657 bytes); qh in report: n/a · saved report: `ASCE 7-22/guide_report_crossref/hip_roof_report.html`
 
 | Answer | Guide (psf) | Our report (psf) | Δ | Match |
 |---|---:|---:|---:|:--:|
@@ -134,7 +134,7 @@ Report rendered OK (146554 bytes); qh in report: n/a · saved report: `ASCE 7-22
 
 ## C&C Monoslope Roof (Guide Ex 6.5 / §30.3 Fig 30.3-5B) [GCp]
 
-Report rendered OK (146580 bytes); qh in report: n/a · saved report: `ASCE 7-22/guide_report_crossref/monoslope_roof_report.html`
+Report rendered OK (146683 bytes); qh in report: n/a · saved report: `ASCE 7-22/guide_report_crossref/monoslope_roof_report.html`
 
 | Answer | Guide (psf) | Our report (psf) | Δ | Match |
 |---|---:|---:|---:|:--:|
@@ -178,7 +178,7 @@ Report rendered OK (150070 bytes); qh in report: n/a · saved report: `ASCE 7-22
 
 ### Sawtooth Roof (C&C) (WE-8 / ASCE 7-22 Fig 30.3-6)
 
-Report rendered OK (146628 bytes); saved report: `ASCE 7-22/guide_report_crossref/sawtooth_faithful_report.html`
+Report rendered OK (146734 bytes); saved report: `ASCE 7-22/guide_report_crossref/sawtooth_faithful_report.html`
 
 | Value | Engine | Report | Δ | Match |
 |---|---:|---:|---:|:--:|
@@ -186,22 +186,22 @@ Report rendered OK (146628 bytes); saved report: `ASCE 7-22/guide_report_crossre
 | Kz (3dp) | 0.940 | 0.940 | 0.000 | ✅ |
 | Kzt (3dp) | 1.000 | 1.000 | 0.000 | ✅ |
 | Ke (3dp) | 1.000 | 1.000 | 0.000 | ✅ |
-| GCp positive | 0.770 | 0.770 | 0.000 | ✅ |
-| GCp negative | -3.980 | -3.980 | 0.000 | ✅ |
+| GCp positive | 0.748 | 0.748 | 0.000 | ✅ |
+| GCp negative | -3.891 | -3.890 | 0.001 | ✅ |
 | dimension a (ft, 2dp) | 10.00 | 10.00 | 0.000 | ✅ |
-| effective wind area (ft2, 2dp) | 20.00 | 20.00 | 0.000 | ✅ |
-| controlling +p (psf, 1dp) | 43.70 | 43.70 | 0.000 | ✅ |
-| controlling -p (psf, 1dp) | -191.40 | -191.40 | 0.000 | ✅ |
-| design p[0] Positive External, GCpi = +0.18 | 27.10 | 27.10 | 0.000 | ✅ |
-| design p[1] Negative External, GCpi = +0.18 | -191.40 | -191.40 | 0.000 | ✅ |
-| design p[2] Positive External, GCpi = -0.18 | 43.70 | 43.70 | 0.000 | ✅ |
-| design p[3] Negative External, GCpi = -0.18 | -174.90 | -174.90 | 0.000 | ✅ |
+| effective wind area (ft2, 2dp) | 33.33 | 33.33 | 0.000 | ✅ |
+| controlling +p (psf, 1dp) | 42.70 | 42.70 | 0.000 | ✅ |
+| controlling -p (psf, 1dp) | -187.30 | -187.30 | 0.000 | ✅ |
+| design p[0] Positive External, GCpi = +0.18 | 26.10 | 26.10 | 0.000 | ✅ |
+| design p[1] Negative External, GCpi = +0.18 | -187.40 | -187.40 | 0.000 | ✅ |
+| design p[2] Positive External, GCpi = -0.18 | 42.70 | 42.70 | 0.000 | ✅ |
+| design p[3] Negative External, GCpi = -0.18 | -170.80 | -170.80 | 0.000 | ✅ |
 
 **14 / 14 engine values rendered faithfully.**
 
 ### Multi-span Gable Roof (C&C) (WE-7 / ASCE 7-22 Fig 30.3-4)
 
-Report rendered OK (146630 bytes); saved report: `ASCE 7-22/guide_report_crossref/multispan_faithful_report.html`
+Report rendered OK (146733 bytes); saved report: `ASCE 7-22/guide_report_crossref/multispan_faithful_report.html`
 
 | Value | Engine | Report | Δ | Match |
 |---|---:|---:|---:|:--:|

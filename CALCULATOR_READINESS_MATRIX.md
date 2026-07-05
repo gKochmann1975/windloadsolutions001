@@ -33,15 +33,23 @@ Legend: ✅ done · ⚠️ partial/caveat · 🚫 not done
 | 12 | Solar Rooftop | ✅ | ✅ | ⚠️ | 🚫 | §29.4 verified + snow wired; balanced snow only (drift/sliding/rain excluded); §29.4.3 two-load-case note pending |
 | 13 | Solar Ground-Mount | ⚠️ | ✅ | ⚠️ | 🚫 | figure-verified + regression-tested (WE-15/WE-22); no independent published worked example exists (§29.4.5 is new in 7-22). Needs snow + foundation. **UI gap below.** |
 | 14 | MWFRS Envelope | ✅ | ✅ | ✅ | 🚫 | wired 2026-06-28 (`/mwfrs/envelope`); Ch 28 Fig 28.3-1/2, all 4 load cases |
-| 15 | Open Signs & Frames | ✅ | ✅ | ✅ | 🚫 | wired 2026-06-28 (`/structures/open-signs`); §29.4 Fig 29.4-2 (ε≤0.7) |
-| 16 | Freestanding Walls | ✅ | ✅ | ✅ | 🚫 | wired 2026-06-28 (`/structures/walls`); §29.3 Fig 29.3-1, 3 load cases |
-| 17 | Trussed Towers | ✅ | ✅ | ✅ | 🚫 | wired 2026-06-28 (`/structures/towers`); §29.4 Fig 29.4-3 |
-| 18 | Arched & Dome Roofs | ✅ | ✅ | ✅ | 🚫 | wired 2026-06-28 (`/cc/arched-dome`); §30.3 Fig 30.3-8 (arched) + Fig 30.3-7 (dome), form toggle |
+| 15 | Open Signs & Frames | ✅ | 🚫 | ✅ | 🚫 | **engine-only in Flask** (corrected 2026-07-05) — calc/report/UI NOT built; WE-12 §29.4 Fig 29.4-2 (ε≤0.7) engine verified. ~½-day build (towers/walls pattern) |
+| 16 | Freestanding Walls | ✅ | ✅ | ⚠️ | 🚫 | **report + UI BUILT 2026-07-05** (webapp): `/api/calc`+`/api/report/walls`, `/structures/walls`, nav; §29.3 Fig 29.3-1 Case A/B/C, WE-13, faithful-render 26/26. Scope ⚠️: needs IBC 1807 foundation (like signs) |
+| 17 | Trussed Towers | ✅ | ✅ | ⚠️ | 🚫 | **report + UI BUILT 2026-07-05** (webapp): `/api/calc`+`/api/report/towers`, `/structures/towers`, nav; §29.4 Fig 29.4-3, WE-11, faithful-render 14/14. Scope ⚠️: needs foundation/anchorage for full deliverable |
+| 18 | Arched & Dome Roofs | ✅ | 🚫 | ✅ | 🚫 | **engine-only in Flask** (corrected 2026-07-05) — calc/report/UI NOT built; WE-16 verified; roof.html serves only the 6 standard shapes; dome rendered only in the Guide test harness. ~½-day build |
 
-## B. Engine VERIFIED but NOT on admin — just needs a route + UI (0)
+## B. Engine VERIFIED but NOT on admin — needs a Flask route + report + UI (2)
 
-✅ **All verified engines are now wired to the admin UI (2026-06-28).** MWFRS Envelope, Open Signs,
-Freestanding Walls, Trussed Towers (webapp `d72fb70`) + Arched/Dome (webapp `2ed8fad`) moved to section A.
+⚠️ **Corrected 2026-07-05:** the earlier "all wired 2026-06-28" note did NOT survive the Flask
+cutover. Genuinely on admin in Flask now: MWFRS Envelope (via `/mwfrs`), **Freestanding Walls +
+Trussed Towers (built 2026-07-05, faithful-render verified)**. **STILL engine-only** (no Flask
+calc/report/UI): **Open Signs** (WE-12) and **Arched/Dome** (WE-16) — each ~½-day build, same
+pattern as towers/walls.
+
+**Report-verification milestone (2026-07-05):** engine suite **364/0**, report cross-ref vs the
+ASCE 7-22 Wind Loads Guide **68/68**, report-vs-engine faithful render **78/78**, and the ASCE
+§30.2 span/3 effective-wind-area floor shipped across all C&C engines. See
+`ASCE 7-22/GUIDE_REPORT_CROSSREF.md` + `webapp/testing/validate_reports_{vs_guide,faithful_render}.py`.
 
 ## C. Engine-only, verification PENDING (3)
 

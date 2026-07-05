@@ -48,9 +48,77 @@ AND unlock** end-to-end. Finish runbook `GO_LIVE_RUNBOOK_JULY1.md` Steps 3–5:
 4. **Customer-logo advertising** — research whether we may display customer logos (e.g.,
    Lockheed Martin) on the site — trademark/permission/PO-terms. **Deferred ("not now").**
 
+### 🛡️ IP protection follow-ups (raised 2026-07-05 — WindLoadCalc, mirrors the Tampee IP audit)
+These are three **distinct** legal-IP actions — do not conflate the categories (each protects a
+different asset by a different mechanism):
+1. **Trademark status check for "Windloadcalc"** — a **USPTO trademark** search/clearance (NOT a
+   copyright, and NOT source-code protection). Scoped narrowly here as the **prerequisite for the
+   Gmail/BIMI verified-logo email cert** (BIMI requires a registered mark before the logo shows in
+   Gmail). Action: check current registration status of the "Windloadcalc" mark; if unregistered,
+   decide whether to file before pursuing BIMI. *(Note the WLC/WLS brand history —
+   `project_brand_history` — 2002 Windloadcalc.com; confirm what, if anything, is already on file.)*
+2. **Trade-secret acknowledgment in ToS** — **contract language** in the Terms of Service by which
+   the user acknowledges WLS trade secrets (velocity data system, geographic rules, verified-value
+   ledger). This is a **contractual protection, not a registration** — nothing to file; it's a
+   clause to add. Route through legal review before publishing the ToS change.
+3. **Template "copyright protection"** — for the **free downloadable templates** (window schedules,
+   etc.), add **download fingerprinting + a per-download license sheet** so distribution is traceable
+   and the license terms travel with the file. This covers the **template documents**, NOT the
+   calculator source code. Action: define the license sheet text + the fingerprint/watermark
+   mechanism on the template download path.
+
+> Framing guardrails (do not blur): trademark = brand name (USPTO); trade secret = ToS contract
+> clause (no registration); template copyright = license/fingerprint on the download (not source
+> code). All three are **research/decide** items — none is "just file it" without Greg's go.
+
 ### Next products to go live (waitlist → priced), each via the two-gate golden rule
 Roofing, Solar, Specialty — recolored/branded but still "Launching Soon"; add priced cards at
 top + Stripe + backend when each is verified & sellable, the same way MWFRS was done.
+
+---
+
+## 🎯 APPROVED NEXT QUEUE — do in this order (approved 2026-07-05, Greg)
+
+Three items, **sequential**. Verification is DONE (see PART E — engines **364/0**, report
+cross-reference **68/68** vs the ASCE 7-22 Wind Loads Guide, faithful-render **38/38**, and the
+**§30.2 span/3 effective-wind-area floor** shipped across all C&C engines). The core calcs are
+permit-accurate; this queue is the path from "verified" → "sold."
+
+### NEXT-1 — Free version: confirm current model + per-calc trial update mechanism
+**Goal:** document exactly how the Free version / free trial works today, then define how we turn a
+free trial on/off/extend **per wind-load calculator** (not just W/D).
+- Confirm current trial logic (`backend/app.py` + `webapp/flask_app/auth_proxy.py`; BIP free-trial
+  app = `building-intelligence-platform.html` + `trial-manager.js`).
+- Define the per-calc trial switch: which calc, trial length, what unlocks, how it converts to paid.
+- Folds into **PART F** (Free trials per calculator) below.
+- **Dependency:** trial state is backend → needs the **backend deploy hold** lifted to ship.
+
+### NEXT-2 — Interactive walkthrough demo (its own mode) — one per calculator
+**Goal:** a standalone **guided demo** — NOT the free version, NOT the live/paid calculator — that
+pre-loads one of our **verified ASCE 7-22 Guide example inputs** and walks the user through the calc;
+the user supplies only a **project name + location**. Replaces a YouTube tutorial.
+- Reuse the exact Guide-example inputs already codified in
+  `webapp/testing/validate_reports_vs_guide.py` (each calc's inputs are known & verified).
+- Read-only / sandboxed: no save, no entitlement consumed, "DEMO" watermark; opens from the shop +
+  nav. One per: W/D, MWFRS (dir+env), 6 roofs, sign, equipment, chimney, solar.
+- Mostly **frontend** (reuse the live calc UI in a demo mode) — **lowest risk** of the three.
+
+### NEXT-3 — Website: sell finished calcs, kill "join waitlist", à-la-carte + account add
+**Goal:** flip the site from "waitlist" to purchasable for every **verified + sellable** calc, and let
+users **add calculators à la carte** from their account.
+- Remove **"Join Waitlist" / "Launching Soon"** on shop pages for calcs that pass both gates
+  (`website/shop/roofing.html`, `solar-panels.html`, `specialty.html`); replace with priced
+  "Available now" cards (same pattern as the MWFRS shop card).
+- **À-la-carte page:** surface it **only after >1 product is available** (memory pricing rule — bundle
+  wins at calc #2). Add the per-calc à-la-carte options.
+- **Account:** wire "Add to my account" → Stripe Checkout for a single calc (kills the `shell.js`
+  `// TODO`) + dynamic add/remove so a subscription updates without re-checkout. This IS
+  **Workstream D** + **PART B** (per-calc go-live) + **PART C** (nav rollout at program #2).
+- **Guardrails (do NOT skip):**
+  - **Confirmed pricing per calculator** before creating ANY Stripe object — no invented prices.
+  - **Stripe TEST mode first**, prove complete+unlock (PART A / B4), then flip live — never touch live
+    Stripe or charge customers without Greg's explicit go, per product.
+  - Per-calc gating + subscription changes are **backend** → need the **backend deploy hold** lifted.
 
 ---
 
@@ -260,11 +328,17 @@ can drift** — the Sealed-Deliverable audit (`audit_sealed_deliverable_pipeline
 caught a report hardcoding Kz/Ke/qh and under-reporting qh by 28–56%. So we validate the **report
 output end-to-end**, not just the engine.
 
-> **Status (2026-06-28):** harness `webapp/testing/validate_reports_vs_guide.py` — **60/60 published
-> answers matched** across: MWFRS Directional + Envelope (Ex 4.1), Rooftop Equipment (Ex 5.2),
-> Domed Roof (Ex 6.7), C&C Flat (Ex 6.1) + Gable (Ex 6.2) at pressure level, C&C Hip (Ex 6.3) +
-> Monoslope (Ex 6.5) at GC<sub>p</sub> level (pressures conservative — engine floors Exp-B K<sub>z</sub>
-> to 0.70 vs the book's raw 0.57/0.62; disclosed). Rendered reports in `ASCE 7-22/guide_report_crossref/`.
+> **Status (2026-07-05, re-run + extended):** `webapp/testing/validate_reports_vs_guide.py` — **68/68
+> published answers matched** across: MWFRS Directional + Envelope (Ex 4.1), Sign (Ex 5.1), Rooftop
+> Equipment (Ex 5.2), Domed Roof (Ex 6.7), C&C Flat (Ex 6.1) + Gable (Ex 6.2) at pressure level, Hip
+> (Ex 6.3) + Monoslope (Ex 6.5) at GC<sub>p</sub> level, Rooftop Solar (Ex 5.3) at coeff level.
+> **Report-vs-engine faithful render** (`validate_reports_faithful_render.py`) — **38/38** for the
+> calcs with no Guide example (Sawtooth, Multi-span, Chimney). Engine suite `validate_asce7_22.py`
+> **364/0** (incl. WE-23 §30.2 EWA floor). Bugs fixed this session via the cross-ref: MWFRS-directional
+> roof-Cp hardcodes (3 spots), MWFRS-envelope zones rendering "—", sign Case-C strip Cf, solar-rooftop
+> dispatcher crash, and the **§30.2 span/3 effective-wind-area floor** (all C&C engines).
+> **Exposure-B note:** Hip/Monoslope pressures are conservative — engine floors Exp-B K<sub>z</sub> to
+> 0.70 vs the book's raw 0.57/0.62; disclosed. Rendered reports in `ASCE 7-22/guide_report_crossref/`.
 > **Generic report generator** (`generate_generic_engineering_report`) built; **UI "Generate Engineering
 > Report" buttons + `/api/report/{equipment,arched-dome,roof}` endpoints wired**. **ALL roof Guide
 > examples + rooftop solar (Ex 5.3) now proven at report level (64/64).** Remaining: route

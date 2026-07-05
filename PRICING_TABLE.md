@@ -72,18 +72,17 @@ live $35/$59/$149 falls right out of the multiplier.*
 | Signs & Freestanding Walls | $25 | $25 | $42 | $107 |
 
 ### WindLoad Complete — all calculators + BIP free (base $99 × tier multiplier)
-| Tier | Monthly | Annual (2 mo free) | Seats | BIP |
+| Tier | Monthly | Annual (Save 20%) | Seats | BIP |
 |---|---|---|---|---|
-| **Complete Solo** | $99 | $990 | 1 | BIP Starter |
-| **Complete Pro** | $167 | $1,670 | 5 | BIP Pro |
-| **Complete Premium** | $422 | $4,220 | 10 | BIP Premium |
+| **Complete Solo** | $99 | $950 | 1 | BIP Starter |
+| **Complete Pro** | $167 | $1,603 | 5 | BIP Pro |
+| **Complete Premium** | $422 | $4,051 | 10 | BIP Premium |
 | **Complete Enterprise** | quote | quote | 10+ | — |
 
 ### Rules (locked)
-- **Annual = pay 10, get 12 ("2 months free").** ⚠️ Reconcile: current live W/D annual uses ~20% off
-  (×9.56 → $336/$564/$1428); the new standard is ×10 → $350/$590/$1490. **Keep existing W/D annual
-  customers as-is; apply ×10 to new products / the Complete bundle.** (Or migrate W/D annual to ×10 —
-  small change, Greg's call; not blocking.)
+- **Annual = Save 20% (×9.6), matching live W/D** (RESOLVED 2026-07-05, Greg). Annual = monthly ×12
+  ×0.80 = monthly ×9.6, across ALL products + the Complete bundle. Customer-facing copy = **"Save 20%"**.
+  Live W/D annual ($336/$564/$1,428) is already ~20% off — keep those exact numbers, they match.
 - **Complete wins at ~the 3rd calculator** (3 core calcs $105 > Complete Starter $99) — funnels to the
   bundle (see `feedback_pricing_bundle_maximization`). Sooner if Solar/pricier calcs are picked.
 - **No PE-sealing in any tier** — separate quoted service, never bundled.
@@ -108,6 +107,6 @@ live $35/$59/$149 falls right out of the multiplier.*
 **Bottom line for the Stripe/account agent:** the **v3 tier × multiplier model is CONFIRMED** — build
 against it. Architecture: each calculator is a Stripe price at **3 tiers** (Starter/Pro/Premium =
 base × 1.0 / 1.69 / 4.26) + a **Complete bundle** at the same tiers ($99/$167/$422) + **Enterprise =
-quote**. Annual = ×10 ("2 months free"). W/D + BIP + MWFRS Stripe products already exist; the other
+quote**. Annual = ×9.6 ("Save 20%", matches live W/D). W/D + BIP + MWFRS Stripe products already exist; the other
 calcs' products still need creating (per the bases above). Keep existing W/D customers on their
 current prices (the model is back-compatible — W/D $35/$59/$149 is the multiplier's "1-calc" column).

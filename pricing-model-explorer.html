@@ -135,7 +135,7 @@
     tier multiplier <span id="multTxt"></span> (derived from live W/D $35/$59/$149) ·
     Complete all-calcs base <b>$99</b> (Starter) ·
     per-calc Starter bases: W/D/MWFRS/Roofs <b>$35</b>, Solar <b>$45</b>, Other <b>$29</b>, Signs <b>$25</b>.
-    Annual = pay 10, get 12 (2 months free).
+    Annual = Save 20% (pay for ~9.6 months, get 12) &mdash; matches live W/D.
   </div>
 </div>
 
@@ -157,7 +157,7 @@ var CALCS = [   // Starter-tier base price (×1)
 ];
 CALCS.forEach(c=>c.on = (c.id==='wd'));
 var COMPLETE_BASE = 99;   // all calcs, Starter tier
-var YR = 10;              // annual = 2 months free
+var YR = 9.6;             // annual = Save 20% (matches live W/D annual)
 var state = { cycle:'mo', tier:'pro' };
 
 function mult(){ return MULT[state.tier]; }
@@ -213,7 +213,7 @@ function completeTiers(){
     html+='<div class="tier'+(t===state.tier?' sel':'')+'">'+
       '<div class="tn">Complete '+ti.name+'</div>'+
       '<div class="tp">'+money(price)+'<small>'+unit()+'</small></div>'+
-      '<div class="ty">'+(state.cycle==='yr'?'2 months free':('≈ '+money(COMPLETE_BASE*MULT[t]*YR)+'/yr'))+'</div>'+
+      '<div class="ty">'+(state.cycle==='yr'?'Save 20%':('≈ '+money(COMPLETE_BASE*MULT[t]*YR)+'/yr'))+'</div>'+
       '<div class="seats">'+ti.seats+' · '+ti.calcs+'</div>'+
       '<ul>'+ti.feats.map(f=>'<li>'+f+'</li>').join('')+'</ul>'+
       '<span class="freebip">★ BIP included FREE</span></div>';
@@ -246,7 +246,7 @@ function grid(){
   ['starter','pro','premium'].forEach(t=>rows+='<td class="r sv'+(t===state.tier?' hl':'')+'"><b>'+money(COMPLETE_BASE*MULT[t]*cyc)+'</b></td>');
   rows+='</tr>';
   document.getElementById('grid').innerHTML=rows;
-  document.getElementById('cycLbl').textContent = state.cycle==='yr'?'annual (2 months free)':'monthly';
+  document.getElementById('cycLbl').textContent = state.cycle==='yr'?'annual (Save 20%)':'monthly';
   var allac=CALCS.reduce((s,c)=>s+c.base,0);
   document.getElementById('gridFoot').innerHTML='All 6 à-la-carte at '+TIER_INFO[state.tier].name+' = '+money(allac*mult()*cyc)+unit()+' vs Complete '+money(COMPLETE_BASE*mult()*cyc)+unit()+'.';
 }

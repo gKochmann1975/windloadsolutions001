@@ -84,14 +84,17 @@ cross-reference **68/68** vs the ASCE 7-22 Wind Loads Guide, faithful-render **3
 **§30.2 span/3 effective-wind-area floor** shipped across all C&C engines). The core calcs are
 permit-accurate; this queue is the path from "verified" → "sold."
 
-### NEXT-1 — Free version: confirm current model + per-calc trial update mechanism
+### NEXT-1 — Free version: confirm current model + per-calc trial update mechanism  ✅ DONE 2026-07-05
 **Goal:** document exactly how the Free version / free trial works today, then define how we turn a
 free trial on/off/extend **per wind-load calculator** (not just W/D).
-- Confirm current trial logic (`backend/app.py` + `webapp/flask_app/auth_proxy.py`; BIP free-trial
-  app = `building-intelligence-platform.html` + `trial-manager.js`).
-- Define the per-calc trial switch: which calc, trial length, what unlocks, how it converts to paid.
-- Folds into **PART F** (Free trials per calculator) below.
-- **Dependency:** trial state is backend → needs the **backend deploy hold** lifted to ship.
+- ✅ **Current model confirmed from code** (7-day / 10-total / 5-day, GLOBAL shared bucket,
+  server-side fail-closed) — see **PART F §7a**.
+- ✅ **Per-calc model RESOLVED** (Greg 2026-07-05): per-calculator trials, lazy start, uniform
+  numbers, fresh trial on add-to-account, one "try everything" Complete-bundle trial — **PART F §7c**.
+- 🚩 **Found the prerequisite landmine:** the Flask gate is hardcoded to W/D
+  (`auth_proxy.py:233`) — must thread the real `calculator_file` before ANY 2nd calc goes live.
+  Blocks NEXT-3 too. See **PART F §7b/§7d**.
+- **Dependency:** implementation is backend → needs the **backend deploy hold** lifted to ship.
 
 ### NEXT-2 — Interactive walkthrough demo (its own mode) — one per calculator
 **Goal:** a standalone **guided demo** — NOT the free version, NOT the live/paid calculator — that
@@ -388,20 +391,51 @@ Guide worked examples already verified (extend as more are read):
 
 ---
 
-## 7. PART F — Free trials per calculator (pre-launch decision)
+## 7. PART F — Free trials per calculator  ✅ MODEL RESOLVED 2026-07-05 (NEXT-1 done)
 
-**Decision needed before go-live (Greg, 2026-06-28).** Today there's one product (W/D) and its
-trial is the `trial-manager.js` / BIP pattern (3/hr · 10/day · 7-day). As the catalog grows we
-need a deliberate free-trial model. Open questions to resolve and wire **before** program #2 ships:
+### 7a. Confirmed CURRENT behavior (verified in code, not docs — 2026-07-05)
+Today there's one paid product (W/D). The live trial is enforced **server-side in the backend**
+(fail-closed), NOT just client-side:
+- **Duration:** 7 days from signup (`config.TRIAL_DAYS`), or a `trialing` sub's period-end if present
+  (`backend/permissions.py:check_trial_access`).
+- **Volume:** **10 calcs total + 5/day**, single hard-stop→upgrade (`config.TRIAL_CALCULATION_LIMIT`
+  / `TRIAL_DAILY_CALCULATION_LIMIT`, `backend/usage_enforcement.py:check_usage_limit`).
+- **Scope:** **GLOBAL, not per-calc.** `TRIAL_ACCESS_ALL_CALCULATORS=True` unlocks every calculator,
+  and the 10-total/5-day counter is **one shared bucket** (the count query has no `calculator_file`
+  filter). *(Note: the client `trial-manager.js` "3/hr" figure does NOT match the server 10-total/5-day
+  — server wins; drop the stale client copy when wiring per-calc.)*
 
-- [ ] **Scope:** one global trial, or a **per-calculator** trial? (Does a W/D trial also unlock MWFRS, or is each calc its own trial?)
-- [ ] **Length + limits per calc** (uses/hr, uses/day, trial days) — same as W/D or tuned per product?
-- [ ] **Add-to-account flow:** when a paying customer adds a new calc, do they get a fresh trial of it, or unlock on purchase only?
-- [ ] **Bundle vs à-la-carte:** does "WindLoad Complete" get one trial covering everything, vs per-calc trials?
-- [ ] **Entry points:** per-calc "Start free trial" in the picker/nav, mapped to the trial entitlement.
-- [ ] **Abuse controls (LAUNCH BLOCKER):** `NORMALIZE_EMAIL_ALIASES=true` ON at launch (blocks +alias trial farming); confirm trial limits enforced server-side, not just client.
+### 7b. 🚩 PREREQUISITE LANDMINE — Flask gate is hardcoded to W/D
+`webapp/flask_app/auth_proxy.py:233` `WD_CALCULATOR_FILE="cc_windows_doors.py"`; every calc endpoint
+calls `require_wd_access()` / records usage as W/D regardless of which calc runs
+(`calc_api.py:217,391`). Harmless while W/D is the only paid calc, but the instant a 2nd calc goes
+live it **wrongly grants** it to any W/D holder + **wrongly denies** a MWFRS-only buyer + mis-attributes
+usage. **Per-calc trials AND per-calc sales (NEXT-3) are both blocked on threading the real
+`calculator_file` through the Flask gate.** This is the single concrete code prerequisite.
 
-Ties into **PART C** (nav rollout) and **Workstream E** (gating). Resolve before flipping program #2 live.
+### 7c. RESOLVED model (Greg, 2026-07-05)
+- ✅ **Scope = PER-CALCULATOR.** Each calc has its own independent 7-day / 10-total / 5-day trial;
+  trying one calc does not consume another's trial. Numbers stay **uniform** across calcs (no
+  per-product tuning to start).
+- ✅ **Trial start = first use of that calc** (lazy), not signup — a trial isn't burned on calcs
+  never opened.
+- ✅ **Add-to-account = fresh trial.** An existing paying customer adding a not-yet-owned calc gets
+  a fresh per-calc trial before buying (low abuse risk, drives bundle attach).
+- ✅ **Complete bundle = one "try everything" trial.** A single Complete trial flips all calcs on
+  for 7 days (generous shared quota), converts to the Complete bundle.
+- ✅ **Abuse controls (LAUNCH BLOCKER):** `NORMALIZE_EMAIL_ALIASES=true` at launch; per-calc trials
+  multiply free value per farmed account, so email-normalization + device-fingerprint + IP-signup
+  caps must all be on. Enforcement stays server-side.
+
+### 7d. Implementation (backend — gated by the deploy hold)
+Two layers, both server-side:
+1. **Flask:** replace the hardcoded `WD_CALCULATOR_FILE` with a per-endpoint `calculator_file`;
+   `require_calc_access(calculator_file, check_usage)` + `record_usage(user, calculator_file)`.
+2. **Backend:** scope the trial window + counters per `calculator_file` (per-(user,calc) trial record:
+   start / expiry / used) instead of the single global `TrialUsage`; bundle-trial = all-calc window.
+- [ ] **Entry points:** per-calc "Start free trial" in the picker/nav, mapped to the per-calc trial entitlement.
+
+Ties into **PART C** (nav rollout) and **Workstream E** (gating). Do 7b/7d before flipping program #2 live.
 
 ---
 

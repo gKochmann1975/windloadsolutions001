@@ -334,7 +334,7 @@
         /* RESET                                        */
         /* ============================================ */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
+        html { scroll-behavior: smooth; overflow-x: hidden; }
         body {
             font-family: var(--font-sans);
             line-height: 1.65;
@@ -524,8 +524,10 @@
             letter-spacing: -0.02em;
             margin-bottom: 1.25rem;
             color: white;
+            text-wrap: balance;
         }
         .hero h1 .hl {
+            white-space: nowrap;
             background: linear-gradient(135deg, var(--electric-cyan) 0%, var(--electric-blue) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -1333,7 +1335,7 @@
             position: fixed;
             bottom: 1.5rem;
             right: 1.5rem;
-            max-width: 380px;
+            max-width: min(380px, calc(100vw - 2rem));
             background: white;
             border: 1px solid var(--border-subtle);
             border-radius: var(--radius-card);
@@ -1590,6 +1592,7 @@
     <div class="fm-label">Wind Load Calculators</div>
     <a href="https://windloadcalc.com/wind-load-calculator-landing.html">Overview</a>
     <a href="https://windloadcalc.com/free-wind-load-calculator.html">Free Trial</a>
+    <a href="https://windloadcalc.com/walkthroughs.html">Walkthroughs</a>
     <a href="https://windloadcalc.com/wind-load-calculator-comparison.html">Feature Comparison</a>
     <a href="https://windloadcalc.com/wind-load-calculator-shop.html">Pricing</a>
   </div>
@@ -1628,7 +1631,7 @@
             <span class="hero-eyebrow">Free Wind Load Calculator &middot; No signup &middot; No meter</span>
             <h1>
                 Design pressure in <span class="hl">eight seconds</span>.<br>
-                With Florida Building Code overrides built in.
+                Building Code overrides built in.
             </h1>
             <p class="hero-subhead">
                 The only free wind load calculator that returns the legally enforceable wind speed for Miami-Dade, Broward, and Collier counties &mdash; not the ASCE map value your plan reviewer will reject.

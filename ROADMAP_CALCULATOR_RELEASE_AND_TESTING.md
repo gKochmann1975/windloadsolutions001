@@ -96,15 +96,33 @@ free trial on/off/extend **per wind-load calculator** (not just W/D).
   Blocks NEXT-3 too. See **PART F §7b/§7d**.
 - **Dependency:** implementation is backend → needs the **backend deploy hold** lifted to ship.
 
-### NEXT-2 — Interactive walkthrough demo (its own mode) — one per calculator
-**Goal:** a standalone **guided demo** — NOT the free version, NOT the live/paid calculator — that
-pre-loads one of our **verified ASCE 7-22 Guide example inputs** and walks the user through the calc;
-the user supplies only a **project name + location**. Replaces a YouTube tutorial.
-- Reuse the exact Guide-example inputs already codified in
-  `webapp/testing/validate_reports_vs_guide.py` (each calc's inputs are known & verified).
-- Read-only / sandboxed: no save, no entitlement consumed, "DEMO" watermark; opens from the shop +
-  nav. One per: W/D, MWFRS (dir+env), 6 roofs, sign, equipment, chimney, solar.
-- Mostly **frontend** (reuse the live calc UI in a demo mode) — **lowest risk** of the three.
+### NEXT-2 — Interactive walkthrough demos (on the REAL calculator) — ✅ W/D + Wave 1 LIVE (2026-07-06)
+**Built (Greg's call: "must be the actual software, not a mock sheet"):** a PUBLIC guided walkthrough
+that runs on the ACTUAL calculator page in **demo mode** — pre-loaded with a verified **locked**
+example, a cinematic **spotlight tour** across the real steps, **live computed values**, and a
+watermarked report. No login, no entitlement, no usage recorded. At `calc.windloadcalc.com/demo/<slug>`.
+
+**Architecture** (webapp repo, `feat/flask-migration`):
+- `flask_app/static/tour.js` — reusable spotlight-tour engine (SVG cutout + accent callout + video-style
+  control bar). Callout auto-positions in the clear gap and **never overlaps** the spotlight (verified).
+- `flask_app/static/demo-boot.js` — demo mode for the custom W/D page (`index.html`).
+- `flask_app/static/calc-workflow.js` → `initDemo()` — demo mode for **all** calc-workflow calcs at once.
+- `flask_app/demo_cases/<slug>.py` — per-calc verified **INPUTS** + `calc()` (live values) + `build()`
+  (report) + tour `steps` (real-page selectors). Auto-registered via the package `__init__`.
+- Ungated endpoints in `calc_api.py`: `/api/demo/case|calc|report/<slug>` (fixed example only, no free
+  general-purpose compute); `/demo/<slug>` serves the real page (`_DEMO_REAL_PAGES` in `__init__.py`).
+  **Live admin calculators untouched** — every demo hook is `/demo/`-path-gated; golden 24/24 stays green.
+- **Verification harness:** headless Chrome (puppeteer) measures each scene's callout rect vs its
+  spotlight target at multiple viewport sizes → asserts **zero overlap**. Use it instead of eyeballing.
+
+**Status:**
+- ✅ **W/D** (reference, 15 scenes) + **Wave 1 — signs, equipment, chimney, towers, walls** (5, via the
+  shared engine) — LIVE and measured clean.
+- ✅ **Walkthroughs marketing page** — `website/walkthroughs.html` LIVE (windloadcalc.com/walkthroughs.html),
+  in the shared nav + sitemap; each card launches the live demo.
+- ⏳ **Wave 2 — MWFRS** (directional + envelope, `mwfrs.html`) and **Wave 3 — 6 C&C roofs** (`roof.html`):
+  each is a custom multi-step page needing its own demo-boot (like W/D). Report builders already done.
+- 🚫 **Solar** excluded — not yet book-verified.
 
 ### NEXT-3 — Website: sell finished calcs, kill "join waitlist", à-la-carte + account add
 **Goal:** flip the site from "waitlist" to purchasable for every **verified + sellable** calc, and let

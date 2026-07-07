@@ -250,4 +250,80 @@ Report rendered OK (79110 bytes); saved report: `ASCE 7-22/guide_report_crossref
 
 **5 / 5 engine values rendered faithfully.**
 
-**Faithful-render TOTAL: 38 / 38 engine values rendered by their report.**
+### Square Trussed Tower (Lattice) (WE-11 / ASCE 7-22 Fig 29.4-3 (square))
+
+Report rendered OK (79456 bytes); saved report: `ASCE 7-22/guide_report_crossref/towers_square_faithful_report.html`
+
+| Value | Engine | Report | Δ | Match |
+|---|---:|---:|---:|:--:|
+| Cf governing | 3.295 | 3.300 | 0.005 | ✅ |
+| Cf wind normal to face | 2.775 | 2.770 | 0.005 | ✅ |
+| qh (psf, 2dp) | 61.69 | 61.69 | 0.000 | ✅ |
+| design force per face (lb) | 116,732 | 116,732 | 0.000 | ✅ |
+| conservative force per face (lb) | 138,235 | 138,235 | 0.000 | ✅ |
+| base moment (kip·ft, 1dp) | 6,272.10 | 6,272.10 | 0.000 | ✅ |
+| resultant height (ft, 2dp) | 53.73 | 53.73 | 0.000 | ✅ |
+
+**7 / 7 engine values rendered faithfully.**
+
+### Triangular Trussed Tower (round members) (WE-11 / ASCE 7-22 Fig 29.4-3 (triangular))
+
+Report rendered OK (79458 bytes); saved report: `ASCE 7-22/guide_report_crossref/towers_triangular_faithful_report.html`
+
+| Value | Engine | Report | Δ | Match |
+|---|---:|---:|---:|:--:|
+| Cf governing | 1.533 | 1.530 | 0.003 | ✅ |
+| Cf wind normal to face | 1.533 | 1.530 | 0.003 | ✅ |
+| qh (psf, 2dp) | 51.61 | 51.61 | 0.000 | ✅ |
+| design force per face (lb) | 27,220 | 27,220 | 0.000 | ✅ |
+| conservative force per face (lb) | 32,271 | 32,271 | 0.000 | ✅ |
+| base moment (kip·ft, 1dp) | 1,162.90 | 1,162.90 | 0.000 | ✅ |
+| resultant height (ft, 2dp) | 42.72 | 42.72 | 0.000 | ✅ |
+
+**7 / 7 engine values rendered faithfully.**
+
+### Solid Freestanding Wall (at grade, B/s=4) (WE-13 / ASCE 7-22 Fig 29.3-1)
+
+Report rendered OK (79655 bytes); saved report: `ASCE 7-22/guide_report_crossref/walls_solid_faithful_report.html`
+
+| Value | Engine | Report | Δ | Match |
+|---|---:|---:|---:|:--:|
+| qh (psf, 2dp) | 41.62 | 41.62 | 0.000 | ✅ |
+| Case A Cf | 1.350 | 1.350 | 0.000 | ✅ |
+| Case A force (lb) | 19,102 | 19,102 | 0.000 | ✅ |
+| Case B Cf | 1.350 | 1.350 | 0.000 | ✅ |
+| Case B force (lb) | 19,102 | 19,102 | 0.000 | ✅ |
+| Case C 0_to_s Cf | 2.900 | 2.900 | 0.000 | ✅ |
+| Case C 0_to_s force (lb) | 10,258 | 10,258 | 0.000 | ✅ |
+| Case C s_to_2s Cf | 1.900 | 1.900 | 0.000 | ✅ |
+| Case C s_to_2s force (lb) | 6,721 | 6,721 | 0.000 | ✅ |
+| Case C 2s_to_3s Cf | 1.300 | 1.300 | 0.000 | ✅ |
+| Case C 2s_to_3s force (lb) | 4,599 | 4,599 | 0.000 | ✅ |
+| Case C 3s_to_10s Cf | 1.100 | 1.100 | 0.000 | ✅ |
+| Case C 3s_to_10s force (lb) | 3,891 | 3,891 | 0.000 | ✅ |
+
+**13 / 13 engine values rendered faithfully.**
+
+### Freestanding Wall (return corner, B/s=6) (WE-13 / ASCE 7-22 Fig 29.3-1 Note 5)
+
+Report rendered OK (79809 bytes); saved report: `ASCE 7-22/guide_report_crossref/walls_return_corner_faithful_report.html`
+
+| Value | Engine | Report | Δ | Match |
+|---|---:|---:|---:|:--:|
+| qh (psf, 2dp) | 36.25 | 36.25 | 0.000 | ✅ |
+| Case A Cf | 1.340 | 1.340 | 0.000 | ✅ |
+| Case A force (lb) | 15,856 | 15,856 | 0.000 | ✅ |
+| Case B Cf | 1.340 | 1.340 | 0.000 | ✅ |
+| Case B force (lb) | 15,856 | 15,856 | 0.000 | ✅ |
+| Case C 0_to_s Cf | 2.475 | 2.480 | 0.005 | ✅ |
+| Case C 0_to_s force (lb) | 4,881 | 4,881 | 0.000 | ✅ |
+| Case C s_to_2s Cf | 2.150 | 2.150 | 0.000 | ✅ |
+| Case C s_to_2s force (lb) | 4,240 | 4,240 | 0.000 | ✅ |
+| Case C 2s_to_3s Cf | 1.550 | 1.550 | 0.000 | ✅ |
+| Case C 2s_to_3s force (lb) | 3,057 | 3,057 | 0.000 | ✅ |
+| Case C 3s_to_10s Cf | 1.050 | 1.050 | 0.000 | ✅ |
+| Case C 3s_to_10s force (lb) | 6,212 | 6,212 | 0.000 | ✅ |
+
+**13 / 13 engine values rendered faithfully.**
+
+**Faithful-render TOTAL: 78 / 78 engine values rendered by their report.**

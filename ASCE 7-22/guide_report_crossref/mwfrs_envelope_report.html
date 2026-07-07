@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="/images/windloadcalc-icon-anim-loop.svg?v=1">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
+<link rel="shortcut icon" href="/favicon.ico?v=2">
+<title>MWFRS Wind Load Calculations &mdash; GUIDE XREF — MWFRS Envelope</title>
+<style>
+  /* -- Page & Base --
+     Bottom margin is intentionally larger so the fixed .report-footer (in
+     print) has clear space to sit in. With a flat 0.75in margin the footer
+     was overlapping the last calc-step / reference bullet on each page,
+     leaving the text sliced in half across the page break. */
+  @page { size: letter portrait; margin: 0.75in 0.75in 1.25in 0.75in; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:    #1a3a5c;
+    --navy-lt: #2a5a8c;
+    --navy-bg: #f0f4f8;
+    --border:  #c8d6e5;
+    --text:    #333;
+    --pass:    #27ae60;
+    --fail:    #e74c3c;
+  }
+
+  body {
+    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.55;
+    max-width: 8.5in;
+    margin: 0 auto;
+    padding: 0.75in;
+    background: #fff;
+    color: var(--text);
+  }
+
+  /* -- Export Toolbar (screen only) -- */
+  .export-toolbar {
+    position: fixed;
+    top: 12px;
+    right: 18px;
+    display: flex;
+    gap: 6px;
+    z-index: 1000;
+    background: rgba(255,255,255,0.92);
+    padding: 6px 10px;
+    border-radius: 6px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+  }
+  .export-toolbar button {
+    background: #fff;
+    color: var(--navy);
+    border: 1.5px solid var(--navy);
+    border-radius: 4px;
+    padding: 4px 10px;
+    font-size: 9pt;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.15s;
+  }
+  .export-toolbar button:hover {
+    background: var(--navy);
+    color: #fff;
+  }
+  .export-toolbar button .icon {
+    font-size: 11pt;
+  }
+
+  /* -- Dual Logo Header -- */
+  .logo-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .logo-row-center {
+    justify-content: center;
+  }
+  .customer-logo {
+    max-width: 300px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .customer-logo img {
+    max-height: 55px;
+    max-width: 300px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
+  .wlc-logo {
+    width: 140px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .wlc-logo img {
+    max-height: 35px;
+    max-width: 140px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
+  .wlc-logo-large {
+    width: 280px;
+    height: 70px;
+  }
+  .wlc-logo-large img {
+    max-height: 70px;
+    max-width: 280px;
+  }
+
+  .report-title {
+    text-align: center;
+    padding: 10px 0 14px;
+    border-bottom: 3px solid var(--navy);
+    margin-bottom: 20px;
+  }
+  .report-title h1 {
+    font-size: 16pt;
+    color: var(--navy);
+    letter-spacing: 1.5px;
+    margin-bottom: 2px;
+  }
+  .report-title .subtitle {
+    font-size: 11pt;
+    color: var(--navy-lt);
+    font-weight: 400;
+  }
+
+  /* -- Section Headings -- */
+  h2 {
+    font-size: 13pt;
+    color: var(--navy);
+    margin: 26px 0 10px;
+    padding-bottom: 4px;
+    border-bottom: 2px solid var(--navy);
+  }
+  h2 .sec-num {
+    display: inline-block;
+    background: var(--navy);
+    color: #fff;
+    font-size: 10pt;
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+    border-radius: 3px;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+  h3 {
+    font-size: 11pt;
+    color: var(--navy-lt);
+    margin: 14px 0 6px;
+    font-weight: 600;
+  }
+
+  /* -- Project Info Block -- */
+  .project-info {
+    border: 2px solid var(--navy);
+    border-radius: 4px;
+    padding: 14px 18px;
+    margin-bottom: 22px;
+    background: var(--navy-bg);
+  }
+  .project-info table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .project-info td {
+    padding: 3px 10px;
+    vertical-align: top;
+    font-size: 10pt;
+  }
+  .project-info td.label {
+    font-weight: 700;
+    color: var(--navy);
+    width: 130px;
+    white-space: nowrap;
+  }
+  .project-info td.spacer {
+    width: 30px;
+  }
+
+  /* -- Data Tables -- */
+  table.data {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8px 0 18px;
+    font-size: 9.5pt;
+  }
+  table.data th {
+    background: var(--navy);
+    color: #fff;
+    padding: 6px 8px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 9pt;
+    border: 1px solid #15304d;
+  }
+  table.data td {
+    padding: 5px 8px;
+    border: 1px solid #dde3ea;
+    text-align: center;
+  }
+  table.data td.left { text-align: left; }
+  table.data tr:nth-child(even) { background: #f6f8fb; }
+  table.data tr:hover { background: #eaf0f7; }
+  table.data td.ref { font-size: 8.5pt; color: #666; text-align: left; }
+
+  /* -- Calc Step Boxes -- */
+  .calc-step {
+    background: #f5f7fa;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--navy);
+    padding: 10px 14px;
+    margin: 6px 0;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 9.5pt;
+    line-height: 1.7;
+    border-radius: 0 4px 4px 0;
+    overflow-x: auto;
+  }
+  .calc-step .result {
+    color: var(--navy);
+    font-weight: 700;
+  }
+  .calc-step .label {
+    color: #888;
+    font-style: italic;
+  }
+
+  /* -- Info Note -- */
+  .info-note {
+    background: #e8f0fe;
+    border: 1px solid #b4d0f0;
+    border-radius: 4px;
+    padding: 8px 14px;
+    margin: 8px 0 12px;
+    font-size: 9.5pt;
+    color: #1a3a5c;
+  }
+
+  /* -- Pass / Fail Badges -- */
+  .badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 3px;
+    font-weight: 700;
+    font-size: 8.5pt;
+    letter-spacing: 0.5px;
+  }
+  .badge-pass { background: #d4edda; color: #155724; }
+  .badge-fail { background: #f8d7da; color: #721c24; }
+
+  /* -- References List -- */
+  .ref-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 8px 0;
+  }
+  .ref-list li {
+    padding: 3px 0 3px 18px;
+    position: relative;
+    font-size: 10pt;
+  }
+  .ref-list li::before {
+    content: "\25A0";
+    color: var(--navy);
+    position: absolute;
+    left: 0;
+    font-size: 7pt;
+    top: 6px;
+  }
+
+  /* -- Footer -- */
+  .report-footer {
+    margin-top: 30px;
+    border-top: 2px solid var(--navy);
+    padding-top: 8px;
+    font-size: 8pt;
+    color: #888;
+  }
+  .footer-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-disclaimer {
+    margin-top: 6px;
+    font-size: 7.5pt;
+    color: #aaa;
+    text-align: center;
+    font-style: italic;
+    line-height: 1.4;
+  }
+
+  /* -- Print Styles -- */
+  @media print {
+    .export-toolbar { display: none !important; }
+
+    /* Force a page break before any section marked with .section-break
+       in the HTML (currently section 2 — Velocity Pressure). The
+       break-* / page-break-* rules below weren't reliably moving section 2
+       off page 1, so we trigger an explicit page break here. */
+    .section-break {
+      break-before: page;
+      page-break-before: always;
+    }
+
+    body {
+      padding: 0;
+      max-width: none;
+      font-size: 10pt;
+    }
+
+    /* Atomic blocks — must never be split across a page break.
+       Both the modern `break-inside` and legacy `page-break-inside` are
+       declared because Chrome's print engine still honors `page-break-*`
+       more reliably than the unprefixed `break-*` in some versions. */
+    .project-info,
+    table.data,
+    .calc-step,
+    .info-note,
+    .ref-list,
+    .ref-list li {
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    /* Section headings stay glued to whatever follows them. Without this,
+       an h2 can end up as the last visible line of a page with its table
+       or first calc-step forced to the next page (orphaned heading). */
+    h2, h3, h4 {
+      break-after: avoid;
+      page-break-after: avoid;
+      /* Belt-and-suspenders: ask the engine to keep the next two lines /
+         block with the heading even when break-after is ignored. */
+      orphans: 3;
+      widows: 3;
+    }
+
+    /* The on-screen .report-footer is replaced in print by the @page
+       bottom-left / -center / -right margin boxes injected at the bottom
+       of the generated HTML. Hiding it here prevents the old static text
+       (which couldn't show real page numbers) from also rendering. */
+    .report-footer {
+      display: none !important;
+    }
+    /* Header prints in BLACK text, not light navy/gray. */
+    .report-title h1,
+    .report-title .subtitle { color: #000 !important; }
+    .project-info td,
+    .project-info td.label { color: #000 !important; }
+  }
+
+  /* MWFRS-specific palette extensions (gold = used row, gray = suppressed) */
+  :root {
+    --used:        #fff8e1;
+    --used-st:     #f59e0b;
+    --suppress-bg: #f3f4f6;
+    --suppress-st: #9ca3af;
+  }
+
+  /* MWFRS load-case banner — used to delimit each Envelope load case */
+  .mwfrs-loadcase {
+    background: var(--navy);
+    color: #fff;
+    padding: 6px 12px;
+    margin: 18px 0 6px;
+    font-size: 10.5pt;
+    font-weight: 700;
+    border-radius: 3px;
+    letter-spacing: 0.5px;
+  }
+  .mwfrs-loadcase .lc-fig {
+    font-weight: 400;
+    font-size: 9pt;
+    opacity: 0.85;
+    margin-left: 10px;
+  }
+  /* Surface group sub-header (windward, leeward, etc.) */
+  .mwfrs-surface-group {
+    background: var(--navy-bg);
+    color: var(--navy);
+    padding: 4px 10px;
+    margin: 14px 0 4px;
+    font-size: 10pt;
+    font-weight: 600;
+    border-left: 4px solid var(--navy);
+    border-radius: 0 3px 3px 0;
+  }
+  /* Pressure value cells: positive = compression, negative = suction */
+  table.data td.p-pos { color: #155724; font-weight: 600; }
+  table.data td.p-neg { color: #721c24; font-weight: 600; }
+
+  /* Calc-step ref tag — small navy badge beside the equation reference */
+  .calc-step .ref-tag {
+    display: inline-block;
+    background: var(--navy);
+    color: #fff;
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 8pt;
+    font-weight: 600;
+    margin-right: 6px;
+    font-family: 'Segoe UI', Arial, sans-serif;
+  }
+
+  /* Inline formula chip */
+  .formula {
+    display: inline-block;
+    background: #eef2f7;
+    padding: 1px 6px;
+    border-radius: 2px;
+    font-family: 'Consolas', monospace;
+    font-size: 10pt;
+  }
+
+  /* Highlighted "used by your project" row in reference tables (gold) */
+  table.data tr.used-row td {
+    background: var(--used);
+    border-color: var(--used-st);
+    font-weight: 700;
+  }
+  table.data tr.used-row td:first-child::before {
+    content: '\25B6  ';
+    color: var(--used-st);
+  }
+
+  /* Reference Tables Appendix — bordered block with navy header */
+  .ref-table-block {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    margin: 14px 0 20px;
+    overflow: hidden;
+  }
+  .ref-table-block .rt-header {
+    background: var(--navy);
+    color: #fff;
+    padding: 6px 12px;
+    font-size: 10pt;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+  }
+  .ref-table-block .rt-header .rt-asce {
+    background: rgba(255,255,255,0.18);
+    padding: 1px 6px;
+    border-radius: 2px;
+    font-size: 9pt;
+    font-weight: 600;
+    margin-right: 8px;
+    letter-spacing: 0.4px;
+  }
+  .ref-table-block .rt-body {
+    padding: 8px 12px;
+    background: #fafbfd;
+  }
+  .ref-table-block .rt-note {
+    font-size: 8.5pt;
+    color: #555;
+    margin-top: 4px;
+    line-height: 1.5;
+  }
+
+  /* Suppressed-table notice (gray, dashed) — replaces tables not applicable
+     to this project (topo when flat, GCpf when directional, Cp when envelope) */
+  .suppressed {
+    background: var(--suppress-bg);
+    border: 1px dashed var(--suppress-st);
+    border-radius: 4px;
+    padding: 10px 14px;
+    margin: 10px 0;
+    font-size: 9.5pt;
+    color: #4b5563;
+    font-style: italic;
+  }
+  .suppressed strong { color: #374151; font-style: normal; }
+
+  /* Governing-pressure callout (navy theme — NOT red; red implies failure) */
+  .governing-callout {
+    background: var(--navy-bg);
+    border-left: 4px solid var(--navy);
+    border-radius: 0 4px 4px 0;
+    padding: 10px 14px;
+    margin: 10px 0;
+    font-size: 10pt;
+    color: var(--text);
+  }
+  .governing-callout strong { color: var(--navy); }
+
+  /* Governing row highlight in the summary table (light blue) */
+  table.data tr.governing-row td {
+    background: #dbeafe;
+    color: var(--navy);
+    font-weight: 700;
+  }
+</style>
+</head>
+<body>
+
+<div class="export-toolbar">
+  <button onclick="window.print()"><span class="icon">&#128424;</span>Print</button>
+</div>
+
+
+
+<div class="report-title">
+  <h1>MWFRS WIND LOAD CALCULATIONS</h1>
+  <div class="subtitle">Envelope Procedure (ASCE 7-22 Ch 28) &mdash; ASCE 7-22</div>
+  <div class="subtitle" style="font-size:9.5pt;margin-top:4px;">International Building Code (IBC) 2021</div>
+</div>
+
+<div class="project-info">
+  <table>
+    <tr><td class="label">Project:</td><td colspan="3">GUIDE XREF — MWFRS Envelope</td></tr>
+    <tr><td class="label">Owner / Client:</td><td colspan="3">&mdash;</td></tr>
+    <tr><td class="label">Address:</td><td colspan="3">&mdash;</td></tr>
+    <tr>
+      <td class="label">Permit #:</td><td>&mdash;</td>
+      <td class="label">Job No.:</td><td>&mdash;</td>
+    </tr>
+    <tr>
+      <td class="label">Building Dept.:</td><td>&mdash;</td>
+      <td class="label">Date:</td><td>June 28, 2026</td>
+    </tr>
+    <tr><td class="label">Building Code:</td><td colspan="3">International Building Code (IBC) 2021 / ASCE 7-22</td></tr>
+    <tr><td class="label">Engineer:</td><td colspan="3">&mdash; &mdash; WindLoadCalc.com</td></tr>
+    <tr><td class="label">Prepared by:</td><td colspan="3">WindLoad Solutions &mdash; windloadcalc.com</td></tr>
+  </table>
+</div>
+
+<h2><span class="sec-num">1</span>Building Description</h2>
+
+<table class="data">
+  <tr><th>Parameter</th><th>Value</th><th>Notes</th></tr>
+  <tr><td class="left">Building Width (B)</td><td>200.00 ft</td><td class="ref">Least horizontal dimension</td></tr>
+  <tr><td class="left">Building Length (L)</td><td>250.00 ft</td><td class="ref"></td></tr>
+  <tr><td class="left">Mean Roof Height (h)</td><td>36.63 ft</td><td class="ref">ASCE 7-22 Section 26.2</td></tr>
+  <tr><td class="left">Roof Slope (&theta;)</td><td>3.99/12 = 18.4&deg;</td><td class="ref">Sloped roof</td></tr>
+  <tr><td class="left">Aspect ratio h/B</td><td>0.183</td><td class="ref">Derived</td></tr>
+  <tr><td class="left">Aspect ratio L/B</td><td>1.250</td><td class="ref">Derived</td></tr>
+  <tr><td class="left">Floor Level / z above grade</td><td>0.00 ft</td><td class="ref">User input</td></tr>
+  <tr><td class="left">Site Ground Elevation (z<sub>e</sub>)</td><td>0 ft above sea level</td><td class="ref">Used for K<sub>e</sub></td></tr>
+  <tr><td class="left">Enclosure Classification</td><td>Enclosed</td><td class="ref">ASCE 7-22 Section 26.12 / Table 26.13-1</td></tr>
+  <tr><td class="left">Topographic Feature</td><td>Flat terrain</td><td class="ref">No topographic effect (Section 26.8.1)</td></tr>
+  <tr><td class="left">Structure Type</td><td colspan="2">Low-rise (h &le; 60 ft, h &le; least horizontal dimension 200 ft) &mdash; qualifies for Envelope Procedure</td></tr>
+</table>
+
+<h2><span class="sec-num">2</span>Design Parameters</h2>
+
+<table class="data">
+  <tr><th>Parameter</th><th>Symbol</th><th>Value</th><th>Reference</th></tr>
+  <tr><td class="left">Basic Wind Speed</td><td>V</td><td>115 mph</td><td class="ref">ASCE 7-22 Fig. 26.5-1A&ndash;1F (Risk Cat II)</td></tr>
+  <tr><td class="left">Wind Speed Type</td><td>&mdash;</td><td>Ultimate</td><td class="ref">Ultimate per ASCE 7-22</td></tr>
+  <tr><td class="left">Risk Category</td><td>&mdash;</td><td>II</td><td class="ref">Table 1.5-1</td></tr>
+  <tr><td class="left">Exposure Category</td><td>&mdash;</td><td>C</td><td class="ref">Section 26.7</td></tr>
+  <tr><td class="left">Directionality Factor</td><td>K<sub>d</sub></td><td>0.85</td><td class="ref">Table 26.6-1 (Buildings, MWFRS)</td></tr>
+  <tr><td class="left">Topographic Factor</td><td>K<sub>zt</sub></td><td>1.0000</td><td class="ref">Section 26.8 (Flat terrain)</td></tr>
+  <tr><td class="left">Ground Elevation Factor</td><td>K<sub>e</sub></td><td>1.0000</td><td class="ref">Section 26.9 / Eq. 26.9-1</td></tr>
+  <tr><td class="left">Enclosure</td><td>&mdash;</td><td>Enclosed</td><td class="ref">Section 26.12</td></tr>
+  <tr><td class="left">Internal Pressure Coefficient</td><td>GC<sub>pi</sub></td><td>±0.18</td><td class="ref">Table 26.13-1 (Enclosed)</td></tr>
+  <tr><td class="left">Procedure</td><td>&mdash;</td><td>Envelope (Ch 28)</td><td class="ref">ASCE 7-22 Ch. 28</td></tr>
+</table>
+
+<h2><span class="sec-num">3</span>Velocity Pressure Calculation</h2>
+
+<p style="margin-bottom:8px;">Velocity pressure at mean roof height per
+<span class="formula">Eq. 26.10-1</span>:</p>
+
+<div class="calc-step">
+  <span class="ref-tag">Eq. 26.10-1</span>
+  q<sub>h</sub> = 0.00256 &middot; K<sub>z</sub> &middot; K<sub>zt</sub> &middot; K<sub>d</sub> &middot; K<sub>e</sub> &middot; V<sup>2</sup>
+</div>
+
+<h3>3.1 Velocity Pressure Exposure Coefficient, K<sub>z</sub></h3>
+<p class="ref">ASCE 7-22 &sect;26.10.1 &middot; Eq. 26.10-2 &middot; Table 26.10-1</p>
+<div class="calc-step">
+  <span class="ref-tag">Eq. 26.10-2</span>
+  K<sub>z</sub> = 2.41 &middot; (z / z<sub>g</sub>)<sup>2/&alpha;</sup>&nbsp; for z &ge; z<sub>min</sub><br>
+  K<sub>z</sub> = 2.41 &middot; (z<sub>min</sub> / z<sub>g</sub>)<sup>2/&alpha;</sup>&nbsp; for z &lt; z<sub>min</sub>
+</div>
+<div class="calc-step">
+  <span class="label">Exposure C terrain constants (Table 26.11-1):</span><br>
+  &alpha; = 9.8 &middot; z<sub>g</sub> = 2460 ft &middot; z<sub>min</sub> = 15 ft<br>
+  z = h = 36.63 ft<br><br>
+  <span class='label'>For z &ge; z<sub>min</sub>:</span><br>K<sub>z</sub> = 2.41 &times; (36.63 / 2460)<sup>2/9.8</sup><br>
+  K<sub>z</sub> = <span class="result">1.0198</span>
+</div>
+
+<h3>3.2 Topographic Factor, K<sub>zt</sub></h3>
+<p class="ref">ASCE 7-22 &sect;26.8 &middot; Eq. 26.8-1 &middot; Table 26.8-1</p>
+
+<div class="calc-step">
+  <span class="ref-tag">Eq. 26.8-1</span>
+  K<sub>zt</sub> = (1 + K<sub>1</sub> &middot; K<sub>2</sub> &middot; K<sub>3</sub>)<sup>2</sup>
+</div>
+<div class="calc-step">
+  <span class="label">Topographic feature: <strong>Flat terrain</strong>
+  &mdash; topographic effects do not apply (Section 26.8.1).</span><br>
+  K<sub>1</sub> = 0&nbsp;&middot;&nbsp;K<sub>2</sub> = 0&nbsp;&middot;&nbsp;K<sub>3</sub> = 0<br>
+  K<sub>zt</sub> = (1 + 0)<sup>2</sup> = <span class="result">1.0000</span>
+</div>
+
+<h3>3.3 Wind Directionality Factor, K<sub>d</sub></h3>
+<p class="ref">ASCE 7-22 &sect;26.6 &middot; Table 26.6-1</p>
+<div class="calc-step">
+  <span class="label">Per Table 26.6-1, &quot;Buildings &mdash; MWFRS&quot;:</span><br>
+  K<sub>d</sub> = <span class="result">0.85</span>
+</div>
+
+<h3>3.4 Ground Elevation Factor, K<sub>e</sub></h3>
+<p class="ref">ASCE 7-22 &sect;26.9 &middot; Eq. 26.9-1 &middot; Table 26.9-1</p>
+<div class="calc-step">
+  <span class="ref-tag">Eq. 26.9-1</span>
+  K<sub>e</sub> = e<sup>(&minus;0.0000362 &middot; z<sub>e</sub>)</sup>
+</div>
+<div class="calc-step">
+  <span class="label">Site z<sub>e</sub> = 0 ft:</span><br>
+  K<sub>e</sub> = e<sup>(&minus;0.0000362 &times; 0)</sup> = <span class="result">1.0000</span>
+</div>
+
+<h3>3.5 Velocity Pressure at Mean Roof Height, q<sub>h</sub></h3>
+<div class="calc-step">
+  q<sub>h</sub> = 0.00256 &times; 1.0198 &times; 1.0000 &times; 0.85 &times; 1.0000 &times; (115)<sup>2</sup><br>
+  q<sub>h</sub> = <span class="result">29.35 psf</span>
+</div>
+
+<h2><span class="sec-num">4</span>Pressure Coefficients</h2>
+
+<h3>4.1 Internal Pressure Coefficient, GC<sub>pi</sub></h3>
+<p class="ref">ASCE 7-22 Table 26.13-1</p>
+<div class="calc-step">
+  <span class="label">Enclosure = <strong>Enclosed</strong>:</span><br>
+  GC<sub>pi</sub> = <span class="result">±0.18</span>
+</div>
+
+<h3>4.2 External Pressure &mdash; Governing Equation</h3>
+<div class="calc-step">
+  <span class="ref-tag">Eq. 28.3-1</span>
+  p = q<sub>h</sub> &middot; [(GC<sub>pf</sub>) &minus; (GC<sub>pi</sub>)]
+</div>
+
+<h2><span class="sec-num">5</span>External Pressure Coefficients (GC<sub>pf</sub>)</h2>
+<p class="ref">ASCE 7-22 Figure 28.3-1 &mdash; Envelope Procedure</p>
+<p>Project roof slope = 3.99/12 (&theta; &asymp; 18.4&deg;, tabulated band 20&deg;).
+Showing the GC<sub>pf</sub> values used for Load Case 1 (Wind Normal to Ridge);
+LC2/LC3/LC4 values follow the same figure (Section 6 below).</p>
+<table class="data">
+  <tr><th style="width:14%;">Surface</th><th>Description</th><th style="width:18%;">GC<sub>pf</sub></th></tr>
+  <tr><td>1</td><td class="left">Windward Wall</td><td>+0.516</td></tr><tr><td>2</td><td class="left">Windward Roof (near eave)</td><td>-0.690</td></tr><tr><td>3</td><td class="left">Leeward Roof</td><td>-0.468</td></tr><tr><td>4</td><td class="left">Leeward Wall</td><td>-0.415</td></tr><tr><td>1E</td><td class="left">Windward Wall (edge zone, within 2a)</td><td>+0.780</td></tr><tr><td>2E</td><td class="left">Windward Roof (edge zone, within 2a)</td><td>-1.070</td></tr><tr><td>3E</td><td class="left">Leeward Roof (edge zone, within 2a)</td><td>-0.673</td></tr><tr><td>4E</td><td class="left">Leeward Wall (edge zone, within 2a)</td><td>-0.618</td></tr>
+</table>
+<div class="info-note"><strong>Note:</strong> Torsional Load Cases 3 and 4 use 25% of the basic GC<sub>pf</sub> values per Figure 28.3-1.</div>
+
+<h2><span class="sec-num">6</span>Design Wind Pressures</h2>
+<p class="ref">Eq. 28.3-1: p = q<sub>h</sub> &middot; [(GC<sub>pf</sub>) &minus; (GC<sub>pi</sub>)]</p>
+<p>q<sub>h</sub> = <strong>29.35 psf</strong> &middot; GC<sub>pi</sub> = <strong>±0.18</strong> &middot;
+slope = 3.99/12 (&theta; row = 20&deg;). Controlling values per surface in Section 7.</p>
+<h3>6.1 Load Case 1 &mdash; Wind Normal to Ridge (Basic)</h3><p class="ref">Figure 28.3-1, Load Case 1</p><table class="data"><tr><th>Surface</th><th>Description</th><th>GC<sub>pf</sub></th><th>p with +GC<sub>pi</sub> (psf)</th><th>p with &minus;GC<sub>pi</sub> (psf)</th></tr><tr><td>1</td><td class="left">Windward Wall</td><td>+0.516</td><td>&mdash;</td><td>&mdash;</td></tr><tr><td>2</td><td class="left">Windward Roof (near eave)</td><td>-0.690</td><td>&mdash;</td><td>&mdash;</td></tr><tr><td>3</td><td class="left">Leeward Roof</td><td>-0.468</td><td>&mdash;</td><td>&mdash;</td></tr><tr><td>4</td><td class="left">Leeward Wall</td><td>-0.415</td><td>&mdash;</td><td>&mdash;</td></tr><tr><td>1E</td><td class="left">Windward Wall (edge zone, within 2a)</td><td>+0.780</td><td>&mdash;</td><td>&mdash;</td></tr><tr><td>2E</td><td class="left">Windward Roof (edge zone, within 2a)</td><td>-1.070</td><td>&mdash;</td><td>&mdash;</td></tr><tr><td>3E</td><td class="left">Leeward Roof (edge zone, within 2a)</td><td>-0.673</td><td>&mdash;</td><td>&mdash;</td></tr><tr><td>4E</td><td class="left">Leeward Wall (edge zone, within 2a)</td><td>-0.618</td><td>&mdash;</td><td>&mdash;</td></tr></table><h3>6.2 Load Case 2 &mdash; Wind Parallel to Ridge (Basic)</h3><p class="ref">Figure 28.3-1, Load Case 2</p><table class="data"><tr><th>Surface</th><th>Description</th><th>GC<sub>pf</sub></th><th>p with +GC<sub>pi</sub> (psf)</th><th>p with &minus;GC<sub>pi</sub> (psf)</th></tr><tr><td>1</td><td class="left">Side Wall (windward)</td><td>-0.450</td><td>&mdash;</td><td>&mdash;</td></tr><tr><td>2</td><td class="left">Windward Roof (near eave)</td><td>-0.690</td><td>&mdash;</td><td>&mdash;</td></tr><tr><td>3</td><td class="left">Leeward Roof</td><td>-0.370</td><td>&mdash;</td><td>&mdash;</td></tr><tr><td>4</td><td class="left">Side Wall (leeward)</td><td>-0.450</td><td>&mdash;</td><td>&mdash;</td></tr><tr><td>5</td><td class="left">Windward End Wall</td><td>+0.400</td><td>&mdash;</td><td>&mdash;</td></tr><tr><td>6</td><td class="left">Leeward End Wall</td><td>-0.290</td><td>&mdash;</td><td>&mdash;</td></tr><tr><td>1E</td><td class="left">Side Wall (edge zone)</td><td>-0.480</td><td>&mdash;</td><td>&mdash;</td></tr><tr><td>2E</td><td class="left">Windward Roof (edge zone)</td><td>-1.070</td><td>&mdash;</td><td>&mdash;</td></tr><tr><td>3E</td><td class="left">Leeward Roof (edge zone)</td><td>-0.530</td><td>&mdash;</td><td>&mdash;</td></tr><tr><td>4E</td><td class="left">Side Wall (edge zone)</td><td>-0.480</td><td>&mdash;</td><td>&mdash;</td></tr><tr><td>5E</td><td class="left">Windward End Wall (edge)</td><td>+0.610</td><td>&mdash;</td><td>&mdash;</td></tr><tr><td>6E</td><td class="left">Leeward End Wall (edge)</td><td>-0.430</td><td>&mdash;</td><td>&mdash;</td></tr></table><h3>6.3 Load Case 3 &mdash; Torsional &mdash; Wind Normal to Ridge</h3><p class="ref">Figure 28.3-2, Load Case 3 (25% of basic Load Case 1 values)</p><table class="data"><tr><th>Surface</th><th>Description</th><th>GC<sub>pf</sub></th><th>p with +GC<sub>pi</sub> (psf)</th><th>p with &minus;GC<sub>pi</sub> (psf)</th></tr><tr><td>1T</td><td class="left">Windward Wall (torsional)</td><td>+0.127</td><td>&mdash;</td><td>&mdash;</td></tr><tr><td>2T</td><td class="left">Windward Roof (torsional)</td><td>-0.170</td><td>&mdash;</td><td>&mdash;</td></tr><tr><td>3T</td><td class="left">Leeward Roof (torsional)</td><td>-0.117</td><td>&mdash;</td><td>&mdash;</td></tr><tr><td>4T</td><td class="left">Leeward Wall (torsional)</td><td>-0.106</td><td>&mdash;</td><td>&mdash;</td></tr></table><h3>6.4 Load Case 4 &mdash; Torsional &mdash; Wind Parallel to Ridge</h3><p class="ref">Figure 28.3-2, Load Case 4 (25% of basic Load Case 2 values)</p><table class="data"><tr><th>Surface</th><th>Description</th><th>GC<sub>pf</sub></th><th>p with +GC<sub>pi</sub> (psf)</th><th>p with &minus;GC<sub>pi</sub> (psf)</th></tr><tr><td>5T</td><td class="left">Windward End Wall (torsional)</td><td>+0.100</td><td>&mdash;</td><td>&mdash;</td></tr><tr><td>6T</td><td class="left">Leeward End Wall (torsional)</td><td>-0.070</td><td>&mdash;</td><td>&mdash;</td></tr></table>
+<h2><span class="sec-num">7</span>Governing Design Pressures Summary</h2>
+<p>Maximum (most severe) design pressures per surface across Load Cases 1 and 2.
+These are the pressures that must be resisted by the MWFRS.</p>
+<table class="data">
+  <tr><th class="left" style="text-align:left;">Surface group</th><th>Surface IDs</th>
+      <th>Max + (psf)</th><th>Max &minus; (psf)</th><th>Max |p| (psf)</th></tr>
+  <tr class="governing-row"><td>1 / 5</td><td class="left">Windward Wall / Windward End Wall</td><td>&mdash;</td><td>&mdash;</td><td>0.0</td></tr><tr><td>1E / 5E</td><td class="left">Windward Wall / End Wall (edge)</td><td>&mdash;</td><td>&mdash;</td><td>0.0</td></tr><tr><td>4 / 6</td><td class="left">Leeward Wall / Leeward End Wall</td><td>&mdash;</td><td>&mdash;</td><td>0.0</td></tr><tr><td>4E / 6E</td><td class="left">Leeward Wall / End Wall (edge)</td><td>&mdash;</td><td>&mdash;</td><td>0.0</td></tr><tr><td>1 / 4 (LC2)</td><td class="left">Side Wall (windward / leeward)</td><td>&mdash;</td><td>&mdash;</td><td>0.0</td></tr><tr><td>1E / 4E (LC2)</td><td class="left">Side Wall (edge)</td><td>&mdash;</td><td>&mdash;</td><td>0.0</td></tr><tr><td>2</td><td class="left">Windward Roof (near eave)</td><td>&mdash;</td><td>&mdash;</td><td>0.0</td></tr><tr><td>2E</td><td class="left">Windward Roof (edge zone)</td><td>&mdash;</td><td>&mdash;</td><td>0.0</td></tr><tr><td>3</td><td class="left">Leeward Roof</td><td>&mdash;</td><td>&mdash;</td><td>0.0</td></tr><tr><td>3E</td><td class="left">Leeward Roof (edge zone)</td><td>&mdash;</td><td>&mdash;</td><td>0.0</td></tr>
+</table>
+
+
+<h2><span class="sec-num">8</span>Applicability &amp; Limitations</h2>
+<ul style="margin: 8px 0 8px 20px;">
+  <li><strong>Method:</strong> ASCE 7-22 Chapter 28, Envelope Procedure for Low-Rise Buildings</li><li><strong>Qualification:</strong> Building qualifies as low-rise: h = 36.63 ft &le; 60 ft, and h &le; least horizontal dimension (200 ft)</li><li><strong>Roof slope:</strong> &theta; = 18.4&deg; &mdash; sloped-roof coefficients apply</li><li><strong>Enclosed building:</strong> Enclosed; GC<sub>pi</sub> = ±0.18</li><li><strong>Regular shaped:</strong> Building is rectangular with no unusual geometric features</li><li><strong>Rigid structure:</strong> Fundamental frequency assumed &ge; 1 Hz</li>
+</ul>
+
+<h2><span class="sec-num">9</span>References</h2>
+<ul style="margin: 8px 0 8px 20px; font-size: 10pt;">
+  <li>ASCE/SEI 7-22, <em>Minimum Design Loads and Associated Criteria for Buildings and Other Structures</em></li>
+  <li>International Building Code (IBC) 2021</li>
+  <li>Table 26.6-1 &mdash; Wind Directionality Factor</li>
+  <li>Table 26.10-1 &mdash; Velocity Pressure Exposure Coefficients</li>
+  <li>Table 26.11-1 &mdash; Terrain Exposure Constants</li>
+  <li>Table 26.13-1 &mdash; Internal Pressure Coefficients</li>
+  <li>Figure 28.3-1 &mdash; External Pressure Coefficients, GC<sub>pf</sub>, for Low-Rise Buildings</li>
+</ul>
+
+<h2><span class="sec-num">10</span>Reference Tables Appendix</h2>
+<p>ASCE 7-22 reference tables that the engine drew from for this calculation.
+Tables show the full row range; rows used by this project are highlighted gold.
+Tables not applicable to this project's procedure or topographic feature are
+suppressed and explicitly called out.</p>
+
+
+<div class="ref-table-block">
+  <div class="rt-header"><span class="rt-asce">Table 26.6-1</span>Wind Directionality Factor, K<sub>d</sub> (Buildings)</div>
+  <div class="rt-body">
+    <table class="data">
+      <tr><th class="left" style="text-align:left;">Structure Type</th><th>K<sub>d</sub></th></tr>
+      <tr class="used-row"><td class="left">Buildings &mdash; MWFRS</td><td>0.85</td></tr>
+    </table>
+    <div class="rt-note">Full Table 26.6-1 has 12 rows. Only the row used by this calculation is reproduced.</div>
+  </div>
+</div>
+
+<div class="ref-table-block">
+  <div class="rt-header"><span class="rt-asce">Table 26.9-1</span>Ground Elevation Factor, K<sub>e</sub></div>
+  <div class="rt-body">
+    <table class="data">
+      <tr><th>Ground Elevation z<sub>e</sub> (ft)</th><th>K<sub>e</sub></th></tr>
+      <tr><td>< 0</td><td>See Note 2</td></tr><tr class="used-row"><td>0</td><td>1.00</td></tr><tr><td>1,000</td><td>0.96</td></tr><tr><td>2,000</td><td>0.93</td></tr><tr><td>3,000</td><td>0.90</td></tr><tr><td>4,000</td><td>0.86</td></tr><tr><td>5,000</td><td>0.83</td></tr><tr><td>6,000</td><td>0.80</td></tr><tr><td>> 6,000</td><td>See Note 3</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="ref-table-block">
+  <div class="rt-header"><span class="rt-asce">Table 26.10-1</span>Velocity Pressure Exposure Coefficients, K<sub>h</sub> and K<sub>z</sub> &mdash; Exposure C (project's exposure)</div>
+  <div class="rt-body">
+    <table class="data">
+      <tr><th>Height z (ft)</th><th>K<sub>z</sub> (Exposure C)</th></tr>
+      <tr><td>0&ndash;15</td><td>0.85</td></tr><tr><td>20</td><td>0.90</td></tr><tr><td>25</td><td>0.94</td></tr><tr><td>30</td><td>0.98</td></tr><tr><td>40</td><td>1.04</td></tr><tr><td>50</td><td>1.09</td></tr><tr><td>60</td><td>1.13</td></tr><tr><td>70</td><td>1.17</td></tr><tr><td>80</td><td>1.21</td></tr><tr><td>90</td><td>1.24</td></tr><tr><td>100</td><td>1.26</td></tr><tr><td>120</td><td>1.31</td></tr><tr><td>140</td><td>1.34</td></tr><tr><td>160</td><td>1.39</td></tr><tr><td>180</td><td>1.41</td></tr><tr><td>200</td><td>1.44</td></tr><tr><td>250</td><td>1.51</td></tr><tr><td>300</td><td>1.57</td></tr><tr><td>350</td><td>1.62</td></tr><tr><td>400</td><td>1.66</td></tr><tr><td>450</td><td>1.70</td></tr><tr><td>500</td><td>1.74</td></tr>
+    </table>
+    <div class="rt-note">Only the column for this project's Exposure C is shown. Exposure categories are mutually exclusive per project; full Table 26.10-1 in the book has columns for B, C, and D side-by-side.</div>
+  </div>
+</div>
+
+<div class="ref-table-block">
+  <div class="rt-header"><span class="rt-asce">Table 26.11-1</span>Terrain Exposure Constants</div>
+  <div class="rt-body">
+    <table class="data">
+      <tr><th>Exposure</th><th>&alpha;</th><th>z<sub>g</sub> (ft)</th>
+          <th>&aacute;<sup>&#770;</sup></th><th>b&#770;</th>
+          <th>&aacute;<sup>&#772;</sup></th><th>b&#772;</th>
+          <th>c</th><th>&#8467; (ft)</th>
+          <th>&#x03B5;&#x0304;</th><th>z<sub>min</sub> (ft)</th></tr>
+      <tr><td>B</td><td>7.5</td><td>3,280</td><td>1/7.5</td><td>0.84</td><td>1/4.5</td><td>0.47</td><td>0.30</td><td>320</td><td>1/3.0</td><td>30</td></tr><tr class="used-row"><td>C</td><td>9.8</td><td>2,460</td><td>1/9.8</td><td>1.00</td><td>1/6.4</td><td>0.66</td><td>0.20</td><td>500</td><td>1/5.0</td><td>15</td></tr><tr><td>D</td><td>11.5</td><td>1,935</td><td>1/11.5</td><td>1.09</td><td>1/8.0</td><td>0.78</td><td>0.15</td><td>650</td><td>1/8.0</td><td>7</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="ref-table-block">
+  <div class="rt-header"><span class="rt-asce">Table 26.13-1</span>Internal Pressure Coefficients, GC<sub>pi</sub></div>
+  <div class="rt-body">
+    <table class="data">
+      <tr><th class="left" style="text-align:left;">Enclosure Classification</th><th>Internal Pressure</th><th>GC<sub>pi</sub></th></tr>
+      <tr class="used-row"><td class="left">Enclosed</td><td>Moderate</td><td>+0.18, -0.18</td></tr><tr><td class="left">Partially Open</td><td>Moderate</td><td>+0.18, -0.18</td></tr><tr><td class="left">Partially Enclosed</td><td>High</td><td>+0.55, -0.55</td></tr><tr><td class="left">Open</td><td>Negligible</td><td>0.00</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="suppressed">
+  <strong>Figure 26.8-1 (K<sub>1</sub> / K<sub>2</sub> / K<sub>3</sub>) suppressed</strong>
+  &mdash; topographic feature for this project is FLAT, so K<sub>zt</sub> = 1.0 by
+  Section 26.8.1 and these reference tables don't apply.
+</div>
+
+<h3>Figure 28.3-1 &mdash; GC<sub>pf</sub> for Envelope Procedure (Load Case 1)</h3>
+<p style="font-size:9.5pt;">All four load cases verified per ASCE 7-22. The Load Case 1 anchor row table is reproduced below; LC2/LC3/LC4 follow the same figure.</p>
+<div class="ref-table-block">
+  <div class="rt-header"><span class="rt-asce">Figure 28.3-1, LC1</span>Basic, Wind Normal to Ridge (8 surfaces &times; tabulated &theta;)</div>
+  <div class="rt-body">
+    <table class="data">
+      <tr><th>&theta; (deg)</th><th>1</th><th>2</th><th>3</th><th>4</th><th>1E</th><th>2E</th><th>3E</th><th>4E</th></tr>
+      <tr><td>0&ndash;5</td><td>+0.40</td><td>&minus;0.69</td><td>&minus;0.37</td><td>&minus;0.29</td><td>+0.61</td><td>&minus;1.07</td><td>&minus;0.53</td><td>&minus;0.43</td></tr>
+      <tr><td>20</td><td>+0.53</td><td>&minus;0.69</td><td>&minus;0.48</td><td>&minus;0.43</td><td>+0.80</td><td>&minus;1.07</td><td>&minus;0.69</td><td>&minus;0.64</td></tr>
+      <tr><td>30&ndash;45</td><td>+0.56</td><td>+0.21</td><td>&minus;0.43</td><td>&minus;0.37</td><td>+0.69</td><td>+0.27</td><td>&minus;0.53</td><td>&minus;0.48</td></tr>
+      <tr><td>90</td><td>+0.56</td><td>+0.56</td><td>&minus;0.37</td><td>&minus;0.37</td><td>+0.69</td><td>+0.69</td><td>&minus;0.48</td><td>&minus;0.48</td></tr>
+    </table>
+    <div class="rt-note">LC2, LC3, LC4 use the same figure with corresponding surface IDs (5/6 for end walls; 1T&ndash;4T and 5T/6T for torsional). Full content rendered in Section 6 above.</div>
+  </div>
+</div>
+
+<div class="suppressed">
+  <strong>Figure 27.3-1 (C<sub>p</sub>, walls + roof) suppressed</strong>
+  &mdash; this project uses the Envelope Procedure (Ch 28), not the Directional
+  Procedure (Ch 27). Suppressing the C<sub>p</sub> data that wouldn't be referenced.
+</div>
+
+<div class="footer report-footer">
+  Windloadcalc.com &mdash; a Wind Load Solutions company<br>
+  MWFRS Wind Load Calculations &mdash; GUIDE XREF — MWFRS Envelope<br>
+  Generated June 28, 2026
+</div>
+
+</body>
+</html>

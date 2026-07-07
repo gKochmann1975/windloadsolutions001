@@ -139,11 +139,13 @@ check_true("qh != double-Kd value (Kd not doubled)", abs(qh - double_kd) > 0.1)
 # ---------------------------------------------------------------------------
 print("\nTEST 6 — (GCrn)nom structural invariants (NO book magnitude asserted)")
 
-# 6a — effective-area (An) clamp behavior. Engine clamps An into [10, 5000].
+# 6a — effective-area (An) clamp behavior. Engine clamps An into [1, 5000]
+# (corrected 2026-06-27: Fig 29.4-7 has an An<=1 plateau; the old [10,5000] clamp
+# skipped it and under-read small panels -> unconservative). See WE-14.
 for omega in (0, 4, 10, 20, 35):
     for zone in (1, 2, 3):
-        below = eng.get_gcrn_nom(5, omega, zone)      # below min -> same as min
-        at_min = eng.get_gcrn_nom(10, omega, zone)
+        below = eng.get_gcrn_nom(0.5, omega, zone)    # below An=1 min -> same as min (plateau)
+        at_min = eng.get_gcrn_nom(1, omega, zone)
         above = eng.get_gcrn_nom(10000, omega, zone)  # above max -> same as max
         at_max = eng.get_gcrn_nom(5000, omega, zone)
         check(f"An clamp below-min == at-min (w={omega},z={zone})", below, at_min, 1e-9)

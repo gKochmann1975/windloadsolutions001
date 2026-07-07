@@ -19,20 +19,20 @@ ledger — needs your book read. 🔲 = not built yet (verify when built).
 | 1 | **C&C Windows / Doors** | LIVE | ✅ verified | Ch26 universals, Fig 30.3-1 (walls), Fig 30.4-1 | ledger-locked |
 | 2 | **MWFRS Building — Directional** | admin | ✅ verified | Ch27, Fig 27.3-1 | ledger-locked |
 | 3 | **MWFRS Building — Envelope** | admin | ✅ verified | Ch28, Fig 28.3-1 | ledger-locked |
-| 4 | **C&C Roof — Flat** | admin | ⬜ NEEDS READ | Fig 30.3-2A + overhang §30.7 | §C&C ROOFS below |
-| 5 | **C&C Roof — Gable** | admin | ⬜ NEEDS READ | Fig 30.3-2B/C/D | §C&C ROOFS |
-| 6 | **C&C Roof — Hip** | admin | ⬜ NEEDS READ | Fig 30.3-2E/F/G | §C&C ROOFS |
-| 7 | **C&C Roof — Monoslope** | admin | ⬜ NEEDS READ | Fig 30.3-5A/5B | §C&C ROOFS |
-| 8 | **C&C Roof — Multispan** | admin | ⬜ NEEDS READ | Fig 30.3-4 | §C&C ROOFS |
-| 9 | **C&C Roof — Sawtooth** | admin | ⬜ NEEDS READ | Fig 30.3-6 | §C&C ROOFS |
-| 10 | **Rooftop Solar** | admin | ⬜ NEEDS READ | Fig 29.4-7, 29.4-8, Eq 29.4-6 | **dedicated worksheet** `SOLAR_29.4_VERIFICATION_WORKSHEET.md` |
-| 11 | **Ground-Mounted Solar** | admin | ⬜ NEEDS READ | Fig 29.4-10, 29.4-11 (+ Fig 29.4-9 zones) | **dedicated worksheet** (same file) |
-| 12 | **Chimneys & Tanks** | admin | ⬜ NEEDS READ | Fig/Table 29.4-1 Cf row mapping | §CHIMNEYS below |
-| 13 | **Signs & Billboards** | admin | ⬜ NEEDS READ | §29.3, Fig 29.3-1 (solid-sign Cf) | §CH29 SPECIALIZED below |
-| 14 | **Open Signs & Frames** | admin | ⬜ NEEDS READ | Fig 29.4-2 (open-sign Cf, ε-banded) | §CH29 SPECIALIZED |
-| 15 | **Rooftop Equipment** | admin | ⬜ NEEDS READ | §29.4.1, (GCr) lateral/vertical | §CH29 SPECIALIZED |
-| 16 | **Trussed / Comm Towers** | admin | ⬜ NEEDS READ | Fig 29.4-3 Cf(ε) + round-member factor | §CH29 SPECIALIZED |
-| 17 | **Fencing / Freestanding Walls** | admin | ⬜ NEEDS READ | §29.3, Fig 29.3-1 (solid-wall Cf) | §CH29 SPECIALIZED |
+| 4 | **C&C Roof — Flat** | admin | ✅ VERIFIED 2026-06-27 | Fig 30.3-2A + overhang §30.7 | ledger-locked + test WE-3 |
+| 5 | **C&C Roof — Gable** | admin | ✅ VERIFIED 2026-06-27 | Fig 30.3-2B/C/D | ledger-locked + test WE-4 |
+| 6 | **C&C Roof — Hip** | admin | ✅ VERIFIED 2026-06-27 | Fig 30.3-2E/F/G | ledger-locked + test WE-5 (1 fix: 2G Z2 A 50→100) |
+| 7 | **C&C Roof — Monoslope** | admin | ✅ VERIFIED 2026-06-27 | Fig 30.3-5A/5B | ledger-locked + test WE-6 |
+| 8 | **C&C Roof — Multispan** | admin | ✅ VERIFIED 2026-06-27 | Fig 30.3-4 | ledger-locked + test WE-7 |
+| 9 | **C&C Roof — Sawtooth** | admin | ✅ VERIFIED 2026-06-27 | Fig 30.3-6 | ledger-locked + test WE-8 |
+| 10 | **Rooftop Solar** | admin | ✅ VERIFIED 2026-06-27 (engine corrected) | Fig 29.4-7, 29.4-8, Eq 29.4-6 | test WE-14; GCrn + γa both fixed |
+| 11 | **Ground-Mounted Solar** | admin | ✅ VERIFIED 2026-06-27 (engine corrected) | Fig 29.4-10, 29.4-11 | tests WE-15/WE-22 (dynamic; was WE-16); static 7/8 + dynamic fixed + Zone-2 overrides WE-21 |
+| 12 | **Chimneys & Tanks** | admin | ✅ VERIFIED 2026-06-27 | Fig/Table 29.4-1 Cf row mapping | ledger-locked + test WE-10 |
+| 13 | **Signs & Billboards** | admin | ✅ VERIFIED 2026-06-27 | §29.3, Fig 29.3-1 (solid-sign Cf) | ledger-locked + test WE-13 (shares 29.3-1 with #17) |
+| 14 | **Open Signs & Frames** | admin | ✅ VERIFIED 2026-06-27 | Fig 29.4-2 (open-sign Cf, ε-banded) | ledger-locked + test WE-12 |
+| 15 | **Rooftop Equipment** | admin | ✅ VERIFIED 2026-06-27 | §29.4.1, (GCr) lateral/vertical | ledger-locked + test WE-9 |
+| 16 | **Trussed / Comm Towers** | admin | ✅ VERIFIED 2026-06-27 | Fig 29.4-3 Cf(ε) + round-member factor | ledger-locked + test WE-11 |
+| 17 | **Fencing / Freestanding Walls** | admin | ✅ VERIFIED 2026-06-27 | §29.3, Fig 29.3-1 (solid-wall Cf) | ledger-locked + test WE-13 |
 | 18 | **Attached Canopies** | engine only | ⬜ NEEDS READ | Fig 30.9-1A/1B, 30.9-2A/2B (graphs) | §NEW ENGINES below |
 | 19 | **Parapets (C&C)** | engine only | ⬜ partial | Fig 30.6-1 combo + roof Zones 2/3 (wall GCp ✅) | §NEW ENGINES |
 | 20 | **C&C Free Roofs (open bldgs)** | engine only | ⬜ NEEDS READ | Fig 30.5-1 Cn table (monoslope done; pitched/troughed pending) | §NEW ENGINES |
@@ -52,8 +52,17 @@ z_min — the 0.70 floor vs raw Table 26.10-1 cells (0.57/0.62/0.66). See the OP
 QUESTION section at the bottom. Conservative either way (no safety risk), but the
 *reported* intermediate Kz for low-rise Exp-B is the floor.
 
-**Bottom line: 19 calculators (#4–22) need your manual book cross-reference before
-they can ship.** The 3 production calculators (#1–3) are done. #18-22 are brand-new
+**✅✅ BOTTOM LINE: ALL 17 UI/admin calculators (#1–17) VALUE-VERIFIED against the physical
+book 2026-06-27.** (#18–22 are engine-only scaffolds with no UI — verify when built.)
+Done: #1–3 production; **ALL 6 C&C ROOFS (#4–9)**; **ALL SPECIALIZED (#12–17)**; **SOLAR
+rooftop (#10) + ground (#11)**. **360 regression assertions (WE-1…WE-22; snow WE-18, combos WE-19, pg WE-20, Zone-2 overrides WE-21).**
+**Engine bugs caught + fixed this pass:** hip Fig 30.3-2G Z2 area (50→100); rooftop solar
+GCrn (Fig 29.4-7) + γa (Fig 29.4-8); ground solar static (Fig 29.4-10, 7/8 curves) +
+dynamic (Fig 29.4-11, shape + 5 cells). Most solar errors were UNCONSERVATIVE (engine read
+LOWER than book) — important catches.
+**Remaining (NOT value errors):** solar ENFORCEMENT gaps (θ≤7° guard, eave-h for θ≤10°,
+is_exposed d₁/d₂ helper — see SOLAR worksheet §C2); opt-in signs/walls Notes 3 + double-faced
+reductions; #18–22 scaffolds when they get a UI. #18-22 are brand-new
 engines (no UI) built 2026-06-23; #20/#21/#22 use mostly READABLE tables/formulas
 (higher confidence); #18 is graph-traced (lower). MWFRS free roofs is blocked on scans.
 
@@ -81,7 +90,8 @@ between anchors. Confirm BOTH the anchor magnitudes AND the effective-area range
 
 ## C&C ROOFS
 
-### [ ] Fig 30.3-2A — Flat roof, h ≤ 60 ft  (book ~p.319) — `asce7_22_cc_roofs_flat.py:303-331`
+### [x] Fig 30.3-2A — Flat roof, h ≤ 60 ft  (book ~p.319) — `asce7_22_cc_roofs_flat.py:303-331`
+> ✅ VERIFIED 2026-06-27 — user confirmed "all match"; ledger-locked + regression test WE-3. All values below confirmed correct.
 > ⚠️ This is the PRIMARY path for the most common case (every 1–2 story flat roof).
 | Zone | A=10 | A=500 (or noted) | Confirm |
 |---|---|---|---|
@@ -92,7 +102,8 @@ between anchors. Confirm BOTH the anchor magnitudes AND the effective-area range
 | Zone 3 | −3.2 | −1.4 | [ ] |
 > Note: Zone 2 and Zone 3 share the same A=500 anchor (−1.4) — unusual, confirm explicitly.
 
-### [ ] Fig 30.3-2A overhangs / §30.7  — `asce7_22_cc_roofs_flat.py:375-398`
+### [x] Fig 30.3-2A overhangs / §30.7  — `asce7_22_cc_roofs_flat.py:375-398`
+> ✅ VERIFIED 2026-06-27 — confirmed with the field figure above.
 | Zone | A=10 | A=500 | Confirm |
 |---|---|---|---|
 | Zone 1′/1 | −1.7 | −1.0 (mid −1.6 @A=100) | [ ] |
@@ -100,7 +111,8 @@ between anchors. Confirm BOTH the anchor magnitudes AND the effective-area range
 | Zone 3 | −3.2 | −1.1 | [ ] |
 > Overhangs usually govern (most negative) → an error here is directly safety-relevant.
 
-### [ ] Fig 30.3-2B/C/D — Gable roof  — `asce7_22_cc_roofs_gable.py:226-291`
+### [x] Fig 30.3-2B/C/D — Gable roof  — `asce7_22_cc_roofs_gable.py:226-291`
+> ✅ VERIFIED 2026-06-27 — user confirmed "all match"; ledger-locked + regression test WE-4 (24 cells). θ-band breakpoints + per-zone area anchors all confirmed. (θ-interp-vs-hard-band decision still open below.)
 **Fig 30.3-2B (θ ≤ 20°):** Pos +0.6/+0.3 @(10/200) · Z1 −2.0/−0.5 @(10/300) · Z2 −2.7/−1.0 @(10/200) · Z3 −3.6/−1.8 @(10/100) — [ ]
 **Fig 30.3-2C (θ ≤ 27°):** Pos +0.6/+0.3 @(10/200) · Z1 −1.5/−0.8 @(10/200) · Z2 −2.5/−1.2 @(10/100) · Z3 −3.0/−1.4 @(10/100) — [ ]
 **Fig 30.3-2D (θ ≤ 45°):** Pos +0.9/+0.5 @(10/200) · Z1 −1.8/−0.8 @(10/100) · Z2 −2.0/−1.0 @(10/200) · Z3 −2.5/−1.0 @(10/200) — [ ]
@@ -108,22 +120,26 @@ between anchors. Confirm BOTH the anchor magnitudes AND the effective-area range
 > between figures vs the current hard θ-bands (step discontinuity at 20°/27°) — same issue the hip
 > engine already fixed. Don't change interpolation until these cells are confirmed.
 
-### [ ] Fig 30.3-2E/F/G — Hip roof  — `asce7_22_cc_roofs_hip.py:184-265`
+### [x] Fig 30.3-2E/F/G — Hip roof  — `asce7_22_cc_roofs_hip.py:184-265`
+> ✅ VERIFIED 2026-06-27 — user reviewed all; 1 correction: **2G Zone 2 A-max 50 → 100** (magnitude −0.8 unchanged). Engine fixed (line 255), ledger-locked, regression test WE-5.
 **Fig 30.3-2E (7°<θ≤20°):** Pos +0.7/+0.3 · Z1 −1.8/−0.8 @(10/200) · Z2 −2.4/−1.3 @(10/200) · Z3 −2.6/−1.4 @(10/200) — [ ]
 **Fig 30.3-2F (20°<θ≤27°):** Z1 −1.4/−0.8 @(10/100) · Z2 −2.0/−1.0 @(10/200) · Z3 −2.0/−1.0 @(10/200) — [ ]
 **Fig 30.3-2G (27°<θ≤45°):** Z1 −1.5/−0.7 @(10/100) · Z2 −1.8/−0.8 @(10/50) · Z3 −2.4/−1.0 @(10/100) — [ ]
 
-### [ ] Fig 30.3-5A/5B — Monoslope roof  — `asce7_22_cc_roofs_monoslope.py:155-190`
+### [x] Fig 30.3-5A/5B — Monoslope roof  — `asce7_22_cc_roofs_monoslope.py:155-190`
+> ✅ VERIFIED 2026-06-27 — user confirmed "all match". A-max=100 confirmed; Zone 1 (5A) constant −1.1; 2′/3′ only in 5A. Ledger-locked + test WE-6.
 **Fig 30.3-5A (3°<θ≤10°):** Pos +0.3/+0.2 · Z1 −1.1 (const) · Z2 −1.3/−1.2 · Z2′ −1.6/−1.5 · Z3 −1.8/−1.2 · Z3′ −2.6/−1.6 @(10/100) — [ ]
 **Fig 30.3-5B (10°<θ≤30°):** Pos +0.4/+0.3 · Z1 −1.3/−1.1 · Z2 −1.6/−1.2 · Z3 −2.9/−2.0 @(10/100) — [ ]
 > ⚠️ Confirm the effective-area range: engine uses A=10→100 (not 10→500). Verify both anchors AND endpoints.
 
-### [ ] Fig 30.3-4 — Multispan gable roof  — `asce7_22_cc_roofs_multispan.py:272-349`
+### [x] Fig 30.3-4 — Multispan gable roof  — `asce7_22_cc_roofs_multispan.py:272-349`
+> ✅ VERIFIED 2026-06-27 — user confirmed "all match". A-max=100 confirmed (plateaus at 100). Ledger-locked + test WE-7.
 **(10°<θ≤30°):** Pos +0.6/+0.4 · Z1 −1.6/−1.4 · Z2 −2.2/−1.7 · Z3 −2.7/−1.7 @(10/100) — [ ]
 **(30°<θ≤45°):** Pos +1.0/+0.8 · Z1 −2.0/−1.1 · Z2 −2.5/−1.7 · Z3 −2.6/−1.7 @(10/100) — [ ]
 > ⚠️ Upper anchor is A=100 (not 500). Confirm whether the curve plateaus at 100 or continues to 500.
 
-### [ ] Fig 30.3-6 — Sawtooth roof  — `asce7_22_cc_roofs_sawtooth.py:296-386`
+### [x] Fig 30.3-6 — Sawtooth roof  — `asce7_22_cc_roofs_sawtooth.py:296-386`
+> ✅ VERIFIED 2026-06-27 — user confirmed "all match". Per-zone positive, Z3 Span-A 3-point piecewise (−4.1/−3.7/−2.1), Z3 B/C/D start at A=100 — all confirmed. Ledger-locked + test WE-8. **Closes the C&C roof cluster.**
 Zone1 +0.7/+0.4, −2.2/−1.1 · Zone2 +1.1/+0.8 (@A=100), −3.2/−1.6 · Zone3 +0.8/+0.7 (@A=100) ·
 Zone3 neg Span A −4.1/−3.7/−2.1 (piecewise), Spans B/C/D −2.6/−1.9 (start A=100) — [ ]
 > Most complex of the roof figures; verify the Span-A piecewise curve and the A=100 start points carefully.
@@ -166,7 +182,8 @@ Static (29.4-10) + dynamic (29.4-11) GCgn/GCgm anchor curves — zones 1/2, two 
 > **`ASCE 7-22/CHIMNEYS_TANKS_Cf_REFERENCE.md`** (every Cf cell + Kd-by-cross-section +
 > the D√qz threshold + the Octagonal-shares-Hexagonal assumption, each with a blank
 > "Book" column to tick). Use that sheet when verifying.
-### [ ] Fig 29.4-1 round subcritical/supercritical mapping — `asce7_22_other_chimneys_tanks.py`
+### [x] Fig 29.4-1 round subcritical/supercritical mapping — `asce7_22_other_chimneys_tanks.py`
+> ✅ VERIFIED 2026-06-27 (physical book, Option B) — all 8 Cf rows × h/D(1/7/25), round D√qz=2.5 split direction, octagonal=hex row, Kd-by-section. Ledger-locked + test WE-10.
 Cf values themselves ARE in the ledger and match. Re-confirm the round-section regime→row mapping
 (D√qz ≤ 2.5 = subcritical single "All" row; > 2.5 = roughness rows) — this had a swap bug 2026-06-15. — [ ]
 
@@ -179,25 +196,29 @@ These five got the Option-6 UI this session, so per the "verify when UI-exposed"
 shipping. Engine values below are the real coded values (extracted 2026-06-22).
 Each should get its own cell-by-cell worksheet like solar did when you sit down to verify it.
 
-### [ ] Signs & Billboards (solid signs) — `asce7_22_other_signs_calculator.py`
+### [x] Signs & Billboards (solid signs) — `asce7_22_other_signs_calculator.py`
+> ✅ VERIFIED 2026-06-27 (physical book, Option B) — shares Fig 29.3-1 with freestanding walls (#17); full Case A/B grid + Case C + Notes 1–4 confirmed. Ledger-locked + test WE-13.
 F = q<sub>h</sub>·G·C<sub>f</sub>·A<sub>s</sub> (Eq. 29.3-1). Uses the **same Fig 29.3-1 C<sub>f</sub>
 table** as freestanding walls (Case A/B/C, s/h × B/s). — [ ]
 > A user reference exists: `SIGNS_FREESTANDING_WALLS_Cf_REFERENCE.md` (Feb 2026). Confirm
 > that against the book + lock into the ledger; don't trust the in-code "VERIFIED" comment alone.
 
-### [ ] Fencing / Freestanding Walls — `asce7_22_other_freestanding_walls.py:59-130`
+### [x] Fencing / Freestanding Walls — `asce7_22_other_freestanding_walls.py:59-130`
+> ✅ VERIFIED 2026-06-27 (physical book, Option B) — full Case A/B grid (7×12), Case C regions + B/s 13/45 subdivisions, return-corner reduction, Notes 1–4. Engine implements Note 1 + interpolation + return-corner; Notes 3 / double-faced reductions left OFF (conservative, opt-in pending). Ledger-locked + test WE-13.
 Fig 29.3-1 C<sub>f</sub>, keyed s/h ∈ {0.16..1.0} × B/s ∈ {0.05..45}. Case A/B sample row
 (s/h=1.0): C<sub>f</sub> = 1.80/1.70/1.65/1.55/1.45/1.40/1.35.../1.30. Plus Case C region
 table. In-code says "verified pp.301-302". — [ ]
 > Most detailed Ch29 table. Confirm Case A/B grid + Case C regions + the Case-C reduction note.
 
-### [ ] Open Signs & Frames — `asce7_22_other_open_signs.py:61-71`
+### [x] Open Signs & Frames — `asce7_22_other_open_signs.py:61-71`
+> ✅ VERIFIED 2026-06-27 (physical book, Option B) — all 9 Cf cells, ε-bands, round D√qz=2.5 split, ε>0.7→solid-sign guard, Kd=0.85. Ledger-locked + test WE-12.
 Fig 29.4-2 C<sub>f</sub> keyed [member regime][ε band]:
 flat 2.0/1.8/1.6 · rounded-subcritical (D√qz≤2.5) 1.2/1.3/1.5 · rounded-supercritical (>2.5) 0.8/0.9/1.1 — [ ]
 > **2026-06-26:** dedicated worksheet — **`ASCE 7-22/OPEN_SIGNS_OPEN_FRAMES_Cf_REFERENCE.md`**
 > (9 Cf cells + ε bands + D√qz threshold + ε>0.7→solid routing). Use that sheet.
 
-### [ ] Rooftop Equipment — `asce7_22_other_rooftop_equipment.py`
+### [x] Rooftop Equipment — `asce7_22_other_rooftop_equipment.py`
+> ✅ VERIFIED 2026-06-27 (physical book, Option B) — GCr 1.9→1.0 over 0.1·B·h→B·h, both force eqs, single GCr, Kd=0.85 (folded into qh). Ledger-locked + test WE-9.
 (GC<sub>r</sub>) = **1.9** for A<sub>f</sub> ≤ 0.1·B·h, reduced linearly 1.9 → 1.0 for A<sub>f</sub>
 between 0.1·B·h and B·h (§29.4.1). Confirm the 1.9 anchor, the 1.0 floor, and the area band. — [ ]
 > **2026-06-26:** dedicated worksheet created — **`ASCE 7-22/ROOFTOP_EQUIPMENT_GCr_REFERENCE.md`**
@@ -205,7 +226,8 @@ between 0.1·B·h and B·h (§29.4.1). Confirm the 1.9 anchor, the 1.0 floor, an
 > "no separate G / single GCr for both Fh & Fv" assumptions). This one is text+formula (no graph)
 > → quickest to confirm. Use that sheet.
 
-### [ ] Trussed / Comm Towers — `asce7_22_other_towers.py:22-32`
+### [x] Trussed / Comm Towers — `asce7_22_other_towers.py:22-32`
+> ✅ VERIFIED 2026-06-27 (physical book, Option B) — Square/Triangle polynomials + round-member (≤1.0) + diagonal (≤1.2) factors + Kd=0.85. Ledger-locked + test WE-11.
 Fig 29.4-3 C<sub>f</sub>(ε): square = 4.0ε²−5.9ε+4.0 · triangle = 3.4ε²−4.7ε+3.4 ·
 round-member multiplier = 0.51ε²+0.57. Confirm all three polynomial coefficient sets. — [ ]
 > **2026-06-26:** dedicated worksheet — **`ASCE 7-22/TRUSSED_TOWERS_Cf_REFERENCE.md`**

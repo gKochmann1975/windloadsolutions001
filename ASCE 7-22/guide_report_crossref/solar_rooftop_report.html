@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="/images/windloadcalc-icon-anim-loop.svg?v=1">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
+<link rel="shortcut icon" href="/favicon.ico?v=2">
+<title>Solar Wind Load Calculations &mdash; GUIDE XREF — Rooftop Solar Parallel (Ex 5.3)</title>
+<style>
+  /* -- Page & Base --
+     Bottom margin is intentionally larger so the fixed .report-footer (in
+     print) has clear space to sit in. With a flat 0.75in margin the footer
+     was overlapping the last calc-step / reference bullet on each page,
+     leaving the text sliced in half across the page break. */
+  @page { size: letter portrait; margin: 0.75in 0.75in 1.25in 0.75in; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:    #1a3a5c;
+    --navy-lt: #2a5a8c;
+    --navy-bg: #f0f4f8;
+    --border:  #c8d6e5;
+    --text:    #333;
+    --pass:    #27ae60;
+    --fail:    #e74c3c;
+  }
+
+  body {
+    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.55;
+    max-width: 8.5in;
+    margin: 0 auto;
+    padding: 0.75in;
+    background: #fff;
+    color: var(--text);
+  }
+
+  /* -- Export Toolbar (screen only) -- */
+  .export-toolbar {
+    position: fixed;
+    top: 12px;
+    right: 18px;
+    display: flex;
+    gap: 6px;
+    z-index: 1000;
+    background: rgba(255,255,255,0.92);
+    padding: 6px 10px;
+    border-radius: 6px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+  }
+  .export-toolbar button {
+    background: #fff;
+    color: var(--navy);
+    border: 1.5px solid var(--navy);
+    border-radius: 4px;
+    padding: 4px 10px;
+    font-size: 9pt;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.15s;
+  }
+  .export-toolbar button:hover {
+    background: var(--navy);
+    color: #fff;
+  }
+  .export-toolbar button .icon {
+    font-size: 11pt;
+  }
+
+  /* -- Dual Logo Header -- */
+  .logo-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .logo-row-center {
+    justify-content: center;
+  }
+  .customer-logo {
+    max-width: 300px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .customer-logo img {
+    max-height: 55px;
+    max-width: 300px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
+  .wlc-logo {
+    width: 140px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .wlc-logo img {
+    max-height: 35px;
+    max-width: 140px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
+  .wlc-logo-large {
+    width: 280px;
+    height: 70px;
+  }
+  .wlc-logo-large img {
+    max-height: 70px;
+    max-width: 280px;
+  }
+
+  .report-title {
+    text-align: center;
+    padding: 10px 0 14px;
+    border-bottom: 3px solid var(--navy);
+    margin-bottom: 20px;
+  }
+  .report-title h1 {
+    font-size: 16pt;
+    color: var(--navy);
+    letter-spacing: 1.5px;
+    margin-bottom: 2px;
+  }
+  .report-title .subtitle {
+    font-size: 11pt;
+    color: var(--navy-lt);
+    font-weight: 400;
+  }
+
+  /* -- Section Headings -- */
+  h2 {
+    font-size: 13pt;
+    color: var(--navy);
+    margin: 26px 0 10px;
+    padding-bottom: 4px;
+    border-bottom: 2px solid var(--navy);
+  }
+  h2 .sec-num {
+    display: inline-block;
+    background: var(--navy);
+    color: #fff;
+    font-size: 10pt;
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+    border-radius: 3px;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+  h3 {
+    font-size: 11pt;
+    color: var(--navy-lt);
+    margin: 14px 0 6px;
+    font-weight: 600;
+  }
+
+  /* -- Project Info Block -- */
+  .project-info {
+    border: 2px solid var(--navy);
+    border-radius: 4px;
+    padding: 14px 18px;
+    margin-bottom: 22px;
+    background: var(--navy-bg);
+  }
+  .project-info table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .project-info td {
+    padding: 3px 10px;
+    vertical-align: top;
+    font-size: 10pt;
+  }
+  .project-info td.label {
+    font-weight: 700;
+    color: var(--navy);
+    width: 130px;
+    white-space: nowrap;
+  }
+  .project-info td.spacer {
+    width: 30px;
+  }
+
+  /* -- Data Tables -- */
+  table.data {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8px 0 18px;
+    font-size: 9.5pt;
+  }
+  table.data th {
+    background: var(--navy);
+    color: #fff;
+    padding: 6px 8px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 9pt;
+    border: 1px solid #15304d;
+  }
+  table.data td {
+    padding: 5px 8px;
+    border: 1px solid #dde3ea;
+    text-align: center;
+  }
+  table.data td.left { text-align: left; }
+  table.data tr:nth-child(even) { background: #f6f8fb; }
+  table.data tr:hover { background: #eaf0f7; }
+  table.data td.ref { font-size: 8.5pt; color: #666; text-align: left; }
+
+  /* -- Calc Step Boxes -- */
+  .calc-step {
+    background: #f5f7fa;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--navy);
+    padding: 10px 14px;
+    margin: 6px 0;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 9.5pt;
+    line-height: 1.7;
+    border-radius: 0 4px 4px 0;
+    overflow-x: auto;
+  }
+  .calc-step .result {
+    color: var(--navy);
+    font-weight: 700;
+  }
+  .calc-step .label {
+    color: #888;
+    font-style: italic;
+  }
+
+  /* -- Info Note -- */
+  .info-note {
+    background: #e8f0fe;
+    border: 1px solid #b4d0f0;
+    border-radius: 4px;
+    padding: 8px 14px;
+    margin: 8px 0 12px;
+    font-size: 9.5pt;
+    color: #1a3a5c;
+  }
+
+  /* -- Pass / Fail Badges -- */
+  .badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 3px;
+    font-weight: 700;
+    font-size: 8.5pt;
+    letter-spacing: 0.5px;
+  }
+  .badge-pass { background: #d4edda; color: #155724; }
+  .badge-fail { background: #f8d7da; color: #721c24; }
+
+  /* -- References List -- */
+  .ref-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 8px 0;
+  }
+  .ref-list li {
+    padding: 3px 0 3px 18px;
+    position: relative;
+    font-size: 10pt;
+  }
+  .ref-list li::before {
+    content: "\25A0";
+    color: var(--navy);
+    position: absolute;
+    left: 0;
+    font-size: 7pt;
+    top: 6px;
+  }
+
+  /* -- Footer -- */
+  .report-footer {
+    margin-top: 30px;
+    border-top: 2px solid var(--navy);
+    padding-top: 8px;
+    font-size: 8pt;
+    color: #888;
+  }
+  .footer-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-disclaimer {
+    margin-top: 6px;
+    font-size: 7.5pt;
+    color: #aaa;
+    text-align: center;
+    font-style: italic;
+    line-height: 1.4;
+  }
+
+  /* -- Print Styles -- */
+  @media print {
+    .export-toolbar { display: none !important; }
+
+    /* Force a page break before any section marked with .section-break
+       in the HTML (currently section 2 — Velocity Pressure). The
+       break-* / page-break-* rules below weren't reliably moving section 2
+       off page 1, so we trigger an explicit page break here. */
+    .section-break {
+      break-before: page;
+      page-break-before: always;
+    }
+
+    body {
+      padding: 0;
+      max-width: none;
+      font-size: 10pt;
+    }
+
+    /* Atomic blocks — must never be split across a page break.
+       Both the modern `break-inside` and legacy `page-break-inside` are
+       declared because Chrome's print engine still honors `page-break-*`
+       more reliably than the unprefixed `break-*` in some versions. */
+    .project-info,
+    table.data,
+    .calc-step,
+    .info-note,
+    .ref-list,
+    .ref-list li {
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    /* Section headings stay glued to whatever follows them. Without this,
+       an h2 can end up as the last visible line of a page with its table
+       or first calc-step forced to the next page (orphaned heading). */
+    h2, h3, h4 {
+      break-after: avoid;
+      page-break-after: avoid;
+      /* Belt-and-suspenders: ask the engine to keep the next two lines /
+         block with the heading even when break-after is ignored. */
+      orphans: 3;
+      widows: 3;
+    }
+
+    /* The on-screen .report-footer is replaced in print by the @page
+       bottom-left / -center / -right margin boxes injected at the bottom
+       of the generated HTML. Hiding it here prevents the old static text
+       (which couldn't show real page numbers) from also rendering. */
+    .report-footer {
+      display: none !important;
+    }
+    /* Header prints in BLACK text, not light navy/gray. */
+    .report-title h1,
+    .report-title .subtitle { color: #000 !important; }
+    .project-info td,
+    .project-info td.label { color: #000 !important; }
+  }
+
+  /* MWFRS-specific palette extensions (gold = used row, gray = suppressed) */
+  :root {
+    --used:        #fff8e1;
+    --used-st:     #f59e0b;
+    --suppress-bg: #f3f4f6;
+    --suppress-st: #9ca3af;
+  }
+
+  /* MWFRS load-case banner — used to delimit each Envelope load case */
+  .mwfrs-loadcase {
+    background: var(--navy);
+    color: #fff;
+    padding: 6px 12px;
+    margin: 18px 0 6px;
+    font-size: 10.5pt;
+    font-weight: 700;
+    border-radius: 3px;
+    letter-spacing: 0.5px;
+  }
+  .mwfrs-loadcase .lc-fig {
+    font-weight: 400;
+    font-size: 9pt;
+    opacity: 0.85;
+    margin-left: 10px;
+  }
+  /* Surface group sub-header (windward, leeward, etc.) */
+  .mwfrs-surface-group {
+    background: var(--navy-bg);
+    color: var(--navy);
+    padding: 4px 10px;
+    margin: 14px 0 4px;
+    font-size: 10pt;
+    font-weight: 600;
+    border-left: 4px solid var(--navy);
+    border-radius: 0 3px 3px 0;
+  }
+  /* Pressure value cells: positive = compression, negative = suction */
+  table.data td.p-pos { color: #155724; font-weight: 600; }
+  table.data td.p-neg { color: #721c24; font-weight: 600; }
+
+  /* Calc-step ref tag — small navy badge beside the equation reference */
+  .calc-step .ref-tag {
+    display: inline-block;
+    background: var(--navy);
+    color: #fff;
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 8pt;
+    font-weight: 600;
+    margin-right: 6px;
+    font-family: 'Segoe UI', Arial, sans-serif;
+  }
+
+  /* Inline formula chip */
+  .formula {
+    display: inline-block;
+    background: #eef2f7;
+    padding: 1px 6px;
+    border-radius: 2px;
+    font-family: 'Consolas', monospace;
+    font-size: 10pt;
+  }
+
+  /* Highlighted "used by your project" row in reference tables (gold) */
+  table.data tr.used-row td {
+    background: var(--used);
+    border-color: var(--used-st);
+    font-weight: 700;
+  }
+  table.data tr.used-row td:first-child::before {
+    content: '\25B6  ';
+    color: var(--used-st);
+  }
+
+  /* Reference Tables Appendix — bordered block with navy header */
+  .ref-table-block {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    margin: 14px 0 20px;
+    overflow: hidden;
+  }
+  .ref-table-block .rt-header {
+    background: var(--navy);
+    color: #fff;
+    padding: 6px 12px;
+    font-size: 10pt;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+  }
+  .ref-table-block .rt-header .rt-asce {
+    background: rgba(255,255,255,0.18);
+    padding: 1px 6px;
+    border-radius: 2px;
+    font-size: 9pt;
+    font-weight: 600;
+    margin-right: 8px;
+    letter-spacing: 0.4px;
+  }
+  .ref-table-block .rt-body {
+    padding: 8px 12px;
+    background: #fafbfd;
+  }
+  .ref-table-block .rt-note {
+    font-size: 8.5pt;
+    color: #555;
+    margin-top: 4px;
+    line-height: 1.5;
+  }
+
+  /* Suppressed-table notice (gray, dashed) — replaces tables not applicable
+     to this project (topo when flat, GCpf when directional, Cp when envelope) */
+  .suppressed {
+    background: var(--suppress-bg);
+    border: 1px dashed var(--suppress-st);
+    border-radius: 4px;
+    padding: 10px 14px;
+    margin: 10px 0;
+    font-size: 9.5pt;
+    color: #4b5563;
+    font-style: italic;
+  }
+  .suppressed strong { color: #374151; font-style: normal; }
+
+  /* Governing-pressure callout (navy theme — NOT red; red implies failure) */
+  .governing-callout {
+    background: var(--navy-bg);
+    border-left: 4px solid var(--navy);
+    border-radius: 0 4px 4px 0;
+    padding: 10px 14px;
+    margin: 10px 0;
+    font-size: 10pt;
+    color: var(--text);
+  }
+  .governing-callout strong { color: var(--navy); }
+
+  /* Governing row highlight in the summary table (light blue) */
+  table.data tr.governing-row td {
+    background: #dbeafe;
+    color: var(--navy);
+    font-weight: 700;
+  }
+</style>
+</head>
+<body>
+
+<div class="export-toolbar">
+  <button onclick="window.print()"><span class="icon">&#128424;</span>Print</button>
+</div>
+
+
+
+<div class="report-title">
+  <h1>SOLAR PANEL WIND LOAD CALCULATIONS</h1>
+  <div class="subtitle">Rooftop Solar Panels &mdash; ASCE 7-22 &sect;29.4.4</div>
+  <div class="subtitle" style="font-size:9.5pt;margin-top:4px;">International Building Code (IBC) 2021</div>
+</div>
+
+<div class="project-info">
+  <table>
+    <tr><td class="label">Project:</td><td colspan="3">GUIDE XREF — Rooftop Solar Parallel (Ex 5.3)</td></tr>
+    <tr><td class="label">Owner / Client:</td><td colspan="3">&mdash;</td></tr>
+    <tr><td class="label">Address:</td><td colspan="3">&mdash;</td></tr>
+    <tr>
+      <td class="label">Permit #:</td><td>&mdash;</td>
+      <td class="label">Job No.:</td><td>&mdash;</td>
+    </tr>
+    <tr>
+      <td class="label">Building Dept.:</td><td>&mdash;</td>
+      <td class="label">Date:</td><td>June 28, 2026</td>
+    </tr>
+    <tr><td class="label">Engineer:</td><td colspan="3">&mdash;</td></tr>
+    <tr><td class="label">Prepared by:</td><td colspan="3">WindLoad Solutions &mdash; windloadcalc.com</td></tr>
+  </table>
+</div>
+
+<h2><span class="sec-num">1</span>Solar System Description</h2>
+<table class="data">
+  <tr><td class="left">Mounting</td><td>Rooftop Solar Panels</td></tr><tr><td class="left">Design wind speed, V</td><td>120 mph (ultimate)</td></tr><tr><td class="left">Exposure category</td><td>B</td></tr>
+</table>
+
+<h2><span class="sec-num">2</span>Velocity Pressure</h2>
+<p>Velocity pressure at the array reference height, per ASCE 7-22 Eq. 26.10-1:</p>
+<div class="calc-step">q<sub>h</sub> = 0.00256 &middot; K<sub>z</sub> &middot; K<sub>zt</sub> &middot; K<sub>d</sub> &middot; K<sub>e</sub> &middot; V&sup2;</div>
+<table class="data">
+  <tr><th class="left" style="text-align:left;">Factor</th><th>Value</th><th>Source</th></tr>
+  <tr><td class="left">K<sub>z</sub></td><td>0.700</td><td>Table 26.10-1</td></tr>
+  <tr><td class="left">K<sub>zt</sub> (topographic)</td><td>1.000</td><td>&sect;26.8</td></tr>
+  <tr><td class="left">K<sub>d</sub> (directionality)</td><td>0.85</td><td>Table 26.6-1</td></tr>
+  <tr><td class="left">K<sub>e</sub> (ground elevation)</td><td>1.000</td><td>Table 26.9-1</td></tr>
+  <tr class="governing-row"><td class="left">q<sub>h</sub></td><td>21.93 psf</td><td>Eq. 26.10-1</td></tr>
+</table>
+
+<h2><span class="sec-num">3</span>Net Pressure Coefficients</h2>
+<div class="calc-step">p = q<sub>h</sub> &middot; (GC<sub>p</sub>) &middot; &gamma;<sub>E</sub> &middot; &gamma;<sub>a</sub> &nbsp;&nbsp; [Eq. 29.4-7]</div>
+<table class="data">
+  <tr><th class="left" style="text-align:left;">Quantity</th><th>Value</th><th>Source</th></tr>
+  <tr><td class="left">Panel tilt &omega;</td><td>&le; 2&deg; &mdash; flush/parallel (&sect;29.4.4)</td><td>Figure 29.4-8</td></tr><tr><td class="left">(GC<sub>p</sub>) from Ch.30</td><td>1.24</td><td>Figure 29.4-8</td></tr><tr><td class="left">&gamma;<sub>E</sub> (array edge)</td><td>1.50</td><td>Figure 29.4-8</td></tr><tr><td class="left">&gamma;<sub>a</sub> (equalization)</td><td>0.687</td><td>Figure 29.4-8</td></tr>
+</table>
+
+<h2><span class="sec-num">4</span>Design Wind Pressures</h2>
+<table class="data">
+  <tr><th class="left" style="text-align:left;">Result</th><th>Value</th></tr>
+  <tr><td class="left">Pressure, downward (+)</td><td>+28.0 psf</td></tr>
+  <tr><td class="left">Pressure, uplift (&minus;)</td><td>-28.0 psf</td></tr>
+  <tr class="governing-row"><td class="left">Governing |p|</td><td>28.0 psf</td></tr>
+</table>
+
+
+<h2><span class="sec-num">5</span>Applicability &amp; Limitations</h2>
+<ul style="margin: 8px 0 8px 20px;">
+  <li><strong>Method:</strong> ASCE 7-22 Chapter 29, &sect;29.4.4 (rooftop solar panels)</li>
+  <li><strong>Coefficient source:</strong> traced from the &sect;29.4 figures &mdash; verified against the printed standard</li>
+  <li><strong>Minimum design load:</strong> 16 psf per ASCE 7-22 &sect;29.7</li>
+  <li><strong>Base factors:</strong> K<sub>z</sub>, K<sub>zt</sub>, K<sub>d</sub>, K<sub>e</sub> per Chapter 26</li>
+</ul>
+
+<h2><span class="sec-num">6</span>References</h2>
+<ul style="margin: 8px 0 8px 20px; font-size: 10pt;">
+  <li>ASCE/SEI 7-22, <em>Minimum Design Loads and Associated Criteria for Buildings and Other Structures</em></li>
+  <li>International Building Code (IBC) 2021</li>
+  <li>Table 26.6-1 &mdash; Wind Directionality Factor</li>
+  <li>Table 26.9-1 &mdash; Ground Elevation Factor</li>
+  <li>Table 26.10-1 &mdash; Velocity Pressure Exposure Coefficients</li>
+  <li>Table 26.11-1 &mdash; Terrain Exposure Constants</li>
+  <li>Figure 29.4-7 &mdash; Rooftop (GC<sub>rn</sub>)<sub>nom</sub>, tilted/flush panels</li><li>Figure 29.4-8 &mdash; Rooftop array equalization factor &gamma;<sub>a</sub></li>
+  <li>Eq. 29.4-6 &mdash; (GC<sub>rn</sub>) with &gamma;<sub>p</sub>, &gamma;<sub>c</sub>, &gamma;<sub>E</sub></li><li>Eq. 29.4-7 &mdash; flush/parallel pressure</li>
+  
+  
+</ul>
+
+<div class="footer report-footer">
+  Windloadcalc.com &mdash; a Wind Load Solutions company<br>
+  Solar Panel Wind Load Calculations &mdash; GUIDE XREF — Rooftop Solar Parallel (Ex 5.3)<br>
+  Generated June 28, 2026
+</div>
+
+</body>
+</html>

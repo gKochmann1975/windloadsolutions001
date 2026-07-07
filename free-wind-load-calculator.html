@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="/images/windloadcalc-icon-anim-loop.svg?v=1">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
+    <link rel="shortcut icon" href="/favicon.ico?v=2">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://windloadcalc.com/free-wind-load-calculator.html">
 
@@ -473,7 +476,8 @@
         /* ============================================ */
         .hero {
             background: var(--hero-gradient);
-            padding: 5rem 1.5rem 4rem;
+            /* top padding clears the fixed nav (~108px desktop) so the eyebrow isn't tucked under it */
+            padding: 8rem 1.5rem 4rem;
             position: relative;
             overflow: hidden;
         }
@@ -489,7 +493,7 @@
             margin: 0 auto;
             text-align: center;
             position: relative;
-            z-index: 1;
+            z-index: 2;
             color: white;
         }
         .hero-eyebrow {
@@ -1482,6 +1486,8 @@
         }
 
         /* Hero aurora — body stays light & usable; aurora lives in the dark hero only */
+        .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+        .hero-veil{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(135deg,rgba(2,6,23,.74) 0%,rgba(10,15,40,.56) 100%)}
         .hero-aurora{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none}
         .hero-aurora span{position:absolute;border-radius:50%;filter:blur(80px);opacity:.5}
         .hero-aurora span:nth-child(1){width:480px;height:480px;background:#0018FF;top:-160px;left:-100px;animation:heroDrift 20s ease-in-out infinite alternate}
@@ -1508,8 +1514,8 @@
         /* Local tokens so the nav doesn't depend on the page :root */
         #nav, .nav-overlay, .full-menu { --luxe:cubic-bezier(.22,.61,.36,1); --line:rgba(255,255,255,.08); --muted:#94a3b8; }
 
-        /* Nav — sticky below the sticky promo banner (top set by JS) */
-        #nav{position:sticky;top:38px;left:0;right:0;z-index:1000;transition:.3s var(--luxe);background:transparent;border-bottom:1px solid transparent}
+        /* Nav — fixed over the dark hero (matches every other page; transparent → scrolled gradient) */
+        #nav{position:fixed;top:0;left:0;right:0;z-index:1000;transition:.3s var(--luxe);background:transparent;border-bottom:1px solid transparent}
         #nav.scrolled{backdrop-filter:blur(14px);border-bottom:1px solid var(--line);
           background:linear-gradient(90deg, rgba(240,244,255,.97) 0%, rgba(223,232,255,.93) 13%, rgba(22,28,58,.92) 46%, rgba(7,10,24,.95) 100%)}
         #nav .wrap{max-width:1180px;margin:0 auto}
@@ -1548,30 +1554,113 @@
         .fm-actions{display:flex;flex-direction:column;gap:10px;padding:20px 26px 0}
         .fm-actions .btn{width:100%;justify-content:center;padding:14px;font-size:15px}
         @media(max-width:820px){#nav .nav-links{display:none}}
-        @media(max-width:480px){#nav .logo-image{height:56px}#nav{top:34px}}
+        @media(max-width:480px){#nav .logo-image{height:56px}}
     </style>
+
+    <!--SEO-GEO-v1-->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://windloadcalc.com/#organization",
+      "name": "WindLoad Solutions",
+      "alternateName": [
+        "WindLoadCalc",
+        "WindLoad Calculator",
+        "WLC"
+      ],
+      "url": "https://windloadcalc.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "@id": "https://windloadcalc.com/#logo",
+        "url": "https://windloadcalc.com/images/windloadcalc-logo.png",
+        "caption": "WindLoadCalc"
+      },
+      "image": {
+        "@id": "https://windloadcalc.com/#logo"
+      },
+      "description": "Professional ASCE 7-22 wind load calculation software for structural engineers, architects, and building professionals — Components & Cladding and MWFRS design pressures for all 50 US states, with Florida HVHZ jurisdictional accuracy.",
+      "foundingDate": "2002",
+      "areaServed": {
+        "@type": "Country",
+        "name": "United States"
+      },
+      "sameAs": [
+        "https://windload.solutions",
+        "https://windload.co"
+      ],
+      "knowsAbout": [
+        "ASCE 7-22 wind load calculations",
+        "Components and Cladding (C&C) design pressures",
+        "Main Wind Force Resisting System (MWFRS)",
+        "ASCE 7-22 basic wind speed maps",
+        "Exposure Categories B, C, D",
+        "Risk Categories I–IV",
+        "Building enclosure classification",
+        "Internal pressure coefficients (GCpi)",
+        "External pressure coefficients (GCp)",
+        "Topographic effects (Kzt)",
+        "High-Velocity Hurricane Zone (HVHZ)",
+        "Florida Building Code wind load requirements"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "Customer Support",
+        "email": "support@windloadcalc.com",
+        "availableLanguage": "English"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://windloadcalc.com/#website",
+      "url": "https://windloadcalc.com/",
+      "name": "WindLoadCalc",
+      "description": "ASCE 7-22 wind load calculators (Components & Cladding and MWFRS) for engineers, architects, and contractors.",
+      "publisher": {
+        "@id": "https://windloadcalc.com/#organization"
+      },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://windloadcalc.com/free-wind-load-calculator.html#webpage",
+      "url": "https://windloadcalc.com/free-wind-load-calculator.html",
+      "name": "Free Wind Load Calculator + Wind Speed Lookup — ASCE 7-22 with Florida HVHZ Overrides | WindLoadCalc",
+      "description": "Free wind load calculator: enter a ZIP, get the legally required design wind speed including Florida Building Code overrides (Miami-Dade 175, Broward 170, Collier 170). Plus single-component design pressure per ASCE 7-22. No signup, no meter.",
+      "isPartOf": {
+        "@id": "https://windloadcalc.com/#website"
+      },
+      "about": {
+        "@id": "https://windloadcalc.com/#organization"
+      },
+      "publisher": {
+        "@id": "https://windloadcalc.com/#organization"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://windloadcalc.com/images/video-posters/windload-free-calculator.jpg"
+      },
+      "inLanguage": "en-US"
+    }
+  ]
+}
+    </script>
 </head>
 <body>
 
     <!-- ============================================ -->
     <!-- TOP-NAV SITE-WIDE BANNER                     -->
     <!-- ============================================ -->
-    <!-- Banner on this page is the next-step upsell — the page itself already
-         IS the free calc, so a self-link would be a dead click. Sends users
-         who've explored the free tool toward the paid full version. -->
-    <div class="wlc-promo-banner" role="region" aria-label="Upgrade announcement">
-        <a href="/wind-load-calculator-landing.html">
-            Need a full schedule, Excel export, or PE stamp? Try the Full Calculator free for 7 days
-            <span class="arrow">&rarr;</span>
-        </a>
-    </div>
+    <!-- Top promo banner removed sitewide (was the 7-day Full Calculator upsell). -->
 
     <!-- ============================================ -->
     <!-- HEADER                                        -->
     <!-- ============================================ -->
     <!-- Canonical dark-glass nav (transparent→scrolled) + full hamburger menu -->
     <nav id="nav"><div class="wrap nav-in">
-      <a class="logo" href="https://windloadcalc.com/"><img height="100" width="300" src="images/windloadcalc-logo.svg" alt="WindLoadCalc — ASCE 7-22 Wind Load Calculator logo" class="logo-image"></a>
+      <a class="logo" href="https://windloadcalc.com/"><img height="100" width="300" src="images/windloadcalc-logo-anim-navy.svg" alt="WindLoadCalc — ASCE 7-22 Wind Load Calculator logo" class="logo-image"></a>
       <div class="nav-right">
         <div class="nav-links">
           <a class="l" href="https://windloadcalc.com/free-wind-load-calculator.html">Free tool</a>
@@ -1580,7 +1669,7 @@
           <a class="l" href="https://windloadcalc.com/building-intelligence-platform-landing.html">BIP</a>
           <a class="l" href="https://windloadcalc.com/why-us.html">Why us</a>
           <a class="btn btn-ghost" href="https://windloadcalc.com/login.html">Log in</a>
-          <a class="btn btn-primary" href="https://windloadcalc.com/wind-load-calculator-shop.html">Start free trial</a>
+          <a class="btn btn-primary" href="https://windloadcalc.com/free-wind-load-calculator.html">Start free trial</a>
         </div>
         <button class="hamburger" id="hamburger" aria-label="Open full menu" aria-expanded="false" aria-controls="fullMenu"><span></span><span></span><span></span></button>
       </div>
@@ -1595,6 +1684,14 @@
     <a href="https://windloadcalc.com/walkthroughs.html">Walkthroughs</a>
     <a href="https://windloadcalc.com/wind-load-calculator-comparison.html">Feature Comparison</a>
     <a href="https://windloadcalc.com/wind-load-calculator-shop.html">Pricing</a>
+  </div>
+  <div class="fm-group">
+    <div class="fm-label">Service Areas</div>
+    <a href="https://windloadcalc.com/service-area/">All States &amp; Counties</a>
+    <a href="https://windloadcalc.com/florida-wind-load-calculator/">Florida</a>
+    <a href="https://windloadcalc.com/texas-wind-load-calculator/">Texas</a>
+    <a href="https://windloadcalc.com/california-wind-load-calculator/">California</a>
+    <a href="https://windloadcalc.com/miami-dade-wind-load-calculator/">Miami-Dade County</a>
   </div>
   <div class="fm-group">
     <div class="fm-label">Building Intelligence Platform</div>
@@ -1626,6 +1723,12 @@
     <!-- HERO  — full-width centered headline             -->
     <!-- ============================================ -->
     <section class="hero">
+        <video class="hero-video" autoplay muted loop playsinline preload="metadata"
+               poster="images/video-posters/windload-free-calculator.jpg">
+            <source src="videos/windload-free-calculator.webm" type="video/webm">
+            <source src="videos/windload-free-calculator.mp4" type="video/mp4">
+        </video>
+        <div class="hero-veil" aria-hidden="true"></div>
         <div class="hero-aurora" aria-hidden="true"><span></span><span></span><span></span></div>
         <div class="hero-inner">
             <span class="hero-eyebrow">Free Wind Load Calculator &middot; No signup &middot; No meter</span>

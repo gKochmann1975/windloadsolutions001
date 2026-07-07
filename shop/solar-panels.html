@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="robots" content="noindex, follow">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2">
+    <link rel="icon" type="image/svg+xml" href="/images/windloadcalc-icon-anim-loop.svg?v=1">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
     <link rel="manifest" href="/site.webmanifest">
     <link rel="shortcut icon" href="/favicon.ico?v=2">
@@ -72,8 +71,10 @@
 <style>
 :root{
   --blue:#0018FF; --blue-deep:#181E57; --blue-bright:#3a5bff;
-  --muted:#94a3b8; --line:rgba(255,255,255,.08); --bg:#070a18; --surface:rgba(255,255,255,.04);
+  --muted:#94a3b8; --line:rgba(255,255,255,.08); --bg:#140e04; --surface:rgba(255,255,255,.04);
   --gold:#E8B530; --luxe:cubic-bezier(.22,.61,.36,1);
+  /* signature = #fbbf24 — matches this product's card on wind-load-calculator-shop.html */
+  --brand:#fbbf24; --brand-lt:#fcd34d; --brand-2:#d97706; --on-brand:#3a2a00;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -82,10 +83,10 @@ body{font-family:'Inter',-apple-system,'Segoe UI',Roboto,sans-serif;background:v
 a{text-decoration:none;color:inherit}
 .wrap{max-width:1180px;margin:0 auto;padding:0 28px}
 .aurora{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
-.aurora span{position:absolute;border-radius:50%;filter:blur(90px);opacity:.5}
-.aurora .a1{width:620px;height:620px;background:#0018FF;top:-180px;left:-120px;animation:drift1 18s var(--luxe) infinite alternate}
-.aurora .a2{width:540px;height:540px;background:#10B981;bottom:-200px;right:-120px;opacity:.28;animation:drift2 22s var(--luxe) infinite alternate}
-.aurora .a3{width:420px;height:420px;background:#181E57;top:34%;right:16%;opacity:.55;animation:drift1 26s var(--luxe) infinite alternate-reverse}
+.aurora span{position:absolute;border-radius:50%;filter:blur(90px);opacity:.6}
+.aurora .a1{width:620px;height:620px;background:#fbbf24;top:-180px;left:-120px;animation:drift1 18s var(--luxe) infinite alternate}
+.aurora .a2{width:540px;height:540px;background:#fbbf24;bottom:-200px;right:-120px;opacity:.42;animation:drift2 22s var(--luxe) infinite alternate}
+.aurora .a3{width:420px;height:420px;background:#b45309;top:34%;right:16%;opacity:.55;animation:drift1 26s var(--luxe) infinite alternate-reverse}
 @keyframes drift1{to{transform:translate(80px,60px) scale(1.15)}}
 @keyframes drift2{to{transform:translate(-70px,-50px) scale(1.1)}}
 .grid-tex{position:fixed;inset:0;z-index:0;pointer-events:none;
@@ -134,21 +135,21 @@ nav.scrolled .logo-image{height:64px;filter:none}
 /* Hero */
 .hero-stage{position:relative;overflow:hidden;isolation:isolate}
 .hero-veil{position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:radial-gradient(ellipse 70% 60% at 50% 26%, rgba(0,24,255,.18), transparent 62%),
+  background:radial-gradient(ellipse 70% 60% at 50% 26%, rgba(251,191,36,.18), transparent 62%),
     linear-gradient(180deg, rgba(7,10,24,.66) 0%, rgba(7,10,24,.42) 32%, rgba(7,10,24,.72) 74%, var(--bg) 100%)}
 header{position:relative;z-index:2;padding:165px 0 70px;text-align:center}
-.eyebrow{display:inline-flex;align-items:center;gap:9px;background:rgba(7,10,24,.5);border:1px solid rgba(58,91,255,.45);
+.eyebrow{display:inline-flex;align-items:center;gap:9px;background:rgba(7,10,24,.5);border:1px solid rgba(251,191,36,.45);
   color:#c3cdff;font-size:13px;font-weight:600;padding:8px 16px;border-radius:999px;margin-bottom:24px;backdrop-filter:blur(6px)}
-.eyebrow .dot{width:7px;height:7px;border-radius:50%;background:#34D399;box-shadow:0 0 0 4px rgba(52,211,153,.25)}
+.eyebrow .dot{width:7px;height:7px;border-radius:50%;background:#fcd34d;box-shadow:0 0 0 4px rgba(252,211,77,.25)}
 h1{font-size:clamp(34px,5.2vw,58px);line-height:1.05;font-weight:800;letter-spacing:-.025em;max-width:18ch;margin:0 auto 16px;text-shadow:0 4px 28px rgba(0,0,0,.45)}
-h1 .grad{background:linear-gradient(110deg,#34D399,#10B981 55%,#3a5bff);-webkit-background-clip:text;background-clip:text;color:transparent}
+h1 .grad{background:linear-gradient(110deg,#fcd34d,#fbbf24 55%,#d97706);-webkit-background-clip:text;background-clip:text;color:transparent}
 .sub{font-size:clamp(16px,2vw,19px);color:#d3dbef;max-width:66ch;margin:0 auto 22px;text-shadow:0 2px 14px rgba(0,0,0,.5)}
 .sub strong{color:#fff}
 .hero-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:8px 0 18px}
 .btn-xl{padding:15px 28px;font-size:15px;border-radius:13px}
 .hero-trust{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;font-size:13px;color:#cdd6ec}
 .hero-trust span{display:inline-flex;align-items:center;gap:6px}
-.hero-trust .ck{color:#34D399;font-weight:800}
+.hero-trust .ck{color:#fcd34d;font-weight:800}
 
 section{position:relative;z-index:1;padding:62px 0}
 .sec-head{text-align:center;max-width:66ch;margin:0 auto 40px}
@@ -158,7 +159,7 @@ section{position:relative;z-index:1;padding:62px 0}
 /* Benefits bar */
 .benefits{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 .benefit{display:flex;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
-.benefit .ic{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex:none;background:linear-gradient(135deg,rgba(0,24,255,.3),rgba(24,30,87,.5));border:1px solid rgba(58,91,255,.4)}
+.benefit .ic{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex:none;background:linear-gradient(135deg,rgba(251,191,36,.3),rgba(180,83,9,.5));border:1px solid rgba(251,191,36,.4)}
 .benefit .ic svg{width:20px;height:20px;stroke:#9db0ff}
 .benefit b{font-size:14px;font-weight:700;display:block}
 .benefit small{font-size:12.5px;color:var(--muted)}
@@ -166,31 +167,31 @@ section{position:relative;z-index:1;padding:62px 0}
 /* Differentiator cards */
 .diff-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
 .diff{position:relative;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:28px 24px;box-shadow:0 12px 32px rgba(0,0,0,.32);transition:.35s var(--luxe)}
-.diff:hover{transform:translateY(-5px);border-color:rgba(58,91,255,.5);box-shadow:0 20px 44px rgba(0,24,255,.18)}
-.diff .badge{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#04221a;background:linear-gradient(135deg,#34D399,#10B981);padding:4px 10px;border-radius:999px;margin-bottom:14px}
+.diff:hover{transform:translateY(-5px);border-color:rgba(251,191,36,.5);box-shadow:0 20px 44px rgba(251,191,36,.18)}
+.diff .badge{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#04221a;background:linear-gradient(135deg,#fcd34d,#fbbf24);padding:4px 10px;border-radius:999px;margin-bottom:14px}
 .diff h3{font-size:19px;font-weight:800;margin-bottom:6px;letter-spacing:-.01em}
 .diff .tag{font-size:13px;color:#9db0ff;font-weight:600;margin-bottom:12px;display:block}
 .diff p{font-size:14px;color:#aeb8cf;margin-bottom:14px}
 .diff ul{list-style:none;margin-bottom:6px}
 .diff ul li{font-size:13px;color:#c2cce0;padding:4px 0 4px 18px;position:relative;line-height:1.45}
-.diff ul li::before{content:"";position:absolute;left:0;top:10px;width:6px;height:6px;border-radius:50%;background:#34D399}
+.diff ul li::before{content:"";position:absolute;left:0;top:10px;width:6px;height:6px;border-radius:50%;background:#fcd34d}
 .diff ul li b{color:#fff}
 
 .pill-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:34px}
 .pill{font-size:13px;font-weight:600;color:#c2cce0;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:8px 16px}
-.pill::before{content:"✓ ";color:#34D399;font-weight:800}
+.pill::before{content:"✓ ";color:#fcd34d;font-weight:800}
 
 /* How it works */
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
 .step{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px 20px;position:relative}
-.step .num{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;color:#fff;background:linear-gradient(135deg,#0018FF,#2540ff);margin-bottom:12px;box-shadow:0 8px 20px rgba(0,24,255,.4)}
+.step .num{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;color:#fff;background:linear-gradient(135deg,#0018FF,rgb(251,191,36));margin-bottom:12px;box-shadow:0 8px 20px rgba(251,191,36,.4)}
 .step h4{font-size:15px;font-weight:700;margin-bottom:6px}
 .step p{font-size:13px;color:#aeb8cf}
 
 /* Perfect for */
 .aud-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .aud{background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:16px;padding:22px 20px;transition:.3s var(--luxe)}
-.aud:hover{border-color:rgba(58,91,255,.45);transform:translateY(-4px)}
+.aud:hover{border-color:rgba(251,191,36,.45);transform:translateY(-4px)}
 .aud h4{font-size:16px;font-weight:700;margin-bottom:7px}
 .aud p{font-size:13.5px;color:#aeb8cf}
 
@@ -221,10 +222,10 @@ section{position:relative;z-index:1;padding:62px 0}
 .form-input{padding:14px 16px;border:1px solid var(--line);border-radius:12px;font-size:15px;font-family:inherit;
   background:rgba(255,255,255,.05);color:#e8edf7;transition:.2s var(--luxe)}
 .form-input::placeholder{color:#8a97b5}
-.form-input:focus{outline:none;border-color:var(--blue-bright);box-shadow:0 0 0 3px rgba(58,91,255,.18)}
-.form-button{background:linear-gradient(135deg,#0018FF,#2540ff);color:#fff;padding:15px 22px;border:none;border-radius:12px;
-  font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;transition:.25s var(--luxe);box-shadow:0 10px 30px rgba(0,24,255,.45)}
-.form-button:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(0,24,255,.6)}
+.form-input:focus{outline:none;border-color:var(--blue-bright);box-shadow:0 0 0 3px rgba(251,191,36,.18)}
+.form-button{background:linear-gradient(135deg,#0018FF,rgb(251,191,36));color:#fff;padding:15px 22px;border:none;border-radius:12px;
+  font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;transition:.25s var(--luxe);box-shadow:0 10px 30px rgba(251,191,36,.45)}
+.form-button:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(251,191,36,.6)}
 .form-note{font-size:13px;color:var(--muted)}
 
 /* FAQ */
@@ -237,10 +238,10 @@ section{position:relative;z-index:1;padding:62px 0}
 .faq p{margin-top:11px;color:#aeb8cf;font-size:14.5px}
 
 .final{text-align:center}
-.final .glass2{background:linear-gradient(160deg,rgba(0,24,255,.18),rgba(16,185,129,.1));border:1px solid rgba(58,91,255,.4);border-radius:26px;padding:54px 40px;box-shadow:0 40px 100px rgba(0,24,255,.25)}
+.final .glass2{background:linear-gradient(160deg,rgba(251,191,36,.18),rgba(251,191,36,.1));border:1px solid rgba(251,191,36,.4);border-radius:26px;padding:54px 40px;box-shadow:0 40px 100px rgba(251,191,36,.25)}
 .final h2{font-size:clamp(28px,3.6vw,42px);font-weight:800;letter-spacing:-.02em;margin-bottom:14px}
 .final p{color:#cdd6ec;font-size:17px;max-width:60ch;margin:0 auto 22px}
-.final p a{color:#34D399;font-weight:600}
+.final p a{color:#fcd34d;font-weight:600}
 
 .main-footer{position:relative;z-index:1;border-top:1px solid var(--line);padding:54px 0 28px;background:rgba(0,0,0,.25)}
 .main-footer .container{max-width:1180px;margin:0 auto;padding:0 28px}
@@ -267,7 +268,7 @@ section{position:relative;z-index:1;padding:62px 0}
 <div class="grid-tex"></div>
 
 <nav id="nav"><div class="wrap nav-in">
-  <a class="logo" href="https://windloadcalc.com/"><img height="100" width="300" src="../images/windloadcalc-logo.svg" alt="WindLoadCalc — ASCE 7-22 Wind Load Calculator logo" class="logo-image"></a>
+  <a class="logo" href="https://windloadcalc.com/"><img height="100" width="300" src="../images/windloadcalc-logo-anim-navy.svg" alt="WindLoadCalc — ASCE 7-22 Wind Load Calculator logo" class="logo-image"></a>
   <div class="nav-right">
     <div class="nav-links">
       <a class="l" href="https://windloadcalc.com/free-wind-load-calculator.html">Free tool</a>
@@ -276,7 +277,7 @@ section{position:relative;z-index:1;padding:62px 0}
           <a class="l" href="https://windloadcalc.com/building-intelligence-platform-landing.html">BIP</a>
       <a class="l" href="https://windloadcalc.com/why-us.html">Why us</a>
       <a class="btn btn-ghost" href="https://windloadcalc.com/login.html">Log in</a>
-      <a class="btn btn-primary" href="https://windloadcalc.com/wind-load-calculator-shop.html">Start free trial</a>
+      <a class="btn btn-primary" href="https://windloadcalc.com/free-wind-load-calculator.html">Start free trial</a>
     </div>
     <button class="hamburger" id="hamburger" aria-label="Open full menu" aria-expanded="false" aria-controls="fullMenu"><span></span><span></span><span></span></button>
   </div>
@@ -291,6 +292,14 @@ section{position:relative;z-index:1;padding:62px 0}
     <a href="https://windloadcalc.com/walkthroughs.html">Walkthroughs</a>
     <a href="https://windloadcalc.com/wind-load-calculator-comparison.html">Feature Comparison</a>
     <a href="https://windloadcalc.com/wind-load-calculator-shop.html">Pricing</a>
+  </div>
+  <div class="fm-group">
+    <div class="fm-label">Service Areas</div>
+    <a href="https://windloadcalc.com/service-area/">All States &amp; Counties</a>
+    <a href="https://windloadcalc.com/florida-wind-load-calculator/">Florida</a>
+    <a href="https://windloadcalc.com/texas-wind-load-calculator/">Texas</a>
+    <a href="https://windloadcalc.com/california-wind-load-calculator/">California</a>
+    <a href="https://windloadcalc.com/miami-dade-wind-load-calculator/">Miami-Dade County</a>
   </div>
   <div class="fm-group">
     <div class="fm-label">Building Intelligence Platform</div>
@@ -476,7 +485,7 @@ section{position:relative;z-index:1;padding:62px 0}
       <ul><li>Edge zone calculations</li><li>Parapet pressure analysis</li><li>Multiple roof types</li></ul>
       <span class="cta">View pricing →</span>
     </a>
-    <a href="https://windloadcalc.com/shop/mwfrs.html" rel="nofollow" class="cat" style="--ac:#3b82f6">
+    <a href="https://windloadcalc.com/shop/mwfrs.html" class="cat" style="--ac:#3b82f6">
       <span class="status">Coming soon</span>
       <span class="tag">MWFRS</span>
       <h3>Main Wind Force Resisting System</h3>
@@ -532,7 +541,7 @@ section{position:relative;z-index:1;padding:62px 0}
     <div class="footer-column"><h3>Wind Load Calculators</h3><ul>
       <li><a href="https://windloadcalc.com/wind-load-calculator-shop.html">All Calculators &amp; Pricing</a></li>
       <li><a href="https://windloadcalc.com/shop/windows-doors-shutters.html">Windows, Doors &amp; Shutters</a></li>
-      <li><a href="https://windloadcalc.com/shop/mwfrs.html" rel="nofollow">MWFRS Calculator</a></li>
+      <li><a href="https://windloadcalc.com/shop/mwfrs.html">MWFRS Calculator</a></li>
       <li><a href="https://windloadcalc.com/shop/roofing.html" rel="nofollow">Roofing Calculator</a></li>
     </ul></div>
     <div class="footer-column"><h3>Resources</h3><ul>

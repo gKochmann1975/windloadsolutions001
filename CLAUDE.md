@@ -120,6 +120,19 @@ header cart icon + `#header-cart-badge`) + `js/stripe-checkout.js`. A "buy" butt
   button is green `✓ Added`, the `.cart-jump` link exists, and `localStorage.windloadcalc_cart` has the
   item — never eyeball it.
 
+### Category / cross-sell cards — flip status the moment a calculator goes live (established 2026-07-08)
+The `.cat-grid` "choose a calculator" cards live on **MORE than one page** — the same MWFRS/Roofs/Solar
+card grid appears on `wind-load-calculator-shop.html`, `wind-load-calculator-landing.html`,
+`wind-load-software.html`, and cross-sell grids on the individual `shop/*.html` pages. When a
+calculator goes live you MUST flip its card on **EVERY** one of those pages in the same change:
+`class="cat"` → `class="cat live"`, `<span class="status">Coming soon</span>` → `● Live now`
+(or `● Available now`), and drop any `rel="nofollow"` (the shop is indexable now). Missing one leaves
+"Coming soon" on a live product (this happened: fixed on the shop page, stale on 3 others).
+`node scripts/check-cart.js` now enforces this — **STALE_STATUS_CARD** is CRITICAL: once a shop has
+live buy buttons, no category card linking to it may still say "Coming soon". Run the full scan at every
+go-live. Same rule applies to the app nav (`webapp/flask_app/static/shell.js`) + `account_proxy.py`
+`PROGRAMS` `live:` flag.
+
 ---
 
 ## IMPORTANT: Pre-Launch Checklist

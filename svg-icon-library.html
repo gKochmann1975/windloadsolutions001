@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Internal reference only — NOT for SEO. Keep noindex + OUT of sitemap.xml. -->
+<meta name="robots" content="noindex, nofollow">
+<title>WindLoadCalc — SVG Icon Library (internal reference)</title>
+<style>
+  :root{
+    --navy:#0d1233; --navy-2:#070a18; --panel:#141a3a; --panel-2:#0f1430;
+    --ink:#cdd6f5; --muted:#8b95c4; --line:rgba(120,140,255,.18);
+    --green:#34D399; --blue:#3b82f6; --amber:#f59e0b; --purple:#a855f7;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:radial-gradient(1200px 600px at 70% -10%,#1a1f4a 0%,var(--navy) 40%,var(--navy-2) 100%);
+       color:var(--ink);font:15px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:0 0 80px}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 20px}
+  header{padding:44px 0 8px}
+  h1{font-size:30px;margin:0 0 6px;letter-spacing:-.02em}
+  h1 .g{color:var(--green)}
+  .sub{color:var(--muted);max-width:760px}
+  .note{margin:22px 0;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:rgba(52,211,153,.06);
+        color:#bfeede;font-size:13.5px}
+  .note code{background:rgba(255,255,255,.08);padding:1px 6px;border-radius:5px;font-size:12.5px;color:#fff}
+  h2{font-size:15px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin:40px 0 14px;
+     border-bottom:1px solid var(--line);padding-bottom:8px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
+  .card{border:1px solid var(--line);border-radius:14px;background:linear-gradient(180deg,var(--panel),var(--panel-2));
+        padding:18px 16px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;position:relative}
+  .card .ico{display:inline-flex;align-items:center;justify-content:center;width:52px;height:52px;color:var(--green)}
+  .card .ico svg{width:30px;height:30px}
+  .card .name{font-weight:700;font-size:13.5px;color:#fff}
+  .card .id{font-size:11.5px;color:var(--muted);font-family:ui-monospace,Menlo,Consolas,monospace}
+  .card button{margin-top:2px;font-size:11px;font-weight:700;letter-spacing:.03em;color:var(--ink);
+        background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:999px;padding:5px 12px;cursor:pointer;
+        transition:all .2s ease}
+  .card button:hover{background:var(--green);color:#04231a;border-color:var(--green)}
+  .card button.copied{background:var(--green);color:#04231a;border-color:var(--green)}
+  /* brand asset cards render an <img> of the actual repo SVG */
+  .asset .ico{width:auto;height:52px;background:#fff;border-radius:10px;padding:8px 12px}
+  .asset .ico.dark{background:var(--navy)}
+  .asset .ico img{height:100%;width:auto;display:block}
+  .legend{display:flex;flex-wrap:wrap;gap:10px;margin:6px 0 2px;font-size:12.5px;color:var(--muted)}
+  .swatch{display:inline-flex;align-items:center;gap:6px}
+  .dot{width:12px;height:12px;border-radius:3px}
+  footer{margin-top:50px;color:var(--muted);font-size:12.5px;border-top:1px solid var(--line);padding-top:16px}
+  a{color:var(--green)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>WindLoad<span class="g">calc</span> · SVG Icon Library</h1>
+    <p class="sub">Internal reference for every brand SVG we ship. Copy-paste ready. Inline UI icons follow one
+    house spec so they inherit color and stay crisp at any size — no more emoji.</p>
+  </header>
+
+  <div class="note">
+    <strong>House inline-icon spec</strong> (match this for every new icon):
+    <code>viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"</code>.
+    Set the size with <code>width/height</code> and the color on the parent via <code>color:</code> (icons use
+    <code>stroke="currentColor"</code>). Add <code>aria-hidden="true"</code> when the icon is decorative next to text.
+    Palette: <span class="legend" style="display:inline-flex">
+      <span class="swatch"><span class="dot" style="background:#34D399"></span>green #34D399 (W/D · "go/buy")</span>
+      <span class="swatch"><span class="dot" style="background:#3b82f6"></span>blue #3b82f6 (MWFRS)</span>
+      <span class="swatch"><span class="dot" style="background:#f59e0b"></span>amber (Roofing)</span>
+      <span class="swatch"><span class="dot" style="background:#a855f7"></span>purple (Specialty)</span>
+    </span>
+  </div>
+
+  <!-- ============ BRAND ASSETS (files in /images) ============ -->
+  <h2>Brand assets — files in <code>/images</code></h2>
+  <div class="grid">
+    <div class="card asset">
+      <div class="ico"><img src="images/windloadcalc-logo.svg" alt="Primary logo"></div>
+      <div class="name">Primary logo</div>
+      <div class="id">images/windloadcalc-logo.svg</div>
+    </div>
+    <div class="card asset">
+      <div class="ico dark"><img src="images/windloadcalc-logo-white.svg" alt="Logo (white)"></div>
+      <div class="name">Logo — white (dark bg)</div>
+      <div class="id">images/windloadcalc-logo-white.svg</div>
+    </div>
+    <div class="card asset">
+      <div class="ico"><img src="images/windloadcalc-icon.svg" alt="Icon mark"></div>
+      <div class="name">Icon mark</div>
+      <div class="id">images/windloadcalc-icon.svg</div>
+    </div>
+    <div class="card asset">
+      <div class="ico dark"><img src="images/windloadcalc-logo-anim.svg" alt="Animated logo"></div>
+      <div class="name">Logo — animated (white ink)</div>
+      <div class="id">images/windloadcalc-logo-anim.svg</div>
+    </div>
+    <div class="card asset">
+      <div class="ico"><img src="images/windloadcalc-favicon.svg" alt="Favicon"></div>
+      <div class="name">Favicon</div>
+      <div class="id">images/windloadcalc-favicon.svg</div>
+    </div>
+    <div class="card asset">
+      <div class="ico"><img src="bimi-logo.svg" alt="BIMI logo"></div>
+      <div class="name">BIMI email logo</div>
+      <div class="id">bimi-logo.svg</div>
+    </div>
+  </div>
+
+  <!-- ============ INLINE UI ICONS ============ -->
+  <h2>Inline UI icons — copy-paste ready</h2>
+  <div class="grid" id="icon-grid"></div>
+
+  <footer>
+    Internal reference — <code>noindex, nofollow</code>, not in sitemap. Add new icons to the
+    <code>ICONS</code> array in this file's script. Keep the house spec so every icon inherits
+    <code>currentColor</code>. Last updated 2026-07-08.
+  </footer>
+</div>
+
+<script>
+// Each entry: [display name, code id, inner SVG paths]. Wrapper spec is applied uniformly.
+const ICONS = [
+  ["Any device (PC + phone)","device-any",
+    '<path d="M18 8V4a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h9"/><rect width="8" height="12" x="14" y="10" rx="2"/><path d="M8 21h4"/><path d="M10 17v4"/>'],
+  ["Location pin","map-pin",
+    '<path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>'],
+  ["Clipboard / list","clipboard-list",
+    '<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h8M8 15h4"/>'],
+  ["Document / report","file-report",
+    '<path d="M6 2h9l5 5v15H6z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6"/>'],
+  ["Envelope / email","mail",
+    '<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>'],
+  ["Shield / secure","shield-check",
+    '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/>'],
+  ["Refresh / always latest","refresh",
+    '<path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/>'],
+  ["Bolt / wind load","bolt",
+    '<path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/>'],
+  ["Download","download",
+    '<path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/>'],
+  ["Check circle","check-circle",
+    '<circle cx="12" cy="12" r="9"/><path d="m8.5 12 2.5 2.5 4.5-5"/>'],
+];
+
+const WRAP_OPEN = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">';
+const WRAP_CLOSE = '</svg>';
+const grid = document.getElementById('icon-grid');
+
+ICONS.forEach(([name, id, inner]) => {
+  const full = WRAP_OPEN + inner + WRAP_CLOSE;
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.innerHTML =
+    '<div class="ico">' + full + '</div>' +
+    '<div class="name">' + name + '</div>' +
+    '<div class="id">' + id + '</div>' +
+    '<button type="button">Copy SVG</button>';
+  const btn = card.querySelector('button');
+  btn.addEventListener('click', () => {
+    navigator.clipboard.writeText(full).then(() => {
+      btn.textContent = '✓ Copied';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'Copy SVG'; btn.classList.remove('copied'); }, 1400);
+    });
+  });
+  grid.appendChild(card);
+});
+</script>
+</body>
+</html>

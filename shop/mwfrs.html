@@ -22,8 +22,6 @@
 
     <link rel="canonical" href="https://windloadcalc.com/shop/mwfrs.html">
 
-    <!-- reCAPTCHA v3 -->
-    <script src="https://www.google.com/recaptcha/api.js?render=6Ld8dSEsAAAAADQhiFFuSitPCafwmxWnStJ5Ii0h"></script>
 
     <!-- SoftwareApplication schema -->
     <script type="application/ld+json">
@@ -199,20 +197,7 @@ section{position:relative;z-index:1;padding:62px 0}
 .split .card ul li::before{content:"";position:absolute;left:0;top:11px;width:6px;height:6px;border-radius:50%;background:#3a5bff}
 .split .card.accent ul li::before{background:var(--brand)}
 
-/* Notify / waitlist */
-.notify{position:relative;z-index:1}
-.notify .glass2{background:linear-gradient(160deg,rgba(0,24,255,.18),rgba(232,181,48,.08));border:1px solid rgba(58,91,255,.4);border-radius:26px;padding:48px 40px;box-shadow:0 40px 100px rgba(0,24,255,.22);max-width:660px;margin:0 auto;text-align:center}
-.notify .eb{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);background:rgba(232,181,48,.1);border:1px solid rgba(232,181,48,.35);border-radius:999px;padding:7px 14px;margin-bottom:18px}
-.notify h2{font-size:clamp(26px,3.2vw,36px);font-weight:800;letter-spacing:-.02em;margin-bottom:12px}
-.notify p.lead{color:#cdd6ec;font-size:16px;max-width:52ch;margin:0 auto 26px}
-.notify-form{display:flex;flex-direction:column;gap:12px;max-width:440px;margin:0 auto}
-.notify-form input.fin{padding:14px 16px;border:1px solid rgba(255,255,255,.18);border-radius:12px;font-size:15px;font-family:inherit;background:rgba(255,255,255,.05);color:#fff;transition:.2s var(--luxe)}
-.notify-form input.fin::placeholder{color:#8b97b5}
-.notify-form input.fin:focus{outline:none;border-color:#3a5bff;box-shadow:0 0 0 3px rgba(0,24,255,.18)}
-.notify-form .fbtn{padding:15px 24px;border:none;border-radius:12px;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;color:#fff;background:linear-gradient(135deg,#0018FF,#2540ff);box-shadow:0 10px 30px rgba(0,24,255,.4);transition:.25s var(--luxe)}
-.notify-form .fbtn:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(0,24,255,.55)}
-.notify-form .fbtn:disabled{opacity:.7;cursor:default;transform:none}
-.notify .fnote{font-size:12.5px;color:var(--muted);margin-top:14px}
+/* (waitlist / notify styles removed at launch — the page now sells via the pricing cards) */
 
 /* Perfect for */
 .aud-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
@@ -445,7 +430,7 @@ section{position:relative;z-index:1;padding:62px 0}
       <div class="pricing-divider"></div>
       <div class="pricing-features"><h4>What's included:</h4><ul>
         <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>1 user license</span></li>
-        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Directional Procedure (ASCE 7-22 Ch 27)</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Directional (Ch 27) + Envelope (Ch 28)</span></li>
         <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span><strong>100 calculations/month</strong></span></li>
         <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Permit-ready Engineering Reports (PDF)</span></li>
         <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Email support</span></li>
@@ -751,61 +736,6 @@ section{position:relative;z-index:1;padding:62px 0}
 })();
 </script>
 
-<!-- Notify form (transplanted waitlist mechanism: reCAPTCHA v3 + honeypot + Apps Script endpoint) -->
-<script>
-    var _nf = document.getElementById('notify-form'); if (_nf) _nf.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const form = this;
-        const submitButton = form.querySelector('.fbtn');
-
-        // Honeypot check
-        const honeypot = form.querySelector('input[name="website_url"]');
-        if (honeypot && honeypot.value) {
-            console.log('Bot detected');
-            submitButton.textContent = '✓ You\'re on the list!';
-            submitButton.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
-            form.reset();
-            return;
-        }
-
-        const originalText = submitButton.textContent;
-        submitButton.textContent = 'Verifying...';
-        submitButton.disabled = true;
-
-        // reCAPTCHA v3
-        grecaptcha.ready(function() {
-            grecaptcha.execute('6Ld8dSEsAAAAADQhiFFuSitPCafwmxWnStJ5Ii0h', {action: 'waitlist'}).then(function(token) {
-                submitButton.textContent = 'Joining the list...';
-
-                const formData = new FormData(form);
-                const data = Object.fromEntries(formData.entries());
-                data.recaptcha_token = token;
-
-                fetch('https://script.google.com/macros/s/AKfycbzMuORWqPrwvsFAmhSqPrwIjinWDVM_6CJK50Q7qwAJXq9tkXZNAqPLRKU-NxC0dHaY/exec', {
-                    method: 'POST',
-                    body: JSON.stringify(data),
-                    headers: { 'Content-Type': 'text/plain' }
-                })
-                .then(function(response) { return response.json(); })
-                .then(function(result) {
-                    if (result.status === 'success') {
-                        submitButton.textContent = '✓ You\'re on the list!';
-                        submitButton.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
-                        form.reset();
-                    } else {
-                        throw new Error('Submission failed');
-                    }
-                })
-                .catch(function(error) {
-                    console.error('Error:', error);
-                    submitButton.textContent = originalText;
-                    submitButton.disabled = false;
-                    alert('There was an error. Please try again.');
-                });
-            });
-        });
-    });
-</script>
 
 <!-- Billing toggle + Stripe checkout (shared cart JS — same wiring as the W/D shop) -->
 <script>

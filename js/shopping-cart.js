@@ -318,6 +318,10 @@ class ShoppingCart {
         document.querySelectorAll('.cart-count').forEach(el => {
             el.textContent = count;
         });
+
+        // Notify the site-wide header cart indicator (js/cart-indicator.js) so it refreshes
+        // instantly on this page after an add/remove (other pages read localStorage on load).
+        try { window.dispatchEvent(new CustomEvent('wlc-cart-updated')); } catch (e) {}
     }
 
     /**

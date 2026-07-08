@@ -71,6 +71,51 @@ function shopHtmlFiles(args) {
 // price string as it would render on the page: 336 -> "$336", 1428 -> "$1,428"
 function priceStr(n) { return '$' + Math.round(n).toLocaleString('en-US'); }
 
+// all git-tracked html (for the site-wide category-card scan), minus backups/vendored
+function allHtmlFiles() {
+  let tracked = '';
+  try { tracked = execSync('git ls-files "*.html"', { cwd: ROOT, encoding: 'utf8' }); } catch { return []; }
+  return tracked.split(/\r?\n/).filter(Boolean).filter((f) => !EXCLUDE.test(f)).map((f) => path.resolve(ROOT, f));
+}
+
+// shop pages that are LIVE = have >=1 data-product-code mapping to a non-comingSoon catalog entry.
+// Returns the set of "shop/<name>.html" keys that category cards across the site link to.
+function liveShopKeys(catalog) {
+  const keys = new Set();
+  for (const f of shopHtmlFiles([])) {
+    const m = /(?:^|\/)(shop\/[a-z0-9-]+\.html)$/.exec(rel(f));
+    if (!m) continue;
+    let text; try { text = fs.readFileSync(f, 'utf8'); } catch { continue; }
+    const codes = [...text.matchAll(/data-product-code=["']([a-z0-9_]+)["']/gi)].map((x) => x[1]);
+    if (codes.some((c) => catalog[c] && !catalog[c].comingSoon)) keys.add(m[1]);
+  }
+  return keys;
+}
+
+// A calculator's status must agree everywhere: once its shop is live, NO category card
+// linking to it may still say "Coming soon" (this bit us — the MWFRS card was flipped on
+// one landing page but stayed "Coming soon" on 3 others). Catch it mechanically.
+function checkCategoryCards(files, liveKeys) {
+  const re = /<a\s+href="[^"]*?(shop\/[a-z0-9-]+\.html)"[^>]*?class="cat\b([^"]*)"[\s\S]{0,220}?class="status"\s*>\s*([^<]*?)\s*<\/span>/gi;
+  const out = [];
+  for (const f of files) {
+    let text; try { text = fs.readFileSync(f, 'utf8'); } catch { continue; }
+    const findings = [];
+    let m;
+    while ((m = re.exec(text)) !== null) {
+      const key = m[1], cls = m[2] || '', status = (m[3] || '').trim();
+      if (!liveKeys.has(key)) continue;
+      if (/coming\s*soon/i.test(status)) {
+        findings.push({ sev: 'CRITICAL', id: 'STALE_STATUS_CARD', msg: `category card links to ${key} (LIVE for sale) but still shows "${status}" — flip to "● Live now"/"● Available now" + add the "live" class.` });
+      } else if (!/\blive\b/.test(cls)) {
+        findings.push({ sev: 'HIGH', id: 'STALE_STATUS_CLASS', msg: `category card links to ${key} (LIVE) with status "${status}" but the anchor lacks the "live" class — styling won't match the other live cards.` });
+      }
+    }
+    if (findings.length) out.push({ file: f, findings });
+  }
+  return out;
+}
+
 function checkPage(file, text, catalog) {
   const findings = [];
   const add = (sev, id, msg) => findings.push({ sev, id, msg });
@@ -120,5 +165,18 @@ for (const file of files) {
   console.log('');
 }
 
-console.log(`Summary: ${critical} CRITICAL, ${high} HIGH across ${files.length} shop page(s).`);
+// Site-wide: category/landing cards must not say "Coming soon" for an already-live shop.
+const liveKeys = liveShopKeys(catalog);
+const catFiles = args.length ? args.map((a) => path.resolve(ROOT, a)) : allHtmlFiles();
+const catResults = checkCategoryCards(catFiles, liveKeys);
+for (const { file, findings } of catResults) {
+  console.log(`• ${rel(file)}`);
+  for (const f of findings) {
+    if (f.sev === 'CRITICAL') critical++; else high++;
+    console.log(`    [${f.sev}] ${f.id} — ${f.msg}`);
+  }
+  console.log('');
+}
+
+console.log(`Summary: ${critical} CRITICAL, ${high} HIGH  (live shops: ${[...liveKeys].join(', ') || 'none'})`);
 process.exit(critical > 0 ? 1 : 0);

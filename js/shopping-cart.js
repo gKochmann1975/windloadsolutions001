@@ -61,6 +61,33 @@ const PRODUCT_CATALOG = {
         features: ['10 users', 'Unlimited calculations', 'Priority support', 'API access']
     },
 
+    // MWFRS Buildings — LIVE (2026-07-07). Directional + Envelope. Annual = Save 20% (x9.6),
+    // matches the live Stripe prices + prod DB. Keep in sync with shop/mwfrs.html + Stripe.
+    'mwfrs_starter': {
+        name: 'MWFRS Buildings - Starter',
+        shortName: 'MWFRS Starter',
+        category: 'calculator',
+        monthlyPrice: 35,
+        annualPrice: 336,
+        features: ['1 user', 'Directional (Ch 27) + Envelope (Ch 28)', '100 calculations/month', 'PDF reports']
+    },
+    'mwfrs_pro': {
+        name: 'MWFRS Buildings - Pro',
+        shortName: 'MWFRS Pro',
+        category: 'calculator',
+        monthlyPrice: 59,
+        annualPrice: 564,
+        features: ['Up to 5 users', '500 calculations/month', 'Priority support', 'Team dashboard']
+    },
+    'mwfrs_premium': {
+        name: 'MWFRS Buildings - Premium',
+        shortName: 'MWFRS Premium',
+        category: 'calculator',
+        monthlyPrice: 149,
+        annualPrice: 1428,
+        features: ['Up to 10 users', 'Unlimited calculations', 'Phone support', 'API access']
+    },
+
     // Future products (coming soon)
     'cc_roofs_starter': {
         name: 'Roofing Systems Calculator - Starter',
@@ -76,14 +103,6 @@ const PRODUCT_CATALOG = {
         category: 'calculator',
         monthlyPrice: 35,
         annualPrice: 336,
-        comingSoon: true
-    },
-    'mwfrs_starter': {
-        name: 'MWFRS Calculator - Starter',
-        shortName: 'MWFRS Starter',
-        category: 'calculator',
-        monthlyPrice: 49,
-        annualPrice: 470,
         comingSoon: true
     }
 };

@@ -99,6 +99,27 @@ actions or wasted crawl budget. Read before adding new pages or schema markup.
 - The base button needs a `transition` (e.g. `transition:all .25-.3s ease`) so the color animates.
   Touch only `:hover` rules — never the structural `order`.
 
+### Add-to-Cart behavior — REQUIRED on EVERY card of EVERY shop page (established 2026-07-08)
+The cart is `js/shopping-cart.js` (localStorage) + `js/cart-header.js` (binds buttons, injects the
+header cart icon + `#header-cart-badge`) + `js/stripe-checkout.js`. A "buy" button opts in by having
+`data-product-code` + `data-billing-cycle` — `cart-header.js` (capture phase) wires it to
+`cart.addItem`. On a successful add the button MUST:
+1. **turn green + confirm** — `linear-gradient(135deg,#0a8f5b,#34D399)`, text `✓ Added to Cart`
+   (the same "go/buy" green as the hover);
+2. **reveal a `.cart-jump` "Go to checkout →" link** right after it (to `cart.html`), and the green
+   button itself becomes a second jump-to-checkout on re-click;
+3. **the header cart badge (`#header-cart-badge`) must show the count** and persist. A returning
+   visitor whose product is already in the cart sees the added state on load.
+- **PRODUCT_CATALOG in `shopping-cart.js` is the cart's source of truth and MUST be kept in sync with
+  the live products + prices.** Every sellable `data-product-code` on a shop page needs a matching,
+  non-`comingSoon` catalog entry with the CORRECT price (annual = Save-20% ×9.6). If a code is missing
+  or flagged `comingSoon`, Add-to-Cart silently fails / pops "coming soon" and the badge never appears
+  (this exact bug shipped for MWFRS: catalog still had a stale `comingSoon` `mwfrs_starter` @ $49 and
+  no `mwfrs_pro`/`mwfrs_premium`). When a product goes live, update its catalog entry in the SAME change.
+- Verify with a headless click (puppeteer): after clicking Add-to-Cart the badge count increments, the
+  button is green `✓ Added`, the `.cart-jump` link exists, and `localStorage.windloadcalc_cart` has the
+  item — never eyeball it.
+
 ---
 
 ## IMPORTANT: Pre-Launch Checklist

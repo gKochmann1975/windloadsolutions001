@@ -12,42 +12,56 @@
     // duplicated the cart link injected into the header below and overlapped content
     // on mobile. The header cart (addCartToHeader) is now the single cart entry point.
 
-    // Replace "Subscribe Now" buttons with "Add to Cart" buttons
+    // After an item lands in the cart, confirm ON the button (turns green) and reveal a
+    // "Go to checkout" link. Applies to EVERY [data-product-code] card on EVERY shop page.
+    function markAdded(btn) {
+        btn.classList.add('in-cart');
+        btn.style.background = 'linear-gradient(135deg,#0a8f5b,#34D399)';   // brand "go/buy" green
+        btn.style.boxShadow = '0 8px 25px rgba(16,185,129,.45)';
+        btn.innerHTML = '✓ Added to Cart';
+        if (btn.parentNode && !btn.parentNode.querySelector('.cart-jump')) {
+            const jump = document.createElement('a');
+            jump.className = 'cart-jump';
+            jump.href = cartUrl;
+            jump.innerHTML = 'Go to checkout →';
+            jump.style.cssText = 'display:block;text-align:center;margin-top:8px;font-weight:800;color:#10b981;text-decoration:none';
+            jump.addEventListener('mouseover', function () { this.style.textDecoration = 'underline'; });
+            jump.addEventListener('mouseout', function () { this.style.textDecoration = 'none'; });
+            btn.insertAdjacentElement('afterend', jump);
+        }
+    }
+
+    // Replace "Subscribe Now" buttons with "Add to Cart" and wire them to the cart.
     document.addEventListener('DOMContentLoaded', function() {
-        // Find all pricing buttons with product codes
         const subscribeButtons = document.querySelectorAll('[data-product-code]');
 
         subscribeButtons.forEach(btn => {
-            // Replace the button text
             btn.innerHTML = '<i class="fas fa-cart-plus"></i> Add to Cart';
-
-            // Remove old click handlers by setting onclick to null
             btn.onclick = null;
 
-            // IMPORTANT: Don't clone the button! Cloning breaks the billing toggle
-            // because updatePricing() updates the original button, not the clone.
-            // Instead, add a capturing event listener that reads attributes at click time.
+            // Capturing listener reads data-* at CLICK time (the billing toggle updates them);
+            // it also runs before stripe-checkout.js's direct-checkout handler and stops it.
             btn.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
-                const productCode = this.dataset.productCode;
-                const billingCycle = this.dataset.billingCycle || 'annual';
-                console.log(`Cart add: ${productCode} (${billingCycle})`);
-                if (typeof cart !== 'undefined') {
-                    cart.addItem(productCode, billingCycle);
-                } else {
-                    alert('Cart system loading... Please try again.');
-                }
-            }, true);  // Use capture phase to run before other handlers
+                // Already added -> the button doubles as a jump to checkout.
+                if (this.classList.contains('in-cart')) { window.location.href = cartUrl; return; }
+                if (typeof cart === 'undefined') { alert('Cart system loading... Please try again.'); return; }
+                const code = this.dataset.productCode, cycle = this.dataset.billingCycle || 'annual';
+                const added = cart.addItem(code, cycle);
+                // addItem returns false for coming-soon / not-found; only confirm if it truly landed.
+                if (added || cart.items.some(it => it.productCode === code)) markAdded(this);
+            }, true);
+
+            // Returning visitor: if this product is already in the cart, show the added state now.
+            if (typeof cart !== 'undefined' && cart.items.some(it => it.productCode === btn.dataset.productCode)) {
+                markAdded(btn);
+            }
         });
 
-        // Add cart icon to header if not already present
+        // Add cart icon to header if not already present, then sync the badge.
         addCartToHeader();
-
-        // Update cart badge
-        if (typeof cart !== 'undefined') {
-            cart.updateCartBadge();
-        }
+        if (typeof cart !== 'undefined') cart.updateCartBadge();
     });
 
     // Add cart icon to page header

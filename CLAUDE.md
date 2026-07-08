@@ -133,6 +133,19 @@ live buy buttons, no category card linking to it may still say "Coming soon". Ru
 go-live. Same rule applies to the app nav (`webapp/flask_app/static/shell.js`) + `account_proxy.py`
 `PROGRAMS` `live:` flag.
 
+### Site-wide cart indicator + the local-testing redirect trap (established 2026-07-08)
+- The cart count lives in `localStorage` (persists site-wide), so the header cart ICON must be on
+  **every** page — `js/cart-indicator.js` (inline-SVG cart + `#wlc-cart-badge`, injected into `.nav-right`
+  so it shows on mobile too). It's loaded on every `#fullMenu` page by a dynamic inline bootstrap that
+  `partials/sync_cart_indicator.py` keeps in sync (run it after adding a new page, like `sync_nav.py`).
+  `check-cart.js` flags a page missing it (**MISSING_CART_INDICATOR**). Do NOT add site-wide JS as a
+  static `<script src>` late in the page — the parser silently drops it on marketing pages; use the
+  bootstrap pattern.
+- **Marketing pages hard-redirect `http`→`https://windloadcalc.com`** (their inline canonical-enforcement
+  script). So a **localhost test of any marketing page silently loads PRODUCTION, not your edit** — you'll
+  "fix" nothing. `/shop/*` pages don't redirect (they test fine locally). Verify marketing-page changes on
+  the LIVE site after deploy, or assert `page.url()` stayed on localhost. Use `/verify-page`.
+
 ---
 
 ## IMPORTANT: Pre-Launch Checklist

@@ -31,7 +31,7 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
-const EXCLUDE = /(?:^|[\\/])(?:website|Lib|venv|venv_clean|new_env|\.backups|node_modules|site-packages|\.venv|asce_wind_processor|email)[\\/]/i;
+const EXCLUDE = /(?:^|[\\/])(?:website|Lib|venv|venv_clean|new_env|\.backups|\.archive|\.held-vs-pages|partials|node_modules|site-packages|\.venv|asce_wind_processor|email)[\\/]/i;
 const rel = (f) => path.relative(ROOT, f).replace(/\\/g, '/');
 
 // ---- parse PRODUCT_CATALOG from js/shopping-cart.js -------------------------
@@ -145,6 +145,23 @@ function checkPage(file, text, catalog) {
   return findings;
 }
 
+// The cart persists in localStorage, so the header cart indicator must be on EVERY real
+// page (not just shop pages) or a user can't see/reach their cart after navigating away.
+// Every page with the site header (#fullMenu) must load js/cart-indicator.js — kept in sync
+// by partials/sync_cart_indicator.py. Catch a page that forgot it.
+function checkCartIndicatorCoverage(files) {
+  const out = [];
+  for (const f of files) {
+    let text; try { text = fs.readFileSync(f, 'utf8'); } catch { continue; }
+    if (!/id="fullMenu"/.test(text)) continue;       // only real pages with the site header
+    if (!/cart-indicator\.js/.test(text)) {
+      out.push({ file: f, findings: [{ sev: 'HIGH', id: 'MISSING_CART_INDICATOR',
+        msg: 'page has the site header but does not load js/cart-indicator.js — the cart count/icon will not appear here. Run: python partials/sync_cart_indicator.py' }] });
+    }
+  }
+  return out;
+}
+
 // ---- main -------------------------------------------------------------------
 const args = process.argv.slice(2);
 const catalog = loadCatalog();
@@ -168,7 +185,8 @@ for (const file of files) {
 // Site-wide: category/landing cards must not say "Coming soon" for an already-live shop.
 const liveKeys = liveShopKeys(catalog);
 const catFiles = args.length ? args.map((a) => path.resolve(ROOT, a)) : allHtmlFiles();
-const catResults = checkCategoryCards(catFiles, liveKeys);
+const coverage = checkCartIndicatorCoverage(catFiles);
+const catResults = [...checkCategoryCards(catFiles, liveKeys), ...coverage];
 for (const { file, findings } of catResults) {
   console.log(`• ${rel(file)}`);
   for (const f of findings) {

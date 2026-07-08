@@ -417,7 +417,7 @@ section{position:relative;z-index:1;padding:62px 0}
       <span class="billing-label" id="monthly-label">Monthly</span>
       <div class="billing-toggle annual" id="billing-toggle" onclick="toggleBilling()"><div class="billing-toggle-slider"></div></div>
       <span class="billing-label active" id="annual-label">Annual</span>
-      <span class="savings-badge">2 months free</span>
+      <span class="savings-badge">Save 20%</span>
     </div>
   </div>
 
@@ -425,8 +425,8 @@ section{position:relative;z-index:1;padding:62px 0}
     <!-- Starter -->
     <div class="pricing-card">
       <div class="pricing-header"><h3>Starter</h3><p class="pricing-description">Solo engineers &amp; small firms</p></div>
-      <div class="pricing-amount"><span class="price-currency">$</span><span class="price-value" id="price-starter">29</span><span class="price-period" id="period-starter">/month</span></div>
-      <p class="price-note" id="note-starter"><strong>2 MONTHS FREE</strong> - Billed annually at $350/year</p>
+      <div class="pricing-amount"><span class="price-currency">$</span><span class="price-value" id="price-starter">28</span><span class="price-period" id="period-starter">/month</span></div>
+      <p class="price-note" id="note-starter"><strong>20% OFF</strong> - Billed annually at $336/year</p>
       <div class="pricing-divider"></div>
       <div class="pricing-features"><h4>What's included:</h4><ul>
         <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>1 user license</span></li>
@@ -442,8 +442,8 @@ section{position:relative;z-index:1;padding:62px 0}
     <!-- Pro (featured) -->
     <div class="pricing-card featured">
       <div class="pricing-header"><h3>Pro</h3><p class="pricing-description">Teams up to 5 — best value</p></div>
-      <div class="pricing-amount"><span class="price-currency">$</span><span class="price-value" id="price-pro">49</span><span class="price-period" id="period-pro">/month</span></div>
-      <p class="price-note" id="note-pro"><strong>2 MONTHS FREE</strong> - Billed annually at $590/year</p>
+      <div class="pricing-amount"><span class="price-currency">$</span><span class="price-value" id="price-pro">47</span><span class="price-period" id="period-pro">/month</span></div>
+      <p class="price-note" id="note-pro"><strong>20% OFF</strong> - Billed annually at $564/year</p>
       <div class="pricing-divider"></div>
       <div class="pricing-features"><h4>Everything in Starter, plus:</h4><ul>
         <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span><strong>Up to 5 user licenses</strong></span></li>
@@ -459,8 +459,8 @@ section{position:relative;z-index:1;padding:62px 0}
     <!-- Premium -->
     <div class="pricing-card">
       <div class="pricing-header"><h3>Premium</h3><p class="pricing-description">Teams up to 10, advanced features</p></div>
-      <div class="pricing-amount"><span class="price-currency">$</span><span class="price-value" id="price-premium">124</span><span class="price-period" id="period-premium">/month</span></div>
-      <p class="price-note" id="note-premium"><strong>2 MONTHS FREE</strong> - Billed annually at $1,490/year</p>
+      <div class="pricing-amount"><span class="price-currency">$</span><span class="price-value" id="price-premium">119</span><span class="price-period" id="period-premium">/month</span></div>
+      <p class="price-note" id="note-premium"><strong>20% OFF</strong> - Billed annually at $1,428/year</p>
       <div class="pricing-divider"></div>
       <div class="pricing-features"><h4>Everything in Pro, plus:</h4><ul>
         <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span><strong>Up to 10 user licenses</strong></span></li>
@@ -751,12 +751,12 @@ section{position:relative;z-index:1;padding:62px 0}
     document.querySelectorAll('[data-product-code]').forEach(function(b){ b.setAttribute('data-billing-cycle', cycle); });
   }
   function updatePricing(){
-    document.getElementById('price-starter').textContent = isAnnual ? '29' : '35';
-    document.getElementById('note-starter').innerHTML = isAnnual ? '<strong>2 MONTHS FREE</strong> - Billed annually at $350/year' : 'Billed monthly';
-    document.getElementById('price-pro').textContent = isAnnual ? '49' : '59';
-    document.getElementById('note-pro').innerHTML = isAnnual ? '<strong>2 MONTHS FREE</strong> - Billed annually at $590/year' : 'Billed monthly';
-    document.getElementById('price-premium').textContent = isAnnual ? '124' : '149';
-    document.getElementById('note-premium').innerHTML = isAnnual ? '<strong>2 MONTHS FREE</strong> - Billed annually at $1,490/year' : 'Billed monthly';
+    document.getElementById('price-starter').textContent = isAnnual ? '28' : '35';
+    document.getElementById('note-starter').innerHTML = isAnnual ? '<strong>20% OFF</strong> - Billed annually at $336/year' : 'Billed monthly';
+    document.getElementById('price-pro').textContent = isAnnual ? '47' : '59';
+    document.getElementById('note-pro').innerHTML = isAnnual ? '<strong>20% OFF</strong> - Billed annually at $564/year' : 'Billed monthly';
+    document.getElementById('price-premium').textContent = isAnnual ? '119' : '149';
+    document.getElementById('note-premium').innerHTML = isAnnual ? '<strong>20% OFF</strong> - Billed annually at $1,428/year' : 'Billed monthly';
   }
   document.addEventListener('DOMContentLoaded', updatePricing);
 </script>

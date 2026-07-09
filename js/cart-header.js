@@ -25,10 +25,25 @@
             const jump = document.createElement('a');
             jump.className = 'cart-jump';
             jump.href = cartUrl;
-            jump.innerHTML = 'Go to checkout →';
-            jump.style.cssText = 'display:block;text-align:center;margin-top:8px;font-weight:800;color:#10b981;text-decoration:none';
-            jump.addEventListener('mouseover', function () { this.style.textDecoration = 'underline'; });
-            jump.addEventListener('mouseout', function () { this.style.textDecoration = 'none'; });
+            jump.innerHTML = 'Go to Checkout →';
+            // A prominent button, not a thin text link — it's the action the user wants next.
+            // Blue (not green) so it reads as "next step", distinct from the green "✓ Added" confirm.
+            jump.style.cssText = 'display:block;text-align:center;margin-top:10px;padding:.9rem 1rem;' +
+                'border-radius:50px;font-weight:800;font-size:.95rem;text-decoration:none;color:#fff;' +
+                'background:linear-gradient(135deg,#0018ff 0%,#2540ff 100%);box-shadow:0 8px 22px rgba(0,24,255,.42);' +
+                'transition:transform .2s ease,box-shadow .2s ease';
+            // Pricing cards lay their children out with flex `order` (.pricing-cta{order:4} …). A
+            // freshly-inserted node defaults to order:0, which floats it to the TOP of the card —
+            // detached from the button the user just tapped (that was the mobile "where's checkout?"
+            // bug). Pin the link to the button's own order slot so it renders DIRECTLY beneath it.
+            // On pages that don't use order, the computed value is '0' and DOM order already places
+            // it correctly, so we skip it.
+            try {
+                var ord = getComputedStyle(btn).order;
+                if (ord && ord !== '0' && ord !== 'auto') jump.style.order = ord;
+            } catch (e) {}
+            jump.addEventListener('mouseover', function () { this.style.transform = 'translateY(-2px)'; this.style.boxShadow = '0 12px 28px rgba(0,24,255,.5)'; });
+            jump.addEventListener('mouseout', function () { this.style.transform = 'none'; this.style.boxShadow = '0 8px 22px rgba(0,24,255,.42)'; });
             btn.insertAdjacentElement('afterend', jump);
         }
     }

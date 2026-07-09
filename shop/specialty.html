@@ -76,6 +76,9 @@
   --brand:#a855f7; --brand-lt:#c084fc; --brand-2:#7e22ce; --on-brand:#2e0a4d;
 }
 *{box-sizing:border-box;margin:0;padding:0}
+/* Hide the floating reCAPTCHA v3 badge (bottom-right). Google-compliant because the
+   required "protected by reCAPTCHA" disclosure is shown under the notify form instead. */
+.grecaptcha-badge{visibility:hidden!important}
 html{scroll-behavior:smooth}
 body{font-family:'Inter',-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:#e8edf7;
   overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.55}
@@ -474,6 +477,7 @@ section{position:relative;z-index:1;padding:62px 0}
     </form>
 
     <p class="form-note">No payment required. We'll only email you about the Specialty Structures launch.</p>
+    <p class="form-note" style="font-size:12px;opacity:.65;margin-top:6px">This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy" target="_blank" rel="noopener" style="text-decoration:underline">Privacy Policy</a> and <a href="https://policies.google.com/terms" target="_blank" rel="noopener" style="text-decoration:underline">Terms of Service</a> apply.</p>
   </div>
 </div></section>
 

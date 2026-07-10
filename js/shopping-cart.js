@@ -88,15 +88,33 @@ const PRODUCT_CATALOG = {
         features: ['Up to 10 users', 'Unlimited calculations', 'Phone support', 'API access']
     },
 
-    // Future products (coming soon)
+    // C&C Roofs — 3 seat tiers (one subscription unlocks all 6 roof types)
     'cc_roofs_starter': {
-        name: 'Roofing Systems Calculator - Starter',
-        shortName: 'Roofing Starter',
+        name: 'C&C Roofs - Starter',
+        shortName: 'C&C Roofs Starter',
         category: 'calculator',
         monthlyPrice: 35,
         annualPrice: 336,
-        comingSoon: true
+        features: ['All 6 roof types (flat, gable, hip, monoslope, multi-span, sawtooth)', '1 user', '100 calculations/month', 'Permit-ready Engineering Reports']
     },
+    'cc_roofs_pro': {
+        name: 'C&C Roofs - Pro',
+        shortName: 'C&C Roofs Pro',
+        category: 'calculator',
+        monthlyPrice: 59,
+        annualPrice: 564,
+        features: ['All 6 roof types', 'Up to 5 users', '500 calculations/month', 'Priority support · team dashboard']
+    },
+    'cc_roofs_premium': {
+        name: 'C&C Roofs - Premium',
+        shortName: 'C&C Roofs Premium',
+        category: 'calculator',
+        monthlyPrice: 149,
+        annualPrice: 1428,
+        features: ['All 6 roof types', 'Up to 10 users', 'Unlimited calculations', 'Phone support · custom branding']
+    },
+
+    // Future products (coming soon)
     'cc_solar_starter': {
         name: 'Solar Panels Calculator - Starter',
         shortName: 'Solar Starter',

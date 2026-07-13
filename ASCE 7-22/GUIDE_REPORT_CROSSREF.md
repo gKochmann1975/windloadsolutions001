@@ -183,9 +183,22 @@ Report rendered OK (80060 bytes); qh in report: n/a · saved report: `ASCE 7-22/
 
 **3 / 3 published answers matched** (tolerance 0.20 psf; forces 5 lb).
 
+## Freestanding Wall (ASCE 7-22 §29.3 / Fig 29.3-1 (WE-13)) [Cf]
+
+Report rendered OK (80273 bytes); qh in report: n/a · saved report: `ASCE 7-22/guide_report_crossref/walls_report.html`
+
+| Answer | Guide (psf) | Our report (psf) | Δ | Match |
+|---|---:|---:|---:|:--:|
+| Case C 0-s Cf @ B/s=10 (book 3.75) | 3.75 | 3.75 | 0.00 | ✅ |
+| Case C s-2s Cf @ B/s=10 (book 2.45) | 2.45 | 2.45 | 0.00 | ✅ |
+| Case C 3s-10s Cf @ B/s=10 (book 0.95) | 0.95 | 0.95 | 0.00 | ✅ |
+| Kd signs/walls (book 0.85) | 0.85 | 0.85 | 0.00 | ✅ |
+
+**4 / 4 published answers matched** (tolerance 0.20 psf; forces 5 lb).
+
 ---
 
-## TOTAL: 73 / 73 published Guide answers matched
+## TOTAL: 77 / 77 published Guide answers matched
 
 **Exposure-B note:** Hip (Ex 6.3), Monoslope (Ex 6.5), and Rooftop Solar parallel (Ex 5.3) are validated at the **coefficient** level (GC<sub>p</sub> / γ<sub>E</sub> / γ<sub>a</sub> — exact). The engine floors the Exposure-B velocity-pressure coefficient K<sub>z</sub> at 0.70 for low-rise (the documented WE-2 conservative choice), where the book uses the raw table value (0.57 / 0.62), so the rendered **pressures are conservative** (higher) by that ratio — disclosed, not an error.
 

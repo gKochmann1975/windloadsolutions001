@@ -122,7 +122,7 @@ const PRODUCT_CATALOG = {
         category: 'calculator',
         monthlyPrice: 35,
         annualPrice: 336,
-        features: ['All 5 Ch 29 calculators', '1 user', '100 calculations/month', 'Email support']
+        features: ['All 6 Ch 29 calculators', '1 user', '100 calculations/month', 'Email support']
     },
     'cc_other_structures_pro': {
         name: 'Other Structures - Pro',
@@ -130,7 +130,7 @@ const PRODUCT_CATALOG = {
         category: 'calculator',
         monthlyPrice: 59,
         annualPrice: 564,
-        features: ['All 5 Ch 29 calculators', 'Up to 5 users', '500 calculations/month', 'Priority support · team dashboard']
+        features: ['All 6 Ch 29 calculators', 'Up to 5 users', '500 calculations/month', 'Priority support · team dashboard']
     },
     'cc_other_structures_premium': {
         name: 'Other Structures - Premium',
@@ -138,7 +138,7 @@ const PRODUCT_CATALOG = {
         category: 'calculator',
         monthlyPrice: 149,
         annualPrice: 1428,
-        features: ['All 5 Ch 29 calculators', 'Up to 10 users', 'Unlimited calculations', 'Phone support · custom branding']
+        features: ['All 6 Ch 29 calculators', 'Up to 10 users', 'Unlimited calculations', 'Phone support · custom branding']
     },
 
     // Future products (coming soon)

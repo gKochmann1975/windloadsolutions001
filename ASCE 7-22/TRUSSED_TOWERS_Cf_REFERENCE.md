@@ -2,7 +2,11 @@
 ## Trussed Towers (Open Structures)
 
 **Source:** ASCE 7-22, Chapter 29, Section 29.4, Figure 29.4-3
-**Status:** ⏳ UNVERIFIED — engine formulas listed below; confirm against the physical book.
+**Status:** ✅ VERIFIED 2026-07-12 (Gregory Kochmann, physical ASCE 7-22 book).
+Square Cf `4.0ε²−5.9ε+4.0`, Triangle Cf `3.4ε²−4.7ε+3.4`, and round-member multiplier
+`0.51ε²+0.57 (≤1.0)` all matched the engine exactly (Fig 29.4-3). Note 4 diagonal-wind factor
+for SQUARE towers `1+0.75ε (≤1.2)` confirmed in book AND present in engine
+(`get_diagonal_wind_factor`). Kd = 0.85 confirmed (Table 26.6-1, trussed towers square/triangular).
 **Engine file:** `webapp/asce7_22_other_towers.py`
 
 > Trussed towers of all heights, square and triangular cross sections. Cf is a **polynomial
@@ -77,9 +81,16 @@ Where:
 
 ## Sign-off
 
-- [ ] Square Cf polynomial coefficients confirmed (4.0 / −5.9 / 4.0)
-- [ ] Triangular Cf polynomial coefficients confirmed (3.4 / −4.7 / 3.4)
-- [ ] Round-member multiplier confirmed (0.51 / 0.57, cap 1.0)
-- [ ] Af = one tower face confirmed
-- [ ] Kd = 0.85 and G = 0.85 confirmed
-- Verified by: _______________  Date: ___________
+- [x] Square Cf polynomial coefficients confirmed (4.0 / −5.9 / 4.0)
+- [x] Triangular Cf polynomial coefficients confirmed (3.4 / −4.7 / 3.4)
+- [x] Round-member multiplier confirmed (0.51 / 0.57, cap 1.0)
+- [x] Note 4 diagonal-wind factor confirmed (1 + 0.75ε, cap 1.2) — engine has it
+- [x] Af = one tower face confirmed
+- [x] Kd = 0.85 and G = 0.85 confirmed (Table 26.6-1)
+- Verified by: **Gregory Kochmann**  Date: **2026-07-12**
+
+> ✅ Diagonal factor IS applied by design: `calculate_tower_forces` computes
+> `Cf_diagonal = Cf · (1+0.75ε≤1.2)` for square towers and uses `Cf_design = max(Cf, Cf_diagonal)`
+> as the governing coefficient (engine lines 338-343). The page's "Governing C_f / Governing
+> direction" rows reflect this. Conservative — no fix needed. (The low-level `get_cf`'s
+> `wind_along_diagonal=False` default is irrelevant; the main method takes the max itself.)

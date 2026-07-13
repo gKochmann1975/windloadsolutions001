@@ -2,7 +2,11 @@
 ## Chimneys, Tanks, Rooftop Equipment (when treated as Other Structures), and Similar Structures
 
 **Source:** ASCE 7-22, Chapter 29, Section 29.4, Figure 29.4-1
-**Status:** ⏳ UNVERIFIED — engine values listed below; confirm each against the physical book.
+**Status:** ✅ VERIFIED 2026-07-12 (Gregory Kochmann, physical ASCE 7-22 book).
+All 24 Cf cells matched the engine exactly (Fig 29.4-1). Octagonal is grouped with Hexagonal
+("Hexagonal or octagonal") in the book → engine's shared row confirmed correct. Kd confirmed
+against Table 26.6-1 (Square 0.90, Hex 0.95, Oct 1.0, Round 1.0). Subcritical/supercritical
+threshold D·√qz = 2.5 (US) / 5.3 (SI) confirmed. Notes 1 & 2 confirmed.
 **Engine file:** `webapp/asce7_22_other_chimneys_tanks.py`
 
 > **How to use this sheet:** Open ASCE 7-22 to Figure 29.4-1. For every cell,
@@ -125,9 +129,17 @@ intermediate h/D (Note 2). Engine clamps h/D to [1, 25]. — *confirm breakpoint
 
 ## Sign-off
 
-- [ ] All Cf cells confirmed against Figure 29.4-1
-- [ ] Kd-by-cross-section confirmed against Table 26.6-1
-- [ ] G = 0.85 confirmed (Section 26.11, rigid)
-- [ ] Octagonal-shares-Hexagonal assumption resolved
-- [ ] D·√qz = 2.5 threshold confirmed
-- Verified by: _______________  Date: ___________
+- [x] All Cf cells confirmed against Figure 29.4-1 — exact match
+- [x] Kd-by-cross-section confirmed against Table 26.6-1 — exact match
+- [x] G = 0.85 confirmed (Section 26.11, rigid)
+- [x] Octagonal-shares-Hexagonal assumption resolved — book groups them, engine correct
+- [x] D·√qz = 2.5 threshold confirmed (5.3 in SI)
+- Verified by: **Gregory Kochmann**  Date: **2026-07-12**
+
+> ⚠️ CODE (non-value) follow-ups, separate from this value sign-off:
+> 1. Round surface bin: engine `_surface_roughness` classifies D′/D = 0.08 exactly as **rough**
+>    (`<= 0.08`), but the book puts D′/D = 0.08 in **very rough**. Unconservative at that exact
+>    boundary — change to `< 0.08`.
+> 2. Audit (2026-07-09) reported the production/Flask chimney front-end posts `cross_section='square'`
+>    (engine only accepts `square_normal`/`square_diagonal`). The Dash page is clean; re-confirm the
+>    Flask path before selling.

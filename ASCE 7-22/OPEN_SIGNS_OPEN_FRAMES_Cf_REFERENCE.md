@@ -2,7 +2,10 @@
 ## Open Signs and Single-Plane Open Frames
 
 **Source:** ASCE 7-22, Chapter 29, Section 29.4, Figure 29.4-2
-**Status:** ⏳ UNVERIFIED — engine values listed below; confirm against the physical book.
+**Status:** ✅ VERIFIED 2026-07-12 (Gregory Kochmann, physical ASCE 7-22 book).
+All 9 Cf cells matched the engine exactly (Fig 29.4-2). ε bands `<0.1 / 0.1 to 0.29 / 0.3 to 0.7`
+confirmed. Rounded-member regime threshold D·√qz = 2.5 (US) / 5.3 (SI) confirmed. Kd = 0.85
+confirmed (Table 26.6-1, "Open signs and single-plane open frames"). Notes 1–3 confirmed.
 **Engine file:** `webapp/asce7_22_other_open_signs.py`
 **In-code note:** comment says "user-confirmed 2026-06-15" — **re-confirm against the book and
 lock into the ledger; do not trust the in-code comment alone** (project hard rule).
@@ -66,9 +69,9 @@ For rounded members, regime is set by **D·√qz** (D = typical round-member dia
 
 ## Sign-off
 
-- [ ] All 9 Cf cells confirmed against Figure 29.4-2
-- [ ] ε band breakpoints confirmed
-- [ ] D·√qz = 2.5 threshold confirmed
-- [ ] Kd = 0.85 and G = 0.85 confirmed
-- [ ] ε > 0.7 → solid-sign routing confirmed
-- Verified by: _______________  Date: ___________
+- [x] All 9 Cf cells confirmed against Figure 29.4-2 — exact match
+- [x] ε band breakpoints confirmed (`<0.1`, `0.1 to 0.29`, `0.3 to 0.7`)
+- [x] D·√qz = 2.5 threshold confirmed (5.3 in SI)
+- [x] Kd = 0.85 and G = 0.85 confirmed (Table 26.6-1)
+- [x] ε > 0.7 → solid-sign routing confirmed (engine raises for ε > 0.7)
+- Verified by: **Gregory Kochmann**  Date: **2026-07-12**

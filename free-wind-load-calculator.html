@@ -1843,10 +1843,10 @@
 
                 <!-- COMPONENT -->
                 <div class="input-group">
-                    <label class="input-group-label">Component Dimensions <span class="hint">feet</span></label>
+                    <label class="input-group-label">Component Dimensions <span class="hint">inches</span></label>
                     <div class="input-row">
-                        <input type="number" id="inp-comp-w" class="input-text" min="0.1" step="0.1" value="4" placeholder="Width">
-                        <input type="number" id="inp-comp-h" class="input-text" min="0.1" step="0.1" value="5" placeholder="Height">
+                        <input type="number" id="inp-comp-w" class="input-text" min="1" step="0.25" value="48" placeholder="Width (in)">
+                        <input type="number" id="inp-comp-h" class="input-text" min="1" step="0.25" value="60" placeholder="Height (in)">
                     </div>
                 </div>
 
@@ -2358,12 +2358,16 @@
             state.mean_roof_height_ft = parseFloat(e.target.value) || 0;
             onInputChange();
         });
+        // Component dimensions are entered in INCHES (trade convention — window/door
+        // schedules are quoted in inches). The engine works in FEET, so convert here:
+        // ft = in / 12. Guards against the classic trap where someone types "40" meaning
+        // 40 in (3.3 ft) but the field expected feet (40 ft = a 2000 ft^2 wall).
         inpCompW.addEventListener('input', (e) => {
-            state.component_width_ft = parseFloat(e.target.value) || 0;
+            state.component_width_ft = (parseFloat(e.target.value) || 0) / 12;
             onInputChange();
         });
         inpCompH.addEventListener('input', (e) => {
-            state.component_height_ft = parseFloat(e.target.value) || 0;
+            state.component_height_ft = (parseFloat(e.target.value) || 0) / 12;
             onInputChange();
         });
 

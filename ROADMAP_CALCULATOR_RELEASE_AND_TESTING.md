@@ -15,7 +15,38 @@ rollout milestone, and the B4 webhook idempotency test+deploy plan.*
 
 ---
 
-## STATUS — updated 2026-07-01
+## STATUS — updated 2026-07-17
+
+### 🗓️ 2026-07-17 — Shop split: Other Structures (LIVE) vs Specialty Components (coming soon)
+The old single "Specialty" product was actually two different things. Corrected + committed on
+`fix/fl-velocity-rebuild-2026-07` (pushed, `f85b7c1`):
+- **Other Structures = LIVE / sellable** — `shop/other-structures.html` (ASCE 7-22 **Chapter 29**
+  force-coefficient calcs: signs, open signs, freestanding walls, rooftop equipment, chimneys/tanks,
+  trussed towers). Live Stripe catalog (`cc_other_structures_{starter,pro,premium}`), buy buttons,
+  in `sitemap.xml`. Brought the page into the **root** tree (it existed only under `website/`); shop +
+  landing cards flipped to a live "Other Structures" card.
+- **Specialty Components = COMING SOON** — `shop/specialty.html`, now correctly scoped to
+  **parapets (§30.6) + attached canopies (§30.9)** and reframed as **Chapter 30 Components & Cladding
+  (GC<sub>p</sub> net pressures)** — NOT Ch 29 force coefficients. `noindex`, out of sitemap, waitlist
+  page. Removed the old parapets/canopies/balconies/billboards mislabeling everywhere it appeared.
+
+**Open TODO (from this split):**
+- [ ] 📖 **BOOK-VERIFY parapets/canopies before Specialty Components ships** (planned 2026-07-18):
+      section numbers are already supported — parapets **§30.6** and attached canopies **§30.9**
+      (Greg supplied Figs 30.9-1A/1B for h≤60 and 30.9-2A/2B for h>60). The OPEN engine items are the
+      canopy figure-band discrepancies already logged in memory `roadmap_asce_verification_pending`:
+      (1) Fig 30.9-2B (h>60 net) has TWO hc/he bands but the engine uses THREE; (2) Fig 30.9-2A shows
+      a −0.5 endpoint the engine's table lacks; plus the parapet zone-label question (note says
+      "Zones 2/3", engine uses 4/5). Resolve against the physical book, then it's a genuine
+      2-figure (parapet) + 4-figure (canopy) build-and-verify. Log results in
+      `reference_asce_7_22_verified_values`. If any §-number changes, update the shop card +
+      `shop/specialty.html` (BOTH trees).
+- [ ] 🔀 **Sync the `website/` tree** (separate checkout, same repo) to this root commit `f85b7c1`:
+      its landing page still shows one stale "Specialized Structures" card, and
+      `website/shop/specialty.html` still has the old Ch-29 framing. Pull the commit or re-apply the edits.
+- [ ] 🛠️ **Build the Specialty Components calculator** (parapets/canopies) per the two-gate rule before
+      flipping it live — engines `asce7_22_cc_parapet.py` / `asce7_22_cc_canopy.py` exist (C&C), but
+      there is no shipped standalone product page/endpoint/Stripe wiring yet.
 
 ### ✅ Done this session (2026-07-01)
 - **Stripe LIVE aligned** for MWFRS: 3 tiers at v3 (Starter $35/$350, Pro $59/$590, Premium
@@ -72,8 +103,9 @@ different asset by a different mechanism):
 > code). All three are **research/decide** items — none is "just file it" without Greg's go.
 
 ### Next products to go live (waitlist → priced), each via the two-gate golden rule
-Roofing, Solar, Specialty — recolored/branded but still "Launching Soon"; add priced cards at
-top + Stripe + backend when each is verified & sellable, the same way MWFRS was done.
+Solar and **Specialty Components (parapets §30.6 / attached canopies §30.9)** are still "Coming
+soon" — add priced cards + Stripe + backend when each is verified & sellable, the same way MWFRS
+was done. **Other Structures (Ch 29) went LIVE 2026-07-17**; Roofing is live.
 
 ---
 

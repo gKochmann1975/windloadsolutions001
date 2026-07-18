@@ -3515,7 +3515,7 @@ Leaflet: ${typeof L !== 'undefined' ? 'LOADED' : 'NOT LOADED'}
         const SIGNUP_CONFIG = {
             API_URL: 'https://api.windloadcalc.com',
             GOOGLE_CLIENT_ID: '54861385840-potugp8t4bpls8ckgbba6ku6i1semkuf.apps.googleusercontent.com',
-            GOOGLE_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbwtwGU1jvSIQGrlf24Is7gKsu2dc-GK9FnT8fW4ldVXLQ54R0yWBy24Y4wegSrLGR_s/exec',
+            GOOGLE_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbylRqdQRHFPhVAE00aavbZLpEiNr3lASMVhAuwx06z15ONJMbbzGD8wUEO_Kkn_PM6J/exec',
             STORAGE_KEY: 'bip_signup_completed',
             SHOW_DELAY: 1000
         };
@@ -3680,6 +3680,7 @@ Leaflet: ${typeof L !== 'undefined' ? 'LOADED' : 'NOT LOADED'}
                         mode: 'no-cors',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
+                            formType: 'bip',
                             name: data.user?.full_name || 'Google User',
                             email: data.user?.email || 'unknown',
                             company: 'Google Sign-In',
@@ -3790,6 +3791,7 @@ Leaflet: ${typeof L !== 'undefined' ? 'LOADED' : 'NOT LOADED'}
                                     'Content-Type': 'application/json',
                                 },
                                 body: JSON.stringify({
+                                    formType: 'bip',
                                     name: name,
                                     email: email,
                                     company: company || 'Not provided',

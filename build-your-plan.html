@@ -75,7 +75,7 @@
   @keyframes iconFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
   @media (prefers-reduced-motion:reduce){.card .ic{animation:none} .card:hover .ic svg{transform:none}}
   .tick svg{width:15px;height:15px;opacity:0;transition:.15s}
-  .card.on .tick svg{opacity:1}
+  .card.on .tick svg,.bip.on .tick svg,.bip.free .tick svg{opacity:1}
   .cbody{flex:1;min-width:0}
   .cbody h3{margin:0;font-size:15.5px;font-weight:680;letter-spacing:-.01em}
   .cbody p{margin:2px 0 0;font-size:12.8px;color:var(--muted)}
@@ -90,7 +90,9 @@
     background:color-mix(in srgb,var(--bip) 7%,var(--panel));cursor:pointer;transition:.15s}
   .bip.on{background:color-mix(in srgb,var(--bip) 15%,var(--panel));border-style:solid}
   .bip.free{border-color:var(--rev);background:color-mix(in srgb,var(--rev) 12%,var(--panel));cursor:default}
-  .bip .tick{border-color:var(--bip)} .bip.on .tick{background:var(--bip);border-color:var(--bip)}
+  .bip .tick{border-color:var(--bip)} .bip.on .tick,.bip.free .tick{background:var(--bip);border-color:var(--bip)}
+  .bip .ic{width:44px;height:44px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex:0 0 auto;background:linear-gradient(140deg,var(--bip),color-mix(in srgb,var(--bip) 64%,#000));border:1px solid rgba(255,255,255,.24);box-shadow:0 5px 14px color-mix(in srgb,var(--bip) 30%,transparent)}
+  .bip .ic svg{width:23px;height:23px;stroke:#fff;fill:none}
   .bip h3{font-size:14.5px;margin:0;font-weight:680} .bip p{margin:2px 0 0;font-size:12.5px;color:var(--muted)}
   .bip .price{font-weight:750;color:var(--bip);white-space:nowrap} .bip.free .price{color:var(--rev)}
 
@@ -187,6 +189,7 @@
   };
   var state = { tier:"starter", cycle:"monthly", selected:{}, bip:false };
   var CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>';
+  var BIP_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5a3 3 0 0 0-5.6-1.5A2.5 2.5 0 0 0 4 6.5a2.5 2.5 0 0 0-.5 4A2.5 2.5 0 0 0 5 15a2.6 2.6 0 0 0 4 2.2A3 3 0 0 0 12 17z"/><path d="M12 5a3 3 0 0 1 5.6-1.5A2.5 2.5 0 0 1 20 6.5a2.5 2.5 0 0 1 .5 4A2.5 2.5 0 0 1 19 15a2.6 2.6 0 0 1-4 2.2A3 3 0 0 1 12 17z"/><path d="M12 5v12"/></svg>';
 
   function money(v){ return "$"+Math.round(v).toLocaleString(); }
   function unit(){ return state.cycle==="annual" ? "/yr" : "/mo"; }
@@ -237,9 +240,9 @@
 
     // BIP row (renders after summary via separate node) -> include inline here
     if(Q.isComplete){
-      h+='<div class="bip free"><div class="tick">'+CHECK+'</div><div class="cbody"><h3>Building Intelligence Platform</h3><p>Included free with Complete.</p></div><div class="price">FREE</div></div>';
+      h+='<div class="bip free"><div class="tick">'+CHECK+'</div><div class="ic">'+BIP_ICON+'</div><div class="cbody"><h3>Building Intelligence Platform</h3><p>Included free with Complete.</p></div><div class="price">FREE</div></div>';
     } else if(Q.showBipOffer){
-      h+='<div class="bip'+(state.bip?' on':'')+'" id="bipRow" tabindex="0" role="button" aria-pressed="'+state.bip+'"><div class="tick">'+CHECK+'</div>'+
+      h+='<div class="bip'+(state.bip?' on':'')+'" id="bipRow" tabindex="0" role="button" aria-pressed="'+state.bip+'"><div class="tick">'+CHECK+'</div><div class="ic">'+BIP_ICON+'</div>'+
          '<div class="cbody"><h3>Add full BIP access</h3><p>Hurricane risk, solar siting, multi‑criteria search across 40,000+ ZIPs.</p></div>'+
          '<div class="price">+'+money(Q.bipPrice)+unit()+'</div></div>';
     }

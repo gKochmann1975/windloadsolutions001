@@ -961,6 +961,20 @@
             padding-top: 1rem;
             border-top: 1px solid var(--border-subtle);
         }
+        /* Effective-wind-area advisory (A >= 500 ft^2: zones converge per Fig 30.3-1) */
+        .ewa-note {
+            margin-top: 0.85rem;
+            padding: 0.75rem 0.9rem;
+            font-size: 0.82rem;
+            line-height: 1.5;
+            color: #7a4d00;
+            background: #fff7e6;
+            border: 1px solid #f0c674;
+            border-left: 3px solid #d99a00;
+            border-radius: 8px;
+        }
+        .ewa-note strong { color: #6b3f00; }
+        .ewa-note a { color: #0018ff; font-weight: 600; }
 
         /* Show the math accordion */
         .math-toggle {
@@ -2548,9 +2562,28 @@
 
             const zoneName = state.zone === 4 ? 'Zone 4 (interior wall)' : 'Zone 5 (corner wall)';
             const ewa = data.inputs_echo.effective_wind_area_sqft;
+
+            // Effective wind area >= 500 ft^2 is past the C&C range. Per ASCE 7-22
+            // Figure 30.3-1 the Zone 4 and Zone 5 wall curves BOTH floor at GCp = -0.8
+            // at A >= 500 ft^2 — they converge — so the two zones return the SAME
+            // pressure. That is correct (not a bug), but it makes the Zone 4/5 toggle
+            // look dead. Surface WHY, and steer the user back to a real component (or
+            // the MWFRS calculator for a whole wall). See ASCE 7-22 Fig 30.3-1.
+            const ewaNote = ewa >= 500 ? `
+                <div class="ewa-note" role="note">
+                    <strong>Zones 4 &amp; 5 read the same here — and that's correct.</strong>
+                    Effective wind area is ${ewa.toFixed(0)} ft&sup2;. Per ASCE 7-22 Fig 30.3-1 the
+                    interior (Zone 4) and corner (Zone 5) wall curves both floor at GC<sub>p</sub> = &minus;0.8
+                    once A &ge; 500 ft&sup2;, so both zones give the same pressure. A wall this large is
+                    <strong>MWFRS, not a cladding component</strong> &mdash; enter a real component
+                    (e.g. a 3&times;5 ft window) to see the corner zone govern, or use the
+                    <a href="/wind-load-calculator-landing.html">MWFRS calculator</a> for a full wall.
+                </div>` : '';
+
             pressureDescription.innerHTML = `
                 <strong>${zoneName}</strong> &middot; ${ewa.toFixed(0)} ft&sup2; effective wind area &middot; ${data.figure_used}.
                 Wind speed source: <strong>${escapeHtml(data.wind_speed.source_label)}</strong> (${data.wind_speed.value_mph} mph).
+                ${ewaNote}
             `;
 
             // Render coefficient table

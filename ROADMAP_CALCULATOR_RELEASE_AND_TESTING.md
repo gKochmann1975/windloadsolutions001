@@ -31,16 +31,17 @@ The old single "Specialty" product was actually two different things. Corrected 
   page. Removed the old parapets/canopies/balconies/billboards mislabeling everywhere it appeared.
 
 **Open TODO (from this split):**
-- [ ] 📖 **BOOK-VERIFY parapets/canopies before Specialty Components ships** (planned 2026-07-18):
-      section numbers are already supported — parapets **§30.6** and attached canopies **§30.9**
-      (Greg supplied Figs 30.9-1A/1B for h≤60 and 30.9-2A/2B for h>60). The OPEN engine items are the
-      canopy figure-band discrepancies already logged in memory `roadmap_asce_verification_pending`:
-      (1) Fig 30.9-2B (h>60 net) has TWO hc/he bands but the engine uses THREE; (2) Fig 30.9-2A shows
-      a −0.5 endpoint the engine's table lacks; plus the parapet zone-label question (note says
-      "Zones 2/3", engine uses 4/5). Resolve against the physical book, then it's a genuine
-      2-figure (parapet) + 4-figure (canopy) build-and-verify. Log results in
-      `reference_asce_7_22_verified_values`. If any §-number changes, update the shop card +
-      `shop/specialty.html` (BOTH trees).
+- [x] 📖 **BOOK-VERIFY parapets/canopies — DONE 2026-07-18** (Greg read the physical figures
+      cell-by-cell). Full sign-off in `ASCE 7-22/CANOPIES_PARAPETS_Cf_REFERENCE.md`; engines fixed
+      in webapp `1827033` (`asce7_22_cc_canopy.py`, `asce7_22_cc_parapet.py`), smoke-tested.
+      Fixes: all four canopy figures re-valued (prior log-scale guesses were too conservative);
+      real effective-wind-area breakpoints (h≤60 bends 10→100; h>60 negatives 10→100→1000);
+      **h>60 net = TWO hc/he bands split at 0.9** (was wrongly three); added the missing −0.5
+      endpoint on 30.9-2A; removed a phantom "combined negative"; Note 5 linear hc/he interpolation.
+      Parapet: combination rule + wall + h≤60 roof verified; the Fig 30.6-1 "Zones 2/3" label on the
+      negative WALL pressure is an ASCE figure-note typo (walls are 4/5) — engine uses 4/5 (decision A1).
+- [ ] ⚠ **STILL PENDING before a parapet h>60 ships:** read **Fig 30.4-1 roof (Zones 2/3, h>60)** —
+      the parapet engine currently reuses the h≤60 roof values for h>60. Not a canopy blocker.
 - [ ] 🔀 **Sync the `website/` tree** (separate checkout, same repo) to this root commit `f85b7c1`:
       its landing page still shows one stale "Specialized Structures" card, and
       `website/shop/specialty.html` still has the old Ch-29 framing. Pull the commit or re-apply the edits.

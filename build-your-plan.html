@@ -8,31 +8,34 @@
 <title>Build Your Plan — WindLoadCalc</title>
 <style>
   :root{
-    --bg:#eef1f7; --panel:#fff; --panel2:#f6f8fc; --ink:#0f1730; --muted:#586178; --faint:#8a93a8;
-    --line:#e2e6f0; --line2:#eef1f7;
-    --accent:#2f4bff; --rev:#0e9f6e; --marg:#d97706; --bip:#0d9488; --complete:#7c3aed;
-    --shadow:0 1px 2px rgba(15,23,48,.05),0 14px 36px rgba(15,23,48,.08); --r:14px;
-  }
-  @media (prefers-color-scheme:dark){:root{
-    --bg:#080b16; --panel:#111830; --panel2:#0d142a; --ink:#eaf0ff; --muted:#9aa6c2; --faint:#6b768f;
-    --line:#212a44; --line2:#1a2238;
+    /* committed dark-immersive (matches the shop pages) */
+    --bg:#070a16;
+    --panel:rgba(255,255,255,.05); --panel2:rgba(255,255,255,.03);
+    --ink:#eef2fb; --muted:#a3aec8; --faint:#727e9a;
+    --line:rgba(255,255,255,.10); --line2:rgba(255,255,255,.055);
     --accent:#6b86ff; --rev:#34d399; --marg:#f5a83f; --bip:#2dd4bf; --complete:#a78bfa;
-    --shadow:0 1px 2px rgba(0,0,0,.4),0 18px 40px rgba(0,0,0,.5);
-  }}
-  :root[data-theme="dark"]{
-    --bg:#080b16; --panel:#111830; --panel2:#0d142a; --ink:#eaf0ff; --muted:#9aa6c2; --faint:#6b768f;
-    --line:#212a44; --line2:#1a2238; --accent:#6b86ff; --rev:#34d399; --marg:#f5a83f; --bip:#2dd4bf; --complete:#a78bfa;
-    --shadow:0 1px 2px rgba(0,0,0,.4),0 18px 40px rgba(0,0,0,.5);
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 18px 44px rgba(0,0,0,.5); --r:14px;
   }
-  :root[data-theme="light"]{
-    --bg:#eef1f7; --panel:#fff; --panel2:#f6f8fc; --ink:#0f1730; --muted:#586178; --faint:#8a93a8;
-    --line:#e2e6f0; --line2:#eef1f7; --accent:#2f4bff; --rev:#0e9f6e; --marg:#d97706; --bip:#0d9488; --complete:#7c3aed;
-    --shadow:0 1px 2px rgba(15,23,48,.05),0 14px 36px rgba(15,23,48,.08);
-  }
+  /* multi-color aurora — one blob per calculator brand color ("every calculator in one plan") */
+  .aurora{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+  .aurora span{position:absolute;border-radius:50%;filter:blur(95px);opacity:.5}
+  .aurora .a1{width:540px;height:540px;background:#06b6d4;top:-150px;left:-110px;animation:drift1 22s ease-in-out infinite alternate}
+  .aurora .a2{width:500px;height:500px;background:#f97316;bottom:-170px;right:-130px;opacity:.42;animation:drift2 26s ease-in-out infinite alternate}
+  .aurora .a3{width:460px;height:460px;background:#a855f7;top:28%;right:10%;opacity:.44;animation:drift1 28s ease-in-out infinite alternate-reverse}
+  .aurora .a4{width:420px;height:420px;background:#14b8a6;bottom:8%;left:6%;opacity:.4;animation:drift2 24s ease-in-out infinite alternate}
+  .aurora .a5{width:380px;height:380px;background:#3b82f6;top:6%;left:42%;opacity:.4;animation:drift1 30s ease-in-out infinite alternate}
+  .aurora .a6{width:300px;height:300px;background:#fbbf24;top:52%;left:50%;opacity:.26;animation:drift2 32s ease-in-out infinite alternate-reverse}
+  @keyframes drift1{to{transform:translate(70px,55px) scale(1.12)}}
+  @keyframes drift2{to{transform:translate(-60px,-45px) scale(1.1)}}
+  .gridbg{position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);
+    background-size:56px 56px;mask-image:radial-gradient(ellipse 82% 62% at 50% 0%,#000 42%,transparent 100%)}
+  @media (prefers-reduced-motion:reduce){.aurora span{animation:none}}
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
     line-height:1.5;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
-  .wrap{max-width:1080px;margin:0 auto;padding:26px 20px 70px}
+  .wrap{max-width:1080px;margin:0 auto;padding:26px 20px 70px;position:relative;z-index:1}
+  .card,.summary,.seg,.bip{backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
   .pvbadge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
     color:var(--complete);background:color-mix(in srgb,var(--complete) 14%,transparent);padding:3px 10px;border-radius:20px;margin-bottom:12px}
   h1{font-size:clamp(21px,2.5vw,28px);letter-spacing:-.02em;margin:0 0 4px;font-weight:760;text-wrap:balance}
@@ -118,12 +121,11 @@
   .finenote{font-size:11.5px;color:var(--faint);text-align:center;margin:-4px 0 0}
   .empty{color:var(--muted);font-size:13.5px;text-align:center;padding:8px 0}
   .previewnote{margin-top:26px;font-size:12px;color:var(--faint);border-top:1px solid var(--line);padding-top:14px;max-width:80ch}
-  .theme-tgl{position:fixed;top:12px;right:12px;border:1px solid var(--line);background:var(--panel);color:var(--muted);
-    border-radius:9px;padding:6px 10px;font:inherit;font-size:12px;cursor:pointer}
 </style>
 </head>
 <body>
-<button class="theme-tgl" id="themeTgl" aria-label="Toggle theme">◐ Theme</button>
+<div class="aurora" aria-hidden="true"><span class="a1"></span><span class="a2"></span><span class="a3"></span><span class="a4"></span><span class="a5"></span><span class="a6"></span></div>
+<div class="gridbg" aria-hidden="true"></div>
 <div class="wrap">
   <span class="pvbadge">ASCE 7‑22 · Volume pricing</span>
   <h1>Build your plan</h1>
@@ -269,11 +271,6 @@
     [].forEach.call(this.querySelectorAll("button"),function(x){x.classList.remove("on");}); btn.classList.add("on"); state[key]=btn.dataset[attr]; render(); }); }
   segWire("tier","tier","t"); segWire("cycle","cycle","c");
 
-  document.getElementById("themeTgl").addEventListener("click",function(){
-    var cur=document.documentElement.getAttribute("data-theme");
-    var next = cur==="dark"?"light":(cur==="light"?"dark":(matchMedia("(prefers-color-scheme:dark)").matches?"light":"dark"));
-    document.documentElement.setAttribute("data-theme",next);
-  });
 
   render();
 })();

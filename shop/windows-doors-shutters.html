@@ -141,6 +141,8 @@ nav.scrolled .logo-image{height:64px;filter:none}
 
 /* Hero */
 .hero-stage{position:relative;overflow:hidden;isolation:isolate}
+.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+@media(prefers-reduced-motion:reduce){.hero-video{display:none}}
 .hero-veil{position:absolute;inset:0;z-index:1;pointer-events:none;
   background:radial-gradient(ellipse 70% 60% at 50% 26%, rgba(16,185,129,.18), transparent 62%),
     linear-gradient(180deg, rgba(7,10,24,.66) 0%, rgba(7,10,24,.42) 32%, rgba(7,10,24,.72) 74%, var(--bg) 100%)}
@@ -485,6 +487,9 @@ section{position:relative;z-index:1;padding:62px 0}
 </aside>
 
 <div class="hero-stage">
+  <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="/images/video-posters/windows-doors-shutters.jpg">
+    <source src="/videos/windows-doors-shutters.mp4" type="video/mp4">
+  </video>
   <div class="hero-veil"></div>
   <header><div class="wrap">
     <div class="eyebrow"><span class="dot"></span>ASCE 7-22 · Components &amp; Cladding · Florida HVHZ ready</div>

@@ -133,6 +133,8 @@ nav.scrolled .logo-image{height:64px;filter:none}
 
 /* Hero */
 .hero-stage{position:relative;overflow:hidden;isolation:isolate}
+.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+@media(prefers-reduced-motion:reduce){.hero-video{display:none}}
 .hero-veil{position:absolute;inset:0;z-index:1;pointer-events:none;
   background:radial-gradient(ellipse 70% 60% at 50% 26%, rgba(0,24,255,.18), transparent 62%),
     linear-gradient(180deg, rgba(7,10,24,.66) 0%, rgba(7,10,24,.42) 32%, rgba(7,10,24,.72) 74%, var(--bg) 100%)}
@@ -396,6 +398,9 @@ section{position:relative;z-index:1;padding:62px 0}
 
 <!-- Hero -->
 <div class="hero-stage">
+  <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="/images/video-posters/wind-load-calculator-shop.jpg">
+    <source src="/videos/wind-load-calculator-shop.mp4" type="video/mp4">
+  </video>
   <div class="hero-veil"></div>
   <header><div class="wrap">
     <div class="eyebrow"><span class="dot"></span>ASCE 7-22 · Chapters 27 &amp; 28 · Available now</div>

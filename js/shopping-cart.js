@@ -140,6 +140,30 @@ const PRODUCT_CATALOG = {
         annualPrice: 1428,
         features: ['All 6 Ch 29 calculators', 'Up to 10 users', 'Unlimited calculations', 'Phone support · custom branding']
     },
+    'cc_specialty_starter': {
+        name: 'Specialty Components - Starter',
+        shortName: 'Specialty Starter',
+        category: 'calculator',
+        monthlyPrice: 35,
+        annualPrice: 336,
+        features: ['1 user', '100 calculations/month', 'Parapets & attached canopies (Ch 30 C&C)', 'Email support']
+    },
+    'cc_specialty_pro': {
+        name: 'Specialty Components - Pro',
+        shortName: 'Specialty Pro',
+        category: 'calculator',
+        monthlyPrice: 59,
+        annualPrice: 564,
+        features: ['5 users', '500 calculations/month', 'Parapets & attached canopies (Ch 30 C&C)', 'Priority support']
+    },
+    'cc_specialty_premium': {
+        name: 'Specialty Components - Premium',
+        shortName: 'Specialty Premium',
+        category: 'calculator',
+        monthlyPrice: 149,
+        annualPrice: 1428,
+        features: ['10 users', 'Unlimited calculations', 'Parapets & attached canopies (Ch 30 C&C)', 'Phone support']
+    },
 
     // Future products (coming soon)
     'cc_solar_starter': {

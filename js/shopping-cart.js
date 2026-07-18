@@ -61,15 +61,87 @@ const PRODUCT_CATALOG = {
         features: ['10 users', 'Unlimited calculations', 'Priority support', 'API access']
     },
 
-    // Future products (coming soon)
+    // C&C Roofs — three seat tiers (ASCE 7-22 Ch 30, all 6 roof types)
     'cc_roofs_starter': {
-        name: 'Roofing Systems Calculator - Starter',
-        shortName: 'Roofing Starter',
+        name: 'C&C Roofs - Starter',
+        shortName: 'C&C Roofs Starter',
         category: 'calculator',
         monthlyPrice: 35,
         annualPrice: 336,
-        comingSoon: true
+        features: ['1 user', '100 calculations/month', 'All 6 roof types', 'Email support']
     },
+    'cc_roofs_pro': {
+        name: 'C&C Roofs - Pro',
+        shortName: 'C&C Roofs Pro',
+        category: 'calculator',
+        monthlyPrice: 59,
+        annualPrice: 564,
+        features: ['5 users', '500 calculations/month', 'All 6 roof types', 'Priority support']
+    },
+    'cc_roofs_premium': {
+        name: 'C&C Roofs - Premium',
+        shortName: 'C&C Roofs Premium',
+        category: 'calculator',
+        monthlyPrice: 149,
+        annualPrice: 1428,
+        features: ['10 users', 'Unlimited calculations', 'All 6 roof types', 'Phone support']
+    },
+
+    // Other Structures — three seat tiers (ASCE 7-22 Ch 29: signs, freestanding walls,
+    // rooftop equipment, chimneys/tanks, trussed towers)
+    'cc_other_structures_starter': {
+        name: 'Other Structures - Starter',
+        shortName: 'Other Structures Starter',
+        category: 'calculator',
+        monthlyPrice: 35,
+        annualPrice: 336,
+        features: ['1 user', '100 calculations/month', 'All 5 Ch 29 structures', 'Email support']
+    },
+    'cc_other_structures_pro': {
+        name: 'Other Structures - Pro',
+        shortName: 'Other Structures Pro',
+        category: 'calculator',
+        monthlyPrice: 59,
+        annualPrice: 564,
+        features: ['5 users', '500 calculations/month', 'All 5 Ch 29 structures', 'Priority support']
+    },
+    'cc_other_structures_premium': {
+        name: 'Other Structures - Premium',
+        shortName: 'Other Structures Premium',
+        category: 'calculator',
+        monthlyPrice: 149,
+        annualPrice: 1428,
+        features: ['10 users', 'Unlimited calculations', 'All 5 Ch 29 structures', 'Phone support']
+    },
+
+    // Specialty Components — three seat tiers (ASCE 7-22 Ch 30 C&C: parapets §30.6,
+    // attached canopies §30.9)
+    'cc_specialty_starter': {
+        name: 'Specialty Components - Starter',
+        shortName: 'Specialty Starter',
+        category: 'calculator',
+        monthlyPrice: 35,
+        annualPrice: 336,
+        features: ['1 user', '100 calculations/month', 'Parapets & attached canopies (Ch 30 C&C)', 'Email support']
+    },
+    'cc_specialty_pro': {
+        name: 'Specialty Components - Pro',
+        shortName: 'Specialty Pro',
+        category: 'calculator',
+        monthlyPrice: 59,
+        annualPrice: 564,
+        features: ['5 users', '500 calculations/month', 'Parapets & attached canopies (Ch 30 C&C)', 'Priority support']
+    },
+    'cc_specialty_premium': {
+        name: 'Specialty Components - Premium',
+        shortName: 'Specialty Premium',
+        category: 'calculator',
+        monthlyPrice: 149,
+        annualPrice: 1428,
+        features: ['10 users', 'Unlimited calculations', 'Parapets & attached canopies (Ch 30 C&C)', 'Phone support']
+    },
+
+    // Future products (coming soon)
     'cc_solar_starter': {
         name: 'Solar Panels Calculator - Starter',
         shortName: 'Solar Starter',

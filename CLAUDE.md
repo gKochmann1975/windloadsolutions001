@@ -101,6 +101,31 @@ actions or wasted crawl budget. Read before adding new pages or schema markup.
 
 ---
 
+## Report & CTA Copy Rules — DO NOT VIOLATE
+
+### The software output is an "Engineering Report" — NEVER "sealed"
+- The software / subscription / calculator produces an **Engineering Report**. It is **NOT** a "sealed
+  report", "sealed deliverable", "PE-stamped report", "PE-stampable PDF", or "stamped document." Never
+  describe the software output as sealed or stamped.
+- **PE sign-and-seal is a SEPARATE professional service** — in-house FL P.E. (residential ≤ 3 stories),
+  PE network for other states. Copy may advertise that service ("PE sign-and-seal is available…",
+  "24 years of PE-stamped projects"), but must never imply the *software* seals.
+- Canonical correct wording is in `faq.html`: *"Is the software output a sealed report? No. The software
+  produces an Engineering Report, not a sealed document. A PE sign-and-seal is a separate service…"*
+- **Run `/check-report-copy` before committing any page copy that mentions reports, permits, or sealing.**
+
+### Buy/upgrade CTA routing — product tool → product shop; general page → general catalog
+- A **product-specific free tool** routes its upgrade/limit/lock popups + post-result CTA to **its own
+  product shop with pricing**: free C&C (`free-wind-load-calculator.html`) → `/shop/windows-doors-shutters.html`;
+  free MWFRS (`free-mwfrs-wind-load-calculator.html`) → `/shop/mwfrs.html`. Never send these to the
+  general catalog or a generic landing.
+- **General / multi-product pages** (state pages `*-wind-load-calculator/index.html`, audience pages,
+  comparison) correctly route their buy CTAs and "All Calculators & Pricing" links to the **general
+  catalog** `wind-load-calculator-shop.html`. This is intentional — do NOT "fix" them to a single product
+  shop. Nav "Pricing" → general catalog everywhere (correct).
+
+---
+
 ## IMPORTANT: Pre-Launch Checklist
 
 ### Before Going Live - MUST DO:
@@ -127,6 +152,11 @@ actions or wasted crawl budget. Read before adding new pages or schema markup.
 ### Key Products:
 - **BIP** (Building Intelligence Platform) - HTML/JSON website tool
 - **Wind Load Calculator** - Python/JSON calculation webapp
+- **Free public calculators** (SEO funnel, no signup, 10 calcs/IP/day each):
+  - C&C `free-wind-load-calculator.html` → `POST api/public/design-pressure` (single wall component)
+  - MWFRS `free-mwfrs-wind-load-calculator.html` → `POST api/public/mwfrs-pressure` (one low-rise box,
+    directional Ch. 27; Kzt=1.0). Per-tool 10/day quota via `_record_free_calc_usage(..., tool=)` in
+    `backend/app.py` — tool-prefixed keys, no DB migration. Engines mirrored webapp/↔backend/.
 
 ### Domain Strategy:
 - windloadcalc.com - Main product site

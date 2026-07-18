@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Internal preview — account 'add calculators' surface (existing user). Not customer-facing.">
+<title>Add Calculators — Preview (Existing User / Account)</title>
+<style>
+  :root{
+    --bg:#eef1f7; --panel:#fff; --panel2:#f6f8fc; --ink:#0f1730; --muted:#586178; --faint:#8a93a8;
+    --line:#e2e6f0; --line2:#eef1f7;
+    --accent:#2f4bff; --rev:#0e9f6e; --marg:#d97706; --bip:#0d9488; --complete:#7c3aed; --own:#0e9f6e;
+    --shadow:0 1px 2px rgba(15,23,48,.05),0 14px 36px rgba(15,23,48,.08); --r:14px;
+  }
+  @media (prefers-color-scheme:dark){:root{
+    --bg:#080b16; --panel:#111830; --panel2:#0d142a; --ink:#eaf0ff; --muted:#9aa6c2; --faint:#6b768f;
+    --line:#212a44; --line2:#1a2238;
+    --accent:#6b86ff; --rev:#34d399; --marg:#f5a83f; --bip:#2dd4bf; --complete:#a78bfa; --own:#34d399;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 18px 40px rgba(0,0,0,.5);
+  }}
+  :root[data-theme="dark"]{
+    --bg:#080b16; --panel:#111830; --panel2:#0d142a; --ink:#eaf0ff; --muted:#9aa6c2; --faint:#6b768f;
+    --line:#212a44; --line2:#1a2238; --accent:#6b86ff; --rev:#34d399; --marg:#f5a83f; --bip:#2dd4bf; --complete:#a78bfa; --own:#34d399;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 18px 40px rgba(0,0,0,.5);
+  }
+  :root[data-theme="light"]{
+    --bg:#eef1f7; --panel:#fff; --panel2:#f6f8fc; --ink:#0f1730; --muted:#586178; --faint:#8a93a8;
+    --line:#e2e6f0; --line2:#eef1f7; --accent:#2f4bff; --rev:#0e9f6e; --marg:#d97706; --bip:#0d9488; --complete:#7c3aed; --own:#0e9f6e;
+    --shadow:0 1px 2px rgba(15,23,48,.05),0 14px 36px rgba(15,23,48,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+    line-height:1.5;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+  .wrap{max-width:1080px;margin:0 auto;padding:24px 20px 70px}
+  .pvbadge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--complete);background:color-mix(in srgb,var(--complete) 14%,transparent);padding:3px 10px;border-radius:20px;margin-bottom:12px}
+  h1{font-size:clamp(20px,2.4vw,27px);letter-spacing:-.02em;margin:0 0 4px;font-weight:760;text-wrap:balance}
+  .sub{color:var(--muted);margin:0;font-size:14.5px;max-width:64ch}
+
+  .simbar{margin:16px 0 6px;padding:12px 14px;background:var(--panel);border:1px dashed var(--line);border-radius:12px}
+  .simbar .lab{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);font-weight:700;margin-bottom:8px}
+  .chips{display:flex;gap:7px;flex-wrap:wrap}
+  .chip{border:1.5px solid var(--line);background:var(--panel2);color:var(--muted);font:inherit;font-size:12.5px;font-weight:600;
+    padding:6px 11px;border-radius:20px;cursor:pointer;transition:.15s}
+  .chip.on{border-color:var(--own);color:var(--own);background:color-mix(in srgb,var(--own) 12%,transparent)}
+  .simnote{font-size:11.5px;color:var(--faint);margin-top:7px}
+
+  .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 18px;align-items:center}
+  .seg{display:flex;gap:4px;background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:4px;box-shadow:var(--shadow)}
+  .seg button{border:0;background:transparent;color:var(--muted);font:inherit;font-size:13px;font-weight:650;padding:8px 13px;border-radius:8px;cursor:pointer;transition:.15s}
+  .seg button:hover{color:var(--ink)} .seg button.on{background:var(--accent);color:#fff;box-shadow:0 2px 9px rgba(47,75,255,.35)}
+  .seg .savepill{font-size:10.5px;font-weight:700;color:var(--rev);margin-left:5px}.seg button.on .savepill{color:#d6ffe9}
+  .daysctl{display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--muted);background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:7px 12px;box-shadow:var(--shadow)}
+  .daysctl input{accent-color:var(--accent)}
+
+  .layout{display:grid;grid-template-columns:1fr 360px;gap:22px;align-items:start}
+  @media (max-width:860px){.layout{grid-template-columns:1fr}}
+  .cards{display:flex;flex-direction:column;gap:11px}
+  .card{display:flex;align-items:center;gap:14px;background:var(--panel);border:1.5px solid var(--line);border-radius:var(--r);
+    padding:14px 17px;cursor:pointer;transition:.16s;box-shadow:var(--shadow)}
+  .card:hover{transform:translateY(-1px)}
+  .card.on{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 18%,transparent),var(--shadow)}
+  .card.owned{cursor:default;border-color:color-mix(in srgb,var(--own) 40%,var(--line));background:color-mix(in srgb,var(--own) 6%,var(--panel))}
+  .card.owned:hover{transform:none}
+  .card.soon{opacity:.55;cursor:not-allowed}
+  .tick{width:26px;height:26px;border-radius:8px;border:2px solid var(--line);display:grid;place-items:center;flex:0 0 auto;color:#fff;transition:.15s}
+  .card.on .tick{background:var(--accent);border-color:var(--accent)}
+  .card.owned .tick{background:var(--own);border-color:var(--own)}
+  .tick svg{width:15px;height:15px;opacity:0;transition:.15s}
+  .card.on .tick svg,.card.owned .tick svg{opacity:1}
+  .cbody{flex:1;min-width:0}.cbody h3{margin:0;font-size:15px;font-weight:680;letter-spacing:-.01em}
+  .cbody p{margin:2px 0 0;font-size:12.6px;color:var(--muted)}
+  .cact{flex:0 0 auto;text-align:right}
+  .cact .add{font-size:14.5px;font-weight:750;color:var(--marg);white-space:nowrap}
+  .cact .add small{display:block;font-size:11px;color:var(--faint);font-weight:600}
+  .cact .in{font-size:12.5px;font-weight:700;color:var(--accent)}
+  .cact .ownlab{font-size:12.5px;font-weight:700;color:var(--own)}
+  .cact .soonlab{font-size:12px;font-weight:700;color:var(--faint)}
+
+  .summary{position:sticky;top:16px;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:18px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:13px}
+  @media (max-width:860px){.summary{position:static}}
+  .sumhead{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);font-weight:700}
+  .todayrow{display:flex;justify-content:space-between;align-items:baseline;font-size:13.5px;color:var(--muted)}
+  .todayrow b{color:var(--ink);font-weight:700}
+  .pricebig{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;padding-top:2px}
+  .pricebig .now{font-size:32px;font-weight:800;letter-spacing:-.03em;color:var(--accent)}
+  .pricebig .unit{font-size:14px;color:var(--muted);font-weight:600}
+  .deltatag{align-self:flex-start;font-size:13px;font-weight:750;color:var(--marg);background:color-mix(in srgb,var(--marg) 13%,transparent);padding:4px 11px;border-radius:20px}
+  .savebadge{align-self:flex-start;font-size:12.5px;font-weight:750;color:var(--rev);background:color-mix(in srgb,var(--rev) 13%,transparent);padding:5px 11px;border-radius:20px}
+  .proration{font-size:12.5px;color:var(--muted);line-height:1.5;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:9px 11px}
+  .proration b{color:var(--ink)}
+  .savemore{font-size:13px;color:var(--muted);line-height:1.5}.savemore b{color:var(--ink)}
+  .progress{display:flex;flex-direction:column;gap:7px}
+  .plabel{display:flex;justify-content:space-between;font-size:12.5px;color:var(--muted)}.plabel b{color:var(--ink)}
+  .track{height:9px;border-radius:6px;background:var(--panel2);overflow:hidden;border:1px solid var(--line)}
+  .fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--accent),var(--complete));transition:width .35s cubic-bezier(.4,0,.2,1)}
+  .nudge{font-size:12.8px;color:var(--complete);font-weight:600;line-height:1.45}.nudge.complete{color:var(--rev)}
+  .bip{display:flex;align-items:center;gap:12px;border:1.5px dashed var(--bip);border-radius:var(--r);padding:13px 15px;background:color-mix(in srgb,var(--bip) 7%,var(--panel));cursor:pointer;transition:.15s}
+  .bip.on{background:color-mix(in srgb,var(--bip) 15%,var(--panel));border-style:solid}
+  .bip.free{border-color:var(--rev);background:color-mix(in srgb,var(--rev) 12%,var(--panel));cursor:default}
+  .bip .tick{border-color:var(--bip)}.bip.on .tick{background:var(--bip);border-color:var(--bip)}
+  .bip h3{font-size:14px;margin:0;font-weight:680}.bip p{margin:2px 0 0;font-size:12.3px;color:var(--muted)}
+  .bip .price{font-weight:750;color:var(--bip);white-space:nowrap}.bip.free .price{color:var(--rev)}
+  .cta{border:0;border-radius:11px;background:linear-gradient(135deg,var(--accent),#4666ff);color:#fff;font:inherit;font-weight:750;font-size:15px;padding:14px;cursor:pointer;transition:.2s;width:100%}
+  .cta:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(47,75,255,.4)}
+  .cta:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
+  .finenote{font-size:11.5px;color:var(--faint);text-align:center;margin:-3px 0 0}
+  .previewnote{margin-top:26px;font-size:12px;color:var(--faint);border-top:1px solid var(--line);padding-top:14px;max-width:80ch}
+  .theme-tgl{position:fixed;top:12px;right:12px;border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:9px;padding:6px 10px;font:inherit;font-size:12px;cursor:pointer}
+</style>
+</head>
+<body>
+<button class="theme-tgl" id="themeTgl" aria-label="Toggle theme">◐ Theme</button>
+<div class="wrap">
+  <span class="pvbadge">Internal preview · existing‑user account</span>
+  <h1>Add calculators to your plan</h1>
+  <p class="sub">You already have a plan — adding more is cheap, because you’re already down the curve. Each calculator you add costs less than the last.</p>
+
+  <div class="simbar">
+    <div class="lab">Preview: simulate what this customer already owns</div>
+    <div class="chips" id="ownChips"></div>
+    <div class="simnote" id="simnote"></div>
+  </div>
+
+  <div class="toolbar">
+    <div class="seg" id="tier"><button data-t="starter" class="on">Starter</button><button data-t="pro">Pro</button><button data-t="premium">Premium</button></div>
+    <div class="seg" id="cycle"><button data-c="monthly" class="on">Monthly</button><button data-c="annual">Annual<span class="savepill">2 mo free</span></button></div>
+    <label class="daysctl">Days left in cycle <b id="daysOut">12</b><input type="range" id="days" min="1" max="30" value="12"></label>
+  </div>
+
+  <div class="layout">
+    <div class="cards" id="cards"></div>
+    <aside class="summary" id="summary"><div class="sumhead">Plan changes</div><div id="sumbody"></div></aside>
+  </div>
+
+  <p class="previewnote" id="pnote"></p>
+</div>
+
+<script src="js/pricing-engine.js"></script>
+<script>
+(function(){
+  "use strict";
+  if(!window.WLCPricing){ document.getElementById("cards").innerHTML="<p>Pricing engine failed to load.</p>"; return; }
+  var P = window.WLCPricing;
+  var DESC = {
+    wd:"C&C openings — windows, doors, shutters, mulled assemblies",
+    mwfrs:"Whole‑building — Directional + Envelope (ASCE 7‑22 Ch 27 / 28)",
+    roofs:"Every roof shape, plus parapets & overhangs",
+    other:"Signs, walls, equipment, chimneys, tanks & trussed towers",
+    solar:"Rooftop + ground‑mount PV — coming soon"
+  };
+  var state = { tier:"starter", cycle:"monthly", owned:{ wd:true, mwfrs:true }, selected:{}, bip:false, days:12 };
+  var CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>';
+
+  function money(v){ return "$"+Math.round(v).toLocaleString(); }
+  function unit(){ return state.cycle==="annual"?"/yr":"/mo"; }
+  function ids(map){ return P.config().catalog.filter(function(c){return map[c.id];}).map(function(c){return c.id;}); }
+  function q(){ return P.quote({ owned:ids(state.owned), selected:ids(state.selected), tier:state.tier, cycle:state.cycle, bipSelected:state.bip }); }
+
+  function renderChips(){
+    var h=""; P.config().catalog.forEach(function(c){
+      if(!c.live) return; // can't own a coming-soon calc
+      h+='<button class="chip'+(state.owned[c.id]?" on":"")+'" data-id="'+c.id+'">'+(state.owned[c.id]?"✓ ":"")+c.name.replace(" & Shutters","").replace(", Parapets & Overhangs","")+'</button>';
+    });
+    document.getElementById("ownChips").innerHTML=h;
+    var Q=q();
+    document.getElementById("simnote").textContent = Q.ownedCount===0
+      ? "Owns nothing yet (behaves like a brand-new user). Toggle some on to see the returning-customer view."
+      : "Owns "+Q.ownedCount+" calculator"+(Q.ownedCount>1?"s":"")+" · pays "+money(Q.currentTotal)+unit()+" today.";
+  }
+
+  function renderCards(){
+    var Q=q(), h="";
+    P.config().catalog.forEach(function(c){
+      var owned=!!state.owned[c.id], on=!!state.selected[c.id], soon=!c.live;
+      var cls="card"+(owned?" owned":(on?" on":""))+(soon&&!owned?" soon":"");
+      var act;
+      if(owned) act='<span class="ownlab">Included</span>';
+      else if(soon) act='<span class="soonlab">Soon</span>';
+      else if(on) act='<span class="in">✓ Adding</span>';
+      else act='<span class="add">Add +'+money(Q.addNextPrice)+'<small>'+unit().slice(1)+'</small></span>';
+      var interactive = !owned && !soon;
+      h+='<div class="'+cls+'" data-id="'+c.id+'"'+(interactive?' tabindex="0" role="button" aria-pressed="'+on+'"':'')+'>'+
+         '<div class="tick">'+CHECK+'</div><div class="cbody"><h3>'+c.name+'</h3><p>'+(DESC[c.id]||"")+'</p></div>'+
+         '<div class="cact">'+act+'</div></div>';
+    });
+    document.getElementById("cards").innerHTML=h;
+  }
+
+  function renderSummary(){
+    var Q=q(), b=document.getElementById("sumbody"), h="";
+    h+='<div class="todayrow"><span>Your plan today</span><b>'+money(Q.currentTotal)+unit()+'</b></div>';
+
+    if(Q.selectedCount===0){
+      h+='<p class="savemore" style="margin-top:2px">Pick a calculator to add. Your next one is just <b style="color:var(--marg)">+'+money(Q.addNextPrice)+unit()+'</b>'+(Q.addNextPrice===0?' (you have them all).':'.')+'</p>';
+      b.innerHTML=h; return;
+    }
+
+    h+='<div class="pricebig"><span class="now">'+money(Q.newTotal)+'</span><span class="unit">'+unit()+' new total</span></div>';
+    h+='<div class="deltatag">+'+money(Q.delta)+unit()+' for '+Q.selectedCount+' more</div>';
+    if(Q.savings>0) h+='<div class="savebadge">Your '+Q.afterCount+'-calc plan saves '+money(Q.savings)+unit()+' vs separate · '+Q.savingsPct+'% off</div>';
+
+    // proration (illustrative)
+    var cycleDays = state.cycle==="annual"?365:30;
+    var prorate = Math.max(0, Math.round((Q.delta+ (Q.bipIncludedFree?0:(state.bip?Q.bipPrice:0))) * state.days / cycleDays));
+    h+='<div class="proration">Added today: <b>≈'+money(prorate)+'</b> prorated for the '+state.days+' day'+(state.days!==1?'s':'')+' left in this billing period, then <b>+'+money(Q.delta+ (Q.bipIncludedFree?0:(state.bip?Q.bipPrice:0)))+unit()+'</b> going forward.</div>';
+
+    if(Q.showSaveMore && Q.remainingToComplete>0) h+='<div class="savemore"><b>Keep going — each one’s cheaper.</b> Your next calculator is only <b>+'+money(Q.addNextPrice)+unit()+'</b>.</div>';
+
+    h+='<div class="progress"><div class="plabel"><span>Plan coverage</span><span><b>'+Q.afterCount+'</b> of '+Q.catalogLive+'</span></div>'+
+       '<div class="track"><div class="fill" style="width:'+Math.round(Q.afterCount/Q.catalogLive*100)+'%"></div></div>';
+    if(Q.isComplete) h+='<div class="nudge complete">✓ Complete — every calculator, plus BIP free.</div>';
+    else if(Q.showCompleteNudge) h+='<div class="nudge">'+Q.remainingToComplete+' away from <b>Complete</b> — all '+Q.catalogLive+' + BIP free for <b>+'+money(Q.completeDelta - Q.delta)+unit()+'</b> more.</div>';
+    h+='</div>';
+
+    if(Q.isComplete) h+='<div class="bip free"><div class="tick">'+CHECK+'</div><div class="cbody"><h3>Building Intelligence Platform</h3><p>Included free with Complete.</p></div><div class="price">FREE</div></div>';
+    else if(Q.showBipOffer) h+='<div class="bip'+(state.bip?' on':'')+'" id="bipRow" tabindex="0" role="button" aria-pressed="'+state.bip+'"><div class="tick">'+CHECK+'</div><div class="cbody"><h3>Add full BIP access</h3><p>Hurricane risk, solar siting, ZIP search across 40k+ ZIPs.</p></div><div class="price">+'+money(Q.bipPrice)+unit()+'</div></div>';
+
+    h+='<button class="cta" id="cta">Add to my plan — +'+money(Q.dueWithBip)+unit()+'</button>';
+    h+='<p class="finenote">Prorated today, then billed '+(state.cycle==="annual"?"yearly":"monthly")+'. Change anytime.</p>';
+    b.innerHTML=h;
+  }
+
+  function render(){ renderChips(); renderCards(); renderSummary();
+    document.getElementById("pnote").textContent="Preview only — no real change to any account. Prices from js/pricing-engine.js. Proration is illustrative (real values come from Stripe on the live build).";
+  }
+
+  document.getElementById("ownChips").addEventListener("click",function(e){ var b=e.target.closest(".chip"); if(!b) return; var id=b.dataset.id;
+    if(state.owned[id]){ delete state.owned[id]; } else { state.owned[id]=true; delete state.selected[id]; } render(); });
+  document.getElementById("cards").addEventListener("click",function(e){ toggleCard(e.target.closest(".card")); });
+  document.getElementById("cards").addEventListener("keydown",function(e){ if((e.key==="Enter"||e.key===" ")&&e.target.classList.contains("card")){ e.preventDefault(); toggleCard(e.target); }});
+  function toggleCard(card){ if(!card) return; var id=card.dataset.id; if(state.owned[id]||!getLive(id)) return; if(state.selected[id]) delete state.selected[id]; else state.selected[id]=true; render(); }
+  function getLive(id){ var c=P.config().catalog.filter(function(x){return x.id===id;})[0]; return c&&c.live; }
+
+  document.getElementById("summary").addEventListener("click",function(e){
+    if(e.target.closest("#bipRow")){ state.bip=!state.bip; render(); }
+    else if(e.target.closest("#cta")){ var Q=q(); alert("Preview — would add "+Q.selectedCount+" calc"+(Q.selectedCount!==1?"s":"")+(state.bip&&!Q.isComplete?" + BIP":"")+" to the plan: "+money(Q.currentTotal)+" → "+money(Q.newTotal)+unit()+"."); }
+  });
+  function segWire(id,key,attr){ document.getElementById(id).addEventListener("click",function(e){ var btn=e.target.closest("button"); if(!btn) return;
+    [].forEach.call(this.querySelectorAll("button"),function(x){x.classList.remove("on");}); btn.classList.add("on"); state[key]=btn.dataset[attr]; render(); }); }
+  segWire("tier","tier","t"); segWire("cycle","cycle","c");
+  document.getElementById("days").addEventListener("input",function(){ state.days=+this.value; document.getElementById("daysOut").textContent=this.value; render(); });
+  document.getElementById("themeTgl").addEventListener("click",function(){ var cur=document.documentElement.getAttribute("data-theme");
+    document.documentElement.setAttribute("data-theme", cur==="dark"?"light":(cur==="light"?"dark":(matchMedia("(prefers-color-scheme:dark)").matches?"light":"dark"))); });
+
+  render();
+})();
+</script>
+</body>
+</html>

@@ -10,7 +10,7 @@
     <link rel="shortcut icon" href="/favicon.ico?v=2">
 
     <title>Virginia Wind Load Calculator — ASCE 7-22, Per-ZIP</title>
-    <meta name="description" content="Virginia wind load calculator since 2002. The latest ASCE 7-22 — Hampton Roads 115-130 mph, Eastern Shore 120-135 mph, NoVA and the Blue Ridge — per-ZIP, permit-ready.">
+    <meta name="description" content="Virginia wind load calculator since 2002. The latest ASCE 7-22 — Hampton Roads 120-125 mph, Eastern Shore 125-130 mph, NoVA and the Blue Ridge — per-ZIP, permit-ready.">
     <meta name="keywords" content="Virginia wind load calculator, VCC wind load, ASCE 7-22 Virginia, Hampton Roads wind load, Norfolk wind load calculator, Virginia Beach wind load, Richmond wind load, NoVA wind load, Eastern Shore Virginia wind">
 
     <!-- Open Graph -->
@@ -44,11 +44,11 @@
         "featureList": [
             "ASCE 7-22 Wind Load Calculations for Virginia",
             "Latest ASCE 7 edition — most current, conservative standard",
-            "Hampton Roads coastal 115-130 mph support",
-            "Eastern Shore (Accomack, Northampton) 120-135 mph",
-            "Richmond and Piedmont 105-115 mph",
+            "Hampton Roads coastal 120-125 mph support",
+            "Eastern Shore (Accomack, Northampton) 125-130 mph",
+            "Richmond and Piedmont 115 mph",
             "Northern Virginia (NoVA) jurisdictional context",
-            "Shenandoah Valley and Blue Ridge 100-110 mph",
+            "Shenandoah Valley and Blue Ridge 110 mph",
             "Risk Category I, II, III, IV support",
             "Exposure Category B, C, D",
             "Components and Cladding (C&C) pressures",
@@ -83,14 +83,14 @@
             "name": "What's the design wind speed in Norfolk and Virginia Beach?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Norfolk (ZIPs 23510, 23507) and Virginia Beach (23451, 23452) fall in the Hampton Roads coastal band: roughly 115-130 mph for ASCE 7-22 Risk Category II. Oceanfront and Bay-front ZIPs run highest. The calculator returns the exact per-ZIP value."
+                "text": "Norfolk (ZIPs 23510, 23507) and Virginia Beach (23451, 23452) fall in the Hampton Roads coastal band: roughly 120-125 mph for ASCE 7-22 Risk Category II. Oceanfront and Bay-front ZIPs run highest. The calculator returns the exact per-ZIP value."
             }
         },{
             "@type": "Question",
             "name": "Does the Eastern Shore have higher wind speeds than Hampton Roads?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Yes. Accomack and Northampton counties — Chincoteague, Onancock, Cape Charles, the barrier islands — carry the state's highest design wind speeds: about 120-135 mph for Risk Category II under ASCE 7-22. Exposure D applies broadly there."
+                "text": "Yes. Accomack and Northampton counties — Chincoteague, Onancock, Cape Charles, the barrier islands — carry the state's highest design wind speeds: about 125-130 mph for Risk Category II under ASCE 7-22. Exposure D applies broadly there."
             }
         },{
             "@type": "Question",
@@ -104,7 +104,7 @@
             "name": "Which ASCE 7 edition does WindLoadCalc apply for Virginia?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "WindLoadCalc applies the latest ASCE 7-22 — the most current, conservative standard. Virginia building departments commonly reference an earlier ASCE 7 edition, so confirm the accepted edition with your locality before you submit."
+                "text": "WindLoadCalc computes to ASCE 7-22, the current edition. Virginia's Uniform Statewide Building Code (the VCC) presently references ASCE 7-16, so 7-22 governs as the more conservative envelope — the wind speeds here are defensible under either edition."
             }
         },{
             "@type": "Question",
@@ -132,7 +132,7 @@
             "name": "Are Northern Virginia projects different from Hampton Roads?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Same statewide VCC, same ASCE 7-22 calc, lower numbers. NoVA Risk Category II runs about 105-115 mph — a thunderstorm climate, not a hurricane one. The real difference is the permit queue at Fairfax, Arlington, and Loudoun."
+                "text": "Same statewide VCC, same ASCE 7-22 calc, lower numbers. NoVA Risk Category II runs about 115 mph — a thunderstorm climate, not a hurricane one. The real difference is the permit queue at Fairfax, Arlington, and Loudoun."
             }
         },{
             "@type": "Question",
@@ -428,7 +428,7 @@ section{position:relative;z-index:1;padding:54px 0}
       "@id": "https://windloadcalc.com/virginia-wind-load-calculator/#webpage",
       "url": "https://windloadcalc.com/virginia-wind-load-calculator/",
       "name": "Virginia Wind Load Calculator — ASCE 7-22, Per-ZIP",
-      "description": "Virginia wind load calculator since 2002. The latest ASCE 7-22 — Hampton Roads 115-130 mph, Eastern Shore 120-135 mph, NoVA and the Blue Ridge — per-ZIP, permit-ready.",
+      "description": "Virginia wind load calculator since 2002. The latest ASCE 7-22 — Hampton Roads 120-125 mph, Eastern Shore 125-130 mph, NoVA and the Blue Ridge — per-ZIP, permit-ready.",
       "isPartOf": {
         "@id": "https://windloadcalc.com/#website"
       },
@@ -516,7 +516,7 @@ section{position:relative;z-index:1;padding:54px 0}
   <header><div class="wrap">
     <div class="eyebrow"><span class="dot"></span>ASCE 7-22 · the latest standard · since 2002</div>
     <h1>Virginia wind loads, <span class="grad">coast to ridge</span></h1>
-    <p class="sub">One state, four wind climates. The basic wind speed at a Virginia ZIP can swing <strong>40 mph</strong> from an Eastern Shore beach lot to a far-western mountain hollow. We return the exact per-ZIP value under <strong>ASCE 7-22</strong>.</p>
+    <p class="sub">One state, four wind climates. The basic wind speed at a Virginia ZIP can swing <strong>20 mph</strong> from an Eastern Shore beach lot to a far-western mountain hollow. We return the exact per-ZIP value under <strong>ASCE 7-22</strong>.</p>
     <form class="zip-form" id="zip-form" onsubmit="return launchCalc(event)">
       <input type="text" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" class="zip-input" id="zip-input" placeholder="Enter a Virginia ZIP (e.g. 23510)" aria-label="Virginia ZIP code">
       <button type="submit" class="btn btn-primary" style="padding:14px 22px">Get VA wind pressures →</button>
@@ -527,8 +527,8 @@ section{position:relative;z-index:1;padding:54px 0}
       <span><span class="ck">✓</span> 7-day free trial</span>
     </div>
     <div class="stat-row">
-      <div class="stat-tile"><div class="n">120-135</div><div class="l">mph · Eastern Shore Risk Cat II</div></div>
-      <div class="stat-tile"><div class="n">95-105</div><div class="l">mph · far-western mountains</div></div>
+      <div class="stat-tile"><div class="n">125-130</div><div class="l">mph · Eastern Shore Risk Cat II</div></div>
+      <div class="stat-tile"><div class="n">110</div><div class="l">mph · far-western mountains</div></div>
       <div class="stat-tile"><div class="n">ASCE 7-22</div><div class="l">the latest standard, applied per-ZIP</div></div>
       <div class="stat-tile"><div class="n">Since 2002</div><div class="l">VA wind loads, online 2006</div></div>
     </div>
@@ -566,12 +566,12 @@ section{position:relative;z-index:1;padding:54px 0}
     <table class="tbl">
       <thead><tr><th>Region</th><th>Sample ZIPs</th><th>Risk Cat II speed</th><th>Typical exposure</th></tr></thead>
       <tbody>
-        <tr><td>Eastern Shore — Accomack, Northampton <span class="cb">Coast</span></td><td>23336, 23310</td><td class="speed">120-135 mph</td><td>D (waterfront) / C</td></tr>
-        <tr><td>Hampton Roads — Norfolk, Va. Beach, Chesapeake <span class="cb">Coast</span></td><td>23510, 23451, 23320</td><td class="speed">115-130 mph</td><td>D (Bay/ocean) / C</td></tr>
-        <tr><td>Richmond &amp; Piedmont</td><td>23219, 23220</td><td class="speed">105-115 mph</td><td>C / B (urban)</td></tr>
-        <tr><td>Northern Virginia — Arlington, Fairfax, Loudoun</td><td>22030, 22201</td><td class="speed">105-115 mph</td><td>B (urban) / C</td></tr>
-        <tr><td>Shenandoah Valley &amp; Blue Ridge</td><td>24011, 22801</td><td class="speed">100-110 mph</td><td>C</td></tr>
-        <tr><td>Far-western mountains — Wise, Lee, Buchanan</td><td>24293, 24210</td><td class="speed">95-105 mph</td><td>C / B</td></tr>
+        <tr><td>Eastern Shore — Accomack, Northampton <span class="cb">Coast</span></td><td>23336, 23310</td><td class="speed">125-130 mph</td><td>D (waterfront) / C</td></tr>
+        <tr><td>Hampton Roads — Norfolk, Va. Beach, Chesapeake <span class="cb">Coast</span></td><td>23510, 23451, 23320</td><td class="speed">120-125 mph</td><td>D (Bay/ocean) / C</td></tr>
+        <tr><td>Richmond &amp; Piedmont</td><td>23219, 23220</td><td class="speed">115 mph</td><td>C / B (urban)</td></tr>
+        <tr><td>Northern Virginia — Arlington, Fairfax, Loudoun</td><td>22030, 22201</td><td class="speed">115 mph</td><td>B (urban) / C</td></tr>
+        <tr><td>Shenandoah Valley &amp; Blue Ridge</td><td>24011, 22801</td><td class="speed">110 mph</td><td>C</td></tr>
+        <tr><td>Far-western mountains — Wise, Lee, Buchanan</td><td>24293, 24210</td><td class="speed">110 mph</td><td>C / B</td></tr>
       </tbody>
     </table>
   </div>
@@ -592,14 +592,14 @@ section{position:relative;z-index:1;padding:54px 0}
     <div class="glass">
       <span class="region coast" style="margin-bottom:12px">Tidewater · Hampton Roads</span>
       <h3>Hurricane-design coast</h3>
-      <p><strong>115-130 mph</strong>, Risk Cat II, with the oceanfront and Chesapeake Bay frontage at the top of the band. Naval Station Norfolk anchors a steady stream of federal and defense-contractor work along that same waterfront.</p>
+      <p><strong>120-125 mph</strong>, Risk Cat II, with the oceanfront and Chesapeake Bay frontage at the top of the band. Naval Station Norfolk anchors a steady stream of federal and defense-contractor work along that same waterfront.</p>
       <p>The trap here is exposure. Sites within about a mile of open water take <strong>Exposure D</strong>, and the Bay qualifies. Two lots a few hundred feet apart can split between D and C.</p>
       <p>Hurricane Isabel (September 2003) is the modern reference event. It did not move the map values; it tightened how the existing standard gets applied on the coast.</p>
     </div>
     <div class="glass">
       <span class="region inland" style="margin-bottom:12px">Piedmont · Valley · Mountains</span>
       <h3>Thunderstorm-design interior</h3>
-      <p><strong>95-115 mph</strong> across Richmond, NoVA, the Shenandoah Valley and the far west. The design event is a thunderstorm downburst or a weakened tropical remnant, not a hurricane landfall.</p>
+      <p><strong>110-115 mph</strong> across Richmond, NoVA, the Shenandoah Valley and the far west. The design event is a thunderstorm downburst or a weakened tropical remnant, not a hurricane landfall.</p>
       <p>Exposure shifts inland: dense urban Richmond and Arlington lean <strong>Exposure B</strong>; open Valley farmland is <strong>Exposure C</strong>. The numbers get gentler as you climb west.</p>
       <p>Past the Blue Ridge, topographic effects (<strong>Kzt</strong>) start to bite on ridge-top projects in Wise, Lee and Buchanan — a factor the coast rarely worries about.</p>
     </div>
@@ -613,12 +613,12 @@ section{position:relative;z-index:1;padding:54px 0}
     <p>Cape Charles to Cumberland Gap, the wind conversation changes every couple hundred miles.</p>
   </div>
   <div class="region-grid">
-    <div class="region"><span class="coast">Coast</span><h3>Eastern Shore</h3><div class="speed">120-135 mph</div><p>Accomack and Northampton: Chincoteague, Onancock, Cape Charles, the barrier islands. The state's highest speeds. Exposure D dominates — almost nothing stands between water and structure.</p></div>
-    <div class="region"><span class="coast">Coast</span><h3>Hampton Roads</h3><div class="speed">115-130 mph</div><p>Norfolk, Virginia Beach, Chesapeake, Hampton, Newport News, Portsmouth. Naval Station Norfolk drives federal work. Most waterfront sites take Exposure D. Isabel 2003 is the design reference.</p></div>
-    <div class="region"><span class="inland">Inland</span><h3>Richmond &amp; Piedmont</h3><div class="speed">105-115 mph</div><p>Richmond metro, Henrico, Chesterfield, Hanover, and the I-95 run south to Petersburg. Thunderstorm and weakened-tropical regime. Exposure B downtown, C in the suburbs.</p></div>
-    <div class="region"><span class="inland">Inland</span><h3>Northern Virginia</h3><div class="speed">105-115 mph</div><p>Arlington, Fairfax, Loudoun, Prince William, Alexandria, Falls Church. Dense DC-metro market, heavy data-center buildout, busy review queues. Exposure B is common.</p></div>
-    <div class="region"><span class="inland">Inland</span><h3>Shenandoah Valley</h3><div class="speed">100-110 mph</div><p>Winchester, Harrisonburg, Staunton, Lexington along I-81. Gentler speeds, rural and small-town stock. Open agricultural Exposure C is the default.</p></div>
-    <div class="region"><span class="inland">Inland</span><h3>Far-western mountains</h3><div class="speed">95-105 mph</div><p>Wise, Lee, Buchanan, Tazewell, Dickenson. The state's lowest design speeds — but ridge-top topographic effects (Kzt) finally start to matter here.</p></div>
+    <div class="region"><span class="coast">Coast</span><h3>Eastern Shore</h3><div class="speed">125-130 mph</div><p>Accomack and Northampton: Chincoteague, Onancock, Cape Charles, the barrier islands. The state's highest speeds. Exposure D dominates — almost nothing stands between water and structure.</p></div>
+    <div class="region"><span class="coast">Coast</span><h3>Hampton Roads</h3><div class="speed">120-125 mph</div><p>Norfolk, Virginia Beach, Chesapeake, Hampton, Newport News, Portsmouth. Naval Station Norfolk drives federal work. Most waterfront sites take Exposure D. Isabel 2003 is the design reference.</p></div>
+    <div class="region"><span class="inland">Inland</span><h3>Richmond &amp; Piedmont</h3><div class="speed">115 mph</div><p>Richmond metro, Henrico, Chesterfield, Hanover, and the I-95 run south to Petersburg. Thunderstorm and weakened-tropical regime. Exposure B downtown, C in the suburbs.</p></div>
+    <div class="region"><span class="inland">Inland</span><h3>Northern Virginia</h3><div class="speed">115 mph</div><p>Arlington, Fairfax, Loudoun, Prince William, Alexandria, Falls Church. Dense DC-metro market, heavy data-center buildout, busy review queues. Exposure B is common.</p></div>
+    <div class="region"><span class="inland">Inland</span><h3>Shenandoah Valley</h3><div class="speed">110 mph</div><p>Winchester, Harrisonburg, Staunton, Lexington along I-81. Gentler speeds, rural and small-town stock. Open agricultural Exposure C is the default.</p></div>
+    <div class="region"><span class="inland">Inland</span><h3>Far-western mountains</h3><div class="speed">110 mph</div><p>Wise, Lee, Buchanan, Tazewell, Dickenson. Among the state's lowest design speeds — but ridge-top topographic effects (Kzt) finally start to matter here.</p></div>
   </div>
 </div></section>
 
@@ -629,7 +629,7 @@ section{position:relative;z-index:1;padding:54px 0}
     <p>WindLoadCalc applies ASCE 7-22 — the most current, conservative edition. Here is what that means for a Virginia submittal.</p>
   </div>
   <ul class="blist">
-    <li><b>We apply ASCE 7-22.</b> It is the latest, most conservative ASCE 7 edition. Virginia building departments commonly reference an earlier edition, so confirm the accepted edition with your locality before you submit.</li>
+    <li><b>We compute to ASCE 7-22.</b> Virginia's VCC presently references ASCE 7-16; the newer 7-22 governs as the more conservative envelope, so these values hold under either edition.</li>
     <li><b>All four enclosure types.</b> ASCE 7-22 recognizes Enclosed, Partially Open, Partially Enclosed, and Open — the full set carried in every calculation.</li>
     <li><b>Edge strip "a" minimum.</b> The calculator applies the ASCE 7-22 minimum edge-strip width for components and cladding zones.</li>
     <li><b>Wind speed is the wind speed.</b> Localities tune fees and inspection sequencing, but a basic wind speed is set by location, not by a county's discretion.</li>
@@ -669,14 +669,14 @@ section{position:relative;z-index:1;padding:54px 0}
 <section id="faq"><div class="wrap">
   <div class="sec-head"><h2>Virginia wind load FAQ</h2></div>
   <div class="faq">
-    <details open><summary>What's the design wind speed in Norfolk and Virginia Beach?</summary><p>Norfolk (ZIPs 23510, 23507) and Virginia Beach (23451, 23452) fall in the Hampton Roads coastal band: roughly 115-130 mph for ASCE 7-22 Risk Category II. Oceanfront and Bay-front ZIPs run highest. The calculator returns the exact per-ZIP value.</p></details>
-    <details><summary>Does the Eastern Shore have higher wind speeds than Hampton Roads?</summary><p>Yes. Accomack and Northampton counties — Chincoteague, Onancock, Cape Charles, the barrier islands — carry the state's highest design wind speeds: about 120-135 mph for Risk Category II under ASCE 7-22. Exposure D applies broadly there.</p></details>
+    <details open><summary>What's the design wind speed in Norfolk and Virginia Beach?</summary><p>Norfolk (ZIPs 23510, 23507) and Virginia Beach (23451, 23452) fall in the Hampton Roads coastal band: roughly 120-125 mph for ASCE 7-22 Risk Category II. Oceanfront and Bay-front ZIPs run highest. The calculator returns the exact per-ZIP value.</p></details>
+    <details><summary>Does the Eastern Shore have higher wind speeds than Hampton Roads?</summary><p>Yes. Accomack and Northampton counties — Chincoteague, Onancock, Cape Charles, the barrier islands — carry the state's highest design wind speeds: about 125-130 mph for Risk Category II under ASCE 7-22. Exposure D applies broadly there.</p></details>
     <details><summary>Why is Exposure D such a big deal on Virginia's coast?</summary><p>Exposure D applies within roughly one mile of unobstructed open water, and the Chesapeake Bay counts. Two waterfront lots a few hundred feet apart can split between D and C. That choice changes the velocity pressure materially.</p></details>
-    <details><summary>Which ASCE 7 edition does WindLoadCalc apply for Virginia?</summary><p>WindLoadCalc applies the latest ASCE 7-22 — the most current, conservative standard. Virginia building departments commonly reference an earlier ASCE 7 edition, so confirm the accepted edition with your locality before you submit.</p></details>
+    <details><summary>Which ASCE 7 edition does WindLoadCalc apply for Virginia?</summary><p>WindLoadCalc computes to ASCE 7-22, the current edition. Virginia's Uniform Statewide Building Code (the VCC) presently references ASCE 7-16, so 7-22 governs as the more conservative envelope — the wind speeds here are defensible under either edition.</p></details>
     <details><summary>Why does Virginia's building code lag the national IBC cycle?</summary><p>Virginia maintains its own statewide code (the USBC) rather than adopting the IBC unmodified. The Board's three-year cycle drifts past the ICC's, plus public comment and amendment drafting. The VCC has run about one IBC cycle behind for years.</p></details>
     <details><summary>Does Virginia have an HVHZ or product-approval program like Florida?</summary><p>No. Virginia has no High Velocity Hurricane Zone and no Miami-Dade-style NOA program. The VCC applies one ASCE 7 wind chapter statewide. What changes by location is the basic wind speed and exposure category.</p></details>
     <details><summary>What did Hurricane Isabel change for Hampton Roads design?</summary><p>Isabel made a Category 2 landfall on the Outer Banks in September 2003 and pushed surge into Hampton Roads. The ASCE map values did not change. Enforcement did: stricter flood-zone freeboard, tighter opening protection, broader Exposure D.</p></details>
-    <details><summary>Are Northern Virginia projects different from Hampton Roads?</summary><p>Same statewide VCC, same ASCE 7-22 calc, lower numbers. NoVA Risk Category II runs about 105-115 mph — a thunderstorm climate, not a hurricane one. The real difference is the permit queue at Fairfax, Arlington, and Loudoun.</p></details>
+    <details><summary>Are Northern Virginia projects different from Hampton Roads?</summary><p>Same statewide VCC, same ASCE 7-22 calc, lower numbers. NoVA Risk Category II runs about 115 mph — a thunderstorm climate, not a hurricane one. The real difference is the permit queue at Fairfax, Arlington, and Loudoun.</p></details>
     <details><summary>Do I need a Virginia-licensed PE to seal the report?</summary><p>Yes. A structural submittal to a Virginia building official must be sealed by a PE licensed by the Virginia Board (APELSCIDLA). WindLoadCalc produces the numbers, the C&amp;C zone breakdown, and the report your VA PE reviews and seals.</p></details>
     <details><summary>How long has WindLoadCalc handled Virginia wind loads?</summary><p>Since 2002, online since 2006 — across seven ASCE 7 editions and every VCC cycle from the Isabel era to the 2021 code. Hampton Roads naval bases, NoVA data centers, Eastern Shore barrier islands: 100% approval over 24 years.</p></details>
   </div>

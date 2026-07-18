@@ -196,9 +196,20 @@ Report rendered OK (80273 bytes); qh in report: n/a · saved report: `ASCE 7-22/
 
 **4 / 4 published answers matched** (tolerance 0.20 psf; forces 5 lb).
 
+## Open Sign / Frame (ASCE 7-22 §29.4 / Fig 29.4-2 (WE-12)) [Cf]
+
+Report rendered OK (79701 bytes); qh in report: n/a · saved report: `ASCE 7-22/guide_report_crossref/open_signs_report.html`
+
+| Answer | Guide (psf) | Our report (psf) | Δ | Match |
+|---|---:|---:|---:|:--:|
+| Flat Cf @ e=0.3 (book 1.6) | 1.60 | 1.60 | 0.00 | ✅ |
+| Kd open signs (book 0.85) | 0.85 | 0.85 | 0.00 | ✅ |
+
+**2 / 2 published answers matched** (tolerance 0.20 psf; forces 5 lb).
+
 ---
 
-## TOTAL: 77 / 77 published Guide answers matched
+## TOTAL: 79 / 79 published Guide answers matched
 
 **Exposure-B note:** Hip (Ex 6.3), Monoslope (Ex 6.5), and Rooftop Solar parallel (Ex 5.3) are validated at the **coefficient** level (GC<sub>p</sub> / γ<sub>E</sub> / γ<sub>a</sub> — exact). The engine floors the Exposure-B velocity-pressure coefficient K<sub>z</sub> at 0.70 for low-rise (the documented WE-2 conservative choice), where the book uses the raw table value (0.57 / 0.62), so the rendered **pressures are conservative** (higher) by that ratio — disclosed, not an error.
 

@@ -40,8 +40,12 @@ The old single "Specialty" product was actually two different things. Corrected 
       endpoint on 30.9-2A; removed a phantom "combined negative"; Note 5 linear hc/he interpolation.
       Parapet: combination rule + wall + h≤60 roof verified; the Fig 30.6-1 "Zones 2/3" label on the
       negative WALL pressure is an ASCE figure-note typo (walls are 4/5) — engine uses 4/5 (decision A1).
-- [ ] ⚠ **STILL PENDING before a parapet h>60 ships:** read **Fig 30.4-1 roof (Zones 2/3, h>60)** —
-      the parapet engine currently reuses the h≤60 roof values for h>60. Not a canopy blocker.
+- [x] ✅ **Parapet h>60 roof DONE 2026-07-18:** Greg re-confirmed Fig 30.4-1 roof (Zone 2 −2.3/−1.6,
+      Zone 3 −3.2/−2.3, "no change from ASCE 7-16") — the LIVE flat-roof engine already had these
+      correct (bug fixed 2026-05-03). The parapet's private copy had wrongly reused the h≤60 values
+      for h>60; refactored to **single-source from `asce7_22_cc_roofs_flat.py`** so it can't drift.
+      Parapet now fully verified (webapp 1827033 + follow-up). Note 7 (Zone 3→2 for ≥3 ft parapet)
+      surfaced as an optional, non-auto-applied reduction.
 - [ ] 🔀 **Sync the `website/` tree** (separate checkout, same repo) to this root commit `f85b7c1`:
       its landing page still shows one stale "Specialized Structures" card, and
       `website/shop/specialty.html` still has the old Ch-29 framing. Pull the commit or re-apply the edits.

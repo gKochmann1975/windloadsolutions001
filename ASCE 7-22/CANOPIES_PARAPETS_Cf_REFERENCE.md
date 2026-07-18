@@ -93,14 +93,26 @@ on p₆ is a **book typo**; the engine uses the physically-correct **wall Zones 
 p₆ (decision A1). Following the note literally (roof Zones 2/3, ≈ −3.2 corner vs wall
 −1.4) would roughly double the leeward back-face suction — over-conservative and wrong.
 
-### Verification state
+### Verification state — ALL VERIFIED 2026-07-18
 - **Wall GCp** (Fig 30.3-1 h≤60 / Fig 30.4-1 h>60) — ✅ verified (reused from the
   ledger-locked Windows/Doors engine).
-- **Roof GCp, h ≤ 60** (Fig 30.3-2A, Zones 2/3) — ✅ inherited from the ledger-locked
-  flat-roof figure (verified 2026-07-04).
 - **Combination rule** — ✅ confirmed vs Fig 30.6-1.
-- **Roof GCp, h > 60** (Fig 30.4-1 roof, Zones 2/3) — ⚠ **STILL PENDING**: the engine
-  currently reuses the h≤60 roof values. Read Fig 30.4-1 roof before a parapet h>60 ships.
+- **Roof GCp** — ✅ verified AND now **single-sourced from the flat-roof engine**
+  (`asce7_22_cc_roofs_flat.py`), no longer duplicated in the parapet. Greg re-confirmed the
+  h>60 roof table (Fig 30.4-1) against the book — "no change from ASCE 7-16":
+
+  | Roof zone (neg) | h ≤ 60 (Fig 30.3-2A) @10 / @500 | h > 60 (Fig 30.4-1) @10 / @500 |
+  |---|---|---|
+  | Zone 1 | −1.7 / −1.0 | −1.4 / −0.9 |
+  | Zone 2 | −2.3 / −1.4 | −2.3 / **−1.6** |
+  | Zone 3 | −3.2 / −1.4 | −3.2 / **−2.3** |
+
+  h>60 Zone 2/3 large-area suctions are LARGER than h≤60; the live flat-roof engine already
+  dispatches correctly by height (bug fixed 2026-05-03). The **parapet's private copy had
+  wrongly reused the h≤60 values for h>60**; fixed 2026-07-18 by calling the roof engine.
+- **Note 7 (Fig 30.4-1) / Note 5 (Fig 30.3-2A):** a perimeter parapet ≥ 3 ft on a θ ≤ 10°
+  roof MAY treat roof corner Zone 3 as Zone 2 — surfaced as an OPTIONAL reduction
+  (`note7_zone3_as_zone2_available`), **not auto-applied** (conservative Zone 3 retained).
 
 The engines carry these explanations in an `engineering_notes` field so the Engineering
 Report and calc UI show the "why" (avoids reviewer phone calls).

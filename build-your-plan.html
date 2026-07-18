@@ -37,29 +37,29 @@
   .wrap{max-width:1080px;margin:0 auto;padding:26px 20px 70px;position:relative;z-index:1}
   .card,.summary,.seg,.bip{backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
   .pvbadge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
-    color:var(--complete);background:color-mix(in srgb,var(--complete) 14%,transparent);padding:3px 10px;border-radius:20px;margin-bottom:12px}
+    color:#aebdff;background:color-mix(in srgb,#3a5bff 18%,transparent);border:1px solid color-mix(in srgb,#3a5bff 42%,transparent);padding:4px 11px;border-radius:20px;margin-bottom:14px}
   h1{font-size:clamp(21px,2.5vw,28px);letter-spacing:-.02em;margin:0 0 4px;font-weight:760;text-wrap:balance}
   .sub{color:var(--muted);margin:0;font-size:14.5px;max-width:64ch}
 
   .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0 18px}
-  .seg{display:flex;gap:4px;background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:4px;box-shadow:var(--shadow)}
-  .seg button{border:0;background:transparent;color:var(--muted);font:inherit;font-size:13px;font-weight:650;padding:8px 13px;border-radius:8px;cursor:pointer;transition:.15s}
-  .seg button:hover{color:var(--ink)}
-  .seg button.on{background:var(--accent);color:#fff;box-shadow:0 2px 9px rgba(47,75,255,.35)}
+  .seg{display:flex;gap:4px;background:#fff;border:1px solid rgba(255,255,255,.55);border-radius:11px;padding:4px;box-shadow:0 6px 20px rgba(0,0,0,.35)}
+  .seg button{border:0;background:transparent;color:#181E57;font:inherit;font-size:13px;font-weight:650;padding:8px 13px;border-radius:8px;cursor:pointer;transition:.15s}
+  .seg button:hover{color:#0018FF}
+  .seg button.on{background:#0018FF;color:#fff;box-shadow:0 2px 10px rgba(0,24,255,.45)}
   .seg .savepill{font-size:10.5px;font-weight:700;color:var(--rev);margin-left:5px}
   .seg button.on .savepill{color:#d6ffe9}
 
-  .layout{display:grid;grid-template-columns:1fr 360px;gap:22px;align-items:start}
+  .layout{display:grid;grid-template-columns:1fr 370px;gap:30px;align-items:start}
   @media (max-width:860px){.layout{grid-template-columns:1fr}}
 
   /* calc cards */
-  .cards{display:flex;flex-direction:column;gap:12px}
-  .card{display:flex;align-items:center;gap:14px;border:1.5px solid color-mix(in srgb,var(--ac,var(--accent)) 32%,var(--line));
+  .cards{display:flex;flex-direction:column;gap:15px}
+  .card{display:flex;align-items:center;gap:17px;border:1.5px solid color-mix(in srgb,var(--ac,var(--accent)) 32%,var(--line));
     background:linear-gradient(135deg,color-mix(in srgb,var(--ac,var(--accent)) 26%,transparent),color-mix(in srgb,var(--ac,var(--accent)) 7%,transparent)),var(--panel);
-    border-radius:var(--r);padding:15px 17px;cursor:pointer;transition:border-color .18s,transform .12s,box-shadow .18s;box-shadow:var(--shadow)}
+    border-radius:var(--r);padding:18px 20px;cursor:pointer;transition:border-color .18s,transform .12s,box-shadow .18s;box-shadow:var(--shadow)}
   .card:hover{transform:translateY(-1px)}
   .card.on{border-color:var(--ac,var(--accent));background:linear-gradient(135deg,color-mix(in srgb,var(--ac,var(--accent)) 42%,transparent),color-mix(in srgb,var(--ac,var(--accent)) 13%,transparent)),var(--panel);box-shadow:0 0 0 3px color-mix(in srgb,var(--ac,var(--accent)) 22%,transparent),var(--shadow)}
-  .card.soon{opacity:.55;cursor:not-allowed}
+  .card.soon{opacity:.72;cursor:not-allowed}
   .tick{width:26px;height:26px;border-radius:8px;border:2px solid var(--line);display:grid;place-items:center;flex:0 0 auto;color:#fff;transition:.15s}
   .card.on .tick{background:var(--ac,var(--accent));border-color:var(--ac,var(--accent))}
   .card .ic{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex:0 0 auto;
@@ -69,7 +69,7 @@
   .card .ic svg{width:24px;height:24px;stroke:#fff;fill:none;transition:transform .4s cubic-bezier(.22,.61,.36,1)}
   .card:hover .ic{box-shadow:0 10px 24px color-mix(in srgb,var(--ac,var(--accent)) 38%,transparent)}
   .card:hover .ic svg{transform:scale(1.18) rotate(-6deg)}
-  .card.soon .ic{animation:none;filter:grayscale(.5)}
+  .card.soon .ic{animation:none}
   .card:nth-child(2) .ic{animation-delay:.5s} .card:nth-child(3) .ic{animation-delay:1s}
   .card:nth-child(4) .ic{animation-delay:1.5s} .card:nth-child(5) .ic{animation-delay:2s} .card:nth-child(6) .ic{animation-delay:2.5s}
   @keyframes iconFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
@@ -95,8 +95,12 @@
   .bip .price{font-weight:750;color:var(--bip);white-space:nowrap} .bip.free .price{color:var(--rev)}
 
   /* summary */
-  .summary{position:sticky;top:16px;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
-    padding:18px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:14px}
+  .summary{position:sticky;top:16px;border-radius:var(--r);padding:24px 22px;display:flex;flex-direction:column;gap:16px;
+    /* scoped light tokens -> dark text on white, brand-blue accents, ZERO purple */
+    --ink:#0f1730;--muted:#4a5573;--faint:#8794ad;--panel2:#eef2fc;--line:#dfe5f3;--accent:#2f4bff;--complete:#0018FF;--bip:#0e7490;--rev:#0a8f5b;
+    background:linear-gradient(160deg,#ffffff 0%,#e9f0ff 100%);border:1px solid rgba(255,255,255,.65);
+    box-shadow:0 12px 34px rgba(3,10,40,.5);transition:box-shadow .3s}
+  .summary:hover{box-shadow:0 18px 46px rgba(3,10,40,.6)}
   @media (max-width:860px){.summary{position:static}}
   .sumhead{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);font-weight:700}
   .pricebig{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
@@ -170,7 +174,7 @@
     roofs:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.7"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>',
     other:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.7"><path d="M12 3v18"/><path d="M7 8a7 7 0 0 1 10 0"/><path d="M9.5 11a3.5 3.5 0 0 1 5 0"/><path d="M9 21l3-6 3 6"/></svg>',
     specialty:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.7"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>',
-    solar:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.7"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><rect x="8" y="12.5" width="8" height="5" rx=".6"/><path d="M8 15h8M12 12.5v5"/></svg>'
+    solar:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.7"><path d="M3 5l16-1.6v8L3 13z"/><path d="M3 8.8l16-1M9 4.15v8.45M14 3.7v8.9"/><path d="M11 13v6M7.5 19.5h7M2 22h20"/></svg>'
   };
   var DESC = {
     wd:"C&C openings — windows, doors, shutters, mulled assemblies",

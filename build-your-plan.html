@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Build your WindLoadCalc plan — pick the ASCE 7-22 calculators you need. The more you add, the less each one costs.">
+<title>Build Your Plan — WindLoadCalc</title>
+<style>
+  :root{
+    --bg:#eef1f7; --panel:#fff; --panel2:#f6f8fc; --ink:#0f1730; --muted:#586178; --faint:#8a93a8;
+    --line:#e2e6f0; --line2:#eef1f7;
+    --accent:#2f4bff; --rev:#0e9f6e; --marg:#d97706; --bip:#0d9488; --complete:#7c3aed;
+    --shadow:0 1px 2px rgba(15,23,48,.05),0 14px 36px rgba(15,23,48,.08); --r:14px;
+  }
+  @media (prefers-color-scheme:dark){:root{
+    --bg:#080b16; --panel:#111830; --panel2:#0d142a; --ink:#eaf0ff; --muted:#9aa6c2; --faint:#6b768f;
+    --line:#212a44; --line2:#1a2238;
+    --accent:#6b86ff; --rev:#34d399; --marg:#f5a83f; --bip:#2dd4bf; --complete:#a78bfa;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 18px 40px rgba(0,0,0,.5);
+  }}
+  :root[data-theme="dark"]{
+    --bg:#080b16; --panel:#111830; --panel2:#0d142a; --ink:#eaf0ff; --muted:#9aa6c2; --faint:#6b768f;
+    --line:#212a44; --line2:#1a2238; --accent:#6b86ff; --rev:#34d399; --marg:#f5a83f; --bip:#2dd4bf; --complete:#a78bfa;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 18px 40px rgba(0,0,0,.5);
+  }
+  :root[data-theme="light"]{
+    --bg:#eef1f7; --panel:#fff; --panel2:#f6f8fc; --ink:#0f1730; --muted:#586178; --faint:#8a93a8;
+    --line:#e2e6f0; --line2:#eef1f7; --accent:#2f4bff; --rev:#0e9f6e; --marg:#d97706; --bip:#0d9488; --complete:#7c3aed;
+    --shadow:0 1px 2px rgba(15,23,48,.05),0 14px 36px rgba(15,23,48,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+    line-height:1.5;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+  .wrap{max-width:1080px;margin:0 auto;padding:26px 20px 70px}
+  .pvbadge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--complete);background:color-mix(in srgb,var(--complete) 14%,transparent);padding:3px 10px;border-radius:20px;margin-bottom:12px}
+  h1{font-size:clamp(21px,2.5vw,28px);letter-spacing:-.02em;margin:0 0 4px;font-weight:760;text-wrap:balance}
+  .sub{color:var(--muted);margin:0;font-size:14.5px;max-width:64ch}
+
+  .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0 18px}
+  .seg{display:flex;gap:4px;background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:4px;box-shadow:var(--shadow)}
+  .seg button{border:0;background:transparent;color:var(--muted);font:inherit;font-size:13px;font-weight:650;padding:8px 13px;border-radius:8px;cursor:pointer;transition:.15s}
+  .seg button:hover{color:var(--ink)}
+  .seg button.on{background:var(--accent);color:#fff;box-shadow:0 2px 9px rgba(47,75,255,.35)}
+  .seg .savepill{font-size:10.5px;font-weight:700;color:var(--rev);margin-left:5px}
+  .seg button.on .savepill{color:#d6ffe9}
+
+  .layout{display:grid;grid-template-columns:1fr 360px;gap:22px;align-items:start}
+  @media (max-width:860px){.layout{grid-template-columns:1fr}}
+
+  /* calc cards */
+  .cards{display:flex;flex-direction:column;gap:12px}
+  .card{display:flex;align-items:center;gap:14px;background:var(--panel);border:1.5px solid var(--line);
+    border-radius:var(--r);padding:15px 17px;cursor:pointer;transition:border-color .18s,transform .12s,box-shadow .18s;box-shadow:var(--shadow)}
+  .card:hover{transform:translateY(-1px)}
+  .card.on{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 18%,transparent),var(--shadow)}
+  .card.soon{opacity:.55;cursor:not-allowed}
+  .tick{width:26px;height:26px;border-radius:8px;border:2px solid var(--line);display:grid;place-items:center;flex:0 0 auto;color:#fff;transition:.15s}
+  .card.on .tick{background:var(--accent);border-color:var(--accent)}
+  .tick svg{width:15px;height:15px;opacity:0;transition:.15s}
+  .card.on .tick svg{opacity:1}
+  .cbody{flex:1;min-width:0}
+  .cbody h3{margin:0;font-size:15.5px;font-weight:680;letter-spacing:-.01em}
+  .cbody p{margin:2px 0 0;font-size:12.8px;color:var(--muted)}
+  .cact{flex:0 0 auto;text-align:right}
+  .cact .add{font-size:14.5px;font-weight:750;color:var(--marg);white-space:nowrap}
+  .cact .in{font-size:13px;font-weight:700;color:var(--rev)}
+  .cact .soonlab{font-size:12px;font-weight:700;color:var(--faint)}
+  .cact small{display:block;font-size:11px;color:var(--faint);font-weight:600}
+
+  /* BIP row */
+  .bip{display:flex;align-items:center;gap:13px;border:1.5px dashed var(--bip);border-radius:var(--r);padding:14px 16px;
+    background:color-mix(in srgb,var(--bip) 7%,var(--panel));cursor:pointer;transition:.15s}
+  .bip.on{background:color-mix(in srgb,var(--bip) 15%,var(--panel));border-style:solid}
+  .bip.free{border-color:var(--rev);background:color-mix(in srgb,var(--rev) 12%,var(--panel));cursor:default}
+  .bip .tick{border-color:var(--bip)} .bip.on .tick{background:var(--bip);border-color:var(--bip)}
+  .bip h3{font-size:14.5px;margin:0;font-weight:680} .bip p{margin:2px 0 0;font-size:12.5px;color:var(--muted)}
+  .bip .price{font-weight:750;color:var(--bip);white-space:nowrap} .bip.free .price{color:var(--rev)}
+
+  /* summary */
+  .summary{position:sticky;top:16px;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+    padding:18px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:14px}
+  @media (max-width:860px){.summary{position:static}}
+  .sumhead{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);font-weight:700}
+  .pricebig{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
+  .pricebig .now{font-size:34px;font-weight:800;letter-spacing:-.03em;color:var(--accent)}
+  .pricebig .unit{font-size:14px;color:var(--muted);font-weight:600}
+  .pricebig .was{font-size:16px;color:var(--faint);text-decoration:line-through;text-decoration-thickness:1.5px}
+  .savebadge{align-self:flex-start;font-size:12.5px;font-weight:750;color:var(--rev);background:color-mix(in srgb,var(--rev) 13%,transparent);
+    padding:5px 11px;border-radius:20px}
+  .savemore{font-size:13px;color:var(--muted);line-height:1.5}
+  .savemore b{color:var(--ink)}
+
+  .progress{display:flex;flex-direction:column;gap:7px}
+  .plabel{display:flex;justify-content:space-between;font-size:12.5px;color:var(--muted)}
+  .plabel b{color:var(--ink)}
+  .track{height:9px;border-radius:6px;background:var(--panel2);overflow:hidden;border:1px solid var(--line)}
+  .fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--accent),var(--complete));transition:width .35s cubic-bezier(.4,0,.2,1)}
+  .nudge{font-size:12.8px;color:var(--complete);font-weight:600;line-height:1.45}
+  .nudge.complete{color:var(--rev)}
+
+  .cta{border:0;border-radius:11px;background:linear-gradient(135deg,var(--accent),#4666ff);color:#fff;font:inherit;
+    font-weight:750;font-size:15.5px;padding:14px;cursor:pointer;transition:.2s;width:100%}
+  .cta:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(47,75,255,.4)}
+  .cta:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
+  .finenote{font-size:11.5px;color:var(--faint);text-align:center;margin:-4px 0 0}
+  .empty{color:var(--muted);font-size:13.5px;text-align:center;padding:8px 0}
+  .previewnote{margin-top:26px;font-size:12px;color:var(--faint);border-top:1px solid var(--line);padding-top:14px;max-width:80ch}
+  .theme-tgl{position:fixed;top:12px;right:12px;border:1px solid var(--line);background:var(--panel);color:var(--muted);
+    border-radius:9px;padding:6px 10px;font:inherit;font-size:12px;cursor:pointer}
+</style>
+</head>
+<body>
+<button class="theme-tgl" id="themeTgl" aria-label="Toggle theme">◐ Theme</button>
+<div class="wrap">
+  <span class="pvbadge">ASCE 7‑22 · Volume pricing</span>
+  <h1>Build your plan</h1>
+  <p class="sub">Pick the calculators you need. The more you add, the less each one costs — and every calculator you add is cheaper than the last.</p>
+
+  <div class="toolbar">
+    <div class="seg" id="tier">
+      <button data-t="starter" class="on">Starter</button>
+      <button data-t="pro">Pro</button>
+      <button data-t="premium">Premium</button>
+    </div>
+    <div class="seg" id="cycle">
+      <button data-c="monthly" class="on">Monthly</button>
+      <button data-c="annual">Annual<span class="savepill">2 mo free</span></button>
+    </div>
+  </div>
+
+  <div class="layout">
+    <div class="cards" id="cards"></div>
+
+    <aside class="summary" id="summary">
+      <div class="sumhead">Your plan</div>
+      <div id="sumbody"></div>
+    </aside>
+  </div>
+
+  <p class="previewnote" id="pnote"></p>
+</div>
+
+<script src="js/pricing-engine.js"></script>
+<script>
+(function(){
+  "use strict";
+  if(!window.WLCPricing){ document.getElementById("cards").innerHTML="<p class='empty'>Pricing engine failed to load (js/pricing-engine.js).</p>"; return; }
+  var P = window.WLCPricing;
+  var DESC = {
+    wd:"C&C openings — windows, doors, shutters, mulled assemblies",
+    mwfrs:"Whole‑building — Directional + Envelope (ASCE 7‑22 Ch 27 / 28)",
+    roofs:"Every roof shape, plus parapets & overhangs",
+    other:"Signs, walls, equipment, chimneys, tanks & trussed towers",
+    specialty:"Parapets (§30.6) + attached canopies (§30.9)",
+    solar:"Rooftop + ground‑mount PV — coming soon"
+  };
+  var state = { tier:"starter", cycle:"monthly", selected:{}, bip:false };
+  var CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>';
+
+  function money(v){ return "$"+Math.round(v).toLocaleString(); }
+  function unit(){ return state.cycle==="annual" ? "/yr" : "/mo"; }
+  function selectedIds(){ return P.config().catalog.filter(function(c){return state.selected[c.id];}).map(function(c){return c.id;}); }
+
+  function q(){ return P.quote({ owned:[], selected:selectedIds(), tier:state.tier, cycle:state.cycle, bipSelected:state.bip }); }
+
+  function renderCards(){
+    var Q = q(), cat = P.config().catalog, h="";
+    cat.forEach(function(c){
+      var on = !!state.selected[c.id];
+      var soon = !c.live;
+      var act;
+      if(soon) act = '<span class="soonlab">Soon</span>';
+      else if(on) act = '<span class="in">✓ In your plan</span>';
+      else act = '<span class="add">Add +'+money(Q.addNextPrice)+'</span><small>'+unit().slice(1)+'</small>';
+      h+='<div class="card'+(on?' on':'')+(soon?' soon':'')+'" data-id="'+c.id+'"'+(soon?'':' tabindex="0" role="button" aria-pressed="'+on+'"')+'>'+
+           '<div class="tick">'+CHECK+'</div>'+
+           '<div class="cbody"><h3>'+c.name+'</h3><p>'+(DESC[c.id]||"")+'</p></div>'+
+           '<div class="cact">'+act+'</div>'+
+         '</div>';
+    });
+    document.getElementById("cards").innerHTML = h;
+  }
+
+  function renderSummary(){
+    var Q = q(), sel = selectedIds();
+    var b = document.getElementById("sumbody");
+    if(sel.length===0){ b.innerHTML='<p class="empty">Select a calculator to start. Your first is '+money(P.curveTotal(1,{tier:state.tier,cycle:state.cycle}))+unit()+'.</p>'; return; }
+
+    var h="";
+    // price block
+    h+='<div class="pricebig"><span class="now">'+money(Q.newTotal)+'</span><span class="unit">'+unit()+'</span>';
+    if(Q.savings>0) h+='<span class="was">'+money(Q.separatePrice)+unit()+'</span>';
+    h+='</div>';
+    if(Q.savings>0) h+='<div class="savebadge">You save '+money(Q.savings)+unit()+' · '+Q.savingsPct+'% off</div>';
+
+    // save-more line
+    if(Q.showSaveMore) h+='<div class="savemore"><b>Add more, save more.</b> Each calculator you add now costs less than the last'+(Q.remainingToComplete>0?' — your next is just <b>+'+money(Q.addNextPrice)+unit()+'</b>.':'.')+'</div>';
+
+    // progress to complete
+    h+='<div class="progress"><div class="plabel"><span>Plan coverage</span><span><b>'+Q.afterCount+'</b> of '+Q.catalogLive+' calculators</span></div>'+
+       '<div class="track"><div class="fill" style="width:'+Math.round(Q.afterCount/Q.catalogLive*100)+'%"></div></div>';
+    if(Q.isComplete) h+='<div class="nudge complete">✓ Complete — every calculator, plus BIP included free.</div>';
+    else if(Q.showCompleteNudge) h+='<div class="nudge">You’re '+Q.remainingToComplete+' away from <b>Complete</b> — get all '+Q.catalogLive+' + BIP free for just <b>+'+money(Q.completeDelta - (Q.newTotal-Q.currentTotal))+unit()+'</b> more.</div>';
+    h+='</div>';
+
+    // BIP row (renders after summary via separate node) -> include inline here
+    if(Q.isComplete){
+      h+='<div class="bip free"><div class="tick">'+CHECK+'</div><div class="cbody"><h3>Building Intelligence Platform</h3><p>Included free with Complete.</p></div><div class="price">FREE</div></div>';
+    } else if(Q.showBipOffer){
+      h+='<div class="bip'+(state.bip?' on':'')+'" id="bipRow" tabindex="0" role="button" aria-pressed="'+state.bip+'"><div class="tick">'+CHECK+'</div>'+
+         '<div class="cbody"><h3>Add full BIP access</h3><p>Hurricane risk, solar siting, multi‑criteria search across 40,000+ ZIPs.</p></div>'+
+         '<div class="price">+'+money(Q.bipPrice)+unit()+'</div></div>';
+    }
+
+    // CTA
+    h+='<button class="cta" id="cta">Checkout — '+money(Q.dueWithBip)+unit()+'</button>';
+    h+='<p class="finenote">'+(state.cycle==="annual"?'Billed yearly (2 months free).':'Billed monthly.')+' Cancel anytime.</p>';
+
+    b.innerHTML=h;
+  }
+
+  function render(){ renderCards(); renderSummary(); document.getElementById("pnote").textContent =
+    "Every calculator is ASCE 7-22. Secure checkout by Stripe · cancel anytime · 7-day free trial. Already have a plan? Add calculators from inside your account and keep your volume price."; }
+
+  // events (delegated)
+  document.getElementById("cards").addEventListener("click", function(e){ toggleCard(e.target.closest(".card")); });
+  document.getElementById("cards").addEventListener("keydown", function(e){ if((e.key==="Enter"||e.key===" ")&&e.target.classList.contains("card")){ e.preventDefault(); toggleCard(e.target); }});
+  function toggleCard(card){ if(!card||card.classList.contains("soon")) return; var id=card.dataset.id; if(state.selected[id]) delete state.selected[id]; else state.selected[id]=true; render(); }
+
+  document.getElementById("summary").addEventListener("click", function(e){
+    if(e.target.closest("#bipRow")){ state.bip=!state.bip; render(); }
+    else if(e.target.closest("#cta")){
+      var btn=e.target.closest("#cta"); if(btn.disabled) return;
+      var label=btn.textContent; btn.disabled=true; btn.textContent="Starting secure checkout…";
+      fetch("https://api.windloadcalc.com/api/subscriptions/checkout-curve",{
+        method:"POST", headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({ programs:selectedIds(), tier:state.tier, cycle:state.cycle, bip:state.bip })
+      }).then(function(r){return r.json();}).then(function(d){
+        if(d && d.checkout_url){ window.location.href=d.checkout_url; }
+        else { btn.disabled=false; btn.textContent=label; alert((d&&d.error)||"Could not start checkout — please try again."); }
+      }).catch(function(){ btn.disabled=false; btn.textContent=label; alert("Network error — please try again."); });
+    }
+  });
+
+  function segWire(id,key,attr){ document.getElementById(id).addEventListener("click",function(e){ var btn=e.target.closest("button"); if(!btn) return;
+    [].forEach.call(this.querySelectorAll("button"),function(x){x.classList.remove("on");}); btn.classList.add("on"); state[key]=btn.dataset[attr]; render(); }); }
+  segWire("tier","tier","t"); segWire("cycle","cycle","c");
+
+  document.getElementById("themeTgl").addEventListener("click",function(){
+    var cur=document.documentElement.getAttribute("data-theme");
+    var next = cur==="dark"?"light":(cur==="light"?"dark":(matchMedia("(prefers-color-scheme:dark)").matches?"light":"dark"));
+    document.documentElement.setAttribute("data-theme",next);
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>

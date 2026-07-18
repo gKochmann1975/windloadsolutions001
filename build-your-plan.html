@@ -54,10 +54,21 @@
   .card{display:flex;align-items:center;gap:14px;background:var(--panel);border:1.5px solid var(--line);
     border-radius:var(--r);padding:15px 17px;cursor:pointer;transition:border-color .18s,transform .12s,box-shadow .18s;box-shadow:var(--shadow)}
   .card:hover{transform:translateY(-1px)}
-  .card.on{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 18%,transparent),var(--shadow)}
+  .card.on{border-color:var(--ac,var(--accent));box-shadow:0 0 0 3px color-mix(in srgb,var(--ac,var(--accent)) 20%,transparent),var(--shadow)}
   .card.soon{opacity:.55;cursor:not-allowed}
   .tick{width:26px;height:26px;border-radius:8px;border:2px solid var(--line);display:grid;place-items:center;flex:0 0 auto;color:#fff;transition:.15s}
-  .card.on .tick{background:var(--accent);border-color:var(--accent)}
+  .card.on .tick{background:var(--ac,var(--accent));border-color:var(--ac,var(--accent))}
+  .card .ic{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex:0 0 auto;
+    background:color-mix(in srgb,var(--ac,var(--accent)) 20%,transparent);border:1px solid color-mix(in srgb,var(--ac,var(--accent)) 42%,transparent);
+    animation:iconFloat 5.5s ease-in-out infinite;transition:box-shadow .35s}
+  .card .ic svg{width:24px;height:24px;stroke:var(--ac,var(--accent));fill:none;transition:transform .4s cubic-bezier(.22,.61,.36,1)}
+  .card:hover .ic{box-shadow:0 10px 24px color-mix(in srgb,var(--ac,var(--accent)) 38%,transparent)}
+  .card:hover .ic svg{transform:scale(1.18) rotate(-6deg)}
+  .card.soon .ic{animation:none;filter:grayscale(.5)}
+  .card:nth-child(2) .ic{animation-delay:.5s} .card:nth-child(3) .ic{animation-delay:1s}
+  .card:nth-child(4) .ic{animation-delay:1.5s} .card:nth-child(5) .ic{animation-delay:2s} .card:nth-child(6) .ic{animation-delay:2.5s}
+  @keyframes iconFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+  @media (prefers-reduced-motion:reduce){.card .ic{animation:none} .card:hover .ic svg{transform:none}}
   .tick svg{width:15px;height:15px;opacity:0;transition:.15s}
   .card.on .tick svg{opacity:1}
   .cbody{flex:1;min-width:0}
@@ -148,6 +159,15 @@
   "use strict";
   if(!window.WLCPricing){ document.getElementById("cards").innerHTML="<p class='empty'>Pricing engine failed to load (js/pricing-engine.js).</p>"; return; }
   var P = window.WLCPricing;
+  var COLORS = { wd:"#06b6d4", mwfrs:"#3b82f6", roofs:"#f97316", other:"#14b8a6", specialty:"#a855f7", solar:"#fbbf24" };
+  var ICONS = {
+    wd:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.7"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>',
+    mwfrs:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.7"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><line x1="9" y1="22" x2="9" y2="12"/><line x1="15" y1="22" x2="15" y2="12"/></svg>',
+    roofs:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.7"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>',
+    other:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.7"><path d="M12 3v18"/><path d="M7 8a7 7 0 0 1 10 0"/><path d="M9.5 11a3.5 3.5 0 0 1 5 0"/><path d="M9 21l3-6 3 6"/></svg>',
+    specialty:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.7"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>',
+    solar:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.7"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><rect x="8" y="12.5" width="8" height="5" rx=".6"/><path d="M8 15h8M12 12.5v5"/></svg>'
+  };
   var DESC = {
     wd:"C&C openings — windows, doors, shutters, mulled assemblies",
     mwfrs:"Whole‑building — Directional + Envelope (ASCE 7‑22 Ch 27 / 28)",
@@ -174,8 +194,9 @@
       if(soon) act = '<span class="soonlab">Soon</span>';
       else if(on) act = '<span class="in">✓ In your plan</span>';
       else act = '<span class="add">Add +'+money(Q.addNextPrice)+'</span><small>'+unit().slice(1)+'</small>';
-      h+='<div class="card'+(on?' on':'')+(soon?' soon':'')+'" data-id="'+c.id+'"'+(soon?'':' tabindex="0" role="button" aria-pressed="'+on+'"')+'>'+
+      h+='<div class="card'+(on?' on':'')+(soon?' soon':'')+'" data-id="'+c.id+'" style="--ac:'+(COLORS[c.id]||'var(--accent)')+'"'+(soon?'':' tabindex="0" role="button" aria-pressed="'+on+'"')+'>'+
            '<div class="tick">'+CHECK+'</div>'+
+           '<div class="ic">'+(ICONS[c.id]||'')+'</div>'+
            '<div class="cbody"><h3>'+c.name+'</h3><p>'+(DESC[c.id]||"")+'</p></div>'+
            '<div class="cact">'+act+'</div>'+
          '</div>';

@@ -1,0 +1,2636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="/images/windloadcalc-icon-anim-loop.svg?v=1">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
+    <link rel="shortcut icon" href="/favicon.ico?v=2">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://windloadcalc.com/free-mwfrs-wind-load-calculator.html">
+
+    <title>Free MWFRS Wind Load Calculator — ASCE 7-22 Directional Wall &amp; Roof Pressures | WindLoadCalc</title>
+    <meta name="description" content="Free online MWFRS wind load calculator: enter a ZIP and building size, get ASCE 7-22 directional Main Wind Force Resisting System wall and roof pressures (psf) with every coefficient cited. Low-rise buildings, no signup.">
+    <meta name="keywords" content="free MWFRS wind load calculator, free online MWFRS wind load calculator, free online wind load calculator, MWFRS calculator, main wind force resisting system calculator, ASCE 7-22 MWFRS, directional procedure calculator, wind load on building calculator, wall and roof wind pressure calculator, low-rise wind load calculator">
+
+    <link rel="icon" type="image/svg+xml" href="images/windloadcalc-favicon.svg">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Free MWFRS Wind Load Calculator — ASCE 7-22 Directional">
+    <meta property="og:description" content="Free online MWFRS wind load calculator: ASCE 7-22 directional wall and roof pressures for low-rise buildings, every coefficient cited. No signup.">
+    <meta property="og:url" content="https://windloadcalc.com/free-mwfrs-wind-load-calculator.html">
+    <meta property="og:image" content="https://windloadcalc.com/images/video-posters/windload-free-calculator.jpg">
+    <meta property="og:site_name" content="WindLoadCalc">
+
+    <!-- Twitter Card (added 2026-05-25) -->
+    <meta name="twitter:image" content="https://windloadcalc.com/images/video-posters/windload-free-calculator.jpg">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Free MWFRS Wind Load Calculator — ASCE 7-22 Directional">
+    <meta name="twitter:description" content="Free online MWFRS wind load calculator: ASCE 7-22 directional wall and roof pressures for low-rise buildings, every coefficient cited.">
+
+    <!-- Fonts: brand system stack — matches windloadcalc.com homepage exactly -->
+    <!-- (no Google Fonts dependency) -->
+
+    <!-- ============================================ -->
+    <!-- JSON-LD SCHEMA: WebApplication                -->
+    <!-- ============================================ -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Free MWFRS Wind Load Calculator (ASCE 7-22 Directional)",
+        "url": "https://windloadcalc.com/free-mwfrs-wind-load-calculator.html",
+        "description": "Free online MWFRS wind load calculator. Enter a ZIP and building dimensions to get ASCE 7-22 directional Main Wind Force Resisting System wall and roof pressures (psf) for a low-rise building, with every coefficient cited to its ASCE section.",
+        "applicationCategory": "EngineeringApplication",
+        "applicationSubCategory": "Structural Engineering",
+        "operatingSystem": "Web Browser (Chrome, Firefox, Safari, Edge)",
+        "browserRequirements": "Requires JavaScript. Requires HTML5.",
+        "isAccessibleForFree": true,
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "featureList": [
+            "ASCE 7-22 Directional Procedure (Chapter 27) for low-rise buildings",
+            "MWFRS windward wall, leeward wall, side wall, and roof pressures",
+            "Basic wind speed looked up automatically by ZIP code",
+            "Gust-effect factor, velocity pressure, and Cp values shown per surface",
+            "Every coefficient cited with its ASCE 7-22 section, table, or figure",
+            "Runs the same engine as the paid WindLoadCalc MWFRS product",
+            "No signup required"
+        ],
+        "provider": {
+            "@type": "Organization",
+            "name": "WindLoad Solutions",
+            "url": "https://windloadcalc.com",
+            "foundingDate": "2002"
+        }
+    }
+    </script>
+
+    <!-- ============================================ -->
+    <!-- JSON-LD SCHEMA: Organization                  -->
+    <!-- ============================================ -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "WindLoad Solutions",
+        "alternateName": ["WindLoadCalc", "WLC"],
+        "url": "https://windloadcalc.com",
+        "logo": "https://windloadcalc.com/images/windloadcalc-logo.png",
+        "foundingDate": "2002",
+        "description": "WindLoad Solutions has been calculating wind loads since 2002 (online since 2006) — one of the very first wind load calculators on the web. Professional ASCE 7-22 wind load calculation software for structural engineers, architects, and building professionals.",
+        "areaServed": "United States"
+    }
+    </script>
+
+    <!-- ============================================ -->
+    <!-- JSON-LD SCHEMA: HowTo                         -->
+    <!-- ============================================ -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to Calculate MWFRS Wind Pressures for a Low-Rise Building (ASCE 7-22 Directional)",
+        "description": "Determine directional Main Wind Force Resisting System wall and roof pressures for a low-rise building using the ASCE 7-22 Chapter 27 directional procedure.",
+        "totalTime": "PT45S",
+        "step": [
+            {
+                "@type": "HowToStep",
+                "position": 1,
+                "name": "Enter the project ZIP code",
+                "text": "Enter the 5-digit US ZIP code. The calculator looks up the ASCE 7-22 basic wind speed for the site automatically, so you do not enter V by hand."
+            },
+            {
+                "@type": "HowToStep",
+                "position": 2,
+                "name": "Choose Risk Category and Exposure",
+                "text": "Risk Category per ASCE 7-22 Table 1.5-1 sets the design wind speed; Exposure Category per ASCE 7-22 Section 26.7 (B suburban, C open, D flat unobstructed) sets the velocity-pressure exposure coefficient Kz."
+            },
+            {
+                "@type": "HowToStep",
+                "position": 3,
+                "name": "Describe the building box",
+                "text": "Enter mean roof height h, the plan dimensions B (width facing the wind) and L (depth parallel to the wind), the roof slope in degrees, the enclosure classification, and whether the wind is normal or parallel to the ridge."
+            },
+            {
+                "@type": "HowToStep",
+                "position": 4,
+                "name": "Read the surface pressures",
+                "text": "The calculator returns the directional MWFRS design pressures in psf for the windward wall, leeward wall, side walls, and roof, using p = qGCp − qi(GCpi) per ASCE 7-22 Equation 27.3-1. Expand the math to see qh, G, Kz, and each surface Cp with its reference."
+            }
+        ]
+    }
+    </script>
+
+    <!-- ============================================ -->
+    <!-- JSON-LD SCHEMA: Dataset                       -->
+    <!-- (the GEO secret weapon — AI engines cite     -->
+    <!-- pages that expose Dataset schema)             -->
+    <!-- ============================================ -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Dataset",
+        "name": "ASCE 7-22 Directional MWFRS External Pressure Coefficients (Figure 27.3-1)",
+        "description": "The external pressure coefficients Cp used by the ASCE 7-22 Chapter 27 directional procedure for the Main Wind Force Resisting System of enclosed and partially enclosed low-rise buildings: windward wall (+0.8), leeward wall (−0.5 to −0.2 by L/B), side wall (−0.7), and windward/leeward roof by h/L and roof angle θ, applied with the gust-effect factor G and internal pressure coefficient GCpi.",
+        "url": "https://windloadcalc.com/free-mwfrs-wind-load-calculator.html",
+        "keywords": ["MWFRS", "ASCE 7-22", "directional procedure", "Figure 27.3-1", "external pressure coefficient", "Cp", "gust-effect factor", "windward wall", "leeward wall", "roof pressure", "low-rise building"],
+        "creator": {
+            "@type": "Organization",
+            "name": "WindLoad Solutions",
+            "url": "https://windloadcalc.com"
+        },
+        "spatialCoverage": "United States",
+        "temporalCoverage": "2022/..",
+        "isAccessibleForFree": true,
+        "license": "https://windloadcalc.com/terms",
+        "variableMeasured": [
+            {"@type": "PropertyValue", "name": "External pressure coefficient Cp", "unitText": "dimensionless"},
+            {"@type": "PropertyValue", "name": "Gust-effect factor G", "unitText": "dimensionless"},
+            {"@type": "PropertyValue", "name": "MWFRS design pressure", "unitText": "psf"}
+        ]
+    }
+    </script>
+
+    <!-- ============================================ -->
+    <!-- JSON-LD SCHEMA: FAQPage                       -->
+    <!-- ============================================ -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is MWFRS in wind load design?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "MWFRS stands for the Main Wind Force Resisting System — the assembly of structural elements (frames, shear walls, diaphragms, the roof deck acting as a diaphragm) that receives wind load from more than one surface and carries it to the foundation. ASCE 7-22 treats it separately from Components and Cladding (C&C): MWFRS sizes the overall lateral system, while C&C sizes individual pieces like windows and fasteners. This free calculator solves the MWFRS directional procedure of ASCE 7-22 Chapter 27."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Is this free MWFRS wind load calculator really free?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes. Enter a ZIP and a building box and it returns the directional MWFRS wall and roof pressures on screen, free, with no signup — up to 10 calculations per day. The paid MWFRS calculator removes the daily cap and adds the envelope procedure, all roof geometries, topographic (Kzt) effects, saved projects, Excel export, and a sealed engineering report. The free screen is a genuine slice of the same engine, not a teaser that hides the math."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What is the difference between the directional and envelope procedures?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "ASCE 7-22 gives two ways to find MWFRS pressures on a low-rise building. The directional procedure (Chapter 27) applies pressure coefficients Cp to each building surface for wind from a given direction — it is what this free tool runs. The envelope procedure (Chapter 28) instead applies pseudo-pressure coefficients GCpf that envelope the worst-case load cases as the wind rotates. Both are code-compliant for buildings h ≤ 60 ft; the envelope procedure is available in the paid calculator."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How are MWFRS wall and roof pressures calculated in ASCE 7-22?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Per ASCE 7-22 Equation 27.3-1, p = qGCp − qi(GCpi). q is the velocity pressure (q = 0.00256·Kz·Kzt·Kd·Ke·V²), G is the gust-effect factor (0.85 for a rigid building), Cp is the external pressure coefficient for each surface from Figure 27.3-1, and GCpi is the internal pressure coefficient from Table 26.13-1. Windward wall uses qz at the surface height; leeward wall, side walls, and roof use qh at the mean roof height."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What Cp values does the directional procedure use for walls?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "From ASCE 7-22 Figure 27.3-1: the windward wall uses Cp = +0.8, the side walls use Cp = −0.7, and the leeward wall uses Cp between −0.5 and −0.2 depending on the L/B ratio (−0.5 for L/B ≤ 1, −0.3 at L/B = 2, −0.2 for L/B ≥ 4, interpolated between). Roof Cp depends on the h/L ratio and the roof angle θ. This calculator shows the Cp it used for each surface."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Does this MWFRS calculator look up the wind speed for me?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes. Enter the project ZIP and the calculator returns the ASCE 7-22 basic wind speed for that location and Risk Category from a pre-computed database of all US ZIP codes, so you do not read V off a map by hand. Many free MWFRS tools make you look up and type V yourself, which is a common source of error."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What building sizes does the free MWFRS screen support?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The free screen covers enclosed and partially enclosed low-rise buildings with a mean roof height of 60 ft or less and a regular rectangular footprint, on flat terrain (Kzt = 1.0). Taller buildings, open buildings, irregular geometry, and real topographic effects are handled in the paid MWFRS calculator."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What does 'wind normal to the ridge' versus 'parallel to the ridge' mean?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The directional procedure checks wind blowing perpendicular to the ridge line (normal) and along the ridge line (parallel) because the roof pressure coefficients differ between the two. For a gable or hip roof the governing case is often wind normal to the ridge; for the walls the windward/leeward split simply follows the wind direction. Toggle the two on the calculator to compare."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Is MWFRS the same as Components and Cladding (C&C)?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "No. MWFRS sizes the overall structure that resists wind from multiple surfaces at once, using lower area-averaged pressures. C&C sizes individual elements (windows, doors, fasteners, roof panels) that feel higher localized peak pressures over small tributary areas. A complete design checks both. Use this page for MWFRS; use our free C&C calculator for a single window or wall component."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Can I use this MWFRS output for a building permit?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The pressures are computed with the same ASCE 7-22 directional engine as our paid product and every coefficient is cited, so they are suitable for checking and preliminary design. A permit submission usually requires a sealed engineering report, which the paid MWFRS calculator produces (and which our licensed engineers can stamp). Treat the free screen as a fast, defensible screening tool, not a final stamped document."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <!-- Breadcrumb schema (GEO: helps AI engines + SERP place the page) -->
+    <script type="application/ld+json">
+    { "@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://windloadcalc.com/"},
+      {"@type":"ListItem","position":2,"name":"MWFRS Wind Load Calculator","item":"https://windloadcalc.com/shop/mwfrs.html"},
+      {"@type":"ListItem","position":3,"name":"Free MWFRS Wind Load Calculator","item":"https://windloadcalc.com/free-mwfrs-wind-load-calculator.html"}
+    ]}
+    </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================ */
+        /* DESIGN TOKENS                                */
+        /* ============================================ */
+        :root {
+            /* Brand tokens — pulled directly from windloadcalc.com homepage :root.
+               Do not redefine; do not invent. */
+            --brand-primary: #0018ff;
+            --brand-dark: #181E57;
+            --dark-navy: #0f172a;
+            --light-navy: #1e293b;
+
+            /* Hero gradient: matches homepage .hero-section background EXACTLY */
+            --hero-gradient: linear-gradient(135deg, var(--dark-navy) 0%, var(--light-navy) 50%, #0a0f1f 100%);
+            --hero-overlay: linear-gradient(135deg, rgba(0, 24, 255, 0.1) 0%, rgba(24, 30, 87, 0.3) 100%);
+            --brand-gradient: linear-gradient(135deg, #0018ff 0%, #181E57 100%);
+
+            /* Electric brand palette — matches homepage */
+            --electric-cyan: #00ffff;
+            --electric-blue: #0080ff;
+            --electric-purple: #7c3aed;
+            --electric-orange: #f59e0b;
+            --electric-green: #10b981;
+            --electric-yellow: #fbbf24;
+
+            /* Aliases kept for backward compat in existing rules below */
+            --gold: var(--electric-orange);
+            --gold-soft: rgba(245, 158, 11, 0.1);
+            --suction-red: #DC2626;
+            --pressure-blue: #0018ff;
+
+            --bg-page: #FAFAF7;
+            --bg-card: #ffffff;
+            --bg-card-glass: rgba(255, 255, 255, 0.97);
+
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --text-muted: #9ca3af;
+            --text-ivory: #F5F1EA;
+
+            --border-subtle: rgba(24, 30, 87, 0.08);
+            --border-input: rgba(24, 30, 87, 0.15);
+            --border-input-focus: var(--brand-primary);
+
+            --shadow-card: 0 20px 60px rgba(24, 30, 87, 0.12), 0 4px 16px rgba(24, 30, 87, 0.06);
+            --shadow-badge: 0 8px 24px rgba(245, 158, 11, 0.2);
+
+            --radius-card: 16px;
+            --radius-input: 10px;
+            --radius-pill: 999px;
+
+            /* Brand fonts: system sans-serif (matches homepage). Variable names
+               preserved (--font-serif, --font-mono) so existing rules continue
+               to work without rewriting every selector. */
+            --font-serif: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            /* --font-mono was bleeding typewriter feel across every label/button.
+               Aliased to sans so the brand reads consistently. --font-equation
+               is kept monospace ONLY for actual math formulas where alignment matters. */
+            --font-mono: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            --font-equation: 'SF Mono', Consolas, Monaco, 'Courier New', monospace;
+        }
+
+        /* ============================================ */
+        /* RESET                                        */
+        /* ============================================ */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; overflow-x: hidden; }
+        body {
+            font-family: var(--font-sans);
+            line-height: 1.65;
+            color: var(--text-primary);
+            background: var(--bg-page);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+        button { font-family: inherit; cursor: pointer; }
+        a { color: var(--brand-primary); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        /* ============================================ */
+        /* TOP-NAV SITE-WIDE BANNER (NEW)               */
+        /* ============================================ */
+        /* Stacked-sticky pattern: banner pins at top, header pins just below it.
+           Both stay visible as the user scrolls. No body-padding hack needed. */
+        .wlc-promo-banner {
+            background: linear-gradient(90deg, #0a1f66 0%, #02103f 100%);
+            color: var(--text-ivory);
+            padding: 0.6rem 1.5rem;
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+            position: sticky;
+            top: 0;
+            z-index: 1002;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .wlc-promo-banner a {
+            color: var(--text-ivory);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .wlc-promo-banner a:hover { color: var(--gold); text-decoration: none; }
+        .wlc-promo-banner .arrow {
+            transition: transform 0.2s ease;
+            display: inline-block;
+        }
+        .wlc-promo-banner a:hover .arrow { transform: translateX(4px); }
+
+        /* ============================================ */
+        /* HEADER                                       */
+        /* ============================================ */
+        .site-header {
+            background: var(--bg-card-glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-subtle);
+            /* Header padding matches homepage .header-container (0 3rem) exactly,
+               with vertical breathing so the 100px logo isn't crammed. */
+            padding: 1rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 38px; /* sit just below the sticky promo banner */
+            z-index: 1000;
+        }
+        .site-header .logo {
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        /* Logo sized to match homepage .logo-image EXACTLY (100 / 80 / 70 across
+           the same 768 / 480 breakpoints homepage uses). Class name kept the
+           same so future style changes propagate. */
+        .site-header .logo-image {
+            display: block;
+            height: 100px;
+            width: auto;
+        }
+        .site-header .logo:hover { text-decoration: none; opacity: 0.85; }
+        @media (max-width: 768px) {
+            .site-header { padding: 0.75rem 1.5rem; }
+            .site-header .logo-image { height: 80px; }
+            .site-header .header-right { gap: 0.75rem; }
+        }
+        @media (max-width: 480px) {
+            .site-header { padding: 0.5rem 1rem; top: 34px; }
+            .site-header .logo-image { height: 70px; }
+            .site-header .header-right { gap: 0.5rem; }
+            .header-cta { padding: 0.55rem 1rem; font-size: 0.85rem; border-width: 1.5px; }
+        }
+        @media (max-width: 380px) {
+            .header-cta:not(.primary) { display: none; }
+        }
+        /* Header CTA pattern — matches homepage .header-cta exactly.
+           Uses the homepage's scrolled-state colors because this header
+           is glass over a bright background, not transparent over a hero. */
+        .site-header .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .header-cta {
+            color: var(--brand-primary);
+            background: rgba(0, 24, 255, 0.08);
+            border: 2px solid rgba(0, 24, 255, 0.3);
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            white-space: nowrap;
+            backdrop-filter: blur(10px);
+        }
+        .header-cta:hover {
+            background: rgba(0, 24, 255, 0.15);
+            border-color: rgba(0, 24, 255, 0.55);
+            color: var(--brand-primary);
+            text-decoration: none;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 24, 255, 0.2);
+        }
+        .header-cta.primary {
+            background: var(--brand-primary);
+            color: white;
+            border-color: var(--brand-primary);
+        }
+        .header-cta.primary:hover {
+            background: #0012cc;
+            border-color: #0012cc;
+            color: white;
+            box-shadow: 0 8px 25px rgba(0, 24, 255, 0.4);
+        }
+
+        /* ============================================ */
+        /* HERO  — full-width centered headline             */
+        /* ============================================ */
+        .hero {
+            background: var(--hero-gradient);
+            /* top padding clears the fixed nav (~108px desktop) so the eyebrow isn't tucked under it */
+            padding: 8rem 1.5rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: var(--hero-overlay);
+            pointer-events: none;
+        }
+        .hero-inner {
+            max-width: 920px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            color: white;
+        }
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem 1.25rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0, 255, 255, 0.15);
+            letter-spacing: 0.02em;
+            text-transform: none;
+        }
+        .hero-eyebrow::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            background: var(--electric-cyan);
+            border-radius: 50%;
+            box-shadow: 0 0 12px var(--electric-cyan);
+        }
+        .hero h1 {
+            font-weight: 900;
+            font-size: clamp(2.25rem, 5.5vw, 4.25rem);
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.25rem;
+            color: white;
+            text-wrap: balance;
+        }
+        .hero h1 .hl {
+            white-space: nowrap;
+            background: linear-gradient(135deg, var(--electric-cyan) 0%, var(--electric-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 30px rgba(0, 255, 255, 0.5));
+        }
+        .hero-subhead {
+            font-size: 1.2rem;
+            line-height: 1.55;
+            color: rgba(255, 255, 255, 0.92);
+            margin: 0 auto 1.75rem;
+            max-width: 680px;
+        }
+        .trust-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            margin-top: 1.6rem;
+            margin-bottom: 1.5rem;
+            justify-content: center;
+        }
+        .trust-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(0, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: white;
+            box-shadow: 0 4px 16px rgba(0, 255, 255, 0.08);
+        }
+        .trust-pill .dot {
+            width: 7px;
+            height: 7px;
+            background: var(--electric-cyan);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--electric-cyan);
+        }
+        .hero-tagline {
+            font-size: 0.9rem;
+            color: rgba(0, 255, 255, 0.85);
+            font-weight: 500;
+            letter-spacing: 0.01em;
+        }
+        /* Moat pill row sits below the tagline as a distinct credibility band,
+           separate visually from the feature pills above. Slightly muted vs
+           the main trust pills so the hero hierarchy stays readable. */
+        .trust-pills.moat {
+            margin-top: 1.25rem;
+            padding-top: 1.25rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .trust-pills.moat .trust-pill {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(0, 255, 255, 0.18);
+            font-weight: 500;
+            font-size: 0.8rem;
+        }
+
+        /* ============================================ */
+        /* CALCULATOR CARD                              */
+        /* ============================================ */
+        .calc-card {
+            background: var(--bg-card-glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: var(--radius-card);
+            padding: 2rem;
+            /* Glow + deep shadow combo so the card lifts off the dark navy bg
+               with the same visual depth as the homepage's hero cards. */
+            box-shadow:
+                0 0 0 1px rgba(0, 255, 255, 0.08),
+                0 24px 60px rgba(0, 0, 0, 0.35),
+                0 8px 24px rgba(0, 24, 255, 0.18);
+            position: relative;
+        }
+        .calc-card-title {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--brand-dark);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .input-group { margin-bottom: 1.5rem; }
+        .input-group:last-child { margin-bottom: 0; }
+        .input-group-label {
+            display: block;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: var(--brand-dark);
+            margin-bottom: 0.625rem;
+            letter-spacing: -0.005em;
+        }
+        .input-group-label .hint {
+            font-weight: 400;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            margin-left: 0.5rem;
+        }
+        .input-text {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1.5px solid var(--border-input);
+            border-radius: var(--radius-input);
+            font-family: var(--font-mono);
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            background: white;
+            transition: border-color 0.15s ease, box-shadow 0.15s ease;
+        }
+        .input-text:focus {
+            outline: none;
+            border-color: var(--border-input-focus);
+            box-shadow: 0 0 0 3px rgba(0, 24, 255, 0.1);
+        }
+        .input-text::placeholder { color: var(--text-muted); }
+        .input-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+
+        /* Segmented controls (Risk Cat, Exposure, Zone) */
+        .segmented {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.25rem;
+            background: rgba(24, 30, 87, 0.04);
+            padding: 0.25rem;
+            border-radius: var(--radius-input);
+        }
+        .segmented.three-col { grid-template-columns: repeat(3, 1fr); }
+        .segmented.two-col { grid-template-columns: repeat(2, 1fr); }
+        .seg-btn {
+            padding: 0.5rem 0.5rem;
+            background: transparent;
+            border: none;
+            border-radius: 6px;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .seg-btn:hover { background: rgba(255, 255, 255, 0.5); color: var(--brand-dark); }
+        .seg-btn.active {
+            background: linear-gradient(135deg, var(--brand-primary) 0%, var(--electric-blue) 100%);
+            color: white;
+            box-shadow: 0 4px 14px rgba(0, 24, 255, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+        }
+
+        /* Enclosure card grid */
+        .enclosure-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+        }
+        .enclosure-btn {
+            padding: 0.625rem 0.5rem;
+            background: white;
+            border: 1.5px solid var(--border-input);
+            border-radius: var(--radius-input);
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .enclosure-btn:hover { border-color: var(--brand-primary); box-shadow: 0 4px 14px rgba(0, 24, 255, 0.08); }
+        .enclosure-btn.active {
+            background: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand-primary) 100%);
+            color: white;
+            border-color: var(--brand-primary);
+            box-shadow: 0 6px 20px rgba(0, 24, 255, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+        }
+        .enclosure-btn small {
+            display: block;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            font-weight: 400;
+            opacity: 0.7;
+            margin-top: 0.15rem;
+        }
+
+        /* ============================================ */
+        /* FBC OVERRIDE BADGE (the killer moment)       */
+        /* ============================================ */
+        .fbc-badge {
+            margin-top: 0.75rem;
+            background: white;
+            border: 1px solid var(--border-subtle);
+            border-left: 4px solid var(--gold);
+            border-radius: var(--radius-input);
+            padding: 1rem 1.25rem;
+            box-shadow: var(--shadow-badge);
+            opacity: 0;
+            transform: translateY(-6px);
+            transition: opacity 0.24s cubic-bezier(0.16, 1, 0.3, 1), transform 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+        }
+        .fbc-badge.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        .fbc-badge-eyebrow {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.4rem;
+        }
+        .fbc-badge-eyebrow .dot {
+            width: 6px;
+            height: 6px;
+            background: var(--gold);
+            border-radius: 50%;
+        }
+        .fbc-badge-location {
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--brand-dark);
+            line-height: 1.3;
+            margin-bottom: 0.4rem;
+        }
+        .fbc-badge-speed {
+            font-family: var(--font-serif);
+            font-size: 1.625rem;
+            font-weight: 700;
+            color: var(--brand-dark);
+            line-height: 1;
+            margin-bottom: 0.4rem;
+            font-variant-numeric: tabular-nums;
+        }
+        .fbc-badge-speed-label {
+            display: inline-block;
+            margin-left: 0.4rem;
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            letter-spacing: 0;
+        }
+        .fbc-badge-citation {
+            font-size: 0.8125rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+        .fbc-badge-citation strong { color: var(--brand-dark); }
+        .fbc-badge.asce-only { border-left-color: var(--brand-primary); }
+        .fbc-badge.asce-only .fbc-badge-eyebrow { color: var(--brand-primary); }
+        .fbc-badge.asce-only .fbc-badge-eyebrow .dot { background: var(--brand-primary); }
+        .fbc-badge.error { border-left-color: var(--suction-red); }
+        .fbc-badge.error .fbc-badge-eyebrow { color: var(--suction-red); }
+        .fbc-badge.error .fbc-badge-eyebrow .dot { background: var(--suction-red); }
+
+        /* ============================================ */
+        /* CALC + OUTPUT SECTION                        */
+        /* Inputs (left) and live pressure (right)      */
+        /* side-by-side, with output sticky on scroll.  */
+        /* ============================================ */
+        .calc-section {
+            padding: 3.5rem 1.5rem 5rem;
+            /* Dark navy gradient continues the hero so the page reads as one
+               continuous brand experience instead of cream tech-doc. The white
+               calc cards now have real depth against this background. */
+            background:
+                radial-gradient(ellipse at top, rgba(0, 24, 255, 0.18) 0%, transparent 55%),
+                radial-gradient(ellipse at bottom right, rgba(0, 255, 255, 0.08) 0%, transparent 60%),
+                linear-gradient(180deg, #0f172a 0%, #131c3a 50%, #0a0f1f 100%);
+            position: relative;
+        }
+        .calc-section-heading {
+            max-width: 1280px;
+            margin: 0 auto 2.25rem;
+            text-align: center;
+        }
+        .calc-section-heading h2 {
+            font-family: var(--font-serif);
+            font-size: clamp(1.65rem, 2.6vw, 2.125rem);
+            font-weight: 800;
+            color: white;
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+            margin-bottom: 0.75rem;
+        }
+        .calc-section-heading p {
+            color: rgba(255, 255, 255, 0.78);
+            line-height: 1.6;
+            max-width: 720px;
+            margin: 0 auto;
+            font-size: 0.95rem;
+        }
+        .calc-section-heading p a {
+            color: var(--electric-cyan);
+            font-weight: 600;
+        }
+        .calc-section-heading p a:hover { color: white; }
+        .calc-section-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+        .calc-section-inner .pressure-card {
+            position: sticky;
+            /* clear sticky banner (38px) + sticky header (~132px with 100px logo + 1rem padding) + breathing */
+            top: calc(38px + 132px + 1rem);
+        }
+
+        /* The big result card */
+        .pressure-card {
+            background: white;
+            border-radius: var(--radius-card);
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow:
+                0 0 0 1px rgba(0, 255, 255, 0.08),
+                0 24px 60px rgba(0, 0, 0, 0.35),
+                0 8px 24px rgba(0, 24, 255, 0.18);
+        }
+        .pressure-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .pressure-card-eyebrow {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--brand-dark);
+        }
+        .pressure-card-status {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+        .pressure-card-status.live { color: var(--brand-primary); }
+        .pressure-value-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .pressure-block {
+            padding: 1rem 0;
+        }
+        .pressure-block-label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.5rem;
+        }
+        .pressure-block.positive .pressure-block-label { color: var(--pressure-blue); }
+        .pressure-block.negative .pressure-block-label { color: var(--suction-red); }
+        .pressure-value {
+            font-family: var(--font-serif);
+            font-size: clamp(2.75rem, 5vw, 4.25rem);
+            font-weight: 800;
+            line-height: 1;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: -0.025em;
+            background: linear-gradient(135deg, var(--brand-primary) 0%, var(--electric-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 4px 16px rgba(0, 24, 255, 0.18));
+        }
+        .pressure-block.negative .pressure-value {
+            background: linear-gradient(135deg, var(--suction-red) 0%, #f97316 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 4px 16px rgba(220, 38, 38, 0.18));
+        }
+        .pressure-value.empty {
+            background: none;
+            -webkit-text-fill-color: var(--text-muted);
+            color: var(--text-muted);
+            opacity: 0.35;
+            filter: none;
+        }
+        .pressure-value .unit {
+            font-family: var(--font-sans);
+            font-size: 0.4em;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-left: 0.25rem;
+            letter-spacing: 0;
+            /* Override the parent's gradient text fill so the "psf" stays visible */
+            background: none;
+            -webkit-background-clip: border-box;
+            background-clip: border-box;
+            -webkit-text-fill-color: var(--text-secondary);
+        }
+        .pressure-description {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-subtle);
+        }
+        /* Per-surface MWFRS pressure breakdown table */
+        .surface-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 0.85rem;
+            font-size: 0.82rem;
+        }
+        .surface-table th, .surface-table td {
+            text-align: left;
+            padding: 0.4rem 0.5rem;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .surface-table th {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--text-secondary);
+        }
+        .surface-table td:last-child { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+        .surface-table .sp-pos { color: var(--pressure-blue); font-weight: 700; }
+        .surface-table .sp-neg { color: var(--suction-red); font-weight: 700; }
+
+        /* Show the math accordion */
+        .math-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            padding: 0.75rem 1rem;
+            background: rgba(24, 30, 87, 0.04);
+            border: none;
+            border-radius: var(--radius-input);
+            font-family: var(--font-mono);
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: var(--brand-dark);
+            cursor: pointer;
+            transition: background 0.15s ease;
+            width: 100%;
+            text-align: left;
+        }
+        .math-toggle:hover { background: rgba(24, 30, 87, 0.08); }
+        .math-toggle .chevron {
+            margin-left: auto;
+            transition: transform 0.2s ease;
+        }
+        .math-toggle.open .chevron { transform: rotate(180deg); }
+        .math-table-wrap {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .math-table-wrap.open { max-height: 800px; }
+        .math-table {
+            width: 100%;
+            margin-top: 1rem;
+            font-family: var(--font-mono);
+            font-size: 0.8125rem;
+            border-collapse: collapse;
+        }
+        .math-table th {
+            text-align: left;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+            padding: 0.5rem 0.75rem;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .math-table td {
+            padding: 0.65rem 0.75rem;
+            border-bottom: 1px solid var(--border-subtle);
+            color: var(--text-primary);
+        }
+        .math-table tr:last-child td {
+            border-bottom: 2px solid var(--brand-dark);
+            font-weight: 700;
+            color: var(--brand-dark);
+        }
+        .math-table td .ref {
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+        }
+        .math-table td .desc {
+            display: block;
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 0.1rem;
+            font-weight: 400;
+        }
+
+        /* Post-result CTA */
+        .post-result-cta {
+            margin-top: 1.5rem;
+            padding: 1.25rem;
+            background: rgba(0, 24, 255, 0.04);
+            border: 1px solid rgba(0, 24, 255, 0.12);
+            border-radius: var(--radius-input);
+            display: none;
+        }
+        .post-result-cta.visible { display: block; }
+        .post-result-cta-title {
+            font-weight: 600;
+            color: var(--brand-dark);
+            margin-bottom: 0.4rem;
+            font-size: 0.95rem;
+        }
+        .post-result-cta-body {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+            line-height: 1.55;
+        }
+        .post-result-cta-btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: transparent;
+            border: 1.5px solid var(--brand-primary);
+            color: var(--brand-primary);
+            border-radius: var(--radius-pill);
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: all 0.15s ease;
+        }
+        .post-result-cta-btn:hover {
+            background: var(--brand-primary);
+            color: white;
+            text-decoration: none;
+        }
+
+        /* ============================================ */
+        /* CONTENT SECTIONS BELOW                       */
+        /* ============================================ */
+        .content-section {
+            padding: 4rem 1.5rem;
+            background: white;
+            border-top: 1px solid var(--border-subtle);
+        }
+        .content-section.bg-page { background: var(--bg-page); }
+        .content-inner {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+        .content-inner.wide { max-width: 1200px; }
+        .section-eyebrow {
+            display: inline-block;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--brand-primary);
+            margin-bottom: 0.75rem;
+        }
+        .content-inner h2 {
+            font-family: var(--font-serif);
+            font-size: clamp(1.75rem, 3vw, 2.25rem);
+            font-weight: 600;
+            color: var(--brand-dark);
+            letter-spacing: -0.015em;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+        .content-inner h3 {
+            font-family: var(--font-sans);
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--brand-dark);
+            margin-bottom: 0.5rem;
+            margin-top: 1.5rem;
+        }
+        .content-inner p {
+            color: var(--text-primary);
+            line-height: 1.75;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+        .content-inner p .lead {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+        }
+        .lead {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            max-width: 720px;
+        }
+
+        /* HowTo numbered steps */
+        .howto-steps {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .howto-step {
+            padding: 1.5rem;
+            background: var(--bg-page);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-card);
+        }
+        .howto-step-num {
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            line-height: 32px;
+            text-align: center;
+            background: var(--brand-primary);
+            color: white;
+            border-radius: 50%;
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+        .howto-step-title {
+            font-weight: 600;
+            color: var(--brand-dark);
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+        .howto-step-body {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Jurisdictional overrides table */
+        .overrides-table-wrap {
+            margin-top: 2rem;
+            overflow-x: auto;
+            background: white;
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-card);
+            box-shadow: var(--shadow-card);
+        }
+        .overrides-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+        .overrides-table th {
+            text-align: left;
+            padding: 1rem;
+            background: var(--brand-dark);
+            color: white;
+            font-weight: 600;
+            font-size: 0.8125rem;
+            font-family: var(--font-mono);
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+        .overrides-table td {
+            padding: 0.9rem 1rem;
+            border-bottom: 1px solid var(--border-subtle);
+            font-variant-numeric: tabular-nums;
+        }
+        .overrides-table tr:last-child td { border-bottom: none; }
+        .overrides-table td:first-child {
+            font-weight: 600;
+            color: var(--brand-dark);
+        }
+        .overrides-table .speed { font-family: var(--font-mono); font-weight: 600; }
+        .overrides-table .gold-bg { background: var(--gold-soft); }
+
+        /* Risk Cat definitions */
+        .definition-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .definition-item {
+            padding: 1.25rem;
+            background: var(--bg-page);
+            border-left: 3px solid var(--brand-primary);
+            border-radius: 0 8px 8px 0;
+        }
+        .definition-item dt {
+            font-weight: 700;
+            color: var(--brand-dark);
+            margin-bottom: 0.3rem;
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+        }
+        .definition-item dd { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.55; }
+
+        /* Sources list */
+        .sources-list {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+        .sources-list li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-subtle);
+            font-size: 0.95rem;
+        }
+        .sources-list li:last-child { border-bottom: none; }
+        .sources-list strong { color: var(--brand-dark); display: block; margin-bottom: 0.2rem; }
+
+        /* Trust strip */
+        .trust-strip {
+            background: var(--brand-dark);
+            color: var(--text-ivory);
+            padding: 3rem 1.5rem;
+            text-align: center;
+        }
+        .trust-strip-inner {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .trust-strip-tagline {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: 0.75rem;
+            color: white;
+        }
+        .trust-strip-meta {
+            font-family: var(--font-mono);
+            font-size: 0.8125rem;
+            color: rgba(245, 241, 234, 0.65);
+            letter-spacing: 0.04em;
+        }
+
+        /* FAQ */
+        .faq-item {
+            background: white;
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-input);
+            margin-bottom: 0.75rem;
+            overflow: hidden;
+        }
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem 1.5rem;
+            background: none;
+            border: none;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--brand-dark);
+            text-align: left;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.15s ease;
+        }
+        .faq-question:hover { background: var(--bg-page); }
+        .faq-question .chevron {
+            margin-left: 1rem;
+            color: var(--text-muted);
+            transition: transform 0.2s ease;
+            font-size: 0.85rem;
+        }
+        .faq-question[aria-expanded="true"] .chevron { transform: rotate(180deg); }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .faq-answer.open { max-height: 500px; }
+        .faq-answer-inner {
+            padding: 0 1.5rem 1.25rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        .site-footer {
+            background: white;
+            border-top: 1px solid var(--border-subtle);
+            padding: 2.5rem 1.5rem;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+        .site-footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .site-footer a { color: var(--text-secondary); }
+        .site-footer a:hover { color: var(--brand-primary); }
+
+        /* Toast (intent-triggered CTA) */
+        .toast {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            max-width: min(380px, calc(100vw - 2rem));
+            background: white;
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-card);
+            box-shadow: 0 24px 64px rgba(24, 30, 87, 0.2);
+            padding: 1.25rem 1.5rem;
+            transform: translateY(20px);
+            opacity: 0;
+            pointer-events: none;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+            z-index: 1100;
+        }
+        .toast.visible {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .toast-close {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: none;
+            border: none;
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 0.25rem 0.5rem;
+            line-height: 1;
+        }
+        .toast-close:hover { color: var(--brand-dark); }
+        .toast-title {
+            font-weight: 600;
+            color: var(--brand-dark);
+            margin-bottom: 0.4rem;
+            font-size: 0.95rem;
+            padding-right: 1.5rem;
+        }
+        .toast-body {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.55;
+            margin-bottom: 0.75rem;
+        }
+        .toast-btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: var(--brand-primary);
+            color: white;
+            border-radius: var(--radius-pill);
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-decoration: none;
+        }
+        .toast-btn:hover {
+            background: var(--brand-dark);
+            color: white;
+            text-decoration: none;
+        }
+
+        /* ============================================ */
+        /* PRO-LOCK + DAILY-METER (free-tier gating)    */
+        /* ============================================ */
+        .seg-btn.locked {
+            opacity: 0.55;
+            position: relative;
+            cursor: pointer;
+        }
+        .seg-btn.locked:hover { opacity: 0.75; }
+        .seg-btn.locked .lock-tag {
+            display: inline-block;
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            background: var(--gold, #f5a623);
+            color: #2a1d00;
+            padding: 0.1rem 0.35rem;
+            border-radius: 4px;
+            margin-left: 0.25rem;
+            vertical-align: middle;
+            text-transform: uppercase;
+        }
+        /* PRO-locked enclosure cards (Enclosed) — same gold "Pro" lock as the segmented controls */
+        .enclosure-btn.locked { opacity: 0.55; cursor: pointer; }
+        .enclosure-btn.locked:hover { opacity: 0.75; border-color: var(--border, #e2e8f0); box-shadow: none; }
+        .enclosure-btn.locked .lock-tag {
+            display: inline-block;
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            background: var(--gold, #f5a623);
+            color: #2a1d00;
+            padding: 0.1rem 0.35rem;
+            border-radius: 4px;
+            margin-left: 0.25rem;
+            vertical-align: middle;
+            text-transform: uppercase;
+        }
+        .input-group-hint-line {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-top: 0.4rem;
+            line-height: 1.4;
+        }
+        .input-group-hint-line a {
+            color: var(--brand-primary);
+            font-weight: 600;
+        }
+        .daily-meter {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-top: 0.75rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid var(--border-subtle);
+            text-align: center;
+        }
+        .daily-meter.warning { color: #b45309; }
+        .daily-meter.limit-reached {
+            color: #991b1b;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        .daily-meter a {
+            color: var(--brand-primary);
+            font-weight: 600;
+        }
+
+        /* ============================================ */
+        /* RESPONSIVE                                   */
+        /* ============================================ */
+        @media (max-width: 900px) {
+            .calc-section-inner { grid-template-columns: 1fr; gap: 1.5rem; }
+            .calc-section-inner .pressure-card { position: static; }
+            .howto-steps { grid-template-columns: 1fr; }
+            .definition-list { grid-template-columns: 1fr; }
+            .hero { padding: 3rem 1rem 2.5rem; }
+            .calc-section { padding: 2.5rem 1rem 4rem; }
+            .content-section { padding: 3rem 1rem; }
+            .pressure-value-row { grid-template-columns: 1fr; }
+            .enclosure-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 600px) {
+            .calc-card { padding: 1.5rem; }
+            .pressure-card { padding: 1.5rem; }
+            .input-row { grid-template-columns: 1fr; }
+        }
+
+        /* Hero aurora — body stays light & usable; aurora lives in the dark hero only */
+        .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+        .hero-veil{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(135deg,rgba(2,6,23,.74) 0%,rgba(10,15,40,.56) 100%)}
+        .hero-aurora{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+        .hero-aurora span{position:absolute;border-radius:50%;filter:blur(80px);opacity:.5}
+        .hero-aurora span:nth-child(1){width:480px;height:480px;background:#0018FF;top:-160px;left:-100px;animation:heroDrift 20s ease-in-out infinite alternate}
+        .hero-aurora span:nth-child(2){width:420px;height:420px;background:#10b981;bottom:-180px;right:-80px;opacity:.3;animation:heroDrift 24s ease-in-out infinite alternate-reverse}
+        .hero-aurora span:nth-child(3){width:360px;height:360px;background:#181E57;top:30%;right:18%;opacity:.55;animation:heroDrift 28s ease-in-out infinite alternate}
+        @keyframes heroDrift{to{transform:translate(60px,40px) scale(1.15)}}
+        .hero-inner{position:relative;z-index:1}
+        .hero-quick-answer{max-width:62ch;margin:1.6rem auto .2rem;font-size:1rem;line-height:1.6;color:var(--text-ivory);
+          background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:.85rem 1.1rem;backdrop-filter:blur(6px)}
+        .hero-quick-answer strong{color:#6ee7b7}
+
+        /* Sticky pressure-card offset — set by JS to (promo banner + nav) height so it can't break */
+        .calc-section-inner .pressure-card{top:calc(var(--stuck-top, 170px) + 1rem)}
+        @media(prefers-reduced-motion:reduce){.hero-aurora span{animation:none}}
+    </style>
+
+    <!-- ============================================ -->
+    <!-- CANONICAL DARK-GLASS NAV (copied from         -->
+    <!-- wind-load-calculator-landing.html). Scoped so  -->
+    <!-- the .btn rules do NOT override calc buttons.   -->
+    <!-- Sticky below the promo banner (JS syncs top).  -->
+    <!-- ============================================ -->
+    <style>
+        /* Local tokens so the nav doesn't depend on the page :root */
+        #nav, .nav-overlay, .full-menu { --luxe:cubic-bezier(.22,.61,.36,1); --line:rgba(255,255,255,.08); --muted:#94a3b8; }
+
+        /* Nav — fixed over the dark hero (matches every other page; transparent → scrolled gradient) */
+        #nav{position:fixed;top:0;left:0;right:0;z-index:1000;transition:.3s var(--luxe);background:transparent;border-bottom:1px solid transparent}
+        #nav.scrolled{backdrop-filter:blur(14px);border-bottom:1px solid var(--line);
+          background:linear-gradient(90deg, rgba(240,244,255,.97) 0%, rgba(223,232,255,.93) 13%, rgba(22,28,58,.92) 46%, rgba(7,10,24,.95) 100%)}
+        #nav .wrap{max-width:1180px;margin:0 auto}
+        #nav .nav-in{display:flex;align-items:center;justify-content:space-between;padding:12px clamp(24px,4vw,48px);transition:padding .3s var(--luxe)}
+        #nav.scrolled .nav-in{padding:8px clamp(24px,4vw,48px)}
+        #nav .logo{z-index:1001;display:flex;align-items:center}
+        #nav .logo-image{height:84px;width:auto;display:block;filter:drop-shadow(0 2px 10px rgba(0,0,0,.4));transition:all .3s ease}
+        #nav.scrolled .logo-image{height:64px;filter:none}
+        #nav .nav-right{display:flex;align-items:center;gap:18px}
+        #nav .nav-links{display:flex;align-items:center;gap:28px}
+        #nav .nav-links a.l{position:relative;font-size:14px;color:#fff;font-weight:500;opacity:.88;transition:opacity .2s var(--luxe);text-shadow:0 1px 8px rgba(0,0,0,.45);text-decoration:none}
+        #nav .nav-links a.l:hover{opacity:1;text-decoration:none}
+        #nav .btn, .full-menu .btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;border-radius:11px;cursor:pointer;transition:.25s var(--luxe);border:none;font-family:inherit;text-decoration:none}
+        #nav .btn-ghost, .full-menu .btn-ghost{background:rgba(255,255,255,.06);color:#fff;padding:11px 18px;font-size:14px;border:1px solid rgba(255,255,255,.22)}
+        #nav .btn-ghost:hover, .full-menu .btn-ghost:hover{border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.12);color:#fff;text-decoration:none}
+        #nav .btn-primary, .full-menu .btn-primary{background:linear-gradient(135deg,#0018FF,#2540ff);color:#fff;padding:12px 22px;font-size:14px;box-shadow:0 10px 30px rgba(0,24,255,.45)}
+        #nav .btn-primary:hover, .full-menu .btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(0,24,255,.6);color:#fff;text-decoration:none}
+        #nav .hamburger{display:flex;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;z-index:60}
+        #nav .hamburger span{display:block;width:26px;height:3px;border-radius:2px;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.6);transition:.3s var(--luxe)}
+        #nav .hamburger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+        #nav .hamburger.open span:nth-child(2){opacity:0}
+        #nav .hamburger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+        .nav-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);opacity:0;visibility:hidden;transition:.3s var(--luxe);z-index:9050}
+        .nav-overlay.open{opacity:1;visibility:visible}
+        .full-menu{position:fixed;top:0;right:0;height:100vh;height:100dvh;width:min(90vw,380px);z-index:9060;
+          background:rgba(10,14,30,.985);backdrop-filter:blur(18px);border-left:1px solid var(--line);
+          box-shadow:-24px 0 60px rgba(0,0,0,.55);transform:translateX(100%);transition:transform .3s var(--luxe);overflow-y:auto;padding:22px 0 28px}
+        .full-menu.open{transform:translateX(0)}
+        .fm-head{display:flex;align-items:center;justify-content:space-between;padding:0 26px 14px;border-bottom:1px solid var(--line)}
+        .fm-head span{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+        .fm-close{background:none;border:none;color:#fff;font-size:24px;line-height:1;cursor:pointer;padding:2px 8px}
+        .fm-group{padding:14px 26px 4px;border-bottom:1px solid var(--line)}
+        .fm-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9db0ff;margin-bottom:6px}
+        .fm-group a{display:block;padding:9px 0;font-size:15px;color:#dbe3f5;font-weight:500;transition:color .15s;text-decoration:none}
+        .fm-group a:hover{color:#fff;text-decoration:none}
+        .fm-actions{display:flex;flex-direction:column;gap:10px;padding:20px 26px 0}
+        .fm-actions .btn{width:100%;justify-content:center;padding:14px;font-size:15px}
+        @media(max-width:820px){#nav .nav-links{display:none}}
+        @media(max-width:480px){#nav .logo-image{height:56px}}
+    </style>
+
+    <!--SEO-GEO-v1-->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://windloadcalc.com/#organization",
+      "name": "WindLoad Solutions",
+      "alternateName": [
+        "WindLoadCalc",
+        "WindLoad Calculator",
+        "WLC"
+      ],
+      "url": "https://windloadcalc.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "@id": "https://windloadcalc.com/#logo",
+        "url": "https://windloadcalc.com/images/windloadcalc-logo.png",
+        "caption": "WindLoadCalc"
+      },
+      "image": {
+        "@id": "https://windloadcalc.com/#logo"
+      },
+      "description": "Professional ASCE 7-22 wind load calculation software for structural engineers, architects, and building professionals — Components & Cladding and MWFRS design pressures for all 50 US states, with Florida HVHZ jurisdictional accuracy.",
+      "foundingDate": "2002",
+      "areaServed": {
+        "@type": "Country",
+        "name": "United States"
+      },
+      "sameAs": [
+        "https://windload.solutions",
+        "https://windload.co"
+      ],
+      "knowsAbout": [
+        "ASCE 7-22 wind load calculations",
+        "Components and Cladding (C&C) design pressures",
+        "Main Wind Force Resisting System (MWFRS)",
+        "ASCE 7-22 basic wind speed maps",
+        "Exposure Categories B, C, D",
+        "Risk Categories I–IV",
+        "Building enclosure classification",
+        "Internal pressure coefficients (GCpi)",
+        "External pressure coefficients (GCp)",
+        "Topographic effects (Kzt)",
+        "High-Velocity Hurricane Zone (HVHZ)",
+        "Florida Building Code wind load requirements"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "Customer Support",
+        "email": "support@windloadcalc.com",
+        "availableLanguage": "English"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://windloadcalc.com/#website",
+      "url": "https://windloadcalc.com/",
+      "name": "WindLoadCalc",
+      "description": "ASCE 7-22 wind load calculators (Components & Cladding and MWFRS) for engineers, architects, and contractors.",
+      "publisher": {
+        "@id": "https://windloadcalc.com/#organization"
+      },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://windloadcalc.com/free-mwfrs-wind-load-calculator.html#webpage",
+      "url": "https://windloadcalc.com/free-mwfrs-wind-load-calculator.html",
+      "name": "Free MWFRS Wind Load Calculator — ASCE 7-22 Directional Wall & Roof Pressures | WindLoadCalc",
+      "description": "Free online MWFRS wind load calculator: enter a ZIP and building size, get ASCE 7-22 directional Main Wind Force Resisting System wall and roof pressures with every coefficient cited. Low-rise buildings, no signup.",
+      "isPartOf": {
+        "@id": "https://windloadcalc.com/#website"
+      },
+      "about": {
+        "@id": "https://windloadcalc.com/#organization"
+      },
+      "publisher": {
+        "@id": "https://windloadcalc.com/#organization"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://windloadcalc.com/images/video-posters/windload-free-calculator.jpg"
+      },
+      "inLanguage": "en-US"
+    }
+  ]
+}
+    </script>
+</head>
+<body>
+
+    <!-- ============================================ -->
+    <!-- TOP-NAV SITE-WIDE BANNER                     -->
+    <!-- ============================================ -->
+    <!-- Top promo banner removed sitewide (was the 7-day Full Calculator upsell). -->
+
+    <!-- ============================================ -->
+    <!-- HEADER                                        -->
+    <!-- ============================================ -->
+    <!-- Canonical dark-glass nav (transparent→scrolled) + full hamburger menu -->
+    <nav id="nav"><div class="wrap nav-in">
+      <a class="logo" href="https://windloadcalc.com/"><img height="100" width="300" src="images/windloadcalc-logo-anim-navy.svg" alt="WindLoadCalc — ASCE 7-22 Wind Load Calculator logo" class="logo-image"></a>
+      <div class="nav-right">
+        <div class="nav-links">
+          <a class="l" href="https://windloadcalc.com/free-wind-load-calculator.html">Free tool</a>
+          <a class="l" href="https://windloadcalc.com/wind-load-calculator-comparison.html">Compare</a>
+          <a class="l" href="https://windloadcalc.com/wind-load-calculator-shop.html">Pricing</a>
+          <a class="l" href="https://windloadcalc.com/building-intelligence-platform-landing.html">BIP</a>
+          <a class="l" href="https://windloadcalc.com/why-us.html">Why us</a>
+          <a class="btn btn-ghost" href="https://windloadcalc.com/login.html">Log in</a>
+          <a class="btn btn-primary" href="https://windloadcalc.com/free-wind-load-calculator.html">Start free trial</a>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="Open full menu" aria-expanded="false" aria-controls="fullMenu"><span></span><span></span><span></span></button>
+      </div>
+    </div></nav>
+    <div class="nav-overlay" id="navOverlay"></div>
+<aside class="full-menu" id="fullMenu" aria-label="Site menu">
+  <div class="fm-head"><span>Menu</span><button class="fm-close" id="fmClose" aria-label="Close menu">&times;</button></div>
+  <div class="fm-group">
+    <div class="fm-label">Wind Load Calculators</div>
+    <a href="https://windloadcalc.com/wind-load-calculator-landing.html">Overview</a>
+    <a href="https://windloadcalc.com/free-wind-load-calculator.html">Free Trial</a>
+    <a href="https://windloadcalc.com/wind-load-calculator-comparison.html">Feature Comparison</a>
+    <a href="https://windloadcalc.com/wind-load-calculator-shop.html">Pricing</a>
+  </div>
+  <div class="fm-group">
+    <div class="fm-label">Service Areas</div>
+    <a href="https://windloadcalc.com/service-area/">All States &amp; Counties</a>
+    <a href="https://windloadcalc.com/florida-wind-load-calculator/">Florida</a>
+    <a href="https://windloadcalc.com/texas-wind-load-calculator/">Texas</a>
+    <a href="https://windloadcalc.com/california-wind-load-calculator/">California</a>
+    <a href="https://windloadcalc.com/miami-dade-wind-load-calculator/">Miami-Dade County</a>
+  </div>
+  <div class="fm-group">
+    <div class="fm-label">Building Intelligence Platform</div>
+    <a href="https://windloadcalc.com/building-intelligence-platform-landing.html">Overview</a>
+    <a href="https://windloadcalc.com/building-intelligence-platform.html">Free Trial</a>
+    <a href="https://windloadcalc.com/building-intelligence-platform-shop.html">Pricing</a>
+  </div>
+  <div class="fm-group">
+    <div class="fm-label">For Professionals</div>
+    <a href="https://windloadcalc.com/wind-load-calculator-for-engineers.html">Engineers</a>
+    <a href="https://windloadcalc.com/wind-load-calculator-for-architects.html">Architects</a>
+    <a href="https://windloadcalc.com/wind-loads-for-consultants.html">Consultants</a>
+    <a href="https://windloadcalc.com/contractors-wind-load-calculator.html">Contractors</a>
+  </div>
+  <div class="fm-group">
+    <div class="fm-label">Company</div>
+    <a href="https://windloadcalc.com/services.html">Services</a>
+    <a href="https://windloadcalc.com/why-us.html">Why Us</a>
+    <a href="https://windloadcalc.com/faq.html">FAQ</a>
+    <a href="https://windloadcalc.com/contact.html">Contact Us</a>
+  </div>
+  <div class="fm-actions">
+    <a class="btn btn-ghost" href="https://windloadcalc.com/login.html">Log in</a>
+    <a class="btn btn-primary" href="https://windloadcalc.com/free-wind-load-calculator.html">Start Free Trial &rarr;</a>
+  </div>
+</aside>
+
+    <!-- ============================================ -->
+    <!-- HERO  — full-width centered headline             -->
+    <!-- ============================================ -->
+    <section class="hero">
+        <video class="hero-video" autoplay muted loop playsinline preload="metadata"
+               poster="images/video-posters/windload-free-calculator.jpg">
+            <source src="videos/windload-free-calculator.webm" type="video/webm">
+            <source src="videos/windload-free-calculator.mp4" type="video/mp4">
+        </video>
+        <div class="hero-veil" aria-hidden="true"></div>
+        <div class="hero-aurora" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div class="hero-inner">
+            <span class="hero-eyebrow">Free MWFRS Wind Load Calculator &middot; ASCE 7-22 Directional &middot; No signup</span>
+            <h1>
+                MWFRS wall &amp; roof pressures,<br>
+                the <span class="hl">whole building</span> at once.
+            </h1>
+            <p class="hero-subhead">
+                A free online MWFRS wind load calculator: enter a ZIP and a building box and get ASCE 7-22 directional pressures on the windward wall, leeward wall, side walls, and roof &mdash; every coefficient cited to its section.
+            </p>
+            <p class="hero-quick-answer">
+                <strong>Quick answer:</strong> Yes &mdash; this is a free MWFRS wind load calculator. Enter a U.S. ZIP and building dimensions and it returns the ASCE 7-22 directional Main Wind Force Resisting System pressures (psf) for a low-rise building &mdash; the wind speed is looked up for you, no signup.
+            </p>
+            <div class="trust-pills">
+                <span class="trust-pill"><span class="dot"></span>Directional procedure (Ch. 27)</span>
+                <span class="trust-pill"><span class="dot"></span>Every coefficient cited</span>
+                <span class="trust-pill"><span class="dot"></span>Wind speed by ZIP, built in</span>
+            </div>
+            <p class="hero-tagline">
+                Calculating wind loads since 2002, online since 2006.
+            </p>
+            <div class="trust-pills moat">
+                <span class="trust-pill"><span class="dot"></span>One of the very first wind load calculators on the web</span>
+                <span class="trust-pill"><span class="dot"></span>7 ASCE editions navigated (7-95 &rarr; 7-22)</span>
+                <span class="trust-pill"><span class="dot"></span>In-house FL-licensed P.E.</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- CALC + LIVE OUTPUT  (side by side)            -->
+    <!-- Inputs left, pressure right (sticky).         -->
+    <!-- ============================================ -->
+    <section class="calc-section">
+        <div class="calc-section-heading">
+            <h2>Try it live &mdash; surface pressures update as you type.</h2>
+            <p>
+                The same ASCE 7-22 directional engine the paid MWFRS product runs, one building box at a time. For the envelope procedure, every roof geometry, topographic effects, and a sealed report, <a href="/shop/mwfrs.html">get the full MWFRS calculator &rarr;</a>
+            </p>
+        </div>
+
+        <div class="calc-section-inner">
+            <div class="calc-card">
+                <div class="calc-card-title">Inputs</div>
+
+                <!-- LOCATION -->
+                <div class="input-group">
+                    <label class="input-group-label" for="inp-zip">
+                        ZIP Code <span class="hint">5-digit US ZIP</span>
+                    </label>
+                    <input type="text" id="inp-zip" class="input-text" maxlength="5" inputmode="numeric"
+                           placeholder="e.g. 34102 (Naples, FL)" autocomplete="postal-code" autofocus>
+                    <div class="fbc-badge" id="fbc-badge" role="status" aria-live="polite"></div>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-group-label">Risk Category <span class="hint">ASCE 7-22 Table 1.5-1</span></label>
+                    <div class="segmented" role="radiogroup" aria-label="Risk Category">
+                        <button type="button" class="seg-btn" data-risk="1">I</button>
+                        <button type="button" class="seg-btn active" data-risk="2">II</button>
+                        <button type="button" class="seg-btn locked" data-risk="3" data-locked="1">III <span class="lock-tag">Paid</span></button>
+                        <button type="button" class="seg-btn locked" data-risk="4" data-locked="1">IV <span class="lock-tag">Paid</span></button>
+                    </div>
+                    <div class="input-group-hint-line">Essential facilities (hospitals, schools, emergency response) require the <a href="/shop/mwfrs.html">full MWFRS calculator</a>.</div>
+                </div>
+
+                <!-- BUILDING -->
+                <div class="input-group">
+                    <label class="input-group-label">Exposure Category <span class="hint">ASCE 7-22 &sect;26.7</span></label>
+                    <div class="segmented three-col" role="radiogroup" aria-label="Exposure">
+                        <button type="button" class="seg-btn locked" data-exposure="B" data-locked="1">B <span class="lock-tag">Paid</span></button>
+                        <button type="button" class="seg-btn active" data-exposure="C">C</button>
+                        <button type="button" class="seg-btn" data-exposure="D">D</button>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-group-label">Enclosure <span class="hint">ASCE 7-22 &sect;26.13</span></label>
+                    <div class="segmented two-col" role="radiogroup" aria-label="Enclosure">
+                        <button type="button" class="seg-btn active" data-enclosure="enclosed">Enclosed <small>GCpi &plusmn;0.18</small></button>
+                        <button type="button" class="seg-btn locked" data-enclosure="partially enclosed" data-locked="1">Partially Enclosed <span class="lock-tag">Paid</span></button>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-group-label" for="inp-height">
+                        Mean Roof Height <span class="hint">feet (low-rise &le; 60)</span>
+                    </label>
+                    <input type="number" id="inp-height" class="input-text" min="1" max="60" step="1" value="20">
+                </div>
+
+                <!-- BUILDING PLAN DIMENSIONS -->
+                <div class="input-group">
+                    <label class="input-group-label">Building Plan Dimensions <span class="hint">feet</span></label>
+                    <div class="input-row">
+                        <input type="number" id="inp-bldg-b" class="input-text" min="1" step="1" value="40" placeholder="Width B (ft)">
+                        <input type="number" id="inp-bldg-l" class="input-text" min="1" step="1" value="60" placeholder="Length L (ft)">
+                    </div>
+                    <div class="input-group-hint-line">B = wall width facing the wind · L = depth parallel to the wind.</div>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-group-label" for="inp-slope">
+                        Roof Slope <span class="hint">degrees (0 = flat)</span>
+                    </label>
+                    <input type="number" id="inp-slope" class="input-text" min="0" max="45" step="0.5" value="0">
+                </div>
+
+                <div class="input-group">
+                    <label class="input-group-label">Wind Direction <span class="hint">Fig 27.3-1</span></label>
+                    <div class="segmented two-col" role="radiogroup" aria-label="Wind Direction">
+                        <button type="button" class="seg-btn active" data-winddir="normal">Normal to ridge</button>
+                        <button type="button" class="seg-btn" data-winddir="parallel">Parallel to ridge</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pressure-card">
+                <div class="pressure-card-header">
+                    <span class="pressure-card-eyebrow">Design Pressure</span>
+                    <span class="pressure-card-status" id="pressure-status">&mdash; idle</span>
+                </div>
+
+                <div class="pressure-value-row">
+                    <div class="pressure-block positive">
+                        <span class="pressure-block-label">Max positive (pressure)</span>
+                        <div class="pressure-value empty" id="pressure-positive">&mdash;.&mdash;<span class="unit">psf</span></div>
+                    </div>
+                    <div class="pressure-block negative">
+                        <span class="pressure-block-label">Max negative (suction)</span>
+                        <div class="pressure-value empty" id="pressure-negative">&mdash;.&mdash;<span class="unit">psf</span></div>
+                    </div>
+                </div>
+
+                <div class="pressure-description" id="pressure-description">
+                    Enter a ZIP and your inputs &mdash; the result appears here live.
+                </div>
+
+                <button type="button" class="math-toggle" id="math-toggle" aria-expanded="false">
+                    Show the math (every coefficient, every reference)
+                    <span class="chevron">&#9662;</span>
+                </button>
+                <div class="math-table-wrap" id="math-wrap">
+                    <table class="math-table" id="math-table">
+                        <thead>
+                            <tr><th>Coefficient</th><th>Value</th><th>Reference</th></tr>
+                        </thead>
+                        <tbody id="math-tbody">
+                            <tr><td colspan="3" style="color: var(--text-muted); text-align: center; padding: 1.5rem;">Calculation pending &mdash; enter your inputs above.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="post-result-cta" id="post-result-cta">
+                    <div class="post-result-cta-title">Need the full MWFRS design, not just a screen?</div>
+                    <div class="post-result-cta-body">
+                        The paid MWFRS calculator adds the envelope procedure, every roof geometry, topographic (Kzt) effects, saved projects, Excel export, and a sealed engineering report &mdash; with no daily cap.
+                    </div>
+                    <a href="/shop/mwfrs.html" class="post-result-cta-btn">Get the MWFRS calculator &rarr;</a>
+                </div>
+
+                <div class="daily-meter" id="daily-meter" hidden></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- HOW THIS CALCULATOR WORKS (HowTo)             -->
+    <!-- ============================================ -->
+    <section class="content-section bg-page">
+        <div class="content-inner">
+            <span class="section-eyebrow">How it works</span>
+            <h2>From ZIP to surface pressures in four steps.</h2>
+            <p class="lead">No email gate, no manual wind-speed lookup. The same ASCE 7-22 directional engine engineers pay for, run on one building box so you can check a number in seconds.</p>
+            <div class="howto-steps">
+                <div class="howto-step">
+                    <div class="howto-step-num">1</div>
+                    <div class="howto-step-title">Enter the project ZIP</div>
+                    <div class="howto-step-body">The calculator pulls the ASCE 7-22 basic wind speed for the site and Risk Category, so you never read V off a map by hand.</div>
+                </div>
+                <div class="howto-step">
+                    <div class="howto-step-num">2</div>
+                    <div class="howto-step-title">Pick Risk Category &amp; Exposure</div>
+                    <div class="howto-step-body">Risk Category I&ndash;IV per ASCE 7-22 Table 1.5-1 sets V; Exposure B/C/D per ASCE 7-22 &sect;26.7 sets the K<sub>z</sub> profile.</div>
+                </div>
+                <div class="howto-step">
+                    <div class="howto-step-num">3</div>
+                    <div class="howto-step-title">Describe the building box</div>
+                    <div class="howto-step-body">Mean roof height h, plan dimensions B &times; L, roof slope, enclosure, and wind normal or parallel to the ridge.</div>
+                </div>
+                <div class="howto-step">
+                    <div class="howto-step-num">4</div>
+                    <div class="howto-step-title">Read every surface</div>
+                    <div class="howto-step-body">Directional pressures in psf for windward wall, leeward wall, side walls, and roof. Expand the math to see q<sub>h</sub>, G, and each C<sub>p</sub> with its reference.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FLORIDA JURISDICTIONAL OVERRIDES TABLE        -->
+    <!-- (the GEO bait)                                -->
+    <!-- ============================================ -->
+    <section class="content-section">
+        <div class="content-inner wide">
+            <span class="section-eyebrow">Free vs. full</span>
+            <h2>What the free screen does &mdash; and where the paid calculator takes over.</h2>
+            <p class="lead">
+                The free screen runs the real ASCE 7-22 directional procedure on one low-rise box so you can check pressures fast. The paid MWFRS calculator is the tool you design and submit with.
+            </p>
+
+            <div class="overrides-table-wrap">
+                <table class="overrides-table">
+                    <thead>
+                        <tr>
+                            <th>Capability</th>
+                            <th>Free screen</th>
+                            <th>Full MWFRS calculator</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Directional procedure (Ch. 27)</td><td class="speed gold-bg">Yes</td><td class="speed gold-bg">Yes</td></tr>
+                        <tr><td>Envelope procedure (Ch. 28)</td><td>&mdash;</td><td class="speed gold-bg">Yes</td></tr>
+                        <tr><td>Building height</td><td>&le; 60 ft (low-rise)</td><td class="speed gold-bg">Any height</td></tr>
+                        <tr><td>Roof geometry</td><td>flat / gable / hip</td><td class="speed gold-bg">All shapes</td></tr>
+                        <tr><td>Topographic factor K<sub>zt</sub></td><td>1.0 (flat)</td><td class="speed gold-bg">Full K<sub>zt</sub></td></tr>
+                        <tr><td>Exposure B, Risk Cat III &amp; IV</td><td>&mdash;</td><td class="speed gold-bg">Yes</td></tr>
+                        <tr><td>Saved projects &amp; Excel export</td><td>&mdash;</td><td class="speed gold-bg">Yes</td></tr>
+                        <tr><td>Sealed engineering report</td><td>&mdash;</td><td class="speed gold-bg">Yes</td></tr>
+                        <tr><td>Daily limit</td><td>10 / day</td><td class="speed gold-bg">Unlimited</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p style="margin-top: 1.5rem; font-size: 0.875rem; color: var(--text-secondary);">
+                Every value on the free screen cites its ASCE 7-22 source, so what you see here is the same math the paid tool runs &mdash; just scoped to one building. <a href="/shop/mwfrs.html">See the full MWFRS calculator &rarr;</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- THE FOUR SURFACES (directional procedure)     -->
+    <!-- ============================================ -->
+    <section class="content-section bg-page">
+        <div class="content-inner">
+            <span class="section-eyebrow">Directional procedure</span>
+            <h2>The four surfaces the directional procedure loads.</h2>
+            <p>For wind from one direction, ASCE 7-22 Figure 27.3-1 assigns each building surface an external pressure coefficient C<sub>p</sub>. The pressure on each is p = qGC<sub>p</sub> &minus; q<sub>i</sub>(GC<sub>pi</sub>).</p>
+
+            <dl class="definition-list">
+                <div class="definition-item">
+                    <dt>Windward wall &middot; C<sub>p</sub> = +0.8</dt>
+                    <dd>The wall facing the wind, pushed inward. Uses q<sub>z</sub> evaluated at the height in question, so it grows with height up the wall.</dd>
+                </div>
+                <div class="definition-item">
+                    <dt>Leeward wall &middot; C<sub>p</sub> = &minus;0.5 to &minus;0.2</dt>
+                    <dd>The wall away from the wind, suction. The exact value depends on the L/B ratio (&minus;0.5 at L/B &le; 1, &minus;0.2 at L/B &ge; 4). Uses q<sub>h</sub>.</dd>
+                </div>
+                <div class="definition-item">
+                    <dt>Side walls &middot; C<sub>p</sub> = &minus;0.7</dt>
+                    <dd>The walls parallel to the wind, steady suction along their length. Uses q<sub>h</sub>.</dd>
+                </div>
+                <div class="definition-item">
+                    <dt>Roof &middot; C<sub>p</sub> by h/L and &theta;</dt>
+                    <dd>Windward and leeward roof coefficients depend on the h/L ratio and roof angle &theta; &mdash; typically uplift on a low-slope roof, easing as the slope steepens. Uses q<sub>h</sub>.</dd>
+                </div>
+            </dl>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- HOW WE CALCULATE DESIGN PRESSURE              -->
+    <!-- ============================================ -->
+    <section class="content-section">
+        <div class="content-inner">
+            <span class="section-eyebrow">Methodology</span>
+            <h2>How the MWFRS pressures are calculated.</h2>
+            <p>Per the ASCE 7-22 Chapter 27 directional procedure, the pressure on each MWFRS surface is:</p>
+            <p style="font-family: var(--font-equation); font-size: 1rem; background: var(--bg-page); padding: 1rem; border-radius: 8px; border-left: 3px solid var(--brand-primary);">
+                p = q G C<sub>p</sub> &minus; q<sub>i</sub> (GC<sub>pi</sub>) &nbsp;&nbsp;&nbsp;<span style="color: var(--text-muted);">(Eq. 27.3-1)</span>
+            </p>
+
+            <h3>Where the velocity pressure is</h3>
+            <p style="font-family: var(--font-equation); font-size: 0.95rem; background: var(--bg-page); padding: 1rem; border-radius: 8px;">
+                q<sub>h</sub> = 0.00256 &times; K<sub>z</sub> &times; K<sub>zt</sub> &times; K<sub>d</sub> &times; K<sub>e</sub> &times; V<sup>2</sup>  &nbsp;&nbsp;<span style="color: var(--text-muted);">(Eq. 26.10-1)</span>
+            </p>
+
+            <h3>Coefficients</h3>
+            <ul style="padding-left: 1.25rem; line-height: 2;">
+                <li><strong>V</strong> &mdash; Basic wind speed (mph). ASCE 7-22 Figure 26.5-1, looked up from the project ZIP by Risk Category.</li>
+                <li><strong>q, q<sub>h</sub></strong> &mdash; Velocity pressure; windward wall uses q<sub>z</sub> at the surface height, all other surfaces use q<sub>h</sub> at the mean roof height.</li>
+                <li><strong>G</strong> &mdash; Gust-effect factor. ASCE 7-22 &sect;26.11 (0.85 for a rigid building).</li>
+                <li><strong>C<sub>p</sub></strong> &mdash; External pressure coefficient per surface. ASCE 7-22 Figure 27.3-1 (walls by L/B; roof by h/L and roof angle &theta;).</li>
+                <li><strong>K<sub>z</sub></strong> &mdash; Velocity pressure exposure coefficient. ASCE 7-22 Table 26.10-1, varies with height and Exposure Category.</li>
+                <li><strong>K<sub>zt</sub></strong> &mdash; Topographic factor. ASCE 7-22 &sect;26.8.2 (fixed at 1.0 on this free screen; full K<sub>zt</sub> in the paid calculator).</li>
+                <li><strong>K<sub>d</sub></strong> &mdash; Wind directionality factor. ASCE 7-22 Table 26.6-1 (0.85 for MWFRS of buildings).</li>
+                <li><strong>(GC<sub>pi</sub>)</strong> &mdash; Internal pressure coefficient. ASCE 7-22 Table 26.13-1, by enclosure classification.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- SOURCES                                       -->
+    <!-- ============================================ -->
+    <section class="content-section bg-page">
+        <div class="content-inner">
+            <span class="section-eyebrow">Sources</span>
+            <h2>Where the numbers come from.</h2>
+            <p>Every value returned by this calculator traces to a published standard or code. Verified as of <strong>2026</strong>.</p>
+
+            <ul class="sources-list">
+                <li>
+                    <strong>ASCE/SEI 7-22</strong>
+                    Minimum Design Loads and Associated Criteria for Buildings and Other Structures (2022 edition). American Society of Civil Engineers. Chapters 26 and 27 (directional procedure).
+                </li>
+                <li>
+                    <strong>Florida Building Code, 8th Edition (2023)</strong>
+                    Residential R301.2(7) jurisdictional wind speed amendments. Florida Department of Business and Professional Regulation.
+                </li>
+                <li>
+                    <strong>International Building Code 2024</strong>
+                    Adopts ASCE 7-22 by reference (Section 1609).
+                </li>
+                <li>
+                    <strong>USPS ZIP Code Database</strong>
+                    33,783 5-digit US ZIP codes with city, county, state, and centroid coordinates.
+                </li>
+                <li>
+                    <strong>In-house Florida-licensed Professional Engineer</strong>
+                    Reviews jurisdictional override values against current FBC text.
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- TRUST STRIP                                   -->
+    <!-- ============================================ -->
+    <section class="trust-strip">
+        <div class="trust-strip-inner">
+            <p class="trust-strip-tagline">
+                Calculating wind loads since 2002, online since 2006.
+            </p>
+            <p class="trust-strip-meta">
+                One of the very first wind load calculators on the web &middot; 7 ASCE editions navigated (7-95 &rarr; 7-22) &middot; In-house FL-licensed P.E. reviews jurisdictional overrides
+            </p>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FAQ                                           -->
+    <!-- ============================================ -->
+    <section class="content-section">
+        <div class="content-inner">
+            <span class="section-eyebrow">Frequently asked</span>
+            <h2>Common questions.</h2>
+
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false"><span>What is MWFRS in wind load design?</span><span class="chevron">&#9662;</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">MWFRS stands for the Main Wind Force Resisting System &mdash; the assembly of structural elements (frames, shear walls, diaphragms, the roof deck acting as a diaphragm) that receives wind load from more than one surface and carries it to the foundation. ASCE 7-22 treats it separately from Components and Cladding: MWFRS sizes the overall lateral system, while C&amp;C sizes individual pieces like windows and fasteners. This free calculator solves the MWFRS directional procedure of ASCE 7-22 Chapter 27.</div></div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false"><span>Is this free MWFRS wind load calculator really free?</span><span class="chevron">&#9662;</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">Yes. Enter a ZIP and a building box and it returns the directional MWFRS wall and roof pressures on screen, free, with no signup &mdash; up to 10 calculations per day. The <a href="/shop/mwfrs.html">paid MWFRS calculator</a> removes the daily cap and adds the envelope procedure, all roof geometries, topographic (K<sub>zt</sub>) effects, saved projects, Excel export, and a sealed engineering report. The free screen is a genuine slice of the same engine, not a teaser that hides the math.</div></div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false"><span>What is the difference between the directional and envelope procedures?</span><span class="chevron">&#9662;</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">ASCE 7-22 gives two ways to find MWFRS pressures on a low-rise building. The directional procedure (Chapter 27) applies pressure coefficients C<sub>p</sub> to each building surface for wind from a given direction &mdash; it is what this free tool runs. The envelope procedure (Chapter 28) instead applies pseudo-pressure coefficients GC<sub>pf</sub> that envelope the worst-case load cases as the wind rotates. Both are code-compliant for buildings h &le; 60 ft; the envelope procedure is in the paid calculator.</div></div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false"><span>How are MWFRS wall and roof pressures calculated in ASCE 7-22?</span><span class="chevron">&#9662;</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">Per ASCE 7-22 Equation 27.3-1, p = qGC<sub>p</sub> &minus; q<sub>i</sub>(GC<sub>pi</sub>). q is the velocity pressure (q = 0.00256&middot;K<sub>z</sub>&middot;K<sub>zt</sub>&middot;K<sub>d</sub>&middot;K<sub>e</sub>&middot;V&sup2;), G is the gust-effect factor (0.85 for a rigid building), C<sub>p</sub> is the external pressure coefficient for each surface from Figure 27.3-1, and GC<sub>pi</sub> is the internal pressure coefficient from Table 26.13-1. Windward wall uses q<sub>z</sub> at the surface height; leeward wall, side walls, and roof use q<sub>h</sub> at the mean roof height.</div></div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false"><span>What Cp values does the directional procedure use for walls?</span><span class="chevron">&#9662;</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">From ASCE 7-22 Figure 27.3-1: the windward wall uses C<sub>p</sub> = +0.8, the side walls use C<sub>p</sub> = &minus;0.7, and the leeward wall uses C<sub>p</sub> between &minus;0.5 and &minus;0.2 depending on the L/B ratio (&minus;0.5 for L/B &le; 1, &minus;0.3 at L/B = 2, &minus;0.2 for L/B &ge; 4, interpolated between). Roof C<sub>p</sub> depends on the h/L ratio and the roof angle &theta;. This calculator shows the C<sub>p</sub> it used for each surface.</div></div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false"><span>Does this MWFRS calculator look up the wind speed for me?</span><span class="chevron">&#9662;</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">Yes. Enter the project ZIP and the calculator returns the ASCE 7-22 basic wind speed for that location and Risk Category from a pre-computed database of all US ZIP codes, so you do not read V off a map by hand. Many free MWFRS tools make you look up and type V yourself, which is a common source of error.</div></div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false"><span>What building sizes does the free MWFRS screen support?</span><span class="chevron">&#9662;</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">The free screen covers enclosed and partially enclosed low-rise buildings with a mean roof height of 60 ft or less and a regular rectangular footprint, on flat terrain (K<sub>zt</sub> = 1.0). Taller buildings, open buildings, irregular geometry, and real topographic effects are handled in the <a href="/shop/mwfrs.html">paid MWFRS calculator</a>.</div></div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false"><span>What does "wind normal to the ridge" versus "parallel to the ridge" mean?</span><span class="chevron">&#9662;</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">The directional procedure checks wind blowing perpendicular to the ridge line (normal) and along the ridge line (parallel) because the roof pressure coefficients differ between the two. For a gable or hip roof the governing case is often wind normal to the ridge; for the walls the windward/leeward split simply follows the wind direction. Toggle the two on the calculator to compare.</div></div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false"><span>Is MWFRS the same as Components and Cladding (C&amp;C)?</span><span class="chevron">&#9662;</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">No. MWFRS sizes the overall structure that resists wind from multiple surfaces at once, using lower area-averaged pressures. C&amp;C sizes individual elements (windows, doors, fasteners, roof panels) that feel higher localized peak pressures over small tributary areas. A complete design checks both. Use this page for MWFRS; use our <a href="/free-wind-load-calculator.html">free C&amp;C calculator</a> for a single window or wall component.</div></div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false"><span>Can I use this MWFRS output for a building permit?</span><span class="chevron">&#9662;</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">The pressures are computed with the same ASCE 7-22 directional engine as our paid product and every coefficient is cited, so they are suitable for checking and preliminary design. A permit submission usually requires a sealed engineering report, which the paid MWFRS calculator produces (and which our licensed engineers can stamp). Treat the free screen as a fast, defensible screening tool, not a final stamped document.</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FOOTER                                        -->
+    <!-- ============================================ -->
+    <footer class="site-footer">
+        <div class="site-footer-inner">
+            <div>&copy; 2026 WindLoad Solutions. All rights reserved.</div>
+            <div>
+                <a href="/">Home</a> &nbsp;&middot;&nbsp;
+                <a href="/shop/mwfrs.html">MWFRS Calculator</a> &nbsp;&middot;&nbsp;
+                <a href="/terms">Terms</a> &nbsp;&middot;&nbsp;
+                <a href="/privacy">Privacy</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================ -->
+    <!-- TOAST (intent-triggered CTA)                  -->
+    <!-- ============================================ -->
+    <div class="toast" id="upgrade-toast" role="alert" aria-live="polite">
+        <button class="toast-close" id="toast-close" aria-label="Dismiss">&times;</button>
+        <div class="toast-title">You're clearly doing real work.</div>
+        <div class="toast-body">
+            The full MWFRS calculator adds the envelope procedure, every roof shape, topographic K<sub>zt</sub>, saved projects, Excel export, and a sealed report &mdash; no daily cap.
+        </div>
+        <a href="/shop/mwfrs.html" class="toast-btn">Get MWFRS &rarr;</a>
+    </div>
+
+    <!-- Canonical nav: scroll state + hamburger drawer + sticky offset (banner + nav height) -->
+    <script>
+    (function(){
+      var banner=document.querySelector('.wlc-promo-banner');
+      var nav=document.getElementById('nav');
+      // Transparent → scrolled state (matches landing page)
+      function onScroll(){ if(nav) nav.classList.toggle('scrolled', window.scrollY>40); }
+      onScroll(); window.addEventListener('scroll',onScroll,{passive:true});
+      // Sticky offset: keep nav below the promo banner and feed the pressure card's --stuck-top
+      function syncOffset(){
+        var b=banner?banner.offsetHeight:0;
+        var n=nav?nav.offsetHeight:0;
+        if(nav) nav.style.top=b+'px';
+        document.documentElement.style.setProperty('--stuck-top',(b+n)+'px');
+      }
+      syncOffset();
+      window.addEventListener('resize',syncOffset,{passive:true});
+      window.addEventListener('load',syncOffset);
+      if('ResizeObserver' in window){
+        var ro=new ResizeObserver(syncOffset);
+        if(banner) ro.observe(banner); if(nav) ro.observe(nav);
+      }
+    })();
+    (function(){
+      var ham=document.getElementById('hamburger'), fm=document.getElementById('fullMenu'),
+          ov=document.getElementById('navOverlay'), fc=document.getElementById('fmClose');
+      if(!ham||!fm) return;
+      function setMenu(open){ fm.classList.toggle('open',open); ov.classList.toggle('open',open); ham.classList.toggle('open',open);
+        ham.setAttribute('aria-expanded',open); document.body.style.overflow=open?'hidden':''; }
+      ham.addEventListener('click',function(){ setMenu(!fm.classList.contains('open')); });
+      ov.addEventListener('click',function(){ setMenu(false); });
+      if(fc) fc.addEventListener('click',function(){ setMenu(false); });
+      fm.querySelectorAll('a').forEach(function(a){ a.addEventListener('click',function(){ setMenu(false); }); });
+      window.addEventListener('keydown',function(e){ if(e.key==='Escape') setMenu(false); });
+    })();
+    </script>
+
+    <!-- ============================================ -->
+    <!-- JAVASCRIPT                                    -->
+    <!-- ============================================ -->
+    <script>
+    (function() {
+        'use strict';
+
+        const API_BASE = 'https://api.windloadcalc.com';
+
+        // State
+        const state = {
+            zip: '',
+            risk_cat: '2',
+            exposure: 'C',
+            enclosure: 'enclosed',
+            mean_roof_height_ft: 20,
+            building_width_ft: 40,
+            building_length_ft: 60,
+            roof_slope_deg: 0,
+            wind_direction: 'normal',
+            // Intent tracking
+            uniqueZips: new Set(),
+            calcCount: 0,
+            toastShown: false,
+            // Last displayed pressures — daily count only increments when these change
+            lastPos: null,
+            lastNeg: null,
+        };
+
+        // DOM
+        const $ = (id) => document.getElementById(id);
+        const inpZip = $('inp-zip');
+        const inpHeight = $('inp-height');
+        const inpBldgB = $('inp-bldg-b');
+        const inpBldgL = $('inp-bldg-l');
+        const inpSlope = $('inp-slope');
+        const fbcBadge = $('fbc-badge');
+        const pressureStatus = $('pressure-status');
+        const pressurePositive = $('pressure-positive');
+        const pressureNegative = $('pressure-negative');
+        const pressureDescription = $('pressure-description');
+        const mathToggle = $('math-toggle');
+        const mathWrap = $('math-wrap');
+        const mathTbody = $('math-tbody');
+        const postResultCta = $('post-result-cta');
+        const upgradeToast = $('upgrade-toast');
+        const toastClose = $('toast-close');
+
+        // ----------------------------------------
+        // Segmented button handlers
+        // ----------------------------------------
+        document.querySelectorAll('[data-risk]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (btn.dataset.locked === '1') {
+                    showUpgradeToast('Risk Category III &amp; IV', 'Essential facilities require the full MWFRS calculator.');
+                    return;
+                }
+                document.querySelectorAll('[data-risk]').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                state.risk_cat = btn.dataset.risk;
+                // Wind speed depends on risk category — refresh the FBC badge too,
+                // not just the pressure. Without this, the badge gets stuck showing
+                // the previous risk category's value (e.g., Collier Cat I = 151 mph
+                // when the user has Cat II = 170 mph selected).
+                onZipChange();
+                onInputChange();
+            });
+        });
+        document.querySelectorAll('[data-exposure]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (btn.dataset.locked === '1') {
+                    showUpgradeToast('Exposure B', 'Suburban / wooded terrain (Exposure B) is in the full MWFRS calculator.');
+                    return;
+                }
+                document.querySelectorAll('[data-exposure]').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                state.exposure = btn.dataset.exposure;
+                onInputChange();
+            });
+        });
+        document.querySelectorAll('[data-enclosure]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (btn.dataset.locked === '1') {
+                    showUpgradeToast('Partially Enclosed', 'Partially enclosed buildings (GCpi ±0.55) are in the full MWFRS calculator.');
+                    return;
+                }
+                document.querySelectorAll('[data-enclosure]').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                state.enclosure = btn.dataset.enclosure;
+                onInputChange();
+            });
+        });
+        document.querySelectorAll('[data-winddir]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('[data-winddir]').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                state.wind_direction = btn.dataset.winddir;
+                onInputChange();
+            });
+        });
+
+        // ----------------------------------------
+        // Text/number input handlers
+        // ----------------------------------------
+        inpZip.addEventListener('input', (e) => {
+            state.zip = e.target.value.replace(/\D/g, '').slice(0, 5);
+            e.target.value = state.zip;
+            onZipChange();
+            onInputChange();
+        });
+        inpHeight.addEventListener('input', (e) => {
+            state.mean_roof_height_ft = parseFloat(e.target.value) || 0;
+            onInputChange();
+        });
+        // Building plan dimensions are in FEET (B = width facing wind, L = depth
+        // parallel to wind), same unit the MWFRS engine uses — no conversion.
+        inpBldgB.addEventListener('input', (e) => {
+            state.building_width_ft = parseFloat(e.target.value) || 0;
+            onInputChange();
+        });
+        inpBldgL.addEventListener('input', (e) => {
+            state.building_length_ft = parseFloat(e.target.value) || 0;
+            onInputChange();
+        });
+        inpSlope.addEventListener('input', (e) => {
+            state.roof_slope_deg = parseFloat(e.target.value) || 0;
+            onInputChange();
+        });
+
+        // ----------------------------------------
+        // Debounced ZIP-only lookup (for FBC badge)
+        // ----------------------------------------
+        let zipTimer = null;
+        function onZipChange() {
+            clearTimeout(zipTimer);
+            if (state.zip.length !== 5) {
+                fbcBadge.classList.remove('visible');
+                return;
+            }
+            zipTimer = setTimeout(() => fetchWindSpeed(), 250);
+        }
+
+        async function fetchWindSpeed() {
+            try {
+                const url = `${API_BASE}/api/public/wind-speed?zip=${encodeURIComponent(state.zip)}&risk_cat=${encodeURIComponent(state.risk_cat)}`;
+                const res = await fetch(url);
+                const data = await res.json();
+                renderFbcBadge(data, res.ok);
+            } catch (err) {
+                renderFbcBadge({success: false, error: 'Could not reach lookup service. Please try again.'}, false);
+            }
+        }
+
+        function renderFbcBadge(data, ok) {
+            if (!ok || !data.success) {
+                fbcBadge.className = 'fbc-badge error visible';
+                fbcBadge.innerHTML = `
+                    <div class="fbc-badge-eyebrow"><span class="dot"></span>Lookup issue</div>
+                    <div class="fbc-badge-citation">${escapeHtml(data.error || 'Unknown error')}</div>
+                `;
+                return;
+            }
+            // Track unique ZIPs for intent detection
+            state.uniqueZips.add(state.zip);
+            maybeShowToast();
+
+            if (data.source === 'fbc_override') {
+                fbcBadge.className = 'fbc-badge visible';
+                const supersedes = data.supersedes_asce_value_mph
+                    ? `<br>Supersedes ASCE 7-22 map value: <strong>${data.supersedes_asce_value_mph} mph</strong>`
+                    : '';
+                fbcBadge.innerHTML = `
+                    <div class="fbc-badge-eyebrow"><span class="dot"></span>FBC Override &middot; Risk Cat ${data.risk_category}</div>
+                    <div class="fbc-badge-location">${escapeHtml(data.city || '')}, ${escapeHtml(data.county || '')} County, ${escapeHtml(data.state || '')}</div>
+                    <div class="fbc-badge-speed">${data.wind_speed_mph}<span class="fbc-badge-speed-label">mph required</span></div>
+                    <div class="fbc-badge-citation"><strong>Florida Building Code R301.2(7)</strong> &mdash; legally enforced.${supersedes}</div>
+                `;
+            } else {
+                fbcBadge.className = 'fbc-badge asce-only visible';
+                fbcBadge.innerHTML = `
+                    <div class="fbc-badge-eyebrow"><span class="dot"></span>ASCE 7-22 Map &middot; Risk Cat ${data.risk_category}</div>
+                    <div class="fbc-badge-location">${escapeHtml(data.city || '')}, ${escapeHtml(data.county || '')} County, ${escapeHtml(data.state || '')}</div>
+                    <div class="fbc-badge-speed">${data.wind_speed_mph}<span class="fbc-badge-speed-label">mph</span></div>
+                    <div class="fbc-badge-citation">ASCE 7-22 Figure 26.5-1 basic wind speed. No local jurisdictional override on file.</div>
+                `;
+            }
+        }
+
+        // ----------------------------------------
+        // Debounced full pressure calc
+        // ----------------------------------------
+        let pressureTimer = null;
+        function onInputChange() {
+            clearTimeout(pressureTimer);
+            // Only attempt pressure calc if all required fields are valid
+            if (state.zip.length !== 5) return;
+            if (!state.building_width_ft || !state.building_length_ft) return;
+            if (!state.mean_roof_height_ft) return;
+            pressureStatus.textContent = '... calculating';
+            pressureStatus.classList.add('live');
+            pressureTimer = setTimeout(() => fetchPressure(), 300);
+        }
+
+        // ----------------------------------------
+        // Daily free-calc limit (localStorage)
+        // ----------------------------------------
+        const DAILY_LIMIT = 10;
+        function todayKey() {
+            // UTC to match the server's usage_date (utcnow), so the client meter
+            // and the server quota roll over on the same day boundary.
+            const d = new Date();
+            return `wlc_free_calc_${d.getUTCFullYear()}-${String(d.getUTCMonth()+1).padStart(2,'0')}-${String(d.getUTCDate()).padStart(2,'0')}`;
+        }
+        function getDailyCount() {
+            try { return parseInt(localStorage.getItem(todayKey()) || '0', 10); } catch(e) { return 0; }
+        }
+        // (Daily count is now authoritative SERVER-SIDE; the client only mirrors
+        // the server's data.usage.used into localStorage for the meter display.)
+        function renderDailyMeter() {
+            const used = getDailyCount();
+            const meter = document.getElementById('daily-meter');
+            if (!meter) return;
+            if (used <= 0) { meter.hidden = true; return; }
+            meter.hidden = false;
+            if (used >= DAILY_LIMIT) {
+                meter.className = 'daily-meter limit-reached';
+                meter.innerHTML = `Daily free limit reached (${used}/${DAILY_LIMIT}). <a href="/shop/mwfrs.html">Get the MWFRS calculator &rarr;</a>`;
+            } else if (used >= 7) {
+                meter.className = 'daily-meter warning';
+                meter.innerHTML = `${used}/${DAILY_LIMIT} free calcs used today &mdash; <a href="/shop/mwfrs.html">unlimited with the MWFRS calculator</a>`;
+            } else {
+                meter.className = 'daily-meter';
+                meter.innerHTML = `${used}/${DAILY_LIMIT} free calcs used today`;
+            }
+        }
+
+        function showUpgradeToast(title, body) {
+            const t = document.getElementById('upgrade-toast');
+            t.querySelector('.toast-title').innerHTML = title;
+            t.querySelector('.toast-body').innerHTML = body;
+            t.classList.add('visible');
+        }
+
+        async function fetchPressure() {
+            // No client-side pre-block: the SERVER is the authoritative quota.
+            // Always let the request through and let the 429 below be the gate —
+            // this avoids pessimistically blocking when localStorage is stale or
+            // cleared (the server decides based on real per-IP state).
+            try {
+                const res = await fetch(`${API_BASE}/api/public/mwfrs-pressure`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        zip: state.zip,
+                        risk_cat: state.risk_cat,
+                        exposure: state.exposure,
+                        enclosure: state.enclosure,
+                        mean_roof_height_ft: state.mean_roof_height_ft,
+                        building_width_ft: state.building_width_ft,
+                        building_length_ft: state.building_length_ft,
+                        roof_slope_deg: state.roof_slope_deg,
+                        wind_direction: state.wind_direction,
+                    }),
+                });
+                const data = await res.json();
+
+                // The server is the AUTHORITATIVE quota (per IP, can't be bypassed
+                // by clearing storage). Mirror its count into localStorage so the
+                // meter reflects the real remaining calcs.
+                if (data && data.usage && typeof data.usage.used === 'number') {
+                    try { localStorage.setItem(todayKey(), String(data.usage.used)); } catch(e) {}
+                }
+
+                if (res.status === 429 || (data && data.limit_reached)) {
+                    try { localStorage.setItem(todayKey(), String(DAILY_LIMIT)); } catch(e) {}
+                    pressureStatus.textContent = '! daily limit reached';
+                    pressureStatus.classList.remove('live');
+                    renderDailyMeter();
+                    showUpgradeToast(
+                        `Daily free limit reached (${DAILY_LIMIT}/${DAILY_LIMIT})`,
+                        'The MWFRS calculator removes the daily cap and adds the envelope procedure, all roof shapes, topographic Kzt, and a sealed engineering report.'
+                    );
+                    return;
+                }
+
+                renderPressure(data, res.ok);
+            } catch (err) {
+                pressureStatus.textContent = '! network';
+                pressureStatus.classList.remove('live');
+            }
+        }
+
+        function renderPressure(data, ok) {
+            if (!ok || !data.success) {
+                pressureStatus.textContent = '! ' + (data.error || 'error').substring(0, 40);
+                pressureStatus.classList.remove('live');
+                return;
+            }
+
+            const pos = data.pressures.max_positive_psf;
+            const neg = data.pressures.max_negative_psf;
+
+            // The daily quota is counted + enforced SERVER-SIDE (data.usage, already
+            // mirrored into localStorage by fetchPressure). Here we only track
+            // engagement intent for the upgrade nudge, advancing when the displayed
+            // wind pressures actually change. Compare at the SAME 1-decimal precision
+            // we render (toFixed(1)) so a sub-display-precision wobble doesn't count.
+            const dispPos = pos.toFixed(1);
+            const dispNeg = neg.toFixed(1);
+            const pressuresChanged = (dispPos !== state.lastPos || dispNeg !== state.lastNeg);
+            if (pressuresChanged) {
+                state.lastPos = dispPos;
+                state.lastNeg = dispNeg;
+                state.calcCount++;
+                maybeShowToast();
+            }
+            renderDailyMeter();
+
+            pressurePositive.innerHTML = `+${pos.toFixed(1)}<span class="unit">psf</span>`;
+            pressurePositive.classList.remove('empty');
+            pressureNegative.innerHTML = `${neg.toFixed(1)}<span class="unit">psf</span>`;
+            pressureNegative.classList.remove('empty');
+
+            const echo = data.inputs_echo;
+            const fmt = (v) => (v > 0 ? '+' : '') + v.toFixed(1);
+            const surfaceRows = (data.pressures.surfaces || []).map(s => {
+                const vals = [];
+                if (s.pos_psf) vals.push(`<span class="sp-pos">${fmt(s.pos_psf)}</span>`);
+                if (s.neg_psf) vals.push(`<span class="sp-neg">${fmt(s.neg_psf)}</span>`);
+                return `<tr>
+                    <td>${escapeHtml(s.surface)}</td>
+                    <td>${s.Cp != null ? 'C<sub>p</sub> ' + s.Cp : '&mdash;'}</td>
+                    <td>${vals.join(' / ') || '&mdash;'} psf</td>
+                </tr>`;
+            }).join('');
+
+            pressureDescription.innerHTML = `
+                <strong>MWFRS directional</strong> &middot; B ${echo.building_width_ft} &times; L ${echo.building_length_ft} ft,
+                h ${echo.mean_roof_height_ft} ft, roof ${echo.roof_slope_deg}&deg; (${escapeHtml(echo.wind_direction)} to ridge) &middot; ${data.figure_used}.
+                Wind speed: <strong>${escapeHtml(data.wind_speed.source_label)}</strong> (${data.wind_speed.value_mph} mph).
+                <table class="surface-table">
+                    <thead><tr><th>Surface</th><th>C<sub>p</sub></th><th>Design pressure</th></tr></thead>
+                    <tbody>${surfaceRows}</tbody>
+                </table>`;
+
+            // Render coefficient table
+            mathTbody.innerHTML = data.coefficients.map(c => `
+                <tr>
+                    <td><strong>${escapeHtml(c.name)}</strong><span class="desc">${escapeHtml(c.description)}</span></td>
+                    <td>${escapeHtml(String(c.value))} ${escapeHtml(c.unit || '')}</td>
+                    <td><span class="ref">${escapeHtml(c.reference)}</span></td>
+                </tr>
+            `).join('') + `
+                <tr>
+                    <td><strong>p</strong><span class="desc">Governing design pressure</span></td>
+                    <td>${Math.max(Math.abs(pos), Math.abs(neg)).toFixed(1)} psf</td>
+                    <td><span class="ref">${escapeHtml(data.pressures.reference)}</span></td>
+                </tr>
+            `;
+
+            pressureStatus.textContent = '✓ live';
+            pressureStatus.classList.add('live');
+
+            // Show post-result CTA on first calculation
+            postResultCta.classList.add('visible');
+        }
+
+        // ----------------------------------------
+        // Math accordion
+        // ----------------------------------------
+        mathToggle.addEventListener('click', () => {
+            const isOpen = mathToggle.classList.toggle('open');
+            mathWrap.classList.toggle('open', isOpen);
+            mathToggle.setAttribute('aria-expanded', String(isOpen));
+        });
+
+        // ----------------------------------------
+        // FAQ accordions
+        // ----------------------------------------
+        document.querySelectorAll('.faq-question').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const expanded = btn.getAttribute('aria-expanded') === 'true';
+                btn.setAttribute('aria-expanded', String(!expanded));
+                const answer = btn.nextElementSibling;
+                answer.classList.toggle('open', !expanded);
+            });
+        });
+
+        // ----------------------------------------
+        // Intent-triggered toast (3+ unique ZIPs OR 5+ calcs)
+        // ----------------------------------------
+        function maybeShowToast() {
+            if (state.toastShown) return;
+            if (state.uniqueZips.size >= 3 || state.calcCount >= 5) {
+                state.toastShown = true;
+                setTimeout(() => upgradeToast.classList.add('visible'), 400);
+            }
+        }
+        toastClose.addEventListener('click', () => {
+            upgradeToast.classList.remove('visible');
+        });
+
+        // Paint the daily meter on load so returning users see their remaining count
+        renderDailyMeter();
+
+        // ----------------------------------------
+        // Utility
+        // ----------------------------------------
+        function escapeHtml(s) {
+            if (s == null) return '';
+            return String(s)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+    })();
+    </script>
+</body>
+</html>

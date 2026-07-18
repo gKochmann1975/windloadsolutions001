@@ -31,6 +31,7 @@
       { id: "mwfrs", name: "MWFRS Buildings",               live: true },
       { id: "roofs", name: "Roofs, Parapets & Overhangs",   live: true },
       { id: "other", name: "Other Structures",              live: true },
+      { id: "specialty", name: "Specialty Components",      live: true },
       { id: "solar", name: "Solar Panels",                  live: false }
     ]
   };

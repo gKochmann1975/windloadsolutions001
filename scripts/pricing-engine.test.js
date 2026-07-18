@@ -23,8 +23,9 @@ eq("Complete@5 Pro",     P.curveTotal(5, { tier: "pro" }), 167);
 eq("Complete@5 Premium", P.curveTotal(5, { tier: "premium" }), 422);
 
 // --- Live catalog today = 4 (solar not live); Complete today = curve(4) ---
-eq("liveCount today", P.liveCount(), 4);
-eq("completePrice today (Starter)", P.completePrice({ tier: "starter" }), 86);
+eq("liveCount today", P.liveCount(), 5);
+eq("completePrice today (Starter)", P.completePrice({ tier: "starter" }), 99);
+eq("completePrice today (Pro)", P.completePrice({ tier: "pro" }), 167);
 
 // --- Annual = pay 10 ---
 eq("Annual 1 calc Starter", P.curveTotal(1, { tier: "starter", cycle: "annual" }), 350);
@@ -46,8 +47,8 @@ eq("existing 2+1 currentTotal", q2.currentTotal, 55);
 eq("existing 2+1 delta = the add-next", q2.delta, 16);      // 71 - 55
 eq("existing 2+1 afterCount", q2.afterCount, 3);
 
-// --- Scenario: reaching Complete (owns all 4 live) -> BIP free, nothing more to add ---
-var q3 = P.quote({ owned: ["wd", "mwfrs", "roofs", "other"], selected: [], tier: "starter" });
+// --- Scenario: reaching Complete (owns all 5 live) -> BIP free, nothing more to add ---
+var q3 = P.quote({ owned: ["wd", "mwfrs", "roofs", "other", "specialty"], selected: [], tier: "starter" });
 eq("complete isComplete", q3.isComplete, true);
 eq("complete BIP free", [q3.bipIncludedFree, q3.showBipOffer], [true, false]);
 eq("complete add-next 0", q3.addNextPrice, 0);

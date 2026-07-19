@@ -62,8 +62,15 @@ on-page. Full plan: **`OFF_PAGE_SEO_BACKLINK_STRATEGY.md`** + target list/outrea
   URLs are in the "READY-TO-SUBMIT QUEUE" of `TIER2_DIRECTORY_SUBMISSION_PACKAGE.md`** with ☐ boxes.
   (Gmail drafts N/A — no email addresses; and the claude.ai Gmail connector token is expired, needs G
   to re-auth in claude.ai connector settings if we later want email-based outreach drafted.)
-- **H4 — Tier 3/4 (communities, SEAOC/NCSEA, HARO/Qwoted ongoing)  *(Owner: G, C assists with copy)*.**
-- **H5 — LATER:** buy Ahrefs/Semrush for full competitor backlink profiles + link-intersect at scale
+- **H4 — Tier 3 community engagement  *(Owner: G posts; C prepped the kit)*.**  🔁 **ONGOING — follow up
+  monthly.** Kit ready in the package (Tier 3 section): concrete Eng-Tips threads + subreddits, honest
+  reply copy (Eng-Tips + Reddit variants), and the anti-spam rules (disclose you built it, don't necro,
+  don't paste identical text, lead with the answer, never call the output "sealed"). **Follow-up loop:**
+  ~monthly, search r/StructuralEngineering + Eng-Tips for *new* "free wind load calc?" questions and
+  answer 1–2 genuinely. C can re-run the target search on request to surface fresh threads.
+- **H5 — Tier 4 associations + HARO/Qwoted  *(Owner: G)*.** SEAOC resources page suggestion, NCSEA/
+  STRUCTURE bylined article pitch, Qwoted expert registration. Copy in the package (Tier 4 section).
+- **H6 — LATER:** buy Ahrefs/Semrush for full competitor backlink profiles + link-intersect at scale
   (see "Ahrefs gap" in the package). Note: backlinks are a **weeks-to-months** game — don't expect
   overnight rank movement.
 

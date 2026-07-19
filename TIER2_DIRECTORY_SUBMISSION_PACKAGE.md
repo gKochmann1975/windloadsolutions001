@@ -134,6 +134,55 @@ NO fake reviews, NO "sealed report" claims.
 
 ---
 
+## TIER 3 — Community engagement kit (ready; you post from your own account)
+Referral traffic + occasional links + GEO signal. **This is ongoing, not one-shot** — the durable win
+is answering *new* questions over time, not link-dropping in old threads.
+
+### Rules that keep this from backfiring (read first)
+- **Always disclose** you built WindLoadCalc ("full disclosure, I built this"). Non-disclosure on
+  Reddit/Eng-Tips gets you banned and damages the brand.
+- **Don't necro** dead threads or paste identical text — that reads as spam. Reddit's ~9:1 rule:
+  mostly be helpful, occasionally link.
+- **Lead with the answer**, mention the tool as *one* option alongside SkyCiv/MecaWind, and honor the
+  copy rules: the calc output is an **Engineering Report, not sealed** — PE sign-and-seal is separate.
+- Prioritize **recent/active** threads. Verify a thread is still active before replying.
+
+### Concrete current targets (verify recency before posting)
+| Where | Thread / community | Angle |
+|---|---|---|
+| Eng-Tips | "Wind load pressure calculator (software)" /threads/…457247 | asks for wind load software; SkyCiv/MecaWind already named — add the free ASCE 7-22 option |
+| Eng-Tips | "ASCE Wind Components and Cladding" /threads/…500856 | C&C question — answer, link free C&C calc if apt |
+| Eng-Tips | "Questions on ASD Wind Loads in ASCE 7-16 & 7-22" /threads/…497981 | ASD (0.6W) question — pure expertise, tool optional |
+| Reddit | r/StructuralEngineering, r/civilengineering, r/Construction | recurring "free wind load calc?" posts |
+| Reddit | r/Miami, r/fortlauderdale, r/HomeImprovement (FL permit posts) | HVHZ ZIP→wind-speed is uniquely useful |
+| civilea forum | thread-56062 (ASCE 7-16 wind spreadsheet) | offer the free calc as a cross-check |
+
+### Reusable reply — "what free ASCE 7-22 wind load calculator?" (Eng-Tips / forums)
+> For ASCE 7-22 specifically (not the generic F=qA physics calculators), a few options depending on
+> what you need: SkyCiv's free calc (3 lookups/day), or MecaWind if you want the full MWFRS + other-
+> structures coverage (paid). Full disclosure — I built WindLoadCalc: the free version
+> (windloadcalc.com/free-wind-load-calculator.html) does ZIP → ASCE 7-22 design wind speed with the
+> Florida HVHZ overrides, then Components & Cladding design pressure per Ch. 30, no signup. There's a
+> free MWFRS one too. One caveat for permit work: the calculator output is an Engineering Report, not a
+> sealed doc — a PE sign-and-seal is a separate step.
+
+### Reusable reply — Reddit (more casual, disclosure up front)
+> Disclosure up front: I built one of these, so grain of salt. For real ASCE 7-22 (not the physics
+> "wind load" calculators that just do force = pressure × area), the free options are SkyCiv (limited
+> daily lookups) and mine, WindLoadCalc — the free version pulls the ASCE 7-22 design wind speed from
+> your ZIP (handles the Florida HVHZ counties) and gives you C&C design pressure, no login. If you're
+> pulling a permit though, note the calc isn't sealed — you'd still need a PE to sign/seal it in most
+> jurisdictions.
+
+## TIER 4 — Associations / trusted resource pages + HARO/Qwoted (higher trust, slower)
+- **SEAOC** seaoc.org/list-of-resources — suggest the free calc as a member resource (use outreach
+  template #1). **NCSEA / STRUCTURE Magazine** — pitch a bylined ASCE 7-22 or HVHZ how-to (author link).
+- **Qwoted** qwoted.com (+ HARO email digest) — register as an expert source on wind load / hurricane /
+  Florida building code; respond to relevant journalist queries with template #3. Highest-authority,
+  most GEO-relevant links, but needs an account + ongoing attention.
+
+---
+
 ## The Ahrefs / Semrush gap — what this manual pass CANNOT cover
 This deliverable is built from web search + hand link-intersect on the top ~20 signals. A paid backlink
 tool ($99–199/mo Ahrefs/Semrush) would add, and is worth buying if this becomes a sustained effort:

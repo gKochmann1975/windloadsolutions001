@@ -1942,7 +1942,33 @@
     try{
       var cy=bucketProgs("annual").length?"annual":"monthly", progs=bucketProgs(cy), hasBip=cartHasBip(), isComplete=progs.length>=P.liveCount();
       if(!progs.length && !hasBip){ alert("Your cart is empty."); return; }
+      // Two-bucket model: annual and monthly are separate subscriptions, so a mixed cart is
+      // two checkouts. Do the annual plan first; the monthly plan stays in the cart for a
+      // guided second step (never silently dropped).
+      var otherCy = (cy==="annual")?"monthly":"annual";
+      if(bucketProgs(otherCy).length>0){
+        if(!confirm("Your cart has both annual and monthly calculators — these are billed as two separate plans with their own renewal dates.\n\nWe'll set up your "+cy+" plan now; your "+otherCy+" plan stays in your cart for a quick second step right after.\n\nContinue?")) return;
+      }
       var headers={ "Content-Type":"application/json" }; if(token) headers["Authorization"]="Bearer "+token;
+
+      // EXISTING logged-in user with a same-cycle subscription: MODIFY it (prorated, saved
+      // card, no new checkout) rather than opening a second subscription. add-calculators
+      // returns 409 when they have no bucket for this cycle, or 400 when they have no active
+      // sub at all — in both cases fall through to a fresh Stripe Checkout below.
+      if(token){
+        var addResp=await fetch(CHECKOUT_API_URL+"/api/subscriptions/add-calculators",{ method:"POST", headers:headers,
+          body:JSON.stringify({ programs:progs, tier:plan.tier, cycle:cy }) });
+        if(addResp.ok){
+          var ad=await addResp.json();
+          alert("Added to your existing "+cy+" plan — new total "+money(ad.new_total||0)+(cy==="annual"?"/yr":"/mo")+", prorated to your card on file. No new checkout.");
+          window.location.href="account.html"; return;
+        }
+        var aerr={}; try{ aerr=await addResp.json(); }catch(e){}
+        var noBucket = (addResp.status===409) || ((aerr.error||"").indexOf("No active subscription")>=0);
+        if(!noBucket){ throw new Error(aerr.error||("Could not add to your plan ("+addResp.status+")")); }
+        // else: no existing bucket for this cycle -> start a NEW subscription via Checkout ↓
+      }
+
       var resp=await fetch(CHECKOUT_API_URL+"/api/subscriptions/checkout-curve",{ method:"POST", headers:headers,
         body:JSON.stringify({ programs:progs, tier:plan.tier, cycle:cy, bip:(hasBip&&!isComplete), email:email||null }) });
       var data=await resp.json();

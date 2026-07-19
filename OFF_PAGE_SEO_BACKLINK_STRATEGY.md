@@ -107,7 +107,14 @@ where Omni earns word-of-mouth.
     primary CTAs were pointing at the windloadcalc.com **homepage**; repointed to
     `free-wind-load-calculator.html`. `master` 8f3a7b72.
   - Side benefit: killed 4 stale/indirect links (1 redirect hop + 3 homepage-instead-of-calc).
-  - NEXT: verify all 6 resolve 200 on the live sites once deploys settle; then Tier 2 directory submissions.
+  - **VERIFIED LIVE 2026-07-19.** windload.solutions auto-deployed on push. windload.co did NOT
+    (its `daily-deploy.yml` is paused + no push→Vercel hook), so deployed manually via
+    `vercel --prod` (CLI authed as gkochmann1975, project `windload-solutions/windload-co`).
+    Confirmed all 6 links live. **Verify windload.co via CLEAN URLs (`/vs-omni`, not `/vs-omni.html`)**
+    — `cleanUrls:true` 308-redirects the `.html` form, so a non-redirect-following curl reads a
+    stub and falsely reports 0.
+  - NEXT: Tier 2 directory submissions (Engineers Edge, BuildingsGuide, Jabacus). Give Tier-1 links
+    a few weeks to be crawled before expecting rank movement.
 
 ## Flagged (not acted on — out of Tier-1 scope, needs Greg)
 - **windload.co copy violates two locked rules.** Its schema/FAQ say "PE-**stampable** PDF reports"

@@ -145,6 +145,11 @@
       '<h1>Sign in to manage your plan</h1>'+
       '<p class="sub" style="margin-top:6px">Please <a href="/login.html" style="color:var(--accent);font-weight:700;text-decoration:none">sign in</a> to add calculators to your subscription.</p>';
   }
+  // Deep-link login (admin login links / support): ?token=<jwt> stores the session, then
+  // cleans it out of the URL so the token isn't left in history or shared links.
+  try{ var _u=new URL(location.href), _t=_u.searchParams.get("token");
+    if(_t){ localStorage.setItem("windload_auth_token", _t); _u.searchParams.delete("token");
+      history.replaceState(null,"", _u.pathname + (_u.searchParams.toString()?("?"+_u.searchParams.toString()):"")); } }catch(e){}
   var token = localStorage.getItem("windload_auth_token");
   if(!token){ showSignIn(); return; }
 

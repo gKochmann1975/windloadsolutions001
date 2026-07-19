@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Internal preview — locked-calculator conversion surface (existing user clicks a calculator not on their plan). Not customer-facing.">
+<title>Calculator Locked — Preview (Existing User / Unlock)</title>
+<style>
+  :root{
+    --bg:#eef1f7; --panel:#fff; --panel2:#f6f8fc; --ink:#0f1730; --muted:#586178; --faint:#8a93a8;
+    --line:#e2e6f0; --line2:#eef1f7;
+    --accent:#2f4bff; --rev:#0e9f6e; --marg:#d97706; --bip:#0d9488; --complete:#7c3aed;
+    --shadow:0 1px 2px rgba(15,23,48,.05),0 14px 36px rgba(15,23,48,.08); --r:16px;
+    --brand:#2f4bff; /* overridden per-calculator */
+  }
+  @media (prefers-color-scheme:dark){:root{
+    --bg:#080b16; --panel:#111830; --panel2:#0d142a; --ink:#eaf0ff; --muted:#9aa6c2; --faint:#6b768f;
+    --line:#212a44; --line2:#1a2238;
+    --accent:#6b86ff; --rev:#34d399; --marg:#f5a83f; --bip:#2dd4bf; --complete:#a78bfa;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 20px 44px rgba(0,0,0,.55);
+  }}
+  :root[data-theme="dark"]{
+    --bg:#080b16; --panel:#111830; --panel2:#0d142a; --ink:#eaf0ff; --muted:#9aa6c2; --faint:#6b768f;
+    --line:#212a44; --line2:#1a2238; --accent:#6b86ff; --rev:#34d399; --marg:#f5a83f; --bip:#2dd4bf; --complete:#a78bfa;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 20px 44px rgba(0,0,0,.55);
+  }
+  :root[data-theme="light"]{
+    --bg:#eef1f7; --panel:#fff; --panel2:#f6f8fc; --ink:#0f1730; --muted:#586178; --faint:#8a93a8;
+    --line:#e2e6f0; --line2:#eef1f7; --accent:#2f4bff; --rev:#0e9f6e; --marg:#d97706; --bip:#0d9488; --complete:#7c3aed;
+    --shadow:0 1px 2px rgba(15,23,48,.05),0 14px 36px rgba(15,23,48,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+    line-height:1.5;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+  .wrap{max-width:1040px;margin:0 auto;padding:22px 20px 72px}
+  .pvbadge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--complete);background:color-mix(in srgb,var(--complete) 14%,transparent);padding:3px 10px;border-radius:20px;margin-bottom:14px}
+
+  /* preview simulator (not part of the real page) */
+  .simbar{margin:0 0 20px;padding:12px 14px;background:var(--panel);border:1px dashed var(--line);border-radius:12px}
+  .simbar .lab{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);font-weight:700;margin-bottom:8px}
+  .simrow{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .chip{border:1.5px solid var(--line);background:var(--panel2);color:var(--muted);font:inherit;font-size:12.5px;font-weight:600;
+    padding:6px 11px;border-radius:20px;cursor:pointer;transition:.15s}
+  .chip.on{border-color:var(--rev);color:var(--rev);background:color-mix(in srgb,var(--rev) 12%,transparent)}
+  .chip.locked{border-color:var(--brand);color:var(--brand);background:color-mix(in srgb,var(--brand) 12%,transparent);cursor:default}
+  .seg{display:inline-flex;gap:4px;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:3px}
+  .seg button{border:0;background:transparent;color:var(--muted);font:inherit;font-size:12.5px;font-weight:650;padding:6px 11px;border-radius:7px;cursor:pointer}
+  .seg button.on{background:var(--accent);color:#fff}
+  .simnote{font-size:11.5px;color:var(--faint);margin-top:8px}
+
+  /* hero */
+  .hero{display:flex;align-items:center;gap:16px;margin-bottom:8px}
+  .lockbadge{width:56px;height:56px;flex:0 0 auto;border-radius:15px;display:grid;place-items:center;color:#fff;
+    background:linear-gradient(150deg,var(--brand),color-mix(in srgb,var(--brand) 55%,#000));box-shadow:0 10px 26px color-mix(in srgb,var(--brand) 40%,transparent)}
+  .lockbadge svg{width:26px;height:26px}
+  .hero .eyebrow{font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--brand);margin:0 0 2px}
+  .hero h1{font-size:clamp(22px,3vw,32px);letter-spacing:-.02em;margin:0;font-weight:780;text-wrap:balance;line-height:1.1}
+  .tagline{color:var(--muted);margin:12px 0 22px;font-size:15.5px;max-width:66ch}
+  .tagline b{color:var(--ink);font-weight:680}
+
+  .layout{display:grid;grid-template-columns:1fr 358px;gap:24px;align-items:start}
+  @media (max-width:840px){.layout{grid-template-columns:1fr}}
+
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow)}
+  .whatbox{padding:20px 22px}
+  .whatbox h2{font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--faint);font-weight:700;margin:0 0 14px}
+  .feat{display:flex;gap:12px;padding:11px 0;border-top:1px solid var(--line2)}
+  .feat:first-of-type{border-top:0;padding-top:0}
+  .feat .fi{width:30px;height:30px;flex:0 0 auto;border-radius:9px;display:grid;place-items:center;color:var(--brand);
+    background:color-mix(in srgb,var(--brand) 12%,transparent)}
+  .feat .fi svg{width:17px;height:17px}
+  .feat h3{margin:0;font-size:14.5px;font-weight:680;letter-spacing:-.01em}
+  .feat p{margin:2px 0 0;font-size:13px;color:var(--muted)}
+  .outputs{margin-top:16px;padding-top:15px;border-top:1px solid var(--line2)}
+  .outputs .lab{font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--faint);font-weight:700;margin-bottom:9px}
+  .otags{display:flex;gap:7px;flex-wrap:wrap}
+  .otag{font-size:12px;font-weight:600;color:var(--ink);background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:5px 10px}
+
+  /* unlock card */
+  .unlock{position:sticky;top:16px;padding:20px;display:flex;flex-direction:column;gap:14px;
+    border:1px solid var(--line);border-top:4px solid var(--brand)}
+  @media (max-width:840px){.unlock{position:static}}
+  .unlock .carticon{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;color:var(--brand);
+    background:color-mix(in srgb,var(--brand) 12%,transparent)}
+  .unlock .carticon svg{width:22px;height:22px}
+  .unlock .u-h{font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--faint);font-weight:700}
+  .priceline{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
+  .priceline .now{font-size:34px;font-weight:820;letter-spacing:-.03em;color:var(--brand)}
+  .priceline .unit{font-size:14px;color:var(--muted);font-weight:600}
+  .downcurve{font-size:13px;color:var(--muted);line-height:1.5;background:var(--panel2);border:1px solid var(--line);border-radius:11px;padding:11px 13px}
+  .downcurve b{color:var(--ink)}
+  .savebadge{align-self:flex-start;font-size:12.5px;font-weight:750;color:var(--rev);background:color-mix(in srgb,var(--rev) 13%,transparent);padding:5px 11px;border-radius:20px}
+  .cta{border:0;border-radius:12px;background:linear-gradient(135deg,var(--brand),color-mix(in srgb,var(--brand) 60%,#6b86ff));color:#fff;font:inherit;font-weight:760;font-size:15.5px;
+    padding:15px;cursor:pointer;transition:.2s;width:100%;display:flex;align-items:center;justify-content:center;gap:9px}
+  .cta svg{width:19px;height:19px}
+  .cta:hover{transform:translateY(-2px);box-shadow:0 16px 34px color-mix(in srgb,var(--brand) 42%,transparent)}
+  .reassure{display:flex;flex-direction:column;gap:7px;margin-top:1px}
+  .reassure div{display:flex;gap:8px;align-items:center;font-size:12.6px;color:var(--muted)}
+  .reassure svg{width:15px;height:15px;color:var(--rev);flex:0 0 auto}
+  .seelink{text-align:center;font-size:13px}.seelink a{color:var(--accent);text-decoration:none;font-weight:600}.seelink a:hover{text-decoration:underline}
+  .finenote{font-size:11.5px;color:var(--faint);text-align:center;margin:-4px 0 0}
+  .previewnote{margin-top:28px;font-size:12px;color:var(--faint);border-top:1px solid var(--line);padding-top:14px;max-width:82ch}
+  .theme-tgl{position:fixed;top:12px;right:12px;border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:9px;padding:6px 10px;font:inherit;font-size:12px;cursor:pointer;z-index:5}
+</style>
+</head>
+<body>
+<button class="theme-tgl" id="themeTgl" aria-label="Toggle theme">◐ Theme</button>
+<div class="wrap">
+  <span class="pvbadge">Internal preview · existing‑user · locked calculator</span>
+
+  <div class="simbar">
+    <div class="lab">Preview: which calculator did they click, and what do they already own?</div>
+    <div class="simrow" style="margin-bottom:9px"><span style="font-size:11.5px;color:var(--faint);font-weight:700;text-transform:uppercase;letter-spacing:.05em;align-self:center">Locked (clicked):</span><span id="lockChips"></span></div>
+    <div class="simrow"><span style="font-size:11.5px;color:var(--faint);font-weight:700;text-transform:uppercase;letter-spacing:.05em;align-self:center">Already owns:</span><span id="ownChips"></span>
+      <span class="seg" id="tier" style="margin-left:6px"><button data-t="starter" class="on">Starter</button><button data-t="pro">Pro</button><button data-t="premium">Premium</button></span>
+      <span class="seg" id="cycle"><button data-c="monthly" class="on">Monthly</button><button data-c="annual">Annual</button></span>
+    </div>
+    <div class="simnote" id="simnote"></div>
+  </div>
+
+  <div class="hero">
+    <div class="lockbadge" id="lockbadge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+    </div>
+    <div>
+      <p class="eyebrow" id="eyebrow">Not on your plan yet</p>
+      <h1 id="title">Roofs</h1>
+    </div>
+  </div>
+  <p class="tagline" id="tagline"></p>
+
+  <div class="layout">
+    <section class="panel whatbox">
+      <h2>What this calculator does</h2>
+      <div id="feats"></div>
+      <div class="outputs"><div class="lab">You get, on every run</div><div class="otags" id="otags"></div></div>
+    </section>
+
+    <aside class="panel unlock">
+      <div class="carticon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+      </div>
+      <div class="u-h">Add to your plan</div>
+      <div class="priceline"><span class="now" id="addprice">$0</span><span class="unit" id="addunit">/mo more</span></div>
+      <div class="downcurve" id="downcurve"></div>
+      <div class="savebadge" id="savebadge" hidden></div>
+      <button class="cta" id="cta">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+        <span id="ctatext">Add Roofs — +$0/mo</span>
+      </button>
+      <div class="reassure">
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Added instantly to your existing plan — no new checkout</div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Prorated for the rest of this billing period, then rolls in</div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Charged to your card on file · cancel or change anytime</div>
+      </div>
+      <p class="finenote">One plan, one renewal date. Your discount grows as you add.</p>
+      <div class="seelink"><a href="build-your-plan.html" id="seeall">Compare all calculators &amp; pricing →</a></div>
+    </aside>
+  </div>
+
+  <p class="previewnote" id="pnote"></p>
+</div>
+
+<script src="js/pricing-engine.js"></script>
+<script>
+(function(){
+  "use strict";
+  if(!window.WLCPricing){ document.body.insertAdjacentHTML("beforeend","<p style='padding:20px'>Pricing engine failed to load.</p>"); return; }
+  var P = window.WLCPricing;
+
+  // Per-calculator brand color + conversion content. Scope descriptions only — no ASCE values invented.
+  var BRAND = { wd:"#06b6d4", mwfrs:"#3b82f6", roofs:"#f97316", other:"#14b8a6", specialty:"#a855f7", solar:"#fbbf24" };
+  var ICONS = {
+    check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>',
+    grid:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>',
+    layers:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>',
+    file:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>',
+    wind:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/></svg>'
+  };
+  var CALC = {
+    wd:{ name:"Windows, Doors & Shutters", tag:"Component &amp; cladding pressures for every opening in the envelope — <b>windows, doors, shutters, and mulled assemblies</b> — the way plan reviewers expect to see them.",
+      feats:[["grid","Per‑opening design pressures","Positive and negative DP for each window, door, and shutter, by wall zone."],
+             ["layers","Mulled assemblies handled right","Lite, mullion (both tributary widths), and the wall opening — all three checks."],
+             ["file","Submittal‑ready DP schedule","Export a clean pressure schedule that matches how AHJs review openings."]],
+      outputs:["Zone 4 / Zone 5 pressures","Positive & negative DP","Mullion tributary","DP schedule export"] },
+    mwfrs:{ name:"MWFRS — Whole Building", tag:"Main Wind‑Force Resisting System pressures for the <b>whole building</b> — Directional (Ch 27) and Envelope (Ch 28) in one place.",
+      feats:[["wind","Directional + Envelope","Both ASCE 7‑22 procedures, so you pick the one your project calls for."],
+             ["grid","Every face resolved","Windward, leeward, side walls, and roof — per‑surface design pressures."],
+             ["file","Documented, per‑face output","A clean pressure breakdown ready to hand to the structural reviewer."]],
+      outputs:["Directional Ch 27","Envelope Ch 28","Windward / leeward","Per‑face pressures"] },
+    roofs:{ name:"Roofs", tag:"Roof pressures for <b>every roof shape you build</b> — plus parapets and overhangs — without leaving the calculator to hand‑check a figure.",
+      feats:[["grid","Every roof shape","Gable, hip, monoslope, flat, sawtooth, and multispan — each with the right zones."],
+             ["layers","Parapets & overhangs","Overhang uplift and parapet pressures handled alongside the main roof."],
+             ["file","Zone‑by‑zone output","Corner, edge, and field pressures laid out for the permit set."]],
+      outputs:["Gable · Hip · Mono","Flat · Sawtooth","Overhang uplift","Corner / edge / field"] },
+    other:{ name:"Other Structures", tag:"Wind loads for the structures that aren’t the building — <b>signs, freestanding walls, rooftop equipment, chimneys, tanks, and trussed towers</b>.",
+      feats:[["grid","Six structure types","Signs, walls, equipment, chimneys, tanks, and trussed towers in one calculator."],
+             ["wind","Force coefficients done for you","The right Cf treatment for each shape, so you’re not chasing figures."],
+             ["file","Force & pressure output","Design forces documented per structure for the submittal."]],
+      outputs:["Signs & walls","Rooftop equipment","Chimneys & tanks","Trussed towers"] },
+    specialty:{ name:"Specialty Components", tag:"The specialty roof components that trip up a submittal — <b>parapets (§30.6) and attached canopies (§30.9)</b> — done to ASCE 7‑22.",
+      feats:[["layers","Parapets — §30.6","Windward and leeward parapet pressures for the components and cladding."],
+             ["grid","Attached canopies — §30.9","Net pressures on canopies attached to the building wall."],
+             ["file","Section‑cited output","Results tied to the governing ASCE section for a clean review."]],
+      outputs:["Parapet §30.6","Canopy §30.9","Net pressures","Section‑cited"] },
+    solar:{ name:"Solar (coming soon)", tag:"Rooftop and ground‑mount <b>PV array wind loads</b> — the one‑stop solar package. Launching soon.",
+      feats:[["grid","Rooftop & ground‑mount","Both array types in a single solar‑focused workflow."],
+             ["wind","PV‑specific pressures","Array‑edge and interior zone treatment for panels."],
+             ["file","Installer‑ready output","Loads documented for the racking and permit package."]],
+      outputs:["Rooftop PV","Ground‑mount","Array zones","Coming soon"] }
+  };
+
+  function qparam(k){ try{ return new URLSearchParams(location.search).get(k); }catch(e){ return null; } }
+  var locked = (qparam("calc")||"roofs").toLowerCase();
+  if(!CALC[locked]) locked = "roofs";
+
+  // Existing user simulation: default they own W/D + MWFRS. Never "own" the locked one.
+  var state = { tier:"starter", cycle:"monthly", owned:{ wd:true, mwfrs:true }, locked:locked };
+  if(state.owned[locked]) delete state.owned[locked];
+
+  function money(v){ return "$"+Math.round(v).toLocaleString(); }
+  function unit(){ return state.cycle==="annual"?"/yr":"/mo"; }
+  function liveIds(map){ return P.config().catalog.filter(function(c){return c.live&&map[c.id];}).map(function(c){return c.id;}); }
+  function quote(){ return P.quote({ owned:liveIds(state.owned), selected:[state.locked], tier:state.tier, cycle:state.cycle, bipSelected:false }); }
+  function calcLive(id){ var c=P.config().catalog.filter(function(x){return x.id===id;})[0]; return c&&c.live; }
+
+  function applyBrand(){ document.documentElement.style.setProperty("--brand", BRAND[state.locked]||"#2f4bff"); }
+
+  function renderChips(){
+    var lh="", oh="";
+    P.config().catalog.forEach(function(c){
+      lh+='<button class="chip'+(c.id===state.locked?" locked":"")+'" data-role="lock" data-id="'+c.id+'">'+c.name.replace(" & Shutters","").replace(" (coming soon)","")+'</button>';
+      if(c.live && c.id!==state.locked)
+        oh+='<button class="chip'+(state.owned[c.id]?" on":"")+'" data-role="own" data-id="'+c.id+'">'+(state.owned[c.id]?"✓ ":"")+c.name.replace(" & Shutters","").replace(", Parapets & Overhangs","")+'</button>';
+    });
+    document.getElementById("lockChips").innerHTML=lh;
+    document.getElementById("ownChips").innerHTML=oh;
+    var Q=quote();
+    document.getElementById("simnote").textContent = "Simulating a customer who owns "+Q.ownedCount+" calculator"+(Q.ownedCount!==1?"s":"")+" ("+money(Q.currentTotal)+unit()+" today) and just clicked a locked "+CALC[state.locked].name.replace(" (coming soon)","")+".";
+  }
+
+  function renderContent(){
+    var c = CALC[state.locked];
+    document.getElementById("title").textContent = c.name;
+    document.getElementById("tagline").innerHTML = c.tag;
+    document.getElementById("eyebrow").textContent = calcLive(state.locked) ? "Not on your plan yet" : "Coming soon — not yet available";
+    document.getElementById("feats").innerHTML = c.feats.map(function(f){
+      return '<div class="feat"><div class="fi">'+(ICONS[f[0]]||ICONS.check)+'</div><div><h3>'+f[1]+'</h3><p>'+f[2]+'</p></div></div>';
+    }).join("");
+    document.getElementById("otags").innerHTML = c.outputs.map(function(o){ return '<span class="otag">'+o+'</span>'; }).join("");
+    document.title = c.name + " — Locked (Preview)";
+  }
+
+  function renderUnlock(){
+    var Q=quote(), c=CALC[state.locked], live=calcLive(state.locked);
+    document.getElementById("addprice").textContent = "+"+money(Q.addNextPrice);
+    document.getElementById("addunit").textContent = unit()+" more";
+    var dc = document.getElementById("downcurve");
+    if(Q.ownedCount>0){
+      dc.innerHTML = "You already pay <b>"+money(Q.currentTotal)+unit()+"</b> for "+Q.ownedCount+" calculator"+(Q.ownedCount!==1?"s":"")+". Adding "+c.name.replace(" (coming soon)","")+" brings you to <b>"+money(Q.newTotal)+unit()+"</b> — you’re already down the curve, so it’s your cheapest add yet.";
+    } else {
+      dc.innerHTML = "Your first calculator is <b>"+money(Q.addNextPrice)+unit()+"</b>. Every one after that costs less than the last.";
+    }
+    var sb=document.getElementById("savebadge");
+    if(Q.savings>0){ sb.hidden=false; sb.textContent="Your "+Q.afterCount+"-calc plan saves "+money(Q.savings)+unit()+" vs buying separately"; } else sb.hidden=true;
+
+    var cta=document.getElementById("cta"), ctatext=document.getElementById("ctatext");
+    if(!live){ ctatext.textContent="Notify me when "+shortName(c.name)+" launches"; cta.style.background="linear-gradient(135deg,var(--muted),var(--faint))"; }
+    else { ctatext.textContent="Add "+shortName(c.name)+" — +"+money(Q.addNextPrice)+unit(); cta.style.background=""; }
+  }
+  function shortName(n){ return n.replace(" (coming soon)","").replace(", Parapets & Overhangs","").replace(" & Shutters",""); }
+
+  function render(){ applyBrand(); renderChips(); renderContent(); renderUnlock();
+    document.getElementById("pnote").textContent = "Preview only — no account is charged. The unlock routes an EXISTING customer to the in‑account add flow (modify subscription → curve price, prorated), never a fresh checkout. Prices from js/pricing-engine.js; proration is illustrative until Stripe returns the real amount.";
+  }
+
+  document.getElementById("lockChips").addEventListener("click",function(e){ var b=e.target.closest(".chip"); if(!b) return;
+    state.locked=b.dataset.id; delete state.owned[state.locked]; render(); });
+  document.getElementById("ownChips").addEventListener("click",function(e){ var b=e.target.closest(".chip"); if(!b) return; var id=b.dataset.id;
+    if(state.owned[id]) delete state.owned[id]; else state.owned[id]=true; render(); });
+  function segWire(id,key,attr){ document.getElementById(id).addEventListener("click",function(e){ var btn=e.target.closest("button"); if(!btn) return;
+    [].forEach.call(this.querySelectorAll("button"),function(x){x.classList.remove("on");}); btn.classList.add("on"); state[key]=btn.dataset[attr]; render(); }); }
+  segWire("tier","tier","t"); segWire("cycle","cycle","c");
+  document.getElementById("cta").addEventListener("click",function(){ var Q=quote(), c=CALC[state.locked];
+    if(!calcLive(state.locked)){ alert("Preview — would capture a launch‑notify signup for "+shortName(c.name)+"."); return; }
+    alert("Preview — would call POST /api/subscriptions/add-calculators { programs:[\""+state.locked+"\"], cycle:\""+state.cycle+"\", tier:\""+state.tier+"\" }\\n\\nExisting "+state.cycle+" bucket → modify to "+money(Q.newTotal)+unit()+" (prorated). If they have no "+state.cycle+" bucket, the API returns 409 {route:checkout-curve} and we open build-your-plan for a new "+state.cycle+" bucket."); });
+  document.getElementById("themeTgl").addEventListener("click",function(){ var cur=document.documentElement.getAttribute("data-theme");
+    document.documentElement.setAttribute("data-theme", cur==="dark"?"light":(cur==="light"?"dark":(matchMedia("(prefers-color-scheme:dark)").matches?"light":"dark"))); });
+
+  render();
+})();
+</script>
+</body>
+</html>

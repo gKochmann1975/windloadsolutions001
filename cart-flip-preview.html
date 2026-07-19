@@ -1813,8 +1813,7 @@
   var PROG = { wd:"cc_walls", mwfrs:"mwfrs", roofs:"cc_roofs", other:"cc_other_structures", specialty:"cc_specialty", solar:"cc_solar" };
   var COLORS = { wd:"#06b6d4", mwfrs:"#3b82f6", roofs:"#f97316", other:"#14b8a6", specialty:"#a855f7", solar:"#fbbf24" };
   var NAMES = { wd:"Windows, Doors & Shutters", mwfrs:"MWFRS — Whole Building", roofs:"Roofs", other:"Other Structures", specialty:"Specialty Components", solar:"Solar" };
-  var DESC = { wd:"C&C openings", mwfrs:"Directional + Envelope", roofs:"Every roof shape + parapets", other:"Signs, walls, equipment, towers", specialty:"Parapets §30.6 + canopies §30.9", solar:"Rooftop + ground-mount PV" };
-  var FEATS = { wd:["C&C openings","Mulled assemblies"], mwfrs:["Directional Ch 27","Envelope Ch 28"], roofs:["Every roof shape","Parapets & overhangs"], other:["Signs · walls · towers","Equipment & tanks"], specialty:["Parapets §30.6","Canopies §30.9"], solar:["Rooftop PV","Ground-mount"] };
+  var DESC = { wd:"Windows, doors & shutters", mwfrs:"Whole-building wind pressures", roofs:"Every roof shape + parapets", other:"Signs, walls, equipment, towers", specialty:"Parapets & attached canopies", solar:"Rooftop + ground-mount PV" };
   var A='fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"';
   var ICONS = {
     wd:'<svg viewBox="0 0 24 24" '+A+'><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="12" y1="3" x2="12" y2="21"/></svg>',
@@ -1847,11 +1846,10 @@
   // ---- LEFT: your familiar cart format + brand icons + curve pricing ----
   function renderItem(prog, cycle){
     var base=P.curveTotal(1, O(cycle)), label=cycle==="annual"?"/year":"/month";
-    var chips=(FEATS[prog]||[]).map(function(f){ return '<span style="display:inline-block;background:#f0f9ff;color:#0369a1;padding:2px 8px;border-radius:4px;font-size:0.75rem;margin-right:4px;margin-bottom:4px;">'+f+'</span>'; }).join("");
     return '<div class="cart-item" style="background:white;border:1px solid #e5e7eb;border-radius:12px;padding:16px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;">'+
       '<div style="flex:1;display:flex;align-items:center;">'+
         '<div class="cf-brand" style="background:'+COLORS[prog]+'">'+ICONS[prog]+'</div>'+
-        '<div><h4 style="margin:0 0 4px 0;color:#1f2937;font-size:1rem;">'+NAMES[prog]+'</h4><div style="margin-top:8px;">'+chips+'</div></div>'+
+        '<div><h4 style="margin:0;color:#1f2937;font-size:1rem;">'+NAMES[prog]+'</h4></div>'+
       '</div>'+
       '<div style="text-align:right;min-width:100px;">'+
         '<div style="font-size:1.2rem;font-weight:700;color:#0018ff;">'+money(base)+'</div>'+

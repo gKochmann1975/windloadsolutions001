@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Add calculators to your WindLoadCalc subscription — pay only the volume-curve difference, prorated to your card.">
+<title>Add Calculators to Your Plan | WindLoadCalc</title>
+<style>
+  :root{
+    --bg:#eef1f7; --panel:#fff; --panel2:#f6f8fc; --ink:#0f1730; --muted:#586178; --faint:#8a93a8;
+    --line:#e2e6f0; --line2:#eef1f7;
+    --accent:#2f4bff; --rev:#0e9f6e; --marg:#d97706; --bip:#0d9488; --complete:#7c3aed; --own:#0e9f6e;
+    --shadow:0 1px 2px rgba(15,23,48,.05),0 14px 36px rgba(15,23,48,.08); --r:14px;
+  }
+  @media (prefers-color-scheme:dark){:root{
+    --bg:#080b16; --panel:#111830; --panel2:#0d142a; --ink:#eaf0ff; --muted:#9aa6c2; --faint:#6b768f;
+    --line:#212a44; --line2:#1a2238;
+    --accent:#6b86ff; --rev:#34d399; --marg:#f5a83f; --bip:#2dd4bf; --complete:#a78bfa; --own:#34d399;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 18px 40px rgba(0,0,0,.5);
+  }}
+  :root[data-theme="dark"]{
+    --bg:#080b16; --panel:#111830; --panel2:#0d142a; --ink:#eaf0ff; --muted:#9aa6c2; --faint:#6b768f;
+    --line:#212a44; --line2:#1a2238; --accent:#6b86ff; --rev:#34d399; --marg:#f5a83f; --bip:#2dd4bf; --complete:#a78bfa; --own:#34d399;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 18px 40px rgba(0,0,0,.5);
+  }
+  :root[data-theme="light"]{
+    --bg:#eef1f7; --panel:#fff; --panel2:#f6f8fc; --ink:#0f1730; --muted:#586178; --faint:#8a93a8;
+    --line:#e2e6f0; --line2:#eef1f7; --accent:#2f4bff; --rev:#0e9f6e; --marg:#d97706; --bip:#0d9488; --complete:#7c3aed; --own:#0e9f6e;
+    --shadow:0 1px 2px rgba(15,23,48,.05),0 14px 36px rgba(15,23,48,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+    line-height:1.5;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+  .wrap{max-width:1080px;margin:0 auto;padding:24px 20px 70px}
+  .pvbadge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--complete);background:color-mix(in srgb,var(--complete) 14%,transparent);padding:3px 10px;border-radius:20px;margin-bottom:12px}
+  h1{font-size:clamp(20px,2.4vw,27px);letter-spacing:-.02em;margin:0 0 4px;font-weight:760;text-wrap:balance}
+  .sub{color:var(--muted);margin:0;font-size:14.5px;max-width:64ch}
+
+  .simbar{margin:16px 0 6px;padding:12px 14px;background:var(--panel);border:1px dashed var(--line);border-radius:12px}
+  .simbar .lab{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);font-weight:700;margin-bottom:8px}
+  .chips{display:flex;gap:7px;flex-wrap:wrap}
+  .chip{border:1.5px solid var(--line);background:var(--panel2);color:var(--muted);font:inherit;font-size:12.5px;font-weight:600;
+    padding:6px 11px;border-radius:20px;cursor:pointer;transition:.15s}
+  .chip.on{border-color:var(--own);color:var(--own);background:color-mix(in srgb,var(--own) 12%,transparent)}
+  .simnote{font-size:11.5px;color:var(--faint);margin-top:7px}
+
+  .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 18px;align-items:center}
+  .seg{display:flex;gap:4px;background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:4px;box-shadow:var(--shadow)}
+  .seg button{border:0;background:transparent;color:var(--muted);font:inherit;font-size:13px;font-weight:650;padding:8px 13px;border-radius:8px;cursor:pointer;transition:.15s}
+  .seg button:hover{color:var(--ink)} .seg button.on{background:var(--accent);color:#fff;box-shadow:0 2px 9px rgba(47,75,255,.35)}
+  .seg .savepill{font-size:10.5px;font-weight:700;color:var(--rev);margin-left:5px}.seg button.on .savepill{color:#d6ffe9}
+  .daysctl{display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--muted);background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:7px 12px;box-shadow:var(--shadow)}
+  .daysctl input{accent-color:var(--accent)}
+
+  .layout{display:grid;grid-template-columns:1fr 360px;gap:22px;align-items:start}
+  @media (max-width:860px){.layout{grid-template-columns:1fr}}
+  .cards{display:flex;flex-direction:column;gap:11px}
+  .card{display:flex;align-items:center;gap:14px;background:var(--panel);border:1.5px solid var(--line);border-radius:var(--r);
+    padding:14px 17px;cursor:pointer;transition:.16s;box-shadow:var(--shadow)}
+  .card:hover{transform:translateY(-1px)}
+  .card.on{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 18%,transparent),var(--shadow)}
+  .card.owned{cursor:default;border-color:color-mix(in srgb,var(--own) 40%,var(--line));background:color-mix(in srgb,var(--own) 6%,var(--panel))}
+  .card.owned:hover{transform:none}
+  .card.soon{opacity:.55;cursor:not-allowed}
+  .tick{width:26px;height:26px;border-radius:8px;border:2px solid var(--line);display:grid;place-items:center;flex:0 0 auto;color:#fff;transition:.15s}
+  .card.on .tick{background:var(--accent);border-color:var(--accent)}
+  .card.owned .tick{background:var(--own);border-color:var(--own)}
+  .tick svg{width:15px;height:15px;opacity:0;transition:.15s}
+  .card.on .tick svg,.card.owned .tick svg{opacity:1}
+  .cbody{flex:1;min-width:0}.cbody h3{margin:0;font-size:15px;font-weight:680;letter-spacing:-.01em}
+  .cbody p{margin:2px 0 0;font-size:12.6px;color:var(--muted)}
+  .cact{flex:0 0 auto;text-align:right}
+  .cact .add{font-size:14.5px;font-weight:750;color:var(--marg);white-space:nowrap}
+  .cact .add small{display:block;font-size:11px;color:var(--faint);font-weight:600}
+  .cact .in{font-size:12.5px;font-weight:700;color:var(--accent)}
+  .cact .ownlab{font-size:12.5px;font-weight:700;color:var(--own)}
+  .cact .soonlab{font-size:12px;font-weight:700;color:var(--faint)}
+
+  .summary{position:sticky;top:16px;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:18px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:13px}
+  @media (max-width:860px){.summary{position:static}}
+  .sumhead{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);font-weight:700}
+  .todayrow{display:flex;justify-content:space-between;align-items:baseline;font-size:13.5px;color:var(--muted)}
+  .todayrow b{color:var(--ink);font-weight:700}
+  .pricebig{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;padding-top:2px}
+  .pricebig .now{font-size:32px;font-weight:800;letter-spacing:-.03em;color:var(--accent)}
+  .pricebig .unit{font-size:14px;color:var(--muted);font-weight:600}
+  .deltatag{align-self:flex-start;font-size:13px;font-weight:750;color:var(--marg);background:color-mix(in srgb,var(--marg) 13%,transparent);padding:4px 11px;border-radius:20px}
+  .savebadge{align-self:flex-start;font-size:12.5px;font-weight:750;color:var(--rev);background:color-mix(in srgb,var(--rev) 13%,transparent);padding:5px 11px;border-radius:20px}
+  .proration{font-size:12.5px;color:var(--muted);line-height:1.5;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:9px 11px}
+  .proration b{color:var(--ink)}
+  .savemore{font-size:13px;color:var(--muted);line-height:1.5}.savemore b{color:var(--ink)}
+  .progress{display:flex;flex-direction:column;gap:7px}
+  .plabel{display:flex;justify-content:space-between;font-size:12.5px;color:var(--muted)}.plabel b{color:var(--ink)}
+  .track{height:9px;border-radius:6px;background:var(--panel2);overflow:hidden;border:1px solid var(--line)}
+  .fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--accent),var(--complete));transition:width .35s cubic-bezier(.4,0,.2,1)}
+  .nudge{font-size:12.8px;color:var(--complete);font-weight:600;line-height:1.45}.nudge.complete{color:var(--rev)}
+  .bip{display:flex;align-items:center;gap:12px;border:1.5px dashed var(--bip);border-radius:var(--r);padding:13px 15px;background:color-mix(in srgb,var(--bip) 7%,var(--panel));cursor:pointer;transition:.15s}
+  .bip.on{background:color-mix(in srgb,var(--bip) 15%,var(--panel));border-style:solid}
+  .bip.free{border-color:var(--rev);background:color-mix(in srgb,var(--rev) 12%,var(--panel));cursor:default}
+  .bip .tick{border-color:var(--bip)}.bip.on .tick{background:var(--bip);border-color:var(--bip)}
+  .bip h3{font-size:14px;margin:0;font-weight:680}.bip p{margin:2px 0 0;font-size:12.3px;color:var(--muted)}
+  .bip .price{font-weight:750;color:var(--bip);white-space:nowrap}.bip.free .price{color:var(--rev)}
+  .cta{border:0;border-radius:11px;background:linear-gradient(135deg,var(--accent),#4666ff);color:#fff;font:inherit;font-weight:750;font-size:15px;padding:14px;cursor:pointer;transition:.2s;width:100%}
+  .cta:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(47,75,255,.4)}
+  .cta:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
+  .finenote{font-size:11.5px;color:var(--faint);text-align:center;margin:-3px 0 0}
+  .previewnote{margin-top:26px;font-size:12px;color:var(--faint);border-top:1px solid var(--line);padding-top:14px;max-width:80ch}
+  .theme-tgl{position:fixed;top:12px;right:12px;border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:9px;padding:6px 10px;font:inherit;font-size:12px;cursor:pointer}
+  .donebanner{margin:0 0 16px;padding:12px 15px;border-radius:12px;font-size:14px;font-weight:600;color:#0e6b46;background:color-mix(in srgb,var(--rev) 15%,var(--panel));border:1px solid color-mix(in srgb,var(--rev) 45%,transparent)}
+  @media (prefers-color-scheme:dark){.donebanner{color:#6ee7b7}}
+  :root[data-theme="dark"] .donebanner{color:#6ee7b7}
+  #tier button:disabled{cursor:default}
+</style>
+</head>
+<body>
+<button class="theme-tgl" id="themeTgl" aria-label="Toggle theme">◐ Theme</button>
+<div class="wrap">
+  <h1>Add calculators to your plan</h1>
+  <p class="sub" id="subline">Loading your plan…</p>
+
+  <div class="toolbar">
+    <div class="seg" id="tier"><button data-t="starter" class="on">Starter</button><button data-t="pro">Pro</button><button data-t="premium">Premium</button></div>
+    <div class="seg" id="cycle"><button data-c="monthly" class="on">Monthly</button><button data-c="annual">Annual<span class="savepill">2 mo free</span></button></div>
+  </div>
+
+  <div class="layout">
+    <div class="cards" id="cards"></div>
+    <aside class="summary" id="summary"><div class="sumhead">Plan changes</div><div id="sumbody"></div></aside>
+  </div>
+
+  <p class="previewnote" id="pnote"></p>
+</div>
+
+<script src="js/pricing-engine.js"></script>
+<script>
+(function(){
+  "use strict";
+  var cards = document.getElementById("cards");
+  if(!window.WLCPricing){ cards.innerHTML="<p>Pricing failed to load. Please refresh.</p>"; return; }
+  var P = window.WLCPricing, API = "https://api.windloadcalc.com";
+  function showSignIn(){
+    document.querySelector(".wrap").innerHTML =
+      '<h1>Sign in to manage your plan</h1>'+
+      '<p class="sub" style="margin-top:6px">Please <a href="/login.html" style="color:var(--accent);font-weight:700;text-decoration:none">sign in</a> to add calculators to your subscription.</p>';
+  }
+  var token = localStorage.getItem("windload_auth_token");
+  if(!token){ showSignIn(); return; }
+
+  var DESC = {
+    wd:"Windows, doors & shutters",
+    mwfrs:"Whole‑building wind pressures",
+    roofs:"Every roof shape, plus parapets & overhangs",
+    other:"Signs, walls, equipment, chimneys, tanks & towers",
+    specialty:"Parapets & attached canopies",
+    solar:"Rooftop + ground‑mount PV — coming soon"
+  };
+  var CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>';
+
+  var plan = { monthly:null, annual:null };   // from GET /api/subscriptions/my-plan
+  var state = { cycle:"monthly", selected:{}, bipTouched:false, bip:false, newTier:"starter", busy:false };
+
+  function bucket(){ return plan[state.cycle]; }
+  function ownedMap(){ var m={}, b=bucket(); if(b)(b.covered_calculators||[]).forEach(function(id){m[id]=true;}); return m; }
+  function tier(){ var b=bucket(); return b ? b.tier : (state.newTier||"starter"); }
+  function ownedIds(){ return Object.keys(ownedMap()); }
+  function selectedIds(){ var om=ownedMap(); return Object.keys(state.selected).filter(function(id){ return !om[id] && isLive(id); }); }
+  function money(v){ return "$"+Math.round(v).toLocaleString(); }
+  function unit(){ return state.cycle==="annual"?"/yr":"/mo"; }
+  function isLive(id){ var c=P.config().catalog.filter(function(x){return x.id===id;})[0]; return !!(c&&c.live); }
+  function haveBip(){ var b=bucket(); return b ? !!b.bip_included : false; }
+  function bipDesired(){ return state.bipTouched ? state.bip : haveBip(); }
+  function q(){ return P.quote({ owned:ownedIds(), selected:selectedIds(), tier:tier(), cycle:state.cycle, bipSelected:bipDesired() }); }
+
+  function renderCards(){
+    var Q=q(), om=ownedMap(), h="";
+    P.config().catalog.forEach(function(c){
+      var owned=!!om[c.id], on=(!!state.selected[c.id] && !owned), soon=!c.live;
+      var cls="card"+(owned?" owned":(on?" on":""))+(soon&&!owned?" soon":"");
+      var act;
+      if(owned) act='<span class="ownlab">Included</span>';
+      else if(soon) act='<span class="soonlab">Soon</span>';
+      else if(on) act='<span class="in">✓ Adding</span>';
+      else act='<span class="add">Add +'+money(Q.addNextPrice)+'<small>'+unit().slice(1)+'</small></span>';
+      var interactive=!owned&&!soon;
+      h+='<div class="'+cls+'" data-id="'+c.id+'"'+(interactive?' tabindex="0" role="button" aria-pressed="'+on+'"':'')+'>'+
+         '<div class="tick">'+CHECK+'</div><div class="cbody"><h3>'+c.name+'</h3><p>'+(DESC[c.id]||"")+'</p></div>'+
+         '<div class="cact">'+act+'</div></div>';
+    });
+    cards.innerHTML=h;
+  }
+
+  function renderSummary(){
+    var Q=q(), b=document.getElementById("sumbody"), sel=selectedIds(), h="";
+    var bipChanged = state.bipTouched && (state.bip !== haveBip()) && !Q.isComplete;
+    var bipAdd = (bipDesired() && !Q.isComplete) ? Q.bipPrice : 0;
+    h+='<div class="todayrow"><span>Your '+state.cycle+' plan today</span><b>'+money(Q.currentTotal)+unit()+'</b></div>';
+    if(sel.length===0 && !bipChanged){
+      h+='<p class="savemore" style="margin-top:2px">Pick a calculator to add — your next one is just <b style="color:var(--marg)">+'+money(Q.addNextPrice)+unit()+'</b>'+(Q.addNextPrice===0?' (you have them all).':'.')+'</p>';
+      b.innerHTML=h; wireSummary(); return;
+    }
+    h+='<div class="pricebig"><span class="now">'+money(Q.newTotal+bipAdd)+'</span><span class="unit">'+unit()+' new total</span></div>';
+    if(sel.length) h+='<div class="deltatag">+'+money(Q.delta)+unit()+' for '+sel.length+' more</div>';
+    if(Q.savings>0) h+='<div class="savebadge">Your '+Q.afterCount+'-calc plan saves '+money(Q.savings)+unit()+' vs separate · '+Q.savingsPct+'% off</div>';
+    h+='<div class="proration">Charged to your card on file, <b>prorated</b> for the days left in this billing period, then <b>+'+money(Q.delta+bipAdd)+unit()+'</b> going forward.</div>';
+    if(Q.showSaveMore && Q.remainingToComplete>0) h+='<div class="savemore"><b>Keep going — each one’s cheaper.</b> Your next calculator is only <b>+'+money(Q.addNextPrice)+unit()+'</b>.</div>';
+    h+='<div class="progress"><div class="plabel"><span>Plan coverage</span><span><b>'+Q.afterCount+'</b> of '+Q.catalogLive+'</span></div><div class="track"><div class="fill" style="width:'+Math.round(Q.afterCount/Q.catalogLive*100)+'%"></div></div>';
+    if(Q.isComplete) h+='<div class="nudge complete">✓ Complete — every calculator, plus BIP free.</div>';
+    else if(Q.showCompleteNudge) h+='<div class="nudge">'+Q.remainingToComplete+' away from <b>Complete</b> — all '+Q.catalogLive+' + BIP free.</div>';
+    h+='</div>';
+    if(Q.isComplete) h+='<div class="bip free"><div class="tick">'+CHECK+'</div><div class="cbody"><h3>Building Intelligence Platform</h3><p>Included free with Complete.</p></div><div class="price">FREE</div></div>';
+    else h+='<div class="bip'+(bipDesired()?' on':'')+'" id="bipRow" tabindex="0" role="button" aria-pressed="'+bipDesired()+'"><div class="tick">'+CHECK+'</div><div class="cbody"><h3>Full BIP access</h3><p>Hurricane risk, solar siting, ZIP search across 40k+ ZIPs.</p></div><div class="price">+'+money(Q.bipPrice)+unit()+'</div></div>';
+    var due = Q.delta + bipAdd;
+    var label = bucket() ? ("Add to my plan — +"+money(due)+unit()) : ("Start my "+state.cycle+" plan — "+money(Q.newTotal+bipAdd)+unit());
+    h+='<button class="cta" id="cta"'+(state.busy?" disabled":"")+'>'+(state.busy?"Working…":label)+'</button>';
+    h+='<p class="finenote">'+(bucket()?"Prorated today, then billed ":"Billed ")+(state.cycle==="annual"?"yearly":"monthly")+'. Change anytime.</p>';
+    b.innerHTML=h; wireSummary();
+  }
+
+  function wireSummary(){
+    var bipRow=document.getElementById("bipRow");
+    if(bipRow) bipRow.onclick=function(){ state.bipTouched=true; state.bip=!bipDesired(); render(); };
+    var cta=document.getElementById("cta");
+    if(cta) cta.onclick=submit;
+  }
+
+  function syncToolbar(){
+    [].forEach.call(document.querySelectorAll("#cycle button"),function(x){ x.classList.toggle("on", x.dataset.c===state.cycle); });
+    var locked = !!bucket();   // tier is fixed once a bucket exists (an add never changes tier)
+    [].forEach.call(document.querySelectorAll("#tier button"),function(x){
+      x.classList.toggle("on", x.dataset.t===tier());
+      x.disabled = locked;
+      x.style.opacity = (locked && x.dataset.t!==tier()) ? ".4" : "";
+    });
+  }
+
+  function render(){ syncToolbar(); renderCards(); renderSummary(); }
+
+  function submit(){
+    if(state.busy) return;
+    var sel = selectedIds();
+    var bipChanged = state.bipTouched && (state.bip !== haveBip());
+    if(!sel.length && !bipChanged) return;
+    state.busy=true; render();
+    var body = { programs: sel, cycle: state.cycle, tier: tier(), bip: bipDesired() };
+    fetch(API+"/api/subscriptions/add-calculators",{ method:"POST",
+      headers:{ "Content-Type":"application/json", "Authorization":"Bearer "+token },
+      body: JSON.stringify(body)
+    }).then(function(r){ return r.json().then(function(d){ return {ok:r.ok, status:r.status, d:d}; }); })
+      .then(function(res){
+        if(res.ok){ done(res.d); return; }
+        if(res.status===409 || ((res.d.error||"").indexOf("No active subscription")>=0)){ return startNewBucket(sel); }
+        throw new Error(res.d.error || "Could not update your plan.");
+      }).catch(function(e){ state.busy=false; render(); alert(e.message || "Something went wrong. Please try again."); });
+  }
+
+  function startNewBucket(sel){
+    fetch(API+"/api/subscriptions/checkout-curve",{ method:"POST",
+      headers:{ "Content-Type":"application/json", "Authorization":"Bearer "+token },
+      body: JSON.stringify({ programs: sel, cycle: state.cycle, tier: tier(), bip: bipDesired() })
+    }).then(function(r){ return r.json(); }).then(function(d){
+      if(d.checkout_url){ location.href=d.checkout_url; } else { throw new Error(d.error||"Checkout failed"); }
+    }).catch(function(e){ state.busy=false; render(); alert(e.message); });
+  }
+
+  function done(d){
+    var cyc=state.cycle;
+    plan[cyc] = { cycle:cyc, tier:tier(), covered_calculators:(d.covered_calculators||[]), count:d.count,
+                  total:d.new_total, is_complete:d.is_complete, bip_included:!!d.bip_addon };
+    state.selected={}; state.bipTouched=false; state.bip=!!d.bip_addon; state.busy=false;
+    render();
+    var extra = d.is_complete ? " (Complete — BIP included free)" : (d.bip_addon ? " + BIP" : "");
+    var msg = "✓ Your plan is updated — "+d.count+" calculator"+(d.count!==1?"s":"")+extra+". Charged to your card on file, prorated.";
+    var banner=document.getElementById("doneBanner");
+    if(!banner){ banner=document.createElement("div"); banner.id="doneBanner"; banner.className="donebanner";
+      var w=document.querySelector(".wrap"); w.insertBefore(banner, w.querySelector(".toolbar")); }
+    banner.textContent=msg; banner.scrollIntoView({behavior:"smooth", block:"nearest"});
+  }
+
+  function loadPlan(){
+    fetch(API+"/api/subscriptions/my-plan",{ headers:{ "Authorization":"Bearer "+token } })
+      .then(function(r){ if(r.status===401){ showSignIn(); throw new Error("auth"); } return r.json(); })
+      .then(function(d){
+        (d.buckets||[]).forEach(function(b){ if(b.cycle==="annual"||b.cycle==="monthly") plan[b.cycle]=b; });
+        var p=new URLSearchParams(location.search), qc=p.get("cycle");
+        if(qc==="annual"||qc==="monthly") state.cycle=qc;
+        else if(plan.annual && !plan.monthly) state.cycle="annual";
+        var add=(p.get("add")||"").toLowerCase();
+        if(add && isLive(add) && !ownedMap()[add]) state.selected[add]=true;
+        var sl=document.getElementById("subline"), b=bucket();
+        if(sl) sl.textContent = b
+          ? ("You have a "+b.count+"‑calculator "+state.cycle+" plan. Adding more is cheap — each one costs less than the last.")
+          : "Build your plan — each calculator you add costs less than the last.";
+        render();
+      })
+      .catch(function(e){ if(e.message==="auth") return; cards.innerHTML="<p>Couldn’t load your plan — please refresh.</p>"; });
+  }
+
+  cards.addEventListener("click",function(e){ toggleCard(e.target.closest(".card")); });
+  cards.addEventListener("keydown",function(e){ if((e.key==="Enter"||e.key===" ")&&e.target.classList.contains("card")){ e.preventDefault(); toggleCard(e.target); }});
+  function toggleCard(card){ if(!card) return; var id=card.dataset.id; if(ownedMap()[id]||!isLive(id)) return; if(state.selected[id]) delete state.selected[id]; else state.selected[id]=true; render(); }
+  document.getElementById("cycle").addEventListener("click",function(e){ var x=e.target.closest("button"); if(!x) return; state.cycle=x.dataset.c; state.selected={}; state.bipTouched=false; render(); });
+  document.getElementById("tier").addEventListener("click",function(e){ var x=e.target.closest("button"); if(!x||x.disabled) return; if(!bucket()){ state.newTier=x.dataset.t; render(); } });
+  document.getElementById("themeTgl").addEventListener("click",function(){ var cur=document.documentElement.getAttribute("data-theme"); document.documentElement.setAttribute("data-theme", cur==="dark"?"light":(cur==="light"?"dark":(matchMedia("(prefers-color-scheme:dark)").matches?"light":"dark"))); });
+
+  loadPlan();
+})();
+</script>
+</body>
+</html>

@@ -1844,17 +1844,20 @@
   function O(cycle){ return { tier: plan.tier, cycle: cycle }; }   // engine opts {tier,cycle}
 
   // ---- LEFT: your familiar cart format + brand icons + curve pricing ----
-  function renderItem(prog, cycle){
-    var base=P.curveTotal(1, O(cycle)), label=cycle==="annual"?"/year":"/month";
+  function renderItem(prog, cycle, n){
+    // Curve/bundle pricing: a per-item dollar figure is fictional (the price is for the
+    // whole N-calculator plan, not any one calc). Show plan-membership instead so the line
+    // items never contradict the section total. The Annual/Monthly Total below is the price.
+    var incl=(n>1)?'Included in your '+n+'-calculator plan':'Included in your plan';
     return '<div class="cart-item" style="background:white;border:1px solid #e5e7eb;border-radius:12px;padding:16px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;">'+
       '<div style="flex:1;display:flex;align-items:center;">'+
         '<div class="cf-brand" style="background:'+COLORS[prog]+'">'+ICONS[prog]+'</div>'+
-        '<div><h4 style="margin:0;color:#1f2937;font-size:1rem;">'+NAMES[prog]+'</h4></div>'+
+        '<div><h4 style="margin:0;color:#1f2937;font-size:1rem;">'+NAMES[prog]+'</h4>'+
+          '<div style="font-size:0.82rem;color:#16a34a;font-weight:600;margin-top:3px;"><i class="fas fa-check-circle" style="margin-right:4px;"></i>'+incl+'</div>'+
+        '</div>'+
       '</div>'+
-      '<div style="text-align:right;min-width:100px;">'+
-        '<div style="font-size:1.2rem;font-weight:700;color:#0018ff;">'+money(base)+'</div>'+
-        '<div style="font-size:0.8rem;color:#64748b;">'+label+'</div>'+
-        '<button onclick="cfRemove(\''+prog+'\',\''+cycle+'\')" style="background:none;border:none;color:#dc2626;cursor:pointer;font-size:0.85rem;margin-top:8px;padding:4px 8px;"><i class="fas fa-trash"></i> Remove</button>'+
+      '<div style="text-align:right;">'+
+        '<button onclick="cfRemove(\''+prog+'\',\''+cycle+'\')" style="background:none;border:none;color:#dc2626;cursor:pointer;font-size:0.85rem;padding:4px 8px;"><i class="fas fa-trash"></i> Remove</button>'+
       '</div></div>';
   }
   function section(cycle){
@@ -1868,7 +1871,7 @@
       :'<span style="background:'+(isA?"#d1fae5":"#dbeafe")+';color:'+(isA?"#065f46":"#1e40af")+';padding:2px 8px;border-radius:4px;font-size:0.75rem;font-weight:600;">'+(isA?"Volume pricing":"Flexible")+'</span>';
     var box=isA?'<div style="background:#f0fdf4;border-radius:8px;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;"><span style="color:#166534;font-weight:500;">Annual Total (paid upfront)</span><span style="color:#166534;font-size:1.2rem;font-weight:700;">'+money(total)+'</span></div>'
                :'<div style="background:#eff6ff;border-radius:8px;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;"><span style="color:#1e40af;font-weight:500;">Monthly Total (recurring)</span><span style="color:#1e40af;font-size:1.2rem;font-weight:700;">'+money(total)+'/mo</span></div>';
-    return '<div class="cart-section '+(isA?"annual-section":"monthly-section")+'" style="margin-bottom:24px;"><div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid '+(isA?"#10b981":"#3b82f6")+';">'+head+badge+'</div><div class="cart-items">'+progs.map(function(p){return renderItem(p,cycle);}).join("")+'</div>'+box+'</div>';
+    return '<div class="cart-section '+(isA?"annual-section":"monthly-section")+'" style="margin-bottom:24px;"><div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid '+(isA?"#10b981":"#3b82f6")+';">'+head+badge+'</div><div class="cart-items">'+progs.map(function(p){return renderItem(p,cycle,progs.length);}).join("")+'</div>'+box+'</div>';
   }
   function render(){
     var host=document.getElementById("cart-items-container"); if(!host) return;

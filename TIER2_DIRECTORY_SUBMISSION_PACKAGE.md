@@ -1,0 +1,111 @@
+# WindLoadCalc — Backlink Prospecting & Outreach Deliverable (Tier 2+)
+
+Companion to `OFF_PAGE_SEO_BACKLINK_STRATEGY.md`. Real, researched targets (2026-07-19) ranked by ROI.
+**Hook for every pitch:** the free calculator — https://windloadcalc.com/free-wind-load-calculator.html
+(+ free MWFRS: https://windloadcalc.com/free-mwfrs-wind-load-calculator.html).
+**Honest positioning only** (memory rules): "only free ASCE 7-22 calc with real ZIP→wind-speed + FL
+HVHZ overrides," "online since 2006 / firm since 2002," PE sign-and-seal is a *separate service*.
+NO fake reviews, NO "sealed report" claims.
+
+> What I can't do end-to-end: POST external forms, create accounts, solve CAPTCHAs, or send email as
+> you. Everything below is prepped to the point of one click / one paste. Acceptance on editorial
+> targets is a human's call.
+
+---
+
+## Prioritized target list (by ROI)
+
+### A. Vendor self-serve directories — DO FIRST (free, DoFollow, YOU control, competitors already there)
+| Target | Competitor link there | How you get the same link | Difficulty | Angle |
+|---|---|---|---|---|
+| **SourceForge** sourceforge.net | **MecaWind listed** (confirmed) | Free "Add your software" vendor listing | Easy | Dedicated ASCE 7-22 wind tool w/ free calc |
+| **Slashdot** slashdot.org/software | MecaWind vs SkyCiv comparison (confirmed) | Same network as SourceForge — one listing feeds both | Easy | Same |
+| **Capterra** capterra.com | Construction/structural software category | Free vendor profile (claim/create) | Easy | Wind load calc + reports |
+| **GetApp / SoftwareAdvice** (Gartner network) | Structural software listings | One Gartner submission → 3 sites | Easy | Same |
+| **G2** g2.com | Structural analysis category | Free vendor profile | Easy–Med (needs a few reviews) | Same |
+| **thestructuralengineer.info/software** | **SkyCiv, MecaWind, RWIND listed** (confirmed) | Free basic listing via /advertising (paid = featured) | Med (email) | Structural-specific, high relevance |
+
+### B. Link-intersect software directories / listicles (competitors clustered — editorial contact)
+| Target | Links which competitors | Get the same link | Difficulty | Angle |
+|---|---|---|---|---|
+| **DCOdes** dcodes.io/categories/structural-engineering/software/wind-engineering | **MecaWind + SkyCiv + RWIND + 12 more** (confirmed; WLC absent) | Email to add WLC to the wind-engineering category | Med | Highest link-intersect; you're the obvious missing free tool |
+| **TopBusinessSoftware** topbusinesssoftware.com/categories/wind-simulation | "Top 17 Wind Simulation Software" | Submit/contact to be added | Med | Free ASCE 7-22 option |
+| **worktaps** worktaps.com/asce-wind-load-calculator | Lists 8+ free ASCE calcs (WLC absent) | Email "you're missing one" | Med | Only one with ZIP + HVHZ |
+| **Grokipedia / Wikipedia** "List of structural engineering software" | Lists many | Edit the wiki list (cite a source) | Med (editorial review) | Neutral factual entry |
+| **matthewmarks / tooldone / FIRGELLI** calc pages | Generic ASCE calcs | Comment/contact for resource link | Easy–Med | Code-correct alternative |
+
+### C. Communities (referral + occasional links — you post manually)
+| Target | Why | Angle |
+|---|---|---|
+| **Eng-Tips** thread 457247 "wind load pressure calculator (software)" + new threads | Engineers literally asking for wind load software | Answer the question, link the free calc as the ASCE 7-22 option |
+| **Reddit** r/StructuralEngineering, r/civilengineering, r/Construction | Recurring "free wind load calc?" posts | Same — be genuinely helpful, disclose you built it |
+| **FBC / Florida contractor forums** | HVHZ is your moat | ZIP→HVHZ wind speed is uniquely useful here |
+
+### D. Associations / trusted resource pages (harder, high-trust)
+| Target | Why | Angle |
+|---|---|---|
+| **SEAOC** seaoc.org/list-of-resources | Curated member resources page | Suggest the free calc as a member resource |
+| **NCSEA** ncsea.com + STRUCTURE Magazine | 44-state reach; contributor articles | Pitch a bylined ASCE 7-22 / HVHZ how-to (link in bio) |
+
+### E. Ongoing citation engine (GEO + authority)
+| Target | Why | Angle |
+|---|---|---|
+| **Qwoted** qwoted.com (+ HARO email digest via Featured.com) | Journalists want wind/hurricane/Florida-code experts | Register as expert; respond to relevant queries → high-DA news links + AI-citable mentions |
+
+---
+
+## The first 10 moves (in order, highest ROI first)
+1. **SourceForge** — create free vendor listing (MecaWind is there): https://sourceforge.net/software/ → "Add your product."
+2. **Capterra** — claim/create free profile: https://www.capterra.com/vendors/sign-up
+3. **GetApp/SoftwareAdvice** — one Gartner submission covers all three (starts at Capterra above).
+4. **thestructuralengineer.info** — request free basic listing: https://www.thestructuralengineer.info/advertising
+5. **DCOdes** — email to be added to the wind-engineering category (link-intersect win): dcodes.io contact/footer.
+6. **worktaps** listicle — email "you list 8 free ASCE calcs; you're missing the only one with ZIP + HVHZ."
+7. **TopBusinessSoftware** — submit to the wind-simulation category.
+8. **G2** — create free vendor profile; ask 2–3 real customers for honest reviews (never fake).
+9. **Wikipedia/Grokipedia** "List of structural engineering software" — add a neutral, cited entry.
+10. **Qwoted** — register as an expert source (wind load / hurricane / Florida building code) for ongoing citations.
+
+---
+
+## Reusable outreach copy
+
+### 1) Suggest-a-resource (resource/links pages, associations)
+> Subject: A free ASCE 7-22 wind load calculator for your resources
+> Hi [NAME], I'm Gregory Kochmann, owner of WindLoadCalc.com (structural wind-load tools since 2002).
+> Your [page] is a great resource list — I think our free wind load calculator would fit: enter a ZIP
+> and it returns the ASCE 7-22 design wind speed (with Florida HVHZ overrides), then Components &
+> Cladding pressure per Ch. 30. Free, no signup. https://windloadcalc.com/free-wind-load-calculator.html
+> Happy to add a reciprocal link. Thanks, Gregory
+
+### 2) Listicle add-request (roundups like worktaps)
+> Subject: One free ASCE 7-22 calculator you're missing
+> Hi [NAME], great roundup of free wind load calculators. One worth adding: WindLoadCalc's free tool is
+> the only one that pulls the ASCE 7-22 design wind speed by ZIP (incl. Miami-Dade 175 / Broward 170
+> HVHZ) and returns C&C design pressure per Ch. 30 — no signup, no meter.
+> https://windloadcalc.com/free-wind-load-calculator.html Would you consider including it? Thanks, Gregory
+
+### 3) HARO / Qwoted expert pitch (respond to a query)
+> I'm Gregory Kochmann, owner of WindLoadCalc.com, working in ASCE 7 wind load engineering since 2002.
+> [2–3 sentence direct, quotable answer to the reporter's question — real expertise, no promo fluff.]
+> Happy to expand or share data. Bio/tool: https://windloadcalc.com
+
+### 4) Broken-link outreach (find a dead calculator link on a resource page)
+> Subject: Broken link on [page]
+> Hi [NAME], while using your [page] I noticed the link to [dead tool] returns a 404. If you're
+> updating it, our free ASCE 7-22 wind load calculator could be a fit:
+> https://windloadcalc.com/free-wind-load-calculator.html Either way, thought you'd want to know. Thanks, Gregory
+
+---
+
+## The Ahrefs / Semrush gap — what this manual pass CANNOT cover
+This deliverable is built from web search + hand link-intersect on the top ~20 signals. A paid backlink
+tool ($99–199/mo Ahrefs/Semrush) would add, and is worth buying if this becomes a sustained effort:
+- **Full competitor backlink profiles** — every referring domain SkyCiv/MecaWind/Dlubal/Omni have
+  (hundreds–thousands), not just the ones surfaced by search.
+- **True Link Intersect at scale** — automatically list pages linking to 2+ competitors but NOT you
+  (I can only approximate this by hand for a few directories).
+- **DR/UR + traffic metrics** — to rank targets by real authority instead of judgment.
+- **Broken-link finder at scale** — competitors' dead-link backlinks you could reclaim.
+- **New/lost link monitoring** — track whether these submissions actually get indexed over time.
+Until then, work the first-10 list; it captures the highest-signal targets a manual pass can see.

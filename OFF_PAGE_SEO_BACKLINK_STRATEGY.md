@@ -62,6 +62,12 @@ Repos:
 Rules while executing: unique/contextual anchors (no bulk identical), surgical deltas, verify each
 link resolves live before claiming done, never `git add -A`.
 
+## TIER 2+ — Full prospecting deliverable
+**See `TIER2_DIRECTORY_SUBMISSION_PACKAGE.md`** for the researched, ROI-ranked target list
+(link-intersect winners, vendor self-serve directories, listicles, communities, associations,
+HARO/Qwoted), the first-10 moves with exact URLs, 4 reusable outreach templates, and the Ahrefs gap.
+Summary table below.
+
 ## TIER 2 — Free directory / listing submissions (we submit → they list)
 Calculator aggregators that already list tools like Omni/CalcTool. Getting listed = a backlink.
 | Target | URL | Status |

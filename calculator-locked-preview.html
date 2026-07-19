@@ -96,6 +96,9 @@
     padding:15px;cursor:pointer;transition:.2s;width:100%;display:flex;align-items:center;justify-content:center;gap:9px}
   .cta svg{width:19px;height:19px}
   .cta:hover{transform:translateY(-2px);box-shadow:0 16px 34px color-mix(in srgb,var(--brand) 42%,transparent)}
+  .cta.ghost{background:transparent;color:var(--brand);border:1.5px solid color-mix(in srgb,var(--brand) 45%,var(--line));box-shadow:none;font-size:14.5px;padding:12px}
+  .cta.ghost:hover{background:color-mix(in srgb,var(--brand) 8%,transparent);transform:translateY(-1px);box-shadow:none}
+  .cta.ghost svg{width:17px;height:17px}
   .reassure{display:flex;flex-direction:column;gap:7px;margin-top:1px}
   .reassure div{display:flex;gap:8px;align-items:center;font-size:12.6px;color:var(--muted)}
   .reassure svg{width:15px;height:15px;color:var(--rev);flex:0 0 auto}
@@ -155,8 +158,11 @@
         <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Prorated for the rest of this billing period, then rolls in</div>
         <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Charged to your card on file · cancel or change anytime</div>
       </div>
+      <button class="cta ghost" id="ctaMore">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        <span id="ctaMoreText">Add more &amp; save more →</span>
+      </button>
       <p class="finenote">One plan, one renewal date. Your discount grows as you add.</p>
-      <div class="seelink"><a href="build-your-plan.html" id="seeall">Compare all calculators &amp; pricing →</a></div>
     </aside>
   </div>
 
@@ -286,6 +292,14 @@
   document.getElementById("cta").addEventListener("click",function(){ var Q=quote(), c=CALC[state.locked];
     if(!calcLive(state.locked)){ alert("Preview — would capture a launch‑notify signup for "+shortName(c.name)+"."); return; }
     alert("Preview — would call POST /api/subscriptions/add-calculators { programs:[\""+state.locked+"\"], cycle:\""+state.cycle+"\", tier:\""+state.tier+"\" }\\n\\nExisting "+state.cycle+" bucket → modify to "+money(Q.newTotal)+unit()+" (prorated). If they have no "+state.cycle+" bucket, the API returns 409 {route:checkout-curve} and we open build-your-plan for a new "+state.cycle+" bucket."); });
+  // "Add more & save more" -> the existing-user multi-select screen, carrying the clicked
+  // calc pre-selected plus the current cycle/tier so the curve continues seamlessly.
+  document.getElementById("ctaMore").addEventListener("click",function(){
+    var qs = "add="+encodeURIComponent(state.locked)+"&cycle="+state.cycle+"&tier="+state.tier;
+    var url = "account-add-calculators-preview.html?"+qs;
+    alert("Preview — would open the multi-select add screen:\\n"+url+"\\n\\n"+CALC[state.locked].name.replace(" (coming soon)","")+" is pre-selected; pick more and the curve keeps discounting each one.");
+    // live: window.location.href = url;
+  });
   document.getElementById("themeTgl").addEventListener("click",function(){ var cur=document.documentElement.getAttribute("data-theme");
     document.documentElement.setAttribute("data-theme", cur==="dark"?"light":(cur==="light"?"dark":(matchMedia("(prefers-color-scheme:dark)").matches?"light":"dark"))); });
 

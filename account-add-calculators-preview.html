@@ -152,6 +152,20 @@
     solar:"Rooftop + ground‑mount PV — coming soon"
   };
   var state = { tier:"starter", cycle:"monthly", owned:{ wd:true, mwfrs:true }, selected:{}, bip:false, days:12 };
+  // Arriving from the locked-calculator page ("add more & save more"): pre-select that calc
+  // and carry its cycle/tier so the curve continues without a jarring reset.
+  (function(){ try{
+    var p = new URLSearchParams(location.search);
+    var t = p.get("tier"); if(t==="starter"||t==="pro"||t==="premium") state.tier=t;
+    var c = p.get("cycle"); if(c==="annual"||c==="monthly") state.cycle=c;
+    var add = (p.get("add")||"").toLowerCase();
+    if(add){ var c2=window.WLCPricing.config().catalog.filter(function(x){return x.id===add;})[0];
+      if(c2 && c2.live && !state.owned[add]) state.selected[add]=true; }
+    // sync the toolbar toggles to the incoming tier/cycle
+    function syncSeg(id,val,attr){ var box=document.getElementById(id); if(!box) return;
+      [].forEach.call(box.querySelectorAll("button"),function(b){ b.classList.toggle("on", b.dataset[attr]===val); }); }
+    syncSeg("tier",state.tier,"t"); syncSeg("cycle",state.cycle,"c");
+  }catch(e){} })();
   var CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>';
 
   function money(v){ return "$"+Math.round(v).toLocaleString(); }

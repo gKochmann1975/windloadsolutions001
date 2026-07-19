@@ -1,0 +1,1954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>/* site-wide cart indicator */(function(d){var s=d.createElement("script");s.src="/js/cart-indicator.js";s.defer=true;(d.head||d.documentElement).appendChild(s);})(document);</script>
+    <meta charset="UTF-8">
+    <meta name="description" content="WindLoadCalc.com - Cart. Professional wind load calculations and building intelligence platform for engineers and architects.">
+
+    <meta name="robots" content="noindex, nofollow">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="/images/windloadcalc-icon-anim-loop.svg?v=1">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="shortcut icon" href="/favicon.ico?v=2">
+    <title>Shopping Cart — Curve Flip Preview | WindLoadCalc</title>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Shopping Cart | WindLoadCalc">
+    <meta property="og:description" content="Professional wind load calculations and building intelligence platform for engineers and architects.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://windloadcalc.com/cart.html">
+    <meta property="og:image" content="https://windloadcalc.com/images/video-posters/index-homepage.jpg">
+    <meta property="og:site_name" content="WindLoadCalc">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Google Sign-In SDK -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+    <style>
+        :root{
+          --blue:#0018FF; --blue-deep:#181E57; --blue-bright:#3a5bff;
+          --muted:#94a3b8; --line:rgba(255,255,255,.08); --bg:#070a18; --surface:rgba(255,255,255,.04);
+          --gold:#E8B530; --luxe:cubic-bezier(.22,.61,.36,1);
+        }
+        * { box-sizing:border-box; margin:0; padding:0; }
+        html{scroll-behavior:smooth}
+        body {
+            font-family:'Inter',-apple-system,'Segoe UI',Roboto,sans-serif;
+            background:var(--bg);
+            color:#e8edf7;
+            min-height:100vh;
+            overflow-x:hidden;
+            -webkit-font-smoothing:antialiased;
+            line-height:1.55;
+        }
+        a{text-decoration:none;color:inherit}
+
+        /* Dark-glass ambient layers */
+        .aurora{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+        .aurora span{position:absolute;border-radius:50%;filter:blur(90px);opacity:.5}
+        .aurora .a1{width:620px;height:620px;background:#0018FF;top:-180px;left:-120px;animation:drift1 18s var(--luxe) infinite alternate}
+        .aurora .a2{width:540px;height:540px;background:#10B981;bottom:-200px;right:-120px;opacity:.28;animation:drift2 22s var(--luxe) infinite alternate}
+        .aurora .a3{width:420px;height:420px;background:#181E57;top:34%;right:16%;opacity:.55;animation:drift1 26s var(--luxe) infinite alternate-reverse}
+        @keyframes drift1{to{transform:translate(80px,60px) scale(1.15)}}
+        @keyframes drift2{to{transform:translate(-70px,-50px) scale(1.1)}}
+        .grid-tex{position:fixed;inset:0;z-index:0;pointer-events:none;
+          background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+          background-size:54px 54px;mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000 40%,transparent 100%)}
+
+        /* Nav (solid by default — no dark hero behind it) */
+        nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:.3s var(--luxe);
+          backdrop-filter:blur(14px);border-bottom:1px solid var(--line);
+          background:linear-gradient(90deg, rgba(240,244,255,.97) 0%, rgba(223,232,255,.93) 13%, rgba(22,28,58,.92) 46%, rgba(7,10,24,.95) 100%)}
+        .nav-in{display:flex;align-items:center;justify-content:space-between;padding:8px clamp(24px,4vw,48px);transition:padding .3s var(--luxe)}
+        .logo{z-index:1001;display:flex;align-items:center}
+        .logo-image{height:64px;width:auto;display:block;transition:all .3s ease}
+        .nav-right{display:flex;align-items:center;gap:18px}
+        .nav-links{display:flex;align-items:center;gap:28px}
+        .nav-links a.l{position:relative;font-size:14px;color:#fff;font-weight:500;opacity:.88;transition:opacity .2s var(--luxe);text-shadow:0 1px 8px rgba(0,0,0,.45)}
+        .nav-links a.l:hover{opacity:1}
+        .btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;border-radius:11px;cursor:pointer;transition:.25s var(--luxe);border:none;font-family:inherit}
+        .btn-ghost{background:rgba(255,255,255,.06);color:#fff;padding:11px 18px;font-size:14px;border:1px solid rgba(255,255,255,.22)}
+        .btn-ghost:hover{border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.12)}
+        .btn-primary{background:linear-gradient(135deg,#0018FF,#2540ff);color:#fff;padding:12px 22px;font-size:14px;box-shadow:0 10px 30px rgba(0,24,255,.45)}
+        .btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(0,24,255,.6)}
+        .hamburger{display:flex;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;z-index:60}
+        .hamburger span{display:block;width:26px;height:3px;border-radius:2px;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.6);transition:.3s var(--luxe)}
+        .hamburger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+        .hamburger.open span:nth-child(2){opacity:0}
+        .hamburger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+        .nav-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);opacity:0;visibility:hidden;transition:.3s var(--luxe);z-index:55}
+        .nav-overlay.open{opacity:1;visibility:visible}
+        .full-menu{position:fixed;top:0;right:0;height:100vh;height:100dvh;width:min(90vw,380px);z-index:60;
+          background:rgba(10,14,30,.985);backdrop-filter:blur(18px);border-left:1px solid var(--line);
+          box-shadow:-24px 0 60px rgba(0,0,0,.55);transform:translateX(100%);transition:transform .3s var(--luxe);overflow-y:auto;padding:74px 0 28px}
+        .full-menu.open{transform:translateX(0)}
+        .fm-head{display:flex;align-items:center;justify-content:space-between;padding:0 26px 14px;border-bottom:1px solid var(--line)}
+        .fm-head span{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+        .fm-close{background:none;border:none;color:#fff;font-size:24px;line-height:1;cursor:pointer;padding:2px 8px}
+        .fm-group{padding:14px 26px 4px;border-bottom:1px solid var(--line)}
+        .fm-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9db0ff;margin-bottom:6px}
+        .fm-group a{display:block;padding:9px 0;font-size:15px;color:#dbe3f5;font-weight:500;transition:color .15s}
+        .fm-group a:hover{color:#fff}
+        .fm-actions{display:flex;flex-direction:column;gap:10px;padding:20px 26px 0}
+        .fm-actions .btn{width:100%;justify-content:center;padding:14px;font-size:15px}
+
+        /* Page container */
+        .container {
+            position:relative;
+            z-index:1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 130px 28px 60px;
+        }
+
+        .page-title {
+            font-size: clamp(28px,4vw,2.5rem);
+            font-weight: 800;
+            color: #fff;
+            letter-spacing:-.02em;
+            margin-bottom: 0.5rem;
+        }
+        .page-title i{color:#9db0ff}
+
+        .page-subtitle {
+            color: #aeb8cf;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .cart-layout {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        @media (max-width: 1024px) {
+            .cart-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .cart-main {
+            background: var(--surface);
+            border:1px solid var(--line);
+            border-radius: 18px;
+            padding: 24px;
+            box-shadow: 0 12px 32px rgba(0,0,0,.34);
+            backdrop-filter:blur(6px);
+        }
+
+        .cart-sidebar {
+            position: sticky;
+            top: 110px;
+        }
+
+        .upsell-section {
+            background: var(--surface);
+            border:1px solid var(--line);
+            border-radius: 18px;
+            padding: 24px;
+            box-shadow: 0 12px 32px rgba(0,0,0,.34);
+            backdrop-filter:blur(6px);
+            margin-bottom: 1.5rem;
+        }
+
+        .upsell-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Upsell cards — JS injects these into #upsell-recommendations */
+        .upsell-product {
+            background: rgba(58,91,255,.10) !important;
+            border: 1px solid rgba(58,91,255,.4) !important;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+        .upsell-product h4 { color: #c3cdff !important; margin-bottom: 8px; }
+        .upsell-product p { color: #aeb8cf !important; font-size: 0.9rem; margin-bottom: 12px; }
+        .upsell-product > div[style*="font-weight: 700"]{color:#9db0ff !important}
+
+        .upsell-price {
+            display: flex;
+            align-items: baseline;
+            flex-wrap:wrap;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        .upsell-price .original { text-decoration: line-through; color: #7e8aa6; }
+        .upsell-price .discounted { font-size: 1.3rem; font-weight: 700; color: #9db0ff; }
+
+        .add-upsell-btn {
+            width: 100%;
+            background: linear-gradient(135deg,#0018FF,#2540ff);
+            color: white;
+            border: none;
+            padding: 11px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.25s var(--luxe);
+        }
+        .add-upsell-btn:hover { transform: translateY(-1px); box-shadow:0 10px 26px rgba(0,24,255,.4); }
+
+        /* Bundle discount banner (#bundle-discount-banner) */
+        .bundle-banner {
+            background: linear-gradient(135deg, rgba(16,185,129,.16), rgba(58,91,255,.12));
+            border: 1px solid rgba(52,211,153,.4);
+            border-radius: 14px;
+            padding: 16px;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .bundle-banner h3 { color: #6ee7b7; margin-bottom: 8px; font-size: 1.1rem; }
+        .bundle-banner p { color: #cdd6ec; font-size: 0.95rem; }
+        .bundle-banner strong{color:#fff}
+
+        /* Static empty-cart fallback inside #cart-items-container */
+        .empty-cart { text-align: center; padding: 60px 20px; }
+        .empty-cart i { font-size: 4rem; color: rgba(157,176,255,.4); margin-bottom: 1.5rem; }
+        .empty-cart h3 { color: #dbe3f5; margin-bottom: 1rem; }
+        .empty-cart p{color:#aeb8cf}
+        .empty-cart a { color: #34D399; font-weight: 600; text-decoration: none; }
+        .empty-cart a:hover { text-decoration: underline; }
+
+        .browse-more {
+            text-align: center;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--line);
+        }
+        .browse-more a { color: #9db0ff; text-decoration: none; font-weight: 600; }
+        .browse-more a:hover { color:#fff; text-decoration: underline; }
+
+        /* Trust / secure card */
+        .trust-card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 12px 32px rgba(0,0,0,.34);backdrop-filter:blur(6px)}
+        .trust-card h4{color:#fff;margin-bottom:1rem;font-size:1rem;display:flex;align-items:center;gap:.4rem}
+        .trust-card ul{margin-top:1rem;color:#aeb8cf;font-size:.85rem;padding-left:1.2rem}
+        .secure-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+            color: #aeb8cf;
+            font-size: 0.85rem;
+        }
+        .secure-badges span { display: flex; align-items: center; gap: 0.3rem; }
+
+        /* ===== Overrides for runtime-injected cart markup (shopping-cart.js) =====
+           shopping-cart.js writes inline white/light styles into #cart-items-container.
+           These rules force the injected rows to be readable on the dark canvas. */
+        #cart-items-container .cart-item{
+            background:rgba(255,255,255,.05) !important;
+            border:1px solid var(--line) !important;
+            border-radius:12px;
+        }
+        #cart-items-container .cart-item h4{color:#fff !important}
+        /* feature chips inside each cart-item */
+        #cart-items-container .cart-item span[style*="background: #f0f9ff"]{
+            background:rgba(58,91,255,.14) !important;
+            color:#c3cdff !important;
+        }
+        /* per-item price */
+        #cart-items-container .cart-item div[style*="color: #0018ff"],
+        #cart-items-container .cart-item div[style*="color:#0018ff"]{color:#9db0ff !important}
+        #cart-items-container .cart-item div[style*="color: #64748b"]{color:#aeb8cf !important}
+        /* section header titles (Annual / Monthly Subscriptions) */
+        #cart-items-container .cart-section h3{color:#fff !important}
+        /* annual subtotal strip */
+        #cart-items-container div[style*="background: #f0fdf4"]{background:rgba(16,185,129,.12) !important}
+        #cart-items-container div[style*="background: #f0fdf4"] span{color:#6ee7b7 !important}
+        /* monthly subtotal strip */
+        #cart-items-container div[style*="background: #eff6ff"]{background:rgba(58,91,255,.12) !important}
+        #cart-items-container div[style*="background: #eff6ff"] span{color:#9db0ff !important}
+        /* order summary card already dark in JS — keep, just ensure rounded glass edge */
+        #cart-items-container .cart-summary{border:1px solid var(--line)}
+        /* promo code section (#promo-code-section) */
+        #cart-items-container #promo-code-section{
+            background:rgba(255,255,255,.04) !important;
+            border:1px solid var(--line) !important;
+        }
+        #cart-items-container #promo-code-section span[style*="color: #374151"]{color:#dbe3f5 !important}
+        #cart-items-container #promo-code-input-area > div{
+            background:rgba(255,255,255,.05) !important;
+            border:1px solid var(--line) !important;
+        }
+        #cart-items-container #promo-code-input-area p{color:#aeb8cf !important}
+        #cart-items-container #promo-code-input-area strong{color:#fff}
+        /* "Secured by Stripe" caption under checkout button */
+        #cart-items-container p[style*="color: #64748b"]{color:#aeb8cf !important}
+
+        /* Checkout Auth Modal Styles */
+        .checkout-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .checkout-modal-overlay.active {
+            display: flex;
+        }
+
+        .checkout-modal {
+            background: white;
+            border-radius: 20px;
+            max-width: 480px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3);
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .checkout-modal-header {
+            padding: 24px 24px 16px;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .checkout-modal-header h2 {
+            font-size: 1.5rem;
+            color: #1f2937;
+            margin: 0;
+        }
+
+        .checkout-modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #9ca3af;
+            cursor: pointer;
+            padding: 4px;
+            line-height: 1;
+        }
+
+        .checkout-modal-close:hover {
+            color: #6b7280;
+        }
+
+        .checkout-modal-body {
+            padding: 24px;
+        }
+
+        .checkout-auth-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .checkout-auth-tab {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #e5e7eb;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #6b7280;
+            transition: all 0.2s;
+        }
+
+        .checkout-auth-tab.active {
+            border-color: #0018ff;
+            color: #0018ff;
+            background: #eff6ff;
+        }
+
+        .checkout-auth-tab:hover:not(.active) {
+            border-color: #d1d5db;
+            background: #f9fafb;
+        }
+
+        .checkout-form-group {
+            margin-bottom: 16px;
+        }
+
+        .checkout-form-group label {
+            display: block;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 6px;
+            font-size: 0.9rem;
+        }
+
+        .checkout-form-group input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .checkout-form-group input:focus {
+            outline: none;
+            border-color: #0018ff;
+        }
+
+        .checkout-submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #0018ff, #0080ff);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 8px;
+        }
+
+        .checkout-submit-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 24, 255, 0.3);
+        }
+
+        .checkout-submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .checkout-divider {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            color: #9ca3af;
+            font-size: 0.85rem;
+        }
+
+        .checkout-divider::before,
+        .checkout-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #e5e7eb;
+        }
+
+        .checkout-divider span {
+            padding: 0 12px;
+        }
+
+        .google-signin-btn {
+            width: 100%;
+            padding: 12px;
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.2s;
+            color: #374151;
+        }
+
+        .google-signin-btn:hover {
+            background: #f9fafb;
+            border-color: #d1d5db;
+        }
+
+        .google-signin-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .checkout-error {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #dc2626;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .checkout-error.show {
+            display: block;
+        }
+
+        .checkout-view {
+            display: none;
+        }
+
+        .checkout-view.active {
+            display: block;
+        }
+
+        .checkout-loading {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .checkout-loading i {
+            font-size: 2.5rem;
+            color: #0018ff;
+            margin-bottom: 16px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .checkout-success {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .checkout-success-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.35);
+        }
+
+        .checkout-success h3 {
+            font-size: 1.5rem;
+            color: #1f2937;
+            margin-bottom: 12px;
+        }
+
+        .checkout-success p {
+            color: #6b7280;
+            margin-bottom: 20px;
+        }
+
+        .password-toggle {
+            position: relative;
+        }
+
+        .password-toggle input {
+            padding-right: 45px;
+        }
+
+        .password-toggle-btn {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #9ca3af;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .password-toggle-btn:hover {
+            color: #6b7280;
+        }
+    </style>
+    <link rel="canonical" href="https://windloadcalc.com/cart.html">
+</head>
+<body>
+    <div class="aurora"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
+    <div class="grid-tex"></div>
+
+    <!-- Nav (solid by default — no dark hero on this page) -->
+    <nav id="nav"><div class="nav-in">
+      <a class="logo" href="https://windloadcalc.com/"><img height="100" width="300" src="images/windloadcalc-logo-anim-navy.svg" alt="WindLoadCalc — ASCE 7-22 Wind Load Calculator logo" class="logo-image"></a>
+      <div class="nav-right">
+        <div class="nav-links">
+          <a class="l" href="https://windloadcalc.com/wind-load-calculator-shop.html">Calculators</a>
+          <a class="l" href="https://windloadcalc.com/building-intelligence-platform-shop.html">BIP</a>
+          <a class="l" href="https://windloadcalc.com/wind-load-calculator-shop.html">Pricing</a>
+          <a class="l" href="https://windloadcalc.com/building-intelligence-platform-landing.html">BIP</a>
+          <a class="btn btn-ghost" href="https://windloadcalc.com/login.html">Log in</a>
+          <a class="btn btn-primary" href="https://windloadcalc.com/wind-load-calculator-landing.html">Start free trial</a>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="Open full menu" aria-expanded="false" aria-controls="fullMenu"><span></span><span></span><span></span></button>
+      </div>
+    </div></nav>
+    <div class="nav-overlay" id="navOverlay"></div>
+    <aside class="full-menu" id="fullMenu" aria-label="Site menu">
+  <div class="fm-head"><span>Menu</span><button class="fm-close" id="fmClose" aria-label="Close menu">&times;</button></div>
+  <div class="fm-group">
+    <div class="fm-label">Wind Load Calculators</div>
+    <a href="https://windloadcalc.com/wind-load-calculator-landing.html">Overview</a>
+    <a href="https://windloadcalc.com/free-wind-load-calculator.html">Free Calculator</a>
+    <a href="https://windloadcalc.com/walkthroughs.html">Walkthroughs</a>
+    <a href="https://windloadcalc.com/wind-load-calculator-comparison.html">Feature Comparison</a>
+    <a href="https://windloadcalc.com/wind-load-calculator-shop.html">Pricing</a>
+  </div>
+  <div class="fm-group">
+    <div class="fm-label">Service Areas</div>
+    <a href="https://windloadcalc.com/service-area/">All States &amp; Counties</a>
+    <a href="https://windloadcalc.com/florida-wind-load-calculator/">Florida</a>
+    <a href="https://windloadcalc.com/texas-wind-load-calculator/">Texas</a>
+    <a href="https://windloadcalc.com/california-wind-load-calculator/">California</a>
+    <a href="https://windloadcalc.com/miami-dade-wind-load-calculator/">Miami-Dade County</a>
+  </div>
+  <div class="fm-group">
+    <div class="fm-label">Building Intelligence Platform</div>
+    <a href="https://windloadcalc.com/building-intelligence-platform-landing.html">Overview</a>
+    <a href="https://windloadcalc.com/building-intelligence-platform.html">Free Trial</a>
+    <a href="https://windloadcalc.com/building-intelligence-platform-shop.html">Pricing</a>
+  </div>
+  <div class="fm-group">
+    <div class="fm-label">For Professionals</div>
+    <a href="https://windloadcalc.com/wind-load-calculator-for-engineers.html">Engineers</a>
+    <a href="https://windloadcalc.com/wind-load-calculator-for-architects.html">Architects</a>
+    <a href="https://windloadcalc.com/wind-loads-for-consultants.html">Consultants</a>
+    <a href="https://windloadcalc.com/contractors-wind-load-calculator.html">Contractors</a>
+  </div>
+  <div class="fm-group">
+    <div class="fm-label">Company</div>
+    <a href="https://windloadcalc.com/services.html">Services</a>
+    <a href="https://windloadcalc.com/why-us.html">Why Us</a>
+    <a href="https://windloadcalc.com/faq.html">FAQ</a>
+    <a href="https://windloadcalc.com/contact.html">Contact Us</a>
+  </div>
+  <div class="fm-actions">
+    <a class="btn btn-ghost" href="https://windloadcalc.com/login.html">Log in</a>
+    <a class="btn btn-primary" href="https://windloadcalc.com/wind-load-calculator-landing.html">Start Free Trial &rarr;</a>
+  </div>
+</aside>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1 class="page-title">
+            <i class="fas fa-shopping-cart"></i>
+            Your Cart
+        </h1>
+        <p class="page-subtitle">Review your selected subscriptions before checkout</p>
+
+        <div class="anydevice-row" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:#cdd6f5;margin:10px 0 18px">
+            <span style="display:inline-flex;align-items:center;gap:6px;background:rgba(52,211,153,.12);border:1px solid rgba(52,211,153,.4);color:#34D399;border-radius:999px;padding:6px 13px;font-weight:700"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:0 0 auto"><path d="M18 8V4a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h9"/><rect width="8" height="12" x="14" y="10" rx="2"/><path d="M8 21h4"/><path d="M10 17v4"/></svg>Works on any device · no install</span>
+            <span style="display:inline-flex;align-items:center;gap:6px;background:rgba(7,10,24,.5);border:1px solid rgba(58,91,255,.4);border-radius:999px;padding:6px 13px;color:#cdd6f5">↻ Always the latest ASCE 7</span>
+            <a href="why-us.html#reasons" style="color:#34D399;font-weight:700;text-decoration:none;border-bottom:1px solid rgba(52,211,153,.4)">Learn more about any device →</a>
+        </div>
+
+        <!-- Bundle Discount Banner (shown when applicable) -->
+        <div id="bundle-discount-banner" class="bundle-banner" style="display: none;">
+            <h3><i class="fas fa-gift"></i> Bundle Discount Applied!</h3>
+            <p>You're getting <strong>15% off</strong> for bundling BIP + Calculator subscriptions. This discount applies for your first 12 months!</p>
+        </div>
+
+        <div class="cart-layout">
+            <!-- Cart Items -->
+            <div class="cart-main">
+                <div id="cart-items-container">
+                    <!-- Cart items will be rendered here by JavaScript -->
+                    <div class="empty-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <h3>Your cart is empty</h3>
+                        <p style="color: #9ca3af; margin-bottom: 1.5rem;">Add subscriptions to get started</p>
+                        <a href="wind-load-calculator-shop.html">
+                            <i class="fas fa-arrow-right"></i> Browse Wind Load Calculators
+                        </a>
+                    </div>
+                </div>
+
+                <div class="browse-more">
+                    <a href="wind-load-calculator-shop.html">
+                        <i class="fas fa-plus"></i> Add More Products
+                    </a>
+                </div>
+            </div>
+
+            <!-- Sidebar: Upsells & Recommendations -->
+            <div class="cart-sidebar">
+                <!-- Upsell Section -->
+                <div class="upsell-section" id="upsell-section">
+                    <h3 class="upsell-title">
+                        <i class="fas fa-sparkles" style="color: #f59e0b;"></i>
+                        Complete Your Toolkit
+                    </h3>
+                    <div id="upsell-recommendations">
+                        <!-- Dynamic upsells based on cart contents -->
+                    </div>
+                </div>
+
+                <!-- Trust Badges -->
+                <div class="trust-card">
+                    <h4>
+                        <i class="fas fa-shield-alt" style="color: #34D399;"></i>
+                        Secure Checkout
+                    </h4>
+                    <div class="secure-badges">
+                        <span><i class="fas fa-lock"></i> SSL Encrypted</span>
+                        <span><i class="fab fa-stripe"></i> Stripe</span>
+                    </div>
+                    <ul>
+                        <li style="margin-bottom: 0.5rem;">Cancel anytime</li>
+                        <li style="margin-bottom: 0.5rem;">7-day free trial</li>
+                        <li style="margin-bottom: 0.5rem;">Money-back guarantee</li>
+                        <li>24/7 customer support</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Auth Modal -->
+    <div class="checkout-modal-overlay" id="checkout-auth-modal">
+        <div class="checkout-modal">
+            <div class="checkout-modal-header">
+                <h2 id="checkout-modal-title">Create Account</h2>
+                <button class="checkout-modal-close" onclick="closeCheckoutModal()">&times;</button>
+            </div>
+            <div class="checkout-modal-body">
+                <!-- Error Message -->
+                <div class="checkout-error" id="checkout-error"></div>
+
+                <!-- Auth Form View -->
+                <div class="checkout-view active" id="checkout-form-view">
+                    <!-- Tabs: Sign Up / Log In -->
+                    <div class="checkout-auth-tabs">
+                        <button class="checkout-auth-tab active" id="tab-signup" onclick="switchCheckoutTab('signup')">
+                            <i class="fas fa-user-plus"></i> Sign Up
+                        </button>
+                        <button class="checkout-auth-tab" id="tab-login" onclick="switchCheckoutTab('login')">
+                            <i class="fas fa-sign-in-alt"></i> Log In
+                        </button>
+                    </div>
+
+                    <!-- Sign Up Form -->
+                    <form id="checkout-signup-form" onsubmit="handleCheckoutSignup(event)">
+                        <div class="checkout-form-group">
+                            <label for="checkout-name">Full Name</label>
+                            <input type="text" id="checkout-name" placeholder="John Smith" required>
+                        </div>
+                        <div class="checkout-form-group">
+                            <label for="checkout-email">Email Address</label>
+                            <input type="email" id="checkout-email" placeholder="john@company.com" required>
+                        </div>
+                        <div class="checkout-form-group">
+                            <label for="checkout-password">Create Password</label>
+                            <div class="password-toggle">
+                                <input type="password" id="checkout-password" placeholder="Min. 8 characters" minlength="8" required>
+                                <button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('checkout-password', this)">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <button type="submit" class="checkout-submit-btn" id="checkout-signup-btn">
+                            <i class="fas fa-lock"></i> Continue to Checkout
+                        </button>
+                    </form>
+
+                    <!-- Login Form (hidden by default) -->
+                    <form id="checkout-login-form" style="display: none;" onsubmit="handleCheckoutLogin(event)">
+                        <div class="checkout-form-group">
+                            <label for="checkout-login-email">Email Address</label>
+                            <input type="email" id="checkout-login-email" placeholder="john@company.com" required>
+                        </div>
+                        <div class="checkout-form-group">
+                            <label for="checkout-login-password">Password</label>
+                            <div class="password-toggle">
+                                <input type="password" id="checkout-login-password" placeholder="Enter your password" required>
+                                <button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('checkout-login-password', this)">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <button type="submit" class="checkout-submit-btn" id="checkout-login-btn">
+                            <i class="fas fa-lock"></i> Continue to Checkout
+                        </button>
+                        <p style="text-align: center; margin-top: 12px;">
+                            <a href="forgot-password.html" style="color: #0018ff; font-size: 0.9rem;">Forgot password?</a>
+                        </p>
+                    </form>
+
+                    <!-- Divider -->
+                    <div class="checkout-divider">
+                        <span>or continue with</span>
+                    </div>
+
+                    <!-- Google Sign In -->
+                    <button type="button" class="google-signin-btn" onclick="signInWithGoogleCheckout()">
+                        <svg viewBox="0 0 24 24">
+                            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                        </svg>
+                        Sign in with Google
+                    </button>
+                </div>
+
+                <!-- Loading View -->
+                <div class="checkout-view" id="checkout-loading-view">
+                    <div class="checkout-loading">
+                        <i class="fas fa-spinner"></i>
+                        <p>Creating your account...</p>
+                    </div>
+                </div>
+
+                <!-- Success View (redirecting to Stripe) -->
+                <div class="checkout-view" id="checkout-success-view">
+                    <div class="checkout-success">
+                        <div class="checkout-success-icon">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </div>
+                        <h3>Account Ready!</h3>
+                        <p>Redirecting you to secure checkout...</p>
+                        <i class="fas fa-spinner fa-spin" style="color: #0018ff; font-size: 1.5rem;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shopping Cart JS -->
+    <script src="js/pricing-engine.js"></script>
+    <script src="js/shopping-cart.js"></script>
+
+    <!-- Checkout Auth JS -->
+    <script>
+        const CHECKOUT_API_URL = 'https://api.windloadcalc.com';
+        const GOOGLE_CLIENT_ID = '54861385840-potugp8t4bpls8ckgbba6ku6i1semkuf.apps.googleusercontent.com';
+        let checkoutUserData = null;
+
+        // Check if user is already logged in
+        function getStoredToken() {
+            return localStorage.getItem('windload_auth_token');
+        }
+
+        function getStoredUser() {
+            try {
+                return JSON.parse(localStorage.getItem('windload_user_data'));
+            } catch {
+                return null;
+            }
+        }
+
+        // Open checkout modal
+        function openCheckoutModal() {
+            // Check if already logged in
+            const token = getStoredToken();
+            if (token) {
+                // Verify token is still valid and proceed directly to checkout
+                proceedToStripeCheckout();
+                return;
+            }
+
+            document.getElementById('checkout-auth-modal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close checkout modal
+        function closeCheckoutModal() {
+            document.getElementById('checkout-auth-modal').classList.remove('active');
+            document.body.style.overflow = '';
+
+            // Reset views
+            showCheckoutView('checkout-form-view');
+            hideCheckoutError();
+        }
+
+        // Switch between signup and login tabs
+        function switchCheckoutTab(tab) {
+            const signupForm = document.getElementById('checkout-signup-form');
+            const loginForm = document.getElementById('checkout-login-form');
+            const tabSignup = document.getElementById('tab-signup');
+            const tabLogin = document.getElementById('tab-login');
+            const modalTitle = document.getElementById('checkout-modal-title');
+
+            hideCheckoutError();
+
+            if (tab === 'signup') {
+                signupForm.style.display = 'block';
+                loginForm.style.display = 'none';
+                tabSignup.classList.add('active');
+                tabLogin.classList.remove('active');
+                modalTitle.textContent = 'Create Account';
+            } else {
+                signupForm.style.display = 'none';
+                loginForm.style.display = 'block';
+                tabSignup.classList.remove('active');
+                tabLogin.classList.add('active');
+                modalTitle.textContent = 'Welcome Back';
+            }
+        }
+
+        // Show specific view
+        function showCheckoutView(viewId) {
+            document.querySelectorAll('.checkout-view').forEach(v => v.classList.remove('active'));
+            document.getElementById(viewId).classList.add('active');
+        }
+
+        // Show error
+        function showCheckoutError(message) {
+            const errorEl = document.getElementById('checkout-error');
+            errorEl.textContent = message;
+            errorEl.classList.add('show');
+        }
+
+        function hideCheckoutError() {
+            document.getElementById('checkout-error').classList.remove('show');
+        }
+
+        // Toggle password visibility
+        function togglePasswordVisibility(inputId, btn) {
+            const input = document.getElementById(inputId);
+            const icon = btn.querySelector('i');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+        // Handle signup form
+        async function handleCheckoutSignup(e) {
+            e.preventDefault();
+            hideCheckoutError();
+
+            const name = document.getElementById('checkout-name').value.trim();
+            const email = document.getElementById('checkout-email').value.trim();
+            const password = document.getElementById('checkout-password').value;
+
+            if (password.length < 8) {
+                showCheckoutError('Password must be at least 8 characters');
+                return;
+            }
+
+            const btn = document.getElementById('checkout-signup-btn');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating account...';
+
+            try {
+                const response = await fetch(`${CHECKOUT_API_URL}/api/auth/register`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        email: email,
+                        password: password,
+                        full_name: name,
+                        trial_type: null // No trial for paid subscriptions
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success || data.user_id) {
+                    // Now login to get the token
+                    const loginResponse = await fetch(`${CHECKOUT_API_URL}/api/auth/login`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email, password })
+                    });
+
+                    const loginData = await loginResponse.json();
+
+                    if (loginData.success && loginData.token) {
+                        localStorage.setItem('windload_auth_token', loginData.token);
+                        localStorage.setItem('windload_user_data', JSON.stringify({
+                            id: loginData.user_id,
+                            email: email,
+                            name: name
+                        }));
+                        checkoutUserData = { email, name, token: loginData.token };
+
+                        showCheckoutView('checkout-success-view');
+                        setTimeout(() => proceedToStripeCheckout(), 1500);
+                    } else {
+                        throw new Error(loginData.error || 'Login failed after registration');
+                    }
+                } else {
+                    throw new Error(data.error || 'Registration failed');
+                }
+            } catch (error) {
+                console.error('Signup error:', error);
+                if (error.message === 'Failed to fetch') {
+                    showCheckoutError('Unable to connect to server. Please check your internet connection, disable any ad blockers, and try again.');
+                } else {
+                    showCheckoutError(error.message || 'Failed to create account. Please try again.');
+                }
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-lock"></i> Continue to Checkout';
+            }
+        }
+
+        // Handle login form
+        async function handleCheckoutLogin(e) {
+            e.preventDefault();
+            hideCheckoutError();
+
+            const email = document.getElementById('checkout-login-email').value.trim();
+            const password = document.getElementById('checkout-login-password').value;
+
+            const btn = document.getElementById('checkout-login-btn');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
+
+            try {
+                const response = await fetch(`${CHECKOUT_API_URL}/api/auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+
+                if (data.success && data.token) {
+                    localStorage.setItem('windload_auth_token', data.token);
+                    localStorage.setItem('windload_user_data', JSON.stringify({
+                        id: data.user_id,
+                        email: email,
+                        name: data.user?.full_name || email
+                    }));
+                    checkoutUserData = { email, name: data.user?.full_name || email, token: data.token };
+
+                    showCheckoutView('checkout-success-view');
+                    setTimeout(() => proceedToStripeCheckout(), 1500);
+                } else {
+                    throw new Error(data.error || 'Invalid email or password');
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                showCheckoutError(error.message || 'Failed to log in. Please try again.');
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-lock"></i> Continue to Checkout';
+            }
+        }
+
+        // Google Sign In for checkout
+        function signInWithGoogleCheckout() {
+            if (typeof google === 'undefined' || !google.accounts) {
+                showCheckoutError('Google Sign-In is loading. Please try again in a moment.');
+                return;
+            }
+
+            google.accounts.id.initialize({
+                client_id: GOOGLE_CLIENT_ID,
+                callback: handleGoogleCheckoutCallback
+            });
+
+            google.accounts.id.prompt((notification) => {
+                if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+                    // Fallback to popup
+                    google.accounts.oauth2.initTokenClient({
+                        client_id: GOOGLE_CLIENT_ID,
+                        scope: 'email profile',
+                        callback: (response) => {
+                            if (response.access_token) {
+                                // Use access token to get user info
+                                fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+                                    headers: { Authorization: `Bearer ${response.access_token}` }
+                                })
+                                .then(res => res.json())
+                                .then(userInfo => {
+                                    handleGoogleUserInfo(userInfo);
+                                });
+                            }
+                        }
+                    }).requestAccessToken();
+                }
+            });
+        }
+
+        async function handleGoogleCheckoutCallback(response) {
+            if (!response.credential) {
+                showCheckoutError('Google Sign-In failed. Please try again.');
+                return;
+            }
+
+            showCheckoutView('checkout-loading-view');
+
+            try {
+                const apiResponse = await fetch(`${CHECKOUT_API_URL}/api/auth/google`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ id_token: response.credential })
+                });
+
+                const data = await apiResponse.json();
+
+                if (data.success && data.token) {
+                    localStorage.setItem('windload_auth_token', data.token);
+                    localStorage.setItem('windload_user_data', JSON.stringify({
+                        id: data.user_id,
+                        email: data.user?.email,
+                        name: data.user?.full_name
+                    }));
+                    checkoutUserData = {
+                        email: data.user?.email,
+                        name: data.user?.full_name,
+                        token: data.token
+                    };
+
+                    showCheckoutView('checkout-success-view');
+                    setTimeout(() => proceedToStripeCheckout(), 1500);
+                } else {
+                    throw new Error(data.error || 'Google authentication failed');
+                }
+            } catch (error) {
+                console.error('Google auth error:', error);
+                showCheckoutError(error.message || 'Google Sign-In failed. Please try again.');
+                showCheckoutView('checkout-form-view');
+            }
+        }
+
+        async function handleGoogleUserInfo(userInfo) {
+            // This is a fallback - ideally we use the ID token method
+            showCheckoutView('checkout-loading-view');
+
+            // For now, show error and suggest using email signup
+            showCheckoutError('Please use email signup or try Google Sign-In again.');
+            showCheckoutView('checkout-form-view');
+        }
+
+        // Proceed to Stripe checkout with user info
+        async function proceedToStripeCheckout() {
+            const token = getStoredToken();
+            const user = getStoredUser();
+
+            if (!token) {
+                openCheckoutModal();
+                return;
+            }
+
+            // ── VOLUME-CURVE FLIP ──────────────────────────────────────────
+            // Price by COUNT of distinct calculator programs at the plan's tier+cycle,
+            // via /api/subscriptions/checkout-curve. Returns before the legacy per-item
+            // checkout-cart path below (kept visible for diff clarity, now unreached).
+            if (window.cfDoCurveCheckout) { await window.cfDoCurveCheckout(token, user && user.email); return; }
+            // ───────────────────────────────────────────────────────────────
+
+            try {
+                const totals = cart.calculateTotals();
+
+                // Check if we have pending monthly items (from mixed cart notification)
+                // If so, only checkout annual items now
+                const pendingMonthly = sessionStorage.getItem('pending_monthly_checkout');
+                let itemsToCheckout = cart.items;
+
+                if (pendingMonthly && totals.isMixed) {
+                    // Only send annual items to Stripe
+                    itemsToCheckout = cart.items.filter(item => item.billingCycle === 'annual');
+                    console.log('Mixed cart: Checking out annual items only:', itemsToCheckout);
+                }
+
+                // Use checkout-cart endpoint for multi-item carts, single checkout for single items
+                const isMultiItem = itemsToCheckout.length > 1;
+                const endpoint = isMultiItem
+                    ? `${CHECKOUT_API_URL}/api/subscriptions/checkout-cart`
+                    : `${CHECKOUT_API_URL}/api/subscriptions/checkout`;
+
+                console.log(`Checkout: ${itemsToCheckout.length} items, using ${isMultiItem ? 'cart' : 'single'} endpoint`);
+
+                // Create checkout session
+                const response = await fetch(endpoint, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify(isMultiItem ? {
+                        // Multi-item cart checkout
+                        cart_items: itemsToCheckout,
+                        email: user?.email,
+                        split_checkout_info: pendingMonthly ? {
+                            part: 1,
+                            other_amount: totals.monthlyTotal,
+                            other_cycle: 'monthly'
+                        } : null
+                    } : {
+                        // Single item checkout
+                        product_code: itemsToCheckout[0].productCode,
+                        billing_cycle: itemsToCheckout[0].billingCycle,
+                        bundle_discount: totals.hasBundleDiscount,
+                        cart_items: itemsToCheckout,
+                        success_url: 'https://windloadcalc.com/checkout-success.html',
+                        cancel_url: 'https://windloadcalc.com/cart.html'
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success && data.checkout_url) {
+                    // Clear items that were sent to checkout from cart
+                    const sentKeys = itemsToCheckout.map(i => i.productCode + '_' + i.billingCycle);
+                    cart.items = cart.items.filter(item =>
+                        !sentKeys.includes(item.productCode + '_' + item.billingCycle)
+                    );
+                    cart.saveCart();
+
+                    window.location.href = data.checkout_url;
+                } else {
+                    // Try guest checkout-cart as fallback for multi-item
+                    const guestEndpoint = isMultiItem
+                        ? `${CHECKOUT_API_URL}/api/subscriptions/checkout-cart`
+                        : `${CHECKOUT_API_URL}/api/subscriptions/checkout-guest`;
+
+                    const guestResponse = await fetch(guestEndpoint, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(isMultiItem ? {
+                            cart_items: itemsToCheckout,
+                            email: user?.email,
+                            split_checkout_info: pendingMonthly ? {
+                                part: 1,
+                                other_amount: totals.monthlyTotal,
+                                other_cycle: 'monthly'
+                            } : null
+                        } : {
+                            product_code: itemsToCheckout[0].productCode,
+                            billing_cycle: itemsToCheckout[0].billingCycle,
+                            email: user?.email,
+                            bundle_discount: totals.hasBundleDiscount,
+                            cart_items: itemsToCheckout,
+                            success_url: 'https://windloadcalc.com/checkout-success.html',
+                            cancel_url: 'https://windloadcalc.com/cart.html'
+                        })
+                    });
+
+                    const guestData = await guestResponse.json();
+
+                    if (guestData.success && guestData.checkout_url) {
+                        // Clear items that were sent to checkout from cart
+                        const sentKeys = itemsToCheckout.map(i => i.productCode + '_' + i.billingCycle);
+                        cart.items = cart.items.filter(item =>
+                            !sentKeys.includes(item.productCode + '_' + item.billingCycle)
+                        );
+                        cart.saveCart();
+
+                        window.location.href = guestData.checkout_url;
+                    } else {
+                        throw new Error(guestData.error || 'Checkout failed');
+                    }
+                }
+            } catch (error) {
+                console.error('Checkout error:', error);
+                alert('Checkout failed: ' + error.message + '\n\nPlease try again.');
+                closeCheckoutModal();
+            }
+        }
+
+        // Override cart's proceedToCheckout to use modal
+        cart.proceedToCheckout = function() {
+            if (this.items.length === 0) {
+                alert('Your cart is empty. Please add products first.');
+                return;
+            }
+
+            // Check for mixed billing cycles - Stripe doesn't support this in one session
+            const totals = this.calculateTotals();
+
+            if (totals.isMixed) {
+                // Save monthly items for after annual checkout completes
+                // The warning banner is already visible on the page
+                sessionStorage.setItem('pending_monthly_checkout', JSON.stringify(
+                    this.items.filter(item => item.billingCycle === 'monthly')
+                ));
+                sessionStorage.setItem('pending_monthly_amount', totals.monthlySubtotal.toFixed(2));
+            }
+
+            openCheckoutModal();
+        };
+
+        // Close modal when clicking outside
+        document.getElementById('checkout-auth-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeCheckoutModal();
+            }
+        });
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeCheckoutModal();
+            }
+        });
+    </script>
+
+    <script>
+        // Initialize cart display on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            cart.updateCartDisplay();
+            updateUpsellRecommendations();
+            updateBundleBanner();
+        });
+
+        // Update upsell recommendations based on cart
+        function updateUpsellRecommendations() {
+            const container = document.getElementById('upsell-recommendations');
+            if (!container) return;
+
+            const totals = cart.calculateTotals();
+
+            // Combine all items from both billing cycles
+            const allItems = [...totals.monthlyItems, ...totals.annualItems];
+
+            let html = '';
+
+            // Check what's NOT in cart
+            const hasBIP = allItems.some(item => item.category === 'bip');
+            const hasCalc = allItems.some(item => item.category === 'calculator');
+
+            // Get current tier if one product is in cart (to recommend matching tier)
+            const calcItem = allItems.find(item => item.category === 'calculator');
+            const bipItem = allItems.find(item => item.category === 'bip');
+
+            // Tier pricing data for dynamic recommendations
+            const bipTiers = {
+                starter: { code: 'bip_starter', name: 'Starter', annual: 300, monthly: 25, discounted: 21.25, yearlyDisc: 255 },
+                pro: { code: 'bip_pro', name: 'Pro', annual: 804, monthly: 67, discounted: 56.95, yearlyDisc: 683.40 },
+                premium: { code: 'bip_premium', name: 'Premium', annual: 1524, monthly: 127, discounted: 107.95, yearlyDisc: 1295.40 }
+            };
+
+            const calcTiers = {
+                starter: { code: 'cc_walls_starter', name: 'Starter', annual: 336, monthly: 28, discounted: 23.80, yearlyDisc: 285.60 },
+                pro: { code: 'cc_walls_pro', name: 'Pro', annual: 564, monthly: 47, discounted: 39.95, yearlyDisc: 479.40 },
+                premium: { code: 'cc_walls_premium', name: 'Premium', annual: 1428, monthly: 119, discounted: 101.15, yearlyDisc: 1213.80 }
+            };
+
+            // Helper to get tier name from product code
+            function getTierFromCode(code) {
+                if (code.includes('starter')) return 'starter';
+                if (code.includes('pro')) return 'pro';
+                if (code.includes('premium')) return 'premium';
+                return 'starter';
+            }
+
+            if (!hasBIP && hasCalc) {
+                // Recommend BIP matching the Calculator tier AND billing cycle
+                const calcTier = getTierFromCode(calcItem.productCode);
+                const calcCycle = calcItem.billingCycle || 'annual';
+                const bip = bipTiers[calcTier];
+
+                // Calculate prices based on billing cycle
+                const isAnnual = calcCycle === 'annual';
+                const displayPrice = isAnnual ? bip.discounted.toFixed(2) : bip.monthly;
+                const billingText = isAnnual ? `billed annually ($${bip.yearlyDisc.toFixed(2)}/year)` : 'billed monthly';
+                const savingsText = isAnnual ? 'Save 15%' : 'Bundle discount at checkout';
+
+                html += `
+                    <div class="upsell-product">
+                        <h4><i class="fas fa-brain"></i> Building Intelligence Platform - ${bip.name}</h4>
+                        <p>AI-powered building analysis, wind velocity finder, hurricane risk analysis</p>
+
+                        <!-- Billing Cycle Toggle -->
+                        <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+                            <button onclick="toggleUpsellCycle('bip', 'monthly')"
+                                id="bip-monthly-btn"
+                                class="upsell-cycle-btn ${!isAnnual ? 'active' : ''}"
+                                style="flex: 1; padding: 8px; border: 2px solid ${!isAnnual ? '#0ea5e9' : '#e5e7eb'};
+                                       background: ${!isAnnual ? '#f0f9ff' : 'white'}; border-radius: 6px;
+                                       cursor: pointer; font-weight: 600; font-size: 0.85rem;
+                                       color: ${!isAnnual ? '#0ea5e9' : '#64748b'};">
+                                Monthly $${bip.monthly}/mo
+                            </button>
+                            <button onclick="toggleUpsellCycle('bip', 'annual')"
+                                id="bip-annual-btn"
+                                class="upsell-cycle-btn ${isAnnual ? 'active' : ''}"
+                                style="flex: 1; padding: 8px; border: 2px solid ${isAnnual ? '#0ea5e9' : '#e5e7eb'};
+                                       background: ${isAnnual ? '#f0f9ff' : 'white'}; border-radius: 6px;
+                                       cursor: pointer; font-weight: 600; font-size: 0.85rem;
+                                       color: ${isAnnual ? '#0ea5e9' : '#64748b'};">
+                                Annual $${bip.discounted.toFixed(2)}/mo
+                            </button>
+                        </div>
+
+                        <div id="bip-upsell-price" class="upsell-price">
+                            ${isAnnual ? `<span class="original">$${bip.monthly}/mo</span>` : ''}
+                            <span class="discounted">$${displayPrice}/mo</span>
+                            <span style="color: #10b981; font-size: 0.85rem; font-weight: 600;">${savingsText}</span>
+                        </div>
+                        <div id="bip-upsell-billing" style="font-size: 0.8rem; color: #64748b; margin-bottom: 8px;">${billingText}</div>
+                        <button id="bip-upsell-add-btn" onclick="cart.addItem('${bip.code}', '${calcCycle}')" class="add-upsell-btn">
+                            <i class="fas fa-plus"></i> Add & Save 15%
+                        </button>
+                    </div>
+                `;
+
+                // Store BIP tier info for toggle
+                window.upsellBipTier = bip;
+            }
+
+            if (!hasCalc && hasBIP) {
+                // Recommend Calculator matching the BIP tier AND billing cycle
+                const bipTier = getTierFromCode(bipItem.productCode);
+                const bipCycle = bipItem.billingCycle || 'annual';
+                const calc = calcTiers[bipTier];
+
+                // Calculate prices based on billing cycle
+                const isAnnual = bipCycle === 'annual';
+                const displayPrice = isAnnual ? calc.discounted.toFixed(2) : calc.monthly;
+                const billingText = isAnnual ? `billed annually ($${calc.yearlyDisc.toFixed(2)}/year)` : 'billed monthly';
+                const savingsText = isAnnual ? 'Save 15%' : 'Bundle discount at checkout';
+
+                html += `
+                    <div class="upsell-product">
+                        <h4><i class="fas fa-calculator"></i> Wind Load Calculator - ${calc.name}</h4>
+                        <p>ASCE 7-22 compliant C&C pressure calculations with permit-ready PDFs</p>
+
+                        <!-- Billing Cycle Toggle -->
+                        <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+                            <button onclick="toggleUpsellCycle('calc', 'monthly')"
+                                id="calc-monthly-btn"
+                                class="upsell-cycle-btn ${!isAnnual ? 'active' : ''}"
+                                style="flex: 1; padding: 8px; border: 2px solid ${!isAnnual ? '#0ea5e9' : '#e5e7eb'};
+                                       background: ${!isAnnual ? '#f0f9ff' : 'white'}; border-radius: 6px;
+                                       cursor: pointer; font-weight: 600; font-size: 0.85rem;
+                                       color: ${!isAnnual ? '#0ea5e9' : '#64748b'};">
+                                Monthly $${calc.monthly}/mo
+                            </button>
+                            <button onclick="toggleUpsellCycle('calc', 'annual')"
+                                id="calc-annual-btn"
+                                class="upsell-cycle-btn ${isAnnual ? 'active' : ''}"
+                                style="flex: 1; padding: 8px; border: 2px solid ${isAnnual ? '#0ea5e9' : '#e5e7eb'};
+                                       background: ${isAnnual ? '#f0f9ff' : 'white'}; border-radius: 6px;
+                                       cursor: pointer; font-weight: 600; font-size: 0.85rem;
+                                       color: ${isAnnual ? '#0ea5e9' : '#64748b'};">
+                                Annual $${calc.discounted.toFixed(2)}/mo
+                            </button>
+                        </div>
+
+                        <div id="calc-upsell-price" class="upsell-price">
+                            ${isAnnual ? `<span class="original">$${calc.monthly}/mo</span>` : ''}
+                            <span class="discounted">$${displayPrice}/mo</span>
+                            <span style="color: #10b981; font-size: 0.85rem; font-weight: 600;">${savingsText}</span>
+                        </div>
+                        <div id="calc-upsell-billing" style="font-size: 0.8rem; color: #64748b; margin-bottom: 8px;">${billingText}</div>
+                        <button id="calc-upsell-add-btn" onclick="cart.addItem('${calc.code}', '${bipCycle}')" class="add-upsell-btn">
+                            <i class="fas fa-plus"></i> Add & Save 15%
+                        </button>
+                    </div>
+                `;
+
+                // Store calc tier info for toggle
+                window.upsellCalcTier = calc;
+            }
+
+            if (!hasBIP && !hasCalc) {
+                // Cart is empty - show both
+                html = `
+                    <div class="upsell-product">
+                        <h4><i class="fas fa-calculator"></i> Wind Load Calculator</h4>
+                        <p>ASCE 7-22 compliant C&C pressure calculations</p>
+                        <div style="font-size: 1.2rem; font-weight: 700; color: #0ea5e9; margin-bottom: 12px;">
+                            $28/mo <span style="font-size: 0.85rem; color: #64748b; font-weight: normal;">billed annually</span>
+                        </div>
+                        <button onclick="cart.addItem('cc_walls_starter', 'annual')" class="add-upsell-btn">
+                            <i class="fas fa-plus"></i> Add to Cart
+                        </button>
+                    </div>
+                    <div class="upsell-product" style="border-color: #8b5cf6; background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);">
+                        <h4 style="color: #7c3aed;"><i class="fas fa-brain"></i> Building Intelligence Platform</h4>
+                        <p>Wind velocity finder, hurricane analysis, AI insights</p>
+                        <div style="font-size: 1.2rem; font-weight: 700; color: #8b5cf6; margin-bottom: 12px;">
+                            $25/mo <span style="font-size: 0.85rem; color: #64748b; font-weight: normal;">billed annually</span>
+                        </div>
+                        <button onclick="cart.addItem('bip_starter', 'annual')" class="add-upsell-btn" style="background: #8b5cf6;">
+                            <i class="fas fa-plus"></i> Add to Cart
+                        </button>
+                    </div>
+                `;
+            }
+
+            if (hasBIP && hasCalc) {
+                // Both in cart - check if upgrade is possible
+                const calcTier = getTierFromCode(calcItem.productCode);
+                const bipTier = getTierFromCode(bipItem.productCode);
+
+                // Determine the highest tier between the two products
+                const tierRank = { 'starter': 1, 'pro': 2, 'premium': 3 };
+                const highestTier = tierRank[calcTier] >= tierRank[bipTier] ? calcTier : bipTier;
+
+                html = `
+                    <div style="text-align: center; padding: 20px; color: #10b981;">
+                        <i class="fas fa-check-circle" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                        <h4 style="margin-bottom: 0.5rem;">Complete Toolkit!</h4>
+                        <p style="color: #64748b; font-size: 0.9rem;">You have both BIP and Calculator subscriptions with 15% bundle discount applied.</p>
+                    </div>
+                `;
+
+                // Only show upgrade option if not already at Premium
+                if (highestTier === 'starter') {
+                    html += `
+                        <div class="upsell-product" style="border-color: #f59e0b; background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);">
+                            <h4 style="color: #d97706;"><i class="fas fa-arrow-up"></i> Upgrade to Pro?</h4>
+                            <p>Get team features (5 users), more calculations (500/mo), and priority support</p>
+                            <button onclick="window.location.href='wind-load-calculator-shop.html#pricing'" class="add-upsell-btn" style="background: #f59e0b;">
+                                View Pro Plans
+                            </button>
+                        </div>
+                    `;
+                } else if (highestTier === 'pro') {
+                    html += `
+                        <div class="upsell-product" style="border-color: #8b5cf6; background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);">
+                            <h4 style="color: #7c3aed;"><i class="fas fa-arrow-up"></i> Upgrade to Premium?</h4>
+                            <p>Get unlimited calculations, more users (10-15), and API access</p>
+                            <button onclick="window.location.href='wind-load-calculator-shop.html#pricing'" class="add-upsell-btn" style="background: #8b5cf6;">
+                                View Premium Plans
+                            </button>
+                        </div>
+                    `;
+                } else {
+                    // Premium - suggest Enterprise (contact us)
+                    html += `
+                        <div class="upsell-product" style="border-color: #10b981; background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);">
+                            <h4 style="color: #065f46;"><i class="fas fa-building"></i> Need Enterprise?</h4>
+                            <p>Custom pricing, unlimited users, dedicated support, SLA, and custom integrations</p>
+                            <button onclick="window.location.href='contact.html'" class="add-upsell-btn" style="background: #10b981;">
+                                Contact Us
+                            </button>
+                        </div>
+                    `;
+                }
+            }
+
+            container.innerHTML = html;
+        }
+
+        // Update bundle discount banner
+        function updateBundleBanner() {
+            const banner = document.getElementById('bundle-discount-banner');
+            if (cart.hasBundleDiscount()) {
+                banner.style.display = 'block';
+            } else {
+                banner.style.display = 'none';
+            }
+        }
+
+        // Toggle upsell billing cycle (monthly/annual)
+        // IMPORTANT: Bundle 15% discount ONLY applies when both products have the SAME billing cycle
+        function toggleUpsellCycle(product, cycle) {
+            const isAnnual = cycle === 'annual';
+
+            // Get the primary item's billing cycle to check if bundle discount applies
+            const totals = cart.calculateTotals();
+            const allItems = [...totals.monthlyItems, ...totals.annualItems];
+            const calcItem = allItems.find(item => item.category === 'calculator');
+            const bipItem = allItems.find(item => item.category === 'bip');
+
+            if (product === 'bip' && window.upsellBipTier) {
+                const bip = window.upsellBipTier;
+
+                // Check if the upsell cycle matches the primary Calculator's cycle
+                const primaryCycle = calcItem ? calcItem.billingCycle : 'annual';
+                const cyclesMatch = cycle === primaryCycle;
+
+                // Update button styles
+                const monthlyBtn = document.getElementById('bip-monthly-btn');
+                const annualBtn = document.getElementById('bip-annual-btn');
+
+                if (monthlyBtn && annualBtn) {
+                    monthlyBtn.style.borderColor = !isAnnual ? '#0ea5e9' : '#e5e7eb';
+                    monthlyBtn.style.background = !isAnnual ? '#f0f9ff' : 'white';
+                    monthlyBtn.style.color = !isAnnual ? '#0ea5e9' : '#64748b';
+
+                    annualBtn.style.borderColor = isAnnual ? '#0ea5e9' : '#e5e7eb';
+                    annualBtn.style.background = isAnnual ? '#f0f9ff' : 'white';
+                    annualBtn.style.color = isAnnual ? '#0ea5e9' : '#64748b';
+                }
+
+                // Update price display - show bundle discount ONLY if cycles match
+                const priceEl = document.getElementById('bip-upsell-price');
+                const billingEl = document.getElementById('bip-upsell-billing');
+                const addBtn = document.getElementById('bip-upsell-add-btn');
+
+                if (priceEl) {
+                    if (isAnnual) {
+                        // Annual: 15% annual discount already built in
+                        if (cyclesMatch) {
+                            priceEl.innerHTML = `
+                                <span class="original">$${bip.monthly}/mo</span>
+                                <span class="discounted">$${bip.discounted.toFixed(2)}/mo</span>
+                                <span style="color: #10b981; font-size: 0.85rem; font-weight: 600;">Save 15% (annual)</span>
+                            `;
+                        } else {
+                            priceEl.innerHTML = `
+                                <span class="original">$${bip.monthly}/mo</span>
+                                <span class="discounted">$${bip.discounted.toFixed(2)}/mo</span>
+                                <span style="color: #f59e0b; font-size: 0.85rem; font-weight: 600;">No bundle discount (different cycle)</span>
+                            `;
+                        }
+                    } else {
+                        // Monthly: bundle discount only if primary is also monthly
+                        if (cyclesMatch) {
+                            priceEl.innerHTML = `
+                                <span class="discounted">$${bip.monthly}/mo</span>
+                                <span style="color: #10b981; font-size: 0.85rem; font-weight: 600;">15% bundle discount at checkout</span>
+                            `;
+                        } else {
+                            priceEl.innerHTML = `
+                                <span class="discounted">$${bip.monthly}/mo</span>
+                                <span style="color: #f59e0b; font-size: 0.85rem; font-weight: 600;">No bundle discount (different cycle)</span>
+                            `;
+                        }
+                    }
+                }
+
+                if (billingEl) {
+                    billingEl.textContent = isAnnual ? `billed annually ($${bip.yearlyDisc.toFixed(2)}/year)` : 'billed monthly';
+                }
+
+                if (addBtn) {
+                    addBtn.setAttribute('onclick', `cart.addItem('${bip.code}', '${cycle}')`);
+                    // Update button text based on whether bundle discount applies
+                    if (cyclesMatch) {
+                        addBtn.innerHTML = `<i class="fas fa-plus"></i> Add & Save 15%`;
+                    } else {
+                        addBtn.innerHTML = `<i class="fas fa-plus"></i> Add to Cart`;
+                    }
+                }
+            }
+
+            if (product === 'calc' && window.upsellCalcTier) {
+                const calc = window.upsellCalcTier;
+
+                // Check if the upsell cycle matches the primary BIP's cycle
+                const primaryCycle = bipItem ? bipItem.billingCycle : 'annual';
+                const cyclesMatch = cycle === primaryCycle;
+
+                // Update button styles
+                const monthlyBtn = document.getElementById('calc-monthly-btn');
+                const annualBtn = document.getElementById('calc-annual-btn');
+
+                if (monthlyBtn && annualBtn) {
+                    monthlyBtn.style.borderColor = !isAnnual ? '#0ea5e9' : '#e5e7eb';
+                    monthlyBtn.style.background = !isAnnual ? '#f0f9ff' : 'white';
+                    monthlyBtn.style.color = !isAnnual ? '#0ea5e9' : '#64748b';
+
+                    annualBtn.style.borderColor = isAnnual ? '#0ea5e9' : '#e5e7eb';
+                    annualBtn.style.background = isAnnual ? '#f0f9ff' : 'white';
+                    annualBtn.style.color = isAnnual ? '#0ea5e9' : '#64748b';
+                }
+
+                // Update price display - show bundle discount ONLY if cycles match
+                const priceEl = document.getElementById('calc-upsell-price');
+                const billingEl = document.getElementById('calc-upsell-billing');
+                const addBtn = document.getElementById('calc-upsell-add-btn');
+
+                if (priceEl) {
+                    if (isAnnual) {
+                        // Annual: 15% annual discount already built in
+                        if (cyclesMatch) {
+                            priceEl.innerHTML = `
+                                <span class="original">$${calc.monthly}/mo</span>
+                                <span class="discounted">$${calc.discounted.toFixed(2)}/mo</span>
+                                <span style="color: #10b981; font-size: 0.85rem; font-weight: 600;">Save 15% (annual)</span>
+                            `;
+                        } else {
+                            priceEl.innerHTML = `
+                                <span class="original">$${calc.monthly}/mo</span>
+                                <span class="discounted">$${calc.discounted.toFixed(2)}/mo</span>
+                                <span style="color: #f59e0b; font-size: 0.85rem; font-weight: 600;">No bundle discount (different cycle)</span>
+                            `;
+                        }
+                    } else {
+                        // Monthly: bundle discount only if primary is also monthly
+                        if (cyclesMatch) {
+                            priceEl.innerHTML = `
+                                <span class="discounted">$${calc.monthly}/mo</span>
+                                <span style="color: #10b981; font-size: 0.85rem; font-weight: 600;">15% bundle discount at checkout</span>
+                            `;
+                        } else {
+                            priceEl.innerHTML = `
+                                <span class="discounted">$${calc.monthly}/mo</span>
+                                <span style="color: #f59e0b; font-size: 0.85rem; font-weight: 600;">No bundle discount (different cycle)</span>
+                            `;
+                        }
+                    }
+                }
+
+                if (billingEl) {
+                    billingEl.textContent = isAnnual ? `billed annually ($${calc.yearlyDisc.toFixed(2)}/year)` : 'billed monthly';
+                }
+
+                if (addBtn) {
+                    addBtn.setAttribute('onclick', `cart.addItem('${calc.code}', '${cycle}')`);
+                    // Update button text based on whether bundle discount applies
+                    if (cyclesMatch) {
+                        addBtn.innerHTML = `<i class="fas fa-plus"></i> Add & Save 15%`;
+                    } else {
+                        addBtn.innerHTML = `<i class="fas fa-plus"></i> Add to Cart`;
+                    }
+                }
+            }
+        }
+
+        // Override cart's updateCartDisplay to also update upsells
+        const originalUpdateCartDisplay = cart.updateCartDisplay.bind(cart);
+        cart.updateCartDisplay = function() {
+            originalUpdateCartDisplay();
+            updateUpsellRecommendations();
+            updateBundleBanner();
+        };
+
+        // Check if Stripe is in TEST mode and show warning banner
+        async function checkStripeMode() {
+            try {
+                const response = await fetch('https://api.windloadcalc.com/health');
+                const data = await response.json();
+                if (data.stripe_mode === 'TEST') {
+                    const banner = document.createElement('div');
+                    banner.id = 'stripe-test-banner';
+                    banner.style.cssText = `
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        background: linear-gradient(90deg, #f59e0b, #d97706);
+                        color: white;
+                        text-align: center;
+                        padding: 8px 16px;
+                        font-weight: 600;
+                        font-size: 14px;
+                        z-index: 10000;
+                        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+                    `;
+                    banner.innerHTML = '⚠️ STRIPE TEST MODE - Use test card: 4242 4242 4242 4242, any future date, any CVC';
+                    document.body.prepend(banner);
+                    document.body.style.paddingTop = '40px';
+                }
+            } catch (e) {
+                console.log('Could not check Stripe mode:', e);
+            }
+        }
+        checkStripeMode();
+    </script>
+
+    <!-- Dark-glass nav drawer toggle -->
+    <script>
+    (function(){
+      var ham=document.getElementById('hamburger'), fm=document.getElementById('fullMenu'),
+          ov=document.getElementById('navOverlay'), fc=document.getElementById('fmClose');
+      if(!ham||!fm) return;
+      function setMenu(open){ fm.classList.toggle('open',open); ov.classList.toggle('open',open); ham.classList.toggle('open',open);
+        ham.setAttribute('aria-expanded',open); document.body.style.overflow=open?'hidden':''; }
+      ham.addEventListener('click',function(){ setMenu(!fm.classList.contains('open')); });
+      ov.addEventListener('click',function(){ setMenu(false); });
+      if(fc) fc.addEventListener('click',function(){ setMenu(false); });
+      fm.querySelectorAll('a').forEach(function(a){ a.addEventListener('click',function(){ setMenu(false); }); });
+      window.addEventListener('keydown',function(e){ if(e.key==='Escape') setMenu(false); });
+    })();
+    </script>
+<!-- ══════════════ VOLUME-CURVE FLIP MODULE (preview) ══════════════
+     shopping-cart.js remains the data/persistence layer (localStorage key
+     'windloadcalc_cart', item shape {productCode,billingCycle,addedAt}, badge — all
+     untouched, Stripe-safe). This module overrides ONLY rendering, pricing, and the
+     checkout endpoint: it prices by COUNT of distinct calculator programs on the curve
+     and checks out via /api/subscriptions/checkout-curve. -->
+<style>
+  #cart-items-container .empty-cart{display:none}
+  .cf-toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 16px}
+  .cf-seg{display:flex;gap:4px;background:rgba(7,10,24,.55);border:1px solid var(--line,#2a3357);border-radius:11px;padding:4px}
+  .cf-seg button{border:0;background:transparent;color:#aeb8cf;font:inherit;font-size:13px;font-weight:650;padding:8px 14px;border-radius:8px;cursor:pointer;transition:.15s}
+  .cf-seg button:hover{color:#fff}
+  .cf-seg button.on{background:#3a5bff;color:#fff;box-shadow:0 2px 10px rgba(58,91,255,.45)}
+  .cf-seg .cf-save{font-size:10.5px;font-weight:700;color:#6ee7b7;margin-left:5px}.cf-seg button.on .cf-save{color:#d6ffe9}
+  .cf-addhead{margin:4px 0 12px}
+  .cf-addhead b{font-size:16px;font-weight:750;color:#fff;display:flex;align-items:center;gap:8px}
+  .cf-addhead b svg{width:18px;height:18px;color:#9db0ff}
+  .cf-addhead p{margin:4px 0 0 26px;font-size:12.8px;color:#aeb8cf}
+  .cf-picker{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:22px}
+  .cf-pcard{display:flex;align-items:center;gap:11px;background:rgba(255,255,255,.03);border:1.5px solid var(--line,#2a3357);border-radius:12px;padding:12px 13px;cursor:pointer;transition:.15s;text-align:left;color:#fff;font:inherit}
+  .cf-pcard:hover{border-color:#3a5bff;transform:translateY(-1px);background:rgba(58,91,255,.08)}
+  .cf-pcard .cf-ic{width:30px;height:30px;flex:0 0 auto;border-radius:8px;display:grid;place-items:center;color:#fff}
+  .cf-pcard .cf-ic svg{width:16px;height:16px}
+  .cf-pcard h4{margin:0;font-size:13.5px;font-weight:680}
+  .cf-pcard .cf-add{margin-left:auto;font-size:13px;font-weight:750;color:#f5a83f;white-space:nowrap}
+  .cf-pcard.soon{opacity:.5;cursor:not-allowed}.cf-pcard.soon:hover{transform:none;border-color:var(--line,#2a3357);background:rgba(255,255,255,.03)}
+  .cf-pcard.soon .cf-add{color:#8a93a8;font-weight:600}
+  .cf-owned{display:flex;flex-direction:column;gap:9px;margin-bottom:18px}
+  .cf-item{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.04);border:1px solid var(--line,#2a3357);border-radius:12px;padding:13px 15px}
+  .cf-item .cf-ic{width:32px;height:32px;flex:0 0 auto;border-radius:9px;display:grid;place-items:center;color:#fff}
+  .cf-item .cf-ic svg{width:17px;height:17px}
+  .cf-item h4{margin:0;font-size:14.5px;font-weight:680;color:#fff}
+  .cf-item p{margin:1px 0 0;font-size:12.3px;color:#aeb8cf}
+  .cf-item .cf-rm{margin-left:auto;background:transparent;border:0;color:#8a93a8;cursor:pointer;font-size:18px;line-height:1;padding:4px 8px;border-radius:7px}
+  .cf-item .cf-rm:hover{color:#ff8f8f;background:rgba(255,143,143,.1)}
+  .cf-sum{background:linear-gradient(160deg,rgba(58,91,255,.12),rgba(7,10,24,.4));border:1px solid rgba(58,91,255,.35);border-radius:14px;padding:18px}
+  .cf-total{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .cf-total .cf-now{font-size:32px;font-weight:820;letter-spacing:-.03em;color:#fff}
+  .cf-total .cf-u{font-size:14px;color:#aeb8cf;font-weight:600}
+  .cf-savebadge{display:inline-block;margin-top:9px;font-size:12.5px;font-weight:750;color:#6ee7b7;background:rgba(52,211,153,.14);padding:5px 11px;border-radius:20px}
+  .cf-prog{margin:14px 0 4px}
+  .cf-plabel{display:flex;justify-content:space-between;font-size:12.5px;color:#aeb8cf;margin-bottom:6px}.cf-plabel b{color:#fff}
+  .cf-track{height:9px;border-radius:6px;background:rgba(255,255,255,.08);overflow:hidden}
+  .cf-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,#3a5bff,#a855f7);transition:width .35s cubic-bezier(.4,0,.2,1)}
+  .cf-nudge{font-size:12.8px;font-weight:600;line-height:1.45;margin-top:8px;color:#c9a9ff}.cf-nudge.done{color:#6ee7b7}
+  .cf-bip{display:flex;align-items:center;gap:11px;border:1.5px dashed #2dd4bf;border-radius:12px;padding:12px 14px;margin:14px 0 0;background:rgba(45,212,191,.07);cursor:pointer}
+  .cf-bip.on{background:rgba(45,212,191,.16);border-style:solid}.cf-bip.free{border-color:#34D399;background:rgba(52,211,153,.14);cursor:default}
+  .cf-bip h4{margin:0;font-size:13.5px;font-weight:680;color:#fff}.cf-bip p{margin:1px 0 0;font-size:12px;color:#aeb8cf}
+  .cf-bip .cf-bp{margin-left:auto;font-weight:750;color:#2dd4bf;white-space:nowrap}.cf-bip.free .cf-bp{color:#34D399}
+  .cf-pay{margin-top:16px;width:100%;border:0;border-radius:12px;background:linear-gradient(135deg,#3a5bff,#4666ff);color:#fff;font:inherit;font-weight:760;font-size:15.5px;padding:15px;cursor:pointer;transition:.2s;display:flex;align-items:center;justify-content:center;gap:9px}
+  .cf-pay svg{width:19px;height:19px}
+  .cf-pay:hover{transform:translateY(-2px);box-shadow:0 16px 36px rgba(58,91,255,.5)}
+  .cf-fine{font-size:11.5px;color:#8a93a8;text-align:center;margin:9px 0 0}
+</style>
+<script>
+(function(){
+  "use strict";
+  var P = window.WLCPricing, cart = window.cart;
+  if(!P || !cart){ console.warn("[curve-flip] engine or cart missing"); return; }
+
+  // Neutralize the legacy 15%-bundle + tier-upsell UI (superseded by the curve).
+  window.updateBundleBanner = function(){ var b=document.getElementById("bundle-discount-banner"); if(b) b.style.display="none"; };
+  window.updateUpsellRecommendations = function(){ var s=document.getElementById("upsell-section"); if(s) s.style.display="none"; };
+
+  var PROG = { wd:"cc_walls", mwfrs:"mwfrs", roofs:"cc_roofs", other:"cc_other_structures", specialty:"cc_specialty", solar:"cc_solar" };
+  var COLORS = { wd:"#06b6d4", mwfrs:"#3b82f6", roofs:"#f97316", other:"#14b8a6", specialty:"#a855f7", solar:"#fbbf24" };
+  var NAMES = { wd:"Windows, Doors & Shutters", mwfrs:"MWFRS — Whole Building", roofs:"Roofs", other:"Other Structures", specialty:"Specialty Components", solar:"Solar" };
+  var DESC = { wd:"C&C openings", mwfrs:"Directional + Envelope", roofs:"Every roof shape + parapets", other:"Signs, walls, equipment, towers", specialty:"Parapets §30.6 + canopies §30.9", solar:"Rooftop + ground-mount PV" };
+  var CART_SVG='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>';
+  var PLUS='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>';
+  var DOT='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/></svg>';
+
+  function progOf(code){ if(!code) return null; if(code.indexOf("bip_")===0) return "bip";
+    for(var k in PROG){ if(code.indexOf(PROG[k])===0) return k; } return null; }
+  function isLive(prog){ var c=P.config().catalog.filter(function(x){return x.id===prog;})[0]; return !!(c&&c.live); }
+
+  var plan = { tier:"starter", cycle:"annual" };
+  // seed plan tier/cycle from existing cart items (first calc item)
+  (function(){ for(var i=0;i<cart.items.length;i++){ var pr=progOf(cart.items[i].productCode);
+    if(pr&&pr!=="bip"){ var parts=cart.items[i].productCode.split("_"); var t=parts[parts.length-1];
+      if(t==="starter"||t==="pro"||t==="premium") plan.tier=t; plan.cycle=cart.items[i].billingCycle||"annual"; break; } } })();
+  window.cfPlan = plan;
+
+  function cartPrograms(){ var seen={}, out=[]; cart.items.forEach(function(it){ var p=progOf(it.productCode);
+    if(p&&p!=="bip"&&!seen[p]){ seen[p]=1; out.push(p); } }); return out; }
+  function cartHasBip(){ return cart.items.some(function(it){ return progOf(it.productCode)==="bip"; }); }
+  window.cfCartPrograms = cartPrograms;
+  window.cfCartHasBip = cartHasBip;
+
+  function money(v){ return "$"+Math.round(v).toLocaleString(); }
+  function unit(){ return plan.cycle==="annual"?"/yr":"/mo"; }
+  function quote(){ return P.quote({ owned:[], selected:cartPrograms(), tier:plan.tier, cycle:plan.cycle, bipSelected:cartHasBip() }); }
+
+  function addProgram(prog){ if(!isLive(prog)) return; cart.addItem(PROG[prog]+"_"+plan.tier, plan.cycle); }
+  function removeProgram(prog){ cart.items = cart.items.filter(function(it){ return progOf(it.productCode)!==prog; }); cart.saveCart(); }
+  function toggleBip(){ if(cartHasBip()){ cart.items = cart.items.filter(function(it){ return progOf(it.productCode)!=="bip"; }); cart.saveCart(); }
+    else { cart.addItem("bip_"+ (plan.tier==="starter"?"starter":plan.tier), plan.cycle); } }
+
+  // Curve renderer -> replaces shopping-cart.js's #cart-items-container output.
+  function render(){
+    var host=document.getElementById("cart-items-container"); if(!host) return;
+    var Q=quote(), progs=cartPrograms(), hasBip=cartHasBip(), h="";
+
+    h+='<div class="cf-toolbar">'+
+       '<div class="cf-seg" id="cfTier"><button data-t="starter" class="'+(plan.tier==="starter"?"on":"")+'">Starter</button><button data-t="pro" class="'+(plan.tier==="pro"?"on":"")+'">Pro</button><button data-t="premium" class="'+(plan.tier==="premium"?"on":"")+'">Premium</button></div>'+
+       '<div class="cf-seg" id="cfCycle"><button data-c="monthly" class="'+(plan.cycle==="monthly"?"on":"")+'">Monthly</button><button data-c="annual" class="'+(plan.cycle==="annual"?"on":"")+'">Annual<span class="cf-save">2 mo free</span></button></div>'+
+       '</div>';
+
+    // owned/in-cart list
+    if(progs.length||hasBip){
+      h+='<div class="cf-owned">';
+      progs.forEach(function(p){ h+='<div class="cf-item"><div class="cf-ic" style="background:'+COLORS[p]+'">'+DOT+'</div>'+
+        '<div><h4>'+NAMES[p]+'</h4><p>'+DESC[p]+'</p></div><button class="cf-rm" data-rm="'+p+'" aria-label="Remove">&times;</button></div>'; });
+      h+='</div>';
+    }
+
+    // add-more picker
+    var remaining=P.config().catalog.filter(function(c){ return progs.indexOf(c.id)<0; });
+    if(remaining.length){
+      h+='<div class="cf-addhead"><b>'+PLUS+'Add calculators — save more with each one</b><p>Tap any to add it. Add as many as you want — each one costs less than the last.</p></div>';
+      h+='<div class="cf-picker">';
+      remaining.forEach(function(c){ var soon=!c.live;
+        h+='<button class="cf-pcard'+(soon?" soon":"")+'" data-add="'+c.id+'"'+(soon?" disabled":"")+'>'+
+           '<div class="cf-ic" style="background:'+(COLORS[c.id]||"#3a5bff")+'">'+DOT+'</div><h4>'+(NAMES[c.id]||c.name)+'</h4>'+
+           '<span class="cf-add">'+(soon?"Soon":"+"+money(Q.addNextPrice))+'</span></button>'; });
+      h+='</div>';
+    }
+
+    // summary
+    if(progs.length||hasBip){
+      var due=Q.newTotal + ((hasBip&&!Q.isComplete)?Q.bipPrice:0);
+      h+='<div class="cf-sum">';
+      h+='<div class="cf-total"><span class="cf-now">'+money(due)+'</span><span class="cf-u">'+unit()+' · '+progs.length+' calculator'+(progs.length!==1?"s":"")+(hasBip&&!Q.isComplete?" + BIP":"")+'</span></div>';
+      if(Q.savings>0) h+='<div class="cf-savebadge">Saves '+money(Q.savings)+unit()+' vs buying separately · '+Q.savingsPct+'% off</div>';
+      h+='<div class="cf-prog"><div class="cf-plabel"><span>Plan coverage</span><span><b>'+progs.length+'</b> of '+Q.catalogLive+'</span></div><div class="cf-track"><div class="cf-fill" style="width:'+Math.round(progs.length/Q.catalogLive*100)+'%"></div></div>';
+      if(Q.isComplete) h+='<div class="cf-nudge done">✓ Complete — every calculator, plus BIP included free.</div>';
+      else h+='<div class="cf-nudge">Your next calculator is just <b style="color:#fff">+'+money(Q.addNextPrice)+unit()+'</b> — the more you add, the less each costs.</div>';
+      h+='</div>';
+
+      if(Q.isComplete) h+='<div class="cf-bip free"><div class="cf-ic" style="background:#0d9488">'+DOT+'</div><div><h4>Building Intelligence Platform</h4><p>Included free with Complete.</p></div><span class="cf-bp">FREE</span></div>';
+      else h+='<div class="cf-bip'+(hasBip?" on":"")+'" id="cfBip"><div class="cf-ic" style="background:#0d9488">'+DOT+'</div><div><h4>Add full BIP access</h4><p>Hurricane risk, solar siting, ZIP search across 40k+ ZIPs.</p></div><span class="cf-bp">+'+money(Q.bipPrice)+unit()+'</span></div>';
+
+      h+='<button class="cf-pay" onclick="proceedToStripeCheckout()">'+CART_SVG+'Pay Securely — '+money(due)+unit()+'</button>';
+      h+='<p class="cf-fine">Secure Stripe checkout · 7-day free trial · one plan, one renewal date · cancel anytime.</p>';
+      h+='</div>';
+    } else {
+      h+='<p style="text-align:center;color:#aeb8cf;padding:20px 0">Your cart is empty — tap a calculator above to start your plan.</p>';
+    }
+
+    host.innerHTML=h;
+    // wire
+    host.querySelectorAll("#cfTier button").forEach(function(b){ b.onclick=function(){ plan.tier=b.dataset.t; render(); }; });
+    host.querySelectorAll("#cfCycle button").forEach(function(b){ b.onclick=function(){ plan.cycle=b.dataset.c; render(); }; });
+    host.querySelectorAll("[data-add]").forEach(function(b){ b.onclick=function(){ if(!b.disabled) addProgram(b.dataset.add); }; });
+    host.querySelectorAll("[data-rm]").forEach(function(b){ b.onclick=function(){ removeProgram(b.dataset.rm); }; });
+    var bip=document.getElementById("cfBip"); if(bip) bip.onclick=function(){ toggleBip(); };
+  }
+
+  // Curve checkout helper called by proceedToStripeCheckout (token flow preserved).
+  window.cfDoCurveCheckout = async function(token, email){
+    try{
+      var progs=cartPrograms(), hasBip=cartHasBip(), isComplete=progs.length>=P.liveCount();
+      if(!progs.length && !hasBip){ alert("Your cart is empty."); return; }
+      var headers={ "Content-Type":"application/json" }; if(token) headers["Authorization"]="Bearer "+token;
+      var resp=await fetch(CHECKOUT_API_URL+"/api/subscriptions/checkout-curve",{ method:"POST", headers:headers,
+        body:JSON.stringify({ programs:progs, tier:plan.tier, cycle:plan.cycle, bip:(hasBip&&!isComplete), email:email||null }) });
+      var data=await resp.json();
+      if(data && data.checkout_url){ window.location.href=data.checkout_url; }
+      else { throw new Error((data&&data.error)||"Checkout failed"); }
+    }catch(e){ console.error("Curve checkout error:",e); alert("Checkout failed: "+e.message+"\n\nPlease try again."); if(typeof closeCheckoutModal==="function") closeCheckoutModal(); }
+  };
+
+  // Take over rendering: shopping-cart.js triggers updateCartDisplay on every change.
+  cart.updateCartDisplay = render;
+  // hide the legacy static "Add More Products" link (picker replaces it) + bundle banner now
+  var bm=document.querySelector(".browse-more"); if(bm) bm.style.display="none";
+  window.updateBundleBanner(); window.updateUpsellRecommendations();
+  render();
+})();
+</script>
+</body>
+</html>

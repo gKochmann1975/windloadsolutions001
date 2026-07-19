@@ -282,7 +282,9 @@
             background:rgba(255,255,255,.04) !important;
             border:1px solid var(--line) !important;
         }
-        #cart-items-container #promo-code-section span[style*="color: #374151"]{color:#dbe3f5 !important}
+        /* label style is injected minified (no space after "color:"), so DON'T key off the
+           inline-style string — target the span directly or it stays dark-on-dark/invisible. */
+        #cart-items-container #promo-code-section span{color:#dbe3f5 !important}
         #cart-items-container #promo-code-input-area > div{
             background:rgba(255,255,255,.05) !important;
             border:1px solid var(--line) !important;
@@ -1823,7 +1825,9 @@
     specialty:'<svg viewBox="0 0 24 24" '+A+'><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>',
     solar:'<svg viewBox="0 0 24 24" '+A+'><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="5" y1="5" x2="7" y2="7"/><line x1="17" y1="17" x2="19" y2="19"/><line x1="5" y1="19" x2="7" y2="17"/><line x1="17" y1="7" x2="19" y2="5"/></svg>'
   };
-  var BIP_ICON='<svg viewBox="0 0 24 24" '+A+' style="color:#fff"><path d="M12 5a3 3 0 0 0-3 3 3 3 0 0 0-1 5.8V16a2 2 0 0 0 4 0 2 2 0 0 0 4 0v-2.2A3 3 0 0 0 15 8a3 3 0 0 0-3-3z"/></svg>';
+  // Canonical BIP brain — the two-hemisphere Lucide "brain" (matches the fa-brain used on the
+  // BIP product page + the chosen mockup option), styled like the other cf-brand Lucide icons.
+  var BIP_ICON='<svg viewBox="0 0 24 24" '+A+' style="color:#fff"><path d="M9.5 2a2.5 2.5 0 0 1 2.5 2.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2z"/><path d="M14.5 2a2.5 2.5 0 0 0-2.5 2.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2z"/></svg>';
 
   function progOf(code){ if(!code) return null; if(code.indexOf("bip_")===0) return "bip";
     for(var k in PROG){ if(code.indexOf(PROG[k])===0) return k; } return null; }
@@ -1892,7 +1896,7 @@
     h+='<div class="cart-summary" style="background:linear-gradient(135deg,#1e3a5f,#0f172a);border-radius:12px;padding:24px;margin-top:20px;color:white;"><h3 style="margin:0 0 16px 0;font-size:1.1rem;color:#94a3b8;"><i class="fas fa-receipt"></i> Order Summary</h3>';
     if(aP.length) h+='<div style="display:flex;justify-content:space-between;margin-bottom:8px;color:#94a3b8;"><span>'+aP.length+' annual calculator'+(aP.length>1?"s":"")+' (upfront)</span><span>'+money(annualTotal)+'</span></div>';
     if(mP.length) h+='<div style="display:flex;justify-content:space-between;margin-bottom:8px;color:#94a3b8;"><span>'+mP.length+' monthly calculator'+(mP.length>1?"s":"")+' (first month)</span><span>'+money(monthlyTotal)+'</span></div>';
-    if(bipDue>0) h+='<div style="display:flex;justify-content:space-between;margin-bottom:8px;color:#5eead4;"><span>BIP full access</span><span>'+money(bipDue)+'</span></div>';
+    if(bipDue>0) h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;color:#5eead4;"><span>BIP full access</span><span style="display:flex;align-items:center;gap:12px;">'+money(bipDue)+'<button onclick="cfBip()" title="Remove BIP full access" style="background:none;border:none;color:#f87171;cursor:pointer;font-size:.8rem;padding:0;white-space:nowrap;"><i class="fas fa-trash"></i> Remove</button></span></div>';
     if(anyComplete()) h+='<div style="display:flex;justify-content:space-between;margin-bottom:8px;color:#4ade80;"><span>BIP full access</span><span>FREE (Complete)</span></div>';
     h+='<div style="display:flex;justify-content:space-between;padding-top:16px;border-top:1px solid rgba(255,255,255,0.2);font-size:1.4rem;font-weight:700;"><span>Total Due Today</span><span style="color:#4ade80;">'+money(dueToday)+'</span></div>';
     if(mP.length) h+='<p style="margin:12px 0 0 0;font-size:.85rem;color:#94a3b8;"><i class="fas fa-info-circle"></i> Monthly renews at '+money(monthlyTotal)+'/month</p>';

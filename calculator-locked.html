@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>/* site-wide cart indicator */(function(d){var s=d.createElement("script");s.src="/js/cart-indicator.js";s.defer=true;(d.head||d.documentElement).appendChild(s);})(document);</script>
+    <meta charset="UTF-8">
+    <meta name="description" content="Add a wind load calculator to your WindLoadCalc plan.">
+
+    <meta name="robots" content="noindex, nofollow">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="/images/windloadcalc-icon-anim-loop.svg?v=1">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="shortcut icon" href="/favicon.ico?v=2">
+    <title>Add a Calculator to Your Plan | WindLoadCalc</title>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Shopping Cart | WindLoadCalc">
+    <meta property="og:description" content="Professional wind load calculations and building intelligence platform for engineers and architects.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://windloadcalc.com/calculator-locked.html">
+    <meta property="og:image" content="https://windloadcalc.com/images/video-posters/index-homepage.jpg">
+    <meta property="og:site_name" content="WindLoadCalc">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Google Sign-In SDK -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+    <style>
+        :root{
+          --blue:#0018FF; --blue-deep:#181E57; --blue-bright:#3a5bff;
+          --muted:#94a3b8; --line:rgba(255,255,255,.08); --bg:#070a18; --surface:rgba(255,255,255,.04);
+          --gold:#E8B530; --luxe:cubic-bezier(.22,.61,.36,1);
+        }
+        * { box-sizing:border-box; margin:0; padding:0; }
+        html{scroll-behavior:smooth}
+        body {
+            font-family:'Inter',-apple-system,'Segoe UI',Roboto,sans-serif;
+            background:var(--bg);
+            color:#e8edf7;
+            min-height:100vh;
+            overflow-x:hidden;
+            -webkit-font-smoothing:antialiased;
+            line-height:1.55;
+        }
+        a{text-decoration:none;color:inherit}
+
+        /* Dark-glass ambient layers */
+        .aurora{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+        .aurora span{position:absolute;border-radius:50%;filter:blur(90px);opacity:.5}
+        .aurora .a1{width:620px;height:620px;background:#0018FF;top:-180px;left:-120px;animation:drift1 18s var(--luxe) infinite alternate}
+        .aurora .a2{width:540px;height:540px;background:#10B981;bottom:-200px;right:-120px;opacity:.28;animation:drift2 22s var(--luxe) infinite alternate}
+        .aurora .a3{width:420px;height:420px;background:#181E57;top:34%;right:16%;opacity:.55;animation:drift1 26s var(--luxe) infinite alternate-reverse}
+        @keyframes drift1{to{transform:translate(80px,60px) scale(1.15)}}
+        @keyframes drift2{to{transform:translate(-70px,-50px) scale(1.1)}}
+        .grid-tex{position:fixed;inset:0;z-index:0;pointer-events:none;
+          background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+          background-size:54px 54px;mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000 40%,transparent 100%)}
+
+        /* Nav (solid by default — no dark hero behind it) */
+        nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:.3s var(--luxe);
+          backdrop-filter:blur(14px);border-bottom:1px solid var(--line);
+          background:linear-gradient(90deg, rgba(240,244,255,.97) 0%, rgba(223,232,255,.93) 13%, rgba(22,28,58,.92) 46%, rgba(7,10,24,.95) 100%)}
+        .nav-in{display:flex;align-items:center;justify-content:space-between;padding:8px clamp(24px,4vw,48px);transition:padding .3s var(--luxe)}
+        .logo{z-index:1001;display:flex;align-items:center}
+        .logo-image{height:64px;width:auto;display:block;transition:all .3s ease}
+        .nav-right{display:flex;align-items:center;gap:18px}
+        .nav-links{display:flex;align-items:center;gap:28px}
+        .nav-links a.l{position:relative;font-size:14px;color:#fff;font-weight:500;opacity:.88;transition:opacity .2s var(--luxe);text-shadow:0 1px 8px rgba(0,0,0,.45)}
+        .nav-links a.l:hover{opacity:1}
+        .btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;border-radius:11px;cursor:pointer;transition:.25s var(--luxe);border:none;font-family:inherit}
+        .btn-ghost{background:rgba(255,255,255,.06);color:#fff;padding:11px 18px;font-size:14px;border:1px solid rgba(255,255,255,.22)}
+        .btn-ghost:hover{border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.12)}
+        .btn-primary{background:linear-gradient(135deg,#0018FF,#2540ff);color:#fff;padding:12px 22px;font-size:14px;box-shadow:0 10px 30px rgba(0,24,255,.45)}
+        .btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(0,24,255,.6)}
+        .hamburger{display:flex;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;z-index:60}
+        .hamburger span{display:block;width:26px;height:3px;border-radius:2px;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.6);transition:.3s var(--luxe)}
+        .hamburger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+        .hamburger.open span:nth-child(2){opacity:0}
+        .hamburger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+        .nav-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);opacity:0;visibility:hidden;transition:.3s var(--luxe);z-index:55}
+        .nav-overlay.open{opacity:1;visibility:visible}
+        .full-menu{position:fixed;top:0;right:0;height:100vh;height:100dvh;width:min(90vw,380px);z-index:60;
+          background:rgba(10,14,30,.985);backdrop-filter:blur(18px);border-left:1px solid var(--line);
+          box-shadow:-24px 0 60px rgba(0,0,0,.55);transform:translateX(100%);transition:transform .3s var(--luxe);overflow-y:auto;padding:74px 0 28px}
+        .full-menu.open{transform:translateX(0)}
+        .fm-head{display:flex;align-items:center;justify-content:space-between;padding:0 26px 14px;border-bottom:1px solid var(--line)}
+        .fm-head span{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+        .fm-close{background:none;border:none;color:#fff;font-size:24px;line-height:1;cursor:pointer;padding:2px 8px}
+        .fm-group{padding:14px 26px 4px;border-bottom:1px solid var(--line)}
+        .fm-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9db0ff;margin-bottom:6px}
+        .fm-group a{display:block;padding:9px 0;font-size:15px;color:#dbe3f5;font-weight:500;transition:color .15s}
+        .fm-group a:hover{color:#fff}
+        .fm-actions{display:flex;flex-direction:column;gap:10px;padding:20px 26px 0}
+        .fm-actions .btn{width:100%;justify-content:center;padding:14px;font-size:15px}
+
+        /* Page container */
+        .container {
+            position:relative;
+            z-index:1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 130px 28px 60px;
+        }
+
+        .page-title {
+            font-size: clamp(28px,4vw,2.5rem);
+            font-weight: 800;
+            color: #fff;
+            letter-spacing:-.02em;
+            margin-bottom: 0.5rem;
+        }
+        .page-title i{color:#9db0ff}
+
+        .page-subtitle {
+            color: #aeb8cf;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .cart-layout {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        @media (max-width: 1024px) {
+            .cart-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .cart-main {
+            background: var(--surface);
+            border:1px solid var(--line);
+            border-radius: 18px;
+            padding: 24px;
+            box-shadow: 0 12px 32px rgba(0,0,0,.34);
+            backdrop-filter:blur(6px);
+        }
+
+        .cart-sidebar {
+            position: sticky;
+            top: 110px;
+        }
+
+        .upsell-section {
+            background: var(--surface);
+            border:1px solid var(--line);
+            border-radius: 18px;
+            padding: 24px;
+            box-shadow: 0 12px 32px rgba(0,0,0,.34);
+            backdrop-filter:blur(6px);
+            margin-bottom: 1.5rem;
+        }
+
+        .upsell-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Upsell cards — JS injects these into #upsell-recommendations */
+        .upsell-product {
+            background: rgba(58,91,255,.10) !important;
+            border: 1px solid rgba(58,91,255,.4) !important;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+        .upsell-product h4 { color: #c3cdff !important; margin-bottom: 8px; }
+        .upsell-product p { color: #aeb8cf !important; font-size: 0.9rem; margin-bottom: 12px; }
+        .upsell-product > div[style*="font-weight: 700"]{color:#9db0ff !important}
+
+        .upsell-price {
+            display: flex;
+            align-items: baseline;
+            flex-wrap:wrap;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        .upsell-price .original { text-decoration: line-through; color: #7e8aa6; }
+        .upsell-price .discounted { font-size: 1.3rem; font-weight: 700; color: #9db0ff; }
+
+        .add-upsell-btn {
+            width: 100%;
+            background: linear-gradient(135deg,#0018FF,#2540ff);
+            color: white;
+            border: none;
+            padding: 11px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.25s var(--luxe);
+        }
+        .add-upsell-btn:hover { transform: translateY(-1px); box-shadow:0 10px 26px rgba(0,24,255,.4); }
+
+        /* Bundle discount banner (#bundle-discount-banner) */
+        .bundle-banner {
+            background: linear-gradient(135deg, rgba(16,185,129,.16), rgba(58,91,255,.12));
+            border: 1px solid rgba(52,211,153,.4);
+            border-radius: 14px;
+            padding: 16px;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .bundle-banner h3 { color: #6ee7b7; margin-bottom: 8px; font-size: 1.1rem; }
+        .bundle-banner p { color: #cdd6ec; font-size: 0.95rem; }
+        .bundle-banner strong{color:#fff}
+
+        /* Static empty-cart fallback inside #cart-items-container */
+        .empty-cart { text-align: center; padding: 60px 20px; }
+        .empty-cart i { font-size: 4rem; color: rgba(157,176,255,.4); margin-bottom: 1.5rem; }
+        .empty-cart h3 { color: #dbe3f5; margin-bottom: 1rem; }
+        .empty-cart p{color:#aeb8cf}
+        .empty-cart a { color: #34D399; font-weight: 600; text-decoration: none; }
+        .empty-cart a:hover { text-decoration: underline; }
+
+        .browse-more {
+            text-align: center;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--line);
+        }
+        .browse-more a { color: #9db0ff; text-decoration: none; font-weight: 600; }
+        .browse-more a:hover { color:#fff; text-decoration: underline; }
+
+        /* Trust / secure card */
+        .trust-card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 12px 32px rgba(0,0,0,.34);backdrop-filter:blur(6px)}
+        .trust-card h4{color:#fff;margin-bottom:1rem;font-size:1rem;display:flex;align-items:center;gap:.4rem}
+        .trust-card ul{margin-top:1rem;color:#aeb8cf;font-size:.85rem;padding-left:1.2rem}
+        .secure-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+            color: #aeb8cf;
+            font-size: 0.85rem;
+        }
+        .secure-badges span { display: flex; align-items: center; gap: 0.3rem; }
+
+        /* ===== Overrides for runtime-injected cart markup (shopping-cart.js) =====
+           shopping-cart.js writes inline white/light styles into #cart-items-container.
+           These rules force the injected rows to be readable on the dark canvas. */
+        #cart-items-container .cart-item{
+            background:rgba(255,255,255,.05) !important;
+            border:1px solid var(--line) !important;
+            border-radius:12px;
+        }
+        #cart-items-container .cart-item h4{color:#fff !important}
+        /* feature chips inside each cart-item */
+        #cart-items-container .cart-item span[style*="background: #f0f9ff"]{
+            background:rgba(58,91,255,.14) !important;
+            color:#c3cdff !important;
+        }
+        /* per-item price */
+        #cart-items-container .cart-item div[style*="color: #0018ff"],
+        #cart-items-container .cart-item div[style*="color:#0018ff"]{color:#9db0ff !important}
+        #cart-items-container .cart-item div[style*="color: #64748b"]{color:#aeb8cf !important}
+        /* section header titles (Annual / Monthly Subscriptions) */
+        #cart-items-container .cart-section h3{color:#fff !important}
+        /* annual subtotal strip */
+        #cart-items-container div[style*="background: #f0fdf4"]{background:rgba(16,185,129,.12) !important}
+        #cart-items-container div[style*="background: #f0fdf4"] span{color:#6ee7b7 !important}
+        /* monthly subtotal strip */
+        #cart-items-container div[style*="background: #eff6ff"]{background:rgba(58,91,255,.12) !important}
+        #cart-items-container div[style*="background: #eff6ff"] span{color:#9db0ff !important}
+        /* order summary card already dark in JS — keep, just ensure rounded glass edge */
+        #cart-items-container .cart-summary{border:1px solid var(--line)}
+        /* promo code section (#promo-code-section) */
+        #cart-items-container #promo-code-section{
+            background:rgba(255,255,255,.04) !important;
+            border:1px solid var(--line) !important;
+        }
+        #cart-items-container #promo-code-section span[style*="color: #374151"]{color:#dbe3f5 !important}
+        #cart-items-container #promo-code-input-area > div{
+            background:rgba(255,255,255,.05) !important;
+            border:1px solid var(--line) !important;
+        }
+        #cart-items-container #promo-code-input-area p{color:#aeb8cf !important}
+        #cart-items-container #promo-code-input-area strong{color:#fff}
+        /* "Secured by Stripe" caption under checkout button */
+        #cart-items-container p[style*="color: #64748b"]{color:#aeb8cf !important}
+
+        /* Checkout Auth Modal Styles */
+        .checkout-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .checkout-modal-overlay.active {
+            display: flex;
+        }
+
+        .checkout-modal {
+            background: white;
+            border-radius: 20px;
+            max-width: 480px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3);
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .checkout-modal-header {
+            padding: 24px 24px 16px;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .checkout-modal-header h2 {
+            font-size: 1.5rem;
+            color: #1f2937;
+            margin: 0;
+        }
+
+        .checkout-modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #9ca3af;
+            cursor: pointer;
+            padding: 4px;
+            line-height: 1;
+        }
+
+        .checkout-modal-close:hover {
+            color: #6b7280;
+        }
+
+        .checkout-modal-body {
+            padding: 24px;
+        }
+
+        .checkout-auth-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .checkout-auth-tab {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #e5e7eb;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #6b7280;
+            transition: all 0.2s;
+        }
+
+        .checkout-auth-tab.active {
+            border-color: #0018ff;
+            color: #0018ff;
+            background: #eff6ff;
+        }
+
+        .checkout-auth-tab:hover:not(.active) {
+            border-color: #d1d5db;
+            background: #f9fafb;
+        }
+
+        .checkout-form-group {
+            margin-bottom: 16px;
+        }
+
+        .checkout-form-group label {
+            display: block;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 6px;
+            font-size: 0.9rem;
+        }
+
+        .checkout-form-group input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .checkout-form-group input:focus {
+            outline: none;
+            border-color: #0018ff;
+        }
+
+        .checkout-submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #0018ff, #0080ff);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 8px;
+        }
+
+        .checkout-submit-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 24, 255, 0.3);
+        }
+
+        .checkout-submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .checkout-divider {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            color: #9ca3af;
+            font-size: 0.85rem;
+        }
+
+        .checkout-divider::before,
+        .checkout-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #e5e7eb;
+        }
+
+        .checkout-divider span {
+            padding: 0 12px;
+        }
+
+        .google-signin-btn {
+            width: 100%;
+            padding: 12px;
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.2s;
+            color: #374151;
+        }
+
+        .google-signin-btn:hover {
+            background: #f9fafb;
+            border-color: #d1d5db;
+        }
+
+        .google-signin-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .checkout-error {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #dc2626;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .checkout-error.show {
+            display: block;
+        }
+
+        .checkout-view {
+            display: none;
+        }
+
+        .checkout-view.active {
+            display: block;
+        }
+
+        .checkout-loading {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .checkout-loading i {
+            font-size: 2.5rem;
+            color: #0018ff;
+            margin-bottom: 16px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .checkout-success {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .checkout-success-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.35);
+        }
+
+        .checkout-success h3 {
+            font-size: 1.5rem;
+            color: #1f2937;
+            margin-bottom: 12px;
+        }
+
+        .checkout-success p {
+            color: #6b7280;
+            margin-bottom: 20px;
+        }
+
+        .password-toggle {
+            position: relative;
+        }
+
+        .password-toggle input {
+            padding-right: 45px;
+        }
+
+        .password-toggle-btn {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #9ca3af;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .password-toggle-btn:hover {
+            color: #6b7280;
+        }
+    </style>
+    <link rel="canonical" href="https://windloadcalc.com/cart.html">
+</head>
+<body>
+    <div class="aurora"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
+    <div class="grid-tex"></div>
+
+    <!-- Nav (solid by default — no dark hero on this page) -->
+    <nav id="nav"><div class="nav-in">
+      <a class="logo" href="https://windloadcalc.com/"><img height="100" width="300" src="images/windloadcalc-logo-anim-navy.svg" alt="WindLoadCalc — ASCE 7-22 Wind Load Calculator logo" class="logo-image"></a>
+      <div class="nav-right">
+        <div class="nav-links">
+          <a class="l" href="https://windloadcalc.com/wind-load-calculator-shop.html">Calculators</a>
+          <a class="l" href="https://windloadcalc.com/building-intelligence-platform-shop.html">BIP</a>
+          <a class="l" href="https://windloadcalc.com/wind-load-calculator-shop.html">Pricing</a>
+          <a class="l" href="https://windloadcalc.com/building-intelligence-platform-landing.html">BIP</a>
+          <a class="btn btn-ghost" href="https://windloadcalc.com/login.html">Log in</a>
+          <a class="btn btn-primary" href="https://windloadcalc.com/wind-load-calculator-landing.html">Start free trial</a>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="Open full menu" aria-expanded="false" aria-controls="fullMenu"><span></span><span></span><span></span></button>
+      </div>
+    </div></nav>
+    <div class="nav-overlay" id="navOverlay"></div>
+    <aside class="full-menu" id="fullMenu" aria-label="Site menu">
+  <div class="fm-head"><span>Menu</span><button class="fm-close" id="fmClose" aria-label="Close menu">&times;</button></div>
+  <div class="fm-group">
+    <div class="fm-label">Wind Load Calculators</div>
+    <a href="https://windloadcalc.com/wind-load-calculator-landing.html">Overview</a>
+    <a href="https://windloadcalc.com/free-wind-load-calculator.html">Free Calculator</a>
+    <a href="https://windloadcalc.com/walkthroughs.html">Walkthroughs</a>
+    <a href="https://windloadcalc.com/wind-load-calculator-comparison.html">Feature Comparison</a>
+    <a href="https://windloadcalc.com/wind-load-calculator-shop.html">Pricing</a>
+  </div>
+  <div class="fm-group">
+    <div class="fm-label">Service Areas</div>
+    <a href="https://windloadcalc.com/service-area/">All States &amp; Counties</a>
+    <a href="https://windloadcalc.com/florida-wind-load-calculator/">Florida</a>
+    <a href="https://windloadcalc.com/texas-wind-load-calculator/">Texas</a>
+    <a href="https://windloadcalc.com/california-wind-load-calculator/">California</a>
+    <a href="https://windloadcalc.com/miami-dade-wind-load-calculator/">Miami-Dade County</a>
+  </div>
+  <div class="fm-group">
+    <div class="fm-label">Building Intelligence Platform</div>
+    <a href="https://windloadcalc.com/building-intelligence-platform-landing.html">Overview</a>
+    <a href="https://windloadcalc.com/building-intelligence-platform.html">Free Trial</a>
+    <a href="https://windloadcalc.com/building-intelligence-platform-shop.html">Pricing</a>
+  </div>
+  <div class="fm-group">
+    <div class="fm-label">For Professionals</div>
+    <a href="https://windloadcalc.com/wind-load-calculator-for-engineers.html">Engineers</a>
+    <a href="https://windloadcalc.com/wind-load-calculator-for-architects.html">Architects</a>
+    <a href="https://windloadcalc.com/wind-loads-for-consultants.html">Consultants</a>
+    <a href="https://windloadcalc.com/contractors-wind-load-calculator.html">Contractors</a>
+  </div>
+  <div class="fm-group">
+    <div class="fm-label">Company</div>
+    <a href="https://windloadcalc.com/services.html">Services</a>
+    <a href="https://windloadcalc.com/why-us.html">Why Us</a>
+    <a href="https://windloadcalc.com/faq.html">FAQ</a>
+    <a href="https://windloadcalc.com/contact.html">Contact Us</a>
+  </div>
+  <div class="fm-actions">
+    <a class="btn btn-ghost" href="https://windloadcalc.com/login.html">Log in</a>
+    <a class="btn btn-primary" href="https://windloadcalc.com/wind-load-calculator-landing.html">Start Free Trial &rarr;</a>
+  </div>
+</aside>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div id="clWrap"></div>
+    </div>
+
+    <script src="js/pricing-engine.js"></script>
+    <script src="js/shopping-cart.js"></script>
+    <script>
+    (function(){
+      var ham=document.getElementById('hamburger'), fm=document.getElementById('fullMenu'),
+          ov=document.getElementById('navOverlay'), fc=document.getElementById('fmClose');
+      if(!ham||!fm) return;
+      function setMenu(open){ fm.classList.toggle('open',open); if(ov)ov.classList.toggle('open',open); ham.classList.toggle('open',open);
+        ham.setAttribute('aria-expanded',open); document.body.style.overflow=open?'hidden':''; }
+      ham.addEventListener('click',function(){ setMenu(!fm.classList.contains('open')); });
+      if(ov) ov.addEventListener('click',function(){ setMenu(false); });
+      if(fc) fc.addEventListener('click',function(){ setMenu(false); });
+      fm.querySelectorAll('a').forEach(function(a){ a.addEventListener('click',function(){ setMenu(false); }); });
+      window.addEventListener('keydown',function(e){ if(e.key==='Escape') setMenu(false); });
+    })();
+    </script>
+
+    <style>
+      #clWrap{max-width:1040px;margin:0 auto}
+      #clWrap .cl-hero{display:flex;align-items:center;gap:18px;margin-bottom:10px}
+      #clWrap .cl-badge{width:60px;height:60px;flex:0 0 auto;border-radius:16px;display:grid;place-items:center;color:#fff;box-shadow:0 12px 30px rgba(0,0,0,.45)}
+      #clWrap .cl-badge svg{width:30px;height:30px}
+      #clWrap .cl-eyebrow{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin:0 0 3px}
+      #clWrap .cl-name{font-size:clamp(24px,3.4vw,34px);font-weight:820;letter-spacing:-.02em;color:#fff;margin:0;line-height:1.05}
+      #clWrap .cl-tag{color:#c7d0e6;font-size:15.5px;line-height:1.55;margin:14px 0 26px;max-width:70ch}#clWrap .cl-tag b{color:#fff;font-weight:680}
+      #clWrap .cl-grid{display:grid;grid-template-columns:1fr 350px;gap:24px;align-items:start}
+      @media (max-width:840px){#clWrap .cl-grid{grid-template-columns:1fr}}
+      #clWrap .cl-panel{background:rgba(255,255,255,.04);border:1px solid rgba(120,140,200,.2);border-radius:16px;padding:20px 22px}
+      #clWrap .cl-h2{font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;color:#8a93a8;font-weight:700;margin:0 0 14px}
+      #clWrap .cl-feat{display:flex;gap:13px;padding:12px 0;border-top:1px solid rgba(255,255,255,.06)}#clWrap .cl-feat:first-of-type{border-top:0;padding-top:0}
+      #clWrap .cl-fi{width:32px;height:32px;flex:0 0 auto;border-radius:9px;display:grid;place-items:center}
+      #clWrap .cl-fi svg{width:18px;height:18px}
+      #clWrap .cl-feat h4{margin:0;font-size:14.5px;font-weight:680;color:#fff}
+      #clWrap .cl-feat p{margin:2px 0 0;font-size:13px;color:#aeb8cf}
+      #clWrap .cl-outs{margin-top:16px;padding-top:15px;border-top:1px solid rgba(255,255,255,.06)}
+      #clWrap .cl-outs .l{font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:#8a93a8;font-weight:700;margin-bottom:9px}
+      #clWrap .cl-tags{display:flex;gap:7px;flex-wrap:wrap}
+      #clWrap .cl-tag2{font-size:12px;font-weight:600;color:#e8edf7;background:rgba(255,255,255,.06);border:1px solid rgba(120,140,200,.22);border-radius:8px;padding:5px 10px}
+      #clWrap .cl-cta{position:sticky;top:16px;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:14px}
+      @media (max-width:840px){#clWrap .cl-cta{position:static}}
+      #clWrap .cl-cart{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;color:#fff}
+      #clWrap .cl-cart svg{width:22px;height:22px}
+      #clWrap .cl-uh{font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:#94a3b8;font-weight:700}
+      #clWrap .cl-price{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+      #clWrap .cl-price .now{font-size:30px;font-weight:820;letter-spacing:-.03em;color:#fff}
+      #clWrap .cl-price .u{font-size:13.5px;color:#aeb8cf;font-weight:600}
+      #clWrap .cl-note{font-size:12.5px;color:#aeb8cf;line-height:1.5}
+      #clWrap .cl-go{border:0;border-radius:12px;color:#fff;font:inherit;font-weight:760;font-size:15.5px;padding:15px;cursor:pointer;transition:.2s;display:flex;align-items:center;justify-content:center;gap:9px;text-decoration:none;text-align:center}
+      #clWrap .cl-go svg{width:19px;height:19px}
+      #clWrap .cl-go:hover{transform:translateY(-2px)}
+      #clWrap .cl-reassure{display:flex;flex-direction:column;gap:7px}
+      #clWrap .cl-reassure div{display:flex;gap:8px;align-items:center;font-size:12.6px;color:#aeb8cf}
+      #clWrap .cl-reassure svg{width:15px;height:15px;color:#34D399;flex:0 0 auto}
+      #clWrap .cl-see{text-align:center;font-size:13px}#clWrap .cl-see a{color:#9db0ff;font-weight:600}
+      #clWrap .cl-soon{display:inline-block;background:rgba(255,255,255,.08);color:#8a93a8;border-radius:10px;padding:14px;text-align:center;font-weight:700;width:100%}
+    </style>
+    <script>
+    (function(){
+      var wrap=document.getElementById("clWrap");
+      if(!window.WLCPricing){ wrap.innerHTML="<p style='color:#aeb8cf'>Pricing failed to load — please refresh.</p>"; return; }
+      var P=window.WLCPricing;
+      var COLORS={wd:"#06b6d4",mwfrs:"#3b82f6",roofs:"#f97316",other:"#14b8a6",specialty:"#a855f7",solar:"#fbbf24"};
+      var A='fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"';
+      var ICONS={
+        wd:'<svg viewBox="0 0 24 24" '+A+'><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="12" y1="3" x2="12" y2="21"/></svg>',
+        mwfrs:'<svg viewBox="0 0 24 24" '+A+'><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-5h6v5"/></svg>',
+        roofs:'<svg viewBox="0 0 24 24" '+A+'><path d="M3 12l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>',
+        other:'<svg viewBox="0 0 24 24" '+A+'><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18"/><path d="M4 22h16"/><path d="M10 7h4M10 11h4M10 15h4"/></svg>',
+        specialty:'<svg viewBox="0 0 24 24" '+A+'><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>',
+        solar:'<svg viewBox="0 0 24 24" '+A+'><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="5" y1="5" x2="7" y2="7"/><line x1="17" y1="17" x2="19" y2="19"/><line x1="5" y1="19" x2="7" y2="17"/><line x1="17" y1="7" x2="19" y2="5"/></svg>'
+      };
+      var FI={grid:'<svg viewBox="0 0 24 24" '+A+'><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>',
+        layers:'<svg viewBox="0 0 24 24" '+A+'><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>',
+        file:'<svg viewBox="0 0 24 24" '+A+'><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>',
+        wind:'<svg viewBox="0 0 24 24" '+A+'><path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/></svg>'};
+      var CART='<svg viewBox="0 0 24 24" '+A+'><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>';
+      var OK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+      // Plain-language copy — NO ASCE chapter/section numbers.
+      var CALC={
+        wd:{name:"Windows, Doors & Shutters",tag:"Component &amp; cladding pressures for <b>every opening in the envelope</b> — windows, doors, shutters, and mulled assemblies — the way plan reviewers expect to see them.",
+          feats:[["grid","Per-opening design pressures","Positive and negative pressures for each window, door, and shutter, by wall zone."],["layers","Mulled assemblies handled right","The lite, the mullion (both tributary widths), and the wall opening — all three checks."],["file","Submittal-ready schedule","A clean pressure schedule that matches how reviewers look at openings."]],
+          outs:["Corner & field zones","Positive & negative","Mullion tributary","Pressure schedule"]},
+        mwfrs:{name:"MWFRS — Whole Building",tag:"Main wind-force resisting pressures for the <b>whole building</b> — the Directional and Envelope methods in one place.",
+          feats:[["wind","Directional + Envelope","Both procedures, so you pick the one your project calls for."],["grid","Every face resolved","Windward, leeward, side walls, and roof — per-surface design pressures."],["file","Documented per-face output","A clean breakdown ready to hand to the structural reviewer."]],
+          outs:["Directional method","Envelope method","Windward / leeward","Per-face pressures"]},
+        roofs:{name:"Roofs",tag:"Roof pressures for <b>every roof shape you build</b> — plus parapets and overhangs — without leaving the calculator to hand-check a figure.",
+          feats:[["grid","Every roof shape","Gable, hip, monoslope, flat, sawtooth, and multispan — each with the right zones."],["layers","Parapets & overhangs","Overhang uplift and parapet pressures handled alongside the main roof."],["file","Zone-by-zone output","Corner, edge, and field pressures laid out for the permit set."]],
+          outs:["Gable · Hip · Mono","Flat · Sawtooth","Overhang uplift","Corner / edge / field"]},
+        other:{name:"Other Structures",tag:"Wind loads for the structures that aren’t the building — <b>signs, freestanding walls, rooftop equipment, chimneys, tanks, and trussed towers</b>.",
+          feats:[["grid","Six structure types","Signs, walls, equipment, chimneys, tanks, and trussed towers in one calculator."],["wind","Force coefficients done for you","The right treatment for each shape, so you’re not chasing figures."],["file","Force & pressure output","Design forces documented per structure for the submittal."]],
+          outs:["Signs & walls","Rooftop equipment","Chimneys & tanks","Trussed towers"]},
+        specialty:{name:"Specialty Components",tag:"The specialty roof components that trip up a submittal — <b>parapets and attached canopies</b> — done to ASCE 7-22.",
+          feats:[["layers","Parapets","Windward and leeward parapet pressures for the components and cladding."],["grid","Attached canopies","Net pressures on canopies attached to the building wall."],["file","Clean, documented output","Results laid out for a smooth review."]],
+          outs:["Parapets","Attached canopies","Net pressures","Documented"]},
+        solar:{name:"Solar",tag:"Rooftop and ground-mount <b>PV array wind loads</b> — the one-stop solar package. Launching soon.",
+          feats:[["grid","Rooftop & ground-mount","Both array types in a single solar-focused workflow."],["wind","Panel-specific pressures","Array-edge and interior zone treatment for panels."],["file","Installer-ready output","Loads documented for the racking and permit package."]],
+          outs:["Rooftop PV","Ground-mount","Array zones","Coming soon"]}
+      };
+      function qp(k){ try{ return new URLSearchParams(location.search).get(k); }catch(e){ return null; } }
+      var id=(qp("calc")||"roofs").toLowerCase(); if(!CALC[id]) id="roofs";
+      var c=CALC[id], color=COLORS[id]||"#3a5bff";
+      var live=(function(){ var x=P.config().catalog.filter(function(k){return k.id===id;})[0]; return !!(x&&x.live); })();
+      // A representative "starts at" price: one calculator at Pro annual (marketing anchor).
+      var priceFrom=P.curveTotal(1,{tier:"pro",cycle:"annual"});
+
+      document.title=c.name+" — Add to Your Plan | WindLoadCalc";
+      var h="";
+      h+='<div class="cl-hero"><div class="cl-badge" style="background:linear-gradient(150deg,'+color+','+color+'99)">'+ICONS[id]+'</div>'+
+         '<div><p class="cl-eyebrow" style="color:'+color+'">'+(live?"Not on your plan yet":"Coming soon")+'</p><h1 class="cl-name">'+c.name+'</h1></div></div>';
+      h+='<p class="cl-tag">'+c.tag+'</p>';
+      h+='<div class="cl-grid"><section class="cl-panel"><div class="cl-h2">What this calculator does</div>';
+      c.feats.forEach(function(f){ h+='<div class="cl-feat"><div class="cl-fi" style="background:'+color+'22;color:'+color+'">'+(FI[f[0]]||FI.grid)+'</div><div><h4>'+f[1]+'</h4><p>'+f[2]+'</p></div></div>'; });
+      h+='<div class="cl-outs"><div class="l">You get, on every run</div><div class="cl-tags">'+c.outs.map(function(o){return '<span class="cl-tag2">'+o+'</span>';}).join("")+'</div></div></section>';
+      // CTA card
+      h+='<aside class="cl-cta cl-panel" style="border-top:4px solid '+color+'"><div class="cl-cart" style="background:'+color+'22;color:'+color+'">'+CART+'</div>';
+      if(live){
+        h+='<div class="cl-uh">Add to your plan</div><div class="cl-price"><span class="now">from '+("$"+Math.round(priceFrom).toLocaleString())+'</span><span class="u">/yr — less as you add more</span></div>';
+        h+='<div class="cl-note">You already have a plan — adding '+c.name.split(" ")[0]+' is cheap because you’re down the curve. You’ll see your exact prorated price on the next step.</div>';
+        h+='<a class="cl-go" style="background:linear-gradient(135deg,'+color+','+color+'cc)" href="/account-add-calculators.html?add='+id+'">'+CART+'Add '+c.name.split(" ")[0].replace(",","")+' to my plan</a>';
+        h+='<div class="cl-reassure"><div>'+OK+'Added to your existing plan — no new checkout</div><div>'+OK+'Prorated to your card on file</div><div>'+OK+'Cancel or change anytime</div></div>';
+        h+='<div class="cl-see"><a href="/account-add-calculators.html">See your whole plan &amp; add several →</a></div>';
+      } else {
+        h+='<div class="cl-uh">Coming soon</div><div class="cl-note">'+c.name+' isn’t available yet. Add the calculators you need today and this one will be here when it launches.</div>';
+        h+='<span class="cl-soon">Launching soon</span><div class="cl-see"><a href="/account-add-calculators.html">See your plan &amp; add calculators →</a></div>';
+      }
+      h+='</aside></div>';
+      wrap.innerHTML=h;
+    })();
+    </script>
+</body>
+</html>

@@ -16,7 +16,7 @@
   var CSS = ''
     + '.wlc-vlookup{--vl-navy:#0d1233;--vl-blue:#0018ff;--vl-green:#10B981;'
     + 'background:linear-gradient(160deg,#0d1233,#141a44);color:#e8ecff;border:1px solid rgba(88,110,255,.28);'
-    + 'border-radius:16px;padding:22px 20px;max-width:640px;margin:1.5rem 0;box-shadow:0 18px 50px rgba(6,10,40,.35)}'
+    + 'border-radius:16px;padding:22px 20px;max-width:640px;margin:1.5rem auto;box-shadow:0 18px 50px rgba(6,10,40,.35)}'
     + '.wlc-vlookup .vl-eyebrow{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:#8ea2ff;font-weight:700;margin-bottom:.35rem}'
     + '.wlc-vlookup .vl-title{font-size:1.15rem;font-weight:800;color:#fff;margin:0 0 .9rem;line-height:1.3}'
     + '.wlc-vlookup .vl-row{display:flex;gap:.5rem;flex-wrap:wrap}'

@@ -116,8 +116,12 @@ where Omni earns word-of-mouth.
   - NEXT: Tier 2 directory submissions (Engineers Edge, BuildingsGuide, Jabacus). Give Tier-1 links
     a few weeks to be crawled before expecting rank movement.
 
-## Flagged (not acted on — out of Tier-1 scope, needs Greg)
-- **windload.co copy violates two locked rules.** Its schema/FAQ say "PE-**stampable** PDF reports"
-  and "ASCE 7-**16** and 7-22". Per memory: software output is an **Engineering Report, never
-  sealed/stampable** (`feedback_no_sealed_reports_in_software`), and positioning is **7-22 ONLY,
-  never 7-16** (`feedback_asce_version_positioning`). Separate cleanup pass — flag, don't fix mid-task.
+## Copy-rule cleanup (windload.co) — DONE 2026-07-19
+- **FIXED & pushed (`master` 44f0cc72).** Removed the two locked-rule violations across all 9 live
+  content pages: product-positioning "ASCE 7-16/7-22" → "ASCE 7-22" (no 7-16 engine exists), and
+  "PE-sealed reports" / "PE-stampable PDF" describing the *software* output → "PE sign-and-seal
+  services" / "Engineering Report PDF". Refs `feedback_no_sealed_reports_in_software`,
+  `feedback_asce_version_positioning`, `audit_no_asce716_engine_confirmed`.
+- **Left intact (legitimate):** pe.html "PE-stamped documents" (the paid PE *service* deliverable —
+  advertising the service is allowed) and the vs-buildingsguide historical ASCE-edition timeline
+  (2016 = 7-16, a real past edition; removing it would be factually wrong).

@@ -53,13 +53,14 @@ on-page. Full plan: **`OFF_PAGE_SEO_BACKLINK_STRATEGY.md`** + target list/outrea
 - **H1 — Tier 1 (owned domains)  ✅ DONE 2026-07-19.** 6 backlinks to the free calcs live & verified:
   windload.solutions `/resources` (card + 2 inline) + windload.co `/vs-omni`,`/vs-buildingsguide`,
   `/compare` CTAs. (Also fixed windload.co copy: removed 7-16 + "sealed/stampable" software claims.)
-- **H1b — ⚠️ OPEN copy audit (surfaced 2026-07-19 by `/lint-marketing-copy`).** Only the specific
-  windload.co schema/FAQ/CTA violations were fixed. A broader **ASCE-7-16 product-positioning** audit
-  across windloadcalc.com + windload.solutions is NOT done: tight-pattern scan finds hits on
-  `Landing Pages/asce-7-wind-load-calculator.html` (3 copies) + several `*-wind-load-requirements.html`
-  state pages. **Most are LIKELY legitimate** (state pages correctly citing a state still on 7-16), but
-  a few software-landing taglines may be real slips. Needs Greg-paced triage (per
-  `reference_state_building_code_status`), NOT a mass find-replace. Run `/lint-marketing-copy`.
+- **H1b — ✅ DONE 2026-07-19: copy audit triaged (surfaced by `/lint-marketing-copy`).** Full
+  tight-pattern audit across all 3 marketing sites. **Exactly ONE real product-positioning violation
+  found and fixed:** windload.solutions about-us *software* page said "ASCE 7-16 and 7-22 results" →
+  now "ASCE 7-22" (deployed via `vercel --prod`, verified live). **Everything else confirmed
+  LEGITIMATE and left intact:** state-requirement pages ("Nevada … ASCE 7-16/7-22", "no wind importance
+  factor") + code-history FAQs = correct education, not positioning; windloadcalc.com live root is clean
+  (the `windloadsolutions001/` nested dir with 7-16 is untracked local cruft — not tracked/deployed/
+  indexed); windload.co asce7-16-overview is an educational page in Vercel-ignored `deployed-pages/`.
 - **H2 — Tier 2 self-serve directories  *(Owner: G — needs accounts/forms C can't submit)*.** First 10
   moves listed in the package: SourceForge → Capterra → Gartner/GetApp → thestructuralengineer.info →
   G2 → Qwoted. Competitors (MecaWind/SkyCiv/RWIND) already listed on these.

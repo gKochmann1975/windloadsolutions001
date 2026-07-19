@@ -45,6 +45,24 @@ Flip calculators live **one at a time**, each only when it clears: on-brand UI �
 - Order: **MWFRS** (most ready) → **Roofs** → **Specialized** (Signs/Equipment/Chimneys/Towers) → **Solar**.
 - When the last one ships → GATE 3 clears → launch **WindLoad Complete** bundle + the customer "add subscriptions" flow.
 
+## Workstream H — Off-page SEO / backlinks (overtake Omni & CalcTool)  *(started 2026-07-19)*
+Goal: climb above Omni/CalcTool for "wind load calculator." Diagnosis — our free page is already
+technically superior (10.6k words + full schema); the gap is **domain authority (backlinks)**, not
+on-page. Full plan: **`OFF_PAGE_SEO_BACKLINK_STRATEGY.md`** + target list/outreach:
+**`TIER2_DIRECTORY_SUBMISSION_PACKAGE.md`**.
+- **H1 — Tier 1 (owned domains)  ✅ DONE 2026-07-19.** 6 backlinks to the free calcs live & verified:
+  windload.solutions `/resources` (card + 2 inline) + windload.co `/vs-omni`,`/vs-buildingsguide`,
+  `/compare` CTAs. (Also fixed windload.co copy: removed 7-16 + "sealed/stampable" software claims.)
+- **H2 — Tier 2 self-serve directories  *(Owner: G — needs accounts/forms C can't submit)*.** First 10
+  moves listed in the package: SourceForge → Capterra → Gartner/GetApp → thestructuralengineer.info →
+  G2 → Qwoted. Competitors (MecaWind/SkyCiv/RWIND) already listed on these.
+- **H3 — Tier 2 editorial emails  *(Owner: C drafts → G reviews/sends)*.** 4 targets (DCOdes, worktaps,
+  thestructuralengineer.info, TopBusinessSoftware) — C can draft as Gmail drafts on request.
+- **H4 — Tier 3/4 (communities, SEAOC/NCSEA, HARO/Qwoted ongoing)  *(Owner: G, C assists with copy)*.**
+- **H5 — LATER:** buy Ahrefs/Semrush for full competitor backlink profiles + link-intersect at scale
+  (see "Ahrefs gap" in the package). Note: backlinks are a **weeks-to-months** game — don't expect
+  overnight rank movement.
+
 ---
 
 ## Today's parallel plan (full day)

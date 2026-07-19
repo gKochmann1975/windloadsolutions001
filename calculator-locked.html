@@ -755,6 +755,9 @@
       };
       function qp(k){ try{ return new URLSearchParams(location.search).get(k); }catch(e){ return null; } }
       var id=(qp("calc")||"roofs").toLowerCase(); if(!CALC[id]) id="roofs";
+      // Carry a session token (handed off from the calc app) through to the add flow, so the
+      // existing subscriber isn't asked to sign in again.
+      var tok=qp("token"); var TQ=tok?("&token="+encodeURIComponent(tok)):""; var TQ0=tok?("?token="+encodeURIComponent(tok)):"";
       var c=CALC[id], color=COLORS[id]||"#3a5bff";
       var live=(function(){ var x=P.config().catalog.filter(function(k){return k.id===id;})[0]; return !!(x&&x.live); })();
       // A representative "starts at" price: one calculator at Pro annual (marketing anchor).
@@ -773,12 +776,12 @@
       if(live){
         h+='<div class="cl-uh">Add to your plan</div><div class="cl-price"><span class="now">from '+("$"+Math.round(priceFrom).toLocaleString())+'</span><span class="u">/yr — less as you add more</span></div>';
         h+='<div class="cl-note">You already have a plan — adding '+c.name.split(" ")[0]+' is cheap because you’re down the curve. You’ll see your exact prorated price on the next step.</div>';
-        h+='<a class="cl-go" style="background:linear-gradient(135deg,'+color+','+color+'cc)" href="/account-add-calculators.html?add='+id+'">'+CART+'Add '+c.name.split(" ")[0].replace(",","")+' to my plan</a>';
+        h+='<a class="cl-go" style="background:linear-gradient(135deg,'+color+','+color+'cc)" href="/account-add-calculators.html?add='+id+TQ+'">'+CART+'Add '+c.name.split(" ")[0].replace(",","")+' to my plan</a>';
         h+='<div class="cl-reassure"><div>'+OK+'Added to your existing plan — no new checkout</div><div>'+OK+'Prorated to your card on file</div><div>'+OK+'Cancel or change anytime</div></div>';
-        h+='<div class="cl-see"><a href="/account-add-calculators.html">See your whole plan &amp; add several →</a></div>';
+        h+='<div class="cl-see"><a href="/account-add-calculators.html'+TQ0+'">See your whole plan &amp; add several →</a></div>';
       } else {
         h+='<div class="cl-uh">Coming soon</div><div class="cl-note">'+c.name+' isn’t available yet. Add the calculators you need today and this one will be here when it launches.</div>';
-        h+='<span class="cl-soon">Launching soon</span><div class="cl-see"><a href="/account-add-calculators.html">See your plan &amp; add calculators →</a></div>';
+        h+='<span class="cl-soon">Launching soon</span><div class="cl-see"><a href="/account-add-calculators.html'+TQ0+'">See your plan &amp; add calculators →</a></div>';
       }
       h+='</aside></div>';
       wrap.innerHTML=h;

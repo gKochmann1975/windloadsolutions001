@@ -56,8 +56,12 @@ on-page. Full plan: **`OFF_PAGE_SEO_BACKLINK_STRATEGY.md`** + target list/outrea
 - **H2 — Tier 2 self-serve directories  *(Owner: G — needs accounts/forms C can't submit)*.** First 10
   moves listed in the package: SourceForge → Capterra → Gartner/GetApp → thestructuralengineer.info →
   G2 → Qwoted. Competitors (MecaWind/SkyCiv/RWIND) already listed on these.
-- **H3 — Tier 2 editorial emails  *(Owner: C drafts → G reviews/sends)*.** 4 targets (DCOdes, worktaps,
-  thestructuralengineer.info, TopBusinessSoftware) — C can draft as Gmail drafts on request.
+- **H3 — Tier 2 editorial submissions  *(Owner: G submits — copy is DONE)*.**  ⏳ **PENDING SEND.**
+  4 targets, all verified **contact-form/registration (NOT email)**: DCOdes (register+claim), worktaps,
+  thestructuralengineer.info (/advertising), TopBusinessSoftware. **Paste-ready copy + exact submission
+  URLs are in the "READY-TO-SUBMIT QUEUE" of `TIER2_DIRECTORY_SUBMISSION_PACKAGE.md`** with ☐ boxes.
+  (Gmail drafts N/A — no email addresses; and the claude.ai Gmail connector token is expired, needs G
+  to re-auth in claude.ai connector settings if we later want email-based outreach drafted.)
 - **H4 — Tier 3/4 (communities, SEAOC/NCSEA, HARO/Qwoted ongoing)  *(Owner: G, C assists with copy)*.**
 - **H5 — LATER:** buy Ahrefs/Semrush for full competitor backlink profiles + link-intersect at scale
   (see "Ahrefs gap" in the package). Note: backlinks are a **weeks-to-months** game — don't expect

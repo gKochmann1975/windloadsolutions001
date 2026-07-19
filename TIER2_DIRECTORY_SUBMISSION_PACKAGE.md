@@ -68,6 +68,42 @@ NO fake reviews, NO "sealed report" claims.
 
 ---
 
+## READY-TO-SUBMIT QUEUE (paste-and-go — status tracked so nothing is forgotten)
+> All four are **contact forms / account registration, not email** (verified 2026-07-19) — so these
+> get pasted into each site's form, not sent from Gmail. Copy is final. Check the box when submitted.
+
+**☐ 1. DCOdes** — submit via free account: https://www.dcodes.io/register → claim/suggest software
+(lists MecaWind+SkyCiv+RWIND, not us). Fallback form: https://www.dcodes.io/contact
+> Subject: Add WindLoadCalc to wind-engineering software
+> Hi DCOdes team, I'm Gregory Kochmann, owner of WindLoadCalc.com (firm since 2002, online since 2006).
+> Your wind-engineering category lists MecaWind, SkyCiv, and RWIND — I'd like to add WindLoadCalc, the
+> free code-based option your visitors are missing. It's ASCE 7-22: enter a ZIP → design wind speed
+> (incl. Florida HVHZ, Miami-Dade 175 / Broward 170) → Components & Cladding pressure per Ch. 30. Free,
+> no signup; free MWFRS calc too. https://windloadcalc.com/free-wind-load-calculator.html — happy to
+> reciprocal-link. Thanks, Gregory Kochmann, Owner, WindLoadCalc.com
+
+**☐ 2. thestructuralengineer.info** — request free basic listing via form: https://www.thestructuralengineer.info/advertising
+> Hi, I'm Gregory Kochmann, owner of WindLoadCalc.com. Your directory lists SkyCiv, MecaWind, and RWIND
+> under wind load — I'd like a listing for WindLoadCalc, a dedicated ASCE 7-22 tool (ZIP → design wind
+> speed w/ Florida HVHZ → C&C pressure per Ch. 30; free version, no signup; free MWFRS too).
+> Free tool: https://windloadcalc.com/free-wind-load-calculator.html · Site: https://windloadcalc.com
+> Could you set up a basic listing? Open to a sponsorship tier for featured placement. Thanks, Gregory Kochmann
+
+**☐ 3. worktaps "8+ Free ASCE Wind Load Calculators"** — via their contact page (worktaps.com/contact)
+> Subject: One free ASCE 7-22 calculator you're missing
+> Hi, great roundup of free wind load calculators. One worth adding: WindLoadCalc's free tool is the
+> only one that pulls the ASCE 7-22 design wind speed by ZIP (incl. Miami-Dade 175 / Broward 170 HVHZ)
+> and returns C&C design pressure per Ch. 30 — no signup, no meter.
+> https://windloadcalc.com/free-wind-load-calculator.html Would you consider including it? Thanks, Gregory Kochmann
+
+**☐ 4. TopBusinessSoftware — wind-simulation category** — via their contact/submit form (topbusinesssoftware.com)
+> Hi, I'd like to submit WindLoadCalc to your wind-simulation / wind-load category. It's an ASCE 7-22
+> wind load calculator (ZIP → design wind speed w/ Florida HVHZ → C&C pressure per Ch. 30) with a free,
+> no-signup version. https://windloadcalc.com/free-wind-load-calculator.html · https://windloadcalc.com
+> Thanks, Gregory Kochmann, Owner, WindLoadCalc.com
+
+---
+
 ## Reusable outreach copy
 
 ### 1) Suggest-a-resource (resource/links pages, associations)

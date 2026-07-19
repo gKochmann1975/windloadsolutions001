@@ -815,8 +815,9 @@
         h+='</div>';
         if(Q.isComplete) h+='<div class="aa-bip free"><div class="aa-brand" style="width:34px;height:34px;background:#0d9488">'+BIP+'</div><div><h4>BIP full access</h4><p>Included free with Complete.</p></div><span class="bp">FREE</span></div>';
         else h+='<div class="aa-bip'+(bipDesired()?" on":"")+'" id="aaBip"><div class="aa-brand" style="width:34px;height:34px;background:#0d9488">'+BIP+'</div><div><h4>Full BIP access</h4><p>Hurricane risk, solar siting, 40k+ ZIPs.</p></div><span class="bp">+'+money(Q.bipPrice)+unit()+'</span></div>';
+        var changed = sel.length>0 || (state.bipTouched && bipDesired()!==haveBip() && !Q.isComplete);
         var due=Q.delta+bipAdd, label=bucket()?("Add to my plan — +"+money(due)+unit()):("Start my "+state.cycle+" plan — "+money(Q.newTotal+bipAdd)+unit());
-        h+='<button class="aa-cta" id="aaCta"'+(state.busy?" disabled":"")+'>'+(state.busy?"Working…":label)+'</button>';
+        h+='<button class="aa-cta" id="aaCta"'+((state.busy||!changed)?" disabled":"")+'>'+(state.busy?"Working…":(changed?label:"Select a calculator to add"))+'</button>';
         h+='<p class="aa-fine">'+(bucket()?"Prorated today, then billed ":"Billed ")+(state.cycle==="annual"?"yearly":"monthly")+'. Change anytime.</p>';
         h+='</aside></div>';
         wrap.innerHTML=h; wire();

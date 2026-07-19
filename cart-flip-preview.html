@@ -1918,7 +1918,7 @@
     var save=Math.max(0, standalone-addNext), pct=standalone>0?Math.round(save/standalone*100):0;
     var h='<div class="cf-up-toggles"><div class="cf-seg" id="cfUpTier">'+["starter","pro","premium"].map(function(t){return '<button data-t="'+t+'" class="'+(plan.tier===t?"on":"")+'">'+t.charAt(0).toUpperCase()+t.slice(1)+'</button>';}).join("")+'</div>'+
             '<div class="cf-seg" id="cfUpCycle">'+["monthly","annual"].map(function(c){return '<button data-c="'+c+'" class="'+(addCycle===c?"on":"")+'">'+(c==="annual"?"Annual":"Monthly")+'</button>';}).join("")+'</div></div>';
-    h+='<p class="cf-up-hint">Add to your <b style="color:#cdd6f5">'+addCycle+'</b> plan'+(save>0?' — your next is <b style="color:#6ee7b7">'+pct+'% off</b>, and each one after saves even more.':' — each one costs less than the last.')+'</p>';
+    h+='<p class="cf-up-hint">Add to your <b style="color:#cdd6f5">'+addCycle+'</b> plan'+(save>0?'. Every calculator is the same price — your <b style="color:#6ee7b7">next one is '+pct+'% off</b> a standalone plan, and each one you add after that costs even less.':' — each one costs less than the last.')+'</p>';
     if(!remaining.length){ h+='<div class="cf-up-done">✓ You have every calculator — that’s Complete, and BIP is free.</div>'; }
     else remaining.forEach(function(c){ var soon=!c.live;
       var priceBlock = soon

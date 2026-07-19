@@ -992,6 +992,16 @@
                     </div>
                 </div>
             </div>
+
+            <div class="card" style="margin-top:1.5rem">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fas fa-layer-group"></i> Available Calculators</h2>
+                </div>
+                <p style="color:#64748b;margin:.25rem 0 1rem">Add any calculator to your plan — the more you own, the less each one costs. A locked calculator opens a page explaining what it does, then lets you add it from your account.</p>
+                <div id="calcLibrary">
+                    <div class="loading"><div class="spinner"></div></div>
+                </div>
+            </div>
         </div>
 
         <!-- My Projects Tab -->
@@ -1242,7 +1252,7 @@
         }
 
         async function loadSubscriptions() {
-            const token = localStorage.getItem(STORAGE_KEY);
+            const token = localStorage.getItem(STORAGE_KEY) || localStorage.getItem('windload_token');
 
             try {
                 // Get user_id from stored user data
@@ -1282,7 +1292,60 @@
                 console.error('Error loading subscriptions:', error);
                 userSubscriptions = [];
                 renderSubscriptions();
+            } finally {
+                loadLibrary();
             }
+        }
+
+        // ---- Available Calculators: owned vs locked/available -----------------------
+        // Shows every live calculator; owned ones are marked, the rest link to their
+        // per-calc explainer page (calculator-locked.html) carrying the session token so
+        // the customer can add them from inside the account without re-signing-in.
+        const CALC_PROGRAMS = [
+            { id:'wd',        name:'Windows, Doors & Shutters',   blurb:'Wall components & cladding (C&C).',                     match:/window|door|shutter|wall|c&c|cladding|cc_walls/i },
+            { id:'mwfrs',     name:'MWFRS Buildings',             blurb:'Whole-building main wind-force pressures.',             match:/mwfrs/i },
+            { id:'roofs',     name:'Roofs, Parapets & Overhangs', blurb:'Every roof shape, parapets & overhangs.',              match:/roof|parapet|overhang/i },
+            { id:'other',     name:'Other Structures',            blurb:'Signs, freestanding walls, chimneys, towers, equipment.', match:/other\s*structure|sign|freestanding|chimney|tower|equipment/i },
+            { id:'specialty', name:'Specialty Components',        blurb:'Parapets & attached canopies.',                        match:/specialty|canopy/i }
+        ];
+
+        async function loadLibrary() {
+            const container = document.getElementById('calcLibrary');
+            if (!container) return;
+            const token = localStorage.getItem(STORAGE_KEY) || localStorage.getItem('windload_token');
+            const owned = new Set();
+            // 1) Legacy / single-product subscriptions already loaded into userSubscriptions.
+            (userSubscriptions || []).forEach(s => {
+                const hay = ((s.product_name || '') + ' ' + (s.product_code || '')).trim();
+                CALC_PROGRAMS.forEach(p => { if (p.match.test(hay)) owned.add(p.id); });
+            });
+            // 2) Volume-curve buckets — the curve source of truth (covered_calculators).
+            try {
+                const r = await fetch(`${API_URL}/api/subscriptions/my-plan`, { headers: { 'Authorization': `Bearer ${token}` } });
+                if (r.ok) {
+                    const d = await r.json();
+                    (d.buckets || []).forEach(b => (b.covered_calculators || []).forEach(pid => owned.add(pid)));
+                }
+            } catch (e) { /* best-effort: fall back to the legacy-only owned set */ }
+            renderLibrary(owned, token);
+        }
+
+        function renderLibrary(owned, token) {
+            const container = document.getElementById('calcLibrary');
+            if (!container) return;
+            const tq = token ? ('&token=' + encodeURIComponent(token)) : '';
+            container.innerHTML = '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px">' +
+                CALC_PROGRAMS.map(p => {
+                    const isOwned = owned.has(p.id);
+                    const href = isOwned ? '#' : ('/calculator-locked.html?calc=' + p.id + tq);
+                    const badge = isOwned
+                        ? '<span style="white-space:nowrap;font-size:.78rem;font-weight:700;color:#166534;background:#dcfce7;padding:3px 8px;border-radius:999px"><i class="fas fa-check-circle"></i> Owned</span>'
+                        : '<span style="white-space:nowrap;font-size:.78rem;font-weight:700;color:#3730a3;background:#e0e7ff;padding:3px 8px;border-radius:999px"><i class="fas fa-lock"></i> Add</span>';
+                    return '<a href="' + href + '"' + (isOwned ? ' onclick="return false"' : '') +
+                        ' style="display:block;text-decoration:none;border:1px solid ' + (isOwned ? '#bbf7d0' : '#e2e8f0') + ';background:' + (isOwned ? '#f0fdf4' : '#fff') + ';border-radius:12px;padding:16px;color:inherit;cursor:' + (isOwned ? 'default' : 'pointer') + '">' +
+                        '<div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px"><h4 style="margin:0;font-size:1rem;color:#1f2937">' + p.name + '</h4>' + badge + '</div>' +
+                        '<p style="margin:0;color:#64748b;font-size:.86rem;line-height:1.4">' + p.blurb + '</p></a>';
+                }).join('') + '</div>';
         }
 
         function renderSubscriptions() {

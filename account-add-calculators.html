@@ -739,7 +739,7 @@
         if(_t){ localStorage.setItem("windload_auth_token", _t); _u.searchParams.delete("token");
           history.replaceState(null,"", _u.pathname + (_u.searchParams.toString()?("?"+_u.searchParams.toString()):"")); } }catch(e){}
       function signIn(){ sub.textContent=""; wrap.innerHTML='<p class="aa-empty">Please <a class="aa-signin" href="/login.html">sign in</a> to manage your plan.</p>'; }
-      var token=localStorage.getItem("windload_auth_token");
+      var token=localStorage.getItem("windload_auth_token")||localStorage.getItem("windload_token");
       if(!token){ signIn(); return; }
 
       var COLORS={wd:"#06b6d4",mwfrs:"#3b82f6",roofs:"#f97316",other:"#14b8a6",specialty:"#a855f7",solar:"#fbbf24"};

@@ -1794,6 +1794,9 @@
   .cf-up-add{flex:0 0 auto;border:0;border-radius:9px;background:linear-gradient(135deg,#3a5bff,#4666ff);color:#fff;font:inherit;font-weight:700;font-size:12.5px;padding:9px 13px;cursor:pointer;white-space:nowrap;transition:.15s}
   .cf-up-add:hover{transform:translateY(-1px);box-shadow:0 9px 22px rgba(58,91,255,.5)}
   .cf-up-add.soon{background:rgba(255,255,255,.08);color:#8a93a8;cursor:not-allowed}.cf-up-add.soon:hover{transform:none;box-shadow:none}
+  .cf-up-price{flex:0 0 auto;display:flex;flex-direction:column;align-items:flex-end;gap:3px;text-align:right}
+  .cf-strike{font-size:11px;color:#8a93a8;text-decoration:line-through}
+  .cf-up-save{font-size:10.5px;font-weight:750;color:#6ee7b7;background:rgba(52,211,153,.14);padding:2px 8px;border-radius:20px;white-space:nowrap}
   .cf-up-done{text-align:center;color:#6ee7b7;font-weight:650;font-size:13px;padding:12px;background:rgba(52,211,153,.1);border-radius:10px}
   .cf-up-bip{display:flex;align-items:center;gap:11px;border:1.5px dashed #2dd4bf;border-radius:12px;padding:11px 12px;margin-top:12px;background:rgba(45,212,191,.07);cursor:pointer;transition:.15s}
   .cf-up-bip.on{background:rgba(45,212,191,.16);border-style:solid}.cf-up-bip.free{border-color:#34D399;background:rgba(52,211,153,.14);cursor:default}
@@ -1910,13 +1913,19 @@
     var inCart={}; ["annual","monthly"].forEach(function(cy){ bucketProgs(cy).forEach(function(p){ inCart[p]=1; }); });
     var remaining=P.config().catalog.filter(function(c){ return !inCart[c.id]; });
     var Nt=bucketProgs(addCycle).length, addNext=P.addNext(Nt, O(addCycle));
+    var standalone=P.curveTotal(1, O(addCycle));            // price of one calc on its own
+    var save=Math.max(0, standalone-addNext), pct=standalone>0?Math.round(save/standalone*100):0;
     var h='<div class="cf-up-toggles"><div class="cf-seg" id="cfUpTier">'+["starter","pro","premium"].map(function(t){return '<button data-t="'+t+'" class="'+(plan.tier===t?"on":"")+'">'+t.charAt(0).toUpperCase()+t.slice(1)+'</button>';}).join("")+'</div>'+
             '<div class="cf-seg" id="cfUpCycle">'+["monthly","annual"].map(function(c){return '<button data-c="'+c+'" class="'+(addCycle===c?"on":"")+'">'+(c==="annual"?"Annual":"Monthly")+'</button>';}).join("")+'</div></div>';
-    h+='<p class="cf-up-hint">Add to your <b style="color:#cdd6f5">'+addCycle+'</b> plan — each one costs less than the last.</p>';
+    h+='<p class="cf-up-hint">Add to your <b style="color:#cdd6f5">'+addCycle+'</b> plan'+(save>0?' — your next is <b style="color:#6ee7b7">'+pct+'% off</b>, and each one after saves even more.':' — each one costs less than the last.')+'</p>';
     if(!remaining.length){ h+='<div class="cf-up-done">✓ You have every calculator — that’s Complete, and BIP is free.</div>'; }
     else remaining.forEach(function(c){ var soon=!c.live;
-      h+='<div class="cf-up-card"><div class="cf-brand" style="background:'+(COLORS[c.id]||"#3a5bff")+'">'+(ICONS[c.id]||"")+'</div><div class="cf-up-info"><h4>'+(NAMES[c.id]||c.name)+'</h4><p>'+(DESC[c.id]||"")+'</p></div>'+
-         '<button class="cf-up-add'+(soon?" soon":"")+'" '+(soon?"disabled":'onclick="cfAdd(\''+c.id+'\')"')+'>'+(soon?"Soon":"+ Add "+money0(addNext))+'</button></div>';
+      var priceBlock = soon
+        ? '<div class="cf-up-price"><span class="cf-up-add soon">Soon</span></div>'
+        : '<div class="cf-up-price">'+(save>0?'<span class="cf-strike">'+money0(standalone)+'</span>':'')+
+          '<button class="cf-up-add" onclick="cfAdd(\''+c.id+'\')">+ Add '+money0(addNext)+'</button>'+
+          (save>0?'<span class="cf-up-save">save '+money0(save)+' · '+pct+'% off</span>':'')+'</div>';
+      h+='<div class="cf-up-card"><div class="cf-brand" style="background:'+(COLORS[c.id]||"#3a5bff")+'">'+(ICONS[c.id]||"")+'</div><div class="cf-up-info"><h4>'+(NAMES[c.id]||c.name)+'</h4><p>'+(DESC[c.id]||"")+'</p></div>'+priceBlock+'</div>';
     });
     if(anyComplete()) h+='<div class="cf-up-bip free"><div class="cf-brand" style="background:#0d9488">'+BIP_ICON+'</div><div><h4>BIP full access</h4><p>Included free with Complete.</p></div><span class="cf-bp">FREE</span></div>';
     else h+='<div class="cf-up-bip'+(cartHasBip()?" on":"")+'" onclick="cfBip()"><div class="cf-brand" style="background:#0d9488">'+BIP_ICON+'</div><div><h4>Add BIP full access</h4><p>Hurricane risk, solar siting, 40k+ ZIPs.</p></div><span class="cf-bp">+'+money0(P.bipPrice(O(addCycle)))+'</span></div>';

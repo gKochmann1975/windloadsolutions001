@@ -1,316 +1,874 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex, nofollow">
-<meta name="description" content="Add calculators to your WindLoadCalc subscription — pay only the volume-curve difference, prorated to your card.">
-<title>Add Calculators to Your Plan | WindLoadCalc</title>
-<style>
-  :root{
-    --bg:#eef1f7; --panel:#fff; --panel2:#f6f8fc; --ink:#0f1730; --muted:#586178; --faint:#8a93a8;
-    --line:#e2e6f0; --line2:#eef1f7;
-    --accent:#2f4bff; --rev:#0e9f6e; --marg:#d97706; --bip:#0d9488; --complete:#7c3aed; --own:#0e9f6e;
-    --shadow:0 1px 2px rgba(15,23,48,.05),0 14px 36px rgba(15,23,48,.08); --r:14px;
-  }
-  @media (prefers-color-scheme:dark){:root{
-    --bg:#080b16; --panel:#111830; --panel2:#0d142a; --ink:#eaf0ff; --muted:#9aa6c2; --faint:#6b768f;
-    --line:#212a44; --line2:#1a2238;
-    --accent:#6b86ff; --rev:#34d399; --marg:#f5a83f; --bip:#2dd4bf; --complete:#a78bfa; --own:#34d399;
-    --shadow:0 1px 2px rgba(0,0,0,.4),0 18px 40px rgba(0,0,0,.5);
-  }}
-  :root[data-theme="dark"]{
-    --bg:#080b16; --panel:#111830; --panel2:#0d142a; --ink:#eaf0ff; --muted:#9aa6c2; --faint:#6b768f;
-    --line:#212a44; --line2:#1a2238; --accent:#6b86ff; --rev:#34d399; --marg:#f5a83f; --bip:#2dd4bf; --complete:#a78bfa; --own:#34d399;
-    --shadow:0 1px 2px rgba(0,0,0,.4),0 18px 40px rgba(0,0,0,.5);
-  }
-  :root[data-theme="light"]{
-    --bg:#eef1f7; --panel:#fff; --panel2:#f6f8fc; --ink:#0f1730; --muted:#586178; --faint:#8a93a8;
-    --line:#e2e6f0; --line2:#eef1f7; --accent:#2f4bff; --rev:#0e9f6e; --marg:#d97706; --bip:#0d9488; --complete:#7c3aed; --own:#0e9f6e;
-    --shadow:0 1px 2px rgba(15,23,48,.05),0 14px 36px rgba(15,23,48,.08);
-  }
-  *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
-    line-height:1.5;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
-  .wrap{max-width:1080px;margin:0 auto;padding:24px 20px 70px}
-  .pvbadge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
-    color:var(--complete);background:color-mix(in srgb,var(--complete) 14%,transparent);padding:3px 10px;border-radius:20px;margin-bottom:12px}
-  h1{font-size:clamp(20px,2.4vw,27px);letter-spacing:-.02em;margin:0 0 4px;font-weight:760;text-wrap:balance}
-  .sub{color:var(--muted);margin:0;font-size:14.5px;max-width:64ch}
+<script>/* site-wide cart indicator */(function(d){var s=d.createElement("script");s.src="/js/cart-indicator.js";s.defer=true;(d.head||d.documentElement).appendChild(s);})(document);</script>
+    <meta charset="UTF-8">
+    <meta name="description" content="Add calculators to your WindLoadCalc plan — pay only the volume-curve difference, prorated.">
 
-  .simbar{margin:16px 0 6px;padding:12px 14px;background:var(--panel);border:1px dashed var(--line);border-radius:12px}
-  .simbar .lab{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);font-weight:700;margin-bottom:8px}
-  .chips{display:flex;gap:7px;flex-wrap:wrap}
-  .chip{border:1.5px solid var(--line);background:var(--panel2);color:var(--muted);font:inherit;font-size:12.5px;font-weight:600;
-    padding:6px 11px;border-radius:20px;cursor:pointer;transition:.15s}
-  .chip.on{border-color:var(--own);color:var(--own);background:color-mix(in srgb,var(--own) 12%,transparent)}
-  .simnote{font-size:11.5px;color:var(--faint);margin-top:7px}
+    <meta name="robots" content="noindex, nofollow">
 
-  .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 18px;align-items:center}
-  .seg{display:flex;gap:4px;background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:4px;box-shadow:var(--shadow)}
-  .seg button{border:0;background:transparent;color:var(--muted);font:inherit;font-size:13px;font-weight:650;padding:8px 13px;border-radius:8px;cursor:pointer;transition:.15s}
-  .seg button:hover{color:var(--ink)} .seg button.on{background:var(--accent);color:#fff;box-shadow:0 2px 9px rgba(47,75,255,.35)}
-  .seg .savepill{font-size:10.5px;font-weight:700;color:var(--rev);margin-left:5px}.seg button.on .savepill{color:#d6ffe9}
-  .daysctl{display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--muted);background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:7px 12px;box-shadow:var(--shadow)}
-  .daysctl input{accent-color:var(--accent)}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="/images/windloadcalc-icon-anim-loop.svg?v=1">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="shortcut icon" href="/favicon.ico?v=2">
+    <title>Add Calculators to Your Plan | WindLoadCalc</title>
 
-  .layout{display:grid;grid-template-columns:1fr 360px;gap:22px;align-items:start}
-  @media (max-width:860px){.layout{grid-template-columns:1fr}}
-  .cards{display:flex;flex-direction:column;gap:11px}
-  .card{display:flex;align-items:center;gap:14px;background:var(--panel);border:1.5px solid var(--line);border-radius:var(--r);
-    padding:14px 17px;cursor:pointer;transition:.16s;box-shadow:var(--shadow)}
-  .card:hover{transform:translateY(-1px)}
-  .card.on{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 18%,transparent),var(--shadow)}
-  .card.owned{cursor:default;border-color:color-mix(in srgb,var(--own) 40%,var(--line));background:color-mix(in srgb,var(--own) 6%,var(--panel))}
-  .card.owned:hover{transform:none}
-  .card.soon{opacity:.55;cursor:not-allowed}
-  .tick{width:26px;height:26px;border-radius:8px;border:2px solid var(--line);display:grid;place-items:center;flex:0 0 auto;color:#fff;transition:.15s}
-  .card.on .tick{background:var(--accent);border-color:var(--accent)}
-  .card.owned .tick{background:var(--own);border-color:var(--own)}
-  .tick svg{width:15px;height:15px;opacity:0;transition:.15s}
-  .card.on .tick svg,.card.owned .tick svg{opacity:1}
-  .cbody{flex:1;min-width:0}.cbody h3{margin:0;font-size:15px;font-weight:680;letter-spacing:-.01em}
-  .cbody p{margin:2px 0 0;font-size:12.6px;color:var(--muted)}
-  .cact{flex:0 0 auto;text-align:right}
-  .cact .add{font-size:14.5px;font-weight:750;color:var(--marg);white-space:nowrap}
-  .cact .add small{display:block;font-size:11px;color:var(--faint);font-weight:600}
-  .cact .in{font-size:12.5px;font-weight:700;color:var(--accent)}
-  .cact .ownlab{font-size:12.5px;font-weight:700;color:var(--own)}
-  .cact .soonlab{font-size:12px;font-weight:700;color:var(--faint)}
+    <!-- Open Graph -->
+    <meta property="og:title" content="Add Calculators to Your Plan | WindLoadCalc">
+    <meta property="og:description" content="Professional wind load calculations and building intelligence platform for engineers and architects.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://windloadcalc.com/account-add-calculators.html">
+    <meta property="og:image" content="https://windloadcalc.com/images/video-posters/index-homepage.jpg">
+    <meta property="og:site_name" content="WindLoadCalc">
 
-  .summary{position:sticky;top:16px;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:18px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:13px}
-  @media (max-width:860px){.summary{position:static}}
-  .sumhead{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);font-weight:700}
-  .todayrow{display:flex;justify-content:space-between;align-items:baseline;font-size:13.5px;color:var(--muted)}
-  .todayrow b{color:var(--ink);font-weight:700}
-  .pricebig{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;padding-top:2px}
-  .pricebig .now{font-size:32px;font-weight:800;letter-spacing:-.03em;color:var(--accent)}
-  .pricebig .unit{font-size:14px;color:var(--muted);font-weight:600}
-  .deltatag{align-self:flex-start;font-size:13px;font-weight:750;color:var(--marg);background:color-mix(in srgb,var(--marg) 13%,transparent);padding:4px 11px;border-radius:20px}
-  .savebadge{align-self:flex-start;font-size:12.5px;font-weight:750;color:var(--rev);background:color-mix(in srgb,var(--rev) 13%,transparent);padding:5px 11px;border-radius:20px}
-  .proration{font-size:12.5px;color:var(--muted);line-height:1.5;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:9px 11px}
-  .proration b{color:var(--ink)}
-  .savemore{font-size:13px;color:var(--muted);line-height:1.5}.savemore b{color:var(--ink)}
-  .progress{display:flex;flex-direction:column;gap:7px}
-  .plabel{display:flex;justify-content:space-between;font-size:12.5px;color:var(--muted)}.plabel b{color:var(--ink)}
-  .track{height:9px;border-radius:6px;background:var(--panel2);overflow:hidden;border:1px solid var(--line)}
-  .fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--accent),var(--complete));transition:width .35s cubic-bezier(.4,0,.2,1)}
-  .nudge{font-size:12.8px;color:var(--complete);font-weight:600;line-height:1.45}.nudge.complete{color:var(--rev)}
-  .bip{display:flex;align-items:center;gap:12px;border:1.5px dashed var(--bip);border-radius:var(--r);padding:13px 15px;background:color-mix(in srgb,var(--bip) 7%,var(--panel));cursor:pointer;transition:.15s}
-  .bip.on{background:color-mix(in srgb,var(--bip) 15%,var(--panel));border-style:solid}
-  .bip.free{border-color:var(--rev);background:color-mix(in srgb,var(--rev) 12%,var(--panel));cursor:default}
-  .bip .tick{border-color:var(--bip)}.bip.on .tick{background:var(--bip);border-color:var(--bip)}
-  .bip h3{font-size:14px;margin:0;font-weight:680}.bip p{margin:2px 0 0;font-size:12.3px;color:var(--muted)}
-  .bip .price{font-weight:750;color:var(--bip);white-space:nowrap}.bip.free .price{color:var(--rev)}
-  .cta{border:0;border-radius:11px;background:linear-gradient(135deg,var(--accent),#4666ff);color:#fff;font:inherit;font-weight:750;font-size:15px;padding:14px;cursor:pointer;transition:.2s;width:100%}
-  .cta:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(47,75,255,.4)}
-  .cta:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
-  .finenote{font-size:11.5px;color:var(--faint);text-align:center;margin:-3px 0 0}
-  .previewnote{margin-top:26px;font-size:12px;color:var(--faint);border-top:1px solid var(--line);padding-top:14px;max-width:80ch}
-  .theme-tgl{position:fixed;top:12px;right:12px;border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:9px;padding:6px 10px;font:inherit;font-size:12px;cursor:pointer}
-  .donebanner{margin:0 0 16px;padding:12px 15px;border-radius:12px;font-size:14px;font-weight:600;color:#0e6b46;background:color-mix(in srgb,var(--rev) 15%,var(--panel));border:1px solid color-mix(in srgb,var(--rev) 45%,transparent)}
-  @media (prefers-color-scheme:dark){.donebanner{color:#6ee7b7}}
-  :root[data-theme="dark"] .donebanner{color:#6ee7b7}
-  #tier button:disabled{cursor:default}
-</style>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Google Sign-In SDK -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+    <style>
+        :root{
+          --blue:#0018FF; --blue-deep:#181E57; --blue-bright:#3a5bff;
+          --muted:#94a3b8; --line:rgba(255,255,255,.08); --bg:#070a18; --surface:rgba(255,255,255,.04);
+          --gold:#E8B530; --luxe:cubic-bezier(.22,.61,.36,1);
+        }
+        * { box-sizing:border-box; margin:0; padding:0; }
+        html{scroll-behavior:smooth}
+        body {
+            font-family:'Inter',-apple-system,'Segoe UI',Roboto,sans-serif;
+            background:var(--bg);
+            color:#e8edf7;
+            min-height:100vh;
+            overflow-x:hidden;
+            -webkit-font-smoothing:antialiased;
+            line-height:1.55;
+        }
+        a{text-decoration:none;color:inherit}
+
+        /* Dark-glass ambient layers */
+        .aurora{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+        .aurora span{position:absolute;border-radius:50%;filter:blur(90px);opacity:.5}
+        .aurora .a1{width:620px;height:620px;background:#0018FF;top:-180px;left:-120px;animation:drift1 18s var(--luxe) infinite alternate}
+        .aurora .a2{width:540px;height:540px;background:#10B981;bottom:-200px;right:-120px;opacity:.28;animation:drift2 22s var(--luxe) infinite alternate}
+        .aurora .a3{width:420px;height:420px;background:#181E57;top:34%;right:16%;opacity:.55;animation:drift1 26s var(--luxe) infinite alternate-reverse}
+        @keyframes drift1{to{transform:translate(80px,60px) scale(1.15)}}
+        @keyframes drift2{to{transform:translate(-70px,-50px) scale(1.1)}}
+        .grid-tex{position:fixed;inset:0;z-index:0;pointer-events:none;
+          background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+          background-size:54px 54px;mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000 40%,transparent 100%)}
+
+        /* Nav (solid by default — no dark hero behind it) */
+        nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:.3s var(--luxe);
+          backdrop-filter:blur(14px);border-bottom:1px solid var(--line);
+          background:linear-gradient(90deg, rgba(240,244,255,.97) 0%, rgba(223,232,255,.93) 13%, rgba(22,28,58,.92) 46%, rgba(7,10,24,.95) 100%)}
+        .nav-in{display:flex;align-items:center;justify-content:space-between;padding:8px clamp(24px,4vw,48px);transition:padding .3s var(--luxe)}
+        .logo{z-index:1001;display:flex;align-items:center}
+        .logo-image{height:64px;width:auto;display:block;transition:all .3s ease}
+        .nav-right{display:flex;align-items:center;gap:18px}
+        .nav-links{display:flex;align-items:center;gap:28px}
+        .nav-links a.l{position:relative;font-size:14px;color:#fff;font-weight:500;opacity:.88;transition:opacity .2s var(--luxe);text-shadow:0 1px 8px rgba(0,0,0,.45)}
+        .nav-links a.l:hover{opacity:1}
+        .btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;border-radius:11px;cursor:pointer;transition:.25s var(--luxe);border:none;font-family:inherit}
+        .btn-ghost{background:rgba(255,255,255,.06);color:#fff;padding:11px 18px;font-size:14px;border:1px solid rgba(255,255,255,.22)}
+        .btn-ghost:hover{border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.12)}
+        .btn-primary{background:linear-gradient(135deg,#0018FF,#2540ff);color:#fff;padding:12px 22px;font-size:14px;box-shadow:0 10px 30px rgba(0,24,255,.45)}
+        .btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(0,24,255,.6)}
+        .hamburger{display:flex;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;z-index:60}
+        .hamburger span{display:block;width:26px;height:3px;border-radius:2px;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.6);transition:.3s var(--luxe)}
+        .hamburger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+        .hamburger.open span:nth-child(2){opacity:0}
+        .hamburger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+        .nav-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);opacity:0;visibility:hidden;transition:.3s var(--luxe);z-index:55}
+        .nav-overlay.open{opacity:1;visibility:visible}
+        .full-menu{position:fixed;top:0;right:0;height:100vh;height:100dvh;width:min(90vw,380px);z-index:60;
+          background:rgba(10,14,30,.985);backdrop-filter:blur(18px);border-left:1px solid var(--line);
+          box-shadow:-24px 0 60px rgba(0,0,0,.55);transform:translateX(100%);transition:transform .3s var(--luxe);overflow-y:auto;padding:74px 0 28px}
+        .full-menu.open{transform:translateX(0)}
+        .fm-head{display:flex;align-items:center;justify-content:space-between;padding:0 26px 14px;border-bottom:1px solid var(--line)}
+        .fm-head span{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+        .fm-close{background:none;border:none;color:#fff;font-size:24px;line-height:1;cursor:pointer;padding:2px 8px}
+        .fm-group{padding:14px 26px 4px;border-bottom:1px solid var(--line)}
+        .fm-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9db0ff;margin-bottom:6px}
+        .fm-group a{display:block;padding:9px 0;font-size:15px;color:#dbe3f5;font-weight:500;transition:color .15s}
+        .fm-group a:hover{color:#fff}
+        .fm-actions{display:flex;flex-direction:column;gap:10px;padding:20px 26px 0}
+        .fm-actions .btn{width:100%;justify-content:center;padding:14px;font-size:15px}
+
+        /* Page container */
+        .container {
+            position:relative;
+            z-index:1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 130px 28px 60px;
+        }
+
+        .page-title {
+            font-size: clamp(28px,4vw,2.5rem);
+            font-weight: 800;
+            color: #fff;
+            letter-spacing:-.02em;
+            margin-bottom: 0.5rem;
+        }
+        .page-title i{color:#9db0ff}
+
+        .page-subtitle {
+            color: #aeb8cf;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .cart-layout {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        @media (max-width: 1024px) {
+            .cart-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .cart-main {
+            background: var(--surface);
+            border:1px solid var(--line);
+            border-radius: 18px;
+            padding: 24px;
+            box-shadow: 0 12px 32px rgba(0,0,0,.34);
+            backdrop-filter:blur(6px);
+        }
+
+        .cart-sidebar {
+            position: sticky;
+            top: 110px;
+        }
+
+        .upsell-section {
+            background: var(--surface);
+            border:1px solid var(--line);
+            border-radius: 18px;
+            padding: 24px;
+            box-shadow: 0 12px 32px rgba(0,0,0,.34);
+            backdrop-filter:blur(6px);
+            margin-bottom: 1.5rem;
+        }
+
+        .upsell-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Upsell cards — JS injects these into #upsell-recommendations */
+        .upsell-product {
+            background: rgba(58,91,255,.10) !important;
+            border: 1px solid rgba(58,91,255,.4) !important;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+        .upsell-product h4 { color: #c3cdff !important; margin-bottom: 8px; }
+        .upsell-product p { color: #aeb8cf !important; font-size: 0.9rem; margin-bottom: 12px; }
+        .upsell-product > div[style*="font-weight: 700"]{color:#9db0ff !important}
+
+        .upsell-price {
+            display: flex;
+            align-items: baseline;
+            flex-wrap:wrap;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        .upsell-price .original { text-decoration: line-through; color: #7e8aa6; }
+        .upsell-price .discounted { font-size: 1.3rem; font-weight: 700; color: #9db0ff; }
+
+        .add-upsell-btn {
+            width: 100%;
+            background: linear-gradient(135deg,#0018FF,#2540ff);
+            color: white;
+            border: none;
+            padding: 11px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.25s var(--luxe);
+        }
+        .add-upsell-btn:hover { transform: translateY(-1px); box-shadow:0 10px 26px rgba(0,24,255,.4); }
+
+        /* Bundle discount banner (#bundle-discount-banner) */
+        .bundle-banner {
+            background: linear-gradient(135deg, rgba(16,185,129,.16), rgba(58,91,255,.12));
+            border: 1px solid rgba(52,211,153,.4);
+            border-radius: 14px;
+            padding: 16px;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .bundle-banner h3 { color: #6ee7b7; margin-bottom: 8px; font-size: 1.1rem; }
+        .bundle-banner p { color: #cdd6ec; font-size: 0.95rem; }
+        .bundle-banner strong{color:#fff}
+
+        /* Static empty-cart fallback inside #cart-items-container */
+        .empty-cart { text-align: center; padding: 60px 20px; }
+        .empty-cart i { font-size: 4rem; color: rgba(157,176,255,.4); margin-bottom: 1.5rem; }
+        .empty-cart h3 { color: #dbe3f5; margin-bottom: 1rem; }
+        .empty-cart p{color:#aeb8cf}
+        .empty-cart a { color: #34D399; font-weight: 600; text-decoration: none; }
+        .empty-cart a:hover { text-decoration: underline; }
+
+        .browse-more {
+            text-align: center;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--line);
+        }
+        .browse-more a { color: #9db0ff; text-decoration: none; font-weight: 600; }
+        .browse-more a:hover { color:#fff; text-decoration: underline; }
+
+        /* Trust / secure card */
+        .trust-card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 12px 32px rgba(0,0,0,.34);backdrop-filter:blur(6px)}
+        .trust-card h4{color:#fff;margin-bottom:1rem;font-size:1rem;display:flex;align-items:center;gap:.4rem}
+        .trust-card ul{margin-top:1rem;color:#aeb8cf;font-size:.85rem;padding-left:1.2rem}
+        .secure-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+            color: #aeb8cf;
+            font-size: 0.85rem;
+        }
+        .secure-badges span { display: flex; align-items: center; gap: 0.3rem; }
+
+        /* ===== Overrides for runtime-injected cart markup (shopping-cart.js) =====
+           shopping-cart.js writes inline white/light styles into #cart-items-container.
+           These rules force the injected rows to be readable on the dark canvas. */
+        #cart-items-container .cart-item{
+            background:rgba(255,255,255,.05) !important;
+            border:1px solid var(--line) !important;
+            border-radius:12px;
+        }
+        #cart-items-container .cart-item h4{color:#fff !important}
+        /* feature chips inside each cart-item */
+        #cart-items-container .cart-item span[style*="background: #f0f9ff"]{
+            background:rgba(58,91,255,.14) !important;
+            color:#c3cdff !important;
+        }
+        /* per-item price */
+        #cart-items-container .cart-item div[style*="color: #0018ff"],
+        #cart-items-container .cart-item div[style*="color:#0018ff"]{color:#9db0ff !important}
+        #cart-items-container .cart-item div[style*="color: #64748b"]{color:#aeb8cf !important}
+        /* section header titles (Annual / Monthly Subscriptions) */
+        #cart-items-container .cart-section h3{color:#fff !important}
+        /* annual subtotal strip */
+        #cart-items-container div[style*="background: #f0fdf4"]{background:rgba(16,185,129,.12) !important}
+        #cart-items-container div[style*="background: #f0fdf4"] span{color:#6ee7b7 !important}
+        /* monthly subtotal strip */
+        #cart-items-container div[style*="background: #eff6ff"]{background:rgba(58,91,255,.12) !important}
+        #cart-items-container div[style*="background: #eff6ff"] span{color:#9db0ff !important}
+        /* order summary card already dark in JS — keep, just ensure rounded glass edge */
+        #cart-items-container .cart-summary{border:1px solid var(--line)}
+        /* promo code section (#promo-code-section) */
+        #cart-items-container #promo-code-section{
+            background:rgba(255,255,255,.04) !important;
+            border:1px solid var(--line) !important;
+        }
+        #cart-items-container #promo-code-section span[style*="color: #374151"]{color:#dbe3f5 !important}
+        #cart-items-container #promo-code-input-area > div{
+            background:rgba(255,255,255,.05) !important;
+            border:1px solid var(--line) !important;
+        }
+        #cart-items-container #promo-code-input-area p{color:#aeb8cf !important}
+        #cart-items-container #promo-code-input-area strong{color:#fff}
+        /* "Secured by Stripe" caption under checkout button */
+        #cart-items-container p[style*="color: #64748b"]{color:#aeb8cf !important}
+
+        /* Checkout Auth Modal Styles */
+        .checkout-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .checkout-modal-overlay.active {
+            display: flex;
+        }
+
+        .checkout-modal {
+            background: white;
+            border-radius: 20px;
+            max-width: 480px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3);
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .checkout-modal-header {
+            padding: 24px 24px 16px;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .checkout-modal-header h2 {
+            font-size: 1.5rem;
+            color: #1f2937;
+            margin: 0;
+        }
+
+        .checkout-modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #9ca3af;
+            cursor: pointer;
+            padding: 4px;
+            line-height: 1;
+        }
+
+        .checkout-modal-close:hover {
+            color: #6b7280;
+        }
+
+        .checkout-modal-body {
+            padding: 24px;
+        }
+
+        .checkout-auth-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .checkout-auth-tab {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #e5e7eb;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #6b7280;
+            transition: all 0.2s;
+        }
+
+        .checkout-auth-tab.active {
+            border-color: #0018ff;
+            color: #0018ff;
+            background: #eff6ff;
+        }
+
+        .checkout-auth-tab:hover:not(.active) {
+            border-color: #d1d5db;
+            background: #f9fafb;
+        }
+
+        .checkout-form-group {
+            margin-bottom: 16px;
+        }
+
+        .checkout-form-group label {
+            display: block;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 6px;
+            font-size: 0.9rem;
+        }
+
+        .checkout-form-group input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .checkout-form-group input:focus {
+            outline: none;
+            border-color: #0018ff;
+        }
+
+        .checkout-submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #0018ff, #0080ff);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 8px;
+        }
+
+        .checkout-submit-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 24, 255, 0.3);
+        }
+
+        .checkout-submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .checkout-divider {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            color: #9ca3af;
+            font-size: 0.85rem;
+        }
+
+        .checkout-divider::before,
+        .checkout-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #e5e7eb;
+        }
+
+        .checkout-divider span {
+            padding: 0 12px;
+        }
+
+        .google-signin-btn {
+            width: 100%;
+            padding: 12px;
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.2s;
+            color: #374151;
+        }
+
+        .google-signin-btn:hover {
+            background: #f9fafb;
+            border-color: #d1d5db;
+        }
+
+        .google-signin-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .checkout-error {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #dc2626;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .checkout-error.show {
+            display: block;
+        }
+
+        .checkout-view {
+            display: none;
+        }
+
+        .checkout-view.active {
+            display: block;
+        }
+
+        .checkout-loading {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .checkout-loading i {
+            font-size: 2.5rem;
+            color: #0018ff;
+            margin-bottom: 16px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .checkout-success {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .checkout-success-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.35);
+        }
+
+        .checkout-success h3 {
+            font-size: 1.5rem;
+            color: #1f2937;
+            margin-bottom: 12px;
+        }
+
+        .checkout-success p {
+            color: #6b7280;
+            margin-bottom: 20px;
+        }
+
+        .password-toggle {
+            position: relative;
+        }
+
+        .password-toggle input {
+            padding-right: 45px;
+        }
+
+        .password-toggle-btn {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #9ca3af;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .password-toggle-btn:hover {
+            color: #6b7280;
+        }
+    </style>
+    <link rel="canonical" href="https://windloadcalc.com/cart.html">
 </head>
 <body>
-<button class="theme-tgl" id="themeTgl" aria-label="Toggle theme">◐ Theme</button>
-<div class="wrap">
-  <h1>Add calculators to your plan</h1>
-  <p class="sub" id="subline">Loading your plan…</p>
+    <div class="aurora"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
+    <div class="grid-tex"></div>
 
-  <div class="toolbar">
-    <div class="seg" id="tier"><button data-t="starter" class="on">Starter</button><button data-t="pro">Pro</button><button data-t="premium">Premium</button></div>
-    <div class="seg" id="cycle"><button data-c="monthly" class="on">Monthly</button><button data-c="annual">Annual<span class="savepill">2 mo free</span></button></div>
+    <!-- Nav (solid by default — no dark hero on this page) -->
+    <nav id="nav"><div class="nav-in">
+      <a class="logo" href="https://windloadcalc.com/"><img height="100" width="300" src="images/windloadcalc-logo-anim-navy.svg" alt="WindLoadCalc — ASCE 7-22 Wind Load Calculator logo" class="logo-image"></a>
+      <div class="nav-right">
+        <div class="nav-links">
+          <a class="l" href="https://windloadcalc.com/wind-load-calculator-shop.html">Calculators</a>
+          <a class="l" href="https://windloadcalc.com/building-intelligence-platform-shop.html">BIP</a>
+          <a class="l" href="https://windloadcalc.com/wind-load-calculator-shop.html">Pricing</a>
+          <a class="l" href="https://windloadcalc.com/building-intelligence-platform-landing.html">BIP</a>
+          <a class="btn btn-ghost" href="https://windloadcalc.com/login.html">Log in</a>
+          <a class="btn btn-primary" href="https://windloadcalc.com/wind-load-calculator-landing.html">Start free trial</a>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="Open full menu" aria-expanded="false" aria-controls="fullMenu"><span></span><span></span><span></span></button>
+      </div>
+    </div></nav>
+    <div class="nav-overlay" id="navOverlay"></div>
+    <aside class="full-menu" id="fullMenu" aria-label="Site menu">
+  <div class="fm-head"><span>Menu</span><button class="fm-close" id="fmClose" aria-label="Close menu">&times;</button></div>
+  <div class="fm-group">
+    <div class="fm-label">Wind Load Calculators</div>
+    <a href="https://windloadcalc.com/wind-load-calculator-landing.html">Overview</a>
+    <a href="https://windloadcalc.com/free-wind-load-calculator.html">Free Calculator</a>
+    <a href="https://windloadcalc.com/walkthroughs.html">Walkthroughs</a>
+    <a href="https://windloadcalc.com/wind-load-calculator-comparison.html">Feature Comparison</a>
+    <a href="https://windloadcalc.com/wind-load-calculator-shop.html">Pricing</a>
   </div>
-
-  <div class="layout">
-    <div class="cards" id="cards"></div>
-    <aside class="summary" id="summary"><div class="sumhead">Plan changes</div><div id="sumbody"></div></aside>
+  <div class="fm-group">
+    <div class="fm-label">Service Areas</div>
+    <a href="https://windloadcalc.com/service-area/">All States &amp; Counties</a>
+    <a href="https://windloadcalc.com/florida-wind-load-calculator/">Florida</a>
+    <a href="https://windloadcalc.com/texas-wind-load-calculator/">Texas</a>
+    <a href="https://windloadcalc.com/california-wind-load-calculator/">California</a>
+    <a href="https://windloadcalc.com/miami-dade-wind-load-calculator/">Miami-Dade County</a>
   </div>
+  <div class="fm-group">
+    <div class="fm-label">Building Intelligence Platform</div>
+    <a href="https://windloadcalc.com/building-intelligence-platform-landing.html">Overview</a>
+    <a href="https://windloadcalc.com/building-intelligence-platform.html">Free Trial</a>
+    <a href="https://windloadcalc.com/building-intelligence-platform-shop.html">Pricing</a>
+  </div>
+  <div class="fm-group">
+    <div class="fm-label">For Professionals</div>
+    <a href="https://windloadcalc.com/wind-load-calculator-for-engineers.html">Engineers</a>
+    <a href="https://windloadcalc.com/wind-load-calculator-for-architects.html">Architects</a>
+    <a href="https://windloadcalc.com/wind-loads-for-consultants.html">Consultants</a>
+    <a href="https://windloadcalc.com/contractors-wind-load-calculator.html">Contractors</a>
+  </div>
+  <div class="fm-group">
+    <div class="fm-label">Company</div>
+    <a href="https://windloadcalc.com/services.html">Services</a>
+    <a href="https://windloadcalc.com/why-us.html">Why Us</a>
+    <a href="https://windloadcalc.com/faq.html">FAQ</a>
+    <a href="https://windloadcalc.com/contact.html">Contact Us</a>
+  </div>
+  <div class="fm-actions">
+    <a class="btn btn-ghost" href="https://windloadcalc.com/login.html">Log in</a>
+    <a class="btn btn-primary" href="https://windloadcalc.com/wind-load-calculator-landing.html">Start Free Trial &rarr;</a>
+  </div>
+</aside>
 
-  <p class="previewnote" id="pnote"></p>
-</div>
+    <!-- Main Content -->
+    <div class="container">
+        <h1 class="page-title"><i class="fas fa-plus-circle"></i> Add calculators to your plan</h1>
+        <p class="page-subtitle" id="aaSub">Loading your plan…</p>
+        <div id="aaWrap" style="max-width:1040px;margin:0 auto"></div>
+    </div>
 
-<script src="js/pricing-engine.js"></script>
-<script>
-(function(){
-  "use strict";
-  var cards = document.getElementById("cards");
-  if(!window.WLCPricing){ cards.innerHTML="<p>Pricing failed to load. Please refresh.</p>"; return; }
-  var P = window.WLCPricing, API = "https://api.windloadcalc.com";
-  function showSignIn(){
-    document.querySelector(".wrap").innerHTML =
-      '<h1>Sign in to manage your plan</h1>'+
-      '<p class="sub" style="margin-top:6px">Please <a href="/login.html" style="color:var(--accent);font-weight:700;text-decoration:none">sign in</a> to add calculators to your subscription.</p>';
-  }
-  // Deep-link login (admin login links / support): ?token=<jwt> stores the session, then
-  // cleans it out of the URL so the token isn't left in history or shared links.
-  try{ var _u=new URL(location.href), _t=_u.searchParams.get("token");
-    if(_t){ localStorage.setItem("windload_auth_token", _t); _u.searchParams.delete("token");
-      history.replaceState(null,"", _u.pathname + (_u.searchParams.toString()?("?"+_u.searchParams.toString()):"")); } }catch(e){}
-  var token = localStorage.getItem("windload_auth_token");
-  if(!token){ showSignIn(); return; }
+    <script src="js/pricing-engine.js"></script>
+    <script src="js/shopping-cart.js"></script>
+    <script>
+    (function(){
+      var ham=document.getElementById('hamburger'), fm=document.getElementById('fullMenu'),
+          ov=document.getElementById('navOverlay'), fc=document.getElementById('fmClose');
+      if(!ham||!fm) return;
+      function setMenu(open){ fm.classList.toggle('open',open); if(ov)ov.classList.toggle('open',open); ham.classList.toggle('open',open);
+        ham.setAttribute('aria-expanded',open); document.body.style.overflow=open?'hidden':''; }
+      ham.addEventListener('click',function(){ setMenu(!fm.classList.contains('open')); });
+      if(ov) ov.addEventListener('click',function(){ setMenu(false); });
+      if(fc) fc.addEventListener('click',function(){ setMenu(false); });
+      fm.querySelectorAll('a').forEach(function(a){ a.addEventListener('click',function(){ setMenu(false); }); });
+      window.addEventListener('keydown',function(e){ if(e.key==='Escape') setMenu(false); });
+    })();
+    </script>
 
-  var DESC = {
-    wd:"Windows, doors & shutters",
-    mwfrs:"Whole‑building wind pressures",
-    roofs:"Every roof shape, plus parapets & overhangs",
-    other:"Signs, walls, equipment, chimneys, tanks & towers",
-    specialty:"Parapets & attached canopies",
-    solar:"Rooftop + ground‑mount PV — coming soon"
-  };
-  var CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>';
+    <style>
+      #aaWrap .aa-toolbar{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:0 0 20px}
+      #aaWrap .cf-seg{display:flex;gap:4px;background:rgba(7,10,24,.55);border:1px solid rgba(120,140,200,.25);border-radius:11px;padding:4px}
+      #aaWrap .cf-seg button{border:0;background:transparent;color:#aeb8cf;font:inherit;font-size:13px;font-weight:650;padding:8px 14px;border-radius:8px;cursor:pointer;transition:.15s}
+      #aaWrap .cf-seg button:hover{color:#fff} #aaWrap .cf-seg button.on{background:#3a5bff;color:#fff;box-shadow:0 2px 10px rgba(58,91,255,.45)}
+      #aaWrap .cf-seg button:disabled{cursor:default}
+      #aaWrap .cf-seg .cf-save{font-size:10.5px;font-weight:700;color:#6ee7b7;margin-left:5px}#aaWrap .cf-seg button.on .cf-save{color:#d6ffe9}
+      #aaWrap .aa-grid{display:grid;grid-template-columns:1fr 360px;gap:22px;align-items:start}
+      @media (max-width:860px){#aaWrap .aa-grid{grid-template-columns:1fr}}
+      #aaWrap .aa-lab{font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:#8a93a8;font-weight:700;margin:0 0 10px}
+      #aaWrap .aa-lab.addhdr{display:flex;align-items:center;gap:8px;margin:22px 0 10px;color:#fff;font-size:15px;text-transform:none;letter-spacing:0}
+      #aaWrap .aa-lab.addhdr svg{width:18px;height:18px;color:#9db0ff}
+      #aaWrap .aa-card{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.04);border:1px solid rgba(120,140,200,.22);border-radius:13px;padding:13px 15px;margin-bottom:10px}
+      #aaWrap .aa-card.owned{background:rgba(52,211,153,.09);border-color:rgba(52,211,153,.35)}
+      #aaWrap .aa-card.soon{opacity:.5}
+      #aaWrap .aa-brand{width:38px;height:38px;flex:0 0 auto;border-radius:10px;display:grid;place-items:center;color:#fff}
+      #aaWrap .aa-brand svg{width:20px;height:20px}
+      #aaWrap .aa-info{flex:1;min-width:0}
+      #aaWrap .aa-info h4{margin:0;font-size:14.5px;font-weight:680;color:#fff}
+      #aaWrap .aa-info p{margin:1px 0 0;font-size:12.3px;color:#aeb8cf}
+      #aaWrap .aa-price{flex:0 0 auto;display:flex;flex-direction:column;align-items:flex-end;gap:3px;text-align:right}
+      #aaWrap .aa-inc{font-size:13px;font-weight:750;color:#6ee7b7;white-space:nowrap}
+      #aaWrap .aa-strike{font-size:11px;color:#8a93a8;text-decoration:line-through}
+      #aaWrap .aa-add{border:0;border-radius:9px;background:linear-gradient(135deg,#3a5bff,#4666ff);color:#fff;font:inherit;font-weight:700;font-size:12.5px;padding:9px 13px;cursor:pointer;white-space:nowrap;transition:.15s}
+      #aaWrap .aa-add:hover{transform:translateY(-1px);box-shadow:0 9px 22px rgba(58,91,255,.5)}
+      #aaWrap .aa-card.on .aa-add{background:linear-gradient(135deg,#0a8f5b,#34D399)}
+      #aaWrap .aa-save{font-size:10.5px;font-weight:750;color:#6ee7b7;background:rgba(52,211,153,.14);padding:2px 8px;border-radius:20px;white-space:nowrap}
+      #aaWrap .aa-sum{position:sticky;top:16px;background:linear-gradient(160deg,rgba(58,91,255,.12),rgba(7,10,24,.5));border:1px solid rgba(58,91,255,.35);border-radius:16px;padding:20px}
+      @media (max-width:860px){#aaWrap .aa-sum{position:static}}
+      #aaWrap .aa-sh{font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:#94a3b8;font-weight:700;margin:0 0 12px}
+      #aaWrap .aa-today{display:flex;justify-content:space-between;align-items:baseline;font-size:13.5px;color:#aeb8cf}#aaWrap .aa-today b{color:#fff}
+      #aaWrap .aa-big{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;margin:10px 0 2px}
+      #aaWrap .aa-big .now{font-size:32px;font-weight:820;letter-spacing:-.03em;color:#fff}
+      #aaWrap .aa-big .u{font-size:14px;color:#aeb8cf;font-weight:600}
+      #aaWrap .aa-delta{display:inline-block;font-size:13px;font-weight:750;color:#f5a83f;background:rgba(245,168,63,.14);padding:4px 11px;border-radius:20px;margin-top:6px}
+      #aaWrap .aa-savebadge{display:block;margin-top:9px;font-size:12.5px;font-weight:750;color:#6ee7b7;background:rgba(52,211,153,.14);padding:6px 11px;border-radius:20px}
+      #aaWrap .aa-pro{font-size:12.5px;color:#aeb8cf;line-height:1.5;background:rgba(7,10,24,.4);border:1px solid rgba(120,140,200,.22);border-radius:11px;padding:10px 12px;margin-top:12px}#aaWrap .aa-pro b{color:#fff}
+      #aaWrap .aa-cov{margin:14px 0 4px}
+      #aaWrap .aa-cl{display:flex;justify-content:space-between;font-size:12.5px;color:#aeb8cf;margin-bottom:6px}#aaWrap .aa-cl b{color:#fff}
+      #aaWrap .aa-track{height:9px;border-radius:6px;background:rgba(255,255,255,.08);overflow:hidden}
+      #aaWrap .aa-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,#3a5bff,#a855f7);transition:width .35s cubic-bezier(.4,0,.2,1)}
+      #aaWrap .aa-nudge{font-size:12.8px;font-weight:600;line-height:1.45;margin-top:8px;color:#c9a9ff}#aaWrap .aa-nudge.done{color:#6ee7b7}
+      #aaWrap .aa-bip{display:flex;align-items:center;gap:11px;border:1.5px dashed #2dd4bf;border-radius:12px;padding:12px 14px;margin-top:12px;background:rgba(45,212,191,.07);cursor:pointer}
+      #aaWrap .aa-bip.on{background:rgba(45,212,191,.16);border-style:solid}#aaWrap .aa-bip.free{border-color:#34D399;background:rgba(52,211,153,.14);cursor:default}
+      #aaWrap .aa-bip h4{margin:0;font-size:13.5px;font-weight:680;color:#fff}#aaWrap .aa-bip p{margin:1px 0 0;font-size:12px;color:#aeb8cf}
+      #aaWrap .aa-bip .bp{margin-left:auto;font-weight:750;color:#2dd4bf;white-space:nowrap}#aaWrap .aa-bip.free .bp{color:#34D399}
+      #aaWrap .aa-cta{margin-top:16px;width:100%;border:0;border-radius:12px;background:linear-gradient(135deg,#10b981,#059669);color:#fff;font:inherit;font-weight:760;font-size:15.5px;padding:15px;cursor:pointer;transition:.2s;box-shadow:0 4px 14px rgba(16,185,129,.4)}
+      #aaWrap .aa-cta:hover{transform:translateY(-2px);box-shadow:0 16px 34px rgba(16,185,129,.5)}
+      #aaWrap .aa-cta:disabled{opacity:.5;cursor:default;transform:none;box-shadow:none}
+      #aaWrap .aa-fine{font-size:11.5px;color:#8a93a8;text-align:center;margin:9px 0 0}
+      #aaWrap .aa-msg{margin:0 0 16px;padding:12px 15px;border-radius:12px;font-size:14px;font-weight:600;color:#6ee7b7;background:rgba(52,211,153,.14);border:1px solid rgba(52,211,153,.4)}
+      #aaWrap .aa-empty{text-align:center;color:#aeb8cf;padding:20px}
+      #aaWrap .aa-signin{color:#9db0ff;font-weight:700;text-decoration:none}
+    </style>
+    <script>
+    (function(){
+      "use strict";
+      var wrap=document.getElementById("aaWrap"), sub=document.getElementById("aaSub");
+      if(!window.WLCPricing){ wrap.innerHTML='<p class="aa-empty">Pricing failed to load — please refresh.</p>'; return; }
+      var P=window.WLCPricing, API="https://api.windloadcalc.com";
+      // deep-link login: ?token=<jwt> stores the session then cleans the URL
+      try{ var _u=new URL(location.href), _t=_u.searchParams.get("token");
+        if(_t){ localStorage.setItem("windload_auth_token", _t); _u.searchParams.delete("token");
+          history.replaceState(null,"", _u.pathname + (_u.searchParams.toString()?("?"+_u.searchParams.toString()):"")); } }catch(e){}
+      function signIn(){ sub.textContent=""; wrap.innerHTML='<p class="aa-empty">Please <a class="aa-signin" href="/login.html">sign in</a> to manage your plan.</p>'; }
+      var token=localStorage.getItem("windload_auth_token");
+      if(!token){ signIn(); return; }
 
-  var plan = { monthly:null, annual:null };   // from GET /api/subscriptions/my-plan
-  var state = { cycle:"monthly", selected:{}, bipTouched:false, bip:false, newTier:"starter", busy:false };
+      var COLORS={wd:"#06b6d4",mwfrs:"#3b82f6",roofs:"#f97316",other:"#14b8a6",specialty:"#a855f7",solar:"#fbbf24"};
+      var NAMES={wd:"Windows, Doors & Shutters",mwfrs:"MWFRS — Whole Building",roofs:"Roofs",other:"Other Structures",specialty:"Specialty Components",solar:"Solar"};
+      var DESC={wd:"Windows, doors & shutters",mwfrs:"Whole-building wind pressures",roofs:"Every roof shape, plus parapets & overhangs",other:"Signs, walls, equipment, chimneys, tanks & towers",specialty:"Parapets & attached canopies",solar:"Rooftop + ground-mount PV — coming soon"};
+      var A='fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"';
+      var ICONS={
+        wd:'<svg viewBox="0 0 24 24" '+A+'><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="12" y1="3" x2="12" y2="21"/></svg>',
+        mwfrs:'<svg viewBox="0 0 24 24" '+A+'><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-5h6v5"/></svg>',
+        roofs:'<svg viewBox="0 0 24 24" '+A+'><path d="M3 12l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>',
+        other:'<svg viewBox="0 0 24 24" '+A+'><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18"/><path d="M4 22h16"/><path d="M10 7h4M10 11h4M10 15h4"/></svg>',
+        specialty:'<svg viewBox="0 0 24 24" '+A+'><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>',
+        solar:'<svg viewBox="0 0 24 24" '+A+'><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="5" y1="5" x2="7" y2="7"/><line x1="17" y1="17" x2="19" y2="19"/><line x1="5" y1="19" x2="7" y2="17"/><line x1="17" y1="7" x2="19" y2="5"/></svg>'
+      };
+      var CART='<svg viewBox="0 0 24 24" '+A+'><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>';
+      var PLUS='<svg viewBox="0 0 24 24" '+A+'><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>';
+      var BIP='<svg viewBox="0 0 24 24" '+A+' style="color:#fff"><path d="M12 5a3 3 0 0 0-3 3 3 3 0 0 0-1 5.8V16a2 2 0 0 0 4 0 2 2 0 0 0 4 0v-2.2A3 3 0 0 0 15 8a3 3 0 0 0-3-3z"/></svg>';
 
-  function bucket(){ return plan[state.cycle]; }
-  function ownedMap(){ var m={}, b=bucket(); if(b)(b.covered_calculators||[]).forEach(function(id){m[id]=true;}); return m; }
-  function tier(){ var b=bucket(); return b ? b.tier : (state.newTier||"starter"); }
-  function ownedIds(){ return Object.keys(ownedMap()); }
-  function selectedIds(){ var om=ownedMap(); return Object.keys(state.selected).filter(function(id){ return !om[id] && isLive(id); }); }
-  function money(v){ return "$"+Math.round(v).toLocaleString(); }
-  function unit(){ return state.cycle==="annual"?"/yr":"/mo"; }
-  function isLive(id){ var c=P.config().catalog.filter(function(x){return x.id===id;})[0]; return !!(c&&c.live); }
-  function haveBip(){ var b=bucket(); return b ? !!b.bip_included : false; }
-  function bipDesired(){ return state.bipTouched ? state.bip : haveBip(); }
-  function q(){ return P.quote({ owned:ownedIds(), selected:selectedIds(), tier:tier(), cycle:state.cycle, bipSelected:bipDesired() }); }
+      var plan={monthly:null,annual:null};
+      var state={cycle:"monthly",selected:{},bipTouched:false,bip:false,newTier:"starter",busy:false};
 
-  function renderCards(){
-    var Q=q(), om=ownedMap(), h="";
-    P.config().catalog.forEach(function(c){
-      var owned=!!om[c.id], on=(!!state.selected[c.id] && !owned), soon=!c.live;
-      var cls="card"+(owned?" owned":(on?" on":""))+(soon&&!owned?" soon":"");
-      var act;
-      if(owned) act='<span class="ownlab">Included</span>';
-      else if(soon) act='<span class="soonlab">Soon</span>';
-      else if(on) act='<span class="in">✓ Adding</span>';
-      else act='<span class="add">Add +'+money(Q.addNextPrice)+'<small>'+unit().slice(1)+'</small></span>';
-      var interactive=!owned&&!soon;
-      h+='<div class="'+cls+'" data-id="'+c.id+'"'+(interactive?' tabindex="0" role="button" aria-pressed="'+on+'"':'')+'>'+
-         '<div class="tick">'+CHECK+'</div><div class="cbody"><h3>'+c.name+'</h3><p>'+(DESC[c.id]||"")+'</p></div>'+
-         '<div class="cact">'+act+'</div></div>';
-    });
-    cards.innerHTML=h;
-  }
+      function bucket(){ return plan[state.cycle]; }
+      function ownedMap(){ var m={},b=bucket(); if(b)(b.covered_calculators||[]).forEach(function(id){m[id]=true;}); return m; }
+      function tier(){ var b=bucket(); return b?b.tier:(state.newTier||"starter"); }
+      function isLive(id){ var c=P.config().catalog.filter(function(x){return x.id===id;})[0]; return !!(c&&c.live); }
+      function ownedIds(){ return Object.keys(ownedMap()); }
+      function selIds(){ var om=ownedMap(); return Object.keys(state.selected).filter(function(id){return !om[id]&&isLive(id);}); }
+      function haveBip(){ var b=bucket(); return b?!!b.bip_included:false; }
+      function bipDesired(){ return state.bipTouched?state.bip:haveBip(); }
+      function money(v){ return "$"+Math.round(v).toLocaleString(); }
+      function unit(){ return state.cycle==="annual"?"/yr":"/mo"; }
+      function O(){ return {tier:tier(),cycle:state.cycle}; }
+      function q(){ return P.quote({owned:ownedIds(),selected:selIds(),tier:tier(),cycle:state.cycle,bipSelected:bipDesired()}); }
 
-  function renderSummary(){
-    var Q=q(), b=document.getElementById("sumbody"), sel=selectedIds(), h="";
-    var bipChanged = state.bipTouched && (state.bip !== haveBip()) && !Q.isComplete;
-    var bipAdd = (bipDesired() && !Q.isComplete) ? Q.bipPrice : 0;
-    h+='<div class="todayrow"><span>Your '+state.cycle+' plan today</span><b>'+money(Q.currentTotal)+unit()+'</b></div>';
-    if(sel.length===0 && !bipChanged){
-      h+='<p class="savemore" style="margin-top:2px">Pick a calculator to add — your next one is just <b style="color:var(--marg)">+'+money(Q.addNextPrice)+unit()+'</b>'+(Q.addNextPrice===0?' (you have them all).':'.')+'</p>';
-      b.innerHTML=h; wireSummary(); return;
-    }
-    h+='<div class="pricebig"><span class="now">'+money(Q.newTotal+bipAdd)+'</span><span class="unit">'+unit()+' new total</span></div>';
-    if(sel.length) h+='<div class="deltatag">+'+money(Q.delta)+unit()+' for '+sel.length+' more</div>';
-    if(Q.savings>0) h+='<div class="savebadge">Your '+Q.afterCount+'-calc plan saves '+money(Q.savings)+unit()+' vs separate · '+Q.savingsPct+'% off</div>';
-    h+='<div class="proration">Charged to your card on file, <b>prorated</b> for the days left in this billing period, then <b>+'+money(Q.delta+bipAdd)+unit()+'</b> going forward.</div>';
-    if(Q.showSaveMore && Q.remainingToComplete>0) h+='<div class="savemore"><b>Keep going — each one’s cheaper.</b> Your next calculator is only <b>+'+money(Q.addNextPrice)+unit()+'</b>.</div>';
-    h+='<div class="progress"><div class="plabel"><span>Plan coverage</span><span><b>'+Q.afterCount+'</b> of '+Q.catalogLive+'</span></div><div class="track"><div class="fill" style="width:'+Math.round(Q.afterCount/Q.catalogLive*100)+'%"></div></div>';
-    if(Q.isComplete) h+='<div class="nudge complete">✓ Complete — every calculator, plus BIP free.</div>';
-    else if(Q.showCompleteNudge) h+='<div class="nudge">'+Q.remainingToComplete+' away from <b>Complete</b> — all '+Q.catalogLive+' + BIP free.</div>';
-    h+='</div>';
-    if(Q.isComplete) h+='<div class="bip free"><div class="tick">'+CHECK+'</div><div class="cbody"><h3>Building Intelligence Platform</h3><p>Included free with Complete.</p></div><div class="price">FREE</div></div>';
-    else h+='<div class="bip'+(bipDesired()?' on':'')+'" id="bipRow" tabindex="0" role="button" aria-pressed="'+bipDesired()+'"><div class="tick">'+CHECK+'</div><div class="cbody"><h3>Full BIP access</h3><p>Hurricane risk, solar siting, ZIP search across 40k+ ZIPs.</p></div><div class="price">+'+money(Q.bipPrice)+unit()+'</div></div>';
-    var due = Q.delta + bipAdd;
-    var label = bucket() ? ("Add to my plan — +"+money(due)+unit()) : ("Start my "+state.cycle+" plan — "+money(Q.newTotal+bipAdd)+unit());
-    h+='<button class="cta" id="cta"'+(state.busy?" disabled":"")+'>'+(state.busy?"Working…":label)+'</button>';
-    h+='<p class="finenote">'+(bucket()?"Prorated today, then billed ":"Billed ")+(state.cycle==="annual"?"yearly":"monthly")+'. Change anytime.</p>';
-    b.innerHTML=h; wireSummary();
-  }
+      function render(){
+        var Q=q(), om=ownedMap(), sel=selIds(), h="";
+        h+='<div class="aa-toolbar"><div class="cf-seg" id="aaTier">'+["starter","pro","premium"].map(function(t){return '<button data-t="'+t+'" class="'+(tier()===t?"on":"")+'"'+(bucket()?" disabled":"")+'>'+t.charAt(0).toUpperCase()+t.slice(1)+'</button>';}).join("")+'</div>'+
+           '<div class="cf-seg" id="aaCycle">'+["monthly","annual"].map(function(c){return '<button data-c="'+c+'" class="'+(state.cycle===c?"on":"")+'">'+(c==="annual"?"Annual":"Monthly")+(c==="annual"?'<span class="cf-save">2 mo free</span>':"")+'</button>';}).join("")+'</div></div>';
 
-  function wireSummary(){
-    var bipRow=document.getElementById("bipRow");
-    if(bipRow) bipRow.onclick=function(){ state.bipTouched=true; state.bip=!bipDesired(); render(); };
-    var cta=document.getElementById("cta");
-    if(cta) cta.onclick=submit;
-  }
+        h+='<div class="aa-grid"><div class="aa-main">';
+        var ownedList=P.config().catalog.filter(function(c){return om[c.id];});
+        if(ownedList.length){ h+='<div class="aa-lab">Your '+state.cycle+' plan</div>';
+          ownedList.forEach(function(c){ h+='<div class="aa-card owned"><div class="aa-brand" style="background:'+COLORS[c.id]+'">'+ICONS[c.id]+'</div><div class="aa-info"><h4>'+NAMES[c.id]+'</h4><p>'+DESC[c.id]+'</p></div><div class="aa-price"><span class="aa-inc">✓ Included</span></div></div>'; });
+        }
+        var rem=P.config().catalog.filter(function(c){return !om[c.id];});
+        if(rem.length){
+          var stand=P.curveTotal(1,O()), addNext=Q.addNextPrice, save=Math.max(0,stand-addNext), pct=stand>0?Math.round(save/stand*100):0;
+          h+='<div class="aa-lab addhdr">'+PLUS+'Add calculators — save more with each one</div>';
+          rem.forEach(function(c){ var soon=!c.live, on=!!state.selected[c.id];
+            var right = soon ? '<span class="aa-add" style="background:rgba(255,255,255,.08);color:#8a93a8">Soon</span>'
+              : (on ? '<button class="aa-add" data-add="'+c.id+'">✓ Adding</button>'
+                    : '<div class="aa-price">'+(save>0?'<span class="aa-strike">'+money(stand)+'</span>':'')+'<button class="aa-add" data-add="'+c.id+'">+ Add '+money(addNext)+'</button>'+(save>0?'<span class="aa-save">save '+pct+'% off</span>':'')+'</div>');
+            h+='<div class="aa-card'+(on?" on":"")+(soon?" soon":"")+'"><div class="aa-brand" style="background:'+COLORS[c.id]+'">'+ICONS[c.id]+'</div><div class="aa-info"><h4>'+NAMES[c.id]+'</h4><p>'+DESC[c.id]+'</p></div>'+(right.indexOf("aa-price")>=0?right:'<div class="aa-price">'+right+'</div>')+'</div>';
+          });
+        }
+        h+='</div>';  // aa-main
 
-  function syncToolbar(){
-    [].forEach.call(document.querySelectorAll("#cycle button"),function(x){ x.classList.toggle("on", x.dataset.c===state.cycle); });
-    var locked = !!bucket();   // tier is fixed once a bucket exists (an add never changes tier)
-    [].forEach.call(document.querySelectorAll("#tier button"),function(x){
-      x.classList.toggle("on", x.dataset.t===tier());
-      x.disabled = locked;
-      x.style.opacity = (locked && x.dataset.t!==tier()) ? ".4" : "";
-    });
-  }
+        // summary
+        var bipAdd=(bipDesired()&&!Q.isComplete)?Q.bipPrice:0;
+        h+='<aside class="aa-sum"><div class="aa-sh">Plan changes</div>';
+        h+='<div class="aa-today"><span>Your '+state.cycle+' plan today</span><b>'+money(Q.currentTotal)+unit()+'</b></div>';
+        if(sel.length||( state.bipTouched && bipDesired()!==haveBip() && !Q.isComplete )){
+          h+='<div class="aa-big"><span class="now">'+money(Q.newTotal+bipAdd)+'</span><span class="u">'+unit()+' new total</span></div>';
+          if(sel.length) h+='<div class="aa-delta">+'+money(Q.delta)+unit()+' for '+sel.length+' more</div>';
+          if(Q.savings>0) h+='<span class="aa-savebadge">Your '+Q.afterCount+'-calc plan saves '+money(Q.savings)+unit()+' vs separate · '+Q.savingsPct+'% off</span>';
+          h+='<div class="aa-pro">Charged to your card on file, <b>prorated</b> for the days left in this period, then <b>+'+money(Q.delta+bipAdd)+unit()+'</b> going forward.</div>';
+        } else {
+          h+='<p class="aa-pro" style="margin-top:12px">Pick a calculator to add — your next one is just <b style="color:#f5a83f">+'+money(Q.addNextPrice)+unit()+'</b>.</p>';
+        }
+        h+='<div class="aa-cov"><div class="aa-cl"><span>Plan coverage</span><span><b>'+Q.afterCount+'</b> of '+Q.catalogLive+'</span></div><div class="aa-track"><div class="aa-fill" style="width:'+Math.round(Q.afterCount/Q.catalogLive*100)+'%"></div></div>';
+        if(Q.isComplete) h+='<div class="aa-nudge done">✓ Complete — every calculator, plus BIP free.</div>';
+        else if(Q.showCompleteNudge) h+='<div class="aa-nudge">'+Q.remainingToComplete+' away from <b>Complete</b> — all '+Q.catalogLive+' + BIP free.</div>';
+        h+='</div>';
+        if(Q.isComplete) h+='<div class="aa-bip free"><div class="aa-brand" style="width:34px;height:34px;background:#0d9488">'+BIP+'</div><div><h4>BIP full access</h4><p>Included free with Complete.</p></div><span class="bp">FREE</span></div>';
+        else h+='<div class="aa-bip'+(bipDesired()?" on":"")+'" id="aaBip"><div class="aa-brand" style="width:34px;height:34px;background:#0d9488">'+BIP+'</div><div><h4>Full BIP access</h4><p>Hurricane risk, solar siting, 40k+ ZIPs.</p></div><span class="bp">+'+money(Q.bipPrice)+unit()+'</span></div>';
+        var due=Q.delta+bipAdd, label=bucket()?("Add to my plan — +"+money(due)+unit()):("Start my "+state.cycle+" plan — "+money(Q.newTotal+bipAdd)+unit());
+        h+='<button class="aa-cta" id="aaCta"'+(state.busy?" disabled":"")+'>'+(state.busy?"Working…":label)+'</button>';
+        h+='<p class="aa-fine">'+(bucket()?"Prorated today, then billed ":"Billed ")+(state.cycle==="annual"?"yearly":"monthly")+'. Change anytime.</p>';
+        h+='</aside></div>';
+        wrap.innerHTML=h; wire();
+      }
 
-  function render(){ syncToolbar(); renderCards(); renderSummary(); }
+      function wire(){
+        wrap.querySelectorAll("#aaTier button").forEach(function(b){ b.onclick=function(){ if(b.disabled)return; state.newTier=b.dataset.t; render(); }; });
+        wrap.querySelectorAll("#aaCycle button").forEach(function(b){ b.onclick=function(){ state.cycle=b.dataset.c; state.selected={}; state.bipTouched=false; render(); }; });
+        wrap.querySelectorAll("[data-add]").forEach(function(b){ b.onclick=function(){ var id=b.dataset.add; if(state.selected[id])delete state.selected[id]; else state.selected[id]=true; render(); }; });
+        var bip=document.getElementById("aaBip"); if(bip) bip.onclick=function(){ state.bipTouched=true; state.bip=!bipDesired(); render(); };
+        var cta=document.getElementById("aaCta"); if(cta) cta.onclick=submit;
+      }
 
-  function submit(){
-    if(state.busy) return;
-    var sel = selectedIds();
-    var bipChanged = state.bipTouched && (state.bip !== haveBip());
-    if(!sel.length && !bipChanged) return;
-    state.busy=true; render();
-    var body = { programs: sel, cycle: state.cycle, tier: tier(), bip: bipDesired() };
-    fetch(API+"/api/subscriptions/add-calculators",{ method:"POST",
-      headers:{ "Content-Type":"application/json", "Authorization":"Bearer "+token },
-      body: JSON.stringify(body)
-    }).then(function(r){ return r.json().then(function(d){ return {ok:r.ok, status:r.status, d:d}; }); })
-      .then(function(res){
-        if(res.ok){ done(res.d); return; }
-        if(res.status===409 || ((res.d.error||"").indexOf("No active subscription")>=0)){ return startNewBucket(sel); }
-        throw new Error(res.d.error || "Could not update your plan.");
-      }).catch(function(e){ state.busy=false; render(); alert(e.message || "Something went wrong. Please try again."); });
-  }
+      function submit(){
+        if(state.busy) return;
+        var sel=selIds(), bipChanged=state.bipTouched&&(state.bip!==haveBip());
+        if(!sel.length&&!bipChanged) return;
+        state.busy=true; render();
+        var body={programs:sel,cycle:state.cycle,tier:tier(),bip:bipDesired()};
+        fetch(API+"/api/subscriptions/add-calculators",{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+token},body:JSON.stringify(body)})
+          .then(function(r){ return r.json().then(function(d){ return {ok:r.ok,status:r.status,d:d}; }); })
+          .then(function(res){ if(res.ok){ done(res.d); return; }
+            if(res.status===409||((res.d.error||"").indexOf("No active subscription")>=0)){ return newBucket(sel); }
+            throw new Error(res.d.error||"Could not update your plan."); })
+          .catch(function(e){ state.busy=false; render(); alert(e.message||"Something went wrong. Please try again."); });
+      }
+      function newBucket(sel){
+        fetch(API+"/api/subscriptions/checkout-curve",{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+token},body:JSON.stringify({programs:sel,cycle:state.cycle,tier:tier(),bip:bipDesired()})})
+          .then(function(r){return r.json();}).then(function(d){ if(d.checkout_url){location.href=d.checkout_url;} else {throw new Error(d.error||"Checkout failed");} })
+          .catch(function(e){ state.busy=false; render(); alert(e.message); });
+      }
+      function done(d){
+        plan[state.cycle]={cycle:state.cycle,tier:tier(),covered_calculators:(d.covered_calculators||[]),count:d.count,total:d.new_total,is_complete:d.is_complete,bip_included:!!d.bip_addon};
+        state.selected={}; state.bipTouched=false; state.bip=!!d.bip_addon; state.busy=false; render();
+        var extra=d.is_complete?" (Complete — BIP free)":(d.bip_addon?" + BIP":"");
+        var msg=document.createElement("div"); msg.className="aa-msg"; msg.textContent="✓ Plan updated — "+d.count+" calculator"+(d.count!==1?"s":"")+extra+". Charged to your card on file, prorated.";
+        wrap.insertBefore(msg, wrap.firstChild); msg.scrollIntoView({behavior:"smooth",block:"nearest"});
+      }
 
-  function startNewBucket(sel){
-    fetch(API+"/api/subscriptions/checkout-curve",{ method:"POST",
-      headers:{ "Content-Type":"application/json", "Authorization":"Bearer "+token },
-      body: JSON.stringify({ programs: sel, cycle: state.cycle, tier: tier(), bip: bipDesired() })
-    }).then(function(r){ return r.json(); }).then(function(d){
-      if(d.checkout_url){ location.href=d.checkout_url; } else { throw new Error(d.error||"Checkout failed"); }
-    }).catch(function(e){ state.busy=false; render(); alert(e.message); });
-  }
-
-  function done(d){
-    var cyc=state.cycle;
-    plan[cyc] = { cycle:cyc, tier:tier(), covered_calculators:(d.covered_calculators||[]), count:d.count,
-                  total:d.new_total, is_complete:d.is_complete, bip_included:!!d.bip_addon };
-    state.selected={}; state.bipTouched=false; state.bip=!!d.bip_addon; state.busy=false;
-    render();
-    var extra = d.is_complete ? " (Complete — BIP included free)" : (d.bip_addon ? " + BIP" : "");
-    var msg = "✓ Your plan is updated — "+d.count+" calculator"+(d.count!==1?"s":"")+extra+". Charged to your card on file, prorated.";
-    var banner=document.getElementById("doneBanner");
-    if(!banner){ banner=document.createElement("div"); banner.id="doneBanner"; banner.className="donebanner";
-      var w=document.querySelector(".wrap"); w.insertBefore(banner, w.querySelector(".toolbar")); }
-    banner.textContent=msg; banner.scrollIntoView({behavior:"smooth", block:"nearest"});
-  }
-
-  function loadPlan(){
-    fetch(API+"/api/subscriptions/my-plan",{ headers:{ "Authorization":"Bearer "+token } })
-      .then(function(r){ if(r.status===401){ showSignIn(); throw new Error("auth"); } return r.json(); })
-      .then(function(d){
-        (d.buckets||[]).forEach(function(b){ if(b.cycle==="annual"||b.cycle==="monthly") plan[b.cycle]=b; });
-        var p=new URLSearchParams(location.search), qc=p.get("cycle");
-        if(qc==="annual"||qc==="monthly") state.cycle=qc;
-        else if(plan.annual && !plan.monthly) state.cycle="annual";
-        var add=(p.get("add")||"").toLowerCase();
-        if(add && isLive(add) && !ownedMap()[add]) state.selected[add]=true;
-        var sl=document.getElementById("subline"), b=bucket();
-        if(sl) sl.textContent = b
-          ? ("You have a "+b.count+"‑calculator "+state.cycle+" plan. Adding more is cheap — each one costs less than the last.")
-          : "Build your plan — each calculator you add costs less than the last.";
-        render();
-      })
-      .catch(function(e){ if(e.message==="auth") return; cards.innerHTML="<p>Couldn’t load your plan — please refresh.</p>"; });
-  }
-
-  cards.addEventListener("click",function(e){ toggleCard(e.target.closest(".card")); });
-  cards.addEventListener("keydown",function(e){ if((e.key==="Enter"||e.key===" ")&&e.target.classList.contains("card")){ e.preventDefault(); toggleCard(e.target); }});
-  function toggleCard(card){ if(!card) return; var id=card.dataset.id; if(ownedMap()[id]||!isLive(id)) return; if(state.selected[id]) delete state.selected[id]; else state.selected[id]=true; render(); }
-  document.getElementById("cycle").addEventListener("click",function(e){ var x=e.target.closest("button"); if(!x) return; state.cycle=x.dataset.c; state.selected={}; state.bipTouched=false; render(); });
-  document.getElementById("tier").addEventListener("click",function(e){ var x=e.target.closest("button"); if(!x||x.disabled) return; if(!bucket()){ state.newTier=x.dataset.t; render(); } });
-  document.getElementById("themeTgl").addEventListener("click",function(){ var cur=document.documentElement.getAttribute("data-theme"); document.documentElement.setAttribute("data-theme", cur==="dark"?"light":(cur==="light"?"dark":(matchMedia("(prefers-color-scheme:dark)").matches?"light":"dark"))); });
-
-  loadPlan();
-})();
-</script>
+      fetch(API+"/api/subscriptions/my-plan",{headers:{"Authorization":"Bearer "+token}})
+        .then(function(r){ if(r.status===401){ signIn(); throw new Error("auth"); } return r.json(); })
+        .then(function(d){
+          (d.buckets||[]).forEach(function(b){ if(b.cycle==="annual"||b.cycle==="monthly") plan[b.cycle]=b; });
+          var p=new URLSearchParams(location.search), qc=p.get("cycle");
+          if(qc==="annual"||qc==="monthly") state.cycle=qc; else if(plan.annual&&!plan.monthly) state.cycle="annual";
+          var add=(p.get("add")||"").toLowerCase(); if(add&&isLive(add)&&!ownedMap()[add]) state.selected[add]=true;
+          var b=bucket();
+          sub.textContent=b?("You have a "+b.count+"-calculator "+state.cycle+" plan. Adding more is cheap — each one costs less than the last."):"Build your plan — each calculator you add costs less than the last.";
+          render();
+        })
+        .catch(function(e){ if(e.message==="auth") return; wrap.innerHTML='<p class="aa-empty">Couldn’t load your plan — please refresh.</p>'; });
+    })();
+    </script>
 </body>
 </html>

@@ -839,6 +839,7 @@
     </div>
 
     <!-- Shopping Cart JS -->
+    <script src="js/pricing-engine.js"></script>
     <script src="js/shopping-cart.js"></script>
 
     <!-- Checkout Auth JS -->
@@ -1150,6 +1151,13 @@
                 openCheckoutModal();
                 return;
             }
+
+            // ── VOLUME-CURVE FLIP ──────────────────────────────────────────
+            // Price by COUNT of distinct calculator programs at the plan's tier+cycle,
+            // via /api/subscriptions/checkout-curve. Returns before the legacy per-item
+            // checkout-cart path below (kept visible for diff clarity, now unreached).
+            if (window.cfDoCurveCheckout) { await window.cfDoCurveCheckout(token, user && user.email); return; }
+            // ───────────────────────────────────────────────────────────────
 
             try {
                 const totals = cart.calculateTotals();
@@ -1762,5 +1770,220 @@
       window.addEventListener('keydown',function(e){ if(e.key==='Escape') setMenu(false); });
     })();
     </script>
+<!-- ══════════════ VOLUME-CURVE PRICING MODULE ══════════════
+     Keeps your existing cart FORMAT (Annual/Monthly sections, order summary, promo,
+     pay button — same classes/CSS). shopping-cart.js stays the data/persistence layer.
+     This module overrides rendering + pricing: line items gain a brand icon + color and
+     price on the curve; the RIGHT "Complete Your Toolkit" panel becomes the Build-Your-Plan
+     curve picker (add more → each costs less). Checkout → /api/subscriptions/checkout-curve. -->
+<style>
+  #cart-items-container .cf-brand{width:40px;height:40px;flex:0 0 auto;border-radius:11px;display:grid;place-items:center;color:#fff;margin-right:14px}
+  #cart-items-container .cf-brand svg{width:21px;height:21px}
+  .cf-up-toggles{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+  .cf-seg{display:flex;gap:3px;background:rgba(7,10,24,.55);border:1px solid rgba(120,140,200,.25);border-radius:10px;padding:3px}
+  .cf-seg button{border:0;background:transparent;color:#aeb8cf;font:inherit;font-size:12px;font-weight:650;padding:6px 10px;border-radius:7px;cursor:pointer;transition:.15s}
+  .cf-seg button:hover{color:#fff}
+  .cf-seg button.on{background:#3a5bff;color:#fff;box-shadow:0 2px 9px rgba(58,91,255,.4)}
+  .cf-up-hint{font-size:12px;color:#aeb8cf;margin:0 0 12px}
+  .cf-up-card{display:flex;align-items:center;gap:11px;background:rgba(255,255,255,.03);border:1px solid rgba(120,140,200,.22);border-radius:12px;padding:11px 12px;margin-bottom:9px}
+  .cf-up-card .cf-brand{width:34px;height:34px;flex:0 0 auto;border-radius:9px;display:grid;place-items:center;color:#fff}
+  .cf-up-card .cf-brand svg{width:18px;height:18px}
+  .cf-up-info{flex:1;min-width:0}
+  .cf-up-info h4{margin:0;font-size:13.5px;font-weight:680;color:#fff}
+  .cf-up-info p{margin:1px 0 0;font-size:11.5px;color:#aeb8cf}
+  .cf-up-add{flex:0 0 auto;border:0;border-radius:9px;background:linear-gradient(135deg,#3a5bff,#4666ff);color:#fff;font:inherit;font-weight:700;font-size:12.5px;padding:9px 13px;cursor:pointer;white-space:nowrap;transition:.15s}
+  .cf-up-add:hover{transform:translateY(-1px);box-shadow:0 9px 22px rgba(58,91,255,.5)}
+  .cf-up-add.soon{background:rgba(255,255,255,.08);color:#8a93a8;cursor:not-allowed}.cf-up-add.soon:hover{transform:none;box-shadow:none}
+  .cf-up-price{flex:0 0 auto;display:flex;flex-direction:column;align-items:flex-end;gap:3px;text-align:right}
+  .cf-strike{font-size:11px;color:#8a93a8;text-decoration:line-through}
+  .cf-up-save{font-size:10.5px;font-weight:750;color:#6ee7b7;background:rgba(52,211,153,.14);padding:2px 8px;border-radius:20px;white-space:nowrap}
+  .cf-up-done{text-align:center;color:#6ee7b7;font-weight:650;font-size:13px;padding:12px;background:rgba(52,211,153,.1);border-radius:10px}
+  .cf-up-bip{display:flex;align-items:center;gap:11px;border:1.5px dashed #2dd4bf;border-radius:12px;padding:11px 12px;margin-top:12px;background:rgba(45,212,191,.07);cursor:pointer;transition:.15s}
+  .cf-up-bip.on{background:rgba(45,212,191,.16);border-style:solid}.cf-up-bip.free{border-color:#34D399;background:rgba(52,211,153,.14);cursor:default}
+  .cf-up-bip .cf-brand{width:34px;height:34px;flex:0 0 auto;border-radius:9px;display:grid;place-items:center}
+  .cf-up-bip h4{margin:0;font-size:13px;font-weight:680;color:#fff}.cf-up-bip p{margin:1px 0 0;font-size:11px;color:#aeb8cf}
+  .cf-up-bip .cf-bp{margin-left:auto;font-weight:750;color:#2dd4bf;white-space:nowrap}.cf-up-bip.free .cf-bp{color:#34D399}
+</style>
+<script>
+(function(){
+  "use strict";
+  var P = window.WLCPricing, cart = window.cart;
+  if(!P || !cart){ console.warn("[curve-flip] engine or cart missing"); return; }
+
+  var PROG = { wd:"cc_walls", mwfrs:"mwfrs", roofs:"cc_roofs", other:"cc_other_structures", specialty:"cc_specialty", solar:"cc_solar" };
+  var COLORS = { wd:"#06b6d4", mwfrs:"#3b82f6", roofs:"#f97316", other:"#14b8a6", specialty:"#a855f7", solar:"#fbbf24" };
+  var NAMES = { wd:"Windows, Doors & Shutters", mwfrs:"MWFRS — Whole Building", roofs:"Roofs", other:"Other Structures", specialty:"Specialty Components", solar:"Solar" };
+  var DESC = { wd:"Windows, doors & shutters", mwfrs:"Whole-building wind pressures", roofs:"Every roof shape + parapets", other:"Signs, walls, equipment, towers", specialty:"Parapets & attached canopies", solar:"Rooftop + ground-mount PV" };
+  var A='fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"';
+  var ICONS = {
+    wd:'<svg viewBox="0 0 24 24" '+A+'><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="12" y1="3" x2="12" y2="21"/></svg>',
+    mwfrs:'<svg viewBox="0 0 24 24" '+A+'><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-5h6v5"/></svg>',
+    roofs:'<svg viewBox="0 0 24 24" '+A+'><path d="M3 12l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>',
+    other:'<svg viewBox="0 0 24 24" '+A+'><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18"/><path d="M4 22h16"/><path d="M10 7h4M10 11h4M10 15h4"/></svg>',
+    specialty:'<svg viewBox="0 0 24 24" '+A+'><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>',
+    solar:'<svg viewBox="0 0 24 24" '+A+'><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="5" y1="5" x2="7" y2="7"/><line x1="17" y1="17" x2="19" y2="19"/><line x1="5" y1="19" x2="7" y2="17"/><line x1="17" y1="7" x2="19" y2="5"/></svg>'
+  };
+  var BIP_ICON='<svg viewBox="0 0 24 24" '+A+' style="color:#fff"><path d="M12 5a3 3 0 0 0-3 3 3 3 0 0 0-1 5.8V16a2 2 0 0 0 4 0 2 2 0 0 0 4 0v-2.2A3 3 0 0 0 15 8a3 3 0 0 0-3-3z"/></svg>';
+
+  function progOf(code){ if(!code) return null; if(code.indexOf("bip_")===0) return "bip";
+    for(var k in PROG){ if(code.indexOf(PROG[k])===0) return k; } return null; }
+  function isLive(prog){ var c=P.config().catalog.filter(function(x){return x.id===prog;})[0]; return !!(c&&c.live); }
+
+  var plan = { tier:"starter" };
+  (function(){ for(var i=0;i<cart.items.length;i++){ var pr=progOf(cart.items[i].productCode);
+    if(pr&&pr!=="bip"){ var parts=cart.items[i].productCode.split("_"); var t=parts[parts.length-1];
+      if(t==="starter"||t==="pro"||t==="premium") plan.tier=t; break; } } })();
+  window.cfAddCycle = window.cfAddCycle || (function(){ for(var i=0;i<cart.items.length;i++){ var p=progOf(cart.items[i].productCode); if(p&&p!=="bip") return cart.items[i].billingCycle||"annual"; } return "annual"; })();
+
+  function bucketProgs(cycle){ var seen={}, out=[]; cart.items.forEach(function(it){ var p=progOf(it.productCode);
+    if(p&&p!=="bip"&&(it.billingCycle||"annual")===cycle&&!seen[p]){ seen[p]=1; out.push(p); } }); return out; }
+  function cartHasBip(){ return cart.items.some(function(it){ return progOf(it.productCode)==="bip"; }); }
+  function anyComplete(){ return bucketProgs("annual").length>=P.liveCount() || bucketProgs("monthly").length>=P.liveCount(); }
+  function money(v){ return "$"+(Math.round(v*100)/100).toFixed(2); }
+  function money0(v){ return "$"+Math.round(v).toLocaleString(); }
+  function O(cycle){ return { tier: plan.tier, cycle: cycle }; }   // engine opts {tier,cycle}
+
+  // ---- LEFT: your familiar cart format + brand icons + curve pricing ----
+  function renderItem(prog, cycle){
+    var base=P.curveTotal(1, O(cycle)), label=cycle==="annual"?"/year":"/month";
+    return '<div class="cart-item" style="background:white;border:1px solid #e5e7eb;border-radius:12px;padding:16px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;">'+
+      '<div style="flex:1;display:flex;align-items:center;">'+
+        '<div class="cf-brand" style="background:'+COLORS[prog]+'">'+ICONS[prog]+'</div>'+
+        '<div><h4 style="margin:0;color:#1f2937;font-size:1rem;">'+NAMES[prog]+'</h4></div>'+
+      '</div>'+
+      '<div style="text-align:right;min-width:100px;">'+
+        '<div style="font-size:1.2rem;font-weight:700;color:#0018ff;">'+money(base)+'</div>'+
+        '<div style="font-size:0.8rem;color:#64748b;">'+label+'</div>'+
+        '<button onclick="cfRemove(\''+prog+'\',\''+cycle+'\')" style="background:none;border:none;color:#dc2626;cursor:pointer;font-size:0.85rem;margin-top:8px;padding:4px 8px;"><i class="fas fa-trash"></i> Remove</button>'+
+      '</div></div>';
+  }
+  function section(cycle){
+    var progs=bucketProgs(cycle); if(!progs.length) return "";
+    var isA=cycle==="annual", total=P.curveTotal(progs.length, O(cycle)), base=P.curveTotal(1, O(cycle));
+    var save=progs.length*base-total, pct=base>0?Math.round(save/(progs.length*base)*100):0;
+    var head=isA?'<i class="fas fa-calendar-check" style="color:#10b981;"></i><h3 style="margin:0;font-size:1rem;color:#1f2937;">Annual Subscriptions</h3>'
+                :'<i class="fas fa-sync-alt" style="color:#3b82f6;"></i><h3 style="margin:0;font-size:1rem;color:#1f2937;">Monthly Subscriptions</h3>';
+    var badge=(progs.length>1)
+      ?'<span style="background:'+(isA?"#d1fae5":"#dbeafe")+';color:'+(isA?"#065f46":"#1e40af")+';padding:2px 8px;border-radius:4px;font-size:0.75rem;font-weight:600;">Save '+money0(save)+' · '+pct+'% off</span>'
+      :'<span style="background:'+(isA?"#d1fae5":"#dbeafe")+';color:'+(isA?"#065f46":"#1e40af")+';padding:2px 8px;border-radius:4px;font-size:0.75rem;font-weight:600;">'+(isA?"Volume pricing":"Flexible")+'</span>';
+    var box=isA?'<div style="background:#f0fdf4;border-radius:8px;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;"><span style="color:#166534;font-weight:500;">Annual Total (paid upfront)</span><span style="color:#166534;font-size:1.2rem;font-weight:700;">'+money(total)+'</span></div>'
+               :'<div style="background:#eff6ff;border-radius:8px;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;"><span style="color:#1e40af;font-weight:500;">Monthly Total (recurring)</span><span style="color:#1e40af;font-size:1.2rem;font-weight:700;">'+money(total)+'/mo</span></div>';
+    return '<div class="cart-section '+(isA?"annual-section":"monthly-section")+'" style="margin-bottom:24px;"><div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid '+(isA?"#10b981":"#3b82f6")+';">'+head+badge+'</div><div class="cart-items">'+progs.map(function(p){return renderItem(p,cycle);}).join("")+'</div>'+box+'</div>';
+  }
+  function render(){
+    var host=document.getElementById("cart-items-container"); if(!host) return;
+    var aP=bucketProgs("annual"), mP=bucketProgs("monthly"), hasBip=cartHasBip();
+    if(!aP.length && !mP.length && !hasBip){
+      host.innerHTML='<div style="text-align:center;padding:40px 20px;color:#64748b;"><i class="fas fa-shopping-cart" style="font-size:3rem;margin-bottom:1rem;opacity:.3;"></i><p style="font-size:1.1rem;margin-bottom:1rem;">Your cart is empty</p><p style="color:#aeb8cf">Add calculators from “Complete Your Toolkit” →</p></div>';
+      renderUpsell(); return;
+    }
+    var annualTotal=aP.length?P.curveTotal(aP.length, O("annual")):0;
+    var monthlyTotal=mP.length?P.curveTotal(mP.length, O("monthly")):0;
+    var mixed=aP.length&&mP.length;
+    var bipDue=(hasBip&&!anyComplete())?P.bipPrice(O(mP.length?"monthly":"annual")):0;
+    var dueToday=annualTotal+monthlyTotal+bipDue;
+
+    var h=section("annual")+section("monthly");
+    if(mixed) h+='<div style="background:linear-gradient(135deg,#fef3c7,#fde68a);border:2px solid #f59e0b;border-radius:12px;padding:14px 16px;margin:4px 0 16px;color:#78350f;font-size:.9rem;line-height:1.5;"><strong style="color:#92400e;">Two-step checkout:</strong> annual ('+money(annualTotal)+') is charged first, then monthly ('+money(monthlyTotal)+'/mo). Both on the same account — separate renewal dates (two buckets).</div>';
+
+    h+='<div class="cart-summary" style="background:linear-gradient(135deg,#1e3a5f,#0f172a);border-radius:12px;padding:24px;margin-top:20px;color:white;"><h3 style="margin:0 0 16px 0;font-size:1.1rem;color:#94a3b8;"><i class="fas fa-receipt"></i> Order Summary</h3>';
+    if(aP.length) h+='<div style="display:flex;justify-content:space-between;margin-bottom:8px;color:#94a3b8;"><span>'+aP.length+' annual calculator'+(aP.length>1?"s":"")+' (upfront)</span><span>'+money(annualTotal)+'</span></div>';
+    if(mP.length) h+='<div style="display:flex;justify-content:space-between;margin-bottom:8px;color:#94a3b8;"><span>'+mP.length+' monthly calculator'+(mP.length>1?"s":"")+' (first month)</span><span>'+money(monthlyTotal)+'</span></div>';
+    if(bipDue>0) h+='<div style="display:flex;justify-content:space-between;margin-bottom:8px;color:#5eead4;"><span>BIP full access</span><span>'+money(bipDue)+'</span></div>';
+    if(anyComplete()) h+='<div style="display:flex;justify-content:space-between;margin-bottom:8px;color:#4ade80;"><span>BIP full access</span><span>FREE (Complete)</span></div>';
+    h+='<div style="display:flex;justify-content:space-between;padding-top:16px;border-top:1px solid rgba(255,255,255,0.2);font-size:1.4rem;font-weight:700;"><span>Total Due Today</span><span style="color:#4ade80;">'+money(dueToday)+'</span></div>';
+    if(mP.length) h+='<p style="margin:12px 0 0 0;font-size:.85rem;color:#94a3b8;"><i class="fas fa-info-circle"></i> Monthly renews at '+money(monthlyTotal)+'/month</p>';
+    h+='</div>';
+
+    h+='<div id="promo-code-section" style="background:#f8fafc;border:2px solid #e2e8f0;border-radius:10px;padding:16px;margin-top:16px;"><div onclick="togglePromoCode()" style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;"><span style="color:#374151;font-weight:600;font-size:.95rem;"><i class="fas fa-tag" style="color:#6366f1;margin-right:6px;"></i>Have a discount code?</span><i id="promo-toggle-icon" class="fas fa-chevron-down" style="color:#9ca3af;font-size:.8rem;transition:transform .3s;"></i></div><div id="promo-code-input-area" style="display:none;margin-top:12px;"><div style="background:white;border:1px solid #e5e7eb;border-radius:8px;padding:14px;"><p style="margin:0 0 8px 0;color:#374151;font-size:.9rem;font-weight:500;"><i class="fas fa-check-circle" style="color:#10b981;margin-right:4px;"></i>Enter your code on the next page.</p><p style="margin:0;color:#64748b;font-size:.85rem;line-height:1.5;">After clicking <strong>“Pay Securely”</strong>, use <strong>“Add promotion code”</strong> on the Stripe checkout page.</p></div></div></div>';
+
+    h+='<button onclick="cart.proceedToCheckout()" style="width:100%;background:linear-gradient(135deg,#10b981,#059669);color:white;border:none;padding:18px;border-radius:8px;font-size:1.2rem;font-weight:600;cursor:pointer;margin-top:20px;transition:all .3s;box-shadow:0 4px 12px rgba(16,185,129,0.4);" onmouseover="this.style.transform=\'translateY(-2px)\'" onmouseout="this.style.transform=\'translateY(0)\'"><i class="fas fa-lock"></i> Pay '+money(dueToday)+' Securely</button>';
+    h+='<p style="text-align:center;color:#64748b;font-size:.85rem;margin-top:12px;"><i class="fas fa-shield-alt"></i> Secured by Stripe &bull; Cancel anytime</p>';
+
+    host.innerHTML=h;
+    renderUpsell();
+  }
+
+  // ---- RIGHT: the Build-Your-Plan curve picker (replaces the old tier upsell) ----
+  function renderUpsell(){
+    var host=document.getElementById("upsell-recommendations"); if(!host) return;
+    var addCycle=window.cfAddCycle||"annual";
+    var inCart={}; ["annual","monthly"].forEach(function(cy){ bucketProgs(cy).forEach(function(p){ inCart[p]=1; }); });
+    var remaining=P.config().catalog.filter(function(c){ return !inCart[c.id]; });
+    var Nt=bucketProgs(addCycle).length, addNext=P.addNext(Nt, O(addCycle));
+    var standalone=P.curveTotal(1, O(addCycle));            // price of one calc on its own
+    var save=Math.max(0, standalone-addNext), pct=standalone>0?Math.round(save/standalone*100):0;
+    var h='<div class="cf-up-toggles"><div class="cf-seg" id="cfUpTier">'+["starter","pro","premium"].map(function(t){return '<button data-t="'+t+'" class="'+(plan.tier===t?"on":"")+'">'+t.charAt(0).toUpperCase()+t.slice(1)+'</button>';}).join("")+'</div>'+
+            '<div class="cf-seg" id="cfUpCycle">'+["monthly","annual"].map(function(c){return '<button data-c="'+c+'" class="'+(addCycle===c?"on":"")+'">'+(c==="annual"?"Annual":"Monthly")+'</button>';}).join("")+'</div></div>';
+    h+='<p class="cf-up-hint">Add to your <b style="color:#cdd6f5">'+addCycle+'</b> plan'+(save>0?' — your next is <b style="color:#6ee7b7">'+pct+'% off</b>, and each one after saves even more.':' — each one costs less than the last.')+'</p>';
+    if(!remaining.length){ h+='<div class="cf-up-done">✓ You have every calculator — that’s Complete, and BIP is free.</div>'; }
+    else remaining.forEach(function(c){ var soon=!c.live;
+      var priceBlock = soon
+        ? '<div class="cf-up-price"><span class="cf-up-add soon">Soon</span></div>'
+        : '<div class="cf-up-price">'+(save>0?'<span class="cf-strike">'+money0(standalone)+'</span>':'')+
+          '<button class="cf-up-add" onclick="cfAdd(\''+c.id+'\')">+ Add '+money0(addNext)+'</button>'+
+          (save>0?'<span class="cf-up-save">save '+money0(save)+' · '+pct+'% off</span>':'')+'</div>';
+      h+='<div class="cf-up-card"><div class="cf-brand" style="background:'+(COLORS[c.id]||"#3a5bff")+'">'+(ICONS[c.id]||"")+'</div><div class="cf-up-info"><h4>'+(NAMES[c.id]||c.name)+'</h4><p>'+(DESC[c.id]||"")+'</p></div>'+priceBlock+'</div>';
+    });
+    if(anyComplete()) h+='<div class="cf-up-bip free"><div class="cf-brand" style="background:#0d9488">'+BIP_ICON+'</div><div><h4>BIP full access</h4><p>Included free with Complete.</p></div><span class="cf-bp">FREE</span></div>';
+    else h+='<div class="cf-up-bip'+(cartHasBip()?" on":"")+'" onclick="cfBip()"><div class="cf-brand" style="background:#0d9488">'+BIP_ICON+'</div><div><h4>Add BIP full access</h4><p>Hurricane risk, solar siting, 40k+ ZIPs.</p></div><span class="cf-bp">+'+money0(P.bipPrice(O(addCycle)))+'</span></div>';
+    host.innerHTML=h;
+    host.querySelectorAll("#cfUpTier button").forEach(function(b){ b.onclick=function(){ plan.tier=b.dataset.t; render(); }; });
+    host.querySelectorAll("#cfUpCycle button").forEach(function(b){ b.onclick=function(){ window.cfAddCycle=b.dataset.c; render(); }; });
+  }
+
+  // ---- mutations (via shopping-cart.js data layer) ----
+  window.cfAdd=function(prog){ if(!isLive(prog)) return; cart.addItem(PROG[prog]+"_"+plan.tier, window.cfAddCycle||"annual"); };
+  window.cfRemove=function(prog,cycle){ cart.items=cart.items.filter(function(it){ return !(progOf(it.productCode)===prog && (it.billingCycle||"annual")===cycle); }); cart.saveCart(); };
+  window.cfBip=function(){ if(cartHasBip()){ cart.items=cart.items.filter(function(it){ return progOf(it.productCode)!=="bip"; }); cart.saveCart(); } else { cart.addItem("bip_"+plan.tier, window.cfAddCycle||"annual"); } };
+
+  // ---- curve checkout (auth-token gate preserved via proceedToStripeCheckout) ----
+  window.cfDoCurveCheckout = async function(token, email){
+    try{
+      var cy=bucketProgs("annual").length?"annual":"monthly", progs=bucketProgs(cy), hasBip=cartHasBip(), isComplete=progs.length>=P.liveCount();
+      if(!progs.length && !hasBip){ alert("Your cart is empty."); return; }
+      // Two-bucket model: annual and monthly are separate subscriptions, so a mixed cart is
+      // two checkouts. Do the annual plan first; the monthly plan stays in the cart for a
+      // guided second step (never silently dropped).
+      var otherCy = (cy==="annual")?"monthly":"annual";
+      if(bucketProgs(otherCy).length>0){
+        if(!confirm("Your cart has both annual and monthly calculators — these are billed as two separate plans with their own renewal dates.\n\nWe'll set up your "+cy+" plan now; your "+otherCy+" plan stays in your cart for a quick second step right after.\n\nContinue?")) return;
+      }
+      var headers={ "Content-Type":"application/json" }; if(token) headers["Authorization"]="Bearer "+token;
+
+      // EXISTING logged-in user with a same-cycle subscription: MODIFY it (prorated, saved
+      // card, no new checkout) rather than opening a second subscription. add-calculators
+      // returns 409 when they have no bucket for this cycle, or 400 when they have no active
+      // sub at all — in both cases fall through to a fresh Stripe Checkout below.
+      if(token){
+        var addResp=await fetch(CHECKOUT_API_URL+"/api/subscriptions/add-calculators",{ method:"POST", headers:headers,
+          body:JSON.stringify({ programs:progs, tier:plan.tier, cycle:cy }) });
+        if(addResp.ok){
+          var ad=await addResp.json();
+          alert("Added to your existing "+cy+" plan — new total "+money(ad.new_total||0)+(cy==="annual"?"/yr":"/mo")+", prorated to your card on file. No new checkout.");
+          window.location.href="account.html"; return;
+        }
+        var aerr={}; try{ aerr=await addResp.json(); }catch(e){}
+        var noBucket = (addResp.status===409) || ((aerr.error||"").indexOf("No active subscription")>=0);
+        if(!noBucket){ throw new Error(aerr.error||("Could not add to your plan ("+addResp.status+")")); }
+        // else: no existing bucket for this cycle -> start a NEW subscription via Checkout ↓
+      }
+
+      var resp=await fetch(CHECKOUT_API_URL+"/api/subscriptions/checkout-curve",{ method:"POST", headers:headers,
+        body:JSON.stringify({ programs:progs, tier:plan.tier, cycle:cy, bip:(hasBip&&!isComplete), email:email||null }) });
+      var data=await resp.json();
+      if(data && data.checkout_url){ window.location.href=data.checkout_url; } else { throw new Error((data&&data.error)||"Checkout failed"); }
+    }catch(e){ console.error("Curve checkout error:",e); alert("Checkout failed: "+e.message+"\n\nPlease try again."); if(typeof closeCheckoutModal==="function") closeCheckoutModal(); }
+  };
+
+  // Take over rendering; neutralize the legacy 15%-bundle banner; keep the sidebar visible.
+  window.updateBundleBanner = function(){ var b=document.getElementById("bundle-discount-banner"); if(b) b.style.display="none"; };
+  window.updateUpsellRecommendations = renderUpsell;
+  cart.updateCartDisplay = render;
+  var bm=document.querySelector(".browse-more"); if(bm) bm.style.display="none";
+  window.updateBundleBanner();
+  render();
+})();
+</script>
 </body>
 </html>

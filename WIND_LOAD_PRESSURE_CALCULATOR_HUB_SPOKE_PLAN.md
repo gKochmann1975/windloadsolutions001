@@ -14,6 +14,33 @@ and **no page** targets the exact phrase, so you don't rank for it at all).
 authority + the Tier-1/2 backlinks + time do the climbing. Anyone promising #1 fast is lying. Incumbents to
 beat: SkyCiv, Omni, CalcTool, CADDTools (DA 80-90).
 
+## ⚑ GSC DATA FINDINGS — 2026-07-20 (this reshapes the plan)
+Pulled real Search Console data for BOTH properties. Key facts:
+- **windload.solutions is the ranking powerhouse** (avg pos ~5.9, ~1.4M impr/yr) — **3× stronger** than
+  windloadcalc.com (avg pos ~16, ~14.6k impr/3mo). The product site's core tool pages rank *poorly*
+  (`wind-load-software` #46, `-for-engineers` #45, `-landing` #32).
+- **For "wind load pressure calculator":** windload.solutions ranks **#19.7** (100 impr) vs windloadcalc.com
+  **#24.4** (26 impr). windload.solutions ALSO already has `ultimate-nominal-asce-7-wind-load-pressure-calculator`
+  at **#13.2 (4,167 impr)** and `components-cladding-...pressure-analysis` at **#6.5 (77k impr, 595 clicks)**.
+- **The exact phrase is low-volume; the CLUSTER is the prize.** Real, close-to-ranking demand:
+  "components and cladding wind load calculator" (#14.5), "window design pressure calculator" (#21.7),
+  "design wind pressure" (#12.7), pressure **converters** ("wind speed to pressure", "psf to wind load",
+  "wind load to psf" — repeated), "roof/wind uplift calculator" (#28–44, wide open).
+
+**Decision this forces (Greg's call — see recommendation below):** anchor the HUB on the **strong domain
+(windload.solutions)** to rank *fast* and funnel to the windloadcalc.com tool, OR build on windloadcalc.com
+for direct product ranking (slower, weaker start). **Recommendation: hub on windload.solutions**, optimize its
+existing `ultimate-nominal-...pressure-calculator` page toward the exact phrase, and funnel hard to the
+windloadcalc.com free tool (extends the Tier-1 cross-link model). Build the product-domain hub in parallel as
+a secondary, longer play.
+
+### Striking-distance quick wins (optimize existing pages FIRST — faster than new pages)
+- **windload.solutions:** its `...pressure-calculator` page (#13) + C&C page (#6.5) → sharpen toward
+  "wind load pressure calculator" / "wind pressure calculator" + add the tool CTA. Fastest movement available.
+- **windloadcalc.com:** homepage (#23.6 on 5,883 impr — huge) + free calc for "wind pressure calculator" (#18).
+- **New spokes to match real demand (build after the hub):** pressure **converter** (wind speed↔psf↔pressure),
+  **window design pressure calculator**, **roof/wind uplift calculator**. These target proven queries, not guesses.
+
 ## Why this and not "just optimize the free calc"
 The free calc already ranks-targets "free **wind load calculator**" — your bigger head term. Retargeting it to
 "wind load **pressure** calculator" risks weakening that. Instead: a **new hub** owns the pressure phrase, and the

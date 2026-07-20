@@ -1783,7 +1783,7 @@
   #cart-items-container .cf-brand svg{width:21px;height:21px}
   .cf-up-toggles{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
   .cf-seg{display:flex;gap:3px;background:rgba(7,10,24,.55);border:1px solid rgba(120,140,200,.25);border-radius:10px;padding:3px}
-  .cf-seg button{border:0;background:transparent;color:#aeb8cf;font:inherit;font-size:12px;font-weight:650;padding:6px 10px;border-radius:7px;cursor:pointer;transition:.15s}
+  .cf-seg button{flex:1;text-align:center;border:0;background:transparent;color:#aeb8cf;font:inherit;font-size:12px;font-weight:650;padding:6px 10px;border-radius:7px;cursor:pointer;transition:.15s}
   .cf-seg button:hover{color:#fff}
   .cf-seg button.on{background:#3a5bff;color:#fff;box-shadow:0 2px 9px rgba(58,91,255,.4)}
   .cf-up-hint{font-size:12px;color:#aeb8cf;margin:0 0 12px}
@@ -1843,7 +1843,7 @@
     if(p&&p!=="bip"&&(it.billingCycle||"annual")===cycle&&!seen[p]){ seen[p]=1; out.push(p); } }); return out; }
   function cartHasBip(){ return cart.items.some(function(it){ return progOf(it.productCode)==="bip"; }); }
   function anyComplete(){ return bucketProgs("annual").length>=P.liveCount() || bucketProgs("monthly").length>=P.liveCount(); }
-  function money(v){ return "$"+(Math.round(v*100)/100).toFixed(2); }
+  function money(v){ return "$"+(Math.round(v*100)/100).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); }
   function money0(v){ return "$"+Math.round(v).toLocaleString(); }
   function O(cycle){ return { tier: plan.tier, cycle: cycle }; }   // engine opts {tier,cycle}
 
@@ -1936,7 +1936,10 @@
     else h+='<div class="cf-up-bip'+(cartHasBip()?" on":"")+'" onclick="cfBip()"><div class="cf-brand" style="background:#0d9488">'+BIP_ICON+'</div><div><h4>Add BIP full access</h4><p>Hurricane risk, solar siting, 40k+ ZIPs.</p></div><span class="cf-bp">+'+money0(P.bipPrice(O(addCycle)))+'</span></div>';
     host.innerHTML=h;
     host.querySelectorAll("#cfUpTier button").forEach(function(b){ b.onclick=function(){ plan.tier=b.dataset.t; render(); }; });
-    host.querySelectorAll("#cfUpCycle button").forEach(function(b){ b.onclick=function(){ window.cfAddCycle=b.dataset.c; render(); }; });
+    host.querySelectorAll("#cfUpCycle button").forEach(function(b){ b.onclick=function(){ var cy=b.dataset.c; window.cfAddCycle=cy;
+      // Toggling the cycle converts EVERY calculator already in the cart to that cycle, so the
+      // whole plan is one bucket / one transaction (annual OR monthly), never a silent mix.
+      cart.items.forEach(function(it){ it.billingCycle=cy; }); cart.saveCart(); /* saveCart -> render */ }; });
   }
 
   // ---- mutations (via shopping-cart.js data layer) ----

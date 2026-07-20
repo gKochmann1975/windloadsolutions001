@@ -78,6 +78,11 @@ on-page. Full plan: **`OFF_PAGE_SEO_BACKLINK_STRATEGY.md`** + target list/outrea
   answer 1–2 genuinely. C can re-run the target search on request to surface fresh threads.
 - **H5 — Tier 4 associations + HARO/Qwoted  *(Owner: G)*.** SEAOC resources page suggestion, NCSEA/
   STRUCTURE bylined article pitch, Qwoted expert registration. Copy in the package (Tier 4 section).
+- **H7 — Hub-and-spoke content cluster for "wind load pressure calculator"  *(plan DONE 2026-07-20; build pending)*.**
+  Diagnosis: ZERO pages target the exact phrase → we don't rank for it at all (on-page gap, not backlinks).
+  Full plan in **`WIND_LOAD_PRESSURE_CALCULATOR_HUB_SPOKE_PLAN.md`**: new HUB `/wind-load-pressure-calculator.html`
+  (URL free) + wire existing free-calc / MWFRS / windload.solutions spokes up to it + build roof/wall/velocity
+  gap spokes. P1 = build the hub. Weeks-to-months to rank.
 - **H6 — LATER:** buy Ahrefs/Semrush for full competitor backlink profiles + link-intersect at scale
   (see "Ahrefs gap" in the package). Note: backlinks are a **weeks-to-months** game — don't expect
   overnight rank movement.

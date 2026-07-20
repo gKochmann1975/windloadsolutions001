@@ -27,12 +27,13 @@ Pulled real Search Console data for BOTH properties. Key facts:
   "design wind pressure" (#12.7), pressure **converters** ("wind speed to pressure", "psf to wind load",
   "wind load to psf" — repeated), "roof/wind uplift calculator" (#28–44, wide open).
 
-**Decision this forces (Greg's call — see recommendation below):** anchor the HUB on the **strong domain
-(windload.solutions)** to rank *fast* and funnel to the windloadcalc.com tool, OR build on windloadcalc.com
-for direct product ranking (slower, weaker start). **Recommendation: hub on windload.solutions**, optimize its
-existing `ultimate-nominal-...pressure-calculator` page toward the exact phrase, and funnel hard to the
-windloadcalc.com free tool (extends the Tier-1 cross-link model). Build the product-domain hub in parallel as
-a secondary, longer play.
+**DECISION (Greg, 2026-07-20): BOTH, IN SEQUENCE.**
+- **P1 (now) — windload.solutions hub** on the strong domain (ranks fast): optimize/expand its existing
+  `ultimate-nominal-...pressure-calculator` page (#13.2, 4,167 impr) into the authoritative pressure hub,
+  funneling hard to the windloadcalc.com free tool. Extends the Tier-1 cross-link model.
+- **P2 (parallel/after) — windloadcalc.com product hub** `/wind-load-pressure-calculator.html` so the product
+  domain also climbs and searchers can land directly on the tool. Longer play.
+- Both obey the QUALITY BAR (no thin/templated, on-brand per *each site's own* design system, show Greg before live).
 
 ### Striking-distance quick wins (optimize existing pages FIRST — faster than new pages)
 - **windload.solutions:** its `...pressure-calculator` page (#13) + C&C page (#6.5) → sharpen toward

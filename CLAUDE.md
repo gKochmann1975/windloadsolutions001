@@ -148,6 +148,34 @@ go-live. Same rule applies to the app nav (`webapp/flask_app/static/shell.js`) +
 
 ---
 
+## Subscription Cancellation — Self-Serve (shipped 2026-07-20)
+
+Customers can cancel themselves; before this they had to email support (there was NO cancel route).
+- **Behavior: cancel-at-period-end, NOT immediate delete.** Access continues through
+  `current_period_end`; Stripe then fires `customer.subscription.deleted` and status flips to
+  `cancelled`. Reversible with "Resume" until the period ends. After it ends there is NO resume — the
+  Stripe sub is gone; they must re-purchase via the shop.
+- Backend: `POST /api/subscriptions/cancel` (owner-only; a `subscription_id`, or ALL the user's active
+  owned subs if omitted) + `POST /api/subscriptions/reactivate`. Logic in `subscription_manager.py`
+  (`schedule_subscription_cancellation` / `reactivate_subscription`; `_stripe_period_end` handles the
+  item-nested Stripe field). `user_subscriptions.cancel_at_period_end` column. Webhook syncs the flag.
+- Frontend: `account.html` Subscriptions tab — Cancel/Resume button per owned active sub.
+- Locked users → shop: the calc gate redirects non-entitled users to `/?need=calculator|bip` on the
+  dashboard, which now shows a banner routing them to the shop ("View Plans & Pricing"). Account page's
+  "No Active Subscriptions" state also links to `wind-load-calculator-shop.html`.
+- Strategy write-up: `docs/RETENTION_STRATEGY.md`.
+
+## Customer HTML Email — LOGO RULE (Greg rejected the wrong logo 3×)
+
+- **NEVER** use the raw `images/windloadcalc-logo.png` in an email — it's a 3000×3000 transparent SQUARE
+  that renders as a giant white box with a tiny logo.
+- **USE** the cropped horizontal wordmark `https://windloadcalc.com/images/windloadcalc-logo-email.png`
+  (440×90, display `width="200" height="41"`), in a `<td align="center" style="...text-align:center">`
+  with `<img style="display:inline-block">`. inline-block + text-align:center survives Gmail copy/paste;
+  `margin:0 auto` does NOT (it left-shifts on paste).
+- **ALWAYS render the email and look before sending** — run `/preview-email`. Seed from the Eduardo
+  reference template, never clone an old customer email.
+
 ## IMPORTANT: Pre-Launch Checklist
 
 ### Before Going Live - MUST DO:

@@ -20,14 +20,14 @@
     <meta property="og:description" content="California wind loads computed to the latest ASCE 7-22 standard. Lower wind, still code-required. Five Special Wind Regions flagged at the ZIP.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://windloadcalc.com/california-wind-load-calculator/">
-    <meta property="og:image" content="https://windloadcalc.com/images/video-posters/index-homepage.jpg">
+    <meta property="og:image" content="https://windloadcalc.com/images/video-posters/hurricane-06.jpg">
     <meta property="og:site_name" content="WindLoadCalc">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="California Wind Load Calculator — ASCE 7-22 (Latest)">
     <meta name="twitter:description" content="California wind loads computed to the latest ASCE 7-22 standard. Lower wind, still code-required. Special Wind Regions flagged at the ZIP.">
-    <meta name="twitter:image" content="https://windloadcalc.com/images/video-posters/index-homepage.jpg">
+    <meta name="twitter:image" content="https://windloadcalc.com/images/video-posters/hurricane-06.jpg">
 
     <!-- SoftwareApplication Schema -->
     <script type="application/ld+json">
@@ -197,6 +197,8 @@ nav.scrolled .logo-image{height:64px;filter:none}
 
 /* Hero (aurora only — no video) */
 .hero-stage{position:relative;overflow:hidden;isolation:isolate}
+.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+@media(prefers-reduced-motion:reduce){.hero-video{display:none}}
 .hero-veil{position:absolute;inset:0;z-index:1;pointer-events:none;
   background:radial-gradient(ellipse 70% 60% at 50% 26%, rgba(0,24,255,.18), transparent 62%),
     linear-gradient(180deg, rgba(7,10,24,.30) 0%, rgba(7,10,24,.10) 38%, rgba(7,10,24,.55) 78%, var(--bg) 100%)}
@@ -416,7 +418,7 @@ section{position:relative;z-index:1;padding:56px 0}
       },
       "primaryImageOfPage": {
         "@type": "ImageObject",
-        "url": "https://windloadcalc.com/images/video-posters/index-homepage.jpg"
+        "url": "https://windloadcalc.com/images/video-posters/hurricane-06.jpg"
       },
       "inLanguage": "en-US"
     }
@@ -490,6 +492,9 @@ section{position:relative;z-index:1;padding:56px 0}
 
 <!-- Hero -->
 <div class="hero-stage">
+  <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="/images/video-posters/hurricane-06.jpg">
+    <source src="https://pub-855aeb0543b6449aa495e1f99ac2d507.r2.dev/hurricane-06.mp4" type="video/mp4">
+  </video>
   <div class="hero-veil"></div>
   <header><div class="wrap">
     <div class="eyebrow"><span class="dot"></span>Latest ASCE 7-22 · five Special Wind Regions flagged</div>

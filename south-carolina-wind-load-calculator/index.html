@@ -21,14 +21,14 @@
     <meta property="og:description" content="SC wind loads using the latest ASCE 7-22. Lowcountry coastal 140–150 mph for Charleston, Hilton Head, Myrtle Beach. Free wind speed lookup by ZIP.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://windloadcalc.com/south-carolina-wind-load-calculator/">
-    <meta property="og:image" content="https://windloadcalc.com/images/video-posters/index-homepage.jpg">
+    <meta property="og:image" content="https://windloadcalc.com/images/video-posters/hurricane-10.jpg">
     <meta property="og:site_name" content="WindLoadCalc">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="South Carolina Wind Load Calculator — Charleston 150 mph (ASCE 7-22)">
     <meta name="twitter:description" content="SC wind loads using the latest ASCE 7-22. Lowcountry coastal 140–150 mph. Free wind speed lookup by ZIP.">
-    <meta name="twitter:image" content="https://windloadcalc.com/images/video-posters/index-homepage.jpg">
+    <meta name="twitter:image" content="https://windloadcalc.com/images/video-posters/hurricane-10.jpg">
 
     <!-- SoftwareApplication Schema -->
     <script type="application/ld+json">
@@ -205,6 +205,8 @@ nav.scrolled .logo-image{height:64px;filter:none}
 
 /* Hero (aurora-only, no video) */
 .hero-stage{position:relative;overflow:hidden;isolation:isolate}
+.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+@media(prefers-reduced-motion:reduce){.hero-video{display:none}}
 .hero-veil{position:absolute;inset:0;z-index:1;pointer-events:none;
   background:radial-gradient(ellipse 70% 60% at 50% 26%, rgba(0,24,255,.18), transparent 62%),
     linear-gradient(180deg, rgba(7,10,24,.4) 0%, rgba(7,10,24,.2) 40%, var(--bg) 100%)}
@@ -423,7 +425,7 @@ ul.bul li b{color:#fff}
       },
       "primaryImageOfPage": {
         "@type": "ImageObject",
-        "url": "https://windloadcalc.com/images/video-posters/index-homepage.jpg"
+        "url": "https://windloadcalc.com/images/video-posters/hurricane-10.jpg"
       },
       "inLanguage": "en-US"
     }
@@ -497,6 +499,9 @@ ul.bul li b{color:#fff}
 
 <!-- Hero -->
 <div class="hero-stage">
+  <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="/images/video-posters/hurricane-10.jpg">
+    <source src="https://pub-855aeb0543b6449aa495e1f99ac2d507.r2.dev/hurricane-10.mp4" type="video/mp4">
+  </video>
   <div class="hero-veil"></div>
   <header><div class="wrap">
     <div class="eyebrow"><span class="dot"></span>ASCE 7-22 (latest) · AAMA-rated · since 2002</div>

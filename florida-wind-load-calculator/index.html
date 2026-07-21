@@ -18,14 +18,14 @@
     <meta property="og:description" content="The state that built the first statewide code, on one calculator. ASCE 7-22 + FBC 8th Edition, all 67 counties, HVHZ tagged, county overrides applied. Free ZIP lookup.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://windloadcalc.com/florida-wind-load-calculator/">
-    <meta property="og:image" content="https://windloadcalc.com/images/video-posters/index-homepage.jpg">
+    <meta property="og:image" content="https://windloadcalc.com/images/video-posters/hurricane-00.jpg">
     <meta property="og:site_name" content="WindLoadCalc">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Florida Wind Load Calculator — Statewide ASCE 7-22 + FBC 8th Edition">
     <meta name="twitter:description" content="The state that built the first statewide code, on one calculator. ASCE 7-22 + FBC 8th Edition, all 67 counties, HVHZ tagged, county overrides applied.">
-    <meta name="twitter:image" content="https://windloadcalc.com/images/video-posters/index-homepage.jpg">
+    <meta name="twitter:image" content="https://windloadcalc.com/images/video-posters/hurricane-00.jpg">
 
     <link rel="canonical" href="https://windloadcalc.com/florida-wind-load-calculator/">
 
@@ -158,8 +158,10 @@ nav.scrolled .logo-image{height:64px;filter:none}
 .fm-actions{display:flex;flex-direction:column;gap:10px;padding:20px 26px 0}
 .fm-actions .btn{width:100%;justify-content:center;padding:14px;font-size:15px}
 
-/* Hero — AURORA ONLY (no video) */
+/* Hero — R2 hurricane video behind the aurora veil */
 .hero-stage{position:relative;overflow:hidden;isolation:isolate}
+.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+@media(prefers-reduced-motion:reduce){.hero-video{display:none}}
 .hero-veil{position:absolute;inset:0;z-index:1;pointer-events:none;
   background:radial-gradient(ellipse 70% 60% at 50% 26%, rgba(0,24,255,.18), transparent 62%),
     linear-gradient(180deg, rgba(7,10,24,.66) 0%, rgba(7,10,24,.42) 32%, rgba(7,10,24,.72) 74%, var(--bg) 100%)}
@@ -388,7 +390,7 @@ section{position:relative;z-index:1;padding:62px 0}
       },
       "primaryImageOfPage": {
         "@type": "ImageObject",
-        "url": "https://windloadcalc.com/images/video-posters/index-homepage.jpg"
+        "url": "https://windloadcalc.com/images/video-posters/hurricane-00.jpg"
       },
       "inLanguage": "en-US"
     }
@@ -460,8 +462,11 @@ section{position:relative;z-index:1;padding:62px 0}
   </div>
 </aside>
 
-<!-- Hero (aurora only) -->
+<!-- Hero (R2 hurricane video + aurora veil) -->
 <div class="hero-stage">
+  <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="/images/video-posters/hurricane-00.jpg">
+    <source src="https://pub-855aeb0543b6449aa495e1f99ac2d507.r2.dev/hurricane-00.mp4" type="video/mp4">
+  </video>
   <div class="hero-veil"></div>
   <header><div class="wrap">
     <div class="eyebrow"><span class="dot"></span>ASCE 7-22 · FBC 8th Edition · all 67 Florida counties</div>

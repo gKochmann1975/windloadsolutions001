@@ -423,6 +423,27 @@
             gap: 0.3rem;
         }
 
+        /* Self-serve cancel button (subtle danger, readable on dark glass) */
+        .btn-cancel-sub {
+            background: transparent;
+            color: #fca5a5;
+            border: 1px solid rgba(239,68,68,.5);
+            padding: 0.6rem 1.1rem;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: all .2s ease;
+        }
+        .btn-cancel-sub:hover {
+            background: #ef4444;
+            color: #fff;
+            border-color: #ef4444;
+        }
+
         .subscription-badge {
             padding: 0.4rem 0.8rem;
             border-radius: 20px;
@@ -1369,6 +1390,28 @@
                 const badge = getBadgeClass(sub.plan_tier || sub.product_name);
                 const badgeText = (sub.plan_tier || 'STARTER').toUpperCase();
 
+                // A real, self-manageable subscription the user OWNS (not a team seat,
+                // not a virtual trial/admin entry).
+                const isOwned = sub.access_type === 'owner' && !!sub.subscription_id;
+                const canManage = isOwned && sub.status === 'active';
+                const canceling = canManage && sub.cancel_at_period_end === true;
+                const endDate = fmtDate(sub.current_period_end);
+
+                const statusChip = canceling
+                    ? `<span><i class="fas fa-hourglass-half" style="color: #f59e0b;"></i> Canceling</span>`
+                    : `<span><i class="fas fa-check-circle" style="color: #10b981;"></i> Active</span>`;
+
+                const dateChip = canceling
+                    ? `<span style="color: #fbbf24;"><i class="fas fa-calendar-times"></i> Access ends: ${endDate || 'end of period'}</span>`
+                    : `<span><i class="fas fa-clock"></i> Renews: ${endDate || (sub.billing_cycle === 'annual' ? 'Yearly' : 'Monthly')}</span>`;
+
+                let actionBtns = '';
+                if (canceling) {
+                    actionBtns = `<button class="btn btn-secondary" onclick="resumeSubscription(${sub.subscription_id})"><i class="fas fa-rotate-left"></i> Resume subscription</button>`;
+                } else if (canManage) {
+                    actionBtns = `<button class="btn-cancel-sub" onclick="cancelSubscription(${sub.subscription_id})"><i class="fas fa-ban"></i> Cancel</button>`;
+                }
+
                 return `
                     <div class="subscription-card">
                         <div class="subscription-info">
@@ -1377,17 +1420,80 @@
                                 <span class="subscription-badge ${badge}">${badgeText}</span>
                             </div>
                             <div class="subscription-meta">
-                                <span><i class="fas fa-calendar"></i> ${sub.billing_cycle || 'Monthly'}</span>
-                                <span><i class="fas fa-clock"></i> Renews: ${sub.next_billing_date || 'N/A'}</span>
-                                <span><i class="fas fa-check-circle" style="color: #10b981;"></i> Active</span>
+                                <span><i class="fas fa-calendar"></i> ${sub.billing_cycle === 'annual' ? 'Annual' : (sub.billing_cycle || 'Monthly')}</span>
+                                ${dateChip}
+                                ${statusChip}
                             </div>
+                            ${canceling ? `<p style="margin: 0.6rem 0 0; font-size: 0.85rem; color: #fbbf24;">This subscription won't renew. You keep full access until ${endDate || 'the end of your current period'}.</p>` : ''}
                         </div>
-                        <div style="display: flex; gap: 0.5rem;">
+                        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: flex-start;">
                             ${hasTeamSeats(sub) ? `<button class="btn btn-secondary" onclick="showTab('team')"><i class="fas fa-users"></i> Manage Team</button>` : ''}
+                            ${actionBtns}
                         </div>
                     </div>
                 `;
             }).join('');
+        }
+
+        // Format an ISO date (or null) as e.g. "Aug 17, 2026"
+        function fmtDate(iso) {
+            if (!iso) return '';
+            const d = new Date(iso);
+            if (isNaN(d.getTime())) return '';
+            return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+        }
+
+        async function cancelSubscription(subId) {
+            const sub = (userSubscriptions || []).find(s => s.subscription_id === subId);
+            const productName = sub ? sub.product_name : 'this subscription';
+            const ok = confirm(
+                `Cancel "${productName}"?\n\n` +
+                `You'll keep full access until the end of your current paid period, then it simply won't renew — ` +
+                `no further charges. You can resubscribe anytime.`
+            );
+            if (!ok) return;
+
+            const token = localStorage.getItem(STORAGE_KEY) || localStorage.getItem('windload_token');
+            try {
+                const res = await fetch(`${API_URL}/api/subscriptions/cancel`, {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ subscription_id: subId })
+                });
+                const data = await res.json();
+                if (res.ok && data.success) {
+                    const until = fmtDate(data.access_until);
+                    alert(`Done — your subscription has been canceled.\n\n` +
+                          `You keep access until ${until || 'the end of your current period'} and won't be charged again.`);
+                    await loadSubscriptions();
+                } else {
+                    alert(data.error || 'We couldn’t cancel that automatically. Please contact support@windloadcalc.com and we’ll take care of it.');
+                }
+            } catch (e) {
+                console.error('Cancel error:', e);
+                alert('Something went wrong. Please contact support@windloadcalc.com and we’ll cancel it for you.');
+            }
+        }
+
+        async function resumeSubscription(subId) {
+            const token = localStorage.getItem(STORAGE_KEY) || localStorage.getItem('windload_token');
+            try {
+                const res = await fetch(`${API_URL}/api/subscriptions/reactivate`, {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ subscription_id: subId })
+                });
+                const data = await res.json();
+                if (res.ok && data.success) {
+                    alert('Your subscription has been reactivated — it will continue to renew as normal.');
+                    await loadSubscriptions();
+                } else {
+                    alert(data.error || 'We couldn’t reactivate that. Please contact support@windloadcalc.com.');
+                }
+            } catch (e) {
+                console.error('Resume error:', e);
+                alert('Something went wrong. Please contact support@windloadcalc.com.');
+            }
         }
 
         function getBadgeClass(tier) {

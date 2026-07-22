@@ -2665,6 +2665,10 @@
                         building_width_ft: state.mwfrs_w_ft,
                         building_length_ft: state.mwfrs_l_ft,
                         roof_slope_deg: state.mwfrs_slope_deg,
+                        // MWFRS screen supports enclosed | partially enclosed only. The free
+                        // tool's default "partially open" is GCpi-equivalent to enclosed
+                        // (±0.18), so map to a valid MWFRS enclosure.
+                        enclosure: (state.enclosure === 'partially enclosed') ? 'partially enclosed' : 'enclosed',
                     });
                 } else {
                     endpoint = '/api/public/design-pressure';

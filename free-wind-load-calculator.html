@@ -1806,6 +1806,17 @@
             <div class="calc-card">
                 <div class="calc-card-title">Inputs</div>
 
+                <!-- SURFACE TOGGLE -->
+                <div class="input-group">
+                    <label class="input-group-label">What are you calculating?</label>
+                    <div class="segmented surface-toggle three-col" role="radiogroup" aria-label="Surface type">
+                        <button type="button" class="seg-btn active" data-surface="wds">Windows / Doors / Shutters</button>
+                        <button type="button" class="seg-btn" data-surface="roof">Roof</button>
+                        <button type="button" class="seg-btn" data-surface="mwfrs">MWFRS</button>
+                    </div>
+                    <div class="input-group-hint-line" id="surface-hint">Components &amp; cladding (C&amp;C) pressure on a wall opening &mdash; ASCE 7-22 Ch. 30.</div>
+                </div>
+
                 <!-- LOCATION -->
                 <div class="input-group">
                     <label class="input-group-label" for="inp-zip">
@@ -1854,21 +1865,74 @@
                     <input type="number" id="inp-height" class="input-text" min="1" max="500" step="1" value="15">
                 </div>
 
-                <!-- COMPONENT -->
-                <div class="input-group">
-                    <label class="input-group-label">Component Dimensions <span class="hint">inches</span></label>
-                    <div class="input-row">
-                        <input type="number" id="inp-comp-w" class="input-text" min="1" step="0.25" value="48" placeholder="Width (in)">
-                        <input type="number" id="inp-comp-h" class="input-text" min="1" step="0.25" value="60" placeholder="Height (in)">
+                <!-- COMPONENT (Windows / Doors / Shutters C&C) -->
+                <div id="group-wds">
+                    <div class="input-group">
+                        <label class="input-group-label">Component Dimensions <span class="hint">inches</span></label>
+                        <div class="input-row">
+                            <input type="number" id="inp-comp-w" class="input-text" min="1" step="0.25" value="48" placeholder="Width (in)">
+                            <input type="number" id="inp-comp-h" class="input-text" min="1" step="0.25" value="60" placeholder="Height (in)">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-group-label">Component Zone <span class="hint">Fig 30.3-1 / 30.4-1</span></label>
+                        <div class="segmented two-col" role="radiogroup" aria-label="Zone">
+                            <button type="button" class="seg-btn active" data-zone="4">Zone 4 (Interior)</button>
+                            <button type="button" class="seg-btn" data-zone="5">Zone 5 (Corner)</button>
+                        </div>
                     </div>
                 </div>
 
-                <div class="input-group">
-                    <label class="input-group-label">Component Zone <span class="hint">Fig 30.3-1 / 30.4-1</span></label>
-                    <div class="segmented two-col" role="radiogroup" aria-label="Zone">
-                        <button type="button" class="seg-btn active" data-zone="4">Zone 4 (Interior)</button>
-                        <button type="button" class="seg-btn" data-zone="5">Zone 5 (Corner)</button>
+                <!-- ROOF C&C uplift -->
+                <div id="group-roof" hidden>
+                    <div class="input-group">
+                        <label class="input-group-label">Roof Shape <span class="hint">ASCE 7-22 Ch. 30</span></label>
+                        <div class="segmented three-col" role="radiogroup" aria-label="Roof shape">
+                            <button type="button" class="seg-btn active" data-roofshape="flat">Flat / Low-slope</button>
+                            <button type="button" class="seg-btn" data-roofshape="gable">Gable</button>
+                            <button type="button" class="seg-btn" data-roofshape="hip">Hip</button>
+                        </div>
+                        <div class="input-group-hint-line" id="roofshape-hint">Flat or low-slope roof (slope &le; 7&deg;). Monoslope is on the <a href="/shop/roofing.html">paid roofing calculator</a>.</div>
                     </div>
+
+                    <div class="input-group" id="roof-slope-group" hidden>
+                        <label class="input-group-label" for="inp-roof-slope">Roof Slope <span class="hint">degrees</span></label>
+                        <input type="number" id="inp-roof-slope" class="input-text" min="7" max="45" step="0.5" value="20" placeholder="e.g. 20 (about 4.4:12)">
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-group-label">Component Tributary Size <span class="hint">inches (fastener / panel)</span></label>
+                        <div class="input-row">
+                            <input type="number" id="inp-roof-tw" class="input-text" min="1" step="0.25" value="24" placeholder="Width (in)">
+                            <input type="number" id="inp-roof-tl" class="input-text" min="1" step="0.25" value="24" placeholder="Length (in)">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-group-label">Roof Zone <span class="hint">1 field &middot; 2 edge &middot; 3 corner</span></label>
+                        <div class="segmented three-col" role="radiogroup" aria-label="Roof zone">
+                            <button type="button" class="seg-btn active" data-roofzone="1">Zone 1 (Field)</button>
+                            <button type="button" class="seg-btn" data-roofzone="2">Zone 2 (Edge)</button>
+                            <button type="button" class="seg-btn" data-roofzone="3">Zone 3 (Corner)</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MWFRS (whole-building directional) -->
+                <div id="group-mwfrs" hidden>
+                    <div class="input-group">
+                        <label class="input-group-label">Building Plan Dimensions <span class="hint">feet</span></label>
+                        <div class="input-row">
+                            <input type="number" id="inp-mwfrs-w" class="input-text" min="1" step="1" value="40" placeholder="Width B (ft)">
+                            <input type="number" id="inp-mwfrs-l" class="input-text" min="1" step="1" value="60" placeholder="Length L (ft)">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group-label">Roof Slope <span class="hint">degrees</span></label>
+                        <input type="number" id="inp-mwfrs-slope" class="input-text" min="0" max="45" step="0.5" value="0" placeholder="e.g. 0 (flat)">
+                    </div>
+                    <div class="input-group-hint-line">Whole-building directional pressures (ASCE 7-22 Ch. 27), low-rise, K<sub>zt</sub> = 1.0.</div>
                 </div>
             </div>
 
@@ -2278,6 +2342,18 @@
             component_width_ft: 4,
             component_height_ft: 5,
             zone: 4,
+            // Surface mode: 'wds' (windows/doors/shutters C&C) | 'roof' (roof C&C uplift) | 'mwfrs'
+            surface: 'wds',
+            // Roof C&C
+            roof_shape: 'flat',
+            roof_slope_deg: 0,
+            roof_tw_ft: 2,   // 24 in
+            roof_tl_ft: 2,   // 24 in
+            roof_zone: 1,
+            // MWFRS
+            mwfrs_w_ft: 40,
+            mwfrs_l_ft: 60,
+            mwfrs_slope_deg: 0,
             // Intent tracking
             uniqueZips: new Set(),
             calcCount: 0,
@@ -2359,6 +2435,62 @@
         });
 
         // ----------------------------------------
+        // Surface toggle (Windows/Doors/Shutters · Roof · MWFRS)
+        // ----------------------------------------
+        const SURFACE_META = {
+            wds:   { hint: 'Components &amp; cladding (C&amp;C) pressure on a wall opening &mdash; ASCE 7-22 Ch. 30.',
+                     eyebrow: 'Design Pressure' },
+            roof:  { hint: 'Roof C&amp;C net uplift by zone (field / edge / corner) &mdash; ASCE 7-22 Ch. 30, your production roof engine.',
+                     eyebrow: 'Roof Uplift' },
+            mwfrs: { hint: 'Whole-building directional pressures for a low-rise box &mdash; ASCE 7-22 Ch. 27.',
+                     eyebrow: 'MWFRS Pressure' },
+        };
+        function applySurface(surface) {
+            state.surface = surface;
+            document.querySelectorAll('[data-surface]').forEach(b => b.classList.toggle('active', b.dataset.surface === surface));
+            document.getElementById('group-wds').hidden = surface !== 'wds';
+            document.getElementById('group-roof').hidden = surface !== 'roof';
+            document.getElementById('group-mwfrs').hidden = surface !== 'mwfrs';
+            const meta = SURFACE_META[surface] || SURFACE_META.wds;
+            const sh = document.getElementById('surface-hint'); if (sh) sh.innerHTML = meta.hint;
+            const eb = document.querySelector('.pressure-card-eyebrow'); if (eb) eb.textContent = meta.eyebrow;
+            onInputChange();
+        }
+        document.querySelectorAll('[data-surface]').forEach(btn => {
+            btn.addEventListener('click', () => applySurface(btn.dataset.surface));
+        });
+
+        // Roof shape (flat hides the slope field; gable/hip show it)
+        function applyRoofShape(shape) {
+            state.roof_shape = shape;
+            document.querySelectorAll('[data-roofshape]').forEach(b => b.classList.toggle('active', b.dataset.roofshape === shape));
+            const slopeGroup = document.getElementById('roof-slope-group');
+            const slopeInp = document.getElementById('inp-roof-slope');
+            const hint = document.getElementById('roofshape-hint');
+            if (shape === 'flat') {
+                if (slopeGroup) slopeGroup.hidden = true;
+                state.roof_slope_deg = 0;
+                if (hint) hint.innerHTML = 'Flat or low-slope roof (slope &le; 7&deg;). Monoslope is on the <a href="/shop/roofing.html">paid roofing calculator</a>.';
+            } else {
+                if (slopeGroup) slopeGroup.hidden = false;
+                state.roof_slope_deg = parseFloat(slopeInp && slopeInp.value) || 20;
+                if (hint) hint.innerHTML = (shape === 'gable' ? 'Gable' : 'Hip') + ' roof (slope 7&deg;&ndash;45&deg;).';
+            }
+            onInputChange();
+        }
+        document.querySelectorAll('[data-roofshape]').forEach(btn => {
+            btn.addEventListener('click', () => applyRoofShape(btn.dataset.roofshape));
+        });
+        document.querySelectorAll('[data-roofzone]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('[data-roofzone]').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                state.roof_zone = parseInt(btn.dataset.roofzone);
+                onInputChange();
+            });
+        });
+
+        // ----------------------------------------
         // Text/number input handlers
         // ----------------------------------------
         inpZip.addEventListener('input', (e) => {
@@ -2383,6 +2515,15 @@
             state.component_height_ft = (parseFloat(e.target.value) || 0) / 12;
             onInputChange();
         });
+        // Roof C&C inputs (tributary in INCHES → feet; slope in degrees)
+        const _bind = (id, fn) => { const el = document.getElementById(id); if (el) el.addEventListener('input', (e) => { fn(e); onInputChange(); }); };
+        _bind('inp-roof-slope', (e) => { state.roof_slope_deg = parseFloat(e.target.value) || 0; });
+        _bind('inp-roof-tw', (e) => { state.roof_tw_ft = (parseFloat(e.target.value) || 0) / 12; });
+        _bind('inp-roof-tl', (e) => { state.roof_tl_ft = (parseFloat(e.target.value) || 0) / 12; });
+        // MWFRS inputs (building dims in FEET; slope in degrees)
+        _bind('inp-mwfrs-w', (e) => { state.mwfrs_w_ft = parseFloat(e.target.value) || 0; });
+        _bind('inp-mwfrs-l', (e) => { state.mwfrs_l_ft = parseFloat(e.target.value) || 0; });
+        _bind('inp-mwfrs-slope', (e) => { state.mwfrs_slope_deg = parseFloat(e.target.value) || 0; });
 
         // ----------------------------------------
         // Debounced ZIP-only lookup (for FBC badge)
@@ -2449,10 +2590,12 @@
         let pressureTimer = null;
         function onInputChange() {
             clearTimeout(pressureTimer);
-            // Only attempt pressure calc if all required fields are valid
+            // Only attempt calc if all required fields for the CURRENT surface are valid.
             if (state.zip.length !== 5) return;
-            if (!state.component_width_ft || !state.component_height_ft) return;
             if (!state.mean_roof_height_ft) return;
+            if (state.surface === 'wds' && (!state.component_width_ft || !state.component_height_ft)) return;
+            if (state.surface === 'roof' && (!state.roof_tw_ft || !state.roof_tl_ft)) return;
+            if (state.surface === 'mwfrs' && (!state.mwfrs_w_ft || !state.mwfrs_l_ft)) return;
             pressureStatus.textContent = '... calculating';
             pressureStatus.classList.add('live');
             pressureTimer = setTimeout(() => fetchPressure(), 300);
@@ -2504,19 +2647,42 @@
             // this avoids pessimistically blocking when localStorage is stale or
             // cleared (the server decides based on real per-IP state).
             try {
-                const res = await fetch(`${API_BASE}/api/public/design-pressure`, {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({
-                        zip: state.zip,
-                        risk_cat: state.risk_cat,
-                        exposure: state.exposure,
-                        enclosure: state.enclosure,
-                        mean_roof_height_ft: state.mean_roof_height_ft,
+                const common = {
+                    zip: state.zip,
+                    risk_cat: state.risk_cat,
+                    exposure: state.exposure,
+                    enclosure: state.enclosure,
+                    mean_roof_height_ft: state.mean_roof_height_ft,
+                };
+                let endpoint, payload;
+                if (state.surface === 'roof') {
+                    endpoint = '/api/public/roof-pressure';
+                    payload = Object.assign({}, common, {
+                        roof_shape: state.roof_shape,
+                        roof_slope_deg: state.roof_slope_deg,
+                        tributary_width_ft: state.roof_tw_ft,
+                        tributary_length_ft: state.roof_tl_ft,
+                        zone: state.roof_zone,
+                    });
+                } else if (state.surface === 'mwfrs') {
+                    endpoint = '/api/public/mwfrs-pressure';
+                    payload = Object.assign({}, common, {
+                        building_width_ft: state.mwfrs_w_ft,
+                        building_length_ft: state.mwfrs_l_ft,
+                        roof_slope_deg: state.mwfrs_slope_deg,
+                    });
+                } else {
+                    endpoint = '/api/public/design-pressure';
+                    payload = Object.assign({}, common, {
                         component_width_ft: state.component_width_ft,
                         component_height_ft: state.component_height_ft,
                         zone: state.zone,
-                    }),
+                    });
+                }
+                const res = await fetch(`${API_BASE}${endpoint}`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(payload),
                 });
                 const data = await res.json();
 
@@ -2577,28 +2743,39 @@
             pressureNegative.innerHTML = `${neg.toFixed(1)}<span class="unit">psf</span>`;
             pressureNegative.classList.remove('empty');
 
-            const zoneName = state.zone === 4 ? 'Zone 4 (interior wall)' : 'Zone 5 (corner wall)';
-            const ewa = data.inputs_echo.effective_wind_area_sqft;
+            const ie = data.inputs_echo || {};
+            const ewa = ie.effective_wind_area_sqft;
 
-            // Effective wind area >= 500 ft^2 is past the C&C range. Per ASCE 7-22
-            // Figure 30.3-1 the Zone 4 and Zone 5 wall curves BOTH floor at GCp = -0.8
-            // at A >= 500 ft^2 — they converge — so the two zones return the SAME
-            // pressure. That is correct (not a bug), but it makes the Zone 4/5 toggle
-            // look dead. Surface WHY, and steer the user back to a real component (or
-            // the MWFRS calculator for a whole wall). See ASCE 7-22 Fig 30.3-1.
-            const ewaNote = ewa >= 500 ? `
+            // Lead-in description varies by surface (wall zone / roof zone / whole building).
+            let descLead;
+            if (state.surface === 'roof') {
+                const shapeName = { flat: 'flat / low-slope', gable: 'gable', hip: 'hip' }[ie.roof_shape || state.roof_shape] || (ie.roof_shape || state.roof_shape);
+                descLead = `<strong>${escapeHtml(ie.zone_label || ('Zone ' + state.roof_zone))}</strong> &middot; ${escapeHtml(shapeName)} roof`
+                    + (ewa != null ? ` &middot; ${ewa.toFixed(0)} ft&sup2; effective wind area` : '');
+            } else if (state.surface === 'mwfrs') {
+                const bw = ie.building_width_ft || state.mwfrs_w_ft;
+                const bl = ie.building_length_ft || state.mwfrs_l_ft;
+                descLead = `<strong>Whole building (MWFRS)</strong> &middot; ${bw} &times; ${bl} ft, directional`;
+            } else {
+                const zoneName = state.zone === 4 ? 'Zone 4 (interior wall)' : 'Zone 5 (corner wall)';
+                descLead = `<strong>${zoneName}</strong>` + (ewa != null ? ` &middot; ${ewa.toFixed(0)} ft&sup2; effective wind area` : '');
+            }
+
+            // Wall-only note: effective wind area >= 500 ft^2 is past the C&C range —
+            // Zones 4 & 5 converge at GCp = -0.8 (ASCE 7-22 Fig 30.3-1). Only relevant to WDS.
+            const ewaNote = (state.surface === 'wds' && ewa >= 500) ? `
                 <div class="ewa-note" role="note">
                     <strong>Zones 4 &amp; 5 read the same here — and that's correct.</strong>
                     Effective wind area is ${ewa.toFixed(0)} ft&sup2;. Per ASCE 7-22 Fig 30.3-1 the
                     interior (Zone 4) and corner (Zone 5) wall curves both floor at GC<sub>p</sub> = &minus;0.8
                     once A &ge; 500 ft&sup2;, so both zones give the same pressure. A wall this large is
                     <strong>MWFRS, not a cladding component</strong> &mdash; enter a real component
-                    (e.g. a 3&times;5 ft window) to see the corner zone govern, or use the
-                    <a href="/free-mwfrs-wind-load-calculator.html">free MWFRS calculator</a> for a full wall.
+                    (e.g. a 3&times;5 ft window) to see the corner zone govern, or switch to the
+                    <strong>MWFRS</strong> tab for a full wall.
                 </div>` : '';
 
             pressureDescription.innerHTML = `
-                <strong>${zoneName}</strong> &middot; ${ewa.toFixed(0)} ft&sup2; effective wind area &middot; ${data.figure_used}.
+                ${descLead} &middot; ${data.figure_used}.
                 Wind speed source: <strong>${escapeHtml(data.wind_speed.source_label)}</strong> (${data.wind_speed.value_mph} mph).
                 ${ewaNote}
             `;
@@ -2662,6 +2839,17 @@
 
         // Paint the daily meter on load so returning users see their remaining count
         renderDailyMeter();
+
+        // Deep-link: ?surface=roof|mwfrs|wds pre-selects the tool (CTAs from the roof,
+        // MWFRS, and window/door pages land here with the right tab already on).
+        (function initSurfaceFromQuery() {
+            try {
+                const q = (new URLSearchParams(window.location.search).get('surface') || '').toLowerCase();
+                const alias = { roof: 'roof', roofs: 'roof', mwfrs: 'mwfrs', wds: 'wds', wall: 'wds', windows: 'wds', 'windows-doors': 'wds' };
+                const surface = alias[q];
+                if (surface && surface !== 'wds') applySurface(surface);
+            } catch (e) {}
+        })();
 
         // ----------------------------------------
         // Utility

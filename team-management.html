@@ -534,16 +534,17 @@
 
         // State
         let userId = null;
+        let authToken = null;
         let subscriptions = [];
         let currentSubscriptionId = null;
 
         // Initialize
         document.addEventListener('DOMContentLoaded', async () => {
             // Check if logged in
-            const token = localStorage.getItem('windload_token');
+            authToken = localStorage.getItem('windload_auth_token') || localStorage.getItem('windload_token');
             userId = localStorage.getItem('windload_user_id');
 
-            if (!token || !userId) {
+            if (!authToken || !userId) {
                 window.location.href = 'login.html?redirect=team-management.html';
                 return;
             }
@@ -556,7 +557,7 @@
             try {
                 const response = await fetch(`${API_URL}/api/team/my-teams`, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + authToken },
                     body: JSON.stringify({ user_id: parseInt(userId) })
                 });
 
@@ -614,7 +615,7 @@
             try {
                 const response = await fetch(`${API_URL}/api/team/info`, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + authToken },
                     body: JSON.stringify({
                         user_id: parseInt(userId),
                         subscription_id: currentSubscriptionId
@@ -748,7 +749,7 @@
             try {
                 const response = await fetch(`${API_URL}/api/team/invite`, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + authToken },
                     body: JSON.stringify({
                         user_id: parseInt(userId),
                         subscription_id: currentSubscriptionId,
@@ -780,7 +781,7 @@
             try {
                 const response = await fetch(`${API_URL}/api/team/resend-invite`, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + authToken },
                     body: JSON.stringify({
                         user_id: parseInt(userId),
                         subscription_id: currentSubscriptionId,
@@ -811,7 +812,7 @@
             try {
                 const response = await fetch(`${API_URL}/api/team/remove-member`, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + authToken },
                     body: JSON.stringify({
                         user_id: parseInt(userId),
                         subscription_id: currentSubscriptionId,

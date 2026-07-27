@@ -109,17 +109,21 @@ delete throwaway). Never with a self-minted token — the local `.env` `JWT_SECR
 does **not** match the live Railway secret, so a hand-minted token is rejected;
 only a token the live backend issued proves the allow-path.
 
-### Still open (documented, not yet fixed)
-- **`/api/migration/create-checkout` + `/complete`:** guarded only by the client-side
-  migration-token flow; the endpoints don't re-verify the token. Low active risk
-  (Stripe payment still required), legacy one-off. Should re-verify the migration
-  token server-side.
-- **`ADMIN_KEY` hardcoded default** `'WindLoadAdmin2026'` in `admin_routes.py`. Prod
-  has been rotated to a real value (verified — the default is rejected), but the
-  fallback should be removed from source (fail closed if the env is unset).
-- **No HTTP access logs.** `gunicorn app:app` runs without `--access-logfile`, and
-  there's no request-logging middleware. Whether the leaks were exploited before the
-  fix is **not determinable**. Add `--access-logfile -` going forward.
+### Hygiene items — all CLOSED 2026-07-27 (commit `4c596f3`)
+- **`/api/migration/create-checkout`** now requires the migration token and derives
+  `legacy_customer_id` from `verify_migration_token()` (was a body-trusted IDOR).
+  `migrate.html` sends the token (deployed first). **`/api/migration/complete`** HTTP
+  route admin-gated (the webhook calls `complete_migration()` in-process; no external caller).
+- **`ADMIN_KEY` hardcoded default removed** from `admin_routes.py`, `delivery_routes.py`,
+  and `app.py _require_admin()`. `verify_admin_key()` now **fails closed** when the env
+  is unset (`bool(ADMIN_KEY) and key == ADMIN_KEY`). Prod already had a real key set.
+- **Access logging enabled**: `gunicorn ... --access-logfile - --access-logformat '<combined>'`
+  so future requests are logged to stdout (captured by Railway).
+
+### Genuinely still open (nothing critical)
+- Nothing critical remains. Every user-data read and every destructive/admin route now
+  enforces auth. Future work is ordinary hardening (rate-limit tuning, moving admin auth
+  fully to admin-JWT and retiring the shared key, rotating `JWT_SECRET`).
 
 ---
 

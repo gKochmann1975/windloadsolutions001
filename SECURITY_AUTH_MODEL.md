@@ -120,10 +120,34 @@ only a token the live backend issued proves the allow-path.
 - **Access logging enabled**: `gunicorn ... --access-logfile - --access-logformat '<combined>'`
   so future requests are logged to stdout (captured by Railway).
 
-### Genuinely still open (nothing critical)
-- Nothing critical remains. Every user-data read and every destructive/admin route now
-  enforces auth. Future work is ordinary hardening (rate-limit tuning, moving admin auth
-  fully to admin-JWT and retiring the shared key, rotating `JWT_SECRET`).
+### Remaining open works — resolved with a decision (2026-07-27)
+
+**1. Usage/permission IDORs — SCHEDULED (do NOT hotfix).**
+`POST /api/usage/{summary,check-limit,record-calculation}`, `/api/permissions/check`,
+and `POST /api/calculate` read a body `user_id` with no token. Severity is
+**moderate-low**: info leak (usage counts / access booleans by id) + a griefing write
+(`record-calculation`/`calculate` could burn another user's daily quota). **Not closed as
+a hotfix on purpose:** these are the calc app's core usage-enforcement layer, called
+server-to-server by ~10+ webapp files (`subscription_middleware.py`, every `cc_*` calc
+page) with `{'user_id': ...}` and **no token**. Requiring auth backend-side would break
+usage limits on the paid product unless every call site is updated in lockstep. **Correct
+fix = a scoped, coordinated task:** add an internal service credential (backend accepts a
+valid user JWT matching `user_id` **or** an `X-Internal-Key` shared secret), update all
+webapp call sites to send it, deploy webapp→backend. Track and schedule; don't rush.
+
+**2. Rotate `JWT_SECRET` — DECISION: do NOT rotate now.** There is no evidence the secret
+leaked. Rotating invalidates every active session (mass logout of all users) and is a
+Railway env action. Only rotate on suspected compromise; if so, plan for the forced
+re-login.
+
+**3. Retire the shared admin key in favor of admin-JWT only — DECISION: optional, deferred.**
+The key now fails closed and prod uses a rotated value, so it is not a vulnerability.
+Retiring it means reworking `admin.html` (and any admin scripts) to send an admin JWT
+instead of `X-Admin-Key`. Nice-to-have, not required.
+
+**Net:** no critical or high-severity issue remains open. The one real remaining IDOR
+class (usage/permission) is moderate-low and deliberately deferred to a coordinated task
+to avoid breaking the paid calculator's usage enforcement.
 
 ---
 

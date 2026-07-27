@@ -101,6 +101,7 @@ expired/invalid token or any 401, and unify the token-key lookup
 2. Owner-scoped `GET /api/user/<id>` (leaked email/name/role/status) and `GET /api/permissions/user-calculators/<id>`.
 3. Admin-gated **12** previously-unauthenticated `/admin/*` + `/api/admin/*` routes in `app.py` — most critically **`POST /admin/delete-user`** (anyone could hard-delete any customer by email), plus `test-user/set-subscription` (grant free access), `beta-toggle`, `clear-test-users` (mass delete), etc. Added `_require_admin()`.
 4. Admin-gated `POST /api/admin/update-pricing` + `usage-report`/`heavy-users`/`scheduler-status`/`trigger-heavy-user-report`, and migration data reads `GET /api/migration/{stats,list-pending,export-urls}`.
+5. Owner-scoped `POST /api/team/*` (info, invite, remove-member, resend-invite, my-teams, check-access) — bound the body `user_id` to the Bearer token (`_token_user_id()` + reject mismatch), so the handlers' existing `verify_owner` checks are now trustworthy. **Coordinated deploy:** `team-management.html` was updated to send the Bearer token and deployed to Pages *first* (account.html already did); then the backend began requiring it.
 
 Every fix verified against **live prod** with a real login token (throwaway user →
 real `/api/auth/login` → matrix: own-id 200, other-id 403, no-token 401 →
@@ -109,13 +110,6 @@ does **not** match the live Railway secret, so a hand-minted token is rejected;
 only a token the live backend issued proves the allow-path.
 
 ### Still open (documented, not yet fixed)
-- **`/api/team/*` (info, invite, remove-member, resend-invite, my-teams, check-access):**
-  read a spoofable body `user_id` and authorize off it (`verify_owner`). The fix is
-  owner-scoping (bind `user_id` to the token). **Blocked on a coordinated deploy:**
-  `team-management.html` currently calls these with **no token** (it relies on the
-  hole) and its token read uses the wrong key. Requiring a token backend-side would
-  break that page until it's updated to send `Bearer` first. Do frontend → backend,
-  in that order.
 - **`/api/migration/create-checkout` + `/complete`:** guarded only by the client-side
   migration-token flow; the endpoints don't re-verify the token. Low active risk
   (Stripe payment still required), legacy one-off. Should re-verify the migration

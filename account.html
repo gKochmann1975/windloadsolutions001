@@ -1118,6 +1118,34 @@
         const STORAGE_KEY = 'windload_auth_token';
         const USER_STORAGE_KEY = 'windload_user_data';
 
+        // --- Auth token helpers (single source of truth) ---
+        // The auth token may live under either the current or a legacy key.
+        // Reads and writes MUST use the same lookup or the page can render from
+        // one token while authenticated writes (cancel/reactivate) use another.
+        function authToken() {
+            return localStorage.getItem(STORAGE_KEY) || localStorage.getItem('windload_token');
+        }
+        // Decode a JWT payload without verifying signature (client-side gate only).
+        function tokenPayload(t) {
+            try {
+                const parts = (t || '').split('.');
+                if (parts.length !== 3) return null;
+                return JSON.parse(atob(parts[1]));
+            } catch (e) { return null; }
+        }
+        // A token we should treat as unusable: not a JWT, no exp, or past exp.
+        function tokenExpired(t) {
+            const p = tokenPayload(t);
+            if (!p || !p.exp) return true;
+            return (Date.now() / 1000) >= p.exp;
+        }
+        // Clear session and send the user to login to mint a fresh token.
+        function redirectToLogin() {
+            localStorage.removeItem(STORAGE_KEY);
+            localStorage.removeItem('windload_token');
+            window.location.href = 'login.html?return_url=' + encodeURIComponent(window.location.href);
+        }
+
         // State
         let currentUser = null;
         let userSubscriptions = [];
@@ -1130,11 +1158,13 @@
         });
 
         async function initAccount() {
-            const token = localStorage.getItem(STORAGE_KEY) || localStorage.getItem('windload_token');
+            const token = authToken();
 
-            if (!token) {
-                // Not logged in - redirect to login
-                window.location.href = 'login.html?return_url=' + encodeURIComponent(window.location.href);
+            // Gate on a VALID, unexpired token — not merely its presence. A stale
+            // token would otherwise render the page (subs come from cached user
+            // data) while every authenticated write 401s ("Authorization required").
+            if (!token || tokenExpired(token)) {
+                redirectToLogin();
                 return;
             }
 
@@ -1260,7 +1290,7 @@
         }
 
         async function loadSubscriptions() {
-            const token = localStorage.getItem(STORAGE_KEY);
+            const token = authToken();
 
             try {
                 // Get user_id from stored user data
@@ -1387,13 +1417,17 @@
             );
             if (!ok) return;
 
-            const token = localStorage.getItem(STORAGE_KEY) || localStorage.getItem('windload_token');
+            const token = authToken();
+            if (!token || tokenExpired(token)) { redirectToLogin(); return; }
             try {
                 const res = await fetch(`${API_URL}/api/subscriptions/cancel`, {
                     method: 'POST',
                     headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
                     body: JSON.stringify({ subscription_id: subId })
                 });
+                // Session died between page load and this click — send them to
+                // re-login for a fresh token rather than showing a dead button.
+                if (res.status === 401) { redirectToLogin(); return; }
                 const data = await res.json();
                 if (res.ok && data.success) {
                     const until = fmtDate(data.access_until);
@@ -1410,13 +1444,15 @@
         }
 
         async function resumeSubscription(subId) {
-            const token = localStorage.getItem(STORAGE_KEY) || localStorage.getItem('windload_token');
+            const token = authToken();
+            if (!token || tokenExpired(token)) { redirectToLogin(); return; }
             try {
                 const res = await fetch(`${API_URL}/api/subscriptions/reactivate`, {
                     method: 'POST',
                     headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
                     body: JSON.stringify({ subscription_id: subId })
                 });
+                if (res.status === 401) { redirectToLogin(); return; }
                 const data = await res.json();
                 if (res.ok && data.success) {
                     alert('Your subscription has been reactivated — it will continue to renew as normal.');

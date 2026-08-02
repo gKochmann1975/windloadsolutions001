@@ -266,6 +266,47 @@ check("A1 = min(4*Lc^2, 500)", A1b, min(4 * 64, 500), 1e-9)
 check("A2 = min(15*Lc^2, 1000)", A2b, min(15 * 64, 1000), 1e-9)
 
 # ---------------------------------------------------------------------------
+# TEST 9 — BOOK MAGNITUDE anchors, Fig 29.4-10 (static) & 29.4-11 (dynamic).
+# Read from the physical ASCE 7-22 (pp.312-313); re-confirmed 2026-08-02 against
+# the figure photos. These LOCK the coefficients TEST 6 deliberately left
+# un-asserted (they were JPEG-traced/unverified when this harness was written).
+# NOTE: the 15-60 deg GCgn_static Zone-1 large-area endpoint (1.0) rests on the
+# 2026-06-27 curve-by-curve book read (couldn't be re-read off the photo).
+# ---------------------------------------------------------------------------
+print("\nTEST 9 — Fig 29.4-10/29.4-11 BOOK magnitude anchors")
+# Static GCgn (Fig 29.4-10 top): (omega, zone, area, expected)
+for om, z, A, exp in [
+        (3, 1, 1, 1.5), (3, 1, 10000, 0.8), (3, 2, 1, 2.5), (3, 2, 10000, 1.5),
+        (30, 1, 1, 3.0), (30, 1, 10000, 1.0), (30, 2, 1, 5.0), (30, 2, 10000, 1.5)]:
+    check(f"GCgn_static om={om} Z{z} A={A}", eng.get_gcgn_static(z, om, A), exp, 0.005)
+# Static GCgm (Fig 29.4-10 bottom)
+for om, z, A, exp in [
+        (3, 1, 1, 0.20), (3, 1, 10000, 0.10), (3, 2, 1, 0.30), (3, 2, 10000, 0.20),
+        (30, 1, 1, 0.45), (30, 1, 10000, 0.15), (30, 2, 1, 0.70), (30, 2, 10000, 0.20)]:
+    check(f"GCgm_static om={om} Z{z} A={A}", eng.get_gcgm_static(z, om, A), exp, 0.005)
+
+# Dynamic — Lc=12 -> A1=500, A2=1000; area 100 (<=A1), 2000 (>=A2). beta=0.01 (1% damping).
+LcD, Asm, Abg = 12.0, 100.0, 2000.0
+# GCgn dynamic (Fig 29.4-11 top): (omega, zone, area, Ns, expected)
+for om, z, A, ns, exp in [
+        (3, 1, Asm, 0.1, 1.2), (3, 1, Asm, 0.8, 0.36), (3, 2, Asm, 0.1, 2.2), (3, 2, Asm, 0.8, 0.80),
+        (30, 1, Asm, 0.1, 2.4), (30, 1, Asm, 0.3, 1.2), (30, 1, Asm, 0.8, 0.40),
+        (30, 2, Asm, 0.1, 4.2), (30, 2, Asm, 0.3, 1.6), (30, 2, Asm, 0.8, 0.40),
+        (3, 1, Abg, 0.1, 0.90), (3, 1, Abg, 0.8, 0.20), (3, 2, Abg, 0.1, 1.2), (3, 2, Abg, 0.8, 0.30),
+        (30, 1, Abg, 0.1, 1.7), (30, 1, Abg, 0.3, 0.80), (30, 1, Abg, 0.8, 0.40),
+        (30, 2, Abg, 0.1, 3.4), (30, 2, Abg, 0.3, 1.2), (30, 2, Abg, 0.8, 0.40)]:
+    check(f"GCgn_dyn om={om} Z{z} A={A} Ns={ns}", eng.get_gcgn_dynamic(z, om, ns, A, LcD), exp, 0.005)
+# GCgm dynamic (Fig 29.4-11 bottom)
+for om, z, A, ns, exp in [
+        (3, 1, Asm, 0.1, 0.27), (3, 1, Asm, 0.8, 0.08), (3, 2, Asm, 0.1, 0.40), (3, 2, Asm, 0.8, 0.17),
+        (30, 1, Asm, 0.1, 0.40), (30, 1, Asm, 0.3, 0.26), (30, 1, Asm, 0.8, 0.10),
+        (30, 2, Asm, 0.1, 0.75), (30, 2, Asm, 0.3, 0.40), (30, 2, Asm, 0.8, 0.18),
+        (3, 1, Abg, 0.1, 0.20), (3, 1, Abg, 0.8, 0.05), (3, 2, Abg, 0.1, 0.26), (3, 2, Abg, 0.8, 0.10),
+        (30, 1, Abg, 0.1, 0.34), (30, 1, Abg, 0.3, 0.18), (30, 1, Abg, 0.8, 0.08),
+        (30, 2, Abg, 0.1, 0.64), (30, 2, Abg, 0.3, 0.28), (30, 2, Abg, 0.8, 0.08)]:
+    check(f"GCgm_dyn om={om} Z{z} A={A} Ns={ns}", eng.get_gcgm_dynamic(z, om, ns, A, LcD), exp, 0.005)
+
+# ---------------------------------------------------------------------------
 print("\n" + "=" * 60)
 n_pass = sum(results)
 n_total = len(results)

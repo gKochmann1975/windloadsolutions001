@@ -14,9 +14,10 @@ Covers:
   3. Terrain      — Table 26.11-1 (alpha/zg/zmin, B/C/D)
   4. Kd           — Table 26.6-1 (rooftop equipment = 0.85)
   5. qz           — Eq. 26.10-1, confirms Kd folded in exactly once
-  6. GCr          — Section 29.4.1 (1.9, reduced LINEARLY 1.9->1.0 as Af
-                     goes 0.1*B*h -> B*h; endpoints + midpoint; NO 1.5 value)
-  7. Fh / Fv      — Eq. 29.4-2 / 29.4-3 (Fh=qh*GCr*Af, Fv=qh*GCr*Ar)
+  6. GCr          — Section 29.4.1. LATERAL (Eq 29.4-2, p.300): 1.9 reduced 1.9->1.0
+                     as Af goes 0.1*B*h -> B*h. VERTICAL uplift (Eq 29.4-3, p.304):
+                     DISTINCT anchor 1.5, reduced 1.5->1.0 as Ar goes 0.1*B*L -> B*L.
+  7. Fh / Fv      — Eq. 29.4-2 / 29.4-3 (Fh=qh*1.9*Af lateral, Fv=qh*1.5*Ar vertical)
 
 NOTE: This is a Chapter-29 force-coefficient engine and has no GCpi method,
 so the GCpi universal check is intentionally skipped.
@@ -184,8 +185,8 @@ check("GCr linear at Af=lo+25%", eng.get_gcr(q, B, h), expected_q, 0.001)
 # V=130, Exp C, h=30 -> Kz=0.98 (Table 26.10-1), Kzt=1, Ke=1, Kd=0.85.
 #   qh = 0.00256*0.98*1.0*0.85*1.0*130^2 = 36.0405632 psf
 #   Af = 20, Ar = 40, B=50, h=30 -> 0.1*B*h = 150 >= 20 so GCr = 1.9
-#   Fh = qh*1.9*20 = 1369.541 lbs
-#   Fv = qh*1.9*40 = 2739.083 lbs
+#   Fh = qh*1.9*20 = 1369.541 lbs   (lateral, GCr=1.9 per Eq 29.4-2)
+#   Fv = qh*1.5*40 = 2162.434 lbs   (VERTICAL uplift, GCr=1.5 per Eq 29.4-3, book p.304)
 # All factors below come from the ledger (Kz, Kd) + Section 29.4.1 (GCr) + the
 # exact Eq. 26.10-1 / 29.4-x formulas; expecteds are computed independently here.
 # ---------------------------------------------------------------------------
@@ -193,11 +194,12 @@ print("\nTEST 7 — Fh/Fv via Eq. 29.4-2 / 29.4-3")
 V = 130.0
 Kz_30C = 0.98   # ledger Table 26.10-1, C, z=30
 Kd = 0.85       # ledger Table 26.6-1
-GCr_full = 1.9  # ledger Section 29.4.1
+GCr_full = 1.9   # LATERAL anchor, Eq 29.4-2 (book p.300)
+GCr_vert = 1.5   # VERTICAL uplift anchor, Eq 29.4-3 (book p.304) — distinct from lateral
 Af, Ar = 20.0, 40.0
 qh_expected = 0.00256 * Kz_30C * 1.0 * Kd * 1.0 * V ** 2
-Fh_expected = qh_expected * GCr_full * Af
-Fv_expected = qh_expected * GCr_full * Ar
+Fh_expected = qh_expected * GCr_full * Af   # Fh = qh*(GCr=1.9)*Af
+Fv_expected = qh_expected * GCr_vert * Ar   # Fv = qh*(GCr=1.5)*Ar
 
 res = eng.calculate_equipment_force(
     wind_speed=V, speed_type='ultimate', exposure_category='C',

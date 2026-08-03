@@ -67,17 +67,18 @@ check("b (theta=20 conical) = 0.6D = 24", eng.roof_zone_boundary_b(40, 25, 30, 2
 check("b (H/D=0.25) = 0.2D = 8", eng.roof_zone_boundary_b(40, 10, 30, 5), 8.0, 0.01)
 
 # ---------------------------------------------------------------------------
-# TEST 4 — Wall drag, Eq 29.4-1  F = qz·G·Cf·Af, Cf=0.63, Af=D*H.
-# Case: V=150 Ult, Exp C, D=40, H=25, Z=H/2=12.5 -> Kz(12.5<15,C)=0.85.
-#   qz = 0.00256*0.85*22500 = 48.96 ; F = 48.96*0.85*0.63*1000 = 26218 lbs
+# TEST 4 — Wall drag, Eq 29.4-1  F = qz·G·Cf·Af, Cf=0.63, Af = D·h (§29.4.2.1,
+# h = MEAN ROOF HEIGHT — "projected wall area Dh", book-confirmed 2026-08-02).
+# Case: V=150 Ult, Exp C, D=40, H=25, h=30 -> Af = D·h = 1200; Z = h/2 = 15 ->
+#   Kz(15,C)=0.85 ; qz = 0.00256*0.85*22500 = 48.96 ; F = 48.96*0.85*0.63*1200 = 31462 lbs
 # ---------------------------------------------------------------------------
-print("\nTEST 4 — wall drag Eq 29.4-1 (Cf=0.63)")
+print("\nTEST 4 — wall drag Eq 29.4-1 (Cf=0.63, Af = D·h)")
 qz = 0.00256 * 0.85 * 1.0 * 1.0 * 1.0 * 150 ** 2
-w = eng.calculate_wall_force(150, 'ultimate', 'C', 40, 25)
+w = eng.calculate_wall_force(150, 'ultimate', 'C', 40, 25, mean_roof_height_h=30)
 check("qz at centroid (Kz=0.85)", w['velocity_pressure']['qz_psf'], round(qz, 2), 0.05)
 check("Cf = 0.63", w['Cf'], 0.63, 0.001)
-check("projected area Af = D*H = 1000", w['projected_area_Af_sqft'], 1000.0, 0.1)
-check("wall drag F", w['result']['drag_force_F_lbs'], qz * 0.85 * 0.63 * 1000, 5.0)
+check("projected area Af = D*h = 1200", w['projected_area_Af_sqft'], 1200.0, 0.1)
+check("wall drag F", w['result']['drag_force_F_lbs'], qz * 0.85 * 0.63 * 1200, 5.0)
 
 # ---------------------------------------------------------------------------
 print("\nTEST 5 — Cf=0.63 applicability gates (§29.4.2.1)")

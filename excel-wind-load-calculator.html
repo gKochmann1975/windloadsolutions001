@@ -207,8 +207,9 @@ section{position:relative;z-index:1;padding:62px 0}
 @media(max-width:940px){.hero-grid{grid-template-columns:1fr;gap:38px}}
 .xhero h1{font-size:clamp(2.4rem,5.2vw,4.2rem);font-weight:800;letter-spacing:-.035em;line-height:1.03;margin:.45em 0 .34em;max-width:none;text-shadow:none;text-wrap:balance}
 .xhero h1 .strike{position:relative;color:var(--muted);white-space:nowrap}
-.xhero h1 .strike::after{content:"";position:absolute;left:-2%;right:-2%;top:54%;height:.09em;background:var(--danger);border-radius:2px;transform:scaleX(0);transform-origin:left;animation:strike 1s var(--ease) 1.1s forwards}
-@keyframes strike{to{transform:scaleX(1)}}
+.xhero h1 .strike::after{content:"";position:absolute;left:-2%;right:-2%;top:54%;height:.09em;background:var(--danger);border-radius:2px;transform:scaleX(0);transform-origin:left}
+.xhero h1 .strike.striking::after{animation:strikeLoop 9s var(--ease) infinite}
+@keyframes strikeLoop{0%{transform:scaleX(0);transform-origin:left}12%{transform:scaleX(1);transform-origin:left}85%{transform:scaleX(1);transform-origin:right}97%{transform:scaleX(0);transform-origin:right}100%{transform:scaleX(0);transform-origin:left}}
 .xhero h1 .glow{color:transparent;background:linear-gradient(100deg,#fff 10%,var(--go) 55%,var(--blue-bright) 100%);-webkit-background-clip:text;background-clip:text}
 .lede{font-size:1.12rem;color:var(--muted);max-width:34em;margin:.2em 0 1.7em}
 .lede b{color:var(--text);font-weight:600}
@@ -453,7 +454,7 @@ section{position:relative;z-index:1;padding:62px 0}
   .aurora span{animation:none}
   .rise{opacity:1;transform:none}
   .sheet .cell,.report-chip,.exp-chip-g{opacity:1;transform:none}
-  .xhero h1 .strike::after{transform:scaleX(1)}
+  .xhero h1 .strike::after,.xhero h1 .strike.striking::after{transform:scaleX(1);animation:none}
   .exp-line{stroke-dashoffset:0}
   .mark.yes svg .chk{stroke-dashoffset:0}
   .dash{animation:none}
@@ -533,13 +534,14 @@ section{position:relative;z-index:1;padding:62px 0}
     <div>
       <span class="eb2">Pioneer of wind&nbsp;load software · online since 2006</span>
       <h1>The wind&#8209;load <span class="strike">spreadsheet</span><br><span class="glow">that outgrew Excel.</span></h1>
-      <p class="lede">We spent two decades running these numbers in a spreadsheet — so we know exactly where Excel helps and where it lets you down. <b>WindLoadCalc keeps everything you loved about that workflow, deletes <span style="font-family:var(--mono);color:var(--danger)">#REF!</span> forever, and adds what a spreadsheet never could</b>: a permit&#8209;ready ASCE&nbsp;7&#8209;22 Engineering Report, one&#8209;click exports (yes — including Excel), and access from any device you own.</p>
+      <p class="lede">We've been running these numbers in Excel spreadsheets since 2001 — so we know exactly where the spreadsheet helps and where it lets you down. <b>WindLoadCalc keeps everything you loved about that workflow, deletes <span style="font-family:var(--mono);color:var(--danger)">#REF!</span> forever, and adds what a spreadsheet never could</b>: a permit&#8209;ready ASCE&nbsp;7&#8209;22 Engineering Report, one&#8209;click exports (yes — including Excel), and access from any device you own.</p>
       <div class="cta-row">
         <a class="btn btn-primary btn-xl" href="https://windloadcalc.com/free-wind-load-calculator.html">Run a free calculation →</a>
         <a class="btn btn-ghost btn-xl" href="#compare">See it beside Excel</a>
       </div>
       <div class="trust-row">
-        <span>Building wind&#8209;load software since 2002</span>
+        <span>Wind loads in Excel since 2001</span>
+        <span>Wind&#8209;load software since 2002</span>
         <span>Through seven editions of ASCE&nbsp;7</span>
         <span>In&#8209;house FL&nbsp;P.E.</span>
       </div>
@@ -1030,6 +1032,16 @@ section{position:relative;z-index:1;padding:62px 0}
     en.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('reveal'); io.unobserve(e.target);} });
   },{threshold:.18});
   els.forEach(function(e){io.observe(e)});
+})();
+(function(){
+  var s=document.querySelector('.xhero h1 .strike');
+  if(!s) return;
+  if(!('IntersectionObserver' in window)){ s.classList.add('striking'); return; }
+  // Re-run the 9s strike loop each time it scrolls into view; reset when out of view.
+  var io=new IntersectionObserver(function(en){
+    en.forEach(function(e){ e.target.classList.toggle('striking', e.isIntersecting); });
+  },{threshold:0});
+  io.observe(s);
 })();
 </script>
 </body>

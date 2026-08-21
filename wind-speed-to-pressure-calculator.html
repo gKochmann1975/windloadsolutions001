@@ -9,44 +9,38 @@
     <link rel="manifest" href="/site.webmanifest">
     <link rel="shortcut icon" href="/favicon.ico?v=2">
 
-    <title>How to Calculate Wind Load (ASCE 7-22): Step-by-Step Guide | WindLoadCalc</title>
-    <meta name="description" content="How to calculate wind load per ASCE 7-22, in plain English: pick a risk category, read the basic wind speed, set exposure, build the velocity pressure qz, then turn it into a design pressure in psf with GCp and GCpi. Worked example included — plus the one-click shortcut.">
+    <title>Wind Speed to Pressure Calculator (psf) — Convert mph to Wind Load | WindLoadCalc</title>
+    <meta name="description" content="Convert wind speed to pressure in psf. The ASCE 7-22 velocity pressure is q = 0.00256·V², so 150 mph ≈ 57.6 psf. See the full mph→psf table, why the design pressure differs, and calculate the enforceable value for your site free.">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="How to Calculate Wind Load — ASCE 7-22 Step-by-Step | WindLoadCalc">
-    <meta property="og:description" content="The full ASCE 7-22 wind load method explained step by step — risk category, wind speed, exposure, velocity pressure qz, and the GCp/GCpi that give you design pressure in psf. With a worked example.">
+    <meta property="og:title" content="Wind Speed to Pressure Calculator (psf) — Convert mph to Wind Load | WindLoadCalc">
+    <meta property="og:description" content="q = 0.00256·V² turns a wind speed in mph into a pressure in psf. Full conversion table, why the code pressure adds coefficients, and a free calculator for the stamped value.">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://windloadcalc.com/how-to-calculate-wind-load.html">
+    <meta property="og:url" content="https://windloadcalc.com/wind-speed-to-pressure-calculator.html">
     <meta property="og:image" content="https://windloadcalc.com/images/video-posters/hurricane-08.jpg">
     <meta property="og:site_name" content="WindLoadCalc">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="How to Calculate Wind Load — ASCE 7-22 Step-by-Step | WindLoadCalc">
-    <meta name="twitter:description" content="Risk category → wind speed → exposure → velocity pressure qz → design pressure in psf. The ASCE 7-22 wind load method, step by step, with a worked example.">
+    <meta name="twitter:title" content="Wind Speed to Pressure Calculator (psf) — Convert mph to Wind Load">
+    <meta name="twitter:description" content="q = 0.00256·V² converts mph to psf. Full table, why design pressure differs, and a free calculator for the enforceable value.">
     <meta name="twitter:image" content="https://windloadcalc.com/images/video-posters/hurricane-08.jpg">
 
-    <link rel="canonical" href="https://windloadcalc.com/how-to-calculate-wind-load.html">
+    <link rel="canonical" href="https://windloadcalc.com/wind-speed-to-pressure-calculator.html">
 
-    <!-- HowTo schema — 1:1 with the visible step method -->
+    <!-- HowTo schema — 1:1 with the visible method -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "HowTo",
-      "name": "How to Calculate Wind Load per ASCE 7-22",
-      "description": "The ASCE 7-22 procedure for turning a location and a building shape into design wind pressures in psf, from risk category through velocity pressure to the final component or MWFRS pressure.",
-      "totalTime": "PT10M",
-      "supply": [ { "@type": "HowToSupply", "name": "Building location (ZIP or address)" }, { "@type": "HowToSupply", "name": "Building dimensions, height, roof shape, and enclosure" } ],
-      "tool": [ { "@type": "HowToTool", "name": "ASCE 7-22 wind maps and coefficient tables" } ],
+      "name": "How to Convert Wind Speed to Pressure",
+      "description": "Convert a wind speed in mph to a wind pressure in psf using the ASCE 7-22 velocity pressure equation, then adjust it to a design pressure.",
       "step": [
-        { "@type": "HowToStep", "position": 1, "name": "Set the risk category", "text": "Classify the building as Risk Category I through IV by occupancy. The risk category selects which ASCE 7-22 wind speed map you read." },
-        { "@type": "HowToStep", "position": 2, "name": "Read the basic wind speed V", "text": "From the ASCE 7-22 map for that risk category, read the basic wind speed V in mph for the site — or look it up by ZIP." },
-        { "@type": "HowToStep", "position": 3, "name": "Choose the exposure category", "text": "Assign Exposure B, C, or D from the upwind surface roughness around the building." },
-        { "@type": "HowToStep", "position": 4, "name": "Find the velocity pressure coefficient Kz", "text": "Look up Kz from ASCE 7-22 Table 26.10-1 for the exposure and the height at which pressure is evaluated." },
-        { "@type": "HowToStep", "position": 5, "name": "Apply Kzt, Kd, and Ke", "text": "Set the topographic factor Kzt (1.0 on flat terrain), the directionality factor Kd (0.85 for buildings), and the ground elevation factor Ke." },
-        { "@type": "HowToStep", "position": 6, "name": "Compute the velocity pressure qz", "text": "Evaluate qz = 0.00256 × Kz × Kzt × Kd × Ke × V², giving the velocity pressure in psf." },
-        { "@type": "HowToStep", "position": 7, "name": "Pick the pressure coefficients", "text": "Read the external pressure coefficient GCp (components and cladding) or Cp (MWFRS) for the surface and zone, and the internal pressure coefficient GCpi for the enclosure class." },
-        { "@type": "HowToStep", "position": 8, "name": "Solve for the design pressure p", "text": "For components and cladding, p = qz × (GCp − GCpi). For MWFRS, combine external and internal pressures per Chapter 27 to get the design pressure in psf." }
+        { "@type": "HowToStep", "position": 1, "name": "Get the wind speed", "text": "Take the wind speed V in mph — the basic design wind speed for the site, rounded up to the nearest 5 mph." },
+        { "@type": "HowToStep", "position": 2, "name": "Square the speed", "text": "Compute V squared." },
+        { "@type": "HowToStep", "position": 3, "name": "Multiply by 0.00256", "text": "The velocity pressure is q = 0.00256 × V², giving the raw pressure in psf. For example 150 mph gives about 57.6 psf." },
+        { "@type": "HowToStep", "position": 4, "name": "Adjust for the site", "text": "Multiply by the ASCE 7-22 factors Kz, Kzt, Kd, and Ke for exposure, topography, directionality, and elevation to get the site velocity pressure qz." },
+        { "@type": "HowToStep", "position": 5, "name": "Apply the surface coefficients", "text": "Multiply by (GCp − GCpi) for components and cladding, or combine per Chapter 27 for MWFRS, to get the design pressure in psf." }
       ]
     }
     </script>
@@ -57,13 +51,12 @@
       "@context": "https://schema.org",
       "@type": "FAQPage",
       "mainEntity": [
-        { "@type": "Question", "name": "What is the formula for wind load?", "acceptedAnswer": { "@type": "Answer", "text": "Wind load is built in two moves. First the velocity pressure: qz = 0.00256 × Kz × Kzt × Kd × Ke × V², where V is the basic wind speed in mph and qz comes out in psf. Then the design pressure: for components and cladding p = qz × (GCp − GCpi), and for the MWFRS the external and internal pressures are combined per ASCE 7-22 Chapter 27." } },
-        { "@type": "Question", "name": "How do you find the design wind speed for a location?", "acceptedAnswer": { "@type": "Answer", "text": "The basic wind speed comes from the ASCE 7-22 wind maps, and there is a separate map for each risk category. Instead of tracing contour lines, you can enter a ZIP or address and read the mapped design wind speed directly, with the enforceable Florida value applied in Miami-Dade and Broward." } },
-        { "@type": "Question", "name": "What is the difference between components and cladding and MWFRS wind loads?", "acceptedAnswer": { "@type": "Answer", "text": "Components and cladding pressures size the individual pieces — a window, a door, a roof panel, a fastener — using GCp by zone and effective wind area. MWFRS pressures are the whole-building loads the structural frame resists, using Cp on the windward, leeward, and side walls and the roof. A project usually needs both." } },
-        { "@type": "Question", "name": "Do I need ASCE 7-22 or ASCE 7-16?", "acceptedAnswer": { "@type": "Answer", "text": "For current permits, ASCE 7-22 — the edition Florida's 8th-Edition Building Code and most other state codes now enforce. Our calculators are 7-22 end to end: maps, coefficients, and equations all track the current standard." } },
-        { "@type": "Question", "name": "Can I calculate wind load by hand?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Every step here can be done by hand with the ASCE 7-22 tables and maps. The tedium is in reading Kz, Kzt, GCp, and GCpi correctly for each zone and effective wind area, and in keeping the enclosure and risk category consistent — which is exactly what the calculator automates." } },
-        { "@type": "Question", "name": "What units is wind load measured in?", "acceptedAnswer": { "@type": "Answer", "text": "Design wind pressure is expressed in pounds per square foot, psf. Positive pressure pushes on a surface and negative pressure (suction) pulls away from it — roof corners and wall edges usually see the largest suction." } },
-        { "@type": "Question", "name": "Is a hand calculation enough for a building permit?", "acceptedAnswer": { "@type": "Answer", "text": "The math can be, but a plans examiner wants the work shown. The calculator produces an Engineering Report with every coefficient cited to its ASCE 7-22 section. That report is not a sealed document; a PE sign-and-seal is a separate service, available in all 50 states." } }
+        { "@type": "Question", "name": "How do you convert wind speed to pressure?", "acceptedAnswer": { "@type": "Answer", "text": "Square the speed and multiply by 0.00256: q = 0.00256 × V², with V in mph and q in psf. That gives the velocity (stagnation) pressure. A code design pressure then multiplies by the exposure, topographic, directionality, and elevation factors and the surface coefficients." } },
+        { "@type": "Question", "name": "What is the pressure of a 150 mph wind?", "acceptedAnswer": { "@type": "Answer", "text": "About 57.6 psf of raw velocity pressure: 0.00256 × 150². The design pressure on an actual surface can be well above or below that once exposure, height, gust, and the GCp for the zone are applied." } },
+        { "@type": "Question", "name": "Where does the 0.00256 constant come from?", "acceptedAnswer": { "@type": "Answer", "text": "It bundles air density and the unit conversions so that speed in mph and pressure in psf line up. It is the standard coefficient in the ASCE 7-22 velocity pressure equation for sea-level air." } },
+        { "@type": "Question", "name": "Why is my code pressure different from 0.00256 times V squared?", "acceptedAnswer": { "@type": "Answer", "text": "Because that formula is only the raw airstream pressure. ASCE 7-22 adjusts it with Kz, Kzt, Kd, and Ke, then applies GCp and GCpi for the surface. A roof corner and a mid-wall panel land on very different pressures at the same wind speed." } },
+        { "@type": "Question", "name": "Can I convert pressure back to a wind speed?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, rearrange it: V = square root of (q / 0.00256). It returns the speed that produces a given raw velocity pressure, but a design pressure in psf includes coefficients, so it does not convert straight back to a wind speed." } },
+        { "@type": "Question", "name": "Is this ASCE 7-22?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The constant and the velocity pressure equation are ASCE 7-22 — the standard adopted through the Florida Building Code 8th Edition and by most of the country. Our calculators apply it end to end." } }
       ]
     }
     </script>
@@ -73,7 +66,7 @@
     { "@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
       {"@type":"ListItem","position":1,"name":"Home","item":"https://windloadcalc.com/"},
       {"@type":"ListItem","position":2,"name":"ASCE 7-22 Guide","item":"https://windloadcalc.com/asce-7-wind-load-calculator/"},
-      {"@type":"ListItem","position":3,"name":"How to Calculate Wind Load","item":"https://windloadcalc.com/how-to-calculate-wind-load.html"}
+      {"@type":"ListItem","position":3,"name":"Wind Speed to Pressure Calculator","item":"https://windloadcalc.com/wind-speed-to-pressure-calculator.html"}
     ]}
     </script>
 
@@ -324,11 +317,11 @@ section{position:relative;z-index:1;padding:62px 0}
     },
     {
       "@type": "TechArticle",
-      "@id": "https://windloadcalc.com/how-to-calculate-wind-load.html#webpage",
-      "url": "https://windloadcalc.com/how-to-calculate-wind-load.html",
-      "name": "How to Calculate Wind Load (ASCE 7-22): Step-by-Step Guide",
-      "headline": "How to Calculate Wind Load per ASCE 7-22",
-      "description": "A plain-English ASCE 7-22 walkthrough of how to calculate wind load — risk category, basic wind speed, exposure, the velocity pressure qz, and the GCp and GCpi that turn it into a design pressure in psf — with a worked example.",
+      "@id": "https://windloadcalc.com/wind-speed-to-pressure-calculator.html#webpage",
+      "url": "https://windloadcalc.com/wind-speed-to-pressure-calculator.html",
+      "name": "Wind Speed to Pressure Calculator (psf) — Convert mph to Wind Load",
+      "headline": "Convert wind speed to pressure with q = 0.00256·V²",
+      "description": "Convert a wind speed in mph to a pressure in psf with the ASCE 7-22 velocity pressure equation q = 0.00256·V², plus a full conversion table and why the design pressure adds site and surface coefficients.",
       "isPartOf": {
         "@id": "https://windloadcalc.com/#website"
       },
@@ -417,22 +410,22 @@ section{position:relative;z-index:1;padding:62px 0}
   </video>
   <div class="hero-veil"></div>
   <header><div class="wrap">
-    <div class="eyebrow"><span class="dot"></span>ASCE 7-22 · Velocity pressure &rarr; design pressure · Worked example</div>
-    <h1>How to <span class="grad">Calculate Wind Load</span> &mdash; ASCE 7-22</h1>
-    <p class="sub">Wind load comes down to two equations and a handful of table look-ups. This guide walks the full <strong>ASCE 7-22</strong> method &mdash; risk category, basic wind speed, exposure, the <strong>velocity pressure q<sub>z</sub></strong>, and the coefficients that turn it into a <strong>design pressure in psf</strong> &mdash; then shows the one-click shortcut when you'd rather not read tables.</p>
+    <div class="eyebrow"><span class="dot"></span>ASCE 7-22 · q = 0.00256·V² · mph &rarr; psf</div>
+    <h1>Wind Speed to <span class="grad">Pressure</span> Calculator</h1>
+    <p class="sub">Convert a wind speed in mph to a pressure in <strong>psf</strong>. The ASCE 7-22 velocity pressure is <strong>q = 0.00256&middot;V&sup2;</strong>, so a 150 mph wind carries about <strong>57.6 psf</strong>. See the full conversion table below &mdash; then get the enforceable design pressure, with the site and surface coefficients applied.</p>
     <div class="hero-cta">
-      <a class="btn btn-primary btn-xl" href="https://windloadcalc.com/free-wind-load-calculator.html">Skip the math &mdash; calculate free</a>
+      <a class="btn btn-primary btn-xl" href="https://windloadcalc.com/free-wind-load-calculator.html">Calculate a pressure &mdash; free</a>
       <a class="btn btn-ghost btn-xl" href="https://windloadcalc.com/wind-load-calculator-shop.html">See plans &amp; pricing</a>
     </div>
     <div class="hero-trust">
-      <span><span class="ck">✓</span> No signup to read the guide</span>
-      <span><span class="ck">✓</span> Worked example in psf</span>
-      <span><span class="ck">✓</span> Every step cites its ASCE section</span>
+      <span><span class="ck">&#10003;</span> No signup to try</span>
+      <span><span class="ck">&#10003;</span> Full mph &rarr; psf table</span>
+      <span><span class="ck">&#10003;</span> ASCE 7-22 design value free</span>
     </div>
     <div class="stat-row">
-      <div class="stat-tile"><div class="n">2</div><div class="l">equations do the work</div></div>
-      <div class="stat-tile"><div class="n">0.00256</div><div class="l">the velocity-pressure constant</div></div>
-      <div class="stat-tile"><div class="n">8 steps</div><div class="l">location to psf</div></div>
+      <div class="stat-tile"><div class="n">0.00256</div><div class="l">&times; V&sup2; = psf</div></div>
+      <div class="stat-tile"><div class="n">150&rarr;57.6</div><div class="l">mph to psf (raw)</div></div>
+      <div class="stat-tile"><div class="n">V&sup2;</div><div class="l">pressure scales with speed²</div></div>
       <div class="stat-tile"><div class="n">psf</div><div class="l">the answer, every time</div></div>
     </div>
   </div></header>
@@ -441,169 +434,129 @@ section{position:relative;z-index:1;padding:62px 0}
 <!-- Benefits -->
 <section><div class="wrap">
   <div class="benefits">
-    <div class="benefit"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 19h16M4 19V5M8 15l3-4 3 2 4-6"/></svg></div><div><b>Two equations</b><small>Velocity pressure, then design pressure</small></div></div>
-    <div class="benefit"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="9"/></svg></div><div><b>Location drives it</b><small>Wind speed comes from the site</small></div></div>
-    <div class="benefit"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M3 9h6"/></svg></div><div><b>Zone by zone</b><small>Corners and edges see the most</small></div></div>
-    <div class="benefit"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 20h16M7 20V9M12 20V4M17 20v-7"/></svg></div><div><b>Answer in psf</b><small>Pounds per square foot, signed</small></div></div>
+    <div class="benefit"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 19h16M4 19V5M8 15l3-4 3 2 4-6"/></svg></div><div><b>One constant</b><small>0.00256 turns mph into psf</small></div></div>
+    <div class="benefit"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></div><div><b>Speed squared</b><small>Double the speed, quadruple the load</small></div></div>
+    <div class="benefit"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 20h16M7 20V9M12 20V4M17 20v-7"/></svg></div><div><b>Height &amp; exposure</b><small>Adjust the raw number for the site</small></div></div>
+    <div class="benefit"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 3c4 5 6 8 6 11a6 6 0 0 1-12 0c0-3 2-6 6-11z"/></svg></div><div><b>Design &ne; raw</b><small>Code pressure adds the coefficients</small></div></div>
   </div>
 </div></section>
 
-<!-- The two equations -->
-<section id="equations"><div class="wrap">
+<!-- The one equation -->
+<section id="equation"><div class="wrap">
   <div class="sec-head">
-    <h2>The two equations behind every wind load</h2>
-    <p>Every ASCE 7-22 wind load is built in two moves: first the velocity pressure the wind carries, then the pressure that lands on a particular surface. Get these two and the rest is table look-ups.</p>
+    <h2>Wind speed to pressure: one equation</h2>
+    <p>The pressure a moving airstream carries scales with the square of its speed. In ASCE 7-22 units &mdash; miles per hour in, pounds per square foot out &mdash; that relationship has a single constant.</p>
+  </div>
+  <div style="max-width:720px;margin:0 auto 8px">
+    <p style="font-size:20px;color:#e8edf7;background:rgba(0,24,255,.12);border:1px solid rgba(58,91,255,.35);border-radius:14px;padding:20px;text-align:center;font-weight:800">q = 0.00256 &middot; V&sup2;</p>
+    <p style="font-size:14px;color:#aeb8cf;text-align:center">q is the velocity (stagnation) pressure in psf; V is the wind speed in mph. So a <b>150 mph</b> wind carries <b>0.00256 &times; 150&sup2; &asymp; 57.6 psf</b>. That is the raw push &mdash; the starting point for a code design pressure, not the end of it.</p>
+  </div>
+</div></section>
+
+<!-- Reference table -->
+<section id="table" style="padding-top:20px"><div class="wrap">
+  <div class="sec-head"><h2>Wind speed to pressure table (mph &rarr; psf)</h2><p>Velocity pressure q = 0.00256&middot;V&sup2; at each design speed. Round wind speed up to the nearest 5 mph before you read a code value.</p></div>
+  <div style="max-width:640px;margin:0 auto;overflow-x:auto">
+    <table style="width:100%;border-collapse:collapse;font-size:15px;background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden">
+      <thead><tr style="background:rgba(0,24,255,.14)">
+        <th style="text-align:left;padding:12px 16px;font-weight:700;color:#fff">Wind speed V (mph)</th>
+        <th style="text-align:right;padding:12px 16px;font-weight:700;color:#fff">Velocity pressure q (psf)</th>
+      </tr></thead>
+      <tbody style="color:#c2cce0">
+        <tr style="border-top:1px solid var(--line)"><td style="padding:10px 16px">90</td><td style="padding:10px 16px;text-align:right">20.7</td></tr>
+        <tr style="border-top:1px solid var(--line)"><td style="padding:10px 16px">100</td><td style="padding:10px 16px;text-align:right">25.6</td></tr>
+        <tr style="border-top:1px solid var(--line)"><td style="padding:10px 16px">110</td><td style="padding:10px 16px;text-align:right">31.0</td></tr>
+        <tr style="border-top:1px solid var(--line)"><td style="padding:10px 16px">120</td><td style="padding:10px 16px;text-align:right">36.9</td></tr>
+        <tr style="border-top:1px solid var(--line)"><td style="padding:10px 16px">130</td><td style="padding:10px 16px;text-align:right">43.3</td></tr>
+        <tr style="border-top:1px solid var(--line)"><td style="padding:10px 16px">140</td><td style="padding:10px 16px;text-align:right">50.2</td></tr>
+        <tr style="border-top:1px solid var(--line)"><td style="padding:10px 16px;color:#34D399;font-weight:700">150</td><td style="padding:10px 16px;text-align:right;color:#34D399;font-weight:700">57.6</td></tr>
+        <tr style="border-top:1px solid var(--line)"><td style="padding:10px 16px">160</td><td style="padding:10px 16px;text-align:right">65.5</td></tr>
+        <tr style="border-top:1px solid var(--line)"><td style="padding:10px 16px">170</td><td style="padding:10px 16px;text-align:right">74.0</td></tr>
+        <tr style="border-top:1px solid var(--line)"><td style="padding:10px 16px">180</td><td style="padding:10px 16px;text-align:right">82.9</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:13px;color:#8ea0c0;text-align:center;margin-top:12px">Values are the raw velocity pressure. Your enforceable design pressure is higher or lower once exposure, height, gust, and the surface coefficients are applied &mdash; see below.</p>
+  </div>
+</div></section>
+
+<!-- Raw vs design -->
+<section id="design"><div class="wrap">
+  <div class="sec-head">
+    <h2>Why your code pressure isn&rsquo;t just 0.00256&middot;V&sup2;</h2>
+    <p>The table gives the wind&rsquo;s raw energy. ASCE 7-22 then corrects it for where the building sits and what part of it you are designing. Three factors turn a speed into a stamped pressure.</p>
   </div>
   <div class="diff-grid">
-
     <div class="diff">
-      <span class="badge">Move 1</span>
-      <h3>Velocity pressure, q<sub>z</sub></h3>
-      <span class="tag">ASCE 7-22 Eq 26.10-1 &mdash; the wind's raw push</span>
-      <p style="font-size:16px;color:#e8edf7;background:rgba(0,24,255,.12);border:1px solid rgba(58,91,255,.35);border-radius:12px;padding:14px 14px;text-align:center;font-weight:700">q<sub>z</sub> = 0.00256 &middot; K<sub>z</sub> &middot; K<sub>zt</sub> &middot; K<sub>d</sub> &middot; K<sub>e</sub> &middot; V&sup2;</p>
-      <ul>
-        <li><b>V</b> &mdash; basic wind speed (mph), read from the map for your risk category</li>
-        <li><b>K<sub>z</sub></b> &mdash; velocity pressure coefficient; grows with height and openness</li>
-        <li><b>K<sub>zt</sub></b> &mdash; topographic speed-up; 1.0 on flat ground, higher on hills</li>
-        <li><b>K<sub>d</sub></b> &mdash; directionality, 0.85 for buildings; <b>K<sub>e</sub></b> &mdash; ground elevation</li>
-      </ul>
-      <div class="hl">q<sub>z</sub> is in psf. It is the same for every surface at that height &mdash; the surface coefficients come next.</div>
+      <span class="badge">Step 1</span>
+      <h3>Raw velocity pressure</h3>
+      <span class="tag">The number from the table above</span>
+      <p>q = 0.00256&middot;V&sup2; is the stagnation pressure of the airstream at that speed. It assumes standard conditions and says nothing yet about your building.</p>
+      <div class="hl">Good for a gut check; never the value you submit.</div>
     </div>
-
     <div class="diff">
-      <span class="badge">Move 2a</span>
-      <h3>Design pressure &mdash; C&amp;C</h3>
-      <span class="tag">Components &amp; cladding &mdash; ASCE 7-22 Chapter 30</span>
-      <p style="font-size:16px;color:#e8edf7;background:rgba(16,185,129,.12);border:1px solid rgba(52,211,153,.35);border-radius:12px;padding:14px 14px;text-align:center;font-weight:700">p = q<sub>z</sub> &middot; ( GC<sub>p</sub> &minus; GC<sub>pi</sub> )</p>
-      <ul>
-        <li><b>GC<sub>p</sub></b> &mdash; external coefficient by zone and effective wind area (Fig 30.3-1)</li>
-        <li><b>GC<sub>pi</sub></b> &mdash; internal pressure; &plusmn;0.18 enclosed, &plusmn;0.55 partially enclosed</li>
-        <li>Sizes a single piece: a window, a door, a roof panel, a fastener</li>
-        <li>Corners (Zone 5 walls, Zone 3 roofs) run the most negative &mdash; suction governs</li>
-      </ul>
-      <div class="hl">Negative p is suction, pulling away from the building &mdash; that is what tears panels off in a storm.</div>
+      <span class="badge">Step 2</span>
+      <h3>Adjust for the site</h3>
+      <span class="tag">K<sub>z</sub>, K<sub>zt</sub>, K<sub>d</sub>, K<sub>e</sub></span>
+      <p>The full ASCE 7-22 velocity pressure is q<sub>z</sub> = 0.00256&middot;K<sub>z</sub>&middot;K<sub>zt</sub>&middot;K<sub>d</sub>&middot;K<sub>e</sub>&middot;V&sup2;. Exposure and height (K<sub>z</sub>), hills (K<sub>zt</sub>), directionality (K<sub>d</sub>), and elevation (K<sub>e</sub>) move the raw number up or down.</p>
+      <div class="hl">Open coastline pushes it up; a sheltered low wall pulls it down.</div>
     </div>
-
     <div class="diff">
-      <span class="badge">Move 2b</span>
-      <h3>Design pressure &mdash; MWFRS</h3>
-      <span class="tag">Main Wind Force Resisting System &mdash; Chapter 27</span>
-      <p style="font-size:16px;color:#e8edf7;background:rgba(232,181,48,.12);border:1px solid rgba(232,181,48,.35);border-radius:12px;padding:14px 14px;text-align:center;font-weight:700">p = q &middot; G &middot; C<sub>p</sub> &minus; q<sub>i</sub> &middot; (GC<sub>pi</sub>)</p>
-      <ul>
-        <li><b>C<sub>p</sub></b> &mdash; external coefficient per face: windward, leeward, side walls, roof</li>
-        <li><b>G</b> &mdash; gust-effect factor, 0.85 for a rigid building</li>
-        <li>These are the whole-building loads the frame, connections, and foundation resist</li>
-        <li>Most projects need both C&amp;C <em>and</em> MWFRS &mdash; they answer different questions</li>
-      </ul>
-      <div class="hl">C&amp;C sizes the parts; MWFRS sizes the skeleton. One address, both results.</div>
+      <span class="badge">Step 3</span>
+      <h3>Pick the surface</h3>
+      <span class="tag">GC<sub>p</sub> and GC<sub>pi</sub></span>
+      <p>A design pressure is p = q<sub>z</sub>(GC<sub>p</sub> &minus; GC<sub>pi</sub>). A roof corner sees far more suction than a mid-wall panel at the same wind speed &mdash; the coefficients, not the speed, make that difference.</p>
+      <div class="hl">Same 150 mph, very different psf on a corner vs a field panel.</div>
     </div>
   </div>
-
   <div class="pill-row">
-    <span class="pill">V from the ASCE map</span>
-    <span class="pill">K<sub>z</sub> by height &amp; exposure</span>
-    <span class="pill">K<sub>zt</sub> for topography</span>
-    <span class="pill">GC<sub>pi</sub> by enclosure</span>
-    <span class="pill">GC<sub>p</sub> by zone &amp; area</span>
+    <span class="pill">q = 0.00256&middot;V&sup2;</span>
+    <span class="pill">Round V up to 5 mph</span>
+    <span class="pill">Exposure B/C/D</span>
+    <span class="pill">Corners suck hardest</span>
     <span class="pill">Answer in psf</span>
   </div>
 </div></section>
 
-<!-- The procedure, step by step -->
-<section id="steps"><div class="wrap">
-  <div class="sec-head"><h2>The ASCE 7-22 procedure, step by step</h2><p>Eight moves take you from a dot on the map to a signed pressure in psf. Do them in order and nothing gets skipped.</p></div>
-  <div class="steps">
-    <div class="step"><div class="num">1</div><h4>Risk category</h4><p>Classify the building I&ndash;IV by occupancy. A hospital is Risk IV; a shed is Risk I. The category picks which wind-speed map you read.</p></div>
-    <div class="step"><div class="num">2</div><h4>Basic wind speed V</h4><p>Read V (mph) from the ASCE 7-22 map for that risk category &mdash; or look it up by ZIP so you skip tracing contours by eye.</p></div>
-    <div class="step"><div class="num">3</div><h4>Exposure category</h4><p>Assign B, C, or D from the ground roughness upwind. Suburbs are usually B; open country and coastline push toward C and D.</p></div>
-    <div class="step"><div class="num">4</div><h4>Coefficient K<sub>z</sub></h4><p>Look up K<sub>z</sub> from Table 26.10-1 for the exposure and the evaluation height. Taller and more open both raise it.</p></div>
-    <div class="step"><div class="num">5</div><h4>K<sub>zt</sub>, K<sub>d</sub>, K<sub>e</sub></h4><p>Set the topographic factor (1.0 on flat terrain), directionality (0.85 for buildings), and the ground elevation factor.</p></div>
-    <div class="step"><div class="num">6</div><h4>Velocity pressure q<sub>z</sub></h4><p>Multiply it out: q<sub>z</sub> = 0.00256&middot;K<sub>z</sub>&middot;K<sub>zt</sub>&middot;K<sub>d</sub>&middot;K<sub>e</sub>&middot;V&sup2;. Now you have psf at that height.</p></div>
-    <div class="step"><div class="num">7</div><h4>Pressure coefficients</h4><p>Read GC<sub>p</sub> (or C<sub>p</sub> for MWFRS) for the surface and zone, and GC<sub>pi</sub> for the enclosure class.</p></div>
-    <div class="step"><div class="num">8</div><h4>Solve for p</h4><p>Combine: p = q<sub>z</sub>(GC<sub>p</sub> &minus; GC<sub>pi</sub>) for C&amp;C, or the Chapter 27 combination for MWFRS. That is your design pressure.</p></div>
-  </div>
-</div></section>
-
-<!-- Worked example -->
-<section id="example"><div class="wrap">
-  <div class="sec-head"><h2>A worked example, in psf</h2><p>One enclosed building, run all the way through. Swap in your own numbers and the shape of the arithmetic never changes.</p></div>
-  <div style="max-width:860px;margin:0 auto" class="diff">
-    <span class="badge">Assumptions</span>
-    <h3>Enclosed building, 30 ft roof, Exposure C</h3>
-    <span class="tag">Risk II &middot; flat terrain &middot; near sea level &middot; V = 150 mph (illustrative)</span>
-    <p>Say the mapped basic wind speed at the site is <b>V = 150 mph</b>, the mean roof height is <b>30 ft</b>, the exposure is <b>C</b>, the ground is flat, and the building is enclosed. Read the coefficients:</p>
-    <ul>
-      <li><b>K<sub>z</sub> = 0.98</b> &mdash; Table 26.10-1, Exposure C at 30 ft</li>
-      <li><b>K<sub>zt</sub> = 1.0</b> (flat) &nbsp;&middot;&nbsp; <b>K<sub>d</sub> = 0.85</b> (building) &nbsp;&middot;&nbsp; <b>K<sub>e</sub> = 1.0</b> (near sea level)</li>
-    </ul>
-    <p style="font-size:15px;color:#e8edf7;background:rgba(0,24,255,.12);border:1px solid rgba(58,91,255,.35);border-radius:12px;padding:14px;text-align:center;font-weight:700;margin-top:6px">
-      q<sub>z</sub> = 0.00256 &middot; 0.98 &middot; 1.0 &middot; 0.85 &middot; 1.0 &middot; 150&sup2; &asymp; <span style="color:#34D399">48.0 psf</span>
-    </p>
-    <p>Now turn that into a wall-corner design pressure. For an enclosed building GC<sub>pi</sub> = &plusmn;0.18. Take a Zone 5 (corner) external coefficient of <b>GC<sub>p</sub> = &minus;1.1</b> &mdash; illustrative; the exact value comes from Figure 30.3-1 for your zone and effective wind area:</p>
-    <p style="font-size:15px;color:#e8edf7;background:rgba(16,185,129,.12);border:1px solid rgba(52,211,153,.35);border-radius:12px;padding:14px;text-align:center;font-weight:700">
-      p = 48.0 &middot; ( &minus;1.1 &minus; 0.18 ) &asymp; <span style="color:#34D399">&minus;61 psf</span> &nbsp;<span style="font-weight:500;color:#aeb8cf">(suction)</span>
-    </p>
-    <div class="hl">The corner has to resist about 61 psf of suction &mdash; roughly a third more than the same wall's field. That is why corner fasteners and edge zones govern. A <a href="https://windloadcalc.com/wind-load-pressure-calculator.html" style="color:#34D399;font-weight:600">wind load pressure calculator</a> reads every zone's GC<sub>p</sub> and effective wind area for you and returns the full set.</div>
-  </div>
-</div></section>
-
-<!-- C&C vs MWFRS + surfaces -->
+<!-- Use cases -->
 <section><div class="wrap">
-  <div class="sec-head"><h2>Which wind load do you actually need?</h2><p>The surface you are designing decides the coefficients &mdash; and usually a real project needs more than one.</p></div>
+  <div class="sec-head"><h2>From a wind speed to the number on your permit</h2><p>The raw conversion is one line; the enforceable pressure is a short procedure. Both live in the same calculator.</p></div>
   <div class="aud-grid">
-    <div class="aud"><h4>Windows, doors &amp; walls</h4><p>Components &amp; cladding pressures by zone and effective wind area &mdash; the numbers you match to a product approval. See the <a href="https://windloadcalc.com/components-and-cladding-wind-loads/" style="color:#34D399;font-weight:600">C&amp;C wind load guide</a>.</p></div>
-    <div class="aud"><h4>Roofs &amp; uplift</h4><p>Gable, hip, monoslope, and flat roofs, plus overhangs &mdash; where corner and edge suction decides membranes, panels, and fasteners.</p></div>
-    <div class="aud"><h4>The whole building (MWFRS)</h4><p>Directional pressures on every wall and the roof &mdash; the loads the frame, connections, and foundation are sized to carry.</p></div>
-    <div class="aud"><h4>Signs, walls &amp; equipment</h4><p>Force coefficients for solid and open signs, freestanding walls, rooftop equipment, chimneys, and towers under Chapter 29.</p></div>
-    <div class="aud"><h4>Solar &amp; specialty</h4><p>Rooftop and ground-mount PV arrays, parapets, and attached canopies &mdash; each with its own ASCE 7-22 procedure.</p></div>
-    <div class="aud"><h4>By location</h4><p>The mapped speed and code overrides change by jurisdiction. Jump to <a href="https://windloadcalc.com/florida-wind-load-calculator/" style="color:#34D399;font-weight:600">Florida</a>, <a href="https://windloadcalc.com/texas-wind-load-calculator/" style="color:#34D399;font-weight:600">Texas</a>, or <a href="https://windloadcalc.com/service-area/" style="color:#34D399;font-weight:600">any state</a>.</p></div>
-  </div>
-</div></section>
-
-<!-- Authority band -->
-<section class="proof"><div class="wrap">
-  <div class="sec-head"><h2>Why hand-calculate when the tables are the hard part?</h2><p>The method above is exact &mdash; the tedium is reading K<sub>z</sub>, GC<sub>p</sub>, and GC<sub>pi</sub> right for every zone. That is what the calculator removes.</p></div>
-  <div class="proof-grid">
-    <div class="proof-item"><div class="n">Every ZIP</div><div class="c">the mapped ASCE 7-22 design wind speed, by risk category</div></div>
-    <div class="proof-item"><div class="n">100% cited</div><div class="c">every coefficient traces back to its ASCE 7-22 section</div></div>
-    <div class="proof-item"><div class="n">Since 2002</div><div class="c">putting the ASCE wind method online before most rivals existed</div></div>
-    <div class="proof-item"><div class="n">100%</div><div class="c">permit approval across 24 years of jurisdiction submittals</div></div>
-    <div class="proof-item"><div class="n">Florida HVHZ</div><div class="c">Miami-Dade &amp; Broward code values applied automatically</div></div>
-    <div class="proof-item"><div class="n">All 50 states</div><div class="c">PE sign-and-seal available as a separate service</div></div>
+    <div class="aud"><h4>Have a wind speed already?</h4><p>Read the raw pressure off the table, then run the <a href="https://windloadcalc.com/wind-load-pressure-calculator.html" style="color:#34D399;font-weight:600">wind load pressure calculator</a> to get the code value with the coefficients applied.</p></div>
+    <div class="aud"><h4>Only know the address?</h4><p>Enter a ZIP and the mapped ASCE 7-22 design wind speed is looked up for you &mdash; no map tracing, no guessing the category.</p></div>
+    <div class="aud"><h4>Want the whole method?</h4><p>See every factor built up in order in the <a href="https://windloadcalc.com/how-to-calculate-wind-load.html" style="color:#34D399;font-weight:600">how to calculate wind load</a> guide.</p></div>
   </div>
 </div></section>
 
 <!-- FAQ -->
 <section id="faq"><div class="wrap">
-  <div class="sec-head"><h2>How to calculate wind load &mdash; FAQ</h2></div>
+  <div class="sec-head"><h2>Wind speed to pressure &mdash; FAQ</h2></div>
   <div class="faq">
-    <details open><summary>What is the formula for wind load?</summary><p>Two moves. First the velocity pressure: q<sub>z</sub> = 0.00256&middot;K<sub>z</sub>&middot;K<sub>zt</sub>&middot;K<sub>d</sub>&middot;K<sub>e</sub>&middot;V&sup2;, where V is the basic wind speed in mph and q<sub>z</sub> lands in psf. Then the design pressure: for components &amp; cladding, p = q<sub>z</sub>(GC<sub>p</sub> &minus; GC<sub>pi</sub>); for the MWFRS, the external and internal pressures are combined per ASCE 7-22 Chapter 27.</p></details>
-    <details><summary>How do you find the design wind speed for a location?</summary><p>The basic wind speed comes from the ASCE 7-22 wind maps, and there is a separate map for each risk category. Rather than trace contour lines, enter a ZIP or address and read the mapped speed directly &mdash; with the enforceable Florida value applied in Miami-Dade and Broward.</p></details>
-    <details><summary>What is the difference between components &amp; cladding and MWFRS wind loads?</summary><p>Components &amp; cladding pressures size the individual pieces &mdash; a window, a door, a roof panel, a fastener &mdash; using GC<sub>p</sub> by zone and effective wind area. MWFRS pressures are the whole-building loads the frame resists, using C<sub>p</sub> on each face. A real project usually needs both.</p></details>
-    <details><summary>Do I need ASCE 7-22 or ASCE 7-16?</summary><p>For current permits, ASCE 7-22 &mdash; the edition Florida's 8th-Edition Building Code and most other state codes now enforce. Our calculators are 7-22 end to end: maps, coefficients, and equations all track the current standard.</p></details>
-    <details><summary>Can I calculate wind load by hand?</summary><p>Yes &mdash; every step here can be done by hand with the ASCE 7-22 tables and maps. The work is in reading K<sub>z</sub>, K<sub>zt</sub>, GC<sub>p</sub>, and GC<sub>pi</sub> correctly for each zone and effective wind area, and keeping the enclosure and risk category consistent. That is exactly what the calculator automates.</p></details>
-    <details><summary>What units is wind load measured in?</summary><p>Design wind pressure is in pounds per square foot, psf. Positive pushes on a surface; negative (suction) pulls away from it. Roof corners and wall edges usually see the largest suction.</p></details>
-    <details><summary>Is a hand calculation enough for a building permit?</summary><p>The math can be, but the plans examiner wants the work shown. The calculator produces an Engineering Report with every coefficient cited to its ASCE 7-22 section. That report is not a sealed document &mdash; a PE sign-and-seal is a separate service, available in all 50 states.</p></details>
+    <details open><summary>How do you convert wind speed to pressure?</summary><p>Square the speed and multiply by 0.00256: q = 0.00256&middot;V&sup2;, with V in mph and q in psf. That gives the velocity (stagnation) pressure. A code design pressure then multiplies by the exposure, topographic, directionality, and elevation factors and the surface coefficients.</p></details>
+    <details><summary>What is the pressure of a 150 mph wind?</summary><p>About 57.6 psf of raw velocity pressure: 0.00256 &times; 150&sup2;. The design pressure on an actual surface can be well above or below that once exposure, height, gust, and the GC<sub>p</sub> for the zone are applied.</p></details>
+    <details><summary>Where does the 0.00256 constant come from?</summary><p>It bundles air density and the unit conversions so that speed in mph and pressure in psf line up. It is the standard coefficient in the ASCE 7-22 velocity pressure equation for sea-level air.</p></details>
+    <details><summary>Why is my code pressure different from 0.00256&middot;V&sup2;?</summary><p>Because that formula is only the raw airstream pressure. ASCE 7-22 adjusts it with K<sub>z</sub>, K<sub>zt</sub>, K<sub>d</sub>, and K<sub>e</sub>, then applies GC<sub>p</sub> and GC<sub>pi</sub> for the surface. A roof corner and a mid-wall panel land on very different pressures at the same wind speed.</p></details>
+    <details><summary>Can I convert pressure back to a wind speed?</summary><p>Yes, rearrange it: V = &radic;(q / 0.00256). It returns the speed that produces a given raw velocity pressure &mdash; but a design pressure in psf includes coefficients, so it does not convert straight back to a wind speed.</p></details>
+    <details><summary>Is this ASCE 7-22?</summary><p>Yes. The constant and the velocity pressure equation are ASCE 7-22 — the standard adopted through the Florida Building Code 8th Edition and by most of the country. Our calculators apply it end to end.</p></details>
   </div>
 </div></section>
 
 <!-- Final CTA -->
 <section class="final"><div class="wrap">
   <div class="glass2">
-    <h2>Run it instead of reading tables</h2>
-    <p>You now have the whole method &mdash; risk category, wind speed, exposure, q<sub>z</sub>, and the coefficients that give you psf. When you want the answer without the look-ups, the <a href="https://windloadcalc.com/wind-load-pressure-calculator.html">wind load pressure calculator</a> runs all eight steps from a single address.</p>
+    <h2>Turn a wind speed into a stamped pressure</h2>
+    <p>The table gives you the raw psf in a glance; the <a href="https://windloadcalc.com/wind-load-pressure-calculator.html">wind load pressure calculator</a> gives you the enforceable design pressure with every coefficient applied and cited. Start free.</p>
     <div class="hero-cta" style="margin-bottom:6px">
       <a class="btn btn-primary btn-xl" href="https://windloadcalc.com/free-wind-load-calculator.html">Calculate a pressure &mdash; free</a>
-      <a class="btn btn-ghost btn-xl" href="https://windloadcalc.com/wind-load-calculator-shop.html">View all calculators &amp; pricing</a>
+      <a class="btn btn-ghost btn-xl" href="https://windloadcalc.com/wind-load-calculator-shop.html">See plans &amp; pricing</a>
     </div>
     <div class="hero-trust" style="margin-top:10px">
-      <span><span class="ck">✓</span> No signup to try</span>
-      <span><span class="ck">✓</span> Wind speed lookup free</span>
-      <span><span class="ck">✓</span> Every coefficient cited</span>
+      <span><span class="ck">&#10003;</span> No signup to try</span>
+      <span><span class="ck">&#10003;</span> Wind speed lookup free</span>
+      <span><span class="ck">&#10003;</span> Every coefficient cited</span>
     </div>
     <div class="trycalc">
-      <div class="eb">Prefer the full standard reference?</div>
-      <p>The <a href="https://windloadcalc.com/asce-7-wind-load-calculator/" style="color:#34D399;font-weight:600">ASCE 7-22 guide</a> covers the chapters and figures behind each coefficient, and the <a href="https://windloadcalc.com/free-mwfrs-wind-load-calculator.html" style="color:#34D399;font-weight:600">free MWFRS calculator</a> runs the whole-building side.</p>
+      <div class="eb">Want the full method?</div>
+      <p>Walk every factor from risk category to psf in the <a href="https://windloadcalc.com/how-to-calculate-wind-load.html" style="color:#34D399;font-weight:600">how to calculate wind load</a> guide, then run your own numbers.</p>
       <a class="btn btn-ghost" href="https://windloadcalc.com/free-wind-load-calculator.html">Open the free calculator &rarr;</a>
     </div>
   </div>

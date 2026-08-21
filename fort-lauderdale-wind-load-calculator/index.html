@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="index, follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="/images/windloadcalc-icon-anim-loop.svg?v=1">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="shortcut icon" href="/favicon.ico?v=2">
+
+    <title>Fort Lauderdale Wind Load Calculator — 170 mph HVHZ Permit (ASCE 7-22) | WindLoadCalc</title>
+    <meta name="description" content="Fort Lauderdale wind load calculations for permit. Broward County is HVHZ, so it is the enforceable 170 mph design speed and ASCE 7-22 pressures. Get C&C, MWFRS, and roof design pressures by address, with a permit-ready Engineering Report — PE sign-and-seal available.">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Fort Lauderdale Wind Load Calculator — 170 mph HVHZ Permit (ASCE 7-22)">
+    <meta property="og:description" content="Broward HVHZ: 170 mph, FBC 8th Edition, ASCE 7-22. Design pressures by Fort Lauderdale address for C&C, MWFRS, and roofs, matched to product approvals, with a permit-ready report.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://windloadcalc.com/fort-lauderdale-wind-load-calculator/">
+    <meta property="og:image" content="https://windloadcalc.com/images/video-posters/hurricane-08.jpg">
+    <meta property="og:site_name" content="WindLoadCalc">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Fort Lauderdale Wind Load Calculator — 170 mph HVHZ Permit (ASCE 7-22)">
+    <meta name="twitter:description" content="Broward HVHZ 170 mph, FBC 8th Edition, ASCE 7-22. Design pressures by Fort Lauderdale address, permit-ready report, PE seal available.">
+    <meta name="twitter:image" content="https://windloadcalc.com/images/video-posters/hurricane-08.jpg">
+
+    <link rel="canonical" href="https://windloadcalc.com/fort-lauderdale-wind-load-calculator/">
+
+    <!-- FAQPage schema — 1:1 with the visible FAQ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "What wind speed do I use for Fort Lauderdale?", "acceptedAnswer": { "@type": "Answer", "text": "The Risk II design wind speed for Fort Lauderdale is 170 mph, set by Broward County's High-Velocity Hurricane Zone status. Higher risk categories step up from there. The calculator applies the enforceable value the moment it detects a Fort Lauderdale address." } },
+        { "@type": "Question", "name": "Is Fort Lauderdale in the HVHZ?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Fort Lauderdale is in Broward County, one of the two HVHZ counties in Florida along with Miami-Dade. That is why the design speed and the product-approval requirements are stricter than most of the state." } },
+        { "@type": "Question", "name": "Which code applies to a Fort Lauderdale permit?", "acceptedAnswer": { "@type": "Answer", "text": "The Florida Building Code 8th Edition, which references ASCE 7-22 for wind loads. Our calculators are ASCE 7-22 throughout, with the Broward HVHZ pressures applied where the county requires them." } },
+        { "@type": "Question", "name": "Do I need a PE stamp for my Fort Lauderdale permit?", "acceptedAnswer": { "@type": "Answer", "text": "It depends on the scope and the reviewer. The software output is an Engineering Report, not a sealed document. A PE sign-and-seal is a separate service, available through our in-house Florida P.E. for residential up to three stories and our PE network beyond that." } },
+        { "@type": "Question", "name": "Can I match the pressures to a Notice of Acceptance?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The calculator returns design pressures by zone and effective wind area, so you can compare each opening's value to the rated design pressure on its NOA or Florida Product Approval before installation." } },
+        { "@type": "Question", "name": "Does it cover roofs and re-roofs?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — uplift for flat, gable, hip, and monoslope roofs with corner and edge zones, at the Broward HVHZ speed, for both new construction and re-roofing submittals." } }
+      ]
+    }
+    </script>
+
+    <!-- Breadcrumb schema -->
+    <script type="application/ld+json">
+    { "@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://windloadcalc.com/"},
+      {"@type":"ListItem","position":2,"name":"Florida","item":"https://windloadcalc.com/florida-wind-load-calculator/"},
+      {"@type":"ListItem","position":3,"name":"Fort Lauderdale","item":"https://windloadcalc.com/fort-lauderdale-wind-load-calculator/"}
+    ]}
+    </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#0018FF; --blue-deep:#181E57; --blue-bright:#3a5bff;
+  --muted:#94a3b8; --line:rgba(255,255,255,.08); --bg:#070a18; --surface:rgba(255,255,255,.04);
+  --gold:#E8B530; --luxe:cubic-bezier(.22,.61,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:#e8edf7;
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.55}
+a{text-decoration:none;color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+.aurora{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.aurora span{position:absolute;border-radius:50%;filter:blur(90px);opacity:.5}
+.aurora .a1{width:620px;height:620px;background:#0018FF;top:-180px;left:-120px;animation:drift1 18s var(--luxe) infinite alternate}
+.aurora .a2{width:540px;height:540px;background:#10B981;bottom:-200px;right:-120px;opacity:.28;animation:drift2 22s var(--luxe) infinite alternate}
+.aurora .a3{width:420px;height:420px;background:#181E57;top:34%;right:16%;opacity:.55;animation:drift1 26s var(--luxe) infinite alternate-reverse}
+@keyframes drift1{to{transform:translate(80px,60px) scale(1.15)}}
+@keyframes drift2{to{transform:translate(-70px,-50px) scale(1.1)}}
+.grid-tex{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:54px 54px;mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000 40%,transparent 100%)}
+
+/* Nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:.3s var(--luxe);background:transparent;border-bottom:1px solid transparent}
+nav.scrolled{backdrop-filter:blur(14px);border-bottom:1px solid var(--line);
+  background:linear-gradient(90deg, rgba(240,244,255,.97) 0%, rgba(223,232,255,.93) 13%, rgba(22,28,58,.92) 46%, rgba(7,10,24,.95) 100%)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;padding:12px clamp(24px,4vw,48px);transition:padding .3s var(--luxe)}
+nav.scrolled .nav-in{padding:8px clamp(24px,4vw,48px)}
+.logo{z-index:1001;display:flex;align-items:center}
+.logo-image{height:84px;width:auto;display:block;filter:drop-shadow(0 2px 10px rgba(0,0,0,.4));transition:all .3s ease}
+nav.scrolled .logo-image{height:64px;filter:none}
+.nav-right{display:flex;align-items:center;gap:18px}
+.nav-links{display:flex;align-items:center;gap:28px}
+.nav-links a.l{position:relative;font-size:14px;color:#fff;font-weight:500;opacity:.88;transition:opacity .2s var(--luxe);text-shadow:0 1px 8px rgba(0,0,0,.45)}
+.nav-links a.l:hover{opacity:1}
+.btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;border-radius:11px;cursor:pointer;transition:.25s var(--luxe);border:none;font-family:inherit}
+.btn-ghost{background:rgba(255,255,255,.06);color:#fff;padding:11px 18px;font-size:14px;border:1px solid rgba(255,255,255,.22)}
+.btn-ghost:hover{border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.12)}
+.btn-primary{background:linear-gradient(135deg,#0018FF,#2540ff);color:#fff;padding:12px 22px;font-size:14px;box-shadow:0 10px 30px rgba(0,24,255,.45)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(0,24,255,.6)}
+.hamburger{display:flex;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;z-index:60}
+.hamburger span{display:block;width:26px;height:3px;border-radius:2px;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.6);transition:.3s var(--luxe)}
+.hamburger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+.nav-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);opacity:0;visibility:hidden;transition:.3s var(--luxe);z-index:55}
+.nav-overlay.open{opacity:1;visibility:visible}
+.full-menu{position:fixed;top:0;right:0;height:100vh;height:100dvh;width:min(90vw,380px);z-index:60;
+  background:rgba(10,14,30,.985);backdrop-filter:blur(18px);border-left:1px solid var(--line);
+  box-shadow:-24px 0 60px rgba(0,0,0,.55);transform:translateX(100%);transition:transform .3s var(--luxe);overflow-y:auto;padding:74px 0 28px}
+.full-menu.open{transform:translateX(0)}
+.fm-head{display:flex;align-items:center;justify-content:space-between;padding:0 26px 14px;border-bottom:1px solid var(--line)}
+.fm-head span{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.fm-close{background:none;border:none;color:#fff;font-size:24px;line-height:1;cursor:pointer;padding:2px 8px}
+.fm-group{padding:14px 26px 4px;border-bottom:1px solid var(--line)}
+.fm-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9db0ff;margin-bottom:6px}
+.fm-group a{display:block;padding:9px 0;font-size:15px;color:#dbe3f5;font-weight:500;transition:color .15s}
+.fm-group a:hover{color:#fff}
+.fm-actions{display:flex;flex-direction:column;gap:10px;padding:20px 26px 0}
+.fm-actions .btn{width:100%;justify-content:center;padding:14px;font-size:15px}
+
+/* Hero */
+.hero-stage{position:relative;overflow:hidden;isolation:isolate;min-height:100vh;min-height:100svh;display:flex;align-items:center;justify-content:center}
+.hero-stage>header{width:100%}
+.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.hero-veil{position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(ellipse 70% 60% at 50% 26%, rgba(0,24,255,.18), transparent 62%),
+    linear-gradient(180deg, rgba(7,10,24,.66) 0%, rgba(7,10,24,.42) 32%, rgba(7,10,24,.72) 74%, var(--bg) 100%)}
+header{position:relative;z-index:2;padding:165px 0 70px;text-align:center}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;background:rgba(7,10,24,.5);border:1px solid rgba(58,91,255,.45);
+  color:#c3cdff;font-size:13px;font-weight:600;padding:8px 16px;border-radius:999px;margin-bottom:24px;backdrop-filter:blur(6px)}
+.eyebrow .dot{width:7px;height:7px;border-radius:50%;background:#34D399;box-shadow:0 0 0 4px rgba(52,211,153,.25)}
+h1{font-size:clamp(34px,5.2vw,58px);line-height:1.05;font-weight:800;letter-spacing:-.025em;max-width:18ch;margin:0 auto 16px;text-shadow:0 4px 28px rgba(0,0,0,.45)}
+h1 .grad{background:linear-gradient(110deg,#34D399,#10B981 55%,#3a5bff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{font-size:clamp(16px,2vw,19px);color:#d3dbef;max-width:62ch;margin:0 auto 22px;text-shadow:0 2px 14px rgba(0,0,0,.5)}
+.sub strong{color:#fff}
+.hero-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:8px 0 18px}
+.btn-xl{padding:15px 28px;font-size:15px;border-radius:13px}
+.hero-trust{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;font-size:13px;color:#cdd6ec}
+.hero-trust span{display:inline-flex;align-items:center;gap:6px}
+.hero-trust .ck{color:#34D399;font-weight:800}
+.stat-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:34px}
+.stat-tile{background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:14px;padding:16px 22px;min-width:150px;backdrop-filter:blur(6px)}
+.stat-tile .n{font-size:26px;font-weight:800;letter-spacing:-.02em;background:linear-gradient(135deg,#fff,#9db0ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat-tile .l{font-size:12.5px;color:#aeb8cf;margin-top:3px}
+
+section{position:relative;z-index:1;padding:62px 0}
+.sec-head{text-align:center;max-width:66ch;margin:0 auto 40px}
+.sec-head h2{font-size:clamp(26px,3.2vw,38px);font-weight:800;letter-spacing:-.02em;margin-bottom:12px}
+.sec-head p{color:#aeb8cf;font-size:16px}
+
+/* Benefits bar */
+.benefits{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.benefit{display:flex;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.benefit .ic{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex:none;background:linear-gradient(135deg,rgba(0,24,255,.3),rgba(24,30,87,.5));border:1px solid rgba(58,91,255,.4)}
+.benefit .ic svg{width:20px;height:20px;stroke:#9db0ff}
+.benefit b{font-size:14px;font-weight:700;display:block}
+.benefit small{font-size:12.5px;color:var(--muted)}
+
+/* Pain -> fix cards */
+.diff-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.diff{position:relative;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:28px 24px;box-shadow:0 12px 32px rgba(0,0,0,.32);transition:.35s var(--luxe)}
+.diff:hover{transform:translateY(-5px);border-color:rgba(58,91,255,.5);box-shadow:0 20px 44px rgba(0,24,255,.18)}
+.diff .badge{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#04221a;background:linear-gradient(135deg,#34D399,#10B981);padding:4px 10px;border-radius:999px;margin-bottom:14px}
+.diff h3{font-size:19px;font-weight:800;margin-bottom:6px;letter-spacing:-.01em}
+.diff .tag{font-size:13px;color:#9db0ff;font-weight:600;margin-bottom:12px;display:block}
+.diff p{font-size:14px;color:#aeb8cf;margin-bottom:14px}
+.diff ul{list-style:none;margin-bottom:6px}
+.diff ul li{font-size:13px;color:#c2cce0;padding:4px 0 4px 18px;position:relative;line-height:1.45}
+.diff ul li::before{content:"";position:absolute;left:0;top:10px;width:6px;height:6px;border-radius:50%;background:#34D399}
+.diff ul li b{color:#fff}
+.diff .hl{font-size:13px;color:#cdd6ec;background:rgba(0,24,255,.1);border:1px solid rgba(58,91,255,.3);border-radius:10px;padding:10px 12px;margin-top:12px}
+.diff .cta{margin-top:14px;display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:700;color:#34D399}
+
+.pill-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:34px}
+.pill{font-size:13px;font-weight:600;color:#c2cce0;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:8px 16px}
+.pill::before{content:"✓ ";color:#34D399;font-weight:800}
+
+/* How it works */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;counter-reset:step}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px 20px;position:relative}
+.step .num{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;color:#fff;background:linear-gradient(135deg,#0018FF,#2540ff);margin-bottom:12px;box-shadow:0 8px 20px rgba(0,24,255,.4)}
+.step h4{font-size:15px;font-weight:700;margin-bottom:6px}
+.step p{font-size:13px;color:#aeb8cf}
+
+/* Cards grid (audience / use cases) */
+.aud-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.aud{background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:16px;padding:22px 20px;transition:.3s var(--luxe)}
+.aud:hover{border-color:rgba(58,91,255,.45);transform:translateY(-4px)}
+.aud h4{font-size:16px;font-weight:700;margin-bottom:7px}
+.aud p{font-size:13.5px;color:#aeb8cf}
+
+/* Proof band */
+.proof{background:linear-gradient(135deg,rgba(0,24,255,.12),rgba(16,185,129,.08));border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:8px}
+.proof-item{text-align:center}
+.proof-item .n{font-size:34px;font-weight:800;letter-spacing:-.03em;background:linear-gradient(135deg,#fff,#9db0ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.proof-item .c{font-size:14px;color:#cdd6ec;margin-top:4px}
+
+/* FAQ */
+.faq{max-width:860px;margin:0 auto}
+.faq details{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 22px;margin-bottom:12px}
+.faq summary{font-size:16px;font-weight:700;cursor:pointer;list-style:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";float:right;color:#9db0ff;font-weight:800}
+.faq details[open] summary::after{content:"–"}
+.faq p{margin-top:11px;color:#aeb8cf;font-size:14.5px}
+
+.final{text-align:center}
+.final .glass2{background:linear-gradient(160deg,rgba(0,24,255,.18),rgba(16,185,129,.1));border:1px solid rgba(58,91,255,.4);border-radius:26px;padding:54px 40px;box-shadow:0 40px 100px rgba(0,24,255,.25)}
+.final h2{font-size:clamp(28px,3.6vw,42px);font-weight:800;letter-spacing:-.02em;margin-bottom:14px}
+.final p{color:#cdd6ec;font-size:17px;max-width:60ch;margin:0 auto 22px}
+.final p a{color:#34D399;font-weight:600}
+.trycalc{margin-top:26px;background:rgba(232,181,48,.08);border:1px solid rgba(232,181,48,.35);border-radius:16px;padding:22px 24px;max-width:640px;margin-left:auto;margin-right:auto}
+.trycalc .eb{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin-bottom:7px}
+.trycalc p{font-size:14px;color:#cdd6ec;margin-bottom:14px}
+
+.main-footer{position:relative;z-index:1;border-top:1px solid var(--line);padding:54px 0 28px;background:rgba(0,0,0,.25)}
+.main-footer .container{max-width:1180px;margin:0 auto;padding:0 28px}
+.footer-content{display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
+.footer-column h3{font-size:15px;font-weight:700;color:#fff;margin-bottom:15px}
+.footer-column ul{list-style:none}
+.footer-column li{margin-bottom:9px;font-size:14px;color:#aeb8cf}
+.footer-column a{color:#aeb8cf;transition:color .2s}
+.footer-column a:hover{color:#fff}
+.footer-bottom{border-top:1px solid var(--line);margin-top:34px;padding-top:20px;text-align:center;color:var(--muted);font-size:13px}
+
+@media(max-width:980px){
+  .benefits{grid-template-columns:repeat(2,1fr)}
+  .diff-grid,.aud-grid,.proof-grid{grid-template-columns:1fr}
+  .steps{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:880px){.nav-links{display:none}.footer-content{grid-template-columns:repeat(2,1fr)}header{padding:128px 0 44px}}
+@media(max-width:560px){.wrap{padding:0 20px}.benefits{grid-template-columns:1fr}.steps{grid-template-columns:1fr}.footer-content{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.hero-video{display:none}.aurora span{animation:none}}
+</style>
+
+    <!--SEO-GEO-v1-->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://windloadcalc.com/#organization",
+      "name": "WindLoad Solutions",
+      "alternateName": [
+        "WindLoadCalc",
+        "WindLoad Calculator",
+        "WLC"
+      ],
+      "url": "https://windloadcalc.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "@id": "https://windloadcalc.com/#logo",
+        "url": "https://windloadcalc.com/images/windloadcalc-logo.png",
+        "caption": "WindLoadCalc"
+      },
+      "image": {
+        "@id": "https://windloadcalc.com/#logo"
+      },
+      "description": "Professional ASCE 7-22 wind load calculation software for structural engineers, architects, and building professionals — Components & Cladding and MWFRS design pressures for all 50 US states, with Florida HVHZ jurisdictional accuracy.",
+      "foundingDate": "2002",
+      "areaServed": {
+        "@type": "Country",
+        "name": "United States"
+      },
+      "sameAs": [
+        "https://windload.solutions",
+        "https://windload.co"
+      ],
+      "knowsAbout": [
+        "ASCE 7-22 wind load calculations",
+        "Components and Cladding (C&C) design pressures",
+        "Main Wind Force Resisting System (MWFRS)",
+        "ASCE 7-22 basic wind speed maps",
+        "Exposure Categories B, C, D",
+        "Risk Categories I–IV",
+        "Building enclosure classification",
+        "Internal pressure coefficients (GCpi)",
+        "External pressure coefficients (GCp)",
+        "Topographic effects (Kzt)",
+        "High-Velocity Hurricane Zone (HVHZ)",
+        "Florida Building Code wind load requirements"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "Customer Support",
+        "email": "support@windloadcalc.com",
+        "availableLanguage": "English"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://windloadcalc.com/#website",
+      "url": "https://windloadcalc.com/",
+      "name": "WindLoadCalc",
+      "description": "ASCE 7-22 wind load calculators (Components & Cladding and MWFRS) for engineers, architects, and contractors.",
+      "publisher": {
+        "@id": "https://windloadcalc.com/#organization"
+      },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://windloadcalc.com/fort-lauderdale-wind-load-calculator/#webpage",
+      "url": "https://windloadcalc.com/fort-lauderdale-wind-load-calculator/",
+      "name": "Fort Lauderdale Wind Load Calculator — 170 mph HVHZ Permit (ASCE 7-22)",
+      "description": "ASCE 7-22 wind load design pressures for Fort Lauderdale, Florida, at the enforceable 170 mph Broward County HVHZ design speed under the Florida Building Code 8th Edition — C&C, MWFRS, and roof pressures with a permit-ready Engineering Report.",
+      "isPartOf": {
+        "@id": "https://windloadcalc.com/#website"
+      },
+      "about": {
+        "@id": "https://windloadcalc.com/#organization"
+      },
+      "publisher": {
+        "@id": "https://windloadcalc.com/#organization"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://windloadcalc.com/images/video-posters/hurricane-08.jpg"
+      },
+      "contentLocation": {
+        "@type": "Place",
+        "name": "Fort Lauderdale, Florida",
+        "containedInPlace": { "@type": "AdministrativeArea", "name": "Broward County, Florida" }
+      },
+      "inLanguage": "en-US"
+    }
+  ]
+}
+    </script>
+</head>
+<body>
+<div class="aurora"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
+<div class="grid-tex"></div>
+
+<nav id="nav"><div class="wrap nav-in">
+  <a class="logo" href="https://windloadcalc.com/"><img height="100" width="300" src="https://windloadcalc.com/images/windloadcalc-logo-anim-navy.svg" alt="WindLoadCalc — ASCE 7-22 Wind Load Calculator logo" class="logo-image"></a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a class="l" href="https://windloadcalc.com/free-wind-load-calculator.html">Free tool</a>
+      <a class="l" href="https://windloadcalc.com/wind-load-calculator-comparison.html">Compare</a>
+      <a class="l" href="https://windloadcalc.com/wind-load-calculator-shop.html">Pricing</a>
+          <a class="l" href="https://windloadcalc.com/building-intelligence-platform-landing.html">BIP</a>
+      <a class="l" href="https://windloadcalc.com/why-us.html">Why us</a>
+      <a class="btn btn-ghost" href="https://windloadcalc.com/login.html">Log in</a>
+      <a class="btn btn-primary" href="https://windloadcalc.com/free-wind-load-calculator.html">Start free trial</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Open full menu" aria-expanded="false" aria-controls="fullMenu"><span></span><span></span><span></span></button>
+  </div>
+</div></nav>
+<div class="nav-overlay" id="navOverlay"></div>
+<aside class="full-menu" id="fullMenu" aria-label="Site menu">
+  <div class="fm-head"><span>Menu</span><button class="fm-close" id="fmClose" aria-label="Close menu">&times;</button></div>
+  <div class="fm-group">
+    <div class="fm-label">Wind Load Calculators</div>
+    <a href="https://windloadcalc.com/wind-load-calculator-landing.html">Overview</a>
+    <a href="https://windloadcalc.com/free-wind-load-calculator.html">Free Trial</a>
+    <a href="https://windloadcalc.com/wind-load-calculator-comparison.html">Feature Comparison</a>
+    <a href="https://windloadcalc.com/wind-load-calculator-shop.html">Pricing</a>
+  </div>
+  <div class="fm-group">
+    <div class="fm-label">Service Areas</div>
+    <a href="https://windloadcalc.com/service-area/">All States &amp; Counties</a>
+    <a href="https://windloadcalc.com/florida-wind-load-calculator/">Florida</a>
+    <a href="https://windloadcalc.com/texas-wind-load-calculator/">Texas</a>
+    <a href="https://windloadcalc.com/california-wind-load-calculator/">California</a>
+    <a href="https://windloadcalc.com/miami-dade-wind-load-calculator/">Miami-Dade County</a>
+  </div>
+  <div class="fm-group">
+    <div class="fm-label">Building Intelligence Platform</div>
+    <a href="https://windloadcalc.com/building-intelligence-platform-landing.html">Overview</a>
+    <a href="https://windloadcalc.com/building-intelligence-platform.html">Free Trial</a>
+    <a href="https://windloadcalc.com/building-intelligence-platform-shop.html">Pricing</a>
+  </div>
+  <div class="fm-group">
+    <div class="fm-label">For Professionals</div>
+    <a href="https://windloadcalc.com/wind-load-calculator-for-engineers.html">Engineers</a>
+    <a href="https://windloadcalc.com/wind-load-calculator-for-architects.html">Architects</a>
+    <a href="https://windloadcalc.com/wind-loads-for-consultants.html">Consultants</a>
+    <a href="https://windloadcalc.com/contractors-wind-load-calculator.html">Contractors</a>
+  </div>
+  <div class="fm-group">
+    <div class="fm-label">Company</div>
+    <a href="https://windloadcalc.com/services.html">Services</a>
+    <a href="https://windloadcalc.com/why-us.html">Why Us</a>
+    <a href="https://windloadcalc.com/faq.html">FAQ</a>
+    <a href="https://windloadcalc.com/contact.html">Contact Us</a>
+  </div>
+  <div class="fm-actions">
+    <a class="btn btn-ghost" href="https://windloadcalc.com/login.html">Log in</a>
+    <a class="btn btn-primary" href="https://windloadcalc.com/free-wind-load-calculator.html">Start Free Trial &rarr;</a>
+  </div>
+</aside>
+
+<div class="hero-stage">
+  <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="https://windloadcalc.com/images/video-posters/hurricane-08.jpg">
+    <source src="https://pub-855aeb0543b6449aa495e1f99ac2d507.r2.dev/hurricane-08.mp4" type="video/mp4">
+  </video>
+  <div class="hero-veil"></div>
+  <header><div class="wrap">
+    <div class="eyebrow"><span class="dot"></span>Broward County · HVHZ · 170 mph · FBC 8th Edition (ASCE 7-22)</div>
+    <h1>Fort Lauderdale wind loads, <span class="grad">170 mph HVHZ</span></h1>
+    <p class="sub">Fort Lauderdale is in Broward County&rsquo;s High-Velocity Hurricane Zone, so the enforceable design speed is <strong>170 mph</strong> and the code is <strong>ASCE 7-22</strong> under the Florida Building Code 8th Edition. Enter an address and get <strong>C&amp;C, MWFRS, and roof design pressures in psf</strong>, matched to product approvals, with a permit-ready Engineering Report.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary btn-xl" href="https://windloadcalc.com/free-wind-load-calculator.html">Calculate a pressure &mdash; free</a>
+      <a class="btn btn-ghost btn-xl" href="https://windloadcalc.com/wind-load-calculator-shop.html">See plans &amp; pricing</a>
+    </div>
+    <div class="hero-trust">
+      <span><span class="ck">&#10003;</span> 170 mph applied for you</span>
+      <span><span class="ck">&#10003;</span> Wind speed lookup free</span>
+      <span><span class="ck">&#10003;</span> PE seal available</span>
+    </div>
+    <div class="stat-row">
+      <div class="stat-tile"><div class="n">170 mph</div><div class="l">Broward HVHZ design speed</div></div>
+      <div class="stat-tile"><div class="n">HVHZ</div><div class="l">Miami-Dade &amp; Broward only</div></div>
+      <div class="stat-tile"><div class="n">ASCE 7-22</div><div class="l">FBC 8th Edition</div></div>
+      <div class="stat-tile"><div class="n">psf</div><div class="l">C&amp;C · MWFRS · roof</div></div>
+    </div>
+  </div></header>
+</div>
+
+<!-- Benefits -->
+<section><div class="wrap">
+  <div class="benefits">
+    <div class="benefit"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 3c4 5 6 8 6 11a6 6 0 0 1-12 0c0-3 2-6 6-11z"/></svg></div><div><b>170 mph HVHZ</b><small>Broward&rsquo;s enforceable speed</small></div></div>
+    <div class="benefit"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M6 2h9l5 5v15H6z"/><path d="M14 2v6h6"/></svg></div><div><b>FBC 8th Edition</b><small>Adopts ASCE 7-22</small></div></div>
+    <div class="benefit"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></div><div><b>Pressures by address</b><small>C&amp;C, MWFRS &amp; roof, in psf</small></div></div>
+    <div class="benefit"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></div><div><b>Permit-ready</b><small>Cited report; PE seal available</small></div></div>
+  </div>
+</div></section>
+
+<!-- Why FTL is HVHZ -->
+<section id="hvhz"><div class="wrap">
+  <div class="sec-head">
+    <h2>Fort Lauderdale sits in the High-Velocity Hurricane Zone</h2>
+    <p>Fort Lauderdale is in Broward County, one of Florida&rsquo;s two HVHZ counties. That single fact drives the whole calculation: the design wind speed, the products you can install, and what the plans examiner will and won&rsquo;t accept.</p>
+  </div>
+  <div class="diff-grid">
+    <div class="diff">
+      <span class="badge">The speed</span>
+      <h3>170 mph, not a number you pick</h3>
+      <span class="tag">Broward County HVHZ design wind speed</span>
+      <p>Across Fort Lauderdale and the rest of Broward, the enforceable Risk II design wind speed is 170 mph. It is set by the county&rsquo;s HVHZ status, so the value that clears review is fixed &mdash; get it wrong and the submittal bounces.</p>
+      <ul>
+        <li>Applied automatically the moment a Fort Lauderdale address is detected</li>
+        <li>Higher risk categories step up from there per ASCE 7-22</li>
+        <li>No contour tracing, no &ldquo;which map&rdquo; guesswork</li>
+      </ul>
+      <div class="hl">The 170 mph value is what Broward checks your pressures against.</div>
+    </div>
+    <div class="diff">
+      <span class="badge">The code</span>
+      <h3>FBC 8th Edition adopts ASCE 7-22</h3>
+      <span class="tag">Florida Building Code, current edition</span>
+      <p>The Florida Building Code 8th Edition governs Fort Lauderdale permits, and it references ASCE 7-22 for wind. Our engines are 7-22 throughout, with the HVHZ pressures layered on where the county requires them.</p>
+      <ul>
+        <li>Components &amp; cladding pressures for windows, doors, and cladding</li>
+        <li>MWFRS pressures for the whole structure</li>
+        <li>Roof uplift for every shape, with corner and edge zones</li>
+      </ul>
+      <div class="hl">One address gives you every surface the permit set needs.</div>
+    </div>
+    <div class="diff">
+      <span class="badge">The products</span>
+      <h3>Pressures matched to product approvals</h3>
+      <span class="tag">NOA / Florida Product Approval alignment</span>
+      <p>In HVHZ, windows, doors, and shutters carry a rated design pressure through a Notice of Acceptance or Florida Product Approval. Your calculated pressure has to sit within that rating for the zone the opening is in.</p>
+      <ul>
+        <li>Design pressure by zone and effective wind area, ready to compare to a rating</li>
+        <li>Corner (Zone 5) openings checked against their harsher suction</li>
+        <li>The number the reviewer expects, in the form they expect it</li>
+      </ul>
+      <div class="hl">Match the pressure to the approval before you order the product.</div>
+    </div>
+  </div>
+  <div class="pill-row">
+    <span class="pill">170 mph HVHZ</span>
+    <span class="pill">FBC 8th Edition</span>
+    <span class="pill">ASCE 7-22</span>
+    <span class="pill">C&amp;C &middot; MWFRS &middot; roof</span>
+    <span class="pill">NOA-ready pressures</span>
+  </div>
+</div></section>
+
+<!-- Steps -->
+<section id="workflow"><div class="wrap">
+  <div class="sec-head"><h2>From a Fort Lauderdale address to a permit number</h2><p>The HVHZ math is handled; you supply the building.</p></div>
+  <div class="steps">
+    <div class="step"><div class="num">1</div><h4>Enter the address</h4><p>Type a Fort Lauderdale address or ZIP. The 170 mph Broward HVHZ design speed and the site exposure load automatically.</p></div>
+    <div class="step"><div class="num">2</div><h4>Describe the building</h4><p>Set the dimensions, height, roof shape, and enclosure, and choose the surface &mdash; wall, roof, or whole structure.</p></div>
+    <div class="step"><div class="num">3</div><h4>Read the pressures</h4><p>Design pressures come out in psf by zone, ready to compare against product approvals and to carry into the structural design.</p></div>
+    <div class="step"><div class="num">4</div><h4>Download the report</h4><p>Export the Engineering Report with each factor pinned to its ASCE 7-22 clause for the Broward submittal.</p></div>
+  </div>
+</div></section>
+
+<!-- Surfaces / use cases -->
+<section><div class="wrap">
+  <div class="sec-head"><h2>Every Fort Lauderdale permit surface</h2><p>Whatever the plan review asks for, the pressure comes out in psf at the 170 mph HVHZ speed.</p></div>
+  <div class="aud-grid">
+    <div class="aud"><h4>Windows, doors &amp; shutters</h4><p>Component &amp; cladding pressures to match against a Notice of Acceptance for each opening, corner zones included.</p></div>
+    <div class="aud"><h4>Roofs &amp; re-roofs</h4><p>Uplift for flat, gable, hip, and monoslope roofs &mdash; the corner and edge suction that governs membranes, tiles, and fasteners in HVHZ.</p></div>
+    <div class="aud"><h4>Whole-building (MWFRS)</h4><p>Directional pressures on every wall and the roof for the structural frame, additions, and new construction.</p></div>
+    <div class="aud"><h4>Signs, walls &amp; equipment</h4><p>Freestanding walls, signs, rooftop equipment, and specialty structures under ASCE 7-22 Chapter 29.</p></div>
+    <div class="aud"><h4>Solar &amp; canopies</h4><p>Rooftop and ground-mount PV, parapets, and attached canopies at the Broward HVHZ speed.</p></div>
+    <div class="aud"><h4>Nearby jurisdictions</h4><p>Working across the county line? See <a href="https://windloadcalc.com/broward-wind-load-calculator/" style="color:#34D399;font-weight:600">Broward</a>, <a href="https://windloadcalc.com/miami-dade-wind-load-calculator/" style="color:#34D399;font-weight:600">Miami-Dade</a>, or the <a href="https://windloadcalc.com/florida-wind-load-calculator/" style="color:#34D399;font-weight:600">Florida</a> hub.</p></div>
+  </div>
+</div></section>
+
+<!-- Proof band -->
+<section class="proof"><div class="wrap">
+  <div class="sec-head"><h2>Built for South Florida plan review</h2><p>No paid testimonials &mdash; a verifiable record in the toughest wind jurisdiction in the country.</p></div>
+  <div class="proof-grid">
+    <div class="proof-item"><div class="n">170 mph</div><div class="c">Broward HVHZ design speed applied automatically</div></div>
+    <div class="proof-item"><div class="n">24 years</div><div class="c">a clean South Florida plan-review record behind the numbers</div></div>
+    <div class="proof-item"><div class="n">Since 2002</div><div class="c">running Florida wind numbers, starting in Naples</div></div>
+    <div class="proof-item"><div class="n">Florida P.E.</div><div class="c">in-house seal for homes up to three stories, network beyond</div></div>
+    <div class="proof-item"><div class="n">Fully cited</div><div class="c">each factor pinned to its ASCE 7-22 clause for the reviewer</div></div>
+    <div class="proof-item"><div class="n">HVHZ-aware</div><div class="c">Miami-Dade &amp; Broward pressures, not a generic map</div></div>
+  </div>
+</div></section>
+
+<!-- FAQ -->
+<section id="faq"><div class="wrap">
+  <div class="sec-head"><h2>Fort Lauderdale wind load &mdash; FAQ</h2></div>
+  <div class="faq">
+    <details open><summary>What wind speed do I use for Fort Lauderdale?</summary><p>The Risk II design wind speed for Fort Lauderdale is 170 mph, set by Broward County&rsquo;s High-Velocity Hurricane Zone status. Higher risk categories step up from there. The calculator applies the enforceable value the moment it detects a Fort Lauderdale address.</p></details>
+    <details><summary>Is Fort Lauderdale in the HVHZ?</summary><p>Yes. Fort Lauderdale is in Broward County, one of the two HVHZ counties in Florida along with Miami-Dade. That is why the design speed and the product-approval requirements are stricter than most of the state.</p></details>
+    <details><summary>Which code applies to a Fort Lauderdale permit?</summary><p>The Florida Building Code 8th Edition, which references ASCE 7-22 for wind loads. Our calculators are ASCE 7-22 throughout, with the Broward HVHZ pressures applied where the county requires them.</p></details>
+    <details><summary>Do I need a PE stamp for my Fort Lauderdale permit?</summary><p>It depends on the scope and the reviewer. The software output is an Engineering Report, not a sealed document. A PE sign-and-seal is a separate service &mdash; available through our in-house Florida P.E. for residential up to three stories and our PE network beyond that.</p></details>
+    <details><summary>Can I match the pressures to a Notice of Acceptance?</summary><p>Yes. The calculator returns design pressures by zone and effective wind area, so you can compare each opening&rsquo;s value to the rated design pressure on its NOA or Florida Product Approval before installation.</p></details>
+    <details><summary>Does it cover roofs and re-roofs?</summary><p>Yes &mdash; uplift for flat, gable, hip, and monoslope roofs with corner and edge zones, at the Broward HVHZ speed, for both new construction and re-roofing submittals.</p></details>
+  </div>
+</div></section>
+
+<!-- Final CTA -->
+<section class="final"><div class="wrap">
+  <div class="glass2">
+    <h2>Get Fort Lauderdale pressures at 170 mph</h2>
+    <p>Enter a Fort Lauderdale address and get ASCE 7-22 design pressures at the enforceable Broward HVHZ speed, with a permit-ready Engineering Report. Start with the <a href="https://windloadcalc.com/free-wind-load-calculator.html">free calculator</a>, or see plans and pricing.</p>
+    <div class="hero-cta" style="margin-bottom:6px">
+      <a class="btn btn-primary btn-xl" href="https://windloadcalc.com/free-wind-load-calculator.html">Calculate a pressure &mdash; free</a>
+      <a class="btn btn-ghost btn-xl" href="https://windloadcalc.com/wind-load-calculator-shop.html">See plans &amp; pricing</a>
+    </div>
+    <div class="hero-trust" style="margin-top:10px">
+      <span><span class="ck">&#10003;</span> 170 mph applied for you</span>
+      <span><span class="ck">&#10003;</span> Wind speed lookup free</span>
+      <span><span class="ck">&#10003;</span> PE seal available</span>
+    </div>
+    <div class="trycalc">
+      <div class="eb">Need the method or a neighbor county?</div>
+      <p>See <a href="https://windloadcalc.com/how-to-calculate-wind-load.html" style="color:#34D399;font-weight:600">how to calculate wind load</a>, or jump to <a href="https://windloadcalc.com/broward-wind-load-calculator/" style="color:#34D399;font-weight:600">Broward</a> and <a href="https://windloadcalc.com/miami-dade-wind-load-calculator/" style="color:#34D399;font-weight:600">Miami-Dade</a>.</p>
+      <a class="btn btn-ghost" href="https://windloadcalc.com/free-wind-load-calculator.html">Open the free calculator &rarr;</a>
+    </div>
+  </div>
+</div></section>
+
+<!-- Footer -->
+
+<footer class="main-footer"><div class="container">
+  <div class="footer-content">
+    <div class="footer-column"><h3>Contact Information</h3><ul>
+      <li><strong>General Inquiries</strong></li>
+      <li><a href="mailto:info@windloadcalc.com">info@windloadcalc.com</a></li>
+      <li><a href="tel:8332723946">(833) 272-3946</a></li>
+      <li style="margin-top:.6rem"><strong>Sales</strong></li>
+      <li><a href="mailto:sales@windloadcalc.com">sales@windloadcalc.com</a></li>
+    </ul></div>
+    <div class="footer-column"><h3>Wind Load Calculators</h3><ul>
+      <li><a href="https://windloadcalc.com/wind-load-calculator-shop.html">All Calculators &amp; Pricing</a></li>
+      <li><a href="https://windloadcalc.com/shop/windows-doors-shutters.html">Windows, Doors &amp; Shutters</a></li>
+      <li><a href="https://windloadcalc.com/shop/mwfrs.html">MWFRS Calculator</a></li>
+      <li><a href="https://windloadcalc.com/shop/roofing.html" rel="nofollow">Roofing Calculator</a></li>
+    </ul></div>
+    <div class="footer-column"><h3>Resources</h3><ul>
+      <li><a href="/free-wind-load-calculator.html">Free Wind Load Calculator</a></li>
+      <li><a href="/asce-7-wind-load-calculator/">ASCE 7-22 Guide</a></li>
+      <li><a href="/components-and-cladding-wind-loads/">C&amp;C Wind Loads</a></li>
+      <li><a href="https://windloadcalc.com/building-intelligence-platform-shop.html">BIP Plans</a></li>
+    </ul></div>
+    <div class="footer-column"><h3>Company</h3><ul>
+      <li><a href="https://windloadcalc.com/why-us.html">About Us</a></li>
+      <li><a href="https://windloadcalc.com/contact.html">Contact</a></li>
+      <li><a href="https://windloadcalc.com/services.html">Professional Services</a></li>
+      <li><a href="https://windloadcalc.com/privacy-policy.html">Privacy Policy</a></li>
+      <li><a href="https://windloadcalc.com/terms-of-service.html">Terms of Service</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 WindLoadCalc · WindLoad Solutions, LLC — online since 2006. ASCE 7-22 wind load software.</p></div>
+</div></footer>
+
+<script>
+(function(){
+  var nav=document.getElementById('nav');
+  function onScroll(){ nav.classList.toggle('scrolled', window.scrollY>40); }
+  onScroll(); window.addEventListener('scroll',onScroll,{passive:true});
+})();
+(function(){
+  var ham=document.getElementById('hamburger'), fm=document.getElementById('fullMenu'),
+      ov=document.getElementById('navOverlay'), fc=document.getElementById('fmClose');
+  if(!ham||!fm) return;
+  function setMenu(open){ fm.classList.toggle('open',open); ov.classList.toggle('open',open); ham.classList.toggle('open',open);
+    ham.setAttribute('aria-expanded',open); document.body.style.overflow=open?'hidden':''; }
+  ham.addEventListener('click',function(){ setMenu(!fm.classList.contains('open')); });
+  ov.addEventListener('click',function(){ setMenu(false); });
+  if(fc) fc.addEventListener('click',function(){ setMenu(false); });
+  fm.querySelectorAll('a').forEach(function(a){ a.addEventListener('click',function(){ setMenu(false); }); });
+  window.addEventListener('keydown',function(e){ if(e.key==='Escape') setMenu(false); });
+})();
+</script>
+</body>
+</html>

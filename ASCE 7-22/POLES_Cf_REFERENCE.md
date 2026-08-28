@@ -20,16 +20,21 @@ diameters → round subcritical, and multi-sided decorative poles → octagonal)
 these two rows against ASCE 7-22 Fig 29.4-1 as a pole-specific release gate. Values as
 currently coded (inherited from the verified chimney engine):
 
+**VERIFIED 2026-08-28 (Gregory Kochmann, physical ASCE 7-22 Figure 29.4-1).** All rows below
+matched the engine exactly — 100% pass, no engine changes.
+
 | Cross section | h/D = 1 | h/D = 7 | h/D = 25 | Book? |
 |---|---|---|---|---|
-| **Round, subcritical** (D·√q_z ≤ 2.5), "All surfaces" row | 0.7 | 0.8 | 1.2 | ☐ |
-| **Octagonal** (coded as the "Hexagonal or octagonal" row) | 1.0 | 1.2 | 1.4 | ☐ |
+| **Round, subcritical** (D·√q_z ≤ 2.5), "All surfaces" row | 0.7 | 0.8 | 1.2 | ☑ |
+| **Octagonal** (coded as the "Hexagonal or octagonal" row) | 1.0 | 1.2 | 1.4 | ☑ |
 
-Also confirm (already checked for chimneys, re-affirm for poles):
-- ☐ K_d: Round **1.0**, Square **0.90**, Hexagonal **0.95**, Octagonal **1.0** (Table 26.6-1).
-- ☐ The D·√q_z = **2.5** subcritical/supercritical threshold, and that the ≤ 2.5 boundary
-  bins to **subcritical** (higher Cf = conservative).
-- ☐ h/D breakpoints **1 / 7 / 25** with linear interpolation (Note 2) and clamp to [1, 25].
+Full figure re-affirmed the same day (also re-verifies the chimney engine):
+- ☑ Square normal 1.3/1.4/2.0 · Square diagonal 1.0/1.1/1.5 · Hex-or-octagonal 1.0/1.2/1.4.
+- ☑ Round >2.5: mod. smooth 0.5/0.6/0.7 · rough 0.7/0.8/0.9 · very rough 0.8/1.0/1.2.
+- ☑ Book states "**Hexagonal or octagonal**" as one shared row → octagonal-shares-hexagonal correct.
+- ☑ The D·√q_z = **2.5** (5.3 SI) subcritical/supercritical threshold; ≤ 2.5 bins to subcritical.
+- ☑ Very rough = D'/D = 0.08; h/D breakpoints **1 / 7 / 25**; Note 2 linear interpolation.
+- ☑ K_d: Round **1.0**, Square **0.90**, Hexagonal **0.95**, Octagonal **1.0** (Table 26.6-1, prior sign-off).
 
 If any cell differs from the book, correct the value in the **chimney** engine
 (`_cf_data`) — never the pole engine — so both stay in sync. Then re-run
@@ -85,7 +90,7 @@ Combined: **V_total = 3,724.91 + 2·132.09 = 3,989.09 lb**;
 - ☑ Report says "Engineering Report" — never "sealed."
 - ☑ App boots; `/api/calc/pole`, `/api/report/pole`, `/structures/poles` register; endpoint
   gates 401 unauthenticated (no 500).
-- ☐ **§1 book re-tick complete** (two Cf rows).
+- ☑ **§1 book re-tick complete** (2026-08-28, full Fig 29.4-1 matched 100%).
 - ☐ **Backend entitlement** grants `asce7_22_other_pole.py` under the Other-Structures tiers
   on api.windloadcalc.com (else subscribers 402). Deploy-time; verify with `deploy-verify-backend`.
 - ☐ Deploy `feat/flask-migration` (calc.windloadcalc.com) and live authed smoke test

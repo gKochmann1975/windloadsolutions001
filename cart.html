@@ -1015,7 +1015,15 @@
                         // webhook links the payment to their existing account by email.
                         checkoutUserData = { email, name };
                         showCheckoutView('checkout-loading-view');
-                        if (window.cfDoCurveCheckout) { window.cfDoCurveCheckout(null, email); return; }
+                        if (window.cfDoCurveCheckout) {
+                            await window.cfDoCurveCheckout(null, email);
+                            // If it returned WITHOUT navigating to Stripe (e.g. the customer
+                            // cancelled the mixed monthly+annual prompt), don't strand them on the
+                            // spinner — put them back on the form so they can retry.
+                            showCheckoutView('checkout-form-view');
+                            btn.disabled = false; btn.innerHTML = '<i class="fas fa-lock"></i> Continue to Checkout';
+                            return;
+                        }
                         throw new Error('Checkout is still loading — please try again in a moment.');
                     }
                     throw new Error(data.error || 'Registration failed');

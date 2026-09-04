@@ -1003,6 +1003,17 @@
                         throw new Error(loginData.error || 'Login failed after registration');
                     }
                 } else {
+                    // Returning customer — this email already has an account. DON'T dead-end
+                    // the sale on "already registered". Continue the purchase as a GUEST
+                    // checkout with this email; the Stripe webhook links the payment to their
+                    // existing account by email. No password, no login, no catch-22.
+                    const _em = (data.error || '').toLowerCase();
+                    if (_em.indexOf('already registered') !== -1 || _em.indexOf('already exists') !== -1) {
+                        checkoutUserData = { email, name };
+                        showCheckoutView('checkout-loading-view');
+                        setTimeout(() => proceedToGuestCheckout(email), 600);
+                        return;
+                    }
                     throw new Error(data.error || 'Registration failed');
                 }
             } catch (error) {
@@ -1274,6 +1285,67 @@
         }
 
         // Override cart's proceedToCheckout to use modal
+        // Guest checkout — NO account or login required. Used when a returning customer's
+        // email already exists: we take their email straight to Stripe and let the webhook
+        // attach the purchase to their existing account. This is what removes the
+        // "already registered" catch-22 — an existing customer can always just pay.
+        async function proceedToGuestCheckout(email) {
+            try {
+                const totals = cart.calculateTotals();
+                const pendingMonthly = sessionStorage.getItem('pending_monthly_checkout');
+                let itemsToCheckout = cart.items;
+                if (pendingMonthly && totals.isMixed) {
+                    itemsToCheckout = cart.items.filter(item => item.billingCycle === 'annual');
+                }
+                const isMultiItem = itemsToCheckout.length > 1;
+                const guestEndpoint = isMultiItem
+                    ? `${CHECKOUT_API_URL}/api/subscriptions/checkout-cart`
+                    : `${CHECKOUT_API_URL}/api/subscriptions/checkout-guest`;
+
+                const guestResponse = await fetch(guestEndpoint, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(isMultiItem ? {
+                        cart_items: itemsToCheckout,
+                        email: email,
+                        split_checkout_info: pendingMonthly ? {
+                            part: 1,
+                            other_amount: totals.monthlyTotal,
+                            other_cycle: 'monthly'
+                        } : null
+                    } : {
+                        product_code: itemsToCheckout[0].productCode,
+                        billing_cycle: itemsToCheckout[0].billingCycle,
+                        email: email,
+                        bundle_discount: totals.hasBundleDiscount,
+                        cart_items: itemsToCheckout,
+                        success_url: 'https://windloadcalc.com/checkout-success.html',
+                        cancel_url: 'https://windloadcalc.com/cart.html'
+                    })
+                });
+
+                const guestData = await guestResponse.json();
+
+                if (guestData.success && guestData.checkout_url) {
+                    const sentKeys = itemsToCheckout.map(i => i.productCode + '_' + i.billingCycle);
+                    cart.items = cart.items.filter(item =>
+                        !sentKeys.includes(item.productCode + '_' + item.billingCycle)
+                    );
+                    cart.saveCart();
+                    window.location.href = guestData.checkout_url;
+                } else {
+                    throw new Error(guestData.error || 'Checkout failed');
+                }
+            } catch (error) {
+                console.error('Guest checkout error:', error);
+                // Fall back to the form so they can try again or log in — never a hard dead-end.
+                showCheckoutView('checkout-form-view');
+                showCheckoutError('We couldn’t start checkout just now. Please try again, or log in with your email above to continue.');
+                const _b = document.getElementById('checkout-signup-btn');
+                if (_b) { _b.disabled = false; _b.innerHTML = '<i class="fas fa-lock"></i> Continue to Checkout'; }
+            }
+        }
+
         cart.proceedToCheckout = function() {
             if (this.items.length === 0) {
                 alert('Your cart is empty. Please add products first.');

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- PCI DSS SAQ A: restrict script/data origins on pages that hand off to Stripe Checkout -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: blob:; media-src 'self' https://pub-855aeb0543b6449aa495e1f99ac2d507.r2.dev; connect-src 'self' https://api.windloadcalc.com; frame-src 'none'; form-action 'self'; base-uri 'self'; object-src 'none'">
 <script>/* site-wide cart indicator */(function(d){var s=d.createElement("script");s.src="/js/cart-indicator.js";s.defer=true;(d.head||d.documentElement).appendChild(s);})(document);</script>
     <meta charset="UTF-8">
     <meta name="robots" content="index, follow">

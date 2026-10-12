@@ -826,6 +826,23 @@
             }
         }
         @media (max-width: 560px){ .footer-content{grid-template-columns:1fr} }
+
+        /* Billing History table */
+        .bill-table-wrap { overflow-x: auto; }
+        .bill-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+        .bill-table th, .bill-table td {
+            text-align: left; padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border, #e2e8f0); white-space: nowrap;
+        }
+        .bill-table th { color: var(--text-secondary); font-weight: 600; font-size: 0.8rem;
+            text-transform: uppercase; letter-spacing: .03em; }
+        .bill-table td:nth-child(2) { white-space: normal; }
+        .bill-actions { display: flex; gap: .5rem; }
+        .bill-badge { display: inline-block; padding: .2rem .6rem; border-radius: 999px;
+            font-size: .72rem; font-weight: 700; letter-spacing: .03em; }
+        .bill-badge.paid  { background: #d1fae5; color: #065f46; }
+        .bill-badge.other { background: #fef3c7; color: #92400e; }
+        @media (max-width: 560px){ .bill-actions{ flex-direction: column; } }
     </style>
     <link rel="canonical" href="https://windloadcalc.com/account.html">
 </head>
@@ -1169,6 +1186,7 @@
         let userSubscriptions = [];
         let teamMemberships = [];
         let projectsLoaded = false;
+        let billingLoaded = false;
 
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', async function() {
@@ -1743,6 +1761,79 @@
             // Lazy-load projects on first view
             if (tabName === 'projects' && !projectsLoaded) {
                 loadProjects();
+            }
+
+            // Lazy-load billing history on first view
+            if (tabName === 'billing' && !billingLoaded) {
+                loadBillingHistory();
+            }
+        }
+
+        // Billing History — real invoices/receipts (view, print, download PDF)
+        async function loadBillingHistory() {
+            const container = document.getElementById('billingHistory');
+            container.innerHTML = '<p style="color: var(--text-secondary); padding: 1rem;">'
+                + '<i class="fas fa-spinner fa-spin"></i> Loading your receipts…</p>';
+            try {
+                const token = localStorage.getItem(STORAGE_KEY);
+                const response = await fetch(`${API_URL}/api/stripe/invoices`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (!response.ok) throw new Error('bad status ' + response.status);
+                const data = await response.json();
+                const invoices = (data && data.invoices) || [];
+                billingLoaded = true;
+
+                if (!invoices.length) {
+                    container.innerHTML = '<p style="color: var(--text-secondary); padding: 1rem;">'
+                        + 'No receipts yet. Charges will appear here after your first payment. '
+                        + 'If you believe this is an error, contact '
+                        + '<a href="mailto:sales@windloadcalc.com">sales@windloadcalc.com</a>.</p>';
+                    return;
+                }
+
+                let rows = '';
+                invoices.forEach(function (inv) {
+                    const d = inv.date ? new Date(inv.date * 1000) : null;
+                    const dateStr = d ? d.toLocaleDateString('en-US',
+                        { year: 'numeric', month: 'short', day: 'numeric' }) : '—';
+                    const amt = (typeof inv.amount === 'number')
+                        ? (inv.amount / 100).toLocaleString('en-US',
+                            { style: 'currency', currency: inv.currency || 'USD' })
+                        : '—';
+                    const paid = inv.status === 'paid';
+                    const badge = '<span class="bill-badge ' + (paid ? 'paid' : 'other') + '">'
+                        + escapeHtml((inv.status || '').toUpperCase()) + '</span>';
+                    const view = inv.hosted_invoice_url
+                        ? '<a class="btn btn-secondary btn-sm" target="_blank" rel="noopener" href="'
+                          + encodeURI(inv.hosted_invoice_url) + '"><i class="fas fa-print"></i> View / Print</a>'
+                        : '';
+                    const pdf = inv.invoice_pdf
+                        ? '<a class="btn btn-secondary btn-sm" target="_blank" rel="noopener" href="'
+                          + encodeURI(inv.invoice_pdf) + '"><i class="fas fa-download"></i> PDF</a>'
+                        : '';
+                    rows += '<tr>'
+                        + '<td>' + dateStr + '</td>'
+                        + '<td>' + escapeHtml(inv.description || 'Subscription') + '</td>'
+                        + '<td>' + amt + '</td>'
+                        + '<td>' + badge + '</td>'
+                        + '<td class="bill-actions">' + view + ' ' + pdf + '</td>'
+                        + '</tr>';
+                });
+
+                container.innerHTML =
+                    '<div class="bill-table-wrap"><table class="bill-table">'
+                    + '<thead><tr><th>Date</th><th>Description</th><th>Amount</th>'
+                    + '<th>Status</th><th>Receipt</th></tr></thead>'
+                    + '<tbody>' + rows + '</tbody></table></div>'
+                    + '<p style="color: var(--text-secondary); padding: .75rem 1rem 0; font-size: .85rem;">'
+                    + 'Each receipt opens on Stripe\'s secure page where you can print it or download the PDF.</p>';
+            } catch (err) {
+                console.error('Error loading billing history:', err);
+                container.innerHTML = '<p style="color: var(--text-secondary); padding: 1rem;">'
+                    + 'We couldn\'t load your receipts right now. Please try again, or use '
+                    + '"Manage in Stripe" above, or email '
+                    + '<a href="mailto:sales@windloadcalc.com">sales@windloadcalc.com</a> for a copy.</p>';
             }
         }
 

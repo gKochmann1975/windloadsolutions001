@@ -186,7 +186,14 @@ Answer the user's question now:`;
             const data = await response.json().catch(() => ({}));
 
             if (response.status === 401) {
-                throw new Error(data.error || 'Please sign in to use Hurricane AI.');
+                // Token missing or expired (the login JWT lives 7 days). Clear the
+                // stale login so the app re-gates to sign-in on next load, and tell
+                // the user plainly instead of dead-ending on "please sign in".
+                try {
+                    localStorage.removeItem('windload_token');
+                    localStorage.removeItem('windload_user_id');
+                } catch (e) {}
+                throw new Error(data.error || 'Your session has expired — please sign in again to use Hurricane AI.');
             }
             if (response.status === 403) {
                 throw new Error(data.error || 'Hurricane AI requires an active Building Intelligence Platform plan.');

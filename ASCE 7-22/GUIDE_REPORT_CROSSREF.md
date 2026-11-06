@@ -90,7 +90,7 @@ Report rendered OK (1416 bytes); qh in report: YES · saved report: `ASCE 7-22/g
 
 ## C&C Flat Roof (Guide Ex 6.1 / §30.3 Fig 30.3-2A)
 
-Report rendered OK (147273 bytes); qh in report: n/a · saved report: `ASCE 7-22/guide_report_crossref/flat_roof_report.html`
+Report rendered OK (147275 bytes); qh in report: n/a · saved report: `ASCE 7-22/guide_report_crossref/flat_roof_report.html`
 
 | Answer | Guide (psf) | Our report (psf) | Δ | Match |
 |---|---:|---:|---:|:--:|
@@ -107,7 +107,7 @@ Report rendered OK (147273 bytes); qh in report: n/a · saved report: `ASCE 7-22
 
 ## C&C Gable Roof (Guide Ex 6.2 / §30.3 Fig 30.3-2B)
 
-Report rendered OK (147274 bytes); qh in report: n/a · saved report: `ASCE 7-22/guide_report_crossref/gable_roof_report.html`
+Report rendered OK (147276 bytes); qh in report: n/a · saved report: `ASCE 7-22/guide_report_crossref/gable_roof_report.html`
 
 | Answer | Guide (psf) | Our report (psf) | Δ | Match |
 |---|---:|---:|---:|:--:|
@@ -122,7 +122,7 @@ Report rendered OK (147274 bytes); qh in report: n/a · saved report: `ASCE 7-22
 
 ## C&C Hip Roof (Guide Ex 6.3 / §30.3 Fig 30.3-2E) [GCp]
 
-Report rendered OK (147275 bytes); qh in report: n/a · saved report: `ASCE 7-22/guide_report_crossref/hip_roof_report.html`
+Report rendered OK (147277 bytes); qh in report: n/a · saved report: `ASCE 7-22/guide_report_crossref/hip_roof_report.html`
 
 | Answer | Guide (psf) | Our report (psf) | Δ | Match |
 |---|---:|---:|---:|:--:|
@@ -134,7 +134,7 @@ Report rendered OK (147275 bytes); qh in report: n/a · saved report: `ASCE 7-22
 
 ## C&C Monoslope Roof (Guide Ex 6.5 / §30.3 Fig 30.3-5B) [GCp]
 
-Report rendered OK (147301 bytes); qh in report: n/a · saved report: `ASCE 7-22/guide_report_crossref/monoslope_roof_report.html`
+Report rendered OK (147303 bytes); qh in report: n/a · saved report: `ASCE 7-22/guide_report_crossref/monoslope_roof_report.html`
 
 | Answer | Guide (psf) | Our report (psf) | Δ | Match |
 |---|---:|---:|---:|:--:|
@@ -216,3 +216,161 @@ Report rendered OK (79701 bytes); qh in report: n/a · saved report: `ASCE 7-22/
 **Dome note:** the Domed Roof calc (Ex 6.7) has no live Engineering-Report endpoint yet; the verified dome **engine** (`asce7_22_cc_dome.ASCE7_ArchedDomeRoofCalculator.calculate_dome_circular`) result is rendered into a small C&C-style report table here — q<sub>h</sub> and (GC<sub>p</sub>) come straight from the engine (K<sub>d</sub>=1.0, q at h<sub>D</sub>+f per Note 1).
 
 **Rooftop-solar note:** the validated case is **parallel-to-roof** (§29.4.4, the only solar worked example in the Guide). The solar report **generator** renders the parallel result (γ<sub>E</sub> edge = 1.50, (GC<sub>p</sub>) = 1.24, γ<sub>a</sub> from Fig 29.4-8); the interior γ<sub>E</sub> = 1.00 is matched by the nearest-value rule.
+
+---
+
+## Report-vs-Engine Faithful Render (calcs without a Guide worked example)
+
+*Appended 2026-07-05 by `webapp/testing/validate_reports_faithful_render.py`. These three calcs have **book-verified engines** (validated in `webapp/testing/validate_asce7_22.py`, 360/0) but **no ASCE 7-22 Wind Loads Guide worked example**, so they cannot be Guide-cross-referenced. Instead each calc's engine is run with representative valid inputs, the KEY engineering values are pulled straight from the engine result dict, and the SAME Engineering-Report generator the live admin endpoint uses (see `report_roof` / `report_chimney` in `webapp/flask_app/calc_api.py`) renders the HTML. Every engine value is asserted to appear in the tag-stripped report (nearest rendered value) at the report's display precision — tolerance 0.20 for psf/coefficients, max(5 lb, 0.5%) for forces.*
+
+### Sawtooth Roof (C&C) (WE-8 / ASCE 7-22 Fig 30.3-6)
+
+Report rendered OK (147354 bytes); saved report: `ASCE 7-22/guide_report_crossref/sawtooth_faithful_report.html`
+
+| Value | Engine | Report | Δ | Match |
+|---|---:|---:|---:|:--:|
+| qh (psf, 2dp) | 46.02 | 46.02 | 0.000 | ✅ |
+| Kz (3dp) | 0.940 | 0.940 | 0.000 | ✅ |
+| Kzt (3dp) | 1.000 | 1.000 | 0.000 | ✅ |
+| Ke (3dp) | 1.000 | 1.000 | 0.000 | ✅ |
+| GCp positive | 0.748 | 0.748 | 0.000 | ✅ |
+| GCp negative | -3.891 | -3.890 | 0.001 | ✅ |
+| dimension a (ft, 2dp) | 10.00 | 10.00 | 0.000 | ✅ |
+| effective wind area (ft2, 2dp) | 33.33 | 33.33 | 0.000 | ✅ |
+| controlling +p (psf, 1dp) | 42.70 | 42.70 | 0.000 | ✅ |
+| controlling -p (psf, 1dp) | -187.30 | -187.30 | 0.000 | ✅ |
+| design p[0] Positive External, GCpi = +0.18 | 26.10 | 26.10 | 0.000 | ✅ |
+| design p[1] Negative External, GCpi = +0.18 | -187.40 | -187.40 | 0.000 | ✅ |
+| design p[2] Positive External, GCpi = -0.18 | 42.70 | 42.70 | 0.000 | ✅ |
+| design p[3] Negative External, GCpi = -0.18 | -170.80 | -170.80 | 0.000 | ✅ |
+
+**14 / 14 engine values rendered faithfully.**
+
+### Multi-span Gable Roof (C&C) (WE-7 / ASCE 7-22 Fig 30.3-4)
+
+Report rendered OK (147353 bytes); saved report: `ASCE 7-22/guide_report_crossref/multispan_faithful_report.html`
+
+| Value | Engine | Report | Δ | Match |
+|---|---:|---:|---:|:--:|
+| qh (psf, 2dp) | 41.80 | 41.80 | 0.000 | ✅ |
+| Kz (3dp) | 0.980 | 0.980 | 0.000 | ✅ |
+| Kzt (3dp) | 1.000 | 1.000 | 0.000 | ✅ |
+| Ke (3dp) | 1.000 | 1.000 | 0.000 | ✅ |
+| GCp positive | 0.524 | 0.524 | 0.000 | ✅ |
+| GCp negative | -2.010 | -2.010 | 0.000 | ✅ |
+| dimension a (ft, 2dp) | 12.00 | 12.00 | 0.000 | ✅ |
+| effective wind area (ft2, 2dp) | 24.00 | 24.00 | 0.000 | ✅ |
+| controlling +p (psf, 1dp) | 29.40 | 29.40 | 0.000 | ✅ |
+| controlling -p (psf, 1dp) | -91.50 | -91.50 | 0.000 | ✅ |
+| design p[0] Positive External, GCpi = +0.18 | 14.40 | 14.40 | 0.000 | ✅ |
+| design p[1] Negative External, GCpi = +0.18 | -91.50 | -91.50 | 0.000 | ✅ |
+| design p[2] Positive External, GCpi = -0.18 | 29.40 | 29.40 | 0.000 | ✅ |
+| design p[3] Negative External, GCpi = -0.18 | -76.50 | -76.50 | 0.000 | ✅ |
+
+**14 / 14 engine values rendered faithfully.**
+
+### Round Chimney / Tank (WE-10 / ASCE 7-22 Fig 29.4-1 (round))
+
+Report rendered OK (79738 bytes); saved report: `ASCE 7-22/guide_report_crossref/chimney_round_faithful_report.html`
+
+| Value | Engine | Report | Δ | Match |
+|---|---:|---:|---:|:--:|
+| Cf | 0.831 | 0.831 | 0.000 | ✅ |
+| qh/qz (psf, 2dp) | 72.58 | 72.58 | 0.000 | ✅ |
+| h/D (2dp) | 12.50 | 12.50 | 0.000 | ✅ |
+| total force F (lb) | 34,654 | 34,654 | 0.000 | ✅ |
+| base moment (kip·ft, 1dp) | 1,861.30 | 1,861.30 | 0.000 | ✅ |
+
+**5 / 5 engine values rendered faithfully.**
+
+### Square Chimney / Stack (WE-10 / ASCE 7-22 Fig 29.4-1 (square))
+
+Report rendered OK (79728 bytes); saved report: `ASCE 7-22/guide_report_crossref/chimney_square_faithful_report.html`
+
+| Value | Engine | Report | Δ | Match |
+|---|---:|---:|---:|:--:|
+| Cf | 1.500 | 1.500 | 0.000 | ✅ |
+| qh/qz (psf, 2dp) | 51.03 | 51.03 | 0.000 | ✅ |
+| h/D (2dp) | 10.00 | 10.00 | 0.000 | ✅ |
+| total force F (lb) | 20,166 | 20,166 | 0.000 | ✅ |
+| base moment (kip·ft, 1dp) | 639.80 | 639.80 | 0.000 | ✅ |
+
+**5 / 5 engine values rendered faithfully.**
+
+### Square Trussed Tower (Lattice) (WE-11 / ASCE 7-22 Fig 29.4-3 (square))
+
+Report rendered OK (80074 bytes); saved report: `ASCE 7-22/guide_report_crossref/towers_square_faithful_report.html`
+
+| Value | Engine | Report | Δ | Match |
+|---|---:|---:|---:|:--:|
+| Cf governing | 3.295 | 3.300 | 0.005 | ✅ |
+| Cf wind normal to face | 2.775 | 2.770 | 0.005 | ✅ |
+| qh (psf, 2dp) | 61.69 | 61.69 | 0.000 | ✅ |
+| design force per face (lb) | 116,732 | 116,732 | 0.000 | ✅ |
+| conservative force per face (lb) | 138,235 | 138,235 | 0.000 | ✅ |
+| base moment (kip·ft, 1dp) | 6,272.10 | 6,272.10 | 0.000 | ✅ |
+| resultant height (ft, 2dp) | 53.73 | 53.73 | 0.000 | ✅ |
+
+**7 / 7 engine values rendered faithfully.**
+
+### Triangular Trussed Tower (round members) (WE-11 / ASCE 7-22 Fig 29.4-3 (triangular))
+
+Report rendered OK (80076 bytes); saved report: `ASCE 7-22/guide_report_crossref/towers_triangular_faithful_report.html`
+
+| Value | Engine | Report | Δ | Match |
+|---|---:|---:|---:|:--:|
+| Cf governing | 1.533 | 1.530 | 0.003 | ✅ |
+| Cf wind normal to face | 1.533 | 1.530 | 0.003 | ✅ |
+| qh (psf, 2dp) | 51.61 | 51.61 | 0.000 | ✅ |
+| design force per face (lb) | 27,220 | 27,220 | 0.000 | ✅ |
+| conservative force per face (lb) | 32,271 | 32,271 | 0.000 | ✅ |
+| base moment (kip·ft, 1dp) | 1,162.90 | 1,162.90 | 0.000 | ✅ |
+| resultant height (ft, 2dp) | 42.72 | 42.72 | 0.000 | ✅ |
+
+**7 / 7 engine values rendered faithfully.**
+
+### Solid Freestanding Wall (at grade, B/s=4) (WE-13 / ASCE 7-22 Fig 29.3-1)
+
+Report rendered OK (80273 bytes); saved report: `ASCE 7-22/guide_report_crossref/walls_solid_faithful_report.html`
+
+| Value | Engine | Report | Δ | Match |
+|---|---:|---:|---:|:--:|
+| qh (psf, 2dp) | 41.62 | 41.62 | 0.000 | ✅ |
+| Case A Cf | 1.350 | 1.350 | 0.000 | ✅ |
+| Case A force (lb) | 19,102 | 19,102 | 0.000 | ✅ |
+| Case B Cf | 1.350 | 1.350 | 0.000 | ✅ |
+| Case B force (lb) | 19,102 | 19,102 | 0.000 | ✅ |
+| Case C 0_to_s Cf | 2.900 | 2.900 | 0.000 | ✅ |
+| Case C 0_to_s force (lb) | 10,258 | 10,258 | 0.000 | ✅ |
+| Case C s_to_2s Cf | 1.900 | 1.900 | 0.000 | ✅ |
+| Case C s_to_2s force (lb) | 6,721 | 6,721 | 0.000 | ✅ |
+| Case C 2s_to_3s Cf | 1.300 | 1.300 | 0.000 | ✅ |
+| Case C 2s_to_3s force (lb) | 4,599 | 4,599 | 0.000 | ✅ |
+| Case C 3s_to_10s Cf | 1.100 | 1.100 | 0.000 | ✅ |
+| Case C 3s_to_10s force (lb) | 3,891 | 3,891 | 0.000 | ✅ |
+
+**13 / 13 engine values rendered faithfully.**
+
+### Freestanding Wall (return corner, B/s=6) (WE-13 / ASCE 7-22 Fig 29.3-1 Note 5)
+
+Report rendered OK (80427 bytes); saved report: `ASCE 7-22/guide_report_crossref/walls_return_corner_faithful_report.html`
+
+| Value | Engine | Report | Δ | Match |
+|---|---:|---:|---:|:--:|
+| qh (psf, 2dp) | 36.25 | 36.25 | 0.000 | ✅ |
+| Case A Cf | 1.340 | 1.340 | 0.000 | ✅ |
+| Case A force (lb) | 15,856 | 15,856 | 0.000 | ✅ |
+| Case B Cf | 1.340 | 1.340 | 0.000 | ✅ |
+| Case B force (lb) | 15,856 | 15,856 | 0.000 | ✅ |
+| Case C 0_to_s Cf | 2.475 | 2.480 | 0.005 | ✅ |
+| Case C 0_to_s force (lb) | 4,881 | 4,881 | 0.000 | ✅ |
+| Case C s_to_2s Cf | 2.150 | 2.150 | 0.000 | ✅ |
+| Case C s_to_2s force (lb) | 4,240 | 4,240 | 0.000 | ✅ |
+| Case C 2s_to_3s Cf | 1.550 | 1.550 | 0.000 | ✅ |
+| Case C 2s_to_3s force (lb) | 3,057 | 3,057 | 0.000 | ✅ |
+| Case C 3s_to_10s Cf | 1.050 | 1.050 | 0.000 | ✅ |
+| Case C 3s_to_10s force (lb) | 6,212 | 6,212 | 0.000 | ✅ |
+
+**13 / 13 engine values rendered faithfully.**
+
+**Faithful-render TOTAL: 78 / 78 engine values rendered by their report.**

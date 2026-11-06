@@ -332,10 +332,14 @@
       page-break-inside: avoid;
     }
 
-    /* Section headings stay glued to whatever follows them. Without this,
-       an h2 can end up as the last visible line of a page with its table
-       or first calc-step forced to the next page (orphaned heading). */
-    h2, h3, h4 {
+    /* Section headings — and the reference/caption line that follows them —
+       stay glued to whatever comes next. A heading keeps with its caption, but
+       the CAPTION must also keep with the table; otherwise the header+caption
+       sit alone at the bottom of a page while the whole (break-inside:avoid)
+       table jumps to the next page (the orphaned-heading bug). Gluing .ref /
+       .subtitle too means header → caption → table move together: if they don't
+       fit, the WHOLE group starts the next page. Applies to every report. */
+    h1, h2, h3, h4, h5, .ref, .subtitle, .rt-header, .section-header {
       break-after: avoid;
       page-break-after: avoid;
       /* Belt-and-suspenders: ask the engine to keep the next two lines /
@@ -343,6 +347,9 @@
       orphans: 3;
       widows: 3;
     }
+    /* Keep a table's header rows together so a split table never starts a page
+       with a lone header row (and keeps them with the section heading above). */
+    thead, tr { break-inside: avoid; page-break-inside: avoid; }
 
     /* The on-screen .report-footer is replaced in print by the @page
        bottom-left / -center / -right margin boxes injected at the bottom
@@ -363,7 +370,7 @@
 <div class="subtitle">Engineering Report &mdash; ASCE 7-22, Chapter 30 &middot; Hip Roof</div></div>
 <div class="project-info"><table>
 <tr><td class="label">Project:</td><td>GUIDE XREF — Hip Roof</td><td class="spacer"></td><td class="label">Report #:</td><td>&mdash;</td></tr>
-<tr><td class="label">Address:</td><td>&mdash;, FL</td><td class="spacer"></td><td class="label">Date:</td><td>July 05, 2026</td></tr>
+<tr><td class="label">Address:</td><td>&mdash;, FL</td><td class="spacer"></td><td class="label">Date:</td><td>July 24, 2026</td></tr>
 <tr><td class="label">Owner / Client:</td><td>&mdash;</td><td class="spacer"></td><td class="label">Company:</td><td>WindLoadCalc.com</td></tr>
 <tr><td class="label">Prepared By:</td><td colspan="4">&mdash;</td></tr>
 </table></div>
@@ -414,6 +421,8 @@
 <tr class="highlight"><td class="left" style="width:70%"><strong>Controlling Positive (inward)</strong></td><td><strong>+11.4 psf</strong></td></tr>
 <tr class="highlight"><td class="left"><strong>Controlling Negative (uplift)</strong></td><td><strong>-26.7 psf</strong></td></tr>
 </tbody></table>
+
+
 
 <h2><span class="sec-num">6</span>Applicability &amp; References</h2>
 <p>This report determines Components &amp; Cladding wind pressures for a hip roof per <strong>ASCE 7-22, Chapter 30</strong>

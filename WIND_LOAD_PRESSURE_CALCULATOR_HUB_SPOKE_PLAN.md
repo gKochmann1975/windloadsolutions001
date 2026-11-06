@@ -169,3 +169,41 @@ Every page in this cluster MUST clear ALL of these before it ships:
 ## Progress log
 - **2026-07-20** — Plan created. Confirmed: exact phrase currently targeted by ZERO pages; windloadcalc.com not
   in top SERP for it; hub URL free; spoke assets inventoried. Awaiting go to build P1 (the hub).
+
+---
+
+## STRATEGY: Cross-domain twins + free-tool integrity (added 2026-07-21)
+
+### Cross-domain twin pages — why & how
+**Goal:** own TWO SERP slots for a target phrase instead of one, by publishing the
+same topic on BOTH owned properties — `windload.solutions` (authority/educational)
+and `windloadcalc.com` (product/tool-forward) — as **distinct pages, not copies.**
+
+- **Why it works:** two owned domains both ranking pushes competitors (Omni, CalcTool)
+  further down and doubles our footprint. windloadcalc.com converts (it sells); windload.solutions
+  carries authority. Both feed the funnel.
+- **The hard rule that makes it work:** the twin bodies MUST be uniquely written. If the two
+  domains share ≥10-word runs of body prose, Google treats them as duplicates and ranks only
+  one — defeating the whole point. Enforce with **`/check-page-dup`** (cross-domain check) before
+  shipping. On the roof twin this caught 27 shared FAQ-answer runs; reworded to **0**.
+- **How to differentiate cheaply:** .solutions = "how it works" (method, zones, theory);
+  windloadcalc.com = "get your permit-ready number + Engineering Report" (benefits, workflow,
+  proof band, buy CTAs). Same ASCE facts, opposite framing. Different hero video.
+- **Applied this session:** roof-uplift topic shipped as a .solutions spoke AND a windloadcalc.com
+  product twin; both live, 0 cross-domain body overlap.
+
+### Free-tool integrity — a CTA must deliver what it promises
+A "Calculate roof uplift — free" CTA that routes to a **wall-only** free calculator is a
+correctness/trust bug (Greg flagged it). Fix pattern applied: gave the free calculator a real
+**Roof C&C mode** (new `/api/public/roof-pressure` on the production roof engine) behind a
+surface toggle (Windows-Doors-Shutters · Roof · MWFRS), deep-linked via `?surface=`. Principle:
+**never point a specific CTA at a tool that can't do that specific thing** — either build the
+capability or reword the CTA. Never fake it.
+
+## Progress log
+- **2026-07-20** — Plan created; hub URL free, spoke assets inventoried.
+- **2026-07-21** — LIVE: P1 hub (windload.solutions) + P2 (windloadcalc.com); 3 .solutions spokes
+  (roof-uplift, window-door-DP, speed↔pressure converter) wired to hub; windloadcalc.com roof
+  product twin (0 cross-domain dup). Global nav updated on both sites (174 .solutions pages).
+  Free calculator became a 3-surface tool (WDS/Roof/MWFRS) on the production roof engine;
+  roof-page CTAs deep-link to the Roof tab. All verified live.

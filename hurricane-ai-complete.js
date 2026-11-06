@@ -167,16 +167,30 @@ Answer the user's question now:`;
 
     // Call our backend, which proxies to Gemini server-side using the
     // env-stored API key. Backend handles all Gemini-specific request shape.
+    // Hurricane AI is now gated server-side to logged-in BIP subscribers, so we
+    // send the login JWT (stored by trial-manager.js as 'windload_token'). A
+    // 401/403 means not-signed-in / no BIP plan — surface a clear message.
     async callGemini(prompt) {
         try {
+            const headers = { 'Content-Type': 'application/json' };
+            const token = (typeof localStorage !== 'undefined')
+                ? localStorage.getItem('windload_token') : null;
+            if (token) headers['Authorization'] = 'Bearer ' + token;
+
             const response = await fetch(HURRICANE_AI_ENDPOINT, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: headers,
                 body: JSON.stringify({ prompt })
             });
 
             const data = await response.json().catch(() => ({}));
 
+            if (response.status === 401) {
+                throw new Error(data.error || 'Please sign in to use Hurricane AI.');
+            }
+            if (response.status === 403) {
+                throw new Error(data.error || 'Hurricane AI requires an active Building Intelligence Platform plan.');
+            }
             if (!response.ok || !data.success) {
                 throw new Error(data.error || `Request failed (${response.status})`);
             }

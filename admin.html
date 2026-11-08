@@ -2071,8 +2071,8 @@
         // Fetch live deployment data from windload.co
         async function fetchDeploymentData() {
             try {
-                // Use www subdomain to avoid redirect issues
-                const response = await fetch('https://www.windload.co/deployment-log.json?' + Date.now());
+                // Use apex (windload.co) — www 308-redirects and the redirect drops CORS headers, so the browser blocks it
+                const response = await fetch('https://windload.co/deployment-log.json?' + Date.now());
                 if (!response.ok) throw new Error('Failed to fetch deployment log');
                 return await response.json();
             } catch (error) {

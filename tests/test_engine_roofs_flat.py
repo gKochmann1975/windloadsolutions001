@@ -229,6 +229,54 @@ for zone in ("1'", 1, 2, 3):
 check_true("GCp finite & no-crash across grid (tall h>60)", finite_tall_ok)
 
 # ---------------------------------------------------------------------------
+# TEST 8 — calculate_wind_pressure threads mean_roof_height into the GCp lookup.
+# Regression for the bug where a tall (h>60) flat roof silently used the h<=60
+# Fig 30.3-2A edge/corner values (unconservative). Structural invariant only:
+# the reported gcp must equal the engine's own h-aware get_gcp, and for Zone 3
+# it must DIFFER between a tall and a low building (same effective area).
+# ---------------------------------------------------------------------------
+print("\nTEST 8 — calculate_wind_pressure passes mean_roof_height to GCp (wiring)")
+
+
+def _neg_gcp(h):
+    res = eng.calculate_wind_pressure(150, 'ultimate', 'C', 'enclosed', h,
+                                      80, 60, 25, 20, 3, theta=0, state='FL')
+    neg = [p for p in res['design_pressures'] if 'Negative' in p['case']][0]
+    return neg['gcp']
+
+
+_eff = eng.calculate_effective_wind_area(25, 20)
+_tall_direct = eng.get_gcp_flat_roof(3, _eff, theta=0, pressure_type='negative', mean_roof_height=120)
+_low_direct = eng.get_gcp_flat_roof(3, _eff, theta=0, pressure_type='negative')
+check("tall result gcp == h-aware get_gcp", _neg_gcp(120), _tall_direct, 1e-9)
+check("low  result gcp == low get_gcp", _neg_gcp(30), _low_direct, 1e-9)
+check_true("tall vs low Zone 3 gcp differ (height is used)", abs(_neg_gcp(120) - _neg_gcp(30)) > 1e-6)
+check_true("tall Zone 3 more conservative (|gcp| larger)", abs(_neg_gcp(120)) > abs(_neg_gcp(30)))
+
+# Boundary: h == 60 is NOT high-rise (figure title reads "h > 60 ft"); 60.01 is.
+check("h=60 uses low-rise gcp (boundary)", _neg_gcp(60), _low_direct, 1e-9)
+check("h=60.01 uses tall gcp (boundary)", _neg_gcp(60.01), _tall_direct, 1e-9)
+
+
+def _neg_gcp_z2(h):
+    res = eng.calculate_wind_pressure(150, 'ultimate', 'C', 'enclosed', h,
+                                      80, 60, 25, 20, 2, theta=0, state='FL')
+    return [p for p in res['design_pressures'] if 'Negative' in p['case']][0]['gcp']
+
+
+check("Zone 2 tall gcp wired", _neg_gcp_z2(120),
+      eng.get_gcp_flat_roof(2, _eff, theta=0, pressure_type='negative', mean_roof_height=120), 1e-9)
+
+# Edge-strip 'a' per Fig 30.4-1 (book p.334): a = 10% least horizontal, min 3 ft
+# (4 ft FL floor), with NO 0.4h cap and NO 4% rule for h > 60.
+check("tall a = 10% least, no 0.4h cap (FL)", eng.calculate_zone_dimension_a(400, 400, 61, 'FL'), 40.0, 1e-9)
+check("tall a floor 4 ft (FL small bldg)", eng.calculate_zone_dimension_a(30, 30, 61, 'FL'), 4.0, 1e-9)
+check("tall a floor 3 ft (non-FL small bldg)", eng.calculate_zone_dimension_a(20, 20, 61, 'TX'), 3.0, 1e-9)
+check_true("tall a >= low-rise a (conservative)",
+           eng.calculate_zone_dimension_a(400, 400, 61, 'FL') >= eng.calculate_zone_dimension_a(400, 400, 60, 'FL'))
+check("low-rise a unchanged (FL 50x40 h=20)", eng.calculate_zone_dimension_a(50, 40, 20, 'FL'), 4.0, 1e-9)
+
+# ---------------------------------------------------------------------------
 print("\n" + "=" * 60)
 n_pass = sum(results)
 n_total = len(results)

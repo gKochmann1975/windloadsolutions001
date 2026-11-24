@@ -172,13 +172,14 @@
   "use strict";
   if(!window.WLCPricing){ document.getElementById("cards").innerHTML="<p class='empty'>Pricing engine failed to load (js/pricing-engine.js).</p>"; return; }
   var P = window.WLCPricing;
-  var COLORS = { wd:"#06b6d4", mwfrs:"#3b82f6", roofs:"#f97316", other:"#14b8a6", specialty:"#a855f7", solar:"#fbbf24" };
+  var COLORS = { wd:"#06b6d4", mwfrs:"#3b82f6", roofs:"#f97316", other:"#14b8a6", specialty:"#a855f7", open_structures:"#6366f1", solar:"#fbbf24" };
   var ICONS = {
     wd:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.7"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>',
     mwfrs:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.7"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><line x1="9" y1="22" x2="9" y2="12"/><line x1="15" y1="22" x2="15" y2="12"/></svg>',
     roofs:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.7"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>',
     other:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.7"><path d="M12 3v18"/><path d="M7 8a7 7 0 0 1 10 0"/><path d="M9.5 11a3.5 3.5 0 0 1 5 0"/><path d="M9 21l3-6 3 6"/></svg>',
     specialty:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.7"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>',
+    open_structures:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.7"><path d="M3 11l9-7 9 7"/><path d="M5 11v9"/><path d="M19 11v9"/><path d="M3 20h18"/></svg>',
     solar:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.7"><path d="M3 5l16-1.6v8L3 13z"/><path d="M3 8.8l16-1M9 4.15v8.45M14 3.7v8.9"/><path d="M11 13v6M7.5 19.5h7M2 22h20"/></svg>'
   };
   var DESC = {
@@ -187,6 +188,7 @@
     roofs:"Every roof shape, plus parapets & overhangs",
     other:"Signs, walls, equipment, chimneys, tanks & trussed towers",
     specialty:"Parapets + attached canopies",
+    open_structures:"Free‑standing canopies & free roofs",
     solar:"Rooftop + ground‑mount PV — coming soon"
   };
   var state = { tier:"starter", cycle:"monthly", selected:{}, bip:false };

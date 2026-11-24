@@ -32,8 +32,14 @@
       { id: "roofs", name: "Roofs, Parapets & Overhangs",   live: true },
       { id: "other", name: "Other Structures",              live: true },
       { id: "specialty", name: "Specialty Components",      live: true },
+      { id: "open_structures", name: "Open Structures",     live: true },
       { id: "solar", name: "Solar Panels",                  live: false }
     ]
+    // NOTE (2026-11-23, HELD): open_structures is live program #6 so the site's program
+    // count matches the backend. This MUST deploy in lockstep with the backend going to 6 —
+    // if the site reaches 6 while the backend is still at 5 (or the reverse), a buyer with
+    // all 5 current calcs reads as "Complete" (BIP free) on one side but not the other, so
+    // they pay for Complete+BIP and get no BIP. Keep this branch HELD until both ship together.
   };
 
   function configure(overrides) {

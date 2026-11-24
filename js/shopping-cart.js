@@ -165,6 +165,37 @@ const PRODUCT_CATALOG = {
         features: ['10 users', 'Unlimited calculations', 'Parapets & attached canopies (Ch 30 C&C)', 'Phone support']
     },
 
+    // Open Structures — free-standing canopies & free roofs (ASCE 7-22 §27.3 open buildings + §30.5 C&C).
+    // HELD for owner review: page is noindex + NOT in sitemap. Only the $35 Starter base is owner-approved;
+    // Pro/Premium stay comingSoon with NO price until the owner sets them. The real price the customer pays
+    // is computed by the volume-curve engine (pricing-engine.js) from the program COUNT — these per-item
+    // prices are only used by the legacy cart renderer (cart.html overrides updateCartDisplay with the curve).
+    // NO annualPrice here on purpose: annual is not owner-approved and must not be fabricated. The Starter
+    // card adds with billingCycle 'monthly'.
+    'cc_open_structures_starter': {
+        name: 'Open Structures - Starter',
+        shortName: 'Open Structures Starter',
+        category: 'calculator',
+        monthlyPrice: 35,
+        features: ['Free-standing canopies & free roofs', '1 user', '100 calculations/month', 'Permit-ready Engineering Reports']
+    },
+    'cc_open_structures_pro': {
+        name: 'Open Structures - Pro',
+        shortName: 'Open Structures Pro',
+        category: 'calculator',
+        monthlyPrice: null,
+        annualPrice: null,
+        comingSoon: true
+    },
+    'cc_open_structures_premium': {
+        name: 'Open Structures - Premium',
+        shortName: 'Open Structures Premium',
+        category: 'calculator',
+        monthlyPrice: null,
+        annualPrice: null,
+        comingSoon: true
+    },
+
     // Future products (coming soon)
     'cc_solar_starter': {
         name: 'Solar Panels Calculator - Starter',

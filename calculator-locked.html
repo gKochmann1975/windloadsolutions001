@@ -720,7 +720,7 @@
       var wrap=document.getElementById("clWrap");
       if(!window.WLCPricing){ wrap.innerHTML="<p style='color:#aeb8cf'>Pricing failed to load — please refresh.</p>"; return; }
       var P=window.WLCPricing;
-      var COLORS={wd:"#06b6d4",mwfrs:"#3b82f6",roofs:"#f97316",other:"#14b8a6",specialty:"#a855f7",solar:"#fbbf24"};
+      var COLORS={wd:"#06b6d4",mwfrs:"#3b82f6",roofs:"#f97316",other:"#14b8a6",specialty:"#a855f7",open_structures:"#6366f1",solar:"#fbbf24"};
       var A='fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"';
       var ICONS={
         wd:'<svg viewBox="0 0 24 24" '+A+'><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="12" y1="3" x2="12" y2="21"/></svg>',
@@ -728,6 +728,7 @@
         roofs:'<svg viewBox="0 0 24 24" '+A+'><path d="M3 12l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>',
         other:'<svg viewBox="0 0 24 24" '+A+'><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18"/><path d="M4 22h16"/><path d="M10 7h4M10 11h4M10 15h4"/></svg>',
         specialty:'<svg viewBox="0 0 24 24" '+A+'><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>',
+        open_structures:'<svg viewBox="0 0 24 24" '+A+'><path d="M3 11l9-7 9 7"/><path d="M5 11v9"/><path d="M19 11v9"/><path d="M3 20h18"/></svg>',
         solar:'<svg viewBox="0 0 24 24" '+A+'><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="5" y1="5" x2="7" y2="7"/><line x1="17" y1="17" x2="19" y2="19"/><line x1="5" y1="19" x2="7" y2="17"/><line x1="17" y1="7" x2="19" y2="5"/></svg>'
       };
       var FI={grid:'<svg viewBox="0 0 24 24" '+A+'><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>',
@@ -753,6 +754,9 @@
         specialty:{name:"Specialty Components",tag:"The specialty roof components that trip up a submittal — <b>parapets and attached canopies</b> — done to ASCE 7-22.",
           feats:[["layers","Parapets","Windward and leeward parapet pressures for the components and cladding."],["grid","Attached canopies","Net pressures on canopies attached to the building wall."],["file","Clean, documented output","Results laid out for a smooth review."]],
           outs:["Parapets","Attached canopies","Net pressures","Documented"]},
+        open_structures:{name:"Open Structures",tag:"Wind loads for the structures the wind blows straight through — <b>free-standing canopies and free roofs</b> — with the net-pressure method these open roofs actually need.",
+          feats:[["layers","Free roofs & canopies","Open-roof net pressures for canopies and free-standing roofs, done the right way."],["wind","Clear & obstructed flow","The correct load case for whether the space below the roof is open or blocked."],["file","Documented net pressures","Results laid out per surface for a clean submittal."]],
+          outs:["Free-standing canopies","Free roofs","Clear / obstructed","Net pressures"]},
         solar:{name:"Solar",tag:"Rooftop and ground-mount <b>PV array wind loads</b> — the one-stop solar package. Launching soon.",
           feats:[["grid","Rooftop & ground-mount","Both array types in a single solar-focused workflow."],["wind","Panel-specific pressures","Array-edge and interior zone treatment for panels."],["file","Installer-ready output","Loads documented for the racking and permit package."]],
           outs:["Rooftop PV","Ground-mount","Array zones","Coming soon"]}

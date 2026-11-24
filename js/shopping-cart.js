@@ -141,6 +141,38 @@ const PRODUCT_CATALOG = {
         features: ['10 users', 'Unlimited calculations', 'Parapets & attached canopies (Ch 30 C&C)', 'Phone support']
     },
 
+    // Open Structures — Canopies & Free-Standing Roofs (ASCE 7-22 free roofs / open buildings:
+    // MWFRS §27.3.2 + C&C §30.5). Program #6 on the generic volume curve. HELD for owner review —
+    // shop/open-structures.html is noindex + not in sitemap until go-live.
+    // $35 base is the ONLY owner-approved price. Pro/Premium prices are NOT set (TODO) — they are
+    // registered here (contract keys) but kept inert (comingSoon) so no fabricated price can be charged.
+    'open_structures_starter': {
+        name: 'Open Structures (Canopies & Free Roofs) - Starter',
+        shortName: 'Open Structures Starter',
+        category: 'calculator',
+        monthlyPrice: 35,
+        annualPrice: null, // TODO: owner to set annual price (sibling $35 tiers use 336/yr — NOT confirmed for this product)
+        features: ['1 user', '100 calculations/month', 'Canopies & free roofs (MWFRS + C&C)', 'Email support']
+    },
+    'open_structures_pro': {
+        name: 'Open Structures (Canopies & Free Roofs) - Pro',
+        shortName: 'Open Structures Pro',
+        category: 'calculator',
+        monthlyPrice: null, // TODO: owner to set Pro price (not approved)
+        annualPrice: null,  // TODO: owner to set Pro annual price
+        comingSoon: true,   // inert until priced — remove when the owner sets the price + wires the Pro CTA
+        features: ['Up to 5 users', '500 calculations/month', 'Canopies & free roofs (MWFRS + C&C)', 'Priority support']
+    },
+    'open_structures_premium': {
+        name: 'Open Structures (Canopies & Free Roofs) - Premium',
+        shortName: 'Open Structures Premium',
+        category: 'calculator',
+        monthlyPrice: null, // TODO: owner to set Premium price (not approved)
+        annualPrice: null,  // TODO: owner to set Premium annual price
+        comingSoon: true,   // inert until priced — remove when the owner sets the price + wires the Premium CTA
+        features: ['Up to 10 users', 'Unlimited calculations', 'Canopies & free roofs (MWFRS + C&C)', 'Phone support']
+    },
+
     // Future products (coming soon)
     'cc_solar_starter': {
         name: 'Solar Panels Calculator - Starter',

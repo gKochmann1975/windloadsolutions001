@@ -57,11 +57,11 @@ eng = eng_mod.ASCE7_CC_MonoslopeRoofCalculator()
 
 # ---------------------------------------------------------------------------
 # TEST 1 — Ground Elevation Factor Ke (Eq. 26.9-1 / Table 26.9-1)
-# Engine policy: Ke = 1.0 for ze <= 1000 ft (conservative, matches all engines);
-# above 1000 ft the exact Eq. 26.9-1 formula applies. Ledger Eq.26.9-1 LOCKED.
+# Engine policy: Ke = exp(-0.0000362*ze) for all finite elevations, matches all
+# engines (ASCE 7-22 Table 26.9-1 Note 2). Ke=1.0 only at ze=0. Ledger Eq.26.9-1 LOCKED.
 # ---------------------------------------------------------------------------
 print("\nTEST 1 — Ke (Eq. 26.9-1, engine conservative <=1000 ft policy)")
-for z, expected in [(0, 1.00), (500, 1.00), (1000, 1.00)]:
+for z, expected in [(0, 1.00), (500, 0.9821), (1000, 0.9644)]:
     check(f"Ke(z={z}) conservative", eng.calculate_ke(z), expected, 0.001)
 # Above 1000 ft -> Eq. 26.9-1 exp(-0.0000362*ze); ledger Table 26.9-1 cells (tol 0.01)
 for z, book in [(2000, 0.93), (3000, 0.90), (4000, 0.86), (5000, 0.83), (6000, 0.80)]:

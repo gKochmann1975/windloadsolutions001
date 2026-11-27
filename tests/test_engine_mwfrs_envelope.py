@@ -51,9 +51,9 @@ env = env_mod.ASCE7_MWFRS_EnvelopeCalculator()
 
 # --- Ke (Table 26.9-1 + Eq. 26.9-1) ---
 print("\nTEST A — Ke vs Table 26.9-1 (Ke = exp(-0.0000362*ze); <=1000 ft -> 1.0)")
-# Engine policy: Ke = 1.0 for ze <= 1000 ft (conservative). Above 1000 ft,
-# exact Eq. 26.9-1 formula -> compare to book table (2-decimal rounding tol 0.01).
-ke_conservative = [(0, 1.00), (500, 1.00), (1000, 1.00)]
+# Engine policy: Ke = exp(-0.0000362*ze) for all finite elevations (ASCE 7-22
+# Table 26.9-1 Note 2). Ke=1.0 only at ze=0; book table (2-decimal) tol 0.01 >1000.
+ke_conservative = [(0, 1.00), (500, 0.9821), (1000, 0.9644)]
 ke_formula = [(2000, 0.93), (3000, 0.90), (4000, 0.86), (5000, 0.83), (6000, 0.80)]
 for z, expected in ke_conservative:
     check(f"Ke(z={z}) conservative", env.calculate_ke(z), expected, 0.001)

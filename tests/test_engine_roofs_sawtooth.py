@@ -54,10 +54,10 @@ eng = saw_mod.ASCE7_CC_SawtoothRoofCalculator()
 
 # ---------------------------------------------------------------------------
 # TEST 1 — Ground Elevation Factor Ke vs ASCE 7-22 Table 26.9-1 / Eq. 26.9-1
-# Engine policy: Ke = 1.0 for ze <= 1000 ft; exact Eq. 26.9-1 above.
+# Engine policy: Ke = exp(-0.0000362*ze) for all ze (ASCE 7-22 Table 26.9-1 Note 2); Ke=1.0 only at ze=0.
 # ---------------------------------------------------------------------------
 print("\nTEST 1 — Ke vs Table 26.9-1 (Eq. 26.9-1: Ke = exp(-0.0000362*ze))")
-for z, expected in [(0, 1.00), (500, 1.00), (1000, 1.00)]:
+for z, expected in [(0, 1.00), (500, 0.9821), (1000, 0.9644)]:
     check(f"Ke(z={z}) conservative <=1000", eng.calculate_ke(z), expected, 0.001)
 for z, book in [(2000, 0.93), (3000, 0.90), (4000, 0.86), (5000, 0.83), (6000, 0.80)]:
     check(f"Ke(z={z}) formula", eng.calculate_ke(z), book, 0.01)

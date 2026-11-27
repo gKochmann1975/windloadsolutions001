@@ -77,11 +77,11 @@ for exp, vals in terrain_expected.items():
 
 # ---------------------------------------------------------------------------
 # TEST 4 — Ground Elevation Factor Ke (Table 26.9-1 / Eq. 26.9-1)
-# Engine policy: Ke = 1.0 for ze <= 1000 (conservative); above, exact formula.
+# Engine policy: Ke = exp(-0.0000362*ze) for all ze (ASCE 7-22 Table 26.9-1 Note 2); Ke=1.0 only at ze=0.
 # REGRESSION GUARD: Ke(2000) must NOT be ~0.67 (old -2.0e-4 coefficient bug).
 # ---------------------------------------------------------------------------
 print("\nTEST 4 — Ke vs Table 26.9-1 (Eq. 26.9-1: Ke = exp(-0.0000362*ze))")
-for z, expected in [(0, 1.00), (500, 1.00), (1000, 1.00)]:
+for z, expected in [(0, 1.00), (500, 0.9821), (1000, 0.9644)]:
     check(f"Ke(z={z}) conservative", eng.calculate_ke(z), expected, 0.001)
 for z, book in [(2000, 0.93), (3000, 0.90), (4000, 0.86), (5000, 0.83), (6000, 0.80)]:
     check(f"Ke(z={z}) formula", eng.calculate_ke(z), book, 0.01)

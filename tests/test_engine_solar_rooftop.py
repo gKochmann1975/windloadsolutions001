@@ -55,12 +55,12 @@ eng = solar_mod.ASCE7_RooftopSolarCalculator()
 
 # ---------------------------------------------------------------------------
 # TEST 1 — Ground Elevation Factor Ke vs ASCE 7-22 Table 26.9-1
-# Engine policy: Ke = 1.0 for ze <= 1000 ft (conservative, keeps FL unchanged);
-# above 1000 ft the exact Eq. 26.9-1 formula Ke = exp(-0.0000362*ze) applies.
+# Engine policy: Ke = exp(-0.0000362*ze) for all finite elevations (ASCE 7-22
+# Table 26.9-1 Note 2). Ke=1.0 only at ze=0; it decreases with elevation.
 # Book table tol 0.01 for 2-decimal rounding.
 # ---------------------------------------------------------------------------
 print("\nTEST 1 — Ke vs Table 26.9-1 (Eq. 26.9-1: Ke = exp(-0.0000362*ze))")
-for z, expected in [(0, 1.00), (500, 1.00), (1000, 1.00)]:
+for z, expected in [(0, 1.00), (500, 0.9821), (1000, 0.9644)]:
     check(f"Ke(z={z}) conservative", eng.calculate_ke(z), expected, 0.001)
 for z, book in [(2000, 0.93), (3000, 0.90), (4000, 0.86), (5000, 0.83), (6000, 0.80)]:
     check(f"Ke(z={z}) formula", eng.calculate_ke(z), book, 0.01)

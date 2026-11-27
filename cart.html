@@ -1200,10 +1200,17 @@
 
             // An expired/invalid token must never block checkout. Detect an auth-reason failure
             // on the authed attempt so we can clear the stale token and fall through to guest.
+            // NOTE: this legacy per-item path is unreached (cfDoCurveCheckout returns above), but
+            // the detector is kept NARROW to match the live curve path so it can never log out a
+            // valid customer on a non-auth 500/400/generic-403 whose text merely contains
+            // "session"/"expired"/"auth"/"credential".
             function isAuthFailure(status, body) {
-                if (status === 401 || status === 403) return true;
-                const err = ((body && (body.error || body.message)) || '').toString().toLowerCase();
-                return /token|unauthor|expired|\bauth\b|session|credential|not logged in|please log in/.test(err);
+                if (status === 401) return true;
+                if (status === 403) {
+                    const m = ((body && (body.error || body.message)) || '').toString().trim().toLowerCase();
+                    return m === 'invalid token' || m === 'token expired' || m === 'not logged in' || m === 'please log in';
+                }
+                return false;
             }
 
             // Drop the stale token + cached user so the guest path is clean.
@@ -1293,11 +1300,12 @@
                         return;
                     }
 
-                    // The authed attempt produced no session. If it looks like a token/auth
-                    // problem (401/403, a token/auth error message, or a body we could not
-                    // parse), drop the stale token so the guest path is clean and the user is
-                    // NEVER shown "Invalid token" when guest checkout would succeed.
-                    if (authThrew || authData === null || isAuthFailure(authStatus, authData)) {
+                    // The authed attempt produced no session. Clear the stale token ONLY on a
+                    // CONFIRMED auth failure (per isAuthFailure) so the guest path is clean and the
+                    // user is NEVER shown "Invalid token" when guest checkout would succeed. A
+                    // network throw or an unparseable body is NOT a confirmed auth failure — keep
+                    // the session rather than wrongly logging out a valid customer.
+                    if (isAuthFailure(authStatus, authData)) {
                         console.warn('Clearing stale/invalid auth token; proceeding as guest.');
                         clearStaleAuth();
                     }
@@ -2041,12 +2049,19 @@
       var headers={ "Content-Type":"application/json" }; if(token) headers["Authorization"]="Bearer "+token;
 
       // An expired/invalid auth token must NEVER block checkout. If an authed call fails for an
-      // auth reason (401/403 or a token/auth error body), drop the stale token and fall back to
-      // guest checkout (email only) instead of surfacing "Invalid token" to the customer.
+      // auth reason, drop the stale token and fall back to guest checkout (email only) instead of
+      // surfacing "Invalid token". DELIBERATELY NARROW so a VALID paying customer is never logged
+      // out by a non-auth error: a 401 is the real expired/invalid-token case; a 403 counts ONLY
+      // when its body is EXACTLY token-auth wording. A 500/400/generic-403 — even one whose text
+      // happens to contain "session" ("Failed to create checkout session"), "expired" ("card
+      // expired"), "auth" or "credential" — is NOT an auth failure and must keep the session.
       var cfIsAuthFail = function(status, body){
-        if(status===401 || status===403) return true;
-        var m=((body&&(body.error||body.message))||"").toString().toLowerCase();
-        return /token|unauthor|expired|\bauth\b|session|credential|not logged in|please log in/.test(m);
+        if(status===401) return true;
+        if(status===403){
+          var m=((body&&(body.error||body.message))||"").toString().trim().toLowerCase();
+          return m==="invalid token" || m==="token expired" || m==="not logged in" || m==="please log in";
+        }
+        return false;
       };
       var cfClearStaleAuth = function(){
         try{ localStorage.removeItem("windload_auth_token"); localStorage.removeItem("windload_user_data"); }catch(e){}
@@ -2070,10 +2085,16 @@
           alert("Added to your existing "+cy+" plan — new total "+money(ad.new_total||0)+(cy==="annual"?"/yr":"/mo")+", prorated to your card on file. No new checkout.");
           window.location.href="account.html"; return;
         }
-        var aerr = (addResp ? await cfParseJson(addResp) : null) || {};
-        var aStatus = addResp ? addResp.status : 0;
-        if(!addResp || cfIsAuthFail(aStatus, aerr)){
-          // Stale/invalid token (or network drop) — clear it and proceed to GUEST checkout below.
+        if(!addResp){
+          // NETWORK error / fetch throw — we could NOT confirm the token is bad, so we do NOT
+          // wipe a possibly-valid session or silently fall to guest (which risks a duplicate
+          // subscription). Surface a clean error and keep the session.
+          throw new Error("Could not reach checkout — please check your connection and try again.");
+        }
+        var aerr = (await cfParseJson(addResp)) || {};
+        var aStatus = addResp.status;
+        if(cfIsAuthFail(aStatus, aerr)){
+          // CONFIRMED auth failure (expired/invalid token) — clear it and proceed to GUEST checkout.
           cfClearStaleAuth();
         } else {
           var noBucket = (aStatus===409) || ((aerr.error||"").indexOf("No active subscription")>=0);

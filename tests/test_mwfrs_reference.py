@@ -41,12 +41,11 @@ print("\nTEST 1 — Ke vs Table 26.9-1 (Eq. 26.9-1: Ke = exp(-0.0000362*ze))")
 env = env_mod.ASCE7_MWFRS_EnvelopeCalculator()
 dir_ = dir_mod.ASCE7_MWFRS_DirectionalCalculator()
 
-# Engine policy: Ke = 1.0 for ze <= 1000 ft (ASCE 7-22 Table 26.9-1 Note 1
-# permits the conservative 1.0 at all elevations — keeps Florida unchanged);
-# above 1000 ft the exact Eq. 26.9-1 formula applies. So <=1000 ft is tested
-# against 1.0 (conservative), and >1000 ft against the book table (tol 0.01 for
-# the table's 2-decimal rounding).
-ke_conservative = [(0, 1.00), (500, 1.00), (1000, 1.00)]
+# Engine policy: Ke = exp(-0.0000362*ze) for all finite elevations
+# (ASCE 7-22 Table 26.9-1 Note 2); Ke = 1.0 only at ze = 0. Low elevations are
+# tested against the formula (0 ft -> 1.0, 500 ft -> 0.9821, 1000 ft -> 0.9644);
+# the book table rows above are checked at tol 0.01 for 2-decimal rounding.
+ke_conservative = [(0, 1.00), (500, 0.9821), (1000, 0.9644)]
 ke_formula = [(2000, 0.93), (3000, 0.90), (4000, 0.86), (5000, 0.83), (6000, 0.80)]
 for z, expected in ke_conservative:
     check(f"envelope  Ke(z={z}) conservative", env.calculate_ke(z), expected, 0.001)

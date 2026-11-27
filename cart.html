@@ -1870,7 +1870,10 @@
   function bucketProgs(cycle){ var seen={}, out=[]; cart.items.forEach(function(it){ var p=progOf(it.productCode);
     if(p&&p!=="bip"&&(it.billingCycle||"annual")===cycle&&!seen[p]){ seen[p]=1; out.push(p); } }); return out; }
   function cartHasBip(){ return cart.items.some(function(it){ return progOf(it.productCode)==="bip"; }); }
-  function anyComplete(){ return bucketProgs("annual").length>=P.liveCount() || bucketProgs("monthly").length>=P.liveCount(); }
+  // BIP-free is MEMBERSHIP-based (mirrors the backend): a bucket makes BIP free iff its program
+  // set is a superset of all live programs OR of the original-5 set. NOT a count >= liveCount test
+  // (that would charge an original-5 cart for BIP the backend gives free).
+  function anyComplete(){ return P.bipIsFree(bucketProgs("annual")) || P.bipIsFree(bucketProgs("monthly")); }
   function money(v){ return "$"+(Math.round(v*100)/100).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); }
   function money0(v){ return "$"+Math.round(v).toLocaleString(); }
   function O(cycle){ return { tier: plan.tier, cycle: cycle }; }   // engine opts {tier,cycle}
@@ -1978,7 +1981,7 @@
   // ---- curve checkout (auth-token gate preserved via proceedToStripeCheckout) ----
   window.cfDoCurveCheckout = async function(token, email){
     try{
-      var cy=bucketProgs("annual").length?"annual":"monthly", progs=bucketProgs(cy), hasBip=cartHasBip(), isComplete=progs.length>=P.liveCount();
+      var cy=bucketProgs("annual").length?"annual":"monthly", progs=bucketProgs(cy), hasBip=cartHasBip(), bipFree=P.bipIsFree(progs);
       if(!progs.length && !hasBip){ alert("Your cart is empty."); return; }
       // Two-bucket model: annual and monthly are separate subscriptions, so a mixed cart is
       // two checkouts. Do the annual plan first; the monthly plan stays in the cart for a
@@ -2008,7 +2011,7 @@
       }
 
       var resp=await fetch(CHECKOUT_API_URL+"/api/subscriptions/checkout-curve",{ method:"POST", headers:headers,
-        body:JSON.stringify({ programs:progs, tier:plan.tier, cycle:cy, bip:(hasBip&&!isComplete), email:email||null }) });
+        body:JSON.stringify({ programs:progs, tier:plan.tier, cycle:cy, bip:(hasBip&&!bipFree), email:email||null }) });
       var data=await resp.json();
       if(data && data.checkout_url){ window.location.href=data.checkout_url; } else { throw new Error((data&&data.error)||"Checkout failed"); }
     }catch(e){ console.error("Curve checkout error:",e); alert("Checkout failed: "+e.message+"\n\nPlease try again."); if(typeof closeCheckoutModal==="function") closeCheckoutModal(); }

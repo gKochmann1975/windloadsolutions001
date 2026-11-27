@@ -64,5 +64,18 @@ eq("bip due incl add-on", q4.dueWithBip, q4.delta + 5);
 var q5 = P.quote({ owned: ["wd"], selected: ["wd", "mwfrs"], tier: "starter" });
 eq("dup ignored -> afterCount 2", q5.afterCount, 2);
 
+// --- MEMBERSHIP-based BIP-free (mirrors backend): free iff ⊇ all live OR ⊇ original 5 ---
+eq("bipIsFree original-5", P.bipIsFree(["wd", "mwfrs", "roofs", "other", "specialty"]), true);
+eq("bipIsFree all-6 live", P.bipIsFree(["wd", "mwfrs", "roofs", "other", "specialty", "open_structures"]), true);
+eq("bipIsFree 4 of 5 -> no", P.bipIsFree(["wd", "mwfrs", "roofs", "other"]), false);
+// 5 calcs but NOT the original set (open_structures swapped in, missing specialty) -> NOT free
+eq("bipIsFree 5-but-wrong-set -> no", P.bipIsFree(["wd", "mwfrs", "roofs", "other", "open_structures"]), false);
+// Grandfathered: owns exactly the original 5 (not open_structures) -> BIP free though count < live(6)
+var qg = P.quote({ owned: ["wd", "mwfrs", "roofs", "other", "specialty"], selected: [], tier: "starter", bipSelected: true });
+eq("original-5 owner: BIP free though not pricing-complete", [qg.bipIncludedFree, qg.isComplete], [true, false]);
+eq("original-5 owner: BIP not charged", [qg.dueWithBip, qg.bipEligible, qg.showBipOffer], [0, false, false]);
+// Adding Open Structures to reach all 6 is still offered (addNext > 0) but BIP already free
+eq("original-5 owner: can still add #6", qg.addNextPrice, P.addNext(5, { tier: "starter", cycle: "monthly" }));
+
 console.log("\n" + passes + " passed, " + fails + " failed");
 process.exit(fails ? 1 : 0);

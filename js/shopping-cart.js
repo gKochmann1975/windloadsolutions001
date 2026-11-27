@@ -166,12 +166,12 @@ const PRODUCT_CATALOG = {
     },
 
     // Open Structures — free-standing canopies & free roofs (ASCE 7-22 §27.3 open buildings + §30.5 C&C).
-    // HELD for owner review: page is noindex + NOT in sitemap. Only the $35 Starter base is owner-approved;
-    // Pro/Premium stay comingSoon with NO price until the owner sets them. The real price the customer pays
-    // is computed by the volume-curve engine (pricing-engine.js) from the program COUNT — these per-item
-    // prices are only used by the legacy cart renderer (cart.html overrides updateCartDisplay with the curve).
-    // NO annualPrice here on purpose: annual is not owner-approved and must not be fabricated. The Starter
-    // card adds with billingCycle 'monthly'.
+    // LIVE (program #6): the $35 Starter base is purchasable (no comingSoon flag). Pro/Premium stay
+    // comingSoon with NO price until the owner sets them — do NOT fabricate tier prices. The real price the
+    // customer pays is computed by the volume-curve engine (pricing-engine.js) from the program COUNT —
+    // these per-item prices are only used by the legacy cart renderer (cart.html overrides updateCartDisplay
+    // with the curve). NO annualPrice here on purpose: annual is not owner-approved and must not be
+    // fabricated. The Starter card adds with billingCycle 'monthly'.
     'cc_open_structures_starter': {
         name: 'Open Structures - Starter',
         shortName: 'Open Structures Starter',

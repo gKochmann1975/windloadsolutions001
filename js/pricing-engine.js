@@ -25,6 +25,11 @@
     annualMonths: 10,       // annual = pay 10, get 12 (2 months free)
     bipMonthly: 5,          // full-BIP attach-on, flat, not tier-scaled
     bipOfferAtCount: 2,     // surface the BIP offer once the cart/account reaches this many calcs
+    // BIP-free is MEMBERSHIP-based (must mirror the backend): BIP is free iff the owned/selected
+    // set is a SUPERSET of every live program OR a superset of this original-5 grandfather set.
+    // Owning the original 5 keeps BIP free even without the later-added programs (e.g. Open
+    // Structures), so a pre-launch "Complete" buyer is never asked to re-buy to keep BIP free.
+    bipFreeBaseSet: ["wd", "mwfrs", "roofs", "other", "specialty"],
     // Sellable calculator programs. Order-independent; Other Structures is ONE bundle = one line.
     catalog: [
       { id: "wd",    name: "Windows, Doors & Shutters",     live: true },
@@ -56,6 +61,27 @@
   function cycleFactor(cycle) { return cycle === "annual" ? CONFIG.annualMonths : 1; }
   function liveCount() {
     return CONFIG.catalog.filter(function (c) { return c.live; }).length;
+  }
+  function liveIds() {
+    return CONFIG.catalog.filter(function (c) { return c.live; }).map(function (c) { return c.id; });
+  }
+  /** True iff `set` contains every id in `required` (order-independent superset test). */
+  function isSuperset(set, required) {
+    if (!required || !required.length) return false;
+    var have = {};
+    for (var i = 0; i < set.length; i++) have[set[i]] = 1;
+    for (var j = 0; j < required.length; j++) if (!have[required[j]]) return false;
+    return true;
+  }
+  /**
+   * MEMBERSHIP-based BIP-free rule (mirrors the backend). BIP is free iff the owned/selected
+   * `set` is a superset of all live programs OR of the original-5 grandfather set. This is the
+   * ONLY correct BIP-free test — do NOT substitute a pure count >= liveCount() comparison, which
+   * would charge a customer who owns the original 5 (BIP-free on the backend) for BIP on screen.
+   */
+  function bipIsFree(set) {
+    set = uniq(set || []);
+    return isSuperset(set, liveIds()) || isSuperset(set, CONFIG.bipFreeBaseSet);
   }
 
   /**
@@ -113,9 +139,14 @@
     var newTotal = curveTotal(afterN, opts);        // what they'd pay after adding
     var delta = newTotal - currentTotal;            // cost of THIS add / cart
 
+    // Pricing "Complete" = own every live program = top of the curve (count-based).
     var isComplete = afterN >= total && total > 0;
-    var bipOn = q.bipSelected && !isComplete;
-    var bip = isComplete ? 0 : (bipOn ? bipPrice(opts) : 0);
+    // BIP-free is a SEPARATE, membership-based decision (⊇ all live OR ⊇ original 5) so it stays
+    // in lockstep with what the backend charges — never gate the BIP price on isComplete alone.
+    var afterSet = uniq(owned.concat(selected));
+    var bipFree = bipIsFree(afterSet);
+    var bipOn = q.bipSelected && !bipFree;
+    var bip = bipFree ? 0 : (bipOn ? bipPrice(opts) : 0);
 
     // The single "Add for +$X" price shown on every not-yet-selected card right now:
     // marginal to go from the current running count to +1. Shrinks as more are selected.
@@ -146,13 +177,13 @@
       completeDelta: Math.max(0, completePrice(opts) - currentTotal), // +$ to reach Complete from today
       remainingToComplete: Math.max(0, total - afterN),
 
-      bipEligible: afterN >= CONFIG.bipOfferAtCount && !isComplete,
+      bipEligible: afterN >= CONFIG.bipOfferAtCount && !bipFree,
       bipPrice: bipPrice(opts),
-      bipIncludedFree: isComplete,
+      bipIncludedFree: bipFree,
 
       // UX flags
       showSaveMore: afterN >= 2 && savings > 0,
-      showBipOffer: afterN >= CONFIG.bipOfferAtCount && !isComplete,
+      showBipOffer: afterN >= CONFIG.bipOfferAtCount && !bipFree,
       showCompleteNudge: !isComplete && total - afterN <= 2 && total - afterN > 0
     };
   }
@@ -172,6 +203,8 @@
     bipPrice: bipPrice,
     completePrice: completePrice,
     liveCount: liveCount,
+    liveIds: liveIds,
+    bipIsFree: bipIsFree,
     quote: quote
   };
 });

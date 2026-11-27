@@ -166,12 +166,11 @@ const PRODUCT_CATALOG = {
     },
 
     // Open Structures — free-standing canopies & free roofs (ASCE 7-22 §27.3 open buildings + §30.5 C&C).
-    // LIVE (program #6): the $35 Starter base is purchasable (no comingSoon flag). Pro/Premium stay
-    // comingSoon with NO price until the owner sets them — do NOT fabricate tier prices. The real price the
-    // customer pays is computed by the volume-curve engine (pricing-engine.js) from the program COUNT —
-    // these per-item prices are only used by the legacy cart renderer (cart.html overrides updateCartDisplay
-    // with the curve). NO annualPrice here on purpose: annual is not owner-approved and must not be
-    // fabricated. The Starter card adds with billingCycle 'monthly'.
+    // LIVE (program #6): all three seat tiers are purchasable (no comingSoon flag). Pro/Premium tier prices
+    // mirror the live sibling ladder (Other Structures / Specialty): Pro $59/$564, Premium $149/$1428. The
+    // real price the customer pays is computed by the volume-curve engine (pricing-engine.js) from the
+    // program COUNT — these per-item prices are only used by the legacy cart renderer (cart.html overrides
+    // updateCartDisplay with the curve). Cards add with billingCycle 'monthly'.
     'cc_open_structures_starter': {
         name: 'Open Structures - Starter',
         shortName: 'Open Structures Starter',
@@ -183,17 +182,17 @@ const PRODUCT_CATALOG = {
         name: 'Open Structures - Pro',
         shortName: 'Open Structures Pro',
         category: 'calculator',
-        monthlyPrice: null,
-        annualPrice: null,
-        comingSoon: true
+        monthlyPrice: 59,
+        annualPrice: 564,
+        features: ['Free-standing canopies & free roofs', 'Up to 5 users', '500 calculations/month', 'Priority support · team dashboard']
     },
     'cc_open_structures_premium': {
         name: 'Open Structures - Premium',
         shortName: 'Open Structures Premium',
         category: 'calculator',
-        monthlyPrice: null,
-        annualPrice: null,
-        comingSoon: true
+        monthlyPrice: 149,
+        annualPrice: 1428,
+        features: ['Free-standing canopies & free roofs', 'Up to 10 users', 'Unlimited calculations', 'Phone support · custom branding']
     },
 
     // Future products (coming soon)

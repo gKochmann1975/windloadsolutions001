@@ -1188,6 +1188,31 @@
             if (window.cfDoCurveCheckout) { await window.cfDoCurveCheckout(token, user && user.email); return; }
             // ───────────────────────────────────────────────────────────────
 
+            // Safely parse a response body as JSON. A 401 / non-JSON body must NEVER throw
+            // past the guest fallback, so parse failures resolve to null instead of raising.
+            async function parseJsonSafe(resp) {
+                try {
+                    return await resp.json();
+                } catch {
+                    return null;
+                }
+            }
+
+            // An expired/invalid token must never block checkout. Detect an auth-reason failure
+            // on the authed attempt so we can clear the stale token and fall through to guest.
+            function isAuthFailure(status, body) {
+                if (status === 401 || status === 403) return true;
+                const err = ((body && (body.error || body.message)) || '').toString().toLowerCase();
+                return /token|unauthor|expired|\bauth\b|session|credential|not logged in|please log in/.test(err);
+            }
+
+            // Drop the stale token + cached user so the guest path is clean.
+            function clearStaleAuth() {
+                localStorage.removeItem('windload_auth_token');
+                localStorage.removeItem('windload_user_data');
+                checkoutUserData = null;
+            }
+
             try {
                 const totals = cart.calculateTotals();
 
@@ -1210,15 +1235,84 @@
 
                 console.log(`Checkout: ${itemsToCheckout.length} items, using ${isMultiItem ? 'cart' : 'single'} endpoint`);
 
-                // Create checkout session
-                const response = await fetch(endpoint, {
+                // Redirect to Stripe and clear the items we just sent from the cart.
+                const redirectToCheckout = (checkoutUrl) => {
+                    const sentKeys = itemsToCheckout.map(i => i.productCode + '_' + i.billingCycle);
+                    cart.items = cart.items.filter(item =>
+                        !sentKeys.includes(item.productCode + '_' + item.billingCycle)
+                    );
+                    cart.saveCart();
+
+                    window.location.href = checkoutUrl;
+                };
+
+                // PHASE 1 — authed attempt. Only runs when we actually hold a token; a VALID
+                // token still checks out authed exactly as before.
+                if (token) {
+                    let authData = null;
+                    let authStatus = 0;
+                    let authThrew = false;
+
+                    try {
+                        const response = await fetch(endpoint, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${token}`
+                            },
+                            body: JSON.stringify(isMultiItem ? {
+                                // Multi-item cart checkout
+                                cart_items: itemsToCheckout,
+                                email: user?.email,
+                                split_checkout_info: pendingMonthly ? {
+                                    part: 1,
+                                    other_amount: totals.monthlyTotal,
+                                    other_cycle: 'monthly'
+                                } : null
+                            } : {
+                                // Single item checkout
+                                product_code: itemsToCheckout[0].productCode,
+                                billing_cycle: itemsToCheckout[0].billingCycle,
+                                bundle_discount: totals.hasBundleDiscount,
+                                cart_items: itemsToCheckout,
+                                success_url: 'https://windloadcalc.com/checkout-success.html',
+                                cancel_url: 'https://windloadcalc.com/cart.html'
+                            })
+                        });
+
+                        authStatus = response.status;
+                        authData = await parseJsonSafe(response);
+                    } catch (netErr) {
+                        // Network-level failure on the authed call — fall through to guest.
+                        authThrew = true;
+                        console.warn('Authed checkout request failed, trying guest path:', netErr);
+                    }
+
+                    if (authData && authData.success && authData.checkout_url) {
+                        redirectToCheckout(authData.checkout_url);
+                        return;
+                    }
+
+                    // The authed attempt produced no session. If it looks like a token/auth
+                    // problem (401/403, a token/auth error message, or a body we could not
+                    // parse), drop the stale token so the guest path is clean and the user is
+                    // NEVER shown "Invalid token" when guest checkout would succeed.
+                    if (authThrew || authData === null || isAuthFailure(authStatus, authData)) {
+                        console.warn('Clearing stale/invalid auth token; proceeding as guest.');
+                        clearStaleAuth();
+                    }
+                }
+
+                // PHASE 2 — guest checkout (no Authorization header). Request body shape is
+                // unchanged. Reached for a true guest OR after an authed auth-failure above.
+                const guestEndpoint = isMultiItem
+                    ? `${CHECKOUT_API_URL}/api/subscriptions/checkout-cart`
+                    : `${CHECKOUT_API_URL}/api/subscriptions/checkout-guest`;
+
+                const guestResponse = await fetch(guestEndpoint, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(isMultiItem ? {
-                        // Multi-item cart checkout
                         cart_items: itemsToCheckout,
                         email: user?.email,
                         split_checkout_info: pendingMonthly ? {
@@ -1227,9 +1321,9 @@
                             other_cycle: 'monthly'
                         } : null
                     } : {
-                        // Single item checkout
                         product_code: itemsToCheckout[0].productCode,
                         billing_cycle: itemsToCheckout[0].billingCycle,
+                        email: user?.email,
                         bundle_discount: totals.hasBundleDiscount,
                         cart_items: itemsToCheckout,
                         success_url: 'https://windloadcalc.com/checkout-success.html',
@@ -1237,59 +1331,13 @@
                     })
                 });
 
-                const data = await response.json();
+                const guestData = await parseJsonSafe(guestResponse);
 
-                if (data.success && data.checkout_url) {
-                    // Clear items that were sent to checkout from cart
-                    const sentKeys = itemsToCheckout.map(i => i.productCode + '_' + i.billingCycle);
-                    cart.items = cart.items.filter(item =>
-                        !sentKeys.includes(item.productCode + '_' + item.billingCycle)
-                    );
-                    cart.saveCart();
-
-                    window.location.href = data.checkout_url;
+                if (guestData && guestData.success && guestData.checkout_url) {
+                    redirectToCheckout(guestData.checkout_url);
                 } else {
-                    // Try guest checkout-cart as fallback for multi-item
-                    const guestEndpoint = isMultiItem
-                        ? `${CHECKOUT_API_URL}/api/subscriptions/checkout-cart`
-                        : `${CHECKOUT_API_URL}/api/subscriptions/checkout-guest`;
-
-                    const guestResponse = await fetch(guestEndpoint, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(isMultiItem ? {
-                            cart_items: itemsToCheckout,
-                            email: user?.email,
-                            split_checkout_info: pendingMonthly ? {
-                                part: 1,
-                                other_amount: totals.monthlyTotal,
-                                other_cycle: 'monthly'
-                            } : null
-                        } : {
-                            product_code: itemsToCheckout[0].productCode,
-                            billing_cycle: itemsToCheckout[0].billingCycle,
-                            email: user?.email,
-                            bundle_discount: totals.hasBundleDiscount,
-                            cart_items: itemsToCheckout,
-                            success_url: 'https://windloadcalc.com/checkout-success.html',
-                            cancel_url: 'https://windloadcalc.com/cart.html'
-                        })
-                    });
-
-                    const guestData = await guestResponse.json();
-
-                    if (guestData.success && guestData.checkout_url) {
-                        // Clear items that were sent to checkout from cart
-                        const sentKeys = itemsToCheckout.map(i => i.productCode + '_' + i.billingCycle);
-                        cart.items = cart.items.filter(item =>
-                            !sentKeys.includes(item.productCode + '_' + item.billingCycle)
-                        );
-                        cart.saveCart();
-
-                        window.location.href = guestData.checkout_url;
-                    } else {
-                        throw new Error(guestData.error || 'Checkout failed');
-                    }
+                    // Only now — guest checkout genuinely failed — surface an error.
+                    throw new Error((guestData && guestData.error) || 'Checkout failed');
                 }
             } catch (error) {
                 console.error('Checkout error:', error);
@@ -1992,28 +2040,63 @@
       }
       var headers={ "Content-Type":"application/json" }; if(token) headers["Authorization"]="Bearer "+token;
 
+      // An expired/invalid auth token must NEVER block checkout. If an authed call fails for an
+      // auth reason (401/403 or a token/auth error body), drop the stale token and fall back to
+      // guest checkout (email only) instead of surfacing "Invalid token" to the customer.
+      var cfIsAuthFail = function(status, body){
+        if(status===401 || status===403) return true;
+        var m=((body&&(body.error||body.message))||"").toString().toLowerCase();
+        return /token|unauthor|expired|\bauth\b|session|credential|not logged in|please log in/.test(m);
+      };
+      var cfClearStaleAuth = function(){
+        try{ localStorage.removeItem("windload_auth_token"); localStorage.removeItem("windload_user_data"); }catch(e){}
+        token=null;
+        if(headers["Authorization"]) delete headers["Authorization"];
+      };
+      var cfParseJson = async function(r){ try{ return await r.json(); }catch(e){ return null; } };
+
       // EXISTING logged-in user with a same-cycle subscription: MODIFY it (prorated, saved
       // card, no new checkout) rather than opening a second subscription. add-calculators
       // returns 409 when they have no bucket for this cycle, or 400 when they have no active
       // sub at all — in both cases fall through to a fresh Stripe Checkout below.
       if(token){
-        var addResp=await fetch(CHECKOUT_API_URL+"/api/subscriptions/add-calculators",{ method:"POST", headers:headers,
-          body:JSON.stringify({ programs:progs, tier:plan.tier, cycle:cy }) });
-        if(addResp.ok){
-          var ad=await addResp.json();
+        var addResp=null;
+        try{
+          addResp=await fetch(CHECKOUT_API_URL+"/api/subscriptions/add-calculators",{ method:"POST", headers:headers,
+            body:JSON.stringify({ programs:progs, tier:plan.tier, cycle:cy }) });
+        }catch(netErr){ addResp=null; }
+        if(addResp && addResp.ok){
+          var ad=await cfParseJson(addResp) || {};
           alert("Added to your existing "+cy+" plan — new total "+money(ad.new_total||0)+(cy==="annual"?"/yr":"/mo")+", prorated to your card on file. No new checkout.");
           window.location.href="account.html"; return;
         }
-        var aerr={}; try{ aerr=await addResp.json(); }catch(e){}
-        var noBucket = (addResp.status===409) || ((aerr.error||"").indexOf("No active subscription")>=0);
-        if(!noBucket){ throw new Error(aerr.error||("Could not add to your plan ("+addResp.status+")")); }
-        // else: no existing bucket for this cycle -> start a NEW subscription via Checkout ↓
+        var aerr = (addResp ? await cfParseJson(addResp) : null) || {};
+        var aStatus = addResp ? addResp.status : 0;
+        if(!addResp || cfIsAuthFail(aStatus, aerr)){
+          // Stale/invalid token (or network drop) — clear it and proceed to GUEST checkout below.
+          cfClearStaleAuth();
+        } else {
+          var noBucket = (aStatus===409) || ((aerr.error||"").indexOf("No active subscription")>=0);
+          if(!noBucket){ throw new Error(aerr.error||("Could not add to your plan ("+aStatus+")")); }
+          // else: no existing bucket for this cycle -> start a NEW subscription via Checkout ↓
+        }
       }
 
       var resp=await fetch(CHECKOUT_API_URL+"/api/subscriptions/checkout-curve",{ method:"POST", headers:headers,
         body:JSON.stringify({ programs:progs, tier:plan.tier, cycle:cy, bip:(hasBip&&!bipFree), email:email||null }) });
-      var data=await resp.json();
-      if(data && data.checkout_url){ window.location.href=data.checkout_url; } else { throw new Error((data&&data.error)||"Checkout failed"); }
+      var data=await cfParseJson(resp);
+      if(data && data.checkout_url){ window.location.href=data.checkout_url; return; }
+      // Defensive: if checkout-curve itself rejects a token we were still carrying, clear it
+      // and retry once as a guest before surfacing any error.
+      if(headers["Authorization"] && (resp && cfIsAuthFail(resp.status, data))){
+        cfClearStaleAuth();
+        var gresp=await fetch(CHECKOUT_API_URL+"/api/subscriptions/checkout-curve",{ method:"POST", headers:headers,
+          body:JSON.stringify({ programs:progs, tier:plan.tier, cycle:cy, bip:(hasBip&&!bipFree), email:email||null }) });
+        var gdata=await cfParseJson(gresp);
+        if(gdata && gdata.checkout_url){ window.location.href=gdata.checkout_url; return; }
+        throw new Error((gdata&&gdata.error)||"Checkout failed");
+      }
+      throw new Error((data&&data.error)||"Checkout failed");
     }catch(e){ console.error("Curve checkout error:",e); alert("Checkout failed: "+e.message+"\n\nPlease try again."); if(typeof closeCheckoutModal==="function") closeCheckoutModal(); }
   };
 

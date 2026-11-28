@@ -608,7 +608,29 @@ section{position:relative;z-index:1;padding:20px 0 62px}
       <li><a href="terms-of-service.html">Terms of Service</a></li>
     </ul></div>
   </div>
-  <div class="footer-bottom"><p>&copy; 2026 WindLoadCalc · WindLoad Solutions, LLC — online since 2006. ASCE 7-22 wind load software.</p></div>
+  <style>
+.footer-pod{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:40px;margin-bottom:8px;padding:18px 22px;border:1px solid rgba(245,158,11,.3);border-radius:14px;background:rgba(245,158,11,.07);text-decoration:none;color:inherit;transition:border-color .25s,background .25s}
+.footer-pod:hover{border-color:rgba(245,158,11,.55);background:rgba(245,158,11,.1)}
+.footer-pod img{width:40px;height:40px;flex:0 0 auto}
+.footer-pod .fp-txt{flex:1;min-width:220px}
+.footer-pod .fp-eyebrow{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#ffcf8a;font-weight:700}
+.footer-pod .fp-head{display:block;font-size:15px;font-weight:700;color:#fff;margin-top:3px}
+.footer-pod .fp-head .pod-name{color:#ffcf8a}
+.footer-pod #podFooterRotor{display:inline-block;transition:opacity .4s ease}
+.footer-pod .fp-cta{flex:0 0 auto;display:inline-flex;align-items:center;gap:7px;font-weight:700;font-size:13.5px;padding:10px 18px;border-radius:10px;background:linear-gradient(145deg,#fde047,#f59e0b 45%,#ea580c);color:#3a1d03;text-decoration:none;transition:transform .2s ease}
+.footer-pod:hover .fp-cta{transform:translateY(-2px)}
+@media(max-width:820px){.footer-pod .fp-head{min-height:3.2em}}
+@media(max-width:620px){.footer-pod{flex-direction:column;align-items:flex-start}}
+</style>
+<a class="footer-pod" href="https://planofday.com/auth/signup?utm_source=windloadcalc&utm_medium=footer&utm_campaign=sister_product" target="_blank" rel="sponsored nofollow noopener">
+  <img src="/images/pod-logo.png" alt="Plan of Day logo" width="40" height="40">
+  <span class="fp-txt">
+    <span class="fp-eyebrow">From the team behind WindLoadCalc</span>
+    <span class="fp-head"><span class="pod-name">Plan of Day</span> &mdash; <span id="podFooterRotor">Run the project, not the paperwork.</span></span>
+  </span>
+  <span class="fp-cta">Try it free &rarr;</span>
+</a>
+<div class="footer-bottom"><p>&copy; 2026 WindLoadCalc · WindLoad Solutions, LLC — online since 2006. ASCE 7-22 wind load software.</p></div>
 </div></footer>
 
 <script>
@@ -623,6 +645,16 @@ section{position:relative;z-index:1;padding:20px 0 62px}
   if(fc) fc.addEventListener('click',function(){ setMenu(false); });
   fm.querySelectorAll('a').forEach(function(a){ a.addEventListener('click',function(){ setMenu(false); }); });
   window.addEventListener('keydown',function(e){ if(e.key==='Escape') setMenu(false); });
+})();
+</script>
+<script>
+// POD sister-product footer rotating headline
+(function(){
+  var lines=["Run the project, not the paperwork.","The smartest way to manage any project.","Modern project software that does the reporting for you.","Spend your day on the work, not the reports.","Project management that keeps up with your jobsite.","The easiest way to run any project.","Less busywork, more built.","Flat pricing that never takes a cut of your revenue."];
+  var el=document.getElementById('podFooterRotor'),i=0;
+  if(!el) return;
+  try{ if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return; }catch(e){}
+  setInterval(function(){el.style.opacity=0;setTimeout(function(){i=(i+1)%lines.length;el.textContent=lines[i];el.style.opacity=1;},400);},3000);
 })();
 </script>
 </body>
